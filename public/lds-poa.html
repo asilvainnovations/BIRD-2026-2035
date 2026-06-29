@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programme of Activities — Lanao del Sur Investment Roadmap 2026–2035</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --forest: #022c22;
+  --emerald: #064e3b;
+  --jade: #0d7a5a;
+  --mint: #6ee7b7;
+  --cream: #f8f4ec;
+  --gold: #c9a84c;
+  --gold-bright: #e8c560;
+  --gold-deep: #8b6c28;
+  --gold-pale: #fdf3d0;
+  --ink: #0a1408;
+  --mist: #f0ede8;
+  --text-body: #2c3020;
+  --text-muted: #6b7060;
+  --gold-grad: linear-gradient(135deg, #7a5c1e 0%, #c9a84c 35%, #e8c560 50%, #c9a84c 65%, #7a5c1e 100%);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── PRINT ── */
+@media print {
+  body { background: white; }
+  .page { box-shadow: none !important; margin: 0 !important; max-width: 100% !important; }
+  .no-print { display: none !important; }
+}
+
+/* ── PAGE WRAPPER ── */
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  min-height: 100vh;
+}
+@media (min-width: 920px) {
+  .page { margin: 2rem auto; box-shadow: 0 20px 60px rgba(2,44,34,.12); border-radius: .5rem; overflow: hidden; }
+}
+
+/* ── HEADER ── */
+.header {
+  background: linear-gradient(165deg, var(--forest) 0%, #011a12 60%, #03241a 100%);
+  color: white;
+  padding: 2.5rem 2rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+  background-size: 50px 50px; opacity: .03; pointer-events: none;
+}
+.header-inner { position: relative; z-index: 1; }
+
+.header-eyebrow {
+  font-family: 'Space Mono', monospace; font-size: .62rem; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: .6rem; display: block;
+}
+.header-title {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700; line-height: 1.15; margin-bottom: .4rem;
+}
+.header-title .accent { color: var(--gold-bright); font-style: italic; font-weight: 500; }
+.header-subtitle {
+  font-size: .88rem; color: rgba(255,255,255,.55); font-weight: 300;
+  max-width: 600px; line-height: 1.6;
+}
+
+.header-meta {
+  display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1.5rem;
+  padding-top: 1.25rem; border-top: 1px solid rgba(201,168,76,.2);
+}
+.meta-item { display: flex; align-items: center; gap: .5rem; }
+.meta-icon { font-size: 1rem; }
+.meta-label {
+  font-family: 'Space Mono', monospace; font-size: .55rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--gold); display: block;
+}
+.meta-value { font-size: .78rem; color: rgba(255,255,255,.8); font-weight: 500; }
+
+/* ── BODY ── */
+.programme-body { padding: 2rem; }
+
+/* ── TIMELINE ── */
+.timeline { position: relative; }
+.timeline::before {
+  content: ''; position: absolute; left: 15px; top: 0; bottom: 0;
+  width: 2px; background: linear-gradient(180deg, var(--gold) 0%, rgba(201,168,76,.15) 100%);
+}
+
+.segment {
+  position: relative; padding-left: 44px; padding-bottom: 1.75rem;
+}
+.segment:last-child { padding-bottom: 0; }
+
+.segment-dot {
+  position: absolute; left: 8px; top: 4px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--gold-grad); border: 3px solid white;
+  box-shadow: 0 0 0 2px var(--gold); z-index: 1;
+}
+.segment-dot.break { background: var(--mint); box-shadow: 0 0 0 2px var(--jade); }
+
+/* Time badge */
+.time-badge {
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: var(--gold-pale); color: var(--gold-deep);
+  padding: .25rem .7rem; border-radius: 2rem;
+  font-family: 'Space Mono', monospace; font-size: .65rem; font-weight: 700;
+  letter-spacing: .06em; margin-bottom: .5rem;
+}
+.time-badge .clock { font-size: .8rem; }
+
+/* Segment header */
+.segment-header {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  font-weight: 700; color: var(--forest); line-height: 1.25; margin-bottom: .6rem;
+}
+
+/* Activities */
+.activity-list { list-style: none; }
+.activity-item {
+  padding: .6rem 0; border-bottom: 1px solid rgba(201,168,76,.1);
+  display: flex; gap: .75rem; align-items: flex-start;
+}
+.activity-item:last-child { border-bottom: none; }
+
+.activity-bullet {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+  margin-top: .55rem; flex-shrink: 0;
+}
+.activity-content { flex: 1; }
+.activity-title {
+  font-size: .82rem; font-weight: 600; color: var(--forest); line-height: 1.45;
+  margin-bottom: .15rem;
+}
+.activity-desc {
+  font-size: .78rem; color: var(--text-muted); line-height: 1.55;
+}
+
+/* Sub-activities (nested) */
+.sub-list { list-style: none; margin-top: .4rem; padding-left: .5rem; }
+.sub-item {
+  padding: .35rem 0; display: flex; gap: .5rem; align-items: flex-start;
+  border-bottom: 1px dashed rgba(201,168,76,.08);
+}
+.sub-item:last-child { border-bottom: none; }
+.sub-tag {
+  font-family: 'Space Mono', monospace; font-size: .55rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  background: rgba(6,78,59,.06); color: var(--jade);
+  padding: .15rem .4rem; border-radius: .25rem; flex-shrink: 0; margin-top: .1rem;
+}
+.sub-text { font-size: .76rem; color: var(--text-muted); line-height: 1.5; }
+.sub-text strong { color: var(--forest); font-weight: 600; }
+
+/* Question highlight */
+.question-box {
+  background: rgba(201,168,76,.06); border-left: 3px solid var(--gold);
+  padding: .5rem .75rem; border-radius: 0 .35rem .35rem 0;
+  margin-top: .3rem; font-size: .74rem; color: var(--text-muted);
+  font-style: italic; line-height: 1.5;
+}
+
+/* Break segment */
+.break-segment {
+  background: linear-gradient(135deg, rgba(110,231,183,.06), rgba(13,122,90,.04));
+  border: 1px dashed rgba(13,122,90,.2); border-radius: .6rem;
+  padding: 1rem 1.25rem; margin-left: 44px; margin-bottom: 1.75rem;
+  display: flex; align-items: center; gap: .75rem;
+}
+.break-icon { font-size: 1.3rem; }
+.break-text {
+  font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600;
+  color: var(--jade);
+}
+.break-time {
+  font-family: 'Space Mono', monospace; font-size: .6rem; font-weight: 700;
+  color: var(--jade); letter-spacing: .08em; text-transform: uppercase;
+  margin-left: auto; flex-shrink: 0;
+}
+
+/* ── FOOTER ── */
+.footer-bar {
+  background: var(--forest); color: rgba(255,255,255,.5);
+  padding: 1.25rem 2rem; text-align: center; font-size: .7rem;
+  border-top: 2px solid rgba(201,168,76,.2);
+}
+.footer-bar span { color: var(--gold); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .header { padding: 1.75rem 1.25rem 1.5rem; }
+  .header-meta { gap: 1rem; }
+  .programme-body { padding: 1.25rem; }
+  .timeline::before { left: 11px; }
+  .segment { padding-left: 34px; }
+  .segment-dot { left: 4px; width: 14px; height: 14px; }
+  .break-segment { margin-left: 34px; padding: .85rem 1rem; }
+}
+
+@media (max-width: 400px) {
+  .header-meta { flex-direction: column; gap: .6rem; }
+  .break-segment { flex-direction: column; align-items: flex-start; gap: .4rem; }
+  .break-time { margin-left: 0; }
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ═══════ HEADER ═══════ -->
+  <header class="header">
+    <div class="header-inner">
+      <span class="header-eyebrow">Workshop Programme of Activities</span>
+      <h1 class="header-title">
+        Synchronizing the Ecosystem:<br>
+        <span class="accent">Lanao del Sur</span> Investment Roadmap 2026–2035
+      </h1>
+      <p class="header-subtitle">
+        A one-day workshop transitioning provincial planning from traditional sectoral silos toward an integrated, ecosystem-based investment roadmap using the BEIE Framework and Systems Thinking.
+      </p>
+      <div class="header-meta">
+        <div class="meta-item">
+          <span class="meta-icon">📅</span>
+          <div>
+            <span class="meta-label">Date</span>
+            <span class="meta-value">[Insert Workshop Date]</span>
+          </div>
+        </div>
+        <div class="meta-item">
+          <span class="meta-icon">📍</span>
+          <div>
+            <span class="meta-label">Venue</span>
+            <span class="meta-value">[Insert Venue, Lanao del Sur]</span>
+          </div>
+        </div>
+        <div class="meta-item">
+          <span class="meta-icon">⏱️</span>
+          <div>
+            <span class="meta-label">Duration</span>
+            <span class="meta-value">8:30 AM — 4:30 PM</span>
+          </div>
+        </div>
+        <div class="meta-item">
+          <span class="meta-icon">👥</span>
+          <div>
+            <span class="meta-label">Participants</span>
+            <span class="meta-value">Provincial Ministries &amp; Stakeholders</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════ PROGRAMME BODY ═══════ -->
+  <div class="programme-body">
+    <div class="timeline">
+
+      <!-- Segment 1 -->
+      <div class="segment">
+        <div class="segment-dot"></div>
+        <div class="time-badge"><span class="clock">🕣</span> 8:30 AM — 9:30 AM</div>
+        <h2 class="segment-header">Segment 1: Preliminaries</h2>
+        <ul class="activity-list">
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">Opening &amp; Context Setting</div>
+              <div class="activity-desc">Introduction to the <strong>"Moral Governance"</strong> operating system — emphasizing transparency and accountability as the primary currency for attracting investment.</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">Icebreaker: "The Interdependence Chain"</div>
+              <div class="activity-desc">Participants from different ministries (Agriculture, Public Works, Trade, etc.) map how their specific mandate directly impacts another department's success.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Segment 2 -->
+      <div class="segment">
+        <div class="segment-dot"></div>
+        <div class="time-badge"><span class="clock">🕤</span> 9:30 AM — 11:00 AM</div>
+        <h2 class="segment-header">Segment 2: Lanao del Sur Investment &amp; Economic Outlook</h2>
+        <ul class="activity-list">
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">Provincial Briefing</div>
+              <div class="activity-desc">Presentation of Lanao del Sur as the <strong>fastest-growing economy in BARMM</strong>, highlighting its <strong>5.02% growth in 2023</strong> and <strong>₱75.38 billion GDP</strong>.</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">2.1 Video Case Study: "The City of Harmony"</div>
+              <div class="activity-desc">Screening of a case study illustrating the failure of traditional "siloed" responses to budget deficits and the success of a systems thinking approach linking housing, public works, and health.</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">2.2 Group SWOT Analysis per BEIE Cluster</div>
+              <div class="activity-desc">Participants divided into five groups based on the BEIE clusters:</div>
+              <ul class="sub-list">
+                <li class="sub-item">
+                  <span class="sub-tag">Foundations</span>
+                  <span class="sub-text"><strong>Agriculture, Fisheries, Energy</strong> — Are our farmers producing the raw materials Halal factories and global buyers need?</span>
+                </li>
+                <li class="sub-item">
+                  <span class="sub-tag">Transformers</span>
+                  <span class="sub-text"><strong>Industrial &amp; Halal Manufacturing</strong> — How do we turn raw crops into finished, high-value Halal products for global markets?</span>
+                </li>
+                <li class="sub-item">
+                  <span class="sub-tag">Enablers</span>
+                  <span class="sub-text"><strong>Infrastructure, Logistics, Social Services</strong> — Are roads and facilities truly making it cheaper and faster for products to reach market?</span>
+                </li>
+                <li class="sub-item">
+                  <span class="sub-tag">Connectors</span>
+                  <span class="sub-text"><strong>Trade, Exports &amp; BIMP-EAGA</strong> — How do we tell local producers exactly what foreign customers want to buy?</span>
+                </li>
+                <li class="sub-item">
+                  <span class="sub-tag">Financiers</span>
+                  <span class="sub-text"><strong>Islamic Banking &amp; Ethical Finance</strong> — How can Islamic Banking fund big, connected projects rather than small, separate loans?</span>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">2.3 Systems Thinking Module <span style="font-weight:400;color:var(--text-muted);">(via Strat Planner Pro)</span></div>
+              <div class="activity-desc">Using the <strong>Map Dynamics</strong> tool to visualize non-linear relationships — e.g., how "Security-Investment Tensions" act as a balancing loop, or how the "Halal Wildcard" amplifies growth across all clusters.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Break -->
+      <div class="break-segment">
+        <span class="break-icon">🍽️</span>
+        <span class="break-text">Lunch Break &amp; Networking</span>
+        <span class="break-time">11:00 AM — 1:00 PM</span>
+      </div>
+
+      <!-- Segment 3 -->
+      <div class="segment">
+        <div class="segment-dot"></div>
+        <div class="time-badge"><span class="clock">🕐</span> 1:00 PM — 2:00 PM</div>
+        <h2 class="segment-header">Segment 3: Strategic Options through Strategy Matrix</h2>
+        <ul class="activity-list">
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">Generating Strategy</div>
+              <div class="activity-desc">Using the <strong>AI Strategy Generator</strong> to derive SO (Strengths-Opportunities), ST (Strengths-Threats), WO (Weaknesses-Opportunities), and WT (Weaknesses-Threats) strategic options.</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">Prioritization</div>
+              <div class="activity-desc">Aligning options with identified <strong>Priority Investment Corridors</strong>, such as the Wao–Amai Manabilang Agro-Industrial corridor or the Marawi Halal Food Manufacturing hub.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Segment 4 -->
+      <div class="segment">
+        <div class="segment-dot"></div>
+        <div class="time-badge"><span class="clock">🕑</span> 2:00 PM — 2:30 PM</div>
+        <h2 class="segment-header">Segment 4: KPI Benchmarking &amp; Balanced Scorecard</h2>
+        <ul class="activity-list">
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">Benchmarking Methodologies</div>
+              <div class="activity-desc">Setting performance targets based on recent regional successes, such as <strong>BARMM's ₱5 billion investment milestone in 2025</strong>.</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">Balanced Scorecard (BSC) Alignment</div>
+              <div class="activity-desc">Categorizing strategic objectives into four perspectives: <strong>Financial</strong>, <strong>Customer/Resident</strong>, <strong>Internal Process</strong>, and <strong>Learning/Growth</strong>.</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">KPI Development</div>
+              <div class="activity-desc">Defining specific, measurable indicators such as <em>"percentage of MSMEs halal-certified"</em> or <em>"reduction in logistics costs via farm-to-market road completion"</em>.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Segment 5 -->
+      <div class="segment">
+        <div class="segment-dot"></div>
+        <div class="time-badge"><span class="clock">🕝</span> 2:30 PM — 4:00 PM</div>
+        <h2 class="segment-header">Segment 5: Group Presentations</h2>
+        <ul class="activity-list">
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">The "Integrated Pitch" <span style="font-weight:400;color:var(--text-muted);">(10 mins max per cluster)</span></div>
+              <div class="activity-desc">Each cluster presents their section of the roadmap, explicitly stating dependencies on other clusters — e.g., <em>"Our Halal Processing hub depends on the Ministry of Public Works' road rehabilitation."</em></div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">Feedback Loop</div>
+              <div class="activity-desc">Peer review focused on ensuring the roadmap moves from <strong>"fragmented growth"</strong> to a <strong>"synchronized ecosystem"</strong>.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Segment 6 -->
+      <div class="segment">
+        <div class="segment-dot"></div>
+        <div class="time-badge"><span class="clock">🕓</span> 4:00 PM — 4:30 PM</div>
+        <h2 class="segment-header">Segment 6: Wrapping Up</h2>
+        <ul class="activity-list">
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">Synthesis</div>
+              <div class="activity-desc">Summarizing the ten-year economic vision to transform Lanao del Sur into a <strong>self-sustaining, export-linked hub</strong>.</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">Next Steps</div>
+              <div class="activity-desc">Exporting the initial draft via the <strong>Plan Generator</strong> for official documentation and departmental refinement.</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <span class="activity-bullet"></span>
+            <div class="activity-content">
+              <div class="activity-title">Closing Remarks</div>
+              <div class="activity-desc">Emphasizing that in Lanao del Sur, the difference between scattered progress and <strong>synchronized development</strong> is everything.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════ FOOTER ═══════ -->
+  <footer class="footer-bar">
+    <p><span>MTIT</span> · Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)</p>
+    <p style="margin-top:.25rem;font-size:.65rem;">Investment Roadmap 2026–2035 · BEIE Framework · Systems Thinking Approach</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

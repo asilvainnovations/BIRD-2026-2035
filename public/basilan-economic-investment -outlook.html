@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#022c22">
+<meta name="description" content="Basilan Economic and Investment Outlook (2026 - 2035)">
+<title>Basilan Economic and Investment Outlook (2026 - 2035)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =====================================================
+DESIGN TOKENS
+===================================================== */
+:root{
+--primary-green:#064e3b;--dark-green:#022c22;--mid-green:#065f46;
+--light-green:#6ee7b7;--cream:#ecfdf5;--text-dark:#0f172a;--text-muted:#64748b;
+--gold:#C9A84C;--gold-light:#E8C560;--gold-dark:#8B6C28;--gold-pale:#fdf6e3;
+--gold-border:rgba(201,168,76,0.35);
+--gold-grad:linear-gradient(135deg,#7a5c1e 0%,#c9a84c 35%,#e8c560 50%,#c9a84c 65%,#7a5c1e 100%);
+/* Spacing scale */
+--sp-1:.25rem;--sp-2:.5rem;--sp-3:.75rem;--sp-4:1rem;--sp-6:1.5rem;--sp-8:2rem;--sp-12:3rem;--sp-16:4rem;
+/* Touch targets */
+--touch-min:44px;
+/* Border radius */
+--r-sm:.5rem;--r-md:1rem;--r-lg:1.25rem;--r-xl:1.5rem;
+--r-full:9999px;
+/* Animation timing */
+--ease-smooth:cubic-bezier(0.4, 0, 0.2, 1);
+--ease-bounce:cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+/* =====================================================
+RESET & BASE — MOBILE FIRST
+===================================================== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;line-height:1.7;color:var(--text-dark);background:var(--cream);overflow-x:hidden;font-size:1rem;}
+img{max-width:100%;height:auto;display:block;}
+a{color:inherit;}
+button{cursor:pointer;font-family:inherit;}
+/* Arabic text */
+.arabic-text{font-family:'Noto Naskh Arabic', serif;direction:rtl;text-align:right;}
+/* =====================================================
+ACCESSIBILITY
+===================================================== */
+.skip-link{position:absolute;top:-100%;left:var(--sp-4);z-index:9999;background:var(--gold);color:var(--dark-green);padding:.6rem 1.2rem;border-radius:0 0 var(--r-sm) var(--r-sm);font-weight:700;font-size:.9rem;text-decoration:none;transition:top .2s;}
+.skip-link:focus{top:0;}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+button:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+@media(forced-colors:active){.cta-btn,.submit-btn{border:2px solid ButtonText;}}
+/* =====================================================
+NAV — MOBILE FIRST (hamburger always at far right)
+===================================================== */
+nav{background:rgba(2,44,34,.98);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);position:fixed;width:100%;z-index:1000;border-bottom:2px solid var(--gold-border);transition:all .4s ease;}
+nav.scrolled{background:rgba(2,44,34,.99);box-shadow:0 4px 30px rgba(0,0,0,.4);}
+.nav-container{max-width:1400px;margin:0 auto;padding:.6rem var(--sp-4);display:flex;align-items:center;gap:var(--sp-3);}
+.nav-logo-wrap{display:flex;align-items:center;gap:var(--sp-3);text-decoration:none;min-height:var(--touch-min);flex-shrink:0;}
+.nav-logo-wrap img{height:44px;width:auto;object-fit:contain;}
+.nav-site-name{display:none;font-family:'Cinzel',serif;font-size:.72rem;color:var(--gold);font-weight:700;letter-spacing:.06em;line-height:1.3;}
+.nav-right{display:none;align-items:center;gap:var(--sp-4);margin-left:auto;}
+.nav-hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:var(--touch-min);height:var(--touch-min);background:none;border:1px solid var(--gold-border);border-radius:var(--r-sm);padding:.55rem;flex-shrink:0;transition:all .3s;margin-left:auto;}
+.nav-hamburger:hover,.nav-hamburger:focus-visible{border-color:var(--gold);background:rgba(201,168,76,.08);}
+.hamburger-line{width:100%;height:2px;background:var(--light-green);border-radius:2px;transition:all .3s;}
+.nav-hamburger.open .hamburger-line:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-hamburger.open .hamburger-line:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.open .hamburger-line:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+/* Mobile drawer */
+.nav-links{list-style:none;position:absolute;top:100%;left:0;right:0;background:rgba(2,44,34,.99);border-top:1px solid var(--gold-border);border-bottom:2px solid var(--gold-border);display:none;flex-direction:column;padding:var(--sp-2) 0;z-index:999;}
+.nav-links.open{display:flex;}
+.nav-links li{width:100%;}
+.nav-links a{display:flex;align-items:center;min-height:var(--touch-min);padding:.6rem var(--sp-6);color:var(--light-green);text-decoration:none;font-weight:500;font-size:.95rem;letter-spacing:.02em;transition:all .2s;border-left:3px solid transparent;}
+.nav-links a.nav-ext{color:var(--gold);}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--gold);background:rgba(201,168,76,.07);border-left-color:var(--gold);}
+.nav-links .nav-divider{height:1px;background:var(--gold-border);margin:.3rem var(--sp-6);}
+.cta-btn{background:var(--gold-grad);color:var(--dark-green);padding:.55rem 1.1rem;border-radius:var(--r-sm);text-decoration:none;font-weight:700;font-size:.78rem;letter-spacing:.04em;transition:transform .3s,box-shadow .3s;white-space:nowrap;text-transform:uppercase;min-height:var(--touch-min);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cta-btn:hover,.cta-btn:focus-visible{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.4);}
+/* Desktop nav — ≥ 900px */
+@media(min-width:900px){
+.nav-site-name{display:block;}
+.nav-hamburger{display:none;}
+.nav-right{display:flex;}
+/* ✅ FIXED: Explicitly hide mobile drawer on desktop */
+#navLinksMobile { display: none !important; }
+.nav-links{
+position:static;display:flex;flex-direction:row;
+background:none;border:none;padding:0;gap:0;
+align-items:center;
+}
+.nav-links li{width:auto;}
+.nav-links .nav-divider{width:1px;height:18px;background:var(--gold-border);margin:0 .2rem;}
+.nav-links a{
+min-height:auto;padding:.4rem .7rem;border:none;
+font-size:.82rem;letter-spacing:.025em;position:relative;color:var(--light-green);
+border-radius:.35rem;
+}
+.nav-links a.nav-ext{color:var(--gold-light);}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:.7rem;right:.7rem;width:auto;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:center;transition:transform .25s;}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-links a:hover,.nav-links a:focus-visible{background:rgba(201,168,76,.07);color:var(--gold);border:none;}
+.cta-btn{padding:.6rem 1.35rem;font-size:.82rem;}
+}
+/* =====================================================
+BANNER
+===================================================== */
+.banner-wrap{margin-top:70px;line-height:0;position:relative;overflow:hidden;}
+.banner-wrap img{width:100%;display:block;max-height:55vw;object-fit:cover;object-position:center top;}
+@media(min-width:768px){.banner-wrap{margin-top:74px;}.banner-wrap img{max-height:70vh;}}
+/* =====================================================
+HERO CONTENT
+===================================================== */
+.hero-content{background:linear-gradient(to bottom,var(--dark-green),#011a12);color:white;text-align:center;padding:var(--sp-12) var(--sp-4) var(--sp-8);}
+.hero-badge{display:inline-block;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.45);color:var(--gold);padding:.4rem 1.1rem;border-radius:2rem;font-size:.72rem;font-weight:600;margin-bottom:var(--sp-4);letter-spacing:.12em;text-transform:uppercase;}
+.hero-content h1{font-family:'Cinzel',serif;font-size:clamp(1.5rem,5vw,3.8rem);color:white;line-height:1.15;font-weight:700;text-shadow:0 2px 20px rgba(0,0,0,.5);margin-bottom:.6rem;}
+.hero-content h1 .gold{color:var(--gold);}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);color:rgba(255,255,255,.8);max-width:680px;margin:0 auto var(--sp-6);font-weight:300;letter-spacing:.02em;}
+.hero-cta-wrap{display:flex;flex-direction:column;align-items:center;gap:var(--sp-3);margin-bottom:var(--sp-8);}
+.hero-cta-wrap .cta-btn{font-size:.95rem;padding:.9rem 2rem;}
+.hero-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-3);max-width:1100px;margin:0 auto;padding:0 var(--sp-2);}
+.stat-card{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid var(--gold-border);border-radius:var(--r-md);padding:var(--sp-4);text-align:center;transition:transform .3s,border-color .3s;}
+.stat-card:hover{transform:translateY(-4px);border-color:var(--gold);}
+.stat-num{font-family:'Cinzel',serif;font-size:clamp(1.2rem,3vw,1.9rem);font-weight:700;color:var(--gold);display:block;line-height:1.1;margin-bottom:.3rem;}
+.stat-lbl{color:var(--light-green);font-size:.75rem;font-weight:500;line-height:1.3;}
+@media(min-width:640px){.hero-stats{grid-template-columns:repeat(4,1fr);}.hero-cta-wrap{flex-direction:row;justify-content:center;}}
+/* =====================================================
+SECTIONS — BASE
+===================================================== */
+section{padding:var(--sp-12) var(--sp-4);}
+.container{max-width:1200px;margin:0 auto;}
+.section-header{text-align:center;margin-bottom:var(--sp-12);}
+.section-label{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:.6rem;}
+.section-header h2{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2.4rem);color:var(--primary-green);margin-bottom:.7rem;line-height:1.25;}
+.section-header h2.white{color:white;}
+.section-divider{width:60px;height:4px;background:var(--gold-grad);border-radius:2px;margin:.8rem auto var(--sp-4);}
+.section-header p{color:var(--text-muted);font-size:.95rem;max-width:600px;margin:0 auto;line-height:1.65;}
+.section-header p.light{color:rgba(255,255,255,.65);}
+/* Section Navigation */
+.section-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--sp-2);margin-bottom:var(--sp-12);}
+.section-nav-btn{background:rgba(6,78,59,.1);color:var(--text-muted);border:1px solid rgba(6,78,59,.2);border-radius:var(--r-full);padding:var(--sp-2) var(--sp-4);font-size:.85rem;font-weight:500;transition:all .3s;white-space:nowrap;}
+.section-nav-btn:hover,.section-nav-btn:focus-visible{background:var(--primary-green);color:white;border-color:var(--gold);}
+/* =====================================================
+PROVINCIAL OVERVIEW SECTION
+===================================================== */
+.overview-section{background:white;}
+.overview-grid{display:grid;grid-template-columns:1fr;gap:var(--sp-8);}
+.overview-card{background:var(--cream);border-radius:var(--r-md);padding:var(--sp-6);border-left:4px solid var(--gold);transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;}
+.overview-card::before{content:'';position:absolute;top:0;right:0;width:70px;height:70px;background:radial-gradient(circle,rgba(201,168,76,.1) 0%,transparent 70%);transform:translate(30%,-30%);}
+.overview-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(6,78,59,.12);}
+.overview-icon{width:44px;height:44px;background:var(--primary-green);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:.8rem;flex-shrink:0;}
+.overview-card h3{font-family:'Cinzel',serif;color:var(--primary-green);font-size:.92rem;margin-bottom:.3rem;font-weight:600;}
+.overview-card p{color:var(--text-muted);font-size:.84rem;line-height:1.5;}
+.overview-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-4);margin-top:var(--sp-6);}
+.stat-item{background:white;border-radius:var(--r-md);padding:var(--sp-4);text-align:center;box-shadow:0 4px 12px rgba(6,78,59,.05);}
+.stat-value{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:var(--gold);display:block;margin-bottom:.2rem;}
+.stat-label{font-size:.75rem;color:var(--text-muted);}
+@media(min-width:480px){.overview-stats{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:900px){
+.overview-grid{grid-template-columns:repeat(2,1fr);}
+}
+/* =====================================================
+MACROECONOMIC SECTION
+===================================================== */
+.economic-section{background:var(--dark-green);color:white;}
+.economic-grid{display:grid;grid-template-columns:1fr;gap:var(--sp-6);}
+.economic-card{background:rgba(255,255,255,.04);border-radius:var(--r-md);padding:var(--sp-6);border:1px solid rgba(255,255,255,.08);transition:all .3s;}
+.economic-card:hover{background:rgba(255,255,255,.07);transform:translateY(-3px);}
+.economic-card h3{font-family:'Cinzel',serif;font-size:1rem;margin-bottom:.9rem;color:white;}
+.economic-card p{color:rgba(255,255,255,.72);font-size:.86rem;line-height:1.5;margin-bottom:var(--sp-3);}
+.economic-chart{background:rgba(255,255,255,.03);border-radius:var(--r-sm);padding:var(--sp-4);margin-top:var(--sp-3);}
+.economic-table{width:100%;border-collapse:collapse;margin-top:var(--sp-4);font-size:.85rem;}
+.economic-table th{background:rgba(201,168,76,.1);color:var(--gold);padding:var(--sp-2);text-align:left;border-bottom:2px solid var(--gold);}
+.economic-table td{padding:var(--sp-2);border-bottom:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.economic-table tr:last-child td{border-bottom:none;}
+@media(min-width:768px){
+.economic-grid{grid-template-columns:repeat(2,1fr);}
+.economic-table{font-size:.9rem;}
+}
+/* =====================================================
+BEIE FRAMEWORK SECTION
+===================================================== */
+.beie-section{background:white;}
+.framework-intro{background:var(--cream);border-left:4px solid var(--gold);border-radius:0 var(--r-md) var(--r-md) 0;padding:var(--sp-4) var(--sp-6);margin-bottom:var(--sp-8);font-size:.9rem;color:var(--text-muted);line-height:1.7;}
+.framework-intro strong{color:var(--primary-green);}
+.framework-grid{display:grid;grid-template-columns:1fr;gap:var(--sp-6);margin-bottom:var(--sp-12);}
+.cluster-card{background:#061810;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.15);border:1px solid rgba(201,168,76,.2);}
+.cluster-card svg{width:100%;height:auto;display:block;}
+.cluster-explanation{padding:var(--sp-4) var(--sp-4);background:rgba(255,255,255,.03);border-top:2px solid rgba(201,168,76,.25);}
+.cluster-badge{display:inline-block;font-size:.65rem;font-weight:700;padding:.15rem .55rem;border-radius:.25rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.08em;}
+.badge-foundations{background:rgba(16,185,129,.15);color:#10b981;border:1px solid rgba(16,185,129,.3);}
+.badge-transformers{background:rgba(201,168,76,.15);color:var(--gold);border:1px solid var(--gold-border);}
+.badge-enablers{background:rgba(59,130,246,.15);color:#3b82f6;border:1px solid rgba(59,130,246,.3);}
+.badge-connectors{background:rgba(147,51,234,.15);color:#9333ea;border:1px solid rgba(147,51,234,.3);}
+.badge-financiers{background:rgba(239,68,68,.15);color:#ef4444;border:1px solid rgba(239,68,68,.3);}
+.cluster-crosscutting{background:rgba(245,158,11,.15);color:#f59e0b;border:1px solid rgba(245,158,11,.3);}
+.cluster-explanation h4{font-family:'Cinzel',serif;color:var(--gold);font-size:.95rem;margin-bottom:.45rem;}
+.cluster-explanation p{color:rgba(209,250,229,.8);font-size:.83rem;line-height:1.6;margin-bottom:.5rem;}
+.cluster-insight{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:var(--r-sm);padding:.6rem .85rem;font-size:.79rem;color:rgba(209,250,229,.85);line-height:1.55;}
+.cluster-insight strong{color:var(--gold);}
+@media(min-width:768px){.framework-grid{grid-template-columns:repeat(2,1fr);}}
+/* =====================================================
+INVESTMENT PERFORMANCE SECTION
+===================================================== */
+.performance-section{background:var(--cream);padding:var(--sp-12) 0;}
+.performance-section .container{padding-left:var(--sp-4);padding-right:var(--sp-4);}
+.performance-section .section-header{margin-bottom:var(--sp-8);}
+.performance-body{display:flex;flex-direction:column;gap:0;}
+.performance-text-block{padding:var(--sp-6) var(--sp-4);max-width:1200px;margin:0 auto;width:100%;}
+.performance-text-block h3{font-family:'Cinzel',serif;font-size:clamp(1.2rem,2.5vw,1.5rem);color:var(--primary-green);margin-bottom:var(--sp-3);}
+.performance-text-block p{color:var(--text-muted);margin-bottom:var(--sp-3);line-height:1.8;font-size:.92rem;}
+.performance-table{width:100%;border-collapse:collapse;margin:var(--sp-4) 0;font-size:.85rem;}
+.performance-table th{background:var(--primary-green);color:white;padding:var(--sp-3);text-align:left;}
+.performance-table td{padding:var(--sp-3);border-bottom:1px solid rgba(6,78,59,.1);color:var(--text-muted);}
+.performance-table tr:nth-child(even){background:rgba(255,255,255,.5);}
+.project-highlight{background:white;border-radius:var(--r-md);padding:var(--sp-4) var(--sp-6);border-left:4px solid var(--gold);margin-top:var(--sp-4);}
+.project-highlight h4{font-family:'Cinzel',serif;color:var(--primary-green);margin-bottom:.65rem;font-size:.95rem;}
+.project-highlight ul{list-style:none;font-size:.87rem;color:var(--text-muted);}
+.project-highlight li{padding:.25rem 0;}
+/* =====================================================
+CHALLENGES SECTION
+===================================================== */
+.challenges-section{background:white;}
+.challenges-grid{display:grid;grid-template-columns:1fr;gap:var(--sp-4);}
+.challenge-card{background:var(--cream);border-radius:var(--r-md);padding:var(--sp-6);border-left:4px solid var(--gold);transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;}
+.challenge-card::before{content:'';position:absolute;top:0;right:0;width:70px;height:70px;background:radial-gradient(circle,rgba(201,168,76,.1) 0%,transparent 70%);transform:translate(30%,-30%);}
+.challenge-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(6,78,59,.12);}
+.challenge-icon{width:44px;height:44px;background:var(--primary-green);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:.8rem;flex-shrink:0;}
+.challenge-card h3{font-family:'Cinzel',serif;color:var(--primary-green);font-size:.92rem;margin-bottom:.3rem;font-weight:600;}
+.challenge-card p{color:var(--text-muted);font-size:.84rem;line-height:1.5;}
+@media(min-width:480px){.challenges-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:900px){.challenges-grid{grid-template-columns:repeat(3,1fr);}}
+/* =====================================================
+RECOMMENDATIONS SECTION
+===================================================== */
+.recommendations-section{background:var(--dark-green);color:white;}
+.recommendations-intro{background:rgba(255,255,255,.04);border-left:4px solid var(--gold);border-radius:0 var(--r-md) var(--r-md) 0;padding:var(--sp-4) var(--sp-6);margin-bottom:var(--sp-8);font-size:.9rem;color:rgba(255,255,255,.7);line-height:1.7;}
+.recommendations-grid{display:grid;grid-template-columns:1fr;gap:var(--sp-6);}
+.recommendation-card{background:rgba(255,255,255,.04);border-radius:var(--r-md);padding:var(--sp-6);border:1px solid rgba(255,255,255,.08);transition:all .3s;}
+.recommendation-card:hover{background:rgba(255,255,255,.07);transform:translateY(-3px);}
+.recommendation-card h3{font-family:'Cinzel',serif;font-size:1rem;margin-bottom:.9rem;color:white;}
+.recommendation-card p{color:rgba(255,255,255,.72);font-size:.86rem;line-height:1.5;margin-bottom:var(--sp-3);}
+.recommendation-list{list-style:none;font-size:.85rem;color:rgba(255,255,255,.7);}
+.recommendation-list li{padding:.38rem 0 .38rem 1.3rem;position:relative;}
+.recommendation-list li::before{content:'•';position:absolute;left:0;color:var(--gold);font-weight:bold;font-size:1.2rem;}
+@media(min-width:768px){
+.recommendations-grid{grid-template-columns:repeat(2,1fr);}
+}
+/* =====================================================
+CONTACT
+===================================================== */
+.contact-section{background:linear-gradient(135deg,var(--primary-green),var(--dark-green));color:white;padding:var(--sp-16) var(--sp-4);position:relative;overflow:hidden;}
+.contact-section::before{content:'';position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.07) 0%,transparent 70%);pointer-events:none;}
+.contact-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+.contact-banner-wrap{border-radius:var(--r-xl);overflow:hidden;margin-bottom:var(--sp-12);box-shadow:0 20px 60px rgba(0,0,0,.4);}
+.contact-banner-wrap img{width:100%;height:auto;display:block;}
+.contact-grid{display:grid;grid-template-columns:1fr;gap:var(--sp-8);}
+.contact-info h3{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--gold);margin-bottom:var(--sp-4);}
+.contact-detail{display:flex;align-items:flex-start;gap:var(--sp-3);margin-bottom:var(--sp-4);}
+.ci{width:42px;height:42px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.contact-detail p{color:rgba(255,255,255,.82);font-size:.88rem;line-height:1.6;}
+.contact-detail strong{display:block;color:var(--gold);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.1rem;}
+.contact-detail a{color:var(--light-green);text-decoration:none;}
+.agency-grid{display:grid;grid-template-columns:1fr;gap:.55rem;margin-top:var(--sp-4);}
+.agency-tag{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-sm);padding:.55rem .8rem;font-size:.78rem;color:var(--light-green);font-weight:500;text-align:center;transition:all .3s;min-height:var(--touch-min);display:flex;align-items:center;justify-content:center;}
+.agency-tag:hover{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.3);color:var(--gold);}
+.form-wrap{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-xl);padding:var(--sp-6);}
+.form-wrap h3{font-family:'Cinzel',serif;color:var(--gold);font-size:1.15rem;margin-bottom:var(--sp-6);}
+.form-group{margin-bottom:var(--sp-4);}
+.form-group label{display:block;font-size:.74rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--light-green);margin-bottom:.4rem;}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:.8rem var(--sp-4);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:var(--r-sm);color:white;font-family:'DM Sans',sans-serif;font-size:.9rem;transition:border-color .3s,background .3s;outline:none;min-height:var(--touch-min);}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,.3);}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:rgba(201,168,76,.5);background:rgba(255,255,255,.09);}
+.form-group select option{background:var(--dark-green);color:white;}
+.form-group textarea{resize:vertical;min-height:100px;}
+.form-row{display:grid;grid-template-columns:1fr;gap:var(--sp-4);}
+.submit-btn{width:100%;padding:.95rem;background:var(--gold-grad);color:var(--dark-green);border:none;border-radius:var(--r-sm);font-family:'DM Sans',sans-serif;font-size:.92rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;transition:transform .3s,box-shadow .3s;min-height:var(--touch-min);}
+.submit-btn:hover,.submit-btn:focus-visible{transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,168,76,.35);}
+.form-note{text-align:center;font-size:.74rem;color:rgba(255,255,255,.35);margin-top:.7rem;}
+@media(min-width:640px){.form-row{grid-template-columns:1fr 1fr;}}
+@media(min-width:900px){.contact-grid{grid-template-columns:1fr 1fr;}.agency-grid{grid-template-columns:1fr 1fr;}}
+/* =====================================================
+FOOTER
+===================================================== */
+footer{background:#011a12;color:white;padding:var(--sp-8) var(--sp-4) var(--sp-6);border-top:3px solid var(--gold-border);}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-logo img{height:42px;width:auto;object-fit:contain;margin-bottom:var(--sp-4);}
+.footer-bottom{text-align:center;padding-top:var(--sp-4);border-top:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.38);font-size:.78rem;line-height:1.7;}
+.footer-bottom span{color:var(--gold);}
+/* =====================================================
+SCROLL ANIMATIONS
+===================================================== */
+.fade-in{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.fade-in.visible{opacity:1;transform:none;}
+.fd1{transition-delay:.08s;}.fd2{transition-delay:.16s;}.fd3{transition-delay:.24s;}
+/* =====================================================
+UTILS
+===================================================== */
+.hidden-sections-msg{display:none!important;}
+@media(prefers-color-scheme:dark){
+body{background:var(--cream);}
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+<!-- ======================================================
+ACCESSIBILITY: SKIP LINK
+====================================================== -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<!-- ======================================================
+NAVIGATION — MOBILE-FIRST
+====================================================== -->
+<nav id="navbar" role="navigation" aria-label="Main site navigation">
+<div class="nav-container">
+<!-- LOGO -->
+<a href="/" class="nav-logo-wrap" aria-label="Basilan Investment Outlook — Home">
+<img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png"
+alt="Ministry of Trade, Investments and Tourism – BARMM"
+width="140" height="44"
+onerror="this.style.display='none'">
+<span class="nav-site-name">Basilan<br>Investment Outlook</span>
+</a>
+<!-- DESKTOP NAV + CTA (hidden on mobile) -->
+<div class="nav-right" aria-label="Desktop navigation" role="menubar">
+<ul class="nav-links" id="navLinksDesktop" role="list">
+<li role="none"><a href="#overview" role="menuitem">Overview</a></li>
+<li role="none"><a href="#macro" role="menuitem">Macroeconomic</a></li>
+<li role="none"><a href="#beie" role="menuitem">BEIE Framework</a></li>
+<li role="none"><a href="#performance" role="menuitem">Performance</a></li>
+<li role="none"><a href="#challenges" role="menuitem">Challenges</a></li>
+<li role="none"><a href="#recommendations" role="menuitem">Recommendations</a></li>
+</ul>
+<a href="#contact" class="cta-btn" aria-label="Invest in Basilan now">Invest Now</a>
+</div>
+<!-- HAMBURGER — always at far right on mobile -->
+<button class="nav-hamburger" id="navHamburger" aria-controls="navLinksMobile" aria-expanded="false" aria-label="Toggle navigation menu">
+<span class="hamburger-line" aria-hidden="true"></span>
+<span class="hamburger-line" aria-hidden="true"></span>
+<span class="hamburger-line" aria-hidden="true"></span>
+</button>
+</div>
+<!-- MOBILE DRAWER (opens below nav bar) -->
+<ul class="nav-links" id="navLinksMobile" role="list" aria-label="Mobile navigation">
+<li><a href="#overview">Overview</a></li>
+<li><a href="#macro">Macroeconomic</a></li>
+<li><a href="#beie">BEIE Framework</a></li>
+<li><a href="#performance">Performance</a></li>
+<li><a href="#challenges">Challenges</a></li>
+<li><a href="#recommendations">Recommendations</a></li>
+<li><a href="#contact">Invest Now</a></li>
+</ul>
+</nav>
+<!-- ======================================================
+BANNER
+====================================================== -->
+<div class="banner-wrap" role="img" aria-label="Basilan landscape with islands and coastal areas">
+<img src="https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/bird-images/public/Basilan%20Banner.png"
+alt="Basilan Economic and Investment Outlook Banner"
+loading="eager" fetchpriority="high"
+onerror="this.style.display='none'">
+</div>
+<!-- ======================================================
+HERO CONTENT
+====================================================== -->
+<div class="hero-content" id="main-content">
+<div class="hero-badge" aria-label="Document type">Investment Outlook 2026–2035</div>
+<h1>Basilan Economic and<br><span class="gold">Investment Outlook 2026-2035</span></h1>
+<p class="hero-sub">Transforming the post-conflict recovery economy into a resilient, export-linked, and inclusive economic hub within BARMM through integrated ecosystem-based development.</p>
+<div class="hero-cta-wrap">
+<a href="#overview" class="cta-btn" aria-label="Explore the outlook">Explore the Outlook</a>
+<a href="#recommendations" class="cta-btn" style="background:none;border:1px solid var(--gold-border);color:var(--gold);" aria-label="View investment recommendations">Investment Opportunities</a>
+</div>
+<div class="hero-stats" role="list" aria-label="Key economic statistics">
+<div class="stat-card" role="listitem" data-tooltip="Gross Provincial Domestic Product in 2023">
+<span class="stat-num" aria-label="PHP 23.15 billion GDP in 2023">23.15B</span>
+<span class="stat-lbl">GDP 2023</span>
+</div>
+<div class="stat-card" role="listitem" data-tooltip="Growth rate in 2023">
+<span class="stat-num" aria-label="2.9% growth rate in 2023">2.9%</span>
+<span class="stat-lbl">Growth Rate 2023</span>
+</div>
+<div class="stat-card" role="listitem" data-tooltip="AFF sector share of GDP">
+<span class="stat-num" aria-label="41% AFF sector share">41%</span>
+<span class="stat-lbl">AFF Sector Share</span>
+</div>
+<div class="stat-card" role="listitem" data-tooltip="Population as per 2024 Census">
+<span class="stat-num" aria-label="541,947 population">542K</span>
+<span class="stat-lbl">Population 2024</span>
+</div>
+</div>
+</div>
+<!-- =====================================================
+SECTION NAVIGATION
+===================================================== -->
+<div class="section-nav" id="sectionNav" role="navigation" aria-label="Section navigation">
+<a href="#overview" class="section-nav-btn">Overview</a>
+<a href="#macro" class="section-nav-btn">Macroeconomic</a>
+<a href="#beie" class="section-nav-btn">BEIE Framework</a>
+<a href="#performance" class="section-nav-btn">Performance</a>
+<a href="#challenges" class="section-nav-btn">Challenges</a>
+<a href="#recommendations" class="section-nav-btn">Recommendations</a>
+</div>
+<!-- =====================================================
+PROVINCIAL OVERVIEW SECTION
+===================================================== -->
+<section class="overview-section" id="overview" aria-labelledby="overview-heading">
+<div class="container">
+<div class="section-header fade-in">
+<span class="section-label">Geography & Demographics</span>
+<h2 id="overview-heading">Provincial Overview</h2>
+<div class="section-divider"></div>
+<p>Understanding the geographical, demographic, and post-conflict context of Basilan, a province of strategic importance in the Bangsamoro Autonomous Region in Muslim Mindanao.</p>
+</div>
+<div class="overview-grid" role="list">
+<article class="overview-card fade-in fd1" role="listitem">
+<div class="overview-icon" aria-hidden="true">🏝️</div>
+<h3>Geographic Profile</h3>
+<p>Basilan is the largest and northernmost of the major islands in the Sulu Archipelago, with a total land area of approximately 1,134 square kilometers. The province is strategically located just off the southern coast of Zamboanga Peninsula, separated by the Basilan Strait, positioning it as a potential economic spillover zone and logistics gateway between Mindanao and the Sulu Archipelago.</p>
+<div class="overview-stats">
+<div class="stat-item">
+<span class="stat-value">1,134</span>
+<span class="stat-label">Sq Km Land Area</span>
+</div>
+<div class="stat-item">
+<span class="stat-value">Isabela City</span>
+<span class="stat-label">Provincial Capital</span>
+</div>
+<div class="stat-item">
+<span class="stat-value">11+1</span>
+<span class="stat-label">Municipalities & City</span>
+</div>
+</div>
+</article>
+<article class="overview-card fade-in fd2" role="listitem">
+<div class="overview-icon" aria-hidden="true">👥</div>
+<h3>Demographic Profile</h3>
+<p>The 2024 Census recorded Basilan's population at 541,947, representing a significant increase from previous years. The province's population growth rate has been among the highest in the country, indicating a youthful demographic profile. Basilan is characterized by a diverse ethno-linguistic composition including Yakan, Tausug, Samal, Bajau, and Iranon communities.</p>
+<div class="overview-stats">
+<div class="stat-item">
+<span class="stat-value">542K</span>
+<span class="stat-label">Population 2024</span>
+</div>
+<div class="stat-item">
+<span class="stat-value">High</span>
+<span class="stat-label">Growth Rate</span>
+</div>
+<div class="stat-item">
+<span class="stat-value">Diverse</span>
+<span class="stat-label">Ethno-linguistic</span>
+</div>
+</div>
+</article>
+<article class="overview-card fade-in fd3" role="listitem">
+<div class="overview-icon" aria-hidden="true">☮️</div>
+<h3>Post-Conflict Context</h3>
+<p>Basilan was officially declared Abu Sayyaf Group (ASG)-free in June 2024, marking a historic milestone in the peace process. The remaining ASG members surrendered on December 26, 2024. This security improvement has created favorable conditions for economic recovery and development, enabling the normalization of economic activities and the return of displaced families.</p>
+<div class="overview-stats">
+<div class="stat-item">
+<span class="stat-value">2024</span>
+<span class="stat-label">ASG-Free Declaration</span>
+</div>
+<div class="stat-item">
+<span class="stat-value">33.7%</span>
+<span class="stat-label">Poverty Incidence 2023</span>
+</div>
+<div class="stat-item">
+<span class="stat-value">0.4%</span>
+<span class="stat-label">Inflation Dec 2025</span>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- =====================================================
+MACROECONOMIC SECTION
+===================================================== -->
+<section class="economic-section" id="macro" aria-labelledby="macro-heading">
+<div class="container">
+<div class="section-header fade-in">
+<span class="section-label" style="color:var(--gold);">Economic Indicators</span>
+<h2 id="macro-heading" class="white">Macroeconomic Performance</h2>
+<div class="section-divider"></div>
+<p>Analysis of GDP growth, sectoral composition, and price stability dynamics from 2018 to 2023, highlighting the province's economic resilience and post-conflict recovery.</p>
+</div>
+<div class="economic-grid" role="list">
+<article class="economic-card fade-in fd1" role="listitem">
+<h3>GDP Growth Trajectory (2018-2023)</h3>
+<p>Basilan's GDP expanded from ₱19.04 billion in 2018 to ₱23.15 billion in 2023 at constant prices, representing a cumulative real increase of approximately 21.6 percent over the five-year period. The province recorded a GDP growth rate of 2.9 percent in 2023, demonstrating economic resilience despite post-conflict challenges and climate-related disruptions.</p>
+<div class="economic-chart">
+<table class="economic-table">
+<thead>
+<tr>
+<th>Year</th>
+<th>GDP (₱B)</th>
+<th>Growth Rate (%)</th>
+<th>AFF (₱B)</th>
+<th>Industry (₱B)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2018</td>
+<td>19.04</td>
+<td>—</td>
+<td>8.24</td>
+<td>4.39</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>19.85</td>
+<td>+4.26%</td>
+<td>8.40</td>
+<td>4.65</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>20.78</td>
+<td>+4.68%</td>
+<td>8.92</td>
+<td>4.52</td>
+</tr>
+<tr>
+<td>2021</td>
+<td>21.65</td>
+<td>+4.19%</td>
+<td>9.26</td>
+<td>4.78</td>
+</tr>
+<tr>
+<td>2022</td>
+<td>22.50</td>
+<td>+3.93%</td>
+<td>9.72</td>
+<td>5.05</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>23.15</td>
+<td>+2.89%</td>
+<td>9.51</td>
+<td>5.32</td>
+</tr>
+</tbody>
+</table>
+</div>
+</article>
+<article class="economic-card fade-in fd2" role="listitem">
+<h3>Sectoral Composition & Structural Shift</h3>
+<p>Basilan's economy is structured around three broad sectors: Agriculture, Forestry, and Fisheries (41%), Services (36%), and Industry (23%). The AFF sector maintains dominance reflecting the province's strong agricultural base, while showing gradual diversification toward services. The Services sector emerged as a key growth driver, expanding from ₱6.41 billion (2018) to ₱8.32 billion (2023).</p>
+<div class="economic-chart">
+<div style="display:flex;gap:var(--sp-4);flex-wrap:wrap;">
+<div style="flex:1;min-width:120px;">
+<h4 style="color:var(--gold);font-size:.9rem;margin-bottom:.5rem;">AFF (41%)</h4>
+<ul style="font-size:.8rem;color:rgba(255,255,255,.7);">
+<li>Rubber Production</li>
+<li>Coconut/Copra</li>
+<li>Seaweed Farming</li>
+<li>Fisheries</li>
+</ul>
+</div>
+<div style="flex:1;min-width:120px;">
+<h4 style="color:var(--gold);font-size:.9rem;margin-bottom:.5rem;">Services (36%)</h4>
+<ul style="font-size:.8rem;color:rgba(255,255,255,.7);">
+<li>Wholesale & Retail</li>
+<li>Transportation</li>
+<li>Public Admin</li>
+<li>Education</li>
+</ul>
+</div>
+<div style="flex:1;min-width:120px;">
+<h4 style="color:var(--gold);font-size:.9rem;margin-bottom:.5rem;">Industry (23%)</h4>
+<ul style="font-size:.8rem;color:rgba(255,255,255,.7);">
+<li>Manufacturing</li>
+<li>Utilities (37.8% gain)</li>
+<li>Construction</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+<article class="economic-card fade-in fd3" role="listitem">
+<h3>Price Stability & Inflation Dynamics</h3>
+<p>Basilan posted a year-to-date inflation rate that remained well-controlled in 2024–2025. The province recorded an inflation rate of 0.4 percent in December 2025, significantly lower than the 1.2 percent recorded in December 2024. In February 2025, Basilan's inflation rate was at -0.9 percent, the second lowest in BARMM. This low inflation trajectory provides a stable macroeconomic backdrop for investment planning.</p>
+<div class="economic-chart">
+<div style="display:flex;gap:var(--sp-4);flex-wrap:wrap;">
+<div style="flex:1;min-width:120px;">
+<h4 style="color:var(--gold);font-size:.9rem;margin-bottom:.5rem;">Inflation Dec 2025</h4>
+<div style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);margin-bottom:.3rem;">0.4%</div>
+</div>
+<div style="flex:1;min-width:120px;">
+<h4 style="color:var(--gold);font-size:.9rem;margin-bottom:.5rem;">Inflation Dec 2024</h4>
+<div style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);margin-bottom:.3rem;">1.2%</div>
+</div>
+<div style="flex:1;min-width:120px;">
+<h4 style="color:var(--gold);font-size:.9rem;margin-bottom:.5rem;">Feb 2025 Rate</h4>
+<div style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);margin-bottom:.3rem;">-0.9%</div>
+</div>
+</div>
+</div>
+</article>
+<article class="economic-card fade-in fd1" role="listitem">
+<h3>BARMM Regional Growth (2025)</h3>
+<p>The Bangsamoro regional economy reached ₱266.59 billion in 2025 at constant 2018 prices, recording a 5.0% growth rate—ranking sixth fastest among the Philippines' 18 regions. Health and social services led sectoral growth at 13.9%, followed by education at 12.0% and public administration at 9.6%. Agriculture, forestry, and fishing expanded by 4.9%, reinforcing the region's food security foundations.</p>
+<div class="economic-chart">
+<div style="display:flex;gap:var(--sp-4);flex-wrap:wrap;">
+<div style="flex:1;min-width:120px;">
+<h4 style="color:var(--gold);font-size:.9rem;margin-bottom:.5rem;">GDP Growth 2025</h4>
+<div style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);margin-bottom:.3rem;">5.0%</div>
+</div>
+<div style="flex:1;min-width:120px;">
+<h4 style="color:var(--gold);font-size:.9rem;margin-bottom:.5rem;">Regional GDP</h4>
+<div style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);margin-bottom:.3rem;">₱266.59B</div>
+</div>
+<div style="flex:1;min-width:120px;">
+<h4 style="color:var(--gold);font-size:.9rem;margin-bottom:.5rem;">National Rank</h4>
+<div style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);margin-bottom:.3rem;">6th</div>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- =====================================================
+BEIE FRAMEWORK SECTION
+===================================================== -->
+<section class="beie-section" id="beie" aria-labelledby="beie-heading">
+<div class="container">
+<div class="section-header fade-in">
+<span class="section-label">Ecosystem Analysis</span>
+<h2 id="beie-heading">Bangsamoro Economic and Investment Ecosystem (BEIE) Framework</h2>
+<div class="section-divider"></div>
+<p>Applying the integrated systems model to analyze sectoral interlinkages and identify priority investment corridors in Basilan.</p>
+</div>
+<div class="framework-intro fade-in" role="note">
+<strong>How the BEIE Framework works:</strong> The BEIE Framework organizes economic activity into five functional clusters—Foundations, Transformers, Enablers, Connectors, and Financiers—anchored by Moral Governance and driven by four cross-cutting enablers: Tourism and Culture, Peace and Security, Human Capital, and Environmental Sustainability. This systems lens reveals investment opportunities that a conventional sectoral analysis would miss.
+</div>
+<div class="framework-grid fade-in">
+<!-- BEIE Image -->
+<div class="cluster-card fade-in fd1" role="article" aria-labelledby="beie-image-title">
+<img src="https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/bird-images/public/BEIE%20Framework%201.png"
+alt="Bangsamoro Economic and Investment Ecosystem (BEIE) Framework diagram showing the five clusters: Foundations, Transformers, Enablers, Connectors, Financiers, with cross-cutting drivers of Moral Governance, Tourism/Culture, Peace/Security, Human Capital, and Environmental Sustainability"
+loading="lazy" style="width:100%;height:auto;object-fit:contain;object-position:center;">
+<div class="cluster-explanation">
+<h4 id="beie-image-title">Bangsamoro Economic and Investment Ecosystem (BEIE) Framework</h4>
+<p>The BEIE Framework visualizes the interconnected nature of economic clusters in BARMM. Each cluster supports and reinforces the others, creating a holistic ecosystem for sustainable development.</p>
+</div>
+</div>
+<!-- Foundations -->
+<div class="cluster-card" role="article" aria-labelledby="foundations-title">
+<div class="cluster-explanation">
+<span class="cluster-badge badge-foundations">Cluster 1</span>
+<h4 id="foundations-title">Foundations — Agriculture, Fisheries, Forestry & Energy</h4>
+<p>The resource base on which Basilan's entire economic ecosystem depends. As the largest rubber-producing province in the Philippines, Basilan's AFF sector contributes 41% of GDP.</p>
+<ul class="recommendation-list">
+<li><strong>Agriculture & Fisheries:</strong> Basilan is historically known as the largest rubber-producing province with approximately 48,366 hectares planted to rubber trees. The province produced 69,392 metric tons of rubber in 2024. Coconut/copra and seaweed farming are also major agricultural outputs.</li>
+<li><strong>Energy:</strong> The utilities sector has been the most consistent growth driver, expanding 37.8% from 2018 to 2023. The ₱6.67 billion Zamboanga-Basilan Interconnection Project (ZBIP) will connect Basilan to the Mindanao grid.</li>
+</ul>
+<div class="cluster-insight"><strong>Investment Opportunities:</strong> Rubber plantation rehabilitation and modernization, coconut value chain development, seaweed farming and processing, organic and halal-certified agriculture, solar and biomass energy installations.</div>
+</div>
+</div>
+<!-- Transformers -->
+<div class="cluster-card" role="article" aria-labelledby="transformers-title">
+<div class="cluster-explanation">
+<span class="cluster-badge badge-transformers">Cluster 2</span>
+<h4 id="transformers-title">Transformers — Industrial Development & Agro-Processing</h4>
+<p>If Foundations provide the raw material, Transformers create the value. Basilan's manufacturing subsector is dominated by agro-processing, particularly rubber and copra processing.</p>
+<ul class="recommendation-list">
+<li><strong>Rubber Processing:</strong> Establishing modern rubber processing plants capable of producing technically specified rubber (TSR), crepe rubber, and latex-based products would capture more value within the province.</li>
+<li><strong>Coconut Processing:</strong> Opportunities for integrated processing facilities producing virgin coconut oil (VCO), desiccated coconut, coconut milk/cream, and activated carbon.</li>
+</ul>
+<div class="cluster-insight"><strong>Investment Opportunities:</strong> Modern rubber processing plants, integrated coconut processing complexes, cold chain and food processing facilities, feed milling and livestock integration.</div>
+</div>
+</div>
+<!-- Enablers -->
+<div class="cluster-card" role="article" aria-labelledby="enablers-title">
+<div class="cluster-explanation">
+<span class="cluster-badge badge-enablers">Cluster 3</span>
+<h4 id="enablers-title">Enablers — Infrastructure, Logistics & Connectivity</h4>
+<p>No production capability can generate export value without physical infrastructure to move goods. Infrastructure gaps remain among the most cited constraints on investment in Basilan.</p>
+<ul class="recommendation-list">
+<li><strong>Transport Infrastructure:</strong> The Ministry of Public Works readied ₱627 million for Basilan infrastructure projects in 2025. The proposed Basilan-Zamboanga Bridge, projected for completion by 2030, will be transformative.</li>
+<li><strong>Connectivity:</strong> A 2.24-kilometer bridge linking Malamawi Island to mainland Isabela City is set to be constructed, enhancing intra-provincial connectivity.</li>
+</ul>
+<div class="cluster-insight"><strong>Investment Opportunities:</strong> Farm-to-market roads, port and wharf development, warehousing and cold storage, digital infrastructure expansion, water and sanitation systems.</div>
+</div>
+</div>
+<!-- Connectors -->
+<div class="cluster-card" role="article" aria-labelledby="connectors-title">
+<div class="cluster-explanation">
+<span class="cluster-badge badge-connectors">Cluster 4</span>
+<h4 id="connectors-title">Connectors — Trade, Exports & BIMP-EAGA Integration</h4>
+<p>This cluster links Basilan's production to regional and global markets. Basilan's strategic location positions it as a potential gateway for trade within the BIMP-EAGA corridor.</p>
+<ul class="recommendation-list">
+<li><strong>Regional Trade:</strong> Basilan's proximity to Sabah, Malaysia, and location along maritime trade routes provide opportunities for cross-border trade and investment within the BIMP-EAGA network.</li>
+<li><strong>Domestic Markets:</strong> Isabela City contributed 62% of the district's total tax collection in 2024 and ranked 14th among the most competitive component cities in Mindanao in 2024.</li>
+</ul>
+<div class="cluster-insight"><strong>Investment Opportunities:</strong> Export-oriented agro-processing, halal certification and production, trade facilitation infrastructure, domestic market integration through improved logistics.</div>
+</div>
+</div>
+<!-- Financiers -->
+<div class="cluster-card" role="article" aria-labelledby="financiers-title">
+<div class="cluster-explanation">
+<span class="cluster-badge badge-financiers">Cluster 5</span>
+<h4 id="financiers-title">Financiers — Islamic Banking & Ethical Finance</h4>
+<p>The Financiers cluster is particularly strategic for Basilan given the province's significant Muslim population and cultural alignment with Islamic finance principles.</p>
+<ul class="recommendation-list">
+<li><strong>Financial Inclusion:</strong> Basilan's financial and insurance subsector grew from ₱50.49 million in 2018 to ₱77.10 million in 2023, but remains significantly underpenetrated relative to the province's economic size.</li>
+<li><strong>Islamic Finance:</strong> The expansion of Islamic banking would reduce the barrier to capital access for MSMEs, farmers, and fisherfolk, amplifying the impact of investments across all clusters.</li>
+</ul>
+<div class="cluster-insight"><strong>Investment Opportunities:</strong> Islamic banking branches, microfinance and cooperative development, agricultural credit and insurance, digital financial services deployment.</div>
+</div>
+</div>
+<!-- Cross-Cutting -->
+<div class="cluster-card" role="article" aria-labelledby="crosscutting-title">
+<div class="cluster-explanation">
+<span class="cluster-badge cluster-crosscutting">Cross-Cutting</span>
+<h4 id="crosscutting-title">Cross-Cutting Drivers — Moral Governance, Tourism & Peace</h4>
+<p>These drivers operate across all clusters and determine the effectiveness of the entire ecosystem.</p>
+<ul class="recommendation-list">
+<li><strong>Peace and Security:</strong> Basilan's declaration as ASG-free in June 2024 marked a historic milestone, creating a favorable environment for investment and development.</li>
+<li><strong>Tourism:</strong> The province has significant tourism potential including uncharted forest wilderness, marine sanctuaries, cultural heritage sites, and historical landmarks. Isabela City won the 2024 Tourism Champions Challenge Mindanao Category.</li>
+</ul>
+<div class="cluster-insight"><strong>Investment Opportunities:</strong> Eco-tourism and adventure tourism, cultural and heritage tourism, halal tourism infrastructure, tourism support services.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- =====================================================
+INVESTMENT PERFORMANCE SECTION
+===================================================== -->
+<section class="performance-section" id="performance" aria-labelledby="performance-heading">
+<div class="container">
+<div class="section-header fade-in">
+<span class="section-label">Investment Climate</span>
+<h2 id="performance-heading">Investment Climate and Recent Performance</h2>
+<div class="section-divider"></div>
+<p>Tracking BARMM's investment momentum and highlighting significant projects in Basilan that demonstrate the province's growing attractiveness to investors.</p>
+</div>
+<div class="performance-body">
+<div class="performance-text-block fade-in">
+<h3>BARMM Investment Momentum</h3>
+<p>BARMM's investment climate has undergone a structural upswing. The Bangsamoro Board of Investments (BBOI) approved ₱5.1 billion worth of investments as of April 2026, creating over 750 jobs in the first quarter alone. This strong performance reflects growing investor confidence in the region's stability and potential.</p>
+<p>In 2025, BARMM hit ₱5 billion in investment approvals, surpassing its full-year target in the first quarter, driven by new projects across the region. The BBOI approved ₱1.6 billion worth of investments during its 1st Board Meeting of 2026, creating over 750 jobs. This momentum demonstrates the region's emergence as a viable investment destination.</p>
+<p>Philippine Statistics Authority data confirmed that BARMM ranked second in Mindanao in approved investments, behind only the Davao Region, and placed within the top 10 regions nationally for Q2 2025. This regional ranking reflects a structural shift in investor perception—from BARMM as a conflict-affected risk zone to an emerging destination with governance credibility and strong growth fundamentals.</p>
+</div>
+<div class="performance-text-block fade-in">
+<h3>Basilan Investment Highlights (2022–2025)</h3>
+<table class="performance-table">
+<thead>
+<tr>
+<th>Project/Investor</th>
+<th>Location</th>
+<th>Value/ Jobs</th>
+<th>Sector</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BARMM Rubber Industry Development</td>
+<td>Province-wide</td>
+<td>₱195M</td>
+<td>Agriculture/Agro-industry</td>
+</tr>
+<tr>
+<td>MPW Infrastructure Projects</td>
+<td>Multiple municipalities</td>
+<td>₱627M (2025)</td>
+<td>Infrastructure</td>
+</tr>
+<tr>
+<td>Zamboanga-Basilan Interconnection (ZBIP)</td>
+<td>Province-wide</td>
+<td>₱6.67B</td>
+<td>Energy/Infrastructure</td>
+</tr>
+<tr>
+<td>Isabela City Public Market (Lantawan)</td>
+<td>Lantawan</td>
+<td>Not disclosed</td>
+<td>Infrastructure/Trade</td>
+</tr>
+<tr>
+<td>NPC 2.0 MW Generating Sets</td>
+<td>Basilan Grid</td>
+<td>Not disclosed</td>
+<td>Energy</td>
+</tr>
+<tr>
+<td>Seaweed Seedling Distribution</td>
+<td>Coastal municipalities</td>
+<td>30,000 kg</td>
+<td>Fisheries</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="performance-text-block fade-in">
+<h3>Strategic Investment Priority Areas</h3>
+<p>Based on the BEIE Framework analysis, existing investment momentum, and the province's structural endowments, the following priority investment corridors are identified for Basilan through 2035:</p>
+<div class="project-highlight">
+<h4>Priority Investment Corridors</h4>
+<ul>
+<li><strong>Rubber Value Chain Development Zone (Mainland Municipalities):</strong> Integrated rubber plantation rehabilitation, modern processing facilities, and value-added product manufacturing.</li>
+<li><strong>Coconut Agro-Industrial Corridor (Coastal and Island Municipalities):</strong> Coconut processing complexes producing VCO, desiccated coconut, and coir products.</li>
+<li><strong>Seaweed Farming and Processing Belt (Coastal Areas):</strong> Expansion of seaweed cultivation and establishment of carrageenan processing facilities.</li>
+<li><strong>Isabela City Commercial and Tourism Hub:</strong> Mixed-use commercial development, halal tourism infrastructure, and MSME support facilities.</li>
+<li><strong>Renewable Energy Development Zone:</strong> Solar farms, biomass power plants, and mini-grid systems for remote areas.</li>
+<li><strong>Basilan-Zamboanga Bridge Economic Corridor:</strong> Logistics hubs, warehousing, and industrial parks along the bridge route.</li>
+<li><strong>Fisheries and Marine Resources Development Zone:</strong> Cold chain facilities, fish ports, and marine aquaculture development.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- =====================================================
+CHALLENGES SECTION
+===================================================== -->
+<section class="challenges-section" id="challenges" aria-labelledby="challenges-heading">
+<div class="container">
+<div class="section-header fade-in">
+<span class="section-label">Risk Assessment</span>
+<h2 id="challenges-heading">Challenges, Risks, and Structural Constraints</h2>
+<div class="section-divider"></div>
+<p>Identifying the key obstacles and vulnerabilities that must be addressed to realize the investment outlook and ensure sustainable development.</p>
+</div>
+<div class="challenges-grid" role="list">
+<article class="challenge-card fade-in fd1" role="listitem">
+<div class="challenge-icon" aria-hidden="true">⚠️</div>
+<h3>Poverty and Human Development</h3>
+<p>Despite significant improvements, poverty remains a defining structural challenge. Basilan recorded a poverty incidence of 33.7 percent in 2023, though this represents improvement from 73.5 percent in 2018 and 53.5 percent in 2021. The province has the highest poverty incidence in BARMM, reflecting the lingering impacts of conflict and limited economic opportunities.</p>
+</article>
+<article class="challenge-card fade-in fd2" role="listitem">
+<div class="challenge-icon" aria-hidden="true">🏗️</div>
+<h3>Infrastructure Gaps</h3>
+<p>While infrastructure investment is improving, significant gaps remain. Road networks in interior municipalities limit market access for farmers, increase logistics costs, and constrain the viability of agro-industrial investment. Water supply systems in many municipalities remain inadequate. Digital connectivity is uneven, with broadband penetration in rural areas remaining limited.</p>
+</article>
+<article class="challenge-card fade-in fd3" role="listitem">
+<div class="challenge-icon" aria-hidden="true">🛡️</div>
+<h3>Peace and Security Dynamics</h3>
+<p>Although Basilan has been declared ASG-free, localized armed incidents, clan conflicts (rido), and the residual presence of lawless elements in some municipalities create security risks that investors must assess. The peace dividend is real and measurable, but its sustainability depends on continued progress in the peace process and effective governance.</p>
+</article>
+<article class="challenge-card fade-in fd1" role="listitem">
+<div class="challenge-icon" aria-hidden="true">🏛️</div>
+<h3>Governance and Institutional Capacity</h3>
+<p>Coordination capacity remains a constraint. The BEIE Framework identifies this as the central challenge: "It's not about launching more programs—it's about aligning existing ones into a coherent system." Inter-agency coordination between MAFAR, SPDA, MPW, MTIT, BBOI, and local governments is essential for synchronized development.</p>
+</article>
+<article class="challenge-card fade-in fd2" role="listitem">
+<div class="challenge-icon" aria-hidden="true">🌡️</div>
+<h3>Climate Vulnerability</h3>
+<p>El Niño-induced drought and flooding have caused significant agricultural losses in Basilan. In 2023, the province faced flooding that impacted agricultural production, while rising temperatures and changing rainfall patterns pose long-term risks to rubber and coconut production. Climate adaptation measures are critical.</p>
+</article>
+<article class="challenge-card fade-in fd3" role="listitem">
+<div class="challenge-icon" aria-hidden="true">💼</div>
+<h3>Investment Perception Risks</h3>
+<p>The historical conflict legacy may deter cautious investors despite significant recent improvements in stability and governance. Residual negative reputation can activate the Security-Investment Tensions balancing loop, requiring proactive efforts to communicate the province's new reality and investment potential.</p>
+</article>
+</div>
+</div>
+</section>
+<!-- =====================================================
+RECOMMENDATIONS SECTION
+===================================================== -->
+<section class="recommendations-section" id="recommendations" aria-labelledby="recommendations-heading">
+<div class="container">
+<div class="section-header fade-in">
+<span class="section-label" style="color:var(--gold);">Strategic Outlook</span>
+<h2 id="recommendations-heading" class="white">Strategic Outlook and Investment Recommendations</h2>
+<div class="section-divider"></div>
+<p>Defining the ten-year economic vision and prioritizing ecosystem-based investments to transform Basilan into a self-sustaining, export-linked, and inclusive economic hub.</p>
+</div>
+<div class="recommendations-intro fade-in" role="note">
+<strong>Vision Statement:</strong> Transform Basilan from a post-conflict recovery economy into a self-sustaining, export-linked, and inclusive economic hub within BARMM and the BIMP-EAGA corridor, grounded in its comparative advantages—strategic location, abundant agricultural resources, cultural heritage, youthful population, and alignment with the global halal economy.
+</div>
+<div class="recommendations-grid" role="list">
+<article class="recommendation-card fade-in fd1" role="listitem">
+<h3>Policy Recommendations for Policymakers</h3>
+<p>Strategic actions to create an enabling environment for investment and sustainable development.</p>
+<ul class="recommendation-list">
+<li>Establish a dedicated Basilan Investment Facilitation Office within the BBOI to serve as a one-stop shop for investors, reducing transaction costs and coordination delays.</li>
+<li>Fast-track the completion of the Zamboanga-Basilan Interconnection Project (ZBIP) to provide reliable and affordable electricity, critical for industrial development.</li>
+<li>Prioritize the Basilan-Zamboanga Bridge project and ensure its completion by the target date of 2030, as this will be transformative for the province's economic integration.</li>
+<li>Develop a Basilan Rubber Industry Roadmap integrating the ₱195 million BARMM investment with provincial programs, focusing on plantation rehabilitation and modern processing.</li>
+<li>Accelerate Islamic banking licensing and expand the Al-Amanah Islamic Investment Bank network in Basilan municipalities to improve capital access for MSMEs.</li>
+<li>Strengthen climate adaptation programs for the agriculture sector, including drought-resistant crop varieties and irrigation systems.</li>
+<li>Enhance tourism development by implementing tourism plans, developing eco-tourism sites, and promoting halal tourism infrastructure.</li>
+</ul>
+</article>
+<article class="recommendation-card fade-in fd2" role="listitem">
+<h3>Investment Recommendations for Investors</h3>
+<p>Strategic opportunities and priority zones for private sector investment.</p>
+<ul class="recommendation-list">
+<li><strong>Agro-industrial investors:</strong> Look at the rubber and coconut value chains as priority sectors, where BARMM support programs, existing production base, and government investment create a favorable ecosystem.</li>
+<li><strong>The halal food and consumer goods sector:</strong> Isabela City presents a first-mover advantage. The city's cultural diversity and strategic location create opportunities for halal-certified products targeting BIMP-EAGA and Middle Eastern markets.</li>
+<li><strong>Infrastructure investors:</strong> Assess the farm-to-market road and cold chain gap between Basilan's agricultural interior and export nodes as a high-priority, high-return infrastructure corridor.</li>
+<li><strong>Renewable energy investors:</strong> Recognize Basilan as a significant underserved market with growing electricity demand, high power costs, and abundant solar and biomass resources.</li>
+<li><strong>Tourism investors:</strong> Conduct feasibility studies for eco-tourism, cultural heritage circuits, and halal hospitality in anticipation of the peace dividend's continued maturation.</li>
+<li><strong>Islamic finance and fintech investors:</strong> Recognize Basilan as a significant underserved market: a province of 541,947 primarily Muslim residents with a growing economy but minimal formal financial service penetration.</li>
+</ul>
+</article>
+<article class="recommendation-card fade-in fd3" role="listitem">
+<h3>Ecosystem-Based Investment Priorities (2026–2035)</h3>
+<p>Integrated investment matrix aligned with the BEIE Framework clusters.</p>
+<ul class="recommendation-list">
+<li><strong>Foundations:</strong> Rubber plantation rehabilitation, seaweed farming expansion, renewable energy (Target: 2026–2030) - Expanded AFF output, reliable power supply.</li>
+<li><strong>Transformers:</strong> Modern rubber processing plants, coconut processing complexes (Target: 2026–2032) - Value-added exports, MSME employment.</li>
+<li><strong>Enablers:</strong> Basilan-Zamboanga Bridge, farm-to-market roads, digital infrastructure (Target: 2026–2030) - Reduced logistics costs, market access.</li>
+<li><strong>Connectors:</strong> BIMP-EAGA trade linkages, halal export certification (Target: 2026–2035) - Export revenue, regional market integration.</li>
+<li><strong>Financiers:</strong> Islamic banking expansion, microfinance, agricultural credit (Target: 2026–2030) - Inclusive capital access, MSME financing.</li>
+<li><strong>Cross-Cutting:</strong> Eco-tourism, cultural heritage, human capital development (Target: 2026–2035) - Diversified income, skilled workforce.</li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- =====================================================
+CONTACT
+===================================================== -->
+<section class="contact-section" id="contact" aria-labelledby="contact-heading">
+<div class="contact-inner">
+<div class="section-header fade-in">
+<span class="section-label" style="color:var(--gold);">Get In Touch</span>
+<h2 id="contact-heading" class="white" style="font-family:'Cinzel',serif;">Invest in Basilan</h2>
+<div class="section-divider"></div>
+<p class="light">Connect with our investment facilitation team and explore opportunities in the emerging economic hub of BARMM.</p>
+</div>
+<div class="contact-banner-wrap fade-in">
+<img src="https://image.qwenlm.ai/public_source/b578fa38-549f-4dff-9d0c-944e8c8a2e89/158afde79-933a-429b-b54d-6ecca73aab57.png"
+alt="Isabela City Basilan development and infrastructure"
+loading="lazy" onerror="this.parentElement.style.display='none'">
+</div>
+<div class="contact-grid">
+<div class="contact-info fade-in">
+<h3>Investment Facilitation</h3>
+<address style="font-style:normal;">
+<div class="contact-detail">
+<div class="ci" aria-hidden="true">🏛️</div>
+<p><strong>Ministry</strong>Ministry of Trade, Investments and Tourism (MTIT)<br>Bangsamoro Autonomous Region in Muslim Mindanao</p>
+</div>
+<div class="contact-detail">
+<div class="ci" aria-hidden="true">📍</div>
+<p><strong>Address</strong>MTIT Building, Capitol Compound<br>Cotabato City, 9600 Philippines</p>
+</div>
+<div class="contact-detail">
+<div class="ci" aria-hidden="true">✉️</div>
+<p><strong>Email</strong><a href="mailto:invest@mtit.bangsamoro.gov.ph" aria-label="Email investment inquiries">invest@mtit.bangsamoro.gov.ph</a><br><a href="mailto:info@mtit.bangsamoro.gov.ph" aria-label="Email MTIT">info@mtit.bangsamoro.gov.ph</a></p>
+</div>
+<div class="contact-detail">
+<div class="ci" aria-hidden="true">🌐</div>
+<p><strong>Website</strong><a href="https://mtit.bangsamoro.gov.ph" target="_blank" rel="noopener noreferrer" aria-label="Visit MTIT website (opens in new tab)">mtit.bangsamoro.gov.ph</a><br><a href="https://barmm.gov.ph" target="_blank" rel="noopener noreferrer" aria-label="Visit BARMM website (opens in new tab)">barmm.gov.ph</a></p>
+</div>
+</address>
+<h3 style="margin-top:var(--sp-6);font-size:1.05rem;">Key Investment Agencies</h3>
+<div class="agency-grid" role="list">
+<div class="agency-tag" role="listitem" data-tooltip="Investment promotion and facilitation">Bangsamoro Board of Investments (BBOI)</div>
+<div class="agency-tag" role="listitem" data-tooltip="Economic zone development and management">Bangsamoro Economic Zone Authority (BEZA)</div>
+<div class="agency-tag" role="listitem" data-tooltip="Halal certification and standards">Bangsamoro Halal Board (BHB)</div>
+<div class="agency-tag" role="listitem" data-tooltip="Freeport operations and trade">Polloc Freeport &amp; Ecozone (PFEZ)</div>
+<div class="agency-tag" role="listitem" data-tooltip="Strategic planning and development">BPDA – Planning &amp; Development</div>
+<div class="agency-tag" role="listitem" data-tooltip="Flagship halal manufacturing hub">WOW Matanog Special Ecozone</div>
+</div>
+<div style="margin-top:var(--sp-6);padding:var(--sp-4);background:rgba(201,168,76,.08);border:1px solid var(--gold-border);border-radius:var(--r-md);">
+<p style="font-size:.84rem;color:rgba(255,255,255,.65);line-height:1.7;"><strong style="color:var(--gold);display:block;margin-bottom:.25rem;">🕐 Office Hours</strong>Monday – Friday, 8:00 AM – 5:00 PM (PHT)<br>Investment inquiries responded to within 3 business days.</p>
+</div>
+</div>
+<div class="fade-in fd2">
+<div class="form-wrap">
+<h3>Send an Investment Inquiry</h3>
+<form id="contactForm" novalidate aria-label="Investment inquiry form">
+<div class="form-row">
+<div class="form-group">
+<label for="fname">First Name <span aria-label="required">*</span></label>
+<input type="text" id="fname" name="fname" placeholder="Juan" autocomplete="given-name" required aria-required="true">
+</div>
+<div class="form-group">
+<label for="lname">Last Name <span aria-label="required">*</span></label>
+<input type="text" id="lname" name="lname" placeholder="dela Cruz" autocomplete="family-name" required aria-required="true">
+</div>
+</div>
+<div class="form-group">
+<label for="email">Email Address <span aria-label="required">*</span></label>
+<input type="email" id="email" name="email" placeholder="yourname@company.com" autocomplete="email" required aria-required="true">
+</div>
+<div class="form-group">
+<label for="org">Organisation / Company</label>
+<input type="text" id="org" name="org" placeholder="Company Name" autocomplete="organization">
+</div>
+<div class="form-group">
+<label for="country">Country of Origin</label>
+<input type="text" id="country" name="country" placeholder="e.g. Philippines, Malaysia, UAE" autocomplete="country-name">
+</div>
+<div class="form-group">
+<label for="sector">Sector of Interest <span aria-label="required">*</span></label>
+<select id="sector" name="sector" required aria-required="true">
+<option value="" disabled selected>Select a sector…</option>
+<option>Rubber Processing &amp; Products</option>
+<option>Coconut Processing</option>
+<option>Seaweed &amp; Carrageenan</option>
+<option>Halal Food &amp; Beverage</option>
+<option>Islamic Finance &amp; Banking</option>
+<option>Agribusiness &amp; Fisheries</option>
+<option>Renewable Energy</option>
+<option>Tourism &amp; Hospitality</option>
+<option>Infrastructure &amp; Construction</option>
+<option>Digital Infrastructure &amp; ICT</option>
+<option>Other</option>
+</select>
+</div>
+<div class="form-group">
+<label for="investment">Investment Range (USD)</label>
+<select id="investment" name="investment">
+<option value="" disabled selected>Select range…</option>
+<option>Under $100,000</option>
+<option>$100,000 – $500,000</option>
+<option>$500,000 – $1 Million</option>
+<option>$1M – $5M</option>
+<option>$5M – $10M</option>
+<option>Above $10M</option>
+</select>
+</div>
+<div class="form-group">
+<label for="message">Message / Inquiry</label>
+<textarea id="message" name="message" placeholder="Tell us about your investment interest in Basilan…" rows="4"></textarea>
+</div>
+<button type="button" class="submit-btn" id="submitBtn" onclick="handleSubmit(this)" aria-live="polite">Submit Investment Inquiry</button>
+<p class="form-note" role="note">Your information is kept confidential and used solely for investment facilitation purposes.</p>
+</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- =====================================================
+FOOTER
+===================================================== -->
+<footer role="contentinfo">
+<div class="footer-inner">
+<div class="footer-logo">
+<img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png"
+alt="MTIT BARMM logo" width="140" height="42"
+loading="lazy" onerror="this.style.display='none'">
+</div>
+<div class="footer-bottom">
+<p>© 2026 Bangsamoro Autonomous Region in Muslim Mindanao (BARMM). All rights reserved.</p>
+<p style="margin-top:.3rem;"><span>Basilan Economic and Investment Outlook</span> — 2026–2035</p>
+</div>
+</div>
+</footer>
+<!-- =====================================================
+JAVASCRIPT
+===================================================== -->
+<script>
+/* =====================================================
+MOBILE NAV — hamburger controls mobile drawer only
+===================================================== */
+const hamburger=document.getElementById('navHamburger');
+const mobileDrawer=document.getElementById('navLinksMobile');
+function closeDrawer(){
+mobileDrawer.classList.remove('open');
+hamburger.classList.remove('open');
+hamburger.setAttribute('aria-expanded','false');
+}
+hamburger.addEventListener('click',()=>{
+const isOpen=mobileDrawer.classList.toggle('open');
+hamburger.classList.toggle('open',isOpen);
+hamburger.setAttribute('aria-expanded',String(isOpen));
+});
+// Close on internal anchor link click (not external tabs)
+mobileDrawer.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',closeDrawer));
+// Close on outside click
+document.addEventListener('click',e=>{
+if(!hamburger.contains(e.target)&&!mobileDrawer.contains(e.target))closeDrawer();
+});
+// Close on Escape
+document.addEventListener('keydown',e=>{
+if(e.key==='Escape')closeDrawer();
+});
+// ✅ NEW: Auto-close mobile menu when resizing to desktop breakpoint
+window.addEventListener('resize', ()=>{
+if(window.innerWidth >= 900) closeDrawer();
+});
+/* =====================================================
+NAV SCROLL
+===================================================== */
+window.addEventListener('scroll',()=>{
+document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
+},{passive:true});
+/* =====================================================
+SCROLL ANIMATIONS
+===================================================== */
+const obs=new IntersectionObserver(entries=>{
+entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:.07,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+/* =====================================================
+ANIMATED COUNTERS
+===================================================== */
+function animateCounter(el){
+const target=parseFloat(el.dataset.target),
+prefix=el.dataset.prefix||'',
+suffix=el.dataset.suffix||'',
+dec=parseInt(el.dataset.dec)||0,dur=2000,steps=60;
+let step=0;
+const t=setInterval(()=>{
+step++;
+const p=1-Math.pow(1-step/steps,3);
+el.textContent=prefix+(target*p).toFixed(dec)+suffix;
+if(step>=steps){clearInterval(t);el.textContent=prefix+target.toFixed(dec)+suffix;}
+},dur/steps);
+}
+const cObs=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.querySelectorAll('.stat-value[data-target]').forEach((el,i)=>{
+setTimeout(()=>animateCounter(el),i*120);
+});
+cObs.unobserve(e.target);
+}
+});
+},{threshold:.2});
+const fig=document.querySelector('.overview-stats');
+if(fig)cObs.observe(fig);
+/* =====================================================
+CONTACT FORM
+===================================================== */
+function handleSubmit(btn){
+const form=document.getElementById('contactForm');
+if(!form.checkValidity()){
+form.reportValidity();
+return;
+}
+btn.textContent='Sending…';btn.disabled=true;btn.setAttribute('aria-busy','true');
+setTimeout(()=>{
+btn.textContent='✓ Inquiry Submitted!';
+btn.style.background='linear-gradient(135deg,#10b981,#059669)';
+btn.style.color='white';
+btn.setAttribute('aria-busy','false');
+form.reset();
+setTimeout(()=>{btn.textContent='Submit Investment Inquiry';btn.style.background='';btn.style.color='';btn.disabled=false;},3500);
+},1600);
+}
+/* =====================================================
+SMOOTH SCROLL
+===================================================== */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+a.addEventListener('click',e=>{
+e.preventDefault();
+const t=document.querySelector(a.getAttribute('href'));
+if(t){const nh=document.querySelector('nav').offsetHeight;
+window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-nh,behavior:'smooth'});}
+});
+});
+/* =====================================================
+PREFERS REDUCED MOTION
+===================================================== */
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+document.documentElement.style.scrollBehavior='auto';
+}
+/* =====================================================
+ACCESSIBILITY: LIVE REGION FOR DYNAMIC CONTENT
+===================================================== */
+const announcer=document.createElement('div');
+announcer.setAttribute('aria-live','polite');
+announcer.setAttribute('aria-atomic','true');
+announcer.className='sr-only';
+document.body.appendChild(announcer);
+function announce(message){
+announcer.textContent=message;
+setTimeout(()=>announcer.textContent='',1000);
+}
+</script>
+</body>
+</html>

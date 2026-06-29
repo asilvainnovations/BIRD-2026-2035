@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#022c22">
+<meta name="description" content="BARMM Investment Roadmap 2026-2035 – Interactive Strategy Map: The Emerging Bangsamoro">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50: '#f0fdfa',
+          100: '#ccfbf1',
+          500: '#14b8a6',
+          600: '#0d9488',
+          700: '#0f766e',
+          800: '#115e59',
+          900: '#134e4a',
+          950: '#022c22'
+        },
+        gold: {
+          DEFAULT: '#C9A84C',
+          light: '#E8C560',
+          dark: '#8B6C28',
+          pale: '#fdf6e3'
+        }
+      },
+      fontFamily: {
+        cinzel: ['Cinzel', 'serif'],
+        sans: ['DM Sans', 'sans-serif']
+      }
+    }
+  }
+}
+</script>
+<style>
+:root {
+  --primary-green: #064e3b;
+  --dark-green: #022c22;
+  --mid-green: #065f46;
+  --light-green: #6ee7b7;
+  --cream: #ecfdf5;
+  --gold: #C9A84C;
+  --gold-light: #E8C560;
+  --gold-border: rgba(201, 168, 76, 0.32);
+  --gold-border-strong: rgba(201, 168, 76, 0.55);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: linear-gradient(160deg, #011a12 0%, #022c22 45%, #0a1628 100%);
+  min-height: 100vh;
+  color: var(--cream);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Collapsible Styling */
+details {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--gold-border);
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+details[open] {
+  border-color: var(--gold-border-strong);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+summary {
+  padding: 1.25rem;
+  cursor: pointer;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--gold);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  transition: background 0.2s;
+}
+
+summary:hover {
+  background: rgba(201, 168, 76, 0.1);
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::after {
+  content: '▼';
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+  color: var(--gold-light);
+}
+
+details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.details-content {
+  padding: 1.5rem;
+  border-top: 1px solid var(--gold-border);
+  animation: sweep 0.3s ease-in-out;
+}
+
+@keyframes sweep {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Table Styling */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+
+.data-table th {
+  background: rgba(201, 168, 76, 0.15);
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  padding: 0.85rem;
+  text-align: left;
+  border-bottom: 2px solid var(--gold-border);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.data-table td {
+  padding: 0.85rem;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+  color: rgba(236, 253, 245, 0.9);
+  vertical-align: top;
+}
+
+.data-table tr:hover {
+  background: rgba(201, 168, 76, 0.05);
+}
+
+.data-table tr.critical-row {
+  background: rgba(201, 168, 76, 0.12) !important;
+  border-left: 3px solid var(--gold);
+}
+
+.badge-critical {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--dark-green);
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  margin-left: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Toggle Switch */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  border: 1px solid var(--gold-border);
+}
+
+.toggle-label {
+  margin-right: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gold-light);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #374151;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--gold);
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+/* Utility */
+.section-title {
+  font-family: 'Cinzel', serif;
+  color: var(--gold);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.text-muted {
+  color: rgba(236, 253, 245, 0.7);
+}
+
+.highlight {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.info-card {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--gold-border);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.info-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+}
+</style>
+</head>
+<body class="antialiased">
+
+<!-- Navigation -->
+<nav class="sticky top-0 z-50 bg-brand-950/95 backdrop-blur-md border-b border-gold/30 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-gold rounded-full flex items-center justify-center text-brand-950 font-cinzel font-bold text-lg">B</div>
+        <span class="font-cinzel font-bold text-gold text-lg tracking-wide">BIRD 2026–2035</span>
+      </div>
+      <div class="hidden md:flex space-x-1">
+        <button onclick="scrollToSection('action-plan')" class="px-3 py-2 rounded-md text-sm font-medium text-brand-100 hover:text-gold hover:bg-gold/10 transition">Action Plan</button>
+        <button onclick="scrollToSection('swot')" class="px-3 py-2 rounded-md text-sm font-medium text-brand-100 hover:text-gold hover:bg-gold/10 transition">SWOT</button>
+        <button onclick="scrollToSection('clds')" class="px-3 py-2 rounded-md text-sm font-medium text-brand-100 hover:text-gold hover:bg-gold/10 transition">CLDs</button>
+        <button onclick="scrollToSection('archetypes')" class="px-3 py-2 rounded-md text-sm font-medium text-brand-100 hover:text-gold hover:bg-gold/10 transition">Archetypes</button>
+        <button onclick="scrollToSection('bsc')" class="px-3 py-2 rounded-md text-sm font-medium text-brand-100 hover:text-gold hover:bg-gold/10 transition">BSC</button>
+        <button onclick="scrollToSection('metrics')" class="px-3 py-2 rounded-md text-sm font-medium text-brand-100 hover:text-gold hover:bg-gold/10 transition">Metrics</button>
+        <button onclick="scrollToSection('phases')" class="px-3 py-2 rounded-md text-sm font-medium text-brand-100 hover:text-gold hover:bg-gold/10 transition">Phases</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+  <!-- Header -->
+  <div class="text-center py-8 border-b border-gold/20">
+    <h1 class="font-cinzel text-3xl md:text-4xl font-bold text-gold mb-2">Bangsamoro Investment Roadmap</h1>
+    <p class="text-brand-100 text-lg italic">"The Emerging Bangsamoro: A Hub for Resilient and Ethical Growth"</p>
+    <p class="text-muted text-sm mt-2">Integrated Ecosystem Development Strategy (IEDS) | 2026–2035</p>
+  </div>
+
+  <!-- 1. ACTION PLAN 2026 -->
+  <section id="action-plan">
+    <details open>
+      <summary>
+        <span>📋 One-Year Action Plan (2026–2027)</span>
+        <span class="text-xs font-sans font-normal text-brand-100 bg-brand-800 px-2 py-1 rounded">Phase 1: Foundation Building</span>
+      </summary>
+      <div class="details-content">
+        <p class="text-muted mb-4">Initiating the Investment–Development Virtuous Cycle (R1) and Governance–Investor Confidence Loop (R2) through targeted interventions at the four Critical Leverage Points. Total Year 1 Budget Allocation: <span class="highlight">₱2.07 Billion</span>.</p>
+        
+        <div class="overflow-x-auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Quarter</th>
+                <th>Priority Action / Leverage Point</th>
+                <th>Lead Agency</th>
+                <th>Expected Output</th>
+                <th>Budget (₱M)</th>
+                <th>KPI Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="critical-row">
+                <td>Q4 2026</td>
+                <td><strong>Establish BICC</strong> <span class="badge-critical">Critical</span><br><span class="text-xs text-muted">LP3: Governance</span></td>
+                <td>BBOI-MTIT</td>
+                <td>BICC operational; cross-agency coordination protocols signed</td>
+                <td class="highlight">5.0</td>
+                <td>Inter-agency coordination score (Target: 8/10)</td>
+              </tr>
+              <tr>
+                <td>Q4 2026</td>
+                <td><strong>Digital Business Registration Pilot</strong><br><span class="text-xs text-muted">LP3: Governance</span></td>
+                <td>MICT / BBOI</td>
+                <td>1-day registration capability launched in Cotabato City</td>
+                <td class="highlight">10.0</td>
+                <td>Business registration time (Target: 1 day)</td>
+              </tr>
+              <tr class="critical-row">
+                <td>Q1 2027</td>
+                <td><strong>Enact Bangsamoro Forestry Code</strong> <span class="badge-critical">Critical</span><br><span class="text-xs text-muted">LP1: Halal/Green</span></td>
+                <td>MENRE / Parliament</td>
+                <td>Code signed into law; legal architecture for carbon markets established</td>
+                <td class="highlight">2.0</td>
+                <td>Green economy legal framework activation</td>
+              </tr>
+              <tr class="critical-row">
+                <td>Q1 2027</td>
+                <td><strong>Sign MENRE-MILG JMC No. 2026-01</strong> <span class="badge-critical">Critical</span><br><span class="text-xs text-muted">LP1: Green Economy</span></td>
+                <td>MENRE-MILG</td>
+                <td>JMC operationalized; LGU training on PES/Carbon credits begun</td>
+                <td class="highlight">3.0</td>
+                <td>JMC implementation rate (Target: 100%)</td>
+              </tr>
+              <tr>
+                <td>Q2 2027</td>
+                <td><strong>Complete ZBIP Phase 1 Milestones</strong><br><span class="text-xs text-muted">LP2: Infrastructure</span></td>
+                <td>DOE / MPW</td>
+                <td>80% of ₱6.67B transmission line constructed</td>
+                <td class="highlight">2,000.0</td>
+                <td>ZBIP completion rate</td>
+              </tr>
+              <tr class="critical-row">
+                <td>Q2 2027</td>
+                <td><strong>Launch BHB Capacity Building</strong> <span class="badge-critical">Critical</span><br><span class="text-xs text-muted">LP1: Halal Certification</span></td>
+                <td>BHB / MTIT</td>
+                <td>First cadre of 50 halal certification officers trained</td>
+                <td class="highlight">8.0</td>
+                <td>Halal certification officers trained (Target: 100+)</td>
+              </tr>
+              <tr>
+                <td>Q3 2027</td>
+                <td><strong>Deploy ICT Literacy Centers</strong><br><span class="text-xs text-muted">LP4: Human Capital</span></td>
+                <td>MICT / DepEd</td>
+                <td>3 centers operational in lagging provinces; 200 citizens trained</td>
+                <td class="highlight">15.0</td>
+                <td>Digital literacy rate</td>
+              </tr>
+              <tr>
+                <td>Q3 2027</td>
+                <td><strong>Conduct Labor Market Assessment</strong><br><span class="text-xs text-muted">LP4: Human Capital</span></td>
+                <td>MOLE / BBOI</td>
+                <td>Assessment report and skills gap analysis for priority sectors</td>
+                <td class="highlight">5.0</td>
+                <td>Skills mismatch indicator</td>
+              </tr>
+              <tr>
+                <td>Q4 2027</td>
+                <td><strong>Review Year 1 Performance</strong><br><span class="text-xs text-muted">Adaptive Management</span></td>
+                <td>BICC / BPDA</td>
+                <td>Annual performance report; revised PAP registry for Year 2</td>
+                <td class="highlight">3.0</td>
+                <td>KPI variance analysis</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+    <details>
+      <summary>
+        <span>📊 Detailed Programs, Activities, and Projects (PAPs) 2026-2035</span>
+      </summary>
+      <div class="details-content">
+        <p class="text-muted mb-4">Representative high-leverage PAPs aligned with the Balanced Scorecard and BEIE Clusters. Total Estimated Budget: ₱120–160 Billion.</p>
+        <div class="overflow-x-auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Perspective / Cluster</th>
+                <th>Program</th>
+                <th>Project / Activity</th>
+                <th>Lead Agency</th>
+                <th>Timeline</th>
+                <th>Budget (₱M)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="critical-row">
+                <td>Financial / Transformers</td>
+                <td>Halal Economy Acceleration</td>
+                <td>Bangsamoro Halal Park Development (Matanog)</td>
+                <td>BEZA / MTIT</td>
+                <td>2026–2029</td>
+                <td class="highlight">1,500.0</td>
+              </tr>
+              <tr class="critical-row">
+                <td>Financial / Foundations</td>
+                <td>Green Economy Revenue Activation</td>
+                <td>REDD+ Program Registration & Baseline Audit</td>
+                <td>MENRE / MTIT</td>
+                <td>2026–2029</td>
+                <td class="highlight">120.0</td>
+              </tr>
+              <tr>
+                <td>Financial / Financiers</td>
+                <td>Islamic Finance Ecosystem Dev.</td>
+                <td>Islamic Banking Branch Expansion (7 Capitals)</td>
+                <td>BSP / Al-Amanah</td>
+                <td>2026–2030</td>
+                <td class="highlight">200.0</td>
+              </tr>
+              <tr class="critical-row">
+                <td>Internal Process / Enablers</td>
+                <td>Critical Infrastructure Acceleration</td>
+                <td>ZBIP Completion Support & ROW Resolution</td>
+                <td>MENRE / MPW</td>
+                <td>2026–2028</td>
+                <td class="highlight">6,670.0</td>
+              </tr>
+              <tr>
+                <td>Learning & Growth / Enablers</td>
+                <td>Digital Literacy for Investment</td>
+                <td>ICT/Digital Literacy Centers Establishment</td>
+                <td>MICT / DepEd</td>
+                <td>2026–2029</td>
+                <td class="highlight">150.0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- 2. SWOT ANALYSIS -->
+  <section id="swot">
+    <details>
+      <summary>
+        <span>🔍 Quantified SWOT Analysis (Strat Planner Pro Framework)</span>
+      </summary>
+      <div class="details-content">
+        <p class="text-muted mb-4">Mathematical formulations ensure analytical rigor: <br>
+        • <strong>Resilience Index (Strengths):</strong> RI = (Impact × Likelihood) / 5 <br>
+        • <strong>Resilience Index (Opportunities):</strong> RI = √(Impact × Likelihood) <br>
+        • <strong>Risk Score (Weaknesses):</strong> Risk = Impact × Likelihood (Scale 1-25) <br>
+        • <strong>Vulnerability Index (Threats):</strong> VI = (Impact² × Likelihood) / 25</p>
+        
+        <div class="card-grid">
+          <!-- Strengths -->
+          <div class="info-card border-l-4 border-green-500">
+            <h3 class="font-cinzel text-green-400 font-bold mb-3 flex items-center gap-2">💪 Strengths (Internal Resilience)</h3>
+            <ul class="space-y-3 text-sm">
+              <li><strong>Halal Legitimacy & Cultural Credibility</strong> <span class="badge-critical">RI: 5.0</span><br><span class="text-muted">Authentic Muslim-majority identity providing unmatched branding advantage.</span></li>
+              <li><strong>Domestic Halal Demand</strong> <span class="badge-critical">RI: 5.0</span><br><span class="text-muted">5.69M Muslim consumer base driving local market absorption.</span></li>
+              <li><strong>Young, Growing Population</strong> <span class="badge-critical">RI: 5.0</span><br><span class="text-muted">3.43% annual growth; highest in Maguindanao del Norte (4.3%).</span></li>
+              <li><strong>Strategic Location (BIMP-EAGA)</strong> <span class="text-gold font-bold">RI: 4.0</span><br><span class="text-muted">Proximity to Sabah and ASEAN trade corridors (Highest in Tawi-Tawi, Basilan).</span></li>
+              <li><strong>Strong AFF Base</strong> <span class="text-gold font-bold">RI: 3.2</span><br><span class="text-muted">Rubber (Basilan), seaweed (Tawi-Tawi), rice/corn (Mag. del Sur).</span></li>
+            </ul>
+          </div>
+
+          <!-- Weaknesses -->
+          <div class="info-card border-l-4 border-red-500">
+            <h3 class="font-cinzel text-red-400 font-bold mb-3 flex items-center gap-2">⚠️ Weaknesses (Internal Risk)</h3>
+            <ul class="space-y-3 text-sm">
+              <li><strong>Critical Infrastructure Deficits</strong> <span class="bg-red-900 text-red-200 text-xs px-2 py-1 rounded font-bold">Risk: 25.0</span><br><span class="text-muted">Energy, transport, digital, and water gaps (Highest in Tawi-Tawi, Basilan, Sulu).</span></li>
+              <li><strong>Highest Poverty Incidence</strong> <span class="bg-red-900 text-red-200 text-xs px-2 py-1 rounded font-bold">Risk: 25.0</span><br><span class="text-muted">34.8% limiting domestic market depth (Highest in Sulu 39.5%, Basilan 33.7%).</span></li>
+              <li><strong>Weak Halal Certification System</strong> <span class="bg-red-900 text-red-200 text-xs px-2 py-1 rounded font-bold">Risk: 20.0</span><br><span class="text-muted">Resource-constrained BHB; 45-60 day processing vs 15-day Malaysia benchmark.</span></li>
+              <li><strong>Lowest Functional Literacy Rate</strong> <span class="bg-red-900 text-red-200 text-xs px-2 py-1 rounded font-bold">Risk: 20.0</span><br><span class="text-muted">59.3% creating severe human capital constraints.</span></li>
+              <li><strong>Fragmented Policy Frameworks</strong> <span class="bg-red-900 text-red-200 text-xs px-2 py-1 rounded font-bold">Risk: 16.0</span><br><span class="text-muted">Governance coordination gaps and underspending in budget execution (<80%).</span></li>
+            </ul>
+          </div>
+
+          <!-- Opportunities -->
+          <div class="info-card border-l-4 border-blue-500">
+            <h3 class="font-cinzel text-blue-400 font-bold mb-3 flex items-center gap-2">🌟 Opportunities (External Resilience)</h3>
+            <ul class="space-y-3 text-sm">
+              <li><strong>Global Halal Market</strong> <span class="badge-critical">RI: 5.0</span><br><span class="text-muted">USD 2.3 trillion market with growing demand; ASEAN market at USD 1.38T.</span></li>
+              <li><strong>Renewable Energy Investments</strong> <span class="text-gold font-bold">RI: 4.5</span><br><span class="text-muted">Solar, hydro rehabilitation, and biomass potential (BSEMP alignment).</span></li>
+              <li><strong>Islamic Finance Ecosystem</strong> <span class="text-gold font-bold">RI: 4.5</span><br><span class="text-muted">Growing global Shariah-compliant capital pool seeking ethical investments.</span></li>
+              <li><strong>BIMP-EAGA Regional Integration</strong> <span class="text-gold font-bold">RI: 4.0</span><br><span class="text-muted">Cross-border trade facilitation and eco-corridors.</span></li>
+              <li><strong>Carbon Markets & REDD+</strong> <span class="text-gold font-bold">RI: 3.5</span><br><span class="text-muted">Monetizing forest endowments and carbon stocks (Lanao del Sur highlands, Mag. watersheds).</span></li>
+            </ul>
+          </div>
+
+          <!-- Threats -->
+          <div class="info-card border-l-4 border-yellow-500">
+            <h3 class="font-cinzel text-yellow-400 font-bold mb-3 flex items-center gap-2">🔥 Threats (External Vulnerability)</h3>
+            <ul class="space-y-3 text-sm">
+              <li><strong>Climate Change Vulnerabilities</strong> <span class="bg-yellow-900 text-yellow-200 text-xs px-2 py-1 rounded font-bold">VI: 5.0</span><br><span class="text-muted">El Niño, flooding, shifting rainfall (4.2% AFF contraction in 2024).</span></li>
+              <li><strong>Competition from Established Halal Hubs</strong> <span class="bg-yellow-900 text-yellow-200 text-xs px-2 py-1 rounded font-bold">VI: 4.0</span><br><span class="text-muted">Malaysia, Indonesia, Thailand holding established market share.</span></li>
+              <li><strong>Standards Recognition Risk</strong> <span class="bg-yellow-900 text-yellow-200 text-xs px-2 py-1 rounded font-bold">VI: 4.0</span><br><span class="text-muted">BARMM certifications not yet aligned with OIC/SMIIC international standards.</span></li>
+              <li><strong>Political Transition Uncertainties</strong> <span class="text-gold font-bold">VI: 2.6</span><br><span class="text-muted">First parliamentary elections and governance continuity risks.</span></li>
+              <li><strong>Rubber Pestalotiopsis Disease</strong> <span class="text-gold font-bold">VI: 1.9</span><br><span class="text-muted">Fungal infestation threatening plantation base (Basilan).</span></li>
+            </ul>
+          </div>
+        </div>
+ recent
+      </div>
+    </details>
+  </section>
+
+  <!-- 3. CAUSAL LOOP DIAGRAMS (CLDs) -->
+  <section id="clds">
+    <details>
+      <summary>
+        <span>🔄 Causal Loop Diagrams (Systems Dynamics)</span>
+      </summary>
+      <div class="details-content">
+        <p class="text-muted mb-4">Non-linear linkages defining the structural dynamics of BARMM's investment ecosystem. Reinforcing loops (R) amplify change; Balancing loops (B) seek equilibrium or constrain growth.</p>
+        
+        <div class="space-y-6">
+          <!-- R1 -->
+          <div class="info-card border-l-4 border-green-500">
+            <h3 class="font-cinzel text-green-400 font-bold mb-2">R1: Investment-Development Virtuous Cycle</h3>
+            <p class="text-sm text-muted mb-3"><strong>Dynamic:</strong> Investment Inflows (+) → Employment & Income Growth (+) → Expanded Domestic Market (+) → Improved Business Climate (+) → Attracts Further Investment (+).</p>
+            <div class="bg-brand-950/50 p-3 rounded text-xs text-brand-100">
+              <strong>Leverage Points:</strong> L7 (Positive Feedback Gain: tie incentives to employment), L9 (Delay Lengths: streamline permitting), L10 (Stock-Flow: build critical mass of anchor investments like DoleFil).
+            </div>
+          </div>
+
+          <!-- R2 -->
+          <div class="info-card border-l-4 border-green-500">
+            <h3 class="font-cinzel text-green-400 font-bold mb-2">R2: Governance-Investor Confidence Cycle</h3>
+            <p class="text-sm text-muted mb-3"><strong>Dynamic:</strong> Governance Capacity/Transparency (+) → Policy Clarity (+) → Investor Confidence (+) → Investment Inflows (+) → Expanded Tax Base (+) → Resources for further Governance Improvement (+).</p>
+            <div class="bg-brand-950/50 p-3 rounded text-xs text-brand-
+</html>

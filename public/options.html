@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BARMM Investment Roadmap 2026–2035 | Strategy Formulation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+/* ===================== TOKENS ===================== */
+:root {
+  --dk:#022c22; --dk2:#011a12; --mid:#064e3b; --mid2:#065f46;
+  --lg:#6ee7b7; --cream:#ecfdf5; --white:#fff;
+  --gold:#C9A84C; --gold-l:#E8C560; --gold-d:#8B6C28;
+  --gold-border:rgba(201,168,76,.32); --gold-border-s:rgba(201,168,76,.55);
+  --gold-glow:rgba(201,168,76,.18);
+  --gold-grad:linear-gradient(135deg,#7a5c1e 0%,#c9a84c 35%,#e8c560 50%,#c9a84c 65%,#7a5c1e 100%);
+  --blue:#1e3a8a; --purple:#4c1d95; --orange:#7c2d12; --teal:#134e4a;
+  --red:#7f1d1d; --green-s:#14532d;
+  --r-sm:.5rem; --r-md:1rem; --r-lg:1.25rem;
+  --touch:44px;
+  --edit-active:rgba(201,168,76,.15);
+}
+
+/* ===================== RESET ===================== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:linear-gradient(160deg,#011a12 0%,#022c22 50%,#0a1628 100%);
+  background-attachment:fixed;
+  min-height:100vh;
+  color:var(--cream);
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Cinzel',serif;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{cursor:pointer;font-family:inherit;}
+
+/* ===================== SKIP LINK ===================== */
+.skip-link{position:absolute;top:-50px;left:0;background:var(--gold);color:var(--dk);padding:.5rem 1rem;border-radius:0 0 .5rem 0;font-weight:700;z-index:9999;transition:top .2s;}
+.skip-link:focus{top:0;}
+
+/* ===================== NAV ===================== */
+.site-nav{
+  background:rgba(2,44,34,.97);
+  backdrop-filter:blur(18px);
+  position:sticky;top:0;width:100%;z-index:300;
+  border-bottom:2px solid var(--gold-border);
+  transition:box-shadow .4s;
+}
+.site-nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.5);}
+.nav-inner{
+  max-width:1400px;margin:0 auto;
+  padding:.6rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+}
+.nav-logo{display:flex;align-items:center;gap:.75rem;}
+.nav-logo img{height:44px;width:auto;object-fit:contain;}
+.nav-title{font-family:'Cinzel',serif;font-size:.72rem;color:var(--gold);font-weight:700;letter-spacing:.06em;line-height:1.3;}
+.nav-links{display:flex;gap:.25rem;flex-wrap:wrap;align-items:center;}
+.nav-links a{
+  color:rgba(167,243,208,.85);font-size:.75rem;font-weight:500;
+  padding:.4rem .7rem;border-radius:.375rem;
+  transition:all .2s;letter-spacing:.025em;
+  min-height:var(--touch);display:flex;align-items:center;
+}
+.nav-links a:hover{background:rgba(201,168,76,.1);color:var(--gold);}
+
+/* ===================== PAGE HEADER ===================== */
+.page-header{
+  text-align:center;padding:3rem 1.5rem 2rem;
+  position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+.page-header::after{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:200px;height:4px;background:var(--gold-grad);border-radius:2px;
+}
+.eyebrow{
+  display:inline-block;background:rgba(201,168,76,.1);
+  border:1px solid var(--gold-border-s);color:var(--gold);
+  padding:.35rem 1.1rem;border-radius:2rem;
+  font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:1rem;
+}
+.page-header h1{
+  font-size:clamp(1.6rem,4vw,3rem);font-weight:700;line-height:1.15;
+  background:var(--gold-grad);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.5rem;
+}
+.page-header .sub{font-family:'Cinzel',serif;color:var(--lg);font-size:1rem;margin-bottom:.4rem;}
+.page-header .tagline{font-size:.88rem;color:rgba(255,255,255,.5);font-style:italic;}
+
+/* ===================== EDIT TOOLBAR ===================== */
+.edit-bar{
+  position:fixed;bottom:1.25rem;left:50%;transform:translateX(-50%);
+  background:rgba(2,44,34,.96);border:1px solid var(--gold);
+  border-radius:2rem;padding:.5rem .75rem;
+  display:flex;gap:.4rem;z-index:400;
+  box-shadow:0 8px 32px rgba(0,0,0,.55);
+  backdrop-filter:blur(10px);flex-wrap:wrap;justify-content:center;
+  max-width:92vw;
+}
+.eb-btn{
+  background:transparent;border:1px solid var(--gold-border);
+  color:var(--lg);padding:.45rem .9rem;border-radius:1.5rem;
+  font-size:.74rem;font-weight:600;transition:all .25s;
+  display:flex;align-items:center;gap:.4rem;min-height:36px;
+}
+.eb-btn:hover{background:rgba(201,168,76,.18);color:var(--gold);}
+.eb-btn.primary{background:var(--gold-grad);color:var(--dk);border-color:var(--gold);}
+.eb-btn.danger{border-color:rgba(239,68,68,.5);color:#fca5a5;}
+.eb-btn.danger:hover{background:rgba(239,68,68,.15);}
+.edit-status{
+  position:fixed;top:80px;right:1rem;
+  background:rgba(16,185,129,.9);color:#fff;
+  padding:.45rem .9rem;border-radius:.5rem;font-size:.78rem;font-weight:600;
+  opacity:0;transition:opacity .3s;z-index:500;pointer-events:none;
+}
+.edit-status.show{opacity:1;}
+
+/* ===================== SECTION WRAPPER ===================== */
+.page-wrap{max-width:1400px;margin:0 auto;padding:0 1.5rem 5rem;}
+section{margin-bottom:3rem;}
+.section-hdr{margin-bottom:1.75rem;}
+.section-hdr h2{
+  font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:700;
+  color:var(--gold);margin-bottom:.3rem;
+}
+.section-hdr p{color:rgba(209,250,229,.7);font-size:.88rem;line-height:1.65;max-width:760px;}
+.gold-rule{width:50px;height:3px;background:var(--gold-grad);border-radius:2px;margin:.6rem 0 .9rem;}
+
+/* ===================== CARDS ===================== */
+.card{
+  background:rgba(6,78,59,.2);border:1px solid var(--gold-border);
+  border-radius:var(--r-lg);padding:1.4rem 1.5rem;
+  transition:border-color .3s,box-shadow .3s;position:relative;
+}
+.card:hover{border-color:var(--gold-border-s);}
+.card-top-bar{position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad);border-radius:var(--r-lg) var(--r-lg) 0 0;}
+
+/* ===================== GRID HELPERS ===================== */
+.g2{display:grid;grid-template-columns:1fr;gap:1.25rem;}
+.g3{display:grid;grid-template-columns:1fr;gap:1.25rem;}
+.g4{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;}
+@media(min-width:640px){.g2{grid-template-columns:repeat(2,1fr);}.g3{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:900px){.g4{grid-template-columns:repeat(4,1fr);}}
+
+/* ===================== EDITABLE ELEMENTS ===================== */
+[contenteditable="true"]{
+  background:var(--edit-active);
+  outline:2px dashed var(--gold);
+  outline-offset:2px;
+  border-radius:.25rem;
+  cursor:text;
+  min-height:1.2em;
+}
+[contenteditable="true"]:focus{outline:2px solid var(--gold);}
+.edit-hint{
+  display:none;position:absolute;top:-1.8rem;right:0;
+  background:var(--gold);color:var(--dk);
+  font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:.15rem .5rem;border-radius:.25rem;pointer-events:none;
+  white-space:nowrap;z-index:10;
+}
+.edit-mode [contenteditable="true"]:focus .edit-hint,
+.edit-mode [contenteditable="true"]:hover .edit-hint{display:block;}
+
+/* ===================== SECTION 0: TITLE BAND ===================== */
+.title-band{
+  background:linear-gradient(135deg,rgba(6,78,59,.55) 0%,rgba(30,58,138,.35) 100%);
+  border:1px solid var(--gold-border);border-radius:var(--r-lg);
+  padding:1.75rem 2rem;margin-bottom:2rem;
+  display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;
+}
+.tb-left h2{font-size:clamp(1rem,2.5vw,1.4rem);color:var(--gold);margin-bottom:.3rem;}
+.tb-left p{font-size:.85rem;color:rgba(209,250,229,.75);line-height:1.6;max-width:600px;}
+.tb-meta{display:flex;flex-wrap:wrap;gap:.6rem;}
+.meta-chip{
+  background:rgba(201,168,76,.1);border:1px solid var(--gold-border);
+  color:var(--gold);padding:.3rem .75rem;border-radius:2rem;
+  font-size:.72rem;font-weight:600;letter-spacing:.05em;
+}
+
+/* ===================== SECTION 1: CONTEXT ===================== */
+.pedset-grid{display:grid;grid-template-columns:1fr;gap:1rem;}
+@media(min-width:640px){.pedset-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:900px){.pedset-grid{grid-template-columns:repeat(3,1fr);}}
+
+.pedset-card{
+  background:rgba(2,44,34,.55);border:1px solid var(--gold-border);
+  border-radius:var(--r-md);padding:1.2rem;
+  transition:transform .3s,border-color .3s;
+}
+.pedset-card:hover{transform:translateY(-3px);border-color:var(--gold-border-s);}
+.pc-icon{font-size:1.5rem;margin-bottom:.5rem;}
+.pc-label{
+  font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;
+  color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;
+}
+.pc-body{font-size:.82rem;color:rgba(209,250,229,.82);line-height:1.6;}
+.pc-body ul{list-style:none;display:flex;flex-direction:column;gap:.3rem;}
+.pc-body li{padding-left:1rem;position:relative;}
+.pc-body li::before{content:'›';position:absolute;left:0;color:var(--gold);font-weight:bold;}
+
+/* ===================== SECTION 2: SWOT ===================== */
+.swot-quadrant{
+  display:grid;grid-template-columns:1fr;gap:1.25rem;
+}
+@media(min-width:640px){.swot-quadrant{grid-template-columns:repeat(2,1fr);}}
+
+.swot-card{border-radius:var(--r-lg);padding:1.4rem;border:1px solid transparent;transition:transform .3s;}
+.swot-card:hover{transform:translateY(-3px);}
+.swot-card.S{background:linear-gradient(135deg,rgba(20,83,45,.6) 0%,rgba(6,78,59,.45) 100%);border-color:rgba(16,185,129,.35);}
+.swot-card.W{background:linear-gradient(135deg,rgba(120,53,15,.5) 0%,rgba(6,78,59,.4) 100%);border-color:rgba(201,168,76,.35);}
+.swot-card.O{background:linear-gradient(135deg,rgba(30,58,138,.5) 0%,rgba(6,78,59,.4) 100%);border-color:rgba(59,130,246,.35);}
+.swot-card.T{background:linear-gradient(135deg,rgba(127,29,29,.5) 0%,rgba(6,78,59,.4) 100%);border-color:rgba(239,68,68,.35);}
+.swot-hdr{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;font-size:.95rem;}
+.swot-badge{
+  width:32px;height:32px;border-radius:.5rem;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-weight:900;font-size:.9rem;color:var(--dk);flex-shrink:0;
+}
+.S .swot-badge{background:linear-gradient(135deg,#10b981,#6ee7b7);}
+.W .swot-badge{background:var(--gold-grad);}
+.O .swot-badge{background:linear-gradient(135deg,#3b82f6,#93c5fd);}
+.T .swot-badge{background:linear-gradient(135deg,#ef4444,#fca5a5);}
+.swot-label{font-family:'Cinzel',serif;font-weight:700;color:#fff;}
+.swot-items{display:flex;flex-direction:column;gap:.5rem;}
+.swot-entry{
+  background:rgba(0,0,0,.25);border-radius:.5rem;padding:.7rem .85rem;
+  font-size:.82rem;color:rgba(236,253,245,.85);line-height:1.5;
+  border-left:3px solid transparent;transition:all .22s;position:relative;
+}
+.S .swot-entry{border-left-color:rgba(16,185,129,.4);}
+.W .swot-entry{border-left-color:rgba(201,168,76,.4);}
+.O .swot-entry{border-left-color:rgba(59,130,246,.4);}
+.T .swot-entry{border-left-color:rgba(239,68,68,.4);}
+.swot-entry:hover{background:rgba(0,0,0,.38);transform:translateX(3px);}
+.se-kv{font-size:.7rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:.15rem;}
+
+/* ===================== SECTION 3: LEVERAGE POINTS ===================== */
+.lp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;}
+@media(min-width:768px){.lp-grid{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:1024px){.lp-grid{grid-template-columns:repeat(5,1fr);}}
+
+.lp-card{
+  background:rgba(2,44,34,.6);border:1px solid var(--gold-border);
+  border-radius:var(--r-md);padding:1.25rem 1rem;text-align:center;
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.lp-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--gold-grad);
+}
+.lp-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 35px rgba(201,168,76,.15);}
+.lp-num{font-family:'Cinzel',serif;font-size:2rem;font-weight:900;color:var(--gold);line-height:1;margin-bottom:.4rem;}
+.lp-title{font-size:.8rem;color:rgba(167,243,208,.9);line-height:1.4;font-weight:500;}
+.lp-desc{font-size:.76rem;color:rgba(255,255,255,.5);margin-top:.5rem;line-height:1.4;}
+
+/* ===================== SECTION 4: STRATEGIC OPTIONS ===================== */
+.options-wrap{display:flex;flex-direction:column;gap:1.25rem;}
+.option-card{
+  border-radius:var(--r-lg);overflow:hidden;
+  border:2px solid transparent;
+  transition:border-color .3s,box-shadow .3s;
+}
+.option-card.recommended{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,168,76,.25),0 12px 40px rgba(0,0,0,.35);}
+.option-header{
+  padding:1.1rem 1.4rem;display:flex;align-items:center;gap:1rem;
+  cursor:pointer;border:none;width:100%;text-align:left;color:#fff;
+  transition:filter .2s;
+}
+.option-header:hover{filter:brightness(1.1);}
+.opt-A .option-header{background:linear-gradient(135deg,rgba(19,78,74,.9),rgba(15,118,110,.7));}
+.opt-B .option-header{background:linear-gradient(135deg,rgba(30,58,138,.9),rgba(37,99,235,.7));}
+.opt-C .option-header{background:linear-gradient(135deg,rgba(76,29,149,.9),rgba(91,33,182,.7));}
+.opt-D .option-header{background:linear-gradient(135deg,rgba(6,78,59,.95),rgba(120,53,15,.7));}
+.opt-letter{
+  width:52px;height:52px;border-radius:.75rem;
+  background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-size:1.4rem;font-weight:900;flex-shrink:0;
+}
+.opt-D .opt-letter{background:var(--gold-grad);color:var(--dk);border-color:var(--gold);}
+.opt-meta{flex:1;}
+.opt-meta h3{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;margin-bottom:.2rem;}
+.opt-meta .opt-sub{font-size:.8rem;opacity:.75;}
+.opt-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.4rem;}
+.opt-tag{
+  font-size:.68rem;font-weight:600;padding:.15rem .55rem;border-radius:.25rem;
+  text-transform:uppercase;letter-spacing:.05em;
+}
+.opt-tag.time{background:rgba(255,255,255,.12);color:rgba(255,255,255,.8);}
+.opt-tag.res{background:rgba(201,168,76,.2);color:var(--gold);}
+.opt-tag.rec{background:var(--gold-grad);color:var(--dk);}
+.opt-body{padding:1.25rem 1.4rem;background:rgba(0,0,0,.22);}
+.opt-grid{display:grid;grid-template-columns:1fr;gap:1rem;}
+@media(min-width:768px){.opt-grid{grid-template-columns:repeat(3,1fr);}}
+
+.opt-col h4{font-family:'Cinzel',serif;font-size:.78rem;color:var(--gold);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em;}
+.opt-col ul{list-style:none;display:flex;flex-direction:column;gap:.3rem;}
+.opt-col li{font-size:.8rem;color:rgba(209,250,229,.82);padding-left:1rem;position:relative;line-height:1.45;}
+.opt-col li::before{content:'›';position:absolute;left:0;color:var(--gold);font-weight:bold;}
+.opt-col.risk li::before{color:#fca5a5;}
+.option-card.collapsed .opt-body{display:none;}
+
+/* ===================== SECTION 5: RECOMMENDED STRATEGY ===================== */
+.strat-pillars{display:grid;grid-template-columns:1fr;gap:1.25rem;}
+@media(min-width:640px){.strat-pillars{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1024px){.strat-pillars{grid-template-columns:repeat(4,1fr);}}
+
+.pillar-card{
+  background:rgba(2,44,34,.55);border:1px solid var(--gold-border);
+  border-radius:var(--r-lg);padding:1.4rem;
+  transition:transform .3s,border-color .3s;position:relative;overflow:hidden;
+}
+.pillar-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--gold-grad);}
+.pillar-card:hover{transform:translateY(-4px);border-color:var(--gold-border-s);}
+.pc-num{
+  font-family:'Cinzel',serif;font-size:2.5rem;font-weight:900;
+  color:rgba(201,168,76,.2);position:absolute;top:.5rem;right:.75rem;line-height:1;
+}
+.pillar-card h3{font-family:'Cinzel',serif;color:var(--gold);font-size:.95rem;margin-bottom:.6rem;}
+.pillar-card p{font-size:.83rem;color:rgba(209,250,229,.8);line-height:1.6;margin-bottom:.75rem;}
+.pillar-bullets{list-style:none;display:flex;flex-direction:column;gap:.3rem;}
+.pillar-bullets li{font-size:.78rem;color:var(--lg);padding-left:1rem;position:relative;line-height:1.4;}
+.pillar-bullets li::before{content:'✦';position:absolute;left:0;color:var(--gold);font-size:.6rem;top:.15em;}
+
+/* ===================== SECTION 6: BSC PREVIEW ===================== */
+.bsc-perspective{
+  background:rgba(2,44,34,.4);border:1px solid var(--gold-border);
+  border-radius:var(--r-md);overflow:hidden;margin-bottom:1rem;
+}
+.bsc-persp-hdr{
+  padding:.85rem 1.25rem;display:flex;align-items:center;gap:.75rem;
+  cursor:pointer;border:none;width:100%;text-align:left;color:#fff;
+}
+.bsc-persp-hdr:hover{filter:brightness(1.08);}
+.bsp-fin .bsc-persp-hdr{background:linear-gradient(135deg,rgba(6,78,59,.8),rgba(4,120,87,.6));}
+.bsp-sta .bsc-persp-hdr{background:linear-gradient(135deg,rgba(30,58,138,.8),rgba(37,99,235,.6));}
+.bsp-pro .bsc-persp-hdr{background:linear-gradient(135deg,rgba(120,53,15,.8),rgba(194,65,12,.6));}
+.bsp-lea .bsc-persp-hdr{background:linear-gradient(135deg,rgba(19,78,74,.8),rgba(15,118,110,.6));}
+.bsc-persp-title{font-family:'Cinzel',serif;font-size:.95rem;font-weight:700;}
+.bsc-persp-body{padding:1rem 1.25rem;overflow-x:auto;}
+table.bsc-tbl{width:100%;border-collapse:collapse;font-size:.78rem;min-width:600px;}
+table.bsc-tbl th{
+  padding:.55rem .7rem;text-align:left;color:var(--gold);
+  font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.05em;
+  background:rgba(201,168,76,.1);border-bottom:2px solid var(--gold-border);
+}
+table.bsc-tbl td{
+  padding:.6rem .7rem;vertical-align:top;line-height:1.4;
+  border-bottom:1px solid rgba(201,168,76,.1);color:rgba(209,250,229,.85);
+}
+table.bsc-tbl tr:hover td{background:rgba(201,168,76,.05);}
+table.bsc-tbl td:first-child{color:#fff;font-weight:500;}
+table.bsc-tbl td.target{color:var(--lg);font-weight:600;}
+
+/* ===================== SECTION 7: IMPLEMENTATION PHASES ===================== */
+.phases-timeline{display:flex;flex-direction:column;gap:1.25rem;position:relative;}
+.phases-timeline::before{
+  content:'';position:absolute;left:24px;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--gold),rgba(201,168,76,.2));
+  display:none;
+}
+@media(min-width:640px){.phases-timeline::before{display:block;}}
+
+.phase-item{
+  background:rgba(2,44,34,.5);border:1px solid var(--gold-border);
+  border-radius:var(--r-lg);overflow:hidden;
+  transition:border-color .3s;
+}
+.phase-item:hover{border-color:var(--gold-border-s);}
+.phase-hdr{padding:1.1rem 1.4rem;display:flex;align-items:center;gap:1rem;}
+.ph-1 .phase-hdr{background:linear-gradient(135deg,rgba(6,78,59,.85),rgba(4,120,87,.6));}
+.ph-2 .phase-hdr{background:linear-gradient(135deg,rgba(30,58,138,.85),rgba(37,99,235,.6));}
+.ph-3 .phase-hdr{background:linear-gradient(135deg,rgba(76,29,149,.85),rgba(91,33,182,.6));}
+.phase-num{
+  font-family:'Cinzel',serif;font-size:1.8rem;font-weight:900;color:var(--gold);
+  line-height:1;width:48px;flex-shrink:0;
+}
+.phase-info{flex:1;}
+.phase-info h3{font-family:'Cinzel',serif;font-size:1rem;color:#fff;margin-bottom:.15rem;}
+.phase-info .phase-yr{font-size:.8rem;color:var(--lg);}
+.phase-budget .budget-n{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--gold);font-weight:700;}
+.phase-budget .budget-l{font-size:.65rem;color:rgba(167,243,208,.6);text-transform:uppercase;letter-spacing:.06em;}
+.phase-body{padding:1.25rem 1.4rem;background:rgba(0,0,0,.2);}
+.phase-priorities{display:grid;grid-template-columns:1fr;gap:.75rem;}
+@media(min-width:640px){.phase-priorities{grid-template-columns:repeat(2,1fr);}}
+.pp-item{
+  background:rgba(255,255,255,.05);border-left:3px solid var(--gold);
+  border-radius:0 .5rem .5rem 0;padding:.65rem .85rem;
+  font-size:.8rem;color:rgba(209,250,229,.85);line-height:1.45;transition:background .2s;
+}
+.pp-item:hover{background:rgba(255,255,255,.09);}
+.pp-item strong{display:block;color:var(--gold);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem;}
+.phase-agencies{margin-top:.75rem;display:flex;flex-wrap:wrap;gap:.35rem;}
+.agency-chip{
+  background:rgba(201,168,76,.1);border:1px solid var(--gold-border);
+  border-radius:2rem;padding:.18rem .65rem;font-size:.7rem;color:var(--lg);
+}
+
+/* ===================== RATIONALE BOX ===================== */
+.rationale-box{
+  background:rgba(201,168,76,.07);border-left:4px solid var(--gold);
+  border-radius:0 var(--r-md) var(--r-md) 0;
+  padding:1rem 1.25rem;margin-top:1.25rem;font-size:.85rem;line-height:1.65;
+  color:rgba(209,250,229,.85);
+}
+.rationale-box strong{color:var(--gold);}
+
+/* ===================== KPI SUMMARY GRID ===================== */
+.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.85rem;}
+@media(min-width:640px){.kpi-grid{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:900px){.kpi-grid{grid-template-columns:repeat(6,1fr);}}
+.kpi-card{
+  background:rgba(0,0,0,.3);border:1px solid var(--gold-border);
+  border-radius:var(--r-md);padding:1rem;text-align:center;
+  transition:transform .3s,border-color .3s;
+}
+.kpi-card:hover{transform:translateY(-3px);border-color:var(--gold);}
+.kpi-num{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:var(--gold);display:block;line-height:1;margin-bottom:.3rem;}
+.kpi-lbl{font-size:.73rem;color:rgba(167,243,208,.8);line-height:1.35;}
+.kpi-note{font-size:.66rem;color:rgba(255,255,255,.35);margin-top:.2rem;}
+
+/* ===================== COMPARISON TABLE ===================== */
+.comp-wrap{overflow-x:auto;}
+table.comp-tbl{width:100%;border-collapse:collapse;font-size:.78rem;min-width:700px;}
+table.comp-tbl th{
+  padding:.65rem .85rem;text-align:left;color:var(--gold);
+  font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.05em;
+  background:rgba(201,168,76,.1);border-bottom:2px solid var(--gold-border);
+}
+table.comp-tbl td{
+  padding:.65rem .85rem;border-bottom:1px solid rgba(201,168,76,.1);
+  color:rgba(209,250,229,.85);vertical-align:top;line-height:1.4;
+}
+table.comp-tbl tr.rec-row td{background:rgba(201,168,76,.06);color:#fff;}
+table.comp-tbl tr:hover td{background:rgba(201,168,76,.04);}
+.tag-sm{
+  display:inline-block;font-size:.65rem;font-weight:700;
+  padding:.1rem .4rem;border-radius:.25rem;margin-left:.3rem;
+}
+.tag-rec{background:var(--gold-grad);color:var(--dk);}
+.tag-high{background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.3);}
+.tag-mod{background:rgba(201,168,76,.2);color:var(--gold);border:1px solid var(--gold-border);}
+.tag-low{background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3);}
+
+/* ===================== PRINT ===================== */
+@media print{
+  .edit-bar,.site-nav{display:none!important;}
+  body{background:white;color:black;}
+  .page-wrap{max-width:100%;padding:0 1rem;}
+  .card,.swot-card,.pedset-card,.option-card,.pillar-card,.phase-item,.lp-card,.kpi-card{
+    background:#f9f9f9!important;color:#000!important;border:1px solid #ccc!important;
+  }
+  h1,h2,h3,h4,.section-hdr h2,.swot-label,.pc-label,.lp-title,.opt-meta h3,.pillar-card h3{
+    color:#1a1a1a!important;-webkit-text-fill-color:#1a1a1a!important;
+  }
+  .opt-body{display:block!important;}
+}
+
+/* ===================== ANIMATIONS ===================== */
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.fade-in{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease;}
+.fade-in.visible{opacity:1;transform:none;}
+
+/* ===================== MISC ===================== */
+::-webkit-scrollbar{width:7px;height:7px;}
+::-webkit-scrollbar-track{background:rgba(2,44,34,.5);}
+::-webkit-scrollbar-thumb{background:var(--gold-d);border-radius:4px;}
+::-webkit-scrollbar-thumb:hover{background:var(--gold);}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+
+.section-divider{
+  border:none;border-top:1px solid var(--gold-border);
+  margin:2.5rem 0;
+}
+
+.info-box{
+  background:rgba(30,58,138,.2);border:1px solid rgba(59,130,246,.3);
+  border-radius:var(--r-md);padding:1rem 1.25rem;font-size:.84rem;
+  color:rgba(209,250,229,.85);line-height:1.65;margin-top:1rem;
+}
+.info-box strong{color:#93c5fd;}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- =================== NAV =================== -->
+<nav class="site-nav" id="siteNav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png" alt="MTIT BARMM" height="44" onerror="this.style.display='none'">
+      <span class="nav-title">BARMM Investment<br>Roadmap 2026–2035</span>
+    </div>
+    <nav class="nav-links" aria-label="Page sections">
+      <a href="#context">Context</a>
+      <a href="#swot">SWOT</a>
+      <a href="#leverage">Leverage</a>
+      <a href="#options">Options</a>
+      <a href="#strategy">Strategy</a>
+      <a href="#bsc">BSC</a>
+      <a href="#phases">Phases</a>
+    </nav>
+  </div>
+</nav>
+
+<!-- =================== HEADER =================== -->
+<header class="page-header">
+  <div class="eyebrow">Strategy Formulation Document</div>
+  <h1>The Emerging Bangsamoro</h1>
+  <div class="sub">Investment Roadmap 2026–2035</div>
+  <p class="tagline">"A Hub for Resilient and Ethical Growth" — Integrated Halal-Driven & Green Economy Strategy</p>
+</header>
+
+<!-- =================== EDIT TOOLBAR =================== -->
+<div class="edit-bar" role="toolbar" aria-label="Document editing controls">
+  <button class="eb-btn primary" id="editToggle" onclick="toggleEdit()">✏️ <span id="editTxt">Edit Document</span></button>
+  <button class="eb-btn" id="saveBtn" onclick="saveDoc()" style="display:none">💾 Save</button>
+  <button class="eb-btn" onclick="window.print()">🖨️ Print / PDF</button>
+  <button class="eb-btn danger" id="resetBtn" onclick="resetDoc()" style="display:none">↺ Reset</button>
+</div>
+<div class="edit-status" id="editStatus" role="status" aria-live="polite"></div>
+
+<!-- =================== MAIN =================== -->
+<main id="main" class="page-wrap">
+
+  <!-- TITLE BAND -->
+  <div class="title-band fade-in">
+    <div class="tb-left">
+      <h2>Strategic Analysis &amp; Formulation</h2>
+      <p contenteditable="false" data-key="tb-desc">This document synthesises the PEDSET environmental scan, Dynamic SWOT, systems thinking analysis, and strategic options into a coherent Investment Strategy for the Bangsamoro Autonomous Region in Muslim Mindanao (BARMM) 2026–2035, integrating the Green Economy framework.</p>
+    </div>
+    <div class="tb-meta">
+      <span class="meta-chip">May 2026</span>
+      <span class="meta-chip">MTIT–BARMM</span>
+      <span class="meta-chip">BIRD 2026–2035</span>
+    </div>
+  </div>
+
+  <!-- ================= SECTION 1: CONTEXT ================= -->
+  <section id="context" aria-labelledby="ctx-hdr">
+    <div class="section-hdr fade-in">
+      <h2 id="ctx-hdr">01 — External Environmental Context (PEDSET)</h2>
+      <div class="gold-rule"></div>
+      <p>A macro-environmental scan of the six domains shaping Bangsamoro's investment climate. Each domain reveals critical drivers and constraints that must be accounted for in strategy design.</p>
+    </div>
+
+    <div class="pedset-grid">
+
+      <div class="pedset-card fade-in">
+        <div class="pc-icon">🏛️</div>
+        <div class="pc-label">Political</div>
+        <div class="pc-body">
+          <ul>
+            <li contenteditable="false" data-key="pol-1">BOL (RA 11054) grants 55 exclusive autonomous powers including economic development, trade, and justice administration.</li>
+            <li contenteditable="false" data-key="pol-2">First parliamentary elections held in 2025; transition to elected governance marks a critical milestone for institutional legitimacy.</li>
+            <li contenteditable="false" data-key="pol-3">Supreme Court (2024) excluded Sulu from BARMM, creating territorial and representational challenges.</li>
+            <li contenteditable="false" data-key="pol-4">Normalization process (MILF decommissioning) faces significant delays, raising stability concerns.</li>
+            <li contenteditable="false" data-key="pol-5">Moral Governance framework emphasises transparency, accountability, and Islamic principles of ethical leadership.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pedset-card fade-in">
+        <div class="pc-icon">📈</div>
+        <div class="pc-label">Economic</div>
+        <div class="pc-body">
+          <ul>
+            <li contenteditable="false" data-key="eco-1">GRDP reached PHP 299.5B in 2024 (2.7% growth); target PHP 550B+ by 2035.</li>
+            <li contenteditable="false" data-key="eco-2">Sectoral split: Services 42% (PHP 125.7B), Agriculture 32.4% (PHP 97.2B), Industry 25.6% (PHP 76.6B).</li>
+            <li contenteditable="false" data-key="eco-3">Investment approvals hit PHP 5.1B in Q1 2026 alone, reflecting structural improvement in investor confidence.</li>
+            <li contenteditable="false" data-key="eco-4">Block grant dependency remains high; underspending in budget execution affects development delivery.</li>
+            <li contenteditable="false" data-key="eco-5">BBOI and BEZA identify strategic investment priority categories under the SIPP framework, anchored by the Halal Park in Matanog.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pedset-card fade-in">
+        <div class="pc-icon">👥</div>
+        <div class="pc-label">Demographics</div>
+        <div class="pc-body">
+          <ul>
+            <li contenteditable="false" data-key="dem-1">Population: 5.69 million (2024); annual growth rate 3.43% — nearly double the national average.</li>
+            <li contenteditable="false" data-key="dem-2">Youthful demographic profile generates both labor supply potential and demands for expanded social services.</li>
+            <li contenteditable="false" data-key="dem-3">Educational attainment gap: Functional literacy rate at 59.3% (lowest nationally) — a critical human capital constraint.</li>
+            <li contenteditable="false" data-key="dem-4">45% of children under five affected by stunting — highest prevalence in the country.</li>
+            <li contenteditable="false" data-key="dem-5">Poverty incidence fell from 55.9% (2018) to 34.8% (2023) — demonstrating development capacity and peace dividends.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pedset-card fade-in">
+        <div class="pc-icon">🕌</div>
+        <div class="pc-label">Social</div>
+        <div class="pc-body">
+          <ul>
+            <li contenteditable="false" data-key="soc-1">Predominantly Muslim population provides authentic cultural credibility for halal industry — a non-replicable advantage.</li>
+            <li contenteditable="false" data-key="soc-2">Moral Governance aligns with global ESG criteria increasingly valued by international investors.</li>
+            <li contenteditable="false" data-key="soc-3">Tourism explicitly framed as peacebuilding tool; Isabela City won 2024 Tourism Champions Challenge Mindanao.</li>
+            <li contenteditable="false" data-key="soc-4">Social tensions persist: clan conflict (rido), political rivalries, ex-combatant reintegration challenges.</li>
+            <li contenteditable="false" data-key="soc-5">Basilan declared ASG-free in June 2024, marking a historic milestone in the peace process.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pedset-card fade-in">
+        <div class="pc-icon">🌊</div>
+        <div class="pc-label">Environmental</div>
+        <div class="pc-body">
+          <ul>
+            <li contenteditable="false" data-key="env-1">Renewable energy mix already at 75.86% (primarily hydropower); BSEMP targets 85%+ by 2035.</li>
+            <li contenteditable="false" data-key="env-2">Bangsamoro Forestry Code and JMC No. 2026-01 establish the legal framework for carbon credits, PES, and eco-tourism fees.</li>
+            <li contenteditable="false" data-key="env-3">High climate vulnerability: El Niño 2024 caused PHP 346M in crop losses; AFF contracted 4.2% region-wide.</li>
+            <li contenteditable="false" data-key="env-4">Pestalotiopsis fungal disease struck 800+ ha of rubber trees in Basilan (2023), highlighting biosecurity risks.</li>
+            <li contenteditable="false" data-key="env-5">Green Economy pillar leverages BIMP-EAGA EGL framework to monetize environmental assets via REDD+ and PES.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pedset-card fade-in">
+        <div class="pc-icon">💻</div>
+        <div class="pc-label">Technological</div>
+        <div class="pc-body">
+          <ul>
+            <li contenteditable="false" data-key="tec-1">Electrification: ~75% overall (25–30% households without power); critical constraint on investment competitiveness.</li>
+            <li contenteditable="false" data-key="tec-2">BEGMP (2024–2033): Phase 1 (ICT infra), Phase 2 (e-gov platforms), Phase 3 (data-driven governance).</li>
+            <li contenteditable="false" data-key="tec-3">Broadband penetration <30% in rural/island areas; target 85% by 2035 through digital infrastructure expansion.</li>
+            <li contenteditable="false" data-key="tec-4">Fintech, Islamic digital banking, agritech, halal traceability systems represent high-potential investment verticals.</li>
+            <li contenteditable="false" data-key="tec-5">ZBIP (PHP 6.67B) and Basilan-Zamboanga Bridge (by 2030) are transformative infrastructure projects.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /pedset-grid -->
+
+    <div class="info-box fade-in" style="margin-top:1.25rem;">
+      <strong>Systems Note:</strong> The PEDSET context reveals two primary binding constraints: (1) <strong>Infrastructure deficits</strong> creating a "Limits to Growth" ceiling (B1), and (2) <strong>Political transition uncertainty</strong> activating the "Security–Investment Tensions" balancing loop (B2). Strategy must simultaneously raise the ceiling and dampen the tension loop.
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ================= SECTION 2: SWOT ================= -->
+  <section id="swot" aria-labelledby="swot-hdr">
+    <div class="section-hdr fade-in">
+      <h2 id="swot-hdr">02 — Dynamic SWOT Analysis</h2>
+      <div class="gold-rule"></div>
+      <p>Internal and external factors categorised by variable type, time horizon, and political economy dimension. The dynamic interplay between these elements forms the basis for identifying leverage points.</p>
+    </div>
+
+    <div class="swot-quadrant fade-in">
+
+      <div class="swot-card S" role="region" aria-labelledby="sw-s">
+        <div class="swot-hdr"><div class="swot-badge">S</div><div class="swot-label" id="sw-s">Strengths — Internal Assets</div></div>
+        <div class="swot-items">
+          <div class="swot-entry" contenteditable="false" data-key="sw-s1"><span class="se-kv">Halal Legitimacy · Stock · Long-term · Institutions</span>Inherent cultural authenticity from Islamic heritage and Moral Governance — a non-replicable competitive advantage no other Philippine region can claim for halal industry development.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-s2"><span class="se-kv">BIMP-EAGA Location · Stock · Long-term · Resources</span>Permanent geographic asset serving as gateway to 70M+ ASEAN consumers. Tawi-Tawi is just 20km from Sabah, Malaysia.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-s3"><span class="se-kv">Agriculture Base · Stock · Long-term · Resources</span>AFF contributes 32.4% of GRDP (PHP 97.2B). Tawi-Tawi produces 40% of national seaweed; Basilan has 48,366 ha of rubber.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-s4"><span class="se-kv">BOL Authority · Flow · Medium-term · Power</span>55 distinct autonomous powers under RA 11054 covering economic development, revenue generation, and investment facilitation.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-s5"><span class="se-kv">Domestic Halal Demand · Flow · Medium-term · Incentives</span>Rapidly expanding internal consumer base of 5.69M with specific religious consumption needs — a natural captive market.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-s6"><span class="se-kv">Moral Governance · Stock · Long-term · Institutions</span>Emphasis on transparency, integrity, and accountability grounded in Islamic principles aligns with ESG criteria.</div>
+        </div>
+      </div>
+
+      <div class="swot-card W" role="region" aria-labelledby="sw-w">
+        <div class="swot-hdr"><div class="swot-badge">W</div><div class="swot-label" id="sw-w">Weaknesses — Internal Deficits</div></div>
+        <div class="swot-items">
+          <div class="swot-entry" contenteditable="false" data-key="sw-w1"><span class="se-kv">Weak Certification · Stock · Medium-term · Institutions</span>BHB lacks OIC/SMIIC international recognition; processing takes 45–60 days vs 15-day benchmark. Directly blocks LP1.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-w2"><span class="se-kv">Fragmented Policy · Auxiliary · Medium-term · Institutions</span>Coordination gaps across 15 ministries slow investment facilitation and deter investors requiring regulatory predictability.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-w3"><span class="se-kv">Infrastructure Deficit · Stock · Long-term · Resources</span>25–30% households without power; <30% broadband in rural/island areas. Creates hard ceiling on investment expansion.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-w4"><span class="se-kv">Halal Expertise Gap · Stock · Long-term · Resources</span>Acute shortage of halal certification officers, auditors, and technical personnel for modern agri-processing.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-w5"><span class="se-kv">Import Dependency · Flow · Medium-term · Resources</span>High reliance on imports for industrial inputs limits halal manufacturing competitiveness until local value chains mature.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-w6"><span class="se-kv">Skills Mismatch · Stock · Long-term · Resources</span>59.3% functional literacy rate (lowest nationally). Significant mismatch between available human capital and industry requirements.</div>
+        </div>
+      </div>
+
+      <div class="swot-card O" role="region" aria-labelledby="sw-o">
+        <div class="swot-hdr"><div class="swot-badge">O</div><div class="swot-label" id="sw-o">Opportunities — External Potentials</div></div>
+        <div class="swot-items">
+          <div class="swot-entry" contenteditable="false" data-key="sw-o1"><span class="se-kv">Global Halal Market · Auxiliary · Long-term · Incentives</span>USD 2.3T global halal economy spanning food, cosmetics, pharmaceuticals, Islamic finance, and tourism.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-o2"><span class="se-kv">ASEAN Integration · Auxiliary · Long-term · Institutions</span>BIMP-EAGA and ASEAN frameworks enable regional standards alignment and seamless cross-border trade.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-o3"><span class="se-kv">Islamic Finance · Flow · Medium-term · Institutions</span>Development pathway from Islamic banking → Takaful → Sukuk; functional system targeted by 2028.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-o4"><span class="se-kv">Green Economy & Carbon Markets · Flow · Long-term · Resources</span>Bangsamoro Forestry Code and JMC 2026-01 unlock REDD+, PES, and eco-tourism revenue streams for LGUs.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-o5"><span class="se-kv">Digital Transformation · Flow · Long-term · Resources</span>BEGMP 2024–2033 infrastructure expansion: 85% broadband penetration by 2035. Digital platforms enable e-commerce and fintech.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-o6"><span class="se-kv">Renewable Energy · Flow · Long-term · Resources</span>75.86% renewable mix already in place. Opportunity to position as green manufacturing hub aligned with ESG mandates.</div>
+        </div>
+      </div>
+
+      <div class="swot-card T" role="region" aria-labelledby="sw-t">
+        <div class="swot-hdr"><div class="swot-badge">T</div><div class="swot-label" id="sw-t">Threats — External Risks</div></div>
+        <div class="swot-items">
+          <div class="swot-entry" contenteditable="false" data-key="sw-t1"><span class="se-kv">Halal Hub Competition · Auxiliary · Medium-term · Power</span>Malaysia, Indonesia, Thailand have significant first-mover advantages in certification, manufacturing, and tourism.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-t2"><span class="se-kv">Standards Recognition Risk · Auxiliary · Medium-term · Institutions</span>Risk of OIC/SMIIC non-acceptance of BARMM certifications undermines the entire halal value proposition.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-t3"><span class="se-kv">Investment Perception · Stock · Long-term · Incentives</span>Residual negative reputation from historical conflict deters cautious international investors.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-t4"><span class="se-kv">Climate Vulnerability · Auxiliary · Long-term · Resources</span>El Niño 2024 caused PHP 346M crop losses; AFF contracted 4.2%. Sea-level rise threatens coastal communities.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-t5"><span class="se-kv">Political Transition · Flow · Short-term · Power</span>Shift to elected parliament risks institutional continuity if transition is disrupted or contested.</div>
+          <div class="swot-entry" contenteditable="false" data-key="sw-t6"><span class="se-kv">Security Incidents · Auxiliary · Short-term · Power</span>Sporadic security events activate the B2 Security–Investment Tensions balancing loop, triggering investor caution.</div>
+        </div>
+      </div>
+
+    </div><!-- /swot-quadrant -->
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ================= SECTION 3: LEVERAGE POINTS ================= -->
+  <section id="leverage" aria-labelledby="lp-hdr">
+    <div class="section-hdr fade-in">
+      <h2 id="lp-hdr">03 — Critical Leverage Points</h2>
+      <div class="gold-rule"></div>
+      <p>Five strategic intervention points identified through Causal Loop Diagram analysis where small, well-placed interventions create disproportionate positive impacts across the entire investment system.</p>
+    </div>
+
+    <div class="lp-grid fade-in">
+      <div class="lp-card">
+        <div class="lp-num">LP1</div>
+        <div class="lp-title" contenteditable="false" data-key="lp1-title">Halal Certification Integrity</div>
+        <div class="lp-desc" contenteditable="false" data-key="lp1-desc">Establish BHB with full OIC/SMIIC recognition by 2028. Triggers virtuous cycles of market access and export growth. Addresses "Fixes that Fail".</div>
+      </div>
+      <div class="lp-card">
+        <div class="lp-num">LP2</div>
+        <div class="lp-title" contenteditable="false" data-key="lp2-title">Infrastructure & Energy Nexus</div>
+        <div class="lp-desc" contenteditable="false" data-key="lp2-desc">ZBIP (PHP 6.67B), Basilan-Zamboanga Bridge; 100% electrification and 85% broadband by 2035. Raises the B1 ceiling.</div>
+      </div>
+      <div class="lp-card">
+        <div class="lp-num">LP3</div>
+        <div class="lp-title" contenteditable="false" data-key="lp3-title">Governance & Investor Confidence</div>
+        <div class="lp-desc" contenteditable="false" data-key="lp3-desc">Systemic reforms (1-day Digital BNR, BIIC IRR, one-stop facilitation) activate the R2 reinforcing loop. Addresses root causes.</div>
+      </div>
+      <div class="lp-card">
+        <div class="lp-num">LP4</div>
+        <div class="lp-title" contenteditable="false" data-key="lp4-title">Islamic Finance Ecosystem</div>
+        <div class="lp-desc" contenteditable="false" data-key="lp4-desc">Banking → Takaful → Sukuk pathway by 2028. Provides Shariah-compliant capital for MSMEs and attracts ethical investors.</div>
+      </div>
+      <div class="lp-card">
+        <div class="lp-num">LP5</div>
+        <div class="lp-title" contenteditable="false" data-key="lp5-title">Green Economy Framework</div>
+        <div class="lp-desc" contenteditable="false" data-key="lp5-desc">Forestry Code & JMC 2026-01; REDD+ and PES monetization. Targets PHP 500M/yr in carbon/ecosystem revenue by 2035.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ================= SECTION 4: STRATEGIC OPTIONS ================= -->
+  <section id="options" aria-labelledby="opt-hdr">
+    <div class="section-hdr fade-in">
+      <h2 id="opt-hdr">04 — Strategic Options Analysis</h2>
+      <div class="gold-rule"></div>
+      <p>Four distinct strategic configurations evaluated against the leverage points, systems archetypes, and SWOT dynamics. Click each option to expand its analysis.</p>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="card fade-in" style="margin-bottom:1.5rem;">
+      <div class="card-top-bar"></div>
+      <h3 style="font-family:'Cinzel',serif;color:var(--gold);font-size:.9rem;margin-bottom:1rem;text-transform:uppercase;letter-spacing:.06em;">Strategic Options Comparison Matrix</h3>
+      <div class="comp-wrap">
+        <table class="comp-tbl" aria-label="Strategic options comparison">
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Option A: Infrastructure-First</th>
+              <th>Option B: Halal Hub Rapid</th>
+              <th>Option C: Governance-Centred</th>
+              <th>Option D: Integrated <span class="tag-sm tag-rec">Recommended</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Primary Focus</td>
+              <td>Energy, connectivity, transport</td>
+              <td>Halal certification, parks, value chains</td>
+              <td>Regulatory clarity, transparency</td>
+              <td class="rec-row">All three + Green Economy — integrated</td>
+            </tr>
+            <tr>
+              <td>Time Horizon</td>
+              <td>Long-term (8–10 yrs)</td>
+              <td>Medium-term (5–7 yrs)</td>
+              <td>Medium-term (5–7 yrs)</td>
+              <td class="rec-row">Phased — Foundation → Acceleration → Consolidation</td>
+            </tr>
+            <tr>
+              <td>Key Strength</td>
+              <td>Addresses binding constraints</td>
+              <td>Leverages unique halal advantage</td>
+              <td>Builds investor confidence</td>
+              <td class="rec-row">Synergy across all leverage points simultaneously</td>
+            </tr>
+            <tr>
+              <td>Main Risk</td>
+              <td><span class="tag-sm tag-high">HIGH</span> Delayed visible outcomes</td>
+              <td><span class="tag-sm tag-high">HIGH</span> Infrastructure bottlenecks stall growth</td>
+              <td><span class="tag-sm tag-mod">MOD</span> Slow impact on investment flows</td>
+              <td class="rec-row"><span class="tag-sm tag-low">LOW</span> Coordination complexity across pillars</td>
+            </tr>
+            <tr>
+              <td>Resource Needs</td>
+              <td>Very High (PHP 20B+)</td>
+              <td>High (PHP 15B+)</td>
+              <td>Moderate (PHP 8B)</td>
+              <td class="rec-row">PHP 55B over 10 years (phased)</td>
+            </tr>
+            <tr>
+              <td>Archetype Addressed</td>
+              <td>Limits to Growth only</td>
+              <td>Success to Successful only</td>
+              <td>Fixes that Fail only</td>
+              <td class="rec-row">All three archetypes simultaneously</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Option Cards -->
+    <div class="options-wrap fade-in">
+
+      <!-- OPTION A -->
+      <div class="option-card opt-A collapsed" id="optA">
+        <button class="option-header" onclick="toggleOption('optA')" aria-expanded="false" aria-controls="optA-body">
+          <div class="opt-letter">A</div>
+          <div class="opt-meta">
+            <h3>Infrastructure-First Foundation Building</h3>
+            <div class="opt-sub">Prioritise energy and connectivity deficits before aggressive investment promotion</div>
+            <div class="opt-tags">
+              <span class="opt-tag time">⏱ Long-term: 8–10 years</span>
+              <span class="opt-tag res">💰 Very High Resource Need</span>
+            </div>
+          </div>
+        </button>
+        <div class="opt-body" id="optA-body">
+          <div class="opt-grid">
+            <div class="opt-col">
+              <h4>✦ Strengths</h4>
+              <ul>
+                <li contenteditable="false" data-key="a-s1">Directly addresses the B1 "Limits to Growth" balancing loop by raising the infrastructure ceiling before growth plateaus.</li>
+                <li contenteditable="false" data-key="a-s2">Creates foundational enabling conditions that all other sectors benefit from — a prerequisite multiplier.</li>
+                <li contenteditable="false" data-key="a-s3">Aligns with BSEMP targets and BEGMP roadmap already established by MENRE and BPDA.</li>
+                <li contenteditable="false" data-key="a-s4">Reduces long-term cost of doing business; attracts anchor investors requiring reliable utilities.</li>
+              </ul>
+            </div>
+            <div class="opt-col risk">
+              <h4>⚠ Weaknesses / Risks</h4>
+              <ul>
+                <li contenteditable="false" data-key="a-r1">Delayed visible investment outcomes may erode political support and investor confidence in the interim.</li>
+                <li contenteditable="false" data-key="a-r2">Does not leverage Bangsamoro's unique halal competitive advantage — foregoes first-mover window in global halal market.</li>
+                <li contenteditable="false" data-key="a-r3">Very high capital requirements (PHP 20B+) without concurrent investment attraction to offset costs.</li>
+                <li contenteditable="false" data-key="a-r4">Does not address governance-investor confidence loop (R2) or Islamic finance gap (LP4).</li>
+              </ul>
+            </div>
+            <div class="opt-col">
+              <h4>📋 Key Initiatives</h4>
+              <ul>
+                <li contenteditable="false" data-key="a-i1">BSEMP Phase 1: 80% electrification by 2028, 100% by 2035 across all provinces including Tawi-Tawi and Sulu.</li>
+                <li contenteditable="false" data-key="a-i2">BEGMP core ICT: fibre optic backbone, common towers, data centres — targeting 60% broadband by 2030.</li>
+                <li contenteditable="false" data-key="a-i3">Farm-to-market road network and cold chain logistics to reduce agricultural post-harvest losses.</li>
+                <li contenteditable="false" data-key="a-i4">Polloc Freeport and Economic Zone (PFEZ) modernisation for port infrastructure and trade facilitation.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPTION B -->
+      <div class="option-card opt-B collapsed" id="optB">
+        <button class="option-header" onclick="toggleOption('optB')" aria-expanded="false" aria-controls="optB-body">
+          <div class="opt-letter">B</div>
+          <div class="opt-meta">
+            <h3>Halal Hub Rapid Development</h3>
+            <div class="opt-sub">Immediate exploitation of global halal market through certification and ecozone development</div>
+            <div class="opt-tags">
+              <span class="opt-tag time">⏱ Medium-term: 5–7 years</span>
+              <span class="opt-tag res">💰 High Resource Need</span>
+            </div>
+          </div>
+        </button>
+        <div class="opt-body" id="optB-body">
+          <div class="opt-grid">
+            <div class="opt-col">
+              <h4>✦ Strengths</h4>
+              <ul>
+                <li contenteditable="false" data-key="b-s1">Targets the highest-leverage opportunity — USD 2.3T global halal market with authentic competitive positioning.</li>
+                <li contenteditable="false" data-key="b-s2">Leverages Bangsamoro's non-replicable cultural legitimacy; creates differentiation from other ASEAN halal hubs.</li>
+                <li contenteditable="false" data-key="b-s3">BHB accreditation and Halal Park generate immediate investor confidence signals and export revenue.</li>
+                <li contenteditable="false" data-key="b-s4">Can attract OIC member-state FDI quickly, especially from Malaysia, UAE, Saudi Arabia.</li>
+              </ul>
+            </div>
+            <div class="opt-col risk">
+              <h4>⚠ Weaknesses / Risks</h4>
+              <ul>
+                <li contenteditable="false" data-key="b-r1">Without concurrent infrastructure investment, manufacturing growth hits the B1 ceiling rapidly — Limits to Growth archetype activates.</li>
+                <li contenteditable="false" data-key="b-r2">"Success to the Successful" archetype risk: halal industry growth may divert resources from tourism, agribusiness, and renewable energy.</li>
+                <li contenteditable="false" data-key="b-r3">Skills shortage in halal certification and processing could delay BHB operationalisation.</li>
+                <li contenteditable="false" data-key="b-r4">Infrastructure bottlenecks (power, connectivity) constrain ecozone attractiveness to anchor tenants.</li>
+              </ul>
+            </div>
+            <div class="opt-col">
+              <h4>📋 Key Initiatives</h4>
+              <ul>
+                <li contenteditable="false" data-key="b-i1">BHB operationalisation with full OIC/SMIIC standards alignment by 2027; initial certification of 500 enterprises.</li>
+                <li contenteditable="false" data-key="b-i2">WOW Matanog Halal Park: groundbreaking, anchor tenant pre-qualification, utility infrastructure.</li>
+                <li contenteditable="false" data-key="b-i3">Integrated halal value chains connecting smallholder producers to processors and BIMP-EAGA markets.</li>
+                <li contenteditable="false" data-key="b-i4">Target sectors: halal food, cosmetics, pharmaceuticals, and Muslim-friendly tourism services.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPTION C -->
+      <div class="option-card opt-C collapsed" id="optC">
+        <button class="option-header" onclick="toggleOption('optC')" aria-expanded="false" aria-controls="optC-body">
+          <div class="opt-letter">C</div>
+          <div class="opt-meta">
+            <h3>Governance-Centred Confidence Building</h3>
+            <div class="opt-sub">Emphasise regulatory clarity and transparency to attract risk-averse investors</div>
+            <div class="opt-tags">
+              <span class="opt-tag time">⏱ Medium-term: 5–7 years</span>
+              <span class="opt-tag res">💰 Moderate Resource Need</span>
+            </div>
+          </div>
+        </button>
+        <div class="opt-body" id="optC-body">
+          <div class="opt-grid">
+            <div class="opt-col">
+              <h4>✦ Strengths</h4>
+              <ul>
+                <li contenteditable="false" data-key="c-s1">Directly activates the R2 Governance–Investor Confidence reinforcing loop — the most sustainable growth driver.</li>
+                <li contenteditable="false" data-key="c-s2">Moderate resource requirements make it feasible within current budget envelope.</li>
+                <li contenteditable="false" data-key="c-s3">Addresses "Fixes that Fail" archetype — systemic reform over symptomatic patches.</li>
+                <li contenteditable="false" data-key="c-s4">Digital BNR and one-stop facilitation directly reduce investor transaction costs and time.</li>
+              </ul>
+            </div>
+            <div class="opt-col risk">
+              <h4>⚠ Weaknesses / Risks</h4>
+              <ul>
+                <li contenteditable="false" data-key="c-r1">Slow impact on investment flows — governance reforms take time to translate into visible investment outcomes.</li>
+                <li contenteditable="false" data-key="c-r2">Does not raise the infrastructure ceiling (B1) — growth will still plateau without concurrent infrastructure investment.</li>
+                <li contenteditable="false" data-key="c-r3">Requires sustained political commitment across the BTA-to-elected parliament transition.</li>
+                <li contenteditable="false" data-key="c-r4">Does not leverage halal competitive advantage or develop Islamic finance ecosystem.</li>
+              </ul>
+            </div>
+            <div class="opt-col">
+              <h4>📋 Key Initiatives</h4>
+              <ul>
+                <li contenteditable="false" data-key="c-i1">Digital BNR: 1-day business registration targeting via BBNR digital platform — Bangsamoro Business Name Registration.</li>
+                <li contenteditable="false" data-key="c-i2">BIIC Implementing Rules and Regulations: streamlined tax incentives and regulatory clarity for investors.</li>
+                <li contenteditable="false" data-key="c-i3">BBOI and BEZA capacity professionalisation: 80% of IPA staff with relevant certification by 2030.</li>
+                <li contenteditable="false" data-key="c-i4">Transparent M&amp;E systems: results-based monitoring aligned with Balanced Scorecard, quarterly public reporting.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPTION D — RECOMMENDED -->
+      <div class="option-card opt-D recommended" id="optD">
+        <button class="option-header" onclick="toggleOption('optD')" aria-expanded="true" aria-controls="optD-body">
+          <div class="opt-letter">D</div>
+          <div class="opt-meta">
+            <h3>Integrated Halal-Driven & Green Economy Strategy</h3>
+            <div class="opt-sub">Industry development + infrastructure + governance + green economy — each element reinforces the others</div>
+            <div class="opt-tags">
+              <span class="opt-tag time">⏱ 3 Phases: 2026–2035</span>
+              <span class="opt-tag res">💰 PHP 55B over 10 years</span>
+              <span class="opt-tag rec">★ Recommended</span>
+            </div>
+          </div>
+        </button>
+        <div class="opt-body" id="optD-body">
+          <div class="opt-grid">
+            <div class="opt-col">
+              <h4>✦ Rationale</h4>
+              <ul>
+                <li contenteditable="false" data-key="d-s1">Addresses all five leverage points simultaneously — creating reinforcing synergies that amplify impact beyond isolated interventions.</li>
+                <li contenteditable="false" data-key="d-s2">Mitigates all three systems archetypes: raises B1 ceiling (infra), prevents "Success to Successful" imbalance, avoids "Fixes that Fail" with systemic reform.</li>
+                <li contenteditable="false" data-key="d-s3">Halal legitimacy is a non-replicable competitive advantage — positioning Bangsamoro uniquely in USD 2.3T global market.</li>
+                <li contenteditable="false" data-key="d-s4">Aligns with Moral Governance: halal principles encompass ethical business, quality assurance, and environmental stewardship (khalifa).</li>
+              </ul>
+            </div>
+            <div class="opt-col">
+              <h4>📋 Four Interconnected Pillars</h4>
+              <ul>
+                <li contenteditable="false" data-key="d-i1"><strong style="color:var(--gold)">Pillar 1:</strong> Halal Industry Ecosystem — BHB international accreditation, Bangsamoro Halal Park Matanog, integrated value chains.</li>
+                <li contenteditable="false" data-key="d-i2"><strong style="color:var(--gold)">Pillar 2:</strong> Enabling Infrastructure — ZBIP (PHP 6.67B), Basilan-Zamboanga Bridge, 100% electrification, 85% broadband.</li>
+                <li contenteditable="false" data-key="d-i3"><strong style="color:var(--gold)">Pillar 3:</strong> Governance & Islamic Finance — 1-day digital BNR, BIIC IRR, Islamic banking expansion to all capitals.</li>
+                <li contenteditable="false" data-key="d-i4"><strong style="color:var(--gold)">Pillar 4:</strong> Green Economy & Agro-Industry — Forestry Code, JMC 2026-01, REDD+, PES, DoleFil anchor, rubber/seaweed value chains.</li>
+              </ul>
+            </div>
+            <div class="opt-col">
+              <h4>🎯 Strategic Outcomes (2035)</h4>
+              <ul>
+                <li contenteditable="false" data-key="d-o1">PHP 550B+ GRDP; PHP 15B annual investment approvals.</li>
+                <li contenteditable="false" data-key="d-o2">PHP 40B+ total export value; 5,000+ halal-certified enterprises.</li>
+                <li contenteditable="false" data-key="d-o3">100% electrification; 85% broadband penetration; 25% Islamic finance penetration.</li>
+                <li contenteditable="false" data-key="d-o4">PHP 500M/yr carbon & PES revenue; BARMM as premier halal & green hub.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /options-wrap -->
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ================= SECTION 5: RECOMMENDED STRATEGY ================= -->
+  <section id="strategy" aria-labelledby="strat-hdr">
+    <div class="section-hdr fade-in">
+      <h2 id="strat-hdr">05 — Recommended Strategy: Four Interconnected Pillars</h2>
+      <div class="gold-rule"></div>
+      <p>The Integrated Halal-Driven & Green Economy Strategy (Option D) is operationalised through four mutually reinforcing pillars. Each pillar addresses specific leverage points while creating systemic synergies with the others.</p>
+    </div>
+
+    <div class="strat-pillars fade-in">
+
+      <div class="pillar-card">
+        <div class="pc-num">1</div>
+        <h3 contenteditable="false" data-key="p1-title">Halal Industry Ecosystem</h3>
+        <p contenteditable="false" data-key="p1-desc">Establishes Bangsamoro as a credible, internationally recognised halal production hub. Targets the USD 2.3T global market through authentic cultural positioning and OIC/SMIIC-aligned standards. Directly activates LP1.</p>
+        <ul class="pillar-bullets">
+          <li contenteditable="false" data-key="p1-b1">BHB operationalisation with OIC/SMIIC accreditation by 2028</li>
+          <li contenteditable="false" data-key="p1-b2">WOW Matanog Halal Park: flagship manufacturing ecozone (Maguindanao del Norte)</li>
+          <li contenteditable="false" data-key="p1-b3">Integrated halal value chains: agri → processing → export → BIMP-EAGA markets</li>
+          <li contenteditable="false" data-key="p1-b4">Target sectors: food, cosmetics, pharmaceuticals, Muslim-friendly tourism</li>
+          <li contenteditable="false" data-key="p1-b5">Halal Training Academy: 100 certified officers by 2030</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pc-num">2</div>
+        <h3 contenteditable="false" data-key="p2-title">Enabling Infrastructure</h3>
+        <p contenteditable="false" data-key="p2-desc">Raises the "Limits to Growth" ceiling (B1) by investing in energy, digital, and physical infrastructure ahead of growth momentum stalling. Infrastructure must lead investment, not follow it. Directly addresses LP2.</p>
+        <ul class="pillar-bullets">
+          <li contenteditable="false" data-key="p2-b1">ZBIP (PHP 6.67B) and Basilan-Zamboanga Bridge (by 2030) for energy and logistics connectivity</li>
+          <li contenteditable="false" data-key="p2-b2">100% electrification by 2035; prioritising Tawi-Tawi and Sulu mini-grids</li>
+          <li contenteditable="false" data-key="p2-b3">BEGMP: 85% broadband penetration by 2035 — fibre backbone, common towers</li>
+          <li contenteditable="false" data-key="p2-b4">Farm-to-market roads and cold chain logistics for halal agricultural value chains</li>
+          <li contenteditable="false" data-key="p2-b5">Renewable energy expansion maintaining 85%+ green mix for ESG-aligned investors</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pc-num">3</div>
+        <h3 contenteditable="false" data-key="p3-title">Governance & Islamic Finance</h3>
+        <p contenteditable="false" data-key="p3-desc">Activates the R2 Governance–Investor Confidence reinforcing loop through systemic reform. Prevents the "Fixes that Fail" archetype by investing in institutional capacity alongside incentives. Addresses LP3 and LP4.</p>
+        <ul class="pillar-bullets">
+          <li contenteditable="false" data-key="p3-b1">Digital BNR: 1-day registration through BBNR platform and BEGMP integration</li>
+          <li contenteditable="false" data-key="p3-b2">BIIC IRR finalization: streamlined tax incentives and regulatory clarity</li>
+          <li contenteditable="false" data-key="p3-b3">Islamic Finance Development: banking → Takaful → Sukuk; 25% penetration by 2035</li>
+          <li contenteditable="false" data-key="p3-b4">BBOI and BEZA capacity: 80% IPA staff professionally certified by 2030</li>
+          <li contenteditable="false" data-key="p3-b5">Transparent BSC-aligned M&amp;E with quarterly public reporting</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pc-num">4</div>
+        <h3 contenteditable="false" data-key="p4-title">Green Economy & Agro-Industry</h3>
+        <p contenteditable="false" data-key="p4-desc">Monetizes environmental assets and transforms agricultural raw materials into high-value exports. Leverages the Bangsamoro Forestry Code and JMC 2026-01 to unlock carbon markets and PES. Directly addresses LP5.</p>
+        <ul class="pillar-bullets">
+          <li contenteditable="false" data-key="p4-b1">Bangsamoro Forestry Code enacted; JMC 2026-01 signed for carbon/PES frameworks</li>
+          <li contenteditable="false" data-key="p4-b2">REDD+ program registered; target PHP 500M/yr in carbon and ecosystem revenue by 2035</li>
+          <li contenteditable="false" data-key="p4-b3">Agro-industrial anchors: DoleFil (PHP 306M), Basilan rubber (PHP 195M program), Tawi-Tawi seaweed</li>
+          <li contenteditable="false" data-key="p4-b4">Climate-smart agriculture: drought-resistant varieties, irrigation modernization, early warning systems</li>
+          <li contenteditable="false" data-key="p4-b5">Eco-tourism development: Lake Lanao, marine sanctuaries, Yakan/Sama-Bajau cultural heritage circuits</li>
+        </ul>
+      </div>
+
+    </div><!-- /strat-pillars -->
+
+    <div class="rationale-box fade-in">
+      <strong>Strategic Edge — Why Option D Wins:</strong> The integrated approach creates self-reinforcing growth dynamics: halal industry growth generates demand for infrastructure and services → infrastructure improvements reduce costs and attract more investment → governance reforms build confidence and accelerate investment decisions → green economy monetization provides sustainable revenue streams for LGUs and communities. These reinforcing loops create self-sustaining momentum that isolated single-pillar strategies cannot achieve. Critically, it simultaneously mitigates all three systems archetypes identified in the CLD analysis.
+    </div>
+
+    <!-- KPI Summary -->
+    <div class="section-hdr" style="margin-top:2rem;margin-bottom:1.25rem;">
+      <h3 style="font-family:'Cinzel',serif;color:var(--gold);font-size:1rem;">2035 Vision Targets</h3>
+    </div>
+    <div class="kpi-grid fade-in">
+      <div class="kpi-card">
+        <span class="kpi-num" contenteditable="false" data-key="kpi1-n">PHP 550B+</span>
+        <div class="kpi-lbl" contenteditable="false" data-key="kpi1-l">GRDP Target</div>
+        <div class="kpi-note">from PHP 299.5B (2024)</div>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-num" contenteditable="false" data-key="kpi2-n">PHP 15B</span>
+        <div class="kpi-lbl" contenteditable="false" data-key="kpi2-l">Annual Investment Approvals</div>
+        <div class="kpi-note">from PHP 5.1B (Q1 2026)</div>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-num" contenteditable="false" data-key="kpi3-n">5,000+</span>
+        <div class="kpi-lbl" contenteditable="false" data-key="kpi3-l">Halal-Certified Firms</div>
+        <div class="kpi-note">from ~500 estimated</div>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-num" contenteditable="false" data-key="kpi4-n">100%</span>
+        <div class="kpi-lbl" contenteditable="false" data-key="kpi4-l">Electrification Rate</div>
+        <div class="kpi-note">from ~75% (2024)</div>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-num" contenteditable="false" data-key="kpi5-n">85%</span>
+        <div class="kpi-lbl" contenteditable="false" data-key="kpi5-l">Broadband Connectivity</div>
+        <div class="kpi-note">from <30% rural</div>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-num" contenteditable="false" data-key="kpi6-n">PHP 500M</span>
+        <div class="kpi-lbl" contenteditable="false" data-key="kpi6-l">Carbon & PES Revenue / yr</div>
+        <div class="kpi-note">Green Economy target</div>
+      </div>
+    </div>
+
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ================= SECTION 6: BSC ================= -->
+  <section id="bsc" aria-labelledby="bsc-hdr">
+    <div class="section-hdr fade-in">
+      <h2 id="bsc-hdr">06 — Balanced Scorecard Framework</h2>
+      <div class="gold-rule"></div>
+      <p>The strategy is operationalised across four BSC perspectives — Financial, Stakeholder, Internal Process, and Learning &amp; Growth — translating vision into measurable objectives and actionable initiatives.</p>
+    </div>
+
+    <!-- Financial -->
+    <div class="bsc-perspective bsp-fin fade-in">
+      <button class="bsc-persp-hdr" onclick="toggleBsc(this)" aria-expanded="true">
+        <span style="font-size:1.2rem;">💰</span>
+        <span class="bsc-persp-title">Financial Perspective — "How should we appear to funders &amp; investors?"</span>
+      </button>
+      <div class="bsc-persp-body">
+        <table class="bsc-tbl" aria-label="Financial perspective scorecard">
+          <thead><tr><th>Strategic Objective</th><th>KPI</th><th>2028 Target</th><th class="target">2035 Target</th><th>Lead Initiative</th></tr></thead>
+          <tbody>
+            <tr><td contenteditable="false" data-key="bsc-f1-o">Grow GRDP</td><td contenteditable="false" data-key="bsc-f1-k">BARMM GRDP (PHP B)</td><td>PHP 400B</td><td class="target" contenteditable="false" data-key="bsc-f1-t">PHP 550B+</td><td contenteditable="false" data-key="bsc-f1-i">BEIE ecosystem approach; PPP frameworks</td></tr>
+            <tr><td contenteditable="false" data-key="bsc-f2-o">Increase investment inflows</td><td contenteditable="false" data-key="bsc-f2-k">Annual investment approvals (PHP B)</td><td>PHP 8B p.a.</td><td class="target" contenteditable="false" data-key="bsc-f2-t">PHP 15B p.a.</td><td contenteditable="false" data-key="bsc-f2-i">Investment promotion campaigns; targeted investor outreach</td></tr>
+            <tr><td contenteditable="false" data-key="bsc-f3-o">Expand exports</td><td contenteditable="false" data-key="bsc-f3-k">Total export value (PHP B)</td><td>PHP 20B</td><td class="target" contenteditable="false" data-key="bsc-f3-t">PHP 40B+</td><td contenteditable="false" data-key="bsc-f3-i">BHB accreditation; Halal Park Matanog; BIMP-EAGA trade facilitation</td></tr>
+            <tr><td contenteditable="false" data-key="bsc-f4-o">Activate green economy</td><td contenteditable="false" data-key="bsc-f4-k">Carbon credit + PES revenue (PHP M)</td><td>PHP 100M</td><td class="target" contenteditable="false" data-key="bsc-f4-t">PHP 500M/yr</td><td contenteditable="false" data-key="bsc-f4-i">REDD+ program; JMC No. 2026-01 implementation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Stakeholder -->
+    <div class="bsc-perspective bsp-sta fade-in">
+      <button class="bsc-persp-hdr" onclick="toggleBsc(this)" aria-expanded="true">
+        <span style="font-size:1.2rem;">🤝</span>
+        <span class="bsc-persp-title">Stakeholder Perspective — "How should we appear to key stakeholders?"</span>
+      </button>
+      <div class="bsc-persp-body">
+        <table class="bsc-tbl" aria-label="Stakeholder perspective scorecard">
+          <thead><tr><th>Strategic Objective</th><th>KPI</th><th>2028 Target</th><th class="target">2035 Target</th><th>Lead Initiative</th></tr></thead>
+          <tbody>
+            <tr><td contenteditable="false" data-key="bsc-s1-o">Enhance investor satisfaction</td><td contenteditable="false" data-key="bsc-s1-k">Investor satisfaction score (1–10)</td><td>7.0+</td><td class="target" contenteditable="false" data-key="bsc-s1-t">8.0+</td><td contenteditable="false" data-key="bsc-s1-i">Aftercare services; one-stop facilitation; problem resolution mechanisms</td></tr>
+            <tr><td contenteditable="false" data-key="bsc-s2-o">Empower halal MSMEs</td><td contenteditable="false" data-key="bsc-s2-k">MSMEs with halal certification</td><td>2,000</td><td class="target" contenteditable="false" data-key="bsc-s2-t">5,000+</td><td contenteditable="false" data-key="bsc-s2-i">MSME development programs; BHB certification support; capacity building</td></tr>
+            <tr><td contenteditable="false" data-key="bsc-s3-o">Expand Islamic finance access</td><td contenteditable="false" data-key="bsc-s3-k">Islamic banking penetration (%)</td><td>10%</td><td class="target" contenteditable="false" data-key="bsc-s3-t">25%</td><td contenteditable="false" data-key="bsc-s3-i">Shariah-compliant microfinance; Takaful services; sukuk issuance</td></tr>
+            <tr><td contenteditable="false" data-key="bsc-s4-o">Deepen BIMP-EAGA integration</td><td contenteditable="false" data-key="bsc-s4-k">Intra-EAGA trade value (PHP B)</td><td>PHP 10B</td><td class="target" contenteditable="false" data-key="bsc-s4-t">PHP 50B</td><td contenteditable="false" data-key="bsc-s4-i">BIMP-EAGA trade facilitation; corridor development; mutual recognition agreements</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Internal Process -->
+    <div class="bsc-perspective bsp-pro fade-in">
+      <button class="bsc-persp-hdr" onclick="toggleBsc(this)" aria-expanded="true">
+        <span style="font-size:1.2rem;">⚙️</span>
+        <span class="bsc-persp-title">Internal Process Perspective — "What processes must we excel at?"</span>
+      </button>
+      <div class="bsc-persp-body">
+        <table class="bsc-tbl" aria-label="Internal process perspective scorecard">
+          <thead><tr><th>Strategic Objective</th><th>KPI</th><th>2028 Target</th><th class="target">2035 Target</th><th>Lead Initiative</th></tr></thead>
+          <tbody>
+            <tr><td contenteditable="false" data-key="bsc-p1-o">Streamline investment facilitation</td><td contenteditable="false" data-key="bsc-p1-k">Business registration time (days)</td><td>3 days</td><td class="target" contenteditable="false" data-key="bsc-p1-t">1 day</td><td contenteditable="false" data-key="bsc-p1-i">Digital BNR system; BBNR platform rollout; process re-engineering</td></tr>
+            <tr><td contenteditable="false" data-key="bsc-p2-o">Strengthen halal certification</td><td contenteditable="false" data-key="bsc-p2-k">BHB certification processing time</td><td>21 days</td><td class="target" contenteditable="false" data-key="bsc-p2-t">14 days</td><td contenteditable="false" data-key="bsc-p2-i">OIC/SMIIC standards adoption; laboratory accreditation; audit protocols</td></tr>
+            <tr><td contenteditable="false" data-key="bsc-p3-o">Accelerate infrastructure delivery</td><td contenteditable="false" data-key="bsc-p3-k">Infrastructure budget execution rate</td><td>90%</td><td class="target" contenteditable="false" data-key="bsc-p3-t">>90%</td><td contenteditable="false" data-key="bsc-p3-i">PPP facilitation; project management capacity; DPWH coordination</td></tr>
+            <tr><td contenteditable="false" data-key="bsc-p4-o">Enhance inter-agency coordination</td><td contenteditable="false" data-key="bsc-p4-k">BEDC coordination meetings</td><td>Quarterly</td><td class="target" contenteditable="false" data-key="bsc-p4-t">Monthly + quarterly review</td><td contenteditable="false" data-key="bsc-p4-i">BEDC strengthening; digital collaboration platforms; joint KPI tracking</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Learning & Growth -->
+    <div class="bsc-perspective bsp-lea fade-in">
+      <button class="bsc-persp-hdr" onclick="toggleBsc(this)" aria-expanded="true">
+        <span style="font-size:1.2rem;">📚</span>
+        <span class="bsc-persp-title">Learning &amp; Growth Perspective — "How will we sustain ability to improve?"</span>
+      </button>
+      <div class="bsc-persp-body">
+        <table class="bsc-tbl" aria-label="Learning and growth perspective scorecard">
+          <thead><tr><th>Strategic Objective</th><th>KPI</th><th>2028 Target</th><th class="target">2035 Target</th><th>Lead Initiative</th></tr></thead>
+          <tbody>
+            <tr><td contenteditable="false" data-key="bsc-l1-o">Build halal technical expertise</td><td contenteditable="false" data-key="bsc-l1-k">Halal certification officers trained</td><td>50</td><td class="target" contenteditable="false" data-key="bsc-l1-t">100+</td><td contenteditable="false" data-key="bsc-l1-i">Halal Training Academy; international mentorship; MSU partnership</td></tr>
+            <tr><td contenteditable="false" data-key="bsc-l2-o">Improve functional literacy</td><td contenteditable="false" data-key="bsc-l2-k">BARMM functional literacy rate (%)</td><td>65%</td><td class="target" contenteditable="false" data-key="bsc-l2-t">75%+</td><td contenteditable="false" data-key="bsc-l2-i">TESDA programs; DepEd alternative learning; industry-aligned curriculum</td></tr>
+            <tr><td contenteditable="false" data-key="bsc-l3-o">Foster digital innovation</td><td contenteditable="false" data-key="bsc-l3-k">E-government digital services launched</td><td>10</td><td class="target" contenteditable="false" data-key="bsc-l3-t">20</td><td contenteditable="false" data-key="bsc-l3-i">BEGMP implementation; BDTA establishment; innovation partnerships</td></tr>
+            <tr><td contenteditable="false" data-key="bsc-l4-o">Build Islamic finance professionals</td><td contenteditable="false" data-key="bsc-l4-k">Certified Islamic finance professionals</td><td>20</td><td class="target" contenteditable="false" data-key="bsc-l4-t">50</td><td contenteditable="false" data-key="bsc-l4-i">AAOIFI-aligned training; partnerships with IDB Islamic finance institutions</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ================= SECTION 7: PHASES ================= -->
+  <section id="phases" aria-labelledby="ph-hdr">
+    <div class="section-hdr fade-in">
+      <h2 id="ph-hdr">07 — Implementation Roadmap: Three Phases</h2>
+      <div class="gold-rule"></div>
+      <p>The strategy is operationalised in three phased periods — Foundation Building, Acceleration, and Consolidation — each with clear deliverables, lead agencies, and budget envelopes aligned with the Balanced Scorecard.</p>
+    </div>
+
+    <div class="phases-timeline fade-in">
+
+      <!-- Phase 1 -->
+      <div class="phase-item ph-1">
+        <div class="phase-hdr">
+          <div class="phase-num">01</div>
+          <div class="phase-info">
+            <h3 contenteditable="false" data-key="ph1-title">Foundation Building</h3>
+            <div class="phase-yr" contenteditable="false" data-key="ph1-yr">2026 – 2028</div>
+          </div>
+          <div class="phase-budget" style="text-align:right;">
+            <div class="budget-n" contenteditable="false" data-key="ph1-budget">PHP 15B</div>
+            <div class="budget-l">Estimated Budget</div>
+          </div>
+        </div>
+        <div class="phase-body">
+          <p style="font-size:.83rem;color:rgba(209,250,229,.7);margin-bottom:1rem;" contenteditable="false" data-key="ph1-desc">Establishes the foundational institutional and infrastructure elements without which subsequent phases cannot succeed. Focus on LP1, LP3, and LP5 — certification credibility, governance reform, and green economy legal framework — to trigger R2 early.</p>
+          <div class="phase-priorities">
+            <div class="pp-item" contenteditable="false" data-key="ph1-p1"><strong>LP1 · Halal Certification</strong>Operationalise BHB with OIC/SMIIC-aligned processes; certify 50 initial enterprises; establish laboratory and audit infrastructure.</div>
+            <div class="pp-item" contenteditable="false" data-key="ph1-p2"><strong>LP5 · Green Economy Framework</strong>Enact Bangsamoro Forestry Code; sign MENRE-MILG JMC No. 2026-01 for carbon credits and PES; conduct forest inventory baseline.</div>
+            <div class="pp-item" contenteditable="false" data-key="ph1-p3"><strong>LP3 · Digital Governance</strong>Digital BNR rollout targeting 1-day business registration; BIIC IRR finalised; one-stop facilitation centres launched.</div>
+            <div class="pp-item" contenteditable="false" data-key="ph1-p4"><strong>LP2 · Infrastructure Foundation</strong>ZBIP construction milestones; WOW Matanog Halal Park groundbreaking; Basilan-Zamboanga Bridge construction begun.</div>
+          </div>
+          <div class="phase-agencies">
+            <span class="agency-chip">MTIT</span><span class="agency-chip">BHB</span><span class="agency-chip">BEZA</span><span class="agency-chip">BBOI</span><span class="agency-chip">MENRE</span><span class="agency-chip">BDTA</span><span class="agency-chip">Parliament</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase-item ph-2">
+        <div class="phase-hdr">
+          <div class="phase-num">02</div>
+          <div class="phase-info">
+            <h3 contenteditable="false" data-key="ph2-title">Acceleration</h3>
+            <div class="phase-yr" contenteditable="false" data-key="ph2-yr">2029 – 2032</div>
+          </div>
+          <div class="phase-budget" style="text-align:right;">
+            <div class="budget-n" contenteditable="false" data-key="ph2-budget">PHP 20B</div>
+            <div class="budget-l">Estimated Budget</div>
+          </div>
+        </div>
+        <div class="phase-body">
+          <p style="font-size:.83rem;color:rgba(209,250,229,.7);margin-bottom:1rem;" contenteditable="false" data-key="ph2-desc">Scales up successful Phase 1 initiatives. The R1 and R2 reinforcing loops should be operationally active by this phase. Focus shifts to LP2 ceiling-raising, LP4 Islamic finance ecosystem maturation, and REDD+ monetization.</p>
+          <div class="phase-priorities">
+            <div class="pp-item" contenteditable="false" data-key="ph2-p1"><strong>LP1 · Full Certification</strong>BHB achieves full OIC/SMIIC recognition; mutual recognition agreements with OIC member states signed; 2,000 enterprises certified.</div>
+            <div class="pp-item" contenteditable="false" data-key="ph2-p2"><strong>LP5 · REDD+ & Carbon Markets</strong>REDD+ program registered; first carbon credit sales executed; PES payments flowing to LGUs and communities.</div>
+            <div class="pp-item" contenteditable="false" data-key="ph2-p3"><strong>LP2 · Digital & Energy Expansion</strong>60% broadband penetration achieved; BEGMP Phase 2 e-government platforms rolled out; 90% electrification rate.</div>
+            <div class="pp-item" contenteditable="false" data-key="ph2-p4"><strong>LP4 · Islamic Banking</strong>Islamic banking operations established in all provincial capitals; Takaful services launched; 10% penetration rate.</div>
+          </div>
+          <div class="phase-agencies">
+            <span class="agency-chip">BBOI</span><span class="agency-chip">BEZA</span><span class="agency-chip">BHB</span><span class="agency-chip">Finance Ministry</span><span class="agency-chip">BDTA</span><span class="agency-chip">MAFAR</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase-item ph-3">
+        <div class="phase-hdr">
+          <div class="phase-num">03</div>
+          <div class="phase-info">
+            <h3 contenteditable="false" data-key="ph3-title">Consolidation</h3>
+            <div class="phase-yr" contenteditable="false" data-key="ph3-yr">2033 – 2035</div>
+          </div>
+          <div class="phase-budget" style="text-align:right;">
+            <div class="budget-n" contenteditable="false" data-key="ph3-budget">PHP 20B</div>
+            <div class="budget-l">Estimated Budget</div>
+          </div>
+        </div>
+        <div class="phase-body">
+          <p style="font-size:.83rem;color:rgba(209,250,229,.7);margin-bottom:1rem;" contenteditable="false" data-key="ph3-desc">Achieves the 2035 vision of Bangsamoro as a mature, self-sustaining halal and green hub. Transition from investment attraction to ecosystem management. BARMM established as the Philippines' premier halal production hub and a global model for post-conflict development.</p>
+          <div class="phase-priorities">
+            <div class="pp-item" contenteditable="false" data-key="ph3-p1"><strong>LP1 · Full Accreditation</strong>BHB achieves full international accreditation; 5,000+ halal-certified enterprises; PHP 40B+ total export value attained.</div>
+            <div class="pp-item" contenteditable="false" data-key="ph3-p2"><strong>LP5 · Green Economy Maturity</strong>PHP 500M/yr carbon & PES revenue achieved; eco-tourism reaches 3M visitors; Forestry Code fully enforced.</div>
+            <div class="pp-item" contenteditable="false" data-key="ph3-p3"><strong>LP2 · Infrastructure Completion</strong>100% electrification achieved; 85% broadband penetration; complete farm-to-market logistics network operational.</div>
+            <div class="pp-item" contenteditable="false" data-key="ph3-p4"><strong>LP4 · Islamic Capital Market</strong>Sukuk issuance capability established; functional Islamic capital market serving 25% penetration rate; PHP 550B+ GRDP.</div>
+          </div>
+          <div class="phase-agencies">
+            <span class="agency-chip">All Agencies</span><span class="agency-chip">MTIT</span><span class="agency-chip">BBOI</span><span class="agency-chip">BEZA</span><span class="agency-chip">BHB</span><span class="agency-chip">Finance Ministry</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /phases-timeline -->
+
+    <!-- Critical Success Factors -->
+    <div class="card fade-in" style="margin-top:1.5rem;">
+      <div class="card-top-bar"></div>
+      <h3 style="font-family:'Cinzel',serif;color:var(--gold);font-size:.95rem;margin-bottom:1rem;text-transform:uppercase;letter-spacing:.06em;">Critical Success Factors</h3>
+      <div class="g2">
+        <div class="pp-item" contenteditable="false" data-key="csf1"><strong>Political Commitment</strong>Sustained leadership commitment to the Integrated Halal-Driven & Green Economy Strategy across political transitions.</div>
+        <div class="pp-item" contenteditable="false" data-key="csf2"><strong>Resource Mobilisation</strong>Adequate and timely funding from block grants, national programs, ODA, PPP frameworks, and private investment facilitated through BBOI and BEZA.</div>
+        <div class="pp-item" contenteditable="false" data-key="csf3"><strong>Institutional Coordination</strong>Effective inter-agency collaboration among BBOI, BEZA, MTIT, BHB, MENRE, BDTA, and regional ministries under a strengthened BEDC framework.</div>
+        <div class="pp-item" contenteditable="false" data-key="csf4"><strong>Peace &amp; Stability</strong>Continued progress in MILF normalization, security consolidation, and the completion of the political transition — essential to neutralising the B2 balancing loop.</div>
+        <div class="pp-item" contenteditable="false" data-key="csf5"><strong>Adaptive Management</strong>Regular BSC-aligned monitoring, quarterly evaluation, and willingness to course-correct based on performance data and changing external conditions.</div>
+        <div class="pp-item" contenteditable="false" data-key="csf6"><strong>Stakeholder Engagement</strong>Active participation of private sector investors, halal industry partners, Islamic finance institutions, civil society, and Bangsamoro communities in implementation.</div>
+      </div>
+    </div>
+
+  </section>
+
+</main><!-- /main -->
+
+<!-- =================== SCRIPTS =================== -->
+<script>
+/* =========== STATE =========== */
+let editMode = false;
+let saved = {};
+
+/* =========== EDIT TOGGLE =========== */
+function toggleEdit() {
+  editMode = !editMode;
+  const btn = document.getElementById('editToggle');
+  const txt = document.getElementById('editTxt');
+  const saveBtn = document.getElementById('saveBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  document.body.classList.toggle('edit-mode', editMode);
+
+  if (editMode) {
+    txt.textContent = 'Done Editing';
+    btn.classList.remove('primary');
+    saveBtn.style.display = 'flex';
+    resetBtn.style.display = 'flex';
+    document.querySelectorAll('[data-key]').forEach(el => {
+      el.setAttribute('contenteditable', 'true');
+    });
+    showStatus('Edit mode on. Click any text to modify.');
+  } else {
+    txt.textContent = 'Edit Document';
+    btn.classList.add('primary');
+    saveBtn.style.display = 'none';
+    resetBtn.style.display = 'none';
+    document.querySelectorAll('[data-key]').forEach(el => {
+      el.setAttribute('contenteditable', 'false');
+    });
+  }
+}
+
+/* =========== SAVE =========== */
+function saveDoc() {
+  const data = {};
+  document.querySelectorAll('[data-key]').forEach(el => {
+    data[el.getAttribute('data-key')] = el.innerHTML;
+  });
+  try {
+    localStorage.setItem('barmm_strategy_doc', JSON.stringify(data));
+    showStatus('✓ Document saved successfully!');
+  } catch(e) {
+    showStatus('⚠ Save error: storage may be full.');
+  }
+}
+
+/* =========== LOAD =========== */
+function loadDoc() {
+  try {
+    const raw = localStorage.getItem('barmm_strategy_doc');
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    document.querySelectorAll('[data-key]').forEach(el => {
+      const k = el.getAttribute('data-key');
+      if (data[k] !== undefined) el.innerHTML = data[k];
+    });
+    showStatus('Previous edits loaded.');
+  } catch(e) {}
+}
+
+/* =========== RESET =========== */
+function resetDoc() {
+  if (!confirm('Reset all content to defaults? This will clear all saved edits.')) return;
+  localStorage.removeItem('barmm_strategy_doc');
+  location.reload();
+}
+
+/* =========== STATUS =========== */
+function showStatus(msg, dur = 3000) {
+  const s = document.getElementById('editStatus');
+  s.textContent = msg;
+  s.classList.add('show');
+  setTimeout(() => s.classList.remove('show'), dur);
+}
+
+/* =========== OPTION TOGGLE =========== */
+function toggleOption(id) {
+  const card = document.getElementById(id);
+  const btn = card.querySelector('.option-header');
+  const isCollapsed = card.classList.contains('collapsed');
+  card.classList.toggle('collapsed', !isCollapsed);
+  btn.setAttribute('aria-expanded', String(isCollapsed));
+}
+
+/* =========== BSC TOGGLE =========== */
+function toggleBsc(btn) {
+  const body = btn.nextElementSibling;
+  const isVisible = body.style.display !== 'none';
+  body.style.display = isVisible ? 'none' : 'block';
+  btn.setAttribute('aria-expanded', String(!isVisible));
+}
+
+/* =========== SCROLL ANIMATION =========== */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: .06, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+/* =========== NAV SCROLL =========== */
+window.addEventListener('scroll', () => {
+  document.getElementById('siteNav').classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+/* =========== KEYBOARD SHORTCUTS =========== */
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.key === 'e') { e.preventDefault(); toggleEdit(); }
+  if (e.ctrlKey && e.key === 's' && editMode) { e.preventDefault(); saveDoc(); }
+});
+
+/* =========== INIT =========== */
+loadDoc();
+// Expand Option D by default (recommended)
+document.getElementById('optD').classList.remove('collapsed');
+document.querySelector('#optD .option-header').setAttribute('aria-expanded', 'true');
+</script>
+</body>
+</html>

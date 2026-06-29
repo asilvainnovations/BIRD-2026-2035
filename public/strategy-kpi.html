@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIRD 2026–2035 | Interactive Strategy Map & KPI Dashboard</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Color Palette */
+            --bg-base: #011a12;
+            --bg-gradient-end: #022c22;
+            --primary-gold: #C9A84C;
+            --accent-gold-glow: #E8C560;
+            --mint-secondary: #6ee7b7;
+            --text-cream: #ecfdf5;
+            --text-muted: rgba(209, 250, 229, 0.7);
+            --card-glass: rgba(2, 44, 34, 0.55);
+            --border-gold: linear-gradient(135deg, #7a5c1e, #c9a84c, #e8c560);
+            
+            /* Status Indicators */
+            --status-on-track: #6ee7b7;
+            --status-building: #e8c560;
+            --status-baseline: #38bdf8;
+            
+            /* Typography */
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: radial-gradient(circle at center, var(--bg-gradient-end) 0%, var(--bg-base) 100%);
+            color: var(--text-cream);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Subtle Islamic Geometric Motif Background Overlay */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0 L45 15 L60 30 L45 45 L30 60 L15 45 L0 30 L15 15 Z' fill='none' stroke='rgba(201, 168, 76, 0.04)' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='5' fill='none' stroke='rgba(201, 168, 76, 0.03)' stroke-width='1'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        header {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            padding-bottom: 20px;
+        }
+
+        header h1 {
+            font-family: var(--font-heading);
+            color: var(--primary-gold);
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(232, 197, 96, 0.3);
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Main Grid Architecture */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            position: relative;
+            z-index: 10;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 1200px) {
+            .dashboard-container {
+                grid-template-columns: 450px 1fr;
+                grid-template-rows: auto 1fr;
+            }
+            .full-width-top {
+                grid-column: 1 / -1;
+            }
+            .left-column {
+                grid-column: 1;
+            }
+            .right-column {
+                grid-column: 2;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+
+        /* Glassmorphism Panel Base */
+        .panel {
+            background: var(--card-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .panel:hover {
+            border-color: rgba(232, 197, 96, 0.3);
+            box-shadow: 0 12px 40px 0 rgba(2, 44, 34, 0.5);
+        }
+
+        .panel-title {
+            font-family: var(--font-heading);
+            color: var(--primary-gold);
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 3px solid var(--primary-gold);
+            padding-left: 10px;
+        }
+
+        /* Timeline Controller */
+        .timeline-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            background: rgba(1, 26, 18, 0.8);
+            border: 1px solid rgba(110, 231, 183, 0.2);
+        }
+
+        .timeline-slider-container {
+            width: 100%;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .timeline-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(232, 197, 96, 0.2);
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            z-index: 5;
+        }
+
+        .timeline-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-gold-glow);
+            border: 2px solid var(--bg-base);
+            box-shadow: 0 0 10px var(--primary-gold);
+            transition: transform 0.1s ease;
+        }
+
+        .timeline-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .timeline-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .timeline-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .timeline-label.active {
+            color: var(--mint-secondary);
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(110, 231, 183, 0.5);
+        }
+
+        /* Section A: BSC Strategy Map */
+        .bsc-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+        }
+
+        .bsc-tier {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            background: rgba(1, 26, 18, 0.4);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .bsc-tier-header {
+            background: rgba(2, 44, 34, 0.8);
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .bsc-tier-header:hover {
+            background: rgba(201, 168, 76, 0.1);
+        }
+
+        .bsc-tier-title {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            color: var(--mint-secondary);
+        }
+
+        .bsc-tier-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            background: rgba(232, 197, 96, 0.15);
+            color: var(--accent-gold-glow);
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .bsc-tier-content {
+            max-height: 0;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .bsc-tier[aria-expanded="true"] .bsc-tier-content {
+            max-height: 500px;
+            opacity: 1;
+            padding: 15px 18px;
+        }
+
+        .objective-node {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .objective-node:hover {
+            background: rgba(201, 168, 76, 0.15);
+            border-color: var(--primary-gold);
+            transform: translateX(5px);
+        }
+
+        .objective-node.active-selection {
+            background: rgba(110, 231, 183, 0.1);
+            border-color: var(--mint-secondary);
+            box-shadow: 0 0 10px rgba(110, 231, 183, 0.2);
+        }
+
+        /* SVG Causal Connectors Layout */
+        .svg-connector-container {
+            width: 100%;
+            height: 20px;
+            display: block;
+        }
+
+        .connector-line {
+            stroke: var(--primary-gold);
+            stroke-width: 1.5;
+            fill: none;
+            stroke-dasharray: 4, 4;
+            animation: dash 30s linear infinite;
+        }
+
+        @keyframes dash {
+            to { stroke-dashoffset: -1000; }
+        }
+
+        /* Section B: BEIE Ecosystem Grid System */
+        .beie-orbital-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .beie-orbital-layout {
+                grid-template-columns: 1.2fr 1fr;
+            }
+        }
+
+        /* Dedicated Pure CSS/SVG Ecosystem Orbital Map Rendering */
+        .ecosystem-graphic-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .orbital-svg {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        .center-os-trigger {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--bg-gradient-end) 0%, #000 100%);
+            border: 2px solid var(--primary-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            color: var(--accent-gold-glow);
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 15;
+            box-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+            transition: all 0.3s ease;
+            padding: 10px;
+        }
+
+        .center-os-trigger:hover, .center-os-trigger.active-selection {
+            transform: scale(1.05);
+            border-color: var(--mint-secondary);
+            box-shadow: 0 0 25px rgba(110, 231, 183, 0.6);
+            color: var(--mint-secondary);
+        }
+
+        /* Cluster Cards list container */
+        .beie-clusters-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .cluster-accordion {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            background: rgba(1, 26, 18, 0.3);
+            overflow: hidden;
+        }
+
+        .cluster-header {
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: rgba(2, 44, 34, 0.5);
+            transition: background 0.2s ease;
+        }
+
+        .cluster-header:hover {
+            background: rgba(232, 197, 96, 0.08);
+        }
+
+        .cluster-title-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cluster-icon {
+            font-size: 1.1rem;
+        }
+
+        .cluster-name {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            color: var(--text-cream);
+        }
+
+        .cluster-body {
+            max-height: 0;
+            opacity: 0;
+            transition: all 0.3s ease;
+            padding: 0 16px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 0 solid transparent;
+        }
+
+        .cluster-accordion[aria-expanded="true"] .cluster-body {
+            max-height: 200px;
+            opacity: 1;
+            padding: 12px 16px;
+            border-top: 1px solid rgba(201, 168, 76, 0.1);
+        }
+
+        .cluster-btn-view-kpis {
+            margin-top: 8px;
+            background: transparent;
+            border: 1px solid var(--primary-gold);
+            color: var(--accent-gold-glow);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cluster-btn-view-kpis:hover {
+            background: var(--primary-gold);
+            color: var(--bg-base);
+        }
+
+        /* Section C: KPI Core Dashboard Grid & Matrix */
+        .kpi-matrix-dashboard {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .filter-search-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(1, 26, 18, 0.6);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .search-input {
+            background: rgba(2, 44, 34, 0.8);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            border-radius: 6px;
+            padding: 8px 14px;
+            color: var(--text-cream);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            min-width: 260px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--mint-secondary);
+            box-shadow: 0 0 8px rgba(110, 231, 183, 0.2);
+        }
+
+        .badge-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .filter-chip {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-chip:hover, .filter-chip.active {
+            background: rgba(201, 168, 76, 0.15);
+            border-color: var(--primary-gold);
+            color: var(--accent-gold-glow);
+        }
+
+        /* KPI Cards Container Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .kpi-card {
+            background: rgba(1, 26, 18, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .kpi-card:hover {
+            border-color: rgba(201, 168, 76, 0.25);
+            background: rgba(2, 44, 34, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .kpi-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .kpi-title {
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.4;
+            color: var(--text-cream);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .status-on-track { background-color: var(--status-on-track); box-shadow: 0 0 8px var(--status-on-track); }
+        .status-building { background-color: var(--status-building); box-shadow: 0 0 8px var(--status-building); }
+        .status-baseline { background-color: var(--status-baseline); box-shadow: 0 0 8px var(--status-baseline); }
+
+        .kpi-metrics-display {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+            margin-bottom: 14px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .metric-block {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metric-lbl {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .metric-val {
+            font-family: var(--font-mono);
+            font-size: 1.35rem;
+            font-weight: bold;
+            color: var(--accent-gold-glow);
+            transition: all 0.3s ease;
+        }
+
+        .metric-val.target {
+            color: var(--mint-secondary);
+        }
+
+        .kpi-footer-metadata {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 10px;
+            font-size: 0.75rem;
+        }
+
+        .meta-agency-box {
+            color: var(--text-muted);
+            cursor: help;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        .framework-badges-row {
+            display: flex;
+            gap: 4px;
+        }
+
+        .framework-badge {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge-oic { background: rgba(201, 168, 76, 0.15); color: var(--accent-gold-glow); border: 1px solid rgba(201, 168, 76, 0.3); }
+        .badge-esg { background: rgba(110, 231, 183, 0.15); color: var(--mint-secondary); border: 1px solid rgba(110, 231, 183, 0.3); }
+        .badge-pdp { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+        .badge-sdg { background: rgba(244, 63, 94, 0.15); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.3); }
+
+        /* Custom Interactive Tooltip / Detail Box */
+        .tooltip-card-extension {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(1, 22, 16, 0.96);
+            border-top: 1px solid var(--primary-gold);
+            padding: 12px;
+            transform: translateY(100%);
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.8rem;
+            color: var(--text-cream);
+            z-index: 5;
+        }
+
+        .kpi-card:hover .tooltip-card-extension {
+            transform: translateY(0);
+        }
+
+        .tooltip-header {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--primary-gold);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Informative Empty State Display */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        .current-filter-heading {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            color: var(--accent-gold-glow);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-reset-filter {
+            background: transparent;
+            border: none;
+            color: var(--mint-secondary);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>BARMM INVESTMENT ROADMAP DEVELOPMENT</h1>
+        <p>Strategy Map & KPI Dashboard Framework Calibration (2026–2035)</p>
+    </header>
+
+    <main class="dashboard-container">
+        
+        <section class="panel full-width-top timeline-box" aria-label="Timeline Integration Switcher">
+            <div style="text-align: center; width: 100%;">
+                <span style="font-family: var(--font-heading); color: var(--primary-gold); font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">
+                    Select Horizon Calibration Target Tier
+                </span>
+            </div>
+            <div class="timeline-slider-container">
+                <input type="range" min="0" max="4" value="2" class="timeline-slider" id="globalTimelineSlider" aria-label="BIRD Roadmap Timeline Steps">
+                <div class="timeline-labels" id="timelineLabelsRow">
+                    </div>
+            </div>
+        </section>
+
+        <aside class="left-column flex-column" style="display: flex; flex-direction: column; gap: 30px;">
+            <section class="panel" aria-label="Balanced Scorecard Strategy Map">
+                <div class="panel-title">BSC Strategy Map Flow</div>
+                
+                <div class="bsc-container" id="bscTiersContainer">
+                    </div>
+            </section>
+        </aside>
+
+        <div class="right-column">
+            
+            <section class="panel" aria-label="Bangsamoro Economic and Investment Ecosystem">
+                <div class="panel-title">Bangsamoro Economic & Investment Ecosystem (BEIE)</div>
+                
+                <div class="beie-orbital-layout">
+                    <div class="ecosystem-graphic-box">
+                        <svg class="orbital-svg" viewBox="0 0 220 220" aria-hidden="true">
+                            <circle cx="110" cy="110" r="85" fill="none" stroke="rgba(201, 168, 76, 0.15)" stroke-width="1" stroke-dasharray="3,3" />
+                            <circle cx="110" cy="110" r="55" fill="none" stroke="rgba(110, 231, 183, 0.1)" stroke-width="1" />
+                            
+                            <circle cx="110" cy="110" r="48" fill="none" stroke="rgba(232, 197, 96, 0.05)" stroke-width="2">
+                                <animate attributeName="r" values="45;52;45" dur="3s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" values="0.8;0.2;0.8" dur="3s" repeatCount="indefinite"/>
+                            </circle>
+
+                            <circle cx="110" cy="25" r="5" fill="#C9A84C" />
+                            <circle cx="195" cy="110" r="5" fill="#6ee7b7" />
+                            <circle cx="145" cy="180" r="5" fill="#C9A84C" />
+                            <circle cx="45" cy="160" r="5" fill="#38bdf8" />
+                            <circle cx="30" cy="80" r="5" fill="#e8c560" />
+                        </svg>
+                        
+                        <div class="center-os-trigger" id="btnTriggerOS" role="button" aria-expanded="false" tabindex="0">
+                            CROSS-CUTTING<br>OPERATING SYS
+                        </div>
+                    </div>
+
+                    <div class="beie-clusters-list" id="beieClustersListContainer">
+                        </div>
+                </div>
+            </section>
+
+            <section class="panel" aria-label="KPI Calibration Matrix Dashboard Engine">
+                <div class="panel-title">Phased Target Matrix & KPI Dashboard</div>
+                
+                <div class="kpi-matrix-dashboard">
+                    
+                    <div class="filter-search-strip">
+                        <input type="text" class="search-input" id="searchBarField" placeholder="Search by Lead Agency, Metric, Framework..." aria-label="Query Filter Input Field">
+                        
+                        <div class="badge-filters" id="frameworkFiltersStrip" role="group" aria-label="Framework Standard Filters">
+                            <span class="filter-chip active" data-framework="ALL">ALL MATCHES</span>
+                            <span class="filter-chip" data-framework="OIC">OIC/SMIIC</span>
+                            <span class="filter-chip" data-framework="ESG">ESG METRICS</span>
+                            <span class="filter-chip" data-framework="PDP">PDP 2023-28</span>
+                            <span class="filter-chip" data-framework="SDG">UN SDGs</span>
+                        </div>
+                    </div>
+
+                    <div class="current-filter-heading">
+                        <span id="txtDisplayCurrentScopeLabel">Displaying Portfolio Framework Baseline: All Records</span>
+                        <button class="btn-reset-filter" id="btnGlobalClearFilters" style="display:none;">Clear Filters</button>
+                    </div>
+
+                    <div class="kpi-grid" id="kpiMatrixDataGridContainer">
+                        </div>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        // Timeline calibrations array dictionary
+        const timelineSteps = [
+            { id: "baseline", label: "Baseline (2024-25)", index: 0 },
+            { id: "interim1", label: "Interim 1 (2028)", index: 1 },
+            { id: "interim2", label: "Interim 2 (2030)", index: 2 },
+            { id: "terminal", label: "Terminal (2035)", index: 3 },
+            { id: "longhorizon", label: "Long-Horizon (2040)", index: 4 }
+        ];
+
+        // Core Unified Data Store mapped to BSC and BEIE Structures explicitly
+        const birdMasterSchema = {
+            bscPerspectives: [
+                {
+                    id: "financial",
+                    name: "Financial & Investment Allocation",
+                    label: "Tier 4",
+                    objectives: [
+                        { id: "obj_inv_growth", name: "Maximize Overall Strategic Capital Infusion & Approvals" },
+                        { id: "obj_islamic_cap", name: "Expand Addressable Shariah-Compliant Liquid Pools" }
+                    ]
+                },
+                {
+                    id: "stakeholder",
+                    name: "Stakeholder, Inclusivity & Investor Value",
+                    label: "Tier 3",
+                    objectives: [
+                        { id: "obj_poverty_down", name: "Accelerate Comprehensive Regional Poverty Alleviation" },
+                        { id: "obj_export_corridor", name: "Scale International Gateway Access & Halal Trade Profiles" }
+                    ]
+                },
+                {
+                    id: "internal_process",
+                    name: "Internal Process & Regulatory Excellence",
+                    label: "Tier 2",
+                    objectives: [
+                        { id: "obj_streamline_gov", name: "Institutionalize Moral Governance Standards & Modern Procurement" },
+                        { id: "obj_halal_cert", name: "Optimize and Accredit Certification Speed Timelines" }
+                    ]
+                },
+                {
+                    id: "learning_growth",
+                    name: "Learning, Human Capital & Foundations",
+                    label: "Tier 1",
+                    objectives: [
+                        { id: "obj_literacy_tvet", name: "Elevate Specialized Literacy, Digital Capacities & TVET Outputs" },
+                        { id: "obj_resilient_infra", name: "Deploy Climate-Harden Infrastructure Networks & Clean Power Assets" }
+                    ]
+                }
+            ],
+            beieClusters: [
+                {
+                    id: "foundations",
+                    name: "Foundations Cluster",
+                    icon: "🌾",
+                    scope: "Agriculture, Sustainable Energy, Forest Ecosystem Monetization",
+                    bscLink: "learning_growth"
+                },
+                {
+                    id: "transformers",
+                    name: "Transformers Cluster",
+                    icon: "🏭",
+                    scope: "Industrial Processing, Halal Manufacturing Enterprises, Targeted Tourism Nodes",
+                    bscLink: "internal_process"
+                },
+                {
+                    id: "enablers",
+                    name: "Enablers Cluster",
+                    icon: "🔧",
+                    scope: "Digital Framework Networks, Connectivity Logistics, Human Capital Systems",
+                    bscLink: "learning_growth"
+                },
+                {
+                    id: "connectors",
+                    name: "Connectors Cluster",
+                    icon: "🌏",
+                    scope: "BIMP-EAGA Integration Systems, Global Trade Gateways, Inter-Provincial Networks",
+                    bscLink: "stakeholder"
+                },
+                {
+                    id: "financiers",
+                    name: "Financiers Cluster",
+                    icon: "🕌",
+                    scope: "Islamic Banking Architecture, Takaful Framework Platforms, Waqf Endowments",
+                    bscLink: "financial"
+                }
+            ],
+            // Single truth database containing all specified text-KPI metrics
+            kpiPool: [
+                // Cross-Cutting Operating System Metrics
+                {
+                    id: "kpi_os_1",
+                    title: "Public Financial Compliance & Disclosure Matrix Verification Rate",
+                    category: "OS",
+                    subcategory: "Moral Governance",
+                    associatedNode: "obj_streamline_gov",
+                    leadAgency: "BPDA / Ministry of Finance (MFAM)",
+                    policyAnchor: "Bangsamoro Organic Law (BOL) Governance Code Mandates",
+                    frameworks: ["ESG", "PDP"],
+                    status: "on-track",
+                    targets: ["65%", "80%", "90%", "100%", "100%"]
+                },
+                {
+                    id: "kpi_os_2",
+                    title: "Regional Climate-Risk Screening Protocol Implementation Share",
+                    category: "OS",
+                    subcategory: "Resilience",
+                    associatedNode: "obj_resilient_infra",
+                    leadAgency: "MENRE / Bangsamoro Disaster Risk Reduction Management Office",
+                    policyAnchor: "BSEMP Adaptive Resilience Operational Directive Frameworks",
+                    frameworks: ["ESG", "SDG"],
+                    status: "building",
+                    targets: ["0%", "40%", "70%", "100%", "100%"]
+                },
+                {
+                    id: "kpi_os_3",
+                    title: "MSME Local Content Equity Procurement Participation Component",
+                    category: "OS",
+                    subcategory: "Inclusivity",
+                    associatedNode: "obj_inv_growth",
+                    leadAgency: "MTIT / Bureau of Investments (BBOI)",
+                    policyAnchor: "Bangsamoro Sustainable Micro-Enterprise Growth Act",
+                    frameworks: ["PDP", "SDG"],
+                    status: "on-track",
+                    targets: ["< 35%", "45%", "60%", "> 75%", "> 85%"]
+                },
+                {
+                    id: "kpi_os_4",
+                    title: "Functional Basic Literacy Level Metric across Lagging Jurisdictions",
+                    category: "OS",
+                    subcategory: "Inclusivity",
+                    associatedNode: "obj_literacy_tvet",
+                    leadAgency: "Ministry of Basic, Higher and Technical Education (MBHTE)",
+                    policyAnchor: "Education System Transformation Plan Frameworks",
+                    frameworks: ["SDG"],
+                    status: "baseline",
+                    targets: ["59.3%", "63%", "68%", "75%+", "85%+"]
+                },
+                {
+                    id: "kpi_os_5",
+                    title: "Decommissioned Combatant Socio-Economic Reintegration Framework Rate",
+                    category: "OS",
+                    subcategory: "Peace & Security",
+                    associatedNode: "obj_poverty_down",
+                    leadAgency: "Joint Normalization Committee (JNC) / Task Force for Decommissioned Combatants",
+                    policyAnchor: "Comprehensive Agreement on the Bangsamoro Normalization Protocol",
+                    frameworks: ["PDP", "SDG"],
+                    status: "on-track",
+                    targets: ["62%", "75%", "88%", "100%", "100%"]
+                },
+                
+                // Cluster 1: Foundations
+                {
+                    id: "kpi_f_1",
+                    title: "Key Aggregate High-Value Baseline Crop Production Yield Delta",
+                    category: "Cluster",
+                    subcategory: "foundations",
+                    associatedNode: "obj_literacy_tvet",
+                    leadAgency: "MAFAR (Ministry of Agriculture, Fisheries, and Agrarian Reform)",
+                    policyAnchor: "Bangsamoro Food Security and Agricultural Modernization Plan",
+                    frameworks: ["PDP", "SDG"],
+                    status: "building",
+                    targets: ["Baseline", "+ 5%", "+ 10%", "+ 15%", "+ 25%"]
+                },
+                {
+                    id: "kpi_f_2",
+                    title: "Post-Harvest Logistic Infrastructure Product Loss Reduction Factor",
+                    category: "Cluster",
+                    subcategory: "foundations",
+                    associatedNode: "obj_poverty_down",
+                    leadAgency: "MAFAR / Ministry of Public Works (MPW)",
+                    policyAnchor: "BIRD Value Chain Efficiency Expansion Strategic Framework",
+                    frameworks: ["PDP"],
+                    status: "building",
+                    targets: ["0 Value", "10% Lower", "20% Lower", "30%+ Drop", "45% Drop"]
+                },
+                {
+                    id: "kpi_f_3",
+                    title: "Renewable Clean Energy Assets Share in Total Installed Generation Mix",
+                    category: "Cluster",
+                    subcategory: "foundations",
+                    associatedNode: "obj_resilient_infra",
+                    leadAgency: "Ministry of Environment, Natural Resources, and Energy (MENRE)",
+                    policyAnchor: "Bangsamoro Sustainable Energy Master Plan (BSEMP 2035 Horizon)",
+                    frameworks: ["ESG", "SDG"],
+                    status: "on-track",
+                    targets: ["75.86%", "78.0%", "81.5%", "85.0%", "90.0%"]
+                },
+                {
+                    id: "kpi_f_4",
+                    title: "Regional Household Energization and Smart Grid Grid Electrification Coverage",
+                    category: "Cluster",
+                    subcategory: "foundations",
+                    associatedNode: "obj_resilient_infra",
+                    leadAgency: "MENRE / MPW / National Electrification Administration Alliances",
+                    policyAnchor: "Comprehensive Rural Electrification Transformation Acceleration Program",
+                    frameworks: ["SDG"],
+                    status: "baseline",
+                    targets: ["39.0%", "55.0%", "75.0%", "100.0%", "100.0%"]
+                },
+                {
+                    id: "kpi_f_5",
+                    title: "Total Protected Forest Cover Expansion & Carbon Stock Allocation Accumulation",
+                    category: "Cluster",
+                    subcategory: "foundations",
+                    associatedNode: "obj_resilient_infra",
+                    leadAgency: "MENRE (Bureau of Forestry Management Center)",
+                    policyAnchor: "Bangsamoro Forestry Code & REDD+ Resource Monetization Framework",
+                    frameworks: ["ESG", "SDG"],
+                    status: "on-track",
+                    targets: ["Baseline", "+ 3.0%", "+ 5.5%", "+ 10.0%", "+ 15.0%"]
+                },
+
+                // Cluster 2: Transformers
+                {
+                    id: "kpi_t_1",
+                    title: "Active Registered Halal Certified Operational MSMEs Pipeline Ecosystem",
+                    category: "Cluster",
+                    subcategory: "transformers",
+                    associatedNode: "obj_halal_cert",
+                    leadAgency: "MTIT / Bangsamoro Halal Board (BHB)",
+                    policyAnchor: "Bangsamoro Halal Industry Development Program (BHIDP Core Pillar)",
+                    frameworks: ["OIC", "PDP"],
+                    status: "on-track",
+                    targets: ["500 Assets", "1,200 Assets", "2,500 Assets", "5,000+ Units", "8,000+ Units"]
+                },
+                {
+                    id: "kpi_t_2",
+                    title: "Bangsamoro Halal Board Institutional Global OIC / SMIIC Accreditation Status",
+                    category: "Cluster",
+                    subcategory: "transformers",
+                    associatedNode: "obj_halal_cert",
+                    leadAgency: "Bangsamoro Halal Board (BHB)",
+                    policyAnchor: "International Mutual Recognition Synchronization Master Mandate",
+                    frameworks: ["OIC"],
+                    status: "building",
+                    targets: ["Provisional", "Full Audit", "Accredited", "OIC Peer Hub", "OIC Standard Lead"]
+                },
+                {
+                    id: "kpi_t_3",
+                    title: "Gross Consolidated Outbound Certified Halal Product Export Trade Value Metrics",
+                    category: "Cluster",
+                    subcategory: "transformers",
+                    associatedNode: "obj_export_corridor",
+                    leadAgency: "MTIT / Bureau of Export Trade Promotion Development Office",
+                    policyAnchor: "Global Shariah Market Penetration Export Logistics Roadmap Plan",
+                    frameworks: ["OIC", "PDP"],
+                    status: "building",
+                    targets: ["< ₱500M", "₱1.2B", "₱2.8B", "₱5B+ Value", "₱8B+ Value"]
+                },
+                {
+                    id: "kpi_t_4",
+                    title: "Annual Local & International Tourist Passenger Entry Arrivals Profile Track",
+                    category: "Cluster",
+                    subcategory: "transformers",
+                    associatedNode: "obj_export_corridor",
+                    leadAgency: "Ministry of Trade, Industry, and Tourism (Tourism Development Division)",
+                    policyAnchor: "Bangsamoro Cultural Heritage Eco-Tourism Master Blueprint Guidelines",
+                    frameworks: ["PDP"],
+                    status: "on-track",
+                    targets: ["< 500K", "1.0M Entry", "1.8M Entry", "3.0M Entry", "4.5M Entry"]
+                },
+                {
+                    id: "kpi_t_5",
+                    title: "Special Agro-Industrial Economic Zone Capital Infrastructure Project Investment Value Pipeline",
+                    category: "Cluster",
+                    subcategory: "transformers",
+                    associatedNode: "obj_inv_growth",
+                    leadAgency: "Bangsamoro Economic Zone Authority (BEZA) / BBOI",
+                    policyAnchor: "Strategic Investment Priority Plan (SIPP) Ecozone Allocation Frame",
+                    frameworks: ["ESG", "PDP"],
+                    status: "on-track",
+                    targets: ["₱1.35B Base", "₱1.50B", "₱1.75B", "₱2.0B+ Metric", "₱3.0B+ Metric"]
+                },
+
+                // Cluster 3: Enablers
+                {
+                    id: "kpi_e_1",
+                    title: "High-Capacity Broadband Fiber Connectivity and Digital Network Coverage in Rural Municipalities",
+                    category: "Cluster",
+                    subcategory: "enablers",
+                    associatedNode: "obj_resilient_infra",
+                    leadAgency: "Bangsamoro Information and Communications Technology Office (BICTO) / DICT",
+                    policyAnchor: "Digital Bangsamoro Infrastructure Modernization Acceleration Initiative",
+                    frameworks: ["SDG"],
+                    status: "baseline",
+                    targets: ["< 30%", "55%", "75%", "100%", "100%"]
+                },
+                {
+                    id: "kpi_e_2",
+                    title: "Consolidated Ministerial Fiscal Budget Execution Absorptive Delivery Rate Metric",
+                    category: "Cluster",
+                    subcategory: "enablers",
+                    associatedNode: "obj_streamline_gov",
+                    leadAgency: "Ministry of Finance (MFAM) / Bangsamoro Parliament Oversight Committee",
+                    policyAnchor: "Bangsamoro Public Financial Management Development Code Framework",
+                    frameworks: ["ESG"],
+                    status: "building",
+                    targets: ["78%", "84%", "88%", "> 90%", "> 95%"]
+                },
+                {
+                    id: "kpi_e_3",
+                    title: "Annual Industry-Aligned Vocational TVET Training Graduate Placement Metric Pool Output",
+                    category: "Cluster",
+                    subcategory: "enablers",
+                    associatedNode: "obj_literacy_tvet",
+                    leadAgency: "MBHTE (Technical Education and Skills Development Division Hub)",
+                    policyAnchor: "Bangsamoro Workforce Skills Inter-Sector Calibration Strategy Map",
+                    frameworks: ["SDG"],
+                    status: "on-track",
+                    targets: ["4k / Year", "6k / Year", "8k / Year", "10k / Year", "13k / Year"]
+                },
+                {
+                    id: "kpi_e_4",
+                    title: "Active Competency-Certified Operational Halal Compliance Auditors System Pool Size",
+                    category: "Cluster",
+                    subcategory: "enablers",
+                    associatedNode: "obj_halal_cert",
+                    leadAgency: "Bangsamoro Halal Board / Ministry of Science and Technology (MOST)",
+                    policyAnchor: "BHIDP Institutional Audit Scale Capacity Expansion Mandate",
+                    frameworks: ["OIC"],
+                    status: "on-track",
+                    targets: ["50 Techs", "150 Techs", "300 Techs", "500 Experts", "800 Experts"]
+                },
+                {
+                    id: "kpi_e_5",
+                    title: "Under-Five Child Malnutrition Prevalence and Developmental Stunting Rate Drop Profile",
+                    category: "Cluster",
+                    subcategory: "enablers",
+                    associatedNode: "obj_poverty_down",
+                    leadAgency: "Ministry of Health (MOH) / Bangsamoro Nutrition Committee Support Group",
+                    policyAnchor: "Bangsamoro Child Health and Inclusivity Development Strategic Agenda",
+                    frameworks: ["SDG"],
+                    status: "baseline",
+                    targets: ["45.0%", "35.0%", "28.0%", "20.0%", "10.0%"]
+                },
+
+                // Cluster 4: Connectors
+                {
+                    id: "kpi_c_1",
+                    title: "Cross-Border BIMP-EAGA Shipping Maritime Cargo Freight Trade Volume Delta",
+                    category: "Cluster",
+                    subcategory: "connectors",
+                    associatedNode: "obj_export_corridor",
+                    leadAgency: "MTIT / Bangsamoro Port Management Authority (BPMA)",
+                    policyAnchor: "BIMP-EAGA Transport and Maritime Logistics Connectivity Integration Pact",
+                    frameworks: ["PDP"],
+                    status: "building",
+                    targets: ["Baseline", "+ 15%", "+ 30%", "+ 50%", "+ 75%"]
+                },
+                {
+                    id: "kpi_c_2",
+                    title: "Consolidated Direct UAE / GCC Direct Premium Export Corridor Valuation Index",
+                    category: "Cluster",
+                    subcategory: "connectors",
+                    associatedNode: "obj_export_corridor",
+                    leadAgency: "MTIT / MAFAR International Trade Agreements Division Unit",
+                    policyAnchor: "MAFAR-Prime Group Middle East Direct Strategic Export Corridor Protocol",
+                    frameworks: ["OIC", "PDP"],
+                    status: "on-track",
+                    targets: ["₱200M Base", "₱600M", "₱1.2B", "₱2B+ Value", "₱3.5B+ Value"]
+                },
+                {
+                    id: "kpi_c_3",
+                    title: "Automated Interoperable Digital Customs Clearance Processing and Facilitation Implementation Share",
+                    category: "Cluster",
+                    subcategory: "connectors",
+                    associatedNode: "obj_streamline_gov",
+                    leadAgency: "Bureau of Customs (Regional Office Alignment) / MTIT",
+                    policyAnchor: "Ease of Doing Business and Efficient Government Service Delivery Act Mandates",
+                    frameworks: ["OIC"],
+                    status: "on-track",
+                    targets: ["40%", "55%", "70%", "85%", "95%"]
+                },
+                {
+                    id: "kpi_c_4",
+                    title: "Active Functional Autonomous Provincial Investment Investment Facilitation Helpdesk Offices",
+                    category: "Cluster",
+                    subcategory: "connectors",
+                    associatedNode: "obj_inv_growth",
+                    leadAgency: "Bureau of Investments (BBOI)",
+                    policyAnchor: "Bangsamoro Localized Enterprise Investment Localization Access Ordinance",
+                    frameworks: ["PDP"],
+                    status: "on-track",
+                    targets: ["2 Units", "4 Units", "6 Units", "7 Provinces", "7 Provinces"]
+                },
+
+                // Cluster 5: Financiers
+                {
+                    id: "kpi_fi_1",
+                    title: "Gross Consolidated Shariah-Compliant Islamic Banking Asset System Valuation Pool",
+                    category: "Cluster",
+                    subcategory: "financiers",
+                    associatedNode: "obj_islamic_cap",
+                    leadAgency: "Al-Amanah Islamic Investment Bank / BSP / BBOI Financial Panel",
+                    policyAnchor: "Republic Act No. 11439 (The Specialized Islamic Banking Framework Act)",
+                    frameworks: ["OIC", "ESG", "PDP"],
+                    status: "building",
+                    targets: ["< ₱2B Base", "₱5B Pool", "₱11B Pool", "₱20B+ Asset", "₱35B+ Asset"]
+                },
+                {
+                    id: "kpi_fi_2",
+                    title: "Formal Financial System Access and Integration Penetration Rate across Low-Income Tiers",
+                    category: "Cluster",
+                    subcategory: "financiers",
+                    associatedNode: "obj_islamic_cap",
+                    leadAgency: "Bangko Sentral ng Pilipinas Alliance / MTIT Enterprise Division",
+                    policyAnchor: "Bangsamoro National Strategy for Financial Inclusion Localization Program",
+                    frameworks: ["PDP", "SDG"],
+                    status: "baseline",
+                    targets: ["18.0%", "24.0%", "29.0%", "35%+", "50%+"]
+                },
+                {
+                    id: "kpi_fi_3",
+                    title: "Active Operational Smallholder Shariah-Compliant Micro-Financed Accounts Capitalized",
+                    category: "Cluster",
+                    subcategory: "financiers",
+                    associatedNode: "obj_islamic_cap",
+                    leadAgency: "CARD Islamic Microfinance / Al-Amanah Fintech Platforms",
+                    policyAnchor: "Inclusive Community Micro-Capitalization Asset Optimization Directives",
+                    frameworks: ["ESG", "SDG"],
+                    status: "on-track",
+                    targets: ["5k Units", "15k Units", "30k Units", "50k+ Units", "80k+ Units"]
+                },
+                {
+                    id: "kpi_fi_4",
+                    title: "Registered Active Institutional Productive Waqf Social Enterprise Entities Operative",
+                    category: "Cluster",
+                    subcategory: "financiers",
+                    associatedNode: "obj_islamic_cap",
+                    leadAgency: "Bangsamoro Waqf Commission Taskforce Panel Group",
+                    policyAnchor: "Waqf Asset Development Regulation and Management Framework Code",
+                    frameworks: ["OIC", "SDG"],
+                    status: "building",
+                    targets: ["5 Units", "18 Units", "35 Units", "60+ Units", "100+ Units"]
+                }
+            ]
+        };
+
+        // State Machine Storage Data Object Config
+        let appState = {
+            activeTimelineIndex: 2, // Default index tracking Interim 2 (2030 Target Engine Calibration)
+            activeFilterType: "ALL", // Types: ALL, OS, CLUSTER, OBJECTIVE
+            activeFilterValue: "ALL", // Holds category codes
+            activeFrameworkBadgeFilter: "ALL", // Filter parameters by compliance framework badge
+            searchQuery: ""
+        };
+
+        // Initialization Logic Module Execution Anchor
+        document.addEventListener("DOMContentLoaded", () => {
+            initTimelineController();
+            renderBscMapInterface();
+            renderBeieClusterAccordions();
+            bindStaticInteractions();
+            evaluateDashboardDataView();
+        });
+
+        // Setup horizontal horizon navigation selector slide control component
+        function initTimelineController() {
+            const container = document.getElementById("timelineLabelsRow");
+            const slider = document.getElementById("globalTimelineSlider");
+            
+            container.innerHTML = "";
+            timelineSteps.forEach(step => {
+                const label = document.createElement("span");
+                label.className = `timeline-label ${step.index === appState.activeTimelineIndex ? 'active' : ''}`;
+                label.textContent = step.label;
+                label.setAttribute("role", "button");
+                label.addEventListener("click", () => {
+                    slider.value = step.index;
+                    updateTimelineState(step.index);
+                });
+                container.appendChild(label);
+            });
+
+            slider.value = appState.activeTimelineIndex;
+            slider.addEventListener("input", (e) => {
+                updateTimelineState(parseInt(e.target.value));
+            });
+        }
+
+        function updateTimelineState(idx) {
+            appState.activeTimelineIndex = idx;
+            const labels = document.querySelectorAll(".timeline-label");
+            labels.forEach((lbl, i) => {
+                lbl.classList.toggle("active", i === idx);
+            });
+            evaluateDashboardDataView();
+        }
+
+        // Framework component builder logic for Section A
+        function renderBscMapInterface() {
+            const bscBox = document.getElementById("bscTiersContainer");
+            bscBox.innerHTML = "";
+
+            birdMasterSchema.bscPerspectives.forEach((p, idx) => {
+                const tierDiv = document.createElement("div");
+                tierDiv.className = "bsc-tier";
+                tierDiv.id = `bsc_tier_${p.id}`;
+                tierDiv.setAttribute("aria-expanded", idx === 3 ? "true" : "false"); // Initialize bottom expanded
+
+                const header = document.createElement("div");
+                header.className = "bsc-tier-header";
+                header.addEventListener("click", () => {
+                    const isExp = tierDiv.getAttribute("aria-expanded") === "true";
+                    tierDiv.setAttribute("aria-expanded", !isExp);
+                });
+
+                const leftWrap = document.createElement("div");
+                leftWrap.style.display = "flex";
+                leftWrap.style.flexDirection = "column";
+                leftWrap.style.gap = "2px";
+
+                const titleSpan = document.createElement("span");
+                titleSpan.className = "bsc-tier-title";
+                titleSpan.textContent = p.name;
+
+                leftWrap.appendChild(titleSpan);
+
+                const labelSpan = document.createElement("span");
+                labelSpan.className = "bsc-tier-label";
+                labelSpan.textContent = p.label;
+
+                header.appendChild(leftWrap);
+                header.appendChild(labelSpan);
+
+                const contentBox = document.createElement("div");
+                contentBox.className = "bsc-tier-content";
+
+                p.objectives.forEach(obj => {
+                    const node = document.createElement("div");
+                    node.className = "objective-node";
+                    node.id = `node_${obj.id}`;
+                    node.textContent = obj.name;
+                    node.setAttribute("role", "button");
+                    node.addEventListener("click", (e) => {
+                        e.stopPropagation(); // Avoid triggering header collapse toggle
+                        triggerFilterContext("OBJECTIVE", obj.id, `Strategic Objective Flow: "${obj.name}"`);
+                    });
+                    contentBox.appendChild(node);
+                });
+
+                tierDiv.appendChild(header);
+                tierDiv.appendChild(contentBox);
+                bscBox.appendChild(tierDiv);
+
+                // Dynamically inject connecting animated directional SVG flow paths unless terminal node row step
+                if (idx < birdMasterSchema.bscPerspectives.length - 1) {
+                    const svgHolder = document.createElement("svg");
+                    svgHolder.className = "svg-connector-container";
+                    svgHolder.innerHTML = `
+                        <line x1="50%" y1="0%" x2="50%" y2="100%" class="connector-line" />
+                        <polygon points="110,18 106,12 114,12" fill="var(--primary-gold)" transform="translate(${window.innerWidth < 450 ? '-5' : '0'}, 0)" />
+                    `;
+                    bscBox.appendChild(svgHolder);
+                }
+            });
+        }
+
+        // Framework builder layout engine loop logic for Section B
+        function renderBeieClusterAccordions() {
+            const targetBox = document.getElementById("beieClustersListContainer");
+            targetBox.innerHTML = "";
+
+            birdMasterSchema.beieClusters.forEach(c => {
+                const box = document.createElement("div");
+                box.className = "cluster-accordion";
+                box.id = `beie_cluster_item_${c.id}`;
+                box.setAttribute("aria-expanded", "false");
+
+                const h = document.createElement("div");
+                h.className = "cluster-header";
+                h.addEventListener("click", () => {
+                    const isExp = box.getAttribute("aria-expanded") === "true";
+                    // Close all others first to mirror compact UX design space limits
+                    document.querySelectorAll(".cluster-accordion").forEach(el => el.setAttribute("aria-expanded", "false"));
+                    box.setAttribute("aria-expanded", !isExp);
+                });
+
+                const titleDiv = document.createElement("div");
+                titleDiv.className = "cluster-title-box";
+                
+                const ico = document.createElement("span");
+                ico.className = "cluster-icon";
+                ico.textContent = c.icon;
+
+                const name = document.createElement("span");
+                name.className = "cluster-name";
+                name.textContent = c.name;
+
+                titleDiv.appendChild(ico);
+                titleDiv.appendChild(name);
+                h.appendChild(titleDiv);
+
+                const body = document.createElement("div");
+                body.className = "cluster-body";
+                body.innerHTML = `
+                    <p style="margin-bottom:8px; line-height:1.4;"><strong>Ecosystem Scope:</strong> ${c.scope}</p>
+                    <p style="margin-bottom:10px; font-size:0.75rem; color:var(--primary-gold);">Linked to BSC: <span style="text-transform:uppercase; font-family:var(--font-mono);">${c.bscLink.replace('_',' ')}</span></p>
+                    <button class="cluster-btn-view-kpis" onclick="event.stopPropagation(); triggerFilterContext('CLUSTER', '${c.id}', '${c.name} Performance Targets Portfolio')">
+                        Filter Target KPIs ➔
+                    </button>
+                `;
+
+                box.appendChild(h);
+                box.appendChild(body);
+                targetBox.appendChild(box);
+            });
+        }
+
+        // Setup event listener tracking channels
+        function bindStaticInteractions() {
+            // Interactive listener hook tracking Cross-Cutting OS center node map component
+            const osBtn = document.getElementById("btnTriggerOS");
+            osBtn.addEventListener("click", () => {
+                triggerFilterContext("OS", "OS", "Cross-Cutting Operating System Metrics Hub (Moral Governance / Resilience / Inclusivity / Peace)");
+            });
+            osBtn.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    osBtn.click();
+                }
+            });
+
+            // Bind global input search query tracking engine matrix field
+            const searchField = document.getElementById("searchBarField");
+            searchField.addEventListener("input", (e) => {
+                appState.searchQuery = e.target.value.toLowerCase().trim();
+                evaluateDashboardDataView();
+            });
+
+            // Bind compliance chip badge selector framework arrays
+            const chips = document.querySelectorAll("#frameworkFiltersStrip .filter-chip");
+            chips.forEach(chip => {
+                chip.addEventListener("click", () => {
+                    chips.forEach(c => c.classList.remove("active"));
+                    chip.classList.add("active");
+                    appState.activeFrameworkBadgeFilter = chip.getAttribute("data-framework");
+                    evaluateDashboardDataView();
+                });
+            });
+
+            // Universal target matrix dashboard override structural clearing action
+            document.getElementById("btnGlobalClearFilters").addEventListener("click", () => {
+                resetGlobalFiltersState();
+            });
+        }
+
+        // Mutator state updating function handling contextual filtration view switches
+        function triggerFilterContext(type, value, descriptiveLabel) {
+            appState.activeFilterType = type;
+            appState.activeFilterValue = value;
+            
+            // Clean active display states across visual tree node trees to prevent desync
+            document.querySelectorAll(".objective-node, .center-os-trigger").forEach(el => el.classList.remove("active-selection"));
+            
+            if (type === "OBJECTIVE") {
+                const targetNode = document.getElementById(`node_${value}`);
+                if (targetNode) targetNode.classList.add("active-selection");
+                // Open parent tier container for visibility confirmation safety check
+                const parentTier = targetNode.closest(".bsc-tier");
+                if (parentTier) parentTier.setAttribute("aria-expanded", "true");
+            } else if (type === "OS") {
+                document.getElementById("btnTriggerOS").classList.add("active-selection");
+            } else if (type === "CLUSTER") {
+                // Expand matching accordion block container row row item automatically
+                const accordionItem = document.getElementById(`beie_cluster_item_${value}`);
+                if (accordionItem) accordionItem.setAttribute("aria-expanded", "true");
+            }
+
+            document.getElementById("txtDisplayCurrentScopeLabel").textContent = `Scope Context: ${descriptiveLabel}`;
+            document.getElementById("btnGlobalClearFilters").style.display = "inline-block";
+            
+            evaluateDashboardDataView();
+        }
+
+        function resetGlobalFiltersState() {
+            appState.activeFilterType = "ALL";
+            appState.activeFilterValue = "ALL";
+            document.querySelectorAll(".objective-node, .center-os-trigger").forEach(el => el.classList.remove("active-selection"));
+            document.getElementById("txtDisplayCurrentScopeLabel").textContent = "Displaying Portfolio Framework Baseline: All Records";
+            document.getElementById("btnGlobalClearFilters").style.display = "none";
+            evaluateDashboardDataView();
+        }
+
+        // Core compilation pipeline framework managing calculations, searching and visual rendering metrics dynamically
+        function evaluateDashboardDataView() {
+            const gridContainer = document.getElementById("kpiMatrixDataGridContainer");
+            gridContainer.innerHTML = "";
+
+            // Filter process layer step 1: Assess category filters context paths
+            let outputCollection = birdMasterSchema.kpiPool.filter(kpi => {
+                if (appState.activeFilterType === "ALL") return true;
+                if (appState.activeFilterType === "OS") return kpi.category === "OS";
+                if (appState.activeFilterType === "CLUSTER") return kpi.category === "Cluster" && kpi.subcategory === appState.activeFilterValue;
+                if (appState.activeFilterType === "OBJECTIVE") return kpi.associatedNode === appState.activeFilterValue;
+                return true;
+            });
+
+            // Filter process layer step 2: Check compliance standard verification framework constraints badge
+            if (appState.activeFrameworkBadgeFilter !== "ALL") {
+                outputCollection = outputCollection.filter(kpi => kpi.frameworks.includes(appState.activeFrameworkBadgeFilter));
+            }
+
+            // Filter process layer step 3: Apply text global query constraints strings index lookup logic
+            if (appState.searchQuery.length > 0) {
+                outputCollection = outputCollection.filter(kpi => {
+                    return kpi.title.toLowerCase().includes(appState.searchQuery) ||
+                           kpi.leadAgency.toLowerCase().includes(appState.searchQuery) ||
+                           kpi.policyAnchor.toLowerCase().includes(appState.searchQuery) ||
+                           (kpi.subcategory && kpi.subcategory.toLowerCase().includes(appState.searchQuery));
+                });
+            }
+
+            // Render output items UI cards matrix layout display
+            if (outputCollection.length === 0) {
+                gridContainer.innerHTML = `<div class="empty-state">No calibration metrics match the designated tracking constraints. Expand options or modify query keywords.</div>`;
+                return;
+            }
+
+            outputCollection.forEach(kpi => {
+                const card = document.createElement("div");
+                card.className = "kpi-card";
+                card.setAttribute("tabindex", "0");
+
+                // Header information display configuration mappings
+                const headerRow = document.createElement("div");
+                headerRow.className = "kpi-header-row";
+                
+                const title = document.createElement("h3");
+                title.className = "kpi-title";
+                title.textContent = kpi.title;
+
+                const indicator = document.createElement("span");
+                indicator.className = `status-dot status-${kpi.status}`;
+                indicator.title = `Status Metric Alignment Track: ${kpi.status.replace('-', ' ')}`;
+
+                headerRow.appendChild(title);
+                headerRow.appendChild(indicator);
+
+                // Extraction logic calculating targets values depending on timeline position states values array references index mapping rules
+                const currentTargetValue = kpi.targets[appState.activeTimelineIndex];
+                const baselineValue = kpi.targets[0]; // Anchor comparison point step reference element
+
+                const dataDisplayRow = document.createElement("div");
+                dataDisplayRow.className = "kpi-metrics-display";
+                dataDisplayRow.innerHTML = `
+                    <div class="metric-block">
+                        <span class="metric-lbl">Baseline (24)</span>
+                        <span class="metric-val">${baselineValue}</span>
+                    </div>
+                    <div style="color:rgba(255,255,255,0.15); font-weight:bold; font-size:1.1rem;">➔</div>
+                    <div class="metric-block">
+                        <span class="metric-lbl" style="color:var(--mint-secondary)">Target Horizon</span>
+                        <span class="metric-val target">${currentTargetValue}</span>
+                    </div>
+                `;
+
+                // Build lower contextual framework tag rows metadata container layout blocks
+                const footerRow = document.createElement("div");
+                footerRow.className = "kpi-footer-metadata";
+
+                const agencyBox = document.createElement("div");
+                agencyBox.className = "meta-agency-box";
+                agencyBox.textContent = kpi.leadAgency.split('/')[0].trim(); // Shortened tracking format structure view fallback space
+                agencyBox.title = `Full Responsibility Management Center: ${kpi.leadAgency}`;
+
+                const badgesWrap = document.createElement("div");
+                badgesWrap.className = "framework-badges-row";
+                kpi.frameworks.forEach(fw => {
+                    const badge = document.createElement("span");
+                    badge.className = `framework-badge badge-${fw.toLowerCase()}`;
+                    badge.textContent = fw === "OIC" ? "OIC/SMIIC" : fw === "PDP" ? "PDP 23-28" : fw;
+                    badgesWrap.appendChild(badge);
+                });
+
+                footerRow.appendChild(agencyBox);
+                footerRow.appendChild(badgesWrap);
+
+                // Interactive tooltip / expansion card detail tray insertion layer setup step
+                const trayExtension = document.createElement("div");
+                trayExtension.className = "tooltip-card-extension";
+                trayExtension.innerHTML = `
+                    <div class="tooltip-header">Institutional Lead Custodian Agency</div>
+                    <div style="font-size:0.75rem; margin-bottom:6px; color:var(--text-cream); font-weight:500;">${kpi.leadAgency}</div>
+                    <div class="tooltip-header">Policy Anchor & Roadmap Strategic Mandate</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted); line-height:1.3;">${kpi.policyAnchor}</div>
+                `;
+
+                // Assembly framework execution pipeline
+                card.appendChild(headerRow);
+                card.appendChild(dataDisplayRow);
+                card.appendChild(footerRow);
+                card.appendChild(trayExtension);
+                
+                gridContainer.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head><script src="/_sdk/telemetry_sdk.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BIRD 2026–2035</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&amp;family=DM+Sans:wght@300;400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: '#022c22',
+            emerald: '#064e3b',
+            gold: '#c9a84c',
+            'gold-light': '#e8c560',
+            cream: '#f7f3eb',
+            mint: '#6ee7b7'
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
+            mono: ['Space Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    .app-wrapper { height: 100%; overflow-y: auto; overflow-x: hidden; }
+    .grid-overlay {
+      background-image: linear-gradient(rgba(110,231,183,0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(110,231,183,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .gold-glow {
+      background: radial-gradient(ellipse at 50% 30%, rgba(201,168,76,0.15) 0%, transparent 60%);
+    }
+    .mint-glow {
+      background: radial-gradient(ellipse at 70% 60%, rgba(110,231,183,0.08) 0%, transparent 50%);
+    }
+    .gold-gradient {
+      background: linear-gradient(135deg, #7a5c1e, #c9a84c, #e8c560);
+    }
+    .gold-text {
+      background: linear-gradient(135deg, #c9a84c, #e8c560);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(201,168,76,0.15);
+    }
+    .gold-rule {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+    }
+    .score-bar-bg {
+      background: rgba(110,231,183,0.1);
+      border-radius: 999px;
+    }
+    .score-bar-fill {
+      background: linear-gradient(90deg, #064e3b, #6ee7b7);
+      border-radius: 999px;
+      height: 100%;
+      transition: width 0.8s ease;
+    }
+    .slide {
+      min-height: 100%;
+      position: relative;
+    }
+    .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.8s ease forwards; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-forest text-cream font-sans">
+  <div class="app-wrapper" id="app">
+   <!-- SLIDE 1: Hero -->
+   <section class="slide grid-overlay relative flex flex-col justify-center items-center px-6 py-16 text-center">
+    <div class="gold-glow absolute inset-0 pointer-events-none"></div>
+    <div class="relative z-10 max-w-4xl mx-auto fade-up">
+     <p class="eyebrow text-gold mb-6">BOI-MTIT · BARMM · BIRD 2026–2035</p>
+     <h1 class="font-serif text-5xl md:text-7xl font-bold leading-tight mb-6" id="main-title">The Emerging <span class="gold-text">Bangsamoro</span><br><em class="text-3xl md:text-4xl font-normal text-mint/80">A Hub for Resilient &amp; Ethical Growth</em></h1>
+     <p class="text-lg text-cream/70 max-w-2xl mx-auto mb-12">Transitioning from post-conflict recovery to the Philippines' premier halal, agro-industrial, and sustainable investment destination.</p>
+     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+      <div class="bg-emerald/50 border border-gold/20 rounded-lg p-4">
+       <p class="font-serif text-2xl font-bold gold-text">₱299.5B</p>
+       <p class="text-xs text-cream/60 mt-1">GRDP 2024</p>
+      </div>
+      <div class="bg-emerald/50 border border-gold/20 rounded-lg p-4">
+       <p class="font-serif text-2xl font-bold gold-text">₱5.1B</p>
+       <p class="text-xs text-cream/60 mt-1">Investments Q1 2026</p>
+      </div>
+      <div class="bg-emerald/50 border border-gold/20 rounded-lg p-4">
+       <p class="font-serif text-2xl font-bold gold-text">34.8%</p>
+       <p class="text-xs text-cream/60 mt-1">Poverty Rate ↓55.9%</p>
+      </div>
+      <div class="bg-emerald/50 border border-gold/20 rounded-lg p-4">
+       <p class="font-serif text-2xl font-bold gold-text">5.69M</p>
+       <p class="text-xs text-cream/60 mt-1">Population</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- SLIDE 2: BEIE Framework -->
+   <section class="slide relative px-6 py-16 flex flex-col justify-center">
+    <div class="mint-glow absolute inset-0 pointer-events-none"></div>
+    <div class="relative z-10 max-w-5xl mx-auto">
+     <p class="eyebrow text-mint mb-4">Chapter 2A · Framework</p>
+     <h2 class="font-serif text-4xl md:text-5xl font-bold mb-6">The Bangsamoro Economic &amp; Investment Ecosystem <span class="gold-text">(BEIE)</span></h2>
+     <p class="text-cream/70 text-lg mb-10 max-w-3xl">Sectors are deeply interconnected—not silos. The BEIE maps investment flows across 5 functional clusters unified by a single cross-cutting operating system.</p>
+     <div class="bg-emerald/40 border border-mint/20 rounded-2xl p-8 card-hover">
+      <p class="eyebrow text-gold mb-3">Cross-Cutting Operating System</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-4">
+       <div class="text-center"><span class="text-3xl">⚖️</span>
+        <p class="text-sm mt-2 font-medium">Moral Governance</p>
+       </div>
+       <div class="text-center"><span class="text-3xl">🛡️</span>
+        <p class="text-sm mt-2 font-medium">Resilience</p>
+       </div>
+       <div class="text-center"><span class="text-3xl">🤲</span>
+        <p class="text-sm mt-2 font-medium">Inclusivity</p>
+       </div>
+       <div class="text-center"><span class="text-3xl">🕊️</span>
+        <p class="text-sm mt-2 font-medium">Peace &amp; Security</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- SLIDE 3: 5 Functional Clusters -->
+   <section class="slide bg-emerald/20 px-6 py-16 flex flex-col justify-center">
+    <div class="max-w-6xl mx-auto">
+     <p class="eyebrow text-gold mb-4">Chapter 2B–F · Clusters</p>
+     <h2 class="font-serif text-4xl md:text-5xl font-bold mb-10">The 5 Functional Clusters</h2>
+     <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <div class="bg-forest border border-gold/20 rounded-xl p-5 card-hover">
+       <span class="text-2xl">🌾</span>
+       <h3 class="font-serif text-lg font-bold mt-3 gold-text">Foundations</h3>
+       <p class="text-xs text-cream/60 mt-2">AFF (32.4% GRDP), Green Economy, Carbon Markets</p>
+      </div>
+      <div class="bg-forest border border-gold/20 rounded-xl p-5 card-hover">
+       <span class="text-2xl">🏭</span>
+       <h3 class="font-serif text-lg font-bold mt-3 gold-text">Transformers</h3>
+       <p class="text-xs text-cream/60 mt-2">Halal Manufacturing, Agro-processing, Bangsamoro Halal Park</p>
+      </div>
+      <div class="bg-forest border border-gold/20 rounded-xl p-5 card-hover">
+       <span class="text-2xl">🔧</span>
+       <h3 class="font-serif text-lg font-bold mt-3 gold-text">Enablers</h3>
+       <p class="text-xs text-cream/60 mt-2">ZBIP (₱6.67B), Farm-to-market roads, Digital Infra</p>
+      </div>
+      <div class="bg-forest border border-gold/20 rounded-xl p-5 card-hover">
+       <span class="text-2xl">🌏</span>
+       <h3 class="font-serif text-lg font-bold mt-3 gold-text">Connectors</h3>
+       <p class="text-xs text-cream/60 mt-2">BIMP-EAGA Gateway, UAE Halal Corridor, Eco-tourism</p>
+      </div>
+      <div class="bg-forest border border-gold/20 rounded-xl p-5 card-hover">
+       <span class="text-2xl">🕌</span>
+       <h3 class="font-serif text-lg font-bold mt-3 gold-text">Financiers</h3>
+       <p class="text-xs text-cream/60 mt-2">Islamic Banking, Takaful, Waqf, Microfinance</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- SLIDE 4: SWOT -->
+   <section class="slide bg-cream text-forest px-6 py-16 flex flex-col justify-center">
+    <div class="max-w-6xl mx-auto">
+     <p class="eyebrow text-emerald mb-4">Chapter 3A · Analysis</p>
+     <h2 class="font-serif text-4xl md:text-5xl font-bold mb-10">Quantified SWOT Analysis</h2>
+     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div class="bg-white border-2 border-emerald/20 rounded-xl p-5 card-hover">
+       <p class="text-xs font-mono text-emerald/60 uppercase">⬆ Strength · RI 5.0</p>
+       <h3 class="font-serif text-lg font-bold mt-2">Halal Legitimacy</h3>
+       <p class="text-sm text-forest/70 mt-2">Cultural credibility with 5.69M Muslim base.</p>
+       <p class="font-mono text-xs text-gold mt-3">RI = (I × L) / 5</p>
+      </div>
+      <div class="bg-white border-2 border-red-200 rounded-xl p-5 card-hover">
+       <p class="text-xs font-mono text-red-500 uppercase">⬇ Weakness · Risk 25</p>
+       <h3 class="font-serif text-lg font-bold mt-2">Infrastructure Deficits</h3>
+       <p class="text-sm text-forest/70 mt-2">Energy, Roads, &lt;30% Broadband coverage.</p>
+       <p class="font-mono text-xs text-gold mt-3">Risk = I × L</p>
+      </div>
+      <div class="bg-white border-2 border-emerald/20 rounded-xl p-5 card-hover">
+       <p class="text-xs font-mono text-emerald/60 uppercase">⬆ Opportunity · RI 5.0</p>
+       <h3 class="font-serif text-lg font-bold mt-2">Global Halal Market</h3>
+       <p class="text-sm text-forest/70 mt-2">USD 2.3T market &amp; BIMP-EAGA integration.</p>
+       <p class="font-mono text-xs text-gold mt-3">RI = √(I × L)</p>
+      </div>
+      <div class="bg-white border-2 border-red-200 rounded-xl p-5 card-hover">
+       <p class="text-xs font-mono text-red-500 uppercase">⬇ Threat · VI 5.0</p>
+       <h3 class="font-serif text-lg font-bold mt-2">Climate Vulnerabilities</h3>
+       <p class="text-sm text-forest/70 mt-2">El Niño, ₱346M crop losses.</p>
+       <p class="font-mono text-xs text-gold mt-3">VI = (I² × L) / 25</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- SLIDE 5: Systems Mapping -->
+   <section class="slide grid-overlay px-6 py-16 flex flex-col justify-center">
+    <div class="max-w-4xl mx-auto">
+     <p class="eyebrow text-mint mb-4">Chapter 3B · Systems Thinking</p>
+     <h2 class="font-serif text-4xl md:text-5xl font-bold mb-10">Diagnosing the Ecosystem</h2>
+     <div class="space-y-4">
+      <div class="bg-emerald/30 border-l-4 border-gold rounded-r-lg p-5">
+       <h3 class="font-semibold text-mint">Limits to Growth</h3>
+       <p class="text-sm text-cream/70 mt-1">Infrastructure/Human Capital ceilings. <span class="font-mono text-xs text-gold">Leverage: L10 Stock-Flow</span></p>
+      </div>
+      <div class="bg-emerald/30 border-l-4 border-gold rounded-r-lg p-5">
+       <h3 class="font-semibold text-mint">Fixes that Fail</h3>
+       <p class="text-sm text-cream/70 mt-1">Short-term incentives vs. systemic reform. <span class="font-mono text-xs text-gold">Leverage: L5 Rules</span></p>
+      </div>
+      <div class="bg-emerald/30 border-l-4 border-gold rounded-r-lg p-5">
+       <h3 class="font-semibold text-mint">Tragedy of the Commons</h3>
+       <p class="text-sm text-cream/70 mt-1">Fragmented resource governance. <span class="font-mono text-xs text-gold">Leverage: L4 Self-Organization</span></p>
+      </div>
+      <div class="bg-emerald/30 border-l-4 border-gold rounded-r-lg p-5">
+       <h3 class="font-semibold text-mint">Success to the Successful</h3>
+       <p class="text-sm text-cream/70 mt-1">Mainland vs. Archipelagic inequality. <span class="font-mono text-xs text-gold">Leverage: L5 Rules/Equity</span></p>
+      </div>
+      <div class="bg-emerald/30 border-l-4 border-gold rounded-r-lg p-5">
+       <h3 class="font-semibold text-mint">Growth &amp; Underinvestment</h3>
+       <p class="text-sm text-cream/70 mt-1">Facilitation lagging behind approvals. <span class="font-mono text-xs text-gold">Leverage: L9 Delay Lengths</span></p>
+      </div>
+     </div>
+    </div>
+   </section><!-- SLIDE 5.5: Internal Resilience Drivers -->
+   <section class="slide bg-cream text-forest px-6 py-16 flex flex-col justify-center">
+    <div class="max-w-6xl mx-auto">
+     <p class="eyebrow text-emerald mb-4">Chapter 3C · Resilience</p>
+     <h2 class="font-serif text-4xl md:text-5xl font-bold mb-2" id="resilience-headline">Internal Resilience Drivers</h2>
+     <p class="text-forest/60 text-sm mb-8 font-mono">Buffering capacity of internal assets against external shocks. Scale: 1–5 (higher = stronger structural resilience)</p>
+     <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+       <thead>
+        <tr class="border-b-2 border-emerald/30">
+         <th class="text-left py-3 px-2 font-semibold text-emerald">Strength</th>
+         <th class="text-center py-3 px-2 font-mono text-xs text-emerald/70">Impact</th>
+         <th class="text-center py-3 px-2 font-mono text-xs text-emerald/70">Likelihood</th>
+         <th class="text-center py-3 px-2 font-serif font-bold text-emerald">RI</th>
+         <th class="text-left py-3 px-2 text-xs text-forest/60">Provincial Focus</th>
+        </tr>
+       </thead>
+       <tbody class="divide-y divide-emerald/10">
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Halal Legitimacy &amp; Cultural Credibility</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-gradient-to-r from-emerald to-mint flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-gradient-to-r from-emerald to-mint flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-gold text-lg">5.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Mag. del Norte, Lanao del Sur</td>
+        </tr>
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Domestic Halal Demand</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-gradient-to-r from-emerald to-mint flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-gradient-to-r from-emerald to-mint flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-gold text-lg">5.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Regional (5.69M base)</td>
+        </tr>
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Young, Growing Population</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-gradient-to-r from-emerald to-mint flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-gradient-to-r from-emerald to-mint flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-gold text-lg">5.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Mag. del Norte (4.3% growth)</td>
+        </tr>
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Strategic Location (BIMP-EAGA)</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/40 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-gradient-to-r from-emerald to-mint flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-gold text-lg">4.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Tawi-Tawi, Basilan</td>
+        </tr>
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Strong AFF Base</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/40 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/40 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-gold text-lg">3.2</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Basilan (rubber), Tawi-Tawi (seaweed)</td>
+        </tr>
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Polloc Freeport &amp; Economic Zone</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/40 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/40 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-gold text-lg">3.2</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Maguindanao del Norte</td>
+        </tr>
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Renewable Energy Endowments</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/40 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/40 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-gold text-lg">3.2</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Lanao del Sur (hydro)</td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <p class="text-xs text-forest/50 mt-6 font-mono">Formula: RI = (Impact × Likelihood) / 5 · Provinces ranked by concentration of strength assets</p>
+    </div>
+   </section><!-- SLIDE 5.6: Internal Risk Exposure -->
+   <section class="slide bg-cream text-forest px-6 py-16 flex flex-col justify-center">
+    <div class="max-w-6xl mx-auto">
+     <p class="eyebrow text-red-500 mb-4">Chapter 3D · Risk Analysis</p>
+     <h2 class="font-serif text-4xl md:text-5xl font-bold mb-2" id="weaknesses-headline">Internal Risk Exposure</h2>
+     <p class="text-forest/60 text-sm mb-8 font-mono">Quantifies exposure to internal deficits that may hinder growth. Scale: 1–25 (higher = critical vulnerabilities requiring immediate mitigation)</p>
+     <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+       <thead>
+        <tr class="border-b-2 border-red-300">
+         <th class="text-left py-3 px-2 font-semibold text-forest">Weakness</th>
+         <th class="text-center py-3 px-2 font-mono text-xs text-forest/70">Impact</th>
+         <th class="text-center py-3 px-2 font-mono text-xs text-forest/70">Likelihood</th>
+         <th class="text-center py-3 px-2 font-serif font-bold text-red-500">Risk Score</th>
+         <th class="text-left py-3 px-2 text-xs text-forest/60">Provincial Focus</th>
+        </tr>
+       </thead>
+       <tbody class="divide-y divide-red-100">
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Critical Infrastructure Deficits</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-400 flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-400 flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">25.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Tawi-Tawi, Basilan, Sulu</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Highest Poverty Incidence</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-400 flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-400 flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">25.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Sulu (39.5%), Basilan (33.7%)</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Weak Halal Certification System</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">20.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Regional (BHB bottleneck)</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Lowest Functional Literacy Rate</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">20.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Sulu, Tawi-Tawi, Basilan</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Minimal Formal Financial Penetration</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-200 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-200 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">16.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Tawi-Tawi, Sulu, Basilan</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Fragmented Policy Frameworks</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-200 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-200 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">16.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Regional (inter-ministerial)</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Limited Agro-Processing / Cold Chain</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-200 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-200 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">16.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Mag. del Sur, Basilan, Tawi-Tawi</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Weak Market Linkages</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-200 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-200 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">16.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Rural municipalities (all provinces)</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Low Technology Adoption</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-orange-300 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-orange-200 flex items-center justify-center text-forest font-bold text-xs">3</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">12.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Rural areas; Moderate in LDS, MDN</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Underspending in Budget Execution</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-orange-300 flex items-center justify-center text-forest font-bold text-xs">3</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-orange-300 flex items-center justify-center text-forest font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">12.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Regional (absorptive capacity)</td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <p class="text-xs text-forest/50 mt-6 font-mono">Formula: Risk = Impact × Likelihood · Red scores (25.0, 20.0) demand urgent infrastructure and poverty mitigation interventions</p>
+    </div>
+   </section><!-- SLIDE 5.7: External Resilience Drivers (Opportunities) -->
+   <section class="slide bg-cream text-forest px-6 py-16 flex flex-col justify-center">
+    <div class="max-w-6xl mx-auto">
+     <p class="eyebrow text-emerald mb-4">Chapter 3E · Opportunities</p>
+     <h2 class="font-serif text-4xl md:text-5xl font-bold mb-2" id="opportunities-headline">External Resilience Drivers</h2>
+     <p class="text-forest/60 text-sm mb-8 font-mono">Measures strategic potential to capitalize on external positive forces. Scale: 1–5 (higher = greater opportunity exploitation potential)</p>
+     <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+       <thead>
+        <tr class="border-b-2 border-emerald/30">
+         <th class="text-left py-3 px-2 font-semibold text-forest">Opportunity</th>
+         <th class="text-center py-3 px-2 font-mono text-xs text-forest/70">Impact</th>
+         <th class="text-center py-3 px-2 font-mono text-xs text-forest/70">Likelihood</th>
+         <th class="text-center py-3 px-2 font-serif font-bold text-emerald">RI</th>
+         <th class="text-left py-3 px-2 text-xs text-forest/60">Provincial Focus</th>
+        </tr>
+       </thead>
+       <tbody class="divide-y divide-emerald/10">
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Global Halal Market</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-gradient-to-r from-emerald to-mint flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-gradient-to-r from-emerald to-mint flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-emerald text-lg">5.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Regional (USD 2.3T)</td>
+        </tr>
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Renewable Energy Investments</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-gradient-to-r from-emerald to-mint flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/60 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-emerald text-lg">4.5</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Lanao del Sur (hydro)</td>
+        </tr>
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">ASEAN Halal Economy</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-gradient-to-r from-emerald to-mint flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/60 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-emerald text-lg">4.5</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Regional (USD 1.38T)</td>
+        </tr>
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Islamic Finance Ecosystem</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-gradient-to-r from-emerald to-mint flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/60 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-emerald text-lg">4.5</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Regional (Al-Amanah, CARD)</td>
+        </tr>
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">BIMP-EAGA Regional Integration</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/60 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/60 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-emerald text-lg">4.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Tawi-Tawi, Basilan</td>
+        </tr>
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">UAE/GCC Halal Export Corridor</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/60 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/60 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-emerald text-lg">4.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Mag. del Norte, Tawi-Tawi</td>
+        </tr>
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Carbon Markets &amp; REDD+</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/60 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/40 flex items-center justify-center text-forest font-bold text-xs">3</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-emerald text-lg">3.5</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Lanao del Sur (highlands)</td>
+        </tr>
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Payment for Ecosystem Services (PES)</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/60 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/40 flex items-center justify-center text-forest font-bold text-xs">3</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-emerald text-lg">3.5</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Lake Lanao, Tawi-Tawi</td>
+        </tr>
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Post-Conflict Reconstruction</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/60 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/40 flex items-center justify-center text-forest font-bold text-xs">3</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-emerald text-lg">3.5</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Lanao del Sur</td>
+        </tr>
+        <tr class="hover:bg-emerald/5 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Tourism Recovery</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/40 flex items-center justify-center text-forest font-bold text-xs">3</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-emerald/60 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-emerald text-lg">3.5</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Basilan, Lanao del Sur</td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <p class="text-xs text-forest/50 mt-6 font-mono">Formula: RI = √(Impact × Likelihood) · Square root moderates extreme values, balancing attractiveness with feasibility</p>
+    </div>
+   </section><!-- SLIDE 5.8: External Vulnerability Factors (Threats) -->
+   <section class="slide bg-cream text-forest px-6 py-16 flex flex-col justify-center">
+    <div class="max-w-6xl mx-auto">
+     <p class="eyebrow text-red-500 mb-4">Chapter 3F · Threats</p>
+     <h2 class="font-serif text-4xl md:text-5xl font-bold mb-2" id="threats-headline">External Vulnerability Factors</h2>
+     <p class="text-forest/60 text-sm mb-8 font-mono">Reflects severity of external negative forces, emphasizing catastrophic potential of high-impact threats. Scale: 1–5 (higher = existential or systemic risks)</p>
+     <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+       <thead>
+        <tr class="border-b-2 border-red-300">
+         <th class="text-left py-3 px-2 font-semibold text-forest">Threat</th>
+         <th class="text-center py-3 px-2 font-mono text-xs text-forest/70">Impact</th>
+         <th class="text-center py-3 px-2 font-mono text-xs text-forest/70">Likelihood</th>
+         <th class="text-center py-3 px-2 font-serif font-bold text-red-500">VI</th>
+         <th class="text-left py-3 px-2 text-xs text-forest/60">Provincial Focus</th>
+        </tr>
+       </thead>
+       <tbody class="divide-y divide-red-100">
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Climate Change Vulnerabilities</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-400 flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-400 flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">5.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">All provinces (4.2% AFF contraction)</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Competition from Halal Hubs</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-400 flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">4.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Regional (Malaysia, Indonesia)</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Standards Recognition Risk</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-400 flex items-center justify-center text-white font-bold text-xs">5</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">4.0</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Regional (OIC/SMIIC alignment)</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Political Transition Uncertainties</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">2.6</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Regional (parliamentary elections)</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Infrastructure Cost Overruns</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">2.6</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Regional (project delays)</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Market Price Volatility</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">2.6</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Basilan (rubber), Tawi-Tawi (seaweed)</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Risk of Fragmented Mandates</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">2.6</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Regional (inter-ministerial silos)</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Residual Security Incidents</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-200 flex items-center justify-center text-forest font-bold text-xs">3</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">1.9</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Mag. del Sur, Sulu</td>
+        </tr>
+        <tr class="hover:bg-red-50 transition-colors">
+         <td class="py-3 px-2 font-semibold text-forest">Limited National Coordination</td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-300 flex items-center justify-center text-white font-bold text-xs">4</span></td>
+         <td class="text-center py-3 px-2"><span class="inline-block w-6 h-6 rounded-full bg-red-200 flex items-center justify-center text-forest font-bold text-xs">3</span></td>
+         <td class="text-center py-3 px-2 font-serif font-bold text-red-500 text-lg">1.9</td>
+         <td class="py-3 px-2 text-xs text-forest/60">Regional (funding gaps)</td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <p class="text-xs text-forest/50 mt-6 font-mono">Formula: VI = (Impact² × Likelihood) / 25 · Emphasizes catastrophic potential; scores 4.0+ indicate systemic risk concentration</p>
+    </div>
+   </section><!-- SLIDE 6: Strategy -->
+   <section class="slide px-6 py-16 flex flex-col justify-center">
+    <div class="gold-glow absolute inset-0 pointer-events-none"></div>
+    <div class="relative z-10 max-w-4xl mx-auto">
+     <p class="eyebrow text-gold mb-4">Chapter 4 · Strategy</p>
+     <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4">Integrated Ecosystem Development <span class="gold-text">(IEDS)</span></h2>
+     <p class="text-cream/70 mb-10">The only pathway to ₱550B GRDP by resolving all systemic bottlenecks through coherent sequencing.</p>
+     <div class="space-y-4 mb-8">
+      <div>
+       <div class="flex justify-between text-sm mb-1"><span>Economic Impact</span><span class="text-gold font-bold">9.5</span>
+       </div>
+       <div class="score-bar-bg h-3">
+        <div class="score-bar-fill" style="width:95%"></div>
+       </div>
+      </div>
+      <div>
+       <div class="flex justify-between text-sm mb-1"><span>Systems Leverage</span><span class="text-gold font-bold">10.0</span>
+       </div>
+       <div class="score-bar-bg h-3">
+        <div class="score-bar-fill" style="width:100%"></div>
+       </div>
+      </div>
+      <div>
+       <div class="flex justify-between text-sm mb-1"><span>Identity Alignment</span><span class="text-gold font-bold">9.0</span>
+       </div>
+       <div class="score-bar-bg h-3">
+        <div class="score-bar-fill" style="width:90%"></div>
+       </div>
+      </div>
+      <div>
+       <div class="flex justify-between text-sm mb-1"><span>Feasibility</span><span class="text-gold font-bold">8.0</span>
+       </div>
+       <div class="score-bar-bg h-3">
+        <div class="score-bar-fill" style="width:80%"></div>
+       </div>
+      </div>
+     </div>
+     <div class="text-center bg-emerald/40 border border-gold/30 rounded-xl p-6">
+      <p class="font-mono text-sm text-gold/80 uppercase tracking-widest">Composite Score</p>
+      <p class="font-serif text-5xl font-bold gold-text mt-2">8.93 / 10</p>
+     </div>
+    </div>
+   </section><!-- SLIDE 7: KPIs -->
+   <section class="slide grid-overlay px-6 py-16 flex flex-col justify-center">
+    <div class="max-w-5xl mx-auto">
+     <p class="eyebrow text-mint mb-4">Chapter 5 · Metrics</p>
+     <h2 class="font-serif text-4xl md:text-5xl font-bold mb-10">Global Benchmarks &amp; 2035 Targets</h2>
+     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="bg-emerald/40 border border-mint/20 rounded-xl p-5 text-center card-hover">
+       <p class="font-mono text-xs text-mint/70 uppercase">OIC/SMIIC</p>
+       <p class="font-serif text-xl font-bold mt-2">21-Day</p>
+       <p class="text-xs text-cream/60 mt-1">Halal Certification</p>
+      </div>
+      <div class="bg-emerald/40 border border-mint/20 rounded-xl p-5 text-center card-hover">
+       <p class="font-mono text-xs text-mint/70 uppercase">ESG</p>
+       <p class="font-serif text-xl font-bold mt-2">&lt;20%</p>
+       <p class="text-xs text-cream/60 mt-1">Poverty Incidence</p>
+      </div>
+      <div class="bg-emerald/40 border border-mint/20 rounded-xl p-5 text-center card-hover">
+       <p class="font-mono text-xs text-mint/70 uppercase">PDP</p>
+       <p class="font-serif text-xl font-bold mt-2">5–6% p.a.</p>
+       <p class="text-xs text-cream/60 mt-1">GRDP Growth</p>
+      </div>
+      <div class="bg-emerald/40 border border-mint/20 rounded-xl p-5 text-center card-hover">
+       <p class="font-mono text-xs text-mint/70 uppercase">SDGs</p>
+       <p class="font-serif text-xl font-bold mt-2">75%+</p>
+       <p class="text-xs text-cream/60 mt-1">Functional Literacy</p>
+      </div>
+      <div class="bg-emerald/40 border border-mint/20 rounded-xl p-5 text-center card-hover">
+       <p class="font-mono text-xs text-mint/70 uppercase">BIRD</p>
+       <p class="font-serif text-xl font-bold mt-2">₱550B+</p>
+       <p class="text-xs text-cream/60 mt-1">GRDP by 2035</p>
+      </div>
+      <div class="bg-emerald/40 border border-mint/20 rounded-xl p-5 text-center card-hover">
+       <p class="font-mono text-xs text-mint/70 uppercase">BIRD</p>
+       <p class="font-serif text-xl font-bold mt-2">5,000+</p>
+       <p class="text-xs text-cream/60 mt-1">Halal-Certified MSMEs</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- SLIDE 8: Balanced Scorecard -->
+   <section class="slide bg-cream text-forest px-6 py-16 flex flex-col justify-center">
+    <div class="max-w-5xl mx-auto">
+     <p class="eyebrow text-emerald mb-4">Chapter 6 · Scorecard</p>
+     <h2 class="font-serif text-4xl md:text-5xl font-bold mb-10">Balanced Scorecard Alignment</h2>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="bg-white border border-emerald/20 rounded-xl p-6 card-hover">
+       <span class="text-2xl">💰</span>
+       <h3 class="font-serif text-xl font-bold mt-3">Financial</h3>
+       <p class="text-sm text-forest/70 mt-2">₱15B p.a. approvals, ₱40B+ exports, ₱20B+ Islamic assets</p>
+      </div>
+      <div class="bg-white border border-emerald/20 rounded-xl p-6 card-hover">
+       <span class="text-2xl">🤝</span>
+       <h3 class="font-serif text-xl font-bold mt-3">Stakeholder</h3>
+       <p class="text-sm text-forest/70 mt-2">85% project retention, &lt;20% poverty, 20,000+ jobs</p>
+      </div>
+      <div class="bg-white border border-emerald/20 rounded-xl p-6 card-hover">
+       <span class="text-2xl">⚙️</span>
+       <h3 class="font-serif text-xl font-bold mt-3">Internal Process</h3>
+       <p class="text-sm text-forest/70 mt-2">1-day digital registration, &gt;90% budget execution, OIC MRA signed</p>
+      </div>
+      <div class="bg-white border border-emerald/20 rounded-xl p-6 card-hover">
+       <span class="text-2xl">🧠</span>
+       <h3 class="font-serif text-xl font-bold mt-3">Learning &amp; Growth</h3>
+       <p class="text-sm text-forest/70 mt-2">100+ Halal officers, 75%+ literacy, 200+ LGU carbon/PES trained</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- SLIDE 9: Implementation Phases -->
+   <section class="slide px-6 py-16 flex flex-col justify-center">
+    <div class="max-w-6xl mx-auto">
+     <p class="eyebrow text-gold mb-4">Chapter 7 · Phases</p>
+     <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4">Three-Phase Architecture</h2>
+     <p class="text-cream/60 font-mono text-sm mb-10">₱120–160B Total Investment</p>
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="bg-emerald/40 border border-gold/30 rounded-xl p-6 card-hover">
+       <p class="font-mono text-xs text-gold uppercase">Phase 1 · 2026–2028</p>
+       <p class="font-serif text-2xl font-bold gold-text mt-2">₱35–45B</p>
+       <h3 class="font-semibold mt-3 text-mint">Foundation Building</h3>
+       <p class="text-sm text-cream/60 mt-2">Enact Forestry Code, Operationalize BHB, ZBIP milestones, 1-day digital registration.</p>
+      </div>
+      <div class="bg-emerald/40 border border-gold/30 rounded-xl p-6 card-hover">
+       <p class="font-mono text-xs text-gold uppercase">Phase 2 · 2029–2032</p>
+       <p class="font-serif text-2xl font-bold gold-text mt-2">₱50–65B</p>
+       <h3 class="font-semibold mt-3 text-mint">Acceleration</h3>
+       <p class="text-sm text-cream/60 mt-2">Halal Park operational, REDD+ registered, Islamic banking in all capitals, 5,000 MSMEs certified.</p>
+      </div>
+      <div class="bg-emerald/40 border border-gold/30 rounded-xl p-6 card-hover">
+       <p class="font-mono text-xs text-gold uppercase">Phase 3 · 2033–2035</p>
+       <p class="font-serif text-2xl font-bold gold-text mt-2">₱35–50B</p>
+       <h3 class="font-semibold mt-3 text-mint">Consolidation</h3>
+       <p class="text-sm text-cream/60 mt-2">OIC MRA signed, ₱500M+ carbon revenue, GRDP ₱550B+, Full BIMP-EAGA integration.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- SLIDE 10: Governance -->
+   <section class="slide grid-overlay px-6 py-16 flex flex-col justify-center">
+    <div class="max-w-4xl mx-auto">
+     <p class="eyebrow text-mint mb-4">Chapter 7 · Governance</p>
+     <h2 class="font-serif text-4xl md:text-5xl font-bold mb-10">Bangsamoro Investment Command Center <span class="gold-text">(BICC)</span></h2>
+     <div class="space-y-5">
+      <div class="flex items-start gap-4">
+       <span class="gold-text text-xl">✦</span>
+       <p class="text-cream/80">Establish BICC for real-time tracking and cross-agency synchronization.</p>
+      </div>
+      <div class="flex items-start gap-4">
+       <span class="gold-text text-xl">✦</span>
+       <p class="text-cream/80">Inter-Agency MOAs to prevent the "Tragedy of the Commons".</p>
+      </div>
+      <div class="flex items-start gap-4">
+       <span class="gold-text text-xl">✦</span>
+       <p class="text-cream/80">Trigger-based budgeting and quarterly MEL Dashboard reviews.</p>
+      </div>
+      <div class="flex items-start gap-4">
+       <span class="gold-text text-xl">✦</span>
+       <p class="text-cream/80">Provincial Equity Mandate: Minimum 30% infrastructure budget for lagging archipelagic provinces.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- SLIDE 11: Policy Recommendations -->
+   <section class="slide bg-cream text-forest px-6 py-16 flex flex-col justify-center">
+    <div class="max-w-6xl mx-auto">
+     <p class="eyebrow text-emerald mb-4">Chapter 8 · Action</p>
+     <h2 class="font-serif text-4xl md:text-5xl font-bold mb-10">The Call to Action</h2>
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="bg-white border border-emerald/20 rounded-xl p-6">
+       <h3 class="font-serif text-lg font-bold text-emerald mb-3">For Policymakers</h3>
+       <ul class="text-sm text-forest/70 space-y-2">
+        <li>• Enact Forestry Code &amp; JMC 2026-01</li>
+        <li>• Fast-track BHIDP</li>
+        <li>• Institutionalize BICC</li>
+       </ul>
+      </div>
+      <div class="bg-white border border-emerald/20 rounded-xl p-6">
+       <h3 class="font-serif text-lg font-bold text-emerald mb-3">For Planners</h3>
+       <ul class="text-sm text-forest/70 space-y-2">
+        <li>• Infrastructure-first sequencing</li>
+        <li>• Provincial value-chain mapping</li>
+        <li>• MSME digitalization</li>
+       </ul>
+      </div>
+      <div class="bg-white border border-emerald/20 rounded-xl p-6">
+       <h3 class="font-serif text-lg font-bold text-emerald mb-3">For Investors</h3>
+       <ul class="text-sm text-forest/70 space-y-2">
+        <li>• Halal agro-processing (Matanog)</li>
+        <li>• Green Economy / REDD+</li>
+        <li>• Islamic Fintech &amp; Eco-tourism</li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </section><!-- SLIDE 12: Contact -->
+   <section class="slide relative px-6 py-16 flex flex-col justify-center items-center text-center">
+    <div class="gold-glow absolute inset-0 pointer-events-none"></div>
+    <div class="relative z-10 max-w-3xl mx-auto">
+     <p class="eyebrow text-gold mb-6">Invest · Partner · Grow</p>
+     <h2 class="font-serif text-4xl md:text-6xl font-bold mb-6" id="conclusion-title">Invest in the Emerging <span class="gold-text">Bangsamoro</span></h2>
+     <p class="text-lg text-cream/70 mb-8">The window of opportunity is open. The peace dividend is real. Decisive action is now required.</p>
+     <div class="gold-rule w-32 mx-auto mb-8"></div>
+     <p class="text-cream/60 text-sm mb-8" id="contact-info">BOI-MTIT · Cotabato City · <span id="email-display">boi@bangsamoro.gov.ph</span></p>
+     <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <button class="gold-gradient text-forest font-semibold px-8 py-3 rounded-lg hover:opacity-90 transition-opacity">Download Full Roadmap</button> <button class="border-2 border-gold/50 text-gold px-8 py-3 rounded-lg hover:bg-gold/10 transition-colors">Contact Investment Facilitation</button>
+     </div>
+    </div>
+   </section>
+  </div>
+  <script>
+    lucide.createIcons();
+
+    const defaultConfig = {
+      presentation_title: 'The Emerging Bangsamoro',
+      contact_email: 'boi@bangsamoro.gov.ph',
+      background_color: '#022c22',
+      surface_color: '#064e3b',
+      text_color: '#f7f3eb',
+      primary_action_color: '#c9a84c',
+      secondary_action_color: '#6ee7b7',
+      font_family: 'Cormorant Garamond',
+      font_size: 16
+    };
+
+    function applyConfig(config) {
+      const app = document.getElementById('app');
+      app.style.color = config.text_color || defaultConfig.text_color;
+
+      const email = document.getElementById('email-display');
+      if (email) email.textContent = config.contact_email || defaultConfig.contact_email;
+
+      const resilienceHeadline = document.getElementById('resilience-headline');
+      if (resilienceHeadline) resilienceHeadline.textContent = config.resilience_headline || 'Internal Resilience Drivers';
+
+      const weaknessesHeadline = document.getElementById('weaknesses-headline');
+      if (weaknessesHeadline) weaknessesHeadline.textContent = config.weaknesses_headline || 'Internal Risk Exposure';
+
+      const opportunitiesHeadline = document.getElementById('opportunities-headline');
+      if (opportunitiesHeadline) opportunitiesHeadline.textContent = config.opportunities_headline || 'External Resilience Drivers';
+
+      const threatsHeadline = document.getElementById('threats-headline');
+      if (threatsHeadline) threatsHeadline.textContent = config.threats_headline || 'External Vulnerability Factors';
+    }
+
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => { applyConfig(config); },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+          { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+          { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+          { get: () => config.primary_action_color || defaultConfig.primary_action_color, set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); } },
+          { get: () => config.secondary_action_color || defaultConfig.secondary_action_color, set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); } }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+        }
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['presentation_title', config.presentation_title || defaultConfig.presentation_title],
+        ['contact_email', config.contact_email || defaultConfig.contact_email],
+        ['resilience_headline', config.resilience_headline || 'Internal Resilience Drivers'],
+        ['weaknesses_headline', config.weaknesses_headline || 'Internal Risk Exposure'],
+        ['opportunities_headline', config.opportunities_headline || 'External Resilience Drivers'],
+        ['threats_headline', config.threats_headline || 'External Vulnerability Factors']
+      ])
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0b339d39222db23',t:'MTc4MTM3NjA0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

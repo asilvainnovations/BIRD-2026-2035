@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contact MTIT-BARMM — Ministry of Trade, Investments and Tourism, Bangsamoro Autonomous Region. Reach our investment facilitation team for inquiries about halal industry, Islamic finance, and business opportunities.">
+<title>Contact Us | MTIT–BARMM Investment Facilitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ===== DESIGN TOKENS ===== */
+:root{
+  --dark-green:#022c22; --primary-green:#064e3b; --mid-green:#065f46;
+  --light-green:#6ee7b7; --cream:#ecfdf5; --white:#ffffff;
+  --text-dark:#0f172a; --text-muted:#64748b;
+  --gold:#C9A84C; --gold-light:#E8C560; --gold-dark:#8B6C28;
+  --gold-border:rgba(201,168,76,0.32); --gold-border-strong:rgba(201,168,76,0.55);
+  --gold-glow:rgba(201,168,76,0.18);
+  --gold-grad:linear-gradient(135deg,#7a5c1e 0%,#c9a84c 35%,#e8c560 50%,#c9a84c 65%,#7a5c1e 100%);
+  --shadow-sm:0 2px 10px rgba(0,0,0,.06);
+  --shadow-md:0 8px 30px rgba(0,0,0,.1);
+  --shadow-lg:0 20px 60px rgba(0,0,0,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden;line-height:1.7;}
+
+/* ===== NAV ===== */
+nav{background:rgba(2,44,34,.97);backdrop-filter:blur(16px);position:sticky;top:0;z-index:300;border-bottom:2px solid var(--gold-border);transition:box-shadow .4s;}
+nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.5);}
+.nav-inner{max-width:1300px;margin:0 auto;padding:.55rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+.nav-logo img{height:52px;width:auto;object-fit:contain;display:block;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center;}
+.nav-links a{color:var(--light-green);text-decoration:none;font-size:.82rem;font-weight:500;letter-spacing:.03em;transition:color .3s;position:relative;white-space:nowrap;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--gold);transition:width .3s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-links a:hover::after{width:100%;}
+.nav-links a.active{color:var(--gold);}
+.nav-links a.active::after{width:100%;}
+.nav-cta{background:var(--gold-grad)!important;color:var(--dark-green)!important;padding:.55rem 1.25rem;border-radius:.4rem;font-weight:700!important;font-size:.78rem!important;letter-spacing:.04em;text-transform:uppercase;}
+.nav-cta::after{display:none!important;}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,168,76,.35);}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,var(--dark-green) 0%,#034030 40%,#071e3d 100%);
+  padding:5rem 2rem 0;
+  color:white;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 8L46 30L68 36L46 42L40 64L34 42L12 36L34 30Z' fill='none' stroke='%23C9A84C' stroke-width='0.5' opacity='0.07'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.hero::after{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--gold-grad);}
+.hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+.hero-content{max-width:640px;padding-bottom:4rem;}
+.breadcrumb{display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem;font-size:.75rem;color:rgba(255,255,255,.5);}
+.breadcrumb a{color:var(--light-green);text-decoration:none;transition:color .3s;}
+.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb-sep{color:rgba(255,255,255,.3);}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(201,168,76,.1);border:1px solid var(--gold-border-strong);
+  color:var(--gold);padding:.35rem 1.1rem;border-radius:2rem;
+  font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-bottom:1.25rem;
+}
+.hero-content h1{font-family:'Cinzel',serif;font-size:clamp(2rem,4.5vw,3.4rem);font-weight:700;line-height:1.15;margin-bottom:.85rem;}
+.hero-content h1 .gold{background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-content .lead{font-size:1.05rem;color:rgba(255,255,255,.72);max-width:520px;font-weight:300;line-height:1.7;margin-bottom:2rem;}
+.hero-quick-links{display:flex;flex-wrap:wrap;gap:.65rem;}
+.quick-link{
+  display:flex;align-items:center;gap:.5rem;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.75);padding:.5rem 1rem;border-radius:.5rem;
+  font-size:.8rem;font-weight:500;text-decoration:none;
+  transition:all .3s;
+}
+.quick-link svg{width:14px;height:14px;color:var(--gold);flex-shrink:0;}
+.quick-link:hover{background:rgba(201,168,76,.1);border-color:var(--gold-border-strong);color:white;}
+
+/* Hero visual strip */
+.hero-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid rgba(255,255,255,.08);
+  margin-top:0;
+}
+.strip-item{
+  padding:1.5rem 1.75rem;border-right:1px solid rgba(255,255,255,.08);
+  transition:background .3s;
+}
+.strip-item:last-child{border-right:none;}
+.strip-item:hover{background:rgba(255,255,255,.04);}
+.strip-num{font-family:'Cinzel',serif;font-size:1.6rem;font-weight:700;color:var(--gold);display:block;line-height:1;margin-bottom:.25rem;}
+.strip-lbl{font-size:.72rem;color:rgba(255,255,255,.55);letter-spacing:.06em;text-transform:uppercase;font-weight:500;}
+
+/* ===== PAGE LAYOUT ===== */
+.page{max-width:1100px;margin:0 auto;padding:4rem 2rem 5rem;}
+
+/* ===== SECTION LABEL ===== */
+.sec-label{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:.55rem;}
+.gold-div{width:44px;height:3px;background:var(--gold-grad);border-radius:2px;margin:.6rem 0 1.2rem;}
+
+/* ===== CONTACT GRID ===== */
+.contact-grid{display:grid;grid-template-columns:1fr 1.45fr;gap:3.5rem;align-items:start;}
+
+/* ===== INFO PANEL ===== */
+.info-panel{}
+.info-panel h2{font-family:'Cinzel',serif;font-size:1.55rem;color:var(--primary-green);line-height:1.25;margin-bottom:.6rem;}
+.info-panel .desc{color:var(--text-muted);font-size:.92rem;line-height:1.7;margin-bottom:2rem;}
+
+.contact-block{margin-bottom:1.8rem;}
+.contact-block-title{
+  font-family:'Cinzel',serif;font-size:.8rem;font-weight:700;
+  color:var(--gold-dark);letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;
+}
+.contact-block-title::after{content:'';flex:1;height:1px;background:rgba(6,78,59,.12);}
+
+.contact-detail-row{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.1rem;}
+.cd-icon{
+  width:40px;height:40px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--primary-green),var(--dark-green));
+  border:1px solid var(--gold-border);border-radius:.75rem;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-size:1rem;
+}
+.cd-body{}
+.cd-label{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:.15rem;}
+.cd-value{font-size:.88rem;color:var(--text-dark);line-height:1.5;}
+.cd-value a{color:var(--primary-green);text-decoration:none;transition:color .3s;}
+.cd-value a:hover{color:var(--gold-dark);}
+
+/* Agency cards */
+.agency-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:2rem;}
+.agency-card{
+  background:white;border:1px solid rgba(6,78,59,.1);border-radius:.75rem;
+  padding:1rem;transition:all .3s;
+}
+.agency-card:hover{border-color:var(--gold-border-strong);transform:translateY(-2px);box-shadow:var(--shadow-sm);}
+.agency-card-name{font-family:'Cinzel',serif;font-size:.75rem;font-weight:700;color:var(--primary-green);margin-bottom:.15rem;line-height:1.3;}
+.agency-card-abbr{font-size:.68rem;color:var(--gold-dark);font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+
+/* Hours badge */
+.hours-box{
+  background:linear-gradient(135deg,rgba(6,78,59,.06),rgba(201,168,76,.06));
+  border:1px solid var(--gold-border);border-radius:.875rem;
+  padding:1.2rem 1.4rem;display:flex;gap:1rem;align-items:flex-start;
+}
+.hours-icon{font-size:1.5rem;flex-shrink:0;margin-top:.1rem;}
+.hours-body{}
+.hours-title{font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;color:var(--primary-green);margin-bottom:.25rem;}
+.hours-text{font-size:.82rem;color:var(--text-muted);line-height:1.55;}
+.hours-note{font-size:.75rem;color:var(--text-muted);margin-top:.35rem;font-style:italic;}
+
+/* ===== FORM PANEL ===== */
+.form-panel{
+  background:linear-gradient(175deg,var(--primary-green) 0%,var(--dark-green) 100%);
+  border-radius:1.5rem;padding:2.5rem;color:white;
+  box-shadow:0 20px 60px rgba(2,44,34,.3);
+  position:relative;overflow:hidden;
+}
+.form-panel::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L36 24L55 30L36 36L30 55L24 36L5 30L24 24Z' fill='none' stroke='%23C9A84C' stroke-width='0.4' opacity='0.07'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.form-panel::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad);}
+.form-panel-inner{position:relative;z-index:1;}
+.form-header{margin-bottom:1.75rem;}
+.form-header h2{font-family:'Cinzel',serif;font-size:1.25rem;color:var(--gold);margin-bottom:.4rem;}
+.form-header p{color:rgba(255,255,255,.62);font-size:.85rem;line-height:1.55;}
+
+/* Inquiry type tabs */
+.inquiry-tabs{display:flex;gap:.5rem;margin-bottom:1.75rem;flex-wrap:wrap;}
+.inq-tab{
+  padding:.45rem 1rem;border-radius:.4rem;border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.05);color:rgba(255,255,255,.65);
+  font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;
+  cursor:pointer;transition:all .25s;letter-spacing:.02em;
+}
+.inq-tab:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);color:white;}
+.inq-tab.active{background:var(--gold-grad);color:var(--dark-green);border-color:var(--gold);font-weight:700;}
+.inq-tab:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+
+/* Form elements */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.form-group{margin-bottom:1.1rem;}
+.form-group label{
+  display:block;font-size:.72rem;font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--light-green);
+  margin-bottom:.4rem;
+}
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;padding:.8rem 1rem;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.15);border-radius:.6rem;
+  color:white;font-family:'DM Sans',sans-serif;font-size:.9rem;
+  transition:border-color .3s,background .3s;outline:none;
+  appearance:none;-webkit-appearance:none;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder{color:rgba(255,255,255,.3);}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:rgba(201,168,76,.55);background:rgba(255,255,255,.09);
+}
+.form-group select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236ee7b7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .85rem center;background-size:14px;
+  padding-right:2.5rem;cursor:pointer;
+}
+.form-group select option{background:var(--dark-green);color:white;}
+.form-group textarea{resize:vertical;min-height:100px;line-height:1.55;}
+
+/* Char counter */
+.input-hint{font-size:.7rem;color:rgba(255,255,255,.35);margin-top:.3rem;text-align:right;}
+
+/* Submit button */
+.submit-btn{
+  width:100%;padding:.95rem;margin-top:.6rem;
+  background:var(--gold-grad);color:var(--dark-green);
+  border:none;border-radius:.65rem;
+  font-family:'Cinzel',serif;font-size:.88rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+  transition:transform .3s,box-shadow .3s;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+}
+.submit-btn svg{width:16px;height:16px;}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.4);}
+.submit-btn:focus-visible{outline:2px solid var(--gold-light);outline-offset:2px;}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none;}
+
+.form-note{text-align:center;font-size:.72rem;color:rgba(255,255,255,.33);margin-top:.85rem;line-height:1.5;}
+
+/* Success state */
+.form-success{
+  display:none;text-align:center;padding:2rem 1rem;
+}
+.form-success.show{display:block;}
+.success-icon{font-size:3rem;margin-bottom:1rem;}
+.success-title{font-family:'Cinzel',serif;color:var(--gold);font-size:1.2rem;margin-bottom:.5rem;}
+.success-text{color:rgba(255,255,255,.65);font-size:.88rem;line-height:1.6;}
+
+/* ===== MAP / LOCATION SECTION ===== */
+.location-section{margin-top:4rem;}
+.location-header{margin-bottom:2rem;}
+.location-header h2{font-family:'Cinzel',serif;font-size:1.55rem;color:var(--primary-green);margin-bottom:.4rem;}
+.location-header p{color:var(--text-muted);font-size:.9rem;}
+
+.locations-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.2rem;}
+.loc-card{
+  background:white;border-radius:1rem;overflow:hidden;
+  border:1px solid rgba(6,78,59,.1);box-shadow:var(--shadow-sm);
+  transition:transform .3s,box-shadow .3s;
+}
+.loc-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);}
+.loc-card-header{
+  background:linear-gradient(135deg,var(--primary-green),var(--dark-green));
+  padding:1.2rem 1.4rem;color:white;position:relative;overflow:hidden;
+}
+.loc-card-header::after{content:'';position:absolute;bottom:-20px;right:-15px;width:80px;height:80px;background:rgba(201,168,76,.08);border-radius:50%;}
+.loc-type{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;}
+.loc-name{font-family:'Cinzel',serif;font-size:.9rem;font-weight:700;position:relative;z-index:1;line-height:1.3;}
+.loc-body{padding:1.2rem 1.4rem;}
+.loc-detail{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.75rem;}
+.loc-detail:last-child{margin-bottom:0;}
+.loc-detail svg{width:14px;height:14px;color:var(--gold-dark);flex-shrink:0;margin-top:.2rem;}
+.loc-detail span{font-size:.82rem;color:var(--text-muted);line-height:1.45;}
+.loc-detail a{color:var(--primary-green);text-decoration:none;transition:color .3s;}
+.loc-detail a:hover{color:var(--gold-dark);}
+
+/* ===== FAQ SECTION ===== */
+.faq-section{margin-top:4rem;}
+.faq-header{margin-bottom:2rem;}
+.faq-header h2{font-family:'Cinzel',serif;font-size:1.4rem;color:var(--primary-green);margin-bottom:.35rem;}
+.faq-header p{color:var(--text-muted);font-size:.9rem;}
+.faq-list{display:flex;flex-direction:column;gap:.65rem;}
+.faq-item{background:white;border-radius:.875rem;border:1px solid rgba(6,78,59,.1);overflow:hidden;transition:border-color .3s;}
+.faq-item:hover{border-color:rgba(6,78,59,.22);}
+.faq-question{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 1.4rem;background:none;border:none;cursor:pointer;
+  text-align:left;gap:1rem;
+  font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;color:var(--text-dark);
+  transition:background .25s;
+}
+.faq-question:hover{background:rgba(6,78,59,.03);}
+.faq-question:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;}
+.faq-chevron{width:18px;height:18px;color:var(--gold);flex-shrink:0;transition:transform .3s;}
+.faq-item.open .faq-chevron{transform:rotate(180deg);}
+.faq-answer{
+  max-height:0;overflow:hidden;
+  transition:max-height .35s ease,padding .35s ease;
+  padding:0 1.4rem;
+}
+.faq-item.open .faq-answer{max-height:300px;padding:0 1.4rem 1.2rem;}
+.faq-answer p{font-size:.86rem;color:var(--text-muted);line-height:1.65;}
+.faq-answer a{color:var(--primary-green);text-decoration:none;}
+.faq-answer a:hover{color:var(--gold-dark);}
+
+/* ===== SOCIAL / CTA BAR ===== */
+.cta-bar{
+  margin-top:4rem;
+  background:linear-gradient(135deg,var(--primary-green),var(--dark-green));
+  border-radius:1.25rem;padding:2.5rem 3rem;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;
+  flex-wrap:wrap;position:relative;overflow:hidden;
+}
+.cta-bar::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 8L46 30L68 36L46 42L40 64L34 42L12 36L34 30Z' fill='none' stroke='%23C9A84C' stroke-width='0.4' opacity='0.06'/%3E%3C/svg%3E');pointer-events:none;}
+.cta-bar::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad);}
+.cta-bar-text{position:relative;z-index:1;}
+.cta-bar-text h3{font-family:'Cinzel',serif;color:var(--gold);font-size:1.2rem;margin-bottom:.3rem;}
+.cta-bar-text p{color:rgba(255,255,255,.62);font-size:.88rem;}
+.cta-bar-actions{display:flex;gap:.75rem;flex-wrap:wrap;position:relative;z-index:1;}
+.cta-bar-btn{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.75rem 1.4rem;border-radius:.55rem;
+  font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:700;
+  text-decoration:none;letter-spacing:.03em;transition:all .3s;
+}
+.cta-bar-btn.primary{background:var(--gold-grad);color:var(--dark-green);}
+.cta-bar-btn.primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,168,76,.35);}
+.cta-bar-btn.secondary{background:rgba(255,255,255,.07);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.18);}
+.cta-bar-btn.secondary:hover{background:rgba(255,255,255,.12);color:white;border-color:rgba(255,255,255,.3);}
+.cta-bar-btn svg{width:15px;height:15px;}
+
+/* ===== FADE-IN ===== */
+.fi{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.fi.vis{opacity:1;transform:none;}
+.fi-1{transition-delay:.08s;}.fi-2{transition-delay:.16s;}.fi-3{transition-delay:.24s;}.fi-4{transition-delay:.32s;}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){.contact-grid{grid-template-columns:1fr;gap:2.5rem;}.hero-strip{grid-template-columns:repeat(2,1fr);}.footer-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.nav-links{display:none;}.hero-strip{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}.cta-bar{flex-direction:column;align-items:flex-start;padding:2rem;}.agency-grid{grid-template-columns:1fr;}.locations-grid{grid-template-columns:1fr;}.footer-top{grid-template-columns:1fr;}}
+@media(max-width:480px){.page{padding:3rem 1rem 4rem;}.inquiry-tabs{flex-direction:column;}}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--cream);}
+::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="BARMM MTIT — Home">
+      <img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png" alt="Ministry of Trade, Investments and Tourism – BARMM" onerror="this.style.display='none'">
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#roadmap">Roadmap</a></li>
+      <li><a href="index.html#swot">SWOT</a></li>
+      <li><a href="index.html#halal">Halal</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="#inquiry-form" class="nav-cta">Invest Now</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" role="banner">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep" aria-hidden="true">›</span>
+        <span aria-current="page">Contact</span>
+      </nav>
+      <div class="hero-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Investment Facilitation
+      </div>
+      <h1>Connect With<br><span class="gold">Us</span></h1>
+      <p class="lead">Our investment facilitation team is ready to assist you. Whether you are exploring halal industry opportunities, seeking Islamic finance partners, or navigating the BARMM investment landscape — reach us directly.</p>
+      <div class="hero-quick-links">
+        <a href="mailto:invest@mtit.bangsamoro.gov.ph" class="quick-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          invest@mtit.bangsamoro.gov.ph
+        </a>
+        <a href="https://mtit.bangsamoro.gov.ph" target="_blank" rel="noopener" class="quick-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          mtit.bangsamoro.gov.ph
+        </a>
+      </div>
+    </div>
+    <!-- strip -->
+    <div class="hero-strip" role="list" aria-label="Key facts">
+      <div class="strip-item" role="listitem"><span class="strip-num">₱50B</span><span class="strip-lbl">2035 Investment Target</span></div>
+      <div class="strip-item" role="listitem"><span class="strip-num">70M+</span><span class="strip-lbl">BIMP-EAGA Consumers</span></div>
+      <div class="strip-item" role="listitem"><span class="strip-num">3 days</span><span class="strip-lbl">Response Time</span></div>
+      <div class="strip-item" role="listitem"><span class="strip-num">13</span><span class="strip-lbl">Priority Investment Sectors</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE BODY -->
+<div class="page">
+
+  <!-- MAIN CONTACT GRID -->
+  <div class="contact-grid fi" id="inquiry-form">
+
+    <!-- LEFT: INFO -->
+    <aside class="info-panel" aria-label="Contact information">
+      <span class="sec-label">Get In Touch</span>
+      <h2>Investment Facilitation Office</h2>
+      <div class="gold-div"></div>
+      <p class="desc">The Ministry of Trade, Investments and Tourism serves as Bangsamoro's primary gateway for investment facilitation. Our team coordinates across key agencies to streamline your entry into the region's growing halal economy.</p>
+
+      <div class="contact-block">
+        <div class="contact-block-title">Primary Contact</div>
+
+        <div class="contact-detail-row">
+          <div class="cd-icon" aria-hidden="true">🏛️</div>
+          <div class="cd-body">
+            <div class="cd-label">Ministry</div>
+            <div class="cd-value">Ministry of Trade, Investments and Tourism<br>(MTIT) – BARMM</div>
+          </div>
+        </div>
+
+        <div class="contact-detail-row">
+          <div class="cd-icon" aria-hidden="true">📍</div>
+          <div class="cd-body">
+            <div class="cd-label">Address</div>
+            <div class="cd-value">MTIT Building, Capitol Compound<br>Cotabato City, 9600<br>Bangsamoro Autonomous Region, Philippines</div>
+          </div>
+        </div>
+
+        <div class="contact-detail-row">
+          <div class="cd-icon" aria-hidden="true">✉️</div>
+          <div class="cd-body">
+            <div class="cd-label">Investment Inquiries</div>
+            <div class="cd-value">
+              <a href="mailto:invest@mtit.bangsamoro.gov.ph">invest@mtit.bangsamoro.gov.ph</a><br>
+              <a href="mailto:mtit@bangsamoro.gov.ph">mtit@bangsamoro.gov.ph</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-detail-row">
+          <div class="cd-icon" aria-hidden="true">🌐</div>
+          <div class="cd-body">
+            <div class="cd-label">Website</div>
+            <div class="cd-value">
+              <a href="https://mtit.bangsamoro.gov.ph" target="_blank" rel="noopener">mtit.bangsamoro.gov.ph</a><br>
+              <a href="https://barmm.gov.ph" target="_blank" rel="noopener">barmm.gov.ph</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-block">
+        <div class="contact-block-title">Key Investment Agencies</div>
+        <div class="agency-grid">
+          <div class="agency-card"><div class="agency-card-name">Bangsamoro Board of Investments</div><div class="agency-card-abbr">BBOI</div></div>
+          <div class="agency-card"><div class="agency-card-name">Bangsamoro Economic Zone Authority</div><div class="agency-card-abbr">BEZA</div></div>
+          <div class="agency-card"><div class="agency-card-name">Bangsamoro Halal Board</div><div class="agency-card-abbr">BHB</div></div>
+          <div class="agency-card"><div class="agency-card-name">Polloc Freeport &amp; Economic Zone</div><div class="agency-card-abbr">PFEZ</div></div>
+          <div class="agency-card"><div class="agency-card-name">WOW Matanog Special Ecozone</div><div class="agency-card-abbr">SEZ</div></div>
+          <div class="agency-card"><div class="agency-card-name">Bangsamoro Planning &amp; Development Authority</div><div class="agency-card-abbr">BPDA</div></div>
+        </div>
+      </div>
+
+      <div class="hours-box">
+        <div class="hours-icon" aria-hidden="true">🕐</div>
+        <div class="hours-body">
+          <div class="hours-title">Office Hours</div>
+          <div class="hours-text">Monday – Friday, 8:00 AM – 5:00 PM<br>Philippine Standard Time (UTC+8)</div>
+          <div class="hours-note">Investment inquiries are responded to within 3 business days. For urgent matters, include "URGENT" in the subject line of your email.</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT: FORM -->
+    <div class="form-panel" id="form-panel" role="main" aria-label="Investment inquiry form">
+      <div class="form-panel-inner">
+        <div class="form-header">
+          <h2>Send an Investment Inquiry</h2>
+          <p>Select your inquiry type and complete the form. Our investment facilitation team will route your message to the appropriate agency and respond within 3 business days.</p>
+        </div>
+
+        <!-- Inquiry type tabs -->
+        <div class="inquiry-tabs" role="tablist" aria-label="Inquiry type">
+          <button class="inq-tab active" role="tab" aria-selected="true" onclick="setTab(this,'investment')" data-tab="investment">💼 Investment</button>
+          <button class="inq-tab" role="tab" aria-selected="false" onclick="setTab(this,'halal')" data-tab="halal">🌙 Halal Industry</button>
+          <button class="inq-tab" role="tab" aria-selected="false" onclick="setTab(this,'finance')" data-tab="finance">🏦 Islamic Finance</button>
+          <button class="inq-tab" role="tab" aria-selected="false" onclick="setTab(this,'workshop')" data-tab="workshop">📋 Workshop</button>
+          <button class="inq-tab" role="tab" aria-selected="false" onclick="setTab(this,'general')" data-tab="general">💬 General</button>
+        </div>
+
+        <!-- Form -->
+        <form id="inquiryForm" novalidate aria-label="Investment inquiry" onsubmit="handleSubmit(event)">
+          <input type="hidden" name="inquiry_type" id="inquiry_type" value="investment">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first_name">First Name <span aria-hidden="true">*</span></label>
+              <input type="text" id="first_name" name="first_name" placeholder="Juan" required autocomplete="given-name">
+            </div>
+            <div class="form-group">
+              <label for="last_name">Last Name <span aria-hidden="true">*</span></label>
+              <input type="text" id="last_name" name="last_name" placeholder="dela Cruz" required autocomplete="family-name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address <span aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" placeholder="yourname@company.com" required autocomplete="email">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="organisation">Organisation / Company</label>
+              <input type="text" id="organisation" name="organisation" placeholder="Company or institution" autocomplete="organization">
+            </div>
+            <div class="form-group">
+              <label for="country">Country of Origin</label>
+              <input type="text" id="country" name="country" placeholder="e.g. Philippines, Malaysia, UAE" autocomplete="country-name">
+            </div>
+          </div>
+
+          <div class="form-group" id="sector-group">
+            <label for="sector">Sector of Interest</label>
+            <select id="sector" name="sector">
+              <option value="" disabled selected>Select a sector…</option>
+              <option>Halal Food &amp; Beverage</option>
+              <option>Halal Cosmetics &amp; Personal Care</option>
+              <option>Halal Pharmaceuticals</option>
+              <option>Islamic Finance &amp; Banking</option>
+              <option>Agribusiness &amp; Fisheries</option>
+              <option>Renewable Energy</option>
+              <option>Tourism &amp; Hospitality</option>
+              <option>Digital Infrastructure &amp; ICT</option>
+              <option>Manufacturing &amp; Ecozone</option>
+              <option>Infrastructure &amp; Logistics</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="investment-range-group">
+            <label for="investment_range">Investment Range (USD)</label>
+            <select id="investment_range" name="investment_range">
+              <option value="" disabled selected>Select range…</option>
+              <option>Under $100,000</option>
+              <option>$100,000 – $500,000</option>
+              <option>$500,000 – $1 Million</option>
+              <option>$1M – $5M</option>
+              <option>$5M – $10M</option>
+              <option>Above $10M</option>
+              <option>Prefer not to disclose</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message / Inquiry <span aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" placeholder="Tell us about your investment interest, specific questions, or how we can assist you…" required maxlength="1000" oninput="updateCount(this)"></textarea>
+            <div class="input-hint"><span id="char-count">0</span> / 1000</div>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Submit Inquiry
+          </button>
+
+          <p class="form-note" role="note">Your information is kept confidential and used solely for investment facilitation purposes.<br>We do not share your details with third parties without consent.</p>
+        </form>
+
+        <!-- Success message -->
+        <div class="form-success" id="formSuccess" aria-live="polite" aria-atomic="true">
+          <div class="success-icon" aria-hidden="true">✅</div>
+          <div class="success-title">Inquiry Submitted Successfully</div>
+          <p class="success-text">Thank you for reaching out. Our investment facilitation team will review your inquiry and respond within 3 business days at the email address you provided.<br><br>For urgent matters, email us directly at <a href="mailto:invest@mtit.bangsamoro.gov.ph" style="color:var(--light-green)">invest@mtit.bangsamoro.gov.ph</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /contact-grid -->
+
+  <!-- OFFICES -->
+  <div class="location-section fi">
+    <div class="location-header">
+      <span class="sec-label">Offices &amp; Zones</span>
+      <h2>Key Investment Locations</h2>
+      <div class="gold-div"></div>
+      <p>Bangsamoro's investment infrastructure spans multiple strategic hubs. Contact the specific office most relevant to your sector and investment type.</p>
+    </div>
+    <div class="locations-grid">
+
+      <div class="loc-card fi fi-1">
+        <div class="loc-card-header">
+          <div class="loc-type">Headquarters</div>
+          <div class="loc-name">MTIT Main Office — Cotabato City</div>
+        </div>
+        <div class="loc-body">
+          <div class="loc-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Capitol Compound, Cotabato City, 9600, Philippines</span>
+          </div>
+          <div class="loc-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span><a href="mailto:mtit@bangsamoro.gov.ph">mtit@bangsamoro.gov.ph</a></span>
+          </div>
+          <div class="loc-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            <span><a href="https://mtit.bangsamoro.gov.ph" target="_blank" rel="noopener">mtit.bangsamoro.gov.ph</a></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="loc-card fi fi-2">
+        <div class="loc-card-header">
+          <div class="loc-type">Halal Hub · Special Economic Zone</div>
+          <div class="loc-name">WOW Matanog — Bangsamoro Halal Park</div>
+        </div>
+        <div class="loc-body">
+          <div class="loc-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Matanog, Maguindanao del Norte, Bangsamoro</span>
+          </div>
+          <div class="loc-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>Priority zone for halal food, cosmetics, and pharmaceutical manufacturing.</span>
+          </div>
+          <div class="loc-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span><a href="mailto:invest@mtit.bangsamoro.gov.ph">invest@mtit.bangsamoro.gov.ph</a></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="loc-card fi fi-3">
+        <div class="loc-card-header">
+          <div class="loc-type">Freeport &amp; Economic Zone</div>
+          <div class="loc-name">Polloc Freeport &amp; Economic Zone (PFEZ)</div>
+        </div>
+        <div class="loc-body">
+          <div class="loc-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Parang, Maguindanao, Bangsamoro Autonomous Region</span>
+          </div>
+          <div class="loc-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>BIMP-EAGA trade gateway. Strategic port access for regional export-import activity.</span>
+          </div>
+          <div class="loc-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span><a href="mailto:invest@mtit.bangsamoro.gov.ph">invest@mtit.bangsamoro.gov.ph</a></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="loc-card fi fi-4">
+        <div class="loc-card-header">
+          <div class="loc-type">Certification Body</div>
+          <div class="loc-name">Bangsamoro Halal Board (BHB)</div>
+        </div>
+        <div class="loc-body">
+          <div class="loc-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Cotabato City, Bangsamoro Autonomous Region</span>
+          </div>
+          <div class="loc-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>OIC/SMIIC-aligned halal certification for food, cosmetics, pharmaceuticals, and tourism.</span>
+          </div>
+          <div class="loc-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span><a href="mailto:invest@mtit.bangsamoro.gov.ph">invest@mtit.bangsamoro.gov.ph</a></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /location-section -->
+
+  <!-- FAQ -->
+  <div class="faq-section fi">
+    <div class="faq-header">
+      <span class="sec-label">Common Questions</span>
+      <h2>Frequently Asked Questions</h2>
+      <div class="gold-div"></div>
+      <p>Answers to the most common investment and facilitation questions from prospective investors and partners.</p>
+    </div>
+    <div class="faq-list" role="list">
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          What priority sectors does BARMM promote for investment?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>BARMM's Strategic Investment Priorities Plan (SIPP) identifies 13 priority categories. Key sectors include halal food &amp; beverage, halal cosmetics and pharmaceuticals, Islamic finance (banking, Takaful, Sukuk), agribusiness and fisheries, renewable energy, tourism and hospitality, digital infrastructure, and ecozone-based manufacturing. The Bangsamoro Board of Investments (BBOI) can provide sector-specific incentive packages.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          How do I obtain halal certification for my products in BARMM?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>The Bangsamoro Halal Board (BHB) is the regional certification authority. Certification processes are being aligned with OIC/SMIIC international standards covering food (OIC/SMIIC 1:2019), cosmetics (OIC/SMIIC 4:2018), tourism (OIC/SMIIC 9:2019), and supply chain management (OIC/SMIIC 17:2020). Contact our investment facilitation team at <a href="mailto:invest@mtit.bangsamoro.gov.ph">invest@mtit.bangsamoro.gov.ph</a> to initiate the BHB referral process.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          What tax incentives are available for investors in BARMM?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>The BBOI and Bangsamoro Economic Zone Authority (BEZA) offer a range of fiscal incentives aligned with the national Strategic Investment Priorities Plan (SIPP) and the Bangsamoro Organic Law's autonomous fiscal provisions. These include income tax holidays, tax and duty exemptions on capital equipment imports, and special ecozone privileges at PFEZ and WOW Matanog SEZ. Contact BBOI directly through our facilitation desk for a customised incentive package based on your investment profile.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          How long does business registration take in BARMM?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>BARMM is targeting a 1-day business registration time through the Bangsamoro Business Name Registration (BBNR) digital platform under the Bangsamoro e-Governance Master Plan (BEGMP). The one-stop investment facilitation centres are designed to process permits and licences within 7 days once the system reaches full operationalisation (targeted by 2028). Current processing times vary by municipality; our desk can advise on the fastest pathway for your specific business type.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          Is Bangsamoro safe for foreign investment?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>BARMM has made significant strides since the signing of the Comprehensive Agreement on the Bangsamoro (CAB) in 2014 and the enactment of the Bangsamoro Organic Law (BOL) in 2018. Poverty incidence has fallen from 55.9% in 2018 to 23.5% in 2023, and new investments reached ₱3.5 billion in 2024. Mainland provinces such as Maguindanao del Norte, Maguindanao del Sur, Lanao del Sur, Basilan, and Cotabato City have active and growing business communities. Our facilitation team can provide current security advisories and connect you with existing investors for ground-level perspectives.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          What Islamic finance instruments are available in BARMM?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>The Bangsamoro Islamic Finance Roadmap (2024–2028) targets a functional Shariah-compliant financial system by 2028. Development priorities include Islamic banking foundations, microfinance and Waqf (Islamic endowment) instruments, Takaful (Islamic insurance) operations, and a Sukuk (Islamic bond) capital market. The roadmap aligns with national Islamic banking legislation and regional development goals. Contact our team for referrals to Islamic banking partners currently operating in the region.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+/* ===== NAV scroll ===== */
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40);
+},{passive:true});
+
+/* ===== Fade-in observer ===== */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});
+},{threshold:.07,rootMargin:'0px 0px -25px 0px'});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+
+/* ===== Inquiry type tabs ===== */
+function setTab(btn, type){
+  document.querySelectorAll('.inq-tab').forEach(t=>{
+    t.classList.remove('active');
+    t.setAttribute('aria-selected','false');
+  });
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected','true');
+  document.getElementById('inquiry_type').value=type;
+
+  // Adjust form fields by type
+  const rangeGroup=document.getElementById('investment-range-group');
+  const sectorGroup=document.getElementById('sector-group');
+  if(type==='workshop'){
+    rangeGroup.style.display='none';
+    sectorGroup.style.display='none';
+  } else if(type==='general'){
+    rangeGroup.style.display='none';
+    sectorGroup.style.display='block';
+  } else {
+    rangeGroup.style.display='block';
+    sectorGroup.style.display='block';
+  }
+}
+
+/* ===== Char counter ===== */
+function updateCount(el){
+  document.getElementById('char-count').textContent=el.value.length;
+}
+
+/* ===== Form submit ===== */
+function handleSubmit(e){
+  e.preventDefault();
+  const btn=document.getElementById('submitBtn');
+  // Basic validation
+  const required=['first_name','last_name','email','message'];
+  let valid=true;
+  required.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el.value.trim()){
+      el.style.borderColor='rgba(239,68,68,.6)';
+      valid=false;
+    } else {
+      el.style.borderColor='';
+    }
+  });
+  if(!valid){
+    btn.textContent='Please fill required fields';
+    setTimeout(()=>{
+      btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Submit Inquiry';
+    },2500);
+    return;
+  }
+  btn.disabled=true;
+  btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Sending…';
+  setTimeout(()=>{
+    document.getElementById('inquiryForm').style.display='none';
+    const success=document.getElementById('formSuccess');
+    success.classList.add('show');
+    success.scrollIntoView({behavior:'smooth',block:'nearest'});
+  },1600);
+}
+
+/* ===== FAQ accordion ===== */
+function toggleFaq(btn){
+  const item=btn.closest('.faq-item');
+  const isOpen=item.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-item.open').forEach(i=>{
+    i.classList.remove('open');
+    i.querySelector('.faq-question').setAttribute('aria-expanded','false');
+  });
+  if(!isOpen){
+    item.classList.add('open');
+    btn.setAttribute('aria-expanded','true');
+  }
+}
+
+/* ===== Smooth scroll for anchor links ===== */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const href=a.getAttribute('href');
+    if(href==='#') return;
+    const target=document.querySelector(href);
+    if(target){
+      e.preventDefault();
+      const navH=document.querySelector('nav').offsetHeight;
+      window.scrollTo({top:target.getBoundingClientRect().top+window.pageYOffset-navH-20,behavior:'smooth'});
+    }
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#022c22">
+<meta name="description" content="BARMM Strategic MEL Dashboard 2026-2035 — Real-time Monitoring, Evaluation & Learning based on the BIRD 2026–2035 Investment Roadmap">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<title>BARMM Strategic Dashboard — MEL 2026–2035</title>
+<style>
+/* ============================================================
+   DESIGN TOKENS — mirrors roadmap.html exactly
+   ============================================================ */
+:root{
+  --primary-green:#064e3b;--dark-green:#022c22;--mid-green:#065f46;
+  --light-green:#6ee7b7;--cream:#ecfdf5;
+  --text-dark:#0f172a;--text-muted:#64748b;
+  --gold:#C9A84C;--gold-light:#E8C560;--gold-dark:#8B6C28;
+  --gold-border:rgba(201,168,76,0.32);--gold-border-strong:rgba(201,168,76,0.55);
+  --gold-glow:rgba(201,168,76,0.20);
+  --gold-grad:linear-gradient(135deg,#7a5c1e 0%,#c9a84c 35%,#e8c560 50%,#c9a84c 65%,#7a5c1e 100%);
+  --focus-ring:0 0 0 3px rgba(201,168,76,.5);
+  --touch-target:44px;
+  /* Status colours */
+  --status-critical:#ef4444;
+  --status-high:#f59e0b;
+  --status-on-track:#10b981;
+  --status-watch:#3b82f6;
+  --status-critical-bg:rgba(239,68,68,.12);
+  --status-high-bg:rgba(245,158,11,.12);
+  --status-on-track-bg:rgba(16,185,129,.12);
+  --status-watch-bg:rgba(59,130,246,.12);
+  /* Spacing */
+  --s1:.25rem;--s2:.5rem;--s3:.75rem;--s4:1rem;--s5:1.25rem;--s6:1.5rem;--s8:2rem;--s10:2.5rem;--s12:3rem;
+  --r-sm:.5rem;--r-md:.875rem;--r-lg:1.25rem;--r-xl:1.5rem;
+}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:linear-gradient(160deg,#011a12 0%,#022c22 45%,#0a1628 100%);
+  min-height:100vh;color:var(--cream);
+  background-attachment:fixed;overflow-x:hidden;
+  line-height:1.5;-webkit-font-smoothing:antialiased;
+}
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+.skip-link{position:absolute;top:-40px;left:0;background:var(--gold);color:var(--dark-green);padding:8px 16px;text-decoration:none;z-index:9999;font-weight:bold;border-radius:0 0 4px 4px;}
+.skip-link:focus{top:0;}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+/* ============================================================
+   NAV — consistent with roadmap.html
+   ============================================================ */
+.site-nav{
+  background:rgba(2,44,34,.97);backdrop-filter:blur(18px);
+  position:sticky;top:0;width:100%;z-index:200;
+  border-bottom:2px solid var(--gold-border);transition:box-shadow .4s;
+}
+.site-nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.5);}
+.nav-inner{
+  max-width:1400px;margin:0 auto;padding:.65rem 1rem;
+  display:flex;align-items:center;gap:var(--s3);min-height:var(--touch-target);
+}
+.nav-logo-wrap{display:flex;align-items:center;gap:var(--s3);text-decoration:none;flex-shrink:0;}
+.nav-logo-wrap img{height:40px;width:auto;object-fit:contain;}
+.nav-title{display:none;font-family:'Cinzel',serif;font-size:.72rem;color:var(--gold);font-weight:700;letter-spacing:.06em;line-height:1.3;}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap;}
+.nav-back{color:var(--light-green);text-decoration:none;font-size:.82rem;font-weight:500;display:flex;align-items:center;gap:.4rem;transition:color .2s;padding:.4rem .6rem;border-radius:var(--r-sm);border:1px solid var(--gold-border);}
+.nav-back:hover{color:var(--gold);border-color:var(--gold-border-strong);}
+.nav-back.active-nav{color:var(--gold);border-color:var(--gold-border-strong);background:rgba(201,168,76,.08);}
+.live-badge{display:flex;align-items:center;gap:.4rem;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);border-radius:2rem;padding:.3rem .8rem;font-size:.72rem;font-weight:700;color:#10b981;letter-spacing:.04em;text-transform:uppercase;}
+.live-dot{width:7px;height:7px;background:#10b981;border-radius:50%;animation:livePulse 2s infinite;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
+@media(min-width:768px){.nav-title{display:block;}.nav-inner{padding:.55rem 2rem;}.nav-logo-wrap img{height:48px;}}
+
+/* ============================================================
+   DASHBOARD HEADER
+   ============================================================ */
+.dash-header{
+  max-width:1400px;margin:0 auto;padding:var(--s8) var(--s4) var(--s6);
+  position:relative;
+}
+.dash-header::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:200px;height:3px;background:var(--gold-grad);border-radius:2px;
+}
+.dash-eyebrow{display:inline-block;background:rgba(201,168,76,.10);border:1px solid var(--gold-border-strong);color:var(--gold);padding:.3rem 1rem;border-radius:2rem;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:var(--s4);}
+.dash-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,4vw,2.4rem);font-weight:700;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;margin-bottom:var(--s2);}
+.dash-subtitle{font-size:.92rem;color:rgba(255,255,255,.6);max-width:680px;line-height:1.6;}
+.dash-meta-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s4);margin-top:var(--s4);}
+.dash-timestamp{font-size:.78rem;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:.4rem;}
+.pareto-note{font-size:.76rem;background:rgba(201,168,76,.08);border:1px solid var(--gold-border);border-radius:var(--r-sm);padding:.35rem .85rem;color:var(--gold);display:flex;align-items:center;gap:.4rem;}
+@media(min-width:768px){.dash-header{padding:var(--s10) var(--s8) var(--s8);}.dash-header::before{width:280px;height:4px;}}
+
+/* ============================================================
+   LAYOUT — MAIN CONTAINER
+   ============================================================ */
+.dash-container{max-width:1400px;margin:0 auto;padding:0 var(--s4) var(--s12);display:flex;flex-direction:column;gap:var(--s8);}
+@media(min-width:768px){.dash-container{padding:0 var(--s8) var(--s12);}}
+
+/* ============================================================
+   SECTION HEADERS
+   ============================================================ */
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:var(--s3);margin-bottom:var(--s5);}
+.section-label-wrap{}
+.section-kicker{font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.3rem;}
+.section-title{font-family:'Cinzel',serif;font-size:clamp(1rem,2.5vw,1.35rem);font-weight:700;color:white;line-height:1.2;}
+.section-rule{width:40px;height:3px;background:var(--gold-grad);border-radius:2px;margin-top:var(--s2);}
+.section-count{font-size:.72rem;color:rgba(167,243,208,.7);background:rgba(6,78,59,.4);border:1px solid var(--gold-border);border-radius:2rem;padding:.25rem .75rem;white-space:nowrap;align-self:flex-start;}
+
+/* ============================================================
+   SECTION WRAPPER CARD
+   ============================================================ */
+.dash-section{
+  background:rgba(6,78,59,.15);border:1px solid var(--gold-border);
+  border-radius:var(--r-xl);padding:var(--s6);position:relative;overflow:hidden;
+}
+.dash-section::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad);}
+.dash-section::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 0%,rgba(201,168,76,.04) 0%,transparent 60%);pointer-events:none;}
+@media(min-width:768px){.dash-section{padding:var(--s8);}}
+
+/* ============================================================
+   PANEL A: KEY INVESTMENT TARGETS — Circular Progress + KPI grid
+   ============================================================ */
+.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s4);}
+@media(min-width:480px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:768px){.kpi-grid{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:1100px){.kpi-grid{grid-template-columns:repeat(6,1fr);}}
+
+.kpi-card{
+  background:rgba(2,44,34,.6);border:1px solid var(--gold-border);
+  border-radius:var(--r-lg);padding:var(--s5) var(--s4);
+  text-align:center;transition:transform .3s,border-color .3s,box-shadow .3s;
+  position:relative;overflow:hidden;cursor:default;
+}
+.kpi-card:hover{transform:translateY(-4px);border-color:var(--gold-border-strong);box-shadow:0 8px 30px rgba(0,0,0,.4);}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transition:opacity .3s;}
+.kpi-card.on-track::before{background:linear-gradient(90deg,#10b981,#6ee7b7);}
+.kpi-card.watch::before{background:linear-gradient(90deg,#3b82f6,#93c5fd);}
+.kpi-card.behind::before{background:linear-gradient(90deg,#f59e0b,#fcd34d);}
+
+/* Circular progress ring */
+.kpi-ring-wrap{position:relative;width:76px;height:76px;margin:0 auto var(--s3);}
+.kpi-ring{transform:rotate(-90deg);}
+.kpi-ring-track{fill:none;stroke:rgba(255,255,255,.08);stroke-width:5;}
+.kpi-ring-fill{fill:none;stroke-width:5;stroke-linecap:round;transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1);}
+.kpi-ring-fill.green{stroke:#10b981;}
+.kpi-ring-fill.gold{stroke:var(--gold);}
+.kpi-ring-fill.blue{stroke:#3b82f6;}
+.kpi-ring-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;}
+.kpi-ring-pct{font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;color:var(--gold);line-height:1;}
+.kpi-ring-sub{font-size:.6rem;color:rgba(167,243,208,.6);margin-top:.1rem;}
+
+.kpi-label{font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;color:white;letter-spacing:.03em;margin-bottom:.35rem;line-height:1.3;}
+.kpi-current{font-size:.78rem;color:var(--light-green);margin-bottom:.2rem;font-weight:600;}
+.kpi-target{font-size:.68rem;color:rgba(255,255,255,.4);line-height:1.4;}
+.kpi-delta{display:inline-flex;align-items:center;gap:.25rem;font-size:.65rem;font-weight:700;padding:.15rem .5rem;border-radius:2rem;margin-top:.4rem;}
+.kpi-delta.up{background:rgba(16,185,129,.15);color:#10b981;}
+.kpi-delta.flat{background:rgba(245,158,11,.15);color:#f59e0b;}
+.kpi-delta.down{background:rgba(239,68,68,.15);color:#ef4444;}
+.kpi-source{font-size:.6rem;color:rgba(255,255,255,.28);margin-top:.4rem;}
+
+/* ============================================================
+   PANEL B: BSC CRITICAL LEVERAGE POINTS
+   ============================================================ */
+.bsc-grid{display:grid;grid-template-columns:1fr;gap:var(--s4);}
+@media(min-width:640px){.bsc-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1000px){.bsc-grid{grid-template-columns:repeat(5,1fr);}}
+
+.bsc-card{
+  background:rgba(2,44,34,.55);border:1px solid var(--gold-border);
+  border-radius:var(--r-lg);padding:var(--s5);
+  position:relative;overflow:hidden;transition:transform .3s,border-color .3s;
+  display:flex;flex-direction:column;gap:var(--s3);
+}
+.bsc-card:hover{transform:translateY(-3px);border-color:var(--gold-border-strong);}
+/* Perspective colour bar on left */
+.bsc-card::after{content:'';position:absolute;top:0;bottom:0;left:0;width:3px;}
+.bsc-card.finance::after{background:linear-gradient(to bottom,#10b981,#065f46);}
+.bsc-card.stakeholder::after{background:linear-gradient(to bottom,#3b82f6,#1e3a8a);}
+.bsc-card.process::after{background:linear-gradient(to bottom,#f59e0b,#78350f);}
+.bsc-card.learning::after{background:linear-gradient(to bottom,#6ee7b7,#134e4a);}
+
+.bsc-lp-badge{
+  background:var(--gold-grad);color:var(--dark-green);
+  font-size:.62rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;
+  padding:.2rem .6rem;border-radius:2rem;display:inline-flex;align-items:center;gap:.3rem;
+  width:fit-content;
+}
+.bsc-persp-tag{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.4);margin-top:.1rem;}
+.bsc-action{font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;color:white;line-height:1.35;flex:1;}
+.bsc-kpi{font-size:.75rem;color:var(--light-green);font-style:italic;line-height:1.4;}
+
+/* Progress bar */
+.bsc-prog-wrap{margin-top:auto;}
+.bsc-prog-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem;}
+.bsc-prog-current{font-size:.7rem;color:rgba(255,255,255,.55);}
+.bsc-prog-target{font-size:.7rem;font-weight:700;color:var(--gold);}
+.bsc-prog-bar{height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
+.bsc-prog-fill{height:100%;border-radius:2px;transition:width 1.6s cubic-bezier(.4,0,.2,1);}
+.bsc-prog-fill.green{background:linear-gradient(90deg,#10b981,#6ee7b7);}
+.bsc-prog-fill.gold{background:var(--gold-grad);}
+.bsc-prog-fill.blue{background:linear-gradient(90deg,#3b82f6,#93c5fd);}
+.bsc-prog-fill.teal{background:linear-gradient(90deg,#0d9488,#6ee7b7);}
+
+/* ============================================================
+   PANEL C: ACTION PLAN — PRIORITY BOARD
+   ============================================================ */
+/* Summary bar */
+.action-summary{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s3);margin-bottom:var(--s6);}
+@media(min-width:640px){.action-summary{grid-template-columns:repeat(4,1fr);}}
+.a-sum-card{background:rgba(2,44,34,.5);border:1px solid var(--gold-border);border-radius:var(--r-md);padding:var(--s4);text-align:center;position:relative;overflow:hidden;}
+.a-sum-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.a-sum-card.critical::before{background:var(--status-critical);}
+.a-sum-card.high::before{background:var(--status-high);}
+.a-sum-card.track::before{background:var(--status-on-track);}
+.a-sum-card.budget::before{background:var(--gold);}
+.a-sum-num{font-family:'Cinzel',serif;font-size:1.6rem;font-weight:700;line-height:1;margin-bottom:.25rem;}
+.a-sum-card.critical .a-sum-num{color:var(--status-critical);}
+.a-sum-card.high .a-sum-num{color:var(--status-high);}
+.a-sum-card.track .a-sum-num{color:var(--status-on-track);}
+.a-sum-card.budget .a-sum-num{color:var(--gold);font-size:1.3rem;}
+.a-sum-lbl{font-size:.7rem;color:rgba(167,243,208,.7);text-transform:uppercase;letter-spacing:.06em;}
+
+/* Filter row */
+.action-filters{display:flex;flex-wrap:wrap;gap:var(--s2);margin-bottom:var(--s5);}
+.filter-btn{background:rgba(2,44,34,.6);border:1px solid var(--gold-border);border-radius:2rem;padding:.35rem .9rem;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:600;cursor:pointer;transition:all .2s;color:rgba(167,243,208,.8);min-height:var(--touch-target);}
+.filter-btn:hover{border-color:var(--gold-border-strong);color:var(--gold);}
+.filter-btn.active{background:var(--gold-grad);color:var(--dark-green);border-color:var(--gold);font-weight:700;}
+.filter-btn:focus-visible{box-shadow:var(--focus-ring);}
+
+/* Action table */
+.action-table-wrap{overflow-x:auto;border-radius:var(--r-md);border:1px solid var(--gold-border);}
+.action-table{width:100%;border-collapse:collapse;font-size:.8rem;min-width:700px;}
+.action-table thead th{
+  padding:.75rem 1rem;text-align:left;
+  color:var(--gold);font-family:'Cinzel',serif;font-weight:700;font-size:.72rem;letter-spacing:.06em;
+  background:rgba(201,168,76,.1);border-bottom:2px solid var(--gold-border);
+  white-space:nowrap;
+}
+.action-table tbody tr{border-bottom:1px solid rgba(201,168,76,.08);transition:background .2s;}
+.action-table tbody tr:hover{background:rgba(201,168,76,.05);}
+.action-table tbody tr.row-hidden{display:none;}
+.action-table tbody td{padding:.85rem 1rem;vertical-align:top;line-height:1.5;color:rgba(236,253,245,.85);}
+.action-table tbody td:first-child{font-weight:600;color:white;}
+
+/* Priority badges */
+.pri-badge{display:inline-flex;align-items:center;gap:.3rem;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:.25rem;white-space:nowrap;}
+.pri-badge.critical{background:var(--status-critical-bg);color:var(--status-critical);border:1px solid rgba(239,68,68,.3);}
+.pri-badge.high{background:var(--status-high-bg);color:var(--status-high);border:1px solid rgba(245,158,11,.3);}
+.pri-badge.medium{background:var(--status-watch-bg);color:#93c5fd;border:1px solid rgba(59,130,246,.3);}
+
+/* Status badges */
+.status-badge{display:inline-flex;align-items:center;gap:.3rem;font-size:.68rem;font-weight:600;padding:.2rem .6rem;border-radius:.25rem;white-space:nowrap;}
+.status-badge.not-started{background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.1);}
+.status-badge.in-progress{background:var(--status-watch-bg);color:#93c5fd;border:1px solid rgba(59,130,246,.3);}
+.status-badge.on-track{background:var(--status-on-track-bg);color:#6ee7b7;border:1px solid rgba(16,185,129,.3);}
+.status-badge.at-risk{background:var(--status-high-bg);color:#fcd34d;border:1px solid rgba(245,158,11,.3);}
+.status-dot-anim{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.status-badge.in-progress .status-dot-anim{background:#3b82f6;animation:livePulse 1.5s infinite;}
+.status-badge.on-track .status-dot-anim{background:#10b981;animation:livePulse 2s infinite;}
+.status-badge.at-risk .status-dot-anim{background:#f59e0b;animation:livePulse 1.2s infinite;}
+.status-badge.not-started .status-dot-anim{background:rgba(255,255,255,.3);}
+
+/* LP tag inside table */
+.lp-tag{display:inline-block;background:rgba(201,168,76,.12);border:1px solid var(--gold-border);border-radius:.25rem;padding:.12rem .45rem;font-size:.65rem;color:var(--gold);font-weight:700;font-family:'Cinzel',serif;white-space:nowrap;}
+.budget-cell{font-family:'Cinzel',serif;color:var(--gold);font-weight:700;white-space:nowrap;}
+.due-cell{font-size:.75rem;color:var(--light-green);font-weight:600;white-space:nowrap;}
+.agency-cell{font-size:.72rem;color:rgba(167,243,208,.8);}
+.action-desc{font-size:.75rem;color:rgba(209,250,229,.65);margin-top:.3rem;line-height:1.5;}
+
+/* ============================================================
+   PANEL D: SYSTEMS HEALTH MONITOR (mini CLD status)
+   ============================================================ */
+.loops-grid{display:grid;grid-template-columns:1fr;gap:var(--s4);}
+@media(min-width:640px){.loops-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1000px){.loops-grid{grid-template-columns:repeat(4,1fr);}}
+
+.loop-card{
+  background:rgba(2,44,34,.55);border:1px solid var(--gold-border);
+  border-radius:var(--r-lg);padding:var(--s5);position:relative;
+  overflow:hidden;transition:transform .3s;
+}
+.loop-card:hover{transform:translateY(-3px);}
+.loop-id{font-family:'Cinzel',serif;font-size:1.8rem;font-weight:900;line-height:1;margin-bottom:.3rem;}
+.loop-id.reinforcing{color:#10b981;}
+.loop-id.balancing{color:var(--gold);}
+.loop-name{font-size:.75rem;font-weight:700;color:white;margin-bottom:.5rem;line-height:1.3;}
+.loop-type-badge{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:.15rem .5rem;border-radius:.2rem;display:inline-block;margin-bottom:.6rem;}
+.loop-type-badge.reinforcing{background:rgba(16,185,129,.15);color:#10b981;border:1px solid rgba(16,185,129,.3);}
+.loop-type-badge.balancing{background:rgba(201,168,76,.15);color:var(--gold);border:1px solid var(--gold-border);}
+.loop-status-row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;}
+.loop-activation{font-size:.72rem;color:rgba(255,255,255,.55);}
+.loop-health{font-size:.75rem;font-weight:700;padding:.2rem .6rem;border-radius:.25rem;}
+.loop-health.active{background:rgba(16,185,129,.15);color:#10b981;border:1px solid rgba(16,185,129,.25);}
+.loop-health.building{background:rgba(245,158,11,.15);color:#f59e0b;border:1px solid rgba(245,158,11,.25);}
+.loop-health.watch{background:rgba(59,130,246,.15);color:#93c5fd;border:1px solid rgba(59,130,246,.25);}
+.loop-mini-bar{height:3px;background:rgba(255,255,255,.06);border-radius:2px;margin:.6rem 0;overflow:hidden;}
+.loop-mini-fill{height:100%;border-radius:2px;transition:width 1.6s ease;}
+.loop-mini-fill.green{background:linear-gradient(90deg,#10b981,#6ee7b7);}
+.loop-mini-fill.gold{background:var(--gold-grad);}
+.loop-mini-fill.blue{background:linear-gradient(90deg,#3b82f6,#93c5fd);}
+.loop-desc{font-size:.72rem;color:rgba(209,250,229,.6);line-height:1.5;margin-top:.5rem;}
+
+/* ============================================================
+   PHASE PROGRESS TRACKER
+   ============================================================ */
+.phase-tracker{display:grid;grid-template-columns:1fr;gap:var(--s4);}
+@media(min-width:768px){.phase-tracker{grid-template-columns:repeat(3,1fr);}}
+
+.phase-track-card{
+  background:rgba(2,44,34,.55);border:1px solid var(--gold-border);
+  border-radius:var(--r-lg);padding:var(--s5);position:relative;overflow:hidden;
+}
+.phase-num-badge{font-family:'Cinzel',serif;font-size:2.5rem;font-weight:900;color:var(--gold);line-height:1;opacity:.25;position:absolute;top:var(--s4);right:var(--s5);}
+.phase-track-title{font-family:'Cinzel',serif;font-size:.92rem;font-weight:700;color:white;margin-bottom:.2rem;}
+.phase-track-years{font-size:.75rem;color:var(--light-green);font-weight:500;margin-bottom:var(--s3);}
+.phase-track-budget{font-family:'Cinzel',serif;font-size:1.2rem;font-weight:700;color:var(--gold);margin-bottom:var(--s3);}
+.phase-track-status{font-size:.72rem;margin-bottom:var(--s3);}
+.phase-track-bar{height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin-bottom:.4rem;}
+.phase-track-fill{height:100%;border-radius:3px;transition:width 1.6s ease;}
+.phase-track-pct{font-size:.68rem;color:rgba(255,255,255,.4);text-align:right;}
+.phase-milestones{margin-top:var(--s4);display:flex;flex-direction:column;gap:.4rem;}
+.phase-milestone{display:flex;align-items:center;gap:.5rem;font-size:.74rem;color:rgba(209,250,229,.75);}
+.phase-milestone-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.phase-milestone.done .phase-milestone-dot{background:#10b981;}
+.phase-milestone.active .phase-milestone-dot{background:var(--gold);animation:livePulse 1.5s infinite;}
+.phase-milestone.pending .phase-milestone-dot{background:rgba(255,255,255,.2);}
+.phase-milestone.done{color:rgba(209,250,229,.5);}
+
+/* ============================================================
+   MEL LEGEND
+   ============================================================ */
+.mel-legend{display:flex;flex-wrap:wrap;gap:var(--s4);padding:var(--s4) var(--s5);background:rgba(2,44,34,.4);border:1px solid var(--gold-border);border-radius:var(--r-md);}
+.mel-leg-item{display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:rgba(209,250,229,.7);}
+.mel-leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal.d1{transition-delay:.08s;}
+.reveal.d2{transition-delay:.16s;}
+.reveal.d3{transition-delay:.24s;}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar{width:8px;height:8px;}
+::-webkit-scrollbar-track{background:rgba(2,44,34,.5);}
+::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:4px;}
+::-webkit-scrollbar-thumb:hover{background:var(--gold);}
+
+/* Print */
+@media print{.site-nav,.mel-legend{display:none!important;}body{background:white;color:black;}.dash-title,.section-title{color:black!important;-webkit-text-fill-color:black!important;}}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav class="site-nav" id="siteNav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo-wrap" aria-label="BARMM MTIT — Home">
+      <img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png"
+           alt="Ministry of Trade, Investments and Tourism – BARMM"
+           width="130" height="40" onerror="this.style.display='none'">
+      <span class="nav-title">BARMM<br>Strategic Dashboard</span>
+    </a>
+    <div class="nav-right">
+      <a href="dashboard.html" class="nav-back active-nav" aria-label="Dashboard">Dashboard</a>
+      <a href="roadmap.html" class="nav-back" aria-label="Roadmap">Roadmap</a>
+      <a href="action-plan.html" class="nav-back" aria-label="Action Plan">Action Plan</a>
+      <div class="live-badge" role="status" aria-live="polite">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span>Live MEL</span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="dash-header" role="banner" id="main-content">
+  <div class="dash-eyebrow">Strategic MEL Dashboard · Phase 1: Foundation Building</div>
+  <h1 class="dash-title">The Emerging Bangsamoro</h1>
+  <p class="dash-subtitle">Monitoring, Evaluation &amp; Learning — 2026 Priority Actions &amp; 2035 Investment Targets. Applying the <strong>Pareto Principle</strong> to surface the vital few metrics that drive 80% of strategic impact, aligned with the BIRD 2026–2035 Roadmap.</p>
+  <div class="dash-meta-row">
+    <div class="dash-timestamp">
+      <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2"/></svg>
+      <span id="liveTime">Loading…</span>
+    </div>
+    <div class="pareto-note">
+      <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+      Pareto Focus: 6 Critical KPIs · 6 Priority Actions · ₱55B Total Roadmap Budget
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main class="dash-container" role="main">
+
+  <!-- ========================================================
+       MEL LEGEND
+       ======================================================== -->
+  <div class="mel-legend reveal" role="note" aria-label="Dashboard legend">
+    <div class="mel-leg-item"><div class="mel-leg-dot" style="background:#10b981;"></div>On Track</div>
+    <div class="mel-leg-item"><div class="mel-leg-dot" style="background:var(--gold);"></div>Building / In Progress</div>
+    <div class="mel-leg-item"><div class="mel-leg-dot" style="background:#3b82f6;"></div>Watch / Early Stage</div>
+    <div class="mel-leg-item"><div class="mel-leg-dot" style="background:#f59e0b;"></div>At Risk</div>
+    <div class="mel-leg-item"><div class="mel-leg-dot" style="background:#ef4444;"></div>Critical / Behind</div>
+    <div class="mel-leg-item" style="margin-left:auto;font-size:.7rem;color:rgba(255,255,255,.35);">Baselines: 2024 PSA / BBOI / MTIT. Targets: BIRD 2026-2035 Roadmap.</div>
+  </div>
+
+  <!-- ========================================================
+       PANEL A — KEY INVESTMENT TARGETS
+       ======================================================== -->
+  <section class="dash-section reveal" aria-labelledby="kpi-title">
+    <div class="section-head">
+      <div class="section-label-wrap">
+        <span class="section-kicker">Panel A · Pareto Vital Few</span>
+        <h2 class="section-title" id="kpi-title">Key Investment Targets — 2035 Vision</h2>
+        <div class="section-rule"></div>
+      </div>
+      <span class="section-count">6 headline KPIs · Phase 1 progress</span>
+    </div>
+
+    <div class="kpi-grid" role="list">
+
+      <!-- KPI 1 — Investment Inflows -->
+      <div class="kpi-card watch reveal d1" role="listitem" aria-label="Total Investment Inflows KPI">
+        <div class="kpi-ring-wrap" aria-hidden="true">
+          <svg class="kpi-ring" width="76" height="76" viewBox="0 0 76 76">
+            <circle class="kpi-ring-track" cx="38" cy="38" r="31"/>
+            <circle class="kpi-ring-fill gold" cx="38" cy="38" r="31"
+                    stroke-dasharray="194.78"
+                    stroke-dashoffset="194.78"
+                    data-target-offset="128.55"/><!-- 34% filled -->
+          </svg>
+          <div class="kpi-ring-center">
+            <span class="kpi-ring-pct" id="pct1">34%</span>
+            <span class="kpi-ring-sub">of target</span>
+          </div>
+        </div>
+        <div class="kpi-label">Annual Investment Approvals</div>
+        <div class="kpi-current">₱5.1B <span style="font-size:.65rem;opacity:.6;">(Q1 2026)</span></div>
+        <div class="kpi-target">Target: ₱15B p.a. by 2035</div>
+        <span class="kpi-delta up">▲ Structural Shift</span>
+        <div class="kpi-source">BBOI / BEZA · ⭐ LP1+LP3</div>
+      </div>
+
+      <!-- KPI 2 — Total Export Value -->
+      <div class="kpi-card watch reveal d2" role="listitem" aria-label="Total Export Value KPI">
+        <div class="kpi-ring-wrap" aria-hidden="true">
+          <svg class="kpi-ring" width="76" height="76" viewBox="0 0 76 76">
+            <circle class="kpi-ring-track" cx="38" cy="38" r="31"/>
+            <circle class="kpi-ring-fill blue" cx="38" cy="38" r="31"
+                    stroke-dasharray="194.78"
+                    stroke-dashoffset="194.78"
+                    data-target-offset="146.08"/><!-- ~25% -->
+          </svg>
+          <div class="kpi-ring-center">
+            <span class="kpi-ring-pct" id="pct2">25%</span>
+            <span class="kpi-ring-sub">of target</span>
+          </div>
+        </div>
+        <div class="kpi-label">Total Export Value</div>
+        <div class="kpi-current">&lt;₱10B <span style="font-size:.65rem;opacity:.6;">(2024)</span></div>
+        <div class="kpi-target">Target: ₱40B+ by 2035</div>
+        <span class="kpi-delta flat">~ Baseline Phase</span>
+        <div class="kpi-source">PSA / Customs · ⭐ LP1</div>
+      </div>
+
+      <!-- KPI 3 — Halal-Certified Firms -->
+      <div class="kpi-card watch reveal d3" role="listitem" aria-label="Halal Certified Firms KPI">
+        <div class="kpi-ring-wrap" aria-hidden="true">
+          <svg class="kpi-ring" width="76" height="76" viewBox="0 0 76 76">
+            <circle class="kpi-ring-track" cx="38" cy="38" r="31"/>
+            <circle class="kpi-ring-fill gold" cx="38" cy="38" r="31"
+                    stroke-dasharray="194.78"
+                    stroke-dashoffset="194.78"
+                    data-target-offset="175.30"/><!-- 10% -->
+          </svg>
+          <div class="kpi-ring-center">
+            <span class="kpi-ring-pct" id="pct3">10%</span>
+            <span class="kpi-ring-sub">of target</span>
+          </div>
+        </div>
+        <div class="kpi-label">Halal-Certified Firms</div>
+        <div class="kpi-current">~500 <span style="font-size:.65rem;opacity:.6;">(2024)</span></div>
+        <div class="kpi-target">Target: 5,000+ by 2035</div>
+        <span class="kpi-delta flat">~ 2,000 by 2030</span>
+        <div class="kpi-source">BHB Registry · ⭐ LP1</div>
+      </div>
+
+      <!-- KPI 4 — Islamic Finance Penetration -->
+      <div class="kpi-card watch reveal d1" role="listitem" aria-label="Islamic Finance Penetration KPI">
+        <div class="kpi-ring-wrap" aria-hidden="true">
+          <svg class="kpi-ring" width="76" height="76" viewBox="0 0 76 76">
+            <circle class="kpi-ring-track" cx="38" cy="38" r="31"/>
+            <circle class="kpi-ring-fill blue" cx="38" cy="38" r="31"
+                    stroke-dasharray="194.78"
+                    stroke-dashoffset="194.78"
+                    data-target-offset="190.88"/><!-- 2% -->
+          </svg>
+          <div class="kpi-ring-center">
+            <span class="kpi-ring-pct" id="pct4">2%</span>
+            <span class="kpi-ring-sub">building</span>
+          </div>
+        </div>
+        <div class="kpi-label">Islamic Finance Penetration</div>
+        <div class="kpi-current">Minimal <span style="font-size:.65rem;opacity:.6;">(&lt;₱2B assets)</span></div>
+        <div class="kpi-target">Target: 25% of adults by 2035</div>
+        <span class="kpi-delta flat">~ Framework 2026</span>
+        <div class="kpi-source">Min. Finance · ⭐ LP4</div>
+      </div>
+
+      <!-- KPI 5 — Electrification Rate -->
+      <div class="kpi-card on-track reveal d2" role="listitem" aria-label="Electrification Rate KPI">
+        <div class="kpi-ring-wrap" aria-hidden="true">
+          <svg class="kpi-ring" width="76" height="76" viewBox="0 0 76 76">
+            <circle class="kpi-ring-track" cx="38" cy="38" r="31"/>
+            <circle class="kpi-ring-fill green" cx="38" cy="38" r="31"
+                    stroke-dasharray="194.78"
+                    stroke-dashoffset="194.78"
+                    data-target-offset="48.69"/><!-- 75% -->
+          </svg>
+          <div class="kpi-ring-center">
+            <span class="kpi-ring-pct" id="pct5">75%</span>
+            <span class="kpi-ring-sub">of target</span>
+          </div>
+        </div>
+        <div class="kpi-label">Electrification Rate</div>
+        <div class="kpi-current">~75% <span style="font-size:.65rem;opacity:.6;">(2024)</span></div>
+        <div class="kpi-target">Target: 100% by 2035</div>
+        <span class="kpi-delta up">▲ 90% by 2030</span>
+        <div class="kpi-source">MENRE / DOE · ⭐ LP2</div>
+      </div>
+
+      <!-- KPI 6 — Broadband Connectivity -->
+      <div class="kpi-card on-track reveal d3" role="listitem" aria-label="Broadband Connectivity KPI">
+        <div class="kpi-ring-wrap" aria-hidden="true">
+          <svg class="kpi-ring" width="76" height="76" viewBox="0 0 76 76">
+            <circle class="kpi-ring-track" cx="38" cy="38" r="31"/>
+            <circle class="kpi-ring-fill green" cx="38" cy="38" r="31"
+                    stroke-dasharray="194.78"
+                    stroke-dashoffset="194.78"
+                    data-target-offset="126.60"/><!-- 35% -->
+          </svg>
+          <div class="kpi-ring-center">
+            <span class="kpi-ring-pct" id="pct6">35%</span>
+            <span class="kpi-ring-sub">of target</span>
+          </div>
+        </div>
+        <div class="kpi-label">Broadband Connectivity</div>
+        <div class="kpi-current">&lt;30% est. <span style="font-size:.65rem;opacity:.6;">(2024)</span></div>
+        <div class="kpi-target">Target: 85% by 2035</div>
+        <span class="kpi-delta up">▲ 60% by 2030</span>
+        <div class="kpi-source">DICT / MICT · ⭐ LP2</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       PANEL B — BSC CRITICAL LEVERAGE POINTS
+       ======================================================== -->
+  <section class="dash-section reveal" aria-labelledby="bsc-title">
+    <div class="section-head">
+      <div class="section-label-wrap">
+        <span class="section-kicker">Panel B · Balanced Scorecard</span>
+        <h2 class="section-title" id="bsc-title">Critical Leverage Points — BSC View</h2>
+        <div class="section-rule"></div>
+      </div>
+      <span class="section-count">5 ⭐ KPIs · All 4 perspectives</span>
+    </div>
+
+    <div class="bsc-grid" role="list">
+
+      <!-- LP1: Investment Inflows — Financial -->
+      <div class="bsc-card finance reveal d1" role="listitem">
+        <span class="bsc-lp-badge">⭐ LP1 + LP3</span>
+        <span class="bsc-persp-tag">Financial Perspective</span>
+        <div class="bsc-action">Increase FDI &amp; domestic investment inflows</div>
+        <div class="bsc-kpi">Annual Investment Approvals</div>
+        <div class="bsc-prog-wrap">
+          <div class="bsc-prog-label">
+            <span class="bsc-prog-current">₱5.1B (Q1 2026)</span>
+            <span class="bsc-prog-target">₱15B p.a. target</span>
+          </div>
+          <div class="bsc-prog-bar"><div class="bsc-prog-fill gold" style="width:0%" data-w="34"></div></div>
+          <div class="bsc-prog-label" style="margin-top:.3rem;">
+            <span class="status-badge in-progress"><span class="status-dot-anim"></span>In Progress</span>
+            <span style="font-size:.68rem;color:rgba(255,255,255,.35);">34% of 2035 goal</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LP1: Export Value — Financial -->
+      <div class="bsc-card finance reveal d2" role="listitem">
+        <span class="bsc-lp-badge">⭐ LP1</span>
+        <span class="bsc-persp-tag">Financial Perspective</span>
+        <div class="bsc-action">Expand halal &amp; agro-industrial exports</div>
+        <div class="bsc-kpi">Total Export Value</div>
+        <div class="bsc-prog-wrap">
+          <div class="bsc-prog-label">
+            <span class="bsc-prog-current">&lt;₱10B</span>
+            <span class="bsc-prog-target">₱40B+ target</span>
+          </div>
+          <div class="bsc-prog-bar"><div class="bsc-prog-fill blue" style="width:0%" data-w="25"></div></div>
+          <div class="bsc-prog-label" style="margin-top:.3rem;">
+            <span class="status-badge in-progress"><span class="status-dot-anim"></span>Building Corridors</span>
+            <span style="font-size:.68rem;color:rgba(255,255,255,.35);">UAE/GCC focus</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LP3: Investor Satisfaction — Stakeholder -->
+      <div class="bsc-card stakeholder reveal d3" role="listitem">
+        <span class="bsc-lp-badge">⭐ LP3</span>
+        <span class="bsc-persp-tag">Stakeholder Perspective</span>
+        <div class="bsc-action">Enhance investor satisfaction &amp; retention</div>
+        <div class="bsc-kpi">Investor Satisfaction Score (1–10)</div>
+        <div class="bsc-prog-wrap">
+          <div class="bsc-prog-label">
+            <span class="bsc-prog-current">TBD baseline</span>
+            <span class="bsc-prog-target">8.0+ rating</span>
+          </div>
+          <div class="bsc-prog-bar"><div class="bsc-prog-fill blue" style="width:0%" data-w="50"></div></div>
+          <div class="bsc-prog-label" style="margin-top:.3rem;">
+            <span class="status-badge in-progress"><span class="status-dot-anim"></span>Measuring</span>
+            <span style="font-size:.68rem;color:rgba(255,255,255,.35);">BICC activates R2 loop</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LP1: BHB Accreditation — Internal Process -->
+      <div class="bsc-card process reveal d1" role="listitem">
+        <span class="bsc-lp-badge">⭐ LP1 Critical</span>
+        <span class="bsc-persp-tag">Internal Process Perspective</span>
+        <div class="bsc-action">Achieve OIC/SMIIC international accreditation</div>
+        <div class="bsc-kpi">BHB International Accreditation Status</div>
+        <div class="bsc-prog-wrap">
+          <div class="bsc-prog-label">
+            <span class="bsc-prog-current">National only</span>
+            <span class="bsc-prog-target">OIC/SMIIC by 2028</span>
+          </div>
+          <div class="bsc-prog-bar"><div class="bsc-prog-fill gold" style="width:0%" data-w="20"></div></div>
+          <div class="bsc-prog-label" style="margin-top:.3rem;">
+            <span class="status-badge in-progress"><span class="status-dot-anim"></span>Q2 2026 operationalisation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Learning: Halal Officers Trained -->
+      <div class="bsc-card learning reveal d2" role="listitem">
+        <span class="bsc-lp-badge">⭐ LP1 Enabler</span>
+        <span class="bsc-persp-tag">Learning &amp; Growth Perspective</span>
+        <div class="bsc-action">Develop technical halal expertise</div>
+        <div class="bsc-kpi">Halal Certification Officers Trained</div>
+        <div class="bsc-prog-wrap">
+          <div class="bsc-prog-label">
+            <span class="bsc-prog-current">Minimal pool</span>
+            <span class="bsc-prog-target">100+ officers by 2035</span>
+          </div>
+          <div class="bsc-prog-bar"><div class="bsc-prog-fill teal" style="width:0%" data-w="10"></div></div>
+          <div class="bsc-prog-label" style="margin-top:.3rem;">
+            <span class="status-badge in-progress"><span class="status-dot-anim"></span>50 target for 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       PANEL C — PRIORITY ACTION BOARD
+       ======================================================== -->
+  <section class="dash-section reveal" aria-labelledby="action-title">
+    <div class="section-head">
+      <div class="section-label-wrap">
+        <span class="section-kicker">Panel C · One Year Action Plan 2026</span>
+        <h2 class="section-title" id="action-title">Urgent &amp; Priority Actions — Foundation Phase</h2>
+        <div class="section-rule"></div>
+      </div>
+      <span class="section-count">2 Critical · 3 High · 1 Medium</span>
+    </div>
+
+    <!-- Summary cards -->
+    <div class="action-summary">
+      <div class="a-sum-card critical" role="status">
+        <div class="a-sum-num" id="countCritical">2</div>
+        <div class="a-sum-lbl">Critical Actions</div>
+      </div>
+      <div class="a-sum-card high" role="status">
+        <div class="a-sum-num" id="countHigh">3</div>
+        <div class="a-sum-lbl">High Priority</div>
+      </div>
+      <div class="a-sum-card track" role="status">
+        <div class="a-sum-num" id="countQ2">2</div>
+        <div class="a-sum-lbl">Due Q2 2026</div>
+      </div>
+      <div class="a-sum-card budget">
+        <div class="a-sum-num">₱1.1B</div>
+        <div class="a-sum-lbl">2026 Total Budget</div>
+      </div>
+    </div>
+
+    <!-- Filter row -->
+    <div class="action-filters" role="group" aria-label="Filter actions by priority">
+      <button class="filter-btn active" data-filter="all" onclick="filterActions(this,'all')">All Actions</button>
+      <button class="filter-btn" data-filter="critical" onclick="filterActions(this,'critical')">🔴 Critical</button>
+      <button class="filter-btn" data-filter="high" onclick="filterActions(this,'high')">🟡 High</button>
+      <button class="filter-btn" data-filter="medium" onclick="filterActions(this,'medium')">🔵 Medium</button>
+      <button class="filter-btn" data-filter="q2" onclick="filterActions(this,'q2')">📅 Due Q2</button>
+      <button class="filter-btn" data-filter="q4" onclick="filterActions(this,'q4')">📅 Due Q4</button>
+    </div>
+
+    <!-- Table -->
+    <div class="action-table-wrap">
+      <table class="action-table" aria-label="Priority action plan 2026">
+        <thead>
+          <tr>
+            <th scope="col">Strategic Objective</th>
+            <th scope="col">Programme / Action</th>
+            <th scope="col" style="text-align:center;">Priority</th>
+            <th scope="col" style="text-align:center;">Due</th>
+            <th scope="col">MEL Status</th>
+            <th scope="col" style="text-align:right;">Budget</th>
+            <th scope="col">Lead Unit</th>
+          </tr>
+        </thead>
+        <tbody id="actionTableBody">
+
+          <tr data-priority="critical" data-quarter="q2">
+            <td>
+              <span class="lp-tag">LP1</span>
+              <div class="action-desc" style="margin-top:.4rem;">Halal Certification System Integrity — Breaking "Fixes that Fail" archetype</div>
+            </td>
+            <td>
+              <strong>BHB Operationalisation</strong>
+              <div class="action-desc">Aligning certification with OIC/SMIIC standards; establishing audit protocols; initial certification of 50 enterprises.</div>
+            </td>
+            <td style="text-align:center;"><span class="pri-badge critical">● Critical</span></td>
+            <td class="due-cell" style="text-align:center;">Q2 2026</td>
+            <td><span class="status-badge in-progress"><span class="status-dot-anim"></span>In Progress</span></td>
+            <td class="budget-cell" style="text-align:right;">₱200M</td>
+            <td class="agency-cell"><strong style="color:white;">BHB</strong><br>MTIT (Support)</td>
+          </tr>
+
+          <tr data-priority="critical" data-quarter="q2">
+            <td>
+              <span class="lp-tag">LP5</span>
+              <div class="action-desc" style="margin-top:.4rem;">Green Economy Framework — Monetizing environmental assets</div>
+            </td>
+            <td>
+              <strong>Forestry Code &amp; JMC 2026-01</strong>
+              <div class="action-desc">Enact Bangsamoro Forestry Code; sign MENRE-MILG JMC for Carbon Credits, PES, and Eco-tourism User Fees.</div>
+            </td>
+            <td style="text-align:center;"><span class="pri-badge critical">● Critical</span></td>
+            <td class="due-cell" style="text-align:center;">Q2 2026</td>
+            <td><span class="status-badge in-progress"><span class="status-dot-anim"></span>Drafting</span></td>
+            <td class="budget-cell" style="text-align:right;">₱50M</td>
+            <td class="agency-cell"><strong style="color:white;">MENRE</strong><br>Parliament / MILG</td>
+          </tr>
+
+          <tr data-priority="high" data-quarter="q3">
+            <td>
+              <span class="lp-tag">LP3</span>
+              <div class="action-desc" style="margin-top:.4rem;">Governance–Investor Confidence — Digital transformation for ease of doing business</div>
+            </td>
+            <td>
+              <strong>BEGMP Digital Rollout</strong>
+              <div class="action-desc">Complete deployment of Bangsamoro e-Governance Master Plan; 1-day digital business registration via BBOI.</div>
+            </td>
+            <td style="text-align:center;"><span class="pri-badge high">● High</span></td>
+            <td class="due-cell" style="text-align:center;">Q3 2026</td>
+            <td><span class="status-badge in-progress"><span class="status-dot-anim"></span>Development</span></td>
+            <td class="budget-cell" style="text-align:right;">₱150M</td>
+            <td class="agency-cell"><strong style="color:white;">BDTA</strong><br>BBOI, MICT</td>
+          </tr>
+
+          <tr data-priority="high" data-quarter="q4">
+            <td>
+              <span class="lp-tag">LP2</span>
+              <div class="action-desc" style="margin-top:.4rem;">Infrastructure–Energy Nexus — Raising the B1 Growth Ceiling</div>
+            </td>
+            <td>
+              <strong>Bangsamoro Halal Park (Matanog)</strong>
+              <div class="action-desc">Ground-breaking and master-planned site development; anchor tenant pre-qualification; utility infrastructure.</div>
+            </td>
+            <td style="text-align:center;"><span class="pri-badge high">● High</span></td>
+            <td class="due-cell" style="text-align:center;">Q4 2026</td>
+            <td><span class="status-badge in-progress"><span class="status-dot-anim"></span>Pre-Dev</span></td>
+            <td class="budget-cell" style="text-align:right;">₱500M</td>
+            <td class="agency-cell"><strong style="color:white;">BEZA</strong><br>MTIT, Private</td>
+          </tr>
+
+          <tr data-priority="high" data-quarter="q4">
+            <td>
+              <span class="lp-tag">LP4</span>
+              <div class="action-desc" style="margin-top:.4rem;">Islamic Finance Ecosystem — Capital engine for sustainable growth</div>
+            </td>
+            <td>
+              <strong>Islamic Finance Foundation</strong>
+              <div class="action-desc">Regulatory base for Shariah-compliant microfinance; Takaful framework; Al-Amanah expansion to all provincial capitals.</div>
+            </td>
+            <td style="text-align:center;"><span class="pri-badge high">● High</span></td>
+            <td class="due-cell" style="text-align:center;">Q4 2026</td>
+            <td><span class="status-badge in-progress"><span class="status-dot-anim"></span>Scoping</span></td>
+            <td class="budget-cell" style="text-align:right;">₱100M</td>
+            <td class="agency-cell"><strong style="color:white;">Min. Finance</strong><br>BPDA, BSP</td>
+          </tr>
+
+          <tr data-priority="medium" data-quarter="q4">
+            <td>
+              <span class="lp-tag">LP1</span>
+              <div class="action-desc" style="margin-top:.4rem;">Human Capital — Addressing "Limits to Growth" skills constraints</div>
+            </td>
+            <td>
+              <strong>Halal Expert Training Programme</strong>
+              <div class="action-desc">First cadre of 50 halal certification officers; international mentorship; laboratory competency certification.</div>
+            </td>
+            <td style="text-align:center;"><span class="pri-badge medium">● Medium</span></td>
+            <td class="due-cell" style="text-align:center;">Q4 2026</td>
+            <td><span class="status-badge not-started"><span class="status-dot-anim"></span>Planned</span></td>
+            <td class="budget-cell" style="text-align:right;">₱100M</td>
+            <td class="agency-cell"><strong style="color:white;">BHB</strong><br>MOLE, MOST</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       PANEL D — SYSTEMS LOOP HEALTH MONITOR
+       ======================================================== -->
+  <section class="dash-section reveal" aria-labelledby="loops-title">
+    <div class="section-head">
+      <div class="section-label-wrap">
+        <span class="section-kicker">Panel D · Systems Thinking MEL</span>
+        <h2 class="section-title" id="loops-title">Feedback Loop Health Monitor</h2>
+        <div class="section-rule"></div>
+      </div>
+      <span class="section-count">2 reinforcing · 2 balancing</span>
+    </div>
+
+    <div class="loops-grid" role="list">
+
+      <div class="loop-card reveal d1" role="listitem" aria-label="R1 Investment Development loop status">
+        <div class="loop-id reinforcing">R1</div>
+        <span class="loop-type-badge reinforcing">Reinforcing</span>
+        <div class="loop-name">Investment–Development Virtuous Cycle</div>
+        <div class="loop-mini-bar"><div class="loop-mini-fill green" style="width:0%" data-w="35"></div></div>
+        <div class="loop-desc">Investment inflows → employment → income → domestic market → business climate → further investment.</div>
+        <div class="loop-status-row">
+          <span class="loop-activation">35% activation</span>
+          <span class="loop-health building">Building</span>
+        </div>
+      </div>
+
+      <div class="loop-card reveal d2" role="listitem" aria-label="R2 Governance Investor Confidence loop status">
+        <div class="loop-id reinforcing">R2</div>
+        <span class="loop-type-badge reinforcing">Reinforcing</span>
+        <div class="loop-name">Governance–Investor Confidence</div>
+        <div class="loop-mini-bar"><div class="loop-mini-fill gold" style="width:0%" data-w="25"></div></div>
+        <div class="loop-desc">Governance capacity → policy clarity → investor confidence → tax revenues → stronger governance.</div>
+        <div class="loop-status-row">
+          <span class="loop-activation">25% activation</span>
+          <span class="loop-health building">Initialising</span>
+        </div>
+      </div>
+
+      <div class="loop-card reveal d3" role="listitem" aria-label="B1 Growth Resource Constraints loop status">
+        <div class="loop-id balancing">B1</div>
+        <span class="loop-type-badge balancing">Balancing</span>
+        <div class="loop-name">Growth–Resource Constraints</div>
+        <div class="loop-mini-bar"><div class="loop-mini-fill gold" style="width:0%" data-w="60"></div></div>
+        <div class="loop-desc">Infrastructure deficits and skills shortages currently constraining growth ceiling. LP2 interventions targeting this loop.</div>
+        <div class="loop-status-row">
+          <span class="loop-activation">Constraint: 60%</span>
+          <span class="loop-health watch">Actively Managed</span>
+        </div>
+      </div>
+
+      <div class="loop-card reveal d1" role="listitem" aria-label="B2 Security Investment Tensions loop status">
+        <div class="loop-id balancing">B2</div>
+        <span class="loop-type-badge balancing">Balancing</span>
+        <div class="loop-name">Security–Investment Tensions</div>
+        <div class="loop-mini-bar"><div class="loop-mini-fill blue" style="width:0%" data-w="40"></div></div>
+        <div class="loop-desc">Security incidents → investor caution → reduced investment → social tensions. Peace consolidation underway.</div>
+        <div class="loop-status-row">
+          <span class="loop-activation">Tension: 40%</span>
+          <span class="loop-health watch">Monitored</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       PANEL E — PHASE PROGRESS TRACKER
+       ======================================================== -->
+  <section class="dash-section reveal" aria-labelledby="phase-title">
+    <div class="section-head">
+      <div class="section-label-wrap">
+        <span class="section-kicker">Panel E · Implementation Roadmap</span>
+        <h2 class="section-title" id="phase-title">Phase Progress Tracker — 2026–2035</h2>
+        <div class="section-rule"></div>
+      </div>
+      <span class="section-count">₱55B total · 3 phases</span>
+    </div>
+
+    <div class="phase-tracker" role="list">
+
+      <!-- Phase 1 -->
+      <div class="phase-track-card reveal d1" role="listitem">
+        <div class="phase-num-badge" aria-hidden="true">01</div>
+        <div class="phase-track-title">Foundation Building</div>
+        <div class="phase-track-years">2026 – 2028</div>
+        <div class="phase-track-budget">PHP 15B</div>
+        <span class="status-badge in-progress" style="margin-bottom:.6rem;"><span class="status-dot-anim"></span>Current Phase</span>
+        <div class="phase-track-bar" style="background:rgba(16,185,129,.12);">
+          <div class="phase-track-fill" style="background:linear-gradient(90deg,#10b981,#6ee7b7);width:0%;" data-w="26"></div>
+        </div>
+        <div class="phase-track-pct">26% complete (Year 1 of 3)</div>
+        <div class="phase-milestones" role="list">
+          <div class="phase-milestone active" role="listitem"><span class="phase-milestone-dot"></span>BHB operationalisation — Q2 2026</div>
+          <div class="phase-milestone active" role="listitem"><span class="phase-milestone-dot"></span>Forestry Code &amp; JMC 2026-01 — Q2 2026</div>
+          <div class="phase-milestone pending" role="listitem"><span class="phase-milestone-dot"></span>BEGMP Digital Rollout — Q3 2026</div>
+          <div class="phase-milestone pending" role="listitem"><span class="phase-milestone-dot"></span>Halal Park groundbreaking — Q4 2026</div>
+          <div class="phase-milestone pending" role="listitem"><span class="phase-milestone-dot"></span>ZBIP &amp; 80% electrification — 2028</div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase-track-card reveal d2" role="listitem">
+        <div class="phase-num-badge" aria-hidden="true">02</div>
+        <div class="phase-track-title">Acceleration</div>
+        <div class="phase-track-years">2029 – 2032</div>
+        <div class="phase-track-budget">PHP 20B</div>
+        <span class="status-badge not-started" style="margin-bottom:.6rem;"><span class="status-dot-anim"></span>Upcoming</span>
+        <div class="phase-track-bar">
+          <div class="phase-track-fill" style="background:linear-gradient(90deg,#3b82f6,#93c5fd);width:0%;" data-w="0"></div>
+        </div>
+        <div class="phase-track-pct">0% — begins 2029</div>
+        <div class="phase-milestones" role="list">
+          <div class="phase-milestone pending" role="listitem"><span class="phase-milestone-dot"></span>Full OIC/SMIIC recognition</div>
+          <div class="phase-milestone pending" role="listitem"><span class="phase-milestone-dot"></span>Halal Park Phase 1 with tenants</div>
+          <div class="phase-milestone pending" role="listitem"><span class="phase-milestone-dot"></span>60% broadband penetration</div>
+          <div class="phase-milestone pending" role="listitem"><span class="phase-milestone-dot"></span>Islamic banking in all capitals</div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase-track-card reveal d3" role="listitem">
+        <div class="phase-num-badge" aria-hidden="true">03</div>
+        <div class="phase-track-title">Consolidation</div>
+        <div class="phase-track-years">2033 – 2035</div>
+        <div class="phase-track-budget">PHP 20B</div>
+        <span class="status-badge not-started" style="margin-bottom:.6rem;"><span class="status-dot-anim"></span>Future Phase</span>
+        <div class="phase-track-bar">
+          <div class="phase-track-fill" style="background:linear-gradient(90deg,#8b5cf6,#c4b5fd);width:0%;" data-w="0"></div>
+        </div>
+        <div class="phase-track-pct">0% — begins 2033</div>
+        <div class="phase-milestones" role="list">
+          <div class="phase-milestone pending" role="listitem"><span class="phase-milestone-dot"></span>Full BHB mutual recognition</div>
+          <div class="phase-milestone pending" role="listitem"><span class="phase-milestone-dot"></span>100% electrification · 85% broadband</div>
+          <div class="phase-milestone pending" role="listitem"><span class="phase-milestone-dot"></span>₱500M/yr carbon &amp; PES revenue</div>
+          <div class="phase-milestone pending" role="listitem"><span class="phase-milestone-dot"></span>₱40B+ export target achieved</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer style="text-align:center;padding:2rem 1rem;border-top:1px solid var(--gold-border);margin-top:var(--s8);">
+  <div style="margin-bottom:1rem;display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+    <a href="dashboard.html" style="color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600;">Dashboard</a>
+    <a href="roadmap.html" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;">Roadmap</a>
+    <a href="action-plan.html" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;">Action Plan</a>
+  </div>
+  <p style="font-size:.75rem;color:rgba(255,255,255,.3);">© 2026 BARMM · Ministry of Trade, Investments and Tourism · <span style="color:var(--gold);">The Emerging Bangsamoro</span> · Investment Roadmap 2026–2035</p>
+  <p style="font-size:.68rem;color:rgba(255,255,255,.2);margin-top:.3rem;">Data sources: PSA, BBOI, BEZA, MTIT, MENRE (2024 baselines). Targets per BIRD 2026–2035 Roadmap &amp; BDP 2023–2028.</p>
+</footer>
+
+<script>
+/* ============================================================
+   LIVE TIMESTAMP
+   ============================================================ */
+function updateTime(){
+  const now=new Date();
+  const opt={weekday:'short',year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true};
+  document.getElementById('liveTime').textContent=now.toLocaleString('en-PH',opt)+' PHT';
+}
+updateTime();
+setInterval(updateTime,1000);
+
+/* ============================================================
+   NAV SCROLL
+   ============================================================ */
+window.addEventListener('scroll',()=>{
+  document.getElementById('siteNav').classList.toggle('scrolled',window.scrollY>40);
+},{passive:true});
+
+/* ============================================================
+   INTERSECTION OBSERVER — reveal + animate progress
+   ============================================================ */
+const revealObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+},{threshold:.06,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+/* Animate progress bars and rings once their section enters view */
+const progressObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      // Animate progress bar fills
+      e.target.querySelectorAll('[data-w]').forEach(el=>{
+        const w=el.getAttribute('data-w');
+        setTimeout(()=>{el.style.width=w+'%';},150);
+      });
+      // Animate SVG rings
+      e.target.querySelectorAll('.kpi-ring-fill[data-target-offset]').forEach(el=>{
+        const target=parseFloat(el.getAttribute('data-target-offset'));
+        setTimeout(()=>{el.style.strokeDashoffset=target;},200);
+      });
+      progressObs.unobserve(e.target);
+    }
+  });
+},{threshold:.15});
+document.querySelectorAll('.dash-section').forEach(s=>progressObs.observe(s));
+
+/* ============================================================
+   ANIMATED COUNTERS — summary cards
+   ============================================================ */
+function animateCount(el,target,suffix=''){
+  let start=0;const dur=1200;const step=dur/target||dur;
+  const t=setInterval(()=>{
+    start++;el.textContent=start+(suffix);
+    if(start>=target)clearInterval(t);
+  },step);
+}
+const cObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){cObs.unobserve(e.target);/* Already set via HTML */}
+  });
+},{threshold:.5});
+document.querySelectorAll('.a-sum-num').forEach(el=>cObs.observe(el));
+
+/* ============================================================
+   ACTION FILTER
+   ============================================================ */
+function filterActions(btn,filter){
+  // Update active button
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const rows=document.querySelectorAll('#actionTableBody tr');
+  let countCrit=0,countHigh=0,countQ2=0;
+
+  rows.forEach(row=>{
+    const priority=row.getAttribute('data-priority');
+    const quarter=row.getAttribute('data-quarter');
+    let show=false;
+    if(filter==='all') show=true;
+    else if(filter==='critical') show=priority==='critical';
+    else if(filter==='high') show=priority==='high';
+    else if(filter==='medium') show=priority==='medium';
+    else if(filter==='q2') show=quarter==='q2';
+    else if(filter==='q4') show=quarter==='q4';
+
+    row.classList.toggle('row-hidden',!show);
+
+    if(!row.classList.contains('row-hidden')){
+      if(priority==='critical') countCrit++;
+      if(priority==='high') countHigh++;
+      if(quarter==='q2') countQ2++;
+    }
+  });
+
+  document.getElementById('countCritical').textContent=countCrit||'—';
+  document.getElementById('countHigh').textContent=countHigh||'—';
+  document.getElementById('countQ2').textContent=countQ2||'—';
+}
+
+/* ============================================================
+   KEYBOARD: action table rows accessible
+   ============================================================ */
+document.querySelectorAll('.action-table tbody tr').forEach(row=>{
+  row.setAttribute('tabindex','0');
+  row.addEventListener('keydown',e=>{if(e.key==='Enter')row.click();});
+});
+</script>
+</body>
+</html>

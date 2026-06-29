@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#022c22">
+<meta name="description" content="BARMM One Year Action Plan 2026 — Phase 1 Foundation Building: Strategic interventions, budget allocation, and systems thinking integration.">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<title>One Year Action Plan 2026 | BIRD 2026–2035 | BOI-MTIT BARMM</title>
+<style>
+:root {
+  --primary-green: #064e3b;
+  --dark-green: #022c22;
+  --mid-green: #065f46;
+  --light-green: #6ee7b7;
+  --cream: #ecfdf5;
+  --white: #ffffff;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --gold: #C9A84C;
+  --gold-light: #E8C560;
+  --gold-dark: #8B6C28;
+  --gold-pale: #fdf6e3;
+  --gold-border: rgba(201,168,76,0.32);
+  --gold-border-strong: rgba(201,168,76,0.55);
+  --gold-glow: rgba(201,168,76,0.20);
+  --gold-grad: linear-gradient(135deg,#7a5c1e 0%,#c9a84c 35%,#e8c560 50%,#c9a84c 65%,#7a5c1e 100%);
+  --focus-ring: 0 0 0 3px rgba(201,168,76,0.5);
+  --touch-target: 44px;
+  --sp-1: .25rem; --sp-2: .5rem; --sp-3: .75rem; --sp-4: 1rem; --sp-5: 1.25rem;
+  --sp-6: 1.5rem; --sp-8: 2rem; --sp-10: 2.5rem; --sp-12: 3rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: linear-gradient(160deg, #011a12 0%, #022c22 45%, #0a1628 100%);
+  min-height: 100vh;
+  color: var(--cream);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Accessibility */
+.skip-link { position: absolute; top: -40px; left: 0; background: var(--gold); color: var(--dark-green); padding: 8px 16px; text-decoration: none; z-index: 9999; font-weight: bold; border-radius: 0 0 4px 4px; }
+.skip-link:focus { top: 0; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Navigation */
+.site-nav {
+  background: rgba(2,44,34,.97);
+  backdrop-filter: blur(18px);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 200;
+  border-bottom: 2px solid var(--gold-border);
+  transition: box-shadow .4s;
+}
+.site-nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,.5); }
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: .75rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  min-height: var(--touch-target);
+}
+.nav-logo img { height: 40px; width: auto; object-fit: contain; display: block; }
+.nav-links-list {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  align-items: center;
+}
+.nav-links-list a {
+  color: var(--light-green);
+  text-decoration: none;
+  font-size: .85rem;
+  font-weight: 500;
+  letter-spacing: .03em;
+  transition: color .3s;
+  padding: .5rem 0;
+  position: relative;
+}
+.nav-links-list a:hover, .nav-links-list a:focus { color: var(--gold); }
+.nav-links-list a.active { color: var(--gold); font-weight: 700; }
+.nav-links-list a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gold);
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  padding: 3rem 1.5rem 2rem;
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 4px;
+  background: var(--gold-grad);
+  border-radius: 2px;
+}
+.header-eyebrow {
+  display: inline-block;
+  background: rgba(201,168,76,.10);
+  border: 1px solid var(--gold-border-strong);
+  color: var(--gold);
+  padding: .35rem 1.25rem;
+  border-radius: 2rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.page-header h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 700;
+  background: var(--gold-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+  margin-bottom: .5rem;
+}
+.page-header .tagline {
+  font-size: 1rem;
+  color: rgba(255,255,255,.6);
+  font-style: italic;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Container & Sections */
+.container { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem var(--sp-12); }
+.section-header { text-align: center; margin-bottom: var(--sp-8); }
+.section-label { display: block; color: var(--gold); font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; margin-bottom: .5rem; }
+.section-header h2 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 4vw, 2.2rem); color: white; margin-bottom: 1rem; }
+.section-divider { width: 60px; height: 3px; background: var(--gold-grad); margin: 0 auto 1.5rem; border-radius: 2px; }
+.section-header p { color: rgba(255,255,255,.7); max-width: 850px; margin: 0 auto; font-size: .95rem; line-height: 1.7; }
+
+/* Systems Intro */
+.systems-intro {
+  background: rgba(201,168,76,.08);
+  border-left: 4px solid var(--gold);
+  padding: 1.5rem;
+  margin-bottom: var(--sp-8);
+  border-radius: 0 .5rem .5rem 0;
+  font-size: .92rem;
+  line-height: 1.7;
+  color: rgba(209,250,229,.9);
+}
+
+/* Table Wrapper */
+.bsc-wrapper {
+  background: rgba(2,44,34,.7);
+  border: 1px solid var(--gold-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: var(--sp-8);
+  position: relative;
+  overflow: hidden;
+}
+.bsc-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gold-grad);
+}
+.bsc-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+
+/* Metrics Table */
+.metrics-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .82rem;
+  min-width: 800px;
+}
+.metrics-table thead th {
+  padding: .85rem .75rem;
+  text-align: left;
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: .75rem;
+  letter-spacing: .05em;
+  background: rgba(201,168,76,.1);
+  border-bottom: 2px solid var(--gold-border);
+  white-space: nowrap;
+}
+.metrics-table tbody tr {
+  border-bottom: 1px solid rgba(201,168,76,.15);
+  transition: background .2s;
+}
+.metrics-table tbody tr:hover { background: rgba(201,168,76,.05); }
+.metrics-table tbody td {
+  padding: .85rem .75rem;
+  vertical-align: top;
+  color: rgba(236,253,245,.85);
+  line-height: 1.5;
+}
+.metrics-table tbody td strong { color: white; }
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: .25rem .6rem;
+  border-radius: .25rem;
+  font-size: .72rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.badge-critical { background: rgba(239,68,68,.2); color: #fca5a5; border-color: rgba(239,68,68,.4); }
+.badge-high { background: rgba(201,168,76,.2); color: var(--gold); border-color: var(--gold-border); }
+.badge-medium { background: rgba(59,130,246,.2); color: #93c5fd; border-color: rgba(59,130,246,.4); }
+
+/* Archetypes Grid */
+.sub-section-title { font-family: 'Cinzel', serif; color: var(--gold); text-align: center; margin-bottom: var(--sp-6); font-size: 1.3rem; }
+.archetypes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: var(--sp-8); }
+.archetype-card {
+  background: rgba(6,24,16,.9);
+  border: 1px solid var(--gold-border);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform .3s, border-color .3s;
+}
+.archetype-card:hover { transform: translateY(-4px); border-color: var(--gold-border-strong); }
+.arch-desc { padding: 1.5rem; }
+.arch-desc h4 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1rem; margin-bottom: .8rem; display: flex; align-items: center; gap: .5rem; }
+.arch-desc p { font-size: .88rem; line-height: 1.7; color: rgba(209,250,229,.85); }
+
+/* Priorities Section */
+.priorities-section {
+  background: rgba(6,78,59,.25);
+  border: 1px solid var(--gold-border);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-top: var(--sp-8);
+}
+.section-title-bar { font-family: 'Cinzel', serif; color: var(--gold); text-align: center; margin-bottom: var(--sp-6); font-size: 1.3rem; }
+.priorities-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.25rem; }
+.priority-item {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: .75rem;
+  padding: 1.25rem;
+  transition: background .3s, transform .3s;
+}
+.priority-item:hover { background: rgba(255,255,255,.08); transform: translateY(-3px); }
+.priority-title { font-family: 'Cinzel', serif; color: var(--gold); font-size: .95rem; margin-bottom: .5rem; display: flex; align-items: center; gap: .5rem; }
+.priority-desc { font-size: .85rem; color: rgba(209,250,229,.8); line-height: 1.6; }
+
+/* CSI Grid (Quarters) */
+.csi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: var(--sp-8); }
+.csi-item {
+  background: rgba(201,168,76,.1);
+  border: 1px solid var(--gold-border);
+  border-radius: .75rem;
+  padding: 1.25rem;
+  text-align: center;
+  transition: transform .3s, border-color .3s;
+}
+.csi-item:hover { transform: translateY(-3px); border-color: var(--gold); }
+.csi-num { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--gold); font-weight: 700; margin-bottom: .3rem; }
+.csi-label { font-size: .8rem; color: var(--light-green); line-height: 1.4; }
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  border-top: 1px solid var(--gold-border);
+  margin-top: var(--sp-12);
+  background: rgba(0,0,0,.2);
+}
+.footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 1rem; }
+.footer-links a { color: rgba(255,255,255,.5); text-decoration: none; font-size: .85rem; transition: color .2s; }
+.footer-links a:hover { color: var(--gold); }
+footer p { font-size: .75rem; color: rgba(255,255,255,.3); margin-top: .5rem; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links-list { gap: 1rem; }
+  .nav-links-list a { font-size: .75rem; }
+  .bsc-wrapper { padding: 1rem; overflow-x: auto; }
+  .metrics-table { font-size: .75rem; }
+  .priorities-section { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Navigation -->
+<nav class="site-nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="BOI-MTIT BARMM Home">
+      <img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png" alt="Ministry of Trade, Investments and Tourism – BARMM" onerror="this.style.display='none'">
+    </a>
+    <ul class="nav-links-list" id="navLinks">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="action-plan.html" class="active">Action Plan</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<header class="page-header">
+  <div class="header-eyebrow">Phase 1: Foundation Building (2026–2028)</div>
+  <h1>One Year Action Plan 2026</h1>
+  <p class="tagline">Operationalizing the Integrated Halal-Driven Investment Strategy &amp; Green Economy Framework</p>
+</header>
+
+<!-- Main Content -->
+<main class="container" id="main-content">
+
+  <!-- Intro Context -->
+  <div class="section-header">
+    <p>Initiating the <strong style="color:var(--gold);">Investment–Development Virtuous Cycle (R1)</strong> and <strong style="color:var(--gold);">Governance–Investor Confidence Loop (R2)</strong> through targeted interventions at the Critical Leverage Points. This plan addresses the <em>Limits to Growth</em> archetype by investing in infrastructure and governance constraints before they bind, while formally establishing the <strong style="color:var(--gold);">Green Economy Framework</strong> as mandated by the BIRD 2026–2035 roadmap.</p>
+  </div>
+
+  <div class="systems-intro">
+    <strong style="color:var(--gold);">Strategic Architecture:</strong> The 2026 Action Plan operationalizes the <strong>Integrated Halal-Driven Investment Strategy</strong> across four interconnected pillars: (1) Halal Industry Ecosystem Excellence, (2) Green Economy & Environmental Markets, (3) Enabling Infrastructure & Energy Connectivity, and (4) Governance & Institutional Strengthening. Each action targets specific variables within the Causal Loop Diagrams to trigger positive feedback while dismantling the <em>Security–Investment Tensions</em> balancing loop (B2).
+  </div>
+
+  <!-- Action Plan Table -->
+  <div class="bsc-wrapper">
+    <h3 class="bsc-title">
+      <span style="font-size:1.5rem;">📋</span>
+      2026 Priority Actions & Resource Allocation
+      <span style="margin-left:auto;font-size:.8rem;color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:700;">Total Budget: ₱1.3 Billion</span>
+    </h3>
+    
+    <div style="overflow-x:auto;">
+      <table class="metrics-table">
+        <thead>
+          <tr>
+            <th scope="col" style="width:18%;">Strategic Objective</th>
+            <th scope="col" style="width:26%;">Program / Action / Project</th>
+            <th scope="col" style="width:8%;text-align:center;">Priority</th>
+            <th scope="col" style="width:8%;text-align:center;">Due</th>
+            <th scope="col" style="width:18%;">Resources & Dependencies</th>
+            <th scope="col" style="width:8%;text-align:right;">Budget</th>
+            <th scope="col" style="width:12%;">Lead Unit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- LP1: Halal Governance -->
+          <tr style="background:rgba(16,185,129,.05);">
+            <td>
+              <strong style="color:var(--gold);display:block;margin-bottom:.25rem;">LP1: Halal Governance</strong>
+              <span style="font-size:.72rem;color:var(--light-green);">Breaking "Fixes that Fail" via credible OIC/SMIIC standards</span>
+            </td>
+            <td>
+              <strong>Operationalization of BHB</strong>
+              <span style="display:block;margin-top:.3rem;font-size:.78rem;color:rgba(209,250,229,.7);">Aligning certification with OIC/SMIIC standards; audit protocols; initial certification of 50 enterprises. Fast-tracking BHIDP 2025–2030.</span>
+            </td>
+            <td style="text-align:center;"><span class="badge badge-critical">Critical</span></td>
+            <td style="text-align:center;color:var(--light-green);font-weight:600;">Q2</td>
+            <td style="font-size:.78rem;">Technical experts, SMIIC documentation, lab equipment, international accreditation consultants.</td>
+            <td style="text-align:right;color:var(--gold);font-weight:700;font-family:'Cinzel',serif;">₱200M</td>
+            <td style="font-size:.78rem;"><strong style="color:white;">BHB</strong><br>MTIT</td>
+          </tr>
+
+          <!-- Green Economy Framework -->
+          <tr style="background:rgba(16,185,129,.08);">
+            <td>
+              <strong style="color:var(--gold);display:block;margin-bottom:.25rem;">Green Economy Framework</strong>
+              <span style="font-size:.72rem;color:var(--light-green);">Establishing legal architecture for carbon & PES markets</span>
+            </td>
+            <td>
+              <strong>Forestry Code & JMC No. 2026-01</strong>
+              <span style="display:block;margin-top:.3rem;font-size:.78rem;color:rgba(209,250,229,.7);">Enact Bangsamoro Forestry Code; sign MENRE-MILG JMC for Carbon Credits, PES, and Eco-tourism User Fees. Forest inventory baseline.</span>
+            </td>
+            <td style="text-align:center;"><span class="badge badge-critical">Critical</span></td>
+            <td style="text-align:center;color:var(--light-green);font-weight:600;">Q2</td>
+            <td style="font-size:.78rem;">Legal drafting, MENRE-MILG coordination, LGU capacity building, baseline ecological mapping.</td>
+            <td style="text-align:right;color:var(--gold);font-weight:700;font-family:'Cinzel',serif;">₱50M</td>
+            <td style="font-size:.78rem;"><strong style="color:white;">MENRE</strong><br>Parliament</td>
+          </tr>
+
+          <!-- LP3: Digital Facilitation -->
+          <tr>
+            <td>
+              <strong style="color:var(--gold);display:block;margin-bottom:.25rem;">LP3: Digital Facilitation</strong>
+              <span style="font-size:.72rem;color:var(--light-green);">Activating R2 Governance-Confidence loop</span>
+            </td>
+            <td>
+              <strong>BEGMP / BIFOSS Full Rollout</strong>
+              <span style="display:block;margin-top:.3rem;font-size:.78rem;color:rgba(209,250,229,.7);">1-day digital business registration; e-permitting integration; one-stop shop expansion to all provincial capitals.</span>
+            </td>
+            <td style="text-align:center;"><span class="badge badge-high">High</span></td>
+            <td style="text-align:center;color:var(--light-green);font-weight:600;">Q3</td>
+            <td style="font-size:.78rem;">BDTA ICT infrastructure, server hubs, cybersecurity frameworks, DICT partnership.</td>
+            <td style="text-align:right;color:var(--gold);font-weight:700;font-family:'Cinzel',serif;">₱150M</td>
+            <td style="font-size:.78rem;"><strong style="color:white;">BDTA</strong><br>BBOI, MTIT</td>
+          </tr>
+
+          <!-- LP2: Halal Hub Infrastructure -->
+          <tr style="background:rgba(0,0,0,.15);">
+            <td>
+              <strong style="color:var(--gold);display:block;margin-bottom:.25rem;">LP2: Halal Hub Infrastructure</strong>
+              <span style="font-size:.72rem;color:var(--light-green);">Raising the B1 Growth Ceiling</span>
+            </td>
+            <td>
+              <strong>WOW Matanog SEZ Launch</strong>
+              <span style="display:block;margin-top:.3rem;font-size:.78rem;color:rgba(209,250,229,.7);">Ground-breaking for Bangsamoro Halal Park; anchor tenant pre-qualification; utility infrastructure (power, water, digital).</span>
+            </td>
+            <td style="text-align:center;"><span class="badge badge-high">High</span></td>
+            <td style="text-align:center;color:var(--light-green);font-weight:600;">Q4</td>
+            <td style="font-size:.78rem;">Engineering teams, land surveys, PPP frameworks, environmental assessments, BEZA capacity.</td>
+            <td style="text-align:right;color:var(--gold);font-weight:700;font-family:'Cinzel',serif;">₱500M</td>
+            <td style="font-size:.78rem;"><strong style="color:white;">BEZA</strong><br>MTIT</td>
+          </tr>
+
+          <!-- LP2: Energy Connectivity -->
+          <tr>
+            <td>
+              <strong style="color:var(--gold);display:block;margin-bottom:.25rem;">LP2: Energy Connectivity</strong>
+              <span style="font-size:.72rem;color:var(--light-green);">Critical enabler for industrialization</span>
+            </td>
+            <td>
+              <strong>ZBIP Facilitation & Mini-grids</strong>
+              <span style="display:block;margin-top:.3rem;font-size:.78rem;color:rgba(209,250,229,.7);">Investment matchmaking for ₱6.67B ZBIP (Basilan); deployment of solar mini-grids in Tawi-Tawi/Sulu; 80% electrification pathway.</span>
+            </td>
+            <td style="text-align:center;"><span class="badge badge-high">High</span></td>
+            <td style="text-align:center;color:var(--light-green);font-weight:600;">Q4</td>
+            <td style="font-size:.78rem;">DOE/NPC coordination, renewable energy feasibility studies, mini-grid procurement for island communities.</td>
+            <td style="text-align:right;color:var(--gold);font-weight:700;font-family:'Cinzel',serif;">₱200M</td>
+            <td style="font-size:.78rem;"><strong style="color:white;">MENRE</strong><br>DOE, NPC</td>
+          </tr>
+
+          <!-- LP4: Islamic Finance -->
+          <tr style="background:rgba(0,0,0,.15);">
+            <td>
+              <strong style="color:var(--gold);display:block;margin-bottom:.25rem;">LP4: Islamic Finance</strong>
+              <span style="font-size:.72rem;color:var(--light-green);">Capital engine for sustainable growth</span>
+            </td>
+            <td>
+              <strong>Islamic Finance Foundation</strong>
+              <span style="display:block;margin-top:.3rem;font-size:.78rem;color:rgba(209,250,229,.7);">Regulatory base for Shariah-compliant microfinance; Takaful framework; Sukuk readiness assessment; Al-Amanah expansion.</span>
+            </td>
+            <td style="text-align:center;"><span class="badge badge-high">High</span></td>
+            <td style="text-align:center;color:var(--light-green);font-weight:600;">Q4</td>
+            <td style="font-size:.78rem;">Shariah scholars, banking consultants, AAOIFI standards review, BSP coordination.</td>
+            <td style="text-align:right;color:var(--gold);font-weight:700;font-family:'Cinzel',serif;">₱100M</td>
+            <td style="font-size:.78rem;"><strong style="color:white;">Min. Finance</strong><br>BPDA, BSP</td>
+          </tr>
+
+          <!-- Human Capital -->
+          <tr>
+            <td>
+              <strong style="color:var(--gold);display:block;margin-bottom:.25rem;">Human Capital</strong>
+              <span style="font-size:.72rem;color:var(--light-green);">Addressing Skills Constraints</span>
+            </td>
+            <td>
+              <strong>Halal Expert Training Program</strong>
+              <span style="display:block;margin-top:.3rem;font-size:.78rem;color:rgba(209,250,229,.7);">First cadre of 50 halal certification officers/auditors; international mentorship; lab competency certification.</span>
+            </td>
+            <td style="text-align:center;"><span class="badge badge-medium">Medium</span></td>
+            <td style="text-align:center;color:var(--light-green);font-weight:600;">Q4</td>
+            <td style="font-size:.78rem;">Training modules, MSU/international partnerships, certification labs, SMIIC auditor materials.</td>
+            <td style="text-align:right;color:var(--gold);font-weight:700;font-family:'Cinzel',serif;">₱100M</td>
+            <td style="font-size:.78rem;"><strong style="color:white;">BHB</strong><br>MOLE, MOST</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Systems Thinking Integration -->
+  <div>
+    <h3 class="sub-section-title">Systems Thinking Integration</h3>
+    <div class="archetypes-grid">
+      
+      <div class="archetype-card">
+        <div class="arch-desc">
+          <h4><span style="font-size:1.2rem;">🎯</span> Addressing "Limits to Growth"</h4>
+          <p>The ₱500M WOW Matanog investment and ₱200M Energy Connectivity (ZBIP/mini-grids) directly raise the infrastructure and power ceilings that would otherwise constrain the <strong>R1 Investment-Development Virtuous Cycle</strong>. By acting on these constraints in 2026—before growth plateaus—we prevent the B1 balancing loop from binding.</p>
+        </div>
+      </div>
+
+      <div class="archetype-card">
+        <div class="arch-desc">
+          <h4><span style="font-size:1.2rem;">⚖️</span> Avoiding "Success to the Successful"</h4>
+          <p>The dual focus on Halal Park development (₱500M) and Islamic Finance (₱100M) ensures resources flow to both manufacturing and financial services. The ₱50M Green Economy Framework preserves environmental capital, preventing the industrial sector from starving the ecological foundations of long-term resilience.</p>
+        </div>
+      </div>
+
+      <div class="archetype-card">
+        <div class="arch-desc">
+          <h4><span style="font-size:1.2rem;">🛡️</span> Preventing "Fixes that Fail"</h4>
+          <p>Rather than relying on ad-hoc tax incentives (which create the Fixes that Fail archetype), the plan invests ₱50M in the Forestry Code/JMC and ₱200M in BHB operationalization—<strong>systemic governance reforms</strong> that address root causes of low investor confidence through institutional integrity and first-mover advantage in carbon markets.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Feasibility & Viability Box -->
+  <div class="priorities-section">
+    <h3 class="section-title-bar">Plan Rationale: Feasibility, Viability & Desirability</h3>
+    
+    <div class="priorities-grid">
+      <div class="priority-item">
+        <h4 class="priority-title"><span>💰</span> Financial Feasibility</h4>
+        <p class="priority-desc">The 2026 catalyst budget of <strong style="color:var(--gold);">₱1.3 Billion</strong> represents a strategic front-loading of Phase 1 (₱15B envelope), leveraging block grants, ODA, and private PPPs to de-risk large-scale infrastructure like the ₱6.67B ZBIP and Halal Park.</p>
+      </div>
+      
+      <div class="priority-item">
+        <h4 class="priority-title"><span>🏛️</span> Institutional Viability</h4>
+        <p class="priority-desc">Leverages existing BOL-established units: <strong>MTIT</strong> for trade, <strong>BBOI</strong> for investments, <strong>MENRE</strong> for green economy, and <strong>BEZA</strong> for ecozone management—minimizing institutional startup costs and maximizing coordination.</p>
+      </div>
+      
+      <div class="priority-item">
+        <h4 class="priority-title"><span>☪️</span> Cultural Desirability</h4>
+        <p class="priority-desc">Alignment with <strong>Moral Governance</strong> principles through Shariah-compliant investment frameworks (LP4), authentic Halal certification (LP1), and Islamic environmental stewardship (khalifa) in the Green Economy Framework.</p>
+      </div>
+      
+      <div class="priority-item">
+        <h4 class="priority-title"><span>🎯</span> Strategic Coherence</h4>
+        <p class="priority-desc">Each action targets specific binding constraints identified in the <strong>BIRD 2026–2035 SWOT</strong> and <strong>CLD analysis</strong>—simultaneously activating R1/R2 reinforcing loops while neutralizing B2 Security-Investment tensions through visible governance progress.</p>
+      </div>
+    </div>
+
+    <div class="csi-grid">
+      <div class="csi-item">
+        <div class="csi-num">Q1</div>
+        <div class="csi-label">Legal Frameworks & BHB Preparation</div>
+      </div>
+      <div class="csi-item">
+        <div class="csi-num">Q2</div>
+        <div class="csi-label">Forestry Code, JMC & BHB Launch</div>
+      </div>
+      <div class="csi-item">
+        <div class="csi-num">Q3</div>
+        <div class="csi-label">Digital BEGMP / BIFOSS Rollout</div>
+      </div>
+      <div class="csi-item">
+        <div class="csi-num">Q4</div>
+        <div class="csi-label">Halal Park, ZBIP & Islamic Finance</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-links">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="action-plan.html">Action Plan</a>
+    <a href="https://mtit.bangsamoro.gov.ph" target="_blank">MTIT Website</a>
+  </div>
+  <p>© 2026 Bureau of Investments – Ministry of Trade, Investments and Tourism (BOI-MTIT), Bangsamoro Autonomous Region in Muslim Mindanao.</p>
+  <p style="margin-top:.3rem;">Bangsamoro Investment Roadmap Development (BIRD) 2026–2035 — The Emerging Bangsamoro: A Hub for Resilient and Ethical Growth.</p>
+</footer>
+
+<script>
+// Sticky Nav Shadow
+window.addEventListener('scroll', () => {
+  document.getElementById('siteNav').classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+</script>
+
+</body>
+</html>
