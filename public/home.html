@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#022c22">
 <meta name="description" content="BARMM Investment Roadmap 2026-2035 – Interactive Strategy Map: The Emerging Bangsamoro">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<title>BARMM Investment Roadmap 2026–2035 – Interactive Roadmap</title>
+<title>BARMM Investment Roadmap 2026-2035 – Interactive Roadmap</title>
 <style>
 :root{
 --primary-green:#064e3b;--dark-green:#022c22;--mid-green:#065f46;
@@ -233,136 +233,6 @@ letter-spacing:.02em;
 .header-eyebrow { font-size:.72rem; padding:.35rem 1.25rem; }
 .page-header .subtitle { font-size:1.15rem; }
 .page-header .tagline { font-size:.95rem; }
-}
-/* VISION & MISSION SECTION */
-.vision-mission-section {
-max-width:1400px;
-margin:0 auto;
-padding:2rem 1rem 3rem;
-}
-.vision-mission-grid {
-display:grid;
-grid-template-columns:1fr;
-gap:2rem;
-}
-@media (min-width: 768px) {
-.vision-mission-grid {
-grid-template-columns:1fr 1fr;
-gap:2.5rem;
-}
-}
-.vision-card, .mission-card {
-background:rgba(6,78,59,0.35);
-border:1px solid var(--gold-border);
-border-radius:1rem;
-padding:2rem;
-position:relative;
-overflow:hidden;
-transition:transform .3s, border-color .3s;
-}
-.vision-card:hover, .mission-card:hover {
-transform:translateY(-4px);
-border-color:var(--gold-border-strong);
-}
-.vision-card::before, .mission-card::before {
-content:'';
-position:absolute;
-top:0;
-left:0;
-right:0;
-height:3px;
-background:var(--gold-grad);
-}
-.vm-icon {
-width:56px;
-height:56px;
-border-radius:50%;
-background:var(--gold-grad);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:1.75rem;
-margin-bottom:1.25rem;
-box-shadow:0 4px 20px rgba(201,168,76,0.3);
-}
-.vm-label {
-font-family:'Cinzel',serif;
-font-size:.75rem;
-font-weight:700;
-letter-spacing:.15em;
-text-transform:uppercase;
-color:var(--gold);
-margin-bottom:.75rem;
-}
-.vm-title {
-font-family:'Cinzel',serif;
-font-size:1.25rem;
-font-weight:700;
-color:var(--cream);
-margin-bottom:1rem;
-line-height:1.3;
-}
-.vm-text {
-font-size:.95rem;
-color:rgba(236,253,245,0.85);
-line-height:1.7;
-}
-.vm-text strong {
-color:var(--gold-light);
-font-weight:600;
-}
-.vm-year-badge {
-display:inline-block;
-background:rgba(201,168,76,0.15);
-border:1px solid var(--gold-border);
-color:var(--gold);
-padding:.25rem .75rem;
-border-radius:2rem;
-font-size:.75rem;
-font-weight:700;
-letter-spacing:.08em;
-margin-top:1rem;
-}
-/* YOUTUBE VIDEO CONTAINER */
-.video-section {
-max-width:1400px;
-margin:0 auto 2rem;
-padding:0 1rem;
-}
-.video-wrapper {
-position:relative;
-width:100%;
-padding-bottom:56.25%; /* 16:9 aspect ratio */
-height:0;
-overflow:hidden;
-border-radius:1rem;
-border:2px solid var(--gold-border);
-box-shadow:0 8px 40px rgba(0,0,0,0.5), 0 0 30px rgba(201,168,76,0.15);
-background:rgba(2,44,34,0.5);
-}
-.video-wrapper iframe {
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-border:none;
-}
-.video-title {
-font-family:'Cinzel',serif;
-font-size:1.1rem;
-font-weight:700;
-color:var(--gold);
-text-align:center;
-margin-bottom:1rem;
-letter-spacing:.05em;
-}
-.video-caption {
-font-size:.85rem;
-color:rgba(236,253,245,0.6);
-text-align:center;
-margin-top:.75rem;
-font-style:italic;
 }
 /* TABS - Mobile First Horizontal Scroll */
 .tabs-bar {
@@ -622,9 +492,9 @@ pointer-events:none;
 .cld-section-title{font-family:'Cinzel',serif;color:var(--gold);font-size:1.1rem;font-weight:700;margin-bottom:.5rem;}
 .cld-section-sub{color:rgba(209,250,229,.75);font-size:.9rem;margin-bottom:1.8rem;line-height:1.6;}
 .cld-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-bottom:2.5rem;}
-.cld-card{background:rgba(6,24,16,.9);border-radius:1.25rem;overflow:hidden;border:1px solid var(--gold-border);transition:border-color .3s,transform .3s;}
+.cld-card{background:rgba(6,24,16,.9);border-radius:1.25rem;overflow:hidden;border:1px solid var(--gold-border);transition:border-color .3s,transform .3s; cursor:pointer;}
 .cld-card:hover{border-color:var(--gold-border-strong);transform:translateY(-3px);}
-.cld-card svg{width:100%;height:auto;display:block; min-height:200px;}
+.cld-card img{width:100%;height:auto;display:block; min-height:200px; object-fit:contain;}
 .cld-explanation{padding:1.1rem 1.2rem;border-top:1px solid var(--gold-border);background:rgba(0,0,0,.3);}
 .cld-explanation h4{font-family:'Cinzel',serif;color:var(--gold);font-size:.9rem;margin-bottom:.4rem;}
 .cld-explanation p{color:rgba(209,250,229,.8);font-size:.82rem;line-height:1.55;}
@@ -644,7 +514,7 @@ pointer-events:none;
 .archetypes-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;}
 .archetype-card{background:rgba(6,24,16,.9);border-radius:1.25rem;overflow:hidden;border:1px solid var(--gold-border);transition:border-color .3s,transform .3s; cursor:pointer;}
 .archetype-card:hover{border-color:var(--gold-border-strong);transform:translateY(-3px);}
-.archetype-card svg{width:100%;height:auto;display:block; min-height:200px;}
+.archetype-card img{width:100%;height:auto;display:block; min-height:200px; object-fit:contain;}
 .arch-desc{background:rgba(0,0,0,.35);padding:1.2rem;border-top:2px solid var(--gold-border);}
 .arch-desc h4{font-family:'Cinzel',serif;color:var(--gold);font-size:.95rem;margin-bottom:.4rem;}
 .arch-desc p{color:rgba(209,250,229,.8);font-size:.82rem;line-height:1.55;margin-bottom:.6rem;}
@@ -652,6 +522,20 @@ pointer-events:none;
 .arch-leverage strong{color:var(--gold);}
 @media (min-width: 900px) {
 .archetypes-grid{grid-template-columns:repeat(auto-fit,minmax(320px,1fr));}
+}
+/* ---- OPTIONS SECTION ---- */
+.options-section{padding:2rem 0;}
+.options-intro{background:rgba(6,78,59,.2);border:1px solid var(--gold-border);border-radius:.75rem;padding:1.2rem 1.5rem;margin-bottom:1.8rem;}
+.options-intro p{color:rgba(209,250,229,.8);font-size:.88rem;line-height:1.65;}
+.options-image-container{margin:2rem 0;}
+.options-image-container img{width:100%;height:auto;border-radius:1rem;border:1px solid var(--gold-border);}
+.options-evaluation{margin-top:2rem;}
+.evaluation-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:1rem;}
+.evaluation-table th,.evaluation-table td{padding:.75rem;border:1px solid var(--gold-border);text-align:left;}
+.evaluation-table th{background:rgba(201,168,76,.15);color:var(--gold);font-family:'Cinzel',serif;font-weight:700;}
+.evaluation-table td{color:rgba(236,253,245,.85);}
+@media (min-width: 768px) {
+.evaluation-table{font-size:.9rem;}
 }
 /* ---- BSC TABLE ---- */
 .bsc-wrapper{background:rgba(2,44,34,.55);border:1px solid var(--gold-border);border-radius:1rem;padding:1.5rem;overflow-x:auto;position:relative;}
@@ -999,9 +883,10 @@ body { background:white; color:black; }
 <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
 </button>
 <ul class="nav-links-list" id="navLinks" role="list">
-<li><a href="dashboard.html" data-tooltip="View the Strategic MEL Dashboard">Dashboard</a></li>
-<li><a href="roadmap.html" style="color:var(--gold); font-weight:700;" data-tooltip="Interactive Strategy Map 2026-2035">Roadmap</a></li>
-<li><a href="action-plan.html" data-tooltip="View the Detailed Action Plan">Action Plan</a></li>
+<li><a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/dashboard.html" data-tooltip="View the Strategic MEL Dashboard">Dashboard</a></li>
+<li><a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/roadmap.html" style="color:var(--gold); font-weight:700;" data-tooltip="Interactive Strategy Map 2026-2035">Roadmap</a></li>
+<li><a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/action-plan.html" data-tooltip="View the Detailed Action Plan">Action Plan</a></li>
+<li><a href="https://strategy-ai-planner-1.deploypad.app/" data-tooltip="Access BIRD Strategic Planning Application">BIRD App</a></li>
 </ul>
 </div>
 </nav>
@@ -1011,45 +896,12 @@ body { background:white; color:black; }
 <div class="subtitle">Investment Roadmap 2026–2035</div>
 <p class="tagline">"A Hub for Resilient and Ethical Growth"</p>
 </header>
-
-<!-- VISION & MISSION SECTION -->
-<section class="vision-mission-section" aria-label="Vision and Mission">
-<div class="vision-mission-grid">
-<div class="vision-card">
-<div class="vm-icon">🎯</div>
-<div class="vm-label">Our Vision · 2035</div>
-<div class="vm-title">Southeast Asia's Leading Hub for Resilient, Ethical & Inclusive Investment</div>
-<div class="vm-text">
-By 2035, the <strong>Bangsamoro Autonomous Region in Muslim Mindanao</strong> will be recognized as Southeast Asia's leading hub for resilient, ethical, inclusive, and sustainable investments—where <strong>peace, innovation, cultural heritage, environmental stewardship, and moral governance</strong> drive equitable economic prosperity for all Bangsamoro communities.
-</div>
-<div class="vm-year-badge">Horizon: 2026–2035</div>
-</div>
-<div class="mission-card">
-<div class="vm-icon">🚀</div>
-<div class="vm-label">Our Mission</div>
-<div class="vm-title">Creating an Enabling Environment for Responsible Investment</div>
-<div class="vm-text">
-The <strong>Bangsamoro Investment Roadmap</strong> seeks to create an enabling environment where responsible investments contribute to broad-based economic transformation through <strong>coordinated policies, effective institutions, modern infrastructure, skilled human capital, environmental sustainability, and strong partnerships</strong> among government, the private sector, communities, and development partners.
-</div>
-<div class="vm-year-badge">BOI-MTIT · BARMM</div>
-</div>
-</div>
-</section>
-
-<!-- CONTEXT OVERVIEW VIDEO -->
-<div class="video-section">
-<div class="video-title">Context Overview & The Bangsamoro Economic and Investment Ecosystem (BEIE) Framework</div>
-<div class="video-wrapper">
-<iframe src="https://www.youtube.com/embed/Li7lpyWWMcE" title="Bangsamoro Investment Roadmap 2026–2035 | Context Analysis & BEIE Framework" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</div>
-<div class="video-caption">Deep dive into the context analysis and the integrated BEIE Framework that organizes BARMM's economic landscape into five interconnected clusters.</div>
-</div>
-
 <div class="tabs-bar" role="tablist" aria-label="Strategy sections">
 <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="roadmap-tab" onclick="switchTab('roadmap-tab',this)" data-tooltip="Strategic perspectives and leverage points overview">📊 Roadmap</button>
 <button class="tab-btn" role="tab" aria-selected="false" aria-controls="swot-tab" onclick="switchTab('swot-tab',this)" data-tooltip="Strategic SWOT Analysis">🔍 SWOT</button>
 <button class="tab-btn" role="tab" aria-selected="false" aria-controls="cld-tab" onclick="switchTab('cld-tab',this)" data-tooltip="Causal Loop Diagrams showing feedback systems">🔄 CLDs</button>
 <button class="tab-btn" role="tab" aria-selected="false" aria-controls="archetypes-tab" onclick="switchTab('archetypes-tab',this)" data-tooltip="System archetypes and leverage points">⚙️ Archetypes</button>
+<button class="tab-btn" role="tab" aria-selected="false" aria-controls="options-tab" onclick="switchTab('options-tab',this)" data-tooltip="Strategic Options Evaluation">📋 Options</button>
 <button class="tab-btn" role="tab" aria-selected="false" aria-controls="bsc-matrix" onclick="switchTab('bsc-matrix',this)" data-tooltip="Balanced Scorecard Matrix">📈 BSC</button>
 <button class="tab-btn" role="tab" aria-selected="false" aria-controls="metrics-tab" onclick="switchTab('metrics-tab',this)" data-tooltip="Metrics and international benchmarks">📏 Metrics</button>
 <button class="tab-btn" role="tab" aria-selected="false" aria-controls="phases-tab" onclick="switchTab('phases-tab',this)" data-tooltip="Implementation phases 2026-2035">🗺️ Phases</button>
