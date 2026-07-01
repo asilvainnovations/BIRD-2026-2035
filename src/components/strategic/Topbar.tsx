@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import {
   Menu, FileText, ChevronDown, Search, Download, Upload, Moon, Sun,
   Settings as SettingsIcon, LogOut, Share2, Copy, ShieldAlert, User as UserIcon,
-  ExternalLink, X,
+  ExternalLink, X, ClipboardCheck // Added for Validation Survey
 } from 'lucide-react';
 import { useTheme } from '@/components/theme-provider';
 import { StratLogo } from '@/components/branding/Logo';
@@ -44,6 +44,7 @@ const NAV_TARGETS = [
   { id: 'nav-templates', label: 'Templates Library',    view: 'templates', section: 'Navigation' },
   { id: 'nav-team',      label: 'Team Collaboration',   view: 'team',      section: 'Navigation' },
   { id: 'nav-export',    label: 'Plan Generator / Export', view: 'export', section: 'Navigation' },
+  { id: 'nav-validation',label: 'Validation Survey',    view: 'validation',section: 'Navigation' }, // Added
   { id: 'nav-settings',  label: 'Settings',             view: 'settings',  section: 'Navigation' },
 ];
 
@@ -224,6 +225,15 @@ const Topbar: React.FC<TopbarProps> = ({
 
         {/* ── RIGHT: share, search, theme, account ─────────────────────────── */}
         <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+
+          {/* Validation Survey Button */}
+          <button
+            onClick={() => onNavigateView('validation')}
+            className="hidden md:flex items-center gap-1.5 px-3 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 rounded-xl text-xs font-bold border border-cyan-500/30 transition-colors"
+            title="BIRD 2026-2035 Validation Survey"
+          >
+            <ClipboardCheck className="w-4 h-4" /> Validation
+          </button>
 
           {/* Share (desktop) */}
           {isAuthenticated && currentPlan && (
