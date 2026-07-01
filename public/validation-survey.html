@@ -1,416 +1,778 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BIRD 2026-2035 | Strategic Validation Survey</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --primary-green:#064e3b;--dark-green:#022c22;--mid-green:#065f46;
-  --light-green:#6ee7b7;--cream:#ecfdf5;--white:#ffffff;
-  --gold:#C9A84C;--gold-light:#E8C560;--gold-dark:#8B6C28;
-  --gold-border:rgba(201,168,76,0.32);--gold-border-strong:rgba(201,168,76,0.55);
-  --gold-glow:rgba(201,168,76,0.20);
-  --gold-grad:linear-gradient(135deg,#7a5c1e 0%,#c9a84c 35%,#e8c560 50%,#c9a84c 65%,#7a5c1e 100%);
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family:'DM Sans',sans-serif;
-  background:linear-gradient(160deg,#011a12 0%,#022c22 45%,#0a1628 100%);
-  min-height:100vh; color:var(--cream);
-  display:flex; flex-direction:column; align-items:center;
-  padding:2rem 1rem;
-}
-.container { max-width:800px; width:100%; }
-.header { text-align:center; margin-bottom:2rem; }
-.header img { height:50px; margin-bottom:1rem; }
-.header h1 { font-family:'Cinzel',serif; font-size:clamp(1.5rem,4vw,2.2rem); background:var(--gold-grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:0.5rem; }
-.header p { color:var(--light-green); font-size:0.9rem; font-style:italic; }
-
-/* Progress Bar */
-.progress-bar { width:100%; height:6px; background:rgba(255,255,255,0.1); border-radius:3px; margin-bottom:2rem; overflow:hidden; }
-.progress-fill { height:100%; background:var(--gold-grad); width:0%; transition:width 0.4s ease; border-radius:3px; }
-
-/* Survey Card */
-.survey-card {
-  background:rgba(2,44,34,0.6); backdrop-filter:blur(12px);
-  border:1px solid var(--gold-border); border-radius:1.25rem;
-  padding:2rem; box-shadow:0 10px 30px rgba(0,0,0,0.4);
-  display:none; animation:fadeIn 0.4s ease;
-}
-.survey-card.active { display:block; }
-@keyframes fadeIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
-
-.step-title { font-family:'Cinzel',serif; color:var(--gold); font-size:1.2rem; margin-bottom:0.5rem; }
-.step-desc { color:rgba(236,253,245,0.7); font-size:0.85rem; margin-bottom:1.5rem; line-height:1.5; }
-
-/* Form Elements */
-.form-group { margin-bottom:1.5rem; }
-label { display:block; color:var(--light-green); font-size:0.85rem; font-weight:600; margin-bottom:0.5rem; }
-input[type="text"], input[type="email"], select, textarea {
-  width:100%; padding:0.8rem 1rem; background:rgba(0,0,0,0.3);
-  border:1px solid var(--gold-border); border-radius:0.5rem;
-  color:var(--cream); font-family:'DM Sans',sans-serif; font-size:0.9rem;
-  transition:border 0.3s;
-}
-input:focus, select:focus, textarea:focus { outline:none; border-color:var(--gold); box-shadow:0 0 10px var(--gold-glow); }
-textarea { min-height:100px; resize:vertical; }
-select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23C9A84C' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; }
-
-/* Scale Buttons (1-5) */
-.scale-group { display:flex; gap:0.8rem; flex-wrap:wrap; margin-top:0.5rem; }
-.scale-btn {
-  width:45px; height:45px; border-radius:50%;
-  background:rgba(2,44,34,0.8); border:1px solid var(--gold-border);
-  color:var(--cream); font-weight:700; font-size:1rem; cursor:pointer;
-  transition:all 0.3s; display:flex; align-items:center; justify-content:center;
-}
-.scale-btn:hover { border-color:var(--gold); transform:translateY(-2px); }
-.scale-btn.active { background:var(--gold-grad); color:var(--dark-green); border-color:var(--gold); box-shadow:0 0 15px var(--gold-glow); }
-
-/* Item Card for SWOT/Archetypes */
-.item-card {
-  background:rgba(0,0,0,0.25); border:1px solid rgba(201,168,76,0.15);
-  border-radius:0.75rem; padding:1.2rem; margin-bottom:1rem;
-}
-.item-title { color:var(--gold); font-family:'Cinzel',serif; font-size:0.95rem; margin-bottom:1rem; }
-.scale-label { color:rgba(236,253,245,0.6); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.4rem; display:block;}
-
-/* Ranking List */
-.ranking-list { list-style:none; display:flex; flex-direction:column; gap:0.8rem; }
-.ranking-item {
-  background:rgba(0,0,0,0.3); border:1px solid var(--gold-border);
-  border-radius:0.6rem; padding:0.8rem 1rem; display:flex; align-items:center; gap:1rem;
-}
-.rank-num { font-family:'Cinzel',serif; font-size:1.2rem; color:var(--gold); font-weight:700; width:24px; text-align:center; }
-.rank-text { flex:1; font-size:0.85rem; color:var(--cream); }
-.rank-actions { display:flex; flex-direction:column; gap:0.2rem; }
-.rank-actions button {
-  background:transparent; border:1px solid var(--gold-border); color:var(--gold);
-  width:24px; height:24px; border-radius:4px; cursor:pointer; font-size:0.8rem;
-  display:flex; align-items:center; justify-content:center; transition:all 0.2s;
-}
-.rank-actions button:hover { background:rgba(201,168,76,0.2); }
-
-/* Navigation Buttons */
-.nav-buttons { display:flex; justify-content:space-between; margin-top:2rem; gap:1rem; }
-.btn {
-  padding:0.8rem 2rem; border-radius:2rem; font-family:'DM Sans',sans-serif;
-  font-weight:600; font-size:0.9rem; cursor:pointer; transition:all 0.3s;
-  border:none; min-width:120px;
-}
-.btn-primary { background:var(--gold-grad); color:var(--dark-green); box-shadow:0 4px 15px rgba(201,168,76,0.3); }
-.btn-primary:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(201,168,76,0.4); }
-.btn-secondary { background:transparent; border:1px solid var(--gold-border); color:var(--gold); }
-.btn-secondary:hover { background:rgba(201,168,76,0.1); }
-.btn:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
-
-.status-msg { text-align:center; margin-top:1rem; font-size:0.85rem; color:var(--light-green); min-height:20px; }
-.error { color:#fca5a5 !important; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIRD 2026-2035 Validation Survey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .survey-banner {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        h2 {
+            color: #667eea;
+            margin: 30px 0 15px 0;
+            font-size: 22px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .intro-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        
+        .video-container {
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .image-container {
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .question {
+            margin: 20px 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .radio-group,
+        .checkbox-group {
+            margin: 10px 0;
+        }
+        
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+        }
+        
+        .radio-option input,
+        .checkbox-option input {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-btn {
+                width: 200px;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<div class="container">
-  <div class="header">
-    <img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png" alt="BARMM MTIT">
-    <h1>BIRD 2026–2035 Validation</h1>
-    <p>"The Emerging Bangsamoro: A Hub for Resilient and Ethical Growth"</p>
-  </div>
-
-  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-
-  <form id="surveyForm">
-    <!-- STEP 0: Consent -->
-    <div class="survey-card active" data-step="0">
-      <h2 class="step-title">Module 0: Privacy & Consent</h2>
-      <p class="step-desc">Your insights shape the Bangsamoro Investment Roadmap. All data is aggregated anonymously and used exclusively for Strat Planner Pro systems modeling. Do you consent to participate?</p>
-      <div class="form-group">
-        <div class="scale-group" data-name="consent" data-required="true">
-          <button type="button" class="scale-btn" data-value="yes" style="width:auto; border-radius:2rem; padding:0 1.5rem;">Yes, I Consent</button>
-          <button type="button" class="scale-btn" data-value="no" style="width:auto; border-radius:2rem; padding:0 1.5rem;">No, I Do Not</button>
+    <div class="container">
+        <!-- Survey Banner -->
+        <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Validation%20Survey%20Banner.png" alt="BIRD Validation Survey Banner" class="survey-banner">
+        
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/privacy-policy.html" class="nav-btn">Privacy Policy</a>
+            <a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/home.html" class="nav-btn">Home</a>
+            <a href="https://strategy-ai-planner-1.deploypad.app/" class="nav-btn">BIRD APP</a>
         </div>
-      </div>
-      <div class="nav-buttons"><div></div><button type="button" class="btn btn-primary" onclick="nextStep()">Start Survey →</button></div>
+        
+        <div class="content">
+            <h1>Bangsamoro Investment Roadmap Development (BIRD) 2026-2035</h1>
+            <h2>Validation Survey</h2>
+            
+            <p class="intro-text">
+                Welcome to the BIRD 2026-2035 Validation Survey. This survey aims to gather feedback from stakeholders on the Bangsamoro Investment Roadmap Development framework, strategic options, and implementation approach. Your valuable input will help ensure that the roadmap is comprehensive, practical, and aligned with the development needs of the Bangsamoro Autonomous Region in Muslim Mindanao (BARMM).
+            </p>
+            
+            <!-- Section 1: BEIE Framework Introduction -->
+            <div class="section">
+                <h2>Section 1: BEIE Framework Introduction</h2>
+                <p class="intro-text">
+                    The Bangsamoro Economic and Investment Ecosystem (BEIE) Framework is the foundation of the BIRD 2026-2035. Please watch the introductory video below to understand the framework's structure and approach.
+                </p>
+                
+                <div class="video-container">
+                    <iframe width="920" height="517" src="https://www.youtube.com/embed/0J491Vqya_4" title="Bangsamoro Economic & Investment Ecosystem (BEIE) Framework | Driving Growth in BIRD 2026–2035" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                
+                <div class="question">
+                    <label>1.1 How well do you understand the BEIE Framework after watching the video? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q1_1_1" name="q1_1" value="1" required>
+                            <label for="q1_1_1" style="display: inline; font-weight: normal;">Very Well</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q1_1_2" name="q1_1" value="2">
+                            <label for="q1_1_2" style="display: inline; font-weight: normal;">Well</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q1_1_3" name="q1_1" value="3">
+                            <label for="q1_1_3" style="display: inline; font-weight: normal;">Moderately</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q1_1_4" name="q1_1" value="4">
+                            <label for="q1_1_4" style="display: inline; font-weight: normal;">Slightly</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q1_1_5" name="q1_1" value="5">
+                            <label for="q1_1_5" style="display: inline; font-weight: normal;">Not at All</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label>1.2 How relevant is the BEIE Framework to BARMM's development needs? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q1_2_1" name="q1_2" value="1" required>
+                            <label for="q1_2_1" style="display: inline; font-weight: normal;">Very Relevant</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q1_2_2" name="q1_2" value="2">
+                            <label for="q1_2_2" style="display: inline; font-weight: normal;">Relevant</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q1_2_3" name="q1_2" value="3">
+                            <label for="q1_2_3" style="display: inline; font-weight: normal;">Moderately Relevant</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q1_2_4" name="q1_2" value="4">
+                            <label for="q1_2_4" style="display: inline; font-weight: normal;">Slightly Relevant</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q1_2_5" name="q1_2" value="5">
+                            <label for="q1_2_5" style="display: inline; font-weight: normal;">Not Relevant</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 2: Moral Governance -->
+            <div class="section">
+                <h2>Section 2: Moral Governance Operating System</h2>
+                
+                <div class="image-container">
+                    <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/3.%20MG.png" alt="Moral Governance Operating System">
+                </div>
+                
+                <div class="question">
+                    <label>2.1 How important is Moral Governance as the operating system for BARMM's investment ecosystem? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q2_1_1" name="q2_1" value="1" required>
+                            <label for="q2_1_1" style="display: inline; font-weight: normal;">Extremely Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q2_1_2" name="q2_1" value="2">
+                            <label for="q2_1_2" style="display: inline; font-weight: normal;">Very Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q2_1_3" name="q2_1" value="3">
+                            <label for="q2_1_3" style="display: inline; font-weight: normal;">Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q2_1_4" name="q2_1" value="4">
+                            <label for="q2_1_4" style="display: inline; font-weight: normal;">Slightly Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q2_1_5" name="q2_1" value="5">
+                            <label for="q2_1_5" style="display: inline; font-weight: normal;">Not Important</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label>2.2 How effectively can Moral Governance principles be implemented in BARMM? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q2_2_1" name="q2_2" value="1" required>
+                            <label for="q2_2_1" style="display: inline; font-weight: normal;">Very Effectively</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q2_2_2" name="q2_2" value="2">
+                            <label for="q2_2_2" style="display: inline; font-weight: normal;">Effectively</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q2_2_3" name="q2_2" value="3">
+                            <label for="q2_2_3" style="display: inline; font-weight: normal;">Moderately</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q2_2_4" name="q2_2" value="4">
+                            <label for="q2_2_4" style="display: inline; font-weight: normal;">Slightly</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q2_2_5" name="q2_2" value="5">
+                            <label for="q2_2_5" style="display: inline; font-weight: normal;">Not Effectively</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 3: Cluster 1 - Foundations -->
+            <div class="section">
+                <h2>Section 3: Cluster 1 - Foundations (Agriculture, Fisheries, Forestry, Energy)</h2>
+                
+                <div class="image-container">
+                    <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/10.%20Cluster%201.png" alt="Cluster 1: Foundations">
+                </div>
+                
+                <div class="question">
+                    <label>3.1 How would you rate the current state of the Foundations sector in BARMM? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q3_1_1" name="q3_1" value="1" required>
+                            <label for="q3_1_1" style="display: inline; font-weight: normal;">Excellent</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q3_1_2" name="q3_1" value="2">
+                            <label for="q3_1_2" style="display: inline; font-weight: normal;">Good</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q3_1_3" name="q3_1" value="3">
+                            <label for="q3_1_3" style="display: inline; font-weight: normal;">Fair</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q3_1_4" name="q3_1" value="4">
+                            <label for="q3_1_4" style="display: inline; font-weight: normal;">Poor</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q3_1_5" name="q3_1" value="5">
+                            <label for="q3_1_5" style="display: inline; font-weight: normal;">Very Poor</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label>3.2 What are the priority investment areas in the Foundations cluster? (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q3_2_1" name="q3_2" value="agriculture">
+                            <label for="q3_2_1" style="display: inline; font-weight: normal;">Agriculture Modernization</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q3_2_2" name="q3_2" value="fisheries">
+                            <label for="q3_2_2" style="display: inline; font-weight: normal;">Fisheries Development</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q3_2_3" name="q3_2" value="forestry">
+                            <label for="q3_2_3" style="display: inline; font-weight: normal;">Forestry Management</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q3_2_4" name="q3_2" value="energy">
+                            <label for="q3_2_4" style="display: inline; font-weight: normal;">Renewable Energy</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q3_2_5" name="q3_2" value="water">
+                            <label for="q3_2_5" style="display: inline; font-weight: normal;">Water Resources</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 4: Cluster 2 - Transformers -->
+            <div class="section">
+                <h2>Section 4: Cluster 2 - Transformers (Industry, Manufacturing, Halal)</h2>
+                
+                <div class="image-container">
+                    <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/11.%20Cluster%202%20_%20Transformers.png" alt="Cluster 2: Transformers">
+                </div>
+                
+                <div class="question">
+                    <label>4.1 How important is the development of halal industry in BARMM? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q4_1_1" name="q4_1" value="1" required>
+                            <label for="q4_1_1" style="display: inline; font-weight: normal;">Extremely Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q4_1_2" name="q4_1" value="2">
+                            <label for="q4_1_2" style="display: inline; font-weight: normal;">Very Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q4_1_3" name="q4_1" value="3">
+                            <label for="q4_1_3" style="display: inline; font-weight: normal;">Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q4_1_4" name="q4_1" value="4">
+                            <label for="q4_1_4" style="display: inline; font-weight: normal;">Slightly Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q4_1_5" name="q4_1" value="5">
+                            <label for="q4_1_5" style="display: inline; font-weight: normal;">Not Important</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label>4.2 What manufacturing sectors should be prioritized? (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q4_2_1" name="q4_2" value="halal_food">
+                            <label for="q4_2_1" style="display: inline; font-weight: normal;">Halal Food Processing</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q4_2_2" name="q4_2" value="textiles">
+                            <label for="q4_2_2" style="display: inline; font-weight: normal;">Textiles & Garments</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q4_2_3" name="q4_2" value="agro_processing">
+                            <label for="q4_2_3" style="display: inline; font-weight: normal;">Agro-Processing</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q4_2_4" name="q4_2" value="handicrafts">
+                            <label for="q4_2_4" style="display: inline; font-weight: normal;">Handicrafts</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 5: Cluster 3 - Enablers -->
+            <div class="section">
+                <h2>Section 5: Cluster 3 - Enablers (Infrastructure, Human Capital, Digital)</h2>
+                
+                <div class="image-container">
+                    <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/12.%20Cluster%203%20Enablers.png" alt="Cluster 3: Enablers">
+                </div>
+                
+                <div class="question">
+                    <label>5.1 How would you rate the current infrastructure in BARMM? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q5_1_1" name="q5_1" value="1" required>
+                            <label for="q5_1_1" style="display: inline; font-weight: normal;">Excellent</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q5_1_2" name="q5_1" value="2">
+                            <label for="q5_1_2" style="display: inline; font-weight: normal;">Good</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q5_1_3" name="q5_1" value="3">
+                            <label for="q5_1_3" style="display: inline; font-weight: normal;">Fair</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q5_1_4" name="q5_1" value="4">
+                            <label for="q5_1_4" style="display: inline; font-weight: normal;">Poor</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q5_1_5" name="q5_1" value="5">
+                            <label for="q5_1_5" style="display: inline; font-weight: normal;">Very Poor</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label>5.2 Which enabler sectors need the most investment? (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q5_2_1" name="q5_2" value="roads">
+                            <label for="q5_2_1" style="display: inline; font-weight: normal;">Roads & Transportation</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q5_2_2" name="q5_2" value="digital">
+                            <label for="q5_2_2" style="display: inline; font-weight: normal;">Digital Infrastructure</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q5_2_3" name="q5_2" value="education">
+                            <label for="q5_2_3" style="display: inline; font-weight: normal;">Education & Training</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q5_2_4" name="q5_2" value="health">
+                            <label for="q5_2_4" style="display: inline; font-weight: normal;">Healthcare</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 6: Cluster 4 - Connectors -->
+            <div class="section">
+                <h2>Section 6: Cluster 4 - Connectors (Trade, Exports, BIMP-EAGA)</h2>
+                
+                <div class="image-container">
+                    <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/13.%20Cluster%204_%20Connectors.png" alt="Cluster 4: Connectors">
+                </div>
+                
+                <div class="question">
+                    <label>6.1 How important is BIMP-EAGA integration for BARMM's economic growth? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q6_1_1" name="q6_1" value="1" required>
+                            <label for="q6_1_1" style="display: inline; font-weight: normal;">Extremely Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q6_1_2" name="q6_1" value="2">
+                            <label for="q6_1_2" style="display: inline; font-weight: normal;">Very Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q6_1_3" name="q6_1" value="3">
+                            <label for="q6_1_3" style="display: inline; font-weight: normal;">Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q6_1_4" name="q6_1" value="4">
+                            <label for="q6_1_4" style="display: inline; font-weight: normal;">Slightly Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q6_1_5" name="q6_1" value="5">
+                            <label for="q6_1_5" style="display: inline; font-weight: normal;">Not Important</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label>6.2 Which export markets should be prioritized? (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q6_2_1" name="q6_2" value="uae">
+                            <label for="q6_2_1" style="display: inline; font-weight: normal;">UAE/GCC</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q6_2_2" name="q6_2" value="asean">
+                            <label for="q6_2_2" style="display: inline; font-weight: normal;">ASEAN</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q6_2_3" name="q6_2" value="malaysia">
+                            <label for="q6_2_3" style="display: inline; font-weight: normal;">Malaysia</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q6_2_4" name="q6_2" value="indonesia">
+                            <label for="q6_2_4" style="display: inline; font-weight: normal;">Indonesia</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 7: Cluster 5 - Financiers -->
+            <div class="section">
+                <h2>Section 7: Cluster 5 - Financiers (Islamic Banking, Microfinance)</h2>
+                
+                <div class="image-container">
+                    <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/38.%20Cluster%205_%20Financiers.png" alt="Cluster 5: Financiers">
+                </div>
+                
+                <div class="question">
+                    <label>7.1 How important is Islamic finance for BARMM's development? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q7_1_1" name="q7_1" value="1" required>
+                            <label for="q7_1_1" style="display: inline; font-weight: normal;">Extremely Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q7_1_2" name="q7_1" value="2">
+                            <label for="q7_1_2" style="display: inline; font-weight: normal;">Very Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q7_1_3" name="q7_1" value="3">
+                            <label for="q7_1_3" style="display: inline; font-weight: normal;">Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q7_1_4" name="q7_1" value="4">
+                            <label for="q7_1_4" style="display: inline; font-weight: normal;">Slightly Important</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q7_1_5" name="q7_1" value="5">
+                            <label for="q7_1_5" style="display: inline; font-weight: normal;">Not Important</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label>7.2 What financial services are most needed? (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q7_2_1" name="q7_2" value="islamic_banking">
+                            <label for="q7_2_1" style="display: inline; font-weight: normal;">Islamic Banking</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q7_2_2" name="q7_2" value="microfinance">
+                            <label for="q7_2_2" style="display: inline; font-weight: normal;">Microfinance</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q7_2_3" name="q7_2" value="takaful">
+                            <label for="q7_2_3" style="display: inline; font-weight: normal;">Takaful (Islamic Insurance)</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="q7_2_4" name="q7_2" value="waqf">
+                            <label for="q7_2_4" style="display: inline; font-weight: normal;">Waqf (Endowment)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 8: Strategic Options and Roadmap -->
+            <div class="section">
+                <h2>Section 8: Strategic Options and Investment Roadmap</h2>
+                
+                <div class="image-container">
+                    <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/2..%20Formulating%20the%20Roadmap.png" alt="Formulating the Roadmap">
+                </div>
+                
+                <div class="question">
+                    <label>8.1 Which strategic option do you think is most suitable for BARMM? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q8_1_1" name="q8_1" value="heds" required>
+                            <label for="q8_1_1" style="display: inline; font-weight: normal;">Halal Economy Dominance Strategy (HEDS)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q8_1_2" name="q8_1" value="gems">
+                            <label for="q8_1_2" style="display: inline; font-weight: normal;">Green Economy Monetization Strategy (GEMS)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q8_1_3" name="q8_1" value="ifes">
+                            <label for="q8_1_3" style="display: inline; font-weight: normal;">Infrastructure-First Enabling Strategy (IFES)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q8_1_4" name="q8_1" value="ieds">
+                            <label for="q8_1_4" style="display: inline; font-weight: normal;">Integrated Ecosystem Development Strategy (IEDS)</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="image-container">
+                    <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/3.%20Strategic%20Options%20Ranking.png" alt="Strategic Options Ranking">
+                </div>
+                
+                <div class="question">
+                    <label>8.2 How would you rate the proposed sequencing of the investment roadmap?</label>
+                    <div class="image-container">
+                        <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/Sequencing.png" alt="Roadmap Sequencing">
+                    </div>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q8_2_1" name="q8_2" value="1">
+                            <label for="q8_2_1" style="display: inline; font-weight: normal;">Excellent</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q8_2_2" name="q8_2" value="2">
+                            <label for="q8_2_2" style="display: inline; font-weight: normal;">Good</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q8_2_3" name="q8_2" value="3">
+                            <label for="q8_2_3" style="display: inline; font-weight: normal;">Fair</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q8_2_4" name="q8_2" value="4">
+                            <label for="q8_2_4" style="display: inline; font-weight: normal;">Poor</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label>8.3 What additional comments or suggestions do you have for the BIRD 2026-2035?</label>
+                    <textarea rows="4" placeholder="Please share your thoughts..."></textarea>
+                </div>
+            </div>
+            
+            <!-- Closing Video Section -->
+            <div class="section">
+                <h2>Investment Roadmap Overview</h2>
+                <p class="intro-text">
+                    Before submitting, please watch this overview of the Bangsamoro Investment Roadmap 2026-2035:
+                </p>
+                
+                <div class="video-container">
+                    <iframe width="920" height="517" src="https://www.youtube.com/embed/UCi2dVUmSbE" title="Bangsamoro Investment Roadmap 2026‑2035 | Southeast Asia's Hub for Ethical & Sustainable Growth" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <!-- Demographic Information -->
+            <div class="section">
+                <h2>Demographic Information</h2>
+                
+                <div class="question">
+                    <label for="name">Full Name: <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="question">
+                    <label for="email">Email Address: <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="question">
+                    <label for="organization">Organization/Institution: <span class="required">*</span></label>
+                    <input type="text" id="organization" name="organization" required>
+                </div>
+                
+                <div class="question">
+                    <label for="position">Position/Title: <span class="required">*</span></label>
+                    <input type="text" id="position" name="position" required>
+                </div>
+                
+                <div class="question">
+                    <label for="sector">Sector: <span class="required">*</span></label>
+                    <select id="sector" name="sector" required>
+                        <option value="">Select your sector</option>
+                        <option value="government">Government</option>
+                        <option value="private">Private Sector</option>
+                        <option value="academe">Academe</option>
+                        <option value="civil_society">Civil Society</option>
+                        <option value="international">International Organization</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="question">
+                    <label for="province">Province/Area of Expertise: <span class="required">*</span></label>
+                    <select id="province" name="province" required>
+                        <option value="">Select province</option>
+                        <option value="lanao_del_sur">Lanao del Sur</option>
+                        <option value="maguindanao_norte">Maguindanao del Norte</option>
+                        <option value="maguindanao_sur">Maguindanao del Sur</option>
+                        <option value="basilan">Basilan</option>
+                        <option value="sulu">Sulu</option>
+                        <option value="tawi_tawi">Tawi-Tawi</option>
+                        <option value="cotabato_city">Cotabato City</option>
+                        <option value="regional">Regional/ BARMM-wide</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">Submit Survey</button>
+        </div>
     </div>
-
-    <!-- STEP 1: Profiling -->
-    <div class="survey-card" data-step="1">
-      <h2 class="step-title">Stakeholder Profiling</h2>
-      <p class="step-desc">Help us understand the ecosystem perspective you represent.</p>
-      <div class="form-group"><label>Full Name & Title</label><input type="text" name="name" required></div>
-      <div class="form-group"><label>Organization / Agency</label><input type="text" name="org" required></div>
-      <div class="form-group">
-        <label>BEIE Sector Alignment</label>
-        <select name="sector" required>
-          <option value="">Select Cluster...</option>
-          <option>Moral Governance & Policy</option><option>Foundations (AFF/Energy)</option>
-          <option>Transformers (Halal/MSMEs)</option><option>Enablers (Infra/Human Capital)</option>
-          <option>Connectors (Trade/Tourism)</option><option>Financiers (Islamic Finance)</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Geographic Focus</label>
-        <select name="province" required>
-          <option value="">Select Province...</option>
-          <option>Maguindanao del Norte</option><option>Maguindanao del Sur</option>
-          <option>Lanao del Sur</option><option>Basilan</option><option>Sulu</option>
-          <option>Tawi-Tawi</option><option>Cotabato City/SGA</option><option>National/International</option>
-        </select>
-      </div>
-      <div class="form-group"><label>Email (Optional - for final report)</label><input type="email" name="email"></div>
-      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button></div>
-    </div>
-
-    <!-- STEP 2: Iceberg -->
-    <div class="survey-card" data-step="2">
-      <h2 class="step-title">Systems Sensing: The Iceberg Model</h2>
-      <p class="step-desc">Beyond visible events, what is the deepest "Mental Model" or "Systemic Structure" that must shift to achieve the 2035 vision?</p>
-      <div class="form-group"><textarea name="iceberg" placeholder="e.g., Shifting from 'incentives first' to 'governance first'..." required></textarea></div>
-      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button></div>
-    </div>
-
-    <!-- STEP 3: SWOT - Strengths -->
-    <div class="survey-card" data-step="3">
-      <h2 class="step-title">SWOT Validation: Strengths (Resilience Index)</h2>
-      <p class="step-desc">Rate the IMPACT and LIKELIHOOD (1-5) of these core strengths.</p>
-      <div class="item-card">
-        <div class="item-title">Halal Legitimacy & Cultural Credibility</div>
-        <span class="scale-label">Impact (1=Low, 5=Critical)</span>
-        <div class="scale-group" data-name="s1_impact" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
-        <span class="scale-label" style="margin-top:0.8rem;">Likelihood (1=Low, 5=High)</span>
-        <div class="scale-group" data-name="s1_like" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
-      </div>
-      <div class="item-card">
-        <div class="item-title">Strategic BIMP-EAGA Location</div>
-        <span class="scale-label">Impact</span>
-        <div class="scale-group" data-name="s2_impact" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
-        <span class="scale-label" style="margin-top:0.8rem;">Likelihood</span>
-        <div class="scale-group" data-name="s2_like" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
-      </div>
-      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button></div>
-    </div>
-
-    <!-- STEP 4: SWOT - Weaknesses -->
-    <div class="survey-card" data-step="4">
-      <h2 class="step-title">SWOT Validation: Weaknesses (Risk Score)</h2>
-      <p class="step-desc">Rate the IMPACT and LIKELIHOOD (1-5) if these weaknesses remain unaddressed.</p>
-      <div class="item-card">
-        <div class="item-title">Critical Infrastructure Deficits (Energy/Roads)</div>
-        <span class="scale-label">Impact (1=Low, 5=Catastrophic)</span>
-        <div class="scale-group" data-name="w1_impact" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
-        <span class="scale-label" style="margin-top:0.8rem;">Likelihood</span>
-        <div class="scale-group" data-name="w1_like" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
-      </div>
-      <div class="item-card">
-        <div class="item-title">Lowest Functional Literacy Rate (59.3%)</div>
-        <span class="scale-label">Impact</span>
-        <div class="scale-group" data-name="w2_impact" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
-        <span class="scale-label" style="margin-top:0.8rem;">Likelihood</span>
-        <div class="scale-group" data-name="w2_like" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
-      </div>
-      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button></div>
-    </div>
-
-    <!-- STEP 5: Archetypes -->
-    <div class="survey-card" data-step="5">
-      <h2 class="step-title">Systems Archetypes Validation</h2>
-      <p class="step-desc">How accurately do these archetypes describe BARMM's current reality? (1=Strongly Disagree, 5=Strongly Agree)</p>
-      <div class="item-card">
-        <div class="item-title">Limits to Growth (Investment hitting infrastructure ceilings)</div>
-        <div class="scale-group" data-name="arch_limits" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
-      </div>
-      <div class="item-card">
-        <div class="item-title">Fixes that Fail (Short-term incentives causing long-term weakness)</div>
-        <div class="scale-group" data-name="arch_fixes" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
-      </div>
-      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button></div>
-    </div>
-
-    <!-- STEP 6: Leverage Points (Ranking) -->
-    <div class="survey-card" data-step="6">
-      <h2 class="step-title">Meadows' Leverage Points</h2>
-      <p class="step-desc">Rank the following interventions from highest to lowest systemic transformation potential.</p>
-      <ul class="ranking-list" id="lpRanking">
-        <li class="ranking-item" data-id="L5_Rules"><span class="rank-num">1</span><span class="rank-text">L5: Rules (Pair incentives with BHB/capacity milestones)</span><div class="rank-actions"><button type="button" onclick="moveRank(this, -1)">↑</button><button type="button" onclick="moveRank(this, 1)">↓</button></div></li>
-        <li class="ranking-item" data-id="L6_Info"><span class="rank-num">2</span><span class="rank-text">L6: Information Flows (Real-time BEGMP dashboards)</span><div class="rank-actions"><button type="button" onclick="moveRank(this, -1)">↑</button><button type="button" onclick="moveRank(this, 1)">↓</button></div></li>
-        <li class="ranking-item" data-id="L10_Stock"><span class="rank-num">3</span><span class="rank-text">L10: Stock-Flow (Complete ZBIP & farm-to-market roads)</span><div class="rank-actions"><button type="button" onclick="moveRank(this, -1)">↑</button><button type="button" onclick="moveRank(this, 1)">↓</button></div></li>
-        <li class="ranking-item" data-id="L3_Goals"><span class="rank-num">4</span><span class="rank-text">L3: Goals (Maintain 75% literacy & 100% electrification)</span><div class="rank-actions"><button type="button" onclick="moveRank(this, -1)">↑</button><button type="button" onclick="moveRank(this, 1)">↓</button></div></li>
-      </ul>
-      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button></div>
-    </div>
-
-    <!-- STEP 7: IEDS Rating -->
-    <div class="survey-card" data-step="7">
-      <h2 class="step-title">Strategic Options: IEDS Evaluation</h2>
-      <p class="step-desc">Rate the Integrated Ecosystem Development Strategy (IEDS) across these criteria (1-10 scale).</p>
-      <div class="item-card">
-        <div class="item-title">Economic Impact (GRDP ₱550B)</div>
-        <div class="scale-group" data-name="ieds_econ" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button><button type="button" class="scale-btn" data-value="6">6</button><button type="button" class="scale-btn" data-value="7">7</button><button type="button" class="scale-btn" data-value="8">8</button><button type="button" class="scale-btn" data-value="9">9</button><button type="button" class="scale-btn" data-value="10">10</button></div>
-      </div>
-      <div class="item-card">
-        <div class="item-title">Systems Leverage</div>
-        <div class="scale-group" data-name="ieds_sys" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button><button type="button" class="scale-btn" data-value="6">6</button><button type="button" class="scale-btn" data-value="7">7</button><button type="button" class="scale-btn" data-value="8">8</button><button type="button" class="scale-btn" data-value="9">9</button><button type="button" class="scale-btn" data-value="10">10</button></div>
-      </div>
-      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button></div>
-    </div>
-
-    <!-- STEP 8: Submission -->
-    <div class="survey-card" data-step="8">
-      <h2 class="step-title">Final Reflections</h2>
-      <p class="step-desc">What is the single most critical "Mental Model" shift required among BARMM leadership to ensure IEDS succeeds?</p>
-      <div class="form-group"><textarea name="conclusion" placeholder="Your final insights..."></textarea></div>
-      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="submitSurvey()" id="submitBtn">Submit Validation →</button></div>
-      <div class="status-msg" id="statusMsg"></div>
-    </div>
-  </form>
-</div>
-
-<script>
-let currentStep = 0;
-const totalSteps = 9;
-const surveyData = {};
-
-function updateProgress() {
-  document.getElementById('progressFill').style.width = `${(currentStep / (totalSteps - 1)) * 100}%`;
-}
-
-function showStep(step) {
-  document.querySelectorAll('.survey-card').forEach(c => c.classList.remove('active'));
-  document.querySelector(`[data-step="${step}"]`).classList.add('active');
-  updateProgress();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function nextStep() {
-  const currentCard = document.querySelector(`[data-step="${currentStep}"]`);
-  const requiredGroups = currentCard.querySelectorAll('[data-required="true"]');
-  let valid = true;
-  
-  requiredGroups.forEach(group => {
-    if (!group.querySelector('.active')) {
-      valid = false;
-      group.style.border = '1px solid #fca5a5';
-      setTimeout(() => group.style.border = 'none', 2000);
-    }
-  });
-
-  const requiredInputs = currentCard.querySelectorAll('[required]');
-  requiredInputs.forEach(input => {
-    if (!input.value.trim()) {
-      valid = false;
-      input.style.border = '1px solid #fca5a5';
-      setTimeout(() => input.style.border = 'none', 2000);
-    }
-  });
-
-  if (!valid) {
-    document.getElementById('statusMsg').textContent = 'Please complete all required fields.';
-    document.getElementById('statusMsg').className = 'status-msg error';
-    setTimeout(() => document.getElementById('statusMsg').textContent = '', 3000);
-    return;
-  }
-
-  if(currentStep === 0 && document.querySelector('[data-name="consent"] .active').dataset.value === 'no') {
-    alert('Thank you for your time. No data has been recorded.');
-    return;
-  }
-
-  currentStep++;
-  showStep(currentStep);
-}
-
-function prevStep() {
-  if (currentStep > 0) {
-    currentStep--;
-    showStep(currentStep);
-  }
-}
-
-// Scale Button Logic
-document.querySelectorAll('.scale-group').forEach(group => {
-  group.querySelectorAll('.scale-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      group.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
-});
-
-// Ranking Logic
-function moveRank(btn, direction) {
-  const item = btn.closest('.ranking-item');
-  const list = item.parentNode;
-  if (direction === -1 && item.previousElementSibling) {
-    list.insertBefore(item, item.previousElementSibling);
-  } else if (direction === 1 && item.nextElementSibling) {
-    list.insertBefore(item.nextElementSibling, item);
-  }
-  updateRankNumbers();
-}
-
-function updateRankNumbers() {
-  document.querySelectorAll('.ranking-item').forEach((item, index) => {
-    item.querySelector('.rank-num').textContent = index + 1;
-  });
-}
-
-// Data Collection & Submission
-async function submitSurvey() {
-  const btn = document.getElementById('submitBtn');
-  const msg = document.getElementById('statusMsg');
-  btn.disabled = true;
-  msg.textContent = 'Securing data to repository...';
-  msg.className = 'status-msg';
-
-  // Collect Text/Select Inputs
-  document.querySelectorAll('input[type="text"], input[type="email"], select, textarea').forEach(el => {
-    if(el.name) surveyData[el.name] = el.value;
-  });
-
-  // Collect Scale/Radio Data
-  document.querySelectorAll('.scale-group').forEach(group => {
-    const activeBtn = group.querySelector('.scale-btn.active');
-    if(activeBtn && group.dataset.name) {
-      surveyData[group.dataset.name] = parseInt(activeBtn.dataset.value);
-    }
-  });
-
-  // Collect Ranking Data
-  const lpRanking = Array.from(document.querySelectorAll('#lpRanking .ranking-item')).map(item => item.dataset.id);
-  surveyData.leverage_points_ranking = lpRanking;
-
-  surveyData.timestamp = new Date().toISOString();
-
-  try {
-    const response = await fetch('/api/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ surveyData })
-    });
-
-    if (response.ok) {
-      msg.textContent = '✓ Validation successfully stored in the BIRD repository. Thank you!';
-      msg.style.color = 'var(--light-green)';
-      btn.textContent = 'Submitted';
-    } else {
-      throw new Error('Server error');
-    }
-  } catch (error) {
-    // Fallback: Download JSON locally if API fails
-    msg.textContent = '✓ Data captured. Downloading local backup...';
-    const blob = new Blob([JSON.stringify(surveyData, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `bird_response_${Date.now()}.json`;
-    a.click();
-    msg.textContent += ' Thank you!';
-  }
-}
-
-updateProgress();
-</script>
 </body>
 </html>
