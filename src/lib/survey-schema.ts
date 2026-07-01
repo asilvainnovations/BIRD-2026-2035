@@ -45,12 +45,60 @@ export const surveySchema = z.object({
   q7_2: checkboxArray, // Financial instruments
 
   // --- SECTION 8: Strategic Options ---
-  q8_1: z.enum(["heds", "gems", "ifes", "ieds"], {
+  q8_1: z.enum(['heds', 'gems', 'ifes', 'ieds'], {
     errorMap: () => ({ message: "Please select a strategic option." }),
   }),
-  q8_2: scale1to4, // Sequencing rating
-  q8_3: z.string().optional(), // Open comments
+  q8_2: z.enum(['highly_logical', 'mostly_logical', 'needs_adjustment', 'flawed'], {
+    errorMap: () => ({ message: "Please rate the sequencing logic." }),
+  }),
 
+  // --- SECTION 9: Budget & Targets ---
+  q9_1: z.enum(['realistic', 'underestimated', 'overestimated', 'unable'], {
+    errorMap: () => ({ message: "Please assess budget realism." }),
+  }),
+  q10_1: z.enum(['appropriately_ambitious', 'too_conservative', 'too_ambitious', 'mixed'], {
+    errorMap: () => ({ message: "Please assess target ambition." }),
+  }),
+
+  // --- SECTION 10: IEDS Evaluation Matrix (1-10 scale) ---
+  q10_matrix: z.object({
+    heds: z.object({
+      economic_impact: z.coerce.number().min(1).max(10),
+      feasibility: z.coerce.number().min(1).max(10),
+      identity_alignment: z.coerce.number().min(1).max(10),
+      systems_leverage: z.coerce.number().min(1).max(10),
+      risk_return: z.coerce.number().min(1).max(10),
+      inclusivity: z.coerce.number().min(1).max(10),
+      sustainability: z.coerce.number().min(1).max(10),
+    }),
+    gems: z.object({
+      economic_impact: z.coerce.number().min(1).max(10),
+      feasibility: z.coerce.number().min(1).max(10),
+      identity_alignment: z.coerce.number().min(1).max(10),
+      systems_leverage: z.coerce.number().min(1).max(10),
+      risk_return: z.coerce.number().min(1).max(10),
+      inclusivity: z.coerce.number().min(1).max(10),
+      sustainability: z.coerce.number().min(1).max(10),
+    }),
+    ifes: z.object({
+      economic_impact: z.coerce.number().min(1).max(10),
+      feasibility: z.coerce.number().min(1).max(10),
+      identity_alignment: z.coerce.number().min(1).max(10),
+      systems_leverage: z.coerce.number().min(1).max(10),
+      risk_return: z.coerce.number().min(1).max(10),
+      inclusivity: z.coerce.number().min(1).max(10),
+      sustainability: z.coerce.number().min(1).max(10),
+    }),
+    ieds: z.object({
+      economic_impact: z.coerce.number().min(1).max(10),
+      feasibility: z.coerce.number().min(1).max(10),
+      identity_alignment: z.coerce.number().min(1).max(10),
+      systems_leverage: z.coerce.number().min(1).max(10),
+      risk_return: z.coerce.number().min(1).max(10),
+      inclusivity: z.coerce.number().min(1).max(10),
+      sustainability: z.coerce.number().min(1).max(10),
+    }),
+  }),
   // --- SECTIONS 9 & 10: Budget & Targets ---
   q9_1: scale1to5,  // Budget realism
   q10_1: scale1to5, // Target ambition
