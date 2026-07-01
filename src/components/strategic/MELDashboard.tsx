@@ -5,6 +5,7 @@ import {
   DollarSign, Users, Cog, GraduationCap, ArrowUpRight,
   FolderKanban, Info, X, Send, Sparkles, Globe, ChevronDown,
   Loader2, ExternalLink, BookOpen, GitBranch, BrainCircuit, Layers,
+  ArrowRight, Play, Zap, Shield, Leaf,
 } from 'lucide-react';
 import { StrategicPlan } from '@/lib/strategicPlanStore';
 
@@ -33,6 +34,224 @@ interface ChatMessage {
   content: string;
   timestamp: Date;
 }
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// HERO SECTION COMPONENT
+// ═══════════════════════════════════════════════════════════════════════════════
+const HeroSection: React.FC<{ onNavigate?: (view: string) => void }> = ({ onNavigate }) => {
+  const [bannerLoaded, setBannerLoaded] = useState(false);
+  const [bannerError, setBannerError] = useState(false);
+
+  const features = [
+    {
+      icon: Target,
+      title: 'Strategic MEL Dashboard',
+      desc: 'Monitor 6 Pareto KPIs driving 80% of strategic impact',
+      color: '#C9A84C',
+      view: 'dashboard',
+    },
+    {
+      icon: GitBranch,
+      title: 'Systems Thinking',
+      desc: 'Visualize causal loops and feedback dynamics',
+      color: '#10b981',
+      view: 'systems',
+    },
+    {
+      icon: FolderKanban,
+      title: 'Priority Action Board',
+      desc: 'Track 10 critical actions for Phase 1 (2026-2028)',
+      color: '#3b82f6',
+      view: 'dashboard',
+    },
+    {
+      icon: Layers,
+      title: 'Implementation Roadmap',
+      desc: '3-phase ₱120-160B investment pathway to 2035',
+      color: '#8b5cf6',
+      view: 'dashboard',
+    },
+  ];
+
+  return (
+    <div className="relative w-full overflow-hidden">
+      {/* ════════════════════════════════════════════════════════════════════════
+          HERO BANNER — Full-width immersive section
+          ════════════════════════════════════════════════════════════════════════ */}
+      <div className="relative w-full" style={{ minHeight: 600 }}>
+        {/* Background gradient base */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#011a12] via-[#022c22] to-[#0a1628]" />
+
+        {/* Banner image with overlay */}
+        {!bannerError ? (
+          <div className="absolute inset-0">
+            <img
+              src={BIRD_BANNER_URL}
+              alt="BIRD 2026–2035 — Bangsamoro Investment Roadmap Development"
+              className={`w-full h-full object-cover object-center transition-opacity duration-700 ${bannerLoaded ? 'opacity-40' : 'opacity-0'}`}
+              onLoad={() => setBannerLoaded(true)}
+              onError={() => setBannerError(true)}
+              loading="eager"
+              decoding="async"
+            />
+            {/* Gradient overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#011a12]/60 via-[#022c22]/70 to-[#022c22]" />
+          </div>
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-[#022c22] via-[#064e3b] to-[#0a1628]" />
+        )}
+
+        {/* Loading state */}
+        {!bannerLoaded && !bannerError && (
+          <div className="absolute inset-0 bg-gradient-to-br from-[#022c22] via-[#064e3b] to-[#0a1628] animate-pulse" />
+        )}
+
+        {/* Gold accent line at top */}
+        <div className="absolute top-0 left-0 right-0 h-1 z-20 bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent" />
+
+        {/* Content container */}
+        <div className="relative z-10 max-w-[1400px] mx-auto px-4 pt-16 pb-20">
+          {/* Eyebrow badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 bg-[rgba(201,168,76,0.12)] border border-[rgba(201,168,76,0.55)] text-[#C9A84C] px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-sm"
+          >
+            <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+            Bangsamoro Investment Roadmap 2026–2035
+          </motion.div>
+
+          {/* Main headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="text-5xl md:text-7xl font-black leading-[1.05] mb-6"
+            style={{ fontFamily: "'Cinzel', serif" }}
+          >
+            <span className="bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e] bg-clip-text text-transparent">
+              The Emerging
+            </span>
+            <br />
+            <span className="text-white">Bangsamoro</span>
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-xl md:text-2xl text-[#ecfdf5]/70 max-w-3xl leading-relaxed mb-10"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            A Hub for Resilient and Ethical Growth — Transforming post-conflict recovery into
+            Southeast Asia's premier halal, agro-industrial, and sustainable investment destination.
+          </motion.p>
+
+          {/* Key metrics row */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-wrap gap-4 mb-12"
+          >
+            {[
+              { icon: DollarSign, label: 'Total Roadmap', value: TOTAL_BUDGET.label, color: '#C9A84C' },
+              { icon: Clock, label: 'Current Phase', value: 'Phase 1: Foundation', color: '#10b981' },
+              { icon: Target, label: '2035 GRDP Target', value: '₱550B+', color: '#3b82f6' },
+              { icon: Users, label: 'Jobs Target', value: '20,000+', color: '#8b5cf6' },
+            ].map(({ icon: Icon, label, value, color }, i) => (
+              <div
+                key={label}
+                className="bg-[rgba(2,44,34,0.6)] backdrop-blur-sm border border-[rgba(201,168,76,0.32)] rounded-xl px-5 py-4 flex items-center gap-3 hover:border-[rgba(201,168,76,0.55)] transition-all"
+              >
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: `${color}20` }}>
+                  <Icon className="w-5 h-5" style={{ color }} aria-hidden="true" />
+                </div>
+                <div>
+                  <div className="text-[0.65rem] text-[#ecfdf5]/50 uppercase tracking-wider font-bold">{label}</div>
+                  <div className="text-sm font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>{value}</div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-wrap gap-4 mb-16"
+          >
+            <button
+              onClick={() => onNavigate?.('dashboard')}
+              className="group px-8 py-4 bg-gradient-to-r from-[#7a5c1e] via-[#c9a84c] to-[#7a5c1e] text-[#022c22] rounded-xl font-bold text-base hover:shadow-2xl hover:shadow-[#C9A84C]/40 transition-all flex items-center gap-3"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              <Target className="w-5 h-5" aria-hidden="true" />
+              Open MEL Dashboard
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+            </button>
+            <button
+              onClick={() => onNavigate?.('systems')}
+              className="px-8 py-4 bg-[rgba(6,78,59,0.6)] backdrop-blur-sm border-2 border-[rgba(201,168,76,0.55)] text-[#C9A84C] rounded-xl font-bold text-base hover:bg-[rgba(201,168,76,0.15)] transition-all flex items-center gap-3"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              <Play className="w-5 h-5" aria-hidden="true" />
+              Explore Systems Thinking
+            </button>
+          </motion.div>
+
+          {/* Feature cards grid */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
+          >
+            {features.map(({ icon: Icon, title, desc, color, view }, i) => (
+              <motion.button
+                key={title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 + i * 0.1 }}
+                onClick={() => onNavigate?.(view)}
+                className="group bg-[rgba(2,44,34,0.5)] backdrop-blur-sm border border-[rgba(201,168,76,0.32)] rounded-xl p-6 text-left hover:-translate-y-1 hover:border-[rgba(201,168,76,0.55)] transition-all relative overflow-hidden"
+              >
+                {/* Top accent line */}
+                <div className="absolute top-0 left-0 right-0 h-0.5" style={{ background: color }} aria-hidden="true" />
+
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform" style={{ background: `${color}20` }}>
+                  <Icon className="w-6 h-6" style={{ color }} aria-hidden="true" />
+                </div>
+                <h3 className="text-base font-bold text-white mb-2" style={{ fontFamily: "'Cinzel', serif" }}>{title}</h3>
+                <p className="text-sm text-[#ecfdf5]/60 leading-relaxed">{desc}</p>
+                <div className="flex items-center gap-2 mt-4 text-xs font-bold" style={{ color }}>
+                  <span>Explore</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                </div>
+              </motion.button>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10"
+        >
+          <div className="flex flex-col items-center gap-2 text-[#ecfdf5]/40">
+            <span className="text-[0.65rem] uppercase tracking-widest font-bold">Scroll to explore</span>
+            <ChevronDown className="w-5 h-5 animate-bounce" aria-hidden="true" />
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
 
 // ─── Tooltip ──────────────────────────────────────────────────────────────────
 const Tooltip: React.FC<{ children: React.ReactNode; content: string }> = ({ children, content }) => {
@@ -321,8 +540,6 @@ const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
   const [showAIChat,    setShowAIChat]    = useState(false);
   const [actionFilter,  setActionFilter]  = useState('all');
-  const [bannerLoaded,  setBannerLoaded]  = useState(false);
-  const [bannerError,   setBannerError]   = useState(false);
 
   const filteredActions = useMemo(() => PRIORITY_ACTIONS.filter(a => {
     if (actionFilter === 'all')      return true;
@@ -349,54 +566,9 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
     >
 
       {/* ════════════════════════════════════════════════════════════════════════
-          BIRD BANNER — Full-width hero image
+          HERO SECTION — Full-width immersive landing
           ════════════════════════════════════════════════════════════════════════ */}
-      <div className="relative w-full overflow-hidden" style={{ maxHeight: 340 }}>
-        {/* Gold accent line above banner */}
-        <div className="absolute top-0 left-0 right-0 h-1 z-10 bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent" />
-
-        {/* The banner image */}
-        {!bannerError ? (
-          <img
-            src={BIRD_BANNER_URL}
-            alt="BIRD 2026–2035 — Bangsamoro Investment Roadmap Development"
-            className={`w-full object-cover object-center transition-opacity duration-700 ${bannerLoaded ? 'opacity-100' : 'opacity-0'}`}
-            style={{ maxHeight: 340, minHeight: 180 }}
-            onLoad={() => setBannerLoaded(true)}
-            onError={() => setBannerError(true)}
-            loading="eager"
-            decoding="async"
-          />
-        ) : (
-          /* Fallback gradient if image fails */
-          <div className="w-full flex items-center justify-center bg-gradient-to-r from-[#022c22] via-[#064e3b] to-[#0a1628]" style={{ height: 220 }}>
-            <div className="text-center">
-              <p className="text-[#C9A84C] font-bold text-2xl" style={{ fontFamily: "'Cinzel', serif" }}>BIRD 2026–2035</p>
-              <p className="text-[#ecfdf5]/60 text-sm mt-1">Bangsamoro Investment Roadmap Development</p>
-            </div>
-          </div>
-        )}
-
-        {!bannerLoaded && !bannerError && (
-          <div className="absolute inset-0 bg-gradient-to-r from-[#022c22] via-[#064e3b] to-[#0a1628] animate-pulse" style={{ minHeight: 180 }} />
-        )}
-
-        {/* Gradient overlay — ensures text below reads cleanly */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#011a12]/10 to-[#011a12]" />
-
-        {/* Overlay chips */}
-        <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2 z-10">
-          <span className="bg-[#022c22]/80 backdrop-blur-sm border border-[rgba(201,168,76,0.5)] text-[#C9A84C] text-[0.65rem] font-bold px-3 py-1 rounded-full">
-            Phase 1: Foundation Building 2026–2028
-          </span>
-          <span className="bg-[#022c22]/80 backdrop-blur-sm border border-[rgba(16,185,129,0.4)] text-[#6ee7b7] text-[0.65rem] font-bold px-3 py-1 rounded-full">
-            Total Roadmap: {TOTAL_BUDGET.label}
-          </span>
-          <span className="bg-[#022c22]/80 backdrop-blur-sm border border-[rgba(255,255,255,0.15)] text-[#ecfdf5]/70 text-[0.65rem] px-3 py-1 rounded-full">
-            BOI-MTIT, BARMM
-          </span>
-        </div>
-      </div>
+      <HeroSection onNavigate={onNavigate} />
 
       {/* ════════════════════════════════════════════════════════════════════════
           DASHBOARD HEADER
@@ -409,10 +581,10 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
           className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e] bg-clip-text text-transparent leading-tight mb-2"
           style={{ fontFamily: "'Cinzel', serif" }}
         >
-          The Emerging Bangsamoro
+          Monitoring, Evaluation &amp; Learning
         </h1>
         <p className="text-[#ecfdf5]/60 max-w-2xl leading-relaxed text-sm md:text-base">
-          Monitoring, Evaluation &amp; Learning — 2026 Priority Actions &amp; 2035 Investment Targets.
+          2026 Priority Actions &amp; 2035 Investment Targets.
           Applying the <strong className="text-[#C9A84C]">Pareto Principle</strong> to surface the vital few metrics
           that drive 80% of strategic impact, aligned with the BIRD 2026–2035 Roadmap.
         </p>
