@@ -18,6 +18,7 @@ const SettingsPage     = lazy(() => import('./settings/SettingsPage'));
 // ─── HERO loads immediately (it's the first thing users see)
 const HeroSection = lazy(() => import('./strategic/HeroSection'));
 
+const ValidationSurvey = lazy(() => import('./strategic/ValidationSurvey')); // We will create this wrapper next
 // ─── Content views — each chunk is a separate JS bundle loaded on demand
 const MELDashboard     = lazy(() => import('./strategic/MELDashboard'));
 const SWOTAnalysis     = lazy(() => import('./strategic/SWOTAnalysis'));
@@ -53,7 +54,6 @@ const LazyFallback = React.memo(() => (
   </div>
 ));
 
-// ─── PATH / VIEW MAPS (shared constants, no re-creation) ─────────────────────
 const VIEW_TO_PATH: Record<string, string> = {
   dashboard: '/mel-dashboard',
   swot:      '/swot-analysis',
@@ -65,6 +65,7 @@ const VIEW_TO_PATH: Record<string, string> = {
   team:      '/team-collaboration',
   settings:  '/settings',
   export:    '/export-plan',
+  validation: '/validation-survey', // <--- ADD THIS LINE
 };
 
 const PATH_TO_VIEW: Record<string, string> = Object.fromEntries(
@@ -232,7 +233,9 @@ const AppLayout: React.FC = () => {
   const renderContent = useCallback(() => {
     const common = { plan: currentPlan, onNavigate: navigateToView };
     switch (activeView) {
-      case 'dashboard':  return <MELDashboard {...common} />;
+      case 'validation': return <ValidationSurvey />; // <--- ADD THIS LINE
+      default:           return <MELDashboard {...common} />;
+    }
       // ✅ FIXED: Added onAddItem and onRemoveItem props for full CRUD support
       case 'swot':       return (
         <SWOTAnalysis 
