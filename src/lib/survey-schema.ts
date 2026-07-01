@@ -1,57 +1,6 @@
 // src/lib/survey-schema.ts
 import { z } from "zod";
 
-const form = useForm<SurveySchemaType>({
-  resolver: zodResolver(surveySchema),
-  defaultValues: {
-    // Section 1: BEIE Framework (Radio)
-    q1_1: "", q1_2: "",
-    
-    // Section 2: Moral Governance (Radio)
-    q2_1: "", q2_2: "",
-    
-    // Section 3: Foundations (Checkbox, Radio)
-    q3_1: [], q3_2: "",
-    
-    // Section 4: Transformers (Radio, Radio)
-    q4_1: "", q4_2: "",
-    
-    // Section 5: Enablers (Radio, Checkbox, Radio) - CORRECTED
-    q5_1: "", q5_2: [], q5_3: "",
-    
-    // Section 6: Connectors (Radio, Checkbox, Radio) - CORRECTED
-    q6_1: "", q6_2: [], q6_3: "",
-    
-    // Section 7: Financiers (Radio, Checkbox, Radio) - CORRECTED
-    q7_1: "", q7_2: [], q7_3: "",
-    
-    // Section 8: Strategic Options (Radio, Radio)
-    q8_1: "", q8_2: "",
-    
-    // Section 9: Budget (Radio)
-    q9_1: "",
-    
-    // Section 10: Targets (Radio)
-    q10_1: "",
-    
-    // Section 11: Equity (Radio, Checkbox)
-    q11_1: "", q11_2: [],
-    
-    // Section 12: Climate (Radio, Checkbox)
-    q12_1: "", q12_2: [],
-    
-    // Section 13: Policy (Checkbox, Radio)
-    q13_1: [], q13_2: "",
-    
-    // Section 14: Demographics (Select, Select, Checkbox)
-    demo_category: "", demo_province: "", demo_expertise: [],
-    
-    // Section 15: Submission (Checkbox)
-    consent_final: false,
-  },
-  mode: "onTouched",
-});
-
 // ─── HELPER SCHEMAS ─────────────────────────────────────────────────────────
 const scale1to5 = z.enum(["1", "2", "3", "4", "5"], {
   errorMap: () => ({ message: "Please select a rating to proceed." }),
