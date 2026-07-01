@@ -13,7 +13,7 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e5128 0%, #0f3d28 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -72,10 +72,10 @@
         }
         
         h2 {
-            color: #667eea;
+            color: #1e5128;
             margin: 30px 0 15px 0;
             font-size: 22px;
-            border-bottom: 2px solid #667eea;
+            border-bottom: 2px solid #1e5128;
             padding-bottom: 10px;
         }
         
@@ -144,7 +144,7 @@
         select:focus,
         textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #1e5128;
         }
         
         .radio-group,
@@ -167,7 +167,7 @@
         }
         
         .submit-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e5128 0%, #0f3d28 100%);
             color: white;
             padding: 15px 40px;
             border: none;
@@ -182,11 +182,60 @@
         
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 6px 20px rgba(30, 81, 40, 0.4);
         }
         
         .required {
             color: #e74c3c;
+        }
+        
+        .closing-section {
+            background: linear-gradient(135deg, #1e5128 0%, #0f3d28 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .closing-section h2 {
+            color: #FFD700;
+            border-bottom: 2px solid #FFD700;
+        }
+        
+        .closing-section p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin: 20px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #0f3d28;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 20px 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        .success-message {
+            display: none;
+            background: #1e5128;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
         }
         
         @media (max-width: 768px) {
@@ -202,6 +251,15 @@
             .nav-btn {
                 width: 200px;
                 text-align: center;
+            }
+            
+            .closing-section {
+                padding: 20px;
+            }
+            
+            .cta-button {
+                display: block;
+                margin: 10px auto;
             }
         }
     </style>
@@ -225,6 +283,12 @@
             <p class="intro-text">
                 Welcome to the BIRD 2026-2035 Validation Survey. This survey aims to gather feedback from stakeholders on the Bangsamoro Investment Roadmap Development framework, strategic options, and implementation approach. Your valuable input will help ensure that the roadmap is comprehensive, practical, and aligned with the development needs of the Bangsamoro Autonomous Region in Muslim Mindanao (BARMM).
             </p>
+            
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message">
+                <h3>Thank you for your valuable feedback!</h3>
+                <p>Your survey has been successfully submitted.</p>
+            </div>
             
             <!-- Section 1: BEIE Framework Introduction -->
             <div class="section">
@@ -771,8 +835,107 @@
                 </div>
             </div>
             
-            <button type="submit" class="submit-btn">Submit Survey</button>
+            <button type="submit" class="submit-btn" id="submitBtn">Submit Survey</button>
+            
+            <!-- Closing Section -->
+            <div class="closing-section">
+                <h2>🚀 Unlock the Full Power of BIRD 2026-2035</h2>
+                <p>
+                    Thank you for completing this validation survey! Your insights are invaluable in shaping the future of economic development in BARMM.
+                </p>
+                <p>
+                    <strong>Ready to dive deeper?</strong> Create your <strong>FREE unlimited access account</strong> to the BIRD App and explore:
+                </p>
+                <ul style="text-align: left; max-width: 600px; margin: 20px auto; line-height: 2;">
+                    <li>✓ Advanced diagnostic tools and strategic planning frameworks</li>
+                    <li>✓ Interactive BEIE Framework visualizations</li>
+                    <li>✓ Comprehensive investment roadmaps and sectoral analysis</li>
+                    <li>✓ Real-time monitoring and evaluation dashboards</li>
+                    <li>✓ Access to exclusive resources, case studies, and best practices</li>
+                    <li>✓ Personalized recommendations for your organization</li>
+                </ul>
+                <p>
+                    Join a growing community of policymakers, investors, and development practitioners committed to building a resilient, ethical, and sustainable Bangsamoro economy.
+                </p>
+                <a href="https://strategy-ai-planner-1.deploypad.app/" class="cta-button">Sign Up for FREE Access</a>
+                <a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/home.html" class="cta-button">Explore BIRD Resources</a>
+                <p style="margin-top: 30px; font-size: 14px; opacity: 0.9;">
+                    Together, let's transform the Bangsamoro into Southeast Asia's hub for ethical and sustainable growth!
+                </p>
+            </div>
         </div>
     </div>
+    
+    <script>
+        // Form submission handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.content');
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            
+            submitBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Basic validation
+                const requiredFields = form.querySelectorAll('[required]');
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (field.type === 'radio') {
+                        const radioGroup = form.querySelectorAll(`input[name="${field.name}"]`);
+                        const isChecked = Array.from(radioGroup).some(radio => radio.checked);
+                        if (!isChecked) {
+                            isValid = false;
+                            field.closest('.question').style.borderLeft = '4px solid #e74c3c';
+                            field.closest('.question').style.paddingLeft = '10px';
+                        } else {
+                            field.closest('.question').style.borderLeft = 'none';
+                            field.closest('.question').style.paddingLeft = '0';
+                        }
+                    } else if (!field.value.trim()) {
+                        isValid = false;
+                        field.style.borderColor = '#e74c3c';
+                    } else {
+                        field.style.borderColor = '#ddd';
+                    }
+                });
+                
+                if (isValid) {
+                    // Simulate form submission
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Submitting...';
+                    
+                    // Here you would normally send data to a server
+                    setTimeout(function() {
+                        successMessage.style.display = 'block';
+                        submitBtn.style.display = 'none';
+                        
+                        // Scroll to success message
+                        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        
+                        // Reset form after a delay
+                        setTimeout(function() {
+                            form.reset();
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = 'Submit Survey';
+                            successMessage.style.display = 'none';
+                            submitBtn.style.display = 'block';
+                        }, 5000);
+                    }, 1500);
+                } else {
+                    alert('Please fill in all required fields marked with *');
+                }
+            });
+            
+            // Remove validation styling on input
+            form.addEventListener('input', function(e) {
+                if (e.target.hasAttribute('required')) {
+                    e.target.style.borderColor = '#ddd';
+                    e.target.closest('.question').style.borderLeft = 'none';
+                    e.target.closest('.question').style.paddingLeft = '0';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
