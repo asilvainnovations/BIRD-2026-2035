@@ -1,7 +1,6 @@
 // src/components/strategic/SurveyWizard.tsx
 "use client";
 
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,8 +10,10 @@ import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, ArrowLeft, Send, CheckCircle2 } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
+
 import { surveySchema, SurveySchemaType } from "@/lib/survey-schema";
 import { submitSurvey } from "@/lib/api";
+
 // Import all 15 sections
 import { Section1_BEIE } from "./Section1_BEIE";
 import { Section2_MoralGov } from "./Section2_MoralGov";
@@ -30,38 +31,6 @@ import { Section13_Policy } from "./Section13_Policy";
 import { Section14_Demographics } from "./Section14_Demographics";
 import { Section15_Submission } from "./Section15_Submission";
 
-export function SurveyWizard() {
-  // ✅ The useForm hook belongs HERE, inside the React component
-  const form = useForm<SurveySchemaType>({
-    resolver: zodResolver(surveySchema),
-    defaultValues: {
-      q1_1: "", q1_2: "",
-      q2_1: "", q2_2: "",
-      q3_1: [], q3_2: "",
-      q4_1: "", q4_2: "",
-      q5_1: "", q5_2: [], q5_3: "",
-      q6_1: "", q6_2: [], q6_3: "",
-      q7_1: "", q7_2: [], q7_3: "",
-      q8_1: "", q8_2: "",
-      q9_1: "",
-      q10_1: "",
-      q10_matrix: {
-        heds: { economic_impact: 0, feasibility: 0, identity_alignment: 0, systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0 },
-        gems: { economic_impact: 0, feasibility: 0, identity_alignment: 0, systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0 },
-        ifes: { economic_impact: 0, feasibility: 0, identity_alignment: 0, systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0 },
-        ieds: { economic_impact: 0, feasibility: 0, identity_alignment: 0, systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0 },
-      },
-      q11_1: "", q11_2: [],
-      q12_1: "", q12_2: [],
-      q13_1: [], q13_2: "",
-      demo_category: "", demo_province: "", demo_expertise: [],
-      consent_final: false,
-    },
-    mode: "onTouched",
-  });
-
-}
-
 const TOTAL_STEPS = 15;
 
 export function SurveyWizard() {
@@ -69,55 +38,45 @@ export function SurveyWizard() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  // ✅ Single, clean useForm hook with correctly aligned defaultValues
   const form = useForm<SurveySchemaType>({
     resolver: zodResolver(surveySchema),
     defaultValues: {
-      // Section 1: BEIE Framework
+      // Section 1: BEIE Framework (Radio, Radio)
       q1_1: "", q1_2: "",
-      // Section 2: Moral Governance
+      // Section 2: Moral Governance (Radio, Radio)
       q2_1: "", q2_2: "",
-      // Section 3: Foundations
+      // Section 3: Foundations (Checkbox[], Radio)
       q3_1: [], q3_2: "",
-      // Section 4: Transformers
+      // Section 4: Transformers (Radio, Radio)
       q4_1: "", q4_2: "",
-      // Section 5: Enablers
-      q5_1: [], q5_2: "", q5_3: "",
-      // Section 6: Connectors
-      q6_1: [], q6_2: "",
-      // Section 7: Financiers
-      q7_1: "", q7_2: [],
-      // Section 8: Strategic Options
+      // Section 5: Enablers (Radio, Checkbox[], Radio) - FIXED
+      q5_1: "", q5_2: [], q5_3: "",
+      // Section 6: Connectors (Radio, Checkbox[], Radio) - FIXED
+      q6_1: "", q6_2: [], q6_3: "",
+      // Section 7: Financiers (Radio, Checkbox[], Radio)
+      q7_1: "", q7_2: [], q7_3: "",
+      // Section 8: Strategic Options (Radio, Radio)
       q8_1: "", q8_2: "",
-      // Section 9: Budget & Targets
-      q9_1: "", q10_1: "",
-      // Section 10: IEDS Matrix (nested object)
+      // Section 9: Budget (Radio)
+      q9_1: "",
+      // Section 10: Targets (Radio) & Matrix
+      q10_1: "",
       q10_matrix: {
-        heds: {
-          economic_impact: 0, feasibility: 0, identity_alignment: 0,
-          systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0
-        },
-        gems: {
-          economic_impact: 0, feasibility: 0, identity_alignment: 0,
-          systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0
-        },
-        ifes: {
-          economic_impact: 0, feasibility: 0, identity_alignment: 0,
-          systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0
-        },
-        ieds: {
-          economic_impact: 0, feasibility: 0, identity_alignment: 0,
-          systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0
-        }
+        heds: { economic_impact: 0, feasibility: 0, identity_alignment: 0, systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0 },
+        gems: { economic_impact: 0, feasibility: 0, identity_alignment: 0, systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0 },
+        ifes: { economic_impact: 0, feasibility: 0, identity_alignment: 0, systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0 },
+        ieds: { economic_impact: 0, feasibility: 0, identity_alignment: 0, systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0 }
       },
-      // Section 11: Equity
+      // Section 11: Equity (Radio, Checkbox[])
       q11_1: "", q11_2: [],
-      // Section 12: Climate
+      // Section 12: Climate (Radio, Checkbox[])
       q12_1: "", q12_2: [],
-      // Section 13: Policy
+      // Section 13: Policy (Checkbox[], Radio)
       q13_1: [], q13_2: "",
-      // Section 14: Demographics
+      // Section 14: Demographics (Select, Select, Checkbox[])
       demo_category: "", demo_province: "", demo_expertise: [],
-      // Section 15: Submission
+      // Section 15: Submission (Checkbox literal true)
       consent_final: false,
     },
     mode: "onTouched",
