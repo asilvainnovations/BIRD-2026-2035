@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIRD 2026-2035 | Strategic Validation Survey</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary-green:#064e3b;--dark-green:#022c22;--mid-green:#065f46;
+  --light-green:#6ee7b7;--cream:#ecfdf5;--white:#ffffff;
+  --gold:#C9A84C;--gold-light:#E8C560;--gold-dark:#8B6C28;
+  --gold-border:rgba(201,168,76,0.32);--gold-border-strong:rgba(201,168,76,0.55);
+  --gold-glow:rgba(201,168,76,0.20);
+  --gold-grad:linear-gradient(135deg,#7a5c1e 0%,#c9a84c 35%,#e8c560 50%,#c9a84c 65%,#7a5c1e 100%);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'DM Sans',sans-serif;
+  background:linear-gradient(160deg,#011a12 0%,#022c22 45%,#0a1628 100%);
+  min-height:100vh; color:var(--cream);
+  display:flex; flex-direction:column; align-items:center;
+  padding:2rem 1rem;
+}
+.container { max-width:800px; width:100%; }
+.header { text-align:center; margin-bottom:2rem; }
+.header img { height:50px; margin-bottom:1rem; }
+.header h1 { font-family:'Cinzel',serif; font-size:clamp(1.5rem,4vw,2.2rem); background:var(--gold-grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:0.5rem; }
+.header p { color:var(--light-green); font-size:0.9rem; font-style:italic; }
+
+/* Progress Bar */
+.progress-bar { width:100%; height:6px; background:rgba(255,255,255,0.1); border-radius:3px; margin-bottom:2rem; overflow:hidden; }
+.progress-fill { height:100%; background:var(--gold-grad); width:0%; transition:width 0.4s ease; border-radius:3px; }
+
+/* Survey Card */
+.survey-card {
+  background:rgba(2,44,34,0.6); backdrop-filter:blur(12px);
+  border:1px solid var(--gold-border); border-radius:1.25rem;
+  padding:2rem; box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  display:none; animation:fadeIn 0.4s ease;
+}
+.survey-card.active { display:block; }
+@keyframes fadeIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+
+.step-title { font-family:'Cinzel',serif; color:var(--gold); font-size:1.2rem; margin-bottom:0.5rem; }
+.step-desc { color:rgba(236,253,245,0.7); font-size:0.85rem; margin-bottom:1.5rem; line-height:1.5; }
+
+/* Form Elements */
+.form-group { margin-bottom:1.5rem; }
+label { display:block; color:var(--light-green); font-size:0.85rem; font-weight:600; margin-bottom:0.5rem; }
+input[type="text"], input[type="email"], select, textarea {
+  width:100%; padding:0.8rem 1rem; background:rgba(0,0,0,0.3);
+  border:1px solid var(--gold-border); border-radius:0.5rem;
+  color:var(--cream); font-family:'DM Sans',sans-serif; font-size:0.9rem;
+  transition:border 0.3s;
+}
+input:focus, select:focus, textarea:focus { outline:none; border-color:var(--gold); box-shadow:0 0 10px var(--gold-glow); }
+textarea { min-height:100px; resize:vertical; }
+select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23C9A84C' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; }
+
+/* Scale Buttons (1-5) */
+.scale-group { display:flex; gap:0.8rem; flex-wrap:wrap; margin-top:0.5rem; }
+.scale-btn {
+  width:45px; height:45px; border-radius:50%;
+  background:rgba(2,44,34,0.8); border:1px solid var(--gold-border);
+  color:var(--cream); font-weight:700; font-size:1rem; cursor:pointer;
+  transition:all 0.3s; display:flex; align-items:center; justify-content:center;
+}
+.scale-btn:hover { border-color:var(--gold); transform:translateY(-2px); }
+.scale-btn.active { background:var(--gold-grad); color:var(--dark-green); border-color:var(--gold); box-shadow:0 0 15px var(--gold-glow); }
+
+/* Item Card for SWOT/Archetypes */
+.item-card {
+  background:rgba(0,0,0,0.25); border:1px solid rgba(201,168,76,0.15);
+  border-radius:0.75rem; padding:1.2rem; margin-bottom:1rem;
+}
+.item-title { color:var(--gold); font-family:'Cinzel',serif; font-size:0.95rem; margin-bottom:1rem; }
+.scale-label { color:rgba(236,253,245,0.6); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.4rem; display:block;}
+
+/* Ranking List */
+.ranking-list { list-style:none; display:flex; flex-direction:column; gap:0.8rem; }
+.ranking-item {
+  background:rgba(0,0,0,0.3); border:1px solid var(--gold-border);
+  border-radius:0.6rem; padding:0.8rem 1rem; display:flex; align-items:center; gap:1rem;
+}
+.rank-num { font-family:'Cinzel',serif; font-size:1.2rem; color:var(--gold); font-weight:700; width:24px; text-align:center; }
+.rank-text { flex:1; font-size:0.85rem; color:var(--cream); }
+.rank-actions { display:flex; flex-direction:column; gap:0.2rem; }
+.rank-actions button {
+  background:transparent; border:1px solid var(--gold-border); color:var(--gold);
+  width:24px; height:24px; border-radius:4px; cursor:pointer; font-size:0.8rem;
+  display:flex; align-items:center; justify-content:center; transition:all 0.2s;
+}
+.rank-actions button:hover { background:rgba(201,168,76,0.2); }
+
+/* Navigation Buttons */
+.nav-buttons { display:flex; justify-content:space-between; margin-top:2rem; gap:1rem; }
+.btn {
+  padding:0.8rem 2rem; border-radius:2rem; font-family:'DM Sans',sans-serif;
+  font-weight:600; font-size:0.9rem; cursor:pointer; transition:all 0.3s;
+  border:none; min-width:120px;
+}
+.btn-primary { background:var(--gold-grad); color:var(--dark-green); box-shadow:0 4px 15px rgba(201,168,76,0.3); }
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(201,168,76,0.4); }
+.btn-secondary { background:transparent; border:1px solid var(--gold-border); color:var(--gold); }
+.btn-secondary:hover { background:rgba(201,168,76,0.1); }
+.btn:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+
+.status-msg { text-align:center; margin-top:1rem; font-size:0.85rem; color:var(--light-green); min-height:20px; }
+.error { color:#fca5a5 !important; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png" alt="BARMM MTIT">
+    <h1>BIRD 2026–2035 Validation</h1>
+    <p>"The Emerging Bangsamoro: A Hub for Resilient and Ethical Growth"</p>
+  </div>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+  <form id="surveyForm">
+    <!-- STEP 0: Consent -->
+    <div class="survey-card active" data-step="0">
+      <h2 class="step-title">Module 0: Privacy & Consent</h2>
+      <p class="step-desc">Your insights shape the Bangsamoro Investment Roadmap. All data is aggregated anonymously and used exclusively for Strat Planner Pro systems modeling. Do you consent to participate?</p>
+      <div class="form-group">
+        <div class="scale-group" data-name="consent" data-required="true">
+          <button type="button" class="scale-btn" data-value="yes" style="width:auto; border-radius:2rem; padding:0 1.5rem;">Yes, I Consent</button>
+          <button type="button" class="scale-btn" data-value="no" style="width:auto; border-radius:2rem; padding:0 1.5rem;">No, I Do Not</button>
+        </div>
+      </div>
+      <div class="nav-buttons"><div></div><button type="button" class="btn btn-primary" onclick="nextStep()">Start Survey →</button></div>
+    </div>
+
+    <!-- STEP 1: Profiling -->
+    <div class="survey-card" data-step="1">
+      <h2 class="step-title">Stakeholder Profiling</h2>
+      <p class="step-desc">Help us understand the ecosystem perspective you represent.</p>
+      <div class="form-group"><label>Full Name & Title</label><input type="text" name="name" required></div>
+      <div class="form-group"><label>Organization / Agency</label><input type="text" name="org" required></div>
+      <div class="form-group">
+        <label>BEIE Sector Alignment</label>
+        <select name="sector" required>
+          <option value="">Select Cluster...</option>
+          <option>Moral Governance & Policy</option><option>Foundations (AFF/Energy)</option>
+          <option>Transformers (Halal/MSMEs)</option><option>Enablers (Infra/Human Capital)</option>
+          <option>Connectors (Trade/Tourism)</option><option>Financiers (Islamic Finance)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Geographic Focus</label>
+        <select name="province" required>
+          <option value="">Select Province...</option>
+          <option>Maguindanao del Norte</option><option>Maguindanao del Sur</option>
+          <option>Lanao del Sur</option><option>Basilan</option><option>Sulu</option>
+          <option>Tawi-Tawi</option><option>Cotabato City/SGA</option><option>National/International</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Email (Optional - for final report)</label><input type="email" name="email"></div>
+      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button></div>
+    </div>
+
+    <!-- STEP 2: Iceberg -->
+    <div class="survey-card" data-step="2">
+      <h2 class="step-title">Systems Sensing: The Iceberg Model</h2>
+      <p class="step-desc">Beyond visible events, what is the deepest "Mental Model" or "Systemic Structure" that must shift to achieve the 2035 vision?</p>
+      <div class="form-group"><textarea name="iceberg" placeholder="e.g., Shifting from 'incentives first' to 'governance first'..." required></textarea></div>
+      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button></div>
+    </div>
+
+    <!-- STEP 3: SWOT - Strengths -->
+    <div class="survey-card" data-step="3">
+      <h2 class="step-title">SWOT Validation: Strengths (Resilience Index)</h2>
+      <p class="step-desc">Rate the IMPACT and LIKELIHOOD (1-5) of these core strengths.</p>
+      <div class="item-card">
+        <div class="item-title">Halal Legitimacy & Cultural Credibility</div>
+        <span class="scale-label">Impact (1=Low, 5=Critical)</span>
+        <div class="scale-group" data-name="s1_impact" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
+        <span class="scale-label" style="margin-top:0.8rem;">Likelihood (1=Low, 5=High)</span>
+        <div class="scale-group" data-name="s1_like" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
+      </div>
+      <div class="item-card">
+        <div class="item-title">Strategic BIMP-EAGA Location</div>
+        <span class="scale-label">Impact</span>
+        <div class="scale-group" data-name="s2_impact" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
+        <span class="scale-label" style="margin-top:0.8rem;">Likelihood</span>
+        <div class="scale-group" data-name="s2_like" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
+      </div>
+      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button></div>
+    </div>
+
+    <!-- STEP 4: SWOT - Weaknesses -->
+    <div class="survey-card" data-step="4">
+      <h2 class="step-title">SWOT Validation: Weaknesses (Risk Score)</h2>
+      <p class="step-desc">Rate the IMPACT and LIKELIHOOD (1-5) if these weaknesses remain unaddressed.</p>
+      <div class="item-card">
+        <div class="item-title">Critical Infrastructure Deficits (Energy/Roads)</div>
+        <span class="scale-label">Impact (1=Low, 5=Catastrophic)</span>
+        <div class="scale-group" data-name="w1_impact" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
+        <span class="scale-label" style="margin-top:0.8rem;">Likelihood</span>
+        <div class="scale-group" data-name="w1_like" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
+      </div>
+      <div class="item-card">
+        <div class="item-title">Lowest Functional Literacy Rate (59.3%)</div>
+        <span class="scale-label">Impact</span>
+        <div class="scale-group" data-name="w2_impact" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
+        <span class="scale-label" style="margin-top:0.8rem;">Likelihood</span>
+        <div class="scale-group" data-name="w2_like" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
+      </div>
+      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button></div>
+    </div>
+
+    <!-- STEP 5: Archetypes -->
+    <div class="survey-card" data-step="5">
+      <h2 class="step-title">Systems Archetypes Validation</h2>
+      <p class="step-desc">How accurately do these archetypes describe BARMM's current reality? (1=Strongly Disagree, 5=Strongly Agree)</p>
+      <div class="item-card">
+        <div class="item-title">Limits to Growth (Investment hitting infrastructure ceilings)</div>
+        <div class="scale-group" data-name="arch_limits" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
+      </div>
+      <div class="item-card">
+        <div class="item-title">Fixes that Fail (Short-term incentives causing long-term weakness)</div>
+        <div class="scale-group" data-name="arch_fixes" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button></div>
+      </div>
+      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button></div>
+    </div>
+
+    <!-- STEP 6: Leverage Points (Ranking) -->
+    <div class="survey-card" data-step="6">
+      <h2 class="step-title">Meadows' Leverage Points</h2>
+      <p class="step-desc">Rank the following interventions from highest to lowest systemic transformation potential.</p>
+      <ul class="ranking-list" id="lpRanking">
+        <li class="ranking-item" data-id="L5_Rules"><span class="rank-num">1</span><span class="rank-text">L5: Rules (Pair incentives with BHB/capacity milestones)</span><div class="rank-actions"><button type="button" onclick="moveRank(this, -1)">↑</button><button type="button" onclick="moveRank(this, 1)">↓</button></div></li>
+        <li class="ranking-item" data-id="L6_Info"><span class="rank-num">2</span><span class="rank-text">L6: Information Flows (Real-time BEGMP dashboards)</span><div class="rank-actions"><button type="button" onclick="moveRank(this, -1)">↑</button><button type="button" onclick="moveRank(this, 1)">↓</button></div></li>
+        <li class="ranking-item" data-id="L10_Stock"><span class="rank-num">3</span><span class="rank-text">L10: Stock-Flow (Complete ZBIP & farm-to-market roads)</span><div class="rank-actions"><button type="button" onclick="moveRank(this, -1)">↑</button><button type="button" onclick="moveRank(this, 1)">↓</button></div></li>
+        <li class="ranking-item" data-id="L3_Goals"><span class="rank-num">4</span><span class="rank-text">L3: Goals (Maintain 75% literacy & 100% electrification)</span><div class="rank-actions"><button type="button" onclick="moveRank(this, -1)">↑</button><button type="button" onclick="moveRank(this, 1)">↓</button></div></li>
+      </ul>
+      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button></div>
+    </div>
+
+    <!-- STEP 7: IEDS Rating -->
+    <div class="survey-card" data-step="7">
+      <h2 class="step-title">Strategic Options: IEDS Evaluation</h2>
+      <p class="step-desc">Rate the Integrated Ecosystem Development Strategy (IEDS) across these criteria (1-10 scale).</p>
+      <div class="item-card">
+        <div class="item-title">Economic Impact (GRDP ₱550B)</div>
+        <div class="scale-group" data-name="ieds_econ" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button><button type="button" class="scale-btn" data-value="6">6</button><button type="button" class="scale-btn" data-value="7">7</button><button type="button" class="scale-btn" data-value="8">8</button><button type="button" class="scale-btn" data-value="9">9</button><button type="button" class="scale-btn" data-value="10">10</button></div>
+      </div>
+      <div class="item-card">
+        <div class="item-title">Systems Leverage</div>
+        <div class="scale-group" data-name="ieds_sys" data-required="true"><button type="button" class="scale-btn" data-value="1">1</button><button type="button" class="scale-btn" data-value="2">2</button><button type="button" class="scale-btn" data-value="3">3</button><button type="button" class="scale-btn" data-value="4">4</button><button type="button" class="scale-btn" data-value="5">5</button><button type="button" class="scale-btn" data-value="6">6</button><button type="button" class="scale-btn" data-value="7">7</button><button type="button" class="scale-btn" data-value="8">8</button><button type="button" class="scale-btn" data-value="9">9</button><button type="button" class="scale-btn" data-value="10">10</button></div>
+      </div>
+      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button></div>
+    </div>
+
+    <!-- STEP 8: Submission -->
+    <div class="survey-card" data-step="8">
+      <h2 class="step-title">Final Reflections</h2>
+      <p class="step-desc">What is the single most critical "Mental Model" shift required among BARMM leadership to ensure IEDS succeeds?</p>
+      <div class="form-group"><textarea name="conclusion" placeholder="Your final insights..."></textarea></div>
+      <div class="nav-buttons"><button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button><button type="button" class="btn btn-primary" onclick="submitSurvey()" id="submitBtn">Submit Validation →</button></div>
+      <div class="status-msg" id="statusMsg"></div>
+    </div>
+  </form>
+</div>
+
+<script>
+let currentStep = 0;
+const totalSteps = 9;
+const surveyData = {};
+
+function updateProgress() {
+  document.getElementById('progressFill').style.width = `${(currentStep / (totalSteps - 1)) * 100}%`;
+}
+
+function showStep(step) {
+  document.querySelectorAll('.survey-card').forEach(c => c.classList.remove('active'));
+  document.querySelector(`[data-step="${step}"]`).classList.add('active');
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextStep() {
+  const currentCard = document.querySelector(`[data-step="${currentStep}"]`);
+  const requiredGroups = currentCard.querySelectorAll('[data-required="true"]');
+  let valid = true;
+  
+  requiredGroups.forEach(group => {
+    if (!group.querySelector('.active')) {
+      valid = false;
+      group.style.border = '1px solid #fca5a5';
+      setTimeout(() => group.style.border = 'none', 2000);
+    }
+  });
+
+  const requiredInputs = currentCard.querySelectorAll('[required]');
+  requiredInputs.forEach(input => {
+    if (!input.value.trim()) {
+      valid = false;
+      input.style.border = '1px solid #fca5a5';
+      setTimeout(() => input.style.border = 'none', 2000);
+    }
+  });
+
+  if (!valid) {
+    document.getElementById('statusMsg').textContent = 'Please complete all required fields.';
+    document.getElementById('statusMsg').className = 'status-msg error';
+    setTimeout(() => document.getElementById('statusMsg').textContent = '', 3000);
+    return;
+  }
+
+  if(currentStep === 0 && document.querySelector('[data-name="consent"] .active').dataset.value === 'no') {
+    alert('Thank you for your time. No data has been recorded.');
+    return;
+  }
+
+  currentStep++;
+  showStep(currentStep);
+}
+
+function prevStep() {
+  if (currentStep > 0) {
+    currentStep--;
+    showStep(currentStep);
+  }
+}
+
+// Scale Button Logic
+document.querySelectorAll('.scale-group').forEach(group => {
+  group.querySelectorAll('.scale-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      group.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+});
+
+// Ranking Logic
+function moveRank(btn, direction) {
+  const item = btn.closest('.ranking-item');
+  const list = item.parentNode;
+  if (direction === -1 && item.previousElementSibling) {
+    list.insertBefore(item, item.previousElementSibling);
+  } else if (direction === 1 && item.nextElementSibling) {
+    list.insertBefore(item.nextElementSibling, item);
+  }
+  updateRankNumbers();
+}
+
+function updateRankNumbers() {
+  document.querySelectorAll('.ranking-item').forEach((item, index) => {
+    item.querySelector('.rank-num').textContent = index + 1;
+  });
+}
+
+// Data Collection & Submission
+async function submitSurvey() {
+  const btn = document.getElementById('submitBtn');
+  const msg = document.getElementById('statusMsg');
+  btn.disabled = true;
+  msg.textContent = 'Securing data to repository...';
+  msg.className = 'status-msg';
+
+  // Collect Text/Select Inputs
+  document.querySelectorAll('input[type="text"], input[type="email"], select, textarea').forEach(el => {
+    if(el.name) surveyData[el.name] = el.value;
+  });
+
+  // Collect Scale/Radio Data
+  document.querySelectorAll('.scale-group').forEach(group => {
+    const activeBtn = group.querySelector('.scale-btn.active');
+    if(activeBtn && group.dataset.name) {
+      surveyData[group.dataset.name] = parseInt(activeBtn.dataset.value);
+    }
+  });
+
+  // Collect Ranking Data
+  const lpRanking = Array.from(document.querySelectorAll('#lpRanking .ranking-item')).map(item => item.dataset.id);
+  surveyData.leverage_points_ranking = lpRanking;
+
+  surveyData.timestamp = new Date().toISOString();
+
+  try {
+    const response = await fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ surveyData })
+    });
+
+    if (response.ok) {
+      msg.textContent = '✓ Validation successfully stored in the BIRD repository. Thank you!';
+      msg.style.color = 'var(--light-green)';
+      btn.textContent = 'Submitted';
+    } else {
+      throw new Error('Server error');
+    }
+  } catch (error) {
+    // Fallback: Download JSON locally if API fails
+    msg.textContent = '✓ Data captured. Downloading local backup...';
+    const blob = new Blob([JSON.stringify(surveyData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `bird_response_${Date.now()}.json`;
+    a.click();
+    msg.textContent += ' Thank you!';
+  }
+}
+
+updateProgress();
+</script>
+</body>
+</html>
