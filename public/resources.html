@@ -88,6 +88,25 @@ nav{background:rgba(2,44,34,.97);backdrop-filter:blur(16px);position:sticky;top:
 </style>
 <base target="_blank">
 </head>
+  <!-- Mobile-First Liquid Glass Navigation -->
+<nav class="glass-nav">
+  <div class="nav-container">
+    <a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/home.html" class="nav-logo">BIRD <span>2035</span></a>
+    
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span class="hamburger"></span>
+    </button>
+    
+    <ul class="nav-menu">
+      <li><a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/home.html">HOME</a></li>
+      <li><a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/validation-survey.html">SURVEY</a></li>
+      <li><a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/roadmap.html">ROADMAP</a></li>
+      <li><a href="https://strategy-ai-planner-1.deploypad.app/" target="_blank" rel="noopener noreferrer">BIRD APP</a></li>
+      <li><a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/dashboard.html">DASHBOARD</a></li>
+      <li><a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/resouces.html">RESOURCES</a></li>
+    </ul>
+  </div>
+</nav>
 <body>
 
 <nav>
@@ -326,6 +345,34 @@ nav{background:rgba(2,44,34,.97);backdrop-filter:blur(16px);position:sticky;top:
   <p style="font-family:'Cinzel', serif; font-weight:700; color:var(--gold); margin-bottom:1rem;">The Emerging Bangsamoro</p>
   <p style="font-size:0.8rem; opacity:0.6;">© 2026 Asilva Innovations. All rights reserved.</p>
 </footer>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
 
+    // Toggle mobile menu
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked (Mobile UX)
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+    
+    // Optional: Highlight active page based on current URL
+    const currentPath = window.location.pathname.split('/').pop();
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      if (link.getAttribute('href').includes(currentPath) && currentPath !== "") {
+        link.style.color = '#3B82F6';
+        link.style.background = 'rgba(59, 130, 246, 0.1)';
+      }
+    });
+  });
+</script>
 </body>
 </html>
