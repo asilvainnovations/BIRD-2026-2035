@@ -1,13 +1,8 @@
 import React, { useMemo, useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from '@/lib/motion-shim';
-import {
-  TrendingUp, AlertTriangle, CheckCircle2, Clock, Target,
-  DollarSign, Users, Cog, GraduationCap, ArrowUpRight,
-  FolderKanban, Info, X, Send, Sparkles, Globe, ChevronDown,
-  Loader2, ExternalLink, BookOpen, GitBranch, BrainCircuit, Layers,
-  ArrowRight, Play, Zap, Shield, Leaf,
-} from 'lucide-react';
+import { TrendingUp, TriangleAlert as AlertTriangle, CircleCheck as CheckCircle2, Clock, Target, DollarSign, Users, Cog, GraduationCap, ArrowUpRight, FolderKanban, Info, X, Send, Sparkles, Globe, ChevronDown, Loader as Loader2, ExternalLink, BookOpen, GitBranch, BrainCircuit, Layers, ArrowRight, Play, Zap, Shield, Leaf } from 'lucide-react';
 import { StrategicPlan } from '@/lib/strategicPlanStore';
+import { EDGE_FUNCTIONS, BRAND_ASSETS } from '@/lib/supabase';
 
 // ─── Import HeroSection from external file ────────────────────────────────────
 import HeroSection from './HeroSection';
@@ -24,13 +19,6 @@ import { BSC_LEVERAGE_POINTS as BSC_POINTS }               from '@/data/bird/kpi
 import { ACTION_PLAN_2026 as PRIORITY_ACTIONS }            from '@/data/bird/actions';
 import { CAUSAL_LOOPS as FEEDBACK_LOOPS }                  from '@/data/bird/clds';
 import { PHASES, TOTAL_BUDGET }                            from '@/data/bird/phases';
-import { EDGE_FUNCTIONS, BRAND_ASSETS }                    from '@/lib/supabase';
-
-// ─── Asset constants (env-var backed) ────────────────────────────────────────
-const BIRD_BANNER_URL =
-  'https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/bird-images/public/BIRD%20Banner.png';
-const AI_AVATAR_URL = BRAND_ASSETS.AI_AVATAR_URL;
-const AI_ENDPOINT   = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface MELDashboardProps {
