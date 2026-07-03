@@ -69,7 +69,7 @@ const VIEW_TO_PATH: Record<string, string> = {
   team:      '/team-collaboration',
   settings:  '/settings',
   export:    '/export-plan',
-  validation: '/survey-wizard',
+  validation: '/survey-wizard', // ✅ Routes to the Survey Wizard
 };
 
 const PATH_TO_VIEW: Record<string, string> = Object.fromEntries(
@@ -80,7 +80,7 @@ const COMPONENT_TO_VIEW: Record<string, string> = {
   SWOTAnalysis: 'swot', MELDashboard: 'dashboard', StrategicPlanning: 'strategy',
   SystemsThinking: 'systems', BalancedScorecard: 'scorecard', PAPsManagement: 'paps',
   TemplatesLibrary: 'templates', TeamCollaboration: 'team', Settings: 'settings', PlanExport: 'export',
-  SurveyWizard: 'validation',
+  SurveyWizard: 'validation', // ✅ Maps the component name to the view ID
 };
 
 // ─── MAIN LAYOUT ──────────────────────────────────────────────────────────────
@@ -238,6 +238,7 @@ const AppLayout: React.FC = () => {
   const renderContent = useCallback(() => {
     const common = { plan: currentPlan, onNavigate: navigateToView };
     switch (activeView) {
+      // ✅ VALIDATION SURVEY ROUTE
       case 'validation': 
         return <SurveyWizard />;
       
