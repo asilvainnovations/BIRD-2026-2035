@@ -18,7 +18,9 @@ const SettingsPage     = lazy(() => import('./settings/SettingsPage'));
 // ─── HERO loads immediately (it's the first thing users see)
 const HeroSection = lazy(() => import('./strategic/HeroSection'));
 
-const SurveyWizard = lazy(() => import('./strategic/SurveyWizard')); 
+// ─── BIRD Validation Survey Wizard (NEW)
+const SurveyWizard = lazy(() => import('./strategic/SurveyWizard'));
+
 // ─── Content views — each chunk is a separate JS bundle loaded on demand
 const MELDashboard     = lazy(() => import('./strategic/MELDashboard'));
 const SWOTAnalysis     = lazy(() => import('./strategic/SWOTAnalysis'));
@@ -34,26 +36,6 @@ const FloatingAIAssistant = lazy(() => import('./strategic/FloatingAIAssistant')
 
 import { PlanTemplate } from '@/lib/templateData';
 import { Loader2 } from 'lucide-react';
-
-
-// ─── CONTENT RENDERER ─────────────────────────────────────────────────────
-const renderContent = useCallback(() => {
-  const common = { plan: currentPlan, onNavigate: navigateToView };
-  switch (activeView) {
-    case 'validation':
-      return <SurveyWizard />;
-    
-    // ✅ FIXED: Added onAddItem and onRemoveItem props for full CRUD support
-    case 'swot':       
-      return (
-        <SWOTAnalysis 
-          {...common} 
-          onAddItem={addSWOTItem}
-          onUpdateItem={updateSWOTItem} 
-          onRemoveItem={removeSWOTItem}
-          onBulkAdd={bulkAddSWOTItems} 
-        />
-      );
 
 // ─── LOADERS ──────────────────────────────────────────────────────────────────
 
@@ -74,6 +56,8 @@ const LazyFallback = React.memo(() => (
   </div>
 ));
 
+// ─── PATH / VIEW MAPS ─────────────────────────────────────────────────────────
+
 const VIEW_TO_PATH: Record<string, string> = {
   dashboard: '/mel-dashboard',
   swot:      '/swot-analysis',
@@ -85,7 +69,7 @@ const VIEW_TO_PATH: Record<string, string> = {
   team:      '/team-collaboration',
   settings:  '/settings',
   export:    '/export-plan',
-  validation: '/survey-wizard', // <--- ADD THIS LINE
+  validation: '/survey-wizard',
 };
 
 const PATH_TO_VIEW: Record<string, string> = Object.fromEntries(
@@ -96,6 +80,7 @@ const COMPONENT_TO_VIEW: Record<string, string> = {
   SWOTAnalysis: 'swot', MELDashboard: 'dashboard', StrategicPlanning: 'strategy',
   SystemsThinking: 'systems', BalancedScorecard: 'scorecard', PAPsManagement: 'paps',
   TemplatesLibrary: 'templates', TeamCollaboration: 'team', Settings: 'settings', PlanExport: 'export',
+  SurveyWizard: 'validation',
 };
 
 // ─── MAIN LAYOUT ──────────────────────────────────────────────────────────────
@@ -256,7 +241,6 @@ const AppLayout: React.FC = () => {
       case 'validation': 
         return <SurveyWizard />;
       
-      // ✅ FIXED: Added onAddItem and onRemoveItem props for full CRUD support
       case 'swot':       
         return (
           <SWOTAnalysis 
