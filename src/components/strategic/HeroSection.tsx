@@ -12,6 +12,7 @@ import {
   Play,
   LogIn,
   User,
+  ClipboardCheck,
 } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -81,58 +82,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   userName 
 }) => {
   return (
-    // Insert this block inside the main return statement of HeroSection.tsx, 
-// right before the closing </div> of the main container or before the <footer>
-
-<div className="max-w-7xl mx-auto px-6 py-24 border-t border-slate-800">
-  <div className="text-center mb-16">
-    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-widest mb-4">
-      <span>Our Guiding Philosophy</span>
-    </div>
-    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-      The <span className="text-emerald-400">C.A.R.E.</span> Framework & <span className="text-amber-400">Khalifa</span> Stewardship
-    </h2>
-    <p className="text-slate-400 max-w-3xl mx-auto text-lg">
-      Transforming the Bangsamoro requires more than capital; it requires a paradigm rooted in stewardship. 
-      Our approach aligns global best practices with local Islamic values to ensure sustainable, ethical growth.
-    </p>
-  </div>
-
-  {/* The 4 C.A.R.E. Pillars */}
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-    {[
-      { letter: "C", title: "Context-Specific", desc: "Grounded in BARMM realities, requiring explicit local partnership and faith-sensitive design.", color: "from-emerald-500 to-teal-600" },
-      { letter: "A", title: "Action-Oriented", desc: "Focused on identified leverage points, binding constraints, and executable interventions.", color: "from-blue-500 to-indigo-600" },
-      { letter: "R", title: "Real-time & Non-linear", desc: "Embracing systems thinking, adaptive management, and dynamic feedback loops.", color: "from-purple-500 to-pink-600" },
-      { letter: "E", title: "Evidence-Based", desc: "Driven by quantitative indicators, PSA data, and international benchmarks (OIC/SMIIC).", color: "from-amber-500 to-orange-600" }
-    ].map((item) => (
-      <div key={item.letter} className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700 hover:border-slate-600 transition-all">
-        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 text-2xl font-black text-white`}>
-          {item.letter}
-        </div>
-        <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
-        <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
-      </div>
-    ))}
-  </div>
-
-  {/* The Khalifa Alignment Box */}
-  <div className="max-w-4xl mx-auto p-8 rounded-2xl bg-gradient-to-br from-amber-500/5 to-emerald-500/5 border border-amber-500/20">
-    <div className="flex items-start gap-4">
-      <div className="p-3 rounded-xl bg-amber-500/10 text-amber-400 flex-shrink-0">
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
-      </div>
-      <div>
-        <h4 className="text-xl font-bold text-amber-400 mb-2">Anchored in <em>Khalifa</em> (Stewardship)</h4>
-        <p className="text-slate-300 leading-relaxed">
-          The C.A.R.E. framework is deeply aligned with the BARMM concept of <em>Khalifa</em>—the moral obligation of stewardship over resources and communities. 
-          This requires <strong className="text-white">explicit local partnership</strong>, <strong className="text-white">faith-sensitive program design</strong>, and <strong className="text-white">formal coordination with Bangsamoro institutions</strong>. 
-          By embedding these principles, we ensure there are no conflicts between moral-governance norms and humanitarian or investment principles, creating a truly sustainable and ethical economic hub.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
     <div className="min-h-screen bg-slate-900 selection:bg-cyan-500/30">
       {/* Background Decor */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -203,7 +152,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             The official AI-powered platform for the Bangsamoro Investment Roadmap Development 2026–2035. Diagnose, strategize, monitor, and learn — all in one place, grounded in the BEIE framework and five strategic leverage points.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
+          {/* Primary Action Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <button
               onClick={onStartPlanning}
               className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-cyan-500/40 transition-all hover:-translate-y-1 flex items-center justify-center gap-2"
@@ -220,6 +170,21 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             </button>
           </div>
 
+          {/* Validation Survey CTA */}
+          <div className="mb-20">
+            <a
+              href="/survey-wizard"
+              className="inline-flex w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-emerald-500/40 transition-all hover:-translate-y-1 items-center justify-center gap-3"
+            >
+              <ClipboardCheck className="w-6 h-6" />
+              Take BIRD Validation Survey
+              <ArrowRight className="w-5 h-5" />
+            </a>
+            <p className="text-sm text-slate-500 mt-3">
+              Help shape the future of BARMM investment planning
+            </p>
+          </div>
+
           {/* BIRD Banner — wide full format */}
           <div className="relative max-w-6xl mx-auto mb-16 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl shadow-cyan-900/30">
             <img
@@ -230,6 +195,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
             />
           </div>
+
+          {/* Dashboard Preview Mockup */}
           <div className="relative max-w-5xl mx-auto mt-12 group">
              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl blur opacity-20 group-hover:opacity-30 transition duration-1000"></div>
              <div className="relative bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
@@ -291,6 +258,57 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 </div>
               );
             })}
+          </div>
+        </div>
+
+        {/* C.A.R.E. Framework & Khalifa Stewardship */}
+        <div className="max-w-7xl mx-auto px-6 py-24 border-t border-slate-800">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-widest mb-4">
+              <span>Our Guiding Philosophy</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              The <span className="text-emerald-400">C.A.R.E.</span> Framework & <span className="text-amber-400">Khalifa</span> Stewardship
+            </h2>
+            <p className="text-slate-400 max-w-3xl mx-auto text-lg">
+              Transforming the Bangsamoro requires more than capital; it requires a paradigm rooted in stewardship. 
+              Our approach aligns global best practices with local Islamic values to ensure sustainable, ethical growth.
+            </p>
+          </div>
+
+          {/* The 4 C.A.R.E. Pillars */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {[
+              { letter: "C", title: "Context-Specific", desc: "Grounded in BARMM realities, requiring explicit local partnership and faith-sensitive design.", color: "from-emerald-500 to-teal-600" },
+              { letter: "A", title: "Action-Oriented", desc: "Focused on identified leverage points, binding constraints, and executable interventions.", color: "from-blue-500 to-indigo-600" },
+              { letter: "R", title: "Real-time & Non-linear", desc: "Embracing systems thinking, adaptive management, and dynamic feedback loops.", color: "from-purple-500 to-pink-600" },
+              { letter: "E", title: "Evidence-Based", desc: "Driven by quantitative indicators, PSA data, and international benchmarks (OIC/SMIIC).", color: "from-amber-500 to-orange-600" }
+            ].map((item) => (
+              <div key={item.letter} className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700 hover:border-slate-600 transition-all">
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 text-2xl font-black text-white`}>
+                  {item.letter}
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* The Khalifa Alignment Box */}
+          <div className="max-w-4xl mx-auto p-8 rounded-2xl bg-gradient-to-br from-amber-500/5 to-emerald-500/5 border border-amber-500/20">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-xl bg-amber-500/10 text-amber-400 flex-shrink-0">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+              </div>
+              <div>
+                <h4 className="text-xl font-bold text-amber-400 mb-2">Anchored in <em>Khalifa</em> (Stewardship)</h4>
+                <p className="text-slate-300 leading-relaxed">
+                  The C.A.R.E. framework is deeply aligned with the BARMM concept of <em>Khalifa</em>—the moral obligation of stewardship over resources and communities. 
+                  This requires <strong className="text-white">explicit local partnership</strong>, <strong className="text-white">faith-sensitive program design</strong>, and <strong className="text-white">formal coordination with Bangsamoro institutions</strong>. 
+                  By embedding these principles, we ensure there are no conflicts between moral-governance norms and humanitarian or investment principles, creating a truly sustainable and ethical economic hub.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
