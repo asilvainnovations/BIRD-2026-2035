@@ -35,6 +35,26 @@ const FloatingAIAssistant = lazy(() => import('./strategic/FloatingAIAssistant')
 import { PlanTemplate } from '@/lib/templateData';
 import { Loader2 } from 'lucide-react';
 
+
+// ─── CONTENT RENDERER ─────────────────────────────────────────────────────
+const renderContent = useCallback(() => {
+  const common = { plan: currentPlan, onNavigate: navigateToView };
+  switch (activeView) {
+    case 'validation':
+      return <SurveyWizard />;
+    
+    // ✅ FIXED: Added onAddItem and onRemoveItem props for full CRUD support
+    case 'swot':       
+      return (
+        <SWOTAnalysis 
+          {...common} 
+          onAddItem={addSWOTItem}
+          onUpdateItem={updateSWOTItem} 
+          onRemoveItem={removeSWOTItem}
+          onBulkAdd={bulkAddSWOTItems} 
+        />
+      );
+
 // ─── LOADERS ──────────────────────────────────────────────────────────────────
 
 const GlobalLoader = React.memo(({ message }: { message: string }) => (
