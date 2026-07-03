@@ -14,7 +14,6 @@ import { toast } from "@/components/ui/use-toast";
 import { surveySchema, SurveySchemaType } from "@/lib/survey-schema";
 import { submitSurvey } from "@/lib/api";
 
-// Import all 15 sections
 import { Section1_BEIE } from "./Section1_BEIE";
 import { Section2_MoralGov } from "./Section2_MoralGov";
 import { Section3_Foundations } from "./Section3_Foundations";
@@ -30,54 +29,63 @@ import { Section12_Climate } from "./Section12_Climate";
 import { Section13_Policy } from "./Section13_Policy";
 import { Section14_Demographics } from "./Section14_Demographics";
 import { Section15_Submission } from "./Section15_Submission";
+import { Section16_CARE } from "./Section16_CARE";
 
-const TOTAL_STEPS = 15;
+const TOTAL_STEPS = 16;
+
+const emptyIeds = {
+  economic_impact: 0, feasibility: 0, identity_alignment: 0,
+  systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0,
+};
 
 export function SurveyWizard() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // ✅ Single, clean useForm hook with correctly aligned defaultValues
   const form = useForm<SurveySchemaType>({
     resolver: zodResolver(surveySchema),
     defaultValues: {
-      // Section 1: BEIE Framework (Radio, Radio)
+      // Section 1
       q1_1: "", q1_2: "",
-      // Section 2: Moral Governance (Radio, Radio)
-      q2_1: "", q2_2: "",
-      // Section 3: Foundations (Checkbox[], Radio)
-      q3_1: [], q3_2: "",
-      // Section 4: Transformers (Radio, Radio)
-      q4_1: "", q4_2: "",
-      // Section 5: Enablers (Radio, Checkbox[], Radio) - FIXED
-      q5_1: "", q5_2: [], q5_3: "",
-      // Section 6: Connectors (Radio, Checkbox[], Radio) - FIXED
-      q6_1: "", q6_2: [], q6_3: "",
-      // Section 7: Financiers (Radio, Checkbox[], Radio)
-      q7_1: "", q7_2: [], q7_3: "",
-      // Section 8: Strategic Options (Radio, Radio)
-      q8_1: "", q8_2: "",
-      // Section 9: Budget (Radio)
-      q9_1: "",
-      // Section 10: Targets (Radio) & Matrix
-      q10_1: "",
-      q10_matrix: {
-        heds: { economic_impact: 0, feasibility: 0, identity_alignment: 0, systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0 },
-        gems: { economic_impact: 0, feasibility: 0, identity_alignment: 0, systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0 },
-        ifes: { economic_impact: 0, feasibility: 0, identity_alignment: 0, systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0 },
-        ieds: { economic_impact: 0, feasibility: 0, identity_alignment: 0, systems_leverage: 0, risk_return: 0, inclusivity: 0, sustainability: 0 }
-      },
-      // Section 11: Equity (Radio, Checkbox[])
-      q11_1: "", q11_2: [],
-      // Section 12: Climate (Radio, Checkbox[])
-      q12_1: "", q12_2: [],
-      // Section 13: Policy (Checkbox[], Radio)
-      q13_1: [], q13_2: "",
-      // Section 14: Demographics (Select, Select, Checkbox[])
+      // Section 2
+      q2_1: "", q2_2: "", q2_3_archetype: "", q2_4_peace: [],
+      // Section 3
+      q3_1_priorities: [], q3_2_feasibility: "",
+      q3_el_nino_impact: "", q3_el_nino_like: "",
+      q3_pestalotiopsis_impact: "", q3_pestalotiopsis_like: "",
+      q3_postharvest_impact: "", q3_postharvest_like: "",
+      q3_limits_growth: "",
+      // Section 4
+      q4_1_barrier: "", q4_2_halal_park: "",
+      q4_3_fixes_fail: "", q4_4_commodity_impact: "", q4_5_heds_ranking: [],
+      // Section 5
+      q5_1_infra: "", q5_2_sectors: [], q5_3_broadband: "",
+      q5_4_literacy: "", q5_5_stunting: "", q5_6_digital_divide: "",
+      // Section 6
+      q6_1_bimpeaga: "", q6_2_markets: [], q6_3_export_target: "",
+      q6_4_uae_feasibility: "", q6_5_perception: "",
+      // Section 7
+      q7_1_criticality: "", q7_2_instruments: [], q7_3_inclusion_target: "",
+      q7_4_asset_paradox: "", q7_5_block_grant: "",
+      // Section 8
+      q8_1_strategy: "", q8_2_sequencing: "", q8_3_comments: "",
+      // Section 9-10
+      q9_1_budget: "", q10_1_ambition: "",
+      q10_matrix: { heds: { ...emptyIeds }, gems: { ...emptyIeds }, ifes: { ...emptyIeds }, ieds: { ...emptyIeds } },
+      // Section 11
+      q11_1_affirmative: "", q11_2_mechanisms: [],
+      // Section 12
+      q12_1_green_priority: "", q12_2_adaptation: [],
+      // Section 13
+      q13_1_legislation: [], q13_2_bicc: "",
+      // Section 14
       demo_category: "", demo_province: "", demo_expertise: [],
-      // Section 15: Submission (Checkbox literal true)
-      consent_final: false,
+      demo_name: "", demo_email: "", demo_organization: "",
+      // Section 15
+      consent_final: false as never,
+      // Section 16
+      care_context: "", care_action: "", care_realtime: "", care_evidence: "", care_overall: "",
     },
     mode: "onTouched",
   });
@@ -85,24 +93,19 @@ export function SurveyWizard() {
   const progressPercentage = (currentStep / TOTAL_STEPS) * 100;
 
   const handleNext = async () => {
-    // Validate current step fields before proceeding
     const isValid = await form.trigger();
     if (isValid && currentStep < TOTAL_STEPS) {
       setCurrentStep((prev) => prev + 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (!isValid) {
-      toast({
-        title: "Validation Required",
-        description: "Please complete all required fields before proceeding.",
-        variant: "destructive",
-      });
+      toast({ title: "Validation Required", description: "Please complete all required fields.", variant: "destructive" });
     }
   };
 
   const handleBack = () => {
     if (currentStep > 1) {
       setCurrentStep((prev) => prev - 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -111,17 +114,10 @@ export function SurveyWizard() {
     try {
       await submitSurvey(data);
       setIsSuccess(true);
-      toast({
-        title: "Success!",
-        description: "Your validation has been securely recorded in the BIRD repository.",
-      });
+      toast({ title: "Success!", description: "Your validation has been securely recorded in the BIRD repository." });
     } catch (error) {
       console.error("Submission failed:", error);
-      toast({
-        title: "Submission Failed",
-        description: "There was an error submitting your validation. Please try again.",
-        variant: "destructive",
-      });
+      toast({ title: "Submission Failed", description: "Please try again.", variant: "destructive" });
     } finally {
       setIsSubmitting(false);
     }
@@ -133,98 +129,66 @@ export function SurveyWizard() {
         <CheckCircle2 className="w-20 h-20 text-[#C9A84C] mb-6 animate-pulse" />
         <h2 className="text-3xl font-serif text-[#C9A84C] mb-4">Validation Received</h2>
         <p className="text-[#ecfdf5]/80 text-lg max-w-md mb-6">
-          Thank you for shaping the Emerging Bangsamoro. Your insights have been securely recorded in the BIRD repository.
+          Thank you for shaping the Emerging Bangsamoro through the C.A.R.E. principles of Khalifa stewardship.
         </p>
-        <div className="bg-[#064e3b]/30 border border-[#C9A84C]/30 rounded-lg p-6 max-w-lg">
-          <h3 className="text-[#C9A84C] font-serif text-xl mb-3">🚀 Continue Your Journey</h3>
-          <p className="text-[#ecfdf5]/70 text-sm mb-4">
-            Unlock unlimited access to the BIRD App for advanced strategic planning tools, interactive BEIE visualizations, and real-time monitoring dashboards.
-          </p>
-          <Button
-            onClick={() => window.open("https://strategy-ai-planner-1.deploypad.app/", "_blank")}
-            className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold"
-          >
-            Access BIRD App
-          </Button>
-        </div>
+        <Button onClick={() => window.open("https://strategy-ai-planner-1.deploypad.app/", "_blank")}
+          className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold">
+          Access BIRD App →
+        </Button>
       </div>
     );
   }
 
-  // Render the appropriate section based on current step
   const renderSection = () => {
     switch (currentStep) {
-      case 1: return <Section1_BEIE />;
-      case 2: return <Section2_MoralGov />;
-      case 3: return <Section3_Foundations />;
-      case 4: return <Section4_Transformers />;
-      case 5: return <Section5_Enablers />;
-      case 6: return <Section6_Connectors />;
-      case 7: return <Section7_Financiers />;
-      case 8: return <Section8_StrategicOptions />;
-      case 9: return <Section9_BudgetTargets />;
+      case 1:  return <Section1_BEIE />;
+      case 2:  return <Section2_MoralGov />;
+      case 3:  return <Section3_Foundations />;
+      case 4:  return <Section4_Transformers />;
+      case 5:  return <Section5_Enablers />;
+      case 6:  return <Section6_Connectors />;
+      case 7:  return <Section7_Financiers />;
+      case 8:  return <Section8_StrategicOptions />;
+      case 9:  return <Section9_BudgetTargets />;
       case 10: return <Section10_IEDSMatrix />;
       case 11: return <Section11_Equity />;
       case 12: return <Section12_Climate />;
       case 13: return <Section13_Policy />;
       case 14: return <Section14_Demographics />;
-      case 15: return <Section15_Submission />;
+      case 15: return <Section16_CARE />;  // CARE before final consent
+      case 16: return <Section15_Submission isSubmitting={isSubmitting} isSuccess={false} />;
       default: return <Section1_BEIE />;
     }
   };
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4 md:p-8">
-      {/* Header & Progress */}
       <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-serif text-[#C9A84C] text-center mb-2">
-          BIRD 2026–2035 Validation
-        </h1>
-        <p className="text-[#ecfdf5]/60 text-center mb-6">
-          Step {currentStep} of {TOTAL_STEPS}
-        </p>
+        <h1 className="text-3xl md:text-4xl font-serif text-[#C9A84C] text-center mb-2">BIRD 2026–2035 Validation</h1>
+        <p className="text-[#ecfdf5]/60 text-center mb-6">Step {currentStep} of {TOTAL_STEPS}</p>
         <Progress value={progressPercentage} className="h-2 bg-[#064e3b] [&>div]:bg-[#C9A84C]" />
       </div>
 
-      {/* Form Container */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <Card className="bg-[#022c22]/60 backdrop-blur-xl border-[#C9A84C]/30 shadow-2xl shadow-black/40 overflow-hidden">
+          <Card className="bg-[#022c22]/60 backdrop-blur-xl border-[#C9A84C]/30 shadow-2xl overflow-hidden">
             <CardContent className="p-6 md:p-10">
-              {/* Step Content */}
-              <div className="min-h-[500px]">
-                {renderSection()}
-              </div>
+              <div className="min-h-[500px]">{renderSection()}</div>
             </CardContent>
-
-            {/* Navigation Footer */}
             <div className="bg-[#011a12]/50 border-t border-[#C9A84C]/20 p-4 md:p-6 flex justify-between items-center">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={handleBack}
-                disabled={currentStep === 1}
-                className="border-[#C9A84C]/40 text-[#C9A84C] hover:bg-[#C9A84C]/10 hover:text-[#C9A84C] disabled:opacity-30"
-              >
+              <Button type="button" variant="outline" onClick={handleBack} disabled={currentStep === 1}
+                className="border-[#C9A84C]/40 text-[#C9A84C] hover:bg-[#C9A84C]/10 disabled:opacity-30">
                 <ArrowLeft className="w-4 h-4 mr-2" /> Back
               </Button>
-
               {currentStep < TOTAL_STEPS ? (
-                <Button
-                  type="button"
-                  onClick={handleNext}
-                  className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold shadow-lg shadow-[#C9A84C]/20"
-                >
+                <Button type="button" onClick={handleNext}
+                  className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold shadow-lg shadow-[#C9A84C]/20">
                   Next <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               ) : (
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold shadow-lg shadow-[#C9A84C]/20"
-                >
-                  {isSubmitting ? "Securing Data..." : "Submit Validation"}
-                  <Send className="w-4 h-4 ml-2" />
+                <Button type="submit" disabled={isSubmitting}
+                  className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold shadow-lg shadow-[#C9A84C]/20">
+                  {isSubmitting ? "Securing Data..." : "Submit Validation"} <Send className="w-4 h-4 ml-2" />
                 </Button>
               )}
             </div>
