@@ -18,7 +18,7 @@ const SettingsPage     = lazy(() => import('./settings/SettingsPage'));
 // ─── HERO loads immediately (it's the first thing users see)
 const HeroSection = lazy(() => import('./strategic/HeroSection'));
 
-const ValidationSurvey = lazy(() => import('./strategic/ValidationSurvey')); 
+const SurveyWizard = lazy(() => import('./strategic/SurveyWizard')); 
 // ─── Content views — each chunk is a separate JS bundle loaded on demand
 const MELDashboard     = lazy(() => import('./strategic/MELDashboard'));
 const SWOTAnalysis     = lazy(() => import('./strategic/SWOTAnalysis'));
@@ -65,7 +65,7 @@ const VIEW_TO_PATH: Record<string, string> = {
   team:      '/team-collaboration',
   settings:  '/settings',
   export:    '/export-plan',
-  validation: '/validation-survey', // <--- ADD THIS LINE
+  validation: '/survey-wizard', // <--- ADD THIS LINE
 };
 
 const PATH_TO_VIEW: Record<string, string> = Object.fromEntries(
