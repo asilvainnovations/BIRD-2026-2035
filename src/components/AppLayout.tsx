@@ -13,7 +13,6 @@ import HeroSection from './strategic/HeroSection';
 // ─── LAZY LOADED COMPONENTS ───────────────────────────────────────────────────
 // Sidebar & Topbar load first (shell), content components load after
 const Sidebar = lazy(() => import('./strategic/Sidebar'));
-const Validation = lazy() => import('./strategic/SurveyWizard'))
 const Topbar  = lazy(() => import('./strategic/Topbar'));
 const AuthModal        = lazy(() => import('./auth/AuthModal'));
 const UserProfileModal = lazy(() => import('./auth/UserProfileModal'));
