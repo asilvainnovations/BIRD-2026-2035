@@ -24,7 +24,7 @@ export function Section3_Foundations() {
       {/* Question 3.1 (Checkboxes) */}
       <FormField
         control={form.control}
-        name="q3_1"
+        name="q3_1_priorities"
         render={() => (
           <FormItem className="space-y-4">
             <FormLabel className="text-[#ecfdf5] text-lg font-semibold">
@@ -42,7 +42,7 @@ export function Section3_Foundations() {
                 <FormField
                   key={item.id}
                   control={form.control}
-                  name="q3_1"
+                  name="q3_1_priorities"
                   render={({ field }) => {
                     return (
                       <FormItem
@@ -82,7 +82,7 @@ export function Section3_Foundations() {
       {/* Question 3.2 */}
       <FormField
         control={form.control}
-        name="q3_2"
+        name="q3_2_feasibility"
         render={({ field }) => (
           <FormItem className="space-y-4">
             <FormLabel className="text-[#ecfdf5] text-lg font-semibold">
@@ -95,19 +95,19 @@ export function Section3_Foundations() {
                 className="flex flex-col gap-3"
               >
                 {[
-                  "Highly Feasible with current programs",
-                  "Feasible with increased investment",
-                  "Challenging but achievable",
-                  "Unrealistic given infrastructure gaps"
+                  { value: "5", label: "Highly Feasible with current programs" },
+                  { value: "4", label: "Feasible with increased investment" },
+                  { value: "3", label: "Challenging but achievable" },
+                  { value: "1", label: "Unrealistic given infrastructure gaps" }
                 ].map((option) => (
                   <div
-                    key={option}
+                    key={option.value}
                     className={`flex items-center space-x-3 p-4 rounded-lg border transition-all cursor-pointer
-                      ${field.value === option ? "border-[#C9A84C] bg-[#C9A84C]/10" : "border-[#C9A84C]/20 bg-[#011a12]/40 hover:border-[#C9A84C]/50"}`}
+                      ${field.value === option.value ? "border-[#C9A84C] bg-[#C9A84C]/10" : "border-[#C9A84C]/20 bg-[#011a12]/40 hover:border-[#C9A84C]/50"}`}
                   >
-                    <RadioGroupItem value={option} id={`q3_2-${option}`} className="text-[#C9A84C] border-[#C9A84C]/50" />
-                    <FormLabel htmlFor={`q3_2-${option}`} className="flex-1 cursor-pointer text-[#ecfdf5]/90 font-normal">
-                      {option}
+                    <RadioGroupItem value={option.value} id={`q3_2-${option.value}`} className="text-[#C9A84C] border-[#C9A84C]/50" />
+                    <FormLabel htmlFor={`q3_2-${option.value}`} className="flex-1 cursor-pointer text-[#ecfdf5]/90 font-normal">
+                      {option.label}
                     </FormLabel>
                   </div>
                 ))}

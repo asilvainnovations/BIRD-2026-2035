@@ -1,25 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {
-  X,
-  ChevronLeft,
-  ChevronRight,
-  Sparkles,
-  LayoutDashboard,
-  Layers,
-  GitBranch,
-  Target,
-  BarChart3,
-  FolderKanban,
-  FileText,
-  Users,
-  BookOpen,
-  Settings,
-  Check,
-  Lightbulb,
-  ArrowRight,
-  ExternalLink,
-} from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Sparkles, LayoutDashboard, Layers, GitBranch, Target, ChartBar as BarChart3, FolderKanban, FileText, Users, BookOpen, Settings, Check, Lightbulb, ArrowRight, ExternalLink } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { toast } from '@/hooks/use-toast';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -274,6 +258,7 @@ const NavigationTutorial: React.FC<NavigationTutorialProps> = ({
   const [step, setStep] = useState(0);
   const [animDir, setAnimDir] = useState<'next' | 'prev'>('next');
   const [isAnimating, setIsAnimating] = useState(false);
+  const isMobile = useIsMobile();
 
   // Reset to first step whenever the modal opens
   useEffect(() => {
@@ -325,6 +310,10 @@ const NavigationTutorial: React.FC<NavigationTutorialProps> = ({
     const current = TUTORIAL_STEPS[step];
     if (current.viewId && onNavigate) {
       onNavigate(current.viewId);
+      toast({
+        title: `Navigated to ${current.title}`,
+        description: current.highlight,
+      });
       onComplete?.();
       onClose();
     }
@@ -342,6 +331,7 @@ const NavigationTutorial: React.FC<NavigationTutorialProps> = ({
   const progress = ((step) / (totalSteps - 1)) * 100;
 
   return (
+    <TooltipProvider delayDuration={isMobile ? 0 : 300}>
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4"
       style={{ background: 'rgba(5, 14, 31, 0.80)', backdropFilter: 'blur(6px)' }}
@@ -533,41 +523,58 @@ const NavigationTutorial: React.FC<NavigationTutorialProps> = ({
             <div className="flex items-center gap-2">
               {/* "Go to module" — only shown for non-welcome, non-last steps when onNavigate is provided */}
               {current.viewId && onNavigate && !isLast && (
-                <button
-                  onClick={handleNavigate}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-white/70 hover:text-white transition-all"
-                  style={{
-                    background: `${current.accentFrom}18`,
-                    border: `1px solid ${current.accentFrom}33`,
-                  }}
-                  title={`Open ${current.title}`}
-                >
-                  <ExternalLink className="w-3 h-3" />
-                  Open
-                </button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button
+                      onClick={handleNavigate}
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-white/70 hover:text-white transition-all"
+                      style={{
+                        background: `${current.accentFrom}18`,
+                        border: `1px solid ${current.accentFrom}33`,
+                      }}
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                      Open
+                    </button>
+                  </TooltipTrigger>
+                  {!isMobile && (
+                    <TooltipContent side="top" className="bg-popover border-border">
+                      <p>Navigate to {current.title} in sidebar</p>
+                    </TooltipContent>
+                  )}
+                </Tooltip>
               )}
 
               {/* Next / Get Started / Open Module */}
-              <button
-                onClick={isLast && current.viewId && onNavigate ? handleNavigate : goNext}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white transition-all hover:scale-105 hover:shadow-lg"
-                style={{
-                  background: `linear-gradient(135deg, ${current.accentFrom}, ${current.accentTo})`,
-                  boxShadow: `0 4px 16px ${current.accentFrom}44`,
-                }}
-              >
-                {isLast ? (
-                  <>
-                    <Sparkles className="w-3.5 h-3.5" />
-                    {current.viewId && onNavigate ? `Open ${current.title}` : 'Get Started'}
-                  </>
-                ) : (
-                  <>
-                    Next
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    onClick={isLast && current.viewId && onNavigate ? handleNavigate : goNext}
+                    className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white transition-all hover:scale-105 hover:shadow-lg"
+                    style={{
+                      background: `linear-gradient(135deg, ${current.accentFrom}, ${current.accentTo})`,
+                      boxShadow: `0 4px 16px ${current.accentFrom}44`,
+                    }}
+                  >
+                    {isLast ? (
+                      <>
+                        <Sparkles className="w-3.5 h-3.5" />
+                        {current.viewId && onNavigate ? `Open ${current.title}` : 'Get Started'}
+                      </>
+                    ) : (
+                      <>
+                        Next
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      </>
+                    )}
+                  </button>
+                </TooltipTrigger>
+                {!isMobile && (
+                  <TooltipContent side="top" className="bg-popover border-border">
+                    <p>{isLast ? 'Complete the tour' : 'Go to next step'}</p>
+                  </TooltipContent>
                 )}
-              </button>
+              </Tooltip>
             </div>
           </div>
         </div>
@@ -600,6 +607,7 @@ const NavigationTutorial: React.FC<NavigationTutorialProps> = ({
         }
       `}</style>
     </div>
+    </TooltipProvider>
   );
 };
 

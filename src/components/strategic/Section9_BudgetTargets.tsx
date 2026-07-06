@@ -29,7 +29,7 @@ export function Section9_BudgetTargets() {
         {/* Q9.1: Budget Realism */}
         <FormField
           control={form.control}
-          name="q9_1"
+          name="q9_1_budget"
           render={({ field }) => (
             <FormItem className="space-y-3">
               <FormLabel className="text-base font-semibold">9.1 Is the estimated ₱120-160B total investment requirement realistic for achieving the 2035 targets?</FormLabel>
@@ -58,7 +58,7 @@ export function Section9_BudgetTargets() {
         {/* Q10.1: Target Ambition */}
         <FormField
           control={form.control}
-          name="q10_1"
+          name="q10_1_ambition"
           render={({ field }) => (
             <FormItem className="space-y-3">
               <FormLabel className="text-base font-semibold">10.1 How would you characterize the overall ambition level of the 2035 macroeconomic targets?</FormLabel>

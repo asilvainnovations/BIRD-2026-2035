@@ -32,7 +32,6 @@ const AppLoadingFallback = React.memo(() => (
 ));
 
 // ─── Error Boundary for Better Error Handling ────────────────────────────────
-<p className="text-slate-400">Sentry Error Tracking Initialized</p>
 class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
   constructor(props: { children: React.ReactNode }) {
     super(props);

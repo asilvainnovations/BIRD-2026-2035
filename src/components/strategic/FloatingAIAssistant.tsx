@@ -1,10 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
 import { AIStrategistAvatar } from '@/components/branding/Logo';
-import {
-  Sparkles, X, Send, Loader2, ChevronDown, ChevronUp,
-  Brain, Target, BarChart3, Globe2, Leaf, Landmark,
-} from 'lucide-react';
+import { Sparkles, X, Send, Loader as Loader2, ChevronDown, ChevronUp, Brain, Target, ChartBar as BarChart3, Globe as Globe2, Leaf, Landmark } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -160,8 +157,17 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
           }
         : undefined;
 
-      const { data, error } = await supabase.functions.invoke('ai-strategy-assistant', {
-        body: {
+      // Direct fetch to the AI edge function on the correct Supabase project
+      const AI_ASSISTANT_URL = 'https://rgvteytgkugdqdodedxq.databasepad.com/functions/v1/ai-strategy-assistant';
+      const { data: { session } } = await supabase.auth.getSession();
+
+      const response = await fetch(AI_ASSISTANT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session?.access_token || ''}`,
+        },
+        body: JSON.stringify({
           action: 'chat',
           systemContext: BIRD_SYSTEM_CONTEXT,
           data: {
@@ -174,10 +180,14 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
             },
           },
           plan: planContext,
-        },
+        }),
       });
 
-      if (error) throw error;
+      if (!response.ok) {
+        throw new Error(`AI service error: ${response.status}`);
+      }
+
+      const data = await response.json();
 
       const reply =
         data?.data?.reply ||
@@ -214,7 +224,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
       {!open && (
         <button
           onClick={() => { setOpen(true); setMin(false); }}
-          aria-label="Open BIRD AI Strategy Assistant"
+          aria-label="Open AI Strategy Assistant"
           className={cn(
             'fixed bottom-5 right-5 z-50 flex items-center gap-2.5 rounded-full px-5 py-3',
             'bg-gradient-to-r from-fuchsia-600 via-violet-600 to-cyan-500 text-white',

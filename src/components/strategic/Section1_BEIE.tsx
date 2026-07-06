@@ -50,15 +50,15 @@ export function Section1_BEIE() {
                 defaultValue={field.value}
                 className="grid grid-cols-1 md:grid-cols-2 gap-3"
               >
-                {["Very Well", "Well", "Moderately", "Slightly", "Not at All"].map((option) => (
+                {[{ value: "5", label: "Very Well" }, { value: "4", label: "Well" }, { value: "3", label: "Moderately" }, { value: "2", label: "Slightly" }, { value: "1", label: "Not at All" }].map((option) => (
                   <div
-                    key={option}
+                    key={option.value}
                     className={`flex items-center space-x-3 p-4 rounded-lg border transition-all cursor-pointer
-                      ${field.value === option ? "border-[#C9A84C] bg-[#C9A84C]/10" : "border-[#C9A84C]/20 bg-[#011a12]/40 hover:border-[#C9A84C]/50"}`}
+                      ${field.value === option.value ? "border-[#C9A84C] bg-[#C9A84C]/10" : "border-[#C9A84C]/20 bg-[#011a12]/40 hover:border-[#C9A84C]/50"}`}
                   >
-                    <RadioGroupItem value={option} id={`q1_1-${option}`} className="text-[#C9A84C] border-[#C9A84C]/50" />
-                    <FormLabel htmlFor={`q1_1-${option}`} className="flex-1 cursor-pointer text-[#ecfdf5]/90 font-normal">
-                      {option}
+                    <RadioGroupItem value={option.value} id={`q1_1-${option.value}`} className="text-[#C9A84C] border-[#C9A84C]/50" />
+                    <FormLabel htmlFor={`q1_1-${option.value}`} className="flex-1 cursor-pointer text-[#ecfdf5]/90 font-normal">
+                      {option.label}
                     </FormLabel>
                   </div>
                 ))}
@@ -84,15 +84,15 @@ export function Section1_BEIE() {
                 defaultValue={field.value}
                 className="grid grid-cols-1 md:grid-cols-2 gap-3"
               >
-                {["Highly Relevant", "Relevant", "Moderately Relevant", "Slightly Relevant", "Not Relevant"].map((option) => (
+                {[{ value: "5", label: "Highly Relevant" }, { value: "4", label: "Relevant" }, { value: "3", label: "Moderately Relevant" }, { value: "2", label: "Slightly Relevant" }, { value: "1", label: "Not Relevant" }].map((option) => (
                   <div
-                    key={option}
+                    key={option.value}
                     className={`flex items-center space-x-3 p-4 rounded-lg border transition-all cursor-pointer
-                      ${field.value === option ? "border-[#C9A84C] bg-[#C9A84C]/10" : "border-[#C9A84C]/20 bg-[#011a12]/40 hover:border-[#C9A84C]/50"}`}
+                      ${field.value === option.value ? "border-[#C9A84C] bg-[#C9A84C]/10" : "border-[#C9A84C]/20 bg-[#011a12]/40 hover:border-[#C9A84C]/50"}`}
                   >
-                    <RadioGroupItem value={option} id={`q1_2-${option}`} className="text-[#C9A84C] border-[#C9A84C]/50" />
-                    <FormLabel htmlFor={`q1_2-${option}`} className="flex-1 cursor-pointer text-[#ecfdf5]/90 font-normal">
-                      {option}
+                    <RadioGroupItem value={option.value} id={`q1_2-${option.value}`} className="text-[#C9A84C] border-[#C9A84C]/50" />
+                    <FormLabel htmlFor={`q1_2-${option.value}`} className="flex-1 cursor-pointer text-[#ecfdf5]/90 font-normal">
+                      {option.label}
                     </FormLabel>
                   </div>
                 ))}
