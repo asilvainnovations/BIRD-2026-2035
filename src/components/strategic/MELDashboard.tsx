@@ -4,7 +4,7 @@ import { TrendingUp, TriangleAlert as AlertTriangle, CircleCheck as CheckCircle2
 import { StrategicPlan } from '@/lib/strategicPlanStore';
 import { EDGE_FUNCTIONS, BRAND_ASSETS } from '@/lib/supabase';
 
-// ─── Import HeroSection from external file ────────────────────────────────────
+// ─── Import HeroSection from components ────────────────────────────────────
 import HeroSection from './HeroSection';
 
 // ─── Asset constants (env-var backed) ────────────────────────────────────────
