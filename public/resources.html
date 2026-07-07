@@ -1,768 +1,882 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Workshop Resources — The Emerging Bangsamoro: Architecting a Hub for Resilient and Ethical Growth. Session guides, facilitation tools, Strat Planner Pro, and Systems Strat Pro.">
-  <title>Workshop Resources | The Emerging Bangsamoro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <base target="_blank">
-  
-  <style>
-    /* ===== DESIGN TOKENS ===== */
-    :root {
-      --dark-green: #022c22;
-      --primary-green: #064e3b;
-      --mid-green: #065f46;
-      --light-green: #6ee7b7;
-      --cream: #ecfdf5;
-      
-      --text-dark: #0f172a;
-      --text-muted: #64748b;
-      
-      --gold: #C9A84C;
-      --gold-light: #E8C560;
-      --gold-dark: #8B6C28;
-      --gold-pale: #fdf6e3;
-      --gold-border: rgba(201, 168, 76, 0.32);
-      --gold-border-strong: rgba(201, 168, 76, 0.55);
-      --gold-grad: linear-gradient(135deg, #7a5c1e 0%, #c9a84c 35%, #e8c560 50%, #c9a84c 65%, #7a5c1e 100%);
-      
-      --ssp-navy: #0f2044;
-      --ssp-accent: #3b82f6;
-      --ssp-grad: linear-gradient(135deg, #1e3a5f, #0c2240);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#022c22">
+<meta name="description" content="BIRD 2026-2035 Resource Library - Provincial Economic Outlooks, Strategic Frameworks, Digital Tools, and Stakeholder Engagement Resources">
+<meta name="keywords" content="BIRD 2026-2035 resources, BARMM investment outlooks, Lanao del Sur, Maguindanao del Norte, Maguindanao del Sur, Tawi-Tawi, Basilan, SGA, BEIE framework, strategic planning, validation survey">
+<title>BIRD 2026-2035 Resource Library | The Emerging Bangsamoro</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+--primary-green:#064e3b;--dark-green:#022c22;--mid-green:#065f46;
+--light-green:#6ee7b7;--cream:#ecfdf5;--text-dark:#0f172a;--text-muted:#64748b;
+--gold:#C9A84C;--gold-light:#E8C560;--gold-dark:#8B6C28;--gold-pale:#fdf6e3;
+--gold-border:rgba(201,168,76,0.35);
+--gold-grad:linear-gradient(135deg,#7a5c1e 0%,#c9a84c 35%,#e8c560 50%,#c9a84c 65%,#7a5c1e 100%);
+--sp-1:.25rem;--sp-2:.5rem;--sp-3:.75rem;--sp-4:1rem;--sp-6:1.5rem;--sp-8:2rem;--sp-12:3rem;--sp-16:4rem;
+--touch-min:44px;
+--r-sm:.5rem;--r-md:1rem;--r-lg:1.25rem;--r-xl:1.5rem;
+--r-full:9999px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+body{font-family:'DM Sans',sans-serif;line-height:1.7;color:var(--text-dark);background:var(--cream);overflow-x:hidden;font-size:1rem;}
+img{max-width:100%;height:auto;display:block;}
+a{color:inherit;text-decoration:none;}
+button{cursor:pointer;font-family:inherit;}
+.skip-link{position:absolute;top:-100%;left:var(--sp-4);z-index:9999;background:var(--gold);color:var(--dark-green);padding:.6rem 1.2rem;border-radius:0 0 var(--r-sm) var(--r-sm);font-weight:700;font-size:.9rem;text-decoration:none;transition:top .2s;}
+.skip-link:focus{top:0;}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+button:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
 
-    /* ===== RESET & BASE ===== */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+/* Navigation */
+nav{background:rgba(2,44,34,.98);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);position:fixed;width:100%;z-index:1000;border-bottom:2px solid var(--gold-border);transition:all .4s ease;}
+nav.scrolled{background:rgba(2,44,34,.99);box-shadow:0 4px 30px rgba(0,0,0,.4);}
+.nav-container{max-width:1400px;margin:0 auto;padding:.6rem var(--sp-4);display:flex;align-items:center;gap:var(--sp-3);}
+.nav-logo-wrap{display:flex;align-items:center;gap:var(--sp-3);min-height:var(--touch-min);flex-shrink:0;}
+.nav-logo-wrap img{height:44px;width:auto;object-fit:contain;}
+.nav-site-name{display:none;font-family:'Cinzel',serif;font-size:.72rem;color:var(--gold);font-weight:700;letter-spacing:.06em;line-height:1.3;}
+.nav-links{list-style:none;display:none;flex-direction:column;gap:var(--sp-2);margin-left:auto;}
+.nav-links a{color:var(--light-green);font-weight:500;font-size:.9rem;padding:.4rem .7rem;border-radius:.35rem;transition:all .2s;}
+.nav-links a:hover,.nav-links a:focus-visible{background:rgba(201,168,76,.07);color:var(--gold);}
+.nav-links a.active{color:var(--gold);background:rgba(201,168,76,.1);}
+.nav-hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:var(--touch-min);height:var(--touch-min);background:none;border:1px solid var(--gold-border);border-radius:var(--r-sm);padding:.55rem;flex-shrink:0;transition:all .3s;margin-left:auto;}
+.nav-hamburger:hover,.nav-hamburger:focus-visible{border-color:var(--gold);background:rgba(201,168,76,.08);}
+.hamburger-line{width:100%;height:2px;background:var(--light-green);border-radius:2px;transition:all .3s;}
+.nav-hamburger.open .hamburger-line:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-hamburger.open .hamburger-line:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.open .hamburger-line:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media(min-width:900px){
+.nav-site-name{display:block;}
+.nav-hamburger{display:none;}
+.nav-links{display:flex;flex-direction:row;gap:var(--sp-2);}
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+/* Hero */
+.hero{background:linear-gradient(135deg,var(--dark-green) 0%,var(--primary-green) 50%,var(--mid-green) 100%);color:white;padding:var(--sp-16) var(--sp-4) var(--sp-12);text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:-30%;left:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(110,231,183,.05) 0%,transparent 70%);pointer-events:none;}
+.hero-content{max-width:900px;margin:0 auto;position:relative;z-index:1;}
+.hero-badge{display:inline-block;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gold-light);padding:.4rem 1.2rem;border-radius:2rem;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:var(--sp-6);}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,5vw,3.5rem);font-weight:900;line-height:1.15;margin-bottom:var(--sp-4);}
+.hero h1 .gold{background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{font-size:clamp(.95rem,2vw,1.15rem);color:rgba(255,255,255,.8);max-width:700px;margin:0 auto var(--sp-8);line-height:1.7;}
+.hero-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-3);max-width:800px;margin:0 auto;}
+.stat-card{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid var(--gold-border);border-radius:var(--r-md);padding:var(--sp-4);text-align:center;transition:transform .3s,border-color .3s;}
+.stat-card:hover{transform:translateY(-4px);border-color:var(--gold);}
+.stat-num{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;color:var(--gold);display:block;line-height:1.1;margin-bottom:.3rem;}
+.stat-lbl{color:var(--light-green);font-size:.75rem;font-weight:500;line-height:1.3;}
+@media(min-width:640px){.hero-stats{grid-template-columns:repeat(4,1fr);}}
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--cream);
-      color: var(--text-dark);
-      overflow-x: hidden;
-      line-height: 1.7;
-    }
+/* Section Navigation */
+.section-nav{background:white;border-bottom:1px solid rgba(6,78,59,.1);padding:var(--sp-4) 0;position:sticky;top:70px;z-index:99;box-shadow:0 2px 10px rgba(0,0,0,.05);}
+.section-nav-inner{max-width:1400px;margin:0 auto;padding:0 var(--sp-4);display:flex;flex-wrap:wrap;justify-content:center;gap:var(--sp-2);}
+.section-nav-btn{background:rgba(6,78,59,.05);color:var(--text-muted);border:1px solid rgba(6,78,59,.15);border-radius:var(--r-full);padding:var(--sp-2) var(--sp-4);font-size:.85rem;font-weight:500;transition:all .3s;white-space:nowrap;}
+.section-nav-btn:hover,.section-nav-btn:focus-visible{background:var(--primary-green);color:white;border-color:var(--gold);}
 
-    /* ===== NAVIGATION ===== */
-    nav {
-      background: rgba(2, 44, 34, 0.97);
-      backdrop-filter: blur(16px);
-      position: sticky;
-      top: 0;
-      z-index: 200;
-      border-bottom: 2px solid var(--gold-border);
-    }
+/* Main Container */
+.container{max-width:1400px;margin:0 auto;padding:var(--sp-12) var(--sp-4);}
 
-    .nav-inner {
-      max-width: 1340px;
-      margin: 0 auto;
-      padding: 0.5rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-    }
+/* Resource Sections */
+.resource-section{margin-bottom:var(--sp-16);}
+.section-header{text-align:center;margin-bottom:var(--sp-8);}
+.section-label{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:.6rem;}
+.section-header h2{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2.2rem);color:var(--primary-green);margin-bottom:.7rem;line-height:1.25;}
+.section-divider{width:60px;height:4px;background:var(--gold-grad);border-radius:2px;margin:.8rem auto var(--sp-4);}
+.section-header p{color:var(--text-muted);font-size:.95rem;max-width:700px;margin:0 auto;line-height:1.65;}
 
-    .nav-logo {
-      font-family: 'Cinzel', serif;
-      color: var(--gold);
-      font-weight: 900;
-      text-decoration: none;
-      font-size: 1.2rem;
-    }
+/* Resource Grid */
+.resource-grid{display:grid;grid-template-columns:1fr;gap:var(--sp-6);}
+@media(min-width:640px){.resource-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1024px){.resource-grid{grid-template-columns:repeat(3,1fr);}}
 
-    .nav-links {
-      display: flex;
-      gap: 1.3rem;
-      list-style: none;
-      align-items: center;
-    }
+/* Resource Card */
+.resource-card{background:white;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 4px 20px rgba(6,78,59,.08);border:1px solid rgba(6,78,59,.1);transition:transform .3s,box-shadow .3s,border-color .3s;display:flex;flex-direction:column;}
+.resource-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(6,78,59,.15);border-color:var(--gold-border);}
+.resource-card-header{background:linear-gradient(135deg,var(--dark-green) 0%,var(--primary-green) 100%);padding:var(--sp-6);color:white;position:relative;overflow:hidden;}
+.resource-card-header::before{content:'';position:absolute;top:-50%;right:-20%;width:200px;height:200px;background:radial-gradient(circle,rgba(201,168,76,.1) 0%,transparent 70%);pointer-events:none;}
+.resource-icon{width:48px;height:48px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:var(--sp-3);flex-shrink:0;}
+.resource-card-header h3{font-family:'Cinzel',serif;font-size:1.05rem;font-weight:700;line-height:1.3;margin-bottom:.4rem;}
+.resource-card-header p{font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.5;}
+.resource-card-body{padding:var(--sp-6);flex:1;display:flex;flex-direction:column;}
+.resource-card-body p{font-size:.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:var(--sp-4);flex:1;}
+.resource-links{display:flex;flex-direction:column;gap:var(--sp-2);}
+.resource-link{display:flex;align-items:center;gap:var(--sp-2);padding:.6rem .8rem;background:rgba(6,78,59,.03);border:1px solid rgba(6,78,59,.1);border-radius:var(--r-sm);font-size:.82rem;font-weight:500;color:var(--primary-green);transition:all .2s;}
+.resource-link:hover,.resource-link:focus-visible{background:rgba(201,168,76,.08);border-color:var(--gold-border);color:var(--gold-dark);}
+.resource-link svg{width:16px;height:16px;flex-shrink:0;}
+.resource-link.youtube{background:rgba(239,68,68,.05);border-color:rgba(239,68,68,.2);color:#dc2626;}
+.resource-link.youtube:hover{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.4);}
 
-    .nav-links a {
-      color: var(--light-green);
-      text-decoration: none;
-      font-size: 0.79rem;
-      font-weight: 500;
-      letter-spacing: 0.03em;
-      transition: color 0.3s;
-      position: relative;
-    }
+/* Featured Card */
+.resource-card.featured{grid-column:1/-1;}
+@media(min-width:1024px){.resource-card.featured{grid-column:span 2;}}
+.resource-card.featured .resource-card-header{background:linear-gradient(135deg,var(--gold-dark) 0%,var(--gold) 50%,var(--gold-light) 100%);color:var(--dark-green);}
+.resource-card.featured .resource-card-header h3{font-size:1.3rem;}
+.resource-card.featured .resource-card-header p{color:rgba(15,23,42,.7);}
+.resource-card.featured .resource-icon{background:rgba(2,44,34,.15);border-color:rgba(2,44,34,.3);color:var(--dark-green);}
 
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--gold);
-      transition: width 0.3s;
-    }
+/* Video Card */
+.resource-card.video .resource-card-header{background:linear-gradient(135deg,#7f1d1d 0%,#dc2626 100%);}
+.resource-card.video .resource-icon{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);}
 
-    .nav-links a:hover {
-      color: var(--gold);
-    }
+/* Provincial Grid */
+.provincial-grid{display:grid;grid-template-columns:1fr;gap:var(--sp-4);}
+@media(min-width:640px){.provincial-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1024px){.provincial-grid{grid-template-columns:repeat(3,1fr);}}
 
-    .nav-links a:hover::after {
-      width: 100%;
-    }
+.provincial-card{background:white;border-radius:var(--r-md);overflow:hidden;box-shadow:0 4px 15px rgba(6,78,59,.08);border:1px solid rgba(6,78,59,.1);transition:all .3s;display:flex;flex-direction:column;}
+.provincial-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(6,78,59,.15);border-color:var(--gold-border);}
+.provincial-card-header{background:linear-gradient(135deg,var(--primary-green) 0%,var(--mid-green) 100%);padding:var(--sp-4);color:white;text-align:center;}
+.provincial-card-header h4{font-family:'Cinzel',serif;font-size:.95rem;font-weight:700;margin-bottom:.3rem;}
+.provincial-card-header p{font-size:.72rem;color:rgba(255,255,255,.7);}
+.provincial-card-body{padding:var(--sp-4);flex:1;display:flex;flex-direction:column;gap:var(--sp-2);}
+.provincial-stat{display:flex;justify-content:space-between;align-items:center;padding:.4rem 0;border-bottom:1px solid rgba(6,78,59,.05);font-size:.78rem;}
+.provincial-stat:last-child{border-bottom:none;}
+.provincial-stat-label{color:var(--text-muted);font-weight:500;}
+.provincial-stat-value{color:var(--primary-green);font-weight:700;font-family:'Cinzel',serif;}
+.provincial-card-footer{padding:var(--sp-3) var(--sp-4) var(--sp-4);}
+.provincial-link{display:flex;align-items:center;justify-content:center;gap:var(--sp-2);padding:.7rem;background:var(--gold-grad);color:var(--dark-green);border-radius:var(--r-sm);font-size:.82rem;font-weight:700;transition:all .3s;}
+.provincial-link:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,.3);}
 
-    .nav-cta {
-      background: var(--gold-grad);
-      color: var(--dark-green) !important;
-      padding: 0.5rem 1.1rem;
-      border-radius: 0.4rem;
-      font-weight: 700 !important;
-      font-size: 0.77rem !important;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
+/* Footer */
+footer{background:var(--dark-green);color:white;padding:var(--sp-8) var(--sp-4) var(--sp-6);border-top:3px solid var(--gold-border);}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-logo img{height:42px;width:auto;object-fit:contain;margin-bottom:var(--sp-4);}
+.footer-bottom{text-align:center;padding-top:var(--sp-4);border-top:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.38);font-size:.78rem;line-height:1.7;}
+.footer-bottom span{color:var(--gold);}
 
-    /* ===== HERO SECTION ===== */
-    .hero {
-      background: linear-gradient(rgba(2, 44, 34, 0.85), rgba(10, 22, 40, 0.9)), 
-                  url('https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/pending-tasks/public/Investment%20ecosystem.png');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: white;
-      padding: 8rem 2rem 7rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-inner {
-      max-width: 860px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero h1 {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.8rem, 4vw, 3.2rem);
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 0.75rem;
-      background: var(--gold-grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-sub {
-      font-size: 1.1rem;
-      color: rgba(255, 255, 255, 0.75);
-      max-width: 640px;
-      margin: 0 auto 2.5rem;
-    }
-
-    .hero-eyebrow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 0.8rem;
-      color: var(--gold);
-      margin-bottom: 1rem;
-    }
-
-    .hero-eyebrow svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .hero-theme {
-      display: inline-block;
-      padding: 0.4rem 1rem;
-      border: 1px solid var(--gold-border);
-      border-radius: 2rem;
-      font-size: 0.75rem;
-      color: var(--gold-light);
-    }
-
-    /* ===== MAIN CONTENT & GRIDS ===== */
-    .page {
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-    }
-
-    .sec-header {
-      text-align: center;
-      margin-bottom: 3.5rem;
-    }
-
-    .sec-header h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 2.2rem;
-      color: var(--primary-green);
-      margin-bottom: 1rem;
-    }
-
-    .sec-header p {
-      max-width: 700px;
-      margin: 0 auto;
-      color: var(--text-muted);
-      font-size: 1rem;
-    }
-
-    .gold-div {
-      width: 60px;
-      height: 4px;
-      background: var(--gold-grad);
-      margin: 1rem auto 1.5rem;
-      border-radius: 2px;
-    }
-
-    .resources-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 2rem;
-      margin-bottom: 5rem;
-    }
-
-    /* ===== RESOURCE CARDS ===== */
-    .res-card {
-      background: white;
-      border-radius: 1rem;
-      border: 1px solid rgba(6, 78, 59, 0.1);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      overflow: hidden;
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .res-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    }
-
-    .res-card-img {
-      height: 180px;
-      background: var(--dark-green);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold);
-      position: relative;
-    }
-
-    .res-card-img svg {
-      width: 50px;
-      height: 50px;
-    }
-
-    .res-tag {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(4px);
-      padding: 0.3rem 0.8rem;
-      border-radius: 2rem;
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      color: white;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .res-content {
-      padding: 1.5rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .res-content h3 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.1rem;
-      margin-bottom: 0.75rem;
-      color: var(--primary-green);
-    }
-
-    .res-content p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-    }
-
-    .res-btn {
-      margin-top: auto;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.8rem;
-      border-radius: 0.5rem;
-      background: var(--primary-green);
-      color: white;
-      font-weight: 700;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      transition: background 0.2s;
-    }
-
-    .res-btn:hover {
-      background: var(--mid-green);
-    }
-
-    .res-btn.outline {
-      background: transparent;
-      border: 2px solid var(--primary-green);
-      color: var(--primary-green);
-    }
-
-    .res-btn.outline:hover {
-      background: var(--primary-green);
-      color: white;
-    }
-
-    .btn-group {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: auto;
-    }
-
-    .btn-group .res-btn {
-      flex: 1;
-    }
-
-    /* ===== CTA SECTION ===== */
-    .bird-section {
-      background: linear-gradient(135deg, var(--dark-green), var(--primary-green));
-      border-radius: 2rem;
-      padding: 4rem;
-      color: white;
-      margin-top: 4rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .bird-content h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: var(--gold);
-    }
-
-    .bird-content p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-    }
-
-    .bird-cta {
-      display: inline-block;
-      padding: 1rem 2.5rem;
-      background: var(--gold-grad);
-      color: var(--dark-green);
-      text-decoration: none;
-      font-weight: 900;
-      border-radius: 0.5rem;
-      text-transform: uppercase;
-      transition: transform 0.2s;
-    }
-
-    .bird-cta:hover {
-      transform: scale(1.05);
-    }
-
-    .sec-eyebrow {
-      color: var(--gold-light);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 0.8rem;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-
-    .bird-preview {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 2rem;
-      border-radius: 1rem;
-      border: 1px solid var(--gold-border);
-    }
-
-    .preview-title {
-      font-family: 'Cinzel', serif;
-      margin-bottom: 1rem;
-      color: white;
-    }
-
-    .preview-list {
-      list-style: none;
-      font-size: 0.9rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .preview-list li {
-      display: flex;
-      gap: 10px;
-    }
-
-    .preview-num {
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    /* ===== FOOTER ===== */
-    .site-footer {
-      background: var(--dark-green);
-      padding: 4rem 2rem;
-      text-align: center;
-      color: white;
-      border-top: 4px solid var(--gold);
-    }
-
-    .footer-title {
-      font-family: 'Cinzel', serif;
-      font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 1rem;
-    }
-
-    .footer-copy {
-      font-size: 0.8rem;
-      opacity: 0.6;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .bird-section {
-        grid-template-columns: 1fr;
-        padding: 2rem;
-      }
-      .nav-links {
-        display: none;
-      }
-    }
-  </style>
+/* Animations */
+.fade-in{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.fade-in.visible{opacity:1;transform:none;}
+.fd1{transition-delay:.08s;}.fd2{transition-delay:.16s;}.fd3{transition-delay:.24s;}
+</style>
+<base target="_blank">
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- Navigation -->
-  <nav>
-    <div class="nav-inner">
-      <a href="#" class="nav-logo">Resources</a>
-      <ul class="nav-links">
-        <li><a href="#systems">Systems Thinking</a></li>
-        <li><a href="#roadmap">Strategic Roadmap</a></li>
-        <li><a href="#outlooks">Provincial Outlooks</a></li>
-        <li><a href="https://strategy-ai-planner.deploypad.app/">Strat Planner Pro</a></li>
-      </ul>
-      <a href="https://asilvainnovations.github.io/barmm-investment-roadmap/roadmap.html" class="nav-cta">Live Prototype</a>
-    </div>
-  </nav>
+<!-- Navigation -->
+<nav id="navbar" role="navigation" aria-label="Main site navigation">
+<div class="nav-container">
+<a href="home.html" class="nav-logo-wrap" aria-label="BIRD 2026-2035 Home">
+<img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png" alt="Ministry of Trade, Investments and Tourism – BARMM" width="140" height="44" onerror="this.style.display='none'">
+<span class="nav-site-name">BIRD 2026–2035<br>Resource Library</span>
+</a>
+<ul class="nav-links" id="navLinks" role="list">
+<li role="none"><a href="home.html" role="menuitem">Home</a></li>
+<li role="none"><a href="dashboard.html" role="menuitem">Dashboard</a></li>
+<li role="none"><a href="roadmap.html" role="menuitem">Roadmap</a></li>
+<li role="none"><a href="resources.html" role="menuitem" class="active">Resources</a></li>
+<li role="none"><a href="contact.html" role="menuitem">Contact</a></li>
+</ul>
+<button class="nav-hamburger" id="navHamburger" aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation menu">
+<span class="hamburger-line" aria-hidden="true"></span>
+<span class="hamburger-line" aria-hidden="true"></span>
+<span class="hamburger-line" aria-hidden="true"></span>
+</button>
+</div>
+</nav>
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <div class="hero-inner">
-      <div class="hero-eyebrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-        </svg>
-        Architecting the Future
-      </div>
-      <h1>The Emerging Bangsamoro</h1>
-      <p class="hero-sub">A comprehensive resource library for systems-led strategic planning, resilient investment mapping, and ethical growth frameworks.</p>
-      <div class="hero-theme">BARMM Investment Roadmap & Development (BIRD) Prototype</div>
-    </div>
-  </header>
+<!-- Hero -->
+<header class="hero" id="main-content">
+<div class="hero-content">
+<div class="hero-badge">Comprehensive Resource Library</div>
+<h1>The Emerging <span class="gold">Bangsamoro</span></h1>
+<p>A comprehensive collection of provincial economic outlooks, strategic frameworks, digital tools, and stakeholder engagement resources powering the BIRD 2026–2035 initiative.</p>
+<div class="hero-stats" role="list" aria-label="Resource statistics">
+<div class="stat-card" role="listitem">
+<span class="stat-num">6</span>
+<span class="stat-lbl">Provincial Outlooks</span>
+</div>
+<div class="stat-card" role="listitem">
+<span class="stat-num">15+</span>
+<span class="stat-lbl">Strategic Resources</span>
+</div>
+<div class="stat-card" role="listitem">
+<span class="stat-num">4</span>
+<span class="stat-lbl">Video Guides</span>
+</div>
+<div class="stat-card" role="listitem">
+<span class="stat-num">10</span>
+<span class="stat-lbl">Years Vision</span>
+</div>
+</div>
+</div>
+</header>
 
-  <!-- Main Content -->
-  <main class="page">
-    
-    <!-- SECTION 1: SYSTEMS INTELLIGENCE -->
-    <section id="systems" class="sec-header">
-      <h2>Systems Intelligence Library</h2>
-      <div class="gold-div"></div>
-      <p>Move beyond superficial analysis. Use the Iceberg Model and Causal Loop Diagrams to identify the root structures of growth and systemic intervention.</p>
-    </section>
+<!-- Section Navigation -->
+<div class="section-nav" role="navigation" aria-label="Resource sections">
+<div class="section-nav-inner">
+<a href="#provincial" class="section-nav-btn">Provincial Outlooks</a>
+<a href="#core" class="section-nav-btn">Core Navigation</a>
+<a href="#framework" class="section-nav-btn">Strategic Framework</a>
+<a href="#planning" class="section-nav-btn">Planning & Roadmap</a>
+<a href="#tools" class="section-nav-btn">Digital Tools</a>
+<a href="#engagement" class="section-nav-btn">Stakeholder Engagement</a>
+</div>
+</div>
 
-    <div class="resources-grid">
-      <article class="res-card">
-        <div class="res-card-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 19h20L12 2z"/><path d="M12 10v4M12 18h.01"/></svg>
-          <span class="res-tag">Strategy Insight</span>
-        </div>
-        <div class="res-content">
-          <h3>The Iceberg Model</h3>
-          <p>Understand why SWOT listing is not enough. Explore the mental models and systemic structures hidden beneath visible events.</p>
-          <a href="https://youtu.be/y6h2_EcOOcM?si=3DWAm3dMJ7LzOjAS" class="res-btn">Watch Video</a>
-        </div>
-      </article>
+<main class="container">
 
-      <article class="res-card">
-        <div class="res-card-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4v8l4-4z"/></svg>
-          <span class="res-tag">Foundations</span>
-        </div>
-        <div class="res-content">
-          <h3>Introduction to Systems Thinking</h3>
-          <p>A core primer on viewing problems as parts of an overall system, rather than reacting to isolated parts.</p>
-          <a href="https://youtu.be/gsogqS__Ljo?si=Ttlck54LP1puxJYW" class="res-btn">Watch Masterclass</a>
-        </div>
-      </article>
+<!-- Provincial Economic and Investment Outlooks -->
+<section class="resource-section" id="provincial" aria-labelledby="provincial-heading">
+<div class="section-header fade-in">
+<span class="section-label">Provincial Economic and Investment Outlooks</span>
+<h2 id="provincial-heading">Deep-Dive Provincial Analyses</h2>
+<div class="section-divider"></div>
+<p>Comprehensive economic and investment outlooks for BARMM provinces, analyzing GDP growth, sectoral composition, BEIE framework application, and strategic investment corridors through 2035.</p>
+</div>
 
-      <article class="res-card">
-        <div class="res-card-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12c0 6-4.4 10-10 10S2 17.6 2 12 6.4 2 12 2s10 4.4 10 10z"/><path d="M16 12l-4-4v8l4-4z"/></svg>
-          <span class="res-tag">Visual Tools</span>
-        </div>
-        <div class="res-content">
-          <h3>Causal Loop Diagrams</h3>
-          <p>Learn to map the feedback loops that drive system behavior. Critical for identifying unintended consequences.</p>
-          <a href="https://youtu.be/tTo06jbSZ4M?si=mSyIfuUvpeXPsrW" class="res-btn">Learn Mapping</a>
-        </div>
-      </article>
+<div class="provincial-grid">
 
-      <article class="res-card">
-        <div class="res-card-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          <span class="res-tag">Intervention</span>
-        </div>
-        <div class="res-content">
-          <h3>Leverage Points</h3>
-          <p>Donella Meadows' framework for finding the most effective places to intervene in a complex system.</p>
-          <div class="btn-group">
-            <a href="https://youtu.be/ZKdyIz14Niw?si=i6J-8SNjFSuPzDMz" class="res-btn">Video</a>
-            <a href="https://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/" class="res-btn outline">Article</a>
-          </div>
-        </div>
-      </article>
+<!-- Lanao del Sur -->
+<article class="provincial-card fade-in fd1">
+<div class="provincial-card-header">
+<h4>Lanao del Sur</h4>
+<p>Post-Conflict Recovery & Growth Leader</p>
+</div>
+<div class="provincial-card-body">
+<div class="provincial-stat">
+<span class="provincial-stat-label">GDP Growth 2023</span>
+<span class="provincial-stat-value">5.02%</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">BARMM GDP Share</span>
+<span class="provincial-stat-value">25.8%</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">Population</span>
+<span class="provincial-stat-value">1.2M</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">Key Sector</span>
+<span class="provincial-stat-value">Services</span>
+</div>
+</div>
+<div class="provincial-card-footer">
+<a href="lanao-delsur-outlook.html" class="provincial-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+View Outlook
+</a>
+</div>
+</article>
 
-      <article class="res-card">
-        <div class="res-card-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span class="res-tag">Innovation</span>
-        </div>
-        <div class="res-content">
-          <h3>Systems Innovation</h3>
-          <p>Moving from incremental improvement to transformative change by redesigning the system's architecture.</p>
-          <a href="https://youtu.be/rVGoeFAW0FM?si=yOgB50q26R_G389G" class="res-btn">Explore Innovation</a>
-        </div>
-      </article>
-    </div>
+<!-- Maguindanao del Norte -->
+<article class="provincial-card fade-in fd2">
+<div class="provincial-card-header">
+<h4>Maguindanao del Norte</h4>
+<p>BARMM Administrative & Economic Center</p>
+</div>
+<div class="provincial-card-body">
+<div class="provincial-stat">
+<span class="provincial-stat-label">GDP Growth 2024</span>
+<span class="provincial-stat-value">4.1%</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">BARMM GDP Share</span>
+<span class="provincial-stat-value">28%</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">Population</span>
+<span class="provincial-stat-value">1.2M+</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">Key Sector</span>
+<span class="provincial-stat-value">Halal Industry</span>
+</div>
+</div>
+<div class="provincial-card-footer">
+<a href="maguindanao-delnorte-outlook.html" class="provincial-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+View Outlook
+</a>
+</div>
+</article>
 
-    <!-- SECTION 2: BIRD ROADMAP & FRAMEWORKS -->
-    <section id="roadmap" class="sec-header">
-      <h2>BIRD 2026–2035 Roadmap & Frameworks</h2>
-      <div class="gold-div"></div>
-      <p>Explore the decade-long strategic vision, ecosystem orchestration, and investment corridors shaping the future of the Bangsamoro.</p>
-    </section>
+<!-- Maguindanao del Sur -->
+<article class="provincial-card fade-in fd3">
+<div class="provincial-card-header">
+<h4>Maguindanao del Sur</h4>
+<p>Agricultural Heartland & Rice Producer</p>
+</div>
+<div class="provincial-card-body">
+<div class="provincial-stat">
+<span class="provincial-stat-label">Municipalities</span>
+<span class="provincial-stat-value">24</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">Population</span>
+<span class="provincial-stat-value">800K+</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">Poverty Incidence</span>
+<span class="provincial-stat-value">53.0%</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">Key Sector</span>
+<span class="provincial-stat-value">Agriculture</span>
+</div>
+</div>
+<div class="provincial-card-footer">
+<a href="maguindanao-delsur-outlook.html" class="provincial-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+View Outlook
+</a>
+</div>
+</article>
 
-    <div class="resources-grid">
-      <article class="res-card">
-        <div class="res-card-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          <span class="res-tag">Overview</span>
-        </div>
-        <div class="res-content">
-          <h3>Bangsamoro Investment Roadmap</h3>
-          <p>A comprehensive video introduction to the BIRD 2026–2035 plan, detailing how it drives growth and ecosystem orchestration.</p>
-          <a href="https://youtu.be/Li7lpyWWMcE" class="res-btn">Watch Overview</a>
-        </div>
-      </article>
+<!-- Special Geographic Area -->
+<article class="provincial-card fade-in fd1">
+<div class="provincial-card-header">
+<h4>Special Geographic Area</h4>
+<p>8 New Municipalities & Cross-Provincial Hub</p>
+</div>
+<div class="provincial-card-body">
+<div class="provincial-stat">
+<span class="provincial-stat-label">Barangays</span>
+<span class="provincial-stat-value">63</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">New Municipalities</span>
+<span class="provincial-stat-value">8</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">Governance</span>
+<span class="provincial-stat-value">BARMM Direct</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">Key Sector</span>
+<span class="provincial-stat-value">Agro-Industrial</span>
+</div>
+</div>
+<div class="provincial-card-footer">
+<a href="sga-outlook.html" class="provincial-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+View Outlook
+</a>
+</div>
+</article>
 
-      <article class="res-card">
-        <div class="res-card-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h18v18H3z"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
-          <span class="res-tag">Strategy</span>
-        </div>
-        <div class="res-content">
-          <h3>Strategic Options for BARMM</h3>
-          <p>An in-depth exploration of the strategic pathways and options formulated to achieve the region's macroeconomic targets.</p>
-          <a href="https://youtu.be/kb_snh8mo1k" class="res-btn">Watch Video</a>
-        </div>
-      </article>
+<!-- Tawi-Tawi -->
+<article class="provincial-card fade-in fd2">
+<div class="provincial-card-header">
+<h4>Tawi-Tawi</h4>
+<p>Seaweed Capital & BIMP-EAGA Gateway</p>
+</div>
+<div class="provincial-card-body">
+<div class="provincial-stat">
+<span class="provincial-stat-label">National Seaweed Share</span>
+<span class="provincial-stat-value">40%</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">Population</span>
+<span class="provincial-stat-value">439K</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">Islands</span>
+<span class="provincial-stat-value">390</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">Key Sector</span>
+<span class="provincial-stat-value">Marine/Aquaculture</span>
+</div>
+</div>
+<div class="provincial-card-footer">
+<a href="tawi-tawi-outlook.html" class="provincial-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+View Outlook
+</a>
+</div>
+</article>
 
-      <article class="res-card">
-        <div class="res-card-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-          <span class="res-tag">Framework</span>
-        </div>
-        <div class="res-content">
-          <h3>BEIE Framework Visualized</h3>
-          <p>Understanding the Bangsamoro Economic and Investment Ecosystem (BEIE) Framework and its interconnected clusters.</p>
-          <a href="https://www.youtube.com/watch?v=0J491Vqya_4" class="res-btn">Explore Framework</a>
-        </div>
-      </article>
-      
-      <article class="res-card">
-        <div class="res-card-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-          <span class="res-tag">Masterplan</span>
-        </div>
-        <div class="res-content">
-          <h3>The BIRD 2026–2035 Vision</h3>
-          <p>Driving Growth in the Bangsamoro: A deep dive into the 10-year implementation phases and strategic pillars.</p>
-          <a href="https://asilvainnovations.github.io/barmm-investment-roadmap/roadmap.html" class="res-btn">View Roadmap</a>
-        </div>
-      </article>
-    </div>
+<!-- Basilan -->
+<article class="provincial-card fade-in fd3">
+<div class="provincial-card-header">
+<h4>Basilan</h4>
+<p>Peace Dividend & Rubber Industry</p>
+</div>
+<div class="provincial-card-body">
+<div class="provincial-stat">
+<span class="provincial-stat-label">Poverty Reduction</span>
+<span class="provincial-stat-value">55.9%→29.8%</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">Key Infrastructure</span>
+<span class="provincial-stat-value">ZBIP ₱6.67B</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">Milestone</span>
+<span class="provincial-stat-value">ASG-Free 2024</span>
+</div>
+<div class="provincial-stat">
+<span class="provincial-stat-label">Key Sector</span>
+<span class="provincial-stat-value">Rubber/Coconut</span>
+</div>
+</div>
+<div class="provincial-card-footer">
+<a href="basilan-outlook.html" class="provincial-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+View Outlook
+</a>
+</div>
+</article>
 
-    <!-- SECTION 3: PROVINCIAL OUTLOOKS -->
-    <section id="outlooks" class="sec-header">
-      <h2>Provincial Economic & Investment Outlooks</h2>
-      <div class="gold-div"></div>
-      <p>Deep-dive reports and interactive microsites analyzing GDP growth, sectoral composition, and strategic investment corridors for key BARMM provinces.</p>
-    </section>
+</div>
+</section>
 
-    <div class="resources-grid">
-      <article class="res-card">
-        <div class="res-card-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          <span class="res-tag">Investment Outlook</span>
-        </div>
-        <div class="res-content">
-          <h3>Lanao del Sur Outlook 2026–2035</h3>
-          <p>Comprehensive PDF report analyzing GDP growth, sectoral composition, BEIE framework application, and strategic investment corridors.</p>
-          <a href="https://drive.google.com/file/d/1cNEEIDzKJqIBuONG-q9G-s8ZVdznLy3V/view?usp=sharing" class="res-btn">Download PDF</a>
-        </div>
-      </article>
+<!-- Core Navigation -->
+<section class="resource-section" id="core" aria-labelledby="core-heading">
+<div class="section-header fade-in">
+<span class="section-label">Core Navigation</span>
+<h2 id="core-heading">Essential Entry Points</h2>
+<div class="section-divider"></div>
+<p>Primary navigation resources for accessing the BIRD 2026–2035 platform, monitoring dashboard, and stakeholder engagement channels.</p>
+</div>
 
-      <article class="res-card">
-        <div class="res-card-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          <span class="res-tag">Interactive</span>
-        </div>
-        <div class="res-content">
-          <h3>Lanao del Sur — Microsite</h3>
-          <p>An interactive web-based presentation of the Lanao del Sur Economic and Investment Outlook with responsive charts and data visualizations.</p>
-          <a href="https://asilvainnovations.github.io/barmm-investment-roadmap/lanaodelsur-economic-investment-outlook.html" class="res-btn">View Microsite</a>
-        </div>
-      </article>
+<div class="resource-grid">
 
-      <article class="res-card">
-        <div class="res-card-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          <span class="res-tag">Investment Outlook</span>
-        </div>
-        <div class="res-content">
-          <h3>Basilan Outlook 2026–2035</h3>
-          <p>Comprehensive report analyzing the post-conflict peace dividend, rubber/seaweed value chains, and ZBIP energy integration for Basilan.</p>
-          <a href="https://asilvainnovations.github.io/barmm-investment-roadmap/basilan-economic-investment-outlook.html" class="res-btn">View Report</a>
-        </div>
-      </article>
+<!-- Landing Page -->
+<article class="resource-card featured fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">🏠</div>
+<h3>BIRD 2026–2035 Landing Page</h3>
+<p>Your gateway to the Bangsamoro Investment Roadmap</p>
+</div>
+<div class="resource-card-body">
+<p>The official landing page for the BIRD 2026–2035 initiative, providing an overview of the decade-long strategic vision, key statistics, and quick access to all platform resources.</p>
+<div class="resource-links">
+<a href="home.html" class="resource-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+Access Landing Page
+</a>
+</div>
+</div>
+</article>
 
-      <article class="res-card">
-        <div class="res-card-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          <span class="res-tag">Interactive</span>
-        </div>
-        <div class="res-content">
-          <h3>Basilan — Microsite</h3>
-          <p>Explore the interactive web-based presentation of the Basilan Economic and Investment Outlook featuring dynamic data navigation.</p>
-          <a href="https://asilvainnovations.github.io/barmm-investment-roadmap/basilan-economic-investment-outlook.html" class="res-btn">View Microsite</a>
-        </div>
-      </article>
-    </div>
+<!-- Dashboard -->
+<article class="resource-card fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">📊</div>
+<h3>MEL Dashboard</h3>
+<p>Monitoring, Evaluation & Learning</p>
+</div>
+<div class="resource-card-body">
+<p>Real-time dashboard for tracking BIRD 2026–2035 implementation progress, KPI performance, investment approvals, and provincial economic indicators.</p>
+<div class="resource-links">
+<a href="dashboard.html" class="resource-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+Access Dashboard
+</a>
+</div>
+</div>
+</article>
 
-    <!-- SECTION 4: DIGITAL TOOLS & ENGAGEMENT -->
-    <section id="tools" class="sec-header">
-      <h2>Digital Tools & Stakeholder Engagement</h2>
-      <div class="gold-div"></div>
-      <p>Access the digital platforms, AI-driven planning tools, and validation surveys powering the BIRD initiative.</p>
-    </section>
+<!-- Contact -->
+<article class="resource-card fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">📧</div>
+<h3>Contact & Investment Inquiries</h3>
+<p>Connect with BOI-MTIT BARMM</p>
+</div>
+<div class="resource-card-body">
+<p>Direct contact channels for investment facilitation, stakeholder engagement, and technical assistance from the Bureau of Investments – Ministry of Trade, Investments and Tourism.</p>
+<div class="resource-links">
+<a href="contact.html" class="resource-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+Contact Us
+</a>
+</div>
+</div>
+</article>
 
-    <div class="resources-grid">
-      <article class="res-card">
-        <div class="res-card-img" style="background: var(--ssp-grad);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
-          <span class="res-tag">AI Platform</span>
-        </div>
-        <div class="res-content">
-          <h3>Strat Planner Pro</h3>
-          <p>The AI-driven strategic planning platform incorporating SWOT-to-Systems Mapping, Causal Loop Diagrams, and Archetypes.</p>
-          <a href="https://strategy-ai-planner.deploypad.app/" class="res-btn">Access Platform</a>
-        </div>
-      </article>
+</div>
+</section>
 
-      <article class="res-card">
-        <div class="res-card-img" style="background: var(--ssp-grad);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-          <span class="res-tag">Web App</span>
-        </div>
-        <div class="res-content">
-          <h3>BIRD 2035 Web Application</h3>
-          <p>Access the dedicated BIRD web app for navigating the investment roadmap, ecosystem data, and strategic pillars.</p>
-          <a href="https://bird2035.netlify.app/" class="res-btn">Access BIRD App</a>
-        </div>
-      </article>
+<!-- Strategic Framework -->
+<section class="resource-section" id="framework" aria-labelledby="framework-heading">
+<div class="section-header fade-in">
+<span class="section-label">Strategic Framework</span>
+<h2 id="framework-heading">BEIE Framework & Metrics Architecture</h2>
+<div class="section-divider"></div>
+<p>Understanding the Bangsamoro Economic and Investment Ecosystem (BEIE) Framework, systems thinking methodologies, and performance metrics architecture.</p>
+</div>
 
-      <article class="res-card">
-        <div class="res-card-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-          <span class="res-tag">Survey Tool</span>
-        </div>
-        <div class="res-content">
-          <h3>Validation Survey</h3>
-          <p>Participate in the stakeholder validation survey to provide feedback and help shape the final BIRD 2026–2035 roadmap.</p>
-          <a href="https://bird2035.netlify.app/validation-survey/" class="res-btn">Take Survey</a>
-        </div>
-      </article>
+<div class="resource-grid">
 
-      <article class="res-card">
-        <div class="res-card-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          <span class="res-tag">Library</span>
-        </div>
-        <div class="res-content">
-          <h3>Exclusive Resources</h3>
-          <p>Access to additional case studies, best practices, and supplementary materials for the BIRD initiative.</p>
-          <a href="https://asilvainnovations.github.io/BIRD2026-2035/public/resources.html" class="res-btn">View Resources</a>
-        </div>
-      </article>
-    </div>
+<!-- BEIE Student Guide -->
+<article class="resource-card featured fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">🎓</div>
+<h3>BEIE Framework for Grade Six Pupils</h3>
+<p>Educational resource for young learners</p>
+</div>
+<div class="resource-card-body">
+<p>An age-appropriate introduction to the Bangsamoro Economic and Investment Ecosystem (BEIE) Framework, designed to educate Grade Six pupils about economic systems, investment concepts, and sustainable development in the Bangsamoro region.</p>
+<div class="resource-links">
+<a href="student-guide.html" class="resource-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+Access Student Guide
+</a>
+<a href="https://youtu.be/Li7lpyWWMcE" class="resource-link youtube" target="_blank" rel="noopener">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+Watch BEIE Video Guide
+</a>
+</div>
+</div>
+</article>
 
-    <!-- CTA SECTION -->
-    <section class="bird-section">
-      <div class="bird-content">
-        <span class="sec-eyebrow">Development Prototype</span>
-        <h2>BIRD 2026 — 2035</h2>
-        <p>The Bangsamoro Investment Roadmap & Development (BIRD) plan represents a decade-long strategic vision for resilient, ethical, and sustainable growth in the region.</p>
-        <a href="https://asilvainnovations.github.io/barmm-investment-roadmap/roadmap.html" class="bird-cta">Explore the Roadmap Prototype</a>
-      </div>
-      <div class="bird-preview">
-        <h4 class="preview-title">Key Strategic Pillars</h4>
-        <ul class="preview-list">
-          <li><span class="preview-num">01.</span> Resilient Infrastructure</li>
-          <li><span class="preview-num">02.</span> Ethical Financial Governance</li>
-          <li><span class="preview-num">03.</span> Community-Led Development</li>
-          <li><span class="preview-num">04.</span> Global Hub Connectivity</li>
-        </ul>
-      </div>
-    </section>
+<!-- KPI Metrics -->
+<article class="resource-card fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">📈</div>
+<h3>Metrics Architecture for Benchmarking</h3>
+<p>KPI framework & performance indicators</p>
+</div>
+<div class="resource-card-body">
+<p>Comprehensive metrics architecture for benchmarking BIRD 2026–2035 performance, including Pareto KPIs, Balanced Scorecard indicators, and provincial economic metrics.</p>
+<div class="resource-links">
+<a href="kpi.html" class="resource-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+View KPI Framework
+</a>
+</div>
+</div>
+</article>
 
-  </main>
+<!-- SWOT & Systems Mapping Video -->
+<article class="resource-card video fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">🎥</div>
+<h3>SWOT Analysis & Systems Mapping</h3>
+<p>Video guide on analytical methodologies</p>
+</div>
+<div class="resource-card-body">
+<p>Comprehensive video tutorial on SWOT analysis integration with systems thinking, causal loop diagrams, and strategic mapping for investment planning.</p>
+<div class="resource-links">
+<a href="https://youtu.be/LSmBzwyX2uw" class="resource-link youtube" target="_blank" rel="noopener">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+Watch Video Tutorial
+</a>
+</div>
+</div>
+</article>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <p class="footer-title">The Emerging Bangsamoro</p>
-    <p class="footer-copy">© 2026 Asilva Innovations. All rights reserved.</p>
-  </footer>
+</div>
+</section>
 
+<!-- Planning & Roadmap -->
+<section class="resource-section" id="planning" aria-labelledby="planning-heading">
+<div class="section-header fade-in">
+<span class="section-label">Planning & Roadmap</span>
+<h2 id="planning-heading">Strategic Options & Implementation</h2>
+<div class="section-divider"></div>
+<p>Strategic options analysis, investment roadmap 2026–2035, and the one-year action plan for synchronized ecosystem development.</p>
+</div>
+
+<div class="resource-grid">
+
+<!-- Strategic Options -->
+<article class="resource-card fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">🎯</div>
+<h3>Strategic Options</h3>
+<p>HEDS, GEMS, IFES, IEDS pathways</p>
+</div>
+<div class="resource-card-body">
+<p>Analysis of four strategic development pathways: Halal Economy Dominance Strategy (HEDS), Green Economy & Sustainability (GEMS), Islamic Finance Ecosystem Strategy (IFES), and Integrated Ecosystem Development Strategy (IEDS).</p>
+<div class="resource-links">
+<a href="options.html" class="resource-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+View Strategic Options
+</a>
+</div>
+</div>
+</article>
+
+<!-- Investment Roadmap -->
+<article class="resource-card fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">🗺️</div>
+<h3>Investment Roadmap 2026–2035</h3>
+<p>Decade-long strategic vision</p>
+</div>
+<div class="resource-card-body">
+<p>The comprehensive 10-year investment roadmap detailing phased implementation, budget allocation (₱120–160B), priority investment corridors, and milestone targets for BARMM's economic transformation.</p>
+<div class="resource-links">
+<a href="roadmap.html" class="resource-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+View Roadmap
+</a>
+</div>
+</div>
+</article>
+
+<!-- 1-Year Action Plan -->
+<article class="resource-card fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">📋</div>
+<h3>1-Year Action Plan</h3>
+<p>Priority actions for 2026</p>
+</div>
+<div class="resource-card-body">
+<p>Detailed one-year action plan outlining priority programs, activities, and projects (PAPs) for 2026, with assigned lead agencies, budgets, timelines, and performance indicators.</p>
+<div class="resource-links">
+<a href="action-plan.html" class="resource-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+View Action Plan
+</a>
+</div>
+</div>
+</article>
+
+<!-- Strategic Options Video -->
+<article class="resource-card video fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">🎥</div>
+<h3>Strategic Options & Roadmap Video</h3>
+<p>Comprehensive video guide</p>
+</div>
+<div class="resource-card-body">
+<p>In-depth video exploration of the strategic pathways and implementation roadmap formulated to achieve BARMM's macroeconomic targets through 2035.</p>
+<div class="resource-links">
+<a href="https://youtu.be/kb_snh8mo1k" class="resource-link youtube" target="_blank" rel="noopener">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+Watch Video Guide
+</a>
+</div>
+</div>
+</article>
+
+</div>
+</section>
+
+<!-- Digital Tools -->
+<section class="resource-section" id="tools" aria-labelledby="tools-heading">
+<div class="section-header fade-in">
+<span class="section-label">Digital Tools & Platforms</span>
+<h2 id="tools-heading">BIRD App & User Manual</h2>
+<div class="section-divider"></div>
+<p>Access the dedicated BIRD web application and comprehensive user manual for navigating the investment roadmap, ecosystem data, and strategic pillars.</p>
+</div>
+
+<div class="resource-grid">
+
+<!-- BIRD App -->
+<article class="resource-card featured fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">📱</div>
+<h3>BIRD App</h3>
+<p>Interactive web application</p>
+</div>
+<div class="resource-card-body">
+<p>The dedicated BIRD web application for navigating the investment roadmap, exploring ecosystem data, accessing strategic pillars, and engaging with the comprehensive BIRD 2026–2035 platform.</p>
+<div class="resource-links">
+<a href="https://bird2035.netlify.app/" class="resource-link" target="_blank" rel="noopener">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+Launch BIRD App
+</a>
+</div>
+</div>
+</article>
+
+<!-- User Manual -->
+<article class="resource-card fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">📖</div>
+<h3>BIRD App User Manual</h3>
+<p>Comprehensive documentation</p>
+</div>
+<div class="resource-card-body">
+<p>Step-by-step user manual for navigating the BIRD App, understanding its features, accessing data visualizations, and maximizing the platform's strategic planning capabilities.</p>
+<div class="resource-links">
+<a href="user-manual.html" class="resource-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+View User Manual
+</a>
+</div>
+</div>
+</article>
+
+</div>
+</section>
+
+<!-- Stakeholder Engagement -->
+<section class="resource-section" id="engagement" aria-labelledby="engagement-heading">
+<div class="section-header fade-in">
+<span class="section-label">Stakeholder Engagement</span>
+<h2 id="engagement-heading">Validation Survey & Orientation</h2>
+<div class="section-divider"></div>
+<p>Participate in the stakeholder validation survey to provide feedback and help shape the final BIRD 2026–2035 roadmap, along with orientation materials for survey participants.</p>
+</div>
+
+<div class="resource-grid">
+
+<!-- Survey Orientation -->
+<article class="resource-card fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">📚</div>
+<h3>Validation Survey Orientation</h3>
+<p>Staff orientation briefing</p>
+</div>
+<div class="resource-card-body">
+<p>Comprehensive orientation briefing for BOI-MTIT staff on the BIRD 2026–2035 Validation Survey, including methodology, technical architecture, and deployment protocols.</p>
+<div class="resource-links">
+<a href="survey-orientation.html" class="resource-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+View Orientation
+</a>
+</div>
+</div>
+</article>
+
+<!-- Validation Survey -->
+<article class="resource-card featured fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">✅</div>
+<h3>Validation Survey Instrument</h3>
+<p>Stakeholder feedback platform</p>
+</div>
+<div class="resource-card-body">
+<p>The official BIRD 2026–2035 Validation Survey instrument for collecting stakeholder feedback on strategic assumptions, BEIE cluster dynamics, systems archetypes, and investment priorities. Your insights directly shape the final roadmap.</p>
+<div class="resource-links">
+<a href="validation-survey.html" class="resource-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+Take Validation Survey
+</a>
+</div>
+</div>
+</article>
+
+<!-- Overall Journey Video -->
+<article class="resource-card video fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">🎥</div>
+<h3>Overall Journey of BIRD</h3>
+<p>Comprehensive video overview</p>
+</div>
+<div class="resource-card-body">
+<p>A comprehensive video introduction to the BIRD 2026–2035 initiative, detailing how it drives growth, ecosystem orchestration, and the decade-long strategic vision for the Bangsamoro.</p>
+<div class="resource-links">
+<a href="https://youtu.be/UCi2dVUmSbE?si=2vRkydbDTvkKmKlh" class="resource-link youtube" target="_blank" rel="noopener">
+<svg fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+Watch Overall Journey Video
+</a>
+</div>
+</div>
+</article>
+
+</div>
+</section>
+
+<!-- Privacy Policy -->
+<section class="resource-section" aria-labelledby="privacy-heading">
+<div class="section-header fade-in">
+<span class="section-label">Legal</span>
+<h2 id="privacy-heading">Privacy Policy</h2>
+<div class="section-divider"></div>
+<p>Understanding how your data is collected, used, and protected when engaging with the BIRD 2026–2035 platform and validation survey.</p>
+</div>
+
+<div class="resource-grid">
+<article class="resource-card fade-in">
+<div class="resource-card-header">
+<div class="resource-icon">🔒</div>
+<h3>Privacy Policy</h3>
+<p>Data protection & confidentiality</p>
+</div>
+<div class="resource-card-body">
+<p>Comprehensive privacy policy detailing data collection practices, usage policies, security measures, and your rights regarding personal information submitted through the BIRD 2026–2035 platform.</p>
+<div class="resource-links">
+<a href="privacy-policy.html" class="resource-link">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+View Privacy Policy
+</a>
+</div>
+</div>
+</article>
+</div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer role="contentinfo">
+<div class="footer-inner">
+<div class="footer-logo">
+<img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png" alt="MTIT BARMM logo" width="140" height="42" loading="lazy" onerror="this.style.display='none'">
+</div>
+<div class="footer-bottom">
+<p>© 2026 Bangsamoro Autonomous Region in Muslim Mindanao (BARMM). All rights reserved.</p>
+<p style="margin-top:.3rem;"><span>BIRD 2026–2035 Resource Library</span> — The Emerging Bangsamoro: A Hub for Resilient and Ethical Growth</p>
+</div>
+</div>
+</footer>
+
+<script>
+// Navigation
+const hamburger=document.getElementById('navHamburger');
+const navLinks=document.getElementById('navLinks');
+hamburger.addEventListener('click',()=>{
+const isOpen=navLinks.classList.toggle('open');
+hamburger.classList.toggle('open',isOpen);
+hamburger.setAttribute('aria-expanded',String(isOpen));
+});
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+navLinks.classList.remove('open');
+hamburger.classList.remove('open');
+hamburger.setAttribute('aria-expanded','false');
+}));
+document.addEventListener('click',e=>{
+if(!hamburger.contains(e.target)&&!navLinks.contains(e.target)){
+navLinks.classList.remove('open');
+hamburger.classList.remove('open');
+hamburger.setAttribute('aria-expanded','false');
+}
+});
+document.addEventListener('keydown',e=>{
+if(e.key==='Escape'){
+navLinks.classList.remove('open');
+hamburger.classList.remove('open');
+hamburger.setAttribute('aria-expanded','false');
+}
+});
+window.addEventListener('resize',()=>{
+if(window.innerWidth>=900){
+navLinks.classList.remove('open');
+hamburger.classList.remove('open');
+hamburger.setAttribute('aria-expanded','false');
+}
+});
+
+// Scroll
+window.addEventListener('scroll',()=>{
+document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
+},{passive:true});
+
+// Animations
+const obs=new IntersectionObserver(entries=>{
+entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:.07,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+a.addEventListener('click',e=>{
+e.preventDefault();
+const t=document.querySelector(a.getAttribute('href'));
+if(t){const nh=document.querySelector('nav').offsetHeight;
+window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-nh,behavior:'smooth'});}
+});
+});
+
+// Reduced motion
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+document.documentElement.style.scrollBehavior='auto';
+}
+</script>
 </body>
 </html>
