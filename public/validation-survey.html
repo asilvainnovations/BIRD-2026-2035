@@ -1,1177 +1,1226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#022c22">
+<meta name="description" content="BIRD 2026-2035 Validation Survey — Give your feedback on the Bangsamoro Investment Roadmap. Short, offline-friendly, and confidential.">
+<meta name="author" content="Bureau of Investments - Ministry of Trade, Investments and Tourism, BARMM">
+<title>Validation Survey | BIRD 2026–2035 | The Emerging Bangsamoro</title>
+
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2CNG7D15Q7"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-2CNG7D15Q7');
 </script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#022c22">
-<meta name="description" content="BIRD 2026-2035 Validation Survey - Participate in shaping the Bangsamoro Investment Roadmap through comprehensive SWOT analysis, systems mapping, and strategic options validation. Offline-first PWA with save & continue functionality.">
-<meta name="keywords" content="BIRD validation survey, Bangsamoro investment roadmap, BARMM economic outlook, BEIE framework, SWOT analysis, systems mapping, causal loop diagrams, strategic options validation, IEDS, HEDS, GEMS, IFES, offline survey, PWA survey">
-<meta name="author" content="Bureau of Investments - Ministry of Trade, Investments and Tourism, BARMM">
-<meta property="og:title" content="BIRD 2026-2035 Validation Survey | The Emerging Bangsamoro">
-<meta property="og:description" content="Shape the future of Bangsamoro investment. Participate in the official validation survey for the BIRD 2026-2035 Roadmap with comprehensive SWOT analysis and systems thinking validation.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/validation-survey-images/Validation%20Survey%20Banner.png">
-<title>BIRD 2026-2035 Validation Survey | The Emerging Bangsamoro</title>
 
-<!-- PWA Manifest -->
-<link rel="manifest" href="data:application/manifest+json,{%22name%22:%22BIRD%20Validation%20Survey%22,%22short_name%22:%22BIRD%20Survey%22,%22start_url%22:%22/validation-survey.html%22,%22display%22:%22standalone%22,%22background_color%22:%22%23022c22%22,%22theme_color%22:%22%23022c22%22,%22icons%22:[{%22src%22:%22https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png%22,%22sizes%22:%22192x192%22,%22type%22:%22image/png%22}]}">
-
-<!-- Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Survey",
-  "name": "BIRD 2026-2035 Validation Survey",
-  "description": "Official stakeholder validation survey for the Bangsamoro Investment Roadmap Development 2026-2035",
-  "provider": {
-    "@type": "GovernmentOrganization",
-    "name": "Bureau of Investments - MTIT, BARMM",
-    "url": "https://mtit.bangsamoro.gov.ph"
-  },
-  "areaServed": {
-    "@type": "AdministrativeArea",
-    "name": "Bangsamoro Autonomous Region in Muslim Mindanao"
-  }
-}
-</script>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
   --primary-green:#064e3b;
   --dark-green:#022c22;
   --mid-green:#065f46;
-  --light-green:#6ee7b7;
-  --cream:#ecfdf5;
+  --light-green:#a7f3d0;
+  --cream:#f7fbf9;
+  --card:#ffffff;
   --gold:#C9A84C;
   --gold-light:#E8C560;
   --gold-dark:#8B6C28;
-  --gold-border:rgba(201,168,76,0.35);
+  --gold-border:rgba(201,168,76,.35);
   --gold-grad:linear-gradient(135deg,#7a5c1e 0%,#c9a84c 35%,#e8c560 50%,#c9a84c 65%,#7a5c1e 100%);
-  --sp-1:.25rem;
-  --sp-2:.5rem;
-  --sp-3:.75rem;
-  --sp-4:1rem;
-  --sp-6:1.5rem;
-  --sp-8:2rem;
-  --sp-12:3rem;
-  --sp-16:4rem;
-  --touch-min:44px;
-  --r-sm:.5rem;
-  --r-md:1rem;
-  --r-lg:1.25rem;
-  --r-xl:1.5rem;
-  --r-full:9999px;
-  --offline-color:#f59e0b;
-  --online-color:#10b981;
-  --error-color:#ef4444;
-  --success-color:#10b981;
+  --ink:#0f172a;
+  --muted:#5b6b66;
+  --border:#e3ece8;
+  --error:#c0392b;
+  --success:#0f8a5f;
+  --offline:#b7791f;
+  --touch:44px;
+  --r-sm:.5rem;--r-md:.9rem;--r-lg:1.2rem;--r-full:9999px;
 }
-
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
 body{
   font-family:'DM Sans',sans-serif;
-  line-height:1.7;
-  color:#0f172a;
   background:var(--cream);
-  overflow-x:hidden;
-  font-size:1rem;
+  color:var(--ink);
+  line-height:1.6;
   min-height:100vh;
 }
-
-img{max-width:100%;height:auto;display:block;}
-a{color:inherit;text-decoration:none;}
-button{cursor:pointer;font-family:inherit;}
-
-.skip-link{
-  position:absolute;
-  top:-100%;
-  left:var(--sp-4);
-  z-index:9999;
-  background:var(--gold);
-  color:var(--dark-green);
-  padding:.6rem 1.2rem;
-  border-radius:0 0 var(--r-sm) var(--r-sm);
-  font-weight:700;
-  font-size:.9rem;
-  transition:top .2s;
-}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+button{font-family:inherit;cursor:pointer;}
+.skip-link{position:absolute;top:-100%;left:1rem;background:var(--gold);color:var(--dark-green);
+  padding:.6rem 1.2rem;border-radius:0 0 .5rem .5rem;font-weight:700;z-index:9999;transition:top .2s;}
 .skip-link:focus{top:0;}
-
-:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
-
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:.01ms!important;
-    transition-duration:.01ms!important;
-  }
-}
-
-/* Navigation */
-nav{
-  background:rgba(2,44,34,.98);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  position:sticky;
-  top:0;
-  width:100%;
-  z-index:1000;
-  border-bottom:2px solid var(--gold-border);
-  transition:all .4s ease;
-}
-
-nav.scrolled{
-  background:rgba(2,44,34,.99);
-  box-shadow:0 4px 30px rgba(0,0,0,.4);
-}
-
-.nav-container{
-  max-width:1400px;
-  margin:0 auto;
-  padding:.6rem var(--sp-4);
-  display:flex;
-  align-items:center;
-  gap:var(--sp-3);
-}
-
-.nav-logo-wrap{
-  display:flex;
-  align-items:center;
-  gap:var(--sp-3);
-  min-height:var(--touch-min);
-  flex-shrink:0;
-}
-
-.nav-logo-wrap img{height:44px;width:auto;object-fit:contain;}
-
-.nav-site-name{
-  display:none;
-  font-family:'Cinzel',serif;
-  font-size:.72rem;
-  color:var(--gold);
-  font-weight:700;
-  letter-spacing:.06em;
-  line-height:1.3;
-}
-
-.nav-links{
-  list-style:none;
-  display:flex;
-  gap:var(--sp-2);
-  margin-left:auto;
-}
-
-.nav-links a{
-  color:var(--light-green);
-  font-weight:500;
-  font-size:.9rem;
-  padding:.4rem .7rem;
-  border-radius:.35rem;
-  transition:all .2s;
-}
-
-.nav-links a:hover,.nav-links a:focus-visible{
-  background:rgba(201,168,76,.07);
-  color:var(--gold);
-}
-
-.nav-links a.active{
-  color:var(--gold);
-  background:rgba(201,168,76,.1);
-}
-
-/* Status Bar */
-.status-bar{
-  background:var(--dark-green);
-  color:white;
-  padding:.5rem var(--sp-4);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:.85rem;
-  border-bottom:1px solid var(--gold-border);
-}
-
-.status-indicator{
-  display:flex;
-  align-items:center;
-  gap:.5rem;
-}
-
-.status-dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  animation:pulse 2s infinite;
-}
-
-.status-dot.online{background:var(--online-color);}
-.status-dot.offline{background:var(--offline-color);}
-
-@keyframes pulse{
-  0%,100%{opacity:1;}
-  50%{opacity:.5;}
-}
-
-.save-status{
-  display:flex;
-  align-items:center;
-  gap:.5rem;
-  font-size:.8rem;
-}
-
-.save-icon{
-  width:16px;
-  height:16px;
-}
-
-/* C.A.R.E. Framework Hero */
-.hero{
-  background:linear-gradient(135deg,var(--dark-green) 0%,var(--primary-green) 50%,var(--mid-green) 100%);
-  color:white;
-  padding:var(--sp-16) var(--sp-4) var(--sp-12);
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-}
-
-.hero::before{
-  content:'';
-  position:absolute;
-  top:-50%;
-  right:-10%;
-  width:600px;
-  height:600px;
-  background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%);
-  pointer-events:none;
-}
-
-.hero-content{
-  max-width:900px;
-  margin:0 auto;
-  position:relative;
-  z-index:1;
-}
-
-.hero-badge{
-  display:inline-block;
-  background:rgba(201,168,76,.15);
-  border:1px solid rgba(201,168,76,.4);
-  color:var(--gold-light);
-  padding:.4rem 1.2rem;
-  border-radius:2rem;
-  font-size:.75rem;
-  font-weight:700;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  margin-bottom:var(--sp-6);
-}
-
-.hero h1{
-  font-family:'Cinzel',serif;
-  font-size:clamp(1.8rem,5vw,3.5rem);
-  font-weight:900;
-  line-height:1.15;
-  margin-bottom:var(--sp-4);
-}
-
-.hero h1 .gold{
-  background:var(--gold-grad);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-
-.hero p{
-  font-size:clamp(.95rem,2vw,1.15rem);
-  color:rgba(255,255,255,.8);
-  max-width:700px;
-  margin:0 auto var(--sp-8);
-  line-height:1.7;
-}
-
-/* C.A.R.E. Framework Grid */
-.care-framework{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:var(--sp-4);
-  max-width:800px;
-  margin:var(--sp-8) auto;
-}
-
-.care-pillar{
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(10px);
-  border:1px solid var(--gold-border);
-  border-radius:var(--r-lg);
-  padding:var(--sp-6);
-  text-align:center;
-  transition:transform .3s,border-color .3s;
-}
-
-.care-pillar:hover{
-  transform:translateY(-4px);
-  border-color:var(--gold);
-}
-
-.care-letter{
-  font-family:'Cinzel',serif;
-  font-size:2.5rem;
-  font-weight:900;
-  color:var(--gold);
-  display:block;
-  margin-bottom:var(--sp-2);
-}
-
-.care-title{
-  font-size:.95rem;
-  font-weight:700;
-  color:var(--light-green);
-  margin-bottom:var(--sp-2);
-}
-
-.care-desc{
-  font-size:.8rem;
-  color:rgba(255,255,255,.7);
-  line-height:1.5;
-}
-
-@media(min-width:640px){
-  .care-framework{grid-template-columns:repeat(4,1fr);}
-  .hero-stats{grid-template-columns:repeat(4,1fr);}
-}
-
-/* Progress Bar */
-.progress-container{
-  background:white;
-  border-bottom:1px solid rgba(201,168,76,.1);
-  padding:var(--sp-4);
-  position:sticky;
-  top:70px;
-  z-index:99;
-  box-shadow:0 2px 10px rgba(0,0,0,.05);
-}
-
-.progress-bar{
-  height:8px;
-  background:rgba(201,168,76,.1);
-  border-radius:var(--r-full);
-  overflow:hidden;
-  margin-bottom:var(--sp-2);
-}
-
-.progress-fill{
-  height:100%;
-  background:var(--gold-grad);
-  border-radius:var(--r-full);
-  transition:width .5s ease;
-  width:0%;
-}
-
-.progress-text{
-  display:flex;
-  justify-content:space-between;
-  font-size:.85rem;
-  color:#64748b;
-}
-
-/* Survey Container */
-.survey-container{
-  max-width:1000px;
-  margin:0 auto;
-  padding:var(--sp-8) var(--sp-4);
-}
-
-.section{
-  background:white;
-  border-radius:var(--r-lg);
-  padding:var(--sp-8);
-  margin-bottom:var(--sp-6);
-  box-shadow:0 4px 20px rgba(6,78,59,.08);
-  border:1px solid rgba(201,168,76,.1);
-  transition:all .3s;
-}
-
-.section:hover{
-  box-shadow:0 8px 30px rgba(6,78,59,.12);
-  border-color:var(--gold-border);
-}
-
-.section-header{
-  margin-bottom:var(--sp-6);
-  padding-bottom:var(--sp-4);
-  border-bottom:2px solid var(--gold-border);
-}
-
-.section-number{
-  display:inline-block;
-  background:var(--gold-grad);
-  color:var(--dark-green);
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family:'Cinzel',serif;
-  font-weight:900;
-  font-size:1.2rem;
-  margin-bottom:var(--sp-3);
-}
-
-.section-title{
-  font-family:'Cinzel',serif;
-  font-size:1.5rem;
-  color:var(--primary-green);
-  margin-bottom:var(--sp-2);
-}
-
-.section-description{
-  color:#64748b;
-  font-size:.95rem;
-  line-height:1.6;
-}
-
-/* Video & Image Containers */
-.media-container{
-  margin:var(--sp-6) 0;
-  border-radius:var(--r-lg);
-  overflow:hidden;
-  box-shadow:0 8px 30px rgba(0,0,0,.15);
-}
-
-.media-container img{
-  width:100%;
-  height:auto;
-  display:block;
-}
-
-.video-container{
-  position:relative;
-  padding-bottom:56.25%;
-  height:0;
-  overflow:hidden;
-}
-
-.video-container iframe{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  border:none;
-}
-
-/* Question Styles */
-.question{
-  margin-bottom:var(--sp-6);
-  padding:var(--sp-4);
-  background:rgba(236,253,245,.5);
-  border-radius:var(--r-md);
-  border-left:4px solid var(--gold);
-}
-
-.question-label{
-  display:block;
-  font-weight:600;
-  color:#334155;
-  margin-bottom:var(--sp-3);
-  font-size:1rem;
-  line-height:1.6;
-}
-
-.question-label .required{
-  color:var(--error-color);
-  margin-left:.25rem;
-}
-
-.question-hint{
-  font-size:.85rem;
-  color:#64748b;
-  margin-bottom:var(--sp-3);
-  font-style:italic;
-}
-
-/* Radio and Checkbox Styles */
-.radio-group,.checkbox-group{
-  display:flex;
-  flex-direction:column;
-  gap:var(--sp-2);
-}
-
-.radio-item,.checkbox-item{
-  display:flex;
-  align-items:center;
-  gap:var(--sp-3);
-  padding:var(--sp-3);
-  background:white;
-  border:1px solid rgba(201,168,76,.2);
-  border-radius:var(--r-sm);
-  cursor:pointer;
-  transition:all .2s;
-}
-
-.radio-item:hover,.checkbox-item:hover{
-  background:rgba(201,168,76,.05);
-  border-color:var(--gold);
-}
-
-.radio-item input,.checkbox-item input{
-  width:20px;
-  height:20px;
-  cursor:pointer;
-  flex-shrink:0;
-}
-
-.radio-item label,.checkbox-item label{
-  flex:1;
-  cursor:pointer;
-  font-size:.95rem;
-  color:#334155;
-  line-height:1.5;
-}
-
-/* Likert Scale */
-.likert-scale{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:var(--sp-2);
-  margin-top:var(--sp-3);
-}
-
-.likert-option{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:var(--sp-2);
-  padding:var(--sp-3);
-  background:white;
-  border:2px solid rgba(201,168,76,.2);
-  border-radius:var(--r-md);
-  cursor:pointer;
-  transition:all .2s;
-  text-align:center;
-}
-
-.likert-option:hover{
-  background:rgba(201,168,76,.05);
-  border-color:var(--gold);
-  transform:translateY(-2px);
-}
-
-.likert-option input{
-  width:20px;
-  height:20px;
-  cursor:pointer;
-}
-
-.likert-option label{
-  font-size:.85rem;
-  color:#334155;
-  font-weight:500;
-  cursor:pointer;
-}
-
-.likert-number{
-  font-family:'Cinzel',serif;
-  font-size:1.5rem;
-  font-weight:900;
-  color:var(--gold-dark);
-}
-
-/* Text Input */
-.text-input,.textarea-input{
-  width:100%;
-  padding:var(--sp-3) var(--sp-4);
-  border:1px solid rgba(201,168,76,.3);
-  border-radius:var(--r-sm);
-  font-family:'DM Sans',sans-serif;
-  font-size:.95rem;
-  color:#334155;
-  background:white;
-  transition:all .2s;
-}
-
-.text-input:focus,.textarea-input:focus{
-  outline:none;
-  border-color:var(--gold);
-  box-shadow:0 0 0 3px rgba(201,168,76,.1);
-}
-
-.textarea-input{
-  min-height:120px;
-  resize:vertical;
-}
-
-/* Action Buttons */
-.action-buttons{
-  display:flex;
-  flex-wrap:wrap;
-  gap:var(--sp-4);
-  justify-content:center;
-  margin:var(--sp-8) 0;
-}
-
-.btn{
-  padding:var(--sp-3) var(--sp-6);
-  border-radius:var(--r-md);
-  font-weight:600;
-  font-size:1rem;
-  border:none;
-  cursor:pointer;
-  transition:all .3s;
-  display:inline-flex;
-  align-items:center;
-  gap:var(--sp-2);
-  min-height:var(--touch-min);
-}
-
-.btn-primary{
-  background:var(--gold-grad);
-  color:var(--dark-green);
-}
-
-.btn-primary:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(201,168,76,.3);
-}
-
-.btn-secondary{
-  background:white;
-  color:var(--primary-green);
-  border:2px solid var(--gold);
-}
-
-.btn-secondary:hover{
-  background:rgba(201,168,76,.05);
-  transform:translateY(-2px);
-}
-
-.btn-save{
-  background:var(--success-color);
-  color:white;
-}
-
-.btn-save:hover{
-  background:#059669;
-  transform:translateY(-2px);
-}
-
-/* Success Message */
-.success-message{
-  display:none;
-  background:rgba(16,185,129,.1);
-  border:2px solid var(--success-color);
-  border-radius:var(--r-lg);
-  padding:var(--sp-8);
-  text-align:center;
-  margin:var(--sp-8) 0;
-}
-
-.success-message.show{
-  display:block;
-  animation:fadeIn .5s ease;
-}
-
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-.success-icon{
-  font-size:4rem;
-  color:var(--success-color);
-  margin-bottom:var(--sp-4);
-}
-
-.success-title{
-  font-family:'Cinzel',serif;
-  font-size:1.8rem;
-  color:var(--primary-green);
-  margin-bottom:var(--sp-3);
-}
-
-.success-text{
-  font-size:1rem;
-  color:#475569;
-  line-height:1.7;
-  max-width:600px;
-  margin:0 auto;
-}
-
-/* Footer */
-footer{
-  background:var(--dark-green);
-  color:white;
-  padding:var(--sp-8) var(--sp-4) var(--sp-6);
-  border-top:3px solid var(--gold-border);
-  margin-top:var(--sp-12);
-}
-
-.footer-inner{
-  max-width:1200px;
-  margin:0 auto;
-}
-
-.footer-logo img{
-  height:42px;
-  width:auto;
-  object-fit:contain;
-  margin-bottom:var(--sp-4);
-}
-
-.footer-bottom{
-  text-align:center;
-  padding-top:var(--sp-4);
-  border-top:1px solid rgba(255,255,255,.08);
-  color:rgba(255,255,255,.38);
-  font-size:.78rem;
-  line-height:1.7;
-}
-
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* ===== Top utility bar ===== */
+.utility-bar{
+  background:var(--dark-green);color:#cfe9df;font-size:.78rem;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.4rem 1rem;flex-wrap:wrap;gap:.4rem;
+}
+.utility-bar .status{display:flex;align-items:center;gap:.4rem;}
+.dot{width:8px;height:8px;border-radius:50%;background:#34d399;animation:pulse 2s infinite;}
+.dot.offline{background:var(--offline);}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.utility-links{display:flex;gap:.9rem;flex-wrap:wrap;}
+.utility-links a{opacity:.85;}
+.utility-links a:hover{opacity:1;color:var(--gold-light);}
+
+/* ===== Nav ===== */
+nav{background:rgba(2,44,34,.98);border-bottom:2px solid var(--gold-border);position:sticky;top:0;z-index:1000;}
+.nav-inner{max-width:1200px;margin:0 auto;padding:.55rem 1rem;display:flex;align-items:center;gap:.8rem;}
+.brand{display:flex;align-items:center;gap:.6rem;flex-shrink:0;}
+.brand img{height:38px;width:auto;}
+.brand-text{font-family:'Cinzel',serif;font-size:.72rem;color:var(--gold);line-height:1.25;font-weight:700;}
+.nav-links{list-style:none;display:none;gap:.2rem;margin-left:auto;}
+.nav-links a{color:var(--light-green);font-size:.87rem;font-weight:500;padding:.4rem .65rem;border-radius:.4rem;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{background:rgba(201,168,76,.12);color:var(--gold);}
+@media(min-width:980px){.nav-links{display:flex;}}
+
+/* ===== Hero ===== */
+.hero{background:linear-gradient(135deg,var(--dark-green),var(--primary-green) 60%,var(--mid-green));
+  color:#fff;padding:2.6rem 1rem 2rem;text-align:center;}
+.hero-badge{display:inline-block;background:rgba(201,168,76,.15);border:1px solid var(--gold-border);
+  color:var(--gold-light);padding:.3rem 1rem;border-radius:2rem;font-size:.72rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem;}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.5rem,4.2vw,2.5rem);line-height:1.2;margin-bottom:.7rem;font-weight:800;}
+.hero h1 .gold{background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{max-width:640px;margin:0 auto 1.1rem;color:rgba(255,255,255,.82);font-size:.98rem;}
+.hero-meta{display:flex;justify-content:center;gap:1.6rem;flex-wrap:wrap;font-size:.82rem;color:rgba(255,255,255,.75);}
+.hero-meta b{display:block;color:var(--gold-light);font-family:'Cinzel',serif;font-size:1.15rem;}
+
+/* ===== Resource strip ===== */
+.resource-strip{background:#eef7f2;border-bottom:1px solid var(--border);padding:.7rem 1rem;}
+.resource-strip-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;font-size:.85rem;color:var(--muted);}
+.resource-strip a{color:var(--primary-green);font-weight:700;text-decoration:underline;text-underline-offset:2px;}
+.resource-strip a:hover{color:var(--gold-dark);}
+
+/* ===== Progress ===== */
+.progress-wrap{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:56px;z-index:99;padding:.7rem 1rem;}
+.progress-inner{max-width:900px;margin:0 auto;}
+.progress-bar{height:8px;background:#e6efe9;border-radius:var(--r-full);overflow:hidden;}
+.progress-fill{height:100%;background:var(--gold-grad);width:2%;transition:width .35s ease;}
+.progress-text{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin-top:.4rem;}
+
+/* ===== Container / steps ===== */
+main{max-width:780px;margin:0 auto;padding:1.6rem 1rem 4rem;}
+.step{display:none;background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:1.6rem;box-shadow:0 4px 18px rgba(6,78,59,.06);animation:fadeIn .3s ease;}
+.step.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.step-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:.35rem;}
+.step-title{font-family:'Cinzel',serif;font-size:1.35rem;color:var(--primary-green);margin-bottom:.5rem;}
+.step-desc{color:var(--muted);font-size:.94rem;margin-bottom:1.1rem;}
+.step-desc a{color:var(--primary-green);font-weight:700;text-decoration:underline;}
+
+.callout{background:#fbf6e9;border:1px solid var(--gold-border);border-radius:var(--r-md);padding:.85rem 1rem;
+  font-size:.86rem;color:#5a4a1e;margin-bottom:1.1rem;display:flex;gap:.6rem;align-items:flex-start;}
+.callout b{color:var(--gold-dark);}
+.callout a{color:var(--primary-green);font-weight:700;text-decoration:underline;}
+
+.media{margin:1rem 0;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--border);}
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+
+fieldset{border:0;margin:0 0 1.4rem;padding:0;}
+.q-label{display:block;font-weight:700;color:#233;margin-bottom:.15rem;font-size:.98rem;line-height:1.5;}
+.q-label .req{color:var(--error);margin-left:.2rem;}
+.q-hint{font-size:.83rem;color:var(--muted);margin-bottom:.7rem;}
+
+.opt-group{display:flex;flex-direction:column;gap:.5rem;}
+.opt{display:flex;align-items:flex-start;gap:.7rem;padding:.65rem .8rem;background:#fafdfb;
+  border:1.5px solid var(--border);border-radius:var(--r-sm);cursor:pointer;transition:.15s;}
+.opt:hover{border-color:var(--gold);background:#fbf8ef;}
+.opt input{width:19px;height:19px;flex-shrink:0;margin-top:.1rem;accent-color:var(--primary-green);}
+.opt input:checked ~ label{font-weight:700;color:var(--primary-green);}
+.opt label{flex:1;font-size:.92rem;cursor:pointer;}
+.opt:has(input:checked){border-color:var(--gold);background:#fbf3d9;}
+
+.likert{display:grid;grid-template-columns:repeat(5,1fr);gap:.4rem;margin-top:.3rem;}
+.likert-opt{display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.6rem .3rem;
+  background:#fafdfb;border:1.5px solid var(--border);border-radius:var(--r-sm);cursor:pointer;text-align:center;transition:.15s;}
+.likert-opt:hover{border-color:var(--gold);}
+.likert-opt:has(input:checked){border-color:var(--gold);background:#fbf3d9;}
+.likert-opt input{width:18px;height:18px;accent-color:var(--primary-green);}
+.likert-opt span.txt{font-size:.72rem;color:var(--muted);line-height:1.2;}
+.likert-opt span.num{font-family:'Cinzel',serif;font-weight:800;color:var(--gold-dark);font-size:1.1rem;}
+@media(max-width:520px){.likert{grid-template-columns:repeat(5,1fr);}.likert-opt span.txt{display:none;}}
+
+.text-input,.textarea-input,select.text-input{
+  width:100%;padding:.7rem .85rem;border:1.5px solid var(--border);border-radius:var(--r-sm);
+  font-size:.94rem;font-family:inherit;color:var(--ink);background:#fff;
+}
+.text-input:focus,.textarea-input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.15);}
+.textarea-input{min-height:110px;resize:vertical;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+@media(max-width:560px){.two-col{grid-template-columns:1fr;}}
+
+/* nav buttons */
+.step-actions{display:flex;justify-content:space-between;gap:.8rem;margin-top:1.6rem;padding-top:1.2rem;border-top:1px solid var(--border);}
+.btn{padding:.75rem 1.4rem;border-radius:var(--r-md);font-weight:700;font-size:.92rem;border:none;
+  display:inline-flex;align-items:center;gap:.5rem;min-height:var(--touch);transition:.2s;}
+.btn-primary{background:var(--gold-grad);color:var(--dark-green);margin-left:auto;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(201,168,76,.35);}
+.btn-ghost{background:transparent;color:var(--primary-green);border:1.5px solid var(--border);}
+.btn-ghost:hover{border-color:var(--gold);}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none!important;}
+
+/* step nav dots (mobile-friendly quick jump) */
+.step-index{text-align:center;font-size:.78rem;color:var(--muted);margin-bottom:.6rem;}
+
+/* resume banner */
+.resume-banner{max-width:780px;margin:1rem auto 0;background:#eaf6ee;border:1px solid #bfe3ce;color:#0f4d33;
+  border-radius:var(--r-md);padding:.85rem 1rem;display:none;align-items:center;justify-content:space-between;
+  gap:.8rem;font-size:.88rem;flex-wrap:wrap;}
+.resume-banner.show{display:flex;}
+.resume-banner button{background:#0f8a5f;color:#fff;border:none;padding:.45rem .9rem;border-radius:.4rem;font-weight:700;font-size:.82rem;}
+.resume-banner .dismiss{background:transparent;color:#0f4d33;text-decoration:underline;font-weight:600;padding:0;}
+
+/* summary/review */
+.summary-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;font-size:.88rem;}
+.summary-list li{display:flex;justify-content:space-between;gap:1rem;padding:.55rem .7rem;background:#fafdfb;border:1px solid var(--border);border-radius:.5rem;}
+.summary-list .lab{color:var(--muted);}
+.summary-list .val{font-weight:700;color:var(--ink);text-align:right;}
+.consent-box{display:flex;gap:.7rem;align-items:flex-start;background:#fbf6e9;border:1px solid var(--gold-border);
+  border-radius:var(--r-md);padding:1rem;margin:1.1rem 0;}
+.consent-box input{width:20px;height:20px;margin-top:.15rem;accent-color:var(--primary-green);flex-shrink:0;}
+.consent-box label{font-size:.87rem;color:#5a4a1e;line-height:1.55;}
+
+/* success */
+.success-panel{display:none;background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:2.2rem 1.6rem;text-align:center;box-shadow:0 4px 18px rgba(6,78,59,.06);}
+.success-panel.show{display:block;animation:fadeIn .4s ease;}
+.success-icon{width:60px;height:60px;border-radius:50%;background:#e6f7ee;color:var(--success);
+  display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1rem;}
+.success-title{font-family:'Cinzel',serif;color:var(--primary-green);font-size:1.4rem;margin-bottom:.6rem;}
+.success-text{color:var(--muted);font-size:.94rem;max-width:520px;margin:0 auto 1.2rem;}
+.success-links{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;}
+.success-links a{background:var(--gold-grad);color:var(--dark-green);font-weight:700;padding:.6rem 1.1rem;
+  border-radius:.6rem;font-size:.88rem;}
+.success-links a.secondary{background:transparent;border:1.5px solid var(--border);color:var(--primary-green);}
+
+.error-banner{display:none;background:#fdecea;border:1px solid #f1b0a8;color:var(--error);border-radius:var(--r-sm);
+  padding:.7rem .9rem;font-size:.85rem;margin-bottom:1rem;}
+.error-banner.show{display:block;}
+
+/* footer */
+footer{background:var(--dark-green);color:#cfe9df;padding:2rem 1rem 1.4rem;margin-top:2.5rem;border-top:3px solid var(--gold-border);}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.2rem;margin-bottom:1.4rem;}
+.footer-grid h4{font-family:'Cinzel',serif;color:var(--gold-light);font-size:.85rem;margin-bottom:.6rem;}
+.footer-grid a{display:block;font-size:.83rem;color:#cfe9df;opacity:.85;margin-bottom:.4rem;}
+.footer-grid a:hover{opacity:1;color:var(--gold-light);}
+.footer-bottom{text-align:center;padding-top:1rem;border-top:1px solid rgba(255,255,255,.08);
+  color:rgba(255,255,255,.4);font-size:.76rem;line-height:1.7;}
 .footer-bottom span{color:var(--gold);}
-
-/* Responsive */
-@media(max-width:768px){
-  .nav-site-name{display:none;}
-  .nav-links{display:none;}
-  .likert-scale{grid-template-columns:1fr;}
-  .section{padding:var(--sp-4);}
-  .hero{padding:var(--sp-12) var(--sp-4) var(--sp-8);}
-  .care-framework{grid-template-columns:1fr;}
-}
-
-/* Offline Mode Styling */
-.offline-mode .status-bar{
-  background:var(--offline-color);
-}
-
-.offline-mode .save-status{
-  color:var(--offline-color);
-}
-
-/* Print Styles */
-@media print{
-  nav,.status-bar,.progress-container,.action-buttons,footer{display:none;}
-  .section{box-shadow:none;border:1px solid #ccc;}
-}
 </style>
 </head>
 <body>
 
-<a href="#main-content" class="skip-link">Skip to main content</a>
+<a href="#main-content" class="skip-link">Skip to survey</a>
 
-<!-- Navigation -->
-<nav id="navbar" role="navigation" aria-label="Main navigation">
-  <div class="nav-container">
-    <a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/home.html" class="nav-logo-wrap" aria-label="BIRD 2026-2035 Home">
-      <img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png" alt="Ministry of Trade, Investments and Tourism – BARMM" width="140" height="44" onerror="this.style.display='none'">
-      <span class="nav-site-name">BIRD 2026–2035<br>Validation Survey</span>
+<!-- Utility bar: status + quick platform links -->
+<div class="utility-bar">
+  <div class="status">
+    <span class="dot" id="statusDot"></span>
+    <span id="statusText">Online — your answers save automatically</span>
+  </div>
+  <div class="utility-links">
+    <a href="https://bird-survey-orientation.asilvainnovations.com" target="_blank" rel="noopener">Survey guide</a>
+    <a href="https://bird-resources.asilvainnovations.com" target="_blank" rel="noopener">Resources</a>
+    <a href="https://bird-contact.asilvainnovations.com" target="_blank" rel="noopener">Contact us</a>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="https://bangsmoro-investment-roadmap.asilvainnovations.com" class="brand" aria-label="BIRD 2026-2035 Home">
+      <img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png" alt="Ministry of Trade, Investments and Tourism – BARMM" onerror="this.style.display='none'">
+      <span class="brand-text">BIRD 2026–2035<br>Validation Survey</span>
     </a>
-    <ul class="nav-links" role="list">
-      <li role="none"><a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/home.html" role="menuitem">Home</a></li>
-      <li role="none"><a href="https://strategy-ai-planner-1.deploypad.app/" role="menuitem" target="_blank" rel="noopener">BIRD App</a></li>
-      <li role="none"><a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/resources.html" role="menuitem">Resources</a></li>
-      <li role="none"><a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/privacy-policy.html" role="menuitem">Privacy</a></li>
+    <ul class="nav-links">
+      <li><a href="https://bangsmoro-investment-roadmap.asilvainnovations.com">Home</a></li>
+      <li><a href="https://bird-roadmap.asilvainnovations.com" target="_blank" rel="noopener">Read the Roadmap</a></li>
+      <li><a href="https://bird-survey-orientation.asilvainnovations.com" target="_blank" rel="noopener">Survey Guide</a></li>
+      <li><a href="https://bird-app.asilvainnovations.com" target="_blank" rel="noopener">BIRD App</a></li>
+      <li><a href="https://bird-dashboard.asilvainnovations.com" target="_blank" rel="noopener">Dashboard</a></li>
+      <li><a href="https://bird-survey.asilvainnovations.com" class="active">Survey</a></li>
+      <li><a href="https://bird-contact.asilvainnovations.com" target="_blank" rel="noopener">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- Status Bar -->
-<div class="status-bar" role="status" aria-live="polite">
-  <div class="status-indicator">
-    <span class="status-dot online" id="statusDot"></span>
-    <span id="statusText">Online</span>
-  </div>
-  <div class="save-status">
-    <svg class="save-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
-    </svg>
-    <span id="saveStatus">Auto-save enabled</span>
-  </div>
-</div>
-
-<!-- C.A.R.E. Framework Hero -->
-<header class="hero" id="main-content">
-  <div class="hero-content">
-    <div class="hero-badge">Official Stakeholder Validation</div>
-    <h1>Shape the Future of <span class="gold">Bangsamoro Investment</span></h1>
-    <p>Welcome to the BIRD 2026-2035 Validation Survey. Your valuable input will help ensure that the Bangsamoro Investment Roadmap is comprehensive, practical, and aligned with the development needs of the Bangsamoro Autonomous Region in Muslim Mindanao (BARMM).</p>
-    
-    <!-- C.A.R.E. Framework -->
-    <div class="care-framework" role="list" aria-label="C.A.R.E. Framework Pillars">
-      <div class="care-pillar" role="listitem">
-        <span class="care-letter">C</span>
-        <div class="care-title">Context-Specific</div>
-        <div class="care-desc">Grounded in BARMM's unique political, cultural, and geographic realities with provincial nuances.</div>
-      </div>
-      <div class="care-pillar" role="listitem">
-        <span class="care-letter">A</span>
-        <div class="care-title">Action-Oriented</div>
-        <div class="care-desc">Every question maps to specific leverage points, systems archetypes, and implementation bottlenecks.</div>
-      </div>
-      <div class="care-pillar" role="listitem">
-        <span class="care-letter">R</span>
-        <div class="care-title">Real-Time & Non-Linear</div>
-        <div class="care-desc">Embracing systems thinking through CLDs and archetype validation for adaptive management.</div>
-      </div>
-      <div class="care-pillar" role="listitem">
-        <span class="care-letter">E</span>
-        <div class="care-title">Evidence-Based</div>
-        <div class="care-desc">Calibrated against PSA-BARMM baselines, OIC/SMIIC standards, and UN SDGs.</div>
-      </div>
-    </div>
-
-    <div class="hero-stats" role="list" aria-label="Survey statistics">
-      <div class="stat-card" role="listitem">
-        <span class="stat-num">16</span>
-        <span class="stat-lbl">Sections</span>
-      </div>
-      <div class="stat-card" role="listitem">
-        <span class="stat-num">60+</span>
-        <span class="stat-lbl">Questions</span>
-      </div>
-      <div class="stat-card" role="listitem">
-        <span class="stat-num">30</span>
-        <span class="stat-lbl">Minutes</span>
-      </div>
-      <div class="stat-card" role="listitem">
-        <span class="stat-num">100%</span>
-        <span class="stat-lbl">Confidential</span>
-      </div>
-    </div>
+<!-- Hero -->
+<header class="hero">
+  <span class="hero-badge">Stakeholder Validation · 2026</span>
+  <h1>Help shape the <span class="gold">Bangsamoro Investment Roadmap</span></h1>
+  <p>The BIRD 2026–2035 is BARMM's 10-year plan for attracting investment, growing halal industry, green economy, and infrastructure, and reducing poverty. Your feedback tells us what to keep, fix, or rethink before it is finalized.</p>
+  <div class="hero-meta">
+    <div><b>15–20</b>minutes</div>
+    <div><b>16</b>short sections</div>
+    <div><b>100%</b>confidential</div>
+    <div><b>Save &amp; resume</b>anytime</div>
   </div>
 </header>
 
-<!-- Progress Bar -->
-<div class="progress-container">
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
-  <div class="progress-text">
-    <span id="progressText">0% Complete</span>
-    <span id="sectionProgress">Section 1 of 16</span>
+<!-- Resource strip -->
+<div class="resource-strip">
+  <div class="resource-strip-inner">
+    📘 New to BIRD? Read the <a href="https://bird-roadmap.asilvainnovations.com" target="_blank" rel="noopener">full Roadmap draft</a>,
+    watch the <a href="https://bird-survey-orientation.asilvainnovations.com" target="_blank" rel="noopener">2-minute survey orientation</a>,
+    or browse <a href="https://bird-resources.asilvainnovations.com" target="_blank" rel="noopener">supporting resources</a> before you begin.
   </div>
 </div>
 
-<!-- Survey Container -->
-<main class="survey-container">
+<!-- Resume banner -->
+<div class="resume-banner" id="resumeBanner">
+  <span>We found answers you started earlier. Pick up where you left off?</span>
+  <span style="display:flex;gap:.6rem;">
+    <button type="button" id="resumeYes">Resume</button>
+    <button type="button" class="dismiss" id="resumeNo">Start over</button>
+  </span>
+</div>
 
-  <!-- Section 1: BEIE Framework Context -->
-  <section class="section" id="section1">
-    <div class="section-header">
-      <div class="section-number">1</div>
-      <h2 class="section-title">BEIE Framework Understanding</h2>
-      <p class="section-description">The Bangsamoro Economic and Investment Ecosystem (BEIE) Framework is the foundation of the BIRD 2026-2035. Please watch the introductory video below to understand the framework's structure and approach.</p>
+<!-- Progress -->
+<div class="progress-wrap" id="progressWrap">
+  <div class="progress-inner">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-text"><span id="progressText">Getting started</span><span id="stepCount">Step 1 of 17</span></div>
+  </div>
+</div>
+
+<main id="main-content">
+<form id="surveyForm" novalidate>
+
+  <!-- STEP 0 : Welcome + demographics -->
+  <div class="step active" data-step="0">
+    <div class="step-eyebrow">Before you start</div>
+    <h2 class="step-title">Tell us a bit about you</h2>
+    <p class="step-desc">This helps us understand which provinces and sectors are represented. Only your stakeholder type and province are required — everything else is optional.</p>
+
+    <div class="callout">
+      💡 <span><b>Tip:</b> Not sure what BEIE, IEDS, or halal certification mean? The
+      <a href="https://bird-survey-orientation.asilvainnovations.com" target="_blank" rel="noopener">Survey Orientation page</a> explains all key terms in plain language before you answer.</span>
     </div>
 
-    <div class="media-container">
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/Li7lpyWWMcE" title="BEIE Framework" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    <fieldset>
+      <label class="q-label" for="dem_category">I am participating as a... <span class="req">*</span></label>
+      <select class="text-input" id="dem_category" required>
+        <option value="">Select one</option>
+        <option value="government">Government agency / ministry staff</option>
+        <option value="private_investor">Private sector / investor</option>
+        <option value="msme">MSME owner or entrepreneur</option>
+        <option value="academic">Academic / researcher</option>
+        <option value="civil_society">Civil society / community leader</option>
+        <option value="development_partner">Development partner / donor agency</option>
+        <option value="other">Other</option>
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label" for="dem_province">My primary province or area <span class="req">*</span></label>
+      <select class="text-input" id="dem_province" required>
+        <option value="">Select one</option>
+        <option value="basilan">Basilan</option>
+        <option value="lanao_del_sur">Lanao del Sur</option>
+        <option value="maguindanao_del_norte">Maguindanao del Norte</option>
+        <option value="maguindanao_del_sur">Maguindanao del Sur</option>
+        <option value="sulu">Sulu</option>
+        <option value="tawi_tawi">Tawi-Tawi</option>
+        <option value="sga">Special Geographic Area (SGA)</option>
+        <option value="cotabato_city">Cotabato City</option>
+        <option value="barmm_wide">BARMM-wide / regional</option>
+        <option value="outside_barmm">Outside BARMM</option>
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">My area(s) of interest or expertise (pick all that apply)</label>
+      <div class="opt-group" id="dem_expertise">
+        <label class="opt"><input type="checkbox" value="agriculture"><span></span>Agriculture &amp; fisheries</label>
+        <label class="opt"><input type="checkbox" value="halal"><span></span>Halal industry &amp; manufacturing</label>
+        <label class="opt"><input type="checkbox" value="tourism"><span></span>Tourism &amp; culture</label>
+        <label class="opt"><input type="checkbox" value="energy"><span></span>Energy</label>
+        <label class="opt"><input type="checkbox" value="infrastructure"><span></span>Infrastructure &amp; digital connectivity</label>
+        <label class="opt"><input type="checkbox" value="islamic_finance"><span></span>Islamic finance</label>
+        <label class="opt"><input type="checkbox" value="msme"><span></span>MSME development</label>
+        <label class="opt"><input type="checkbox" value="governance"><span></span>Governance &amp; peacebuilding</label>
+        <label class="opt"><input type="checkbox" value="environment"><span></span>Environment &amp; climate</label>
+        <label class="opt"><input type="checkbox" value="education"><span></span>Education &amp; human capital</label>
+        <label class="opt"><input type="checkbox" value="trade"><span></span>Trade &amp; investment promotion</label>
       </div>
+    </fieldset>
+
+    <div class="two-col">
+      <fieldset><label class="q-label" for="dem_name">Full name (optional)</label>
+        <input type="text" id="dem_name" class="text-input" placeholder="e.g., Juan Dela Cruz"></fieldset>
+      <fieldset><label class="q-label" for="dem_email">Email (optional)</label>
+        <input type="email" id="dem_email" class="text-input" placeholder="you@example.com"></fieldset>
+    </div>
+    <fieldset><label class="q-label" for="dem_org">Organization (optional)</label>
+      <input type="text" id="dem_org" class="text-input" placeholder="e.g., BOI-MTIT, ABC Trading Corp."></fieldset>
+
+    <div class="step-actions">
+      <span></span>
+      <button type="button" class="btn btn-primary" data-next>Start survey →</button>
+    </div>
+  </div>
+
+  <!-- STEP 1 : Section 1 - BEIE Framework -->
+  <div class="step" data-step="1">
+    <div class="step-eyebrow">Section 1 of 16 · The Big Picture</div>
+    <h2 class="step-title">The BEIE Framework</h2>
+    <p class="step-desc">BIRD organizes BARMM's economy into five linked clusters — Foundations, Transformers, Enablers, Connectors, and Financiers — held together by good governance. Watch this short video, then answer two quick questions. Full details are in <a href="https://bird-roadmap.asilvainnovations.com" target="_blank" rel="noopener">Chapter 1 of the Roadmap</a>.</p>
+
+    <div class="media video-wrap">
+      <iframe src="https://www.youtube.com/embed/Li7lpyWWMcE" title="BEIE Framework overview" loading="lazy" allowfullscreen></iframe>
     </div>
 
-    <div class="question">
-      <label class="question-label">
-        1.1 How well do you understand the BEIE Framework after watching the video?<span class="required">*</span>
-      </label>
-      <div class="radio-group">
-        <div class="radio-item">
-          <input type="radio" id="q1_1_5" name="q1_1" value="5" required>
-          <label for="q1_1_5">Very Well - I have a comprehensive understanding</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="q1_1_4" name="q1_1" value="4">
-          <label for="q1_1_4">Well - I understand the main concepts</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="q1_1_3" name="q1_1" value="3">
-          <label for="q1_1_3">Moderately - I have a basic understanding</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="q1_1_2" name="q1_1" value="2">
-          <label for="q1_1_2">Slightly - I need more information</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="q1_1_1" name="q1_1" value="1">
-          <label for="q1_1_1">Not at All - I don't understand the framework</label>
-        </div>
+    <fieldset>
+      <label class="q-label">1.1 How clear is the BEIE Framework to you after watching the video? <span class="req">*</span></label>
+      <div class="likert" data-required id="s1_understanding">
+        <label class="likert-opt"><input type="radio" name="s1_understanding" value="1"><span class="num">1</span><span class="txt">Not clear at all</span></label>
+        <label class="likert-opt"><input type="radio" name="s1_understanding" value="2"><span class="num">2</span><span class="txt">Slightly clear</span></label>
+        <label class="likert-opt"><input type="radio" name="s1_understanding" value="3"><span class="num">3</span><span class="txt">Somewhat clear</span></label>
+        <label class="likert-opt"><input type="radio" name="s1_understanding" value="4"><span class="num">4</span><span class="txt">Clear</span></label>
+        <label class="likert-opt"><input type="radio" name="s1_understanding" value="5"><span class="num">5</span><span class="txt">Very clear</span></label>
       </div>
-    </div>
+    </fieldset>
 
-    <div class="question">
-      <label class="question-label">
-        1.2 How relevant is the BEIE Framework to BARMM's development needs?<span class="required">*</span>
-      </label>
-      <div class="radio-group">
-        <div class="radio-item">
-          <input type="radio" id="q1_2_5" name="q1_2" value="5" required>
-          <label for="q1_2_5">Very Relevant - Essential for our development</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="q1_2_4" name="q1_2" value="4">
-          <label for="q1_2_4">Relevant - Highly applicable</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="q1_2_3" name="q1_2" value="3">
-          <label for="q1_2_3">Moderately Relevant - Somewhat applicable</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="q1_2_2" name="q1_2" value="2">
-          <label for="q1_2_2">Slightly Relevant - Limited applicability</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" id="q1_2_1" name="q1_2" value="1">
-          <label for="q1_2_1">Not Relevant - Not applicable to our context</label>
-        </div>
+    <fieldset>
+      <label class="q-label">1.2 How useful is this framework for planning BARMM's investment priorities? <span class="req">*</span></label>
+      <div class="likert" data-required id="s1_relevance">
+        <label class="likert-opt"><input type="radio" name="s1_relevance" value="1"><span class="num">1</span><span class="txt">Not useful</span></label>
+        <label class="likert-opt"><input type="radio" name="s1_relevance" value="2"><span class="num">2</span><span class="txt">Slightly useful</span></label>
+        <label class="likert-opt"><input type="radio" name="s1_relevance" value="3"><span class="num">3</span><span class="txt">Moderately useful</span></label>
+        <label class="likert-opt"><input type="radio" name="s1_relevance" value="4"><span class="num">4</span><span class="txt">Useful</span></label>
+        <label class="likert-opt"><input type="radio" name="s1_relevance" value="5"><span class="num">5</span><span class="txt">Very useful</span></label>
       </div>
-    </div>
-  </section>
+    </fieldset>
 
-  <!-- Section 2: SWOT Analysis & Systems Mapping Banner -->
-  <section class="section" id="section2">
-    <div class="section-header">
-      <div class="section-number">2</div>
-      <h2 class="section-title">SWOT Analysis & Systems Mapping</h2>
-      <p class="section-description">This chapter builds upon the deep presencing analysis to present a comprehensive diagnostic of BARMM through SWOT analysis and systems mapping. The SWOT analysis employs robust mathematical formulations to quantify strategic viability, risk exposure, and resilience capacity across all BEIE clusters.</p>
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" data-next>Continue →</button>
     </div>
+  </div>
 
-    <div class="media-container">
-      <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/1.%20Banner-SWOT%20Analysis%20and%20Systems%20Mapping.png" alt="SWOT Analysis and Systems Mapping Banner" loading="lazy">
-    </div>
-  </section>
+  <!-- STEP 2 : Section 2 - Moral Governance -->
+  <div class="step" data-step="2">
+    <div class="step-eyebrow">Section 2 of 16 · Governance, Resilience, Peace</div>
+    <h2 class="step-title">Moral Governance &amp; Peace</h2>
+    <p class="step-desc">The Roadmap treats transparency, accountability, resilience, inclusivity, and peace as the "operating system" that decides whether every other investment succeeds or stalls.</p>
 
-  <!-- Section 3: Investment-Development Virtuous Cycle -->
-  <section class="section" id="section3">
-    <div class="section-header">
-      <div class="section-number">3</div>
-      <h2 class="section-title">Investment-Development Virtuous Cycle</h2>
-      <p class="section-description">The Investment-Development Virtuous Cycle demonstrates how strategic investments create reinforcing loops that accelerate economic growth, employment, and market expansion in BARMM.</p>
-    </div>
-
-    <div class="media-container">
-      <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/2.%20Investment-Development%20Virtuous%20Cycle.png" alt="Investment-Development Virtuous Cycle" loading="lazy">
-    </div>
-
-    <div class="question">
-      <label class="question-label">
-        3.1 "When investment inflows increase, confidence in BARMM's institutions and governance also improves."<span class="required">*</span>
-      </label>
-      <div class="likert-scale">
-        <div class="likert-option">
-          <input type="radio" id="q3_1_1" name="q3_1" value="1" required>
-          <label for="q3_1_1">Strongly Disagree</label>
-          <span class="likert-number">1</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q3_1_2" name="q3_1" value="2">
-          <label for="q3_1_2">Disagree</label>
-          <span class="likert-number">2</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q3_1_3" name="q3_1" value="3">
-          <label for="q3_1_3">Neutral</label>
-          <span class="likert-number">3</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q3_1_4" name="q3_1" value="4">
-          <label for="q3_1_4">Agree</label>
-          <span class="likert-number">4</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q3_1_5" name="q3_1" value="5">
-          <label for="q3_1_5">Strongly Agree</label>
-          <span class="likert-number">5</span>
-        </div>
+    <fieldset>
+      <label class="q-label">2.1 Transparent, accountable governance is essential for attracting investors to BARMM. <span class="req">*</span></label>
+      <div class="likert" data-required id="s2_importance">
+        <label class="likert-opt"><input type="radio" name="s2_importance" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s2_importance" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s2_importance" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s2_importance" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s2_importance" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
       </div>
-    </div>
-  </section>
+    </fieldset>
 
-  <!-- Section 4: Investment and Governance Cycles -->
-  <section class="section" id="section4">
-    <div class="section-header">
-      <div class="section-number">4</div>
-      <h2 class="section-title">Investment & Governance Confidence Cycles</h2>
-      <p class="section-description">Growth compounds through synchronized investment and governance cycles. These two reinforcing loops (R1: Investment-Development, R2: Governance-Investor Confidence) demonstrate how moral governance and investment attract each other.</p>
-    </div>
-
-    <div class="media-container">
-      <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/15.%20Investment%20and%20Governance%20Cycles.png" alt="Investment and Governance Cycles" loading="lazy">
-    </div>
-
-    <div class="question">
-      <label class="question-label">
-        4.1 "Better infrastructure, certification systems, and institutional support encourage sustained investment growth in the region."<span class="required">*</span>
-      </label>
-      <div class="likert-scale">
-        <div class="likert-option">
-          <input type="radio" id="q4_1_1" name="q4_1" value="1" required>
-          <label for="q4_1_1">Strongly Disagree</label>
-          <span class="likert-number">1</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q4_1_2" name="q4_1" value="2">
-          <label for="q4_1_2">Disagree</label>
-          <span class="likert-number">2</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q4_1_3" name="q4_1" value="3">
-          <label for="q4_1_3">Neutral</label>
-          <span class="likert-number">3</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q4_1_4" name="q4_1" value="4">
-          <label for="q4_1_4">Agree</label>
-          <span class="likert-number">4</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q4_1_5" name="q4_1" value="5">
-          <label for="q4_1_5">Strongly Agree</label>
-          <span class="likert-number">5</span>
-        </div>
+    <fieldset>
+      <label class="q-label">2.2 How would you rate BARMM's progress so far on transparent, accountable governance? <span class="req">*</span></label>
+      <div class="likert" data-required id="s2_implementation">
+        <label class="likert-opt"><input type="radio" name="s2_implementation" value="1"><span class="num">1</span><span class="txt">Very poor</span></label>
+        <label class="likert-opt"><input type="radio" name="s2_implementation" value="2"><span class="num">2</span><span class="txt">Poor</span></label>
+        <label class="likert-opt"><input type="radio" name="s2_implementation" value="3"><span class="num">3</span><span class="txt">Fair</span></label>
+        <label class="likert-opt"><input type="radio" name="s2_implementation" value="4"><span class="num">4</span><span class="txt">Good</span></label>
+        <label class="likert-opt"><input type="radio" name="s2_implementation" value="5"><span class="num">5</span><span class="txt">Very good</span></label>
       </div>
-    </div>
+    </fieldset>
 
-    <div class="question">
-      <label class="question-label">
-        4.2 "Investments that strengthen local capacity (skills, infrastructure, governance) create further opportunities for new investments and exports."<span class="required">*</span>
-      </label>
-      <div class="likert-scale">
-        <div class="likert-option">
-          <input type="radio" id="q4_2_1" name="q4_2" value="1" required>
-          <label for="q4_2_1">Strongly Disagree</label>
-          <span class="likert-number">1</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q4_2_2" name="q4_2" value="2">
-          <label for="q4_2_2">Disagree</label>
-          <span class="likert-number">2</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q4_2_3" name="q4_2" value="3">
-          <label for="q4_2_3">Neutral</label>
-          <span class="likert-number">3</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q4_2_4" name="q4_2" value="4">
-          <label for="q4_2_4">Agree</label>
-          <span class="likert-number">4</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q4_2_5" name="q4_2" value="5">
-          <label for="q4_2_5">Strongly Agree</label>
-          <span class="likert-number">5</span>
-        </div>
+    <fieldset>
+      <label class="q-label">2.3 Which pattern below best matches what you've seen in BARMM's investment climate?</label>
+      <p class="q-hint">These are common patterns the Roadmap uses to explain why good plans sometimes stall.</p>
+      <div class="opt-group" id="s2_archetype">
+        <label class="opt"><input type="radio" name="s2_archetype" value="fixes_that_fail">Quick fixes (tax breaks) work briefly, then investors leave once incentives expire — "Fixes that Fail"</label>
+        <label class="opt"><input type="radio" name="s2_archetype" value="tragedy_of_commons">Shared resources (forests, fishing grounds, power grid) get over-used because no one coordinates — "Tragedy of the Commons"</label>
+        <label class="opt"><input type="radio" name="s2_archetype" value="success_to_successful">Provinces that are already ahead keep getting more investment, leaving others behind — "Success to the Successful"</label>
+        <label class="opt"><input type="radio" name="s2_archetype" value="growth_underinvestment">Investment approvals grow faster than government's capacity to process and support them — "Growth &amp; Underinvestment"</label>
+        <label class="opt"><input type="radio" name="s2_archetype" value="none">None of these match my experience</label>
       </div>
-    </div>
-  </section>
+    </fieldset>
 
-  <!-- Section 5: Capacity Traps -->
-  <section class="section" id="section5">
-    <div class="section-header">
-      <div class="section-number">5</div>
-      <h2 class="section-title">Capacity Traps: Limits to Growth & Underinvestment</h2>
-      <p class="section-description">In BARMM, rapid investment growth is increasingly constrained by resource ceilings such as limited electrification, low broadband penetration, and weak functional literacy. These capacity traps show how infrastructure and human capital gaps act as binding constraints.</p>
-    </div>
+    <fieldset>
+      <label class="q-label">2.4 Which peace and security milestones matter most for investor confidence? (pick all that apply)</label>
+      <div class="opt-group" id="s2_peace">
+        <label class="opt"><input type="checkbox" value="basilan_asg_free">Basilan's ASG-free declaration (2024)</label>
+        <label class="opt"><input type="checkbox" value="parliament_elections">First elected Bangsamoro Parliament</label>
+        <label class="opt"><input type="checkbox" value="normalization">MILF / MNLF normalization &amp; reintegration</label>
+        <label class="opt"><input type="checkbox" value="reconciliation">Community reconciliation programs</label>
+        <label class="opt"><input type="checkbox" value="rido_reduction">Fewer clan feud (rido) incidents</label>
+        <label class="opt"><input type="checkbox" value="other_peace">Other</label>
+      </div>
+    </fieldset>
 
-    <div class="media-container">
-      <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/20.%20Limits%20to%20Growth%20%20and%20Growth%20and%20Underinvestment.png" alt="Limits to Growth and Growth and Underinvestment" loading="lazy">
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" data-next>Continue →</button>
     </div>
+  </div>
 
-    <div class="question">
-      <label class="question-label">
-        5.1 "Rapid growth in BARMM has increased demand for energy, roads, and other infrastructure beyond current capacity."<span class="required">*</span>
-      </label>
-      <div class="likert-scale">
-        <div class="likert-option">
-          <input type="radio" id="q5_1_1" name="q5_1" value="1" required>
-          <label for="q5_1_1">Strongly Disagree</label>
-          <span class="likert-number">1</span>
+  <!-- STEP 3 : Section 3 - Foundations -->
+  <div class="step" data-step="3">
+    <div class="step-eyebrow">Section 3 of 16 · Foundations Cluster</div>
+    <h2 class="step-title">Agriculture, Fisheries, Forestry &amp; Energy</h2>
+    <p class="step-desc">Foundations supply the raw materials — crops, fish, timber, power — that everything else in the economy depends on.</p>
+
+    <fieldset>
+      <label class="q-label">3.1 Which Foundations investments should be prioritized first? (pick up to 3)</label>
+      <div class="opt-group" id="s3_priorities">
+        <label class="opt"><input type="checkbox" value="farm_to_market">Farm-to-market roads</label>
+        <label class="opt"><input type="checkbox" value="climate_smart_agri">Climate-smart agriculture (drought-resistant crops, irrigation)</label>
+        <label class="opt"><input type="checkbox" value="renewable_energy">Renewable energy &amp; grid expansion (e.g., ZBIP)</label>
+        <label class="opt"><input type="checkbox" value="forestry_code">Forestry Code, carbon credits &amp; ecosystem payments</label>
+        <label class="opt"><input type="checkbox" value="fisheries">Fisheries &amp; aquaculture modernization</label>
+        <label class="opt"><input type="checkbox" value="cold_storage">Cold storage &amp; post-harvest facilities</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">3.2 Reaching the 2035 Foundations targets (e.g., 85% renewable energy, fewer post-harvest losses) is realistic. <span class="req">*</span></label>
+      <div class="likert" data-required id="s3_feasibility">
+        <label class="likert-opt"><input type="radio" name="s3_feasibility" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s3_feasibility" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s3_feasibility" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s3_feasibility" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s3_feasibility" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <p class="q-hint" style="margin-bottom:.9rem;">Rate two known risks to agriculture — how <b>serious</b> the damage would be (Impact) and how <b>likely</b> it is to happen (Likelihood). 1 = low, 5 = high.</p>
+
+    <fieldset>
+      <label class="q-label">3.3 El Niño-related drought / flooding — Impact and Likelihood</label>
+      <div class="two-col">
+        <div>
+          <label class="q-hint">Impact</label>
+          <div class="likert" style="grid-template-columns:repeat(5,1fr);" id="s3_elnino_impact">
+            <label class="likert-opt"><input type="radio" name="s3_elnino_impact" value="1"><span class="num">1</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_elnino_impact" value="2"><span class="num">2</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_elnino_impact" value="3"><span class="num">3</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_elnino_impact" value="4"><span class="num">4</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_elnino_impact" value="5"><span class="num">5</span></label>
+          </div>
         </div>
-        <div class="likert-option">
-          <input type="radio" id="q5_1_2" name="q5_1" value="2">
-          <label for="q5_1_2">Disagree</label>
-          <span class="likert-number">2</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q5_1_3" name="q5_1" value="3">
-          <label for="q5_1_3">Neutral</label>
-          <span class="likert-number">3</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q5_1_4" name="q5_1" value="4">
-          <label for="q5_1_4">Agree</label>
-          <span class="likert-number">4</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q5_1_5" name="q5_1" value="5">
-          <label for="q5_1_5">Strongly Agree</label>
-          <span class="likert-number">5</span>
+        <div>
+          <label class="q-hint">Likelihood</label>
+          <div class="likert" style="grid-template-columns:repeat(5,1fr);" id="s3_elnino_likelihood">
+            <label class="likert-opt"><input type="radio" name="s3_elnino_likelihood" value="1"><span class="num">1</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_elnino_likelihood" value="2"><span class="num">2</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_elnino_likelihood" value="3"><span class="num">3</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_elnino_likelihood" value="4"><span class="num">4</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_elnino_likelihood" value="5"><span class="num">5</span></label>
+          </div>
         </div>
       </div>
-    </div>
+    </fieldset>
 
-    <div class="question">
-      <label class="question-label">
-        5.2 "Without timely investment in infrastructure and skills, growth in the region will plateau due to resource bottlenecks."<span class="required">*</span>
-      </label>
-      <div class="likert-scale">
-        <div class="likert-option">
-          <input type="radio" id="q5_2_1" name="q5_2" value="1" required>
-          <label for="q5_2_1">Strongly Disagree</label>
-          <span class="likert-number">1</span>
+    <fieldset>
+      <label class="q-label">3.4 Rubber tree disease (Pestalotiopsis, Basilan) — Impact and Likelihood</label>
+      <div class="two-col">
+        <div>
+          <label class="q-hint">Impact</label>
+          <div class="likert" style="grid-template-columns:repeat(5,1fr);" id="s3_pesta_impact">
+            <label class="likert-opt"><input type="radio" name="s3_pesta_impact" value="1"><span class="num">1</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_pesta_impact" value="2"><span class="num">2</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_pesta_impact" value="3"><span class="num">3</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_pesta_impact" value="4"><span class="num">4</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_pesta_impact" value="5"><span class="num">5</span></label>
+          </div>
         </div>
-        <div class="likert-option">
-          <input type="radio" id="q5_2_2" name="q5_2" value="2">
-          <label for="q5_2_2">Disagree</label>
-          <span class="likert-number">2</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q5_2_3" name="q5_2" value="3">
-          <label for="q5_2_3">Neutral</label>
-          <span class="likert-number">3</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q5_2_4" name="q5_2" value="4">
-          <label for="q5_2_4">Agree</label>
-          <span class="likert-number">4</span>
-        </div>
-        <div class="likert-option">
-          <input type="radio" id="q5_2_5" name="q5_2" value="5">
-          <label for="q5_2_5">Strongly Agree</label>
-          <span class="likert-number">5</span>
+        <div>
+          <label class="q-hint">Likelihood</label>
+          <div class="likert" style="grid-template-columns:repeat(5,1fr);" id="s3_pesta_likelihood">
+            <label class="likert-opt"><input type="radio" name="s3_pesta_likelihood" value="1"><span class="num">1</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_pesta_likelihood" value="2"><span class="num">2</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_pesta_likelihood" value="3"><span class="num">3</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_pesta_likelihood" value="4"><span class="num">4</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_pesta_likelihood" value="5"><span class="num">5</span></label>
+          </div>
         </div>
       </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">3.5 Post-harvest losses (spoilage before crops reach market) — Impact and Likelihood</label>
+      <div class="two-col">
+        <div>
+          <label class="q-hint">Impact</label>
+          <div class="likert" style="grid-template-columns:repeat(5,1fr);" id="s3_postharvest_impact">
+            <label class="likert-opt"><input type="radio" name="s3_postharvest_impact" value="1"><span class="num">1</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_postharvest_impact" value="2"><span class="num">2</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_postharvest_impact" value="3"><span class="num">3</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_postharvest_impact" value="4"><span class="num">4</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_postharvest_impact" value="5"><span class="num">5</span></label>
+          </div>
+        </div>
+        <div>
+          <label class="q-hint">Likelihood</label>
+          <div class="likert" style="grid-template-columns:repeat(5,1fr);" id="s3_postharvest_likelihood">
+            <label class="likert-opt"><input type="radio" name="s3_postharvest_likelihood" value="1"><span class="num">1</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_postharvest_likelihood" value="2"><span class="num">2</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_postharvest_likelihood" value="3"><span class="num">3</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_postharvest_likelihood" value="4"><span class="num">4</span></label>
+            <label class="likert-opt"><input type="radio" name="s3_postharvest_likelihood" value="5"><span class="num">5</span></label>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">3.6 Without fixing infrastructure and climate risks first, farm and fishery growth will stall. <span class="req">*</span></label>
+      <div class="likert" data-required id="s3_limits_growth">
+        <label class="likert-opt"><input type="radio" name="s3_limits_growth" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s3_limits_growth" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s3_limits_growth" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s3_limits_growth" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s3_limits_growth" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" data-next>Continue →</button>
     </div>
-  </section>
+  </div>
 
-  <!-- Continue with remaining sections... -->
-  <!-- Due to length constraints, I'll provide the structure for remaining sections -->
+  <!-- STEP 4 : Section 4 - Transformers -->
+  <div class="step" data-step="4">
+    <div class="step-eyebrow">Section 4 of 16 · Transformers Cluster</div>
+    <h2 class="step-title">Halal Industry &amp; Manufacturing</h2>
+    <p class="step-desc">Transformers turn raw materials into finished, exportable products — especially halal-certified food, cosmetics, and goods for the USD 2.3 trillion global halal market.</p>
 
-  <!-- Section 6: Governance Traps -->
-  <!-- Section 7: Instability Traps -->
-  <!-- Section 8: Resource & Equity Traps -->
-  <!-- Section 9: Meadows Hierarchy of Leverage Points -->
-  <!-- Section 10: Strategic Options Banner -->
-  <!-- Sections 11-16: BEIE Clusters, Strategic Options, Budget, Equity, Climate, Policy, Demographics, Submission -->
+    <fieldset>
+      <label class="q-label">4.1 What is the single biggest barrier to growing halal industry and manufacturing in BARMM? <span class="req">*</span></label>
+      <div class="opt-group" id="s4_barrier" data-required>
+        <label class="opt"><input type="radio" name="s4_barrier" value="certification_delays">Slow halal certification (currently 45–60 days)</label>
+        <label class="opt"><input type="radio" name="s4_barrier" value="processing_infra">Limited processing facilities &amp; cold chain</label>
+        <label class="opt"><input type="radio" name="s4_barrier" value="skills_gap">Skills gaps in the local workforce</label>
+        <label class="opt"><input type="radio" name="s4_barrier" value="finance_access">Limited access to business financing</label>
+        <label class="opt"><input type="radio" name="s4_barrier" value="market_access">Limited access to export markets</label>
+        <label class="opt"><input type="radio" name="s4_barrier" value="other_barrier">Other</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">4.2 The Bangsamoro Halal Park (Matanog) should be a top investment priority. <span class="req">*</span></label>
+      <div class="likert" data-required id="s4_halal_park">
+        <label class="likert-opt"><input type="radio" name="s4_halal_park" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s4_halal_park" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s4_halal_park" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s4_halal_park" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s4_halal_park" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">4.3 Giving tax breaks without also fixing certification and standards will not keep investors long-term. <span class="req">*</span></label>
+      <div class="likert" data-required id="s4_fixes_fail">
+        <label class="likert-opt"><input type="radio" name="s4_fixes_fail" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s4_fixes_fail" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s4_fixes_fail" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s4_fixes_fail" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s4_fixes_fail" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">4.4 The growing global halal market (USD 2.3 trillion) is a major opportunity for BARMM's economy. <span class="req">*</span></label>
+      <div class="likert" data-required id="s4_commodity_impact">
+        <label class="likert-opt"><input type="radio" name="s4_commodity_impact" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s4_commodity_impact" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s4_commodity_impact" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s4_commodity_impact" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s4_commodity_impact" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">4.5 Which halal export sectors should BARMM focus on first? (pick all that apply)</label>
+      <div class="opt-group" id="s4_heds">
+        <label class="opt"><input type="checkbox" value="food_beverage">Halal food &amp; beverage</label>
+        <label class="opt"><input type="checkbox" value="cosmetics">Halal cosmetics</label>
+        <label class="opt"><input type="checkbox" value="pharma">Halal pharmaceuticals</label>
+        <label class="opt"><input type="checkbox" value="tourism_hospitality">Halal tourism &amp; hospitality</label>
+      </div>
+    </fieldset>
+
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" data-next>Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 5 : Section 5 - Enablers -->
+  <div class="step" data-step="5">
+    <div class="step-eyebrow">Section 5 of 16 · Enablers Cluster</div>
+    <h2 class="step-title">Infrastructure &amp; Human Capital</h2>
+    <p class="step-desc">Roads, power, internet, schools, and clinics are the "enablers" that make every other investment possible.</p>
+
+    <fieldset>
+      <label class="q-label">5.1 How would you rate current infrastructure (roads, power, internet) in your area? <span class="req">*</span></label>
+      <div class="likert" data-required id="s5_infra_rating">
+        <label class="likert-opt"><input type="radio" name="s5_infra_rating" value="1"><span class="num">1</span><span class="txt">Very poor</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_infra_rating" value="2"><span class="num">2</span><span class="txt">Poor</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_infra_rating" value="3"><span class="num">3</span><span class="txt">Fair</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_infra_rating" value="4"><span class="num">4</span><span class="txt">Good</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_infra_rating" value="5"><span class="num">5</span><span class="txt">Very good</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">5.2 Which enabler investments matter most to you? (pick up to 3)</label>
+      <div class="opt-group" id="s5_sectors">
+        <label class="opt"><input type="checkbox" value="roads">Roads &amp; bridges</label>
+        <label class="opt"><input type="checkbox" value="power">Electricity &amp; the power grid</label>
+        <label class="opt"><input type="checkbox" value="broadband">Broadband internet</label>
+        <label class="opt"><input type="checkbox" value="healthcare">Healthcare facilities</label>
+        <label class="opt"><input type="checkbox" value="education">Schools &amp; skills training (TVET)</label>
+        <label class="opt"><input type="checkbox" value="housing">Housing with basic utilities</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">5.3 Expanding broadband internet to rural and island areas should be a top priority. <span class="req">*</span></label>
+      <div class="likert" data-required id="s5_broadband">
+        <label class="likert-opt"><input type="radio" name="s5_broadband" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_broadband" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_broadband" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_broadband" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_broadband" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">5.4 Raising the literacy rate (currently 59.3%) should be a top priority. <span class="req">*</span></label>
+      <div class="likert" data-required id="s5_literacy">
+        <label class="likert-opt"><input type="radio" name="s5_literacy" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_literacy" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_literacy" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_literacy" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_literacy" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">5.5 Reducing child malnutrition and stunting should be a top priority. <span class="req">*</span></label>
+      <div class="likert" data-required id="s5_stunting">
+        <label class="likert-opt"><input type="radio" name="s5_stunting" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_stunting" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_stunting" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_stunting" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_stunting" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">5.6 The gap between mainland and island provinces in internet and services is a serious problem. <span class="req">*</span></label>
+      <div class="likert" data-required id="s5_digital_divide">
+        <label class="likert-opt"><input type="radio" name="s5_digital_divide" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_digital_divide" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_digital_divide" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_digital_divide" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s5_digital_divide" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" data-next>Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 6 : Section 6 - Connectors -->
+  <div class="step" data-step="6">
+    <div class="step-eyebrow">Section 6 of 16 · Connectors Cluster</div>
+    <h2 class="step-title">Trade, Tourism &amp; Regional Markets</h2>
+    <p class="step-desc">Connectors link BARMM's products and services to buyers — through BIMP-EAGA, the UAE/GCC halal corridor, and tourism.</p>
+
+    <fieldset>
+      <label class="q-label">6.1 Closer trade ties with Brunei, Indonesia, Malaysia, and other ASEAN neighbors (BIMP-EAGA) matter for BARMM's growth. <span class="req">*</span></label>
+      <div class="likert" data-required id="s6_bimpeaga">
+        <label class="likert-opt"><input type="radio" name="s6_bimpeaga" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_bimpeaga" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_bimpeaga" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_bimpeaga" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_bimpeaga" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">6.2 Which export markets should BARMM prioritize? (pick all that apply)</label>
+      <div class="opt-group" id="s6_markets">
+        <label class="opt"><input type="checkbox" value="uae_gcc">UAE / Gulf (GCC) countries</label>
+        <label class="opt"><input type="checkbox" value="asean">ASEAN neighbors (BIMP-EAGA)</label>
+        <label class="opt"><input type="checkbox" value="domestic">Domestic Philippine market</label>
+        <label class="opt"><input type="checkbox" value="china">China</label>
+        <label class="opt"><input type="checkbox" value="other_market">Other</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">6.3 Reaching ₱40 billion in annual exports by 2035 is achievable. <span class="req">*</span></label>
+      <div class="likert" data-required id="s6_export_target">
+        <label class="likert-opt"><input type="radio" name="s6_export_target" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_export_target" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_export_target" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_export_target" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_export_target" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">6.4 A dedicated UAE/GCC halal export corridor is realistic within the next 5 years. <span class="req">*</span></label>
+      <div class="likert" data-required id="s6_uae">
+        <label class="likert-opt"><input type="radio" name="s6_uae" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_uae" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_uae" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_uae" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_uae" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">6.5 Outside investors' perception of BARMM's peace and security has improved in recent years. <span class="req">*</span></label>
+      <div class="likert" data-required id="s6_perception">
+        <label class="likert-opt"><input type="radio" name="s6_perception" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_perception" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_perception" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_perception" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s6_perception" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" data-next>Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 7 : Section 7 - Financiers -->
+  <div class="step" data-step="7">
+    <div class="step-eyebrow">Section 7 of 16 · Financiers Cluster</div>
+    <h2 class="step-title">Islamic Finance &amp; Access to Capital</h2>
+    <p class="step-desc">Islamic banking, takaful (insurance), microfinance, and waqf (endowments) provide the capital that keeps the whole ecosystem moving.</p>
+
+    <fieldset>
+      <label class="q-label">7.1 Expanding Islamic finance is critical for inclusive growth in BARMM. <span class="req">*</span></label>
+      <div class="likert" data-required id="s7_criticality">
+        <label class="likert-opt"><input type="radio" name="s7_criticality" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_criticality" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_criticality" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_criticality" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_criticality" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">7.2 Which financial instruments should be expanded first? (pick all that apply)</label>
+      <div class="opt-group" id="s7_instruments">
+        <label class="opt"><input type="checkbox" value="islamic_banking">Islamic banking branches</label>
+        <label class="opt"><input type="checkbox" value="takaful">Takaful (Islamic insurance)</label>
+        <label class="opt"><input type="checkbox" value="microfinance">Microfinance &amp; cooperatives</label>
+        <label class="opt"><input type="checkbox" value="waqf">Waqf (community endowments)</label>
+        <label class="opt"><input type="checkbox" value="fintech">Mobile banking &amp; fintech</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">7.3 Reaching 25% adult financial inclusion by 2030 is achievable. <span class="req">*</span></label>
+      <div class="likert" data-required id="s7_inclusion_target">
+        <label class="likert-opt"><input type="radio" name="s7_inclusion_target" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_inclusion_target" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_inclusion_target" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_inclusion_target" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_inclusion_target" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">7.4 It is a problem that Islamic banking assets remain below ₱2 billion, despite BARMM's large Muslim-majority population. <span class="req">*</span></label>
+      <div class="likert" data-required id="s7_asset_paradox">
+        <label class="likert-opt"><input type="radio" name="s7_asset_paradox" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_asset_paradox" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_asset_paradox" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_asset_paradox" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_asset_paradox" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">7.5 The proposed mix of government funding, aid, and private/Islamic finance is adequate to fund this Roadmap. <span class="req">*</span></label>
+      <div class="likert" data-required id="s7_block_grant">
+        <label class="likert-opt"><input type="radio" name="s7_block_grant" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_block_grant" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_block_grant" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_block_grant" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s7_block_grant" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" data-next>Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 8 : Section 8 - Strategic Options -->
+  <div class="step" data-step="8">
+    <div class="step-eyebrow">Section 8 of 16 · Strategic Direction</div>
+    <h2 class="step-title">Choosing the Right Strategy</h2>
+    <p class="step-desc">The Roadmap compares four possible strategies. Read the short summaries, then tell us which one you'd choose. Full comparison is in <a href="https://bird-roadmap.asilvainnovations.com" target="_blank" rel="noopener">Chapter 4 of the Roadmap</a>.</p>
+
+    <fieldset>
+      <label class="q-label">8.1 Which strategic option should BARMM prioritize? <span class="req">*</span></label>
+      <div class="opt-group" id="s8_strategy" data-required>
+        <label class="opt"><input type="radio" name="s8_strategy" value="heds"><b>HEDS</b> — Focus mainly on halal industry &amp; export certification</label>
+        <label class="opt"><input type="radio" name="s8_strategy" value="gems"><b>GEMS</b> — Focus mainly on green economy: carbon credits, eco-tourism, sustainable forestry</label>
+        <label class="opt"><input type="radio" name="s8_strategy" value="ifes"><b>IFES</b> — Focus mainly on infrastructure first: roads, power, digital, skills</label>
+        <label class="opt"><input type="radio" name="s8_strategy" value="ieds"><b>IEDS (recommended)</b> — Sequence all of the above together: infrastructure first, then halal/green production, then export markets</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">8.2 The proposed sequence — infrastructure first (2026–28), then production (2029–32), then markets (2033–35) — makes sense. <span class="req">*</span></label>
+      <div class="likert" data-required id="s8_sequencing">
+        <label class="likert-opt"><input type="radio" name="s8_sequencing" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s8_sequencing" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s8_sequencing" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s8_sequencing" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s8_sequencing" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label" for="s8_comments">8.3 Anything you'd add, change, or remove from this strategy? (optional)</label>
+      <textarea id="s8_comments" class="textarea-input" placeholder="Share your thoughts here..." maxlength="2000"></textarea>
+    </fieldset>
+
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" data-next>Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 9 : Section 9 - Budget -->
+  <div class="step" data-step="9">
+    <div class="step-eyebrow">Section 9 of 16 · Funding the Plan</div>
+    <h2 class="step-title">Investment Budget</h2>
+    <p class="step-desc">The Roadmap estimates a total of ₱120–160 billion is needed from 2026 to 2035, coming from BARMM's block grant, national programs, foreign aid, and private capital.</p>
+
+    <fieldset>
+      <label class="q-label">9.1 This ₱120–160 billion total budget is realistic for what the Roadmap aims to achieve. <span class="req">*</span></label>
+      <div class="likert" data-required id="s9_realism">
+        <label class="likert-opt"><input type="radio" name="s9_realism" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s9_realism" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s9_realism" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s9_realism" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s9_realism" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" data-next>Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 10 : Section 10 - Targets -->
+  <div class="step" data-step="10">
+    <div class="step-eyebrow">Section 10 of 16 · 2035 Targets</div>
+    <h2 class="step-title">Are the Targets Right?</h2>
+    <p class="step-desc">By 2035, the Roadmap aims for a ₱550 billion regional economy and poverty below 20% (from 34.8% today).</p>
+
+    <fieldset>
+      <label class="q-label">10.1 These 2035 targets are ambitious but achievable. <span class="req">*</span></label>
+      <div class="likert" data-required id="s10_ambition">
+        <label class="likert-opt"><input type="radio" name="s10_ambition" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s10_ambition" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s10_ambition" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s10_ambition" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s10_ambition" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">10.2 How confident are you that progress will be tracked and reported honestly? <span class="req">*</span></label>
+      <div class="likert" data-required id="s10_matrix">
+        <label class="likert-opt"><input type="radio" name="s10_matrix" value="1"><span class="num">1</span><span class="txt">Not confident</span></label>
+        <label class="likert-opt"><input type="radio" name="s10_matrix" value="2"><span class="num">2</span><span class="txt">Slightly confident</span></label>
+        <label class="likert-opt"><input type="radio" name="s10_matrix" value="3"><span class="num">3</span><span class="txt">Somewhat confident</span></label>
+        <label class="likert-opt"><input type="radio" name="s10_matrix" value="4"><span class="num">4</span><span class="txt">Confident</span></label>
+        <label class="likert-opt"><input type="radio" name="s10_matrix" value="5"><span class="num">5</span><span class="txt">Very confident</span></label>
+      </div>
+    </fieldset>
+
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" data-next>Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 11 : Section 11 - Equity -->
+  <div class="step" data-step="11">
+    <div class="step-eyebrow">Section 11 of 16 · Fair Distribution</div>
+    <h2 class="step-title">Provincial Equity</h2>
+    <p class="step-desc">Mainland provinces (e.g., Maguindanao del Norte, Lanao del Sur) currently attract more investment than island provinces (Sulu, Tawi-Tawi, Basilan).</p>
+
+    <fieldset>
+      <label class="q-label">11.1 BARMM should adopt deliberate policies to steer more investment toward lagging provinces. <span class="req">*</span></label>
+      <div class="likert" data-required id="s11_affirmative">
+        <label class="likert-opt"><input type="radio" name="s11_affirmative" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s11_affirmative" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s11_affirmative" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s11_affirmative" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s11_affirmative" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">11.2 Which tools would help most in closing this gap? (pick all that apply)</label>
+      <div class="opt-group" id="s11_mechanisms">
+        <label class="opt"><input type="checkbox" value="satellite_offices">Local investment offices in Jolo, Bongao, Lamitan</label>
+        <label class="opt"><input type="checkbox" value="budget_share">Guaranteed minimum infrastructure budget share for island provinces</label>
+        <label class="opt"><input type="checkbox" value="equity_kpis">Public tracking of investment by province</label>
+        <label class="opt"><input type="checkbox" value="local_sourcing">Rules requiring big investors to buy from local suppliers</label>
+      </div>
+    </fieldset>
+
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" data-next>Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 12 : Section 12 - Climate -->
+  <div class="step" data-step="12">
+    <div class="step-eyebrow">Section 12 of 16 · Climate &amp; Green Economy</div>
+    <h2 class="step-title">Environment as an Economic Asset</h2>
+    <p class="step-desc">The Roadmap treats forests, oceans, and clean air as sources of income — through carbon credits, ecosystem payments, and eco-tourism — not just things to protect.</p>
+
+    <fieldset>
+      <label class="q-label">12.1 Turning BARMM's forests and coasts into revenue (carbon credits, ecosystem payments, eco-tourism) should be a top priority. <span class="req">*</span></label>
+      <div class="likert" data-required id="s12_green_priority">
+        <label class="likert-opt"><input type="radio" name="s12_green_priority" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s12_green_priority" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s12_green_priority" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s12_green_priority" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s12_green_priority" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">12.2 Which climate protection steps should be prioritized? (pick all that apply)</label>
+      <div class="opt-group" id="s12_adaptation">
+        <label class="opt"><input type="checkbox" value="risk_screening">Checking climate risk before approving new projects</label>
+        <label class="opt"><input type="checkbox" value="early_warning">Early warning systems for floods, drought, storms</label>
+        <label class="opt"><input type="checkbox" value="coastal_protection">Mangrove &amp; coastal protection</label>
+        <label class="opt"><input type="checkbox" value="drought_crops">Drought-resistant crop varieties</label>
+        <label class="opt"><input type="checkbox" value="climate_insurance">Climate-risk insurance for farmers &amp; fisherfolk</label>
+      </div>
+    </fieldset>
+
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" data-next>Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 13 : Section 13 - Policy -->
+  <div class="step" data-step="13">
+    <div class="step-eyebrow">Section 13 of 16 · Laws &amp; Coordination</div>
+    <h2 class="step-title">Policy &amp; Institutional Support</h2>
+    <p class="step-desc">Several laws are pending, and a new coordination office is proposed to keep agencies working together instead of in silos.</p>
+
+    <fieldset>
+      <label class="q-label">13.1 Which pending law or policy is most urgent to pass? (pick all that apply)</label>
+      <div class="opt-group" id="s13_legislation">
+        <label class="opt"><input type="checkbox" value="forestry_code">Bangsamoro Forestry Code</label>
+        <label class="opt"><input type="checkbox" value="jmc_2026_01">Carbon credit &amp; ecosystem payment rules (JMC No. 2026-01)</label>
+        <label class="opt"><input type="checkbox" value="investment_code">Updated Bangsamoro Investment Code</label>
+        <label class="opt"><input type="checkbox" value="islamic_banking_reg">Stronger Islamic banking regulations</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">13.2 Creating a central coordination office (Bangsamoro Investment Command Center) will improve how agencies work together. <span class="req">*</span></label>
+      <div class="likert" data-required id="s13_bicc">
+        <label class="likert-opt"><input type="radio" name="s13_bicc" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s13_bicc" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s13_bicc" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s13_bicc" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s13_bicc" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" data-next>Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 14 : Section 16 - CARE overall reflection -->
+  <div class="step" data-step="14">
+    <div class="step-eyebrow">Section 14 of 16 · Overall Assessment</div>
+    <h2 class="step-title">Your Overall Impression</h2>
+    <p class="step-desc">A last few questions on the Roadmap as a whole, using the same C.A.R.E. framework introduced at the start: Context-specific, Action-oriented, Real-time &amp; adaptive, Evidence-based.</p>
+
+    <fieldset>
+      <label class="q-label">14.1 The Roadmap reflects BARMM's real, on-the-ground context well. <span class="req">*</span></label>
+      <div class="likert" data-required id="s16_context">
+        <label class="likert-opt"><input type="radio" name="s16_context" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_context" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_context" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_context" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_context" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">14.2 The actions proposed are clear and specific enough to actually carry out. <span class="req">*</span></label>
+      <div class="likert" data-required id="s16_action">
+        <label class="likert-opt"><input type="radio" name="s16_action" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_action" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_action" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_action" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_action" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">14.3 The plan includes good ways to monitor progress and adjust course if something isn't working. <span class="req">*</span></label>
+      <div class="likert" data-required id="s16_realtime">
+        <label class="likert-opt"><input type="radio" name="s16_realtime" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_realtime" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_realtime" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_realtime" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_realtime" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">14.4 The Roadmap is grounded in credible data and evidence. <span class="req">*</span></label>
+      <div class="likert" data-required id="s16_evidence">
+        <label class="likert-opt"><input type="radio" name="s16_evidence" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_evidence" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_evidence" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_evidence" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_evidence" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <label class="q-label">14.5 Overall, how would you rate the BIRD 2026–2035 draft? <span class="req">*</span></label>
+      <div class="likert" data-required id="s16_overall">
+        <label class="likert-opt"><input type="radio" name="s16_overall" value="1"><span class="num">1</span><span class="txt">Poor</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_overall" value="2"><span class="num">2</span><span class="txt">Fair</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_overall" value="3"><span class="num">3</span><span class="txt">Good</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_overall" value="4"><span class="num">4</span><span class="txt">Very good</span></label>
+        <label class="likert-opt"><input type="radio" name="s16_overall" value="5"><span class="num">5</span><span class="txt">Excellent</span></label>
+      </div>
+    </fieldset>
+
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" data-next>Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 15 : Open feedback -->
+  <div class="step" data-step="15">
+    <div class="step-eyebrow">Section 15 of 16 · Anything Else?</div>
+    <h2 class="step-title">Open Feedback</h2>
+    <p class="step-desc">Optional — use this space for any comment that didn't fit above.</p>
+
+    <fieldset>
+      <label class="q-label" for="s15_open">What else should the BIRD team know?</label>
+      <textarea id="s15_open" class="textarea-input" placeholder="Your comments, concerns, or suggestions..." maxlength="2000"></textarea>
+    </fieldset>
+
+    <div class="callout">
+      🔎 <span>Want to explore the numbers behind these questions? Visit the
+      <a href="https://bird-dashboard.asilvainnovations.com" target="_blank" rel="noopener">BIRD Dashboard</a> for live indicators, or try the
+      <a href="https://bird-app.asilvainnovations.com" target="_blank" rel="noopener">BIRD App</a> to explore the strategy in more detail.</span>
+    </div>
+
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" data-next>Continue to review →</button>
+    </div>
+  </div>
+
+  <!-- STEP 16 : Review + Consent + Submit -->
+  <div class="step" data-step="16">
+    <div class="step-eyebrow">Section 16 of 16 · Review &amp; Submit</div>
+    <h2 class="step-title">Review your responses</h2>
+    <p class="step-desc">Please check the summary below, then confirm and submit. You can still go back and change any answer.</p>
+
+    <div class="error-banner" id="submitError"></div>
+
+    <ul class="summary-list" id="summaryList"></ul>
+
+    <div class="consent-box">
+      <input type="checkbox" id="consentBox">
+      <label for="consentBox">I understand my responses will be used by the Bureau of Investments – MTIT, BARMM to improve the BIRD 2026–2035 Roadmap. My answers are kept confidential and reported only in combined, anonymous form. I can request more information via the
+        <a href="https://bird-contact.asilvainnovations.com" target="_blank" rel="noopener" style="color:var(--primary-green);font-weight:700;">Contact page</a>. <span class="req">*</span></label>
+    </div>
+
+    <div class="step-actions">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <button type="button" class="btn btn-primary" id="submitBtn">Submit survey ✓</button>
+    </div>
+  </div>
+
+</form>
+
+<!-- Success panel (shown after submit) -->
+<div class="success-panel" id="successPanel">
+  <div class="success-icon">✓</div>
+  <h2 class="success-title">Maraming salamat! Your feedback has been received.</h2>
+  <p class="success-text">Your response helps shape the final Bangsamoro Investment Roadmap 2026–2035. Results will be summarized and shared through the BIRD Dashboard as validation continues.</p>
+  <div class="success-links">
+    <a href="https://bird-dashboard.asilvainnovations.com" target="_blank" rel="noopener">View the Dashboard</a>
+    <a href="https://bird-roadmap.asilvainnovations.com" target="_blank" rel="noopener" class="secondary">Read the Roadmap</a>
+    <a href="https://bangsmoro-investment-roadmap.asilvainnovations.com" class="secondary">Back to Home</a>
+  </div>
+</div>
 
 </main>
 
 <!-- Footer -->
 <footer role="contentinfo">
   <div class="footer-inner">
-    <div class="footer-logo">
-      <img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png" alt="MTIT BARMM logo" width="140" height="42" loading="lazy" onerror="this.style.display='none'">
+    <div class="footer-grid">
+      <div>
+        <h4>Platform</h4>
+        <a href="https://bangsmoro-investment-roadmap.asilvainnovations.com">Home</a>
+        <a href="https://bird-roadmap.asilvainnovations.com" target="_blank" rel="noopener">The Roadmap</a>
+        <a href="https://bird-app.asilvainnovations.com" target="_blank" rel="noopener">BIRD App</a>
+        <a href="https://bird-dashboard.asilvainnovations.com" target="_blank" rel="noopener">Dashboard</a>
+      </div>
+      <div>
+        <h4>Survey</h4>
+        <a href="https://bird-survey.asilvainnovations.com">Validation Survey</a>
+        <a href="https://bird-survey-orientation.asilvainnovations.com" target="_blank" rel="noopener">Survey Orientation</a>
+        <a href="https://bird-resources.asilvainnovations.com" target="_blank" rel="noopener">Resources</a>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <a href="https://bird-contact.asilvainnovations.com" target="_blank" rel="noopener">Contact Us</a>
+        <a href="mailto:boi@bangsamoro.gov.ph">boi@bangsamoro.gov.ph</a>
+        <a href="tel:+639178343330">0917 834 3330</a>
+      </div>
     </div>
     <div class="footer-bottom">
       <p>© 2026 Bangsamoro Autonomous Region in Muslim Mindanao (BARMM). All rights reserved.</p>
@@ -1181,66 +1230,366 @@ footer{
 </footer>
 
 <script>
-// Navigation
-const hamburger=document.getElementById('navHamburger');
-const navLinks=document.getElementById('navLinks');
-hamburger.addEventListener('click',()=>{
-const isOpen=navLinks.classList.toggle('open');
-hamburger.classList.toggle('open',isOpen);
-hamburger.setAttribute('aria-expanded',String(isOpen));
-});
-navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-navLinks.classList.remove('open');
-hamburger.classList.remove('open');
-hamburger.setAttribute('aria-expanded','false');
-}));
-document.addEventListener('click',e=>{
-if(!hamburger.contains(e.target)&&!navLinks.contains(e.target)){
-navLinks.classList.remove('open');
-hamburger.classList.remove('open');
-hamburger.setAttribute('aria-expanded','false');
-}
-});
-document.addEventListener('keydown',e=>{
-if(e.key==='Escape'){
-navLinks.classList.remove('open');
-hamburger.classList.remove('open');
-hamburger.setAttribute('aria-expanded','false');
-}
-});
-window.addEventListener('resize',()=>{
-if(window.innerWidth>=900){
-navLinks.classList.remove('open');
-hamburger.classList.remove('open');
-hamburger.setAttribute('aria-expanded','false');
-}
-});
+(function(){
+  "use strict";
+  const STORAGE_KEY = 'bird_survey_progress_v1';
+  const QUEUE_KEY = 'bird_survey_queue_v1';
+  const SUBMIT_ENDPOINT = '/.netlify/functions/submit';
 
-// Scroll
-window.addEventListener('scroll',()=>{
-document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
-},{passive:true});
+  const steps = Array.from(document.querySelectorAll('.step'));
+  const totalSteps = steps.length; // 0..16 => 17 steps
+  let current = 0;
 
-// Animations
-const obs=new IntersectionObserver(entries=>{
-entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
-},{threshold:.07,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+  const progressFill = document.getElementById('progressFill');
+  const progressText = document.getElementById('progressText');
+  const stepCount = document.getElementById('stepCount');
+  const progressWrap = document.getElementById('progressWrap');
 
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-a.addEventListener('click',e=>{
-e.preventDefault();
-const t=document.querySelector(a.getAttribute('href'));
-if(t){const nh=document.querySelector('nav').offsetHeight;
-window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-nh,behavior:'smooth'});}
-});
-});
+  const progressLabels = [
+    'Getting started','The big picture','Governance & peace','Foundations cluster','Transformers cluster',
+    'Enablers cluster','Connectors cluster','Financiers cluster','Strategic direction','Funding the plan',
+    '2035 targets','Provincial equity','Climate & green economy','Policy & coordination','Overall assessment',
+    'Open feedback','Review & submit'
+  ];
 
-// Reduced motion
-if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-document.documentElement.style.scrollBehavior='auto';
-}
+  function showStep(idx){
+    steps.forEach(s=>s.classList.remove('active'));
+    steps[idx].classList.add('active');
+    const pct = Math.round((idx/(totalSteps-1))*100);
+    progressFill.style.width = pct + '%';
+    progressText.textContent = progressLabels[idx] || '';
+    stepCount.textContent = 'Step ' + (idx+1) + ' of ' + totalSteps;
+    window.scrollTo({top: progressWrap.offsetTop - 10, behavior:'smooth'});
+    if(idx === totalSteps-1){ buildSummary(); }
+  }
+
+  function validateStep(idx){
+    const step = steps[idx];
+    const requiredRadioGroups = new Set();
+    step.querySelectorAll('[data-required] input[type=radio], .likert[data-required] input[type=radio]').forEach(inp=>{
+      requiredRadioGroups.add(inp.name);
+    });
+    // also any likert with data-required wraps directly
+    step.querySelectorAll('.likert[data-required]').forEach(l=>{
+      const name = l.querySelector('input')?.name;
+      if(name) requiredRadioGroups.add(name);
+    });
+    // any select/input marked required
+    let ok = true;
+    step.querySelectorAll('select[required], input[required]').forEach(el=>{
+      if(!el.value){ ok = false; el.style.borderColor = 'var(--error)'; }
+      else{ el.style.borderColor=''; }
+    });
+    requiredRadioGroups.forEach(name=>{
+      const checked = step.querySelector('input[name="'+name+'"]:checked');
+      if(!checked){ ok = false; }
+    });
+    return ok;
+  }
+
+  document.querySelectorAll('[data-next]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(!validateStep(current)){
+        alert('Please answer all required questions (marked *) before continuing.');
+        return;
+      }
+      saveProgress();
+      if(current < totalSteps-1){ current++; showStep(current); }
+    });
+  });
+  document.querySelectorAll('[data-back]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(current > 0){ current--; showStep(current); }
+    });
+  });
+
+  // ===== Autosave to localStorage =====
+  function collectRaw(){
+    const val = (id)=>{ const el = document.getElementById(id); return el ? el.value : null; };
+    const radio = (name)=>{ const el = document.querySelector('input[name="'+name+'"]:checked'); return el ? el.value : null; };
+    const checks = (containerId)=>{ return Array.from(document.querySelectorAll('#'+containerId+' input[type=checkbox]:checked')).map(i=>i.value); };
+
+    return {
+      demographics:{
+        category: val('dem_category'),
+        province: val('dem_province'),
+        expertise: checks('dem_expertise'),
+        name: val('dem_name'),
+        email: val('dem_email'),
+        organization: val('dem_org'),
+      },
+      responses:{
+        section1_beie:{ understanding: radio('s1_understanding'), relevance: radio('s1_relevance') },
+        section2_mg:{
+          importance: radio('s2_importance'), implementation: radio('s2_implementation'),
+          archetype: radio('s2_archetype'), peace_milestones: checks('s2_peace')
+        },
+        section3_foundations:{
+          priorities: checks('s3_priorities'), feasibility: radio('s3_feasibility'),
+          el_nino_impact: radio('s3_elnino_impact'), el_nino_likelihood: radio('s3_elnino_likelihood'),
+          pestalotiopsis_impact: radio('s3_pesta_impact'), pestalotiopsis_likelihood: radio('s3_pesta_likelihood'),
+          postharvest_impact: radio('s3_postharvest_impact'), postharvest_likelihood: radio('s3_postharvest_likelihood'),
+          limits_growth: radio('s3_limits_growth')
+        },
+        section4_transformers:{
+          barrier: radio('s4_barrier'), halal_park: radio('s4_halal_park'),
+          fixes_fail: radio('s4_fixes_fail'), commodity_impact: radio('s4_commodity_impact'),
+          heds_ranking: checks('s4_heds')
+        },
+        section5_enablers:{
+          infra_rating: radio('s5_infra_rating'), sectors: checks('s5_sectors'),
+          broadband: radio('s5_broadband'), literacy: radio('s5_literacy'),
+          stunting: radio('s5_stunting'), digital_divide: radio('s5_digital_divide')
+        },
+        section6_connectors:{
+          bimpeaga_importance: radio('s6_bimpeaga'), markets: checks('s6_markets'),
+          export_target: radio('s6_export_target'), uae_feasibility: radio('s6_uae'),
+          perception: radio('s6_perception')
+        },
+        section7_financiers:{
+          criticality: radio('s7_criticality'), instruments: checks('s7_instruments'),
+          inclusion_target: radio('s7_inclusion_target'), asset_paradox: radio('s7_asset_paradox'),
+          block_grant: radio('s7_block_grant')
+        },
+        section8_options:{
+          strategy: radio('s8_strategy'), sequencing: radio('s8_sequencing'),
+          comments: val('s8_comments')
+        },
+        section9_budget:{ realism: radio('s9_realism') },
+        section10_targets:{ ambition: radio('s10_ambition'), matrix: radio('s10_matrix') },
+        section11_equity:{ affirmative: radio('s11_affirmative'), mechanisms: checks('s11_mechanisms') },
+        section12_climate:{ green_priority: radio('s12_green_priority'), adaptation: checks('s12_adaptation') },
+        section13_policy:{ legislation: checks('s13_legislation'), bicc: radio('s13_bicc') },
+        section16_care:{
+          context: radio('s16_context'), action: radio('s16_action'),
+          realtime: radio('s16_realtime'), evidence: radio('s16_evidence'), overall: radio('s16_overall')
+        },
+        open_feedback: val('s15_open')
+      },
+      consent: document.getElementById('consentBox') ? document.getElementById('consentBox').checked : false
+    };
+  }
+
+  function saveProgress(){
+    try{
+      const data = collectRaw();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ current, data, savedAt: Date.now() }));
+      document.getElementById('saveStatusFlag');
+    }catch(e){ console.warn('Autosave failed', e); }
+  }
+
+  function restoreProgress(payload){
+    const d = payload.data;
+    const setVal = (id, v)=>{ const el=document.getElementById(id); if(el && v!=null) el.value = v; };
+    const setRadio = (name, v)=>{ if(v==null) return; const el=document.querySelector('input[name="'+name+'"][value="'+v+'"]'); if(el) el.checked = true; };
+    const setChecks = (containerId, arr)=>{ if(!arr) return; arr.forEach(v=>{ const el=document.querySelector('#'+containerId+' input[value="'+v+'"]'); if(el) el.checked = true; }); };
+
+    setVal('dem_category', d.demographics.category);
+    setVal('dem_province', d.demographics.province);
+    setChecks('dem_expertise', d.demographics.expertise);
+    setVal('dem_name', d.demographics.name);
+    setVal('dem_email', d.demographics.email);
+    setVal('dem_org', d.demographics.organization);
+
+    const r = d.responses;
+    setRadio('s1_understanding', r.section1_beie.understanding);
+    setRadio('s1_relevance', r.section1_beie.relevance);
+    setRadio('s2_importance', r.section2_mg.importance);
+    setRadio('s2_implementation', r.section2_mg.implementation);
+    setRadio('s2_archetype', r.section2_mg.archetype);
+    setChecks('s2_peace', r.section2_mg.peace_milestones);
+    setChecks('s3_priorities', r.section3_foundations.priorities);
+    setRadio('s3_feasibility', r.section3_foundations.feasibility);
+    setRadio('s3_elnino_impact', r.section3_foundations.el_nino_impact);
+    setRadio('s3_elnino_likelihood', r.section3_foundations.el_nino_likelihood);
+    setRadio('s3_pesta_impact', r.section3_foundations.pestalotiopsis_impact);
+    setRadio('s3_pesta_likelihood', r.section3_foundations.pestalotiopsis_likelihood);
+    setRadio('s3_postharvest_impact', r.section3_foundations.postharvest_impact);
+    setRadio('s3_postharvest_likelihood', r.section3_foundations.postharvest_likelihood);
+    setRadio('s3_limits_growth', r.section3_foundations.limits_growth);
+    setRadio('s4_barrier', r.section4_transformers.barrier);
+    setRadio('s4_halal_park', r.section4_transformers.halal_park);
+    setRadio('s4_fixes_fail', r.section4_transformers.fixes_fail);
+    setRadio('s4_commodity_impact', r.section4_transformers.commodity_impact);
+    setChecks('s4_heds', r.section4_transformers.heds_ranking);
+    setRadio('s5_infra_rating', r.section5_enablers.infra_rating);
+    setChecks('s5_sectors', r.section5_enablers.sectors);
+    setRadio('s5_broadband', r.section5_enablers.broadband);
+    setRadio('s5_literacy', r.section5_enablers.literacy);
+    setRadio('s5_stunting', r.section5_enablers.stunting);
+    setRadio('s5_digital_divide', r.section5_enablers.digital_divide);
+    setRadio('s6_bimpeaga', r.section6_connectors.bimpeaga_importance);
+    setChecks('s6_markets', r.section6_connectors.markets);
+    setRadio('s6_export_target', r.section6_connectors.export_target);
+    setRadio('s6_uae', r.section6_connectors.uae_feasibility);
+    setRadio('s6_perception', r.section6_connectors.perception);
+    setRadio('s7_criticality', r.section7_financiers.criticality);
+    setChecks('s7_instruments', r.section7_financiers.instruments);
+    setRadio('s7_inclusion_target', r.section7_financiers.inclusion_target);
+    setRadio('s7_asset_paradox', r.section7_financiers.asset_paradox);
+    setRadio('s7_block_grant', r.section7_financiers.block_grant);
+    setRadio('s8_strategy', r.section8_options.strategy);
+    setRadio('s8_sequencing', r.section8_options.sequencing);
+    setVal('s8_comments', r.section8_options.comments);
+    setRadio('s9_realism', r.section9_budget.realism);
+    setRadio('s10_ambition', r.section10_targets.ambition);
+    setRadio('s10_matrix', r.section10_targets.matrix);
+    setRadio('s11_affirmative', r.section11_equity.affirmative);
+    setChecks('s11_mechanisms', r.section11_equity.mechanisms);
+    setRadio('s12_green_priority', r.section12_climate.green_priority);
+    setChecks('s12_adaptation', r.section12_climate.adaptation);
+    setChecks('s13_legislation', r.section13_policy.legislation);
+    setRadio('s13_bicc', r.section13_policy.bicc);
+    setRadio('s16_context', r.section16_care.context);
+    setRadio('s16_action', r.section16_care.action);
+    setRadio('s16_realtime', r.section16_care.realtime);
+    setRadio('s16_evidence', r.section16_care.evidence);
+    setRadio('s16_overall', r.section16_care.overall);
+    setVal('s15_open', r.open_feedback);
+
+    if(document.getElementById('consentBox')) document.getElementById('consentBox').checked = !!d.consent;
+
+    current = payload.current || 0;
+    showStep(current);
+  }
+
+  // Autosave on any change
+  document.getElementById('surveyForm').addEventListener('input', ()=>{ saveProgress(); });
+  document.getElementById('surveyForm').addEventListener('change', ()=>{ saveProgress(); });
+
+  // ===== Resume banner =====
+  const resumeBanner = document.getElementById('resumeBanner');
+  let pendingResume = null;
+  try{
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if(stored){
+      pendingResume = JSON.parse(stored);
+      resumeBanner.classList.add('show');
+    }
+  }catch(e){}
+
+  document.getElementById('resumeYes').addEventListener('click', ()=>{
+    if(pendingResume){ restoreProgress(pendingResume); }
+    resumeBanner.classList.remove('show');
+  });
+  document.getElementById('resumeNo').addEventListener('click', ()=>{
+    localStorage.removeItem(STORAGE_KEY);
+    resumeBanner.classList.remove('show');
+  });
+
+  // ===== Summary builder for review step =====
+  function buildSummary(){
+    const d = collectRaw();
+    const list = document.getElementById('summaryList');
+    const rows = [
+      ['Stakeholder type', d.demographics.category || '—'],
+      ['Province', d.demographics.province || '—'],
+      ['Areas of expertise', (d.demographics.expertise||[]).length + ' selected'],
+      ['Preferred strategy', d.responses.section8_options.strategy || '—'],
+      ['Overall rating', d.responses.section16_care.overall ? d.responses.section16_care.overall + ' / 5' : '—'],
+      ['Open feedback', d.responses.open_feedback ? 'Provided' : 'None'],
+    ];
+    list.innerHTML = rows.map(r=>'<li><span class="lab">'+r[0]+'</span><span class="val">'+r[1]+'</span></li>').join('');
+  }
+
+  // ===== Submit =====
+  document.getElementById('submitBtn').addEventListener('click', async ()=>{
+    const errBanner = document.getElementById('submitError');
+    errBanner.classList.remove('show');
+    const consent = document.getElementById('consentBox').checked;
+    if(!consent){
+      errBanner.textContent = 'Please check the consent box to submit your response.';
+      errBanner.classList.add('show');
+      return;
+    }
+    const surveyData = collectRaw();
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    const payload = {
+      surveyData,
+      metadata:{ platform: navigator.platform, language: navigator.language }
+    };
+
+    try{
+      if(!navigator.onLine) throw new Error('offline');
+      const res = await fetch(SUBMIT_ENDPOINT, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      });
+      if(!res.ok){
+        const errJson = await res.json().catch(()=>({}));
+        throw new Error(errJson.message || 'Submission failed');
+      }
+      onSubmitSuccess();
+    }catch(err){
+      // Queue for later sync if offline or network error
+      try{
+        const queue = JSON.parse(localStorage.getItem(QUEUE_KEY) || '[]');
+        queue.push(payload);
+        localStorage.setItem(QUEUE_KEY, JSON.stringify(queue));
+        onSubmitSuccess(true);
+      }catch(e2){
+        errBanner.textContent = 'We could not submit your response right now. Please try again in a moment.';
+        errBanner.classList.add('show');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit survey ✓';
+      }
+    }
+  });
+
+  function onSubmitSuccess(queued){
+    localStorage.removeItem(STORAGE_KEY);
+    document.getElementById('surveyForm').style.display = 'none';
+    document.getElementById('resumeBanner').classList.remove('show');
+    progressWrap.style.display = 'none';
+    const panel = document.getElementById('successPanel');
+    if(queued){
+      panel.querySelector('.success-text').textContent = 'You appear to be offline. Your response has been saved on this device and will be sent automatically once you are back online. Thank you for taking part!';
+    }
+    panel.classList.add('show');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  // Try to flush queued offline submissions when back online
+  window.addEventListener('online', async ()=>{
+    try{
+      const queue = JSON.parse(localStorage.getItem(QUEUE_KEY) || '[]');
+      if(queue.length === 0) return;
+      const remaining = [];
+      for(const item of queue){
+        try{
+          const res = await fetch(SUBMIT_ENDPOINT, {
+            method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(item)
+          });
+          if(!res.ok) remaining.push(item);
+        }catch(e){ remaining.push(item); }
+      }
+      localStorage.setItem(QUEUE_KEY, JSON.stringify(remaining));
+    }catch(e){}
+  });
+
+  // ===== Online / offline status =====
+  function updateStatus(){
+    const dot = document.getElementById('statusDot');
+    const text = document.getElementById('statusText');
+    if(navigator.onLine){
+      dot.classList.remove('offline');
+      text.textContent = 'Online — your answers save automatically';
+    }else{
+      dot.classList.add('offline');
+      text.textContent = 'Offline — your answers are saved on this device';
+    }
+  }
+  window.addEventListener('online', updateStatus);
+  window.addEventListener('offline', updateStatus);
+  updateStatus();
+
+  // Init
+  showStep(0);
+})();
 </script>
 </body>
 </html>
