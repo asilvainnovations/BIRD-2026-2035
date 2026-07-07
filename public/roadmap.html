@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0A1628">
-<meta name="description" content="BIRD 2026-2035 Strategic Investment Roadmap - Explore strategic options, implementation phases, and investment pathways for the Bangsamoro region.">
-<meta name="keywords" content="BIRD roadmap, Bangsamoro investment, strategic options, IEDS, phased implementation, halal economy, green economy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#022c22">
+<meta name="description" content="BIRD 2026-2035 Strategic Investment Roadmap - Comprehensive guide to Bangsamoro's economic transformation through the Integrated Ecosystem Development Strategy. Explore strategic options, Balanced Scorecard perspectives, and implementation phases.">
+<meta name="keywords" content="BIRD roadmap, Bangsamoro investment, strategic options, IEDS, Balanced Scorecard, halal economy, green economy, BARMM development, investment strategy 2026-2035">
 <meta name="author" content="Bureau of Investments - Ministry of Trade, Investments and Tourism, BARMM">
-<meta property="og:title" content="BIRD 2026-2035 Strategic Roadmap">
-<meta property="og:description" content="Explore the strategic investment roadmap for Bangsamoro's economic transformation 2026-2035.">
+<meta property="og:title" content="BIRD 2026-2035 Strategic Investment Roadmap | The Emerging Bangsamoro">
+<meta property="og:description" content="Discover the comprehensive strategic roadmap for Bangsamoro's economic transformation. Explore the Integrated Ecosystem Development Strategy and investment pathways.">
 <meta property="og:type" content="website">
-<title>BIRD 2026-2035 Strategic Roadmap | The Emerging Bangsamoro</title>
+<meta property="og:image" content="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/Infographic-Roadmap.png">
+<title>BIRD 2026-2035 Strategic Investment Roadmap | The Emerging Bangsamoro</title>
 
 <!-- PWA Manifest -->
 <link rel="manifest" href="/manifest.json">
@@ -19,327 +20,1051 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="apple-touch-icon" href="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png">
 
+<!-- Preload Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap"></noscript>
+
 <style>
-    /* Mobile-First CSS with Apple Liquid Glass Aesthetics */
-    :root {
-        --bg-primary: #0A1628;
-        --bg-secondary: rgba(17, 34, 64, 0.6);
-        --glass-bg: rgba(255, 255, 255, 0.05);
-        --glass-border: rgba(255, 255, 255, 0.1);
-        --accent-blue: #3B82F6;
-        --accent-cyan: #06B6D4;
-        --accent-green: #10B981;
-        --text-primary: #F8FAFC;
-        --text-secondary: #94A3B8;
-        --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-    }
+:root{
+--primary-green:#064e3b;--dark-green:#022c22;--mid-green:#065f46;
+--light-green:#6ee7b7;--cream:#ecfdf5;--white:#ffffff;
+--text-light:#ffffff;--text-muted:#64748b;
+--gold:#C9A84C;--gold-light:#E8C560;--gold-dark:#8B6C28;--gold-pale:#fdf6e3;
+--gold-border:rgba(201,168,76,0.32);--gold-border-strong:rgba(201,168,76,0.55);
+--gold-glow:rgba(201,168,76,0.20);
+--gold-grad:linear-gradient(135deg,#7a5c1e 0%,#c9a84c 35%,#e8c560 50%,#c9a84c 65%,#7a5c1e 100%);
+--focus-ring:0 0 0 3px rgba(201,168,76,0.5);
+--touch-target:44px;
+}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+scroll-behavior: auto !important;
+}
+}
 
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background: var(--bg-primary);
-        color: var(--text-primary);
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        overflow-x: hidden;
-    }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
+font-family:'DM Sans',sans-serif;
+background:linear-gradient(160deg,#011a12 0%,#022c22 45%,#0a1628 100%);
+min-height:100vh;
+color:var(--cream);
+background-attachment:fixed;
+overflow-x:hidden;
+line-height:1.5;
+-webkit-font-smoothing:antialiased;
+}
 
-    /* Liquid Glass Effect */
-    .glass {
-        background: var(--glass-bg);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid var(--glass-border);
-        border-radius: 16px;
-        box-shadow: var(--card-shadow);
-    }
+/* Skip Link for Accessibility */
+.skip-link {
+position:absolute;
+top:-40px;
+left:0;
+background:var(--gold);
+color:var(--dark-green);
+padding:8px;
+text-decoration:none;
+z-index:9999;
+font-weight:bold;
+border-radius:0 0 4px 0;
+}
+.skip-link:focus { top:0; }
 
-    .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
+/* NAV - Mobile First */
+.site-nav {
+background:rgba(2,44,34,.97);
+backdrop-filter:blur(18px);
+position:sticky;
+top:0;
+width:100%;
+z-index:200;
+border-bottom:2px solid var(--gold-border);
+transition:box-shadow .4s;
+}
+.site-nav.scrolled { box-shadow:0 4px 30px rgba(0,0,0,.5); }
+.nav-inner {
+max-width:1400px;
+margin:0 auto;
+padding:.75rem 1rem;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:1rem;
+min-height:var(--touch-target);
+}
+.nav-logo img { height:40px; width:auto; object-fit:contain; display:block; }
 
-    /* Navigation */
-    .main-nav {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        padding: 16px 0;
-        background: rgba(10, 22, 40, 0.85);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-bottom: 1px solid var(--glass-border);
-    }
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+display:block;
+background:none;
+border:none;
+color:var(--gold);
+cursor:pointer;
+padding:.5rem;
+border-radius:.375rem;
+min-width:var(--touch-target);
+min-height:var(--touch-target);
+}
+.mobile-menu-toggle:focus-visible {
+outline:2px solid var(--gold);
+outline-offset:2px;
+}
+.nav-links-list {
+display:none;
+position:absolute;
+top:100%;
+left:0;
+right:0;
+background:rgba(2,44,34,.98);
+flex-direction:column;
+gap:0;
+list-style:none;
+padding:1rem;
+border-bottom:2px solid var(--gold-border);
+max-height:80vh;
+overflow-y:auto;
+}
+.nav-links-list.active { display:flex; }
+.nav-links-list a {
+color:var(--light-green);
+text-decoration:none;
+font-size:1rem;
+font-weight:500;
+letter-spacing:.03em;
+position:relative;
+transition:color .3s;
+display:block;
+padding:1rem;
+border-radius:.5rem;
+min-height:var(--touch-target);
+display:flex;
+align-items:center;
+}
+.nav-links-list a:hover,
+.nav-links-list a:focus {
+color:var(--gold);
+background:rgba(201,168,76,.1);
+outline:none;
+}
+.nav-links-list a:focus-visible { box-shadow:var(--focus-ring); }
 
-    .nav-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 16px;
-    }
+/* Desktop Nav */
+@media (min-width: 900px) {
+.mobile-menu-toggle { display:none; }
+.nav-links-list {
+display:flex !important;
+position:static;
+flex-direction:row;
+gap:1.5rem;
+padding:0;
+background:transparent;
+border:none;
+}
+.nav-links-list a {
+padding:.25rem 0;
+font-size:.82rem;
+white-space:nowrap;
+}
+.nav-links-list a:hover,
+.nav-links-list a:focus { background:none; }
+.nav-links-list a::after {
+content:'';
+position:absolute;
+bottom:-3px;
+left:0;
+width:0;
+height:2px;
+background:var(--gold);
+transition:width .3s;
+}
+.nav-links-list a:hover::after,
+.nav-links-list a:focus::after { width:100%; }
+.nav-logo img { height:52px; }
+.nav-inner { padding:.55rem 2rem; }
+}
 
-    .nav-logo {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--accent-blue);
-        text-decoration: none;
-        letter-spacing: -0.5px;
-    }
+/* PAGE HEADER */
+.page-header {
+text-align:center;
+padding:3.5rem 1rem 2.5rem;
+position:relative;
+}
+.page-header::before {
+content:'';
+position:absolute;
+top:0;
+left:50%;
+transform:translateX(-50%);
+width:220px;
+height:4px;
+background:var(--gold-grad);
+border-radius:2px;
+}
+.page-header::after {
+content:'';
+position:absolute;
+inset:0;
+background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.06) 0%,transparent 65%);
+pointer-events:none;
+}
+.header-eyebrow {
+display:inline-block;
+background:rgba(201,168,76,.10);
+border:1px solid var(--gold-border-strong);
+color:var(--gold);
+padding:.35rem 1.25rem;
+border-radius:2rem;
+font-size:.72rem;
+font-weight:700;
+letter-spacing:.12em;
+text-transform:uppercase;
+margin-bottom:1.5rem;
+}
+.page-header h1 {
+font-family:'Cinzel',serif;
+font-size:clamp(2rem,6vw,3.5rem);
+font-weight:700;
+background:var(--gold-grad);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-clip:text;
+line-height:1.2;
+margin-bottom:1rem;
+}
+.page-header .subtitle {
+font-size:1.25rem;
+color:var(--light-green);
+font-weight:600;
+margin-bottom:.5rem;
+font-family:'Cinzel',serif;
+}
+.page-header .tagline {
+font-size:1.05rem;
+color:rgba(255,255,255,.65);
+font-style:italic;
+letter-spacing:.02em;
+max-width:800px;
+margin:0 auto;
+line-height:1.6;
+}
 
-    .nav-links {
-        display: flex;
-        gap: 8px;
-        list-style: none;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+/* SECTIONS */
+.section-container {
+max-width:1400px;
+margin:0 auto;
+padding:0 2rem 4rem;
+}
+.section-header {
+text-align:center;
+margin-bottom:3rem;
+}
+.section-title {
+font-family:'Cinzel',serif;
+font-size:clamp(1.5rem,4vw,2.25rem);
+color:var(--gold);
+font-weight:700;
+margin-bottom:1rem;
+}
+.section-subtitle {
+color:rgba(209,250,229,.8);
+font-size:1.05rem;
+max-width:800px;
+margin:0 auto;
+line-height:1.7;
+}
 
-    .nav-links a {
-        color: var(--text-secondary);
-        text-decoration: none;
-        font-size: 0.9rem;
-        font-weight: 500;
-        padding: 8px 14px;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-    }
+/* FULL-WIDTH IMAGE CONTAINERS */
+.full-width-image {
+width:100%;
+margin:3rem 0;
+border-radius:1rem;
+overflow:hidden;
+border:2px solid var(--gold-border);
+box-shadow:0 12px 40px rgba(0,0,0,.5);
+background:rgba(2,44,34,.4);
+}
+.full-width-image img {
+width:100%;
+height:auto;
+display:block;
+}
+.image-caption {
+text-align:center;
+padding:1.5rem;
+background:rgba(2,44,34,.8);
+color:rgba(209,250,229,.85);
+font-size:.95rem;
+line-height:1.6;
+border-top:1px solid var(--gold-border);
+}
 
-    .nav-links a:hover {
-        color: var(--text-primary);
-        background: var(--glass-bg);
-    }
+/* COLLAPSIBLE SECTIONS */
+.collapsible-section {
+margin:2.5rem 0;
+border:1px solid var(--gold-border);
+border-radius:1rem;
+overflow:hidden;
+background:rgba(2,44,34,.35);
+}
+.collapsible-header {
+width:100%;
+padding:1.5rem 2rem;
+background:linear-gradient(135deg,rgba(6,78,59,.9) 0%,rgba(6,95,70,.7) 100%);
+border:none;
+cursor:pointer;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:1rem;
+transition:all .3s;
+}
+.collapsible-header:hover {
+background:linear-gradient(135deg,rgba(6,78,59,1) 0%,rgba(6,95,70,.9) 100%);
+}
+.collapsible-header h3 {
+font-family:'Cinzel',serif;
+color:var(--gold);
+font-size:1.25rem;
+font-weight:700;
+margin:0;
+}
+.collapsible-icon {
+width:2rem;
+height:2rem;
+color:var(--gold);
+transition:transform .3s;
+flex-shrink:0;
+}
+.collapsible-section.active .collapsible-icon {
+transform:rotate(180deg);
+}
+.collapsible-content {
+max-height:0;
+overflow:hidden;
+transition:max-height .4s ease-out;
+background:rgba(0,0,0,.25);
+}
+.collapsible-section.active .collapsible-content {
+max-height:5000px;
+}
+.collapsible-body {
+padding:2rem;
+}
 
-    /* Page Header */
-    .page-header {
-        padding: 60px 0 40px;
-        text-align: center;
-    }
+/* BALANCED SCORECARD PERSPECTIVES */
+.bsc-perspective {
+margin-bottom:2rem;
+padding:1.5rem;
+background:rgba(6,78,59,.2);
+border-left:4px solid var(--gold);
+border-radius:0 .75rem .75rem 0;
+}
+.bsc-perspective h4 {
+font-family:'Cinzel',serif;
+color:var(--gold);
+font-size:1.1rem;
+margin-bottom:1rem;
+}
+.bsc-objectives {
+display:grid;
+gap:1rem;
+}
+.bsc-objective {
+background:rgba(0,0,0,.3);
+padding:1.25rem;
+border-radius:.65rem;
+border:1px solid var(--gold-border);
+}
+.bsc-objective h5 {
+color:var(--light-green);
+font-size:1rem;
+margin-bottom:.5rem;
+font-weight:600;
+}
+.bsc-objective p {
+color:rgba(209,250,229,.85);
+font-size:.9rem;
+line-height:1.6;
+}
 
-    .page-header h1 {
-        font-size: 2rem;
-        font-weight: 800;
-        margin-bottom: 12px;
-        background: linear-gradient(135deg, #FFFFFF 0%, #3B82F6 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+/* METRICS GRID */
+.metrics-grid {
+display:grid;
+grid-template-columns:1fr;
+gap:1.5rem;
+}
+@media (min-width: 768px) {
+.metrics-grid {
+grid-template-columns:repeat(2,1fr);
+}
+}
+@media (min-width: 1024px) {
+.metrics-grid {
+grid-template-columns:repeat(3,1fr);
+}
+}
+.metric-card {
+background:rgba(6,78,59,.3);
+padding:1.5rem;
+border-radius:.75rem;
+border:1px solid var(--gold-border);
+text-align:center;
+transition:transform .3s, border-color .3s;
+}
+.metric-card:hover {
+transform:translateY(-4px);
+border-color:var(--gold);
+}
+.metric-value {
+font-family:'Cinzel',serif;
+font-size:2rem;
+color:var(--gold);
+font-weight:700;
+margin-bottom:.5rem;
+}
+.metric-label {
+color:rgba(209,250,229,.85);
+font-size:.9rem;
+line-height:1.5;
+}
+.metric-baseline {
+color:rgba(209,250,229,.6);
+font-size:.8rem;
+margin-top:.5rem;
+}
 
-    .page-header p {
-        color: var(--text-secondary);
-        font-size: 1rem;
-        max-width: 700px;
-        margin: 0 auto;
-    }
+/* PHASES TIMELINE */
+.phases-timeline {
+display:flex;
+flex-direction:column;
+gap:2rem;
+}
+.phase-card {
+background:rgba(6,78,59,.25);
+padding:2rem;
+border-radius:1rem;
+border:2px solid var(--gold-border);
+position:relative;
+}
+.phase-card::before {
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:4px;
+background:var(--gold-grad);
+border-radius:1rem 1rem 0 0;
+}
+.phase-number {
+font-family:'Cinzel',serif;
+font-size:3rem;
+color:var(--gold);
+opacity:.3;
+position:absolute;
+top:1rem;
+right:2rem;
+font-weight:700;
+}
+.phase-title {
+font-family:'Cinzel',serif;
+color:var(--gold);
+font-size:1.4rem;
+margin-bottom:.5rem;
+padding-right:6rem;
+}
+.phase-timeframe {
+color:var(--light-green);
+font-size:.95rem;
+margin-bottom:1rem;
+font-weight:600;
+}
+.phase-description {
+color:rgba(209,250,229,.85);
+line-height:1.7;
+margin-bottom:1.5rem;
+}
+.phase-deliverables {
+background:rgba(0,0,0,.3);
+padding:1.25rem;
+border-radius:.65rem;
+}
+.phase-deliverables h5 {
+color:var(--gold);
+margin-bottom:.75rem;
+font-size:1rem;
+}
+.phase-deliverables ul {
+list-style:none;
+padding-left:0;
+}
+.phase-deliverables li {
+color:rgba(209,250,229,.85);
+padding:.5rem 0;
+padding-left:1.5rem;
+position:relative;
+font-size:.9rem;
+}
+.phase-deliverables li::before {
+content:'▸';
+position:absolute;
+left:0;
+color:var(--gold);
+}
 
-    /* Sections */
-    section {
-        padding: 40px 0;
-    }
+/* CTA SECTION */
+.cta-section {
+text-align:center;
+padding:5rem 2rem;
+background:linear-gradient(135deg,rgba(6,78,59,.6) 0%,rgba(2,44,34,.8) 100%);
+border-radius:1.5rem;
+border:2px solid var(--gold-border);
+margin:4rem 0;
+}
+.cta-title {
+font-family:'Cinzel',serif;
+font-size:clamp(1.75rem,5vw,2.5rem);
+color:var(--gold);
+margin-bottom:1rem;
+}
+.cta-text {
+color:rgba(209,250,229,.9);
+font-size:1.1rem;
+max-width:700px;
+margin:0 auto 2rem;
+line-height:1.7;
+}
+.cta-button {
+display:inline-block;
+background:var(--gold-grad);
+color:var(--dark-green);
+padding:1.25rem 3rem;
+border-radius:3rem;
+text-decoration:none;
+font-family:'Cinzel',serif;
+font-weight:700;
+font-size:1.1rem;
+transition:all .3s;
+box-shadow:0 8px 30px rgba(201,168,76,.3);
+border:2px solid var(--gold);
+}
+.cta-button:hover {
+transform:translateY(-3px);
+box-shadow:0 12px 40px rgba(201,168,76,.5);
+}
 
-    .section-title {
-        font-size: 1.5rem;
-        margin-bottom: 24px;
-        color: white;
-        font-weight: 700;
-    }
+/* FOOTER */
+footer {
+text-align:center;
+padding:3rem 2rem;
+border-top:1px solid var(--gold-border);
+margin-top:4rem;
+color:rgba(209,250,229,.6);
+font-size:.9rem;
+}
+footer p {
+margin:.5rem 0;
+}
 
-    /* Image Gallery - Full Width */
-    .image-gallery {
-        display: flex;
-        flex-direction: column;
-        gap: 32px;
-        margin: 40px 0;
-    }
-
-    .image-container {
-        width: 100%;
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: var(--card-shadow);
-    }
-
-    .image-container img {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
-
-    .image-caption {
-        text-align: center;
-        color: var(--text-secondary);
-        font-size: 0.9rem;
-        margin-top: 12px;
-        padding: 0 20px;
-    }
-
-    /* Video Container - Full Width */
-    .video-container {
-        width: 100%;
-        margin: 40px 0;
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: var(--card-shadow);
-        position: relative;
-        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-        height: 0;
-    }
-
-    .video-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-
-    /* Contact Section */
-    .contact-section {
-        padding: 60px 0;
-        text-align: center;
-    }
-
-    .contact-cta {
-        display: inline-block;
-        background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 100%);
-        color: white;
-        padding: 16px 32px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 1rem;
-        transition: transform 0.3s, box-shadow 0.3s;
-        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
-    }
-
-    .contact-cta:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
-    }
-
-    /* Footer */
-    footer {
-        padding: 40px 0;
-        text-align: center;
-        border-top: 1px solid var(--glass-border);
-        color: var(--text-secondary);
-        font-size: 0.9rem;
-    }
-
-    /* Desktop Adjustments */
-    @media (min-width: 768px) {
-        .page-header h1 { font-size: 2.5rem; }
-        .page-header p { font-size: 1.1rem; }
-        .section-title { font-size: 1.8rem; }
-        .nav-links { gap: 16px; }
-        .nav-links a { font-size: 0.95rem; }
-        .image-gallery {
-            flex-direction: row;
-            flex-wrap: wrap;
-        }
-        .image-container {
-            flex: 1;
-            min-width: calc(50% - 16px);
-        }
-    }
-
-    @media (min-width: 1024px) {
-        .image-container {
-            min-width: calc(50% - 16px);
-        }
-    }
+/* RESPONSIVE */
+@media (min-width: 768px) {
+.section-container { padding:0 3rem 5rem; }
+.collapsible-header { padding:2rem 2.5rem; }
+.collapsible-body { padding:2.5rem; }
+.phases-timeline { gap:2.5rem; }
+}
+@media (min-width: 1024px) {
+.section-container { padding:0 4rem 6rem; }
+}
 </style>
 </head>
 <body>
+<a href="#mainContent" class="skip-link">Skip to main content</a>
 
 <!-- Navigation -->
-<nav class="main-nav">
-    <div class="container nav-container">
-        <a href="https://bangsamoro-investment-roadmap.asilvainnovations.com" class="nav-logo">BIRD 2026–2035</a>
-        <ul class="nav-links">
-            <li><a href="https://bangsamoro-investment-roadmap.asilvainnovations.com">Home</a></li>
-            <li><a href="https://bird-dashboard.asilvainnovations.com">Dashboard</a></li>
-            <li><a href="https://bird-resources.asilvainnovations.com">Resources</a></li>
-            <li><a href="roadmap.html" style="color: var(--accent-blue);">Roadmap</a></li>
-            <li><a href="https://bird-app.asilvainnovations.com">BIRD App</a></li>
-            <li><a href="https://bird-contact.asilvainnovations.com">Contact</a></li>
-        </ul>
-    </div>
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+<div class="nav-inner">
+<a href="https://bird-home.asilvainnovations.com" class="nav-logo" aria-label="BARMM MTIT Home">
+<img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png" alt="Ministry of Trade, Investments and Tourism - BARMM" onerror="this.style.display='none'">
+</a>
+<button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+<svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+</button>
+<ul class="nav-links-list" id="navLinks" role="list">
+<li><a href="https://bird-dashboard.asilvainnovations.com">Dashboard</a></li>
+<li><a href="https://bird-roadmap.asilvainnovations.com" style="color:var(--gold); font-weight:700;">Roadmap</a></li>
+<li><a href="https://bird-survey.asilvainnovations.com">Validation Survey</a></li>
+<li><a href="https://bird-resources.asilvainnovations.com">Resources</a></li>
+<li><a href="https://bird-app.asilvainnovations.com">BIRD App</a></li>
+</ul>
+</div>
 </nav>
 
 <!-- Page Header -->
-<header class="page-header">
-    <div class="container">
-        <h1>Strategic Investment Roadmap</h1>
-        <p>Exploring strategic options and the integrated pathway for Bangsamoro's economic transformation 2026–2035</p>
-    </div>
+<header class="page-header" role="banner">
+<div class="header-eyebrow">Strategic Investment Roadmap 2026–2035</div>
+<h1>The Emerging Bangsamoro</h1>
+<div class="subtitle">Integrated Ecosystem Development Strategy</div>
+<p class="tagline">A comprehensive roadmap transforming vision into measurable economic transformation through synchronized cluster development, strategic investment pathways, and inclusive growth anchored in moral governance</p>
 </header>
 
-<!-- Strategic Options Image -->
+<main class="section-container" id="mainContent">
+
+<!-- Executive Dashboard Snapshot -->
 <section>
-    <div class="container">
-        <h2 class="section-title">Strategic Options Analysis</h2>
-        <div class="image-gallery">
-            <div class="image-container">
-                <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-strategic-options-roadmap/public/2..%20Formulating%20the%20Roadmap.png" alt="Strategic Options Formulation Process">
-            </div>
-        </div>
-        <p class="image-caption">Figure 1: Strategic Options Formulation - Comprehensive analysis of four strategic pathways for BARMM's economic development</p>
-    </div>
+<div class="full-width-image">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/Executive%20Dashboard.png" alt="BIRD Executive Dashboard - Key Performance Indicators and Strategic Metrics Overview">
+</div>
+<div class="image-caption">
+<strong>Executive Dashboard Snapshot:</strong> Real-time monitoring of critical performance indicators tracking BARMM's economic transformation journey from ₱299.5B GRDP baseline to ₱550B+ target by 2035, with integrated metrics across investment approvals, export growth, poverty reduction, and infrastructure development.
+</div>
 </section>
 
-<!-- The IEDS Image -->
+<!-- Vision Section -->
 <section>
-    <div class="container">
-        <h2 class="section-title">The Integrated Ecosystem Development Strategy (IEDS)</h2>
-        <div class="image-gallery">
-            <div class="image-container">
-                <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-strategic-options-roadmap/public/6.%20The%20IEDS.png" alt="The IEDS Framework">
-            </div>
-        </div>
-        <p class="image-caption">Figure 2: The IEDS Framework - Synchronized ecosystem development across all BEIE clusters</p>
-    </div>
+<div class="section-header">
+<h2 class="section-title">Vision 2035: A Hub for Resilient and Ethical Growth</h2>
+<p class="section-subtitle">By 2035, the Bangsamoro Autonomous Region will be recognized as the Philippines' premier halal, agro-industrial, and sustainable investment destination—a self-sustaining, export-linked economy delivering inclusive prosperity anchored in Islamic values, cultural identity, and moral governance.</p>
+</div>
+<div class="full-width-image">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/5.%20Vision.png" alt="Vision 2035 Strategic Framework - Comprehensive economic transformation targets and development pillars">
+</div>
+<div class="image-caption">
+<strong>Vision Framework:</strong> The strategic vision integrates five core pillars—Halal Economy Dominance, Green Economy Monetization, Infrastructure Excellence, BIMP-EAGA Integration, and Islamic Finance Ecosystem—creating a synergistic development model that leverages BARMM's unique cultural authenticity, strategic location, and natural resource endowments.
+</div>
 </section>
 
-<!-- Video Section -->
+<!-- Balanced Scorecard Perspectives -->
 <section>
-    <div class="container">
-        <h2 class="section-title">Strategic Options and the Investment Roadmap</h2>
-        <div class="video-container">
-            <iframe 
-                src="https://www.youtube.com/embed/kb_snh8mo1k" 
-                title="Bangsamoro Investment Roadmap 2026–2035 | Strategic Options & Path to Growth" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin" 
-                allowfullscreen>
-            </iframe>
-        </div>
-        <p class="image-caption">Watch: Comprehensive overview of strategic options and the recommended IEDS pathway</p>
-    </div>
+<div class="section-header">
+<h2 class="section-title">Balanced Scorecard Strategic Perspectives</h2>
+<p class="section-subtitle">Four interconnected perspectives translating strategic vision into actionable objectives, measurable outcomes, and accountable implementation across all BEIE clusters</p>
+</div>
+
+<div class="collapsible-section active">
+<button class="collapsible-header" aria-expanded="true" onclick="toggleCollapsible(this)">
+<h3>Financial Perspective: Investment & Economic Growth</h3>
+<svg class="collapsible-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+</button>
+<div class="collapsible-content">
+<div class="collapsible-body">
+<div class="bsc-perspective">
+<h4>Strategic Objective F1: Scale Investment Approvals</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: ₱15B Annual Investment Approvals by 2035</h5>
+<p>From ₱5.1B baseline (Q1 2026), implementing investment promotion roadshows, BIMP-EAGA missions, and enhanced aftercare services to attract quality domestic and foreign investments aligned with halal, agro-industrial, and green economy priorities.</p>
+</div>
+</div>
+</div>
+<div class="bsc-perspective">
+<h4>Strategic Objective F2: Expand Export Revenue</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: ₱40B+ Annual Export Value</h5>
+<p>From &lt;₱10B baseline, establishing UAE/GCC halal export corridors, BIMP-EAGA trade facilitation mechanisms, and export readiness programs to position BARMM products in premium international markets.</p>
+</div>
+</div>
+</div>
+<div class="bsc-perspective">
+<h4>Strategic Objective F3: Mobilize Islamic Finance</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: ₱20B+ Islamic Banking Assets</h5>
+<p>From &lt;₱2B baseline, expanding Al-Amanah and CARD Islamic Bank networks, deploying fintech solutions, and developing takaful products to channel Shariah-compliant capital across MSMEs, agro-entrepreneurs, and green enterprises.</p>
+</div>
+</div>
+</div>
+<div class="bsc-perspective">
+<h4>Strategic Objective F4: Activate Green Economy Revenue</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: ₱500M+ Annual Carbon/PES Revenue</h5>
+<p>From zero baseline, operationalizing REDD+ programs, Payment for Ecosystem Services frameworks, and eco-tourism user fees to monetize BARMM's environmental stewardship and forest endowments.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="collapsible-section">
+<button class="collapsible-header" aria-expanded="false" onclick="toggleCollapsible(this)">
+<h3>Stakeholder Perspective: Investor & Community Outcomes</h3>
+<svg class="collapsible-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+</button>
+<div class="collapsible-content">
+<div class="collapsible-body">
+<div class="bsc-perspective">
+<h4>Strategic Objective S1: Enhance Investor Confidence</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: 85% Investment Project Retention Rate</h5>
+<p>Establishing problem resolution mechanisms, expanding one-stop shop services, and ensuring predictable policy environment to maintain investor satisfaction at 8.0+/10 and prevent capital flight after incentive periods expire.</p>
+</div>
+</div>
+</div>
+<div class="bsc-perspective">
+<h4>Strategic Objective S2: Empower MSMEs through Halal Certification</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: 5,000+ Halal-Certified MSMEs</h5>
+<p>From ~500 baseline, implementing BHB MSME certification programs, BHIDP 2025-2030 rollout, and QA lab deployment to enable small enterprises to access premium halal markets and global value chains.</p>
+</div>
+</div>
+</div>
+<div class="bsc-perspective">
+<h4>Strategic Objective S3: Reduce Poverty through Inclusive Investment</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: &lt;20% Poverty Incidence</h5>
+<p>From 34.8% (2023), implementing jobs-focused investment facilitation, MSME development programs, and inclusive value chains to ensure economic growth translates into broad-based prosperity and human development.</p>
+</div>
+</div>
+</div>
+<div class="bsc-perspective">
+<h4>Strategic Objective S4: Improve Financial Inclusion</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: 25% Adult Financial Inclusion</h5>
+<p>Expanding Islamic banking branches to all provincial capitals, deploying mobile banking solutions for archipelagic communities, and establishing waqf-managed community enterprises to channel capital to underserved populations.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="collapsible-section">
+<button class="collapsible-header" aria-expanded="false" onclick="toggleCollapsible(this)">
+<h3>Internal Process Perspective: Operational Excellence</h3>
+<svg class="collapsible-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+</button>
+<div class="collapsible-content">
+<div class="collapsible-body">
+<div class="bsc-perspective">
+<h4>Strategic Objective P1: Streamline Investment Facilitation</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: 1-Day Digital Business Registration</h5>
+<p>From multiple days processing, implementing digital BNR system, BEGMP e-governance platform, and one-stop shop expansion to reduce transaction costs and improve ease of doing business rankings.</p>
+</div>
+</div>
+</div>
+<div class="bsc-perspective">
+<h4>Strategic Objective P2: Strengthen Halal Certification Infrastructure</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: Full OIC/SMIIC Accreditation + MRA</h5>
+<p>From pending status, building BHB capacity, signing international Mutual Recognition Agreements, and establishing QA laboratories to reduce certification time from 45-60 days to 21-day international benchmark.</p>
+</div>
+</div>
+</div>
+<div class="bsc-perspective">
+<h4>Strategic Objective P3: Accelerate Infrastructure Delivery</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: &gt;90% Budget Execution Rate</h5>
+<p>From &lt;80% baseline, enhancing MPW-BBOI-LGU coordination, resolving ROW issues, implementing PPP frameworks, and deploying trigger-based budgeting to ensure critical infrastructure keeps pace with investment growth.</p>
+</div>
+</div>
+</div>
+<div class="bsc-perspective">
+<h4>Strategic Objective P4: Synchronize BMOA Programs</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: 8/10 Inter-Agency Coordination Score</h5>
+<p>From ~5.5/10 baseline, institutionalizing Bangsamoro Investment Command Center, establishing inter-agency MOAs, and deploying digital coordination platforms to prevent fragmented delivery and "Tragedy of the Commons" dynamics.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="collapsible-section">
+<button class="collapsible-header" aria-expanded="false" onclick="toggleCollapsible(this)">
+<h3>Learning & Growth Perspective: Capability Development</h3>
+<svg class="collapsible-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+</button>
+<div class="collapsible-content">
+<div class="collapsible-body">
+<div class="bsc-perspective">
+<h4>Strategic Objective L1: Build Halal Expertise</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: 100+ Certified Halal Officers</h5>
+<p>From &lt;50 baseline, establishing Halal Training Academy, BHB-SMIIC partnerships, and international secondments to build technical capacity in certification, auditing, and quality assurance systems.</p>
+</div>
+</div>
+</div>
+<div class="bsc-perspective">
+<h4>Strategic Objective L2: Develop Islamic Finance Professionals</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: 50+ Certified Islamic Finance Experts</h5>
+<p>From &lt;20 baseline, implementing BSP-aligned scholarship programs, professional certification pathways, and IsDB training partnerships to build expertise in Shariah-compliant banking, takaful, and sukuk structuring.</p>
+</div>
+</div>
+</div>
+<div class="bsc-perspective">
+<h4>Strategic Objective L3: Strengthen IPA Capacity</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: 80% IPA Staff Certified/Trained</h5>
+<p>From &lt;50% baseline, implementing capacity building programs, BBOI-MTIT HRD plans, and performance incentives to professionalize investment promotion and aftercare services across all provincial facilitation offices.</p>
+</div>
+</div>
+</div>
+<div class="bsc-perspective">
+<h4>Strategic Objective L4: Improve Functional Literacy</h4>
+<div class="bsc-objectives">
+<div class="bsc-objective">
+<h5>Target: 75%+ Functional Literacy Rate</h5>
+<p>From 59.3% baseline (lowest nationally), deploying TESDA programs, DepEd alternative learning systems, and adult literacy campaigns to resolve the binding human capital constraint on industrial investment viability.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- Contact Section -->
-<section class="contact-section">
-    <div class="container">
-        <h2 class="section-title">Ready to Shape the Future?</h2>
-        <p style="color: var(--text-secondary); margin-bottom: 32px; font-size: 1.1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-            Join us in building a resilient, ethical, and prosperous Bangsamoro economy. Your participation matters.
-        </p>
-        <a href="https://bird-contact.asilvainnovations.com" class="contact-cta">Contact Us Here →</a>
-    </div>
+<!-- Metrics & KPIs -->
+<section>
+<div class="section-header">
+<h2 class="section-title">Key Performance Indicators & Metrics</h2>
+<p class="section-subtitle">Calibrated targets aligned with OIC/SMIIC standards, ESG frameworks, Philippine Development Plan 2023-2028, and BARMM-specific development objectives</p>
+</div>
+
+<div class="metrics-grid">
+<div class="metric-card">
+<div class="metric-value">₱15B</div>
+<div class="metric-label">Annual Investment Approvals Target by 2035</div>
+<div class="metric-baseline">Baseline: ₱5.1B (Q1 2026)</div>
+</div>
+<div class="metric-card">
+<div class="metric-value">₱40B+</div>
+<div class="metric-label">Annual Export Value Target</div>
+<div class="metric-baseline">Baseline: &lt;₱10B</div>
+</div>
+<div class="metric-card">
+<div class="metric-value">5,000+</div>
+<div class="metric-label">Halal-Certified MSMEs</div>
+<div class="metric-baseline">Baseline: ~500 enterprises</div>
+</div>
+<div class="metric-card">
+<div class="metric-value">₱20B+</div>
+<div class="metric-label">Islamic Banking Assets</div>
+<div class="metric-baseline">Baseline: &lt;₱2B</div>
+</div>
+<div class="metric-card">
+<div class="metric-value">100%</div>
+<div class="metric-label">Electrification Rate</div>
+<div class="metric-baseline">Baseline: ~75% (2024)</div>
+</div>
+<div class="metric-card">
+<div class="metric-value">85%</div>
+<div class="metric-label">Broadband Connectivity</div>
+<div class="metric-baseline">Baseline: &lt;30% rural/island areas</div>
+</div>
+<div class="metric-card">
+<div class="metric-value">&lt;20%</div>
+<div class="metric-label">Poverty Incidence Target</div>
+<div class="metric-baseline">Baseline: 34.8% (1H 2023)</div>
+</div>
+<div class="metric-card">
+<div class="metric-value">₱550B+</div>
+<div class="metric-label">GRDP Target by 2035</div>
+<div class="metric-baseline">Baseline: ₱299.5B (2024)</div>
+</div>
+<div class="metric-card">
+<div class="metric-value">75%+</div>
+<div class="metric-label">Functional Literacy Rate</div>
+<div class="metric-baseline">Baseline: 59.3% (lowest in PH)</div>
+</div>
+</div>
 </section>
+
+<!-- Strategic Options -->
+<section>
+<div class="section-header">
+<h2 class="section-title">Four Strategic Options Analysis</h2>
+<p class="section-subtitle">Comprehensive evaluation of alternative development pathways through multi-criteria assessment examining economic impact, feasibility, identity alignment, systems leverage, risk-return profile, inclusivity, and sustainability</p>
+</div>
+<div class="full-width-image">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/2..%20Formulating%20the%20Roadmap.png" alt="Four Strategic Options Formulation - Comprehensive analysis of HEDS, GEMS, IFES, and IEDS pathways with evaluation criteria and scoring matrix">
+</div>
+<div class="image-caption">
+<strong>Strategic Options Formulation:</strong> Through rigorous TOWS matrix analysis and systems archetype mapping, four distinct pathways emerged: (1) Halal Economy Dominance Strategy (HEDS) scoring 7.61/10, (2) Green Economy Monetization Strategy (GEMS) at 7.16/10, (3) Infrastructure-First Enabling Strategy (IFES) at 7.48/10, and (4) Integrated Ecosystem Development Strategy (IEDS) achieving the highest composite score of 8.93/10 with perfect 10.0/10 systems leverage rating. The IEDS was recommended as it uniquely addresses all five systems archetypes while synchronizing cluster development to achieve the ₱550B GRDP target.
+</div>
+</section>
+
+<!-- Implementation Phases -->
+<section>
+<div class="section-header">
+<h2 class="section-title">Phased Implementation Roadmap 2026-2035</h2>
+<p class="section-subtitle">Three-phase execution strategy with budget-calibrated interventions, sequenced to match infrastructure readiness, institutional capacity, and market development</p>
+</div>
+
+<div class="phases-timeline">
+<div class="phase-card">
+<div class="phase-number">01</div>
+<h3 class="phase-title">Phase 1: Foundation Building</h3>
+<div class="phase-timeframe">2026–2028 | Budget: ₱35–45 Billion</div>
+<p class="phase-description">Establishing the moral governance operating system and deploying foundational enablers that unlock downstream investment viability. This phase prioritizes coherent sequencing logic by ensuring regulatory architecture, digital facilitation, and critical infrastructure are in place before scaling production or export commitments.</p>
+<div class="phase-deliverables">
+<h5>Key Deliverables:</h5>
+<ul>
+<li>BHB operationalized with OIC/SMIIC-aligned processes & digital traceability pilot</li>
+<li>ZBIP construction milestones reached; 80% household electrification</li>
+<li>Bangsamoro Forestry Code enacted; JMC No. 2026-01 signed & LGU capacity building initiated</li>
+<li>1-day digital business registration launched via BEGMP platform</li>
+<li>Farm-to-market road priorities funded & ROW mechanisms streamlined</li>
+<li>Bangsamoro Investment Command Center established with real-time tracking</li>
+</ul>
+</div>
+</div>
+
+<div class="phase-card">
+<div class="phase-number">02</div>
+<h3 class="phase-title">Phase 2: Acceleration</h3>
+<div class="phase-timeframe">2029–2032 | Budget: ₱50–65 Billion</div>
+<p class="phase-description">Leveraging governance and infrastructure foundations to activate Foundations-Transformers Integration and Financiers-Ecosystem Alignment. With certification systems, energy connectivity, and logistics networks operational, focus shifts to scaling value addition and channeling capital across the ecosystem.</p>
+<div class="phase-deliverables">
+<h5>Key Deliverables:</h5>
+<ul>
+<li>Bangsamoro Halal Park operational (Matanog); BHB achieves international recognition</li>
+<li>REDD+ program registered; first carbon credit & PES sales executed</li>
+<li>Islamic banking branches in all provincial capitals; takaful & green sukuk launched</li>
+<li>5,000+ MSMEs halal-certified; 1M annual tourist arrivals; Lake Lanao eco-tourism open</li>
+<li>Cold chain & warehousing hubs operational in priority provinces</li>
+<li>REDD+ registered; ₱100M/year carbon/PES revenue activated</li>
+</ul>
+</div>
+</div>
+
+<div class="phase-card">
+<div class="phase-number">03</div>
+<h3 class="phase-title">Phase 3: Consolidation & Global Integration</h3>
+<div class="phase-timeframe">2033–2035 | Budget: ₱35–50 Billion</div>
+<p class="phase-description">Consolidating BARMM's position as a self-sustaining, export-linked, and inclusive economic hub. All strategic pillars converge to achieve Foundations-Transformers-Connectors maturity and global market recognition with innovation-driven continuous improvement.</p>
+<div class="phase-deliverables">
+<h5>Key Deliverables:</h5>
+<ul>
+<li>OIC endorsement secured; SMIIC Mutual Recognition Agreement (MRA) signed</li>
+<li>₱500M+ annual carbon/PES revenue; eco-tourism reaches 3M visitors</li>
+<li>GRDP ₱550B+; poverty &lt;20%; ₱15B+ annual investment approvals sustained</li>
+<li>BARMM recognized as ASEAN halal hub; cross-border BIMP-EAGA certification harmonized</li>
+<li>Innovation hubs & halal R&D centers operational; green bonds market mature</li>
+<li>100% electrification & 85% broadband connectivity achieved</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Summary Infographic -->
+<section>
+<div class="section-header">
+<h2 class="section-title">Integrated Roadmap Overview</h2>
+<p class="section-subtitle">Comprehensive visual synthesis of the Bangsamoro Investment Roadmap Development 2026-2035 showing strategic architecture, cluster interdependencies, and transformation pathways</p>
+</div>
+<div class="full-width-image">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/Infographic-Roadmap.png" alt="BIRD 2026-2035 Comprehensive Infographic - Complete strategic roadmap visualization with BEIE clusters, implementation phases, and key targets">
+</div>
+<div class="image-caption">
+<strong>Roadmap Infographic:</strong> This comprehensive visualization illustrates the synchronized ecosystem development approach, showing how the Cross-Cutting Operating Systems (Moral Governance, Resilience, Inclusivity, Peace) anchor the five functional clusters (Foundations, Transformers, Enablers, Connectors, Financiers) through three implementation phases, ultimately achieving the vision of a ₱550B+ GRDP economy with &lt;20% poverty incidence by 2035.
+</div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+<h2 class="cta-title">Shape the Future of Bangsamoro</h2>
+<p class="cta-text">The data is unambiguous: BARMM's peace dividend is real, investment momentum is structural, and regulatory architecture is maturing. Yet data trends do not determine destinies—execution does. Join us in transforming scattered progress into synchronized ecosystem development. Your partnership, investment, and expertise are critical to building a resilient, ethical, and prosperous Bangsamoro.</p>
+<a href="https://bird-contact.asilvainnovations.com" class="cta-button">Partner With Us →</a>
+</section>
+
+</main>
 
 <!-- Footer -->
 <footer>
-    <div class="container">
-        <p>© 2026 BARMM · Ministry of Trade, Investments and Tourism · The Emerging Bangsamoro · Investment Roadmap 2026–2035</p>
-        <p style="margin-top: 8px; font-size: 0.8rem;">Data sources: PSA, BBOI, BEZA, MTIT, MENRE (2024 baselines). Targets per BIRD 2026–2035 Roadmap & BDP 2023–2028.</p>
-    </div>
+<p>© 2026 BARMM · Ministry of Trade, Investments and Tourism · <span style="color:var(--gold);">The Emerging Bangsamoro</span> · Investment Roadmap 2026–2035</p>
+<p style="margin-top:.5rem; font-size:.8rem;">Data sources: PSA, BBOI, BEZA, MTIT, MENRE (2024 baselines). Targets per BIRD 2026–2035 Roadmap & BDP 2023–2028.</p>
 </footer>
 
+<script>
+// Mobile Menu Toggle
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const navLinks = document.getElementById('navLinks');
+
+mobileMenuToggle.addEventListener('click', () => {
+const isExpanded = navLinks.classList.toggle('active');
+mobileMenuToggle.setAttribute('aria-expanded', isExpanded);
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+if (!mobileMenuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+navLinks.classList.remove('active');
+mobileMenuToggle.setAttribute('aria-expanded', 'false');
+}
+});
+
+// Collapsible Sections
+function toggleCollapsible(button) {
+const section = button.closest('.collapsible-section');
+const isActive = section.classList.contains('active');
+const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+// Toggle current section
+section.classList.toggle('active');
+button.setAttribute('aria-expanded', !isExpanded);
+
+// Optional: Close other sections (accordion behavior)
+// Uncomment below to enable accordion behavior
+/*
+document.querySelectorAll('.collapsible-section').forEach(otherSection => {
+if (otherSection !== section && otherSection.classList.contains('active')) {
+otherSection.classList.remove('active');
+otherSection.querySelector('.collapsible-header').setAttribute('aria-expanded', 'false');
+}
+});
+*/
+}
+
+// Navigation scroll effect
+window.addEventListener('scroll', () => {
+const nav = document.querySelector('.site-nav');
+if (window.scrollY > 40) {
+nav.classList.add('scrolled');
+} else {
+nav.classList.remove('scrolled');
+}
+}, {passive: true});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({
+behavior: 'smooth',
+block: 'start'
+});
+}
+});
+});
+</script>
 </body>
 </html>
