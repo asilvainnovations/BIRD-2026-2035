@@ -158,14 +158,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             </button>
           </div>
 
-          {/* ✅ Validation Survey CTA - Updated Button Text */}
+          {/* Validation Survey CTA */}
           <div className="mb-20">
             <button
               onClick={onOpenValidationSurvey || onStartPlanning}
               className="inline-flex w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-emerald-500/40 transition-all hover:-translate-y-1 items-center justify-center gap-3"
             >
               <ClipboardCheck className="w-6 h-6" />
-              Participate in the Validation Survey
+              Take BIRD Validation Survey
               <ArrowRight className="w-5 h-5" />
             </button>
             <p className="text-sm text-slate-500 mt-3">

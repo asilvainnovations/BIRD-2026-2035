@@ -22,9 +22,6 @@ import {
 import { cn } from '@/lib/utils';
 import { StratLogo } from '@/components/branding/Logo';
 
-// ✅ Import SurveyWizard for reference and lazy loading
-import { SurveyWizard } from '@/components/strategic/SurveyWizard';
-
 interface SidebarProps {
   activeView: string;
   onViewChange: (view: string) => void;
@@ -265,6 +262,4 @@ const Sidebar: React.FC<SidebarProps> = ({
   );
 };
 
-// ✅ Export SurveyWizard for use in other components
-export { SurveyWizard };
 export default React.memo(Sidebar);
