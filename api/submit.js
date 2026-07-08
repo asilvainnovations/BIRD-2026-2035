@@ -1,5 +1,17 @@
 // api/submit.js
-import { v4 as uuidv4 } from 'uuid';
+// Vercel Serverless Function — deploys automatically at POST /api/submit
+//
+// REQUIRED ENVIRONMENT VARIABLES (set in Vercel Project Settings → Environment Variables):
+//   GITHUB_TOKEN          — a GitHub PAT with repo write access (required for primary storage)
+// OPTIONAL:
+//   SUPABASE_URL          — defaults to the value hardcoded below if unset
+//   SUPABASE_SERVICE_KEY  — enables the Supabase fallback if GitHub storage fails
+//   ALLOWED_ORIGIN         — CORS origin to allow (defaults to '*'); set this to your
+//                            HTML's exact origin if you need to lock it down
+//
+// No external npm dependency is required (uses Node's built-in crypto.randomUUID,
+// available in Node 14.17+ — every Vercel Node runtime satisfies this).
+
 import crypto from 'crypto';
 
 // ============ CONFIGURATION ============
@@ -8,19 +20,25 @@ const GITHUB_REPO = 'BIRD-2026-2035';
 const GITHUB_BRANCH = 'main';
 const SUPABASE_URL = process.env.SUPABASE_URL || 'https://lydsisparsmvextskevw.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY;
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || '*';
+
+// ============ CORS ============
+function setCorsHeaders(res) {
+  res.setHeader('Access-Control-Allow-Origin', ALLOWED_ORIGIN);
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+}
 
 // ============ VALIDATION ============
 function validateSurveyData(data) {
   const errors = [];
 
-  // Required demographics
   if (!data.demographics?.category) errors.push('Stakeholder category is required');
   if (!data.demographics?.province) errors.push('Province is required');
   if (!data.demographics?.expertise || data.demographics.expertise.length === 0) {
     errors.push('At least one expertise area is required');
   }
 
-  // Required section responses (at least rating questions)
   if (!data.responses?.section1_beie?.understanding) errors.push('Section 1: Framework understanding is required');
   if (!data.responses?.section2_mg?.importance) errors.push('Section 2: Moral governance importance is required');
   if (!data.responses?.section3_foundations?.priorities || data.responses.section3_foundations.priorities.length === 0) {
@@ -32,12 +50,10 @@ function validateSurveyData(data) {
   if (!data.responses?.section7_financiers?.criticality) errors.push('Section 7: Islamic finance criticality is required');
   if (!data.responses?.section8_options?.strategy) errors.push('Section 8: Strategy selection is required');
 
-  // Optional: validate email format if provided
   if (data.demographics?.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.demographics.email)) {
     errors.push('Invalid email format');
   }
 
-  // Consent required
   if (!data.consent) errors.push('Consent is required to submit');
 
   return errors;
@@ -55,30 +71,13 @@ function sanitizeInput(input) {
     .substring(0, 2000);
 }
 
-function sanitizeObject(obj) {
-  if (!obj || typeof obj !== 'object') return obj;
-  const sanitized = {};
-  for (const [key, value] of Object.entries(obj)) {
-    if (typeof value === 'string') {
-      sanitized[key] = sanitizeInput(value);
-    } else if (Array.isArray(value)) {
-      sanitized[key] = value.map(v => typeof v === 'string' ? sanitizeInput(v) : v);
-    } else if (typeof value === 'object' && value !== null) {
-      sanitized[key] = sanitizeObject(value);
-    } else {
-      sanitized[key] = value;
-    }
-  }
-  return sanitized;
-}
-
 // ============ SCHEMA TRANSFORMATION ============
 function transformToSchema(rawData, metadata) {
   const demographics = rawData.demographics || {};
   const responses = rawData.responses || {};
 
   return {
-    responseId: uuidv4(),
+    responseId: crypto.randomUUID(),
     timestamp: new Date().toISOString(),
     metadata: {
       userAgent: metadata.userAgent,
@@ -176,6 +175,10 @@ function transformToSchema(rawData, metadata) {
         legislation: responses.section13_policy?.legislation || [],
         bicc: responses.section13_policy?.bicc || null,
       },
+      section15_OpenFeedback: {
+        // NOTE: this field was silently dropped in the original transform — restored here.
+        text: sanitizeInput(responses.open_feedback || ''),
+      },
       section16_CARE: {
         context: responses.section16_care?.context || null,
         action: responses.section16_care?.action || null,
@@ -190,7 +193,7 @@ function transformToSchema(rawData, metadata) {
       riskScore: null,
       vulnerabilityIndex: null,
     },
-    version: '3.0',
+    version: '3.1',
     source: 'BIRD Validation Survey v3 - 16 Section C.A.R.E. Framework',
   };
 }
@@ -222,8 +225,8 @@ async function storeToGitHub(data) {
   );
 
   if (!response.ok) {
-    const error = await response.json();
-    throw new Error(`GitHub API Error: ${error.message || 'Unknown error'}`);
+    const error = await response.json().catch(() => ({}));
+    throw new Error(`GitHub API Error: ${error.message || response.status}`);
   }
 
   return path;
@@ -255,10 +258,7 @@ async function storeToSupabase(data) {
       }),
     });
 
-    if (!response.ok) {
-      throw new Error(`Supabase Error: ${response.status}`);
-    }
-
+    if (!response.ok) throw new Error(`Supabase Error: ${response.status}`);
     return 'supabase';
   } catch (error) {
     console.error('Supabase fallback failed:', error);
@@ -266,24 +266,23 @@ async function storeToSupabase(data) {
   }
 }
 
-// ============ RATE LIMITING (Simple IP-based) ============
+// ============ RATE LIMITING (best-effort only) ============
+// NOTE: serverless functions are stateless across invocations/cold starts, so this
+// in-memory map does NOT reliably enforce a limit across all traffic. It only
+// catches rapid repeat requests hitting the same warm instance. For real rate
+// limiting, use Vercel's Edge Config, Upstash Redis, or a similar external store.
 const submissionTracker = new Map();
 
 function checkRateLimit(ip) {
   const now = Date.now();
   const windowMs = 60 * 60 * 1000; // 1 hour
-  const maxSubmissions = 5; // Max 5 per hour per IP
+  const maxSubmissions = 5;
 
-  if (!submissionTracker.has(ip)) {
-    submissionTracker.set(ip, []);
-  }
-
+  if (!submissionTracker.has(ip)) submissionTracker.set(ip, []);
   const submissions = submissionTracker.get(ip);
-  const recentSubmissions = submissions.filter(t => now - t < windowMs);
+  const recentSubmissions = submissions.filter((t) => now - t < windowMs);
 
-  if (recentSubmissions.length >= maxSubmissions) {
-    return false;
-  }
+  if (recentSubmissions.length >= maxSubmissions) return false;
 
   recentSubmissions.push(now);
   submissionTracker.set(ip, recentSubmissions);
@@ -292,24 +291,46 @@ function checkRateLimit(ip) {
 
 // ============ MAIN HANDLER ============
 export default async function handler(req, res) {
-  // Only allow POST
+  setCorsHeaders(res);
+
+  // Preflight
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+
+  // Lightweight health/config check — no secrets are ever returned, just booleans.
+  if (req.method === 'GET') {
+    return res.status(200).json({
+      ok: true,
+      function: 'api/submit',
+      env: {
+        GITHUB_TOKEN: Boolean(process.env.GITHUB_TOKEN),
+        SUPABASE_SERVICE_KEY: Boolean(process.env.SUPABASE_SERVICE_KEY),
+      },
+    });
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
+  // Fail fast and clearly if required config is missing, instead of a generic 500
+  // after storage is attempted.
+  if (!process.env.GITHUB_TOKEN && !process.env.SUPABASE_SERVICE_KEY) {
+    return res.status(500).json({
+      message: 'Server misconfigured: no storage backend configured. Set GITHUB_TOKEN (and/or SUPABASE_SERVICE_KEY) in the project\'s environment variables.',
+    });
+  }
+
   try {
-    // 1. Rate limiting
-    const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
-    const ipHash = crypto.createHash('sha256').update(clientIp).digest('hex').substring(0, 16);
+    const clientIp = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown';
+    const ipHash = crypto.createHash('sha256').update(String(clientIp)).digest('hex').substring(0, 16);
 
     if (!checkRateLimit(ipHash)) {
-      return res.status(429).json({
-        message: 'Rate limit exceeded. Please try again later.'
-      });
+      return res.status(429).json({ message: 'Rate limit exceeded. Please try again later.' });
     }
 
-    // 2. Extract and validate data
-    const { surveyData, metadata = {} } = req.body;
+    const { surveyData, metadata = {} } = req.body || {};
 
     if (!surveyData) {
       return res.status(400).json({ message: 'No survey data provided' });
@@ -317,13 +338,9 @@ export default async function handler(req, res) {
 
     const validationErrors = validateSurveyData(surveyData);
     if (validationErrors.length > 0) {
-      return res.status(400).json({
-        message: 'Validation failed',
-        errors: validationErrors
-      });
+      return res.status(400).json({ message: 'Validation failed', errors: validationErrors });
     }
 
-    // 3. Enrich metadata
     const enrichedMetadata = {
       ...metadata,
       userAgent: req.headers['user-agent'] || 'unknown',
@@ -332,18 +349,14 @@ export default async function handler(req, res) {
       language: req.headers['accept-language'] || 'unknown',
     };
 
-    // 4. Transform to clean schema
     const structuredData = transformToSchema(surveyData, enrichedMetadata);
 
-    // 5. Store to GitHub (primary)
     let storageResult;
     try {
       const githubPath = await storeToGitHub(structuredData);
       storageResult = { primary: 'github', path: githubPath };
     } catch (githubError) {
       console.error('GitHub storage failed, attempting Supabase fallback:', githubError);
-
-      // 6. Fallback to Supabase
       const supabaseResult = await storeToSupabase(structuredData);
       if (supabaseResult) {
         storageResult = { primary: 'supabase', fallback: true };
@@ -352,17 +365,15 @@ export default async function handler(req, res) {
       }
     }
 
-    // 7. Success response
-    res.status(200).json({
+    return res.status(200).json({
       message: 'Survey response stored successfully',
       responseId: structuredData.responseId,
       storage: storageResult,
       timestamp: structuredData.timestamp,
     });
-
   } catch (error) {
     console.error('Submission error:', error);
-    res.status(500).json({
+    return res.status(500).json({
       message: 'Error processing submission',
       error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error',
     });
