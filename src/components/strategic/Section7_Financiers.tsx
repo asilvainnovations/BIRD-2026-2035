@@ -1,201 +1,509 @@
 // src/components/strategic/Section7_Financiers.tsx
-import { useFormContext } from "react-hook-form";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+} from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useFormContext } from "react-hook-form";
+import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Landmark, Shield, HandCoins, Users, AlertTriangle } from "lucide-react";
-
-const financialInstruments = [
-  { id: "banking", label: "Islamic Banking Expansion (Al-Amanah, CARD)", icon: Landmark },
-  { id: "takaful", label: "Takaful (Climate/Agri Islamic Insurance)", icon: Shield },
-  { id: "waqf", label: "Waqf (Community Endowments for MSME incubation)", icon: Users },
-  { id: "sukuk", label: "Green Sukuk (Renewable Energy bonds)", icon: HandCoins },
-  { id: "micro", label: "Islamic Microfinance for rural MSMEs", icon: HandCoins },
-];
 
 export function Section7_Financiers() {
   const form = useFormContext();
-
+  
   return (
-    <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
-      <CardHeader>
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400">
-            <Landmark className="w-6 h-6" />
-          </div>
-          <div>
-            <CardTitle className="text-xl text-foreground">Section 7: Financiers Cluster</CardTitle>
-            <CardDescription className="text-muted-foreground">
-              Islamic Banking, Takaful, Waqf & Microfinance
-            </CardDescription>
-          </div>
-        </div>
+    <div className="space-y-8">
+      <CardHeader className="p-0">
+        <CardTitle className="text-2xl font-serif text-[#C9A84C]">
+          7. Cluster 5: Financiers — Islamic Banking, Waqf, Takaful, Microfinance
+        </CardTitle>
+        <CardDescription className="text-[#ecfdf5]/70 text-base mt-2">
+          The Financiers cluster provides culturally aligned capital to sustain ecosystem growth across all BEIE clusters.
+        </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-8">
 
-        {/* Elephant Context */}
-        <div className="p-4 rounded-lg bg-amber-500/5 border border-amber-500/20 flex gap-3">
-          <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-          <div className="text-sm text-muted-foreground">
-            <strong className="text-foreground">🐘 The Asset Paradox:</strong> Despite RA 11439 and a population
-            of 5.69M Muslims, Islamic banking assets in BARMM sit at{" "}
-            <strong className="text-amber-400">&lt;₱2 Billion</strong>. This is a massive market failure.
-            Simultaneously, <strong className="text-amber-400">Block Grant dependency</strong> stifles
-            urgency for local revenue generation and waqf mobilization.
+      {/* Cluster 5 Financiers Framework Image */}
+      <div className="w-full rounded-lg overflow-hidden border border-[#C9A84C]/20">
+        <img
+          src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/38.%20Cluster%205_%20Financiers.png"
+          alt="Cluster 5: Financiers Framework"
+          className="w-full h-64 object-cover"
+        />
+      </div>
+
+      {/* IEDS Implementation Phases Image */}
+      <div className="w-full rounded-lg overflow-hidden border border-[#C9A84C]/20">
+        <img
+          src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-strategic-options-roadmap/public/6.%20The%20IEDS.png"
+          alt="IEDS Three-Phase Implementation Strategy"
+          className="w-full h-80 object-cover"
+        />
+      </div>
+
+      {/* Section 8: Strategic Sequencing & KPI Calibration */}
+      <CardHeader className="p-0">
+        <CardTitle className="text-2xl font-serif text-[#C9A84C]">
+          8. Strategic Sequencing & KPI Calibration for Financiers
+        </CardTitle>
+        <CardDescription className="text-[#ecfdf5]/70 text-base mt-2">
+          Phase-based deployment of Islamic finance infrastructure aligned with IEDS implementation timeline
+        </CardDescription>
+      </CardHeader>
+
+      <div className="bg-[#011a12]/60 border border-[#C9A84C]/30 rounded-lg p-6 space-y-6">
+        <h3 className="text-lg font-semibold text-[#ecfdf5]">Phase 1: Foundation Building (2026-2028)</h3>
+        <div className="space-y-3">
+          <p className="text-[#ecfdf5]/80 text-sm">
+            <strong className="text-[#C9A84C]">Budget Allocation:</strong> ₱35-45 billion (cross-cluster)
+          </p>
+          <p className="text-[#ecfdf5]/80 text-sm">
+            <strong className="text-[#C9A84C]">Financiers Focus:</strong> Regulatory sandbox establishment, Islamic finance legal framework operationalization, initial branch expansion
+          </p>
+          <ul className="list-disc list-inside text-[#ecfdf5]/80 text-sm space-y-1 ml-4">
+            <li>Islamic banking branches: 15 → 40 outlets</li>
+            <li>Financial inclusion rate: ~38% → 55%</li>
+            <li>Islamic finance professionals trained: &lt;20 → 35</li>
+            <li>Regulatory frameworks: BSP-BARMM coordination protocols established</li>
+          </ul>
+        </div>
+
+        <h3 className="text-lg font-semibold text-[#ecfdf5] pt-4">Phase 2: Acceleration (2029-2032)</h3>
+        <div className="space-y-3">
+          <p className="text-[#ecfdf5]/80 text-sm">
+            <strong className="text-[#C9A84C]">Budget Allocation:</strong> ₱50-65 billion (cross-cluster)
+          </p>
+          <p className="text-[#ecfdf5]/80 text-sm">
+            <strong className="text-[#C9A84C]">Financiers Focus:</strong> Full provincial capital coverage, takaful & green sukuk instruments launch, MSME financing scale-up
+          </p>
+          <ul className="list-disc list-inside text-[#ecfdf5]/80 text-sm space-y-1 ml-4">
+            <li>Islamic banking branches: 40 → 70 outlets (all provincial capitals)</li>
+            <li>MSME accounts with Shariah-compliant products: 5,000 → 35,000</li>
+            <li>Islamic banking assets: &lt;₱2B → ₱14B</li>
+            <li>Takaful products launched: climate-risk, agricultural, MSME coverage</li>
+          </ul>
+        </div>
+
+        <h3 className="text-lg font-semibold text-[#ecfdf5] pt-4">Phase 3: Consolidation & Global Integration (2033-2035)</h3>
+        <div className="space-y-3">
+          <p className="text-[#ecfdf5]/80 text-sm">
+            <strong className="text-[#C9A84C]">Budget Allocation:</strong> ₱35-50 billion (cross-cluster)
+          </p>
+          <p className="text-[#ecfdf5]/80 text-sm">
+            <strong className="text-[#C9A84C]">Financiers Focus:</strong> Market maturity, innovation hubs, cross-border Islamic finance integration
+          </p>
+          <ul className="list-disc list-inside text-[#ecfdf5]/80 text-sm space-y-1 ml-4">
+            <li>Islamic banking branches: 70 → 100+ outlets</li>
+            <li>Islamic banking assets: ₱14B → ₱20B+</li>
+            <li>Adult financial inclusion: 55% → 70%+</li>
+            <li>Waqf-managed community enterprises: 40 → 60+</li>
+            <li>Cross-border BIMP-EAGA Islamic finance harmonization</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* KPI Calibration Matrix */}
+      <div className="bg-[#011a12]/60 border border-[#C9A84C]/30 rounded-lg p-6 space-y-4">
+        <h3 className="text-lg font-semibold text-[#ecfdf5]">KPI Calibration & Trigger Mechanisms</h3>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-[#ecfdf5]/90">
+            <thead className="border-b border-[#C9A84C]/30">
+              <tr>
+                <th className="text-left py-2 text-[#C9A84C]">KPI</th>
+                <th className="text-left py-2 text-[#C9A84C]">Baseline</th>
+                <th className="text-left py-2 text-[#C9A84C]">2030 Target</th>
+                <th className="text-left py-2 text-[#C9A84C]">2035 Target</th>
+                <th className="text-left py-2 text-[#C9A84C]">Trigger Threshold</th>
+              </tr>
+            </thead>
+            <tbody className="space-y-2">
+              <tr className="border-b border-[#C9A84C]/10">
+                <td className="py-2">Islamic banking assets (₱B)</td>
+                <td className="py-2">&lt;₱2B</td>
+                <td className="py-2">₱8B</td>
+                <td className="py-2">₱20B+</td>
+                <td className="py-2 text-amber-400">&lt;70% of trajectory → activate capacity building</td>
+              </tr>
+              <tr className="border-b border-[#C9A84C]/10">
+                <td className="py-2">Financial inclusion rate (%)</td>
+                <td className="py-2">~38%</td>
+                <td className="py-2">55%</td>
+                <td className="py-2">70%+</td>
+                <td className="py-2 text-amber-400">&lt;50% coverage → deploy mobile banking</td>
+              </tr>
+              <tr className="border-b border-[#C9A84C]/10">
+                <td className="py-2">Islamic banking outlets</td>
+                <td className="py-2">~15</td>
+                <td className="py-2">70</td>
+                <td className="py-2">100+</td>
+                <td className="py-2 text-amber-400">&lt;5 provincial capitals → fast-track licensing</td>
+              </tr>
+              <tr className="border-b border-[#C9A84C]/10">
+                <td className="py-2">MSME Shariah accounts</td>
+                <td className="py-2">&lt;5,000</td>
+                <td className="py-2">35,000</td>
+                <td className="py-2">50,000+</td>
+                <td className="py-2 text-amber-400">&lt;60% target → intensify outreach</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Section 9: Policy "Kill Switches" & Adaptive Mechanisms */}
+      <CardHeader className="p-0">
+        <CardTitle className="text-2xl font-serif text-[#C9A84C]">
+          9. Policy "Kill Switches" & Adaptive Mechanisms
+        </CardTitle>
+        <CardDescription className="text-[#ecfdf5]/70 text-base mt-2">
+          Automatic triggers and corrective mechanisms to prevent systemic failures and ensure Financiers cluster resilience
+        </CardDescription>
+      </CardHeader>
+
+      <div className="space-y-6">
+        {/* Kill Switch 1: Financial Stability */}
+        <div className="bg-gradient-to-r from-red-900/40 to-[#011a12] border-l-4 border-red-500 rounded-lg p-6">
+          <h4 className="text-lg font-semibold text-red-400 mb-3">
+            Kill Switch #1: Financial Stability Breach
+          </h4>
+          <div className="space-y-2 text-[#ecfdf5]/90 text-sm">
+            <p><strong className="text-[#C9A84C]">Trigger Condition:</strong> Islamic banking non-performing financing (NPF) ratio exceeds 8% for 2 consecutive quarters</p>
+            <p><strong className="text-[#C9A84C]">Automatic Response:</strong></p>
+            <ul className="list-disc list-inside ml-4 space-y-1">
+              <li>Temporary suspension of new branch licensing</li>
+              <li>Mandatory capital adequacy review by BSP-BARMM</li>
+              <li>Activation of takaful risk-sharing mechanisms</li>
+              <li>Enhanced monitoring and reporting requirements</li>
+            </ul>
+            <p><strong className="text-green-400">Recovery Protocol:</strong> NPF ratio &lt;5% for 2 consecutive quarters → gradual resumption with enhanced oversight</p>
           </div>
         </div>
 
-        {/* Q7.1 Criticality */}
-        <FormField
-          control={form.control}
-          name="q7_1_criticality"
-          render={({ field }) => (
-            <FormItem className="space-y-4">
-              <FormLabel className="text-base font-semibold text-foreground">
-                7.1 How critical is Islamic finance development for BARMM's economic transformation?
-              </FormLabel>
-              <FormControl>
-                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-5 gap-2">
-                  {["1", "2", "3", "4", "5"].map((val) => (
-                    <div key={val} className="flex flex-col items-center gap-1">
-                      <RadioGroupItem value={val} id={`q7_1_${val}`} className="peer sr-only" />
-                      <label htmlFor={`q7_1_${val}`}
-                        className="flex flex-col items-center justify-center w-full h-14 rounded-lg border-2 border-muted bg-popover p-2 hover:bg-accent peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 cursor-pointer transition-all">
-                        <span className="text-xl font-bold">{val}</span>
-                        <span className="text-[10px] text-muted-foreground">{val === "1" ? "Low" : val === "5" ? "Critical" : ""}</span>
-                      </label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {/* Kill Switch 2: Financial Inclusion Gap */}
+        <div className="bg-gradient-to-r from-amber-900/40 to-[#011a12] border-l-4 border-amber-500 rounded-lg p-6">
+          <h4 className="text-lg font-semibold text-amber-400 mb-3">
+            Kill Switch #2: Financial Inclusion Gap
+          </h4>
+          <div className="space-y-2 text-[#ecfdf5]/90 text-sm">
+            <p><strong className="text-[#C9A84C]">Trigger Condition:</strong> Financial inclusion rate in archipelagic provinces (Tawi-Tawi, Sulu, Basilan) remains &lt;25% after 24 months</p>
+            <p><strong className="text-[#C9A84C]">Automatic Response:</strong></p>
+            <ul className="list-disc list-inside ml-4 space-y-1">
+              <li>Mandatory deployment of mobile banking units</li>
+              <li>Activation of agent banking network expansion</li>
+              <li>Reallocation of 20% block grant to digital infrastructure</li>
+              <li>Partnership activation with fintech providers</li>
+            </ul>
+            <p><strong className="text-green-400">Recovery Protocol:</strong> Inclusion rate reaches 35% → transition to sustainable branch network</p>
+          </div>
+        </div>
 
-        {/* Q7.2 Instruments */}
-        <FormField
-          control={form.control}
-          name="q7_2_instruments"
-          render={() => (
-            <FormItem className="space-y-4">
-              <FormLabel className="text-base font-semibold text-foreground">
-                7.2 Which Islamic finance instruments should be prioritized? (Select all that apply)
-              </FormLabel>
+        {/* Kill Switch 3: Shariah Compliance Failure */}
+        <div className="bg-gradient-to-r from-orange-900/40 to-[#011a12] border-l-4 border-orange-500 rounded-lg p-6">
+          <h4 className="text-lg font-semibold text-orange-400 mb-3">
+            Kill Switch #3: Shariah Compliance Failure
+          </h4>
+          <div className="space-y-2 text-[#ecfdf5]/90 text-sm">
+            <p><strong className="text-[#C9A84C]">Trigger Condition:</strong> OIC/SMIIC accreditation delayed beyond 2030 OR Shariah governance violations detected in &gt;3 institutions</p>
+            <p><strong className="text-[#C9A84C]">Automatic Response:</strong></p>
+            <ul className="list-disc list-inside ml-4 space-y-1">
+              <li>Freeze on new Islamic finance product approvals</li>
+              <li>Mandatory Shariah audit of all licensed institutions</li>
+              <li>Emergency training program for Shariah scholars</li>
+              <li>International technical assistance activation (IsDB, ICD)</li>
+            </ul>
+            <p><strong className="text-green-400">Recovery Protocol:</strong> Full compliance restoration → phased product approval resumption</p>
+          </div>
+        </div>
+
+        {/* Kill Switch 4: Capital Flight Risk */}
+        <div className="bg-gradient-to-r from-purple-900/40 to-[#011a12] border-l-4 border-purple-500 rounded-lg p-6">
+          <h4 className="text-lg font-semibold text-purple-400 mb-3">
+            Kill Switch #4: Capital Flight Risk
+          </h4>
+          <div className="space-y-2 text-[#ecfdf5]/90 text-sm">
+            <p><strong className="text-[#C9A84C]">Trigger Condition:</strong> Islamic banking assets decline by &gt;15% quarter-over-quarter OR deposit withdrawal rate exceeds 20%</p>
+            <p><strong className="text-[#C9A84C]">Automatic Response:</strong></p>
+            <ul className="list-disc list-inside ml-4 space-y-1">
+              <li>Emergency liquidity facility activation</li>
+              <li>Temporary capital control measures</li>
+              <li>Public confidence campaign deployment</li>
+              <li>Waqt fund deployment for stability support</li>
+            </ul>
+            <p><strong className="text-green-400">Recovery Protocol:</strong> Asset stabilization for 3 consecutive months → gradual normalization</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Adaptive Management Framework */}
+      <div className="bg-[#011a12]/60 border border-[#C9A84C]/30 rounded-lg p-6 space-y-4">
+        <h3 className="text-lg font-semibold text-[#ecfdf5]">Adaptive Management Framework</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-[#011a12]/80 border border-[#C9A84C]/20 rounded-lg p-4">
+            <h4 className="font-semibold text-[#C9A84C] mb-2">Quarterly Reviews</h4>
+            <ul className="text-sm text-[#ecfdf5]/80 space-y-1">
+              <li>• KPI variance analysis (&gt;15% triggers intervention)</li>
+              <li>Budget utilization assessment</li>
+              <li>Branch expansion progress tracking</li>
+              <li>MSME financing disbursement review</li>
+            </ul>
+          </div>
+          <div className="bg-[#011a12]/80 border border-[#C9A84C]/20 rounded-lg p-4">
+            <h4 className="font-semibold text-[#C9A84C] mb-2">Semi-Annual Adjustments</h4>
+            <ul className="text-sm text-[#ecfdf5]/80 space-y-1">
+              <li>• Strategy map validation</li>
+              <li>Cross-cluster synchronization check</li>
+              <li>Regulatory framework updates</li>
+              <li>Stakeholder feedback integration</li>
+            </ul>
+          </div>
+          <div className="bg-[#011a12]/80 border border-[#C9A84C]/20 rounded-lg p-4">
+            <h4 className="font-semibold text-[#C9A84C] mb-2">Annual Recalibration</h4>
+            <ul className="text-sm text-[#ecfdf5]/80 space-y-1">
+              <li>• Balanced Scorecard assessment</li>
+              <li>Benchmark comparison (OIC/SMIIC, ESG)</li>
+              <li>Phase transition readiness evaluation</li>
+              <li>Budget reallocation decisions</li>
+            </ul>
+          </div>
+          <div className="bg-[#011a12]/80 border border-[#C9A84C]/20 rounded-lg p-4">
+            <h4 className="font-semibold text-[#C9A84C] mb-2">Mid-Term Review (2030)</h4>
+            <ul className="text-sm text-[#ecfdf5]/80 space-y-1">
+              <li>• Major strategy adjustment</li>
+              <li>Phase 3 priority setting</li>
+              <li>External evaluation</li>
+              <li>Parliamentary oversight review</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Question 7.1 */}
+      <FormField
+        control={form.control}
+        name="q7_1_criticality"
+        render={({ field }) => (
+          <FormItem className="space-y-4">
+            <FormLabel className="text-[#ecfdf5] text-lg font-semibold">
+              7.1 How critical is Islamic finance expansion for BARMM's economic sovereignty?
+            </FormLabel>
+            <FormControl>
+              <RadioGroup
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                className="grid grid-cols-1 md:grid-cols-2 gap-3"
+              >
+                {[
+                  { value: "5", label: "Absolutely Critical" },
+                  { value: "4", label: "Very Important" },
+                  { value: "3", label: "Moderately Important" },
+                  { value: "2", label: "Somewhat Important" },
+                  { value: "1", label: "Not Important" }
+                ].map((option) => (
+                  <div
+                    key={option.value}
+                    className={`flex items-center space-x-3 p-4 rounded-lg border transition-all cursor-pointer
+                      ${field.value === option.value ? "border-[#C9A84C] bg-[#C9A84C]/10" : "border-[#C9A84C]/20 bg-[#011a12]/40 hover:border-[#C9A84C]/50"}`}
+                  >
+                    <RadioGroupItem value={option.value} id={`q7_1-${option.value}`} className="text-[#C9A84C] border-[#C9A84C]/50" />
+                    <FormLabel htmlFor={`q7_1-${option.value}`} className="flex-1 cursor-pointer text-[#ecfdf5]/90 font-normal">
+                      {option.label}
+                    </FormLabel>
+                  </div>
+                ))}
+              </RadioGroup>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      {/* Question 7.2 */}
+      <FormField
+        control={form.control}
+        name="q7_2_instruments"
+        render={({ field }) => (
+          <FormItem className="space-y-4">
+            <FormLabel className="text-[#ecfdf5] text-lg font-semibold">
+              7.2 Which Islamic finance instruments should be prioritized? (Select all that apply)
+            </FormLabel>
+            <FormControl>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {financialInstruments.map((item) => (
+                {[
+                  "Murabahah (cost-plus financing)",
+                  "Musharakah (partnership financing)",
+                  "Mudarabah (profit-sharing)",
+                  "Ijara (leasing)",
+                  "Sukuk (Islamic bonds)",
+                  "Takaful (Islamic insurance)",
+                  "Waqf (endowment)",
+                  "Qard Hasan (benevolent loans)"
+                ].map((item, index) => (
                   <FormField
-                    key={item.id}
+                    key={item}
                     control={form.control}
                     name="q7_2_instruments"
-                    render={({ field }) => (
-                      <div className="flex items-center space-x-3 p-3 rounded-lg border border-border hover:bg-accent/50 transition-colors cursor-pointer">
-                        <Checkbox
-                          id={`q7_2_${item.id}`}
-                          checked={field.value?.includes(item.id)}
-                          onCheckedChange={(checked) =>
-                            checked
-                              ? field.onChange([...(field.value || []), item.id])
-                              : field.onChange((field.value || []).filter((v: string) => v !== item.id))
-                          }
-                        />
-                        <item.icon className="w-4 h-4 text-muted-foreground" />
-                        <label htmlFor={`q7_2_${item.id}`} className="flex-1 cursor-pointer text-sm font-normal">{item.label}</label>
-                      </div>
-                    )}
+                    render={({ field }) => {
+                      return (
+                        <FormItem
+                          key={item}
+                          className="flex flex-row items-start space-x-3 space-y-0 p-4 rounded-lg border border-[#C9A84C]/20 bg-[#011a12]/40 hover:border-[#C9A84C]/50 transition-all"
+                        >
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value?.includes(item)}
+                              onCheckedChange={(checked) => {
+                                return checked
+                                  ? field.onChange([...field.value, item])
+                                  : field.onChange(
+                                      field.value?.filter(
+                                        (value) => value !== item
+                                      )
+                                    );
+                              }}
+                            />
+                          </FormControl>
+                          <FormLabel className="text-sm font-normal text-[#ecfdf5]/90 cursor-pointer">
+                            {item}
+                          </FormLabel>
+                        </FormItem>
+                      );
+                    }}
                   />
                 ))}
               </div>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-        {/* Q7.3 Inclusion Target */}
-        <FormField
-          control={form.control}
-          name="q7_3_inclusion_target"
-          render={({ field }) => (
-            <FormItem className="space-y-4">
-              <FormLabel className="text-base font-semibold text-foreground">
-                7.3 How realistic is the target of 25% adult financial inclusion by 2035?
-              </FormLabel>
-              <FormControl>
-                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-5 gap-2">
-                  {["1", "2", "3", "4", "5"].map((val) => (
-                    <div key={val} className="flex flex-col items-center gap-1">
-                      <RadioGroupItem value={val} id={`q7_3_${val}`} className="peer sr-only" />
-                      <label htmlFor={`q7_3_${val}`}
-                        className="flex flex-col items-center justify-center w-full h-14 rounded-lg border-2 border-muted bg-popover p-2 hover:bg-accent peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 cursor-pointer transition-all">
-                        <span className="text-xl font-bold">{val}</span>
-                      </label>
+      {/* Question 7.3 */}
+      <FormField
+        control={form.control}
+        name="q7_3_inclusion_target"
+        render={({ field }) => (
+          <FormItem className="space-y-4">
+            <FormLabel className="text-[#ecfdf5] text-lg font-semibold">
+              7.3 How realistic is the 25% adult financial inclusion target by 2030?
+            </FormLabel>
+            <FormControl>
+              <RadioGroup
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                className="grid grid-cols-1 md:grid-cols-2 gap-3"
+              >
+                {[
+                  { value: "5", label: "Highly Realistic" },
+                  { value: "4", label: "Realistic" },
+                  { value: "3", label: "Moderately Realistic" },
+                  { value: "2", label: "Ambitious" },
+                  { value: "1", label: "Unrealistic" }
+                ].map((option) => (
+                  <div
+                    key={option.value}
+                    className={`flex items-center space-x-3 p-4 rounded-lg border transition-all cursor-pointer
+                      ${field.value === option.value ? "border-[#C9A84C] bg-[#C9A84C]/10" : "border-[#C9A84C]/20 bg-[#011a12]/40 hover:border-[#C9A84C]/50"}`}
+                  >
+                    <RadioGroupItem value={option.value} id={`q7_3-${option.value}`} className="text-[#C9A84C] border-[#C9A84C]/50" />
+                    <FormLabel htmlFor={`q7_3-${option.value}`} className="flex-1 cursor-pointer text-[#ecfdf5]/90 font-normal">
+                      {option.label}
+                    </FormLabel>
+                  </div>
+                ))}
+              </RadioGroup>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      {/* Question 7.4 */}
+      <FormField
+        control={form.control}
+        name="q7_4_asset_paradox"
+        render={({ field }) => (
+          <FormItem className="space-y-4">
+            <FormLabel className="text-[#ecfdf5] text-lg font-semibold">
+              7.4 What is the PRIMARY barrier to Islamic finance asset growth (&lt;₱2B despite 5.69M Muslim population)?
+            </FormLabel>
+            <FormControl>
+              <RadioGroup
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                className="space-y-3"
+              >
+                {[
+                  { value: "cultural", label: "Cultural preference for informal finance", desc: "Traditional lending networks dominate" },
+                  { value: "regulatory", label: "Regulatory fragmentation", desc: "BSP-BARMM coordination gaps" },
+                  { value: "products", label: "Limited product range", desc: "Lack of diverse Shariah-compliant offerings" },
+                  { value: "branches", label: "Insufficient branch network", desc: "Physical access constraints in rural/island areas" }
+                ].map((option) => (
+                  <div
+                    key={option.value}
+                    className={`flex items-start space-x-3 p-4 rounded-lg border transition-all cursor-pointer
+                      ${field.value === option.value ? "border-[#C9A84C] bg-[#C9A84C]/10" : "border-[#C9A84C]/20 bg-[#011a12]/40 hover:border-[#C9A84C]/50"}`}
+                  >
+                    <RadioGroupItem value={option.value} id={`q7_4-${option.value}`} className="text-[#C9A84C] border-[#C9A84C]/50 mt-1" />
+                    <div className="flex-1">
+                      <FormLabel htmlFor={`q7_4-${option.value}`} className="cursor-pointer text-[#ecfdf5]/90 font-semibold block">
+                        {option.label}
+                      </FormLabel>
+                      <p className="text-sm text-[#ecfdf5]/60 mt-1">{option.desc}</p>
                     </div>
-                  ))}
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                  </div>
+                ))}
+              </RadioGroup>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-        {/* Q7.4 Asset Paradox */}
-        <FormField
-          control={form.control}
-          name="q7_4_asset_paradox"
-          render={({ field }) => (
-            <FormItem className="space-y-4">
-              <FormLabel className="text-base font-semibold text-foreground">
-                🐘 Which barrier most significantly sustains the "Growth and Underinvestment" archetype in Islamic finance (&lt;₱2B assets)?
-              </FormLabel>
-              <FormControl>
-                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col gap-2">
-                  {[
-                    { value: "cultural", label: "Cultural preference for informal/shadow-economy finance mechanisms" },
-                    { value: "regulatory", label: "Regulatory fragmentation between BSP and BARMM institutions" },
-                    { value: "products", label: "Lack of Shariah-compliant products tailored for MSMEs and Agri-risk" },
-                    { value: "branches", label: "Limited physical branch networks in rural/archipelagic areas" },
-                  ].map((opt) => (
-                    <div key={opt.value} className="flex items-center space-x-3 p-3 rounded-lg border border-border hover:bg-accent/50 cursor-pointer">
-                      <RadioGroupItem value={opt.value} id={`q7_4_${opt.value}`} />
-                      <label htmlFor={`q7_4_${opt.value}`} className="flex-1 cursor-pointer text-sm font-normal">{opt.label}</label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Q7.5 Block Grant Dependency */}
-        <FormField
-          control={form.control}
-          name="q7_5_block_grant"
-          render={({ field }) => (
-            <FormItem className="space-y-4">
-              <FormLabel className="text-base font-semibold text-foreground">
-                🐘 Rate the impact of Block Grant Dependency on stifling local revenue generation and waqf mobilization (1=Low, 5=Severe):
-              </FormLabel>
-              <FormControl>
-                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex gap-2">
-                  {["1", "2", "3", "4", "5"].map((val) => (
-                    <div key={val} className="flex flex-col items-center gap-1">
-                      <RadioGroupItem value={val} id={`q7_5_${val}`} className="peer sr-only" />
-                      <label htmlFor={`q7_5_${val}`}
-                        className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-muted bg-popover hover:bg-accent peer-data-[state=checked]:border-cyan-500 peer-data-[state=checked]:bg-cyan-500/10 cursor-pointer transition-all font-bold text-sm">
-                        {val}
-                      </label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-      </CardContent>
-    </Card>
+      {/* Question 7.5 */}
+      <FormField
+        control={form.control}
+        name="q7_5_block_grant"
+        render={({ field }) => (
+          <FormItem className="space-y-4">
+            <FormLabel className="text-[#ecfdf5] text-lg font-semibold">
+              7.5 How dependent should Islamic finance be on BARMM block grants vs. private capital mobilization?
+            </FormLabel>
+            <FormControl>
+              <RadioGroup
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                className="grid grid-cols-1 md:grid-cols-2 gap-3"
+              >
+                {[
+                  { value: "5", label: "Primarily Private Capital" },
+                  { value: "4", label: "60% Private / 40% Block Grant" },
+                  { value: "3", label: "50/50 Mix" },
+                  { value: "2", label: "40% Private / 60% Block Grant" },
+                  { value: "1", label: "Primarily Block Grants" }
+                ].map((option) => (
+                  <div
+                    key={option.value}
+                    className={`flex items-center space-x-3 p-4 rounded-lg border transition-all cursor-pointer
+                      ${field.value === option.value ? "border-[#C9A84C] bg-[#C9A84C]/10" : "border-[#C9A84C]/20 bg-[#011a12]/40 hover:border-[#C9A84C]/50"}`}
+                  >
+                    <RadioGroupItem value={option.value} id={`q7_5-${option.value}`} className="text-[#C9A84C] border-[#C9A84C]/50" />
+                    <FormLabel htmlFor={`q7_5-${option.value}`} className="flex-1 cursor-pointer text-[#ecfdf5]/90 font-normal">
+                      {option.label}
+                    </FormLabel>
+                  </div>
+                ))}
+              </RadioGroup>
+            </FormControl>
+            <FormDescription className="text-[#ecfdf5]/60 text-sm">
+              Current projection: 35% block grants, 30% ODA, 35% private/PPP/Islamic finance
+            </FormDescription>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    </div>
   );
 }
