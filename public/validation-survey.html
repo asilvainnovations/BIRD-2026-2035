@@ -312,1048 +312,287 @@ footer{background:var(--dark-green);color:#cfe9df;padding:2rem 1rem 1.4rem;margi
 
 <main id="main-content">
 <form id="surveyForm" novalidate>
-
-  <!-- STEP 0 : Welcome + demographics -->
-  <div class="step active" data-step="0">
-    <div class="step-eyebrow">Before you start</div>
-    <h2 class="step-title">Tell us a bit about you</h2>
-    <p class="step-desc">This helps us understand which provinces and sectors are represented. Only your stakeholder type and province are required — everything else is optional.</p>
-
-    <div class="media video-wrap">
-      <iframe src="https://www.youtube.com/embed/UCi2dVUmSbE" title="Bangsamoro Investment Roadmap 2026-2035 overview" loading="lazy" allowfullscreen></iframe>
-    </div>
-    <p class="fig-cap">🎬 2-minute overview: <em>Bangsamoro Investment Roadmap 2026–2035 — Southeast Asia's Hub for Ethical &amp; Sustainable Growth</em></p>
-
-    <div class="callout">
-      💡 <span><b>Tip:</b> Not sure what BEIE, IEDS, or halal certification mean? The
-      <a href="https://bird-survey-orientation.asilvainnovations.com" target="_blank" rel="noopener">Survey Orientation page</a> explains all key terms in plain language before you answer.</span>
-    </div>
-
-    <fieldset>
-      <label class="q-label" for="dem_category">I am participating as a... <span class="req">*</span></label>
-      <select class="text-input" id="dem_category" required>
-        <option value="">Select one</option>
-        <option value="government">Government agency / ministry staff</option>
-        <option value="private_investor">Private sector / investor</option>
-        <option value="msme">MSME owner or entrepreneur</option>
-        <option value="academic">Academic / researcher</option>
-        <option value="civil_society">Civil society / community leader</option>
-        <option value="development_partner">Development partner / donor agency</option>
-        <option value="other">Other</option>
-      </select>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label" for="dem_province">My primary province or area <span class="req">*</span></label>
-      <select class="text-input" id="dem_province" required>
-        <option value="">Select one</option>
-        <option value="basilan">Basilan</option>
-        <option value="lanao_del_sur">Lanao del Sur</option>
-        <option value="maguindanao_del_norte">Maguindanao del Norte</option>
-        <option value="maguindanao_del_sur">Maguindanao del Sur</option>
-        <option value="sulu">Sulu</option>
-        <option value="tawi_tawi">Tawi-Tawi</option>
-        <option value="sga">Special Geographic Area (SGA)</option>
-        <option value="cotabato_city">Cotabato City</option>
-        <option value="barmm_wide">BARMM-wide / regional</option>
-        <option value="outside_barmm">Outside BARMM</option>
-      </select>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">My area(s) of interest or expertise (pick all that apply)</label>
-      <div class="opt-group" id="dem_expertise">
-        <label class="opt"><input type="checkbox" value="agriculture"><span></span>Agriculture &amp; fisheries</label>
-        <label class="opt"><input type="checkbox" value="halal"><span></span>Halal industry &amp; manufacturing</label>
-        <label class="opt"><input type="checkbox" value="tourism"><span></span>Tourism &amp; culture</label>
-        <label class="opt"><input type="checkbox" value="energy"><span></span>Energy</label>
-        <label class="opt"><input type="checkbox" value="infrastructure"><span></span>Infrastructure &amp; digital connectivity</label>
-        <label class="opt"><input type="checkbox" value="islamic_finance"><span></span>Islamic finance</label>
-        <label class="opt"><input type="checkbox" value="msme"><span></span>MSME development</label>
-        <label class="opt"><input type="checkbox" value="governance"><span></span>Governance &amp; peacebuilding</label>
-        <label class="opt"><input type="checkbox" value="environment"><span></span>Environment &amp; climate</label>
-        <label class="opt"><input type="checkbox" value="education"><span></span>Education &amp; human capital</label>
-        <label class="opt"><input type="checkbox" value="trade"><span></span>Trade &amp; investment promotion</label>
-      </div>
-    </fieldset>
-
-    <div class="two-col">
-      <fieldset><label class="q-label" for="dem_name">Full name (optional)</label>
-        <input type="text" id="dem_name" class="text-input" placeholder="e.g., Juan Dela Cruz"></fieldset>
-      <fieldset><label class="q-label" for="dem_email">Email (optional)</label>
-        <input type="email" id="dem_email" class="text-input" placeholder="you@example.com"></fieldset>
-    </div>
-    <fieldset><label class="q-label" for="dem_org">Organization (optional)</label>
-      <input type="text" id="dem_org" class="text-input" placeholder="e.g., BOI-MTIT, ABC Trading Corp."></fieldset>
-
-    <div class="step-actions">
-      <span></span>
-      <button type="button" class="btn btn-primary" data-next>Start survey →</button>
-    </div>
-  </div>
-
-  <!-- STEP 1 : Section 1 - BEIE Framework -->
-  <div class="step" data-step="1">
-    <div class="step-eyebrow">The Big Picture</div>
-    <h2 class="step-title">The BEIE Framework</h2>
-    <p class="step-desc">BIRD organizes BARMM's economy into five linked clusters — Foundations, Transformers, Enablers, Connectors, and Financiers — held together by good governance. Watch this short video and study the diagram, then answer two quick questions. Full details are in <a href="https://bird-roadmap.asilvainnovations.com" target="_blank" rel="noopener">Chapter 1 of the Roadmap</a>.</p>
-
-    <div class="media video-wrap">
-      <iframe src="https://www.youtube.com/embed/Li7lpyWWMcE" title="BEIE Framework overview" loading="lazy" allowfullscreen></iframe>
-    </div>
-    <p class="fig-cap">🎬 Context Analysis and the BEIE Framework</p>
-
-    <div class="media">
-      <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/19.%20Bangsamoro%20BEIE%20Framework.png" alt="Diagram of the Bangsamoro Economic and Investment Ecosystem (BEIE) Framework showing five clusters" loading="lazy">
-    </div>
-    <p class="fig-cap">Figure: The BEIE Framework — five clusters anchored by Moral Governance, Resilience, Inclusivity, and Peace.</p>
-
-    <fieldset>
-      <label class="q-label">1.1 How clear is the BEIE Framework to you after watching the video? <span class="req">*</span></label>
-      <div class="likert" data-required id="s1_understanding">
-        <label class="likert-opt"><input type="radio" name="s1_understanding" value="1"><span class="num">1</span><span class="txt">Not clear at all</span></label>
-        <label class="likert-opt"><input type="radio" name="s1_understanding" value="2"><span class="num">2</span><span class="txt">Slightly clear</span></label>
-        <label class="likert-opt"><input type="radio" name="s1_understanding" value="3"><span class="num">3</span><span class="txt">Somewhat clear</span></label>
-        <label class="likert-opt"><input type="radio" name="s1_understanding" value="4"><span class="num">4</span><span class="txt">Clear</span></label>
-        <label class="likert-opt"><input type="radio" name="s1_understanding" value="5"><span class="num">5</span><span class="txt">Very clear</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">1.2 How useful is this framework for planning BARMM's investment priorities? <span class="req">*</span></label>
-      <div class="likert" data-required id="s1_relevance">
-        <label class="likert-opt"><input type="radio" name="s1_relevance" value="1"><span class="num">1</span><span class="txt">Not useful</span></label>
-        <label class="likert-opt"><input type="radio" name="s1_relevance" value="2"><span class="num">2</span><span class="txt">Slightly useful</span></label>
-        <label class="likert-opt"><input type="radio" name="s1_relevance" value="3"><span class="num">3</span><span class="txt">Moderately useful</span></label>
-        <label class="likert-opt"><input type="radio" name="s1_relevance" value="4"><span class="num">4</span><span class="txt">Useful</span></label>
-        <label class="likert-opt"><input type="radio" name="s1_relevance" value="5"><span class="num">5</span><span class="txt">Very useful</span></label>
-      </div>
-    </fieldset>
-
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 1.5 : Systems Thinking context (no questions, sets up later sections) -->
-  <div class="step" data-step="1.5">
-    <div class="step-eyebrow">Context Before You Continue</div>
-    <h2 class="step-title">How the System Behaves</h2>
-    <p class="step-desc">Later sections ask about recurring patterns the Roadmap identified in BARMM's investment climate — things like "quick fixes that fail" or "growth outpacing capacity." This page explains those ideas in plain terms first, so the later questions make sense. No questions here — just read, watch, and continue.</p>
-
-    <div class="media">
-      <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/1-Systems%20Thinking%20Banner.png" alt="Systems Thinking banner" loading="lazy">
-    </div>
-    <p class="fig-cap">Systems thinking looks at how parts of BARMM's economy affect each other over time — not just each part on its own.</p>
-
-    <div class="media video-wrap">
-      <iframe src="https://www.youtube.com/embed/VBAHk0WYz_c" title="On Systems Thinking" loading="lazy" allowfullscreen></iframe>
-    </div>
-    <p class="fig-cap">🎬 On Systems Thinking — why cause and effect loop back on each other</p>
-
-    <div class="media">
-      <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/3-Anatomy%20of%20CLD.png" alt="Anatomy of a Causal Loop Diagram" loading="lazy">
-    </div>
-    <p class="fig-cap">Figure: A "Causal Loop Diagram" (CLD) maps how one change (e.g., more investment) triggers a chain of effects that can loop back and reinforce — or balance out — the original change.</p>
-
-    <div class="media">
-      <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/5-Paradigm.png" alt="The Iceberg Model paradigm" loading="lazy">
-    </div>
-    <p class="fig-cap">Figure: The Iceberg Model — visible "Events" (like an investment surge) are driven by hidden Patterns, Structures, and Mental Models beneath the surface.</p>
-
-    <div class="media">
-      <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/6-Anatomy%20of%20Systems%20Traps.png" alt="Anatomy of common systems traps" loading="lazy">
-    </div>
-    <p class="fig-cap">Figure: Common "systems traps" — recurring patterns that quietly stall good plans if left unaddressed.</p>
-
-    <div class="media video-wrap">
-      <iframe src="https://www.youtube.com/embed/LSmBzwyX2uw" title="SWOT Analysis and Systems Mapping" loading="lazy" allowfullscreen></iframe>
-    </div>
-    <p class="fig-cap">🎬 SWOT Analysis and Systems Mapping — how BIRD scored BARMM's strengths, weaknesses, opportunities, and threats</p>
-
-    <div class="resource-btn-row">
-      <a class="resource-btn" href="https://bird-roadmap.asilvainnovations.com" target="_blank" rel="noopener">📖 Read Chapter 3: SWOT &amp; Systems Mapping</a>
-      <a class="resource-btn" href="https://bird-resources.asilvainnovations.com" target="_blank" rel="noopener">📂 Browse all resources</a>
+    <!-- STEP 1: DEMOGRAPHICS -->
+    <div class="step" data-step="1">
+        <h2>Before you start: Tell us a bit about you</h2>
+        <fieldset>
+            <legend>I am participating as a... <span class="required">*</span></legend>
+            <select name="demographics[category]" id="demo_category" required aria-required="true">
+                <option value="">Select one</option>
+                <option value="Government agency / ministry staff">Government agency / ministry staff</option>
+                <option value="Private sector / investor">Private sector / investor</option>
+                <option value="MSME owner or entrepreneur">MSME owner or entrepreneur</option>
+                <option value="Academic / researcher">Academic / researcher</option>
+                <option value="Civil society / community leader">Civil society / community leader</option>
+                <option value="Development partner / donor agency">Development partner / donor agency</option>
+                <option value="Other">Other</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>My primary province or area <span class="required">*</span></legend>
+            <select name="demographics[province]" id="demo_province" required aria-required="true">
+                <option value="">Select one</option>
+                <option value="Basilan">Basilan</option><option value="Lanao del Sur">Lanao del Sur</option>
+                <option value="Maguindanao del Norte">Maguindanao del Norte</option><option value="Maguindanao del Sur">Maguindanao del Sur</option>
+                <option value="Sulu">Sulu</option><option value="Tawi-Tawi">Tawi-Tawi</option>
+                <option value="Special Geographic Area (SGA)">Special Geographic Area (SGA)</option>
+                <option value="Cotabato City">Cotabato City</option><option value="BARMM-wide / regional">BARMM-wide / regional</option>
+                <option value="Outside BARMM">Outside BARMM</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>My area(s) of interest or expertise (pick all that apply)</legend>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="demographics[expertise][]" value="Agriculture & fisheries"> Agriculture & fisheries</label>
+                <label><input type="checkbox" name="demographics[expertise][]" value="Halal industry & manufacturing"> Halal industry & manufacturing</label>
+                <label><input type="checkbox" name="demographics[expertise][]" value="Tourism & culture"> Tourism & culture</label>
+                <label><input type="checkbox" name="demographics[expertise][]" value="Energy"> Energy</label>
+                <label><input type="checkbox" name="demographics[expertise][]" value="Infrastructure & digital connectivity"> Infrastructure & digital connectivity</label>
+                <label><input type="checkbox" name="demographics[expertise][]" value="Islamic finance"> Islamic finance</label>
+                <label><input type="checkbox" name="demographics[expertise][]" value="MSME development"> MSME development</label>
+                <label><input type="checkbox" name="demographics[expertise][]" value="Governance & peacebuilding"> Governance & peacebuilding</label>
+                <label><input type="checkbox" name="demographics[expertise][]" value="Environment & climate"> Environment & climate</label>
+                <label><input type="checkbox" name="demographics[expertise][]" value="Education & human capital"> Education & human capital</label>
+                <label><input type="checkbox" name="demographics[expertise][]" value="Trade & investment promotion"> Trade & investment promotion</label>
+            </div>
+        </fieldset>
+        <fieldset><legend>Full name (optional)</legend><input type="text" name="demographics[name]" id="demo_name"></fieldset>
+        <fieldset><legend>Email (optional)</legend><input type="email" name="demographics[email]" id="demo_email"></fieldset>
+        <fieldset><legend>Organization (optional)</legend><input type="text" name="demographics[organization]" id="demo_org"></fieldset>
     </div>
 
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 2 : Section 2 - Moral Governance -->
-  <div class="step" data-step="2">
-    <div class="step-eyebrow">Governance, Resilience, Peace</div>
-    <h2 class="step-title">Moral Governance &amp; Peace</h2>
-    <p class="step-desc">The Roadmap treats transparency, accountability, resilience, inclusivity, and peace as the "operating system" that decides whether every other investment succeeds or stalls.</p>
-
-    <div class="media">
-      <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/20.%20Operating%20Systems_%20Trust%20as%20the%20Currency.png" alt="Operating Systems — Trust as the Currency" loading="lazy">
-    </div>
-    <p class="fig-cap">Figure: In BIRD, trust and good governance work like currency — they are what allow investment to circulate and compound.</p>
-
-    <fieldset>
-      <label class="q-label">2.1 Transparent, accountable governance is essential for attracting investors to BARMM. <span class="req">*</span></label>
-      <div class="likert" data-required id="s2_importance">
-        <label class="likert-opt"><input type="radio" name="s2_importance" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s2_importance" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s2_importance" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s2_importance" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s2_importance" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">2.2 How would you rate BARMM's progress so far on transparent, accountable governance? <span class="req">*</span></label>
-      <div class="likert" data-required id="s2_implementation">
-        <label class="likert-opt"><input type="radio" name="s2_implementation" value="1"><span class="num">1</span><span class="txt">Very poor</span></label>
-        <label class="likert-opt"><input type="radio" name="s2_implementation" value="2"><span class="num">2</span><span class="txt">Poor</span></label>
-        <label class="likert-opt"><input type="radio" name="s2_implementation" value="3"><span class="num">3</span><span class="txt">Fair</span></label>
-        <label class="likert-opt"><input type="radio" name="s2_implementation" value="4"><span class="num">4</span><span class="txt">Good</span></label>
-        <label class="likert-opt"><input type="radio" name="s2_implementation" value="5"><span class="num">5</span><span class="txt">Very good</span></label>
-      </div>
-    </fieldset>
-
-    <div class="context-note">
-      🔎 The gallery below shows the six patterns ("archetypes") described in Chapter 3 of the Roadmap. Each image illustrates how the pattern plays out in BARMM. Review them, then pick the one that matches your experience.
-    </div>
-    <div class="img-gallery">
-      <figure><img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/8-FtF.png" alt="Fixes that Fail archetype diagram" loading="lazy"><figcaption>Fixes that Fail</figcaption></figure>
-      <figure><img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/9.png" alt="Shifting the Burden archetype diagram" loading="lazy"><figcaption>Shifting the Burden</figcaption></figure>
-      <figure><img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/13.png" alt="Success to the Successful archetype diagram" loading="lazy"><figcaption>Success to the Successful</figcaption></figure>
-      <figure><img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/9LtG.png" alt="Limits to Growth archetype diagram" loading="lazy"><figcaption>Limits to Growth</figcaption></figure>
-      <figure><img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/10.png" alt="Growth and Underinvestment archetype diagram" loading="lazy"><figcaption>Growth &amp; Underinvestment</figcaption></figure>
-      <figure><img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/1-Systems%20Thinking%20Banner.png" alt="Tragedy of the Commons archetype diagram" loading="lazy"><figcaption>Tragedy of the Commons</figcaption></figure>
-      <figure><img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/11-BM.png" alt="The Big Man archetype diagram" loading="lazy"><figcaption>The "Big Man" Dynamic</figcaption></figure>
-      <figure><img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/23.png" alt="Big Man and Escalation diagram" loading="lazy"><figcaption>Escalation Spirals</figcaption></figure>
+    <!-- STEP 2: BEIE FRAMEWORK -->
+    <div class="step" data-step="2">
+        <h2>The Big Picture: The BEIE Framework</h2>
+        <fieldset><legend>1.1 How clear is the BEIE Framework to you? <span class="required">*</span></legend>
+            <select name="responses[section1_beie][understanding]" required aria-required="true">
+                <option value="">Select...</option><option value="1">1 - Not clear at all</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5 - Very clear</option>
+            </select>
+        </fieldset>
+        <fieldset><legend>1.2 How useful is this framework for planning? <span class="required">*</span></legend>
+            <select name="responses[section1_beie][relevance]" required aria-required="true">
+                <option value="">Select...</option><option value="1">1 - Not useful</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5 - Very useful</option>
+            </select>
+        </fieldset>
     </div>
 
-    <fieldset>
-      <label class="q-label">2.3 Which pattern below best matches what you've seen in BARMM's investment climate?</label>
-      <p class="q-hint">These are common patterns the Roadmap uses to explain why good plans sometimes stall.</p>
-      <div class="opt-group" id="s2_archetype">
-        <label class="opt"><input type="radio" name="s2_archetype" value="fixes_that_fail">Quick fixes (tax breaks) work briefly, then investors leave once incentives expire — "Fixes that Fail"</label>
-        <label class="opt"><input type="radio" name="s2_archetype" value="tragedy_of_commons">Shared resources (forests, fishing grounds, power grid) get over-used because no one coordinates — "Tragedy of the Commons"</label>
-        <label class="opt"><input type="radio" name="s2_archetype" value="success_to_successful">Provinces that are already ahead keep getting more investment, leaving others behind — "Success to the Successful"</label>
-        <label class="opt"><input type="radio" name="s2_archetype" value="growth_underinvestment">Investment approvals grow faster than government's capacity to process and support them — "Growth &amp; Underinvestment"</label>
-        <label class="opt"><input type="radio" name="s2_archetype" value="none">None of these match my experience</label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">2.4 Which peace and security milestones matter most for investor confidence? (pick all that apply)</label>
-      <div class="opt-group" id="s2_peace">
-        <label class="opt"><input type="checkbox" value="basilan_asg_free">Basilan's ASG-free declaration (2024)</label>
-        <label class="opt"><input type="checkbox" value="parliament_elections">First elected Bangsamoro Parliament</label>
-        <label class="opt"><input type="checkbox" value="normalization">MILF / MNLF normalization &amp; reintegration</label>
-        <label class="opt"><input type="checkbox" value="reconciliation">Community reconciliation programs</label>
-        <label class="opt"><input type="checkbox" value="rido_reduction">Fewer clan feud (rido) incidents</label>
-        <label class="opt"><input type="checkbox" value="other_peace">Other</label>
-      </div>
-    </fieldset>
-
-    <div class="media">
-      <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/26.png" alt="Moral Governance as Leverage diagram" loading="lazy">
-    </div>
-    <p class="fig-cap">Figure: Why moral governance is the highest-leverage fix — it touches every pattern above at once.</p>
-
-    <div class="resource-btn-row">
-      <a class="resource-btn" href="https://bird-roadmap.asilvainnovations.com" target="_blank" rel="noopener">📖 Read Chapter 2: Cross-Cutting Operating Systems</a>
-      <a class="resource-btn" href="https://bird-dashboard.asilvainnovations.com" target="_blank" rel="noopener">📊 See governance indicators on the Dashboard</a>
+    <!-- STEP 3: MORAL GOVERNANCE -->
+    <div class="step" data-step="3">
+        <h2>Governance, Resilience, Peace</h2>
+        <fieldset><legend>2.1 Transparent governance is essential. <span class="required">*</span></legend>
+            <select name="responses[section2_mg][importance]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+        </fieldset>
+        <fieldset><legend>2.2 Rate BARMM's progress so far. <span class="required">*</span></legend>
+            <select name="responses[section2_mg][implementation]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+        </fieldset>
+        <fieldset><legend>2.3 Which pattern best matches your experience? <span class="required">*</span></legend>
+            <label><input type="radio" name="responses[section2_mg][archetype]" value="Fixes that Fail" required> Quick fixes work briefly, then investors leave</label>
+            <label><input type="radio" name="responses[section2_mg][archetype]" value="Tragedy of the Commons"> Shared resources get over-used</label>
+            <label><input type="radio" name="responses[section2_mg][archetype]" value="Success to the Successful"> Ahead provinces keep getting more</label>
+            <label><input type="radio" name="responses[section2_mg][archetype]" value="Growth & Underinvestment"> Approvals grow faster than capacity</label>
+            <label><input type="radio" name="responses[section2_mg][archetype]" value="None of these"> None of these</label>
+        </fieldset>
+        <fieldset><legend>2.4 Peace milestones for investor confidence (pick all that apply)</legend>
+            <label><input type="checkbox" name="responses[section2_mg][peace_milestones][]" value="Basilan's ASG-free declaration (2024)"> Basilan's ASG-free declaration</label>
+            <label><input type="checkbox" name="responses[section2_mg][peace_milestones][]" value="First elected Bangsamoro Parliament"> First elected Parliament</label>
+            <label><input type="checkbox" name="responses[section2_mg][peace_milestones][]" value="MILF / MNLF normalization"> MILF / MNLF normalization</label>
+            <label><input type="checkbox" name="responses[section2_mg][peace_milestones][]" value="Community reconciliation"> Community reconciliation</label>
+            <label><input type="checkbox" name="responses[section2_mg][peace_milestones][]" value="Fewer rido incidents"> Fewer clan feuds</label>
+        </fieldset>
     </div>
 
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 3 : Section 3 - Foundations -->
-  <div class="step" data-step="3">
-    <div class="step-eyebrow">Foundations Cluster</div>
-    <h2 class="step-title">Agriculture, Fisheries, Forestry &amp; Energy</h2>
-    <p class="step-desc">Foundations supply the raw materials — crops, fish, timber, power — that everything else in the economy depends on.</p>
-
-    <div class="media">
-      <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/25.%20Cluster%201_%20Foundations.png" alt="Cluster 1: Foundations diagram" loading="lazy">
-    </div>
-    <p class="fig-cap">Figure: Cluster 1 — Foundations (Agriculture, Fisheries, Forestry, Energy, Environment)</p>
-
-    <fieldset>
-      <label class="q-label">3.1 Which Foundations investments should be prioritized first? (pick up to 3)</label>
-      <div class="opt-group" id="s3_priorities">
-        <label class="opt"><input type="checkbox" value="farm_to_market">Farm-to-market roads</label>
-        <label class="opt"><input type="checkbox" value="climate_smart_agri">Climate-smart agriculture (drought-resistant crops, irrigation)</label>
-        <label class="opt"><input type="checkbox" value="renewable_energy">Renewable energy &amp; grid expansion (e.g., ZBIP)</label>
-        <label class="opt"><input type="checkbox" value="forestry_code">Forestry Code, carbon credits &amp; ecosystem payments</label>
-        <label class="opt"><input type="checkbox" value="fisheries">Fisheries &amp; aquaculture modernization</label>
-        <label class="opt"><input type="checkbox" value="cold_storage">Cold storage &amp; post-harvest facilities</label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">3.2 Reaching the 2035 Foundations targets (e.g., 85% renewable energy, fewer post-harvest losses) is realistic. <span class="req">*</span></label>
-      <div class="likert" data-required id="s3_feasibility">
-        <label class="likert-opt"><input type="radio" name="s3_feasibility" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s3_feasibility" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s3_feasibility" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s3_feasibility" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s3_feasibility" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <p class="q-hint" style="margin-bottom:.9rem;">Rate two known risks to agriculture — how <b>serious</b> the damage would be (Impact) and how <b>likely</b> it is to happen (Likelihood). 1 = low, 5 = high.</p>
-
-    <fieldset>
-      <label class="q-label">3.3 El Niño-related drought / flooding — Impact and Likelihood</label>
-      <div class="two-col">
-        <div>
-          <label class="q-hint">Impact</label>
-          <div class="likert" style="grid-template-columns:repeat(5,1fr);" id="s3_elnino_impact">
-            <label class="likert-opt"><input type="radio" name="s3_elnino_impact" value="1"><span class="num">1</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_elnino_impact" value="2"><span class="num">2</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_elnino_impact" value="3"><span class="num">3</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_elnino_impact" value="4"><span class="num">4</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_elnino_impact" value="5"><span class="num">5</span></label>
-          </div>
-        </div>
-        <div>
-          <label class="q-hint">Likelihood</label>
-          <div class="likert" style="grid-template-columns:repeat(5,1fr);" id="s3_elnino_likelihood">
-            <label class="likert-opt"><input type="radio" name="s3_elnino_likelihood" value="1"><span class="num">1</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_elnino_likelihood" value="2"><span class="num">2</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_elnino_likelihood" value="3"><span class="num">3</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_elnino_likelihood" value="4"><span class="num">4</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_elnino_likelihood" value="5"><span class="num">5</span></label>
-          </div>
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">3.4 Rubber tree disease (Pestalotiopsis, Basilan) — Impact and Likelihood</label>
-      <div class="two-col">
-        <div>
-          <label class="q-hint">Impact</label>
-          <div class="likert" style="grid-template-columns:repeat(5,1fr);" id="s3_pesta_impact">
-            <label class="likert-opt"><input type="radio" name="s3_pesta_impact" value="1"><span class="num">1</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_pesta_impact" value="2"><span class="num">2</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_pesta_impact" value="3"><span class="num">3</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_pesta_impact" value="4"><span class="num">4</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_pesta_impact" value="5"><span class="num">5</span></label>
-          </div>
-        </div>
-        <div>
-          <label class="q-hint">Likelihood</label>
-          <div class="likert" style="grid-template-columns:repeat(5,1fr);" id="s3_pesta_likelihood">
-            <label class="likert-opt"><input type="radio" name="s3_pesta_likelihood" value="1"><span class="num">1</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_pesta_likelihood" value="2"><span class="num">2</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_pesta_likelihood" value="3"><span class="num">3</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_pesta_likelihood" value="4"><span class="num">4</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_pesta_likelihood" value="5"><span class="num">5</span></label>
-          </div>
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">3.5 Post-harvest losses (spoilage before crops reach market) — Impact and Likelihood</label>
-      <div class="two-col">
-        <div>
-          <label class="q-hint">Impact</label>
-          <div class="likert" style="grid-template-columns:repeat(5,1fr);" id="s3_postharvest_impact">
-            <label class="likert-opt"><input type="radio" name="s3_postharvest_impact" value="1"><span class="num">1</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_postharvest_impact" value="2"><span class="num">2</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_postharvest_impact" value="3"><span class="num">3</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_postharvest_impact" value="4"><span class="num">4</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_postharvest_impact" value="5"><span class="num">5</span></label>
-          </div>
-        </div>
-        <div>
-          <label class="q-hint">Likelihood</label>
-          <div class="likert" style="grid-template-columns:repeat(5,1fr);" id="s3_postharvest_likelihood">
-            <label class="likert-opt"><input type="radio" name="s3_postharvest_likelihood" value="1"><span class="num">1</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_postharvest_likelihood" value="2"><span class="num">2</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_postharvest_likelihood" value="3"><span class="num">3</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_postharvest_likelihood" value="4"><span class="num">4</span></label>
-            <label class="likert-opt"><input type="radio" name="s3_postharvest_likelihood" value="5"><span class="num">5</span></label>
-          </div>
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">3.6 Without fixing infrastructure and climate risks first, farm and fishery growth will stall. <span class="req">*</span></label>
-      <div class="likert" data-required id="s3_limits_growth">
-        <label class="likert-opt"><input type="radio" name="s3_limits_growth" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s3_limits_growth" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s3_limits_growth" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s3_limits_growth" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s3_limits_growth" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 4 : Section 4 - Transformers -->
-  <div class="step" data-step="4">
-    <div class="step-eyebrow">Transformers Cluster</div>
-    <h2 class="step-title">Halal Industry &amp; Manufacturing</h2>
-    <p class="step-desc">Transformers turn raw materials into finished, exportable products — especially halal-certified food, cosmetics, and goods for the USD 2.3 trillion global halal market.</p>
-
-    <div class="media">
-      <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/26.%20Cluster%202%20_%20Transformers.png" alt="Cluster 2: Transformers diagram" loading="lazy">
-    </div>
-    <p class="fig-cap">Figure: Cluster 2 — Transformers (Industry, Manufacturing, Logistics, Halal Processing)</p>
-
-    <fieldset>
-      <label class="q-label">4.1 What is the single biggest barrier to growing halal industry and manufacturing in BARMM? <span class="req">*</span></label>
-      <div class="opt-group" id="s4_barrier" data-required>
-        <label class="opt"><input type="radio" name="s4_barrier" value="certification_delays">Slow halal certification (currently 45–60 days)</label>
-        <label class="opt"><input type="radio" name="s4_barrier" value="processing_infra">Limited processing facilities &amp; cold chain</label>
-        <label class="opt"><input type="radio" name="s4_barrier" value="skills_gap">Skills gaps in the local workforce</label>
-        <label class="opt"><input type="radio" name="s4_barrier" value="finance_access">Limited access to business financing</label>
-        <label class="opt"><input type="radio" name="s4_barrier" value="market_access">Limited access to export markets</label>
-        <label class="opt"><input type="radio" name="s4_barrier" value="other_barrier">Other</label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">4.2 The Bangsamoro Halal Park (Matanog) should be a top investment priority. <span class="req">*</span></label>
-      <div class="likert" data-required id="s4_halal_park">
-        <label class="likert-opt"><input type="radio" name="s4_halal_park" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s4_halal_park" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s4_halal_park" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s4_halal_park" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s4_halal_park" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">4.3 Giving tax breaks without also fixing certification and standards will not keep investors long-term. <span class="req">*</span></label>
-      <div class="likert" data-required id="s4_fixes_fail">
-        <label class="likert-opt"><input type="radio" name="s4_fixes_fail" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s4_fixes_fail" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s4_fixes_fail" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s4_fixes_fail" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s4_fixes_fail" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">4.4 The growing global halal market (USD 2.3 trillion) is a major opportunity for BARMM's economy. <span class="req">*</span></label>
-      <div class="likert" data-required id="s4_commodity_impact">
-        <label class="likert-opt"><input type="radio" name="s4_commodity_impact" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s4_commodity_impact" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s4_commodity_impact" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s4_commodity_impact" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s4_commodity_impact" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">4.5 Which halal export sectors should BARMM focus on first? (pick all that apply)</label>
-      <div class="opt-group" id="s4_heds">
-        <label class="opt"><input type="checkbox" value="food_beverage">Halal food &amp; beverage</label>
-        <label class="opt"><input type="checkbox" value="cosmetics">Halal cosmetics</label>
-        <label class="opt"><input type="checkbox" value="pharma">Halal pharmaceuticals</label>
-        <label class="opt"><input type="checkbox" value="tourism_hospitality">Halal tourism &amp; hospitality</label>
-      </div>
-    </fieldset>
-
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 5 : Section 5 - Enablers -->
-  <div class="step" data-step="5">
-    <div class="step-eyebrow">Enablers Cluster</div>
-    <h2 class="step-title">Infrastructure &amp; Human Capital</h2>
-    <p class="step-desc">Roads, power, internet, schools, and clinics are the "enablers" that make every other investment possible.</p>
-
-    <div class="media">
-      <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/28.%20Cluster%203%20_%20Enablers.png" alt="Cluster 3: Enablers diagram" loading="lazy">
-    </div>
-    <p class="fig-cap">Figure: Cluster 3 — Enablers (Infrastructure, Social Services, Health, Education, Human Capital)</p>
-
-    <fieldset>
-      <label class="q-label">5.1 How would you rate current infrastructure (roads, power, internet) in your area? <span class="req">*</span></label>
-      <div class="likert" data-required id="s5_infra_rating">
-        <label class="likert-opt"><input type="radio" name="s5_infra_rating" value="1"><span class="num">1</span><span class="txt">Very poor</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_infra_rating" value="2"><span class="num">2</span><span class="txt">Poor</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_infra_rating" value="3"><span class="num">3</span><span class="txt">Fair</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_infra_rating" value="4"><span class="num">4</span><span class="txt">Good</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_infra_rating" value="5"><span class="num">5</span><span class="txt">Very good</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">5.2 Which enabler investments matter most to you? (pick up to 3)</label>
-      <div class="opt-group" id="s5_sectors">
-        <label class="opt"><input type="checkbox" value="roads">Roads &amp; bridges</label>
-        <label class="opt"><input type="checkbox" value="power">Electricity &amp; the power grid</label>
-        <label class="opt"><input type="checkbox" value="broadband">Broadband internet</label>
-        <label class="opt"><input type="checkbox" value="healthcare">Healthcare facilities</label>
-        <label class="opt"><input type="checkbox" value="education">Schools &amp; skills training (TVET)</label>
-        <label class="opt"><input type="checkbox" value="housing">Housing with basic utilities</label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">5.3 Expanding broadband internet to rural and island areas should be a top priority. <span class="req">*</span></label>
-      <div class="likert" data-required id="s5_broadband">
-        <label class="likert-opt"><input type="radio" name="s5_broadband" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_broadband" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_broadband" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_broadband" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_broadband" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">5.4 Raising the literacy rate (currently 59.3%) should be a top priority. <span class="req">*</span></label>
-      <div class="likert" data-required id="s5_literacy">
-        <label class="likert-opt"><input type="radio" name="s5_literacy" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_literacy" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_literacy" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_literacy" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_literacy" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">5.5 Reducing child malnutrition and stunting should be a top priority. <span class="req">*</span></label>
-      <div class="likert" data-required id="s5_stunting">
-        <label class="likert-opt"><input type="radio" name="s5_stunting" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_stunting" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_stunting" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_stunting" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_stunting" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">5.6 The gap between mainland and island provinces in internet and services is a serious problem. <span class="req">*</span></label>
-      <div class="likert" data-required id="s5_digital_divide">
-        <label class="likert-opt"><input type="radio" name="s5_digital_divide" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_digital_divide" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_digital_divide" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_digital_divide" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s5_digital_divide" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 6 : Section 6 - Connectors -->
-  <div class="step" data-step="6">
-    <div class="step-eyebrow">Connectors Cluster</div>
-    <h2 class="step-title">Trade, Tourism &amp; Regional Markets</h2>
-    <p class="step-desc">Connectors link BARMM's products and services to buyers — through BIMP-EAGA, the UAE/GCC halal corridor, and tourism.</p>
-
-    <div class="media">
-      <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/33.%20Cluster%204_%20Connectors.png" alt="Cluster 4: Connectors diagram" loading="lazy">
-    </div>
-    <p class="fig-cap">Figure: Cluster 4 — Connectors (Tourism, Digital Connectivity, Trade, Exports, BIMP-EAGA Integration)</p>
-
-    <div class="media">
-      <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/BARMM%20Connectivity%20%20.png" alt="Map of BARMM's connectivity within BIMP-EAGA" loading="lazy">
-    </div>
-    <p class="fig-cap">Figure: BARMM's location within the BIMP-EAGA trade corridor.</p>
-
-    <fieldset>
-      <label class="q-label">6.1 Closer trade ties with Brunei, Indonesia, Malaysia, and other ASEAN neighbors (BIMP-EAGA) matter for BARMM's growth. <span class="req">*</span></label>
-      <div class="likert" data-required id="s6_bimpeaga">
-        <label class="likert-opt"><input type="radio" name="s6_bimpeaga" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_bimpeaga" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_bimpeaga" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_bimpeaga" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_bimpeaga" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">6.2 Which export markets should BARMM prioritize? (pick all that apply)</label>
-      <div class="opt-group" id="s6_markets">
-        <label class="opt"><input type="checkbox" value="uae_gcc">UAE / Gulf (GCC) countries</label>
-        <label class="opt"><input type="checkbox" value="asean">ASEAN neighbors (BIMP-EAGA)</label>
-        <label class="opt"><input type="checkbox" value="domestic">Domestic Philippine market</label>
-        <label class="opt"><input type="checkbox" value="china">China</label>
-        <label class="opt"><input type="checkbox" value="other_market">Other</label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">6.3 Reaching ₱40 billion in annual exports by 2035 is achievable. <span class="req">*</span></label>
-      <div class="likert" data-required id="s6_export_target">
-        <label class="likert-opt"><input type="radio" name="s6_export_target" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_export_target" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_export_target" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_export_target" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_export_target" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <div class="media">
-      <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/UAE%20&%20GCC.png" alt="Bangsamoro and UAE/GCC halal trade corridor map" loading="lazy">
-    </div>
-    <p class="fig-cap">Figure: BARMM's proposed halal export corridor to the UAE and GCC markets.</p>
-
-    <fieldset>
-      <label class="q-label">6.4 A dedicated UAE/GCC halal export corridor is realistic within the next 5 years. <span class="req">*</span></label>
-      <div class="likert" data-required id="s6_uae">
-        <label class="likert-opt"><input type="radio" name="s6_uae" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_uae" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_uae" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_uae" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_uae" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">6.5 Outside investors' perception of BARMM's peace and security has improved in recent years. <span class="req">*</span></label>
-      <div class="likert" data-required id="s6_perception">
-        <label class="likert-opt"><input type="radio" name="s6_perception" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_perception" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_perception" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_perception" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s6_perception" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 7 : Section 7 - Financiers -->
-  <div class="step" data-step="7">
-    <div class="step-eyebrow">Financiers Cluster</div>
-    <h2 class="step-title">Islamic Finance &amp; Access to Capital</h2>
-    <p class="step-desc">Islamic banking, takaful (insurance), microfinance, and waqf (endowments) provide the capital that keeps the whole ecosystem moving.</p>
-
-    <div class="media">
-      <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/38.%20Cluster%205_%20Financiers.png" alt="Cluster 5: Financiers diagram" loading="lazy">
-    </div>
-    <p class="fig-cap">Figure: Cluster 5 — Financiers (Islamic Banking, Waqf, Takaful, Microfinance)</p>
-
-    <fieldset>
-      <label class="q-label">7.1 Expanding Islamic finance is critical for inclusive growth in BARMM. <span class="req">*</span></label>
-      <div class="likert" data-required id="s7_criticality">
-        <label class="likert-opt"><input type="radio" name="s7_criticality" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_criticality" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_criticality" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_criticality" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_criticality" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">7.2 Which financial instruments should be expanded first? (pick all that apply)</label>
-      <div class="opt-group" id="s7_instruments">
-        <label class="opt"><input type="checkbox" value="islamic_banking">Islamic banking branches</label>
-        <label class="opt"><input type="checkbox" value="takaful">Takaful (Islamic insurance)</label>
-        <label class="opt"><input type="checkbox" value="microfinance">Microfinance &amp; cooperatives</label>
-        <label class="opt"><input type="checkbox" value="waqf">Waqf (community endowments)</label>
-        <label class="opt"><input type="checkbox" value="fintech">Mobile banking &amp; fintech</label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">7.3 Reaching 25% adult financial inclusion by 2030 is achievable. <span class="req">*</span></label>
-      <div class="likert" data-required id="s7_inclusion_target">
-        <label class="likert-opt"><input type="radio" name="s7_inclusion_target" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_inclusion_target" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_inclusion_target" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_inclusion_target" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_inclusion_target" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">7.4 It is a problem that Islamic banking assets remain below ₱2 billion, despite BARMM's large Muslim-majority population. <span class="req">*</span></label>
-      <div class="likert" data-required id="s7_asset_paradox">
-        <label class="likert-opt"><input type="radio" name="s7_asset_paradox" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_asset_paradox" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_asset_paradox" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_asset_paradox" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_asset_paradox" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">7.5 The proposed mix of government funding, aid, and private/Islamic finance is adequate to fund this Roadmap. <span class="req">*</span></label>
-      <div class="likert" data-required id="s7_block_grant">
-        <label class="likert-opt"><input type="radio" name="s7_block_grant" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_block_grant" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_block_grant" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_block_grant" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s7_block_grant" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 8 : Section 8 - Strategic Options -->
-  <div class="step" data-step="8">
-    <div class="step-eyebrow">Strategic Direction</div>
-    <h2 class="step-title">Choosing the Right Strategy</h2>
-    <p class="step-desc">The Roadmap compares four possible strategies. Watch the short video and read the summaries below, then tell us which one you'd choose. Full comparison is in <a href="https://bird-roadmap.asilvainnovations.com" target="_blank" rel="noopener">Chapter 4 of the Roadmap</a>.</p>
-
-    <div class="media video-wrap">
-      <iframe src="https://www.youtube.com/embed/kb_snh8mo1k" title="Strategic Options and the Investment Roadmap" loading="lazy" allowfullscreen></iframe>
-    </div>
-    <p class="fig-cap">🎬 Strategic Options and the Investment Roadmap</p>
-
-    <div class="media">
-      <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/24.%20Meadows%20Hierarchy%20of%20Leverage%20Points.png" alt="Meadows Hierarchy of Leverage Points diagram" loading="lazy">
-    </div>
-    <p class="fig-cap">Figure: Meadows' Hierarchy of Leverage Points — the deeper the intervention (rules, goals, mindset), the bigger and more lasting the change.</p>
-
-    <fieldset>
-      <label class="q-label">8.1 Which strategic option should BARMM prioritize? <span class="req">*</span></label>
-      <div class="opt-group" id="s8_strategy" data-required>
-        <label class="opt"><input type="radio" name="s8_strategy" value="heds"><b>HEDS</b> — Focus mainly on halal industry &amp; export certification</label>
-        <label class="opt"><input type="radio" name="s8_strategy" value="gems"><b>GEMS</b> — Focus mainly on green economy: carbon credits, eco-tourism, sustainable forestry</label>
-        <label class="opt"><input type="radio" name="s8_strategy" value="ifes"><b>IFES</b> — Focus mainly on infrastructure first: roads, power, digital, skills</label>
-        <label class="opt"><input type="radio" name="s8_strategy" value="ieds"><b>IEDS (recommended)</b> — Sequence all of the above together: infrastructure first, then halal/green production, then export markets</label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">8.2 The proposed sequence — infrastructure first (2026–28), then production (2029–32), then markets (2033–35) — makes sense. <span class="req">*</span></label>
-      <div class="likert" data-required id="s8_sequencing">
-        <label class="likert-opt"><input type="radio" name="s8_sequencing" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s8_sequencing" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s8_sequencing" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s8_sequencing" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s8_sequencing" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label" for="s8_comments">8.3 Anything you'd add, change, or remove from this strategy? (optional)</label>
-      <textarea id="s8_comments" class="textarea-input" placeholder="Share your thoughts here..." maxlength="2000"></textarea>
-    </fieldset>
-
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 9 : Section 9 - Budget -->
-  <div class="step" data-step="9">
-    <div class="step-eyebrow">Funding the Plan</div>
-    <h2 class="step-title">Investment Budget</h2>
-    <p class="step-desc">The Roadmap estimates a total of ₱120–160 billion is needed from 2026 to 2035, coming from BARMM's block grant, national programs, foreign aid, and private capital.</p>
-
-    <div class="resource-btn-row">
-      <a class="resource-btn" href="https://bird-roadmap.asilvainnovations.com" target="_blank" rel="noopener">📖 See the full budget breakdown (Roadmap Ch.7)</a>
+    <!-- STEP 4: FOUNDATIONS -->
+    <div class="step" data-step="4">
+        <h2>Foundations Cluster</h2>
+        <fieldset><legend>3.1 Prioritize Foundations investments (pick up to 3)</legend>
+            <label><input type="checkbox" name="responses[section3_foundations][priorities][]" value="Farm-to-market roads"> Farm-to-market roads</label>
+            <label><input type="checkbox" name="responses[section3_foundations][priorities][]" value="Climate-smart agriculture"> Climate-smart agriculture</label>
+            <label><input type="checkbox" name="responses[section3_foundations][priorities][]" value="Renewable energy & grid expansion"> Renewable energy & grid</label>
+            <label><input type="checkbox" name="responses[section3_foundations][priorities][]" value="Forestry Code, carbon credits"> Forestry Code & carbon credits</label>
+            <label><input type="checkbox" name="responses[section3_foundations][priorities][]" value="Fisheries & aquaculture"> Fisheries & aquaculture</label>
+            <label><input type="checkbox" name="responses[section3_foundations][priorities][]" value="Cold storage & post-harvest"> Cold storage & post-harvest</label>
+        </fieldset>
+        <fieldset><legend>3.2 Reaching 2035 Foundations targets is realistic. <span class="required">*</span></legend>
+            <select name="responses[section3_foundations][feasibility]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+        </fieldset>
+        <fieldset><legend>3.3 El Niño drought/flooding</legend>
+            <label>Impact: <select name="responses[section3_foundations][el_nino_impact]"><option value="">-</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
+            <label>Likelihood: <select name="responses[section3_foundations][el_nino_likelihood]"><option value="">-</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
+        </fieldset>
+        <fieldset><legend>3.4 Rubber tree disease</legend>
+            <label>Impact: <select name="responses[section3_foundations][pestalotiopsis_impact]"><option value="">-</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
+            <label>Likelihood: <select name="responses[section3_foundations][pestalotiopsis_likelihood]"><option value="">-</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
+        </fieldset>
+        <fieldset><legend>3.5 Post-harvest losses</legend>
+            <label>Impact: <select name="responses[section3_foundations][postharvest_impact]"><option value="">-</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
+            <label>Likelihood: <select name="responses[section3_foundations][postharvest_likelihood]"><option value="">-</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
+        </fieldset>
+        <fieldset><legend>3.6 Without fixing infrastructure first, growth will stall. <span class="required">*</span></legend>
+            <select name="responses[section3_foundations][limits_growth]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+        </fieldset>
     </div>
 
-    <fieldset>
-      <label class="q-label">9.1 This ₱120–160 billion total budget is realistic for what the Roadmap aims to achieve. <span class="req">*</span></label>
-      <div class="likert" data-required id="s9_realism">
-        <label class="likert-opt"><input type="radio" name="s9_realism" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s9_realism" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s9_realism" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s9_realism" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s9_realism" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 10 : Section 10 - Targets -->
-  <div class="step" data-step="10">
-    <div class="step-eyebrow">2035 Targets</div>
-    <h2 class="step-title">Are the Targets Right?</h2>
-    <p class="step-desc">By 2035, the Roadmap aims for a ₱550 billion regional economy and poverty below 20% (from 34.8% today).</p>
-
-    <div class="resource-btn-row">
-      <a class="resource-btn" href="https://bird-roadmap.asilvainnovations.com" target="_blank" rel="noopener">📖 See the KPI &amp; targets framework (Roadmap Ch.5–6)</a>
-      <a class="resource-btn" href="https://bird-dashboard.asilvainnovations.com" target="_blank" rel="noopener">📊 Track live progress on the Dashboard</a>
+    <!-- STEP 5: TRANSFORMERS -->
+    <div class="step" data-step="5">
+        <h2>Transformers Cluster</h2>
+        <fieldset><legend>4.1 Biggest barrier to halal industry? <span class="required">*</span></legend>
+            <select name="responses[section4_transformers][barrier]" required>
+                <option value="">Select...</option><option value="Slow halal certification">Slow certification (45-60 days)</option><option value="Limited processing facilities">Limited processing/cold chain</option>
+                <option value="Skills gaps">Skills gaps</option><option value="Limited access to financing">Limited financing</option><option value="Limited access to export markets">Limited export access</option>
+            </select>
+        </fieldset>
+        <fieldset><legend>4.2 Halal Park (Matanog) should be top priority. <span class="required">*</span></legend>
+            <select name="responses[section4_transformers][halal_park]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+        </fieldset>
+        <fieldset><legend>4.3 Tax breaks without fixing standards won't keep investors. <span class="required">*</span></legend>
+            <select name="responses[section4_transformers][fixes_fail]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+        </fieldset>
+        <fieldset><legend>4.4 Global halal market (USD 2.3T) is a major opportunity. <span class="required">*</span></legend>
+            <select name="responses[section4_transformers][commodity_impact]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+        </fieldset>
+        <fieldset><legend>4.5 Halal export sectors to focus on first (pick all that apply)</legend>
+            <label><input type="checkbox" name="responses[section4_transformers][heds_ranking][]" value="Halal food & beverage"> Halal food & beverage</label>
+            <label><input type="checkbox" name="responses[section4_transformers][heds_ranking][]" value="Halal cosmetics"> Halal cosmetics</label>
+            <label><input type="checkbox" name="responses[section4_transformers][heds_ranking][]" value="Halal pharmaceuticals"> Halal pharmaceuticals</label>
+            <label><input type="checkbox" name="responses[section4_transformers][heds_ranking][]" value="Halal tourism & hospitality"> Halal tourism & hospitality</label>
+        </fieldset>
     </div>
 
-    <fieldset>
-      <label class="q-label">10.1 These 2035 targets are ambitious but achievable. <span class="req">*</span></label>
-      <div class="likert" data-required id="s10_ambition">
-        <label class="likert-opt"><input type="radio" name="s10_ambition" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s10_ambition" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s10_ambition" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s10_ambition" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s10_ambition" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">10.2 How confident are you that progress will be tracked and reported honestly? <span class="req">*</span></label>
-      <div class="likert" data-required id="s10_matrix">
-        <label class="likert-opt"><input type="radio" name="s10_matrix" value="1"><span class="num">1</span><span class="txt">Not confident</span></label>
-        <label class="likert-opt"><input type="radio" name="s10_matrix" value="2"><span class="num">2</span><span class="txt">Slightly confident</span></label>
-        <label class="likert-opt"><input type="radio" name="s10_matrix" value="3"><span class="num">3</span><span class="txt">Somewhat confident</span></label>
-        <label class="likert-opt"><input type="radio" name="s10_matrix" value="4"><span class="num">4</span><span class="txt">Confident</span></label>
-        <label class="likert-opt"><input type="radio" name="s10_matrix" value="5"><span class="num">5</span><span class="txt">Very confident</span></label>
-      </div>
-    </fieldset>
-
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 11 : Section 11 - Equity -->
-  <div class="step" data-step="11">
-    <div class="step-eyebrow">Fair Distribution</div>
-    <h2 class="step-title">Provincial Equity</h2>
-    <p class="step-desc">Mainland provinces (e.g., Maguindanao del Norte, Lanao del Sur) currently attract more investment than island provinces (Sulu, Tawi-Tawi, Basilan).</p>
-
-    <div class="resource-btn-row">
-      <a class="resource-btn" href="https://bird-resources.asilvainnovations.com" target="_blank" rel="noopener">📂 See provincial economic outlooks</a>
+    <!-- STEP 6: ENABLERS -->
+    <div class="step" data-step="6">
+        <h2>Enablers Cluster</h2>
+        <fieldset><legend>5.1 Rate current infrastructure in your area. <span class="required">*</span></legend>
+            <select name="responses[section5_enablers][infra_rating]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+        </fieldset>
+        <fieldset><legend>5.2 Enabler investments that matter most (pick up to 3)</legend>
+            <label><input type="checkbox" name="responses[section5_enablers][sectors][]" value="Roads & bridges"> Roads & bridges</label>
+            <label><input type="checkbox" name="responses[section5_enablers][sectors][]" value="Electricity & power grid"> Electricity & power grid</label>
+            <label><input type="checkbox" name="responses[section5_enablers][sectors][]" value="Broadband internet"> Broadband internet</label>
+            <label><input type="checkbox" name="responses[section5_enablers][sectors][]" value="Healthcare facilities"> Healthcare facilities</label>
+            <label><input type="checkbox" name="responses[section5_enablers][sectors][]" value="Schools & skills training"> Schools & skills training</label>
+            <label><input type="checkbox" name="responses[section5_enablers][sectors][]" value="Housing with basic utilities"> Housing with basic utilities</label>
+        </fieldset>
+        <fieldset><legend>5.3 Expanding broadband to rural areas is top priority. <span class="required">*</span></legend><select name="responses[section5_enablers][broadband]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>5.4 Raising literacy rate (59.3%) is top priority. <span class="required">*</span></legend><select name="responses[section5_enablers][literacy]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>5.5 Reducing child malnutrition/stunting is top priority. <span class="required">*</span></legend><select name="responses[section5_enablers][stunting]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>5.6 Mainland vs island gap is a serious problem. <span class="required">*</span></legend><select name="responses[section5_enablers][digital_divide]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
     </div>
 
-    <fieldset>
-      <label class="q-label">11.1 BARMM should adopt deliberate policies to steer more investment toward lagging provinces. <span class="req">*</span></label>
-      <div class="likert" data-required id="s11_affirmative">
-        <label class="likert-opt"><input type="radio" name="s11_affirmative" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s11_affirmative" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s11_affirmative" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s11_affirmative" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s11_affirmative" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">11.2 Which tools would help most in closing this gap? (pick all that apply)</label>
-      <div class="opt-group" id="s11_mechanisms">
-        <label class="opt"><input type="checkbox" value="satellite_offices">Local investment offices in Jolo, Bongao, Lamitan</label>
-        <label class="opt"><input type="checkbox" value="budget_share">Guaranteed minimum infrastructure budget share for island provinces</label>
-        <label class="opt"><input type="checkbox" value="equity_kpis">Public tracking of investment by province</label>
-        <label class="opt"><input type="checkbox" value="local_sourcing">Rules requiring big investors to buy from local suppliers</label>
-      </div>
-    </fieldset>
-
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 12 : Section 12 - Climate -->
-  <div class="step" data-step="12">
-    <div class="step-eyebrow">Climate &amp; Green Economy</div>
-    <h2 class="step-title">Environment as an Economic Asset</h2>
-    <p class="step-desc">The Roadmap treats forests, oceans, and clean air as sources of income — through carbon credits, ecosystem payments, and eco-tourism — not just things to protect.</p>
-
-    <div class="resource-btn-row">
-      <a class="resource-btn" href="https://bird-roadmap.asilvainnovations.com" target="_blank" rel="noopener">📖 Read about the Green Economy (Roadmap Ch.2)</a>
+    <!-- STEP 7: CONNECTORS -->
+    <div class="step" data-step="7">
+        <h2>Connectors Cluster</h2>
+        <fieldset><legend>6.1 Closer BIMP-EAGA trade ties matter for growth. <span class="required">*</span></legend><select name="responses[section6_connectors][bimpeaga_importance]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>6.2 Export markets to prioritize (pick all that apply)</legend>
+            <label><input type="checkbox" name="responses[section6_connectors][markets][]" value="UAE / Gulf (GCC)"> UAE / Gulf (GCC)</label>
+            <label><input type="checkbox" name="responses[section6_connectors][markets][]" value="ASEAN neighbors"> ASEAN neighbors</label>
+            <label><input type="checkbox" name="responses[section6_connectors][markets][]" value="Domestic Philippine market"> Domestic Philippine market</label>
+            <label><input type="checkbox" name="responses[section6_connectors][markets][]" value="China"> China</label>
+        </fieldset>
+        <fieldset><legend>6.3 Reaching ₱40B annual exports by 2035 is achievable. <span class="required">*</span></legend><select name="responses[section6_connectors][export_target]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>6.4 UAE/GCC halal export corridor is realistic in 5 years. <span class="required">*</span></legend><select name="responses[section6_connectors][uae_feasibility]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>6.5 Outside investors' perception of BARMM peace has improved. <span class="required">*</span></legend><select name="responses[section6_connectors][perception]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
     </div>
 
-    <fieldset>
-      <label class="q-label">12.1 Turning BARMM's forests and coasts into revenue (carbon credits, ecosystem payments, eco-tourism) should be a top priority. <span class="req">*</span></label>
-      <div class="likert" data-required id="s12_green_priority">
-        <label class="likert-opt"><input type="radio" name="s12_green_priority" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s12_green_priority" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s12_green_priority" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s12_green_priority" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s12_green_priority" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">12.2 Which climate protection steps should be prioritized? (pick all that apply)</label>
-      <div class="opt-group" id="s12_adaptation">
-        <label class="opt"><input type="checkbox" value="risk_screening">Checking climate risk before approving new projects</label>
-        <label class="opt"><input type="checkbox" value="early_warning">Early warning systems for floods, drought, storms</label>
-        <label class="opt"><input type="checkbox" value="coastal_protection">Mangrove &amp; coastal protection</label>
-        <label class="opt"><input type="checkbox" value="drought_crops">Drought-resistant crop varieties</label>
-        <label class="opt"><input type="checkbox" value="climate_insurance">Climate-risk insurance for farmers &amp; fisherfolk</label>
-      </div>
-    </fieldset>
-
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 13 : Section 13 - Policy -->
-  <div class="step" data-step="13">
-    <div class="step-eyebrow">Laws &amp; Coordination</div>
-    <h2 class="step-title">Policy &amp; Institutional Support</h2>
-    <p class="step-desc">Several laws are pending, and a new coordination office is proposed to keep agencies working together instead of in silos.</p>
-
-    <div class="resource-btn-row">
-      <a class="resource-btn" href="https://bird-roadmap.asilvainnovations.com" target="_blank" rel="noopener">📖 Read the Policy Recommendations (Roadmap Ch.8)</a>
+    <!-- STEP 8: FINANCIERS -->
+    <div class="step" data-step="8">
+        <h2>Financiers Cluster</h2>
+        <fieldset><legend>7.1 Expanding Islamic finance is critical for inclusive growth. <span class="required">*</span></legend><select name="responses[section7_financiers][criticality]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>7.2 Financial instruments to expand first (pick all that apply)</legend>
+            <label><input type="checkbox" name="responses[section7_financiers][instruments][]" value="Islamic banking branches"> Islamic banking branches</label>
+            <label><input type="checkbox" name="responses[section7_financiers][instruments][]" value="Takaful"> Takaful (Islamic insurance)</label>
+            <label><input type="checkbox" name="responses[section7_financiers][instruments][]" value="Microfinance & cooperatives"> Microfinance & cooperatives</label>
+            <label><input type="checkbox" name="responses[section7_financiers][instruments][]" value="Waqf"> Waqf (community endowments)</label>
+            <label><input type="checkbox" name="responses[section7_financiers][instruments][]" value="Mobile banking & fintech"> Mobile banking & fintech</label>
+        </fieldset>
+        <fieldset><legend>7.3 Reaching 25% adult financial inclusion by 2030 is achievable. <span class="required">*</span></legend><select name="responses[section7_financiers][inclusion_target]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>7.4 Islamic banking assets below ₱2B is a problem. <span class="required">*</span></legend><select name="responses[section7_financiers][asset_paradox]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>7.5 Proposed funding mix is adequate. <span class="required">*</span></legend><select name="responses[section7_financiers][block_grant]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
     </div>
 
-    <fieldset>
-      <label class="q-label">13.1 Which pending law or policy is most urgent to pass? (pick all that apply)</label>
-      <div class="opt-group" id="s13_legislation">
-        <label class="opt"><input type="checkbox" value="forestry_code">Bangsamoro Forestry Code</label>
-        <label class="opt"><input type="checkbox" value="jmc_2026_01">Carbon credit &amp; ecosystem payment rules (JMC No. 2026-01)</label>
-        <label class="opt"><input type="checkbox" value="investment_code">Updated Bangsamoro Investment Code</label>
-        <label class="opt"><input type="checkbox" value="islamic_banking_reg">Stronger Islamic banking regulations</label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">13.2 Creating a central coordination office (Bangsamoro Investment Command Center) will improve how agencies work together. <span class="req">*</span></label>
-      <div class="likert" data-required id="s13_bicc">
-        <label class="likert-opt"><input type="radio" name="s13_bicc" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s13_bicc" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s13_bicc" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s13_bicc" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s13_bicc" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 14 : Section 16 - CARE overall reflection -->
-  <div class="step" data-step="14">
-    <div class="step-eyebrow">Overall Assessment</div>
-    <h2 class="step-title">Your Overall Impression</h2>
-    <p class="step-desc">A last few questions on the Roadmap as a whole, using the same C.A.R.E. framework introduced at the start: Context-specific, Action-oriented, Real-time &amp; adaptive, Evidence-based.</p>
-
-    <fieldset>
-      <label class="q-label">14.1 The Roadmap reflects BARMM's real, on-the-ground context well. <span class="req">*</span></label>
-      <div class="likert" data-required id="s16_context">
-        <label class="likert-opt"><input type="radio" name="s16_context" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_context" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_context" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_context" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_context" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">14.2 The actions proposed are clear and specific enough to actually carry out. <span class="req">*</span></label>
-      <div class="likert" data-required id="s16_action">
-        <label class="likert-opt"><input type="radio" name="s16_action" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_action" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_action" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_action" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_action" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">14.3 The plan includes good ways to monitor progress and adjust course if something isn't working. <span class="req">*</span></label>
-      <div class="likert" data-required id="s16_realtime">
-        <label class="likert-opt"><input type="radio" name="s16_realtime" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_realtime" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_realtime" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_realtime" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_realtime" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">14.4 The Roadmap is grounded in credible data and evidence. <span class="req">*</span></label>
-      <div class="likert" data-required id="s16_evidence">
-        <label class="likert-opt"><input type="radio" name="s16_evidence" value="1"><span class="num">1</span><span class="txt">Strongly disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_evidence" value="2"><span class="num">2</span><span class="txt">Disagree</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_evidence" value="3"><span class="num">3</span><span class="txt">Neutral</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_evidence" value="4"><span class="num">4</span><span class="txt">Agree</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_evidence" value="5"><span class="num">5</span><span class="txt">Strongly agree</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <label class="q-label">14.5 Overall, how would you rate the BIRD 2026–2035 draft? <span class="req">*</span></label>
-      <div class="likert" data-required id="s16_overall">
-        <label class="likert-opt"><input type="radio" name="s16_overall" value="1"><span class="num">1</span><span class="txt">Poor</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_overall" value="2"><span class="num">2</span><span class="txt">Fair</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_overall" value="3"><span class="num">3</span><span class="txt">Good</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_overall" value="4"><span class="num">4</span><span class="txt">Very good</span></label>
-        <label class="likert-opt"><input type="radio" name="s16_overall" value="5"><span class="num">5</span><span class="txt">Excellent</span></label>
-      </div>
-    </fieldset>
-
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 15 : Open feedback -->
-  <div class="step" data-step="15">
-    <div class="step-eyebrow">Anything Else?</div>
-    <h2 class="step-title">Open Feedback</h2>
-    <p class="step-desc">Optional — use this space for any comment that didn't fit above.</p>
-
-    <fieldset>
-      <label class="q-label" for="s15_open">What else should the BIRD team know?</label>
-      <textarea id="s15_open" class="textarea-input" placeholder="Your comments, concerns, or suggestions..." maxlength="2000"></textarea>
-    </fieldset>
-
-    <div class="callout">
-      🔎 <span>Want to explore the numbers behind these questions? Visit the
-      <a href="https://bird-dashboard.asilvainnovations.com" target="_blank" rel="noopener">BIRD Dashboard</a> for live indicators, or try the
-      <a href="https://bird-app.asilvainnovations.com" target="_blank" rel="noopener">BIRD App</a> to explore the strategy in more detail.</span>
+    <!-- STEP 9: STRATEGIC DIRECTION -->
+    <div class="step" data-step="9">
+        <h2>Strategic Direction</h2>
+        <fieldset><legend>8.1 Which strategic option should BARMM prioritize? <span class="required">*</span></legend>
+            <label><input type="radio" name="responses[section8_options][strategy]" value="HEDS" required> HEDS (Halal focus)</label>
+            <label><input type="radio" name="responses[section8_options][strategy]" value="GEMS"> GEMS (Green focus)</label>
+            <label><input type="radio" name="responses[section8_options][strategy]" value="IFES"> IFES (Infrastructure focus)</label>
+            <label><input type="radio" name="responses[section8_options][strategy]" value="IEDS"> IEDS (Integrated/Recommended)</label>
+        </fieldset>
+        <fieldset><legend>8.2 Proposed sequence (Infra -> Production -> Markets) makes sense. <span class="required">*</span></legend><select name="responses[section8_options][sequencing]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>8.3 Anything you'd add, change, or remove? (optional)</legend><textarea name="responses[section8_options][comments]" rows="4"></textarea></fieldset>
     </div>
 
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" data-next>Continue to review →</button>
-    </div>
-  </div>
-
-  <!-- STEP 16 : Review + Consent + Submit -->
-  <div class="step" data-step="16">
-    <div class="step-eyebrow">Review &amp; Submit</div>
-    <h2 class="step-title">Review your responses</h2>
-    <p class="step-desc">Please check the summary below, then confirm and submit. You can still go back and change any answer.</p>
-
-    <div class="error-banner" id="submitError"></div>
-
-    <ul class="summary-list" id="summaryList"></ul>
-
-    <div class="media">
-      <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/18.%20Vision.png" alt="BIRD 2026-2035 Vision statement" loading="lazy">
-    </div>
-    <p class="fig-cap">This is the vision your feedback helps shape: a self-sustaining, export-linked Bangsamoro economy by 2035.</p>
-
-    <div class="consent-box">
-      <input type="checkbox" id="consentBox">
-      <label for="consentBox">I understand my responses will be used by the Bureau of Investments – MTIT, BARMM to improve the BIRD 2026–2035 Roadmap. My answers are kept confidential and reported only in combined, anonymous form. I can request more information via the
-        <a href="https://bird-contact.asilvainnovations.com" target="_blank" rel="noopener" style="color:var(--primary-green);font-weight:700;">Contact page</a>. <span class="req">*</span></label>
+    <!-- STEP 10: BUDGET -->
+    <div class="step" data-step="10">
+        <h2>Funding the Plan</h2>
+        <fieldset><legend>9.1 ₱120–160B total budget is realistic. <span class="required">*</span></legend><select name="responses[section9_budget][realism]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
     </div>
 
-    <div class="step-actions">
-      <button type="button" class="btn btn-ghost" data-back>← Back</button>
-      <button type="button" class="btn btn-primary" id="submitBtn">Submit survey ✓</button>
+    <!-- STEP 11: TARGETS -->
+    <div class="step" data-step="11">
+        <h2>2035 Targets</h2>
+        <fieldset><legend>10.1 2035 targets are ambitious but achievable. <span class="required">*</span></legend><select name="responses[section10_targets][ambition]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>10.2 Confident progress will be tracked honestly. <span class="required">*</span></legend><select name="responses[section10_targets][matrix]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
     </div>
-  </div>
 
+    <!-- STEP 12: EQUITY -->
+    <div class="step" data-step="12">
+        <h2>Fair Distribution</h2>
+        <fieldset><legend>11.1 BARMM should steer investment to lagging provinces. <span class="required">*</span></legend><select name="responses[section11_equity][affirmative]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>11.2 Tools to close the gap (pick all that apply)</legend>
+            <label><input type="checkbox" name="responses[section11_equity][mechanisms][]" value="Local investment offices"> Local investment offices</label>
+            <label><input type="checkbox" name="responses[section11_equity][mechanisms][]" value="Guaranteed minimum infrastructure budget"> Guaranteed minimum infra budget</label>
+            <label><input type="checkbox" name="responses[section11_equity][mechanisms][]" value="Public tracking of investment"> Public tracking</label>
+            <label><input type="checkbox" name="responses[section11_equity][mechanisms][]" value="Rules requiring local sourcing"> Local sourcing rules</label>
+        </fieldset>
+    </div>
+
+    <!-- STEP 13: CLIMATE -->
+    <div class="step" data-step="13">
+        <h2>Climate & Green Economy</h2>
+        <fieldset><legend>12.1 Turning forests/coasts into revenue should be top priority. <span class="required">*</span></legend><select name="responses[section12_climate][green_priority]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>12.2 Climate protection steps to prioritize (pick all that apply)</legend>
+            <label><input type="checkbox" name="responses[section12_climate][adaptation][]" value="Climate risk screening"> Climate risk screening</label>
+            <label><input type="checkbox" name="responses[section12_climate][adaptation][]" value="Early warning systems"> Early warning systems</label>
+            <label><input type="checkbox" name="responses[section12_climate][adaptation][]" value="Mangrove & coastal protection"> Mangrove & coastal protection</label>
+            <label><input type="checkbox" name="responses[section12_climate][adaptation][]" value="Drought-resistant crops"> Drought-resistant crops</label>
+            <label><input type="checkbox" name="responses[section12_climate][adaptation][]" value="Climate-risk insurance"> Climate-risk insurance</label>
+        </fieldset>
+    </div>
+
+    <!-- STEP 14: POLICY -->
+    <div class="step" data-step="14">
+        <h2>Laws & Coordination</h2>
+        <fieldset><legend>13.1 Pending laws to pass urgently (pick all that apply)</legend>
+            <label><input type="checkbox" name="responses[section13_policy][legislation][]" value="Bangsamoro Forestry Code"> Bangsamoro Forestry Code</label>
+            <label><input type="checkbox" name="responses[section13_policy][legislation][]" value="Carbon credit rules (JMC 2026-01)"> Carbon credit rules</label>
+            <label><input type="checkbox" name="responses[section13_policy][legislation][]" value="Updated Bangsamoro Investment Code"> Updated Investment Code</label>
+            <label><input type="checkbox" name="responses[section13_policy][legislation][]" value="Stronger Islamic banking regulations"> Stronger Islamic banking regs</label>
+        </fieldset>
+        <fieldset><legend>13.2 Central coordination office (BICC) will improve collaboration. <span class="required">*</span></legend><select name="responses[section13_policy][bicc]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+    </div>
+
+    <!-- STEP 15: OVERALL ASSESSMENT (C.A.R.E.) -->
+    <div class="step" data-step="15">
+        <h2>Overall Assessment</h2>
+        <fieldset><legend>16.1 Roadmap reflects BARMM's real context. <span class="required">*</span></legend><select name="responses[section16_care][context]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>16.2 Actions are clear and specific. <span class="required">*</span></legend><select name="responses[section16_care][action]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>16.3 Plan includes good ways to monitor progress. <span class="required">*</span></legend><select name="responses[section16_care][realtime]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>16.4 Roadmap is grounded in credible data. <span class="required">*</span></legend><select name="responses[section16_care][evidence]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+        <fieldset><legend>16.5 Overall rating of BIRD 2026-2035 draft. <span class="required">*</span></legend><select name="responses[section16_care][overall]" required><option value="">Select...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></fieldset>
+    </div>
+
+    <!-- STEP 16: CONSENT & SUBMIT -->
+    <div class="step" data-step="16">
+        <h2>Review & Submit</h2>
+        <fieldset>
+            <legend class="consent-label">
+                <input type="checkbox" name="consent" id="consent_check" required aria-required="true">
+                I understand my responses will be used by the Bureau of Investments – MTIT, BARMM to improve the BIRD 2026–2035 Roadmap. My answers are kept confidential. <span class="required">*</span>
+            </legend>
+        </fieldset>
+        <button type="submit" id="submitBtn" class="btn-primary">Submit Survey</button>
+    </div>
 </form>
 
 <!-- Success panel (shown after submit) -->
