@@ -1,4 +1,8 @@
-import { SurveySchemaType } from "./survey-schema";
+// src/lib/api.ts
+// BIRD 2026–2035 · Survey Submission API
+// Posts to Netlify function via /api/submit
+
+import type { SurveySchemaType } from "@/lib/survey-schema";
 
 export interface SubmissionResponse {
   message: string;
@@ -11,14 +15,13 @@ export interface SubmissionResponse {
  * The netlify.toml redirects /api/* to /.netlify/functions/*
  */
 export async function submitSurvey(data: SurveySchemaType): Promise<SubmissionResponse> {
-  // Structure the payload to match the backend's expected schema
   const payload = {
     surveyData: {
       metadata: {
         timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent,
-        platform: navigator.platform,
-        language: navigator.language,
+        userAgent: typeof navigator !== "undefined" ? navigator.userAgent : "server",
+        platform: typeof navigator !== "undefined" ? navigator.platform : "unknown",
+        language: typeof navigator !== "undefined" ? navigator.language : "en",
       },
       responses: {
         section1_beie: { understanding: data.q1_1, relevance: data.q1_2 },
@@ -110,23 +113,16 @@ export async function submitSurvey(data: SurveySchemaType): Promise<SubmissionRe
     },
   };
 
-  try {
-    const response = await fetch("/api/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
+  const response = await fetch("/api/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.message || `Server error: ${response.status}`);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Survey submission failed:", error);
-    throw error;
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || `Server error: ${response.status}`);
   }
+
+  return response.json();
 }
