@@ -877,8 +877,10 @@ body { background:white; color:black; }
 <div id="consentBanner" style="position: fixed; bottom: 0; left: 0; right: 0; background: rgba(2, 44, 34, 0.98); backdrop-filter: blur(10px); border-top: 2px solid var(--gold-border); padding: 1.5rem; z-index: 10000; display: none; box-shadow: 0 -4px 30px rgba(0,0,0,0.5);">
     <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
         <div style="flex: 1; min-width: 280px; color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.5;">
-            <strong style="color: var(--gold); display: block; margin-bottom: 0.5rem;">🍪 Privacy & Data Consent</strong>
-            We use cookies and local storage to enhance your experience, save your preferences, and analyze platform engagement. By clicking "Accept", you consent to our use of these technologies. Read our <a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/privacy-policy.html" style="color: var(--gold); text-decoration: underline;" target="_blank">Privacy Policy</a> for more information.
+            <strong style="color: var(--gold); display: block; margin-bottom: 0.5rem;">🍪 Storage & Privacy Consent</strong>
+            We use your browser's localStorage (not traditional cookies) to save your survey progress and preferences. This data stays on your device. Read our 
+            <a href="cookie-policy.html" style="color: var(--gold); text-decoration: underline;" target="_blank">Cookie & LocalStorage Policy</a> and 
+            <a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/privacy-policy.html" style="color: var(--gold); text-decoration: underline;" target="_blank">Privacy Policy</a> for more information.
         </div>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
             <button id="declineBtn" style="background: transparent; border: 1px solid var(--gold-border); color: var(--light-green); padding: 0.6rem 1.2rem; border-radius: 0.5rem; cursor: pointer; font-family: 'DM Sans', sans-serif; font-weight: 600; transition: all 0.3s;">Decline</button>
@@ -1113,25 +1115,40 @@ installBtn.addEventListener('click',async()=>{if(!deferredPrompt)return;deferred
 loadState();
 render();
 renderBSC();
-
 /* ======================== CONSENT BANNER ======================== */
 document.addEventListener('DOMContentLoaded', function() {
     const banner = document.getElementById('consentBanner');
     const acceptBtn = document.getElementById('acceptBtn');
     const declineBtn = document.getElementById('declineBtn');
+    const CONSENT_KEY = 'birdConsent'; // Standardized key for this site
 
-    if (!localStorage.getItem('birdConsent')) {
+    // 1. Show banner only if the user hasn't made a choice yet
+    if (!localStorage.getItem(CONSENT_KEY)) {
         banner.style.display = 'block';
     }
 
+    // 2. Handle Accept: Save preference and hide banner
     acceptBtn.addEventListener('click', function() {
-        localStorage.setItem('birdConsent', 'accepted');
+        localStorage.setItem(CONSENT_KEY, 'accepted');
         banner.style.display = 'none';
     });
 
+    // 3. Handle Decline: Save preference, hide banner, AND clear non-essential data
     declineBtn.addEventListener('click', function() {
-        localStorage.setItem('birdConsent', 'declined');
+        localStorage.setItem(CONSENT_KEY, 'declined');
         banner.style.display = 'none';
+        
+        // STRICT PRIVACY COMPLIANCE: Clear any existing non-essential localStorage data
+        const keysToKeep = [CONSENT_KEY]; // Only keep the consent choice itself
+        const allKeys = Object.keys(localStorage);
+        
+        allKeys.forEach(key => {
+            if (!keysToKeep.includes(key)) {
+                localStorage.removeItem(key);
+            }
+        });
+        
+        console.log('User declined storage. Non-essential local data cleared.');
     });
 });
 </script>
