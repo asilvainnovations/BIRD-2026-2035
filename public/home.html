@@ -34,6 +34,26 @@ gtag('config', 'G-2CNG7D15Q7');
 --focus-ring:0 0 0 3px rgba(201,168,76,0.5);
 --touch-target:44px;
 }
+/* --- Icon System --- */
+.icon {
+    width: 1.2em;
+    height: 1.2em;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+/* Optional: Add a gap if placing icon next to text */
+.icon-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+    
 @media (prefers-reduced-motion: reduce) {
 *, *::before, *::after {
 animation-duration: 0.01ms !important;
