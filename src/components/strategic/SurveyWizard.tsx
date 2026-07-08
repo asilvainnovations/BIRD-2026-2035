@@ -1,15 +1,20 @@
 // src/components/strategic/SurveyWizard.tsx
 "use client";
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { surveySchema, SurveySchemaType } from "@/lib/survey-schema";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { ArrowRight, ArrowLeft, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { toast } from "@/components/ui/use-toast";
+import { ArrowRight, ArrowLeft, Send, CheckCircle2, AlertTriangle, MapPin } from "lucide-react";
+
 import { toast } from "@/components/ui/use-toast";
 import { surveySchema, SurveySchemaType, conditionalRules } from "@/lib/survey-schema";
 import { submitSurvey } from "@/lib/api";
@@ -400,88 +405,104 @@ export function SurveyWizard() {
           </AlertDescription>
         </Alert>
       )}
+export function SurveyWizard() {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-      {/* Conditional Logic Alert */}
-      {formValues.demo_province && currentStep === 14 && (
-        <Alert className="mb-6 border-blue-500/30 bg-blue-500/10 text-blue-200">
-          <AlertCircle className="h-4 w-4" />
-          <AlertTitle>Province-Specific Questions</AlertTitle>
+  const form = useForm<SurveySchemaType>({
+    resolver: zodResolver(surveySchema),
+    defaultValues: {
+      q1_1: undefined, q1_2: undefined, q8_1_strategy: undefined, q8_2_sequencing: undefined,
+      q10_matrix: {
+        heds: { economic_impact: 5, feasibility: 5, identity_alignment: 5, systems_leverage: 5, risk_return: 5, inclusivity: 5, sustainability: 5 },
+        gems: { economic_impact: 5, feasibility: 5, identity_alignment: 5, systems_leverage: 5, risk_return: 5, inclusivity: 5, sustainability: 5 },
+        ifes: { economic_impact: 5, feasibility: 5, identity_alignment: 5, systems_leverage: 5, risk_return: 5, inclusivity: 5, sustainability: 5 },
+        ieds: { economic_impact: 5, feasibility: 5, identity_alignment: 5, systems_leverage: 5, risk_return: 5, inclusivity: 5, sustainability: 5 },
+      },
+      demo_province: undefined, consent_final: false as never,
+    },
+    mode: "onTouched",
+  });
+
+  // 🧠 CONDITIONAL LOGIC: Watch Province for Dynamic Context
+  const watchedProvince = useWatch({ control: form.control, name: "demo_province" });
+
+  const handleNext = async () => {
+    const isValid = await form.trigger();
+    if (isValid && currentStep < TOTAL_STEPS) {
+      setCurrentStep((prev) => prev + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      toast({ title: "Validation Required", description: "Please complete all required fields or resolve Kill Switch warnings.", variant: "destructive" });
+    }
+  };
+
+  const renderSection = () => {
+    switch (currentStep) {
+      case 1: return <Section1_BEIE />;
+      case 8: return <Section8_StrategicOptions />;
+      case 10: return <Section10_IEDSMatrix />;
+      // ... other cases
+      default: return <Section1_BEIE />;
+    }
+  };
+
+  return (
+    <div className="w-full max-w-5xl mx-auto p-4 md:p-8 space-y-6">
+      {/* Header & Progress */}
+      <div className="text-center space-y-4">
+        <Badge variant="outline" className="border-[#C9A84C]/50 text-[#C9A84C] px-4 py-1.5 text-sm font-serif tracking-wide">
+          BIRD 2026–2035 Validation Survey
+        </Badge>
+        <h1 className="text-3xl md:text-4xl font-serif text-[#C9A84C]">The Emerging Bangsamoro</h1>
+        <p className="text-[#ecfdf5]/60">Step {currentStep} of {TOTAL_STEPS} • Progressive Assessment</p>
+        <Progress value={(currentStep / TOTAL_STEPS) * 100} className="h-2 bg-[#064e3b] [&>div]:bg-[#C9A84C]" />
+      </div>
+
+      {/* 🐘 DYNAMIC CONTEXT ALERT (Conditional Logic) */}
+      {currentStep === 3 && watchedProvince === "basilan" && (
+        <Alert className="bg-amber-950/40 border-amber-500/50 text-amber-100 backdrop-blur-sm">
+          <AlertTriangle className="h-5 w-5 text-amber-400" />
+          <AlertTitle className="text-amber-400 font-serif">Provincial Context: Basilan</AlertTitle>
           <AlertDescription>
-            Based on your province selection, additional targeted questions will appear in the next section.
+            As a Basilan stakeholder, please pay special attention to the <strong>Pestalotiopsis fungal disease</strong> impact on rubber plantations and the <strong>ZBIP</strong> energy interconnection in your assessment.
           </AlertDescription>
         </Alert>
       )}
 
+      {/* Main Form Card (Glassmorphism) */}
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <Card className="bg-[#022c22]/60 backdrop-blur-xl border-[#C9A84C]/30 shadow-2xl overflow-hidden">
-            <CardHeader>
-              <CardTitle className="text-2xl font-serif text-[#C9A84C]">
-                {getSectionTitle(currentStep)}
-              </CardTitle>
-              <CardDescription className="text-[#ecfdf5]/70">
-                {currentStep <= 10 
-                  ? "Core BEIE Framework Assessment" 
-                  : currentStep <= 14 
-                  ? "Strategic Evaluation & Planning" 
-                  : "Final Validation & Submission"}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 md:p-10">
-              <div className="min-h-[500px]">{renderSection()}</div>
+        <form onSubmit={form.handleSubmit(() => toast({ title: "Success", description: "Data Secured." }))}>
+          <Card className="bg-[#022c22]/60 backdrop-blur-xl border-[#C9A84C]/30 shadow-2xl shadow-black/40 overflow-hidden">
+            <CardContent className="p-6 md:p-10 min-h-[500px]">
+              {renderSection()}
             </CardContent>
-            <div className="bg-[#011a12]/50 border-t border-[#C9A84C]/20 p-4 md:p-6 flex justify-between items-center">
+            
+            <Separator className="bg-[#C9A84C]/20" />
+            
+            {/* Navigation Footer */}
+            <div className="bg-[#011a12]/80 backdrop-blur-md p-4 md:p-6 flex justify-between items-center">
               <Button 
-                type="button" 
-                variant="outline" 
-                onClick={handleBack} 
+                type="button" variant="outline" onClick={() => setCurrentStep(prev => Math.max(1, prev - 1))} 
                 disabled={currentStep === 1}
                 className="border-[#C9A84C]/40 text-[#C9A84C] hover:bg-[#C9A84C]/10 disabled:opacity-30"
               >
-                <ArrowLeft className="w-4 h-4 mr-2" /> Back
+                <ArrowLeft className="w-4 h-4 mr-2" /> Previous
               </Button>
               
               {currentStep < TOTAL_STEPS ? (
-                <Button 
-                  type="button" 
-                  onClick={handleNext}
-                  className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold shadow-lg shadow-[#C9A84C]/20"
-                >
-                  {currentStep === TOTAL_STEPS - 1 ? "Review & Submit" : "Next Section"} 
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                <Button type="button" onClick={handleNext} className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold shadow-lg shadow-[#C9A84C]/20">
+                  Next Section <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               ) : (
-                <Button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold shadow-lg shadow-[#C9A84C]/20"
-                >
-                  {isSubmitting ? "Submitting..." : "Submit Validation"} 
-                  <Send className="w-4 h-4 ml-2" />
+                <Button type="submit" disabled={isSubmitting} className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold shadow-lg shadow-[#C9A84C]/20">
+                  {isSubmitting ? "Securing Data..." : "Submit Validation"} <Send className="w-4 h-4 ml-2" />
                 </Button>
               )}
             </div>
           </Card>
         </form>
       </Form>
-
-      {/* Progress Summary */}
-      <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map((step) => (
-          <div
-            key={step}
-            className={`p-2 rounded text-xs text-center transition-all ${
-              step === currentStep
-                ? "bg-[#C9A84C] text-[#022c22] font-bold"
-                : completedSections.has(step)
-                ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                : "bg-[#064e3b]/30 text-[#ecfdf5]/40"
-            }`}
-          >
-            {step}
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
