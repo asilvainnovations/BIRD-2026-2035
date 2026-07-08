@@ -1,4 +1,3 @@
-// netlify/functions/submit.js
 const crypto = require('crypto');
 
 // ============ CONFIGURATION ============
@@ -54,10 +53,163 @@ function sanitizeInput(input) {
     .substring(0, 2000);
 }
 
+// ============ RISK / RESILIENCE METRICS ============
+// Implements the Strat Planner Pro mathematical formulations used throughout
+// BIRD Chapter 3 (SWOT Analysis and Systems Mapping):
+//   Strengths     RI = (Impact x Likelihood) / 5           scale 1-5
+//   Opportunities RI = sqrt(Impact x Likelihood)            scale 1-5
+//   Weaknesses    Risk = Impact x Likelihood                scale 1-25
+//   Threats       VI = (Impact^2 x Likelihood) / 25         scale 1-5
+//
+// The survey collects three Impact/Likelihood pairs in Section 3 (Foundations):
+//   - El Nino-related drought/flooding      -> classified as a THREAT   (Table 3-4)
+//   - Rubber disease, Pestalotiopsis        -> classified as a THREAT   (Table 3-4)
+//   - Post-harvest losses                   -> classified as a WEAKNESS (Table 3-2)
+// so each pair is scored with the formula matching its Roadmap classification,
+// not a single generic formula.
+function toNumber1to5(value) {
+  const n = parseFloat(value);
+  if (Number.isNaN(n) || n < 1 || n > 5) return null;
+  return n;
+}
+
+function computeVulnerabilityIndex(impact, likelihood) {
+  const i = toNumber1to5(impact);
+  const l = toNumber1to5(likelihood);
+  if (i === null || l === null) return null;
+  return +(((i * i) * l) / 25).toFixed(2);
+}
+
+function computeRiskScore(impact, likelihood) {
+  const i = toNumber1to5(impact);
+  const l = toNumber1to5(likelihood);
+  if (i === null || l === null) return null;
+  return +(i * l).toFixed(2);
+}
+
+function computeMetrics(responses) {
+  const f = responses?.section3_foundations || {};
+
+  const elNinoVI = computeVulnerabilityIndex(f.el_nino_impact, f.el_nino_likelihood);
+  const pestalotiopsisVI = computeVulnerabilityIndex(f.pestalotiopsis_impact, f.pestalotiopsis_likelihood);
+  const postharvestRisk = computeRiskScore(f.postharvest_impact, f.postharvest_likelihood);
+
+  // Composite vulnerability index = average of the two threat-type VIs collected
+  const viValues = [elNinoVI, pestalotiopsisVI].filter((v) => v !== null);
+  const compositeVulnerabilityIndex = viValues.length
+    ? +(viValues.reduce((a, b) => a + b, 0) / viValues.length).toFixed(2)
+    : null;
+
+  return {
+    // Per-item detail, so analysts can see which specific risk drove the composite
+    elNinoVulnerabilityIndex: elNinoVI,
+    pestalotiopsisVulnerabilityIndex: pestalotiopsisVI,
+    postharvestRiskScore: postharvestRisk,
+    // Backward-compatible top-level fields
+    resilienceIndex: null, // no Strength/Opportunity Impact-Likelihood pair is collected in this survey
+    riskScore: postharvestRisk,
+    vulnerabilityIndex: compositeVulnerabilityIndex,
+  };
+}
+
 // ============ SCHEMA TRANSFORMATION ============
 function transformToSchema(rawData, metadata) {
   const demographics = rawData.demographics || {};
   const responses = rawData.responses || {};
+
+  const structuredResponses = {
+    section1_BEIE: {
+      understanding: responses.section1_beie?.understanding || null,
+      relevance: responses.section1_beie?.relevance || null,
+    },
+    section2_MoralGovernance: {
+      importance: responses.section2_mg?.importance || null,
+      implementation: responses.section2_mg?.implementation || null,
+      archetype: responses.section2_mg?.archetype || null,
+      peace_milestones: responses.section2_mg?.peace_milestones || [],
+    },
+    section3_Foundations: {
+      priorities: responses.section3_foundations?.priorities || [],
+      feasibility: responses.section3_foundations?.feasibility || null,
+      el_nino: {
+        impact: responses.section3_foundations?.el_nino_impact || null,
+        likelihood: responses.section3_foundations?.el_nino_likelihood || null,
+      },
+      pestalotiopsis: {
+        impact: responses.section3_foundations?.pestalotiopsis_impact || null,
+        likelihood: responses.section3_foundations?.pestalotiopsis_likelihood || null,
+      },
+      postharvest: {
+        impact: responses.section3_foundations?.postharvest_impact || null,
+        likelihood: responses.section3_foundations?.postharvest_likelihood || null,
+      },
+      limits_growth: responses.section3_foundations?.limits_growth || null,
+    },
+    section4_Transformers: {
+      barrier: responses.section4_transformers?.barrier || null,
+      halal_park: responses.section4_transformers?.halal_park || null,
+      fixes_fail: responses.section4_transformers?.fixes_fail || null,
+      commodity_impact: responses.section4_transformers?.commodity_impact || null,
+      heds_ranking: responses.section4_transformers?.heds_ranking || [],
+    },
+    section5_Enablers: {
+      infra_rating: responses.section5_enablers?.infra_rating || null,
+      sectors: responses.section5_enablers?.sectors || [],
+      broadband: responses.section5_enablers?.broadband || null,
+      literacy: responses.section5_enablers?.literacy || null,
+      stunting: responses.section5_enablers?.stunting || null,
+      digital_divide: responses.section5_enablers?.digital_divide || null,
+    },
+    section6_Connectors: {
+      bimpeaga_importance: responses.section6_connectors?.bimpeaga_importance || null,
+      markets: responses.section6_connectors?.markets || [],
+      export_target: responses.section6_connectors?.export_target || null,
+      uae_feasibility: responses.section6_connectors?.uae_feasibility || null,
+      perception: responses.section6_connectors?.perception || null,
+    },
+    section7_Financiers: {
+      criticality: responses.section7_financiers?.criticality || null,
+      instruments: responses.section7_financiers?.instruments || [],
+      inclusion_target: responses.section7_financiers?.inclusion_target || null,
+      asset_paradox: responses.section7_financiers?.asset_paradox || null,
+      block_grant: responses.section7_financiers?.block_grant || null,
+    },
+    section8_StrategicOptions: {
+      strategy: responses.section8_options?.strategy || null,
+      sequencing: responses.section8_options?.sequencing || null,
+      comments: sanitizeInput(responses.section8_options?.comments || ''),
+    },
+    section9_Budget: {
+      realism: responses.section9_budget?.realism || null,
+    },
+    section10_Targets: {
+      ambition: responses.section10_targets?.ambition || null,
+      matrix: responses.section10_targets?.matrix || null,
+    },
+    section11_Equity: {
+      affirmative: responses.section11_equity?.affirmative || null,
+      mechanisms: responses.section11_equity?.mechanisms || [],
+    },
+    section12_Climate: {
+      green_priority: responses.section12_climate?.green_priority || null,
+      adaptation: responses.section12_climate?.adaptation || [],
+    },
+    section13_Policy: {
+      legislation: responses.section13_policy?.legislation || [],
+      bicc: responses.section13_policy?.bicc || null,
+    },
+    section16_CARE: {
+      context: responses.section16_care?.context || null,
+      action: responses.section16_care?.action || null,
+      realtime: responses.section16_care?.realtime || null,
+      evidence: responses.section16_care?.evidence || null,
+      overall: responses.section16_care?.overall || null,
+    },
+    // FIX: previously dropped — the open-ended comment box on the last
+    // content step (Section 15, "Anything Else?") is now captured and
+    // sanitized like every other free-text field.
+    open_feedback: sanitizeInput(responses.open_feedback || ''),
+  };
 
   return {
     responseId: crypto.randomUUID(),
@@ -76,102 +228,18 @@ function transformToSchema(rawData, metadata) {
       email: sanitizeInput(demographics.email || ''),
       organization: sanitizeInput(demographics.organization || ''),
     },
-    responses: {
-      section1_BEIE: {
-        understanding: responses.section1_beie?.understanding || null,
-        relevance: responses.section1_beie?.relevance || null,
-      },
-      section2_MoralGovernance: {
-        importance: responses.section2_mg?.importance || null,
-        implementation: responses.section2_mg?.implementation || null,
-        archetype: responses.section2_mg?.archetype || null,
-        peace_milestones: responses.section2_mg?.peace_milestones || [],
-      },
-      section3_Foundations: {
-        priorities: responses.section3_foundations?.priorities || [],
-        feasibility: responses.section3_foundations?.feasibility || null,
-        el_nino: {
-          impact: responses.section3_foundations?.el_nino_impact || null,
-          likelihood: responses.section3_foundations?.el_nino_likelihood || null,
-        },
-        pestalotiopsis: {
-          impact: responses.section3_foundations?.pestalotiopsis_impact || null,
-          likelihood: responses.section3_foundations?.pestalotiopsis_likelihood || null,
-        },
-        postharvest: {
-          impact: responses.section3_foundations?.postharvest_impact || null,
-          likelihood: responses.section3_foundations?.postharvest_likelihood || null,
-        },
-        limits_growth: responses.section3_foundations?.limits_growth || null,
-      },
-      section4_Transformers: {
-        barrier: responses.section4_transformers?.barrier || null,
-        halal_park: responses.section4_transformers?.halal_park || null,
-        fixes_fail: responses.section4_transformers?.fixes_fail || null,
-        commodity_impact: responses.section4_transformers?.commodity_impact || null,
-        heds_ranking: responses.section4_transformers?.heds_ranking || [],
-      },
-      section5_Enablers: {
-        infra_rating: responses.section5_enablers?.infra_rating || null,
-        sectors: responses.section5_enablers?.sectors || [],
-        broadband: responses.section5_enablers?.broadband || null,
-        literacy: responses.section5_enablers?.literacy || null,
-        stunting: responses.section5_enablers?.stunting || null,
-        digital_divide: responses.section5_enablers?.digital_divide || null,
-      },
-      section6_Connectors: {
-        bimpeaga_importance: responses.section6_connectors?.bimpeaga_importance || null,
-        markets: responses.section6_connectors?.markets || [],
-        export_target: responses.section6_connectors?.export_target || null,
-        uae_feasibility: responses.section6_connectors?.uae_feasibility || null,
-        perception: responses.section6_connectors?.perception || null,
-      },
-      section7_Financiers: {
-        criticality: responses.section7_financiers?.criticality || null,
-        instruments: responses.section7_financiers?.instruments || [],
-        inclusion_target: responses.section7_financiers?.inclusion_target || null,
-        asset_paradox: responses.section7_financiers?.asset_paradox || null,
-        block_grant: responses.section7_financiers?.block_grant || null,
-      },
-      section8_StrategicOptions: {
-        strategy: responses.section8_options?.strategy || null,
-        sequencing: responses.section8_options?.sequencing || null,
-        comments: sanitizeInput(responses.section8_options?.comments || ''),
-      },
-      section9_Budget: {
-        realism: responses.section9_budget?.realism || null,
-      },
-      section10_Targets: {
-        ambition: responses.section10_targets?.ambition || null,
-        matrix: responses.section10_targets?.matrix || null,
-      },
-      section11_Equity: {
-        affirmative: responses.section11_equity?.affirmative || null,
-        mechanisms: responses.section11_equity?.mechanisms || [],
-      },
-      section12_Climate: {
-        green_priority: responses.section12_climate?.green_priority || null,
-        adaptation: responses.section12_climate?.adaptation || [],
-      },
-      section13_Policy: {
-        legislation: responses.section13_policy?.legislation || [],
-        bicc: responses.section13_policy?.bicc || null,
-      },
-      section16_CARE: {
-        context: responses.section16_care?.context || null,
-        action: responses.section16_care?.action || null,
-        realtime: responses.section16_care?.realtime || null,
-        evidence: responses.section16_care?.evidence || null,
-        overall: responses.section16_care?.overall || null,
-      },
-    },
+    responses: structuredResponses,
     consent: rawData.consent || false,
-    computedMetrics: {
-      resilienceIndex: null,
-      riskScore: null,
-      vulnerabilityIndex: null,
-    },
-    version: '3.0',
+    // FIX: previously always null — now computed from the Section 3
+    // Impact/Likelihood pairs using the Roadmap's own SWOT formulas
+    // (see computeMetrics above for the classification rationale).
+    // IMPORTANT: computeMetrics reads the flat field names the client sends
+    // (responses.section3_foundations.el_nino_impact, etc.) — pass the raw
+    // `responses` object here, not `structuredResponses`, since the latter
+    // nests the same values differently (section3_Foundations.el_nino.impact)
+    // and would make every metric resolve to null.
+    computedMetrics: computeMetrics(responses),
+    version: '3.1',
     source: 'BIRD Validation Survey v3 - 16 Section C.A.R.E. Framework',
   };
 }
@@ -324,7 +392,7 @@ exports.handler = async (event, context) => {
       language: event.headers['accept-language'] || 'unknown',
     };
 
-    // 4. Transform to clean schema
+    // 4. Transform to clean schema (now includes open_feedback + computedMetrics)
     const structuredData = transformToSchema(surveyData, enrichedMetadata);
 
     // 5. Store to GitHub (primary)
