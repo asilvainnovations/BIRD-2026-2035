@@ -103,13 +103,41 @@ export const surveySchema = z.object({
   q10_1_ambition: z.enum(["appropriately_ambitious", "too_conservative", "too_ambitious", "mixed"]),
 
   // ── SECTION 10: IEDS Evaluation Matrix ─────────────────────────────────────
+  q10_visual_understanding: z.enum(["yes", "no", "partially"], {
+    required_error: "Please indicate your understanding of the visual framework",
+  }),
   q10_matrix: z.object({
     heds: iedsCriteria,
     gems: iedsCriteria,
     ifes: iedsCriteria,
     ieds: iedsCriteria,
   }),
-
+q10_criteria_importance: z.object({
+    economic_impact_weight: z.enum(["appropriate", "too_high", "too_low"], {
+      required_error: "Please evaluate the economic impact weight",
+    }),
+    feasibility_weight: z.enum(["appropriate", "too_high", "too_low"]),
+    identity_alignment_weight: z.enum(["appropriate", "too_high", "too_low"]),
+    systems_leverage_weight: z.enum(["appropriate", "too_high", "too_low"]),
+    risk_return_weight: z.enum(["appropriate", "too_high", "too_low"]),
+    inclusivity_weight: z.enum(["appropriate", "too_high", "too_low"]),
+    sustainability_weight: z.enum(["appropriate", "too_high", "too_low"]),
+  }),
+   // Strategic option evaluation with context
+  q10_matrix: z.object({
+    heds: iedsCriteria,
+    gems: iedsCriteria,
+    ifes: iedsCriteria,
+    ieds: iedsCriteria,
+  }),
+  
+  // Ranking validation
+  q10_ranking_agreement: scale1to5,
+  q10_ranking_rationale: optionalText,
+  
+  // Pathway selection confidence
+  q10_ieds_confidence: scale1to5,
+  q10_ieds_concerns: checkboxArray.optional(),
   // ── SECTION 11: Provincial Equity ──────────────────────────────────────────
   q11_1_affirmative: scale1to5,
   q11_2_mechanisms: checkboxArray,
