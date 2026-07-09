@@ -1,6 +1,6 @@
 // src/components/strategic/SurveyWizard.tsx
-// BIRD 2026–2035 · Validation Survey Wizard
-// 16-step progressive assessment with kill-switch validation
+// BIRD 2026–2035 · Validation Survey Wizard with Context Panel Integration
+// 16-step progressive assessment with kill-switch validation & rich media context
 
 import React, { useState, useCallback, useMemo } from "react";
 import { useForm, useWatch } from "react-hook-form";
@@ -11,50 +11,26 @@ import { toast } from "sonner";
 import { surveySchema, type SurveySchemaType, conditionalRules } from "@/lib/survey-schema";
 import { submitSurvey } from "@/lib/api";
 
-// ── UI Components (shadcn/ui) ────────────────────────────────────────────────
+// ── UI Components ──────────────────────────────────────────────────────────────
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
+  Card, CardContent, CardHeader, CardTitle, CardDescription,
 } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
-import { Switch } from "@/components/ui/switch";
-import { Textarea } from "@/components/ui/textarea";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 // ── Icons ────────────────────────────────────────────────────────────────────
 import {
-  ArrowRight,
-  ArrowLeft,
-  Send,
-  CheckCircle2,
-  AlertTriangle,
-  AlertCircle,
-  Info,
-  Lock,
-  Shield,
+  ArrowRight, ArrowLeft, Send, CheckCircle2, AlertTriangle, AlertCircle,
 } from "lucide-react";
 
-// ── Section Components (lazy-loaded for performance) ─────────────────────────
+// ── Context Panel (NEW: Videos, Images, Sites integration) ───────────────────
+import { ContextPanel, ContextStrip } from "./ContextPanel";
+
+// ── Section Components ───────────────────────────────────────────────────────
 import { Section1_BEIE } from "./Section1_BEIE";
 import { Section2_MoralGov } from "./Section2_MoralGov";
 import { Section3_Foundations } from "./Section3_Foundations";
@@ -95,23 +71,24 @@ const STEP_TITLES: Record<number, string> = {
   16: "Final Submission",
 };
 
-const STEP_DESCRIPTIONS: Record<number, string> = {
-  1: "Core BEIE Framework Assessment",
-  2: "Core BEIE Framework Assessment",
-  3: "Core BEIE Framework Assessment",
-  4: "Core BEIE Framework Assessment",
-  5: "Core BEIE Framework Assessment",
-  6: "Core BEIE Framework Assessment",
-  7: "Core BEIE Framework Assessment",
-  8: "Core BEIE Framework Assessment",
-  9: "Core BEIE Framework Assessment",
-  10: "Core BEIE Framework Assessment",
-  11: "Strategic Evaluation & Planning",
-  12: "Strategic Evaluation & Planning",
-  13: "Strategic Evaluation & Planning",
-  14: "Strategic Evaluation & Planning",
-  15: "Final Validation & Submission",
-  16: "Final Validation & Submission",
+/** Map step numbers to section IDs for ContextPanel lookup */
+const STEP_TO_SECTION: Record<number, string> = {
+  1: "section1",
+  2: "section2",
+  3: "section3",
+  4: "section4",
+  5: "section5",
+  6: "section6",
+  7: "section7",
+  8: "section8",
+  9: "section9",
+  10: "section10",
+  11: "section11",
+  12: "section12",
+  13: "section13",
+  14: "section14",
+  15: "section16",
+  16: "section15",
 };
 
 /** Fields that MUST be completed before advancing from specific sections */
@@ -123,49 +100,35 @@ const KILL_SWITCH_PREREQUISITES: Record<number, (keyof SurveySchemaType)[]> = {
   16: ["consent_final"],
 };
 
-// ── Helper: Build default values ─────────────────────────────────────────────
-
 function buildDefaultValues(): SurveySchemaType {
   return {
-    q1_1: undefined as unknown as string,
-    q1_2: undefined as unknown as string,
-    q2_1: undefined as unknown as number,
-    q2_2: undefined as unknown as number,
-    q2_3_archetype: undefined as unknown as string,
-    q2_4_peace: [],
-    q3_1_priorities: [],
-    q3_2_feasibility: undefined as unknown as number,
-    q3_el_nino_impact: undefined,
-    q3_el_nino_like: undefined,
-    q3_pestalotiopsis_impact: undefined,
-    q3_pestalotiopsis_like: undefined,
-    q3_postharvest_impact: undefined,
-    q3_postharvest_like: undefined,
+    q1_1: undefined as unknown as string, q1_2: undefined as unknown as string,
+    q2_1: undefined as unknown as number, q2_2: undefined as unknown as number,
+    q2_3_archetype: undefined as unknown as string, q2_4_peace: [],
+    q3_1_priorities: [], q3_2_feasibility: undefined as unknown as number,
+    q3_el_nino_impact: undefined, q3_el_nino_like: undefined,
+    q3_pestalotiopsis_impact: undefined, q3_pestalotiopsis_like: undefined,
+    q3_postharvest_impact: undefined, q3_postharvest_like: undefined,
     q3_limits_growth: undefined,
     q4_1_barrier: undefined as unknown as string,
     q4_2_halal_park: undefined as unknown as string,
     q4_3_fixes_fail: undefined as unknown as string,
-    q4_4_commodity_impact: undefined,
-    q4_5_heds_ranking: [],
-    q5_1_infra: undefined as unknown as number,
-    q5_2_sectors: [],
+    q4_4_commodity_impact: undefined, q4_5_heds_ranking: [],
+    q5_1_infra: undefined as unknown as number, q5_2_sectors: [],
     q5_3_broadband: undefined as unknown as number,
     q5_4_literacy: undefined as unknown as number,
     q5_5_stunting: undefined as unknown as number,
     q5_6_digital_divide: undefined as unknown as string,
-    q6_1_bimpeaga: undefined as unknown as number,
-    q6_2_markets: [],
+    q6_1_bimpeaga: undefined as unknown as number, q6_2_markets: [],
     q6_3_export_target: undefined as unknown as number,
     q6_4_uae_feasibility: undefined as unknown as number,
     q6_5_perception: undefined as unknown as string,
-    q7_1_criticality: undefined as unknown as number,
-    q7_2_instruments: [],
+    q7_1_criticality: undefined as unknown as number, q7_2_instruments: [],
     q7_3_inclusion_target: undefined as unknown as number,
     q7_4_asset_paradox: undefined as unknown as string,
     q7_5_block_grant: undefined as unknown as string,
     q8_1_strategy: undefined as unknown as string,
-    q8_2_sequencing: undefined as unknown as string,
-    q8_3_comments: "",
+    q8_2_sequencing: undefined as unknown as string, q8_3_comments: "",
     q9_1_budget: undefined as unknown as number,
     q10_1_ambition: undefined as unknown as number,
     q10_matrix: {
@@ -174,18 +137,11 @@ function buildDefaultValues(): SurveySchemaType {
       ifes: { economic_impact: 5, feasibility: 5, identity_alignment: 5, systems_leverage: 5, risk_return: 5, inclusivity: 5, sustainability: 5 },
       ieds: { economic_impact: 5, feasibility: 5, identity_alignment: 5, systems_leverage: 5, risk_return: 5, inclusivity: 5, sustainability: 5 },
     },
-    q11_1_affirmative: undefined as unknown as string,
-    q11_2_mechanisms: [],
-    q12_1_green_priority: undefined as unknown as number,
-    q12_2_adaptation: [],
-    q13_1_legislation: [],
-    q13_2_bicc: undefined as unknown as number,
-    demo_category: "",
-    demo_province: "",
-    demo_expertise: [],
-    demo_name: "",
-    demo_email: "",
-    demo_organization: "",
+    q11_1_affirmative: undefined as unknown as string, q11_2_mechanisms: [],
+    q12_1_green_priority: undefined as unknown as number, q12_2_adaptation: [],
+    q13_1_legislation: [], q13_2_bicc: undefined as unknown as number,
+    demo_category: "", demo_province: "", demo_expertise: [],
+    demo_name: "", demo_email: "", demo_organization: "",
     basilan_peace_questions: undefined,
     maguindanao_halal_questions: undefined,
     tawitawi_seaweed_questions: undefined,
@@ -210,66 +166,36 @@ export function SurveyWizard(): JSX.Element {
   const [completedSections, setCompletedSections] = useState<Set<number>>(new Set());
   const [killSwitchErrors, setKillSwitchErrors] = useState<string[]>([]);
 
-  // ── Form Setup ─────────────────────────────────────────────────────────────
   const form = useForm<SurveySchemaType>({
     resolver: zodResolver(surveySchema),
     defaultValues: buildDefaultValues(),
     mode: "onTouched",
   });
 
-  // Watch province for conditional UI
   const watchedProvince = useWatch({ control: form.control, name: "demo_province" });
-  const formValues = useWatch({ control: form.control });
-
   const progressPercentage = useMemo(() => (currentStep / TOTAL_STEPS) * 100, [currentStep]);
 
   // ── Kill Switch Validation ─────────────────────────────────────────────────
-
   const checkKillSwitches = useCallback((): boolean => {
     const prerequisites = KILL_SWITCH_PREREQUISITES[currentStep];
     if (!prerequisites || prerequisites.length === 0) return true;
-
     const values = form.getValues();
     const missing: string[] = [];
-
     for (const field of prerequisites) {
       const value = values[field];
-      if (Array.isArray(value)) {
-        if (value.length === 0) missing.push(field);
-      } else if (value === undefined || value === "" || value === false) {
-        missing.push(field);
-      }
+      if (Array.isArray(value)) { if (value.length === 0) missing.push(field); }
+      else if (value === undefined || value === "" || value === false) missing.push(field);
     }
-
-    if (missing.length > 0) {
-      setKillSwitchErrors(missing);
-      return false;
-    }
-
-    setKillSwitchErrors([]);
-    return true;
+    setKillSwitchErrors(missing);
+    return missing.length === 0;
   }, [currentStep, form]);
 
-  // ── Navigation Handlers ────────────────────────────────────────────────────
-
+  // ── Navigation ───────────────────────────────────────────────────────────────
   const handleNext = useCallback(async () => {
-    // 1. Validate current step fields via Zod
     const isValid = await form.trigger();
-    if (!isValid) {
-      toast.error("Please review and correct the errors before proceeding.");
-      return;
-    }
-
-    // 2. Check kill-switch prerequisites
-    const killSwitchesMet = checkKillSwitches();
-    if (!killSwitchesMet) {
-      toast.error("Please complete all required critical fields before proceeding.");
-      return;
-    }
-
-    // 3. Mark complete and advance
+    if (!isValid) { toast.error("Please review and correct the errors before proceeding."); return; }
+    if (!checkKillSwitches()) { toast.error("Please complete all required critical fields before proceeding."); return; }
     setCompletedSections((prev) => new Set(prev).add(currentStep));
-
     if (currentStep < TOTAL_STEPS) {
       setCurrentStep((prev) => prev + 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -277,53 +203,31 @@ export function SurveyWizard(): JSX.Element {
   }, [currentStep, form, checkKillSwitches]);
 
   const handleBack = useCallback(() => {
-    if (currentStep > 1) {
-      setCurrentStep((prev) => prev - 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    if (currentStep > 1) { setCurrentStep((prev) => prev - 1); window.scrollTo({ top: 0, behavior: "smooth" }); }
   }, [currentStep]);
 
-  // ── Submission Handler ─────────────────────────────────────────────────────
+  // ── Submission ───────────────────────────────────────────────────────────────
+  const onSubmit = useCallback(async (data: SurveySchemaType) => {
+    const finalChecks = KILL_SWITCH_PREREQUISITES[16] ?? [];
+    const values = form.getValues();
+    const missingFinal = finalChecks.filter((f) => {
+      const v = values[f];
+      return v === undefined || v === "" || v === false;
+    });
+    if (missingFinal.length > 0) { setKillSwitchErrors(missingFinal); toast.error("Please complete all final consent requirements."); return; }
 
-  const onSubmit = useCallback(
-    async (data: SurveySchemaType) => {
-      // Final kill-switch check
-      const finalChecks = KILL_SWITCH_PREREQUISITES[16] ?? [];
-      const values = form.getValues();
-      const missingFinal = finalChecks.filter((f) => {
-        const v = values[f];
-        return v === undefined || v === "" || v === false;
-      });
+    setIsSubmitting(true); setKillSwitchErrors([]);
+    try {
+      await submitSurvey(data);
+      setIsSuccess(true);
+      toast.success("Your strategic input has been securely recorded in the BIRD repository.");
+    } catch (error) {
+      console.error("Submission failed:", error);
+      toast.error(error instanceof Error ? error.message : "Submission failed. Please check your connection and try again.");
+    } finally { setIsSubmitting(false); }
+  }, [form]);
 
-      if (missingFinal.length > 0) {
-        setKillSwitchErrors(missingFinal);
-        toast.error("Please complete all final consent requirements.");
-        return;
-      }
-
-      setIsSubmitting(true);
-      setKillSwitchErrors([]);
-
-      try {
-        await submitSurvey(data);
-        setIsSuccess(true);
-        toast.success("Your strategic input has been securely recorded in the BIRD repository.");
-      } catch (error) {
-        console.error("Submission failed:", error);
-        toast.error(
-          error instanceof Error
-            ? error.message
-            : "Submission failed. Please check your connection and try again."
-        );
-      } finally {
-        setIsSubmitting(false);
-      }
-    },
-    [form]
-  );
-
-  // ── Section Renderer ───────────────────────────────────────────────────────
-
+  // ── Section Renderer ─────────────────────────────────────────────────────────
   const renderSection = useCallback((): React.ReactNode => {
     const commonProps = { form, watchedProvince };
     switch (currentStep) {
@@ -347,31 +251,27 @@ export function SurveyWizard(): JSX.Element {
     }
   }, [currentStep, form, watchedProvince, isSubmitting]);
 
+  // Get current section ID for context panel
+  const currentSectionId = STEP_TO_SECTION[currentStep];
+
   // ═══════════════════════════════════════════════════════════════════════════
   // SUCCESS STATE
   // ═══════════════════════════════════════════════════════════════════════════
-
   if (isSuccess) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-8">
         <Card className="w-full max-w-2xl border-[#C9A84C]/30 bg-[#022c22]/70 shadow-2xl backdrop-blur-xl">
           <CardHeader className="items-center">
             <CheckCircle2 className="w-20 h-20 text-[#C9A84C] mb-4 animate-pulse" />
-            <CardTitle className="text-3xl font-serif text-[#C9A84C]">
-              Validation Received
-            </CardTitle>
+            <CardTitle className="text-3xl font-serif text-[#C9A84C]">Validation Received</CardTitle>
             <CardDescription className="text-[#ecfdf5]/80 text-lg max-w-md">
               Thank you for shaping the Emerging Bangsamoro through the C.A.R.E. principles of Khalifa stewardship.
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col items-center gap-4">
-            <Badge className="border-[#C9A84C]/40 bg-[#C9A84C]/10 text-[#E8C560] px-4 py-1.5">
-              Secure submission completed
-            </Badge>
-            <Button
-              onClick={() => window.open("https://strategy-ai-planner-1.deploypad.app/", "_blank")}
-              className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold shadow-lg shadow-[#C9A84C]/20"
-            >
+            <Badge className="border-[#C9A84C]/40 bg-[#C9A84C]/10 text-[#E8C560] px-4 py-1.5">Secure submission completed</Badge>
+            <Button onClick={() => window.open("https://strategy-ai-planner-1.deploypad.app/", "_blank")}
+              className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold shadow-lg shadow-[#C9A84C]/20">
               Access BIRD App →
             </Button>
           </CardContent>
@@ -383,16 +283,12 @@ export function SurveyWizard(): JSX.Element {
   // ═══════════════════════════════════════════════════════════════════════════
   // MAIN RENDER
   // ═══════════════════════════════════════════════════════════════════════════
-
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 md:p-8 space-y-6">
-      {/* ── Header & Progress ── */}
+    <div className="w-full max-w-6xl mx-auto p-4 md:p-8 space-y-6">
+      {/* Header & Progress */}
       <div className="text-center space-y-4">
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <Badge
-            variant="outline"
-            className="border-[#C9A84C]/50 text-[#C9A84C] px-4 py-1.5 text-sm font-serif tracking-wide"
-          >
+          <Badge variant="outline" className="border-[#C9A84C]/50 text-[#C9A84C] px-4 py-1.5 text-sm font-serif tracking-wide">
             BIRD 2026–2035 Validation Survey
           </Badge>
           {completedSections.size > 0 && (
@@ -401,104 +297,108 @@ export function SurveyWizard(): JSX.Element {
             </Badge>
           )}
         </div>
-
-        <h1 className="text-3xl md:text-4xl font-serif text-[#C9A84C]">
-          The Emerging Bangsamoro
-        </h1>
-        <p className="text-[#ecfdf5]/60">
-          Step {currentStep} of {TOTAL_STEPS} • {STEP_TITLES[currentStep]}
-        </p>
-
-        <Progress
-          value={progressPercentage}
-          className="h-2 bg-[#064e3b] [&>div]:bg-[#C9A84C]"
-        />
+        <h1 className="text-3xl md:text-4xl font-serif text-[#C9A84C]">The Emerging Bangsamoro</h1>
+        <p className="text-[#ecfdf5]/60">Step {currentStep} of {TOTAL_STEPS} • {STEP_TITLES[currentStep]}</p>
+        <Progress value={progressPercentage} className="h-2 bg-[#064e3b] [&>div]:bg-[#C9A84C]" />
       </div>
 
-      {/* ── Conditional Provincial Context Alert ── */}
+      {/* Context Strip — Inline reference badges */}
+      <ContextStrip sectionId={currentSectionId} />
+
+      {/* Provincial Context Alert */}
       {currentStep === 3 && watchedProvince === "basilan" && (
         <Alert className="bg-amber-950/40 border-amber-500/50 text-amber-100 backdrop-blur-sm">
           <AlertTriangle className="h-5 w-5 text-amber-400" />
-          <AlertTitle className="text-amber-400 font-serif">
-            Provincial Context: Basilan
-          </AlertTitle>
+          <AlertTitle className="text-amber-400 font-serif">Provincial Context: Basilan</AlertTitle>
           <AlertDescription>
-            As a Basilan stakeholder, please pay special attention to the{" "}
-            <strong>Pestalotiopsis fungal disease</strong> impact on rubber
-            plantations and the <strong>ZBIP</strong> energy interconnection in
-            your assessment.
+            As a Basilan stakeholder, please pay special attention to the <strong>Pestalotiopsis fungal disease</strong> impact on rubber plantations and the <strong>ZBIP</strong> energy interconnection in your assessment.
           </AlertDescription>
         </Alert>
       )}
 
-      {/* ── Kill Switch Alert ── */}
+      {/* Kill Switch Alert */}
       {killSwitchErrors.length > 0 && (
         <Alert className="border-red-500/30 bg-red-500/10 text-red-200 backdrop-blur-sm">
           <AlertCircle className="h-4 w-4 text-red-400" />
           <AlertTitle className="text-red-400">Required Critical Fields Missing</AlertTitle>
           <AlertDescription>
-            This section contains critical prerequisites that must be completed before proceeding.
-            Missing: {killSwitchErrors.join(", ")}
+            This section contains critical prerequisites that must be completed before proceeding. Missing: {killSwitchErrors.join(", ")}
           </AlertDescription>
         </Alert>
       )}
 
-      {/* ── Main Form ── */}
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <Card className="bg-[#022c22]/60 backdrop-blur-xl border-[#C9A84C]/30 shadow-2xl shadow-black/40 overflow-hidden">
-            <CardHeader className="border-b border-[#C9A84C]/10">
-              <CardTitle className="text-2xl font-serif text-[#C9A84C]">
-                {STEP_TITLES[currentStep]}
-              </CardTitle>
-              <CardDescription className="text-[#ecfdf5]/70">
-                {STEP_DESCRIPTIONS[currentStep]}
-              </CardDescription>
-            </CardHeader>
-
-            <CardContent className="p-6 md:p-10">
-              <div className="min-h-[500px]">{renderSection()}</div>
-            </CardContent>
-
-            <Separator className="bg-[#C9A84C]/20" />
-
-            {/* ── Navigation Footer ── */}
-            <div className="bg-[#011a12]/80 backdrop-blur-md p-4 md:p-6 flex justify-between items-center">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={handleBack}
-                disabled={currentStep === 1}
-                className="border-[#C9A84C]/40 text-[#C9A84C] hover:bg-[#C9A84C]/10 disabled:opacity-30"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" /> Previous
-              </Button>
-
-              {currentStep < TOTAL_STEPS ? (
-                <Button
-                  type="button"
-                  onClick={handleNext}
-                  className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold shadow-lg shadow-[#C9A84C]/20"
-                >
-                  Next Section <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              ) : (
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold shadow-lg shadow-[#C9A84C]/20"
-                >
-                  {isSubmitting ? (
-                    <>Securing Data... <span className="ml-2 animate-spin">⟳</span></>
+      {/* Main Content Grid: Form + Context Panel */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Form Column */}
+        <div className="lg:col-span-2">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <Card className="bg-[#022c22]/60 backdrop-blur-xl border-[#C9A84C]/30 shadow-2xl shadow-black/40 overflow-hidden">
+                <CardHeader className="border-b border-[#C9A84C]/10">
+                  <CardTitle className="text-2xl font-serif text-[#C9A84C]">{STEP_TITLES[currentStep]}</CardTitle>
+                  <CardDescription className="text-[#ecfdf5]/70">
+                    {currentStep <= 10 ? "Core BEIE Framework Assessment" : currentStep <= 14 ? "Strategic Evaluation & Planning" : "Final Validation & Submission"}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="p-6 md:p-10">
+                  <div className="min-h-[500px]">{renderSection()}</div>
+                </CardContent>
+                <Separator className="bg-[#C9A84C]/20" />
+                {/* Navigation Footer */}
+                <div className="bg-[#011a12]/80 backdrop-blur-md p-4 md:p-6 flex justify-between items-center">
+                  <Button type="button" variant="outline" onClick={handleBack} disabled={currentStep === 1}
+                    className="border-[#C9A84C]/40 text-[#C9A84C] hover:bg-[#C9A84C]/10 disabled:opacity-30">
+                    <ArrowLeft className="w-4 h-4 mr-2" /> Previous
+                  </Button>
+                  {currentStep < TOTAL_STEPS ? (
+                    <Button type="button" onClick={handleNext}
+                      className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold shadow-lg shadow-[#C9A84C]/20">
+                      Next Section <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
                   ) : (
-                    <>Submit Validation <Send className="w-4 h-4 ml-2" /></>
+                    <Button type="submit" disabled={isSubmitting}
+                      className="bg-[#C9A84C] hover:bg-[#E8C560] text-[#022c22] font-bold shadow-lg shadow-[#C9A84C]/20">
+                      {isSubmitting ? <>Securing Data... <span className="ml-2 animate-spin">⟳</span></> : <>Submit Validation <Send className="w-4 h-4 ml-2" /></>}
+                    </Button>
                   )}
-                </Button>
-              )}
-            </div>
-          </Card>
-        </form>
-      </Form>
+                </div>
+              </Card>
+            </form>
+          </Form>
+        </div>
+
+        {/* Context Panel Column — Videos, Images, Sites */}
+        <div className="lg:col-span-1">
+          <div className="sticky top-6 space-y-4">
+            <ContextPanel sectionId={currentSectionId} compact />
+
+            {/* Quick Links Card */}
+            <Card className="bg-[#022c22]/40 backdrop-blur-xl border-[#C9A84C]/20">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm font-bold text-[#C9A84C] uppercase tracking-wider">Quick Links</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2 pt-0">
+                <a href="https://bird-survey-orientation.asilvainnovations.com" target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs text-[#E8C560] hover:text-[#C9A84C] transition-colors">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]" /> Survey Orientation
+                </a>
+                <a href="https://bird-resources.asilvainnovations.com" target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs text-[#E8C560] hover:text-[#C9A84C] transition-colors">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]" /> Resources Library
+                </a>
+                <a href="https://bird-roadmap.asilvainnovations.com" target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs text-[#E8C560] hover:text-[#C9A84C] transition-colors">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]" /> Investment Roadmap
+                </a>
+                <a href="https://bird-dashboard.asilvainnovations.com" target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs text-[#E8C560] hover:text-[#C9A84C] transition-colors">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]" /> Strategic Dashboard
+                </a>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
