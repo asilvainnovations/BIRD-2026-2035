@@ -1,106 +1,116 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// BIRD 2026–2035 · Branding Components
-// Official logo and avatar components — consistent across all pages.
-// ─────────────────────────────────────────────────────────────────────────────
+// src/components/branding/Logo.tsx
+// BIRD 2026–2035 · Bangsamoro Strategic Logo & Branding
 
 import React from 'react';
-import { cn } from '@/lib/utils';
-import { BRAND_ASSETS } from '@/lib/supabase';
 
-// ─── Asset URLs ───────────────────────────────────────────────────────────────
-// Sourced from supabase.ts → BRAND_ASSETS (which reads VITE_ env vars with CDN fallbacks)
-const LOGO_URL         = BRAND_ASSETS.LOGO_URL;
-const AI_AVATAR_URL    = BRAND_ASSETS.AI_AVATAR_URL;
-
-export const BIRD_BANNER_URL =
-  'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/1.Banner.png';
-
-// ─── Types ────────────────────────────────────────────────────────────────────
 interface LogoProps {
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'sm' | 'md' | 'lg';
+  variant?: 'full' | 'icon' | 'text';
   className?: string;
-  withGlow?: boolean;
-  alt?: string;
 }
 
-const sizeMap: Record<NonNullable<LogoProps['size']>, string> = {
-  xs: 'w-6  h-6',
-  sm: 'w-8  h-8',
-  md: 'w-10 h-10',
-  lg: 'w-14 h-14',
-  xl: 'w-20 h-20',
-};
-
-// ─── Primary logo (MTIT / BIRD 2026–2035) ────────────────────────────────────
-/** Circular BIRD 2026–2035 brand logo — use consistently across all pages */
 export const StratLogo: React.FC<LogoProps> = ({
   size = 'md',
-  className,
-  withGlow = false,
-  alt = 'BIRD 2026–2035 | BOI-MTIT, BARMM',
-}) => (
-  <div
-    className={cn(
-      'relative rounded-full overflow-hidden ring-2 ring-cyan-400/40 bg-slate-900 flex-shrink-0 shadow-lg',
-      withGlow && 'shadow-cyan-500/40',
-      sizeMap[size],
-      className,
-    )}
-  >
-    <img
-      src={LOGO_URL}
-      alt={alt}
-      className="w-full h-full object-cover"
-      loading="eager"
-      decoding="async"
-      onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-    />
-  </div>
-);
-
-// ─── AI Strategist Avatar ─────────────────────────────────────────────────────
-/** Circular BIRD AI / ASilva Innovations avatar — used in FloatingAIAssistant */
-export const AIStrategistAvatar: React.FC<LogoProps> = ({
-  size = 'md',
-  className,
-  withGlow = true,
-  alt = 'BIRD AI Strategy Consultant',
-}) => (
-  <div
-    className={cn(
-      'relative rounded-full overflow-hidden ring-2 ring-fuchsia-400/50 bg-slate-900 flex-shrink-0 shadow-lg',
-      withGlow && 'shadow-fuchsia-500/40',
-      sizeMap[size],
-      className,
-    )}
-  >
-    <img
-      src={AI_AVATAR_URL}
-      alt={alt}
-      className="w-full h-full object-cover"
-      loading="eager"
-      decoding="async"
-      onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-    />
-  </div>
-);
-
-// ─── Wordmark ─────────────────────────────────────────────────────────────────
-/** BIRD 2026–2035 text wordmark — for headers and titles */
-export const BIRDWordmark: React.FC<{ className?: string; size?: 'sm' | 'md' | 'lg' }> = ({
-  className,
-  size = 'md',
+  variant = 'full',
+  className = '',
 }) => {
-  const classes = {
-    sm: 'text-sm',
-    md: 'text-base',
+  const sizeMap = {
+    sm: 'w-6 h-6',
+    md: 'w-10 h-10',
+    lg: 'w-16 h-16',
+  };
+
+  const textSizeMap = {
+    sm: 'text-xs',
+    md: 'text-sm',
     lg: 'text-lg',
   };
+
+  if (variant === 'icon') {
+    return (
+      <div className={`${sizeMap[size]} ${className} flex items-center justify-center`}>
+        <svg
+          viewBox="0 0 100 100"
+          className="w-full h-full"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* Golden shield with teal accent */}
+          <rect x="15" y="20" width="70" height="60" rx="8" fill="#C9A84C" />
+          <circle cx="50" cy="50" r="28" fill="#022c22" />
+          <path d="M50 30 L60 50 L50 70 L40 50 Z" fill="#C9A84C" opacity="0.8" />
+        </svg>
+      </div>
+    );
+  }
+
+  if (variant === 'text') {
+    return (
+      <div className={`${textSizeMap[size]} ${className} font-serif font-bold tracking-wide`}>
+        <span className="text-[#C9A84C]">BIRD</span>
+        <span className="text-[#022c22] ml-1">2026–2035</span>
+      </div>
+    );
+  }
+
+  // Full variant: icon + text
   return (
-    <span className={cn('font-bold text-white tracking-tight', classes[size], className)}>
-      BIRD <span className="text-cyan-400">2026–2035</span>
-    </span>
+    <div className={`${className} flex items-center gap-3`}>
+      <div className={`${sizeMap[size]} flex-shrink-0`}>
+        <svg
+          viewBox="0 0 100 100"
+          className="w-full h-full"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="15" y="20" width="70" height="60" rx="8" fill="#C9A84C" />
+          <circle cx="50" cy="50" r="28" fill="#022c22" />
+          <path d="M50 30 L60 50 L50 70 L40 50 Z" fill="#C9A84C" opacity="0.8" />
+        </svg>
+      </div>
+      <div className={`${textSizeMap[size]} font-serif font-bold tracking-wide`}>
+        <div className="text-[#C9A84C]">BIRD 2026–2035</div>
+        <div className="text-[#022c22]/70 text-xs leading-tight">
+          Bangsamoro Investment Roadmap
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default Logo;
+// Alternative: MTIT/BOI branding
+export const MTITLogo: React.FC<LogoProps> = ({
+  size = 'md',
+  className = '',
+}) => {
+  const sizeMap = {
+    sm: 'w-6 h-6',
+    md: 'w-10 h-10',
+    lg: 'w-16 h-16',
+  };
+
+  return (
+    <div className={`${sizeMap[size]} ${className}`}>
+      <svg
+        viewBox="0 0 100 100"
+        className="w-full h-full"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Simplified MTIT seal */}
+        <circle cx="50" cy="50" r="45" fill="none" stroke="#C9A84C" strokeWidth="2" />
+        <circle cx="50" cy="50" r="40" fill="#022c22" />
+        <text
+          x="50"
+          y="55"
+          textAnchor="middle"
+          fontSize="16"
+          fontWeight="bold"
+          fill="#C9A84C"
+          fontFamily="serif"
+        >
+          MTIT
+        </text>
+      </svg>
+    </div>
+  );
+};
+
+export default StratLogo;
