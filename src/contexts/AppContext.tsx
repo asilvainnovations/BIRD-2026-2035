@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { toast } from '@/components/ui/use-toast';
+import React, { createContext, useContext, useState } from 'react';
 
 interface AppContextType {
   sidebarOpen: boolean;
@@ -23,12 +22,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   return (
-    <AppContext.Provider
-      value={{
-        sidebarOpen,
-        toggleSidebar,
-      }}
-    >
+    <AppContext.Provider value={{ sidebarOpen, toggleSidebar }}>
       {children}
     </AppContext.Provider>
   );
