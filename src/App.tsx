@@ -1,9 +1,8 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '@/components/theme-provider';
 import { AppProvider } from '@/contexts/AppContext';
-import { Toaster } from '@/components/ui/toaster';
 import { Toaster as Sonner } from '@/components/ui/sonner';
 
 const Index          = lazy(() => import('@/pages/Index'));
@@ -19,6 +18,7 @@ const AppLoadingFallback = React.memo(() => (
           src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/bird-images/public/MTIT%20Logo.webp"
           alt="BIRD 2026-2035"
           className="w-full h-full object-cover"
+          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
         />
       </div>
       <div className="absolute -bottom-2 -right-2 w-8 h-8 border-2 border-[#3B82F6] border-t-transparent rounded-full animate-spin" />
@@ -48,7 +48,7 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { has
         <div className="min-h-screen bg-[#0A1628] text-white flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-3xl font-bold mb-4">Something went wrong</h1>
-            <p className="text-slate-400 mb-4">We're sorry, but an unexpected error occurred.</p>
+            <p className="text-slate-400 mb-4">We&apos;re sorry, but an unexpected error occurred.</p>
             <button
               onClick={() => window.location.reload()}
               className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 rounded-lg"
@@ -63,20 +63,21 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { has
   }
 }
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: 1,
-      staleTime: 5 * 60 * 1000,
-      gcTime: 10 * 60 * 1000,
-      suspense: false,
-    },
-    mutations: { retry: 1 },
-  },
-});
-
 const App: React.FC = () => {
+  // FIX #1: QueryClient inside component (StrictMode/HMR safe)
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        retry: 1,
+        staleTime: 5 * 60 * 1000,
+        gcTime: 10 * 60 * 1000,
+        suspense: false,
+      },
+      mutations: { retry: 1 },
+    },
+  }));
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} storageKey="bird-2026-2035-theme">
@@ -85,29 +86,15 @@ const App: React.FC = () => {
             <ErrorBoundary>
               <Suspense fallback={<AppLoadingFallback />}>
                 <Routes>
-                  <Route path="/*" element={<Index />} />
+                  {/* FIX #2: Specific routes MUST come before wildcard */}
                   <Route path="/admin" element={<AdminDashboard />} />
                   <Route path="/shared/:shareId" element={<SharedPlanView />} />
-                  <Route path="*" element={<NotFound />} />
+                  <Route path="/*" element={<Index />} />
                 </Routes>
               </Suspense>
             </ErrorBoundary>
 
-            <Toaster
-              position="top-right"
-              toastOptions={{
-                duration: 4000,
-                style: {
-                  background: 'hsl(222.2 84% 8% / 0.9)',
-                  color: 'hsl(210 40% 98%)',
-                  border: '1px solid hsl(210 40% 98% / 0.1)',
-                  backdropFilter: 'blur(16px) saturate(180%)',
-                  borderRadius: '1rem',
-                  boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.4)',
-                },
-              }}
-            />
-
+            {/* FIX #3: Removed broken radix Toaster; keep Sonner only */}
             <Sonner richColors position="top-right" duration={4000} closeButton theme="dark" />
           </BrowserRouter>
         </AppProvider>
