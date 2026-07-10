@@ -80,8 +80,7 @@ Verify ARIA labels and semantic HTML are applied.
 Use Lighthouse or axe plugin
 Fix contrast, labels, and keyboard navigation issues
 
-Deploy to Netlify
+Deploy to Vercel
 Push code and configure builds.
-Connect repo to Netlify
-Add environment variables in Netlify dashboard
-Run Lighthouse plugin for performance checks
+Connect repo to Vercel
+Add environment variables in Vercel dashboard
