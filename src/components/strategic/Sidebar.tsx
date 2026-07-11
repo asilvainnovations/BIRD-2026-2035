@@ -2,7 +2,7 @@ import React from 'react';
 import {
   LayoutDashboard, Target, Network, Sparkles, BarChart3, FolderKanban, FileText,
   ChevronLeft, ChevronRight, Cloud, Users, Layers, X, User,
-  HelpCircle, ClipboardCheck, Star
+  HelpCircle, ClipboardCheck, Star, Settings
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { StratLogo } from '@/components/branding/Logo';
@@ -31,6 +31,7 @@ const mainMenuItems = [
   { id: 'templates', label: 'Templates Library', icon: Layers, description: 'Reusable Plan Templates' },
   { id: 'team', label: 'Team Collaboration', icon: Users, description: 'Share & Collaborate' },
   { id: 'export', label: 'Plan Generator', icon: FileText, description: 'Export Reports' },
+  { id: 'settings', label: 'Settings', icon: Settings, description: 'Preferences & Account' },
 ];
 
 const specialItems = [
@@ -253,7 +254,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             >
               <HelpCircle className="w-5 h-5 flex-shrink-0" />
               {(!isCollapsed || isMobileMenuOpen) && (
-                <span className="text-sm font-semibold">Guided Tour</span>
+                <span className="text-sm font-semibold">Navigation Tutorial</span>
               )}
             </button>
           </div>
