@@ -7,7 +7,8 @@ Official strategic planning platform for the **Bangsamoro Investment Roadmap Dev
 ---
 
 ## 🌐 Live Platform
-- **Web App:**https://bangsamoro-investment-roadmap.asilvainnovations.com
+- **Home:** https://bangsamoro-investment-roadmap.asilvainnovations.com
+- **Web App:** https://bird-app.asivainnovations.com
 - **User Manual:** https://bird-user-manual.asilvainnovations.com
 - **Validation Survey:** https://bird-survey.asilvainnovations.com
 - **Developer Docs:** https://docs-strat-planner-pro.asilvainnovations.com
@@ -91,14 +92,15 @@ VITE_SUPABASE_URL=https://lydsisparsmvextskevw.supabase.co
 VITE_SUPABASE_ANON_KEY=<your-anon-key>
 
 # ── Branding assets (public CDN) ─────────────────────────────────────────────
-VITE_BRAND_LOGO_URL=https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/bird-images/public/MTIT%20Logo.webp
-VITE_AI_STRATEGIST_AVATAR_URL=https://paibpwwszlfpsyytdnal.databasepad.com/...
-VITE_BANNER_INVESTMENT_URL=https://paibpwwszlfpsyytdnal.databasepad.com/...
+VITE_BRAND_LOGO_URL=https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png
+VITE_AI_STRATEGIST_AVATAR_URL=https://appimize.app/assets/apps/user_1097/images/2c7d825bf937_232_1097.png
+VITE_BANNER_INVESTMENT_URL= https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/1.Banner.png
 
 # ── External URLs ─────────────────────────────────────────────────────────────
-VITE_PWA_EXTERNAL_URL=https://asilvainnovations.github.io/barmm-investment-roadmap/
-VITE_USER_MANUAL_URL=https://asilvainnovations.github.io/strat-planner-pwa/user-manual.html
+VITE_BIRD_HOME_URL=https://bangsamoro-investment-roadmap.asilvainnovations.com
+VITE_USER_MANUAL_URL=https://bird-app-user-manual.asilvainnovations.com
 VITE_DEVELOPER_DOCS_URL=https://asilvainnovations.github.io/strat-planner-pwa/developer-doc.html
+VITE_BIRD_APP_URL=https://bird-app.asilvainnovations.com
 
 # ── Feature Flags ─────────────────────────────────────────────────────────────
 VITE_ENABLE_DEBUG_MODE=false
