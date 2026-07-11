@@ -35,7 +35,7 @@ interface ChatMessage {
 // ═══════════════════════════════════════════════════════════════════════════════
 // HERO SECTION COMPONENT
 // ═══════════════════════════════════════════════════════════════════════════════
-const HeroSection: React.FC<{ onNavigate?: (view: string) => void }> = ({ onNavigate }) => {
+const DashboardHeroSection: React.FC<{ onNavigate?: (view: string) => void }> = ({ onNavigate }) => {
   const [bannerLoaded, setBannerLoaded] = useState(false);
   const [bannerError, setBannerError] = useState(false);
 
@@ -565,7 +565,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
       {/* ════════════════════════════════════════════════════════════════════════
           HERO SECTION — Full-width immersive landing
           ════════════════════════════════════════════════════════════════════════ */}
-      <HeroSection onNavigate={onNavigate} />
+      <DashboardHeroSection onNavigate={onNavigate} />
 
       {/* ════════════════════════════════════════════════════════════════════════
           DASHBOARD HEADER
