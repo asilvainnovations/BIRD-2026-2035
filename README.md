@@ -133,6 +133,9 @@ bird-2026-2035/
 │   │   │   ├── HeroSection.tsx          # Landing page
 │   │   │   ├── Sidebar.tsx              # Navigation sidebar
 │   │   │   └── Topbar.tsx               # Top navigation bar
+│   │   │   └── SurveyWizard.tsx         # Survey engine
+│   │   │   └── Section 1-16 of survey   # Survey components
+│   │   │   └── ContextPanel.tsx         # Survey engine
 │   │   └── ui/                      # shadcn/ui primitives
 │   ├── data/
 │   │   └── bird/                    # Official BIRD 2026–2035 data
@@ -149,6 +152,9 @@ bird-2026-2035/
 │   │   ├── strategicPlanStore.ts    # Plan data schema & local storage
 │   │   ├── formulas.ts              # RI, risk, KPI computation formulas
 │   │   └── utils.ts                 # Utility functions
+│   │   └── bird-urls.ts             # List of URLs for survey visualizations and references
+│   │   └── survey-schema            # Survey data schema specifically for the validation survey wired to both all other lib files above
+│   ├── pages/
 │   ├── pages/
 │   │   ├── Index.tsx                # Root page (AppLayout wrapper)
 │   │   ├── AdminDashboard.tsx       # Admin analytics
@@ -161,9 +167,16 @@ bird-2026-2035/
 │       └── ai-strategy-assistant/   # Edge function (Deno)
 │           └── index.ts
 ├── public/                          # Static assets
+│   └── home.html                    # Landing page
+│   └── roadmap.html                 # Investment roadmap model
+│   └── dashboard.html               # Investment roadmap dashboard model
+│   └── resources.html               # Access to various resources
+│   └── validation-survey.html       # BIRD survey mimicking the react SurveyWizard as fallback
+│   └── survey-dashboard.html        # BIRD survey dashboard 
 ├── .env                             # Environment variables (not committed)
 ├── .env.example                     # Environment template
 ├── package.json
+├── manifest.webmanifest.json        # makes it an installable, offline-capable PWA
 ├── tailwind.config.ts
 ├── vite.config.ts
 └── README.md
@@ -249,6 +262,121 @@ ai_interaction_logs (id, plan_id, action, input_data jsonb, output_data jsonb, c
 ```
 
 ---
+
+# BIRD 2026–2035 Validation Survey — Static PWA Fallback
+
+This is the rebuilt, complete, offline-capable version of `survey.html`, plus its
+companion `survey-dashboard.html`, `manifest.webmanifest`, and `sw.js`. Deploy the
+four files together, side by side, in the same folder — no build step required.
+
+## What was actually wrong with the uploaded `survey.html`
+
+The uploaded file was **not a working survey** — it was markup only, truncated at
+section 14 of 16 (cut off mid-`<select>`, no closing tags), and it had **zero
+JavaScript**. `x-data="surveyWizard()"` was referenced but `surveyWizard()` was
+never defined anywhere. The `BIRD-2026-2035.zip` mentioned in the original request
+(which was supposed to contain `SurveyWizard.tsx`) was never actually uploaded.
+
+This rebuild reconstructs all 16 sections faithfully to the original visual style
+(dark emerald/gold, Georgia serif headers, glass-morphism cards) and — using
+`BIRD_Survey_Data_Map.xlsx` as the authoritative field spec — writes the complete
+Alpine.js engine that was missing: state, validation, kill switches, conditional
+logic, scoring, autosave, and submission.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `survey.html` | The 16-section validation survey (Alpine.js + Tailwind CDN + ECharts) |
+| `survey-dashboard.html` | Live results dashboard (Chart.js), now with offline fallback |
+| `manifest.webmanifest` | PWA manifest — installable on mobile home screens |
+| `sw.js` | Service worker — caches the app shell + CDN libraries for full offline use |
+
+## What's live vs. what's stubbed
+
+**Live (already wired to a real backend):**
+- `survey.html` submits directly to the same Supabase project already hardcoded
+  into the uploaded `survey-dashboard.html` (`lydsisparsmvextskevw.supabase.co`),
+  inserting into a `survey_responses` table with columns
+  `data, timestamp, category, province, organization` — the exact shape the
+  dashboard already expects.
+- **Verify Row-Level Security is configured** on `survey_responses` before going
+  live: anon key should be able to `INSERT` only, never `SELECT/UPDATE/DELETE`.
+  The dashboard's anon key currently has read access (`SELECT`) — confirm that's
+  intentional for a public dashboard, or gate it behind auth if not.
+
+**Always-on regardless of Supabase reachability:**
+- Every submission is written to `localStorage` first
+  (`bird_survey_responses_v1`), so the survey and dashboard both work fully
+  offline, on a single device, with zero backend. If Supabase is unreachable,
+  the dashboard automatically falls back to on-device data and shows a banner
+  saying so.
+- Auto-save to `localStorage` every ~1 second (debounced) while filling the
+  survey, with a draft-restore prompt on return visits.
+
+**Stubbed (clearly marked, easy to wire up later):**
+- `AI_STRATEGY_ASSISTANT` Edge Function — `CONFIG.AI_ASSISTANT_ENABLED = false`
+  by default. Without it, a local heuristic (same weighting logic as
+  `formulas.ts`) picks a recommended strategy from your IEDS matrix scores
+  instantly, offline. Flip the flag and set `AI_ASSISTANT_URL` once you have a
+  real Edge Function.
+- Auth — the survey is intentionally public/anonymous, matching your own spec's
+  "public survey preview" exception. No login wall.
+
+## The 16 sections (per `BIRD_Survey_Data_Map.xlsx`)
+
+1. BEIE Framework Context · 2. Moral Governance Operating System ·
+3. Cluster 1: Foundations · 4. Cluster 2: Transformers · 5. Cluster 3: Enablers ·
+6. Cluster 4: Connectors · 7. Cluster 5: Financiers · 8. Strategic Options ·
+9. Budget & Targets · 10. IEDS Matrix Evaluation · 11. Provincial Equity ·
+12. Climate Resilience · 13. Policy & Governance · 14. Demographics ·
+15. C.A.R.E. Validation · 16. Final Submission
+
+Conditional/provincial logic is wired for **Basilan** (Pestalotiopsis + ZBIP
+alerts), **Maguindanao del Norte/Sur** (Halal Park follow-up), **Tawi-Tawi**
+(seaweed value chain), and **Lanao del Sur** (Lake Lanao), per the Conditional
+Logic Map sheet.
+
+Kill switches (hard stops) are enforced on Sections 1, 2, 10, 15, and 16, per the
+Validation & Kill Switches sheet — you cannot advance past these without
+completing every required field.
+
+## Real-time scoring formulas (mirrors `formulas.ts`)
+
+- Threat/Vulnerability Index: `(Impact² × Likelihood) / 25` — used for El Niño,
+  Pestalotiopsis, and post-harvest-loss risk scoring in Section 3.
+- IEDS Matrix: 4 strategies (HEDS/GEMS/IFES/IEDS) × 7 dimensions (0–10 each),
+  visualized live via an ECharts bar chart, with a mobile card layout that
+  replaces the wide table below the `md:` breakpoint.
+- C.A.R.E. average and indicative ROI estimate (clearly labeled as illustrative,
+  not a forecast) shown live in the sidebar and on the success screen.
+
+## Plain-language / visual context (per your requirement)
+
+Every section shows, above the form: a one-line plain-English explainer, plus
+any relevant images, a video (opens in an inline lightbox), and a "Learn more"
+link — all pulled from your `bird-urls.ts` registry (BEIE cluster diagrams,
+systems archetypes, provincial diagnostics, etc.), so no question is asked
+without visual/contextual grounding.
+
+## Mobile-first specifics
+
+- Sticky bottom nav bar (Back/Next) always visible, thumb-reachable.
+- 44px+ tap targets on all checkboxes/radios; 16px input font size (prevents
+  iOS auto-zoom on focus).
+- IEDS matrix (section 10) renders as scrollable per-strategy cards on phones
+  instead of a 9-column table.
+- Step-dot quick nav lets you jump back to any completed section.
+
+## Known gaps / next steps
+
+- No automated accessibility audit was run (WCAG 2.1 AA target stated in your
+  spec) — visible focus rings, label associations, and color contrast were
+  applied by hand but not machine-verified.
+- Rate limiting (5 submissions/hour/user) requires server-side enforcement
+  (Supabase Edge Function or RLS policy) — not something a static HTML file can
+  enforce on its own; flagging so it isn't assumed to be covered.
+
 
 ## 🔧 Troubleshooting
 
