@@ -4,8 +4,7 @@ import { useStrategicPlan } from '@/hooks/useStrategicPlan';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabase';
 import { StratLogo } from '@/components/branding/Logo';
-import { Loader as Loader2 } from 'lucide-react';
-import { PlanTemplate } from '@/lib/templateData';
+import { Loader2 } from 'lucide-react';
 
 // ─── CRITICAL PATH: Load HeroSection immediately (first screen) ─────────────
 import HeroSection from './strategic/HeroSection';
@@ -13,10 +12,10 @@ import HeroSection from './strategic/HeroSection';
 // ─── LAZY LOADED COMPONENTS (Optimizes Initial Load Time) ───────────────────
 const Sidebar              = lazy(() => import('./strategic/Sidebar'));
 const Topbar               = lazy(() => import('./strategic/Topbar'));
-const AuthModal            = lazy(() => import('./branding/auth/AuthModal'));
-const UserProfileModal     = lazy(() => import('./branding/auth/UserProfileModal'));
+const AuthModal            = lazy(() => import('./auth/AuthModal'));
+const UserProfileModal     = lazy(() => import('./auth/UserProfileModal'));
 const SettingsPage         = lazy(() => import('./settings/SettingsPage'));
-const SurveyWizard         = lazy(() => import('./strategic/SurveyWizard')); // ✅ Survey Wizard
+const SurveyWizard         = lazy(() => import('./strategic/SurveyWizard')); // 
 const MELDashboard         = lazy(() => import('./strategic/MELDashboard'));
 const SWOTAnalysis         = lazy(() => import('./strategic/SWOTAnalysis'));
 const SystemsThinking      = lazy(() => import('./strategic/SystemsThinking'));
@@ -59,7 +58,7 @@ const VIEW_TO_PATH: Record<string, string> = {
   team:       '/team-collaboration',
   settings:   '/settings',
   export:     '/export-plan',
-  validation: '/survey-wizard', // ✅ Maps to SurveyWizard
+  validation: '/survey-wizard', //
 };
 
 const PATH_TO_VIEW: Record<string, string> = Object.fromEntries(
