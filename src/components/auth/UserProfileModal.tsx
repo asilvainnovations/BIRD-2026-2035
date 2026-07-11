@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { X, User, Mail, Building, Phone, Briefcase, Key, Save, Check } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { X, User, Mail, Building, Phone, Briefcase, Key, Save, Check, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 
 interface UserProfileModalProps {
@@ -8,22 +8,45 @@ interface UserProfileModalProps {
 }
 
 export function UserProfileModal({ isOpen, onClose }: UserProfileModalProps) {
-  const { user, updateProfile, updatePassword } = useAuth();
-  const [fullName, setFullName] = useState(user?.full_name || '');
-  const [organization, setOrganization] = useState(user?.organization || '');
-  const [jobTitle, setJobTitle] = useState(user?.job_title || '');
-  const [phone, setPhone] = useState(user?.phone || '');
-  const [currentPassword, setCurrentPassword] = useState('');
+  const { user, profile, updateProfile, updatePassword } = useAuth();
+
+  // ── Profile form state ──────────────────────────────────────────
+  const [fullName, setFullName] = useState('');
+  const [organization, setOrganization] = useState('');
+  const [jobTitle, setJobTitle] = useState('');
+  const [phone, setPhone] = useState('');
+
+  // ── Password form state ─────────────────────────────────────────
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  // ── UI state ────────────────────────────────────────────────────
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<'profile' | 'password'>('profile');
 
+  // Sync form state when modal opens or profile loads
+  useEffect(() => {
+    if (isOpen && profile) {
+      setFullName(profile.full_name || '');
+      setOrganization(profile.organization || '');
+      setJobTitle(profile.job_title || '');
+      setPhone(profile.phone || '');
+      setError('');
+      setSuccess('');
+      setNewPassword('');
+      setConfirmPassword('');
+      setShowPassword(false);
+      setActiveTab('profile');
+    }
+  }, [isOpen, profile]);
+
   if (!isOpen) return null;
 
-  const handleSaveProfile = async () => {
+  const handleSaveProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
     setError('');
     setSuccess('');
     setLoading(true);
@@ -37,7 +60,8 @@ export function UserProfileModal({ isOpen, onClose }: UserProfileModalProps) {
     }
   };
 
-  const handleChangePassword = async () => {
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
     setError('');
     setSuccess('');
     if (newPassword !== confirmPassword) {
@@ -51,9 +75,9 @@ export function UserProfileModal({ isOpen, onClose }: UserProfileModalProps) {
     setLoading(true);
     try {
       await updatePassword(newPassword);
-      setCurrentPassword('');
       setNewPassword('');
       setConfirmPassword('');
+      setShowPassword(false);
       setSuccess('Password updated successfully');
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to update password');
@@ -62,121 +86,270 @@ export function UserProfileModal({ isOpen, onClose }: UserProfileModalProps) {
     }
   };
 
+  const switchTab = (tab: 'profile' | 'password') => {
+    setActiveTab(tab);
+    setError('');
+    setSuccess('');
+  };
+
+  const avatarInitial = (fullName || user?.email || 'U').charAt(0).toUpperCase();
+  const displayName = fullName || user?.email || 'User';
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
       <div
-        className="relative w-full max-w-lg rounded-2xl border border-gold/20 bg-gradient-to-b from-[#022c22] to-[#011a12] p-8 shadow-2xl"
+        className="relative w-full max-w-md rounded-2xl border border-gold/20 bg-gradient-to-b from-[#022c22] to-[#011a12] p-8 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <button onClick={onClose} className="absolute right-4 top-4 text-white/40 hover:text-white transition-colors">
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 text-white/40 hover:text-white transition-colors"
+          aria-label="Close modal"
+        >
           <X size={20} />
         </button>
 
-        <div className="text-center mb-6">
-          <h2 className="font-cinzel text-xl font-bold text-gold-gradient">My Profile</h2>
-          <p className="text-white/50 text-sm mt-1">Manage your account and preferences</p>
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h2 className="font-cinzel text-2xl font-bold text-gold-gradient mb-2">
+            My Profile
+          </h2>
+          <p className="text-white/50 text-sm">
+            Manage your account and preferences
+          </p>
         </div>
 
+        {/* Tab switcher */}
         <div className="flex gap-2 mb-6">
           <button
-            onClick={() => setActiveTab('profile')}
-            className={`flex-1 py-2 text-sm rounded-lg font-medium transition-colors ${
-              activeTab === 'profile' ? 'bg-gold/20 text-gold' : 'text-white/50 hover:text-white/80'
+            onClick={() => switchTab('profile')}
+            className={`flex-1 py-2 text-sm rounded-lg font-medium transition-colors flex items-center justify-center gap-1.5 ${
+              activeTab === 'profile'
+                ? 'bg-gold/20 text-gold'
+                : 'text-white/50 hover:text-white/80'
             }`}
           >
-            <User size={14} className="inline mr-1.5" />
+            <User size={14} />
             Profile
           </button>
           <button
-            onClick={() => setActiveTab('password')}
-            className={`flex-1 py-2 text-sm rounded-lg font-medium transition-colors ${
-              activeTab === 'password' ? 'bg-gold/20 text-gold' : 'text-white/50 hover:text-white/80'
+            onClick={() => switchTab('password')}
+            className={`flex-1 py-2 text-sm rounded-lg font-medium transition-colors flex items-center justify-center gap-1.5 ${
+              activeTab === 'password'
+                ? 'bg-gold/20 text-gold'
+                : 'text-white/50 hover:text-white/80'
             }`}
           >
-            <Key size={14} className="inline mr-1.5" />
+            <Key size={14} />
             Password
           </button>
         </div>
 
-        {error && <div className="mb-4 rounded-lg bg-red-500/10 border border-red-500/30 p-3 text-red-300 text-sm">{error}</div>}
-        {success && <div className="mb-4 rounded-lg bg-green-500/10 border border-green-500/30 p-3 text-green-300 text-sm flex items-center gap-2"><Check size={14} />{success}</div>}
+        {/* Alert messages */}
+        {error && (
+          <div className="mb-4 rounded-lg bg-red-500/10 border border-red-500/30 p-3 text-red-300 text-sm">
+            {error}
+          </div>
+        )}
+        {success && (
+          <div className="mb-4 rounded-lg bg-green-500/10 border border-green-500/30 p-3 text-green-300 text-sm flex items-center gap-2">
+            <Check size={14} />
+            {success}
+          </div>
+        )}
 
+        {/* ── Profile Tab ── */}
         {activeTab === 'profile' ? (
-          <div className="space-y-4">
+          <form onSubmit={handleSaveProfile} className="space-y-4">
+            {/* Avatar + identity */}
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center text-gold font-cinzel text-lg font-bold">
-                {(fullName || user?.email || 'U').charAt(0).toUpperCase()}
+              <div className="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center text-gold font-cinzel text-lg font-bold shrink-0">
+                {avatarInitial}
               </div>
-              <div>
-                <div className="text-sm font-medium text-white">{fullName || user?.email}</div>
-                <div className="text-xs text-white/40">{user?.email}</div>
+              <div className="min-w-0">
+                <div className="text-sm font-medium text-white truncate">
+                  {displayName}
+                </div>
+                <div className="text-xs text-white/40 truncate">
+                  {user?.email}
+                </div>
               </div>
             </div>
 
+            {/* Full Name */}
             <div>
-              <label className="block text-xs font-medium text-gold/70 mb-1.5 uppercase tracking-wider">Full Name</label>
+              <label className="block text-xs font-medium text-gold/70 mb-1.5 uppercase tracking-wider">
+                Full Name
+              </label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" size={16} />
-                <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Full Name" className="pl-10" />
+                <User
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30"
+                  size={16}
+                />
+                <input
+                  type="text"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  placeholder="Juan dela Cruz"
+                  className="pl-10"
+                />
               </div>
             </div>
 
+            {/* Organization */}
             <div>
-              <label className="block text-xs font-medium text-gold/70 mb-1.5 uppercase tracking-wider">Organization</label>
+              <label className="block text-xs font-medium text-gold/70 mb-1.5 uppercase tracking-wider">
+                Organization
+              </label>
               <div className="relative">
-                <Building className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" size={16} />
-                <input type="text" value={organization} onChange={(e) => setOrganization(e.target.value)} placeholder="Organization / Company" className="pl-10" />
+                <Building
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30"
+                  size={16}
+                />
+                <input
+                  type="text"
+                  value={organization}
+                  onChange={(e) => setOrganization(e.target.value)}
+                  placeholder="Organization / Company"
+                  className="pl-10"
+                />
               </div>
             </div>
 
+            {/* Job Title */}
             <div>
-              <label className="block text-xs font-medium text-gold/70 mb-1.5 uppercase tracking-wider">Job Title</label>
+              <label className="block text-xs font-medium text-gold/70 mb-1.5 uppercase tracking-wider">
+                Job Title
+              </label>
               <div className="relative">
-                <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" size={16} />
-                <input type="text" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} placeholder="Job Title" className="pl-10" />
+                <Briefcase
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30"
+                  size={16}
+                />
+                <input
+                  type="text"
+                  value={jobTitle}
+                  onChange={(e) => setJobTitle(e.target.value)}
+                  placeholder="Job Title"
+                  className="pl-10"
+                />
               </div>
             </div>
 
+            {/* Phone */}
             <div>
-              <label className="block text-xs font-medium text-gold/70 mb-1.5 uppercase tracking-wider">Phone</label>
+              <label className="block text-xs font-medium text-gold/70 mb-1.5 uppercase tracking-wider">
+                Phone
+              </label>
               <div className="relative">
-                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" size={16} />
-                <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone Number" className="pl-10" />
+                <Phone
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30"
+                  size={16}
+                />
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="Phone Number"
+                  className="pl-10"
+                />
               </div>
             </div>
 
-            <button onClick={handleSaveProfile} disabled={loading} className="btn btn-primary w-full mt-2">
-              {loading ? <span className="animate-spin inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full" /> : <><Save size={16} /> Save Changes</>}
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn btn-primary w-full mt-2"
+            >
+              {loading ? (
+                <span className="animate-spin inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full" />
+              ) : (
+                <>
+                  <Save size={16} />
+                  Save Changes
+                </>
+              )}
             </button>
-          </div>
+          </form>
         ) : (
-          <div className="space-y-4">
+          /* ── Password Tab ── */
+          <form onSubmit={handleChangePassword} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-gold/70 mb-1.5 uppercase tracking-wider">Current Password</label>
+              <label className="block text-xs font-medium text-gold/70 mb-1.5 uppercase tracking-wider">
+                New Password
+              </label>
               <div className="relative">
-                <Key className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" size={16} />
-                <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} placeholder="Current Password" className="pl-10" />
+                <Key
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30"
+                  size={16}
+                />
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="Min 6 characters"
+                  className="pl-10 pr-10"
+                  required
+                  minLength={6}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
               </div>
             </div>
+
             <div>
-              <label className="block text-xs font-medium text-gold/70 mb-1.5 uppercase tracking-wider">New Password</label>
+              <label className="block text-xs font-medium text-gold/70 mb-1.5 uppercase tracking-wider">
+                Confirm New Password
+              </label>
               <div className="relative">
-                <Key className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" size={16} />
-                <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Min 6 characters" className="pl-10" />
+                <Key
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30"
+                  size={16}
+                />
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Confirm New Password"
+                  className="pl-10 pr-10"
+                  required
+                  minLength={6}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
               </div>
             </div>
-            <div>
-              <label className="block text-xs font-medium text-gold/70 mb-1.5 uppercase tracking-wider">Confirm New Password</label>
-              <div className="relative">
-                <Key className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" size={16} />
-                <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm New Password" className="pl-10" />
-              </div>
-            </div>
-            <button onClick={handleChangePassword} disabled={loading} className="btn btn-primary w-full mt-2">
-              {loading ? <span className="animate-spin inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full" /> : <><Key size={16} /> Update Password</>}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn btn-primary w-full mt-2"
+            >
+              {loading ? (
+                <span className="animate-spin inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full" />
+              ) : (
+                <>
+                  <Key size={16} />
+                  Update Password
+                </>
+              )}
             </button>
-          </div>
+          </form>
         )}
       </div>
     </div>
