@@ -74,7 +74,7 @@ export const useStrategicPlan = () => {
   const [cursors, setCursors] = useState<Record<string, CursorPosition>>({});
 
   // Sync management refs
-  const syncTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const syncTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isInitialSyncDone = useRef(false);
   const isSyncingRef = useRef(false);
 
