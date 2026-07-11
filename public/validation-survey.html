@@ -439,6 +439,68 @@
                 </div>
             </div>
 
+            <!-- ═══════════════════════════════════════════════════════════════════
+                 WELCOME CARD — Step 1 only
+                 Improved copy: active voice, benefits-first, clear CTA,
+                 privacy reassurance without legal jargon overload.
+                 ═══════════════════════════════════════════════════════════════════ -->
+            <div x-show="currentStep === 1" class="bg-bird-dark/60 backdrop-blur-xl border border-bird-gold/30 rounded-xl p-6 md:p-8 max-w-3xl mx-auto section-transition">
+                <h2 class="text-xl md:text-2xl font-serif text-bird-gold mb-3 text-center">
+                    Help Shape the Bangsamoro Investment Roadmap
+                </h2>
+                <p class="text-bird-cream/70 text-sm md:text-base text-center leading-relaxed mb-5">
+                    BARMM is charting its economic course for 2026&ndash;2035. This survey captures your ground-level knowledge &mdash; as a government partner, business owner, researcher, or community leader &mdash; to turn a &#8369;120&ndash;160 billion investment plan into action that actually works for the people it serves.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+                    <div class="text-center p-3 rounded-lg bg-bird-darker/50 border border-bird-gold/10">
+                        <p class="text-bird-gold font-bold text-lg mb-1">Confirm</p>
+                        <p class="text-bird-cream/60 text-xs">Which priorities and opportunities matter most on the ground</p>
+                    </div>
+                    <div class="text-center p-3 rounded-lg bg-bird-darker/50 border border-bird-gold/10">
+                        <p class="text-bird-gold font-bold text-lg mb-1">Strengthen</p>
+                        <p class="text-bird-cream/60 text-xs">Where BARMM is vulnerable to climate shocks, market shifts, and governance gaps</p>
+                    </div>
+                    <div class="text-center p-3 rounded-lg bg-bird-darker/50 border border-bird-gold/10">
+                        <p class="text-bird-gold font-bold text-lg mb-1">Guide</p>
+                        <p class="text-bird-cream/60 text-xs">How &#8369;120&ndash;160B in planned investments gets allocated across provinces and sectors</p>
+                    </div>
+                </div>
+
+                <div class="border-t border-bird-gold/10 pt-4 mb-4">
+                    <h3 class="text-sm font-bold text-bird-lightGold mb-2">What you will do</h3>
+                    <ul class="text-sm text-bird-cream/70 space-y-1.5">
+                        <li class="flex items-start gap-2">
+                            <span class="text-bird-gold mt-0.5">&#10003;</span>
+                            <span>Answer focused questions across agriculture, halal industry, infrastructure, trade connectivity, and Islamic finance</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-bird-gold mt-0.5">&#10003;</span>
+                            <span>Rate strategies and score investment options using the IEDS evaluation matrix</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-bird-gold mt-0.5">&#10003;</span>
+                            <span>Share province-specific insights so the roadmap reflects real conditions, not desk assumptions</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-bird-cream/50 border-t border-bird-gold/10 pt-4">
+                    <span class="flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                        Your responses are confidential. Protected under the <a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/privacy-policy.html" target="_blank" rel="noopener" class="text-bird-gold hover:text-bird-lightGold underline underline-offset-2">Data Privacy Act of 2012</a>.
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Works offline. Saves automatically.
+                    </span>
+                </div>
+            </div>
+
             <!-- Context Strip: Images, Videos, Site Links (plain language, visual aids) -->
             <div class="flex items-center gap-2 flex-wrap justify-center">
                 <template x-for="img in getImagesForSection(stepToSection[currentStep])" :key="img.title">
