@@ -9,6 +9,9 @@ import React from 'react';
  * ⚠️ REMOVE THIS COMPONENT IN PRODUCTION
  */
 export const ErrorButton: React.FC = () => {
+  // Guard: never render in production
+  if (import.meta.env.PROD) return null;
+
   const handleClick = () => {
     // Throw a test error to verify Sentry integration
     throw new Error('This is your first error!');
@@ -20,7 +23,7 @@ export const ErrorButton: React.FC = () => {
       className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold transition-colors"
       aria-label="Trigger test error for Sentry"
     >
-      Break the world
+      Break the world (dev only)
     </button>
   );
 };
