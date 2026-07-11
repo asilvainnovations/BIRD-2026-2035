@@ -16,6 +16,48 @@ export function Section1_BEIE() {
   
   return (
     <div className="space-y-8">
+      {/* Welcome Card — shown only on Step 1 */}
+      <div className="rounded-xl border border-[#C9A84C]/30 bg-[#011a12] p-5 md:p-6 space-y-4">
+        <h2 className="text-xl md:text-2xl font-serif text-[#C9A84C] text-center">
+          Help Shape the Bangsamoro Investment Roadmap
+        </h2>
+        <p className="text-[#ecfdf5]/70 text-sm md:text-base text-center leading-relaxed">
+          BARMM is charting its economic course for 2026–2035. This survey captures your ground-level knowledge — as a government partner, business owner, researcher, or community leader — to turn a ₱120–160 billion investment plan into action that works for the people it serves.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="text-center p-3 rounded-lg bg-[#022c22] border border-[#C9A84C]/20">
+            <p className="text-[#C9A84C] font-bold text-base mb-1">Confirm</p>
+            <p className="text-[#ecfdf5]/60 text-xs">Which priorities matter most on the ground</p>
+          </div>
+          <div className="text-center p-3 rounded-lg bg-[#022c22] border border-[#C9A84C]/20">
+            <p className="text-[#C9A84C] font-bold text-base mb-1">Strengthen</p>
+            <p className="text-[#ecfdf5]/60 text-xs">Where BARMM is vulnerable to shocks and gaps</p>
+          </div>
+          <div className="text-center p-3 rounded-lg bg-[#022c22] border border-[#C9A84C]/20">
+            <p className="text-[#C9A84C] font-bold text-base mb-1">Guide</p>
+            <p className="text-[#ecfdf5]/60 text-xs">How ₱120–160B gets allocated across provinces</p>
+          </div>
+        </div>
+        <div className="border-t border-[#C9A84C]/20 pt-3">
+          <h3 className="text-xs font-bold text-[#E8C560] uppercase tracking-wider mb-2">What you will do</h3>
+          <ul className="text-sm text-[#ecfdf5]/70 space-y-1.5">
+            <li className="flex items-start gap-2"><span className="text-[#C9A84C] mt-0.5">✓</span><span>Answer focused questions across agriculture, halal industry, infrastructure, trade, and Islamic finance</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#C9A84C] mt-0.5">✓</span><span>Rate strategies and score investment options using the IEDS evaluation matrix</span></li>
+            <li className="flex items-start gap-2"><span className="text-[#C9A84C] mt-0.5">✓</span><span>Share province-specific insights so the roadmap reflects real conditions</span></li>
+          </ul>
+        </div>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[#ecfdf5]/50 border-t border-[#C9A84C]/20 pt-3">
+          <span className="flex items-center gap-1.5">
+            <svg className="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+            Protected under the <a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/privacy-policy.html" target="_blank" rel="noopener" className="text-[#C9A84C] hover:text-[#E8C560] underline underline-offset-2">Data Privacy Act of 2012</a>
+          </span>
+          <span className="flex items-center gap-1.5">
+            <svg className="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+            Works offline. Saves automatically.
+          </span>
+        </div>
+      </div>
+
       <CardHeader className="p-0">
         <CardTitle className="text-2xl font-serif text-[#C9A84C]">
           1. The BEIE Framework Context
