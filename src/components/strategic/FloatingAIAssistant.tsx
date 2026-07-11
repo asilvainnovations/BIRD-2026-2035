@@ -115,7 +115,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
   const [messages, setMessages] = useState<Msg[]>([{
     role: 'assistant',
     content:
-      'As-salamu alaykum! I\'m BIRD AI — your investment, strategy & systems-thinking consultant for the Bangsamoro Investment Roadmap 2026–2035.\n\nI can help you analyze SWOT data, explain causal loops, identify leverage points, draft strategic options, and interpret BARMM\'s economic context.\n\nWhat would you like to explore?',
+      'As-salamu alaykum! I\'m the BIRD AI — your investment, strategy & systems-thinking consultant for the Bangsamoro Investment Roadmap 2026–2035.\n\nI can help you analyze SWOT data, explain causal loops, identify leverage points, draft strategic options, and interpret BARMM\'s economic context.\n\nWhat would you like to explore?',
     timestamp: Date.now(),
   }]);
   const endRef    = useRef<HTMLDivElement>(null);
@@ -393,7 +393,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
               {/* Footer note */}
               <div className="px-4 py-1.5 bg-card border-t border-border/30 flex-shrink-0">
                 <p className="text-[10px] text-muted-foreground/50 text-center">
-                  BIRD AI · BOI-MTIT, BARMM · Powered by Kimi AI
+                  BIRD AI · BOI-MTIT, BARMM 
                 </p>
               </div>
             </>
