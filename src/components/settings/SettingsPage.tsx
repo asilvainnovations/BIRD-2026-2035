@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useAuth, UserProfile } from '@/hooks/useAuth';
+import { useTheme } from '@/components/theme-provider';
 import { StratLogo } from '@/components/branding/Logo';
 
 type TabId = 'profile' | 'notifications' | 'theme' | 'ai' | 'security' | 'language' | 'integrations';
@@ -34,7 +35,7 @@ interface Settings {
 
 const DEFAULT_SETTINGS: Settings = {
   notifications: { email: true, weekly_digest: true, kpi_alerts: true, team_mentions: true, product_updates: false },
-  ai_config: { model: 'gpt-4o', temperature: 0.65, auto_suggest: true, verbose: false },
+  ai_config: { model: 'moonshot-v1-128k', temperature: 0.65, auto_suggest: true, verbose: false },
   integrations: {},
   theme_settings: { mode: 'dark', accent: 'blue', density: 'comfortable' },
   language: 'en',
@@ -56,6 +57,7 @@ const INTEGRATION_DEFS = [
 
 const SettingsPage: React.FC = () => {
   const { user, profile, updateProfile, updatePassword } = useAuth();
+  const { setTheme } = useTheme();
   const [tab, setTab] = useState<TabId>('profile');
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const [profileForm, setProfileForm] = useState({
@@ -226,7 +228,7 @@ const SettingsPage: React.FC = () => {
               <h2 className="text-xl font-bold text-white">Theme Settings</h2>
               <SelectField label="Mode" value={settings.theme_settings.mode}
                 options={['dark', 'light', 'system']}
-                onChange={(v) => { const next = { ...settings, theme_settings: { ...settings.theme_settings, mode: v } }; setSettings(next); persistSettings(next); }} />
+                onChange={(v) => { const next = { ...settings, theme_settings: { ...settings.theme_settings, mode: v } }; setSettings(next); persistSettings(next); setTheme(v); }} />
               <SelectField label="Accent Color" value={settings.theme_settings.accent}
                 options={['blue', 'cyan', 'emerald', 'purple', 'rose', 'amber']}
                 onChange={(v) => { const next = { ...settings, theme_settings: { ...settings.theme_settings, accent: v } }; setSettings(next); persistSettings(next); }} />
@@ -242,8 +244,7 @@ const SettingsPage: React.FC = () => {
               <p className="text-sm text-slate-400">Customize how the AI Strategist behaves across your strategic plans.</p>
               <SelectField label="Default AI Model" value={settings.ai_config.model}
                 options={[
-                  'gpt-4o', 'gpt-4o-mini', 'gpt-4-turbo',
-                  'anthropic/claude-opus-4-7', 'anthropic/claude-sonnet-4-6', 'anthropic/claude-haiku-4-5'
+                  'moonshot-v1-128k', 'moonshot-v1-32k', 'moonshot-v1-8k'
                 ]}
                 onChange={(v) => { const next = { ...settings, ai_config: { ...settings.ai_config, model: v } }; setSettings(next); persistSettings(next); }} />
               <SelectField label="Strategist Persona" value={settings.ai_config.persona}
