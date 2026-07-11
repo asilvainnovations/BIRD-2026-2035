@@ -168,7 +168,7 @@ export const useAuth = () => {
       try {
         const { data: { session } } = await supabase.auth.getSession();
         await fetch(
-          '',
+          'https://lydsisparsmvextskevw.supabase.co/functions/v1/email-notifications',
           {
             method: 'POST',
             headers: {
