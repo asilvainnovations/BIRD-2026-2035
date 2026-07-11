@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { supabase } from '@/lib/supabase';
 import {
   Shield,
   AlertCircle,
@@ -53,6 +54,9 @@ import { useStrategicPlan } from '@/hooks/useStrategicPlan';
 
 import { StrategicPlan, SWOTItem, CLDNode, CLDLink, CLDSnapshot } from '@/lib/strategicPlanStore';
 import { cn } from '@/lib/utils';
+import { BIRD_VIDEOS, BIRD_IMAGES, getImagesForSection, getVideosForSection } from '@/lib/bird-urls';
+import { AIStrategistAvatar } from '@/components/branding/Logo';
+import FloatingAIAssistant from './FloatingAIAssistant';
 
 interface SystemsThinkingProps {
   plan: StrategicPlan;
@@ -502,43 +506,80 @@ const SWOTQuadrant: React.FC<{
 
 // ─── EDUCATIONAL RESOURCES ────────────────────────────────────────────────────
 
-const EducationalResources: React.FC = () => (
-  <div className="bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-xl border border-blue-200 p-4 space-y-4">
-    <div className="flex items-center gap-2 mb-3">
-      <PlayCircle className="w-4 h-4 text-blue-600" />
-      <h3 className="text-sm font-semibold text-blue-800">Learning Resources</h3>
-    </div>
-    <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-      <iframe
-        src="https://www.youtube.com/embed/fXxFz-Tr6Zg"
-        title="Systems Mapping"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-        className="absolute top-0 left-0 w-full h-full rounded-lg"
-      />
-    </div>
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-      {[
-        { title: 'Causal Loop Diagrams', url: 'https://youtu.be/tTo06jbSZ4M?si=mSyIfuUvpeXPsrW' },
-        { title: 'Systems Archetypes',   url: 'https://youtu.be/zRmEh-PMvWo?si=DnxR-3n4I-382hKT' },
-      ].map(r => (
-        <a key={r.title} href={r.url} target="_blank" rel="noopener noreferrer"
-          className="group flex items-center gap-3 px-4 py-3 rounded-lg bg-white dark:bg-slate-800/60 border border-blue-200 hover:border-blue-400 hover:shadow-md transition-all">
-          <div className="shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center group-hover:scale-105 transition-transform">
-            <PlayCircle className="w-5 h-5 text-white" />
+const EducationalResources: React.FC = () => {
+  const systemsVideos = Object.values(BIRD_VIDEOS).filter(v => v.section === 'section2');
+  const systemsImages = Object.values(BIRD_IMAGES).filter(img => img.category === 'systems' || img.category === 'archetype');
+
+  return (
+    <div className="bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-purple-950/30 rounded-xl border border-blue-200 dark:border-blue-800 p-4 space-y-4">
+      <div className="flex items-center gap-2 mb-3">
+        <BookOpen className="w-4 h-4 text-blue-600" />
+        <h3 className="text-sm font-semibold text-blue-800 dark:text-blue-300">BIRD Learning Resources</h3>
+      </div>
+
+      {/* Video Resources from bird-urls.ts */}
+      {systemsVideos.length > 0 && (
+        <div className="space-y-2">
+          <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Video Guides</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {systemsVideos.map(v => (
+              <a key={v.url} href={v.url} target="_blank" rel="noopener noreferrer"
+                className="group flex items-center gap-3 px-4 py-3 rounded-lg bg-white dark:bg-slate-800/60 border border-blue-200 dark:border-slate-700 hover:border-blue-400 hover:shadow-md transition-all">
+                <div className="shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <PlayCircle className="w-5 h-5 text-white" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-slate-800 dark:text-slate-100 group-hover:text-blue-700 transition-colors truncate">{v.title}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{v.duration} · {v.section}</p>
+                </div>
+                <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 transition-colors shrink-0" />
+              </a>
+            ))}
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold text-slate-800 dark:text-slate-100 group-hover:text-blue-700 transition-colors">{r.title}</p>
-            <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500">External video tutorial</p>
+        </div>
+      )}
+
+      {/* Image Resources from bird-urls.ts */}
+      {systemsImages.length > 0 && (
+        <div className="space-y-2">
+          <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Visual References</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {systemsImages.slice(0, 6).map(img => (
+              <a key={img.url} href={img.url} target="_blank" rel="noopener noreferrer"
+                className="group block rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 hover:border-blue-400 hover:shadow-md transition-all bg-white dark:bg-slate-800/60">
+                <img src={img.url} alt={img.alt} className="w-full h-24 object-cover group-hover:scale-105 transition-transform"
+                  onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                <div className="px-3 py-2">
+                  <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-200 truncate group-hover:text-blue-600 transition-colors">{img.title}</p>
+                </div>
+              </a>
+            ))}
           </div>
-          <ExternalLink className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 group-hover:text-blue-500 transition-colors" />
-        </a>
-      ))}
+        </div>
+      )}
+
+      {/* Framework Overview Links */}
+      <div className="space-y-2">
+        <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Framework Guides</p>
+        <div className="flex flex-wrap gap-2">
+          {[
+            { title: 'BEIE Framework', url: 'https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/19.%20Bangsamoro%20BEIE%20Framework.png', icon: Layers },
+            { title: 'Meadows Leverage', url: 'https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/24.%20Meadows%20Hierarchy%20of%20Leverage%20Points.png', icon: Target },
+            { title: 'Investment Cycles', url: 'https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/15.%20Investment%20and%20Governance%20Cycles.png', icon: RefreshCw },
+            { title: 'Virtuous Cycle', url: 'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/14.%20Investment-Development%20Virtuous%20Cycle.png', icon: TrendingUp },
+          ].map(r => (
+            <a key={r.title} href={r.url} target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 hover:border-blue-400 hover:shadow-sm transition-all text-xs font-medium text-slate-700 dark:text-slate-200">
+              <r.icon className="w-3.5 h-3.5 text-blue-500" />
+              {r.title}
+              <ExternalLink className="w-3 h-3 text-slate-400" />
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 // ─── ARCHETYPE IMAGE TOOLTIP ──────────────────────────────────────────────────
 
@@ -1847,16 +1888,36 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
   const handleUpdateNodes = useCallback((newNodes: ExtendedCLDNode[]) => setLocalCldNodes(newNodes), []);
   const handleUpdateLinks = useCallback((newLinks: ExtendedCLDLink[]) => setLocalCldLinks(newLinks), []);
 
+  // ── AI Analysis via Kimi Edge Function ─────────────────────────────────────
+  const AI_STRATEGY_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/ai-strategy-assistant';
+
   const executeAIAnalysis = useCallback(async (
     nodes: ExtendedCLDNode[], links: ExtendedCLDLink[], strategies: string[],
   ): Promise<AIAnalysisResponse> => {
     try {
-      const databaseFunctions = (window as any).database?.functions;
-      if (!databaseFunctions) throw new Error('Database functions not available. Ensure database integration is configured.');
-      const response = await databaseFunctions.invoke('ai-strategy-assistant', {
-        body: { action: 'analyze_loops', data: { nodes, links, selectedStrategies: strategies } },
+      const { data: { session } } = await supabase.auth.getSession();
+      const token = session?.access_token;
+
+      const response = await fetch(AI_STRATEGY_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({
+          action: 'analyze_loops',
+          data: { nodes, links, selectedStrategies: strategies },
+        }),
       });
-      return response as AIAnalysisResponse;
+
+      if (!response.ok) {
+        const errText = await response.text().catch(() => 'unknown');
+        throw new Error(`Kimi AI error ${response.status}: ${errText.slice(0, 200)}`);
+      }
+
+      const result = await response.json();
+      if (!result.success) throw new Error(result.error || 'AI analysis failed');
+      return (result.data || result) as AIAnalysisResponse;
     } catch (err) {
       console.error('AI analysis error:', err);
       throw new Error(err instanceof Error ? err.message : 'Failed to analyze loops');
@@ -2225,12 +2286,27 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
         onExecute={executeAIAnalysis}
       />
 
+      {/* Floating AI Assistant — Systems Thinking Context */}
+      <FloatingAIAssistant plan={plan} activeView="systems" />
+
+      {/* Kimi AI Quick Actions — Systems Thinking */}
+      <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-2">
+        <button
+          onClick={() => setShowAnalysisPanel(true)}
+          className="group flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-fuchsia-600 via-violet-600 to-cyan-500 text-white shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+          title="AI Loop Analysis"
+        >
+          <AIStrategistAvatar size="sm" />
+          <span className="text-xs font-semibold">Kimi AI · Analyze Loops</span>
+        </button>
+      </div>
+
       {/* Info Strip */}
       {viewMode !== 'cld' && (
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 flex items-start gap-2.5">
           <Info className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
           <p className="text-xs text-blue-700 leading-relaxed">
-            Use <strong>Impact × Likelihood</strong> (1–25) to score each factor. Switch to <strong>CLD Builder</strong> to map causal relationships and generate Meadows leverage points.
+            Use <strong>Impact × Likelihood</strong> (1–25) to score each factor. Switch to <strong>CLD Builder</strong> to map causal relationships and generate Meadows leverage points. Click the <strong>Kimi AI</strong> button for AI-powered loop analysis.
           </p>
         </div>
       )}
