@@ -1,0 +1,11 @@
+{
+  "name": "BIRD 2026-2035 Validation Survey — The Emerging Bangsamoro",
+  "short_name": "BIRD Survey",
+  "description": "Stakeholder validation survey for the Bangsamoro Investment Roadmap Development 2026-2035. Works fully offline.",
+  "start_url": "survey./engine.html",
+  "scope": "./",
+  "display": "standalone",
+  ...
+  "icons": [ ... two data-URI SVG icons ... ],
+  "shortcuts": [ { "name": "Live Dashboard", "url": ".survey/dashboard.html", ... } ]
+}
