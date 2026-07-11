@@ -88,27 +88,27 @@ export const MTITLogo: React.FC<LogoProps> = ({
   };
 
   return (
-    <div className={`${sizeMap[size]} ${className}`}>
-      <svg
-        viewBox="0 0 100 100"
-        className="w-full h-full"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        {/* Simplified MTIT seal */}
-        <circle cx="50" cy="50" r="45" fill="none" stroke="#C9A84C" strokeWidth="2" />
-        <circle cx="50" cy="50" r="40" fill="#022c22" />
-        <text
-          x="50"
-          y="55"
-          textAnchor="middle"
-          fontSize="16"
-          fontWeight="bold"
-          fill="#C9A84C"
-          fontFamily="serif"
-        >
-          MTIT
-        </text>
-      </svg>
+    <div
+      className={`${sizeMap[size]} ${className} rounded-full overflow-hidden flex-shrink-0 ring-2 ring-[#C9A84C]/30`}
+    >
+      <img
+        src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png"
+        alt="MTIT Logo"
+        className="w-full h-full object-cover"
+        onError={(e) => {
+          const el = e.currentTarget;
+          el.style.display = 'none';
+          const parent = el.parentElement;
+          if (parent) {
+            parent.style.background = '#022c22';
+            parent.style.display = 'flex';
+            parent.style.alignItems = 'center';
+            parent.style.justifyContent = 'center';
+            parent.innerHTML =
+              '<span style="color:#C9A84C;font-size:0.5em;font-weight:700;font-family:Georgia,serif;">MTIT</span>';
+          }
+        }}
+      />
     </div>
   );
 };
@@ -132,7 +132,7 @@ export const AIStrategistAvatar: React.FC<AvatarProps> = ({
       }`}
     >
       <img
-        src="https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/pending-tasks/public/ASilva%20Innovations%20Logo.png"
+        src="https://appimize.app/assets/apps/user_1097/images/2c7d825bf937_232_1097.png"
         alt="BIRD AI Strategist"
         className="w-full h-full object-cover"
         onError={(e) => {

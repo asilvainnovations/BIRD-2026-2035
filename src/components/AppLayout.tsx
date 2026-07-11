@@ -13,8 +13,8 @@ import HeroSection from './strategic/HeroSection';
 // ─── LAZY LOADED COMPONENTS (Optimizes Initial Load Time) ───────────────────
 const Sidebar              = lazy(() => import('./strategic/Sidebar'));
 const Topbar               = lazy(() => import('./strategic/Topbar'));
-const AuthModal            = lazy(() => import('./auth/AuthModal'));
-const UserProfileModal     = lazy(() => import('./auth/UserProfileModal'));
+const AuthModal            = lazy(() => import('./branding/auth/AuthModal'));
+const UserProfileModal     = lazy(() => import('./branding/auth/UserProfileModal'));
 const SettingsPage         = lazy(() => import('./settings/SettingsPage'));
 const SurveyWizard         = lazy(() => import('./strategic/SurveyWizard')); // ✅ Survey Wizard
 const MELDashboard         = lazy(() => import('./strategic/MELDashboard'));
