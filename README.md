@@ -118,9 +118,10 @@ VITE_LOG_LEVEL=info
 bird-2026-2035/
 ├── src/
 │   ├── components/
-│   │   ├── auth/                    # Sign In, Sign Up, Profile modals
 │   │   ├── branding/                # Logo, Avatar components
+│   │   │   ├── Logo.tsx    
 │   │   ├── settings/                # Settings page
+│   │   │   ├── SettiingsPage.tsx    
 │   │   ├── strategic/               # Core feature components
 │   │   │   ├── FloatingAIAssistant.tsx  # ← AI assistant (all pages)
 │   │   │   ├── MELDashboard.tsx         # MEL monitoring dashboard
@@ -139,7 +140,61 @@ bird-2026-2035/
 │   │   │   └── SurveyWizard.tsx         # Survey engine
 │   │   │   └── Section 1-16 of survey   # Survey components
 │   │   │   └── ContextPanel.tsx         # Survey engine
-│   │   └── ui/                      # shadcn/ui primitives
+│   │   └── ui/                          #  resusable shadcn/ui primitives 
+│   │   │   └── accordion.tsx             
+│   │   │   └── alert-dialog.tsx 
+│   │   │   └── aspect-ratio.tsx
+│   │   │   └── avatar.tsx            
+│   │   │   └── badge.tsx
+│   │   │   └── breadcrumb.tsx
+│   │   │   └── button.tsx
+│   │   │   └── calendar.tsx
+│   │   │   └── card.tsx         
+│   │   │   └── carousel.tsx
+│   │   │   └── chart.tsx
+│   │   │   └── checkbox.tsx           
+│   │   │   └── collapsible.tsx
+│   │   │   └── command.tsx
+│   │   │   └── context-menu.tsx          
+│   │   │   └── dialog.tsx
+│   │   │   └── drawer.tsx
+│   │   │   └── dropdown-menu.tsx
+│   │   │   └── form.tsx
+│   │   │   └── hover-card.tsx	      
+│   │   │   └── carousel.tsx
+│   │   │   └── chart.tsx
+│   │   │   └──icons.tsx
+│   │   │   └──input-otp.tsx
+│   │   │   └──input.tsx
+│   │   │   └──label.tsx
+│   │   │   └──menubar.tsx
+│   │   │   └──navigation-menu.tsx
+│   │   │   └──pagination.tsx
+│   │   │   └──popover.tsx
+│   │   │   └──progress.tsx
+│   │   │   └──radio-group.tsx
+│   │   │   └──resizable.tsx
+│   │   │   └──scroll-area.tsx
+│   │   │   └──select.tsx
+│   │   │   └──separator.tsx
+│   │   │   └──sheet.tsx
+│   │   │   └──sidebar.tsx
+│   │   │   └──skeleton.tsx
+│   │   │   └──slider.tsx
+│   │   │   └──sonner.tsx
+│   │   │   └──switch.tsx
+│   │   │   └──table.tsx
+│   │   │   └──tabs.tsx
+│   │   │   └──textarea.tsx
+│   │   │   └──toast.tsx
+│   │   │   └──toaster.tsx
+│   │   │   └──toggle-group.tsx
+│   │   │   └──toggle.tsx
+│   │   │   └──tooltip.tsx
+│   │   │   └──use-toast.ts
+│   │   └── auth/
+│   │   │   └──AuthModal.tsx
+│   │   │   └──UserProfileModal.tsx
 │   ├── data/
 │   │   └── bird/                    # Official BIRD 2026–2035 data
 │   │       ├── kpis.ts              # KPIs & BSC leverage points
@@ -147,17 +202,21 @@ bird-2026-2035/
 │   │       ├── clds.ts              # Causal loops & archetypes
 │   │       └── phases.ts            # Implementation phases
 │   ├── hooks/
+│   │   ├── use-mobile.tsx           
+│   │   ├── use-toast.ts
+│   │   └── useStrategicPlan.ts      # Plan CRUD + sync
 │   │   ├── useAuth.ts               # Authentication state
 │   │   ├── useBIRDData.ts           # BIRD data access hook
-│   │   └── useStrategicPlan.ts      # Plan CRUD + sync
 │   ├── lib/
 │   │   ├── supabase.ts              # Supabase client + edge function URLs
 │   │   ├── strategicPlanStore.ts    # Plan data schema & local storage
 │   │   ├── formulas.ts              # RI, risk, KPI computation formulas
 │   │   └── utils.ts                 # Utility functions
 │   │   └── bird-urls.ts             # List of URLs for survey visualizations and references
-│   │   └── survey-schema            # Survey data schema specifically for the validation survey wired to both all other lib files above
-│   ├── pages/
+│   │   └── survey-schema            # Survey data schema specifically for the validation survey
+│   │   ├── api.ts
+│   │   ├── motion-shim.tsx
+│   │   ├── templateData.ts
 │   ├── pages/
 │   │   ├── Index.tsx                # Root page (AppLayout wrapper)
 │   │   ├── AdminDashboard.tsx       # Admin analytics
@@ -169,20 +228,75 @@ bird-2026-2035/
 │   └── functions/
 │       └── ai-strategy-assistant/   # Edge function (Deno)
 │           └── index.ts
+│       └── crm-dispatcher/          # Edge function (Deno)
+│           └── index.ts
+│       └── email-notifications/      # Edge function (Deno)
+│           └── index.ts
+│       └── strategic-planner-sync/  # Edge function (Deno)
+│           └── index.ts
+│   └── migrations/
+│           └──complete_schema_sql
+│           └──securuty_fix.sql
+│           └──20260711151136_create_visit_logs_table.sql
 ├── public/                          # Static assets
 │   └── home.html                    # Landing page
 │   └── roadmap.html                 # Investment roadmap model
 │   └── dashboard.html               # Investment roadmap dashboard model
 │   └── resources.html               # Access to various resources
 │   └── validation-survey.html       # BIRD survey mimicking the react SurveyWizard as fallback
-│   └── survey-dashboard.html        # BIRD survey dashboard 
+│   └── survey-dashboard.html        # BIRD survey dashboard
+│   └── action-plan.html
+│   └── basilan-outlook.html
+│   └── beie-basics.html
+│   └── contact.html
+│   └── cookie-policy.html
+│   └── feedback.html
+│   └── ieb.html
+│   └── kpi.html
+│   └── lanao-delsur-outlook.html
+│   └── lds-poa.html
+│   └── maguindanao-delnorte-outlook.html
+│   └── maguindanao-delsur-outlook.html
+│   └── manifest.json
+│   └── options.html
+│   └── placeholder.svg
+│   └── privacy-policy.html
+│   └── resources.html
+│   └── robots.txt
+│   └── sga-outlook.html
+│   └── sitemap.xml
+│   └── slides.html
+│   └── strategy-map.html
+│   └── survey-orientation.html
+│   └── sw.js
+│   └── tawi-tawi-outlook.html
+│   └── user-manual.html
 ├── .env                             # Environment variables (not committed)
 ├── .env.example                     # Environment template
 ├── package.json
-├── manifest.webmanifest.json        # makes it an installable, offline-capable PWA
 ├── tailwind.config.ts
 ├── vite.config.ts
 └── README.md
+└── .gitignore
+└── CHANGELOG.md
+└── FILES-LINKS.md
+└── LICENSE
+└── README.md
+└── SURVEYGUIDE.md
+└── USER_MANUAL.md
+└── components.json
+└── eslint.config.js
+└── index.html
+└── package-lock.json
+└── package.json
+└── postcss.config.js
+└── tsconfig.app.json
+└── tsconfig.json
+└── tsconfig.node.json
+└── vercel.json
+└── vite-env.d.ts
+└── vite.config.ts
+└── yarn.lock
 ```
 
 ---
