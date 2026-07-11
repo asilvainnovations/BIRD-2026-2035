@@ -44,6 +44,7 @@ const NAV_TARGETS = [
   { id: 'nav-templates', label: 'Templates Library',    view: 'templates', section: 'Navigation' },
   { id: 'nav-team',      label: 'Team Collaboration',   view: 'team',      section: 'Navigation' },
   { id: 'nav-export',    label: 'Plan Generator',       view: 'export',    section: 'Navigation' },
+  { id: 'nav-validation',label: 'Validation Survey',    view: 'validation',section: 'Navigation' },
   { id: 'nav-settings',  label: 'Settings',             view: 'settings',  section: 'Navigation' },
 ];
 
@@ -56,7 +57,8 @@ const Topbar: React.FC<TopbarProps> = ({
   onNavigateView,
 }) => {
   const { theme, setTheme } = useTheme();
-  const isDark = theme !== 'light';
+  // Resolve 'system' to actual light/dark for UI state and toggle direction
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   const [showPlanSelector, setShowPlanSelector] = useState(false);
   const [showAccountMenu,  setShowAccountMenu]  = useState(false);
