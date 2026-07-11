@@ -113,4 +113,43 @@ export const MTITLogo: React.FC<LogoProps> = ({
   );
 };
 
+interface AvatarProps {
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+  withGlow?: boolean;
+}
+
+export const AIStrategistAvatar: React.FC<AvatarProps> = ({
+  size = 'md',
+  className = '',
+  withGlow = false,
+}) => {
+  const sizeMap = { sm: 'w-8 h-8', md: 'w-10 h-10', lg: 'w-14 h-14' };
+  return (
+    <div
+      className={`${sizeMap[size]} ${className} rounded-full overflow-hidden flex-shrink-0 ${
+        withGlow ? 'ring-2 ring-fuchsia-500/50 shadow-lg shadow-fuchsia-500/20' : ''
+      }`}
+    >
+      <img
+        src="https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/pending-tasks/public/ASilva%20Innovations%20Logo.png"
+        alt="BIRD AI Strategist"
+        className="w-full h-full object-cover"
+        onError={(e) => {
+          const el = e.currentTarget;
+          el.style.display = 'none';
+          const parent = el.parentElement;
+          if (parent) {
+            parent.style.background = 'linear-gradient(135deg, #7c3aed, #06b6d4)';
+            parent.style.display = 'flex';
+            parent.style.alignItems = 'center';
+            parent.style.justifyContent = 'center';
+            parent.innerHTML = '<span style="color:white;font-size:1.1em;font-weight:800;">AI</span>';
+          }
+        }}
+      />
+    </div>
+  );
+};
+
 export default StratLogo;

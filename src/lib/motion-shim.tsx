@@ -58,7 +58,10 @@ function createMotionComponent(tag: string) {
 export const motion: any = new Proxy(
   {},
   {
-    get: (_target, prop: string) => createMotionComponent(prop),
+    get: (_target, prop: string | symbol) => {
+      if (typeof prop !== 'string') return undefined;
+      return createMotionComponent(prop);
+    },
   }
 );
 

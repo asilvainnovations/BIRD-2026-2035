@@ -24,7 +24,7 @@ export const supabase = createClient(supabaseUrl, supabaseKey, {
 // NOTE: Edge functions are deployed on a separate Supabase project.
 //       Use direct fetch() for these endpoints rather than supabase.functions.invoke()
 //       when calling from the primary project's client.
-const EDGE_BASE = 'https://rgvteytgkugdqdodedxq.databasepad.com/functions/v1';
+const EDGE_BASE = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/strategic-planner-sync';
 
 export const EDGE_FUNCTIONS = {
   AI_STRATEGY_ASSISTANT: `${EDGE_BASE}/ai-strategy-assistant`,
@@ -36,16 +36,16 @@ export const EDGE_FUNCTIONS = {
 // ── Branding Assets (CDN) ─────────────────────────────────────────────────────
 export const BRAND_ASSETS = {
   LOGO_URL: import.meta.env.VITE_BRAND_LOGO_URL ||
-    'https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/bird-images/public/MTIT%20Logo.webp',
+    'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png',
   AI_AVATAR_URL: import.meta.env.VITE_AI_STRATEGIST_AVATAR_URL ||
-    'https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/pending-tasks/public/ASilva%20Innovations%20Logo.png',
+    'https://appimize.app/assets/apps/user_1097/images/2c7d825bf937_232_1097.png',
   BANNER_URL: import.meta.env.VITE_BANNER_INVESTMENT_URL ||
-    'https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/pending-tasks/public/Investment%20ecosystem.png',
+    'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/1.Banner.png',
 } as const;
 
 // ── External URLs ──────────────────────────────────────────────────────────────
 export const EXTERNAL_URLS = {
-  PWA:          import.meta.env.VITE_PWA_EXTERNAL_URL      || 'https://asilvainnovations.github.io/barmm-investment-roadmap/',
+  PWA:          import.meta.env.VITE_PWA_EXTERNAL_URL      || 'https://asilvainnovations.github.io//',
   USER_MANUAL:  import.meta.env.VITE_USER_MANUAL_URL        || 'https://asilvainnovations.github.io/strat-planner-pwa/user-manual.html',
   DEV_DOCS:     import.meta.env.VITE_DEVELOPER_DOCS_URL     || 'https://asilvainnovations.github.io/strat-planner-pwa/developer-doc.html',
 } as const;
