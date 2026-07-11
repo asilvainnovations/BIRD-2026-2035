@@ -1,4 +1,3 @@
-// src/components/NavigationTutorial.tsx
 // BIRD 2026–2035 · Interactive Guided Tour
 // Maps exactly to Sidebar.tsx, Topbar.tsx, and MELDashboard.tsx element IDs.
 // Option B (Modal-only): tutorial stays in modal; "Try It" navigates on demand.
