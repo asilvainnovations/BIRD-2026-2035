@@ -162,6 +162,33 @@ export const useAuth = () => {
       options: { data: { full_name: fullName } },
     });
     if (error) throw error;
+
+    // Trigger welcome email via edge function (best-effort, non-blocking)
+    if (data?.user) {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        await fetch(
+          '',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              ...(session?.access_token
+                ? { Authorization: `Bearer ${session.access_token}` }
+                : {}),
+            },
+            body: JSON.stringify({
+              type: 'welcome',
+              to: email,
+              name: fullName || email.split('@')[0],
+            }),
+          }
+        );
+      } catch {
+        // Silently fail — email is not critical for signup completion
+      }
+    }
+
     return data;
   };
 
