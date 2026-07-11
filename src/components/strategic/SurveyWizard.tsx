@@ -1,4 +1,3 @@
-// src/components/strategic/SurveyWizard.tsx
 // BIRD 2026–2035 · Validation Survey Wizard with Context Panel Integration
 // 16-step progressive assessment with kill-switch validation & rich media context
 
@@ -96,6 +95,26 @@ const KILL_SWITCH_PREREQUISITES: Record<number, (keyof SurveySchemaType)[]> = {
   1: ["q1_1", "q1_2"],
   2: ["q2_1", "q2_2", "q2_3_archetype"],
   10: ["q10_matrix", "q10_1_ambition"],
+  15: ["care_context", "care_action", "care_realtime", "care_evidence", "care_overall"],
+  16: ["consent_final"],
+};
+
+// Fields per step — used to scope form.trigger() to current step only
+const STEP_FIELDS: Record<number, (keyof SurveySchemaType)[]> = {
+  1: ["q1_1", "q1_2"],
+  2: ["q2_1", "q2_2", "q2_3_archetype", "q2_4_peace"],
+  3: ["q3_1_priorities", "q3_2_feasibility", "q3_el_nino_impact", "q3_el_nino_like", "q3_pestalotiopsis_impact", "q3_pestalotiopsis_like", "q3_postharvest_impact", "q3_postharvest_like", "q3_limits_growth"],
+  4: ["q4_1_barrier", "q4_2_halal_park", "q4_3_fixes_fail", "q4_4_commodity_impact", "q4_5_heds_ranking"],
+  5: ["q5_1_infra", "q5_2_sectors", "q5_3_broadband", "q5_4_literacy", "q5_5_stunting", "q5_6_digital_divide"],
+  6: ["q6_1_bimpeaga", "q6_2_markets", "q6_3_export_target", "q6_4_uae_feasibility", "q6_5_perception"],
+  7: ["q7_1_criticality", "q7_2_instruments", "q7_3_inclusion_target", "q7_4_asset_paradox", "q7_5_block_grant"],
+  8: ["q8_1_strategy", "q8_2_sequencing", "q8_3_comments"],
+  9: ["q9_1_budget"],
+  10: ["q10_1_ambition", "q10_matrix"],
+  11: ["q11_1_affirmative", "q11_2_mechanisms", "q11_3_priority"],
+  12: ["q12_1_green_priority", "q12_2_adaptation"],
+  13: ["q13_1_legislation", "q13_2_bicc"],
+  14: ["demo_category", "demo_province", "demo_expertise", "demo_name", "demo_email"],
   15: ["care_context", "care_action", "care_realtime", "care_evidence", "care_overall"],
   16: ["consent_final"],
 };
@@ -215,7 +234,9 @@ export function SurveyWizard(): JSX.Element {
 
   // ── Navigation ───────────────────────────────────────────────────────────────
   const handleNext = useCallback(async () => {
-    const isValid = await form.trigger();
+    // Only validate fields for the CURRENT step — not the entire form
+    const stepFields = STEP_FIELDS[currentStep];
+    const isValid = stepFields ? await form.trigger(stepFields as unknown as string[]) : true;
     if (!isValid) { toast.error("Please review and correct the errors before proceeding."); return; }
     if (!checkKillSwitches()) { toast.error("Please complete all required critical fields before proceeding."); return; }
     setCompletedSections((prev) => new Set(prev).add(currentStep));
