@@ -7,9 +7,9 @@
 
 const CACHE_VERSION = 'bird-survey-v1';
 const APP_SHELL = [
-    '.public/survey.html',
-    '.public/dashboard.html',
-    './manifest.webmanifest',
+    '.public/validation-survey.html',
+    '.public/survey-dashboard.html',
+    './manifest.',
 ];
 
 // Third-party assets we want cached so the survey renders even fully offline
