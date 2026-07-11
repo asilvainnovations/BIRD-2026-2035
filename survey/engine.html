@@ -1,15 +1,1438 @@
-<script>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+    <meta name="theme-color" content="#022c22">
+    <meta name="description" content="BIRD 2026-2035 Validation Survey: Stakeholder input for the Bangsamoro Investment Roadmap Development. Shape the Emerging Bangsamoro through the C.A.R.E. principles of Khalifa stewardship. Works offline.">
+    <meta name="keywords" content="BARMM, Bangsamoro, Investment Roadmap, BIRD, BEIE Framework, Halal Economy, Islamic Finance, BIMP-EAGA, Validation Survey">
+    <meta name="author" content="Bureau of Investments - Ministry of Trade, Investments and Tourism (BOI-MTIT), BARMM">
+    <meta property="og:title" content="BIRD 2026-2035 Validation Survey | The Emerging Bangsamoro">
+    <meta property="og:description" content="Stakeholder validation survey for the Bangsamoro Investment Roadmap Development 2026-2035">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bird-survey.asilvainnovations.com">
+    <meta property="og:image" content="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/18.%20Vision.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://bird-survey.asilvainnovations.com">
+    <title>BIRD 2026-2035 Validation Survey | The Emerging Bangsamoro</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23022c22'/%3E%3Ctext x='50' y='62' font-size='48' text-anchor='middle' fill='%23C9A84C' font-family='Georgia,serif'%3EB%3C/text%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23022c22'/%3E%3Ctext x='50' y='62' font-size='48' text-anchor='middle' fill='%23C9A84C' font-family='Georgia,serif'%3EB%3C/text%3E%3C/svg%3E">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="BIRD Survey">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bird: {
+                            dark: '#022c22',
+                            darker: '#011a12',
+                            gold: '#C9A84C',
+                            lightGold: '#E8C560',
+                            cream: '#ecfdf5',
+                            emerald: '#064e3b'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Georgia', 'Cambria', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Apache ECharts for IEDS Matrix Visualization (offline-safe: guarded, dashboard degrades to table if unavailable) -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
+    <!-- Supabase (optional backend; survey works fully offline via localStorage without it) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "BIRD 2026-2035 Validation Survey",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web, iOS, Android (PWA)",
+        "description": "Stakeholder validation survey for the Bangsamoro Investment Roadmap Development 2026-2035",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "PHP" },
+        "author": {
+            "@type": "Organization",
+            "name": "Bureau of Investments - Ministry of Trade, Investments and Tourism (BOI-MTIT), BARMM"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type":"ListItem","position":1,"name":"BIRD Home","item":"https://bangsmoro-investment-roadmap.asilvainnovations.com"},
+            {"@type":"ListItem","position":2,"name":"Validation Survey","item":"https://bird-survey.asilvainnovations.com"}
+        ]
+    }
+    </script>
+
+    <style>
+        [x-cloak] { display: none !important; }
+
+        html, body { overscroll-behavior-y: contain; }
+
+        .slider-track::-webkit-slider-thumb {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #C9A84C;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slider-track::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #C9A84C;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slider-track {
+            appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: #064e3b;
+            outline: none;
+            touch-action: manipulation;
+        }
+
+        .matrix-cell { transition: all 0.3s ease; }
+        .matrix-cell:hover { background: rgba(201, 168, 76, 0.1); }
+
+        .kill-switch-error { animation: pulse-red 2s infinite; }
+        @keyframes pulse-red {
+            0%, 100% { border-color: rgba(239, 68, 68, 0.5); }
+            50% { border-color: rgba(239, 68, 68, 1); }
+        }
+
+        .progress-fill { transition: width 0.5s ease-in-out; }
+        .section-transition { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .context-panel-tab { transition: all 0.2s ease; }
+        .context-panel-tab[data-state="active"] { background: #C9A84C; color: #022c22; }
+
+        .video-thumbnail { transition: all 0.3s ease; }
+        .video-thumbnail:hover { background: rgba(201, 168, 76, 0.1); border-color: rgba(201, 168, 76, 0.5); }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .lightbox.active { display: flex; }
+
+        .heatmap-intensity-1 { background: rgba(239, 68, 68, 0.25); }
+        .heatmap-intensity-2 { background: rgba(245, 158, 11, 0.25); }
+        .heatmap-intensity-3 { background: rgba(234, 179, 8, 0.25); }
+        .heatmap-intensity-4 { background: rgba(34, 197, 94, 0.25); }
+        .heatmap-intensity-5 { background: rgba(16, 185, 129, 0.35); }
+
+        /* Mobile-first: comfortable tap targets, sticky nav footer */
+        input[type="checkbox"], input[type="radio"] { min-width: 20px; min-height: 20px; }
+        select, textarea, input[type="text"], input[type="email"] { font-size: 16px; } /* avoid iOS zoom */
+
+        .sticky-nav {
+            position: sticky;
+            bottom: 0;
+            z-index: 40;
+            backdrop-filter: blur(16px);
+        }
+
+        .offline-badge { animation: fadeIn 0.3s ease-in-out; }
+
+        .toast-enter { animation: fadeIn 0.3s ease-in-out; }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #011a12; }
+        ::-webkit-scrollbar-thumb { background: #064e3b; border-radius: 4px; }
+
+        @media (max-width: 640px) {
+            .matrix-scroll-hint { display: flex; }
+        }
+        .matrix-scroll-hint { display: none; }
+    </style>
+</head>
+<body class="bg-bird-darker text-bird-cream min-h-screen" x-data="surveyWizard()" x-init="init()" x-cloak>
+
+    <!-- Lightbox for Videos/Images -->
+    <div class="lightbox" id="lightbox" @click="closeLightbox()">
+        <div class="max-w-5xl w-full mx-4" @click.stop>
+            <div id="lightbox-content"></div>
+            <button @click="closeLightbox()" class="mt-3 w-full text-center text-bird-cream/70 text-sm hover:text-bird-gold">Close ✕</button>
+        </div>
+    </div>
+
+    <!-- Offline / Connectivity Badge -->
+    <div class="fixed top-2 right-2 z-50 offline-badge" x-show="!isOnline" x-transition x-cloak>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-950/90 border border-amber-500/50 text-amber-200 text-xs font-semibold shadow-lg">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.828-2.829m2.828 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.828m-4.243 2.828a4.978 4.978 0 01-1.414-2.83m-1.414 5.658a9 9 0 01-2.167-9.238m7.824 2.167a1 1 0 111.414 1.414m-1.414-1.414L3 3"></path></svg>
+            Offline — saved locally
+        </span>
+    </div>
+
+    <!-- Toast -->
+    <div x-show="toast.show" x-transition class="fixed bottom-20 md:bottom-6 left-1/2 -translate-x-1/2 z-50 toast-enter" x-cloak>
+        <div class="px-4 py-2.5 rounded-lg shadow-2xl text-sm font-semibold"
+             :class="toast.type === 'error' ? 'bg-red-900/95 border border-red-500/50 text-red-100' : 'bg-emerald-900/95 border border-bird-gold/50 text-bird-lightGold'"
+             x-text="toast.message"></div>
+    </div>
+
+    <!-- Draft Restore Prompt -->
+    <div x-show="showDraftPrompt" x-transition class="fixed inset-0 z-[9998] bg-black/80 flex items-center justify-center p-4" x-cloak>
+        <div class="bg-bird-dark border border-bird-gold/40 rounded-xl p-6 max-w-md w-full shadow-2xl">
+            <h3 class="text-bird-gold font-serif text-xl mb-2">Welcome back</h3>
+            <p class="text-sm text-bird-cream/80 mb-1">We found a saved draft from your last visit
+                <span x-show="draftMeta.savedAt" class="text-bird-cream/50">(<span x-text="draftMeta.savedAt"></span>)</span>.
+            </p>
+            <p class="text-sm text-bird-cream/80 mb-5">
+                You had completed <span class="text-bird-gold font-bold" x-text="draftMeta.completed"></span> of 16 sections.
+                Would you like to continue where you left off?
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button @click="restoreDraft()" class="flex-1 bg-bird-gold text-bird-darker font-bold py-3 rounded-lg hover:bg-bird-lightGold transition-colors">
+                    Continue Draft
+                </button>
+                <button @click="discardDraft()" class="flex-1 border border-bird-gold/30 text-bird-cream/80 font-semibold py-3 rounded-lg hover:bg-bird-darker transition-colors">
+                    Start Fresh
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Screen -->
+    <div x-show="submitted" x-transition class="fixed inset-0 z-[9997] bg-bird-darker flex items-center justify-center p-4 overflow-y-auto" x-cloak>
+        <div class="max-w-lg w-full text-center py-10">
+            <div class="w-20 h-20 mx-auto rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center mb-6">
+                <svg class="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h2 class="text-3xl font-serif text-bird-gold mb-3">Shukran — Your Voice Is Recorded</h2>
+            <p class="text-bird-cream/80 mb-2">Thank you for validating the BIRD 2026–2035 Investment Roadmap.</p>
+            <p class="text-bird-cream/60 text-sm mb-6">
+                Submission ID: <span class="font-mono text-bird-lightGold" x-text="submissionId"></span>
+                <span x-show="!isOnline" class="block mt-1 text-amber-300">(Saved offline — will sync automatically when you're back online)</span>
+            </p>
+
+            <div class="bg-bird-dark/60 border border-bird-gold/20 rounded-xl p-5 mb-6 text-left space-y-2">
+                <p class="text-xs uppercase tracking-wider text-bird-gold font-bold mb-2">Your Assessment Snapshot</p>
+                <div class="flex justify-between text-sm"><span class="text-bird-cream/60">Preferred Strategy</span><span class="text-bird-lightGold font-semibold" x-text="strategyLabel(formData.q8_1_strategy)"></span></div>
+                <div class="flex justify-between text-sm"><span class="text-bird-cream/60">C.A.R.E. Overall Score</span><span class="text-bird-lightGold font-semibold" x-text="(formData.care_overall || '-') + ' / 5'"></span></div>
+                <div class="flex justify-between text-sm"><span class="text-bird-cream/60">IEDS Leading Cluster</span><span class="text-bird-lightGold font-semibold" x-text="leadingClusterLabel()"></span></div>
+            </div>
+
+            <div class="flex flex-col gap-3">
+                <a href="https://bird-app.asilvainnovations.com" target="_blank" rel="noopener"
+                   class="w-full bg-bird-gold text-bird-darker font-bold py-3.5 rounded-lg hover:bg-bird-lightGold transition-colors">
+                    Access BIRD App →
+                </a>
+                <a href="survey-dashboard.html"
+                   class="w-full border border-bird-gold/40 text-bird-lightGold font-semibold py-3 rounded-lg hover:bg-bird-gold/10 transition-colors">
+                    View Live Dashboard
+                </a>
+                <button @click="startNewResponse()" class="text-bird-cream/50 text-sm hover:text-bird-cream mt-2">
+                    Submit another response
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="w-full max-w-7xl mx-auto p-3 sm:p-4 md:p-8 space-y-5 md:space-y-6 pb-28 md:pb-8" x-show="!submitted">
+
+        <!-- Header & Progress -->
+        <div class="text-center space-y-3 md:space-y-4">
+            <div class="flex flex-wrap items-center justify-center gap-2 md:gap-3">
+                <span class="inline-flex items-center px-3 md:px-4 py-1.5 rounded-full border border-bird-gold/50 text-bird-gold text-xs md:text-sm font-serif tracking-wide">
+                    BIRD 2026–2035 Validation Survey
+                </span>
+                <span x-show="completedSections.size > 0"
+                      x-transition
+                      class="inline-flex items-center px-3 py-1 rounded-full border border-green-500/40 bg-green-500/10 text-green-400 text-xs md:text-sm">
+                    <span x-text="completedSections.size"></span> of 16 sections completed
+                </span>
+                <span x-show="autosaveStatus === 'saving'" x-transition class="text-xs text-bird-cream/40">Saving…</span>
+                <span x-show="autosaveStatus === 'saved'" x-transition class="text-xs text-emerald-400/70">✓ Saved</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-serif text-bird-gold">The Emerging Bangsamoro</h1>
+            <p class="text-bird-cream/60 text-sm md:text-base">
+                Step <span x-text="currentStep"></span> of 16 • <span x-text="stepTitles[currentStep]"></span>
+            </p>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-bird-emerald rounded-full h-2 overflow-hidden">
+                <div class="progress-fill h-full bg-bird-gold"
+                     :style="`width: ${(currentStep / 16) * 100}%`"></div>
+            </div>
+
+            <!-- Step dots (mobile-friendly quick nav for completed sections) -->
+            <div class="flex items-center justify-center gap-1 flex-wrap">
+                <template x-for="n in 16" :key="n">
+                    <button @click="jumpToStep(n)"
+                            :disabled="n > currentStep && !completedSections.has(n - 1) && n !== 1"
+                            class="w-2 h-2 rounded-full transition-all"
+                            :class="n === currentStep ? 'bg-bird-gold w-5' : completedSections.has(n) ? 'bg-emerald-500' : 'bg-bird-emerald/60'"
+                            :aria-label="`Go to section ${n}`"></button>
+                </template>
+            </div>
+        </div>
+
+        <!-- Context Strip: Images, Videos, Site Links (plain language, visual aids) -->
+        <div class="flex items-center gap-2 flex-wrap justify-center">
+            <template x-for="img in getImagesForSection(stepToSection[currentStep])" :key="img.title">
+                <button @click="openImage(img)"
+                        class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-bird-gold/10 border border-bird-gold/30 text-bird-lightGold text-xs font-semibold hover:bg-bird-gold/20 transition-colors active:scale-95">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <span x-text="img.title"></span>
+                </button>
+            </template>
+            <template x-for="vid in getVideosForSection(stepToSection[currentStep])" :key="vid.title">
+                <button @click="openVideo(vid)"
+                        class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-bird-gold/10 border border-bird-gold/30 text-bird-lightGold text-xs font-semibold hover:bg-bird-gold/20 transition-colors active:scale-95">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                    <span x-text="'Watch: ' + vid.duration"></span>
+                </button>
+            </template>
+            <a :href="siteLinkForSection(stepToSection[currentStep])" x-show="siteLinkForSection(stepToSection[currentStep])"
+               target="_blank" rel="noopener"
+               class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-bird-emerald/30 border border-bird-gold/20 text-bird-cream/70 text-xs font-semibold hover:bg-bird-emerald/50 transition-colors">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                Learn more
+            </a>
+        </div>
+
+        <!-- Plain-language helper line per section (no jargon without context) -->
+        <div class="text-center text-sm text-bird-cream/60 max-w-2xl mx-auto px-2" x-text="stepHelperText[currentStep]"></div>
+
+        <!-- Provincial Context Alerts (Conditional) -->
+        <div x-show="currentStep === 3 && formData.demo_province === 'basilan'"
+             x-transition
+             class="bg-amber-950/40 border border-amber-500/50 text-amber-100 backdrop-blur-sm rounded-lg p-4">
+            <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+                <div>
+                    <h3 class="text-amber-400 font-serif font-bold">Provincial Context: Basilan</h3>
+                    <p class="text-sm mt-1">
+                        As a Basilan stakeholder, please pay special attention to the
+                        <strong>Pestalotiopsis fungal disease</strong> impact on rubber plantations and the
+                        <strong>ZBIP</strong> (Zamboanga-Basilan Interconnection Project) energy link in your assessment.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kill Switch Alert -->
+        <div x-show="killSwitchErrors.length > 0"
+             x-transition
+             class="kill-switch-error border border-red-500/30 bg-red-500/10 text-red-200 backdrop-blur-sm rounded-lg p-4">
+            <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div>
+                    <h3 class="text-red-400 font-bold">Please complete the required fields</h3>
+                    <p class="text-sm mt-1">
+                        This section has a few required questions marked with <span class="text-red-400">*</span> that must be answered before you can continue.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- Form Column -->
+            <div class="lg:col-span-2">
+                <div class="bg-bird-dark/60 backdrop-blur-xl border border-bird-gold/30 shadow-2xl shadow-black/40 rounded-xl overflow-hidden">
+
+                    <!-- Section Header -->
+                    <div class="border-b border-bird-gold/10 p-5 md:p-6">
+                        <h2 class="text-xl md:text-2xl font-serif text-bird-gold" x-text="stepTitles[currentStep]"></h2>
+                        <p class="text-bird-cream/70 mt-1 text-sm md:text-base"
+                           x-text="currentStep <= 10 ? 'Core BEIE Framework Assessment' : currentStep <= 14 ? 'Strategic Evaluation & Planning' : 'Final Validation & Submission'"></p>
+                    </div>
+
+                    <!-- Section Content -->
+                    <div class="p-5 sm:p-6 md:p-10 min-h-[400px] md:min-h-[500px] section-transition" role="form" :aria-label="stepTitles[currentStep]">
+
+                        <!-- Section 1: BEIE Framework Context -->
+                        <div x-show="currentStep === 1" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                The <strong class="text-bird-gold">BEIE Framework</strong> (Bangsamoro Economic and Investment Ecosystem) groups BARMM's economy into 5 connected clusters — Foundations, Transformers, Enablers, Connectors, and Financiers — under Moral Governance. Watch the short video above if this is new to you.
+                            </p>
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Understanding of BEIE Framework <span class="text-red-400">*</span>
+                                </label>
+                                <select x-model="formData.q1_1"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select your understanding level</option>
+                                    <option value="expert">Expert - Deep understanding of all clusters</option>
+                                    <option value="advanced">Advanced - Strong grasp of framework</option>
+                                    <option value="intermediate">Intermediate - Familiar with core concepts</option>
+                                    <option value="basic">Basic - Limited exposure</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Relevance of BEIE to BARMM <span class="text-red-400">*</span>
+                                </label>
+                                <select x-model="formData.q1_2"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select relevance assessment</option>
+                                    <option value="critical">Critical - Essential for transformation</option>
+                                    <option value="high">High - Very relevant to context</option>
+                                    <option value="moderate">Moderate - Somewhat relevant</option>
+                                    <option value="low">Low - Limited applicability</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Section 2: Moral Governance Operating System -->
+                        <div x-show="currentStep === 2" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                Moral Governance means transparency, accountability, and Islamic ethics guiding how investment decisions are made — it is the "operating system" that determines whether all other clusters function well.
+                            </p>
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Importance of Moral Governance <span class="text-red-400">*</span>
+                                </label>
+                                <input type="range" min="1" max="5" step="1"
+                                       x-model.number="formData.q2_1"
+                                       class="slider-track w-full">
+                                <div class="flex justify-between text-xs text-bird-cream/60 mt-1">
+                                    <span>1 - Low</span>
+                                    <span class="text-bird-gold font-bold" x-text="formData.q2_1 || '-'"></span>
+                                    <span>5 - Critical</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Implementation Readiness <span class="text-red-400">*</span>
+                                </label>
+                                <input type="range" min="1" max="5" step="1"
+                                       x-model.number="formData.q2_2"
+                                       class="slider-track w-full">
+                                <div class="flex justify-between text-xs text-bird-cream/60 mt-1">
+                                    <span>1 - Not Ready</span>
+                                    <span class="text-bird-gold font-bold" x-text="formData.q2_2 || '-'"></span>
+                                    <span>5 - Fully Ready</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Dominant Systems Archetype <span class="text-red-400">*</span>
+                                </label>
+                                <p class="text-xs text-bird-cream/50 mb-2">A "systems archetype" is a recurring pattern of behavior. Pick the one that best describes what usually happens in BARMM investment efforts.</p>
+                                <select x-model="formData.q2_3_archetype"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select dominant archetype</option>
+                                    <option value="fixes_that_fail">Fixes That Fail — short-term fixes that don't solve the real problem</option>
+                                    <option value="shifting_burden">Shifting the Burden — quick relief instead of lasting solutions</option>
+                                    <option value="limits_to_growth">Limits to Growth — growth stalls due to resource ceilings</option>
+                                    <option value="success_to_successful">Success to the Successful — resources flow to already-strong areas</option>
+                                    <option value="tragedy_commons">Tragedy of the Commons — shared resources overused by individuals</option>
+                                    <option value="big_man">The "Big Man" Archetype — progress depends on one leader/patron</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Peace Milestones <span class="text-bird-cream/40 font-normal">(Optional)</span>
+                                </label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center gap-3 cursor-pointer py-1">
+                                        <input type="checkbox" value="basilan_asg_free"
+                                               x-model="formData.q2_4_peace"
+                                               class="w-5 h-5 rounded border-bird-gold/30 bg-bird-darker text-bird-gold focus:ring-bird-gold">
+                                        <span class="text-sm">Basilan ASG-Free Declaration (2024)</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 cursor-pointer py-1">
+                                        <input type="checkbox" value="marawi_rehab"
+                                               x-model="formData.q2_4_peace"
+                                               class="w-5 h-5 rounded border-bird-gold/30 bg-bird-darker text-bird-gold focus:ring-bird-gold">
+                                        <span class="text-sm">Marawi Rehabilitation Progress</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 cursor-pointer py-1">
+                                        <input type="checkbox" value="normalization"
+                                               x-model="formData.q2_4_peace"
+                                               class="w-5 h-5 rounded border-bird-gold/30 bg-bird-darker text-bird-gold focus:ring-bird-gold">
+                                        <span class="text-sm">Normalization Program Implementation</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Section 3: Cluster 1 - Foundations -->
+                        <div x-show="currentStep === 3" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                Foundations are the raw-material base of BARMM's economy: Agriculture, Fisheries, Forestry, and Energy. Everything else is built on top of these.
+                            </p>
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Priority Sectors <span class="text-red-400">*</span>
+                                </label>
+                                <div class="space-y-2">
+                                    <template x-for="sector in ['agriculture', 'fisheries', 'forestry', 'energy', 'environment']">
+                                        <label class="flex items-center gap-3 cursor-pointer py-1">
+                                            <input type="checkbox" :value="sector"
+                                                   x-model="formData.q3_1_priorities"
+                                                   class="w-5 h-5 rounded border-bird-gold/30 bg-bird-darker text-bird-gold focus:ring-bird-gold">
+                                            <span class="text-sm capitalize" x-text="sector"></span>
+                                        </label>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Feasibility Rating <span class="text-red-400">*</span>
+                                </label>
+                                <input type="range" min="1" max="5" step="1"
+                                       x-model.number="formData.q3_2_feasibility"
+                                       class="slider-track w-full">
+                                <div class="flex justify-between text-xs text-bird-cream/60 mt-1">
+                                    <span>1 - Low</span>
+                                    <span class="text-bird-gold font-bold" x-text="formData.q3_2_feasibility || '-'"></span>
+                                    <span>5 - High</span>
+                                </div>
+                            </div>
+
+                            <!-- Conditional: El Niño Questions -->
+                            <div x-show="formData.q3_1_priorities.includes('agriculture')"
+                                 x-transition
+                                 class="border border-bird-gold/20 rounded-lg p-4 space-y-4 bg-bird-darker/50">
+                                <h3 class="text-sm font-bold text-bird-gold">Climate Risk Assessment</h3>
+                                <p class="text-xs text-bird-cream/50">El Niño drought caused ₱346 million in crop losses in Maguindanao del Sur in 2024. Rate how much of a risk this remains.</p>
+
+                                <div>
+                                    <label class="block text-xs font-semibold text-bird-cream/80 mb-1">El Niño Impact</label>
+                                    <input type="range" min="1" max="5" step="1"
+                                           x-model.number="formData.q3_el_nino_impact"
+                                           class="slider-track w-full">
+                                    <div class="flex justify-between text-xs text-bird-cream/60 mt-1">
+                                        <span>1</span><span class="text-bird-gold" x-text="formData.q3_el_nino_impact || '-'"></span><span>5</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-semibold text-bird-cream/80 mb-1">El Niño Likelihood</label>
+                                    <input type="range" min="1" max="5" step="1"
+                                           x-model.number="formData.q3_el_nino_like"
+                                           class="slider-track w-full">
+                                    <div class="flex justify-between text-xs text-bird-cream/60 mt-1">
+                                        <span>1</span><span class="text-bird-gold" x-text="formData.q3_el_nino_like || '-'"></span><span>5</span>
+                                    </div>
+                                </div>
+
+                                <div x-show="formData.q3_el_nino_impact && formData.q3_el_nino_like"
+                                     class="bg-bird-emerald/30 border border-bird-gold/30 rounded-lg p-3">
+                                    <p class="text-xs font-bold text-bird-gold uppercase tracking-wider">Resilience Index (real-time)</p>
+                                    <p class="text-lg font-bold text-bird-lightGold"
+                                       x-text="calculateThreatVI(formData.q3_el_nino_impact, formData.q3_el_nino_like)"></p>
+                                    <p class="text-xs text-bird-cream/60" x-text="riskLevelLabel(calculateThreatVI(formData.q3_el_nino_impact, formData.q3_el_nino_like))"></p>
+                                </div>
+
+                                <!-- Basilan-only: Pestalotiopsis -->
+                                <template x-if="formData.demo_province === 'basilan'">
+                                    <div class="pt-3 border-t border-bird-gold/10 space-y-4">
+                                        <p class="text-xs text-bird-cream/50">Rubber Pestalotiopsis fungal disease has infested 800+ hectares in Basilan (2023).</p>
+                                        <div>
+                                            <label class="block text-xs font-semibold text-bird-cream/80 mb-1">Pestalotiopsis Impact</label>
+                                            <input type="range" min="1" max="5" step="1" x-model.number="formData.q3_pestalotiopsis_impact" class="slider-track w-full">
+                                            <div class="flex justify-between text-xs text-bird-cream/60 mt-1"><span>1</span><span class="text-bird-gold" x-text="formData.q3_pestalotiopsis_impact || '-'"></span><span>5</span></div>
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-semibold text-bird-cream/80 mb-1">Pestalotiopsis Likelihood</label>
+                                            <input type="range" min="1" max="5" step="1" x-model.number="formData.q3_pestalotiopsis_like" class="slider-track w-full">
+                                            <div class="flex justify-between text-xs text-bird-cream/60 mt-1"><span>1</span><span class="text-bird-gold" x-text="formData.q3_pestalotiopsis_like || '-'"></span><span>5</span></div>
+                                        </div>
+                                    </div>
+                                </template>
+
+                                <div class="pt-3 border-t border-bird-gold/10 space-y-4">
+                                    <p class="text-xs text-bird-cream/50">Post-harvest losses currently run 20–40% for key BARMM crops due to limited cold-chain and processing infrastructure.</p>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-bird-cream/80 mb-1">Post-Harvest Loss Impact</label>
+                                        <input type="range" min="1" max="5" step="1" x-model.number="formData.q3_postharvest_impact" class="slider-track w-full">
+                                        <div class="flex justify-between text-xs text-bird-cream/60 mt-1"><span>1</span><span class="text-bird-gold" x-text="formData.q3_postharvest_impact || '-'"></span><span>5</span></div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-bird-cream/80 mb-1">Post-Harvest Loss Likelihood</label>
+                                        <input type="range" min="1" max="5" step="1" x-model.number="formData.q3_postharvest_like" class="slider-track w-full">
+                                        <div class="flex justify-between text-xs text-bird-cream/60 mt-1"><span>1</span><span class="text-bird-gold" x-text="formData.q3_postharvest_like || '-'"></span><span>5</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">Growth Limiting Factors</label>
+                                <textarea x-model="formData.q3_limits_growth"
+                                          rows="3"
+                                          class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none resize-none"
+                                          placeholder="Describe key constraints limiting growth in this cluster..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Section 4: Cluster 2 - Transformers -->
+                        <div x-show="currentStep === 4" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                Transformers turn raw materials into higher-value products — Industry, Manufacturing, and Halal Processing.
+                            </p>
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Primary Barrier to Halal Industry <span class="text-red-400">*</span>
+                                </label>
+                                <select x-model="formData.q4_1_barrier"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select primary barrier</option>
+                                    <option value="certification">Weak Certification System</option>
+                                    <option value="infrastructure">Infrastructure Deficits</option>
+                                    <option value="skills">Skills Mismatch</option>
+                                    <option value="finance">Limited Access to Finance</option>
+                                    <option value="market">Market Access Barriers</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Halal Park Viability <span class="text-red-400">*</span>
+                                </label>
+                                <p class="text-xs text-bird-cream/50 mb-2">The proposed Bangsamoro Halal Park in Matanog, Maguindanao del Norte would cluster halal processors together.</p>
+                                <select x-model="formData.q4_2_halal_park"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select viability assessment</option>
+                                    <option value="yes">Yes - High viability</option>
+                                    <option value="conditional">Conditional - Needs improvements</option>
+                                    <option value="no">No - Low viability</option>
+                                </select>
+                            </div>
+
+                            <!-- Conditional: Commodity Impact -->
+                            <div x-show="formData.q4_2_halal_park === 'yes'" x-transition>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">Which commodity benefits most?</label>
+                                <select x-model="formData.q4_4_commodity_impact"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select commodity</option>
+                                    <option value="rubber">Rubber</option>
+                                    <option value="coconut">Coconut</option>
+                                    <option value="seaweed">Seaweed</option>
+                                    <option value="fisheries">Fisheries</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Why Do Well-Intentioned Fixes Often Fail? <span class="text-red-400">*</span>
+                                </label>
+                                <select x-model="formData.q4_3_fixes_fail"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select reason</option>
+                                    <option value="short_term">Short-term incentives without capacity building</option>
+                                    <option value="fragmented">Fragmented program delivery</option>
+                                    <option value="governance">Weak governance structures</option>
+                                    <option value="coordination">Poor inter-agency coordination</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">HEDS Priority Ranking <span class="text-bird-cream/40 font-normal">(Optional — drag to reorder)</span></label>
+                                <p class="text-xs text-bird-cream/50 mb-2">Rank these Halal Economy Dominance Strategy elements from most (top) to least urgent.</p>
+                                <div class="space-y-2">
+                                    <template x-for="(item, idx) in formData.q4_5_heds_ranking" :key="item">
+                                        <div class="flex items-center gap-2 bg-bird-darker border border-bird-gold/20 rounded-lg px-3 py-2.5">
+                                            <span class="text-bird-gold font-bold text-sm w-5" x-text="idx + 1"></span>
+                                            <span class="text-sm flex-1" x-text="item"></span>
+                                            <button type="button" @click="moveRanking('q4_5_heds_ranking', idx, -1)" :disabled="idx === 0" class="text-bird-cream/50 hover:text-bird-gold disabled:opacity-20 px-2 py-1">▲</button>
+                                            <button type="button" @click="moveRanking('q4_5_heds_ranking', idx, 1)" :disabled="idx === formData.q4_5_heds_ranking.length - 1" class="text-bird-cream/50 hover:text-bird-gold disabled:opacity-20 px-2 py-1">▼</button>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 5: Cluster 3 - Enablers -->
+                        <div x-show="currentStep === 5" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                Enablers are the physical and digital systems that make everything else possible: roads, power, internet, health, education, water.
+                            </p>
+                            <template x-for="field in [
+                                {key: 'q5_1_infra', label: 'Infrastructure Rating'},
+                                {key: 'q5_3_broadband', label: 'Broadband Readiness'},
+                                {key: 'q5_4_literacy', label: 'Digital Literacy'},
+                                {key: 'q5_5_stunting', label: 'Stunting Reduction Priority'}
+                            ]">
+                                <div>
+                                    <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                        <span x-text="field.label"></span> <span class="text-red-400">*</span>
+                                    </label>
+                                    <input type="range" min="1" max="5" step="1"
+                                           x-model.number="formData[field.key]"
+                                           class="slider-track w-full">
+                                    <div class="flex justify-between text-xs text-bird-cream/60 mt-1">
+                                        <span>1</span>
+                                        <span class="text-bird-gold font-bold" x-text="formData[field.key] || '-'"></span>
+                                        <span>5</span>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Priority Sectors <span class="text-red-400">*</span>
+                                </label>
+                                <div class="space-y-2">
+                                    <template x-for="sector in ['roads', 'energy', 'digital', 'health', 'education', 'water']">
+                                        <label class="flex items-center gap-3 cursor-pointer py-1">
+                                            <input type="checkbox" :value="sector"
+                                                   x-model="formData.q5_2_sectors"
+                                                   class="w-5 h-5 rounded border-bird-gold/30 bg-bird-darker text-bird-gold focus:ring-bird-gold">
+                                            <span class="text-sm capitalize" x-text="sector"></span>
+                                        </label>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Digital Divide Assessment <span class="text-red-400">*</span>
+                                </label>
+                                <select x-model="formData.q5_6_digital_divide"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select assessment</option>
+                                    <option value="severe">Severe - Major gaps</option>
+                                    <option value="moderate">Moderate - Some gaps</option>
+                                    <option value="minimal">Minimal - Well connected</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Section 6: Cluster 4 - Connectors -->
+                        <div x-show="currentStep === 6" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                Connectors link BARMM to outside markets: trade, exports, and the BIMP-EAGA regional corridor (Brunei-Indonesia-Malaysia-Philippines East ASEAN Growth Area).
+                            </p>
+                            <template x-for="field in [
+                                {key: 'q6_1_bimpeaga', label: 'BIMP-EAGA Importance'},
+                                {key: 'q6_3_export_target', label: 'Export Target Rating'},
+                                {key: 'q6_4_uae_feasibility', label: 'UAE Market Feasibility'}
+                            ]">
+                                <div>
+                                    <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                        <span x-text="field.label"></span> <span class="text-red-400">*</span>
+                                    </label>
+                                    <input type="range" min="1" max="5" step="1"
+                                           x-model.number="formData[field.key]"
+                                           class="slider-track w-full">
+                                    <div class="flex justify-between text-xs text-bird-cream/60 mt-1">
+                                        <span>1</span>
+                                        <span class="text-bird-gold font-bold" x-text="formData[field.key] || '-'"></span>
+                                        <span>5</span>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Target Markets <span class="text-red-400">*</span>
+                                </label>
+                                <div class="space-y-2">
+                                    <template x-for="market in ['UAE', 'GCC', 'ASEAN', 'BIMP-EAGA', 'Domestic']">
+                                        <label class="flex items-center gap-3 cursor-pointer py-1">
+                                            <input type="checkbox" :value="market"
+                                                   x-model="formData.q6_2_markets"
+                                                   class="w-5 h-5 rounded border-bird-gold/30 bg-bird-darker text-bird-gold focus:ring-bird-gold">
+                                            <span class="text-sm" x-text="market"></span>
+                                        </label>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Investment Perception <span class="text-red-400">*</span>
+                                </label>
+                                <select x-model="formData.q6_5_perception"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select perception</option>
+                                    <option value="positive">Positive - Improving confidence</option>
+                                    <option value="neutral">Neutral - Cautious optimism</option>
+                                    <option value="negative">Negative - Concerns remain</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Section 7: Cluster 5 - Financiers -->
+                        <div x-show="currentStep === 7" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                Financiers provide capital in ways aligned with Islamic (Shariah) principles: Islamic Banking, Takaful (Islamic insurance), Waqf, and Microfinance.
+                            </p>
+                            <template x-for="field in [
+                                {key: 'q7_1_criticality', label: 'Finance Criticality'},
+                                {key: 'q7_3_inclusion_target', label: 'Inclusion Target Rating'}
+                            ]">
+                                <div>
+                                    <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                        <span x-text="field.label"></span> <span class="text-red-400">*</span>
+                                    </label>
+                                    <input type="range" min="1" max="5" step="1"
+                                           x-model.number="formData[field.key]"
+                                           class="slider-track w-full">
+                                    <div class="flex justify-between text-xs text-bird-cream/60 mt-1">
+                                        <span>1</span>
+                                        <span class="text-bird-gold font-bold" x-text="formData[field.key] || '-'"></span>
+                                        <span>5</span>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Finance Instruments <span class="text-red-400">*</span>
+                                </label>
+                                <div class="space-y-2">
+                                    <template x-for="instrument in ['Islamic Banking', 'Takaful', 'Waqf', 'Microfinance', 'Sukuk']">
+                                        <label class="flex items-center gap-3 cursor-pointer py-1">
+                                            <input type="checkbox" :value="instrument"
+                                                   x-model="formData.q7_2_instruments"
+                                                   class="w-5 h-5 rounded border-bird-gold/30 bg-bird-darker text-bird-gold focus:ring-bird-gold">
+                                            <span class="text-sm" x-text="instrument"></span>
+                                        </label>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Asset Paradox Assessment <span class="text-red-400">*</span>
+                                </label>
+                                <p class="text-xs text-bird-cream/50 mb-2">The "asset paradox": BARMM has valuable land, resources, and people, but very little of this wealth is turned into usable investment capital.</p>
+                                <select x-model="formData.q7_4_asset_paradox"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select assessment</option>
+                                    <option value="severe">Severe - Major underutilization</option>
+                                    <option value="moderate">Moderate - Some gaps</option>
+                                    <option value="minimal">Minimal - Well utilized</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Block Grant Effectiveness <span class="text-red-400">*</span>
+                                </label>
+                                <select x-model="formData.q7_5_block_grant"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select effectiveness</option>
+                                    <option value="high">High - Well utilized</option>
+                                    <option value="moderate">Moderate - Some inefficiencies</option>
+                                    <option value="low">Low - Significant gaps</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Section 8: Strategic Options -->
+                        <div x-show="currentStep === 8" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                Choose which overall strategy you believe BARMM should lead with. Each letter is a strategy name, spelled out below.
+                            </p>
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Preferred Strategy <span class="text-red-400">*</span>
+                                </label>
+                                <select x-model="formData.q8_1_strategy"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select preferred strategy</option>
+                                    <option value="heds">HEDS — Halal Economy Dominance Strategy</option>
+                                    <option value="gems">GEMS — Green Economy Monetization Strategy</option>
+                                    <option value="ifes">IFES — Infrastructure-First Enabling Strategy</option>
+                                    <option value="ieds">IEDS — Integrated Ecosystem Development Strategy</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Sequencing Preference <span class="text-red-400">*</span>
+                                </label>
+                                <select x-model="formData.q8_2_sequencing"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select sequencing</option>
+                                    <option value="phase1_first">Phase 1 First - Foundation Building</option>
+                                    <option value="simultaneous">Simultaneous - All clusters</option>
+                                    <option value="market_first">Market First - Connectors priority</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">Additional Comments</label>
+                                <textarea x-model="formData.q8_3_comments"
+                                          rows="4"
+                                          class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none resize-none"
+                                          placeholder="Share additional insights on strategic options..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Section 9: Budget & Targets -->
+                        <div x-show="currentStep === 9" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                The full BIRD 2026–2035 programme carries an indicative budget of ₱120–160 billion across three phases. Tell us how realistic that scale feels.
+                            </p>
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Budget Realism Rating <span class="text-red-400">*</span>
+                                </label>
+                                <input type="range" min="1" max="5" step="1"
+                                       x-model.number="formData.q9_1_budget"
+                                       class="slider-track w-full">
+                                <div class="flex justify-between text-xs text-bird-cream/60 mt-1">
+                                    <span>1 - Unrealistic</span>
+                                    <span class="text-bird-gold font-bold" x-text="formData.q9_1_budget || '-'"></span>
+                                    <span>5 - Highly Realistic</span>
+                                </div>
+                            </div>
+
+                            <!-- ROI Preview -->
+                            <div x-show="formData.q9_1_budget && formData.q8_1_strategy"
+                                 class="bg-bird-emerald/30 border border-bird-gold/30 rounded-lg p-4">
+                                <p class="text-xs font-bold text-bird-gold uppercase tracking-wider mb-2">Indicative Return Estimate (illustrative, not a forecast)</p>
+                                <template x-if="formData.q8_1_strategy">
+                                    <div>
+                                        <p class="text-2xl font-bold text-bird-lightGold"
+                                           x-text="formatCurrency(estimateROI(formData.q9_1_budget * 1000000000, formData.q8_1_strategy).estimatedReturn)"></p>
+                                        <p class="text-xs text-bird-cream/60 mt-1">
+                                            <span x-text="estimateROI(formData.q9_1_budget * 1000000000, formData.q8_1_strategy).multiplier"></span>x indicative multiplier over
+                                            <span x-text="estimateROI(formData.q9_1_budget * 1000000000, formData.q8_1_strategy).timeframe"></span>
+                                        </p>
+                                        <p class="text-xs text-bird-cream/40 mt-2">This is a rough planning estimate derived from BIRD sector assumptions, not investment advice or a guaranteed return.</p>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Section 10: IEDS Matrix Evaluation -->
+                        <div x-show="currentStep === 10" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                Score each of the 4 strategies against 7 dimensions, from 0 (very weak) to 10 (very strong). This produces a weighted comparison automatically.
+                            </p>
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Ambition Level <span class="text-red-400">*</span>
+                                </label>
+                                <input type="range" min="1" max="5" step="1"
+                                       x-model.number="formData.q10_1_ambition"
+                                       class="slider-track w-full">
+                                <div class="flex justify-between text-xs text-bird-cream/60 mt-1">
+                                    <span>1 - Conservative</span>
+                                    <span class="text-bird-gold font-bold" x-text="formData.q10_1_ambition || '-'"></span>
+                                    <span>5 - Transformative</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-3">
+                                    IEDS Evaluation Matrix <span class="text-red-400">*</span>
+                                </label>
+                                <p class="text-xs text-bird-cream/60 mb-4">
+                                    Rate each strategy cluster across 7 dimensions (0–10 scale). On phones, scroll each strategy card; on larger screens, use the full table.
+                                </p>
+
+                                <!-- Desktop/tablet: full table -->
+                                <div class="overflow-x-auto hidden md:block">
+                                    <table class="w-full border-collapse">
+                                        <thead>
+                                            <tr class="border-b border-bird-gold/30">
+                                                <th class="text-left text-xs font-bold text-bird-gold p-2">Strategy</th>
+                                                <template x-for="dim in matrixDimensions" :key="dim.key">
+                                                    <th class="text-center text-xs font-bold text-bird-gold p-2" x-text="dim.label"></th>
+                                                </template>
+                                                <th class="text-center text-xs font-bold text-bird-gold p-2">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template x-for="cluster in ['heds', 'gems', 'ifes', 'ieds']" :key="cluster">
+                                                <tr class="border-b border-bird-gold/20 matrix-cell">
+                                                    <td class="p-2">
+                                                        <span class="text-sm font-bold text-bird-lightGold uppercase" x-text="cluster"></span>
+                                                    </td>
+                                                    <template x-for="dim in matrixDimensions" :key="dim.key">
+                                                        <td class="p-2">
+                                                            <input type="range" min="0" max="10" step="1"
+                                                                   x-model.number="formData.q10_matrix[cluster][dim.key]"
+                                                                   class="slider-track w-full"
+                                                                   :class="getHeatmapClass(formData.q10_matrix[cluster][dim.key])">
+                                                            <div class="text-center text-xs text-bird-gold font-bold mt-1"
+                                                                 x-text="formData.q10_matrix[cluster][dim.key]"></div>
+                                                        </td>
+                                                    </template>
+                                                    <td class="p-2 text-center">
+                                                        <span class="text-lg font-bold text-bird-lightGold" x-text="getClusterTotal(cluster)"></span>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Mobile: stacked cards, one per strategy -->
+                                <div class="md:hidden space-y-4">
+                                    <template x-for="cluster in ['heds', 'gems', 'ifes', 'ieds']" :key="cluster">
+                                        <div class="border border-bird-gold/20 rounded-lg p-4 bg-bird-darker/40">
+                                            <div class="flex items-center justify-between mb-3">
+                                                <span class="text-sm font-bold text-bird-lightGold uppercase" x-text="cluster"></span>
+                                                <span class="text-lg font-bold text-bird-gold" x-text="getClusterTotal(cluster) + ' / 70'"></span>
+                                            </div>
+                                            <div class="space-y-3">
+                                                <template x-for="dim in matrixDimensions" :key="dim.key">
+                                                    <div>
+                                                        <div class="flex justify-between text-xs text-bird-cream/70 mb-1">
+                                                            <span x-text="dim.label"></span>
+                                                            <span class="text-bird-gold font-bold" x-text="formData.q10_matrix[cluster][dim.key]"></span>
+                                                        </div>
+                                                        <input type="range" min="0" max="10" step="1"
+                                                               x-model.number="formData.q10_matrix[cluster][dim.key]"
+                                                               class="slider-track w-full"
+                                                               :class="getHeatmapClass(formData.q10_matrix[cluster][dim.key])">
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+
+                                <!-- Matrix Visualization -->
+                                <div id="matrixChart" class="w-full h-64 mt-6 bg-bird-darker/50 rounded-lg border border-bird-gold/20"></div>
+                            </div>
+                        </div>
+
+                        <!-- Section 11: Provincial Equity -->
+                        <div x-show="currentStep === 11" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                Some BARMM provinces are further behind than others. "Affirmative action" means deliberately directing extra support to lagging provinces.
+                            </p>
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Affirmative Action Stance <span class="text-red-400">*</span>
+                                </label>
+                                <select x-model="formData.q11_1_affirmative"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select stance</option>
+                                    <option value="strong_support">Strong Support - Essential for equity</option>
+                                    <option value="moderate_support">Moderate Support - Helpful but not critical</option>
+                                    <option value="neutral">Neutral - Depends on implementation</option>
+                                    <option value="oppose">Oppose - Merit-based only</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">Equity Mechanisms</label>
+                                <div class="space-y-2">
+                                    <template x-for="mechanism in ['Infrastructure Quotas', 'Investment Incentives', 'Capacity Building', 'Financial Inclusion', 'Skills Training']">
+                                        <label class="flex items-center gap-3 cursor-pointer py-1">
+                                            <input type="checkbox" :value="mechanism"
+                                                   x-model="formData.q11_2_mechanisms"
+                                                   class="w-5 h-5 rounded border-bird-gold/30 bg-bird-darker text-bird-gold focus:ring-bird-gold">
+                                            <span class="text-sm" x-text="mechanism"></span>
+                                        </label>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <!-- Conditional provincial deep-dive questions -->
+                            <div x-show="formData.demo_province === 'basilan'" x-transition class="border border-amber-500/20 rounded-lg p-4 bg-amber-950/10">
+                                <label class="block text-sm font-semibold text-amber-300 mb-2">Basilan: Peace Dividend Follow-up</label>
+                                <textarea x-model="formData.provincial_basilan" rows="3"
+                                          class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none resize-none"
+                                          placeholder="How should the ASG-free declaration translate into investment priorities for Basilan?"></textarea>
+                            </div>
+                            <div x-show="formData.demo_province === 'maguindanao_del_norte' || formData.demo_province === 'maguindanao_del_sur'" x-transition class="border border-bird-gold/20 rounded-lg p-4 bg-bird-darker/30">
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">Maguindanao: Halal Corridor Follow-up</label>
+                                <textarea x-model="formData.provincial_maguindanao" rows="3"
+                                          class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none resize-none"
+                                          placeholder="What would make the Matanog Halal Park a success for Maguindanao communities?"></textarea>
+                            </div>
+                            <div x-show="formData.demo_province === 'tawi_tawi'" x-transition class="border border-bird-gold/20 rounded-lg p-4 bg-bird-darker/30">
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">Tawi-Tawi: Seaweed Value Chain Follow-up</label>
+                                <textarea x-model="formData.provincial_tawitawi" rows="3"
+                                          class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none resize-none"
+                                          placeholder="What is most needed to grow seaweed farming and carrageenan processing in Tawi-Tawi?"></textarea>
+                            </div>
+                            <div x-show="formData.demo_province === 'lanao_del_sur'" x-transition class="border border-bird-gold/20 rounded-lg p-4 bg-bird-darker/30">
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">Lanao del Sur: Lake Lanao Follow-up</label>
+                                <textarea x-model="formData.provincial_lanao" rows="3"
+                                          class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none resize-none"
+                                          placeholder="How should Lake Lanao's energy, fisheries, and eco-tourism potential be balanced?"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Section 12: Climate Resilience -->
+                        <div x-show="currentStep === 12" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                The Green Economy — carbon credits, forest protection, and climate adaptation — is BARMM's newest investment frontier.
+                            </p>
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Green Economy Priority <span class="text-red-400">*</span>
+                                </label>
+                                <input type="range" min="1" max="5" step="1"
+                                       x-model.number="formData.q12_1_green_priority"
+                                       class="slider-track w-full">
+                                <div class="flex justify-between text-xs text-bird-cream/60 mt-1">
+                                    <span>1 - Low</span>
+                                    <span class="text-bird-gold font-bold" x-text="formData.q12_1_green_priority || '-'"></span>
+                                    <span>5 - Critical</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Adaptation Measures <span class="text-red-400">*</span>
+                                </label>
+                                <div class="space-y-2">
+                                    <template x-for="measure in ['Climate-Smart Agriculture', 'Renewable Energy', 'Coastal Protection', 'Early Warning Systems', 'Water Management']">
+                                        <label class="flex items-center gap-3 cursor-pointer py-1">
+                                            <input type="checkbox" :value="measure"
+                                                   x-model="formData.q12_2_adaptation"
+                                                   class="w-5 h-5 rounded border-bird-gold/30 bg-bird-darker text-bird-gold focus:ring-bird-gold">
+                                            <span class="text-sm" x-text="measure"></span>
+                                        </label>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 13: Policy & Governance -->
+                        <div x-show="currentStep === 13" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                The BICC (Bangsamoro Investment Command Center) is the proposed hub for tracking and supporting investors across BARMM.
+                            </p>
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Legislation Priorities <span class="text-red-400">*</span>
+                                </label>
+                                <div class="space-y-2">
+                                    <template x-for="legislation in ['Forestry Code', 'Investment Code', 'Digital Governance', 'Halal Certification', 'Islamic Banking']">
+                                        <label class="flex items-center gap-3 cursor-pointer py-1">
+                                            <input type="checkbox" :value="legislation"
+                                                   x-model="formData.q13_1_legislation"
+                                                   class="w-5 h-5 rounded border-bird-gold/30 bg-bird-darker text-bird-gold focus:ring-bird-gold">
+                                            <span class="text-sm" x-text="legislation"></span>
+                                        </label>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    BICC Effectiveness <span class="text-red-400">*</span>
+                                </label>
+                                <input type="range" min="1" max="5" step="1"
+                                       x-model.number="formData.q13_2_bicc"
+                                       class="slider-track w-full">
+                                <div class="flex justify-between text-xs text-bird-cream/60 mt-1">
+                                    <span>1 - Ineffective</span>
+                                    <span class="text-bird-gold font-bold" x-text="formData.q13_2_bicc || '-'"></span>
+                                    <span>5 - Highly Effective</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Section 14: Demographics -->
+                        <div x-show="currentStep === 14" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                This helps us understand who is responding. Your email is used only to send you a copy of your submission and is never shared publicly.
+                            </p>
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Stakeholder Category <span class="text-red-400">*</span>
+                                </label>
+                                <select x-model="formData.demo_category"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select category</option>
+                                    <option value="government">Government Official</option>
+                                    <option value="private">Private Sector</option>
+                                    <option value="academia">Academia/Research</option>
+                                    <option value="ngo">NGO/Civil Society</option>
+                                    <option value="community">Community Leader</option>
+                                    <option value="investor">Investor</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Province <span class="text-red-400">*</span>
+                                </label>
+                                <select x-model="formData.demo_province"
+                                        class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none">
+                                    <option value="">Select province</option>
+                                    <option value="lanao_del_sur">Lanao del Sur</option>
+                                    <option value="maguindanao_del_norte">Maguindanao del Norte</option>
+                                    <option value="maguindanao_del_sur">Maguindanao del Sur</option>
+                                    <option value="basilan">Basilan</option>
+                                    <option value="sulu">Sulu</option>
+                                    <option value="tawi_tawi">Tawi-Tawi</option>
+                                    <option value="sga">Special Geographic Area (SGA)</option>
+                                    <option value="outside_barmm">Outside BARMM</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Areas of Expertise <span class="text-red-400">*</span>
+                                </label>
+                                <div class="space-y-2">
+                                    <template x-for="area in ['Agriculture', 'Halal Economy', 'Infrastructure', 'Islamic Finance', 'Tourism', 'Governance', 'Environment/Green Economy', 'Trade & Export']">
+                                        <label class="flex items-center gap-3 cursor-pointer py-1">
+                                            <input type="checkbox" :value="area"
+                                                   x-model="formData.demo_expertise"
+                                                   class="w-5 h-5 rounded border-bird-gold/30 bg-bird-darker text-bird-gold focus:ring-bird-gold">
+                                            <span class="text-sm" x-text="area"></span>
+                                        </label>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Full Name <span class="text-red-400">*</span>
+                                </label>
+                                <input type="text" x-model="formData.demo_name"
+                                       class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none"
+                                       placeholder="Juan dela Cruz">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Email Address <span class="text-red-400">*</span>
+                                </label>
+                                <input type="email" x-model="formData.demo_email"
+                                       class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none"
+                                       placeholder="you@example.com">
+                                <p x-show="formData.demo_email && !isValidEmail(formData.demo_email)" class="text-xs text-red-400 mt-1">Please enter a valid email address.</p>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-2">
+                                    Organization <span class="text-bird-cream/40 font-normal">(Optional)</span>
+                                </label>
+                                <input type="text" x-model="formData.demo_organization"
+                                       class="w-full bg-bird-darker border border-bird-gold/30 rounded-lg px-4 py-3 text-bird-cream focus:border-bird-gold focus:outline-none"
+                                       placeholder="Organization or institution">
+                            </div>
+                        </div>
+
+                        <!-- Section 15: C.A.R.E. Validation -->
+                        <div x-show="currentStep === 15" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                <strong class="text-bird-gold">C.A.R.E.</strong> reflects Khalifa (stewardship) values applied to this roadmap: is it <strong>C</strong>ontext-specific, <strong>A</strong>ction-oriented, capable of <strong>R</strong>eal-time feedback, and <strong>E</strong>vidence-based?
+                            </p>
+                            <template x-for="dim in [
+                                {key: 'care_context', label: 'Context-Specific Alignment', hint: 'Does this roadmap fit BARMM\'s actual situation?'},
+                                {key: 'care_action', label: 'Action-Oriented Assessment', hint: 'Does it lead to concrete, doable actions?'},
+                                {key: 'care_realtime', label: 'Real-Time Feedback Capability', hint: 'Can progress be tracked and adjusted as we go?'},
+                                {key: 'care_evidence', label: 'Evidence-Based Confidence', hint: 'Is it grounded in credible data?'}
+                            ]" :key="dim.key">
+                                <div>
+                                    <label class="block text-sm font-semibold text-bird-lightGold mb-1">
+                                        <span x-text="dim.label"></span> <span class="text-red-400">*</span>
+                                    </label>
+                                    <p class="text-xs text-bird-cream/50 mb-2" x-text="dim.hint"></p>
+                                    <input type="range" min="1" max="5" step="1"
+                                           x-model.number="formData[dim.key]"
+                                           class="slider-track w-full">
+                                    <div class="flex justify-between text-xs text-bird-cream/60 mt-1">
+                                        <span>1 - Poor</span>
+                                        <span class="text-bird-gold font-bold" x-text="formData[dim.key] || '-'"></span>
+                                        <span>5 - Excellent</span>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-bird-lightGold mb-1">
+                                    Overall C.A.R.E. Rating <span class="text-red-400">*</span>
+                                </label>
+                                <p class="text-xs text-bird-cream/50 mb-2">Your overall confidence in the BIRD 2026–2035 roadmap.</p>
+                                <input type="range" min="1" max="5" step="1"
+                                       x-model.number="formData.care_overall"
+                                       class="slider-track w-full">
+                                <div class="flex justify-between text-xs text-bird-cream/60 mt-1">
+                                    <span>1 - Poor</span>
+                                    <span class="text-bird-gold font-bold" x-text="formData.care_overall || '-'"></span>
+                                    <span>5 - Excellent</span>
+                                </div>
+                            </div>
+
+                            <div x-show="careAverage() > 0" class="bg-bird-emerald/30 border border-bird-gold/30 rounded-lg p-4">
+                                <p class="text-xs font-bold text-bird-gold uppercase tracking-wider">Your C.A.R.E. Average</p>
+                                <p class="text-2xl font-bold text-bird-lightGold" x-text="careAverage().toFixed(1) + ' / 5'"></p>
+                            </div>
+                        </div>
+
+                        <!-- Section 16: Final Submission -->
+                        <div x-show="currentStep === 16" class="space-y-6">
+                            <p class="text-sm text-bird-cream/70 bg-bird-darker/50 border border-bird-gold/10 rounded-lg p-3">
+                                Almost done. Please review the summary below before submitting.
+                            </p>
+
+                            <div class="bg-bird-darker/50 border border-bird-gold/20 rounded-lg p-4 space-y-2 text-sm">
+                                <div class="flex justify-between"><span class="text-bird-cream/60">Respondent</span><span x-text="formData.demo_name || '—'"></span></div>
+                                <div class="flex justify-between"><span class="text-bird-cream/60">Category</span><span x-text="formData.demo_category || '—'"></span></div>
+                                <div class="flex justify-between"><span class="text-bird-cream/60">Province</span><span x-text="formData.demo_province || '—'"></span></div>
+                                <div class="flex justify-between"><span class="text-bird-cream/60">Preferred Strategy</span><span x-text="strategyLabel(formData.q8_1_strategy)"></span></div>
+                                <div class="flex justify-between"><span class="text-bird-cream/60">C.A.R.E. Overall</span><span x-text="(formData.care_overall || '-') + ' / 5'"></span></div>
+                                <div class="flex justify-between"><span class="text-bird-cream/60">Sections Completed</span><span x-text="completedSections.size + ' / 16'"></span></div>
+                            </div>
+
+                            <label class="flex items-start gap-3 cursor-pointer bg-bird-darker/30 border border-bird-gold/20 rounded-lg p-4">
+                                <input type="checkbox" x-model="formData.consent_final"
+                                       class="w-5 h-5 mt-0.5 rounded border-bird-gold/30 bg-bird-darker text-bird-gold focus:ring-bird-gold">
+                                <span class="text-sm text-bird-cream/80">
+                                    I confirm that my responses reflect my own professional or personal assessment, and I consent to my (anonymized, aggregated) input being used to shape the BIRD 2026–2035 Investment Roadmap. <span class="text-red-400">*</span>
+                                </span>
+                            </label>
+
+                            <button @click="submitSurvey()"
+                                    :disabled="!formData.consent_final || isSubmitting"
+                                    class="w-full bg-bird-gold text-bird-darker font-bold py-4 rounded-lg hover:bg-bird-lightGold disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2">
+                                <svg x-show="isSubmitting" class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                                </svg>
+                                <span x-text="isSubmitting ? 'Submitting…' : 'Submit Validation Survey'"></span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- Sticky Nav Footer (mobile-first, always visible) -->
+                    <div class="sticky-nav bg-bird-dark/95 border-t border-bird-gold/20 p-4 flex items-center justify-between gap-3">
+                        <button @click="prevStep()"
+                                :disabled="currentStep === 1"
+                                class="px-4 sm:px-6 py-3 rounded-lg border border-bird-gold/30 text-bird-cream/80 font-semibold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-bird-darker transition-colors text-sm sm:text-base">
+                                ← Back
+                        </button>
+                        <span class="text-xs text-bird-cream/40 hidden sm:inline" x-text="`${currentStep} / 16`"></span>
+                        <button @click="nextStep()"
+                                x-show="currentStep < 16"
+                                class="px-4 sm:px-6 py-3 rounded-lg bg-bird-gold text-bird-darker font-bold hover:bg-bird-lightGold transition-colors text-sm sm:text-base">
+                                Next →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Context / Live Score Sidebar -->
+            <div class="lg:col-span-1 space-y-4">
+                <div class="bg-bird-dark/60 backdrop-blur-xl border border-bird-gold/30 rounded-xl p-5 sticky top-4 space-y-4">
+                    <h3 class="text-sm font-bold text-bird-gold uppercase tracking-wider">Live Assessment Snapshot</h3>
+
+                    <div>
+                        <p class="text-xs text-bird-cream/50 mb-1">Overall Progress</p>
+                        <div class="w-full bg-bird-emerald rounded-full h-2 overflow-hidden">
+                            <div class="h-full bg-bird-gold progress-fill" :style="`width: ${(completedSections.size / 16) * 100}%`"></div>
+                        </div>
+                        <p class="text-xs text-bird-cream/40 mt-1" x-text="completedSections.size + ' of 16 sections'"></p>
+                    </div>
+
+                    <div x-show="formData.q8_1_strategy">
+                        <p class="text-xs text-bird-cream/50 mb-1">Preferred Strategy</p>
+                        <p class="text-bird-lightGold font-semibold" x-text="strategyLabel(formData.q8_1_strategy)"></p>
+                    </div>
+
+                    <div x-show="careAverage() > 0">
+                        <p class="text-xs text-bird-cream/50 mb-1">C.A.R.E. Average</p>
+                        <p class="text-2xl font-bold text-bird-lightGold" x-text="careAverage().toFixed(1) + ' / 5'"></p>
+                    </div>
+
+                    <div x-show="formData.demo_province" class="pt-3 border-t border-bird-gold/10">
+                        <p class="text-xs text-bird-cream/50 mb-1">Your Province</p>
+                        <p class="text-bird-cream/80 text-sm" x-text="provinceLabel(formData.demo_province)"></p>
+                    </div>
+
+                    <div class="pt-3 border-t border-bird-gold/10">
+                        <p class="text-xs text-bird-cream/50 mb-2">About This Survey</p>
+                        <p class="text-xs text-bird-cream/60 leading-relaxed">
+                            Your input directly shapes the BIRD 2026–2035 Bangsamoro Investment Roadmap.
+                            Responses are saved on your device automatically, even offline, and sync when you're back online.
+                        </p>
+                    </div>
+
+                    <a href="https://bird-survey-orientation.asilvainnovations.com" target="_blank" rel="noopener"
+                       class="block text-center text-xs text-bird-gold hover:text-bird-lightGold underline underline-offset-2">
+                        New here? View the Survey Orientation
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-xs text-bird-cream/30 pt-6 pb-2">
+            <p>© 2026 BARMM · Ministry of Trade, Investments and Tourism (BOI-MTIT) · The Emerging Bangsamoro</p>
+            <p class="mt-1">
+                <a href="https://bangsmoro-investment-roadmap.asilvainnovations.com" class="hover:text-bird-gold">Home</a> ·
+                <a href="https://bird-roadmap.asilvainnovations.com" class="hover:text-bird-gold">Roadmap</a> ·
+                <a href="survey-dashboard.html" class="hover:text-bird-gold">Live Dashboard</a> ·
+                <a href="https://bird-resources.asilvainnovations.com" class="hover:text-bird-gold">Resources</a> ·
+                <a href="https://bird-contact.asilvainnovations.com" class="hover:text-bird-gold">Contact</a>
+            </p>
+        </footer>
+    </div>
+    <script>
     // ═══════════════════════════════════════════════════════════════════════
     // BIRD 2026–2035 Validation Survey — Alpine Engine
     // Field IDs and backend paths follow BIRD_Survey_Data_Map.xlsx exactly.
     // Formulas mirror /lib/bird/formulas.ts (Chapter 3 SWOT scoring methodology).
     // ═══════════════════════════════════════════════════════════════════════
 
-    // ── Config: flip these on when a real backend is ready ─────────────────
+    // ── Config ───────────────────────────────────────────────────────────
+    // Same Supabase project already referenced by survey-dashboard.html and
+    // bird-urls.ts image hosts. The anon key is safe to ship client-side —
+    // Supabase relies on Row-Level Security (RLS) on the `survey_responses`
+    // table to restrict what it can actually do (insert-only for anon, no
+    // read/update/delete). Verify RLS policies are in place before going live.
+    // Regardless of Supabase reachability, every submission is ALSO written
+    // to localStorage first, so the survey is fully offline-capable.
     const CONFIG = {
-        SUPABASE_ENABLED: false,          // set true + fill in values below to enable live sync
-        SUPABASE_URL: '',                  // e.g. 'https://xxxx.supabase.co'
-        SUPABASE_ANON_KEY: '',
+        SUPABASE_ENABLED: true,
+        SUPABASE_URL: 'https://lydsisparsmvextskevw.supabase.co',
+        SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5ZHNpc3BhcnNtdmV4dHNrZXZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5NzIxNzEsImV4cCI6MjA5NzU0ODE3MX0.VM8BPXPLw7wGYCcUvwlTGeP4qB-M02Nq3x720OG5jIs',
         AI_ASSISTANT_ENABLED: false,       // set true once an Edge Function URL is available
         AI_ASSISTANT_URL: '',              // e.g. '.../functions/v1/ai-strategy-assistant'
         STORAGE_KEY: 'bird_survey_draft_v1',
