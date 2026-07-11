@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
 import { AIStrategistAvatar } from '@/components/branding/Logo';
-import { Sparkles, X, Send, Loader as Loader2, ChevronDown, ChevronUp, Brain, Target, ChartBar as BarChart3, Globe as Globe2, Leaf, Landmark } from 'lucide-react';
+import { Sparkles, X, Send, Loader2, ChevronDown, ChevronUp, Brain, Target, BarChart3, Globe2, Leaf, Landmark } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -157,8 +157,8 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
           }
         : undefined;
 
-      // Direct fetch to the AI edge function on the correct Supabase project
-      const AI_ASSISTANT_URL = 'https://rgvteytgkugdqdodedxq.databasepad.com/functions/v1/ai-strategy-assistant';
+      // Direct fetch to the Kimi AI edge function
+      const AI_ASSISTANT_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/ai-strategy-assistant';
       const { data: { session } } = await supabase.auth.getSession();
 
       const response = await fetch(AI_ASSISTANT_URL, {
@@ -202,7 +202,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
         {
           role: 'assistant',
           content:
-            'I had trouble reaching the AI service. Please check your connection and try again. If the issue persists, the Supabase edge function may need to be redeployed.',
+            'I had trouble reaching the Kimi AI service. Please check your connection and try again. If the issue persists, the AI edge function may need to be redeployed.',
           timestamp: Date.now(),
         },
       ]);
@@ -393,7 +393,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
               {/* Footer note */}
               <div className="px-4 py-1.5 bg-card border-t border-border/30 flex-shrink-0">
                 <p className="text-[10px] text-muted-foreground/50 text-center">
-                  BIRD AI · BOI-MTIT, BARMM · Powered by Anthropic Claude
+                  BIRD AI · BOI-MTIT, BARMM · Powered by Kimi AI
                 </p>
               </div>
             </>
