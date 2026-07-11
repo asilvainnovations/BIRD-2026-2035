@@ -7,8 +7,9 @@ Official strategic planning platform for the **Bangsamoro Investment Roadmap Dev
 ---
 
 ## 🌐 Live Platform
-- **Web App:**https://bird.asilvainnovations.com
+- **Web App:**https://bangsamoro-investment-roadmap.asilvainnovations.com
 - **User Manual:** https://bird-user-manual.asilvainnovations.com
+- **Validation Survey:** https://bird-survey.asilvainnovations.com
 - **Developer Docs:** https://docs-strat-planner-pro.asilvainnovations.com
 
 ---
@@ -420,7 +421,7 @@ npm run lint          # Check ESLint issues
 - Email: boi@bangsamoro.gov.ph
 
 **Developer: ASilva Innovations**
-- Platform: https://asilvainnovations.github.io/website/
+- Platform: https://asilvainnovations.com
 
 ---
 
