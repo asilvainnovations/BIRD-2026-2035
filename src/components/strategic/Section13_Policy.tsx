@@ -1,9 +1,12 @@
 // src/components/strategic/Section13_Policy.tsx
+// Section 13: Policy & Governance Recommendations
+
 import { useFormContext } from "react-hook-form";
 import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from "@/components/ui/badge";
 
 export function Section13_Policy() {
   const form = useFormContext();
@@ -11,11 +14,44 @@ export function Section13_Policy() {
   return (
     <div className="space-y-8">
       <CardHeader className="p-0">
+        <div className="flex items-center gap-2 mb-2">
+          <Badge variant="outline" className="text-xs border-blue-400/40 text-blue-400">Governance</Badge>
+        </div>
         <CardTitle className="text-2xl font-serif text-[#C9A84C]">13. Policy & Governance Recommendations</CardTitle>
         <CardDescription className="text-[#ecfdf5]/70 text-base mt-2">
           Fragmented program delivery across BMOAs is a systemic bottleneck. The BIRD roadmap proposes the Bangsamoro Investment Command Center (BICC) and specific enabling laws to synchronize execution.
         </CardDescription>
       </CardHeader>
+
+      {/* Moral Governance as Leverage — Wide Format */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-blue-400/30 shadow-lg group">
+        <img
+          src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/26.png"
+          alt="Moral Governance as Leverage — Highest-impact intervention point"
+          className="w-full h-auto max-h-[400px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+          loading="lazy"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+          <p className="text-xs text-[#ecfdf5]/60 italic">
+            Source: BIRD 2026-2035 — Moral Governance as Highest Leverage Point
+          </p>
+        </div>
+      </div>
+
+      {/* Investment-Governance Cycles — Wide Format */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/20 shadow-lg group">
+        <img
+          src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/15.%20Investment%20and%20Governance%20Cycles.png"
+          alt="Investment and Governance Cycles — Policy coordination feedback loops"
+          className="w-full h-auto max-h-[400px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+          loading="lazy"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+          <p className="text-xs text-[#ecfdf5]/60 italic">
+            Source: BIRD 2026-2035 — Investment and Governance Cycles
+          </p>
+        </div>
+      </div>
 
       <FormField
         control={form.control}
