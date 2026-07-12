@@ -1,4 +1,6 @@
 // src/components/strategic/Section10_IEDSMatrix.tsx
+// Section 10: Strategic Options Evaluation Matrix
+
 import { useFormContext, useWatch } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
@@ -43,10 +45,28 @@ export function Section10_IEDSMatrix() {
     <TooltipProvider delayDuration={100}>
       <div className="space-y-8">
         <div>
+          <div className="flex items-center gap-2 mb-2">
+            <Badge variant="outline" className="text-xs border-purple-400/40 text-purple-400">Evaluation</Badge>
+          </div>
           <h2 className="text-2xl font-serif text-[#C9A84C] mb-2">10. Strategic Options Evaluation Matrix</h2>
           <p className="text-[#ecfdf5]/70">
             Adjust the sliders (1-10) to validate the BIRD framework's weighted scoring. The system calculates the composite score in real-time.
           </p>
+        </div>
+
+        {/* Meadows Leverage Points — Wide Format Context Image */}
+        <div className="relative w-full overflow-hidden rounded-xl border border-purple-400/30 shadow-lg group">
+          <img
+            src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/24.%20Meadows%20Hierarchy%20of%20Leverage%20Points.png"
+            alt="Meadows Hierarchy of Leverage Points — Systems intervention levels"
+            className="w-full h-auto max-h-[400px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+            loading="lazy"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+            <p className="text-xs text-[#ecfdf5]/60 italic">
+              Source: BIRD 2026-2035 — Meadows Hierarchy of Leverage Points (Context for Scoring)
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
