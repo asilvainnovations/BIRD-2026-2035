@@ -1,4 +1,7 @@
 // src/components/strategic/Section7_Financiers.tsx
+// Section 7: Cluster 5 — Financiers
+// Islamic Banking, Waqf, Takaful, Microfinance
+
 import {
   FormField,
   FormItem,
@@ -11,6 +14,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useFormContext } from "react-hook-form";
 import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from "@/components/ui/badge";
 
 export function Section7_Financiers() {
   const form = useFormContext();
@@ -18,30 +22,45 @@ export function Section7_Financiers() {
   return (
     <div className="space-y-8">
       <CardHeader className="p-0">
-        <CardTitle className="text-2xl font-serif text-[#C9A84C]">
-          7. Cluster 5: Financiers — Islamic Banking, Waqf, Takaful, Microfinance
+        <div className="flex items-center gap-2">
+          <Badge variant="outline" className="text-xs border-purple-400/40 text-purple-400">Cluster 5</Badge>
+        </div>
+        <CardTitle className="text-2xl font-serif text-[#C9A84C] mt-2">
+          7. Financiers — Islamic Banking, Waqf, Takaful, Microfinance
         </CardTitle>
         <CardDescription className="text-[#ecfdf5]/70 text-base mt-2">
-          The Financiers cluster provides culturally aligned capital to sustain ecosystem growth across all BEIE clusters.
+          The Financiers cluster provides culturally aligned capital to sustain ecosystem growth across all BEIE clusters. Islamic finance assets currently sit below ₱2B despite a 5.69M Muslim population — a massive untapped opportunity.
         </CardDescription>
       </CardHeader>
 
-      {/* Cluster 5 Financiers Framework Image */}
-      <div className="w-full rounded-lg overflow-hidden border border-[#C9A84C]/20">
+      {/* Cluster 5 Financiers Framework Image — Enhanced Wide Format */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-purple-400/30 shadow-lg group">
         <img
           src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/38.%20Cluster%205_%20Financiers.png"
-          alt="Cluster 5: Financiers Framework"
-          className="w-full h-64 object-cover"
+          alt="Cluster 5: Financiers Framework — Islamic Banking, Waqf, Takaful and Microfinance"
+          className="w-full h-auto max-h-[500px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+          loading="lazy"
         />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+          <p className="text-xs text-[#ecfdf5]/60 italic">
+            Source: BIRD 2026-2035 BEIE Framework — Financiers Cluster
+          </p>
+        </div>
       </div>
 
-      {/* IEDS Implementation Phases Image */}
-      <div className="w-full rounded-lg overflow-hidden border border-[#C9A84C]/20">
+      {/* IEDS Implementation Phases Image — Wide Format */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/20 shadow-lg group">
         <img
           src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-strategic-options-roadmap/public/6.%20The%20IEDS.png"
           alt="IEDS Three-Phase Implementation Strategy"
-          className="w-full h-80 object-cover"
+          className="w-full h-auto max-h-[400px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+          loading="lazy"
         />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+          <p className="text-xs text-[#ecfdf5]/60 italic">
+            Source: BIRD 2026-2035 — IEDS Implementation Phases
+          </p>
+        </div>
       </div>
 
       {/* Section 8: Strategic Sequencing & KPI Calibration */}
@@ -153,90 +172,6 @@ export function Section7_Financiers() {
         </div>
       </div>
 
-      {/* Section 9: Policy "Kill Switches" & Adaptive Mechanisms */}
-      <CardHeader className="p-0">
-        <CardTitle className="text-2xl font-serif text-[#C9A84C]">
-          9. Policy "Kill Switches" & Adaptive Mechanisms
-        </CardTitle>
-        <CardDescription className="text-[#ecfdf5]/70 text-base mt-2">
-          Automatic triggers and corrective mechanisms to prevent systemic failures and ensure Financiers cluster resilience
-        </CardDescription>
-      </CardHeader>
-
-      <div className="space-y-6">
-        {/* Kill Switch 1: Financial Stability */}
-        <div className="bg-gradient-to-r from-red-900/40 to-[#011a12] border-l-4 border-red-500 rounded-lg p-6">
-          <h4 className="text-lg font-semibold text-red-400 mb-3">
-            Kill Switch #1: Financial Stability Breach
-          </h4>
-          <div className="space-y-2 text-[#ecfdf5]/90 text-sm">
-            <p><strong className="text-[#C9A84C]">Trigger Condition:</strong> Islamic banking non-performing financing (NPF) ratio exceeds 8% for 2 consecutive quarters</p>
-            <p><strong className="text-[#C9A84C]">Automatic Response:</strong></p>
-            <ul className="list-disc list-inside ml-4 space-y-1">
-              <li>Temporary suspension of new branch licensing</li>
-              <li>Mandatory capital adequacy review by BSP-BARMM</li>
-              <li>Activation of takaful risk-sharing mechanisms</li>
-              <li>Enhanced monitoring and reporting requirements</li>
-            </ul>
-            <p><strong className="text-green-400">Recovery Protocol:</strong> NPF ratio &lt;5% for 2 consecutive quarters → gradual resumption with enhanced oversight</p>
-          </div>
-        </div>
-
-        {/* Kill Switch 2: Financial Inclusion Gap */}
-        <div className="bg-gradient-to-r from-amber-900/40 to-[#011a12] border-l-4 border-amber-500 rounded-lg p-6">
-          <h4 className="text-lg font-semibold text-amber-400 mb-3">
-            Kill Switch #2: Financial Inclusion Gap
-          </h4>
-          <div className="space-y-2 text-[#ecfdf5]/90 text-sm">
-            <p><strong className="text-[#C9A84C]">Trigger Condition:</strong> Financial inclusion rate in archipelagic provinces (Tawi-Tawi, Sulu, Basilan) remains &lt;25% after 24 months</p>
-            <p><strong className="text-[#C9A84C]">Automatic Response:</strong></p>
-            <ul className="list-disc list-inside ml-4 space-y-1">
-              <li>Mandatory deployment of mobile banking units</li>
-              <li>Activation of agent banking network expansion</li>
-              <li>Reallocation of 20% block grant to digital infrastructure</li>
-              <li>Partnership activation with fintech providers</li>
-            </ul>
-            <p><strong className="text-green-400">Recovery Protocol:</strong> Inclusion rate reaches 35% → transition to sustainable branch network</p>
-          </div>
-        </div>
-
-        {/* Kill Switch 3: Shariah Compliance Failure */}
-        <div className="bg-gradient-to-r from-orange-900/40 to-[#011a12] border-l-4 border-orange-500 rounded-lg p-6">
-          <h4 className="text-lg font-semibold text-orange-400 mb-3">
-            Kill Switch #3: Shariah Compliance Failure
-          </h4>
-          <div className="space-y-2 text-[#ecfdf5]/90 text-sm">
-            <p><strong className="text-[#C9A84C]">Trigger Condition:</strong> OIC/SMIIC accreditation delayed beyond 2030 OR Shariah governance violations detected in &gt;3 institutions</p>
-            <p><strong className="text-[#C9A84C]">Automatic Response:</strong></p>
-            <ul className="list-disc list-inside ml-4 space-y-1">
-              <li>Freeze on new Islamic finance product approvals</li>
-              <li>Mandatory Shariah audit of all licensed institutions</li>
-              <li>Emergency training program for Shariah scholars</li>
-              <li>International technical assistance activation (IsDB, ICD)</li>
-            </ul>
-            <p><strong className="text-green-400">Recovery Protocol:</strong> Full compliance restoration → phased product approval resumption</p>
-          </div>
-        </div>
-
-        {/* Kill Switch 4: Capital Flight Risk */}
-        <div className="bg-gradient-to-r from-purple-900/40 to-[#011a12] border-l-4 border-purple-500 rounded-lg p-6">
-          <h4 className="text-lg font-semibold text-purple-400 mb-3">
-            Kill Switch #4: Capital Flight Risk
-          </h4>
-          <div className="space-y-2 text-[#ecfdf5]/90 text-sm">
-            <p><strong className="text-[#C9A84C]">Trigger Condition:</strong> Islamic banking assets decline by &gt;15% quarter-over-quarter OR deposit withdrawal rate exceeds 20%</p>
-            <p><strong className="text-[#C9A84C]">Automatic Response:</strong></p>
-            <ul className="list-disc list-inside ml-4 space-y-1">
-              <li>Emergency liquidity facility activation</li>
-              <li>Temporary capital control measures</li>
-              <li>Public confidence campaign deployment</li>
-              <li>Waqt fund deployment for stability support</li>
-            </ul>
-            <p><strong className="text-green-400">Recovery Protocol:</strong> Asset stabilization for 3 consecutive months → gradual normalization</p>
-          </div>
-        </div>
-      </div>
-
       {/* Adaptive Management Framework */}
       <div className="bg-[#011a12]/60 border border-[#C9A84C]/30 rounded-lg p-6 space-y-4">
         <h3 className="text-lg font-semibold text-[#ecfdf5]">Adaptive Management Framework</h3>
@@ -340,7 +275,7 @@ export function Section7_Financiers() {
                   "Takaful (Islamic insurance)",
                   "Waqf (endowment)",
                   "Qard Hasan (benevolent loans)"
-                ].map((item, index) => (
+                ].map((item) => (
                   <FormField
                     key={item}
                     control={form.control}
