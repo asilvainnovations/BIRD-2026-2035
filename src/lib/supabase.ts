@@ -8,8 +8,14 @@ import { createClient } from '@supabase/supabase-js';
 
 // ── Primary Supabase project (auth + data) ────────────────────────────────────
 // Values sourced from VITE_ env vars; hard-coded fallbacks for runtime resilience
-const supabaseUrl  = import.meta.env.VITE_SUPABASE_URL  || 'https://lydsisparsmvextskevw.supabase.co';
-const supabaseKey  = import.meta.env.VITE_SUPABASE_ANON_KEY ||
+const supabaseUrl =
+  (import.meta.env.VITE_SUPABASE_URL as string) ||
+  'https://lydsisparsmvextskevw.supabase.co';
+
+const supabaseKey =
+  (import.meta.env.VITE_SUPABASE_ANON_KEY as string) ||
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5ZHNpc3BhcnNtdmV4dHNrZXZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5NzIxNzEsImV4cCI6MjA5NzU0ODE3MX0.VM8BPXPLw7wGYCcUvwlTGeP4qB-M02Nq3x720OG5jIs';
+
 export const supabase = createClient(supabaseUrl, supabaseKey, {
   auth: {
     autoRefreshToken: true,
@@ -22,7 +28,7 @@ export const supabase = createClient(supabaseUrl, supabaseKey, {
 // NOTE: Edge functions are deployed on a separate Supabase project.
 //       Use direct fetch() for these endpoints rather than supabase.functions.invoke()
 //       when calling from the primary project's client.
-const EDGE_BASE = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/strategic-planner-sync';
+const EDGE_BASE = 'https://rgvteytgkugdqdodedxq.databasepad.com/functions/v1';
 
 export const EDGE_FUNCTIONS = {
   AI_STRATEGY_ASSISTANT: `${EDGE_BASE}/ai-strategy-assistant`,
@@ -34,19 +40,18 @@ export const EDGE_FUNCTIONS = {
 // ── Branding Assets (CDN) ─────────────────────────────────────────────────────
 export const BRAND_ASSETS = {
   LOGO_URL: import.meta.env.VITE_BRAND_LOGO_URL ||
-    'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png',
+    'https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/bird-images/public/MTIT%20Logo.webp',
   AI_AVATAR_URL: import.meta.env.VITE_AI_STRATEGIST_AVATAR_URL ||
-    'https://appimize.app/assets/apps/user_1097/images/2c7d825bf937_232_1097.png',
+    'https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/pending-tasks/public/ASilva%20Innovations%20Logo.png',
   BANNER_URL: import.meta.env.VITE_BANNER_INVESTMENT_URL ||
-    'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/1.Banner.png',
+    'https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/pending-tasks/public/Investment%20ecosystem.png',
 } as const;
 
 // ── External URLs ──────────────────────────────────────────────────────────────
 export const EXTERNAL_URLS = {
-  PWA:          import.meta.env.VITE_PWA_EXTERNAL_URL       || 'https://bangsamoro-investment-roadmap.asilvainnovations.com',
-  USER_MANUAL:  import.meta.env.VITE_USER_MANUAL_URL        || 'https://bird-app-user-manual.asilvainnovations.com',
+  PWA:          import.meta.env.VITE_PWA_EXTERNAL_URL      || 'https://asilvainnovations.github.io/barmm-investment-roadmap/',
+  USER_MANUAL:  import.meta.env.VITE_USER_MANUAL_URL        || 'https://asilvainnovations.github.io/strat-planner-pwa/user-manual.html',
   DEV_DOCS:     import.meta.env.VITE_DEVELOPER_DOCS_URL     || 'https://asilvainnovations.github.io/strat-planner-pwa/developer-doc.html',
-  
 } as const;
 
 // ── Typed Headers Helper ──────────────────────────────────────────────────────
