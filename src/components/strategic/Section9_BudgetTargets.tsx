@@ -1,4 +1,6 @@
 // src/components/strategic/Section9_BudgetTargets.tsx
+// Section 9: Budget Allocation and Strategic Targets
+
 import {
   FormField,
   FormItem,
@@ -69,6 +71,9 @@ export function Section9_BudgetTargets() {
   return (
     <div className="space-y-8">
       <CardHeader className="p-0">
+        <div className="flex items-center gap-2 mb-2">
+          <Badge variant="outline" className="text-xs border-emerald-400/40 text-emerald-400">Investment</Badge>
+        </div>
         <CardTitle className="text-2xl font-serif text-[#C9A84C]">
           9. Budget Allocation and Strategic Targets
         </CardTitle>
@@ -76,6 +81,36 @@ export function Section9_BudgetTargets() {
           Phased implementation budget totaling ₱120-160 billion (2026-2035) aligned with IEDS sequencing logic.
         </CardDescription>
       </CardHeader>
+
+      {/* BIRD Investment Roadmap Image — Wide Format */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 shadow-lg group">
+        <img
+          src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/28.png"
+          alt="BIRD Investment Roadmap — Phased implementation timeline 2026-2035"
+          className="w-full h-auto max-h-[400px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+          loading="lazy"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+          <p className="text-xs text-[#ecfdf5]/60 italic">
+            Source: BIRD 2026-2035 — Strategic Investment Roadmap
+          </p>
+        </div>
+      </div>
+
+      {/* Investment-Development Virtuous Cycle — Wide Format */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/20 shadow-lg group">
+        <img
+          src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/14.%20Investment-Development%20Virtuous%20Cycle.png"
+          alt="Investment-Development Virtuous Cycle — How capital deployment drives sustained growth"
+          className="w-full h-auto max-h-[400px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+          loading="lazy"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+          <p className="text-xs text-[#ecfdf5]/60 italic">
+            Source: BIRD 2026-2035 — Investment-Development Virtuous Cycle
+          </p>
+        </div>
+      </div>
 
       {/* Total Budget Summary */}
       <div className="p-6 rounded-lg border border-[#C9A84C]/30 bg-gradient-to-r from-[#C9A84C]/10 to-transparent">
