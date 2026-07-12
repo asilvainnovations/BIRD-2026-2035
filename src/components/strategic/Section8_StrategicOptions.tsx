@@ -1,4 +1,6 @@
 // src/components/strategic/Section8_StrategicOptions.tsx
+// Section 8: Strategic Options & Roadmap Strategy
+
 import { useFormContext } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -15,8 +17,41 @@ export function Section8_StrategicOptions() {
   return (
     <div className="space-y-6">
       <div>
+        <div className="flex items-center gap-2 mb-2">
+          <Badge variant="outline" className="text-xs border-[#C9A84C]/40 text-[#C9A84C]">Strategy</Badge>
+        </div>
         <h2 className="text-2xl font-serif text-[#C9A84C] mb-2">8. Strategic Options & Roadmap Strategy</h2>
         <p className="text-[#ecfdf5]/70 text-sm">Select the most viable pathway for BARMM's 2035 vision.</p>
+      </div>
+
+      {/* Leverage Points in Archetypes — Wide Format Context Image */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 shadow-lg group">
+        <img
+          src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/22.png"
+          alt="Leverage Points in Systems Archetypes — Where intervention matters most"
+          className="w-full h-auto max-h-[400px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+          loading="lazy"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+          <p className="text-xs text-[#ecfdf5]/60 italic">
+            Source: BIRD 2026-2035 — Leverage Points in Systems Archetypes
+          </p>
+        </div>
+      </div>
+
+      {/* Meadows Leverage Points — Wide Format Context Image */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/20 shadow-lg group">
+        <img
+          src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/24.%20Meadows%20Hierarchy%20of%20Leverage%20Points.png"
+          alt="Meadows Hierarchy of Leverage Points — From parameters to paradigm transformation"
+          className="w-full h-auto max-h-[500px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+          loading="lazy"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+          <p className="text-xs text-[#ecfdf5]/60 italic">
+            Source: BIRD 2026-2035 — Meadows Hierarchy of Leverage Points
+          </p>
+        </div>
       </div>
 
       <FormField
