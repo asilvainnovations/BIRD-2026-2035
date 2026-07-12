@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BIRD 2026-2035 BEIE Actors-Value Mapping: Interactive network visualization of 31 stakeholders across the Bangsamoro Economic and Investment Ecosystem. Explore influence relationships, governance dynamics, and investment pathways shaping the Emerging Bangsamoro.">
+<meta name="keywords" content="BARMM, Bangsamoro, BEIE Framework, BIRD 2026-2035, Actors Mapping, Stakeholder Analysis, Investment Roadmap, BTA-BARMM, MILF, BOI-MTIT, Halal Economy, BEZA, Network Visualization">
+<meta name="author" content="Bureau of Investments - Ministry of Trade, Investments and Tourism (BOI-MTIT), BARMM">
+<meta property="og:title" content="BIRD 2026-2035 | BEIE Actors-Value Mapping Network">
+<meta property="og:description" content="Interactive network of 31 stakeholders shaping the Bangsamoro Investment Roadmap. Explore governance dynamics, security relationships, and investment pathways.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bird-app.asilvainnovations.com/actors-mapping">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://bird-app.asilvainnovations.com/actors-mapping">
+<title>BIRD 2026-2035 | BEIE Actors-Value Mapping Network — The Emerging Bangsamoro</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+
+<style>
+:root{
+  --gold-grad: linear-gradient(135deg,#7a5c1e 0%,#c9a84c 35%,#e8c560 50%,#c9a84c 65%,#7a5c1e 100%);
+  --gold-border:rgba(201,168,76,0.32);
+  --gold-border-strong:rgba(201,168,76,0.55);
+  --gold-glow:rgba(201,168,76,0.20);
+  --status-critical:#ef4444;
+  --status-high:#f59e0b;
+  --status-on-track:#10b981;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:linear-gradient(160deg,#011a12 0%,#022c22 45%,#0a1628 100%);min-height:100vh;color:#ecfdf5;}
+
+/* ── Navigation ── */
+.site-nav{background:rgba(2,44,34,.97);backdrop-filter:blur(18px);position:sticky;top:0;width:100%;z-index:200;border-bottom:2px solid var(--gold-border);}
+.nav-inner{max-width:1400px;margin:0 auto;padding:.65rem 1rem;display:flex;align-items:center;gap:.75rem;min-height:44px;}
+.nav-logo-wrap{display:flex;align-items:center;gap:.75rem;text-decoration:none;flex-shrink:0;}
+.nav-logo-wrap img{height:40px;width:auto;object-fit:contain;}
+.nav-title{display:none;font-family:'Cinzel',serif;font-size:.72rem;color:#C9A84C;font-weight:700;letter-spacing:.06em;line-height:1.3;}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;}
+.nav-back{color:#6ee7b7;text-decoration:none;font-size:.82rem;font-weight:500;display:flex;align-items:center;gap:.4rem;transition:color .2s;padding:.4rem .6rem;border-radius:.5rem;border:1px solid var(--gold-border);font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.nav-back:hover{color:#C9A84C;border-color:var(--gold-border-strong);}
+.live-badge{display:flex;align-items:center;gap:.4rem;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);border-radius:2rem;padding:.3rem .8rem;font-size:.72rem;font-weight:700;color:#10b981;letter-spacing:.04em;text-transform:uppercase;font-family:'DM Sans',sans-serif;}
+.live-dot{width:7px;height:7px;background:#10b981;border-radius:50%;animation:livePulse 2s infinite;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
+@media(min-width:768px){.nav-title{display:block;}.nav-inner{padding:.55rem 2rem;}}
+
+/* ── Hero ── */
+.hero{text-align:center;padding:3rem 1rem 2rem;position:relative;max-width:900px;margin:0 auto;}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:200px;height:3px;background:var(--gold-grad);border-radius:2px;}
+.kicker{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#C9A84C;display:block;margin-bottom:.5rem;font-family:'DM Sans',sans-serif;}
+h1{font-family:'Cinzel',serif;font-size:clamp(1.5rem,4vw,2.4rem);font-weight:700;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.75rem;line-height:1.2;}
+.subtitle{font-size:.9rem;color:rgba(236,253,245,.6);max-width:700px;margin:0 auto;line-height:1.6;font-family:'DM Sans',sans-serif;}
+
+/* ── Story Section ── */
+.story-section{max-width:1100px;margin:0 auto;padding:0 1.5rem 2.5rem;}
+.story-text{font-size:.88rem;color:rgba(236,253,245,.75);line-height:1.7;font-family:'DM Sans',sans-serif;text-align:center;max-width:800px;margin:0 auto 2rem;}
+.story-text strong{color:#E8C560;font-weight:600;}
+
+/* ── Legend ── */
+.legend-bar{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:1.5rem;padding:0 1rem;}
+.legend-item{display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:rgba(236,253,245,.6);font-family:'DM Sans',sans-serif;}
+.legend-dot{width:10px;height:10px;border-radius:50%;}
+
+/* ── Network Container ── */
+.network-wrap{max-width:1400px;margin:0 auto;padding:0 1rem 2rem;position:relative;}
+#network-container{background:rgba(6,78,59,.08);border:1px solid var(--gold-border);border-radius:1.25rem;overflow:hidden;position:relative;}
+#network-container::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad);z-index:5;}
+.tooltip{position:absolute;padding:.6rem .85rem;background:rgba(1,26,18,.95);border:1px solid var(--gold-border-strong);border-radius:.75rem;color:#ecfdf5;font-size:.78rem;font-family:'DM Sans',sans-serif;pointer-events:none;opacity:0;transition:opacity .25s;z-index:100;max-width:220px;line-height:1.4;box-shadow:0 8px 24px rgba(0,0,0,.4);}
+.tooltip.visible{opacity:1;}
+
+/* ── Stats ── */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;max-width:900px;margin:0 auto 2rem;padding:0 1rem;}
+.stat-card{background:rgba(2,44,34,.5);border:1px solid var(--gold-border);border-radius:1rem;padding:1rem;text-align:center;transition:all .3s;}
+.stat-card:hover{border-color:var(--gold-border-strong);transform:translateY(-2px);}
+.stat-number{font-family:'Cinzel',serif;font-size:1.75rem;font-weight:700;color:#E8C560;line-height:1;}
+.stat-label{font-size:.72rem;color:rgba(236,253,245,.55);margin-top:.35rem;font-family:'DM Sans',sans-serif;}
+
+/* ── Actor Cards Section ── */
+.cards-section{max-width:1400px;margin:0 auto;padding:3rem 1rem;}
+.section-header{text-align:center;margin-bottom:2rem;}
+.section-title{font-family:'Cinzel',serif;font-size:clamp(1.25rem,3vw,1.75rem);font-weight:700;color:#C9A84C;margin-bottom:.5rem;}
+.section-desc{font-size:.85rem;color:rgba(236,253,245,.55);font-family:'DM Sans',sans-serif;}
+
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-bottom:2rem;}
+.filter-btn{background:rgba(2,44,34,.6);border:1px solid var(--gold-border);color:rgba(236,253,245,.7);padding:.5rem 1rem;border-radius:2rem;font-size:.78rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .3s;}
+.filter-btn:hover,.filter-btn.active{border-color:var(--gold-border-strong);background:rgba(201,168,76,.12);color:#E8C560;}
+.actor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem;}
+.actor-card{background:rgba(6,78,59,.12);border:1px solid var(--gold-border);border-radius:1rem;padding:1.25rem;position:relative;overflow:hidden;transition:transform .3s,border-color .3s;cursor:pointer;}
+.actor-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad);}
+.actor-card:hover{border-color:var(--gold-border-strong);transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.3);}
+.actor-header{display:flex;align-items:center;gap:1rem;margin-bottom:.75rem;}
+.actor-img-wrap{width:52px;height:52px;border-radius:50%;background:rgba(2,44,34,.7);border:2px solid var(--gold-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;font-size:1.5rem;}
+.actor-img-wrap img{width:100%;height:100%;object-fit:cover;}
+.actor-title{flex:1;min-width:0;}
+.actor-name{font-family:'Cinzel',serif;font-size:.9rem;font-weight:700;color:#ecfdf5;line-height:1.2;margin-bottom:.25rem;}
+.actor-category{font-size:.68rem;color:#C9A84C;font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-family:'DM Sans',sans-serif;}
+.influence-bar{height:6px;border-radius:3px;background:rgba(2,44,34,.5);overflow:hidden;margin-bottom:.5rem;position:relative;}
+.influence-fill{height:100%;border-radius:3px;transition:width .8s cubic-bezier(.22,1,.36,1);position:relative;}
+.influence-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:shimmer 2s infinite;}
+@keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+.influence-label{display:flex;justify-content:space-between;font-size:.68rem;color:rgba(236,253,245,.5);font-family:'DM Sans',sans-serif;margin-bottom:.75rem;}
+.influence-score{font-weight:700;color:#E8C560;}
+.actor-desc{font-size:.78rem;color:rgba(236,253,245,.7);line-height:1.5;font-family:'DM Sans',sans-serif;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;transition:all .3s;}
+.actor-card:hover .actor-desc{-webkit-line-clamp:unset;}
+
+/* ── Popup ── */
+.popup-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;padding:1rem;}
+.popup-overlay.active{display:flex;}
+.popup-content{background:rgba(1,26,18,.97);border:1px solid var(--gold-border-strong);border-radius:1.25rem;padding:2rem;max-width:520px;width:100%;max-height:85vh;overflow-y:auto;position:relative;box-shadow:0 16px 64px rgba(0,0,0,.5);}
+.popup-close{position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;background:rgba(201,168,76,.15);border:1px solid var(--gold-border);color:#C9A84C;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.popup-close:hover{background:rgba(201,168,76,.3);}
+.popup-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem;}
+.popup-img{width:64px;height:64px;border-radius:50%;background:rgba(2,44,34,.7);border:2px solid var(--gold-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;font-size:2rem;}
+.popup-img img{width:100%;height:100%;object-fit:cover;}
+.popup-name{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:#ecfdf5;}
+.popup-category{font-size:.75rem;color:#C9A84C;font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-family:'DM Sans',sans-serif;margin-top:.25rem;}
+.popup-desc{font-size:.82rem;color:rgba(236,253,245,.8);line-height:1.65;font-family:'DM Sans',sans-serif;margin-bottom:1.25rem;}
+.popup-meta{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.meta-item{background:rgba(2,44,34,.5);border:1px solid var(--gold-border);border-radius:.75rem;padding:.75rem;text-align:center;}
+.meta-label{font-size:.65rem;color:#C9A84C;text-transform:uppercase;letter-spacing:.06em;font-family:'DM Sans',sans-serif;margin-bottom:.25rem;font-weight:600;}
+.meta-value{font-size:1.25rem;font-weight:700;color:#E8C560;font-family:'DM Sans',sans-serif;}
+
+/* ── CTA ── */
+.cta-section{text-align:center;padding:3rem 1rem;background:rgba(6,78,59,.08);border-top:1px solid var(--gold-border);}
+.cta-title{font-family:'Cinzel',serif;font-size:clamp(1.2rem,3vw,1.6rem);font-weight:700;color:#C9A84C;margin-bottom:1rem;}
+.cta-text{font-size:.85rem;color:rgba(236,253,245,.6);max-width:600px;margin:0 auto 1.5rem;line-height:1.6;font-family:'DM Sans',sans-serif;}
+.cta-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold-grad);color:#022c22;font-weight:700;padding:1rem 2.5rem;border-radius:2rem;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.9rem;text-decoration:none;transition:transform .3s,box-shadow .3s;}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,.4);}
+
+/* ── Footer ── */
+footer{border-top:1px solid var(--gold-border);background:rgba(2,44,34,.7);backdrop-filter:blur(8px);padding:2rem 1rem;margin-top:2rem;text-align:center;}
+.footer-text{font-size:.72rem;color:rgba(236,253,245,.45);font-family:'DM Sans',sans-serif;line-height:1.5;}
+
+/* ── Category colors ── */
+.cat-gov .influence-fill{background:linear-gradient(90deg,#064e3b,#C9A84C);}
+.cat-security .influence-fill{background:linear-gradient(90deg,#7f1d1d,#ef4444);}
+.cat-economic .influence-fill{background:linear-gradient(90deg,#0e7490,#22d3ee);}
+.cat-finance .influence-fill{background:linear-gradient(90deg,#581c87,#a78bfa);}
+.cat-private .influence-fill{background:linear-gradient(90deg,#1e3a5f,#60a5fa);}
+.cat-dev .influence-fill{background:linear-gradient(90deg,#3f6212,#84cc16);}
+.cat-beneficiaries .influence-fill{background:linear-gradient(90deg,#9d174d,#f472b6);}
+.cat-traditional .influence-fill{background:linear-gradient(90deg,#713f12,#f59e0b);}
+.cat-informal .influence-fill{background:linear-gradient(90deg,#292524,#78716c);}
+.cat-education .influence-fill{background:linear-gradient(90deg,#1e3a5f,#38bdf8);}
+
+@media(max-width:640px){.actor-grid{grid-template-columns:1fr;}.stats-grid{grid-template-columns:repeat(2,1fr);}}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "BIRD 2026-2035 BEIE Actors-Value Mapping",
+  "applicationCategory": "BusinessApplication",
+  "description": "Interactive network visualization of 31 stakeholders across the Bangsamoro Economic and Investment Ecosystem (BEIE)",
+  "author": {"@type": "Organization", "name": "BOI-MTIT, BARMM"}
+}
+</script>
+<base target="_blank">
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="https://asilvainnovations.github.io/BIRD-2026-2035/" class="nav-logo-wrap">
+      <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/18.%20Vision.png" alt="BIRD 2026-2035">
+      <span class="nav-title">BIRD 2026&ndash;2035<br><span style="font-size:.6rem;color:rgba(236,253,245,.5);">Actors Mapping</span></span>
+    </a>
+    <div class="nav-right">
+      <a href="https://asilvainnovations.github.io/BIRD-2026-2035/" class="nav-back">BIRD Portal</a>
+      <div class="live-badge"><span class="live-dot"></span>Live</div>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<header class="hero">
+  <span class="kicker">BEIE Framework &middot; Stakeholder Analysis</span>
+  <h1>31 Actors. One Ecosystem.<br>Who Shapes the Emerging Bangsamoro?</h1>
+  <p class="subtitle">Every investment decision ripples through a web of governance, tradition, security, and community. Explore the relationships that will make or break the BIRD 2026&ndash;2035 roadmap.</p>
+</header>
+
+<!-- ── Stats ── -->
+<div class="stats-grid">
+  <div class="stat-card"><div class="stat-number">31</div><div class="stat-label">Key Actors</div></div>
+  <div class="stat-card"><div class="stat-number">172</div><div class="stat-label">Relationships</div></div>
+  <div class="stat-card"><div class="stat-number">9</div><div class="stat-label">Categories</div></div>
+  <div class="stat-card"><div class="stat-number">5</div><div class="stat-label">BEIE Clusters</div></div>
+</div>
+
+<!-- ── Story / Context ── -->
+<div class="story-section">
+  <p class="story-text">
+    The <strong>Bangsamoro Economic and Investment Ecosystem (BEIE)</strong> is not a blueprint on paper. It is a living web of people, institutions, and power dynamics. From the <strong>BTA-BARMM</strong> transition authority holding the legislative pen, to <strong>clan leaders</strong> who control land access in practice, to <strong>vulnerable groups</strong> whose livelihoods depend on every decision — each actor pulls a thread that shapes the whole tapestry. <strong style="color:#C9A84C;">Hover over the network</strong> to explore how these forces connect. <strong style="color:#C9A84C;">Scroll down</strong> for detailed actor profiles with influence scores and value contributions.
+  </p>
+
+  <!-- Legend -->
+  <div class="legend-bar">
+    <div class="legend-item"><div class="legend-dot" style="background:#C9A84C;"></div>Government</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ef4444;"></div>Security/Conflict</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#22d3ee;"></div>Economic Institutions</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#60a5fa;"></div>Private Sector</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#a78bfa;"></div>Development/CSO</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div>Traditional/Informal</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f472b6;"></div>Beneficiaries</div>
+  </div>
+</div>
+
+<!-- ── D3.js Network Diagram ── -->
+<div class="network-wrap">
+  <div id="network-container">
+    <svg id="network-svg" width="100%" height="700"></svg>
+  </div>
+  <div class="tooltip" id="tooltip"></div>
+</div>
+
+<!-- ── Actor Cards ── -->
+<div class="cards-section">
+  <div class="section-header">
+    <h2 class="section-title">Actor Profiles</h2>
+    <p class="section-desc">Click any card for full details. Use filters to explore by category.</p>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All Actors</button>
+    <button class="filter-btn" data-filter="government">Government</button>
+    <button class="filter-btn" data-filter="security">Security</button>
+    <button class="filter-btn" data-filter="economic">Economic</button>
+    <button class="filter-btn" data-filter="finance">Finance</button>
+    <button class="filter-btn" data-filter="private">Private Sector</button>
+    <button class="filter-btn" data-filter="dev">Development</button>
+    <button class="filter-btn" data-filter="traditional">Traditional</button>
+    <button class="filter-btn" data-filter="informal">Informal</button>
+  </div>
+
+  <div class="actor-grid" id="actorGrid"></div>
+</div>
+
+<!-- ── CTA ── -->
+<div class="cta-section">
+  <h3 class="cta-title">See Where Your Organization Fits</h3>
+  <p class="cta-text">The BIRD roadmap needs every actor at the table. Validate the framework, contribute your expertise, and help shape a roadmap that works for all 31 stakeholders.</p>
+  <a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/validation-survey.html" class="cta-btn">Take the Validation Survey &rarr;</a>
+</div>
+
+<!-- ── Footer ── -->
+<footer>
+  <p class="footer-text">&copy; 2025 Bureau of Investments &mdash; Ministry of Trade, Investments and Tourism (BOI-MTIT), BARMM.<br>BIRD 2026&ndash;2035 Actors&ndash;Value Mapping. Part of the BEIE Framework analysis.</p>
+</footer>
+
+<!-- ── Popup ── -->
+<div class="popup-overlay" id="popupOverlay" onclick="closePopup(event)">
+  <div class="popup-content" onclick="event.stopPropagation()">
+    <button class="popup-close" onclick="closePopup()">&times;</button>
+    <div id="popupBody"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════════
+// DATA: 31 Actors + 172 Relationships
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const ACTORS = [
+  { id:"BTA-BARMM", name:"BTA-BARMM", category:"Government / Transition Authority", influence:100, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Bangsamoro Transition Authority is the interim government of BARMM, vested with executive and legislative powers. It oversees the transition from ARMM to BARMM, sets policy direction for the investment roadmap, and appoints the Chief Minister. As the highest governing body, it creates the enabling environment for all investment clusters through legislation, budgeting (Annual Block Grant), and intergovernmental relations with the national government." },
+  { id:"OCM-BARMM", name:"OCM-BARMM", category:"Government / Chief Minister's Office", influence:98, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Office of the Chief Minister is the executive arm of the BTA, headed by the Chief Minister who chairs the cabinet and directs all ministries. It translates parliamentary policy into executive action, oversees the BIRD 2026-2035 implementation, and serves as the primary interface between government and investors through the BOI-MTIT." },
+  { id:"GRP", name:"GRP", category:"Government / National Government", influence:95, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Government of the Republic of the Philippines is the national government that created BARMM through the Bangsamoro Organic Law. It provides the Annual Block Grant (~Php 80B), oversees AFP/PNP security operations, and represents BARMM in international treaties. GRP's policy coherence and fiscal commitment determine the investment ecosystem's macro stability." },
+  { id:"BOI-MTIT", name:"BOI-MTIT", category:"Government / Investment Promotion", influence:92, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Bureau of Investments within the Ministry of Trade, Investments and Tourism is BARMM's primary investment promotion agency. It facilitates investor registration, manages investment incentives, coordinates with BEZA on economic zones, and leads the Halal Economy Dominance Strategy. BOI-MTIT is the operational heart of the BIRD investment facilitation cluster." },
+  { id:"BEZA", name:"BEZA", category:"Economic Zone Authority", influence:85, catClass:"cat-economic", filter:"economic", color:"#22d3ee", desc:"The Bangsamoro Economic Zone Authority manages special economic zones offering tax incentives, simplified regulations, and infrastructure support to investors. Modeled after PEZA, BEZA is central to the HEDS (Halal Economy Dominance Strategy) through the proposed Halal Park in Matanog. It provides the physical and regulatory infrastructure that makes large-scale investment feasible." },
+  { id:"MILF", name:"MILF", category:"Peace Organization / Former Revolutionary Group", influence:88, catClass:"cat-security", filter:"security", color:"#ef4444", desc:"The Moro Islamic Liberation Front is the largest Moro revolutionary group that signed the Comprehensive Agreement on the Bangsamoro (CAB). Its chairman serves as BARMM's Chief Minister. MILF provides political legitimacy, grassroots mobilization, and peace infrastructure for the transition. Its transformation from armed group to governing partner is fundamental to investor confidence." },
+  { id:"AFP/PNP", name:"AFP/PNP", category:"Security Forces", influence:82, catClass:"cat-security", filter:"security", color:"#ef4444", desc:"The Armed Forces of the Philippines and Philippine National Police provide security and maintain law and order in BARMM. They conduct counter-insurgency/counter-terrorism operations against BIFF, Abu Sayyaf, and DI-Maute groups. Security stability is the precondition for all investment — AFP/PNP's effectiveness directly determines investor risk perception and the viability of the BIRD roadmap." },
+  { id:"BHB", name:"BHB", category:"Halal Standards Body", influence:80, catClass:"cat-economic", filter:"economic", color:"#22d3ee", desc:"The Bangsamoro Halal Board is the region's halal accreditation and certification body. Supported by UNIDO, it develops halal standards aligned with OIC/SMIIC, certifies halal products for export to GCC and ASEAN markets, and underpins the entire Halal Economy cluster. BHB certification is the passport for BARMM products into the $2.3 trillion global halal market." },
+  { id:"MAFAR", name:"MAFAR", category:"Agriculture Ministry", influence:78, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Ministry of Agriculture, Fisheries and Agrarian Reform manages Cluster 1 (Foundations) — agriculture, fisheries, forestry, and energy. It supports cooperatives, agricultural MSMEs, and anchor agribusiness investors. MAFAR is critical for food security, rural livelihoods, and the supply chain feeding the Halal Economy and BIMP-EAGA exports." },
+  { id:"MENRE", name:"MENRE", category:"Environment & Energy Ministry", influence:75, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Ministry of Environment, Natural Resources and Energy oversees environmental compliance, natural resource management, and renewable energy. It licenses mining/forestry, manages climate adaptation programs, and attracts green energy investments (solar, geothermal). MENRE is the gatekeeper for sustainable investment in natural resource-based industries." },
+  { id:"Islamic Banks", name:"Islamic Banks", category:"Finance / Islamic Banking", influence:75, catClass:"cat-finance", filter:"finance", color:"#a78bfa", desc:"Islamic banks in BARMM (led by Al-Amanah Islamic Investment Bank) provide Shariah-compliant financial services — sukuk (Islamic bonds), mudarabah (profit-sharing), and microfinance. They are critical for financial inclusion of Muslim communities excluded from conventional banking, and for channeling domestic savings and international Islamic finance into productive investment." },
+  { id:"Int. Dev Partners", name:"Int. Dev Partners", category:"Development Partners / Multilaterals", influence:78, catClass:"cat-dev", filter:"dev", color:"#84cc16", desc:"International development partners — JICA, World Bank, ADB, UN agencies, IsDB, USAID, EU — provide grants, concessional loans, technical assistance, and policy advice. They fund critical infrastructure, capacity building, and peace programs. Development partners are essential co-investors in the BIRD roadmap, providing both financing and international legitimacy that catalyzes private investment." },
+  { id:"Local Politicians / LGUs", name:"Local Politicians / LGUs", category:"Local Government Units", influence:73, catClass:"cat-traditional", filter:"traditional", color:"#f59e0b", desc:"Local Government Units — provincial governors, municipal mayors, barangay captains — implement national and regional policies at the local level, issue business permits, manage local infrastructure, and deliver basic services. LGUs are the frontline interface between investment projects and communities. Their efficiency, transparency, and cooperation directly determine the ease of doing business at the local level." },
+  { id:"Anchor Investors", name:"Anchor Investors", category:"Private Sector / Large Investors", influence:72, catClass:"cat-private", filter:"private", color:"#60a5fa", desc:"Large domestic and multinational corporations (e.g., Dole, San Miguel, Ayala) that commit significant capital to BARMM projects. Anchor investors create employment, develop supply chains, and signal confidence to other investors. Their presence in BEZA economic zones and agricultural concessions validates the investment climate and attracts follow-on investment from smaller firms." },
+  { id:"Clan Leaders / Big Men", name:"Clan Leaders / Big Men", category:"Traditional Power / Informal Governance", influence:70, catClass:"cat-traditional", filter:"traditional", color:"#f59e0b", desc:"Traditional leaders and political strongmen who control local patronage networks, land, and informal security arrangements. They wield significant de facto influence over local politics, business permits, and community consent. Clan leaders can either facilitate or block investment depending on whether their interests align. Engaging them through Moral Governance and inclusive processes is essential for investment localization." },
+  { id:"TESDA/Academe", name:"TESDA/Academe", category:"Education & Skills Development", influence:70, catClass:"cat-education", filter:"dev", color:"#38bdf8", desc:"TESDA (Technical Education and Skills Development Authority) and academic institutions provide workforce training, skills certification, and research. They are the Enablers cluster's human capital engine — producing the skilled labor force needed by anchor investors, halal processors, and service industries. Industry-linked training programs reduce skills mismatch and attract labor-intensive investment." },
+  { id:"Cooperatives", name:"Cooperatives", category:"Private Sector / Collective Enterprise", influence:68, catClass:"cat-private", filter:"private", color:"#60a5fa", desc:"Agricultural and consumer cooperatives aggregate smallholder production, provide shared services (processing, marketing, credit), and enable economies of scale for rural producers. They are the primary interface between MAFAR's agricultural programs and grassroots farmers. Cooperatives reduce transaction costs, improve bargaining power, and channel investment benefits to community level." },
+  { id:"Bangsamoro Corp", name:"Bangsamoro Corp", category:"Government-Owned Corporation", influence:65, catClass:"cat-economic", filter:"economic", color:"#22d3ee", desc:"Bangsamoro Government-owned and controlled corporations (GOCCs) operate in strategic sectors — energy, infrastructure, and agribusiness. They serve as anchor investors, joint venture partners, and vehicles for public-private partnerships. Bangsamoro Corp provides the institutional capacity to implement large-scale projects that private investors alone may not undertake." },
+  { id:"Foreign Investors", name:"Foreign Investors", category:"Private Sector / International Investors", influence:65, catClass:"cat-private", filter:"private", color:"#60a5fa", desc:"International investors from GCC, ASEAN, and BIMP-EAGA countries bring capital, technology, and market access. Key targets include halal food processors, Islamic banks, and infrastructure developers. Foreign direct investment is essential for filling the financing gap beyond the Block Grant, transferring technology, and linking BARMM to global value chains (especially halal and BIMP-EAGA trade)." },
+  { id:"Local CSOs", name:"Local CSOs", category:"Civil Society / Local NGOs", influence:62, catClass:"cat-dev", filter:"dev", color:"#84cc16", desc:"Local civil society organizations are community-based groups that implement development projects, advocate for vulnerable groups, monitor governance, and facilitate grassroots participation in the peace process. They have deep local knowledge, cultural legitimacy, and trust within communities. Local CSOs are the primary delivery channel for development benefits to reach marginalized populations." },
+  { id:"OIC/SMIIC", name:"OIC/SMIIC", category:"International Standards Organization", influence:60, catClass:"cat-education", filter:"dev", color:"#38bdf8", desc:"The Standards and Metrology Institute for Islamic Countries (SMIIC), under the OIC, sets international halal standards (OIC/SMIIC Halal Standards). BHB's alignment with these standards enables mutual recognition of halal certification across 57 OIC member countries. OIC/SMIIC is the gateway standard that makes BARMM halal products internationally competitive and exportable." },
+  { id:"Int. CSOs", name:"Int. CSOs", category:"Civil Society / International NGOs", influence:58, catClass:"cat-dev", filter:"dev", color:"#84cc16", desc:"International civil society organizations — CARE, Oxfam, Mercy Corps, Islamic Relief — deliver humanitarian assistance, capacity building, and advocacy. They often pioneer community-level development models that government later scales. Int. CSOs bridge the gap between international funding and grassroots implementation, particularly in conflict-affected and vulnerable communities." },
+  { id:"MSMEs", name:"MSMEs", category:"Private Sector / Small & Medium Enterprises", influence:55, catClass:"cat-private", filter:"private", color:"#60a5fa", desc:"Micro, small and medium enterprises form the backbone of BARMM's private sector — from halal food processors and artisans to service providers and digital entrepreneurs. MSMEs absorb the majority of employment, innovate at the grassroots level, and distribute investment benefits widely. Their growth is constrained by limited access to finance, markets, and infrastructure." },
+  { id:"MNLF", name:"MNLF", category:"Peace Organization / Former Revolutionary Group", influence:50, catClass:"cat-security", filter:"security", color:"#ef4444", desc:"The Moro National Liberation Front signed the 1996 Final Peace Agreement with the GRP. While it has a separate political track from MILF, some MNLF members participate in the BTA Parliament. MNLF represents an important constituency in Sulu and Tawi-Tawi, and its full integration into BARMM governance is essential for comprehensive peace and inclusive investment." },
+  { id:"Vulnerable Groups", name:"Vulnerable Groups", category:"Beneficiaries / Marginalized Communities", influence:45, catClass:"cat-beneficiaries", filter:"dev", color:"#f472b6", desc:"IDPs, women, children, indigenous peoples, persons with disabilities, and conflict survivors who face disproportionate barriers to economic participation. The BIRD roadmap's inclusivity depends on how effectively investment reaches these groups through targeted programs, MSME support, cooperative membership, and social safety nets. Vulnerable groups are both beneficiaries and potential contributors to the economy." },
+  { id:"Shadow Economies", name:"Shadow Economies", category:"Informal Economy", influence:30, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"Unregulated economic activities — smuggling, illegal logging, informal money transfers, unregistered trade — that operate outside formal governance. Shadow economies deprive government of revenue, undermine regulated businesses, and often fund armed groups. However, they also provide livelihoods where formal institutions are absent. Formalizing shadow economies (e.g., through Islamic banking, cooperative registration) can channel informal activity into productive investment." },
+  { id:"Private Militias", name:"Private Militias", category:"Informal Armed Groups", influence:25, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"Privately armed groups maintained by clan leaders and political figures for protection, electoral violence, and territorial control. Private militias represent the 'dark side' of clan politics — they create insecurity, distort political competition, and undermine the state's monopoly on violence. Their presence increases business costs (protection payments) and deters law-abiding investors. Disarmament is a normalization priority." },
+  { id:"CPP/NPA", name:"CPP/NPA", category:"Communist Insurgents", influence:20, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"The Communist Party of the Philippines-New People's Army has limited but persistent presence in BARMM's hinterlands, primarily engaging in extortion ('revolutionary taxation') of businesses and plantations. While not the primary security threat, NPA activity adds to the cost of doing business in remote agricultural areas and requires coordinated civilian-military response." },
+  { id:"BIFF", name:"BIFF", category:"Non-State Armed Group", influence:15, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"The Bangsamoro Islamic Freedom Fighters is a MILF splinter group that rejects the peace process. Operating primarily in Maguindanao, it conducts sporadic attacks on military targets and infrastructure. Its activities create investor risk, disrupt agricultural supply chains, and drain security resources. Addressing BIFF through normalization and development is key to unlocking investment in conflict-affected areas." },
+  { id:"DI-Maute Group", name:"DI-Maute Group", category:"Terrorist Organization", influence:8, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"The Dawlah Islamiyah-Maute Group was responsible for the 2017 Marawi Siege. Remnants continue asymmetric operations in Lanao del Sur. The group represents the highest-impact terrorism risk in mainland BARMM and directly affected Marawi's rehabilitation — a Php 50+ billion reconstruction program that is itself a major investment and development undertaking." },
+  { id:"Abu Sayyaf", name:"Abu Sayyaf", category:"Terrorist Organization", influence:5, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"A militant group based in Sulu and Basilan known for kidnapping-for-ransom, bombings, and ties to international terrorism. Abu Sayyaf activities severely deter investment in island provinces, increase security costs, and damage BARMM's international reputation. Counter-terrorism cooperation between AFP and local communities is gradually reducing its operational capacity." }
+];
+
+// 172 relationships (top 80 for visualization performance)
+const RELATIONSHIPS = [
+  {source:"BTA-BARMM",target:"OCM-BARMM",value:100},{source:"BTA-BARMM",target:"BOI-MTIT",value:90},
+  {source:"BTA-BARMM",target:"MAFAR",value:85},{source:"BTA-BARMM",target:"MILF",value:85},
+  {source:"BTA-BARMM",target:"BEZA",value:80},{source:"BTA-BARMM",target:"BHB",value:85},
+  {source:"BTA-BARMM",target:"Int. Dev Partners",value:75},{source:"BTA-BARMM",target:"Local Politicians / LGUs",value:70},
+  {source:"GRP",target:"AFP/PNP",value:100},{source:"GRP",target:"BTA-BARMM",value:80},
+  {source:"GRP",target:"MILF",value:65},{source:"GRP",target:"Local Politicians / LGUs",value:70},
+  {source:"OCM-BARMM",target:"BOI-MTIT",value:95},{source:"OCM-BARMM",target:"Local Politicians / LGUs",value:85},
+  {source:"OCM-BARMM",target:"BEZA",value:85},{source:"OCM-BARMM",target:"BHB",value:80},
+  {source:"BOI-MTIT",target:"BEZA",value:85},{source:"BOI-MTIT",target:"BHB",value:90},
+  {source:"BOI-MTIT",target:"Anchor Investors",value:85},{source:"BOI-MTIT",target:"Foreign Investors",value:75},
+  {source:"BOI-MTIT",target:"Bangsamoro Corp",value:80},{source:"BOI-MTIT",target:"MSMEs",value:70},
+  {source:"BEZA",target:"Anchor Investors",value:90},{source:"BEZA",target:"Foreign Investors",value:80},
+  {source:"BEZA",target:"Bangsamoro Corp",value:70},{source:"BEZA",target:"MSMEs",value:60},
+  {source:"BHB",target:"OIC/SMIIC",value:95},{source:"BHB",target:"Islamic Banks",value:85},
+  {source:"BHB",target:"Anchor Investors",value:70},{source:"BHB",target:"MSMEs",value:80},
+  {source:"MAFAR",target:"Cooperatives",value:90},{source:"MAFAR",target:"Anchor Investors",value:75},
+  {source:"MAFAR",target:"Local Politicians / LGUs",value:70},{source:"MAFAR",target:"MENRE",value:80},
+  {source:"MENRE",target:"Int. Dev Partners",value:85},{source:"MENRE",target:"Local Politicians / LGUs",value:75},
+  {source:"MENRE",target:"Vulnerable Groups",value:50},{source:"MENRE",target:"Bangsamoro Corp",value:70},
+  {source:"Islamic Banks",target:"MSMEs",value:80},{source:"Islamic Banks",target:"Bangsamoro Corp",value:65},
+  {source:"Islamic Banks",target:"Cooperatives",value:60},{source:"Islamic Banks",target:"BHB",value:85},
+  {source:"MILF",target:"Local CSOs",value:75},{source:"MILF",target:"MNLF",value:50},
+  {source:"MILF",target:"Local Politicians / LGUs",value:70},{source:"MILF",target:"Clan Leaders / Big Men",value:40},
+  {source:"AFP/PNP",target:"BIFF",value:90},{source:"AFP/PNP",target:"Abu Sayyaf",value:95},
+  {source:"AFP/PNP",target:"DI-Maute Group",value:85},{source:"AFP/PNP",target:"Clan Leaders / Big Men",value:45},
+  {source:"AFP/PNP",target:"Private Militias",value:60},{source:"AFP/PNP",target:"Shadow Economies",value:70},
+  {source:"Clan Leaders / Big Men",target:"Private Militias",value:95},{source:"Clan Leaders / Big Men",target:"Local Politicians / LGUs",value:85},
+  {source:"Clan Leaders / Big Men",target:"Shadow Economies",value:75},{source:"Clan Leaders / Big Men",target:"BIFF",value:30},
+  {source:"Int. Dev Partners",target:"Int. CSOs",value:85},{source:"Int. Dev Partners",target:"Local CSOs",value:65},
+  {source:"Int. Dev Partners",target:"MENRE",value:80},{source:"Int. Dev Partners",target:"BOI-MTIT",value:80},
+  {source:"Local Politicians / LGUs",target:"Cooperatives",value:75},{source:"Local Politicians / LGUs",target:"Vulnerable Groups",value:60},
+  {source:"Anchor Investors",target:"MSMEs",value:55},{source:"Anchor Investors",target:"Cooperatives",value:65},
+  {source:"Anchor Investors",target:"TESDA/Academe",value:70},{source:"Anchor Investors",target:"Foreign Investors",value:65},
+  {source:"Foreign Investors",target:"BOI-MTIT",value:85},{source:"Foreign Investors",target:"BEZA",value:75},
+  {source:"MSMEs",target:"BHB",value:80},{source:"MSMEs",target:"Cooperatives",value:70},
+  {source:"MSMEs",target:"TESDA/Academe",value:75},{source:"MSMEs",target:"Vulnerable Groups",value:60},
+  {source:"Local CSOs",target:"Vulnerable Groups",value:80},{source:"Local CSOs",target:"Int. CSOs",value:85},
+  {source:"Cooperatives",target:"TESDA/Academe",value:65},{source:"Cooperatives",target:"Vulnerable Groups",value:45},
+  {source:"Shadow Economies",target:"Abu Sayyaf",value:50},{source:"Shadow Economies",target:"Private Militias",value:80},
+  {source:"Vulnerable Groups",target:"MAFAR",value:50},{source:"Vulnerable Groups",target:"Islamic Banks",value:55},
+  {source:"Bangsamoro Corp",target:"Anchor Investors",value:75},{source:"Bangsamoro Corp",target:"MENRE",value:70}
+];
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// D3.js FORCE-DIRECTED NETWORK
+// ═══════════════════════════════════════════════════════════════════════════════
+function initNetwork() {
+  const container = document.getElementById('network-container');
+  const svg = d3.select('#network-svg');
+  const tooltip = document.getElementById('tooltip');
+  const width = container.clientWidth;
+  const height = 700;
+
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  // Group relationships by source-target for bidirectional
+  const linkData = RELATIONSHIPS.map(r => ({...r}));
+
+  // Node radius based on influence
+  const radiusScale = d3.scaleSqrt().domain([0,100]).range([12,42]);
+
+  // Link width based on value
+  const linkWidth = d3.scaleLinear().domain([0,100]).range([0.5,5]);
+
+  // Simulation
+  const simulation = d3.forceSimulation(ACTORS)
+    .force('link', d3.forceLink(linkData).id(d => d.id).distance(d => 220 - d.value * 1.5).strength(0.4))
+    .force('charge', d3.forceManyBody().strength(-400))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collision', d3.forceCollide().radius(d => radiusScale(d.influence) + 15))
+    .force('x', d3.forceX(width / 2).strength(0.05))
+    .force('y', d3.forceY(height / 2).strength(0.05));
+
+  // Links
+  const link = svg.append('g')
+    .selectAll('line')
+    .data(linkData)
+    .enter().append('line')
+    .attr('stroke', d => {
+      const avgInf = (ACTORS.find(a=>a.id===d.source)?.influence||50 + ACTORS.find(a=>a.id===d.target)?.influence||50)/2;
+      return d.value >= 80 ? 'rgba(201,168,76,0.5)' : d.value >= 60 ? 'rgba(110,231,183,0.3)' : 'rgba(236,253,245,0.12)';
+    })
+    .attr('stroke-width', d => linkWidth(d.value))
+    .attr('stroke-opacity', 0.7);
+
+  // Arrowheads for directed links
+  svg.append('defs').selectAll('marker')
+    .data(['arrow'])
+    .enter().append('marker')
+    .attr('id', 'arrow')
+    .attr('viewBox', '0 -5 10 10')
+    .attr('refX', 25)
+    .attr('refY', 0)
+    .attr('markerWidth', 6)
+    .attr('markerHeight', 6)
+    .attr('orient', 'auto')
+    .append('path')
+    .attr('d', 'M0,-5L10,0L0,5')
+    .attr('fill', 'rgba(201,168,76,0.4)');
+
+  // Node groups
+  const node = svg.append('g')
+    .selectAll('g')
+    .data(ACTORS)
+    .enter().append('g')
+    .style('cursor', 'pointer')
+    .call(d3.drag()
+      .on('start', dragstarted)
+      .on('drag', dragged)
+      .on('end', dragended));
+
+  // Node circles with glow
+  node.append('circle')
+    .attr('r', d => radiusScale(d.influence))
+    .attr('fill', d => d.color)
+    .attr('stroke', d => d.color)
+    .attr('stroke-width', 2)
+    .attr('stroke-opacity', 0.9)
+    .style('filter', d => `drop-shadow(0 0 ${d.influence > 80 ? 12 : 6}px ${d.color}66)`);
+
+  // Inner gradient overlay
+  node.append('circle')
+    .attr('r', d => radiusScale(d.influence) - 2)
+    .attr('fill', d => `radial-gradient(circle at 30% 30%, ${d.color}88, ${d.color}33)`)
+    .attr('fill-opacity', 0.4);
+
+  // Initials text
+  node.append('text')
+    .attr('text-anchor', 'middle')
+    .attr('dy', '.35em')
+    .style('font-family', 'Cinzel, serif')
+    .style('font-size', d => Math.max(9, radiusScale(d.influence) * 0.35) + 'px')
+    .style('font-weight', 700)
+    .style('fill', '#011a12')
+    .style('pointer-events', 'none')
+    .text(d => {
+      const parts = d.name.split(/[\/\s]/);
+      if(parts.length >= 2 && parts[0].length <= 4) return parts[0].substring(0,3);
+      return d.name.substring(0,3);
+    });
+
+  // Labels
+  const labels = svg.append('g')
+    .selectAll('text')
+    .data(ACTORS)
+    .enter().append('text')
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => radiusScale(d.influence) + 16)
+    .style('font-family', 'DM Sans, sans-serif')
+    .style('font-size', '10px')
+    .style('font-weight', 600)
+    .style('fill', 'rgba(236,253,245,0.85)')
+    .style('pointer-events', 'none')
+    .text(d => d.name.length > 18 ? d.name.substring(0,16) + '..' : d.name);
+
+  // Hover interactions
+  node.on('mouseenter', function(event, d) {
+    tooltip.innerHTML = `<strong style="color:#E8C560;font-family:Cinzel,serif;">${d.name}</strong><br><span style="color:#C9A84C;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;">${d.category}</span><br><span style="color:rgba(236,253,245,.7);margin-top:.35rem;display:block;">Influence: <strong style="color:#E8C560;">${d.influence}</strong>/100</span>`;
+    tooltip.classList.add('visible');
+    tooltip.style.left = (event.pageX + 15) + 'px';
+    tooltip.style.top = (event.pageY - 10) + 'px';
+
+    // Highlight connected links
+    link.attr('stroke-opacity', l => (l.source.id === d.id || l.target.id === d.id) ? 1 : 0.05);
+    node.style('opacity', n => {
+      if(n.id === d.id) return 1;
+      const connected = linkData.some(l => (l.source.id===d.id&&l.target.id===n.id)||(l.target.id===d.id&&l.source.id===n.id));
+      return connected ? 1 : 0.2;
+    });
+    labels.style('opacity', n => {
+      if(n.id === d.id) return 1;
+      const connected = linkData.some(l => (l.source.id===d.id&&l.target.id===n.id)||(l.target.id===d.id&&l.source.id===n.id));
+      return connected ? 0.8 : 0.1;
+    });
+  })
+  .on('mousemove', function(event) {
+    tooltip.style.left = (event.pageX + 15) + 'px';
+    tooltip.style.top = (event.pageY - 10) + 'px';
+  })
+  .on('mouseleave', function() {
+    tooltip.classList.remove('visible');
+    link.attr('stroke-opacity', 0.7);
+    node.style('opacity', 1);
+    labels.style('opacity', 1);
+  })
+  .on('click', function(event, d) { openPopup(d.id); });
+
+  // Tick
+  simulation.on('tick', () => {
+    link
+      .attr('x1', d => d.source.x)
+      .attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x)
+      .attr('y2', d => d.target.y);
+
+    node.attr('transform', d => `translate(${d.x},${d.y})`);
+    labels
+      .attr('x', d => d.x)
+      .attr('y', d => d.y);
+  });
+
+  function dragstarted(event, d) { if(!event.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; }
+  function dragged(event, d) { d.fx = event.x; d.fy = event.y; }
+  function dragended(event, d) { if(!event.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// CARD RENDERING
+// ═══════════════════════════════════════════════════════════════════════════════
+function renderCards(filter) {
+  const grid = document.getElementById('actorGrid');
+  const filtered = filter === 'all' ? ACTORS : ACTORS.filter(a => a.filter === filter);
+  grid.innerHTML = filtered.map(actor => {
+    const initial = actor.name.charAt(0);
+    return `
+    <div class="actor-card ${actor.catClass}" onclick="openPopup('${actor.id}')">
+      <div class="actor-header">
+        <div class="actor-img-wrap" style="color:${actor.color};">${initial}</div>
+        <div class="actor-title">
+          <div class="actor-name">${actor.name}</div>
+          <div class="actor-category">${actor.category}</div>
+        </div>
+      </div>
+      <div class="influence-bar"><div class="influence-fill ${actor.catClass}" style="width:${actor.influence}%"></div></div>
+      <div class="influence-label"><span>Influence</span><span class="influence-score">${actor.influence}/100</span></div>
+      <div class="actor-desc">${actor.desc}</div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// POPUP
+// ═══════════════════════════════════════════════════════════════════════════════
+function openPopup(id) {
+  const actor = ACTORS.find(a => a.id === id);
+  if(!actor) return;
+  const connected = RELATIONSHIPS.filter(r => r.source===id||r.target===id).length;
+  document.getElementById('popupBody').innerHTML = `
+    <div class="popup-header">
+      <div class="popup-img" style="color:${actor.color};">${actor.name.charAt(0)}</div>
+      <div><div class="popup-name">${actor.name}</div><div class="popup-category">${actor.category}</div></div>
+    </div>
+    <div style="margin-bottom:1.25rem;"><div class="influence-bar"><div class="influence-fill ${actor.catClass}" style="width:${actor.influence}%"></div></div><div class="influence-label"><span>Influence Score</span><span class="influence-score">${actor.influence}/100</span></div></div>
+    <div class="popup-desc">${actor.desc}</div>
+    <div class="popup-meta">
+      <div class="meta-item"><div class="meta-label">Cluster</div><div class="meta-value" style="font-size:.85rem;text-transform:capitalize;">${actor.filter}</div></div>
+      <div class="meta-item"><div class="meta-label">Connections</div><div class="meta-value">${connected}</div></div>
+    </div>`;
+  document.getElementById('popupOverlay').classList.add('active');
+}
+function closePopup(e) {
+  if(!e || e.target === document.getElementById('popupOverlay') || e.target.closest('.popup-close')) {
+    document.getElementById('popupOverlay').classList.remove('active');
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════════════════════
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    renderCards(this.dataset.filter);
+  });
+});
+
+renderCards('all');
+initNetwork();
+</script>
+</body>
+</html>
