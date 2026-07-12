@@ -106,12 +106,8 @@
          activates once Alpine has added its initialization class.
          ═══════════════════════════════════════════════════════════════════════ -->
     <style>
-        /* Anti-flicker: hide x-cloak elements ONLY after Alpine has initialized */
-        html.is-alpine-init [x-cloak],
-        html.is-alpine-init [x-cloak="1"] {
-            display: none !important;
-        }
 
+        }
         /* Pre-Alpine: show a loading state instead of blank */
         #alpine-loading {
             display: flex;
@@ -137,13 +133,10 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Hide loading once Alpine is ready */
         html.is-alpine-init #alpine-loading {
             display: none !important;
         }
-
         /* Hide survey wrapper until Alpine initializes to prevent FOUC */
-        #survey-app { visibility: hidden; }
         html.is-alpine-init #survey-app { visibility: visible; }
 
         /* Noscript fallback — shown only when JS is disabled */
