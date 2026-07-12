@@ -27,7 +27,7 @@ import { Section6_Connectors } from "./Section6_Connectors";
 import { Section7_Financiers } from "./Section7_Financiers";
 import { Section8_StrategicOptions } from "./Section8_StrategicOptions";
 import { Section9_BudgetTargets } from "./Section9_BudgetTargets";
-import { Section10_IEDSMx } from "./Section10_IEDSMx";
+import { Section10_IEDSMx } from "./Section10_IEDSMatrix";
 import { Section11_ProvincialEquity } from "./Section11_ProvincialEquity";
 import { Section12_ClimateResilience } from "./Section12_ClimateResilience";
 import { Section13_PolicyGovernance } from "./Section13_PolicyGovernance";
