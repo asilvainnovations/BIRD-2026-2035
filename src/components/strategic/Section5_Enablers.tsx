@@ -1,10 +1,14 @@
 // src/components/strategic/Section5_Enablers.tsx
+// Section 5: Cluster 3 — Enablers
+// Infrastructure, Human Capital, Digital & Health Systems
+
 import { useFormContext } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { AlertTriangle, Building2, Wifi, GraduationCap, HeartPulse } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 const enablerSectors = [
   { id: "roads", label: "Farm-to-market roads & logistics", icon: Building2 },
@@ -29,7 +33,10 @@ export function Section5_Enablers() {
             <Building2 className="w-6 h-6" />
           </div>
           <div>
-            <CardTitle className="text-xl text-foreground">Section 5: Enablers Cluster</CardTitle>
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" className="text-xs border-blue-400/40 text-blue-400">Cluster 3</Badge>
+            </div>
+            <CardTitle className="text-xl text-foreground mt-1">Section 5: Enablers Cluster</CardTitle>
             <CardDescription className="text-muted-foreground">
               Infrastructure, Human Capital, Digital & Health Systems
             </CardDescription>
@@ -47,6 +54,21 @@ export function Section5_Enablers() {
             <strong className="text-amber-400">highest child stunting rate (45%)</strong>.
             Narrative: <em>You cannot build a premier global halal hub with a stunted, illiterate workforce.</em>
             This is the primary "Limits to Growth" constraint.
+          </div>
+        </div>
+
+        {/* Cluster 3 Enablers Framework Image — Wide Format Full View */}
+        <div className="relative w-full overflow-hidden rounded-xl border border-blue-400/30 shadow-lg group">
+          <img
+            src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/28.%20Cluster%203%20_%20Enablers.png"
+            alt="Cluster 3: Enablers Framework — Infrastructure, Human Capital, Digital and Health Systems"
+            className="w-full h-auto max-h-[500px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+            loading="lazy"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+            <p className="text-xs text-[#ecfdf5]/60 italic">
+              Source: BIRD 2026-2035 BEIE Framework — Enablers Cluster
+            </p>
           </div>
         </div>
 
