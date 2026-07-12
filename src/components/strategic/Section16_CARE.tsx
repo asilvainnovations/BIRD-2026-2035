@@ -1,8 +1,11 @@
 // src/components/strategic/Section16_CARE.tsx
+// Section 16: C.A.R.E. & Khalifa Validation
+
 import { useFormContext } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Badge } from "@/components/ui/badge";
 import { CircleCheck as CheckCircle2, Target, RefreshCw, ChartBar as BarChart3 } from "lucide-react";
 
 export function Section16_CARE() {
@@ -51,7 +54,10 @@ export function Section16_CARE() {
             <CheckCircle2 className="w-6 h-6 text-emerald-400" />
           </div>
           <div>
-            <CardTitle className="text-xl">Section 16: C.A.R.E. & Khalifa Validation</CardTitle>
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" className="text-xs border-emerald-400/40 text-emerald-400">Validation</Badge>
+            </div>
+            <CardTitle className="text-xl mt-1">Section 16: C.A.R.E. & Khalifa Validation</CardTitle>
             <CardDescription>
               Validate the roadmap against the C.A.R.E. principles, anchored in the Islamic concept of <em>Khalifa</em> (stewardship).
             </CardDescription>
@@ -62,6 +68,21 @@ export function Section16_CARE() {
         {/* Khalifa Context Box */}
         <div className="p-4 rounded-lg bg-emerald-500/5 border border-emerald-500/20 text-sm text-muted-foreground leading-relaxed">
           <strong className="text-emerald-400">The Khalifa Imperative:</strong> True stewardship requires explicit local partnership, faith-sensitive program design, and formal coordination with Bangsamoro institutions. This ensures no conflicts arise between moral-governance norms and humanitarian/investment principles.
+        </div>
+
+        {/* BEIE Framework Overview — Wide Format Context */}
+        <div className="relative w-full overflow-hidden rounded-xl border border-emerald-400/30 shadow-lg group">
+          <img
+            src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/19.%20Bangsamoro%20BEIE%20Framework.png"
+            alt="Bangsamoro BEIE Framework — The complete ethical investment ecosystem"
+            className="w-full h-auto max-h-[500px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+            loading="lazy"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+            <p className="text-xs text-[#ecfdf5]/60 italic">
+              Source: BIRD 2026-2035 — Bangsamoro BEIE Framework: Moral Governance Anchoring All Clusters
+            </p>
+          </div>
         </div>
 
         {/* C.A.R.E. Principles Validation */}
