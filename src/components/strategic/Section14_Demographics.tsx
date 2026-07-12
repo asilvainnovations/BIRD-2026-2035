@@ -1,9 +1,12 @@
 // src/components/strategic/Section14_Demographics.tsx
+// Section 14: Respondent Profile
+
 import { useFormContext } from "react-hook-form";
 import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from "@/components/ui/badge";
 
 export function Section14_Demographics() {
   const form = useFormContext();
@@ -11,11 +14,44 @@ export function Section14_Demographics() {
   return (
     <div className="space-y-8">
       <CardHeader className="p-0">
+        <div className="flex items-center gap-2 mb-2">
+          <Badge variant="outline" className="text-xs border-purple-400/40 text-purple-400">Profile</Badge>
+        </div>
         <CardTitle className="text-2xl font-serif text-[#C9A84C]">14. Respondent Profile</CardTitle>
         <CardDescription className="text-[#ecfdf5]/70 text-base mt-2">
           To ensure all sectors of the BEIE are proportionally represented in the validation, please provide your demographic context. (Data is anonymized in reporting).
         </CardDescription>
       </CardHeader>
+
+      {/* Provincial Endowments Map — Wide Format Context */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-purple-400/30 shadow-lg group">
+        <img
+          src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/13.%20Provincial%20Endowments-Mainlands.png"
+          alt="Provincial Endowments Map — BARMM geographic and economic context"
+          className="w-full h-auto max-h-[400px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+          loading="lazy"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+          <p className="text-xs text-[#ecfdf5]/60 italic">
+            Source: BIRD 2026-2035 — Provincial Endowments and Geographic Context
+          </p>
+        </div>
+      </div>
+
+      {/* BIRD Vision — Wide Format Context */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/20 shadow-lg group">
+        <img
+          src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/18.%20Vision.png"
+          alt="BIRD Vision 2026-2035 — Strategic vision for the Bangsamoro"
+          className="w-full h-auto max-h-[400px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+          loading="lazy"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+          <p className="text-xs text-[#ecfdf5]/60 italic">
+            Source: BIRD 2026-2035 — Strategic Vision Framework
+          </p>
+        </div>
+      </div>
 
       <FormField
         control={form.control}
