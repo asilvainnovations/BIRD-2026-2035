@@ -1,10 +1,14 @@
 // src/components/strategic/Section6_Connectors.tsx
+// Section 6: Cluster 4 — Connectors
+// Trade, BIMP-EAGA Integration & Export Corridors
+
 import { useFormContext } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Globe, Ship, Plane, TrendingUp, AlertTriangle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Globe, Ship, Plane, AlertTriangle } from "lucide-react";
 
 const exportMarkets = [
   { id: "gcc", label: "UAE / GCC (Middle East — 10.5M consumers)", icon: Plane },
@@ -24,7 +28,10 @@ export function Section6_Connectors() {
             <Globe className="w-6 h-6" />
           </div>
           <div>
-            <CardTitle className="text-xl text-foreground">Section 6: Connectors Cluster</CardTitle>
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" className="text-xs border-emerald-400/40 text-emerald-400">Cluster 4</Badge>
+            </div>
+            <CardTitle className="text-xl text-foreground mt-1">Section 6: Connectors Cluster</CardTitle>
             <CardDescription className="text-muted-foreground">
               Trade, BIMP-EAGA Integration & Export Corridors
             </CardDescription>
@@ -42,6 +49,36 @@ export function Section6_Connectors() {
             perception lags 5-10 years behind ground reality. (2) The highly lucrative{" "}
             <strong className="text-amber-400">informal cross-border barter trade</strong> in Tawi-Tawi
             and Sulu remains unformalized, preventing capture in BIMP-EAGA GDP metrics.
+          </div>
+        </div>
+
+        {/* Cluster 4 Connectors Framework Image — Wide Format Full View */}
+        <div className="relative w-full overflow-hidden rounded-xl border border-emerald-400/30 shadow-lg group">
+          <img
+            src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/33.%20Cluster%204_%20Connectors.png"
+            alt="Cluster 4: Connectors Framework — Trade, BIMP-EAGA Integration and Export Corridors"
+            className="w-full h-auto max-h-[500px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+            loading="lazy"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+            <p className="text-xs text-[#ecfdf5]/60 italic">
+              Source: BIRD 2026-2035 BEIE Framework — Connectors Cluster
+            </p>
+          </div>
+        </div>
+
+        {/* BIMP-EAGA Connectivity Map — Wide Format */}
+        <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/20 shadow-lg group">
+          <img
+            src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/BARMM%20Connectivity%20%20.png"
+            alt="BARMM Strategic Connectivity vis-à-vis BIMP-EAGA"
+            className="w-full h-auto max-h-[400px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+            loading="lazy"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+            <p className="text-xs text-[#ecfdf5]/60 italic">
+              Source: BIRD 2026-2035 — BARMM Strategic Connectivity Map
+            </p>
           </div>
         </div>
 
