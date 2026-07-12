@@ -1,9 +1,12 @@
 // src/components/strategic/Section12_Climate.tsx
+// Section 12: Climate Resilience & Green Economy
+
 import { useFormContext } from "react-hook-form";
 import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from "@/components/ui/badge";
 
 export function Section12_Climate() {
   const form = useFormContext();
@@ -11,11 +14,44 @@ export function Section12_Climate() {
   return (
     <div className="space-y-8">
       <CardHeader className="p-0">
+        <div className="flex items-center gap-2 mb-2">
+          <Badge variant="outline" className="text-xs border-green-400/40 text-green-400">Climate</Badge>
+        </div>
         <CardTitle className="text-2xl font-serif text-[#C9A84C]">12. Climate Resilience & Green Economy</CardTitle>
         <CardDescription className="text-[#ecfdf5]/70 text-base mt-2">
           Climate change poses the highest vulnerability (VI=5.0). El Niño caused ₱346M crop losses in 2024. BARMM can monetize its forests via REDD+ and Payment for Ecosystem Services (PES) under the pending Forestry Code.
         </CardDescription>
       </CardHeader>
+
+      {/* Iceberg Paradigm — Systems Thinking for Climate — Wide Format */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-green-400/30 shadow-lg group">
+        <img
+          src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/5-Paradigm.png"
+          alt="Iceberg Paradigm — Understanding deep structural causes of climate vulnerability"
+          className="w-full h-auto max-h-[400px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+          loading="lazy"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+          <p className="text-xs text-[#ecfdf5]/60 italic">
+            Source: BIRD 2026-2035 — Systems Thinking Iceberg Paradigm (Applied to Climate Resilience)
+          </p>
+        </div>
+      </div>
+
+      {/* Investment-Development Virtuous Cycle — Green Economy Context — Wide Format */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/20 shadow-lg group">
+        <img
+          src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/15.%20Investment%20and%20Governance%20Cycles.png"
+          alt="Investment and Governance Cycles — Climate-smart investment feedback loops"
+          className="w-full h-auto max-h-[400px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
+          loading="lazy"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
+          <p className="text-xs text-[#ecfdf5]/60 italic">
+            Source: BIRD 2026-2035 — Investment and Governance Cycles
+          </p>
+        </div>
+      </div>
 
       <FormField
         control={form.control}
