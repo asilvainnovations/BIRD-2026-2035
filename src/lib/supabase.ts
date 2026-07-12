@@ -10,8 +10,6 @@ import { createClient } from '@supabase/supabase-js';
 // Values sourced from VITE_ env vars; hard-coded fallbacks for runtime resilience
 const supabaseUrl  = import.meta.env.VITE_SUPABASE_URL  || 'https://lydsisparsmvextskevw.supabase.co';
 const supabaseKey  = import.meta.env.VITE_SUPABASE_ANON_KEY ||
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5ZHNpc3BhcnNtdmV4dHNrZXZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5NzIxNzEsImV4cCI6MjA5NzU0ODE3MX0.VM8BPXPLw7wGYCcUvwlTGeP4qB-M02Nq3x720OG5jIs';
-
 export const supabase = createClient(supabaseUrl, supabaseKey, {
   auth: {
     autoRefreshToken: true,
@@ -45,9 +43,10 @@ export const BRAND_ASSETS = {
 
 // ── External URLs ──────────────────────────────────────────────────────────────
 export const EXTERNAL_URLS = {
-  PWA:          import.meta.env.VITE_PWA_EXTERNAL_URL      || 'https://asilvainnovations.github.io//',
-  USER_MANUAL:  import.meta.env.VITE_USER_MANUAL_URL        || 'https://asilvainnovations.github.io/strat-planner-pwa/user-manual.html',
+  PWA:          import.meta.env.VITE_PWA_EXTERNAL_URL       || 'https://bangsamoro-investment-roadmap.asilvainnovations.com',
+  USER_MANUAL:  import.meta.env.VITE_USER_MANUAL_URL        || 'https://bird-app-user-manual.asilvainnovations.com',
   DEV_DOCS:     import.meta.env.VITE_DEVELOPER_DOCS_URL     || 'https://asilvainnovations.github.io/strat-planner-pwa/developer-doc.html',
+  
 } as const;
 
 // ── Typed Headers Helper ──────────────────────────────────────────────────────
