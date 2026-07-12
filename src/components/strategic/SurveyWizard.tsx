@@ -13,10 +13,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
 import { supabase } from "@/lib/supabase";
-import {
-  Save, Send, ChevronRight, ChevronLeft, RotateCcw,
-  CheckCircle2, Sparkles, BarChart3, ArrowRight, Eye, Info
-} from "lucide-react";
+import { Save, Send, ChevronRight, ChevronLeft, RotateCcw, CircleCheck as CheckCircle2, Sparkles, ChartBar as BarChart3, ArrowRight, Eye, Info } from "lucide-react";
 
 import { Section1_BEIE } from "./Section1_BEIE";
 import { Section2_MoralGov } from "./Section2_MoralGov";
@@ -27,13 +24,13 @@ import { Section6_Connectors } from "./Section6_Connectors";
 import { Section7_Financiers } from "./Section7_Financiers";
 import { Section8_StrategicOptions } from "./Section8_StrategicOptions";
 import { Section9_BudgetTargets } from "./Section9_BudgetTargets";
-import { Section10_IEDSMx } from "./Section10_IEDSMatrix";
-import { Section11_ProvincialEquity } from "./Section11_ProvincialEquity";
-import { Section12_ClimateResilience } from "./Section12_ClimateResilience";
-import { Section13_PolicyGovernance } from "./Section13_PolicyGovernance";
+import { Section10_IEDSMatrix as Section10_IEDSMx } from "./Section10_IEDSMatrix";
+import { Section11_Equity as Section11_ProvincialEquity } from "./Section11_Equity";
+import { Section12_Climate as Section12_ClimateResilience } from "./Section12_Climate";
+import { Section13_Policy as Section13_PolicyGovernance } from "./Section13_Policy";
 import { Section14_Demographics } from "./Section14_Demographics";
-import { Section15_CARE } from "./Section15_CARE";
-import { Section16_FinalSubmission } from "./Section16_FinalSubmission";
+import { Section16_CARE as Section15_CARE } from "./Section16_CARE";
+import { Section15_Submission as Section16_FinalSubmission } from "./Section15_Submission";
 import { ContextStrip } from "./ContextPanel";
 
 // ═══════════════════════════════════════════════════════════════════════════════
