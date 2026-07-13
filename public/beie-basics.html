@@ -190,25 +190,138 @@ body{
 /* ═══════════════════════════════════════════════════════════════════════════
    ICEBERG MODEL
    ═══════════════════════════════════════════════════════════════════════════ */
-.iceberg-wrap{display:grid;grid-template-columns:1fr;gap:var(--s6);align-items:center;}
-@media(min-width:900px){.iceberg-wrap{grid-template-columns:1fr 1fr;}}
-.iceberg{position:relative;height:420px;background:linear-gradient(180deg,rgba(59,130,246,.08) 0%,rgba(59,130,246,.08) 35%,rgba(6,78,59,.4) 35%,rgba(6,78,59,.4) 100%);border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--gold-border);}
-.iceberg-waterline{position:absolute;top:35%;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:5;}
-.iceberg-waterline::before{content:'WATERLINE · VISIBLE EVENTS';position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:.62rem;color:var(--gold);letter-spacing:.12em;font-weight:700;white-space:nowrap;background:rgba(2,44,34,.9);padding:.2rem .6rem;border-radius:2rem;border:1px solid var(--gold-border);}
-.iceberg-layer{position:absolute;left:50%;transform:translateX(-50%);width:85%;padding:var(--s3) var(--s4);border-radius:var(--r-md);cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:var(--s3);z-index:2;}
-.iceberg-layer:hover{transform:translateX(-50%) scale(1.03);z-index:3;}
-.iceberg-layer.active{box-shadow:0 0 30px rgba(201,168,76,.4);z-index:4;}
-.iceberg-layer .layer-num{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:900;color:var(--gold);flex-shrink:0;width:32px;}
-.iceberg-layer .layer-title{font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;color:white;}
-.iceberg-layer .layer-sub{font-size:.7rem;color:rgba(236,253,245,.7);margin-top:.1rem;}
-.iceberg-layer.l1{top:15%;background:rgba(201,168,76,.15);border:1px solid var(--gold-border-strong);}
-.iceberg-layer.l2{top:45%;background:rgba(65,105,225,.15);border:1px solid rgba(65,105,225,.4);}
-.iceberg-layer.l3{top:65%;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.4);}
-.iceberg-layer.l4{top:82%;background:rgba(201,168,76,.2);border:1px solid var(--gold-border-strong);}
-.iceberg-detail{background:rgba(2,44,34,.55);border:1px solid var(--gold-border);border-radius:var(--r-lg);padding:var(--s5);min-height:300px;}
-.iceberg-detail-title{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:var(--gold);margin-bottom:var(--s3);}
-.iceberg-detail-text{font-size:.92rem;color:rgba(236,253,245,.85);line-height:1.7;margin-bottom:var(--s4);}
-.iceberg-detail-example{background:rgba(201,168,76,.06);border-left:3px solid var(--gold);padding:var(--s3) var(--s4);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:.85rem;color:rgba(236,253,245,.9);line-height:1.6;}
+.iceberg-wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s6);
+  align-items: center;
+}
+@media (min-width:900px) {
+  .iceberg-wrap { grid-template-columns: 1fr 1fr; }
+}
+
+.iceberg {
+  position: relative;
+  height: 420px;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--gold-border);
+
+  /* Combined gradient + silhouette image */
+  background: 
+    linear-gradient(180deg,
+      rgba(59,130,246,.08) 0%,
+      rgba(59,130,246,.08) 35%,
+      rgba(6,78,59,.4) 35%,
+      rgba(6,78,59,.4) 100%
+    ),
+    url("https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/16.%20The%20Iceberg%20Model%20in%20Governance%20and%20Investment%20Dyamic.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Silhouette effect */
+  filter: grayscale(100%) brightness(40%);
+  color: white; /* ensure text is readable */
+}
+
+.iceberg-waterline {
+  position: absolute;
+  top: 35%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  z-index: 5;
+}
+.iceberg-waterline::before {
+  content: 'WATERLINE · VISIBLE EVENTS';
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: .62rem;
+  color: var(--gold);
+  letter-spacing: .12em;
+  font-weight: 700;
+  white-space: nowrap;
+  background: rgba(2,44,34,.9);
+  padding: .2rem .6rem;
+  border-radius: 2rem;
+  border: 1px solid var(--gold-border);
+}
+
+/* Layer styles */
+.iceberg-layer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  padding: var(--s3) var(--s4);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: all .3s;
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  z-index: 2;
+}
+.iceberg-layer:hover { transform: translateX(-50%) scale(1.03); z-index: 3; }
+.iceberg-layer.active { box-shadow: 0 0 30px rgba(201,168,76,.4); z-index: 4; }
+.iceberg-layer .layer-num {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--gold);
+  flex-shrink: 0;
+  width: 32px;
+}
+.iceberg-layer .layer-title {
+  font-family: 'Cinzel', serif;
+  font-size: .82rem;
+  font-weight: 700;
+  color: white;
+}
+.iceberg-layer .layer-sub {
+  font-size: .7rem;
+  color: rgba(236,253,245,.7);
+  margin-top: .1rem;
+}
+.iceberg-layer.l1 { top: 15%; background: rgba(201,168,76,.15); border: 1px solid var(--gold-border-strong); }
+.iceberg-layer.l2 { top: 45%; background: rgba(65,105,225,.15); border: 1px solid rgba(65,105,225,.4); }
+.iceberg-layer.l3 { top: 65%; background: rgba(139,92,246,.15); border: 1px solid rgba(139,92,246,.4); }
+.iceberg-layer.l4 { top: 82%; background: rgba(201,168,76,.2); border: 1px solid var(--gold-border-strong); }
+
+/* Detail panel */
+.iceberg-detail {
+  background: rgba(2,44,34,.55);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--r-lg);
+  padding: var(--s5);
+  min-height: 300px;
+}
+.iceberg-detail-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: var(--s3);
+}
+.iceberg-detail-text {
+  font-size: .92rem;
+  color: rgba(236,253,245,.85);
+  line-height: 1.7;
+  margin-bottom: var(--s4);
+}
+.iceberg-detail-example {
+  background: rgba(201,168,76,.06);
+  border-left: 3px solid var(--gold);
+  padding: var(--s3) var(--s4);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  font-size: .85rem;
+  color: rgba(236,253,245,.9);
+  line-height: 1.6;
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    VIRTUOUS CYCLE
@@ -275,8 +388,8 @@ footer .gold{color:var(--gold);}
 <nav class="site-nav" id="siteNav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="#" class="nav-logo-wrap" aria-label="BIRD 2026-2035 Home">
-      <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/bird-images/public/MTIT%20Logo.webp" alt="MTIT BARMM" width="130" height="40" onerror="this.style.display='none'">
-      <span class="nav-title">BEIE<br>Student's Guide</span>
+      <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png" alt="MTIT BARMM" width="130" height="40" onerror="this.style.display='none'">
+      <span class="nav-title">BEIE<br>Framework 101</span>
     </a>
     <div class="nav-right">
       <a href="#section-1" class="nav-link">Ecosystem</a>
@@ -292,9 +405,9 @@ footer .gold{color:var(--gold);}
      HERO
      ═══════════════════════════════════════════════════════════════════════════ -->
 <header class="hero" id="main">
-  <div class="hero-eyebrow">Student's Guide · BIRD 2026–2035</div>
+  <div class="hero-eyebrow">Famework 101 · BIRD 2026–2035</div>
   <h1 class="hero-title">
-    Understanding the <span class="gold">Bangsamoro Investment Engine</span>
+    Understanding the <span class="gold">Bangsamoro Economic and Investment Ecosystem</span>
   </h1>
   <p class="hero-subtitle">
     Welcome, future leader of the Bangsamoro! You are witnessing a historic transformation. Our region is moving away from a past of fragmentation toward a future of <strong style="color:var(--gold-light);">Resilient and Ethical Growth</strong>. To navigate this journey, we use a blueprint called the <span class="tip" tabindex="0">BEIE Framework<span class="tip-box"><div class="tip-title">Bangsamoro Economic and Investment Ecosystem</div><div class="tip-text">An integrated analytical model that organizes BARMM's economic landscape into five functional clusters anchored by Moral Governance.</div></span></span>.
@@ -304,14 +417,14 @@ footer .gold{color:var(--gold);}
   </p>
 
   <!-- BEIE Framework Image - Wide Full View -->
-  <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/19.%20Bangsamoro%20BEIE%20Framework.png" alt="Bangsamoro BEIE Framework - Complete Ecosystem Visualization" class="beie-framework-img">
+  <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/BEIE-v3.png" alt="Bangsamoro BEIE Framework - Complete Ecosystem Visualization" class="beie-framework-img">
 
   <!-- Engine Visual - Hidden when image is present -->
   <div class="engine-visual" aria-hidden="true">
     <div class="engine-cluster ec-foundations" data-label="Foundations">🌾</div>
     <div class="engine-cluster ec-transformers" data-label="Transformers">⚙️</div>
     <div class="engine-core">
-      <div class="engine-core-label">BEIE<br>Engine</div>
+      <div class="engine-core-label">BEIE<br>Framework</div>
     </div>
     <div class="engine-cluster ec-enablers" data-label="Enablers">🏗️</div>
     <div class="engine-cluster ec-connectors" data-label="Connectors">🌐</div>
@@ -379,7 +492,7 @@ footer .gold{color:var(--gold);}
        SECTION 2: FIVE CLUSTERS
        ═══════════════════════════════════════════════════════════════════════════ -->
   <section class="section-card reveal" id="section-2" aria-labelledby="s2-title">
-    <span class="section-kicker">Section 2 · The Engine's Components</span>
+    <span class="section-kicker">Section 2 · The Engine's Clusters</span>
     <h2 class="section-title" id="s2-title">Meet the Five Clusters</h2>
     <div class="section-rule"></div>
     <p class="section-intro">
@@ -734,7 +847,7 @@ footer .gold{color:var(--gold);}
     <p class="cta-text">
       Whether you are the engineer maintaining the energy grid, the entrepreneur accessing Waqf capital, or the leader upholding Moral Governance — <strong>you are the driver of this emerging engine of prosperity.</strong>
     </p>
-    <a href="https://strategy-ai-planner-1.deploypad.app/" class="cta-btn" target="_blank" rel="noopener">
+    <a href="https://bird-app.bolt.host/" class="cta-btn" target="_blank" rel="noopener">
       Explore the BIRD App
       <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
     </a>
