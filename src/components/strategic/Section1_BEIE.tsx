@@ -25,7 +25,7 @@ export function Section1_BEIE() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#011a12]/80 via-transparent to-transparent" />
         <div className="absolute bottom-4 left-4 right-4">
           <Badge className="bg-[#C9A84C]/20 text-[#E8C560] border-[#C9A84C]/40 text-[10px]">
-            <Sparkles className="w-3 h-3 mr-1" /> Stakeholder Validation Portal
+            <Sparkles className="w-3 h-3 mr-1" /> Stakeholder Validation Survey
           </Badge>
         </div>
       </div>
@@ -35,7 +35,7 @@ export function Section1_BEIE() {
         <CardHeader>
           <CardTitle className="text-xl font-serif text-[#C9A84C]">Welcome, Stakeholder</CardTitle>
           <CardDescription className="text-[#ecfdf5]/70">
-            Your expertise shapes the Bangsamoro Investment Roadmap. This is not a test — there are no wrong answers.
+            Your contribution shapes the Bangsamoro Investment Roadmap. This is not a test — there are no wrong answers.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -60,14 +60,14 @@ export function Section1_BEIE() {
             <Play className="w-5 h-5" /> Understanding the BEIE Framework
           </CardTitle>
           <CardDescription className="text-[#ecfdf5]/60">
-            Watch this 5-minute overview before you begin. It explains how the 5 clusters interconnect under Moral Governance.
+            Watch this 2-minute introduction to Bangsamoro Economic and Investment Ecosystem (BEIE) Framework before you begin. It explains how the 5 clusters interconnect anchored in Operating Systems highlighting  Moral Governance.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="relative w-full overflow-hidden rounded-lg border border-[#C9A84C]/20" style={{ paddingBottom: "56.25%" }}>
             <iframe
-              src="https://www.youtube.com/embed/0J491Vqya_4"
-              title="Context Analysis and the BEIE Framework"
+              src="https://www.youtube.com/embed/UCi2dVUmSbE"
+              title="The Bangsamoro Economic and Investment Ecosystem Framework"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               className="absolute top-0 left-0 w-full h-full"
