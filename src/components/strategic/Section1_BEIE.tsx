@@ -79,13 +79,13 @@ export function Section1_BEIE() {
         </CardContent>
       </Card>
 
-      {/* ── Student Guide CTA ── */}
+      {/* ── BEIE Basics CTA ── */}
       <Card className="border-[#C9A84C]/20 bg-gradient-to-r from-[#022c22]/60 to-[#064e3b]/30">
         <CardContent className="p-5 flex flex-col sm:flex-row items-center gap-4">
           <div className="flex-1">
             <h4 className="font-serif text-[#C9A84C] text-sm font-bold mb-1">Want a deeper dive?</h4>
             <p className="text-xs text-[#ecfdf5]/60">
-              The BEIE Student Guide provides detailed explanations of each cluster, the systems thinking approach,
+              The BEIE Basics Guide provides detailed explanations of each cluster, the systems thinking approach,
               and how your input feeds into the investment roadmap.
             </p>
           </div>
@@ -95,7 +95,7 @@ export function Section1_BEIE() {
             rel="noopener noreferrer"
           >
             <Button variant="outline" className="border-[#C9A84C]/40 text-[#C9A84C] hover:bg-[#C9A84C]/10 whitespace-nowrap">
-              <BookOpen className="w-4 h-4 mr-2" /> Open BEIE Student Guide
+              <BookOpen className="w-4 h-4 mr-2" /> Open BEIE Basics Guide
             </Button>
           </a>
         </CardContent>
