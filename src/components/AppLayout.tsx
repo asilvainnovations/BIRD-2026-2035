@@ -4,7 +4,7 @@ import { useStrategicPlan } from '@/hooks/useStrategicPlan';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabase';
 import { StratLogo } from '@/components/branding/Logo';
-import { Loader2 } from 'lucide-react';
+import { Loader as Loader2 } from 'lucide-react';
 
 // ─── CRITICAL PATH: Load HeroSection immediately (first screen) ─────────────
 import HeroSection from './strategic/HeroSection';
@@ -58,7 +58,7 @@ const VIEW_TO_PATH: Record<string, string> = {
   team:       '/team-collaboration',
   settings:   '/settings',
   export:     '/export-plan',
-  validation: '/survey-wizard', //
+  validation: '/validation-survey', //
 };
 
 const PATH_TO_VIEW: Record<string, string> = Object.fromEntries(
@@ -137,7 +137,7 @@ const AppLayout: React.FC = () => {
   }, [activeView, currentPlan, user, profile, isAuthenticated, userDisplayInfo.name, addSWOTItem, updateSWOTItem, removeSWOTItem, bulkAddSWOTItems, updateStrategicOption, removeStrategicOption, bulkAddStrategicOptions, updateObjective, addKPI, updateKPI, removeKPI, updatePAP, removePAP, navigateToView]);
 
   const isLoading = authLoading || (isAuthenticated && plansLoading);
-  const bypassLanding = location.pathname === '/survey-wizard';
+  const bypassLanding = location.pathname === '/validation-survey';
 
   // ─── LANDING PAGE (Hero Section) ──────────────────────────────────────────
   if (uiState.showLanding && !currentPlan && !bypassLanding) {
