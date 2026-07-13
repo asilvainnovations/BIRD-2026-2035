@@ -608,7 +608,6 @@
     background: hsl(var(--card));
   }
 }
-
 /* Print Styles */
 @media print {
   .glass,
@@ -621,11 +620,77 @@
     border: 1px solid #e5e7eb;
   }
 }
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   THEME-AWARE COMPONENT UTILITIES
+   These ensure all module pages respond correctly to light/dark mode.
+   Use these classes instead of hard-coded dark-only color values.
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+/* Surface layers */
+.surface-base   { @apply bg-white dark:bg-slate-900; }
+.surface-raised { @apply bg-white dark:bg-slate-800; }
+.surface-sunken { @apply bg-slate-50 dark:bg-slate-950; }
+.surface-panel  { @apply bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700/60; }
+
+/* Text layers */
+.text-primary-content   { @apply text-slate-900 dark:text-slate-50; }
+.text-secondary-content { @apply text-slate-600 dark:text-slate-400; }
+.text-tertiary-content  { @apply text-slate-400 dark:text-slate-500; }
+
+/* Border layers */
+.border-subtle  { @apply border-slate-200 dark:border-slate-700; }
+.border-strong  { @apply border-slate-300 dark:border-slate-600; }
+
+/* Input fields */
+.input-field {
+  @apply bg-white dark:bg-slate-800/50
+         text-slate-900 dark:text-slate-100
+         border-slate-300 dark:border-slate-600
+         placeholder:text-slate-400 dark:placeholder:text-slate-500
+         focus:ring-primary focus:border-primary;
+}
+
+/* Card surface */
+.card-surface {
+  @apply bg-white dark:bg-slate-800/60
+         border border-slate-200 dark:border-slate-700/60
+         rounded-xl shadow-sm;
+}
+
+/* Tab / pill navigation */
+.tab-bar { @apply bg-slate-100 dark:bg-slate-800 rounded-xl p-1; }
+.tab-item { @apply text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200; }
+.tab-item-active { @apply bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-slate-100; }
+
+/* Stat badges */
+.badge-neutral { @apply bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300; }
+
+/* CLD canvas background */
+.cld-canvas-bg {
+  @apply bg-gradient-to-br from-slate-50 via-white to-blue-50/40
+         dark:from-slate-900 dark:via-slate-800 dark:to-blue-950/20
+         border border-slate-200 dark:border-slate-700;
+}
+
+/* Panel overlays (used in analysis side panels, tooltips) */
+.panel-overlay {
+  @apply bg-white dark:bg-slate-900
+         border border-slate-200 dark:border-slate-700
+         shadow-xl;
+}
+
+/* Section header strip */
+.section-header {
+  @apply bg-gradient-to-r from-slate-50 to-slate-100
+         dark:from-slate-800 dark:to-slate-900
+         border-b border-slate-200 dark:border-slate-700;
+}
 /* ========================================
-   ðŸ›¡ï¸ ENHANCED PLATFORM BADGES
+    ENHANCED PLATFORM BADGES
    ======================================== */
 
-/* Primary Badge Selectors */
+/* Primary Bolt Badge Selectors */
 #bolt-badge, 
 .bolt-badge,
 [data-bolt-badge],
@@ -714,69 +779,4 @@ svg[id*="badge"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
-}
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   THEME-AWARE COMPONENT UTILITIES
-   These ensure all module pages respond correctly to light/dark mode.
-   Use these classes instead of hard-coded dark-only color values.
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-
-/* Surface layers */
-.surface-base   { @apply bg-white dark:bg-slate-900; }
-.surface-raised { @apply bg-white dark:bg-slate-800; }
-.surface-sunken { @apply bg-slate-50 dark:bg-slate-950; }
-.surface-panel  { @apply bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700/60; }
-
-/* Text layers */
-.text-primary-content   { @apply text-slate-900 dark:text-slate-50; }
-.text-secondary-content { @apply text-slate-600 dark:text-slate-400; }
-.text-tertiary-content  { @apply text-slate-400 dark:text-slate-500; }
-
-/* Border layers */
-.border-subtle  { @apply border-slate-200 dark:border-slate-700; }
-.border-strong  { @apply border-slate-300 dark:border-slate-600; }
-
-/* Input fields */
-.input-field {
-  @apply bg-white dark:bg-slate-800/50
-         text-slate-900 dark:text-slate-100
-         border-slate-300 dark:border-slate-600
-         placeholder:text-slate-400 dark:placeholder:text-slate-500
-         focus:ring-primary focus:border-primary;
-}
-
-/* Card surface */
-.card-surface {
-  @apply bg-white dark:bg-slate-800/60
-         border border-slate-200 dark:border-slate-700/60
-         rounded-xl shadow-sm;
-}
-
-/* Tab / pill navigation */
-.tab-bar { @apply bg-slate-100 dark:bg-slate-800 rounded-xl p-1; }
-.tab-item { @apply text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200; }
-.tab-item-active { @apply bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-slate-100; }
-
-/* Stat badges */
-.badge-neutral { @apply bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300; }
-
-/* CLD canvas background */
-.cld-canvas-bg {
-  @apply bg-gradient-to-br from-slate-50 via-white to-blue-50/40
-         dark:from-slate-900 dark:via-slate-800 dark:to-blue-950/20
-         border border-slate-200 dark:border-slate-700;
-}
-
-/* Panel overlays (used in analysis side panels, tooltips) */
-.panel-overlay {
-  @apply bg-white dark:bg-slate-900
-         border border-slate-200 dark:border-slate-700
-         shadow-xl;
-}
-
-/* Section header strip */
-.section-header {
-  @apply bg-gradient-to-r from-slate-50 to-slate-100
-         dark:from-slate-800 dark:to-slate-900
-         border-b border-slate-200 dark:border-slate-700;
 }
