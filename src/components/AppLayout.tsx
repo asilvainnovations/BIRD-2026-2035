@@ -4,6 +4,7 @@ import { useStrategicPlan } from '@/hooks/useStrategicPlan';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabase';
 import { StratLogo } from '@/components/branding/Logo';
+import { PlatformBadge } from "@/components/branding/PlatformBadge";
 import { Loader as Loader2 } from 'lucide-react';
 
 // ─── CRITICAL PATH: Load HeroSection immediately (first screen) ─────────────
@@ -208,6 +209,13 @@ const AppLayout: React.FC = () => {
         <FloatingAIAssistant plan={currentPlan} activeView={activeView} />
       </Suspense>
     </div>
+    <PlatformBadge
+  size={48}
+  vPosition="bottom"
+  hPosition="right"
+  offset={16}
+  pulse={true}
+/>
   );
 };
 
