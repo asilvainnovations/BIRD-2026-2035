@@ -1,5 +1,3 @@
-// src/components/strategic/Section9_BudgetTargets.tsx
-// Section 9: Budget Allocation and Strategic Targets
 import {
   FormField,
   FormItem,
