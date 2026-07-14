@@ -1,36 +1,70 @@
-// src/components/strategic/SystemsThinking.tsx
-// Systems Thinking — SWOT Scoring, CLD Builder, Archetypes & AI Analysis
-// Aligned with BIRD 2026-2035 BEIE Framework
-
 import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import {
-  Shield, AlertCircle, Lightbulb, Zap, TrendingUp, TrendingDown,
-  AlertTriangle, Info, ChevronRight, Check, HelpCircle, GitBranch,
-  Plus, Circle, ExternalLink, X, Link as LinkIcon, Sparkles,
-  ChevronDown, ChevronUp, ArrowRight, Layers, Wand2,
-  LayoutDashboard, PlayCircle, BookOpen, RefreshCw,
-  MousePointerClick, Target, Crosshair, Gauge, Workflow,
-  Brain, Anchor, Clock, Activity, BarChart2, Save, Download,
-  Upload, FileText, Printer, Copy, Trash2, Eye, Bot,
+  Shield,
+  AlertCircle,
+  Lightbulb,
+  Zap,
+  TrendingUp,
+  TrendingDown,
+  AlertTriangle,
+  Info,
+  ChevronRight,
+  Check,
+  HelpCircle,
+  GitBranch,
+  Plus,
+  Circle,
+  ExternalLink,
+  X,
+  Link as LinkIcon,
+  Sparkles,
+  ChevronDown,
+  ChevronUp,
+  ArrowRight,
+  Layers,
+  Wand2,
+  LayoutDashboard,
+  PlayCircle,
+  BookOpen,
+  RefreshCw,
+  MousePointerClick,
+  Target,
+  Crosshair,
+  Gauge,
+  Workflow,
+  Brain,
+  Anchor,
+  Clock,
+  Activity,
+  BarChart2,
+  Save,
+  Download,
+  Upload,
+  FileText,
+  Printer,
+  Copy,
+  Trash2,
+  Eye,
+  Bot,
 } from 'lucide-react';
 
+// Import your actual hook
 import { useStrategicPlan } from '@/hooks/useStrategicPlan';
+
 import { StrategicPlan, SWOTItem, CLDNode, CLDLink, CLDSnapshot } from '@/lib/strategicPlanStore';
 import { cn } from '@/lib/utils';
 import { BIRD_VIDEOS, BIRD_IMAGES, getImagesForSection, getVideosForSection } from '@/lib/bird-urls';
 import { AIStrategistAvatar } from '@/components/branding/Logo';
 import FloatingAIAssistant from './FloatingAIAssistant';
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// TYPES
-// ═══════════════════════════════════════════════════════════════════════════════
-
 interface SystemsThinkingProps {
   plan: StrategicPlan;
   onUpdateItem?: (id: string, updates: Partial<SWOTItem>) => void;
   planId?: string;
 }
+
+// ─── EXTENDED TYPES ───────────────────────────────────────────────────────────
 
 interface ExtendedCLDNode extends CLDNode {
   nodeType?: 'stock' | 'flow' | 'converter' | 'goal' | 'paradigm' | 'default';
@@ -60,6 +94,8 @@ interface DetectedLoop {
   strength: number;
 }
 
+// ─── AI ANALYSIS RESPONSE TYPES ────────────────────────────────────────────────
+
 interface AIAnalysisResponse {
   detected_loops: DetectedLoop[];
   dominant_archetypes: Array<{
@@ -72,13 +108,11 @@ interface AIAnalysisResponse {
   recommendations?: string[];
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// MEADOWS HIERARCHY OF LEVERAGE POINTS
-// ═══════════════════════════════════════════════════════════════════════════════
+// ─── MEADOWS LEVELS ───────────────────────────────────────────────────────────
 
 const MEADOWS_LEVELS: Record<number, { name: string; icon: React.ElementType; color: string; desc: string }> = {
-  12: { name: 'Constants & Parameters',   icon: Gauge,      color: 'text-slate-500 dark:text-slate-400',    desc: 'Numbers, subsidies, taxes, standards' },
-  11: { name: 'Buffer Sizes',             icon: Anchor,     color: 'text-slate-500 dark:text-slate-400',    desc: 'Sizes of stabilizing stocks' },
+  12: { name: 'Constants & Parameters',   icon: Gauge,      color: 'text-slate-500 dark:text-slate-400 dark:text-slate-500',    desc: 'Numbers, subsidies, taxes, standards' },
+  11: { name: 'Buffer Sizes',             icon: Anchor,     color: 'text-slate-500 dark:text-slate-400 dark:text-slate-500',    desc: 'Sizes of stabilizing stocks' },
   10: { name: 'Stock-Flow Structure',     icon: Workflow,   color: 'text-blue-500',     desc: 'Physical arrangement of stocks and flows' },
   9:  { name: 'Delay Lengths',            icon: Clock,      color: 'text-blue-600',     desc: 'Length of time relative to rates of change' },
   8:  { name: 'Negative Feedback',        icon: Activity,   color: 'text-cyan-600',     desc: 'Strength of balancing feedback loops' },
@@ -91,9 +125,7 @@ const MEADOWS_LEVELS: Record<number, { name: string; icon: React.ElementType; co
   1:  { name: 'Transcend Paradigms',      icon: Crosshair,  color: 'text-violet-700',   desc: 'Ability to rise above paradigms' },
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// LOOP DETECTION (DFS-based)
-// ═══════════════════════════════════════════════════════════════════════════════
+// ─── LOOP DETECTION ───────────────────────────────────────────────────────────
 
 const findLoops = (nodes: ExtendedCLDNode[], links: ExtendedCLDLink[]): DetectedLoop[] => {
   const loops: DetectedLoop[] = [];
@@ -120,7 +152,7 @@ const findLoops = (nodes: ExtendedCLDNode[], links: ExtendedCLDLink[]): Detected
           loops.push({
             nodeIds: [...path],
             type,
-            name: `${type}${loops.filter(l => l.type === type).length + 1}: ${nodeLabels[0]} \u2192 \u2026 \u2192 ${nodeLabels[nodeLabels.length - 1]}`,
+            name: `${type}${loops.filter(l => l.type === type).length + 1}: ${nodeLabels[0]} → … → ${nodeLabels[nodeLabels.length - 1]}`,
             strength: Math.round(avgStrength),
           });
         }
@@ -137,9 +169,7 @@ const findLoops = (nodes: ExtendedCLDNode[], links: ExtendedCLDLink[]): Detected
   return loops;
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// SYSTEM ARCHETYPES — Aligned with BIRD_IMAGES registry from bird-urls.ts
-// ═══════════════════════════════════════════════════════════════════════════════
+// ─── ARCHETYPE CONFIG ──────────────────────────────────────────────────────────
 
 interface SystemArchetype {
   id: string;
@@ -152,30 +182,14 @@ interface SystemArchetype {
   nodeLabels: string[];
   loops: Array<{ from: string; to: string; polarity: '+' | '-'; label?: string }>;
   loopTypes: string[];
-  imageUrl: string;
+  imageUrl?: string;
 }
-
-/** Centralized archetype image registry — sourced from bird-urls.ts BIRD_IMAGES */
-const ARCHETYPE_IMAGES: Record<string, string> = {
-  ltg:  BIRD_IMAGES.limitsGrowth.url,
-  stb:  BIRD_IMAGES.shiftingBurden.url,
-  dg:   'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Drifting-Goals.png',
-  esc:  'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Escalation.png',
-  sts:  BIRD_IMAGES.successSuccessful.url,
-  toc:  BIRD_IMAGES.tragedyCommons.url,
-  ftf:  BIRD_IMAGES.fixesFail.url,
-  gui:  BIRD_IMAGES.growthUnderinvestment.url,
-  aa:   'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Accidental-Adversaries.png',
-  ap:   'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Attractiveness-Principle.png',
-  bma:  BIRD_IMAGES.bigManArchetype.url,
-  bme:  BIRD_IMAGES.bigManEscalation.url,
-};
 
 const systemArchetypes: SystemArchetype[] = [
   {
-    id: 'ltg', name: 'Limits to Growth', category: 'Reinforcing + Balancing',
+    id: 'ltg', name: 'Limits to Success', category: 'Reinforcing + Balancing',
     color: 'from-emerald-500 to-teal-600',
-    imageUrl: ARCHETYPE_IMAGES.ltg,
+    imageUrl: 'https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/systems-archetypes/public/Limits-to-Success1.png',
     desc: 'A reinforcing growth process is slowed by a balancing constraint.',
     use: 'Use when growth initiatives stall despite strong investment.',
     swotHint: 'Strength-driven opportunities facing constraint threats.',
@@ -192,8 +206,8 @@ const systemArchetypes: SystemArchetype[] = [
   {
     id: 'stb', name: 'Shifting the Burden', category: 'Balancing + Reinforcing (undermining)',
     color: 'from-amber-500 to-orange-600',
-    imageUrl: ARCHETYPE_IMAGES.stb,
-    desc: 'A symptomatic solution relieves pressure but erodes capacity to address the fundamental problem.',
+    imageUrl: 'https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/systems-archetypes/public/Shifting-the-Burden2.png',
+    desc: 'A symptomatic solution relieves pressure but erodes capacity to address fundamental problem.',
     use: 'Use when recurring fixes do not solve root problems.',
     swotHint: 'Repeated weaknesses despite tactical interventions.',
     nodeLabels: ['Problem Symptom', 'Symptomatic Fix', 'Fundamental Solution', 'Side Effect'],
@@ -206,72 +220,10 @@ const systemArchetypes: SystemArchetype[] = [
     loopTypes: ['B1: Symptomatic relief', 'B2: Fundamental solution'],
   },
   {
-    id: 'ftf', name: 'Fixes that Fail', category: 'Balancing + Reinforcing (delayed)',
-    color: 'from-orange-500 to-red-500',
-    imageUrl: ARCHETYPE_IMAGES.ftf,
-    desc: 'A fix that alleviates a problem creates unintended consequences that worsen the original problem.',
-    use: 'Use when solutions create new problems or short-term fixes repeatedly fail.',
-    swotHint: 'Repeated tactical fixes not resolving core weaknesses.',
-    nodeLabels: ['Problem', 'Fix / Solution', 'Unintended Consequence', 'Delay'],
-    loops: [
-      { from: 'Problem',         to: 'Fix / Solution',          polarity: '+', label: 'B' },
-      { from: 'Fix / Solution',  to: 'Problem',                 polarity: '-', label: 'B' },
-      { from: 'Fix / Solution',  to: 'Unintended Consequence',  polarity: '+', label: 'R' },
-    ],
-    loopTypes: ['B: Short-term fix loop', 'R: Unintended consequence'],
-  },
-  {
-    id: 'toc', name: 'Tragedy of the Commons', category: 'Reinforcing + Multiple Balancing',
-    color: 'from-cyan-500 to-sky-600',
-    imageUrl: ARCHETYPE_IMAGES.toc,
-    desc: 'Individual actors rationally exploit shared resources, collectively depleting them.',
-    use: 'Use when shared assets deteriorate despite rational individual behavior.',
-    swotHint: 'Shared market opportunities being over-exploited.',
-    nodeLabels: ['Individual Activity', 'Total Shared Activity', 'Commons Capacity', 'Net Gain per User'],
-    loops: [
-      { from: 'Net Gain per User',     to: 'Individual Activity',    polarity: '+', label: 'R' },
-      { from: 'Individual Activity',   to: 'Total Shared Activity',  polarity: '+', label: '' },
-      { from: 'Total Shared Activity', to: 'Commons Capacity',       polarity: '-', label: 'B' },
-    ],
-    loopTypes: ['R: Individual gain attraction', 'B: Overuse degrades commons'],
-  },
-  {
-    id: 'sts', name: 'Success to the Successful', category: 'Two Reinforcing Loops',
-    color: 'from-purple-500 to-violet-600',
-    imageUrl: ARCHETYPE_IMAGES.sts,
-    desc: 'Two competing activities draw from a shared resource pool. Winners keep winning.',
-    use: 'Use when winners keep winning regardless of merit.',
-    swotHint: 'Dominant strengths concentrating strategic resources.',
-    nodeLabels: ['Resources to A', 'Success of A', 'Resources to B', 'Success of B'],
-    loops: [
-      { from: 'Resources to A', to: 'Success of A',   polarity: '+', label: 'R1' },
-      { from: 'Success of A',   to: 'Resources to A', polarity: '+', label: 'R1' },
-      { from: 'Resources to B', to: 'Success of B',   polarity: '+', label: 'R2' },
-      { from: 'Success of B',   to: 'Resources to B', polarity: '+', label: 'R2' },
-    ],
-    loopTypes: ['R1: Winner advantage', 'R2: Loser starvation'],
-  },
-  {
-    id: 'gui', name: 'Growth and Underinvestment', category: 'Reinforcing + Multiple Balancing',
-    color: 'from-slate-500 to-slate-700',
-    imageUrl: ARCHETYPE_IMAGES.gui,
-    desc: 'Growth drives demand that strains capacity. Standards are lowered rather than investing to expand.',
-    use: 'Use when high-growth initiatives plateau as infrastructure cannot keep pace.',
-    swotHint: 'Opportunity growth limited by capacity weaknesses.',
-    nodeLabels: ['Growth Engine', 'Demand', 'Capacity Gap', 'Investment', 'Performance Standard'],
-    loops: [
-      { from: 'Growth Engine', to: 'Demand',        polarity: '+', label: 'R' },
-      { from: 'Demand',        to: 'Growth Engine', polarity: '+', label: 'R' },
-      { from: 'Demand',        to: 'Capacity Gap',  polarity: '+', label: 'B' },
-      { from: 'Capacity Gap',  to: 'Investment',    polarity: '+', label: 'B' },
-    ],
-    loopTypes: ['R: Self-reinforcing growth', 'B: Capacity investment needed'],
-  },
-  {
     id: 'dg', name: 'Drifting Goals', category: 'Two Balancing Loops',
     color: 'from-blue-500 to-indigo-600',
-    imageUrl: ARCHETYPE_IMAGES.dg,
-    desc: 'When performance gaps are uncomfortable, the standard is lowered rather than corrective action taken.',
+    imageUrl: 'https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/systems-archetypes/public/Drifting-Goals2.png',
+    desc: 'When performance gaps are uncomfortable, standard is lowered rather than corrective action taken.',
     use: 'Use when targets are consistently missed and expectations erode.',
     swotHint: 'Weaknesses that persist without remediation.',
     nodeLabels: ['Goal / Target', 'Gap', 'Corrective Action', 'Actual Performance'],
@@ -286,7 +238,7 @@ const systemArchetypes: SystemArchetype[] = [
   {
     id: 'esc', name: 'Escalation', category: 'Two Reinforcing Loops',
     color: 'from-red-500 to-rose-600',
-    imageUrl: ARCHETYPE_IMAGES.esc,
+    imageUrl: 'https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/systems-archetypes/public/Escalation1.png',
     desc: 'Two parties perceive each other as threats and match escalating actions.',
     use: 'Use in competitive, adversarial dynamics where counter-responses spiral.',
     swotHint: 'Multiple external threats from competing entities.',
@@ -299,9 +251,70 @@ const systemArchetypes: SystemArchetype[] = [
     loopTypes: ['R1: Our escalation', 'R2: Their escalation'],
   },
   {
+    id: 'sts', name: 'Success to the Successful', category: 'Two Reinforcing Loops',
+    color: 'from-purple-500 to-violet-600',
+    imageUrl: 'https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/systems-archetypes/public/Success-to-the-Successful1.png',
+    desc: 'Two competing activities draw from shared resource pool. Winners keep winning.',
+    use: 'Use when winners keep winning regardless of merit.',
+    swotHint: 'Dominant strengths concentrating strategic resources.',
+    nodeLabels: ['Resources to A', 'Success of A', 'Resources to B', 'Success of B'],
+    loops: [
+      { from: 'Resources to A', to: 'Success of A',   polarity: '+', label: 'R1' },
+      { from: 'Success of A',   to: 'Resources to A', polarity: '+', label: 'R1' },
+      { from: 'Resources to B', to: 'Success of B',   polarity: '+', label: 'R2' },
+      { from: 'Success of B',   to: 'Resources to B', polarity: '+', label: 'R2' },
+    ],
+    loopTypes: ['R1: Winner advantage', 'R2: Loser starvation'],
+  },
+  {
+    id: 'toc', name: 'Tragedy of the Commons', category: 'Reinforcing + Multiple Balancing',
+    color: 'from-cyan-500 to-sky-600',
+    imageUrl: 'https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/systems-archetypes/public/Tragedy-of-the-Commons1.png',
+    desc: 'Individual actors rationally exploit shared resources, collectively depleting them.',
+    use: 'Use when shared assets deteriorate despite rational individual behavior.',
+    swotHint: 'Shared market opportunities being over-exploited.',
+    nodeLabels: ['Individual Activity', 'Total Shared Activity', 'Commons Capacity', 'Net Gain per User'],
+    loops: [
+      { from: 'Net Gain per User',     to: 'Individual Activity',    polarity: '+', label: 'R' },
+      { from: 'Individual Activity',   to: 'Total Shared Activity',  polarity: '+', label: '' },
+      { from: 'Total Shared Activity', to: 'Commons Capacity',       polarity: '-', label: 'B' },
+    ],
+    loopTypes: ['R: Individual gain attraction', 'B: Overuse degrades commons'],
+  },
+  {
+    id: 'ftf', name: 'Fixes that Fail', category: 'Balancing + Reinforcing (delayed)',
+    color: 'from-orange-500 to-red-500',
+    imageUrl: 'https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/systems-archetypes/public/Fixes-That-Fail2.png',
+    desc: 'A fix that alleviates a problem creates unintended consequences that worsen original problem.',
+    use: 'Use when solutions create new problems or short-term fixes repeatedly fail.',
+    swotHint: 'Repeated tactical fixes not resolving core weaknesses.',
+    nodeLabels: ['Problem', 'Fix / Solution', 'Unintended Consequence', 'Delay'],
+    loops: [
+      { from: 'Problem',         to: 'Fix / Solution',          polarity: '+', label: 'B' },
+      { from: 'Fix / Solution',  to: 'Problem',                 polarity: '-', label: 'B' },
+      { from: 'Fix / Solution',  to: 'Unintended Consequence',  polarity: '+', label: 'R' },
+    ],
+    loopTypes: ['B: Short-term fix loop', 'R: Unintended consequence'],
+  },
+  {
+    id: 'gui', name: 'Growth and Underinvestment', category: 'Reinforcing + Multiple Balancing',
+    color: 'from-slate-500 to-slate-700',
+    imageUrl: 'https://paibpwwszlfpsyytdnal.databasepad.com/storage/v1/object/public/systems-archetypes/public/Growth-and-Underinvestment2.png',
+    desc: 'Growth drives demand that strains capacity. Standards are lowered rather than investing to expand.',
+    use: 'Use when high-growth initiatives plateau as infrastructure cannot keep pace.',
+    swotHint: 'Opportunity growth limited by capacity weaknesses.',
+    nodeLabels: ['Growth Engine', 'Demand', 'Capacity Gap', 'Investment', 'Performance Standard'],
+    loops: [
+      { from: 'Growth Engine', to: 'Demand',        polarity: '+', label: 'R' },
+      { from: 'Demand',        to: 'Growth Engine', polarity: '+', label: 'R' },
+      { from: 'Demand',        to: 'Capacity Gap',  polarity: '+', label: 'B' },
+      { from: 'Capacity Gap',  to: 'Investment',    polarity: '+', label: 'B' },
+    ],
+    loopTypes: ['R: Self-reinforcing growth', 'B: Capacity investment needed'],
+  },
+  {
     id: 'aa', name: 'Accidental Adversaries', category: 'Two Reinforcing Loops (degrading)',
     color: 'from-pink-500 to-rose-600',
-    imageUrl: ARCHETYPE_IMAGES.aa,
     desc: 'Two parties working toward compatible goals take actions that inadvertently undermine each other.',
     use: 'Use in partnership contexts where self-interest damages relationships.',
     swotHint: 'Partnership strengths eroding through misalignment.',
@@ -317,8 +330,7 @@ const systemArchetypes: SystemArchetype[] = [
   {
     id: 'ap', name: 'Attractiveness Principle', category: 'Reinforcing + Balancing',
     color: 'from-violet-500 to-purple-700',
-    imageUrl: ARCHETYPE_IMAGES.ap,
-    desc: 'As a system attracts more participants due to appeal, congestion reduces quality, eroding attractiveness.',
+    desc: 'As system attracts more participants due to appeal, congestion reduces quality, eroding attractiveness.',
     use: 'Use when growth from popularity degrades the thing that made it popular.',
     swotHint: 'Rapidly growing opportunities attracting competitors.',
     nodeLabels: ['Attractiveness', 'New Entrants / Demand', 'Congestion / Load', 'Quality / Performance'],
@@ -329,46 +341,9 @@ const systemArchetypes: SystemArchetype[] = [
     ],
     loopTypes: ['R: Growth-from-attractiveness', 'B: Congestion degrades quality'],
   },
-  // ── BARMM-Specific Archetypes (from bird-urls.ts) ─────────────────────────
-  {
-    id: 'bma', name: 'The Big Man Archetype', category: 'BARMM-Specific / Governance',
-    color: 'from-amber-600 to-yellow-700',
-    imageUrl: ARCHETYPE_IMAGES.bma,
-    desc: 'Centralized authority structures in BARMM governance create dependency on individual leaders rather than institutions, creating fragility in the governance operating system.',
-    use: 'Use when analyzing BARMM governance structures and institutional capacity building.',
-    swotHint: 'Moral Governance weaknesses rooted in non-institutional authority patterns.',
-    nodeLabels: ['Big Man Authority', 'Institutional Weakness', 'Personal Loyalty', 'Policy Inconsistency'],
-    loops: [
-      { from: 'Big Man Authority',    to: 'Institutional Weakness', polarity: '+', label: 'R' },
-      { from: 'Institutional Weakness',to: 'Personal Loyalty',      polarity: '+', label: 'R' },
-      { from: 'Personal Loyalty',     to: 'Big Man Authority',       polarity: '+', label: 'R' },
-      { from: 'Institutional Weakness',to: 'Policy Inconsistency',  polarity: '+', label: 'B' },
-      { from: 'Policy Inconsistency', to: 'Investor Confidence',     polarity: '-', label: 'B' },
-    ],
-    loopTypes: ['R: Authority consolidation cycle', 'B: Governance fragility feedback'],
-  },
-  {
-    id: 'bme', name: 'BigMan and Escalation', category: 'BARMM-Specific / Conflict',
-    color: 'from-red-700 to-rose-800',
-    imageUrl: ARCHETYPE_IMAGES.bme,
-    desc: 'Personalized authority in BARMM can escalate into inter-clan competition, where rival factions match each other\'s moves, destabilizing the investment climate.',
-    use: 'Use when analyzing clan dynamics, rido conflicts, and their impact on investor confidence.',
-    swotHint: 'Security-Investment tensions triggered by personalized power struggles.',
-    nodeLabels: ['Clan A Influence', 'Clan B Perceived Threat', 'Clan B Response', 'Instability', 'FDI Flight'],
-    loops: [
-      { from: 'Clan A Influence',       to: 'Clan B Perceived Threat', polarity: '+', label: 'R1' },
-      { from: 'Clan B Perceived Threat',to: 'Clan B Response',         polarity: '+', label: 'R1' },
-      { from: 'Clan B Response',        to: 'Clan A Influence',        polarity: '-', label: 'R2' },
-      { from: 'Instability',            to: 'FDI Flight',              polarity: '+', label: 'B' },
-      { from: 'FDI Flight',             to: 'Economic Pressure',       polarity: '+', label: 'B' },
-    ],
-    loopTypes: ['R1: Clan escalation', 'R2: Counter-escalation', 'B: Investment deterrence'],
-  },
 ];
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// CATEGORY CONFIGURATION
-// ═══════════════════════════════════════════════════════════════════════════════
+// ─── CATEGORY CONFIG ──────────────────────────────────────────────────────────
 
 const categoryConfig = {
   strength:    { label: 'Strength',    icon: Shield,      color: 'emerald', bgColor: 'bg-emerald-500', lightBg: 'bg-emerald-50',  textColor: 'text-emerald-700', borderColor: 'border-emerald-200', defaultCLDPolarity: '+' as '+' | '-' },
@@ -377,9 +352,7 @@ const categoryConfig = {
   threat:      { label: 'Threat',      icon: Zap,         color: 'amber',   bgColor: 'bg-amber-500',   lightBg: 'bg-amber-50',    textColor: 'text-amber-700',   borderColor: 'border-amber-200',   defaultCLDPolarity: '-' as '+' | '-' },
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// SCORE BUTTON & ROW COMPONENTS
-// ═══════════════════════════════════════════════════════════════════════════════
+// ─── SCORE BUTTON ─────────────────────────────────────────────────────────────
 
 const ScoreButton: React.FC<{
   value: number; selectedValue: number; onSelect: (v: number) => void;
@@ -394,7 +367,7 @@ const ScoreButton: React.FC<{
           ? type === 'impact'
             ? config.defaultCLDPolarity === '+' ? 'border-emerald-500 bg-emerald-500' : 'border-red-500 bg-red-500'
             : 'border-cyan-500 bg-cyan-500'
-          : 'border-slate-300 dark:border-slate-600 hover:border-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 dark:bg-slate-900'
+          : 'border-slate-300 dark:border-slate-600 hover:border-slate-400 hover:bg-slate-50 dark:bg-slate-900'
       )} aria-label={`${type} score ${value}`}>
       {isSelected && <Check className='w-3.5 h-3.5 text-white' />}
     </button>
@@ -407,22 +380,22 @@ const ScoreRow: React.FC<{
   readOnly?: boolean; labelColor?: string;
 }> = ({ label, score, onChange, type, category, readOnly, labelColor }) => (
   <div className='flex items-center gap-2 flex-wrap'>
-    <span className={cn('text-xs font-semibold w-16 shrink-0', labelColor || 'text-slate-500 dark:text-slate-400')}>{label}</span>
+    <span className={cn('text-xs font-semibold w-16 shrink-0', labelColor || 'text-slate-500 dark:text-slate-400 dark:text-slate-500')}>{label}</span>
     <div className='flex gap-1'>
       {[1, 2, 3, 4, 5].map(n => (
         <ScoreButton key={n} value={n} selectedValue={score} onSelect={readOnly ? () => {} : onChange} type={type} category={category} />
       ))}
     </div>
-    <span className={cn('text-xs font-bold tabular-nums', labelColor || 'text-slate-600 dark:text-slate-400')}>{score}/5</span>
+    <span className={cn('text-xs font-bold tabular-nums', labelColor || 'text-slate-600 dark:text-slate-400 dark:text-slate-500')}>{score}/5</span>
   </div>
 );
 
 const PriorityBadge: React.FC<{ totalScore: number; category: keyof typeof categoryConfig }> = ({ totalScore, category }) => {
   const PRIORITY_GUIDE = [
-    { level: 'Low',      range: '1\u20139',   color: 'text-slate-600 dark:text-slate-400', bg: 'bg-slate-100 dark:bg-slate-800', border: 'border-slate-200 dark:border-slate-700' },
-    { level: 'Medium',   range: '10\u201315', color: 'text-blue-600',  bg: 'bg-blue-100',  border: 'border-blue-200' },
-    { level: 'High',     range: '16\u201320', color: 'text-amber-600', bg: 'bg-amber-100', border: 'border-amber-200' },
-    { level: 'Critical', range: '21\u201325', color: 'text-red-600',   bg: 'bg-red-100',   border: 'border-red-200' },
+    { level: 'Low',      range: '1–9',   color: 'text-slate-600 dark:text-slate-400 dark:text-slate-500', bg: 'bg-slate-100 dark:bg-slate-800', border: 'border-slate-200 dark:border-slate-700' },
+    { level: 'Medium',   range: '10–15', color: 'text-blue-600',  bg: 'bg-blue-100',  border: 'border-blue-200' },
+    { level: 'High',     range: '16–20', color: 'text-amber-600', bg: 'bg-amber-100', border: 'border-amber-200' },
+    { level: 'Critical', range: '21–25', color: 'text-red-600',   bg: 'bg-red-100',   border: 'border-red-200' },
   ];
 
   const getPriorityInfo = (score: number) => {
@@ -435,14 +408,12 @@ const PriorityBadge: React.FC<{ totalScore: number; category: keyof typeof categ
   const priority = getPriorityInfo(totalScore);
   return (
     <span className={cn('px-2 py-0.5 rounded-full text-xs font-bold border', priority.bg, priority.color, priority.border)}>
-      {priority.level} \u00b7 {totalScore}
+      {priority.level} · {totalScore}
     </span>
   );
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// SWOT CARD COMPONENT
-// ═══════════════════════════════════════════════════════════════════════════════
+// ─── SWOT CARD ────────────────────────────────────────────────────────────────
 
 const SWOTCard: React.FC<{
   item: SWOTItem; config: typeof categoryConfig.strength;
@@ -457,7 +428,7 @@ const SWOTCard: React.FC<{
       <div className={cn('rounded-lg p-3 border transition-all', config.lightBg, config.borderColor)}>
         <p className={cn('text-sm font-medium mb-2 leading-snug', config.textColor)}>{item.description}</p>
         <div className='flex items-center justify-between flex-wrap gap-2'>
-          <div className='flex gap-3 text-xs text-slate-500 dark:text-slate-400'>
+          <div className='flex gap-3 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500'>
             <span>Impact <span className={cn('font-bold', config.textColor)}>{imp}</span></span>
             <span>Likelihood <span className='font-bold text-cyan-600'>{lik}</span></span>
           </div>
@@ -479,14 +450,14 @@ const SWOTCard: React.FC<{
       <div className='flex items-start justify-between gap-2 mb-3'>
         <p className={cn('text-sm font-medium leading-relaxed', config.textColor)}>{item.description}</p>
         <span className={cn('px-2 py-0.5 rounded text-xs font-bold text-white shrink-0', config.bgColor)}>
-          {config.defaultCLDPolarity === '+' ? '+' : '\u2212'}{total}
+          {config.defaultCLDPolarity === '+' ? '+' : '−'}{total}
         </span>
       </div>
       <div className='space-y-2 pt-3 border-t border-slate-200 dark:border-slate-700/60'>
         <ScoreRow label='Impact' score={imp} onChange={v => onUpdate?.(item.id, { impactScore: v })} type='impact' category={item.category} labelColor={config.textColor} />
         <ScoreRow label='Likelihood' score={lik} onChange={v => onUpdate?.(item.id, { likelihoodScore: v })} type='likelihood' category={item.category} />
         <div className='flex items-center justify-between pt-1 border-t border-slate-200 dark:border-slate-700/40'>
-          <span className='text-xs text-slate-500 dark:text-slate-400'>Impact \u00d7 Likelihood</span>
+          <span className='text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500'>Impact × Likelihood</span>
           <div className='flex items-center gap-2'>
             <PriorityBadge totalScore={total} category={item.category} />
             {onAddToCLD && (
@@ -502,9 +473,7 @@ const SWOTCard: React.FC<{
   );
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// SWOT QUADRANT COMPONENT
-// ═══════════════════════════════════════════════════════════════════════════════
+// ─── SWOT QUADRANT ────────────────────────────────────────────────────────────
 
 const SWOTQuadrant: React.FC<{
   title: string; count: number; icon: React.ElementType; items: SWOTItem[];
@@ -521,12 +490,12 @@ const SWOTQuadrant: React.FC<{
           <h4 className={cn('font-semibold text-sm', config.textColor)}>{title}</h4>
           <span className={cn('text-xs px-1.5 py-0.5 rounded-full font-medium', config.bgColor, 'text-white')}>{count}</span>
         </div>
-        {open ? <ChevronUp className='w-4 h-4 text-slate-400' /> : <ChevronDown className='w-4 h-4 text-slate-400' />}
+        {open ? <ChevronUp className='w-4 h-4 text-slate-400 dark:text-slate-500' /> : <ChevronDown className='w-4 h-4 text-slate-400 dark:text-slate-500' />}
       </button>
       {open && (
-        <div className='p-3 space-y-2 bg-white dark:bg-slate-800/60'>
+        <div className='p-3 space-y-2 bg-white dark:bg-slate-800/60/60'>
           {items.length === 0
-            ? <p className='text-xs text-slate-400 text-center py-4'>No items yet</p>
+            ? <p className='text-xs text-slate-400 dark:text-slate-500 text-center py-4'>No items yet</p>
             : items.map(item => <SWOTCard key={item.id} item={item} config={config} onUpdate={onUpdate} onAddToCLD={onAddToCLD} compact />)
           }
         </div>
@@ -535,21 +504,11 @@ const SWOTQuadrant: React.FC<{
   );
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// EDUCATIONAL RESOURCES — Uses BIRD_IMAGES from bird-urls.ts
-// ═══════════════════════════════════════════════════════════════════════════════
+// ─── EDUCATIONAL RESOURCES ────────────────────────────────────────────────────
 
 const EducationalResources: React.FC = () => {
   const systemsVideos = Object.values(BIRD_VIDEOS).filter(v => v.section === 'section2');
   const systemsImages = Object.values(BIRD_IMAGES).filter(img => img.category === 'systems' || img.category === 'archetype');
-
-  /** Framework links sourced from BIRD_IMAGES registry */
-  const frameworkLinks = [
-    { title: 'BEIE Framework',   imageRef: BIRD_IMAGES.beieFramework,   icon: Layers },
-    { title: 'Meadows Leverage', imageRef: BIRD_IMAGES.meadowsLeverage, icon: Target },
-    { title: 'Investment Cycles',imageRef: BIRD_IMAGES.investmentGovernanceCycles, icon: RefreshCw },
-    { title: 'Virtuous Cycle',   imageRef: BIRD_IMAGES.investmentVirtuousCycle, icon: TrendingUp },
-  ];
 
   return (
     <div className="bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-purple-950/30 rounded-xl border border-blue-200 dark:border-blue-800 p-4 space-y-4">
@@ -558,20 +517,20 @@ const EducationalResources: React.FC = () => {
         <h3 className="text-sm font-semibold text-blue-800 dark:text-blue-300">BIRD Learning Resources</h3>
       </div>
 
-      {/* Video Resources */}
+      {/* Video Resources from bird-urls.ts */}
       {systemsVideos.length > 0 && (
         <div className="space-y-2">
           <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Video Guides</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {systemsVideos.map(v => (
               <a key={v.url} href={v.url} target="_blank" rel="noopener noreferrer"
-                className="group flex items-center gap-3 px-4 py-3 rounded-lg bg-white dark:bg-slate-800 border border-blue-200 dark:border-slate-700 hover:border-blue-400 hover:shadow-md transition-all">
+                className="group flex items-center gap-3 px-4 py-3 rounded-lg bg-white dark:bg-slate-800/60 border border-blue-200 dark:border-slate-700 hover:border-blue-400 hover:shadow-md transition-all">
                 <div className="shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center group-hover:scale-105 transition-transform">
                   <PlayCircle className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-slate-800 dark:text-slate-100 group-hover:text-blue-700 transition-colors truncate">{v.title}</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">{v.duration} \u00b7 {v.section}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{v.duration} · {v.section}</p>
                 </div>
                 <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 transition-colors shrink-0" />
               </a>
@@ -580,14 +539,14 @@ const EducationalResources: React.FC = () => {
         </div>
       )}
 
-      {/* Image Resources */}
+      {/* Image Resources from bird-urls.ts */}
       {systemsImages.length > 0 && (
         <div className="space-y-2">
           <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Visual References</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {systemsImages.slice(0, 6).map(img => (
               <a key={img.url} href={img.url} target="_blank" rel="noopener noreferrer"
-                className="group block rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 hover:border-blue-400 hover:shadow-md transition-all bg-white dark:bg-slate-800">
+                className="group block rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 hover:border-blue-400 hover:shadow-md transition-all bg-white dark:bg-slate-800/60">
                 <img src={img.url} alt={img.alt} className="w-full h-24 object-cover group-hover:scale-105 transition-transform"
                   onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
                 <div className="px-3 py-2">
@@ -599,13 +558,18 @@ const EducationalResources: React.FC = () => {
         </div>
       )}
 
-      {/* Framework Overview Links — sourced from BIRD_IMAGES */}
+      {/* Framework Overview Links */}
       <div className="space-y-2">
         <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Framework Guides</p>
         <div className="flex flex-wrap gap-2">
-          {frameworkLinks.map(r => (
-            <a key={r.title} href={r.imageRef.url} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-400 hover:shadow-sm transition-all text-xs font-medium text-slate-700 dark:text-slate-200">
+          {[
+            { title: 'BEIE Framework', url: 'https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/19.%20Bangsamoro%20BEIE%20Framework.png', icon: Layers },
+            { title: 'Meadows Leverage', url: 'https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/24.%20Meadows%20Hierarchy%20of%20Leverage%20Points.png', icon: Target },
+            { title: 'Investment Cycles', url: 'https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/15.%20Investment%20and%20Governance%20Cycles.png', icon: RefreshCw },
+            { title: 'Virtuous Cycle', url: 'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/14.%20Investment-Development%20Virtuous%20Cycle.png', icon: TrendingUp },
+          ].map(r => (
+            <a key={r.title} href={r.url} target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 hover:border-blue-400 hover:shadow-sm transition-all text-xs font-medium text-slate-700 dark:text-slate-200">
               <r.icon className="w-3.5 h-3.5 text-blue-500" />
               {r.title}
               <ExternalLink className="w-3 h-3 text-slate-400" />
@@ -617,9 +581,7 @@ const EducationalResources: React.FC = () => {
   );
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// ARCHETYPE IMAGE TOOLTIP
-// ═══════════════════════════════════════════════════════════════════════════════
+// ─── ARCHETYPE IMAGE TOOLTIP ──────────────────────────────────────────────────
 
 const ArchetypeImageTooltip: React.FC<{ imageUrl: string; archetypeName: string }> = ({
   imageUrl,
@@ -654,6 +616,7 @@ const ArchetypeImageTooltip: React.FC<{ imageUrl: string; archetypeName: string 
     hideTimer.current = setTimeout(() => setVisible(false), 120);
   };
 
+  // Clean up timer on unmount
   useEffect(() => () => { if (hideTimer.current) clearTimeout(hideTimer.current); }, []);
 
   return (
@@ -665,7 +628,10 @@ const ArchetypeImageTooltip: React.FC<{ imageUrl: string; archetypeName: string 
         onMouseLeave={hide}
         onFocus={show}
         onBlur={hide}
-        onClick={e => { e.stopPropagation(); visible ? setVisible(false) : show(); }}
+        onClick={e => {
+          e.stopPropagation();
+          visible ? setVisible(false) : show();
+        }}
         className={cn(
           'shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-150',
           visible
@@ -680,17 +646,21 @@ const ArchetypeImageTooltip: React.FC<{ imageUrl: string; archetypeName: string 
 
       {visible && pos && !imgError && (
         <div
-          className="fixed z-50 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden animate-in fade-in zoom-in-95 duration-150"
+          className="fixed z-50 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60 overflow-hidden animate-in fade-in zoom-in-95 duration-150"
           style={{ top: pos.top, left: pos.left, width: 268 }}
           onMouseEnter={() => { clearHide(); setVisible(true); }}
           onMouseLeave={hide}
         >
+          {/* Tooltip header */}
           <div className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-slate-50 to-slate-100 border-b border-slate-200 dark:border-slate-700">
             <GitBranch className="w-3.5 h-3.5 text-blue-500 shrink-0" />
             <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 truncate">{archetypeName}</span>
             <span className="ml-auto text-[9px] text-slate-400 dark:text-slate-500 shrink-0">archetype diagram</span>
           </div>
+
+          {/* Image area */}
           <div className="relative bg-slate-50 dark:bg-slate-900" style={{ minHeight: 180 }}>
+            {/* Skeleton loader */}
             {!imgLoaded && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="space-y-2 w-full px-6">
@@ -703,14 +673,19 @@ const ArchetypeImageTooltip: React.FC<{ imageUrl: string; archetypeName: string 
             <img
               src={imageUrl}
               alt={`${archetypeName} systems archetype diagram`}
-              className={cn('w-full object-contain p-2 transition-opacity duration-300', imgLoaded ? 'opacity-100' : 'opacity-0')}
+              className={cn(
+                'w-full object-contain p-2 transition-opacity duration-300',
+                imgLoaded ? 'opacity-100' : 'opacity-0',
+              )}
               style={{ maxHeight: 220 }}
               onLoad={() => setImgLoaded(true)}
               onError={() => { setImgError(true); setVisible(false); }}
             />
           </div>
+
+          {/* Footer hint */}
           <div className="px-3 py-1.5 bg-slate-50 dark:bg-slate-900 border-t border-slate-100 dark:border-slate-700/60">
-            <p className="text-[9px] text-slate-400 dark:text-slate-500 text-center">Hover to keep open \u00b7 click eye to pin</p>
+            <p className="text-[9px] text-slate-400 dark:text-slate-500 text-center">Hover to keep open · click eye to pin</p>
           </div>
         </div>
       )}
@@ -718,14 +693,12 @@ const ArchetypeImageTooltip: React.FC<{ imageUrl: string; archetypeName: string 
   );
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// LEVERAGE POINTS PANEL
-// ═══════════════════════════════════════════════════════════════════════════════
+// ─── LEVERAGE POINTS PANEL ────────────────────────────────────────────────────
 
 const impactColors = {
   high:   { badge: 'bg-red-100 text-red-700 border-red-200',       dot: 'bg-red-500'    },
   medium: { badge: 'bg-amber-100 text-amber-700 border-amber-200', dot: 'bg-amber-500'  },
-  low:    { badge: 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700', dot: 'bg-slate-400' },
+  low:    { badge: 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-700', dot: 'bg-slate-400'  },
 };
 
 const horizonColors = {
@@ -734,7 +707,7 @@ const horizonColors = {
   long:   'text-purple-600 bg-purple-50 border-purple-200',
 };
 
-export const LeveragePointsPanel: React.FC<{
+const LeveragePointsPanel: React.FC<{
   nodes: ExtendedCLDNode[];
   links: ExtendedCLDLink[];
   selectedArchId: string | null;
@@ -804,19 +777,6 @@ export const LeveragePointsPanel: React.FC<{
         push(8,  'Strengthen quality feedback: make congestion impact on attractiveness more responsive', 'medium', 'short', l => /quality|perform/i.test(l));
         push(5,  'Manage entry rules: metered access, waitlists, or capacity-linked growth', 'high',   'medium', l => /entrant|demand/i.test(l));
         break;
-      // ── BARMM-specific archetype leverage points ──────────────────────────
-      case 'bma':
-        push(2,  'Paradigm shift: transition from personal authority to institutional governance', 'high', 'long',   l => /big.?man|authority|personal/i.test(l));
-        push(4,  'Enable self-organization: build independent civil-service capacity', 'high',   'medium', l => /institutional|weakness/i.test(l));
-        push(5,  'Establish rules: merit-based promotion and anti-patronage policies', 'high',   'medium', _ => true);
-        push(6,  'Improve information flow: transparent public reporting on governance quality', 'medium', 'short',  l => /policy|inconsistency|loyalty/i.test(l));
-        break;
-      case 'bme':
-        push(2,  'Paradigm shift: reframe clan competition as shared economic development', 'high',   'long',   _ => true);
-        push(5,  'Establish rules: formal dispute resolution mechanisms to replace rido cycles', 'high',   'medium', l => /clan|influence|response/i.test(l));
-        push(6,  'Improve information flow: early warning systems for inter-clan tension', 'high',   'short',  l => /instability|threat/i.test(l));
-        push(10, 'Invest in shared infrastructure that benefits all clans equally', 'high',   'medium', l => /fdi|flight|economic/i.test(l));
-        break;
       default:
         break;
     }
@@ -831,7 +791,7 @@ export const LeveragePointsPanel: React.FC<{
     loops.filter(l => l.type === 'R' && l.strength >= 4).forEach(loop => {
       pts.push({
         leverageLevel: 7, meadowsName: MEADOWS_LEVELS[7].name,
-        intervention: `Slow positive feedback in "${loop.name}" \u2014 high gain risks runaway dynamics`,
+        intervention: `Slow positive feedback in "${loop.name}" — high gain risks runaway dynamics`,
         targetNodeIds: loop.nodeIds, expectedImpact: 'high', timeHorizon: 'short', source: 'cld-analysis',
       });
     });
@@ -839,7 +799,7 @@ export const LeveragePointsPanel: React.FC<{
     loops.filter(l => l.type === 'B' && l.strength < 3).forEach(loop => {
       pts.push({
         leverageLevel: 8, meadowsName: MEADOWS_LEVELS[8].name,
-        intervention: `Strengthen balancing loop "${loop.name}" \u2014 weak feedback leaves system uncontrolled`,
+        intervention: `Strengthen balancing loop "${loop.name}" — weak feedback leaves system uncontrolled`,
         targetNodeIds: loop.nodeIds, expectedImpact: 'medium', timeHorizon: 'medium', source: 'cld-analysis',
       });
     });
@@ -861,8 +821,8 @@ export const LeveragePointsPanel: React.FC<{
     return (
       <div className="rounded-xl border border-dashed border-slate-300 dark:border-slate-600 p-6 text-center">
         <Target className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-        <p className="text-sm font-medium text-slate-500 dark:text-slate-400">No leverage points yet</p>
-        <p className="text-xs text-slate-400 mt-1">Apply an archetype or build a CLD to generate Meadows-based interventions</p>
+        <p className="text-sm font-medium text-slate-500 dark:text-slate-400 dark:text-slate-500">No leverage points yet</p>
+        <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">Apply an archetype or build a CLD to generate Meadows-based interventions</p>
       </div>
     );
   }
@@ -875,7 +835,6 @@ export const LeveragePointsPanel: React.FC<{
     return (
       <div className="space-y-2">
         <div className={cn('rounded-lg px-3 py-2 flex items-center gap-2', headerClass)}>
-          <span className="text-xs font-semibold">{title}</span>
           <span className="text-[10px] opacity-70 ml-auto">{subtitle}</span>
         </div>
         {pts.map((point, idx) => {
@@ -887,14 +846,14 @@ export const LeveragePointsPanel: React.FC<{
             <div key={idx}
               className={cn(
                 'rounded-xl border p-3 transition-all cursor-pointer group',
-                isHighlighted ? 'border-violet-400 bg-violet-50 shadow-md' : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-violet-300 hover:shadow-sm',
+                isHighlighted ? 'border-violet-400 bg-violet-50 shadow-md' : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60 hover:border-violet-300 hover:shadow-sm',
               )}
               onClick={() => onHighlightNodes(isHighlighted ? [] : point.targetNodeIds)}>
               <div className="flex items-start justify-between gap-2 mb-2">
                 <div className="flex items-center gap-2">
                   <div className={cn('w-7 h-7 rounded-lg flex items-center justify-center shrink-0',
                     point.leverageLevel <= 3 ? 'bg-violet-100' : point.leverageLevel <= 6 ? 'bg-red-100' : point.leverageLevel <= 9 ? 'bg-amber-100' : 'bg-slate-100 dark:bg-slate-800')}>
-                    <MeadowIcon className={cn('w-3.5 h-3.5', meadow?.color || 'text-slate-500 dark:text-slate-400')} />
+                    <MeadowIcon className={cn('w-3.5 h-3.5', meadow?.color || 'text-slate-500 dark:text-slate-400 dark:text-slate-500')} />
                   </div>
                   <div>
                     <div className="flex items-center gap-1.5">
@@ -904,7 +863,7 @@ export const LeveragePointsPanel: React.FC<{
                         point.leverageLevel <= 9 ? 'bg-amber-500 text-white' : 'bg-slate-400 text-white')}>
                         L{point.leverageLevel}
                       </span>
-                      <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400">{meadow?.name}</span>
+                      <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 dark:text-slate-500">{meadow?.name}</span>
                     </div>
                   </div>
                 </div>
@@ -918,7 +877,7 @@ export const LeveragePointsPanel: React.FC<{
                 <span className="text-[10px] text-slate-400 dark:text-slate-500">{point.targetNodeIds.length} target node{point.targetNodeIds.length !== 1 ? 's' : ''}</span>
                 {point.targetNodeIds.length > 0 && (
                   <span className={cn('text-[10px] font-medium', isHighlighted ? 'text-violet-600' : 'text-slate-400 dark:text-slate-500 group-hover:text-violet-500')}>
-                    {isHighlighted ? '\u2713 highlighted' : 'click to highlight'}
+                    {isHighlighted ? '✓ highlighted' : 'click to highlight'}
                   </span>
                 )}
               </div>
@@ -934,11 +893,11 @@ export const LeveragePointsPanel: React.FC<{
       <div className="rounded-xl bg-gradient-to-r from-violet-50 to-indigo-50 border border-violet-200 p-3">
         <div className="flex items-center gap-2 mb-2">
           <Target className="w-3.5 h-3.5 text-violet-600" />
-          <span className="text-xs font-semibold text-violet-800">Meadows&apos; Leverage Hierarchy</span>
+          <span className="text-xs font-semibold text-violet-800">Meadows' Leverage Hierarchy</span>
           <span className="text-[10px] text-violet-500 ml-auto">lower level = more leverage</span>
         </div>
         <div className="flex items-center gap-1 text-[9px] font-medium">
-          {['L1\u20133\nParadigm', 'L4\u20136\nInformation', 'L7\u20139\nFeedback', 'L10\u201312\nParameters'].map((label, i) => {
+          {['L1–3\nParadigm', 'L4–6\nInformation', 'L7–9\nFeedback', 'L10–12\nParameters'].map((label, i) => {
             const colors = ['bg-violet-600 text-white', 'bg-red-500 text-white', 'bg-amber-500 text-white', 'bg-slate-400 text-white'];
             return (
               <div key={i} className={cn('flex-1 rounded px-1.5 py-1 text-center leading-tight', colors[i])}>
@@ -946,7 +905,7 @@ export const LeveragePointsPanel: React.FC<{
               </div>
             );
           })}
-          <div className="ml-1 text-slate-400 self-center">\u2192 least</div>
+          <div className="ml-1 text-slate-400 dark:text-slate-500 self-center">→ least</div>
         </div>
       </div>
 
@@ -954,17 +913,15 @@ export const LeveragePointsPanel: React.FC<{
       {renderGroup(cldPts,  'CLD-Derived Points',      'from diagram analysis',  'bg-blue-100 text-blue-800')}
 
       <p className="text-[10px] text-slate-400 dark:text-slate-500 text-center leading-relaxed">
-        Based on Donella Meadows&apos; <em>Thinking in Systems</em> (2008). Click a card to highlight target nodes in the CLD.
+        Based on Donella Meadows' <em>Thinking in Systems</em> (2008). Click a card to highlight target nodes in the CLD.
       </p>
     </div>
   );
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// CLD CANVAS COMPONENT
-// ═══════════════════════════════════════════════════════════════════════════════
+// ─── CLD CANVAS ───────────────────────────────────────────────────────────────
 
-export const CLDCanvas: React.FC<{
+const CLDCanvas: React.FC<{
   nodes: ExtendedCLDNode[];
   links: ExtendedCLDLink[];
   highlightedNodeIds?: string[];
@@ -974,26 +931,31 @@ export const CLDCanvas: React.FC<{
   const svgRef   = useRef<SVGSVGElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
 
+  // ── Interaction state ────────────────────────────────────────────────────
   const [editingNodeId,  setEditingNodeId]  = useState<string | null>(null);
   const [hoveredNodeId,  setHoveredNodeId]  = useState<string | null>(null);
   const [hoveredLinkKey, setHoveredLinkKey] = useState<string | null>(null);
   const [showHelp,       setShowHelp]       = useState(false);
 
+  // Arrow-drawing state: dragging from a node to draw a new link
   const [arrowDraw, setArrowDraw] = useState<{
     fromId: string; fromX: number; fromY: number;
     curX: number; curY: number; active: boolean;
   } | null>(null);
 
+  // Node-dragging state
   const [draggingNode, setDraggingNode] = useState<{
     id: string; startMouseX: number; startMouseY: number;
     startNodeX: number; startNodeY: number;
   } | null>(null);
 
+  // Link polarity edit dialog
   const [linkDialog, setLinkDialog] = useState<{
     from: string; to: string; polarity: '+' | '-'; strength: number; isNew: boolean;
   } | null>(null);
 
-  const getSVGPoint = useCallback((e: React.MouseEvent | MouseEvent): { x: number; y: number } => {
+  // ── Helpers ──────────────────────────────────────────────────────────────
+  const getSVGPoint = (e: React.MouseEvent | MouseEvent): { x: number; y: number } => {
     const svg = svgRef.current;
     if (!svg) return { x: 0, y: 0 };
     const rect = svg.getBoundingClientRect();
@@ -1001,12 +963,14 @@ export const CLDCanvas: React.FC<{
       x: ((e.clientX - rect.left) / rect.width) * 100,
       y: ((e.clientY - rect.top)  / rect.height) * 100,
     };
-  }, []);
+  };
 
-  const getNodeAt = useCallback((x: number, y: number): ExtendedCLDNode | undefined =>
-    nodes.find(n => Math.hypot(Number(n.x) - x, Number(n.y) - y) < 6), [nodes]);
+  const getNodeAt = (x: number, y: number): ExtendedCLDNode | undefined =>
+    nodes.find(n => Math.hypot(Number(n.x) - x, Number(n.y) - y) < 6);
 
+  // ── Node management ─────────────────────────────────────────────────────
   const addNode = useCallback(() => {
+    // Place new nodes in a spiral to avoid collisions
     const angle = nodes.length * 137.5 * (Math.PI / 180);
     const r     = 12 + nodes.length * 4;
     const n: ExtendedCLDNode = {
@@ -1027,10 +991,12 @@ export const CLDCanvas: React.FC<{
   const updateLabel = useCallback((id: string, label: string) =>
     onUpdateNodes?.(nodes.map(n => n.id === id ? { ...n, label } : n)), [nodes, onUpdateNodes]);
 
+  // ── Link management ─────────────────────────────────────────────────────
   const confirmLink = useCallback(() => {
     if (!linkDialog?.to || !linkDialog?.from) return;
     const exists = links.find(l => l.from === linkDialog.from && l.to === linkDialog.to);
     if (exists) {
+      // Update existing link polarity/strength
       onUpdateLinks?.(links.map(l =>
         l.from === linkDialog.from && l.to === linkDialog.to
           ? { ...l, polarity: linkDialog.polarity, strength: linkDialog.strength } : l));
@@ -1052,6 +1018,8 @@ export const CLDCanvas: React.FC<{
     if (lnk) setLinkDialog({ from, to, polarity: lnk.polarity, strength: lnk.strength || 3, isNew: false });
   }, [links]);
 
+  // ── Arrow path calculation ────────────────────────────────────────────────
+  // Uses cubic bezier with perpendicular offset for curved arrows (CLD convention)
   const getArrowPath = useCallback((
     fx: number, fy: number, tx: number, ty: number, offset = 8
   ) => {
@@ -1059,16 +1027,22 @@ export const CLDCanvas: React.FC<{
     const len  = Math.sqrt(dx * dx + dy * dy) || 1;
     const cx   = (fx + tx) / 2 - (dy / len) * offset;
     const cy   = (fy + ty) / 2 + (dx / len) * offset;
+    // Shorten endpoint so arrow doesn't overlap circle
     const nx = tx - (dx / len) * 5.5;
     const ny = ty - (dy / len) * 5.5;
     return { d: `M ${fx} ${fy} Q ${cx} ${cy} ${nx} ${ny}`, mx: cx, my: cy };
   }, []);
 
+  // ── Mouse event handlers ─────────────────────────────────────────────────
+
+  // Start dragging a node OR start drawing an arrow (shift+drag)
   const handleNodeMouseDown = useCallback((e: React.MouseEvent, nodeId: string) => {
     e.stopPropagation();
     if (editingNodeId) return;
     const pt = getSVGPoint(e);
+
     if (e.shiftKey || e.altKey) {
+      // Shift/Alt+drag = draw arrow FROM this node
       setArrowDraw({ fromId: nodeId, fromX: pt.x, fromY: pt.y, curX: pt.x, curY: pt.y, active: true });
     } else {
       const node = nodes.find(n => n.id === nodeId);
@@ -1079,28 +1053,33 @@ export const CLDCanvas: React.FC<{
         startNodeX: Number(node.x), startNodeY: Number(node.y),
       });
     }
-  }, [editingNodeId, nodes, getSVGPoint]);
+  }, [editingNodeId, nodes]);
 
   const handleSVGMouseMove = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
     const pt = getSVGPoint(e);
+
     if (arrowDraw?.active) {
       setArrowDraw(prev => prev ? { ...prev, curX: pt.x, curY: pt.y } : null);
     }
+
     if (draggingNode) {
       const dx = pt.x - draggingNode.startMouseX;
       const dy = pt.y - draggingNode.startMouseY;
       onUpdateNodes?.(nodes.map(n =>
         n.id === draggingNode.id
-          ? { ...n, x: Math.max(5, Math.min(95, draggingNode.startNodeX + dx)), y: Math.max(5, Math.min(90, draggingNode.startNodeY + dy)) }
+          ? { ...n,
+              x: Math.max(5, Math.min(95, draggingNode.startNodeX + dx)),
+              y: Math.max(5, Math.min(90, draggingNode.startNodeY + dy)) }
           : n));
     }
-  }, [arrowDraw, draggingNode, nodes, onUpdateNodes, getSVGPoint]);
+  }, [arrowDraw, draggingNode, nodes, onUpdateNodes]);
 
   const handleSVGMouseUp = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
     if (arrowDraw?.active) {
       const pt = getSVGPoint(e);
       const targetNode = getNodeAt(pt.x, pt.y);
       if (targetNode && targetNode.id !== arrowDraw.fromId) {
+        // Check if link already exists
         const existing = links.find(l => l.from === arrowDraw.fromId && l.to === targetNode.id);
         setLinkDialog({
           from: arrowDraw.fromId, to: targetNode.id,
@@ -1112,15 +1091,17 @@ export const CLDCanvas: React.FC<{
       setArrowDraw(null);
     }
     setDraggingNode(null);
-  }, [arrowDraw, links, getSVGPoint, getNodeAt]);
+  }, [arrowDraw, links, getNodeAt]);
 
+  // ── Render helpers ───────────────────────────────────────────────────────
   const isEmpty = nodes.length === 0;
 
   const nodeColorClass = (node: ExtendedCLDNode) => {
-    if (node.category) return categoryConfig[node.category as keyof typeof categoryConfig]?.bgColor || 'bg-slate-500';
+    if (node.category) return categoryConfig[node.category]?.bgColor || 'bg-slate-500';
     return 'bg-gradient-to-br from-slate-500 to-slate-700';
   };
 
+  // Loop labels derived from findLoops for display
   const detectedLoops = useMemo(() => findLoops(nodes, links), [nodes, links]);
 
   return (
@@ -1129,9 +1110,11 @@ export const CLDCanvas: React.FC<{
       className="relative rounded-xl cld-canvas-bg overflow-hidden"
       style={{ minHeight: 500, userSelect: draggingNode ? 'none' : 'auto' }}
     >
+      {/* Dot-grid background */}
       <div className="absolute inset-0 opacity-[0.035] dark:opacity-[0.06] pointer-events-none"
         style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
+      {/* ── SVG layer (links + arrow-draw preview) ─────────────────────── */}
       <svg
         ref={svgRef}
         className="absolute inset-0 w-full h-full"
@@ -1143,6 +1126,7 @@ export const CLDCanvas: React.FC<{
         onMouseLeave={handleSVGMouseUp}
       >
         <defs>
+          {/* Arrow markers — four variants: pos/neg × normal/highlighted */}
           {[
             { id: 'arrow-pos',      fill: '#059669' },
             { id: 'arrow-neg',      fill: '#dc2626' },
@@ -1182,39 +1166,47 @@ export const CLDCanvas: React.FC<{
               onMouseLeave={() => setHoveredLinkKey(null)}
               style={{ cursor: 'pointer' }}
             >
-              <path d={d} stroke="transparent" strokeWidth="4" fill="none" vectorEffect="non-scaling-stroke" />
+              {/* Invisible wider hit zone */}
+              <path d={d} stroke="transparent" strokeWidth="4" fill="none"
+                vectorEffect="non-scaling-stroke" />
+              {/* Visible link */}
               <path d={d} stroke={color} strokeWidth={isHov || isHL ? "1.2" : "0.7"} fill="none"
                 strokeLinecap="round" vectorEffect="non-scaling-stroke"
                 markerEnd={`url(#${markerId})`}
                 style={{ filter: isHL ? 'url(#glow)' : 'none', opacity: isHov ? 1 : 0.85, transition: 'all 0.15s' }}
               />
+              {/* Polarity badge on midpoint */}
               <g onClick={() => editLink(link.from, link.to)}>
-                <circle cx={`${mx}`} cy={`${my}`} r="3.2" fill={color} vectorEffect="non-scaling-stroke" style={{ transition: 'r 0.15s' }} />
+                <circle cx={`${mx}`} cy={`${my}`} r="3.2" fill={color} vectorEffect="non-scaling-stroke"
+                  style={{ transition: 'r 0.15s' }} />
                 <text x={`${mx}`} y={`${my}`} textAnchor="middle" dominantBaseline="central"
                   fill="white" fontSize="3.5" fontWeight="bold" style={{ userSelect: 'none', pointerEvents: 'none' }}>
                   {link.polarity}
                 </text>
               </g>
+              {/* Delay indicator */}
               {(link as ExtendedCLDLink).delay ? (
                 <g transform={`translate(${mx + 2}, ${my - 2})`}>
                   <circle r="2" fill="#f59e0b" vectorEffect="non-scaling-stroke" />
                   <text textAnchor="middle" dominantBaseline="central" fill="white" fontSize="2.5"
-                    style={{ userSelect: 'none', pointerEvents: 'none' }}>\u2016</text>
+                    style={{ userSelect: 'none', pointerEvents: 'none' }}>‖</text>
                 </g>
               ) : null}
+              {/* Delete hit area on hover */}
               {isHov && (
                 <g transform={`translate(${mx - 6}, ${my - 4})`}
                   onClick={(e) => { e.stopPropagation(); deleteLink(link.from, link.to); }}
                   style={{ cursor: 'pointer' }}>
                   <circle cx="4" cy="4" r="3.5" fill="#ef4444" vectorEffect="non-scaling-stroke" />
                   <text x="4" y="4" textAnchor="middle" dominantBaseline="central"
-                    fill="white" fontSize="4" style={{ userSelect: 'none' }}>\u00d7</text>
+                    fill="white" fontSize="4" style={{ userSelect: 'none' }}>×</text>
                 </g>
               )}
             </g>
           );
         })}
 
+        {/* Arrow-draw preview line */}
         {arrowDraw?.active && (() => {
           const f = nodes.find(n => n.id === arrowDraw.fromId);
           if (!f) return null;
@@ -1226,6 +1218,7 @@ export const CLDCanvas: React.FC<{
           );
         })()}
 
+        {/* Loop labels (R1, B1, etc.) — render near detected loops */}
         {detectedLoops.slice(0, 4).map((loop, idx) => {
           const loopNodes = loop.nodeIds.map(id => nodes.find(n => n.id === id)).filter(Boolean) as ExtendedCLDNode[];
           if (loopNodes.length === 0) return null;
@@ -1245,7 +1238,7 @@ export const CLDCanvas: React.FC<{
         })}
       </svg>
 
-      {/* Node layer */}
+      {/* ── Node layer (HTML absolutely positioned) ─────────────────────── */}
       {nodes.map((node, idx) => {
         const isHL   = highlightedNodeIds.includes(node.id);
         const isHov  = hoveredNodeId === node.id;
@@ -1264,19 +1257,27 @@ export const CLDCanvas: React.FC<{
             onMouseEnter={() => setHoveredNodeId(node.id)}
             onMouseLeave={() => setHoveredNodeId(null)}
           >
+            {/* Main node pill */}
             <div
               onMouseDown={(e) => handleNodeMouseDown(e, node.id)}
               onClick={() => !draggingNode && setEditingNodeId(node.id)}
-              title={isEdit ? '' : 'Click to edit label \u00b7 Shift+drag to draw arrow \u00b7 Drag to move'}
+              title={
+                isEdit ? '' :
+                'Click to edit label • Shift+drag to draw arrow • Drag to move'
+              }
               className={cn(
                 'min-w-[72px] max-w-[120px] rounded-full px-3 py-2 shadow-md border-2',
                 'flex items-center justify-center text-white text-[11px] font-semibold text-center',
                 'transition-all duration-150 select-none',
                 isDrg ? 'cursor-grabbing scale-105 shadow-xl' : 'cursor-grab hover:scale-105 hover:shadow-lg',
-                isHL ? 'border-violet-400 ring-4 ring-violet-300/50 ring-offset-1 scale-110'
-                  : isArrowSrc ? 'border-indigo-400 ring-2 ring-indigo-300'
+                isHL
+                  ? 'border-violet-400 ring-4 ring-violet-300/50 ring-offset-1 scale-110'
+                  : isArrowSrc
+                  ? 'border-indigo-400 ring-2 ring-indigo-300'
                   : 'border-white/70',
-                nodeColorClass(node),
+                node.category
+                  ? categoryConfig[node.category]?.bgColor
+                  : 'bg-gradient-to-br from-slate-500 to-slate-700',
               )}
             >
               {isEdit ? (
@@ -1295,12 +1296,14 @@ export const CLDCanvas: React.FC<{
               )}
             </div>
 
+            {/* Leverage badge */}
             {isHL && (
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 whitespace-nowrap pointer-events-none">
-                <span className="text-[9px] font-bold bg-violet-600 text-white px-1.5 py-0.5 rounded-full shadow">\u26a1 leverage</span>
+                <span className="text-[9px] font-bold bg-violet-600 text-white px-1.5 py-0.5 rounded-full shadow">⚡ leverage</span>
               </div>
             )}
 
+            {/* Hover action bar — draw arrow, delete */}
             {isHov && !isEdit && !isDrg && (
               <div className="absolute -top-7 left-1/2 -translate-x-1/2 flex gap-1 items-center animate-in fade-in duration-100">
                 <button
@@ -1311,7 +1314,7 @@ export const CLDCanvas: React.FC<{
                   }}
                   className="w-6 h-6 bg-indigo-500 rounded-full text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform text-[10px] font-bold"
                   title="Draw arrow (or Shift+drag)"
-                >\u2192</button>
+                >→</button>
                 <button
                   onClick={e => { e.stopPropagation(); deleteNode(node.id); }}
                   className="w-6 h-6 bg-red-500 rounded-full text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
@@ -1325,6 +1328,7 @@ export const CLDCanvas: React.FC<{
         );
       })}
 
+      {/* ── Empty state ──────────────────────────────────────────────────── */}
       {isEmpty && (
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 pointer-events-none" style={{ zIndex: 1 }}>
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/40 dark:to-indigo-900/40 flex items-center justify-center mb-3 animate-pulse">
@@ -1335,12 +1339,12 @@ export const CLDCanvas: React.FC<{
             Click <strong className="text-blue-600">Build from SWOT</strong> to auto-generate, apply an archetype, or <strong className="text-blue-600">Add Node</strong> to start from scratch.
           </p>
           <p className="text-[11px] text-slate-400 dark:text-slate-500 max-w-xs">
-            <span className="font-semibold">Shift+drag</span> a node to draw an arrow. <span className="font-semibold">Drag</span> to reposition. Click the <span className="font-semibold text-emerald-600">+</span> / <span className="font-semibold text-red-600">\u2212</span> badge to edit polarity.
+            <span className="font-semibold">Shift+drag</span> a node to draw an arrow. <span className="font-semibold">Drag</span> to reposition. Click the <span className="font-semibold text-emerald-600">+</span> / <span className="font-semibold text-red-600">−</span> badge to edit polarity.
           </p>
         </div>
       )}
 
-      {/* Toolbar */}
+      {/* ── Toolbar: top-left ────────────────────────────────────────────── */}
       <div className="absolute top-3 left-3 flex gap-2 flex-wrap" style={{ zIndex: 15 }}>
         <button onClick={() => setShowHelp(v => !v)}
           className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/90 dark:bg-slate-800/90 backdrop-blur border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium hover:bg-white dark:hover:bg-slate-700 hover:shadow-md transition-all">
@@ -1350,11 +1354,12 @@ export const CLDCanvas: React.FC<{
         {detectedLoops.length > 0 && (
           <span className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-700 text-emerald-700 dark:text-emerald-400 text-xs font-medium">
             <GitBranch className="w-3 h-3" />
-            {detectedLoops.filter(l => l.type === 'R').length}R \u00b7 {detectedLoops.filter(l => l.type === 'B').length}B loops
+            {detectedLoops.filter(l => l.type === 'R').length}R · {detectedLoops.filter(l => l.type === 'B').length}B loops
           </span>
         )}
       </div>
 
+      {/* ── Help panel ──────────────────────────────────────────────────── */}
       {showHelp && (
         <div className="absolute top-14 left-3 right-3 md:right-auto md:max-w-[340px] bg-white/97 dark:bg-slate-800/97 backdrop-blur rounded-xl shadow-xl border border-slate-200 dark:border-slate-700 p-4 z-20 animate-in slide-in-from-top-2 fade-in duration-200">
           <div className="flex items-start justify-between mb-3">
@@ -1367,11 +1372,11 @@ export const CLDCanvas: React.FC<{
             <div className="grid grid-cols-2 gap-2">
               <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-2">
                 <p className="font-bold text-slate-700 dark:text-slate-200 mb-1">Adding nodes</p>
-                <p>Click <strong>&quot;Add Node&quot;</strong> or <strong>&quot;Build from SWOT&quot;</strong> to auto-populate.</p>
+                <p>Click <strong>"Add Node"</strong> (bottom-right) or <strong>"Build from SWOT"</strong> to auto-populate.</p>
               </div>
               <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-2">
                 <p className="font-bold text-slate-700 dark:text-slate-200 mb-1">Drawing arrows</p>
-                <p><strong>Shift+drag</strong> from a node, or hover \u2192 click the <span className="text-indigo-500 font-bold">\u2192</span> button.</p>
+                <p><strong>Shift+drag</strong> from a node, or hover → click the <span className="text-indigo-500 font-bold">→</span> button.</p>
               </div>
               <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-2">
                 <p className="font-bold text-slate-700 dark:text-slate-200 mb-1">Moving nodes</p>
@@ -1379,26 +1384,26 @@ export const CLDCanvas: React.FC<{
               </div>
               <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-2">
                 <p className="font-bold text-slate-700 dark:text-slate-200 mb-1">Editing arrows</p>
-                <p>Click the <span className="text-emerald-600 font-bold">+</span>/<span className="text-red-500 font-bold">\u2212</span> badge to toggle polarity or change strength. Hover \u2192 <span className="text-red-500">\u00d7</span> to delete.</p>
+                <p>Click the <span className="text-emerald-600 font-bold">+</span>/<span className="text-red-500 font-bold">−</span> badge to toggle polarity or change strength. Hover → <span className="text-red-500">×</span> to delete.</p>
               </div>
             </div>
             <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-2 border border-blue-100 dark:border-blue-800">
               <p className="font-semibold text-blue-700 dark:text-blue-300 mb-0.5">CLD conventions</p>
-              <p><span className="text-emerald-600 font-bold">+ (reinforcing)</span> \u2014 A\u2191 causes B\u2191. <span className="text-red-500 font-bold">\u2212 (balancing)</span> \u2014 A\u2191 causes B\u2193. Even number of (\u2212) in a loop = <strong>Reinforcing loop (R)</strong>. Odd = <strong>Balancing loop (B)</strong>.</p>
+              <p><span className="text-emerald-600 font-bold">+ (reinforcing)</span> — A↑ causes B↑. <span className="text-red-500 font-bold">− (balancing)</span> — A↑ causes B↓. Even number of (−) in a loop = <strong>Reinforcing loop (R)</strong>. Odd = <strong>Balancing loop (B)</strong>.</p>
             </div>
             <div className="flex items-center gap-4 text-[10px] text-slate-500 dark:text-slate-400 pt-1">
               <span className="flex items-center gap-1"><span className="w-3 h-0.5 bg-emerald-500 rounded inline-block"/><span className="w-0 h-0 border-l-2 border-r-0 border-t-2 border-b-2 border-transparent border-l-emerald-500 inline-block -ml-0.5 mr-1"/>Reinforcing (+)</span>
-              <span className="flex items-center gap-1"><span className="w-3 h-0.5 bg-red-500 rounded inline-block"/><span className="w-0 h-0 border-l-2 border-r-0 border-t-2 border-b-2 border-transparent border-l-red-500 inline-block -ml-0.5 mr-1"/>Balancing (\u2212)</span>
+              <span className="flex items-center gap-1"><span className="w-3 h-0.5 bg-red-500 rounded inline-block"/><span className="w-0 h-0 border-l-2 border-r-0 border-t-2 border-b-2 border-transparent border-l-red-500 inline-block -ml-0.5 mr-1"/>Balancing (−)</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500 inline-block"/>Delay</span>
             </div>
           </div>
         </div>
       )}
 
-      {/* Legend */}
+      {/* ── Legend: bottom-left ──────────────────────────────────────────── */}
       <div className="absolute bottom-3 left-3 bg-white/90 dark:bg-slate-800/90 backdrop-blur rounded-lg px-3 py-2 text-xs text-slate-600 dark:text-slate-300 flex flex-wrap gap-3 shadow-md border border-slate-200 dark:border-slate-700" style={{ zIndex: 15 }}>
         <span className="flex items-center gap-1.5 font-medium"><span className="w-3 h-0.5 bg-emerald-500 rounded" />Reinforcing (+)</span>
-        <span className="flex items-center gap-1.5 font-medium"><span className="w-3 h-0.5 bg-red-500 rounded" />Balancing (\u2212)</span>
+        <span className="flex items-center gap-1.5 font-medium"><span className="w-3 h-0.5 bg-red-500 rounded" />Balancing (−)</span>
         {highlightedNodeIds.length > 0 && (
           <span className="flex items-center gap-1.5 font-medium text-violet-600 dark:text-violet-400">
             <Circle className="w-2.5 h-2.5 fill-violet-500 text-violet-500" />Leverage target
@@ -1406,12 +1411,12 @@ export const CLDCanvas: React.FC<{
         )}
         {arrowDraw?.active && (
           <span className="flex items-center gap-1.5 font-medium text-indigo-600 dark:text-indigo-400 animate-pulse">
-            <span className="w-2 h-2 rounded-full bg-indigo-500" />Drawing arrow\u2026
+            <span className="w-2 h-2 rounded-full bg-indigo-500" />Drawing arrow…
           </span>
         )}
       </div>
 
-      {/* Add node button */}
+      {/* ── Add node button: bottom-right ───────────────────────────────── */}
       <button
         onClick={addNode}
         className="absolute bottom-3 right-3 px-3 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-xs font-semibold flex items-center gap-1.5 shadow-lg hover:shadow-xl hover:scale-105 transition-all"
@@ -1420,7 +1425,7 @@ export const CLDCanvas: React.FC<{
         <Plus className="w-3.5 h-3.5" /> Add Node
       </button>
 
-      {/* Link dialog */}
+      {/* ── Link dialog ──────────────────────────────────────────────────── */}
       {linkDialog && (
         <div className="absolute inset-0 flex items-center justify-center bg-slate-900/30 dark:bg-slate-900/50 backdrop-blur-sm" style={{ zIndex: 30 }}>
           <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-5 border border-slate-200 dark:border-slate-700 w-full max-w-xs mx-3 animate-in zoom-in-95 duration-200">
@@ -1430,13 +1435,13 @@ export const CLDCanvas: React.FC<{
             </h3>
             <p className="text-[11px] text-slate-500 dark:text-slate-400 mb-4">
               <strong>{nodes.find(n => n.id === linkDialog.from)?.label}</strong>
-              {' \u2192 '}
+              {' → '}
               <strong>{nodes.find(n => n.id === linkDialog.to)?.label}</strong>
             </p>
             <div className="space-y-3">
               <div>
                 <label className="text-xs font-semibold text-slate-600 dark:text-slate-300 block mb-1.5">
-                  Polarity \u2014 how does the cause affect the effect?
+                  Polarity — how does the cause affect the effect?
                 </label>
                 <div className="flex gap-2">
                   {(['+', '-'] as const).map(p => (
@@ -1447,7 +1452,7 @@ export const CLDCanvas: React.FC<{
                           ? p === '+' ? 'bg-emerald-500 text-white shadow-md' : 'bg-red-500 text-white shadow-md'
                           : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
                       )}>
-                      {p === '+' ? '+ Reinforcing (same direction)' : '\u2212 Balancing (opposite direction)'}
+                      {p === '+' ? '+ Reinforcing (same direction)' : '− Balancing (opposite direction)'}
                     </button>
                   ))}
                 </div>
@@ -1506,11 +1511,7 @@ export const CLDCanvas: React.FC<{
   );
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// SNAPSHOTS PANEL
-// ═══════════════════════════════════════════════════════════════════════════════
-
-export const SnapshotsPanel: React.FC<{
+const SnapshotsPanel: React.FC<{
   snapshots: CLDSnapshot[];
   activeSnapshotId: string | undefined;
   onSaveSnapshot: (name: string) => void;
@@ -1548,34 +1549,34 @@ export const SnapshotsPanel: React.FC<{
 
         <div className="relative">
           <select value="" onChange={(e) => { if (e.target.value) { onLoadSnapshot(e.target.value); e.target.value = ''; } }}
-            className="appearance-none flex items-center gap-1.5 px-3 pr-8 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-600 dark:text-slate-400 text-xs font-medium transition-colors cursor-pointer border border-slate-200 dark:border-slate-700">
+            className="appearance-none flex items-center gap-1.5 px-3 pr-8 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-600 dark:text-slate-400 dark:text-slate-500 text-xs font-medium transition-colors cursor-pointer border border-slate-200 dark:border-slate-700">
             <option value="">Load Snapshot...</option>
             {snapshots.map(snap => (
               <option key={snap.id} value={snap.id}>
-                {snap.id === activeSnapshotId ? '\u2022 ' : ''}{snap.label}
+                {snap.id === activeSnapshotId ? '• ' : ''}{snap.label}
               </option>
             ))}
           </select>
-          <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-slate-400 pointer-events-none" />
+          <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-slate-400 dark:text-slate-500 pointer-events-none" />
         </div>
       </div>
 
       {snapshots.length > 0 && (
         <div className="border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-900 p-2 max-h-32 overflow-y-auto">
           {snapshots.map(snap => (
-            <div key={snap.id} className="flex items-center justify-between px-2 py-1 text-xs text-slate-600 dark:text-slate-400">
+            <div key={snap.id} className="flex items-center justify-between px-2 py-1 text-xs text-slate-600 dark:text-slate-400 dark:text-slate-500">
               <span className={cn('truncate flex-1', snap.id === activeSnapshotId && 'text-blue-600 font-semibold')}
                 title={snap.id === activeSnapshotId ? 'Active' : ''}>
-                {snap.id === activeSnapshotId ? '\u2713 ' : ''}{snap.label}
+                {snap.id === activeSnapshotId ? '✓ ' : ''}{snap.label}
               </span>
               {snap.id !== activeSnapshotId && (
                 <div className="flex items-center gap-1">
                   <button onClick={() => { setShowRenameDialog(snap.id); setNewSnapshotName(snap.label); }}
-                    className="text-slate-400 hover:text-blue-500" title="Rename">
+                    className="text-slate-400 dark:text-slate-500 hover:text-blue-500" title="Rename">
                     <FileText className="w-3 h-3" />
                   </button>
                   <button onClick={() => onDeleteSnapshot(snap.id)}
-                    className="text-slate-400 hover:text-red-500" title="Delete">
+                    className="text-slate-400 dark:text-slate-500 hover:text-red-500" title="Delete">
                     <Trash2 className="w-3 h-3" />
                   </button>
                 </div>
@@ -1587,7 +1588,7 @@ export const SnapshotsPanel: React.FC<{
 
       {showSaveDialog && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 animate-in fade-in duration-150">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-5 border border-slate-200 dark:border-slate-700 w-full max-w-sm mx-3 animate-in zoom-in-95 duration-200">
+          <div className="bg-white dark:bg-slate-800/60 rounded-2xl shadow-2xl p-5 border border-slate-200 dark:border-slate-700 w-full max-w-sm mx-3 animate-in zoom-in-95 duration-200">
             <h3 className="font-semibold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2"><Save className="w-5 h-5 text-blue-500" /> Save CLD Snapshot</h3>
             <input autoFocus value={newSnapshotName} onChange={e => setNewSnapshotName(e.target.value)}
               placeholder="Enter snapshot name..."
@@ -1595,7 +1596,7 @@ export const SnapshotsPanel: React.FC<{
               onKeyDown={e => { if (e.key === 'Enter') handleSave(); if (e.key === 'Escape') setShowSaveDialog(false); }} />
             <div className="flex gap-2">
               <button onClick={handleSave} disabled={!newSnapshotName.trim()} className="flex-1 py-2 rounded-lg bg-blue-500 text-white text-sm font-semibold disabled:opacity-50">Save</button>
-              <button onClick={() => setShowSaveDialog(false)} className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-600 dark:text-slate-400 text-sm font-medium">Cancel</button>
+              <button onClick={() => setShowSaveDialog(false)} className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-600 dark:text-slate-400 dark:text-slate-500 text-sm font-medium">Cancel</button>
             </div>
           </div>
         </div>
@@ -1603,7 +1604,7 @@ export const SnapshotsPanel: React.FC<{
 
       {showRenameDialog && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 animate-in fade-in duration-150">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-5 border border-slate-200 dark:border-slate-700 w-full max-w-sm mx-3 animate-in zoom-in-95 duration-200">
+          <div className="bg-white dark:bg-slate-800/60 rounded-2xl shadow-2xl p-5 border border-slate-200 dark:border-slate-700 w-full max-w-sm mx-3 animate-in zoom-in-95 duration-200">
             <h3 className="font-semibold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2"><FileText className="w-5 h-5 text-blue-500" /> Rename Snapshot</h3>
             <input autoFocus value={newSnapshotName} onChange={e => setNewSnapshotName(e.target.value)}
               placeholder="Enter new name..."
@@ -1611,7 +1612,7 @@ export const SnapshotsPanel: React.FC<{
               onKeyDown={e => { if (e.key === 'Enter') handleRename(); if (e.key === 'Escape') setShowRenameDialog(null); }} />
             <div className="flex gap-2">
               <button onClick={handleRename} disabled={!newSnapshotName.trim()} className="flex-1 py-2 rounded-lg bg-blue-500 text-white text-sm font-semibold disabled:opacity-50">Rename</button>
-              <button onClick={() => setShowRenameDialog(null)} className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-600 dark:text-slate-400 text-sm font-medium">Cancel</button>
+              <button onClick={() => setShowRenameDialog(null)} className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-600 dark:text-slate-400 dark:text-slate-500 text-sm font-medium">Cancel</button>
             </div>
           </div>
         </div>
@@ -1620,9 +1621,7 @@ export const SnapshotsPanel: React.FC<{
   );
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// AI ANALYSIS SIDE PANEL
-// ═══════════════════════════════════════════════════════════════════════════════
+// ─── AI ANALYSIS SIDE PANEL ────────────────────────────────────────────────────
 
 interface AnalysisSidePanelProps {
   isOpen: boolean;
@@ -1660,20 +1659,20 @@ const AnalysisSidePanel: React.FC<AnalysisSidePanelProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed right-0 top-0 h-full w-full md:w-[400px] bg-white dark:bg-slate-800 shadow-2xl border-l border-slate-200 dark:border-slate-700 z-50 flex flex-col">
+    <div className="fixed right-0 top-0 h-full w-full md:w-[400px] bg-white dark:bg-slate-800/60 shadow-2xl border-l border-slate-200 dark:border-slate-700 z-50 flex flex-col">
       <div className="p-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between bg-gradient-to-r from-blue-50 to-indigo-50">
         <div className="flex items-center gap-2">
           <Bot className="w-5 h-5 text-blue-600" />
           <h3 className="font-semibold text-slate-800 dark:text-slate-100">AI Strategy Assistant</h3>
         </div>
-        <button onClick={onClose} className="text-slate-400 hover:text-slate-600"><X className="w-5 h-5" /></button>
+        <button onClick={onClose} className="text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:text-slate-500"><X className="w-5 h-5" /></button>
       </div>
 
       {!analysisData && !loading && (
         <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
           <Brain className="w-12 h-12 text-slate-300 mb-3" />
           <h4 className="font-semibold text-slate-700 dark:text-slate-200 mb-2">Ready to Analyze</h4>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">Build your CLD, select strategies, then click &quot;Analyze Loops&quot;</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500 mb-4">Build your CLD, select strategies, then click "Analyze Loops"</p>
           <button onClick={handleAnalyze} disabled={nodes.length < 2} className="px-4 py-2 bg-blue-500 text-white rounded-lg font-medium disabled:opacity-50">
             Analyze Loops
           </button>
@@ -1683,7 +1682,7 @@ const AnalysisSidePanel: React.FC<AnalysisSidePanelProps> = ({
       {loading && (
         <div className="flex-1 flex flex-col items-center justify-center p-6">
           <RefreshCw className="w-8 h-8 text-blue-500 animate-spin mb-3" />
-          <p className="text-sm text-slate-600 dark:text-slate-400">Analyzing your strategy model...</p>
+          <p className="text-sm text-slate-600 dark:text-slate-400 dark:text-slate-500">Analyzing your strategy model...</p>
         </div>
       )}
 
@@ -1691,7 +1690,7 @@ const AnalysisSidePanel: React.FC<AnalysisSidePanelProps> = ({
         <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
           <AlertTriangle className="w-12 h-12 text-red-400 mb-3" />
           <p className="text-sm text-red-600 font-medium mb-2">Analysis Failed</p>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">{error}</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mb-4">{error}</p>
           <button onClick={handleAnalyze} className="px-4 py-2 bg-blue-500 text-white rounded-lg text-sm font-medium">Try Again</button>
         </div>
       )}
@@ -1711,7 +1710,7 @@ const AnalysisSidePanel: React.FC<AnalysisSidePanelProps> = ({
                     </span>
                     <span className="text-xs text-slate-700 dark:text-slate-200 truncate flex-1">{loop.name}</span>
                   </div>
-                  <div className="mt-1 flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400">
+                  <div className="mt-1 flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500">
                     <span>Strength: {loop.strength}/5</span>
                     <span>{loop.nodeIds.length} nodes</span>
                   </div>
@@ -1731,7 +1730,7 @@ const AnalysisSidePanel: React.FC<AnalysisSidePanelProps> = ({
                     <span className="text-xs font-semibold text-violet-800">{arch.archetypeName}</span>
                     <span className="text-[10px] px-1.5 py-0.5 rounded bg-violet-200 text-violet-700">{Math.round(arch.confidence * 100)}%</span>
                   </div>
-                  <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1">Matched nodes: {arch.matchedNodes.length}</p>
+                  <p className="text-[10px] text-slate-600 dark:text-slate-400 dark:text-slate-500 mt-1">Matched nodes: {arch.matchedNodes.length}</p>
                 </div>
               ))}
             </div>
@@ -1743,10 +1742,10 @@ const AnalysisSidePanel: React.FC<AnalysisSidePanelProps> = ({
             </h4>
             <div className="space-y-2">
               {analysisData.ranked_leverage_points.slice(0, 5).map((point, idx) => (
-                <div key={idx} className="rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2">
+                <div key={idx} className="rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60 p-2">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-red-500 text-white">L{point.leverageLevel}</span>
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400">{MEADOWS_LEVELS[point.leverageLevel]?.name || ''}</span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500">{MEADOWS_LEVELS[point.leverageLevel]?.name || ''}</span>
                   </div>
                   <p className="text-xs text-slate-700 dark:text-slate-200 leading-relaxed">{point.intervention}</p>
                 </div>
@@ -1761,7 +1760,7 @@ const AnalysisSidePanel: React.FC<AnalysisSidePanelProps> = ({
               </h4>
               <ul className="space-y-2">
                 {analysisData.recommendations.map((rec, idx) => (
-                  <li key={idx} className="text-xs text-slate-600 dark:text-slate-400 flex items-start gap-2">
+                  <li key={idx} className="text-xs text-slate-600 dark:text-slate-400 dark:text-slate-500 flex items-start gap-2">
                     <ArrowRight className="w-3 h-3 text-blue-500 shrink-0 mt-0.5" />
                     <span>{rec}</span>
                   </li>
@@ -1775,9 +1774,7 @@ const AnalysisSidePanel: React.FC<AnalysisSidePanelProps> = ({
   );
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// MAIN COMPONENT
-// ═══════════════════════════════════════════════════════════════════════════════
+// ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
 
 const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, planId }) => {
   const {
@@ -1808,7 +1805,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
     const colCount = Math.min(3, allItems.length);
     const nodes = allItems.map((item, i) => ({
       id: `swot-${item.id}`,
-      label: item.description.length > 28 ? item.description.slice(0, 28) + '\u2026' : item.description,
+      label: item.description.length > 28 ? item.description.slice(0, 28) + '…' : item.description,
       x: 15 + (i % colCount) * (70 / Math.max(colCount - 1, 1)),
       y: 15 + Math.floor(i / colCount) * 30,
       category: item.category,
@@ -1847,7 +1844,8 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
     setHighlightedNodeIds([]);
   }, []);
 
-  const generateArchetypeLeveragePoints = useCallback((archetypeId: string, nodes: ExtendedCLDNode[], links: ExtendedCLDLink[]): LeveragePoint[] => {
+  // Leverage point generators (mirrored for leverageCount badge)
+  const generateArchetypeLeveragePoints = (archetypeId: string, nodes: ExtendedCLDNode[], links: ExtendedCLDLink[]): LeveragePoint[] => {
     const base: (Omit<LeveragePoint, 'targetNodeIds'> & { targetFilter: (label: string) => boolean })[] = [];
     const push = (leverageLevel: number, intervention: string, expectedImpact: 'high' | 'medium' | 'low', timeHorizon: 'short' | 'medium' | 'long', targetFilter: (label: string) => boolean) =>
       base.push({ archetypeId, leverageLevel, meadowsName: MEADOWS_LEVELS[leverageLevel]?.name || '', intervention, expectedImpact, timeHorizon, source: 'archetype', targetFilter });
@@ -1863,23 +1861,19 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
       case 'gui': push(10,'Invest ahead of demand: build capacity infrastructure before gap widens','high','medium',l=>/capacit|invest/i.test(l)); push(3,'Hold performance standards firm: resist lowering goals when capacity lags','high','medium',l=>/standard|perform/i.test(l)); push(7,'Moderate growth engine temporarily to allow capacity to catch up','medium','short',l=>/growth|demand/i.test(l)); break;
       case 'aa':  push(2,'Paradigm shift: make partnership goals explicit and align incentive structures','high','long',_=>true); push(6,'Create shared information flows: transparent reporting on mutual impacts','high','medium',l=>/success|action/i.test(l)); push(5,'Establish coordination rules: joint decision-making for actions with cross-impact','high','medium',_=>true); break;
       case 'ap':  push(10,'Expand capacity infrastructure to absorb new entrants without quality loss','high','medium',l=>/congestion|load/i.test(l)); push(8,'Strengthen quality feedback: make congestion impact on attractiveness more responsive','medium','short',l=>/quality|perform/i.test(l)); push(5,'Manage entry rules: metered access, waitlists, or capacity-linked growth','high','medium',l=>/entrant|demand/i.test(l)); break;
-      // BARMM-specific
-      case 'bma': push(2,'Paradigm shift: transition from personal authority to institutional governance','high','long',l=>/big.?man|authority|personal/i.test(l)); push(4,'Enable self-organization: build independent civil-service capacity','high','medium',l=>/institutional|weakness/i.test(l)); push(5,'Establish rules: merit-based promotion and anti-patronage policies','high','medium',_=>true); push(6,'Improve information flow: transparent public reporting on governance quality','medium','short',l=>/policy|inconsistency|loyalty/i.test(l)); break;
-      case 'bme': push(2,'Paradigm shift: reframe clan competition as shared economic development','high','long',_=>true); push(5,'Establish rules: formal dispute resolution mechanisms to replace rido cycles','high','medium',l=>/clan|influence|response/i.test(l)); push(6,'Improve information flow: early warning systems for inter-clan tension','high','short',l=>/instability|threat/i.test(l)); push(10,'Invest in shared infrastructure that benefits all clans equally','high','medium',l=>/fdi|flight|economic/i.test(l)); break;
       default: break;
     }
-
     return base.map(b => ({ ...b, targetNodeIds: nodes.filter(n => b.targetFilter(n.label)).map(n => n.id) }));
-  }, []);
+  };
 
-  const generateCLDLeveragePoints = useCallback((nodes: ExtendedCLDNode[], links: ExtendedCLDLink[]): LeveragePoint[] => {
+  const generateCLDLeveragePoints = (nodes: ExtendedCLDNode[], links: ExtendedCLDLink[]): LeveragePoint[] => {
     const pts: LeveragePoint[] = [];
     const loops = findLoops(nodes, links);
     loops.filter(l => l.type === 'R' && l.strength >= 4).forEach(loop => {
-      pts.push({ leverageLevel: 7, meadowsName: MEADOWS_LEVELS[7].name, intervention: `Slow positive feedback in "${loop.name}" \u2014 high gain risks runaway dynamics`, targetNodeIds: loop.nodeIds, expectedImpact: 'high', timeHorizon: 'short', source: 'cld-analysis' });
+      pts.push({ leverageLevel: 7, meadowsName: MEADOWS_LEVELS[7].name, intervention: `Slow positive feedback in "${loop.name}" — high gain risks runaway dynamics`, targetNodeIds: loop.nodeIds, expectedImpact: 'high', timeHorizon: 'short', source: 'cld-analysis' });
     });
     loops.filter(l => l.type === 'B' && l.strength < 3).forEach(loop => {
-      pts.push({ leverageLevel: 8, meadowsName: MEADOWS_LEVELS[8].name, intervention: `Strengthen balancing loop "${loop.name}" \u2014 weak feedback leaves system uncontrolled`, targetNodeIds: loop.nodeIds, expectedImpact: 'medium', timeHorizon: 'medium', source: 'cld-analysis' });
+      pts.push({ leverageLevel: 8, meadowsName: MEADOWS_LEVELS[8].name, intervention: `Strengthen balancing loop "${loop.name}" — weak feedback leaves system uncontrolled`, targetNodeIds: loop.nodeIds, expectedImpact: 'medium', timeHorizon: 'medium', source: 'cld-analysis' });
     });
     const isolated = nodes.filter(n => !links.some(l => l.to === n.id) && !links.some(l => l.from === n.id));
     if (isolated.length > 0) pts.push({ leverageLevel: 6, meadowsName: MEADOWS_LEVELS[6].name, intervention: `Add information flows to ${isolated.length} unconnected variable(s)`, targetNodeIds: isolated.map(n => n.id), expectedImpact: 'high', timeHorizon: 'short', source: 'cld-analysis' });
@@ -1889,11 +1883,12 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
       pts.push({ leverageLevel: 9, meadowsName: MEADOWS_LEVELS[9].name, intervention: `Reduce ${delayedLinks.length} link delay(s)`, targetNodeIds: delayedNodeIds, expectedImpact: 'medium', timeHorizon: 'medium', source: 'cld-analysis' });
     }
     return pts;
-  }, []);
+  };
 
   const handleUpdateNodes = useCallback((newNodes: ExtendedCLDNode[]) => setLocalCldNodes(newNodes), []);
   const handleUpdateLinks = useCallback((newLinks: ExtendedCLDLink[]) => setLocalCldLinks(newLinks), []);
 
+  // ── AI Analysis via Kimi Edge Function ─────────────────────────────────────
   const AI_STRATEGY_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/ai-strategy-assistant';
 
   const executeAIAnalysis = useCallback(async (
@@ -1961,7 +1956,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
     if (localCldNodes.find(n => n.id === `swot-${item.id}`)) return;
     const newNode: ExtendedCLDNode = {
       id: `swot-${item.id}`,
-      label: item.description.length > 28 ? item.description.slice(0, 28) + '\u2026' : item.description,
+      label: item.description.length > 28 ? item.description.slice(0, 28) + '…' : item.description,
       x: 20 + (localCldNodes.length % 4) * 20,
       y: 25 + Math.floor(localCldNodes.length / 4) * 30,
       category: item.category, nodeType: 'default',
@@ -1976,15 +1971,17 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
     pts.push(...generateCLDLeveragePoints(localCldNodes, localCldLinks));
     const seen = new Set<string>();
     return pts.filter(p => { const k = `${p.leverageLevel}-${p.intervention.slice(0, 40)}`; if (seen.has(k)) return false; seen.add(k); return true; }).length;
-  }, [localCldNodes, localCldLinks, selectedArchId, generateArchetypeLeveragePoints, generateCLDLeveragePoints]);
+  }, [localCldNodes, localCldLinks, selectedArchId]);
 
   return (
     <div className="space-y-5 max-w-5xl mx-auto relative">
+      {/* Header */}
       <div className="space-y-1">
         <h1 className="text-xl font-bold text-slate-800 dark:text-slate-100">Systems Thinking</h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400">Score SWOT factors, map causal loops, and apply systems archetypes</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">Score SWOT factors, map causal loops, and apply systems archetypes</p>
       </div>
 
+      {/* Tab Bar */}
       <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 rounded-xl p-1 overflow-x-auto">
         {[
           { id: 'matrix', label: 'Matrix', Icon: LayoutDashboard },
@@ -1993,28 +1990,30 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
         ].map(({ id, label, Icon }) => (
           <button key={id} onClick={() => setViewMode(id as typeof viewMode)}
             className={cn('flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors flex-1 justify-center',
-              viewMode === id ? 'bg-white dark:bg-slate-700 shadow-sm text-slate-800 dark:text-slate-100' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200')}>
+              viewMode === id ? 'bg-white dark:bg-slate-800/60 shadow-sm text-slate-800 dark:text-slate-100' : 'text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:text-slate-200')}>
             <Icon className="w-3.5 h-3.5" />
             {label}
           </button>
         ))}
       </div>
 
-      <button onClick={() => setShowGuide(v => !v)} className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors">
+      {/* Guide Toggle */}
+      <button onClick={() => setShowGuide(v => !v)} className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:text-slate-200 transition-colors">
         <HelpCircle className="w-3.5 h-3.5" />
         {showGuide ? 'Hide' : 'Show'} Scoring Guide
         {showGuide ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
       </button>
       {showGuide && (
         <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-4 space-y-3">
-          <h4 className="font-semibold text-slate-800 dark:text-slate-100 flex items-center gap-2 text-sm"><HelpCircle className="w-4 h-4 text-slate-500 dark:text-slate-400" /> Scoring Guide</h4>
-          <div className="text-xs text-slate-600 dark:text-slate-400 space-y-1.5">
-            <p><span className="font-semibold text-emerald-700">Strengths / Opportunities</span> \u2014 higher score = more valuable</p>
-            <p><span className="font-semibold text-red-700">Weaknesses / Threats</span> \u2014 higher score = more harmful</p>
+          <h4 className="font-semibold text-slate-800 dark:text-slate-100 flex items-center gap-2 text-sm"><HelpCircle className="w-4 h-4 text-slate-500 dark:text-slate-400 dark:text-slate-500" /> Scoring Guide</h4>
+          <div className="text-xs text-slate-600 dark:text-slate-400 dark:text-slate-500 space-y-1.5">
+            <p><span className="font-semibold text-emerald-700">Strengths / Opportunities</span> — higher score = more valuable</p>
+            <p><span className="font-semibold text-red-700">Weaknesses / Threats</span> — higher score = more harmful</p>
           </div>
         </div>
       )}
 
+      {/* ── MATRIX VIEW ── */}
       {viewMode === 'matrix' && (
         <div className="space-y-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -2026,18 +2025,19 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
         </div>
       )}
 
+      {/* ── IMPACT VIEW ── */}
       {viewMode === 'impact' && (
         <div className="space-y-3">
           <h3 className="font-semibold text-sm text-slate-700 dark:text-slate-200 flex items-center gap-2"><AlertTriangle className="w-4 h-4 text-amber-500" /> Ranked by Priority Score</h3>
           {sortedImpact.length === 0 ? (
-            <p className="text-sm text-slate-400 text-center py-8">No SWOT items to display yet.</p>
+            <p className="text-sm text-slate-400 dark:text-slate-500 text-center py-8">No SWOT items to display yet.</p>
           ) : sortedImpact.map((item, idx) => {
             const cfg  = categoryConfig[item.category];
             const Icon = cfg.icon;
             return (
-              <div key={item.id} className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4 space-y-3">
+              <div key={item.id} className="bg-white dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700 p-4 space-y-3">
                 <div className="flex items-start gap-3">
-                  <span className="text-xs font-bold text-slate-400 w-6 shrink-0 mt-0.5">#{idx + 1}</span>
+                  <span className="text-xs font-bold text-slate-400 dark:text-slate-500 w-6 shrink-0 mt-0.5">#{idx + 1}</span>
                   <div className={cn('p-1.5 rounded-lg shrink-0', cfg.bgColor)}><Icon className="w-3.5 h-3.5 text-white" /></div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-2 flex-wrap mb-2">
@@ -2057,15 +2057,17 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
         </div>
       )}
 
+      {/* ── CLD VIEW ── */}
       {viewMode === 'cld' && (
         <div className="space-y-4">
+          {/* Build Actions */}
           <div className="flex flex-wrap gap-2 items-center">
             <button onClick={buildFromSWOT}
               className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white text-xs font-semibold transition-colors shadow-sm">
               <Wand2 className="w-3.5 h-3.5" /> Build from SWOT
             </button>
             <button onClick={() => { setLocalCldNodes([]); setLocalCldLinks([]); setHighlightedNodeIds([]); }}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-600 dark:text-slate-400 text-xs font-medium transition-colors">
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-600 dark:text-slate-400 dark:text-slate-500 text-xs font-medium transition-colors">
               <X className="w-3.5 h-3.5" /> Clear Canvas
             </button>
 
@@ -2086,6 +2088,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
             </button>
           </div>
 
+          {/* Mobile Snapshots */}
           <div className="sm:hidden">
             <SnapshotsPanel
               snapshots={plan.cldSnapshots || []}
@@ -2097,6 +2100,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
             />
           </div>
 
+          {/* Suggested Archetypes */}
           {recommendArchetypes.length > 0 && (
             <div className="rounded-xl border border-violet-200 bg-violet-50 p-4 space-y-3">
               <h4 className="text-sm font-semibold text-violet-800 flex items-center gap-2"><Sparkles className="w-4 h-4" /> Suggested Archetypes</h4>
@@ -2105,14 +2109,14 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
                   const arch = systemArchetypes.find(a => a.id === rec.archetypeId);
                   if (!arch) return null;
                   return (
-                    <div key={rec.archetypeId} className="bg-white dark:bg-slate-800 rounded-lg p-3 border border-violet-200/60">
+                    <div key={rec.archetypeId} className="bg-white dark:bg-slate-800/60 rounded-lg p-3 border border-violet-200/60">
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 flex-wrap mb-1">
                             <span className="font-semibold text-xs text-slate-800 dark:text-slate-100">{arch.name}</span>
                             <span className="px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-100 text-emerald-700">{rec.confidence} match</span>
                           </div>
-                          <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">{rec.reason}</p>
+                          <p className="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-500 leading-relaxed">{rec.reason}</p>
                         </div>
                         <button onClick={() => applyArchetype(rec.archetypeId)}
                           className="shrink-0 px-2.5 py-1.5 rounded-lg bg-violet-500 text-white text-xs font-medium hover:bg-violet-600 transition-colors">
@@ -2126,17 +2130,19 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
             </div>
           )}
 
+          {/* Educational Resources */}
           <EducationalResources />
 
+          {/* CLD Sub-nav */}
           <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 rounded-xl p-1">
             <button onClick={() => setCldSubView('diagram')}
               className={cn('flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors flex-1 justify-center',
-                cldSubView === 'diagram' ? 'bg-white dark:bg-slate-700 shadow-sm text-slate-800 dark:text-slate-100' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200')}>
+                cldSubView === 'diagram' ? 'bg-white dark:bg-slate-800/60 shadow-sm text-slate-800 dark:text-slate-100' : 'text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:text-slate-200')}>
               <GitBranch className="w-3.5 h-3.5" /> CLD Diagram
             </button>
             <button onClick={() => setCldSubView('leverage')}
               className={cn('flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors flex-1 justify-center relative',
-                cldSubView === 'leverage' ? 'bg-white dark:bg-slate-700 shadow-sm text-slate-800 dark:text-slate-100' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200')}>
+                cldSubView === 'leverage' ? 'bg-white dark:bg-slate-800/60 shadow-sm text-slate-800 dark:text-slate-100' : 'text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:text-slate-200')}>
               <Target className="w-3.5 h-3.5" /> Leverage Points
               {leverageCount > 0 && (
                 <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-red-500 text-white text-[9px] font-black flex items-center justify-center">
@@ -2159,7 +2165,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
                 onUpdateLinks={handleUpdateLinks}
               />
               <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-                <p className="text-xs text-slate-500 dark:text-slate-400 mb-2">
+                <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mb-2">
                   <strong>Active CLD Snapshot:</strong>{' '}
                   {plan.activeCLDSnapshotId
                     ? `Loaded from "${(plan.cldSnapshots || []).find(s => s.id === plan.activeCLDSnapshotId)?.label}" (${new Date((plan.cldSnapshots || []).find(s => s.id === plan.activeCLDSnapshotId)?.createdAt || '').toLocaleDateString()})`
@@ -2174,7 +2180,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
             <div>
               <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3 flex items-center gap-2">
                 <Target className="w-4 h-4 text-red-500" /> Generated Leverage Points
-                <span className="text-xs font-normal text-slate-400 dark:text-slate-500">\u2014 Meadows&apos; framework</span>
+                <span className="text-xs font-normal text-slate-400 dark:text-slate-500">— Meadows' framework</span>
               </h3>
               <LeveragePointsPanel
                 nodes={localCldNodes}
@@ -2186,30 +2192,35 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
             </div>
           )}
 
+          {/* ── ARCHETYPES LIBRARY ── */}
           <div>
             <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2 mb-3">
-              <Layers className="w-4 h-4 text-slate-500 dark:text-slate-400" /> Systems Archetypes
+              <Layers className="w-4 h-4 text-slate-500 dark:text-slate-400 dark:text-slate-500" /> Systems Archetypes
               <span className="text-xs font-normal text-slate-400 dark:text-slate-500">{systemArchetypes.length} templates</span>
             </h3>
             <div className="space-y-2">
               {systemArchetypes.map(arch => (
                 <div key={arch.id}
                   className={cn('rounded-xl border-2 transition-all cursor-pointer',
-                    selectedArchId === arch.id ? 'border-blue-500 bg-blue-50' : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-blue-300')}>
+                    selectedArchId === arch.id ? 'border-blue-500 bg-blue-50' : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60 hover:border-blue-300')}>
 
+                  {/* ── Card header row ── */}
                   <div
                     className="flex items-center gap-3 p-3"
                     onClick={() => setSelectedArchId(s => s === arch.id ? null : arch.id)}
                   >
+                    {/* Colour chip */}
                     <div className={cn('w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-black shrink-0 bg-gradient-to-br', arch.color)}>
                       {arch.id.slice(0, 2).toUpperCase()}
                     </div>
 
+                    {/* Name + category */}
                     <div className="min-w-0 flex-1">
                       <h4 className="font-semibold text-sm text-slate-900 leading-tight">{arch.name}</h4>
-                      <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">{arch.category}</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-0.5">{arch.category}</p>
                     </div>
 
+                    {/* 👁 Image tooltip — only for archetypes that have a diagram URL */}
                     {arch.imageUrl && (
                       <ArchetypeImageTooltip
                         imageUrl={arch.imageUrl}
@@ -2217,16 +2228,19 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
                       />
                     )}
 
-                    <ChevronDown className={cn('w-4 h-4 text-slate-400 shrink-0 transition-transform', selectedArchId === arch.id && 'rotate-180')} />
+                    {/* Expand chevron */}
+                    <ChevronDown className={cn('w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0 transition-transform', selectedArchId === arch.id && 'rotate-180')} />
                   </div>
 
+                  {/* ── Expanded body ── */}
                   {selectedArchId === arch.id && (
                     <div className="px-4 pb-4 space-y-3 border-t border-slate-200 dark:border-slate-700/60 pt-3">
+                      {/* Diagram preview inside expanded panel */}
                       {arch.imageUrl && (
                         <div className="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
                           <div className="flex items-center gap-2 px-3 py-2 bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
                             <GitBranch className="w-3.5 h-3.5 text-blue-500" />
-                            <span className="text-[10px] font-semibold text-slate-600 dark:text-slate-400">Archetype Diagram</span>
+                            <span className="text-[10px] font-semibold text-slate-600 dark:text-slate-400 dark:text-slate-500">Archetype Diagram</span>
                           </div>
                           <img
                             src={arch.imageUrl}
@@ -2238,10 +2252,10 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
                         </div>
                       )}
 
-                      <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{arch.desc}</p>
+                      <p className="text-xs text-slate-600 dark:text-slate-400 dark:text-slate-500 leading-relaxed">{arch.desc}</p>
                       <div>
                         <p className="text-[10px] font-bold uppercase tracking-wide text-slate-400 dark:text-slate-500 mb-1">When to apply</p>
-                        <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{arch.use}</p>
+                        <p className="text-xs text-slate-600 dark:text-slate-400 dark:text-slate-500 leading-relaxed">{arch.use}</p>
                       </div>
                       <div className="flex gap-2">
                         <button onClick={e => { e.stopPropagation(); applyArchetype(arch.id); }}
@@ -2262,6 +2276,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
         </div>
       )}
 
+      {/* Analysis Side Panel */}
       <AnalysisSidePanel
         isOpen={analysisPanelOpen}
         onClose={() => setAnalysisPanelOpen(false)}
@@ -2271,25 +2286,27 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
         onExecute={executeAIAnalysis}
       />
 
+      {/* Floating AI Assistant — Systems Thinking Context */}
       <FloatingAIAssistant plan={plan} activeView="systems" />
 
-      {/* FIXED: setShowAnalysisPanel -> setAnalysisPanelOpen */}
+      {/* Kimi AI Quick Actions — Systems Thinking */}
       <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-2">
         <button
-          onClick={() => setAnalysisPanelOpen(true)}
+          onClick={() => setShowAnalysisPanel(true)}
           className="group flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-fuchsia-600 via-violet-600 to-cyan-500 text-white shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
           title="AI Loop Analysis"
         >
           <AIStrategistAvatar size="sm" />
-          <span className="text-xs font-semibold">Kimi AI \u00b7 Analyze Loops</span>
+          <span className="text-xs font-semibold">Kimi AI · Analyze Loops</span>
         </button>
       </div>
 
+      {/* Info Strip */}
       {viewMode !== 'cld' && (
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 flex items-start gap-2.5">
           <Info className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
           <p className="text-xs text-blue-700 leading-relaxed">
-            Use <strong>Impact \u00d7 Likelihood</strong> (1\u201325) to score each factor. Switch to <strong>CLD Builder</strong> to map causal relationships and generate Meadows leverage points. Click the <strong>Kimi AI</strong> button for AI-powered loop analysis.
+            Use <strong>Impact × Likelihood</strong> (1–25) to score each factor. Switch to <strong>CLD Builder</strong> to map causal relationships and generate Meadows leverage points. Click the <strong>Kimi AI</strong> button for AI-powered loop analysis.
           </p>
         </div>
       )}
@@ -2298,6 +2315,3 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
 };
 
 export default SystemsThinking;
-
-// Re-export key sub-components for external use
-export { CLDCanvas, LeveragePointsPanel, SnapshotsPanel, findLoops, MEADOWS_LEVELS, systemArchetypes };
