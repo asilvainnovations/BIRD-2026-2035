@@ -280,7 +280,6 @@ const Sidebar: React.FC<SidebarProps> = ({
             </button>
           </div>
         </nav>
-
         {/* Footer */}
         <div className="mt-auto border-t border-slate-800 bg-slate-900/80 p-3">
           <div className={cn("flex flex-col gap-2", isCollapsed && !isMobileMenuOpen ? "items-center" : "")}>
