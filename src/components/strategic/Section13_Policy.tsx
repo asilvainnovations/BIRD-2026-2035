@@ -1,120 +1,111 @@
-// src/components/strategic/Section13_Policy.tsx
-// Section 13: Policy & Governance Recommendations
+import React from "react";
+import { BIRD_IMAGES } from "@/lib/bird-urls";
+import { GlassCard } from "@/components/GlassCard";
+import { cn } from "@/lib/utils";
+import { Gavel, AlertTriangle } from "lucide-react";
 
-import { useFormContext } from "react-hook-form";
-import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Badge } from "@/components/ui/badge";
+export interface Section13Data {
+  q13_1_legislation: string[];
+  q13_2_bicc?: number;
+  // ── Systems Mapping: Governance Traps ────────────────────────────────────
+  q_s13_shifting_burden: string;
+  q_s13_drifting_goals: string;
+}
 
-export function Section13_Policy() {
-  const form = useFormContext();
+interface Section13Props {
+  data: Section13Data;
+  onChange: (data: Section13Data) => void;
+}
+
+const ScaleButton: React.FC<{ value?: number; onChange: (v: number) => void }> = ({ value, onChange }) => (
+  <div className="flex gap-2">
+    {[1, 2, 3, 4, 5].map((val) => (
+      <button key={val} onClick={() => onChange(val)}
+        className={cn("w-12 h-12 rounded-lg border text-sm font-semibold transition-all",
+          value === val ? "bg-[#C9A84C] text-white border-[#C9A84C]" : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C] hover:bg-[#C9A84C]/10")}>{val}</button>
+    ))}
+  </div>
+);
+
+const Section13_Policy: React.FC<Section13Props> = ({ data, onChange }) => {
+  const update = <K extends keyof Section13Data>(field: K, value: Section13Data[K]) => onChange({ ...data, [field]: value });
+  const toggle = (val: string) => update("q13_1_legislation", data.q13_1_legislation.includes(val) ? data.q13_1_legislation.filter(v => v !== val) : [...data.q13_1_legislation, val]);
 
   return (
-    <div className="space-y-8">
-      <CardHeader className="p-0">
-        <div className="flex items-center gap-2 mb-2">
-          <Badge variant="outline" className="text-xs border-blue-400/40 text-blue-400">Governance</Badge>
-        </div>
-        <CardTitle className="text-2xl font-serif text-[#C9A84C]">13. Policy & Governance Recommendations</CardTitle>
-        <CardDescription className="text-[#ecfdf5]/70 text-base mt-2">
-          Fragmented program delivery across BMOAs is a systemic bottleneck. The BIRD roadmap proposes the Bangsamoro Investment Command Center (BICC) and specific enabling laws to synchronize execution.
-        </CardDescription>
-      </CardHeader>
-
-      {/* Moral Governance as Leverage — Wide Format */}
-      <div className="relative w-full overflow-hidden rounded-xl border border-blue-400/30 shadow-lg group">
-        <img
-          src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/26.png"
-          alt="Moral Governance as Leverage — Highest-impact intervention point"
-          className="w-full h-auto max-h-[400px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
-          loading="lazy"
-        />
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
-          <p className="text-xs text-[#ecfdf5]/60 italic">
-            Source: BIRD 2026-2035 — Moral Governance as Highest Leverage Point
-          </p>
-        </div>
+    <div className="space-y-6">
+      <div className="flex items-center gap-3 mb-4">
+        <Gavel className="w-6 h-6 text-[#C9A84C]" />
+        <h2 className="text-xl font-bold text-[#022c22]">Section 13: Policy &amp; Governance Architecture</h2>
       </div>
 
-      {/* Investment-Governance Cycles — Wide Format */}
-      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/20 shadow-lg group">
-        <img
-          src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/15.%20Investment%20and%20Governance%20Cycles.png"
-          alt="Investment and Governance Cycles — Policy coordination feedback loops"
-          className="w-full h-auto max-h-[400px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
-          loading="lazy"
-        />
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
-          <p className="text-xs text-[#ecfdf5]/60 italic">
-            Source: BIRD 2026-2035 — Investment and Governance Cycles
-          </p>
+      <p className="text-sm text-[#065f46] mb-4">
+        Effective policy architecture is what separates plans from results. This section validates the regulatory framework and identifies governance traps that undermine implementation.
+      </p>
+
+      {/* Q13.1: Legislation */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">Which legislative priorities should be fast-tracked? (Select all)</h3>
+        <div className="space-y-2">
+          {["Bangsamoro Investment Code", "Islamic Banking Act expansion", "Carbon credit framework", "Data privacy & cybersecurity", "Public-private partnership law", "Special economic zone authority"].map(opt => (
+            <button key={opt} onClick={() => toggle(opt)}
+              className={cn("w-full p-3 rounded-lg border text-sm text-left transition-all",
+                data.q13_1_legislation.includes(opt) ? "bg-[#1B4D3E] text-white border-[#1B4D3E]" : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C]")}>{opt}</button>
+          ))}
         </div>
-      </div>
+      </GlassCard>
 
-      <FormField
-        control={form.control}
-        name="q13_1"
-        render={() => (
-          <FormItem className="space-y-4">
-            <FormLabel className="text-[#ecfdf5] text-lg font-semibold">
-              13.1 Which enabling laws/policies should receive the highest priority? (Select top 2)
-            </FormLabel>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {[
-                { id: "forestry_code", label: "Bangsamoro Forestry Code (Unlocks carbon/PES markets)" },
-                { id: "jmc_2026", label: "JMC No. 2026-01 (Carbon Credits & Eco-tourism Fees)" },
-                { id: "bicc_est", label: "BICC Establishment (Cross-agency coordination)" },
-                { id: "digital_gov", label: "Digital Governance & Connectivity Act" }
-              ].map((item) => (
-                <FormField
-                  key={item.id}
-                  control={form.control}
-                  name="q13_1"
-                  render={({ field }) => (
-                    <FormItem key={item.id} className={`flex flex-row items-start space-x-3 space-y-0 p-4 rounded-lg border transition-all cursor-pointer ${field.value?.includes(item.id) ? "border-[#C9A84C] bg-[#C9A84C]/10" : "border-[#C9A84C]/20 bg-[#011a12]/40 hover:border-[#C9A84C]/50"}`}>
-                      <FormControl>
-                        <Checkbox checked={field.value?.includes(item.id)} onCheckedChange={(checked) => checked ? field.onChange([...field.value, item.id]) : field.onChange(field.value?.filter((value: string) => value !== item.id))} className="border-[#C9A84C]/50 data-[state=checked]:bg-[#C9A84C] data-[state=checked]:border-[#C9A84C]" />
-                      </FormControl>
-                      <FormLabel className="text-[#ecfdf5]/90 font-normal cursor-pointer">{item.label}</FormLabel>
-                    </FormItem>
-                  )}
-                />
-              ))}
-            </div>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      {/* Q13.2: BICC */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">How important is a Bangsamoro Investment Coordinating Council (BICC) for streamlining approvals?</h3>
+        <ScaleButton value={data.q13_2_bicc} onChange={(v) => update("q13_2_bicc", v)} />
+        <p className="text-xs text-[#065f46] mt-2 italic">1 = Not important | 5 = Essential</p>
+      </GlassCard>
 
-      <FormField
-        control={form.control}
-        name="q13_2"
-        render={({ field }) => (
-          <FormItem className="space-y-4">
-            <FormLabel className="text-[#ecfdf5] text-lg font-semibold">
-              13.2 How effective will the Bangsamoro Investment Command Center (BICC) be in synchronizing programs across ministries?
-            </FormLabel>
-            <FormControl>
-              <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col gap-3">
-                {[
-                  "Highly Effective (Essential to prevent 'Tragedy of the Commons')",
-                  "Moderately Effective (Depends on political will and funding)",
-                  "Limited Effectiveness (Adds another bureaucratic layer)",
-                  "Ineffective (Ministries will continue operating in silos)"
-                ].map((option) => (
-                  <div key={option} className={`flex items-center space-x-3 p-4 rounded-lg border transition-all cursor-pointer ${field.value === option ? "border-[#C9A84C] bg-[#C9A84C]/10" : "border-[#C9A84C]/20 bg-[#011a12]/40 hover:border-[#C9A84C]/50"}`}>
-                    <RadioGroupItem value={option} id={`q13_2-${option}`} className="text-[#C9A84C] border-[#C9A84C]/50" />
-                    <FormLabel htmlFor={`q13_2-${option}`} className="flex-1 cursor-pointer text-[#ecfdf5]/90 font-normal">{option}</FormLabel>
-                  </div>
-                ))}
-              </RadioGroup>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      {/* Systems Mapping: Shifting the Burden */}
+      <GlassCard className="!p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <AlertTriangle className="w-5 h-5 text-amber-600" />
+          <h3 className="text-base font-semibold text-[#022c22]">Governance Trap: Shifting the Burden</h3>
+        </div>
+        <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 mb-4">
+          <img src={BIRD_IMAGES.shiftingTheBurden.url} alt={BIRD_IMAGES.shiftingTheBurden.alt} className="w-full h-auto object-contain" />
+        </div>
+        <p className="text-sm text-[#022c22] mb-4">
+          Short-term interventions (emergency relief, ad hoc incentives, one-off projects) replace deeper reforms rather than support them. Each quick fix temporarily reduces visible problems, easing pressure for long-term reform. Root causes remain, symptoms reappear, and dependency on external support deepens.
+        </p>
+        <p className="text-sm font-medium text-[#022c22] mb-3">How accurately does this reflect BARMM's approach to governance challenges?</p>
+        <div className="grid grid-cols-2 gap-3">
+          {["Very accurately", "Somewhat accurately", "Needs revision", "Not accurate"].map(opt => (
+            <button key={opt} onClick={() => update("q_s13_shifting_burden", opt)}
+              className={cn("p-3 rounded-lg border text-sm text-left transition-all",
+                data.q_s13_shifting_burden === opt ? "bg-[#1B4D3E] text-white border-[#1B4D3E]" : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C]")}>{opt}</button>
+          ))}
+        </div>
+      </GlassCard>
+
+      {/* Systems Mapping: Drifting Goals */}
+      <GlassCard className="!p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <AlertTriangle className="w-5 h-5 text-amber-600" />
+          <h3 className="text-base font-semibold text-[#022c22]">Governance Trap: Drifting Goals</h3>
+        </div>
+        <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 mb-4">
+          <img src={BIRD_IMAGES.driftingGoals.url} alt={BIRD_IMAGES.driftingGoals.alt} className="w-full h-auto object-contain" />
+        </div>
+        <p className="text-sm text-[#022c22] mb-4">
+          When performance consistently falls below targets, the temptation is to lower the targets rather than address root causes. Over time, goals drift downward — investment targets shrink, poverty reduction benchmarks relax, and the entire system accommodates underperformance rather than confronting it.
+        </p>
+        <p className="text-sm font-medium text-[#022c22] mb-3">How accurately does this reflect goal-setting dynamics in BARMM?</p>
+        <div className="grid grid-cols-2 gap-3">
+          {["Very accurately", "Somewhat accurately", "Needs revision", "Not accurate"].map(opt => (
+            <button key={opt} onClick={() => update("q_s13_drifting_goals", opt)}
+              className={cn("p-3 rounded-lg border text-sm text-left transition-all",
+                data.q_s13_drifting_goals === opt ? "bg-[#1B4D3E] text-white border-[#1B4D3E]" : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C]")}>{opt}</button>
+          ))}
+        </div>
+      </GlassCard>
     </div>
   );
-}
+};
+
+export default Section13_Policy;
