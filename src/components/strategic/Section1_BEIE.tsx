@@ -1,149 +1,264 @@
 import React from "react";
-import { useFormContext } from "react-hook-form";
-import type { SurveySchemaType } from "./SurveyWizard";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ExternalLink, Play, BookOpen, Sparkles } from "lucide-react";
+import { BIRD_IMAGES } from "@/lib/bird-urls";
+import { GlassCard } from "@/components/GlassCard";
+import { cn } from "@/lib/utils";
+import { BookOpen } from "lucide-react";
 
-export function Section1_BEIE() {
-  const { register, formState: { errors } } = useFormContext<SurveySchemaType>();
+// ─── Types ───────────────────────────────────────────────────────────────────
+export interface Section1Data {
+  // ── Retained original questions ──────────────────────────────────────────
+  q1_1: string;
+  q1_2: string;
+  q1_3_cluster_contribution: string;
+  q1_4_beie_actionable: string;
+  // ── SWOT Scale: Strengths (distributed) ─────────────────────────────────
+  q_s1_halal_legitimacy_impact?: number;
+  q_s1_halal_legitimacy_likelihood?: number;
+  q_s1_bimpeaga_impact?: number;
+  q_s1_bimpeaga_likelihood?: number;
+  q_s1_domestic_demand_impact?: number;
+  q_s1_domestic_demand_likelihood?: number;
+}
+
+interface Section1Props {
+  data: Section1Data;
+  onChange: (data: Section1Data) => void;
+}
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+const ScaleButton: React.FC<{
+  value: number | undefined;
+  onChange: (v: number) => void;
+}> = ({ value, onChange }) => (
+  <div className="flex gap-2">
+    {[1, 2, 3, 4, 5].map((val) => (
+      <button
+        key={val}
+        onClick={() => onChange(val)}
+        className={cn(
+          "w-12 h-12 rounded-lg border text-sm font-semibold transition-all",
+          value === val
+            ? "bg-[#C9A84C] text-white border-[#C9A84C]"
+            : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C] hover:bg-[#C9A84C]/10"
+        )}
+      >
+        {val}
+      </button>
+    ))}
+  </div>
+);
+
+// ─── Component ───────────────────────────────────────────────────────────────
+const Section1_BEIE: React.FC<Section1Props> = ({ data, onChange }) => {
+  const update = <K extends keyof Section1Data>(field: K, value: Section1Data[K]) =>
+    onChange({ ...data, [field]: value });
 
   return (
-    <div className="space-y-8">
-      {/* ── Validation Survey Banner ── */}
-      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 shadow-lg">
+    <div className="space-y-6">
+      <div className="flex items-center gap-3 mb-4">
+        <BookOpen className="w-6 h-6 text-[#C9A84C]" />
+        <h2 className="text-xl font-bold text-[#022c22]">Section 1: BEIE Framework</h2>
+      </div>
+
+      <p className="text-sm text-[#065f46] mb-4">
+        The BEIE Framework organizes Bangsamoro's economy into five interconnected clusters.
+        Your responses help validate this ecosystem approach against traditional sector-based planning.
+      </p>
+
+      {/* ── Image 1: Sector to Ecosystem ──────────────────────────────────── */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 shadow-lg group">
         <img
-          src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Validation%20Survey%20Banner.png"
-          alt="BIRD 2026-2035 Validation Survey Banner"
-          className="w-full h-auto object-cover"
-          loading="eager"
+          src={BIRD_IMAGES.sectorToEcosystem.url}
+          alt={BIRD_IMAGES.sectorToEcosystem.alt}
+          className="w-full h-auto max-h-[500px] object-contain transition-transform group-hover:scale-[1.02]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#011a12]/80 via-transparent to-transparent" />
-        <div className="absolute bottom-4 left-4 right-4">
-          <Badge className="bg-[#C9A84C]/20 text-[#E8C560] border-[#C9A84C]/40 text-[10px]">
-            <Sparkles className="w-3 h-3 mr-1" /> Stakeholder Validation Survey
-          </Badge>
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+          <p className="text-xs italic text-white/70">Source: {BIRD_IMAGES.sectorToEcosystem.title}</p>
         </div>
       </div>
 
-      {/* ── Welcome & Context ── */}
-      <Card className="border-[#C9A84C]/20 bg-[#022c22]/40">
-        <CardHeader>
-          <CardTitle className="text-xl font-serif text-[#C9A84C]">Welcome, Stakeholder</CardTitle>
-          <CardDescription className="text-[#ecfdf5]/70">
-            Your contribution shapes the Bangsamoro Investment Roadmap. This is not a test — there are no wrong answers.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <p className="text-sm text-[#ecfdf5]/80 leading-relaxed">
-            The <strong className="text-[#E8C560]">BEIE Framework</strong> (Bangsamoro Economic and Investment Ecosystem)
-            groups BARMM's economy into 5 connected clusters — Foundations, Transformers, Enablers, Connectors,
-            and Financiers — all under <strong className="text-[#E8C560]">Moral Governance</strong>. Your honest,
-            experience-backed input will directly shape a <strong className="text-[#E8C560]">PhP 120–160 billion</strong> investment roadmap.
-          </p>
-          <div className="flex flex-wrap gap-2 text-xs text-[#ecfdf5]/50">
-            <span className="flex items-center gap-1"><Sparkles className="w-3 h-3 text-[#C9A84C]" /> Works offline</span>
-            <span className="flex items-center gap-1"><Sparkles className="w-3 h-3 text-[#C9A84C]" /> Autosaves progress</span>
-            <span className="flex items-center gap-1"><Sparkles className="w-3 h-3 text-[#C9A84C]" /> 15–25 minutes</span>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* ── BEIE Video Embed ── */}
-      <Card className="border-[#C9A84C]/20 bg-[#022c22]/40 overflow-hidden">
-        <CardHeader className="pb-3">
-          <CardTitle className="text-lg font-serif text-[#C9A84C] flex items-center gap-2">
-            <Play className="w-5 h-5" /> Understanding the BEIE Framework
-          </CardTitle>
-          <CardDescription className="text-[#ecfdf5]/60">
-            Watch this 2-minute introduction to Bangsamoro Economic and Investment Ecosystem (BEIE) Framework before you begin. It explains how the 5 clusters interconnect anchored in Operating Systems highlighting  Moral Governance.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="relative w-full overflow-hidden rounded-lg border border-[#C9A84C]/20" style={{ paddingBottom: "56.25%" }}>
-            <iframe
-              src="https://www.youtube.com/embed/UCi2dVUmSbE"
-              title="The Bangsamoro Economic and Investment Ecosystem Framework"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="absolute top-0 left-0 w-full h-full"
-            />
-          </div>
-          <p className="text-xs text-[#ecfdf5]/40 text-center">
-            New to the BEIE Framework? This video covers the 5 clusters, causal loop thinking, and how Moral Governance underpins everything.
-          </p>
-        </CardContent>
-      </Card>
-
-      {/* ── Student Guide CTA ── */}
-      <Card className="border-[#C9A84C]/20 bg-gradient-to-r from-[#022c22]/60 to-[#064e3b]/30">
-        <CardContent className="p-5 flex flex-col sm:flex-row items-center gap-4">
-          <div className="flex-1">
-            <h4 className="font-serif text-[#C9A84C] text-sm font-bold mb-1">Want a deeper dive?</h4>
-            <p className="text-xs text-[#ecfdf5]/60">
-              The BEIE Student Guide provides detailed explanations of each cluster, the systems thinking approach,
-              and how your input feeds into the investment roadmap.
-            </p>
-          </div>
-          <a
-            href="https://asilvainnovations.github.io/BIRD-2026-2035/public/student-guide.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button variant="outline" className="border-[#C9A84C]/40 text-[#C9A84C] hover:bg-[#C9A84C]/10 whitespace-nowrap">
-              <BookOpen className="w-4 h-4 mr-2" /> Open BEIE Student Guide
-            </Button>
-          </a>
-        </CardContent>
-      </Card>
-
-      <Separator className="bg-[#C9A84C]/20" />
-
-      {/* ── Question 1 ── */}
-      <div className="space-y-3">
-        <Label className="text-[#E8C560] font-semibold text-base">
-          Understanding of BEIE Framework <span className="text-red-400 text-xs font-normal">(Recommended)</span>
-        </Label>
-        <p className="text-xs text-[#ecfdf5]/50">How well do you understand the 5-cluster BEIE framework? No wrong answer — this helps us calibrate.</p>
-        <RadioGroup {...register("q1_1")} className="space-y-2">
+      {/* ── Q1.1 ──────────────────────────────────────────────────────────── */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">
+          How well do you understand the BEIE ecosystem approach compared to traditional
+          sector-based planning?
+        </h3>
+        <div className="grid grid-cols-2 gap-3">
           {[
-            { value: "expert", label: "Expert — Deep understanding of all clusters" },
-            { value: "advanced", label: "Advanced — Strong grasp of framework" },
-            { value: "intermediate", label: "Intermediate — Familiar with core concepts" },
-            { value: "basic", label: "Basic — Limited exposure" },
+            "Very well — I see the interconnected value",
+            "Somewhat — I grasp the concept but need clarity on linkages",
+            "Familiar with sector-based only — ecosystems are new to me",
+            "Not familiar with either approach",
           ].map((opt) => (
-            <div key={opt.value} className="flex items-center space-x-3 p-2.5 rounded-lg border border-[#C9A84C]/10 hover:border-[#C9A84C]/30 hover:bg-[#C9A84C]/5 transition-all cursor-pointer">
-              <RadioGroupItem value={opt.value} id={`q1_1_${opt.value}`} className="border-[#C9A84C]/50 text-[#C9A84C]" />
-              <Label htmlFor={`q1_1_${opt.value}`} className="text-sm text-[#ecfdf5]/80 cursor-pointer flex-1">{opt.label}</Label>
-            </div>
+            <button
+              key={opt}
+              onClick={() => update("q1_1", opt)}
+              className={cn(
+                "p-3 rounded-lg border text-sm text-left transition-all",
+                data.q1_1 === opt
+                  ? "bg-[#1B4D3E] text-white border-[#1B4D3E]"
+                  : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C]"
+              )}
+            >
+              {opt}
+            </button>
           ))}
-        </RadioGroup>
+        </div>
+      </GlassCard>
+
+      {/* ── Q1.2 ──────────────────────────────────────────────────────────── */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">
+          How relevant is the BEIE framework to real-world investment planning in your
+          province or organization?
+        </h3>
+        <div className="grid grid-cols-2 gap-3">
+          {["Highly relevant", "Moderately relevant", "Somewhat relevant", "Not relevant"].map(
+            (opt) => (
+              <button
+                key={opt}
+                onClick={() => update("q1_2", opt)}
+                className={cn(
+                  "p-3 rounded-lg border text-sm text-left transition-all",
+                  data.q1_2 === opt
+                    ? "bg-[#1B4D3E] text-white border-[#1B4D3E]"
+                    : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C]"
+                )}
+              >
+                {opt}
+              </button>
+            )
+          )}
+        </div>
+      </GlassCard>
+
+      {/* ── SWOT Scale Questions: Key Strengths ───────────────────────────── */}
+      <GlassCard className="!p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="px-2 py-1 rounded text-xs font-semibold bg-emerald-100 text-emerald-700">STRENGTHS</span>
+          <h3 className="text-base font-semibold text-[#022c22]">
+            How much do these internal strengths help BARMM grow — and how likely are they to continue?
+          </h3>
+        </div>
+        <p className="text-xs text-[#065f46] mb-4 italic">
+          Rate each factor: Impact (1 = very small effect, 5 = very large effect) × Likelihood (1 = very unlikely, 5 = very likely)
+        </p>
+
+        {/* S1: Halal Legitimacy */}
+        <div className="space-y-3 mb-6 pb-6 border-b border-[#C9A84C]/20">
+          <p className="text-sm font-medium text-[#022c22]">
+            <strong>Halal Legitimacy & Cultural Credibility.</strong> BARMM's authentic Muslim-majority identity provides unmatched credibility for halal branding and global market access.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <p className="text-xs text-[#065f46] mb-2">Impact (1–5)</p>
+              <ScaleButton value={data.q_s1_halal_legitimacy_impact} onChange={(v) => update("q_s1_halal_legitimacy_impact", v)} />
+            </div>
+            <div>
+              <p className="text-xs text-[#065f46] mb-2">Likelihood (1–5)</p>
+              <ScaleButton value={data.q_s1_halal_legitimacy_likelihood} onChange={(v) => update("q_s1_halal_legitimacy_likelihood", v)} />
+            </div>
+          </div>
+        </div>
+
+        {/* S2: BIMP-EAGA Location */}
+        <div className="space-y-3 mb-6 pb-6 border-b border-[#C9A84C]/20">
+          <p className="text-sm font-medium text-[#022c22]">
+            <strong>Strategic BIMP-EAGA Location.</strong> BARMM's proximity to Sabah and ASEAN trade corridors makes it a natural gateway for regional trade with 70M+ consumers.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <p className="text-xs text-[#065f46] mb-2">Impact (1–5)</p>
+              <ScaleButton value={data.q_s1_bimpeaga_impact} onChange={(v) => update("q_s1_bimpeaga_impact", v)} />
+            </div>
+            <div>
+              <p className="text-xs text-[#065f46] mb-2">Likelihood (1–5)</p>
+              <ScaleButton value={data.q_s1_bimpeaga_likelihood} onChange={(v) => update("q_s1_bimpeaga_likelihood", v)} />
+            </div>
+          </div>
+        </div>
+
+        {/* S4: Domestic Halal Demand */}
+        <div className="space-y-3">
+          <p className="text-sm font-medium text-[#022c22]">
+            <strong>Domestic Halal Demand.</strong> With 5.69 million Muslim consumers, BARMM has strong built-in local demand that absorbs halal products and services.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <p className="text-xs text-[#065f46] mb-2">Impact (1–5)</p>
+              <ScaleButton value={data.q_s1_domestic_demand_impact} onChange={(v) => update("q_s1_domestic_demand_impact", v)} />
+            </div>
+            <div>
+              <p className="text-xs text-[#065f46] mb-2">Likelihood (1–5)</p>
+              <ScaleButton value={data.q_s1_domestic_demand_likelihood} onChange={(v) => update("q_s1_domestic_demand_likelihood", v)} />
+            </div>
+          </div>
+        </div>
+      </GlassCard>
+
+      {/* ── Image 2: BEIE v2 ──────────────────────────────────────────────── */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 shadow-lg group">
+        <img
+          src={BIRD_IMAGES.beieFrameworkV2.url}
+          alt={BIRD_IMAGES.beieFrameworkV2.alt}
+          className="w-full h-auto max-h-[400px] object-contain transition-transform group-hover:scale-[1.02]"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+          <p className="text-xs italic text-white/70">Source: {BIRD_IMAGES.beieFrameworkV2.title}</p>
+        </div>
       </div>
 
-      {/* ── Question 2 ── */}
-      <div className="space-y-3">
-        <Label className="text-[#E8C560] font-semibold text-base">
-          Relevance of BEIE to BARMM <span className="text-red-400 text-xs font-normal">(Recommended)</span>
-        </Label>
-        <p className="text-xs text-[#ecfdf5]/50">How relevant is the BEIE framework to BARMM's actual economic conditions?</p>
-        <RadioGroup {...register("q1_2")} className="space-y-2">
-          {[
-            { value: "critical", label: "Critical — Essential for transformation" },
-            { value: "high", label: "High — Very relevant to context" },
-            { value: "moderate", label: "Moderate — Somewhat relevant" },
-            { value: "low", label: "Low — Limited applicability" },
-          ].map((opt) => (
-            <div key={opt.value} className="flex items-center space-x-3 p-2.5 rounded-lg border border-[#C9A84C]/10 hover:border-[#C9A84C]/30 hover:bg-[#C9A84C]/5 transition-all cursor-pointer">
-              <RadioGroupItem value={opt.value} id={`q1_2_${opt.value}`} className="border-[#C9A84C]/50 text-[#C9A84C]" />
-              <Label htmlFor={`q1_2_${opt.value}`} className="text-sm text-[#ecfdf5]/80 cursor-pointer flex-1">{opt.label}</Label>
-            </div>
+      {/* ── Q1.3: Cluster Contribution (Retained) ─────────────────────────── */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">
+          In which cluster — Foundations, Transformers, Enablers, Connectors, or Financiers — does
+          your organization believe it can contribute most meaningfully?
+        </h3>
+        <div className="grid grid-cols-2 gap-3">
+          {["Foundations", "Transformers", "Enablers", "Connectors", "Financiers"].map((opt) => (
+            <button
+              key={opt}
+              onClick={() => update("q1_3_cluster_contribution", opt)}
+              className={cn(
+                "p-3 rounded-lg border text-sm text-left transition-all",
+                data.q1_3_cluster_contribution === opt
+                  ? "bg-[#1B4D3E] text-white border-[#1B4D3E]"
+                  : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C]"
+              )}
+            >
+              {opt}
+            </button>
           ))}
-        </RadioGroup>
+        </div>
+      </GlassCard>
+
+      {/* ── Image 3: BEIE v3 ──────────────────────────────────────────────── */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 shadow-lg group">
+        <img
+          src={BIRD_IMAGES.beieFrameworkV3.url}
+          alt={BIRD_IMAGES.beieFrameworkV3.alt}
+          className="w-full h-auto max-h-[400px] object-contain transition-transform group-hover:scale-[1.02]"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+          <p className="text-xs italic text-white/70">Source: {BIRD_IMAGES.beieFrameworkV3.title}</p>
+        </div>
       </div>
+
+      {/* ── Q1.4: BEIE Actionable (Retained) ──────────────────────────────── */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">
+          How can stakeholders across government, business, and civil society work together to make
+          the BEIE ecosystem approach more actionable in real investment planning?
+        </h3>
+        <textarea
+          value={data.q1_4_beie_actionable}
+          onChange={(e) => update("q1_4_beie_actionable", e.target.value)}
+          placeholder="Share your thoughts in one to two sentences..."
+          className="w-full p-4 border border-[#C9A84C]/30 rounded-lg text-sm text-[#022c22] placeholder:text-[#065f46]/50 focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/50 min-h-[100px] resize-y"
+        />
+      </GlassCard>
     </div>
   );
-}
+};
+
+export default Section1_BEIE;
