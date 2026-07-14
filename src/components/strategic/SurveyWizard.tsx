@@ -1,333 +1,537 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { useForm, FormProvider } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { useToast } from "@/components/ui/use-toast";
-import { useAuth } from "@/hooks/useAuth";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
-import { Switch } from "@/components/ui/switch";
-import { supabase } from "@/lib/supabase";
-import { Save, Send, ChevronRight, ChevronLeft, RotateCcw, CircleCheck as CheckCircle2, Sparkles, ChartBar as BarChart3, ArrowRight, Eye, Info } from "lucide-react";
+import React, { useState, useCallback } from "react";
+import { submitSurvey } from "@/lib/api";
+import { surveySchema, type SurveySchemaType } from "@/lib/survey-schema";
+import { Toaster, toast } from "sonner";
+import { ProgressTracker } from "@/components/ProgressTracker";
+import ContextPanel, { SECTION_CATALOG } from "@/components/ContextPanel";
+import FloatingAIAssistant from "@/components/FloatingAIAssistant";
 
-import { Section1_BEIE } from "./Section1_BEIE";
-import { Section2_MoralGov } from "./Section2_MoralGov";
-import { Section3_Foundations } from "./Section3_Foundations";
-import { Section4_Transformers } from "./Section4_Transformers";
-import { Section5_Enablers } from "./Section5_Enablers";
-import { Section6_Connectors } from "./Section6_Connectors";
-import { Section7_Financiers } from "./Section7_Financiers";
-import { Section8_StrategicOptions } from "./Section8_StrategicOptions";
-import { Section9_BudgetTargets } from "./Section9_BudgetTargets";
-import { Section10_IEDSMatrix as Section10_IEDSMx } from "./Section10_IEDSMatrix";
-import { Section11_Equity as Section11_ProvincialEquity } from "./Section11_Equity";
-import { Section12_Climate as Section12_ClimateResilience } from "./Section12_Climate";
-import { Section13_Policy as Section13_PolicyGovernance } from "./Section13_Policy";
-import { Section14_Demographics } from "./Section14_Demographics";
-import { Section16_CARE as Section15_CARE } from "./Section16_CARE";
-import { Section15_Submission as Section16_FinalSubmission } from "./Section15_Submission";
-import { ContextStrip } from "./ContextPanel";
+// ─── Section Components ──────────────────────────────────────────────────────
+import Section0_Orientation from "./sections/Section0_Orientation";
+import Section1_BEIE from "./sections/Section1_BEIE";
+import Section2_MoralGov from "./sections/Section2_MoralGov";
+import Section3_Foundations from "./sections/Section3_Foundations";
+import Section4_Transformers from "./sections/Section4_Transformers";
+import Section5_Enablers from "./sections/Section5_Enablers";
+import Section6_Connectors from "./sections/Section6_Connectors";
+import Section7_Financiers from "./sections/Section7_Financiers";
+import Section8_StrategicOptions from "./sections/Section8_StrategicOptions";
+import Section9_BudgetTargets from "./sections/Section9_BudgetTargets";
+import Section10_IEDSMatrix from "./sections/Section10_IEDSMatrix";
+import Section11_Equity from "./sections/Section11_Equity";
+import Section12_Climate from "./sections/Section12_Climate";
+import Section13_Policy from "./sections/Section13_Policy";
+import Section14_Demographics from "./sections/Section14_Demographics";
+import Section15_Submission from "./sections/Section15_Submission";
+import Section16_CARE from "./sections/Section16_CARE";
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// PILOT MODE SURVEY SCHEMA — ALL FIELDS OPTIONAL
-// ═══════════════════════════════════════════════════════════════════════════════
-export const surveySchema = z.object({
-  q1_1: z.string().optional(), q1_2: z.string().optional(),
-  q2_1: z.string().optional(), q2_2: z.string().optional(),
-  q2_3_archetype: z.string().optional(), q2_4_peace: z.array(z.string()).default([]),
-  q2_5_moral_governance_risk: z.string().optional(),
-  q3_1_priorities: z.array(z.string()).default([]), q3_2_feasibility: z.string().optional(),
-  q3_aff_base_impact: z.string().optional(), q3_aff_base_likelihood: z.string().optional(),
-  q3_el_nino_impact: z.string().optional(), q3_el_nino_like: z.string().optional(),
-  q3_pestalotiopsis_impact: z.string().optional(), q3_pestalotiopsis_like: z.string().optional(),
-  q3_postharvest_impact: z.string().optional(), q3_postharvest_like: z.string().optional(),
-  q4_1_barrier: z.string().optional(), q4_2_halal_park: z.string().optional(),
-  q4_3_fixes_fail: z.string().optional(), q4_4_commodity_impact: z.string().optional(),
-  q4_5_heds_ranking: z.array(z.string()).default(["Halal Certification (BHB)","Halal Park (Matanog)","UAE Export Corridor","Islamic Finance for Halal MSMEs"]),
-  q5_1_infra: z.string().optional(), q5_2_sectors: z.array(z.string()).default([]),
-  q5_3_broadband: z.string().optional(), q5_4_literacy: z.string().optional(),
-  q5_5_stunting: z.string().optional(), q5_6_digital_divide: z.string().optional(),
-  q6_1_bimpeaga: z.string().optional(), q6_2_markets: z.array(z.string()).default([]),
-  q6_3_export_target: z.string().optional(), q6_4_uae_feasibility: z.string().optional(),
-  q6_5_perception: z.string().optional(),
-  q7_1_criticality: z.string().optional(), q7_2_instruments: z.array(z.string()).default([]),
-  q7_3_inclusion_target: z.string().optional(), q7_4_asset_paradox: z.string().optional(),
-  q7_5_block_grant: z.string().optional(),
-  q8_1_strategy: z.string().optional(), q8_2_sequencing: z.string().optional(),
-  q8_3_comments: z.string().optional(),
-  q9_1_budget: z.string().optional(),
-  q10_1_ambition: z.string().optional(),
-  q10_matrix: z.record(z.record(z.number())).default({}),
-  q11_1_affirmative: z.string().optional(), q11_2_mechanisms: z.array(z.string()).default([]),
-  q12_1_green_priority: z.string().optional(), q12_2_adaptation: z.array(z.string()).default([]),
-  q13_1_legislation: z.array(z.string()).default([]), q13_2_bicc: z.string().optional(),
-  demo_category: z.string().optional(), demo_province: z.string().optional(),
-  demo_expertise: z.array(z.string()).default([]), demo_name: z.string().optional(),
-  demo_email: z.string().email().optional().or(z.literal("")),
-  demo_organization: z.string().optional(),
-  provincial_basilan: z.string().optional(), provincial_maguindanao: z.string().optional(),
-  provincial_tawitawi: z.string().optional(), provincial_lanao: z.string().optional(),
-  care_context: z.string().optional(), care_action: z.string().optional(),
-  care_realtime: z.string().optional(), care_evidence: z.string().optional(),
-  care_overall: z.string().optional(),
-  consent_final: z.boolean().default(false),
-});
-export type SurveySchemaType = z.infer<typeof surveySchema>;
+import type { Section0Data } from "./sections/Section0_Orientation";
+import type { Section1Data } from "./sections/Section1_BEIE";
+import type { Section2Data } from "./sections/Section2_MoralGov";
+import type { Section3Data } from "./sections/Section3_Foundations";
+import type { Section4Data } from "./sections/Section4_Transformers";
+import type { Section5Data } from "./sections/Section5_Enablers";
+import type { Section6Data } from "./sections/Section6_Connectors";
+import type { Section7Data } from "./sections/Section7_Financiers";
+import type { Section8Data } from "./sections/Section8_StrategicOptions";
+import type { Section9Data } from "./sections/Section9_BudgetTargets";
+import type { Section10Data } from "./sections/Section10_IEDSMatrix";
+import type { Section11Data } from "./sections/Section11_Equity";
+import type { Section12Data } from "./sections/Section12_Climate";
+import type { Section13Data } from "./sections/Section13_Policy";
+import type { Section14Data } from "./sections/Section14_Demographics";
+import type { Section15Data } from "./sections/Section15_Submission";
+import type { Section16Data } from "./sections/Section16_CARE";
 
-const STEPS = [
-  { id: 1, title: "BEIE Framework Context", component: Section1_BEIE, group: "Framework & Governance" },
-  { id: 2, title: "Moral Governance OS", component: Section2_MoralGov, group: "Framework & Governance" },
-  { id: 3, title: "Cluster 1: Foundations", component: Section3_Foundations, group: "BEIE Clusters" },
-  { id: 4, title: "Cluster 2: Transformers", component: Section4_Transformers, group: "BEIE Clusters" },
-  { id: 5, title: "Cluster 3: Enablers", component: Section5_Enablers, group: "BEIE Clusters" },
-  { id: 6, title: "Cluster 4: Connectors", component: Section6_Connectors, group: "BEIE Clusters" },
-  { id: 7, title: "Cluster 5: Financiers", component: Section7_Financiers, group: "BEIE Clusters" },
-  { id: 8, title: "Strategic Options", component: Section8_StrategicOptions, group: "Strategy & Planning" },
-  { id: 9, title: "Budget & Targets", component: Section9_BudgetTargets, group: "Strategy & Planning" },
-  { id: 10, title: "IEDS Matrix", component: Section10_IEDSMx, group: "Strategy & Planning" },
-  { id: 11, title: "Provincial Equity", component: Section11_ProvincialEquity, group: "Equity & Resilience" },
-  { id: 12, title: "Climate Resilience", component: Section12_ClimateResilience, group: "Equity & Resilience" },
-  { id: 13, title: "Policy & Governance", component: Section13_PolicyGovernance, group: "Equity & Resilience" },
-  { id: 14, title: "Demographics", component: Section14_Demographics, group: "Validation" },
-  { id: 15, title: "C.A.R.E. Validation", component: Section15_CARE, group: "Validation" },
-  { id: 16, title: "Final Submission", component: Section16_FinalSubmission, group: "Submission" },
+// ─── Wizard Steps ────────────────────────────────────────────────────────────
+const STEP_LABELS = [
+  "Welcome",
+  "BEIE Framework",
+  "Moral Governance",
+  "Foundations",
+  "Transformers",
+  "Enablers",
+  "Connectors",
+  "Financiers & Systems",
+  "Strategic Options",
+  "Budget Targets",
+  "IEDS Matrix",
+  "Provincial Equity",
+  "Climate Resilience",
+  "Policy & Governance",
+  "Demographics",
+  "Review & Submit",
+  "C.A.R.E. Validation",
 ];
-const TOTAL_STEPS = STEPS.length;
-const STORAGE_KEY = "bird_survey_draft_v5";
 
-export function SurveyWizard() {
-  const navigate = useNavigate();
-  const { toast } = useToast();
-  const { user } = useAuth();
+// ─── Survey Wizard Component ─────────────────────────────────────────────────
+const SurveyWizard: React.FC = () => {
+  const [step, setStep] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
 
-  const [currentStep, setCurrentStep] = useState(1);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [submissionId, setSubmissionId] = useState("");
-  const [showResetDialog, setShowResetDialog] = useState(false);
-  const [visitedSteps, setVisitedSteps] = useState<Set<number>>(new Set([1]));
-
-  const form = useForm<SurveySchemaType>({
-    resolver: zodResolver(surveySchema),
-    defaultValues: {
-      q2_4_peace: [], q3_1_priorities: [],
-      q4_5_heds_ranking: ["Halal Certification (BHB)","Halal Park (Matanog)","UAE Export Corridor","Islamic Finance for Halal MSMEs"],
-      q5_2_sectors: [], q6_2_markets: [], q7_2_instruments: [],
-      q8_1_strategy: "ieds", q10_matrix: {},
-      q11_2_mechanisms: [], q12_2_adaptation: [], q13_1_legislation: [],
-      demo_expertise: [], consent_final: false,
-    },
-    mode: "onChange",
+  // ── Section 0: Orientation ────────────────────────────────────────────────
+  const [s0, setS0] = useState<Section0Data>({
+    ready_to_begin: "",
+    ecosystem_understanding: "",
+    systems_thinking_value: "",
   });
 
-  // Autosave
-  useEffect(() => {
-    const sub = form.watch((data) => {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...data, currentStep })); } catch {}
-    });
-    return () => sub.unsubscribe();
-  }, [form, currentStep]);
+  // ── Section 1: BEIE ───────────────────────────────────────────────────────
+  const [s1, setS1] = useState<Section1Data>({
+    q1_1: "",
+    q1_2: "",
+    q1_3_cluster_contribution: "",
+    q1_4_beie_actionable: "",
+    q_s1_halal_legitimacy_impact: undefined,
+    q_s1_halal_legitimacy_likelihood: undefined,
+    q_s1_bimpeaga_impact: undefined,
+    q_s1_bimpeaga_likelihood: undefined,
+    q_s1_domestic_demand_impact: undefined,
+    q_s1_domestic_demand_likelihood: undefined,
+  });
 
-  // Restore draft
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) { const p = JSON.parse(raw); if (p.currentStep) setCurrentStep(p.currentStep); form.reset(p); }
-    } catch {}
-  }, [form]);
+  // ── Section 2: Moral Governance ───────────────────────────────────────────
+  const [s2, setS2] = useState<Section2Data>({
+    q2_1: undefined,
+    q2_2: undefined,
+    q2_3_archetype: "",
+    q2_4_peace: [],
+    q_s2_governance_loops: "",
+    q_s2_security_incidents_impact: undefined,
+    q_s2_security_incidents_likelihood: undefined,
+    q_s2_escalation: "",
+    q_s2_bigman: "",
+    q_s2_political_transition_impact: undefined,
+    q_s2_political_transition_likelihood: undefined,
+  });
 
-  // PILOT MODE: Free navigation — no validation blocking
-  const goToStep = useCallback((step: number) => {
-    if (step >= 1 && step <= TOTAL_STEPS) {
-      setCurrentStep(step);
-      setVisitedSteps(prev => new Set(prev).add(step));
-      window.scrollTo({ top: 0, behavior: "smooth" });
+  // ── Section 3: Foundations ────────────────────────────────────────────────
+  const [s3, setS3] = useState<Section3Data>({
+    q3_1_priorities: [],
+    q3_2_feasibility: undefined,
+    q3_el_nino_impact: undefined,
+    q3_el_nino_like: undefined,
+    q3_pestalotiopsis_impact: undefined,
+    q3_pestalotiopsis_like: undefined,
+    q3_postharvest_impact: undefined,
+    q3_postharvest_like: undefined,
+    q3_limits_growth: "",
+    q_s3_climate_change_impact: undefined,
+    q_s3_climate_change_likelihood: undefined,
+    q_s3_tragedy_commons: "",
+  });
+
+  // ── Section 4: Transformers ───────────────────────────────────────────────
+  const [s4, setS4] = useState<Section4Data>({
+    q4_1_barrier: "",
+    q4_2_halal_park: "",
+    q4_3_fixes_fail: "",
+    q4_4_commodity_impact: "",
+    q4_5_heds_ranking: [],
+    q_s4_halal_cert_impact: undefined,
+    q_s4_halal_cert_likelihood: undefined,
+    q_s4_global_halal_impact: undefined,
+    q_s4_global_halal_likelihood: undefined,
+    q_s4_competition_impact: undefined,
+    q_s4_competition_likelihood: undefined,
+    q_s4_fixes_fail: "",
+  });
+
+  // ── Section 5: Enablers ───────────────────────────────────────────────────
+  const [s5, setS5] = useState<Section5Data>({
+    q5_1_infra: undefined,
+    q5_2_sectors: [],
+    q5_3_broadband: undefined,
+    q5_4_literacy: undefined,
+    q5_5_stunting: undefined,
+    q5_6_digital_divide: "",
+    q_s5_infra_deficit_impact: undefined,
+    q_s5_infra_deficit_likelihood: undefined,
+    q_s5_poverty_impact: undefined,
+    q_s5_poverty_likelihood: undefined,
+    q_s5_literacy_impact: undefined,
+    q_s5_literacy_likelihood: undefined,
+    q_s5_limits_growth: "",
+    q_s5_growth_underinvestment: "",
+    q_s5_youth_population_impact: undefined,
+    q_s5_youth_population_likelihood: undefined,
+    q_s5_moral_governance_enablers: "",
+  });
+
+  // ── Section 6: Connectors ─────────────────────────────────────────────────
+  const [s6, setS6] = useState<Section6Data>({
+    q6_1_bimpeaga: undefined,
+    q6_2_markets: [],
+    q6_3_export_target: undefined,
+    q6_4_uae_feasibility: undefined,
+    q6_5_perception: "",
+    q_s6_asean_halal_impact: undefined,
+    q_s6_asean_halal_likelihood: undefined,
+    q_s6_successful: "",
+  });
+
+  // ── Section 7: Financiers ─────────────────────────────────────────────────
+  const [s7, setS7] = useState<Section7Data>({
+    q7_1_criticality: undefined,
+    q7_2_instruments: [],
+    q7_3_inclusion_target: undefined,
+    q7_4_asset_paradox: "",
+    q7_5_block_grant: "",
+    q_s7_islamic_finance_impact: undefined,
+    q_s7_islamic_finance_likelihood: undefined,
+    q_s7_capacity_traps: "",
+    q_s7_shifting_burden: "",
+    q_s7_tragedy_commons: "",
+    q_s7_wordcloud: "",
+  });
+
+  // ── Section 8: Strategic Options ──────────────────────────────────────────
+  const [s8, setS8] = useState<Section8Data>({
+    q8_1_strategy: "",
+    q8_2_sequencing: "",
+    q8_3_comments: "",
+  });
+
+  // ── Section 9: Budget Targets ─────────────────────────────────────────────
+  const [s9, setS9] = useState<Section9Data>({
+    q9_1_budget: undefined,
+  });
+
+  // ── Section 10: IEDS Matrix ───────────────────────────────────────────────
+  const [s10, setS10] = useState<Section10Data>({
+    q10_1_ambition: undefined,
+    q10_matrix: {
+      heds: { economic_impact: 5, feasibility: 5, identity_alignment: 5, systems_leverage: 5, risk_return: 5, inclusivity: 5, sustainability: 5 },
+      gems: { economic_impact: 5, feasibility: 5, identity_alignment: 5, systems_leverage: 5, risk_return: 5, inclusivity: 5, sustainability: 5 },
+      ifes: { economic_impact: 5, feasibility: 5, identity_alignment: 5, systems_leverage: 5, risk_return: 5, inclusivity: 5, sustainability: 5 },
+      ieds: { economic_impact: 5, feasibility: 5, identity_alignment: 5, systems_leverage: 5, risk_return: 5, inclusivity: 5, sustainability: 5 },
+    },
+  });
+
+  // ── Section 11: Provincial Equity ─────────────────────────────────────────
+  const [s11, setS11] = useState<Section11Data>({
+    q11_1_affirmative: "",
+    q11_2_mechanisms: [],
+    q_s11_successful: "",
+    q_s11_poverty_impact: undefined,
+    q_s11_poverty_likelihood: undefined,
+  });
+
+  // ── Section 12: Climate ───────────────────────────────────────────────────
+  const [s12, setS12] = useState<Section12Data>({
+    q12_1_green_priority: undefined,
+    q12_2_adaptation: [],
+  });
+
+  // ── Section 13: Policy ────────────────────────────────────────────────────
+  const [s13, setS13] = useState<Section13Data>({
+    q13_1_legislation: [],
+    q13_2_bicc: undefined,
+    q_s13_shifting_burden: "",
+    q_s13_drifting_goals: "",
+  });
+
+  // ── Section 14: Demographics ──────────────────────────────────────────────
+  const [s14, setS14] = useState<Section14Data>({
+    demo_category: "",
+    demo_province: "",
+    demo_expertise: [],
+    demo_name: "",
+    demo_email: "",
+    demo_organization: "",
+  });
+
+  // ── Section 15: Review ────────────────────────────────────────────────────
+  const [s15, setS15] = useState<Section15Data>({
+    consent_final: false,
+  });
+
+  // ── Section 16: C.A.R.E. ──────────────────────────────────────────────────
+  const [s16, setS16] = useState<Section16Data>({
+    care_context: undefined,
+    care_action: undefined,
+    care_realtime: undefined,
+    care_evidence: undefined,
+    care_overall: undefined,
+  });
+
+  // ─── Step Renderer ─────────────────────────────────────────────────────────
+  const renderStep = () => {
+    switch (step) {
+      case 0:
+        return <Section0_Orientation data={s0} onChange={setS0} />;
+      case 1:
+        return <Section1_BEIE data={s1} onChange={setS1} />;
+      case 2:
+        return <Section2_MoralGov data={s2} onChange={setS2} />;
+      case 3:
+        return <Section3_Foundations data={s3} onChange={setS3} />;
+      case 4:
+        return <Section4_Transformers data={s4} onChange={setS4} />;
+      case 5:
+        return <Section5_Enablers data={s5} onChange={setS5} />;
+      case 6:
+        return <Section6_Connectors data={s6} onChange={setS6} />;
+      case 7:
+        return <Section7_Financiers data={s7} onChange={setS7} />;
+      case 8:
+        return <Section8_StrategicOptions data={s8} onChange={setS8} />;
+      case 9:
+        return <Section9_BudgetTargets data={s9} onChange={setS9} />;
+      case 10:
+        return <Section10_IEDSMatrix data={s10} onChange={setS10} />;
+      case 11:
+        return <Section11_Equity data={s11} onChange={setS11} />;
+      case 12:
+        return <Section12_Climate data={s12} onChange={setS12} />;
+      case 13:
+        return <Section13_Policy data={s13} onChange={setS13} />;
+      case 14:
+        return <Section14_Demographics data={s14} onChange={setS14} />;
+      case 15:
+        return <Section15_Submission data={s15} onChange={setS15} />;
+      case 16:
+        return <Section16_CARE data={s16} onChange={setS16} />;
+      default:
+        return null;
     }
-  }, []);
-
-  const nextStep = useCallback(() => {
-    setVisitedSteps(prev => new Set(prev).add(currentStep));
-    goToStep(currentStep + 1);
-  }, [currentStep, goToStep]);
-
-  const prevStep = useCallback(() => goToStep(currentStep - 1), [currentStep, goToStep]);
-
-  const progress = (currentStep / TOTAL_STEPS) * 100;
-  const CurrentComponent = STEPS[currentStep - 1]?.component;
-
-  // Submit
-  const onSubmit = useCallback(async (data: SurveySchemaType) => {
-    setIsSubmitting(true);
-    try {
-      const id = crypto.randomUUID();
-      const payload = { id, user_id: user?.id || null, data, submitted_at: new Date().toISOString() };
-      const { error } = await supabase.from("survey_responses").insert([payload]);
-      if (error) throw error;
-      setSubmissionId(id); setSubmitted(true);
-      localStorage.removeItem(STORAGE_KEY);
-      toast({ title: "Survey Submitted", description: `ID: ${id.slice(0, 8)}...` });
-    } catch (err: any) {
-      toast({ title: "Submission Failed", description: err.message, variant: "destructive" });
-    } finally { setIsSubmitting(false); }
-  }, [user, toast]);
-
-  const handleReset = () => {
-    localStorage.removeItem(STORAGE_KEY); form.reset();
-    setCurrentStep(1); setVisitedSteps(new Set([1]));
-    setSubmitted(false); setShowResetDialog(false);
-    toast({ title: "Survey Reset" });
   };
 
-  // Success screen
-  if (submitted) return (
-    <div className="min-h-[70vh] flex items-center justify-center p-4">
-      <Card className="max-w-lg w-full border-[#C9A84C]/30 bg-[#011a12]/80">
-        <CardHeader className="text-center">
-          <div className="mx-auto w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mb-4">
-            <CheckCircle2 className="w-8 h-8 text-green-400" />
-          </div>
-          <CardTitle className="text-2xl font-serif text-[#C9A84C]">Shukran — Your Voice Is Recorded</CardTitle>
-          <CardDescription className="text-[#ecfdf5]/70">Thank you for validating the BIRD 2026–2035 Investment Roadmap.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6 text-center">
-          <p className="text-sm text-[#ecfdf5]/60">Submission ID: <code className="text-[#E8C560] font-mono">{submissionId}</code></p>
-          <div className="flex flex-col gap-3">
-            <Button onClick={() => navigate("/dashboard")} className="bg-[#C9A84C] text-[#022c22] hover:bg-[#E8C560] font-bold">
-              <BarChart3 className="w-4 h-4 mr-2" /> View Live Dashboard
-            </Button>
-            <Button variant="outline" onClick={() => { setSubmitted(false); setCurrentStep(1); }} className="border-[#C9A84C]/30 text-[#C9A84C]">
-              <RotateCcw className="w-4 h-4 mr-2" /> Submit Another Response
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
+  // ─── Validation ────────────────────────────────────────────────────────────
+  const validateStep = useCallback((): boolean => {
+    // Pilot mode: minimal validation, only check consent on final step
+    if (step === 15 && !s15.consent_final) {
+      toast.error("Please confirm your consent to proceed.");
+      return false;
+    }
+    if (step === 16) {
+      const careFields = [s16.care_context, s16.care_action, s16.care_realtime, s16.care_evidence, s16.care_overall];
+      const allFilled = careFields.every((v) => v !== undefined && v >= 1);
+      if (!allFilled) {
+        toast.error("Please complete all C.A.R.E. validation ratings.");
+        return false;
+      }
+    }
+    return true;
+  }, [step, s15, s16]);
 
+  // ─── Navigation ────────────────────────────────────────────────────────────
+  const nextStep = () => {
+    if (!validateStep()) return;
+    if (step < STEP_LABELS.length - 1) setStep(step + 1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const prevStep = () => {
+    if (step > 0) setStep(step - 1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // ─── Submission ────────────────────────────────────────────────────────────
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    try {
+      const payload: Partial<SurveySchemaType> = {
+        q1_1: s1.q1_1,
+        q1_2: s1.q1_2,
+        q2_1: s2.q2_1,
+        q2_2: s2.q2_2,
+        q2_3_archetype: s2.q2_3_archetype,
+        q2_4_peace: s2.q2_4_peace,
+        q3_1_priorities: s3.q3_1_priorities,
+        q3_2_feasibility: s3.q3_2_feasibility,
+        q3_el_nino_impact: s3.q3_el_nino_impact,
+        q3_el_nino_like: s3.q3_el_nino_like,
+        q3_pestalotiopsis_impact: s3.q3_pestalotiopsis_impact,
+        q3_pestalotiopsis_like: s3.q3_pestalotiopsis_like,
+        q3_postharvest_impact: s3.q3_postharvest_impact,
+        q3_postharvest_like: s3.q3_postharvest_like,
+        q3_limits_growth: s3.q3_limits_growth,
+        q4_1_barrier: s4.q4_1_barrier,
+        q4_2_halal_park: s4.q4_2_halal_park,
+        q4_3_fixes_fail: s4.q4_3_fixes_fail,
+        q4_4_commodity_impact: s4.q4_4_commodity_impact,
+        q4_5_heds_ranking: s4.q4_5_heds_ranking,
+        q5_1_infra: s5.q5_1_infra,
+        q5_2_sectors: s5.q5_2_sectors,
+        q5_3_broadband: s5.q5_3_broadband,
+        q5_4_literacy: s5.q5_4_literacy,
+        q5_5_stunting: s5.q5_5_stunting,
+        q5_6_digital_divide: s5.q5_6_digital_divide,
+        q6_1_bimpeaga: s6.q6_1_bimpeaga,
+        q6_2_markets: s6.q6_2_markets,
+        q6_3_export_target: s6.q6_3_export_target,
+        q6_4_uae_feasibility: s6.q6_4_uae_feasibility,
+        q6_5_perception: s6.q6_5_perception,
+        q7_1_criticality: s7.q7_1_criticality,
+        q7_2_instruments: s7.q7_2_instruments,
+        q7_3_inclusion_target: s7.q7_3_inclusion_target,
+        q7_4_asset_paradox: s7.q7_4_asset_paradox,
+        q7_5_block_grant: s7.q7_5_block_grant,
+        q8_1_strategy: s8.q8_1_strategy,
+        q8_2_sequencing: s8.q8_2_sequencing,
+        q8_3_comments: s8.q8_3_comments,
+        q9_1_budget: s9.q9_1_budget,
+        q10_1_ambition: s10.q10_1_ambition,
+        q10_matrix: s10.q10_matrix,
+        q11_1_affirmative: s11.q11_1_affirmative,
+        q11_2_mechanisms: s11.q11_2_mechanisms,
+        q12_1_green_priority: s12.q12_1_green_priority,
+        q12_2_adaptation: s12.q12_2_adaptation,
+        q13_1_legislation: s13.q13_1_legislation,
+        q13_2_bicc: s13.q13_2_bicc,
+        demo_category: s14.demo_category,
+        demo_province: s14.demo_province,
+        demo_expertise: s14.demo_expertise,
+        demo_name: s14.demo_name,
+        demo_email: s14.demo_email,
+        demo_organization: s14.demo_organization,
+        consent_final: s15.consent_final,
+        care_context: s16.care_context,
+        care_action: s16.care_action,
+        care_realtime: s16.care_realtime,
+        care_evidence: s16.care_evidence,
+        care_overall: s16.care_overall,
+      };
+
+      const result = await submitSurvey(payload as SurveySchemaType);
+      toast.success(result.message || "Survey submitted successfully!");
+      setStep(STEP_LABELS.length - 1);
+    } catch (err: any) {
+      toast.error(err.message || "Submission failed. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // ─── Progress ──────────────────────────────────────────────────────────────
+  const progress = ((step + 1) / STEP_LABELS.length) * 100;
+
+  // ─── AI Assistant visibility: show in alternating sections ─────────────────
+  const showAIAssistant = step % 2 === 1 && step > 0;
+
+  // ─── Get current section's activeView for AI suggestions ───────────────────
+  const getActiveView = (): string => {
+    const viewMap: Record<number, string> = {
+      0: "default",
+      1: "strategy",
+      2: "systems",
+      3: "paps",
+      4: "strategy",
+      5: "paps",
+      6: "strategy",
+      7: "systems",
+      8: "strategy",
+      9: "paps",
+      10: "scorecard",
+      11: "paps",
+      12: "paps",
+      13: "systems",
+      14: "default",
+      15: "default",
+      16: "default",
+    };
+    return viewMap[step] || "default";
+  };
+
+  // ─── Render ────────────────────────────────────────────────────────────────
   return (
-    <FormProvider {...form}>
-      <div className="max-w-5xl mx-auto px-4 py-6 space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-[#022c22] via-[#064e3b] to-[#065f46]">
+      <Toaster position="top-right" richColors />
 
-        {/* ── Sticky Header ── */}
-        <div className="sticky top-0 z-40 bg-[#011a12]/95 backdrop-blur-md border border-[#C9A84C]/20 rounded-xl p-4 space-y-3 shadow-lg">
-          <div className="flex items-center justify-between flex-wrap gap-3">
+      {/* Header */}
+      <header className="sticky top-0 z-40 bg-[#022c22]/95 backdrop-blur-sm border-b border-[#C9A84C]/20">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <img
+              src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/bird-images/public/MTIT%20Logo.webp"
+              alt="MTIT Logo"
+              className="h-10 w-auto"
+            />
             <div>
-              <div className="flex items-center gap-2 mb-1">
-                <Badge variant="outline" className="border-[#C9A84C]/40 text-[#C9A84C] text-[10px]">BIRD 2026–2035 Validation Survey</Badge>
-                <Badge variant="outline" className="border-cyan-500/40 text-cyan-400 text-[10px]">
-                  <Sparkles className="w-3 h-3 mr-1" /> Pilot Mode — Navigate Freely
-                </Badge>
-              </div>
-              <h2 className="text-lg font-serif text-[#C9A84C]">Step {currentStep} of {TOTAL_STEPS}: {STEPS[currentStep - 1]?.title}</h2>
-              <p className="text-xs text-[#ecfdf5]/50">{STEPS[currentStep - 1]?.group}</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="sm" onClick={() => setShowResetDialog(true)} className="text-[#ecfdf5]/40 hover:text-[#C9A84C]">
-                <RotateCcw className="w-3.5 h-3.5 mr-1" /> Reset
-              </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate("/dashboard")} className="text-[#ecfdf5]/40 hover:text-[#C9A84C]">
-                <BarChart3 className="w-3.5 h-3.5 mr-1" /> Dashboard
-              </Button>
+              <h1 className="text-base font-bold text-[#C9A84C] leading-tight">
+                BIRD 2026–2035
+              </h1>
+              <p className="text-[10px] text-[#C9A84C]/70">Validation Survey</p>
             </div>
           </div>
-          <Progress value={progress} className="h-2 bg-[#022c22]" />
+          <div className="text-right">
+            <p className="text-sm font-semibold text-[#C9A84C]">
+              Step {step + 1} of {STEP_LABELS.length}
+            </p>
+            <p className="text-xs text-[#C9A84C]/70">{STEP_LABELS[step]}</p>
+          </div>
+        </div>
+        <div className="h-1 bg-[#C9A84C]/20">
+          <div
+            className="h-full bg-gradient-to-r from-[#C9A84C] to-[#1B4D3E] transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </header>
 
-          {/* Step Pills — PILOT: all steps clickable */}
-          <div className="flex flex-wrap gap-1.5">
-            {STEPS.map((s) => (
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-4 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Left: Survey Questions */}
+          <div className="lg:col-span-2 space-y-6">
+            {renderStep()}
+
+            {/* Navigation Buttons */}
+            <div className="flex justify-between items-center pt-4">
               <button
-                key={s.id}
-                onClick={() => goToStep(s.id)}
-                className={`px-2.5 py-1 rounded-full text-[10px] font-semibold transition-all ${
-                  s.id === currentStep
-                    ? "bg-[#C9A84C] text-[#022c22]"
-                    : visitedSteps.has(s.id)
-                    ? "bg-[#C9A84C]/20 text-[#C9A84C] border border-[#C9A84C]/30"
-                    : "bg-[#011a12]/60 text-[#ecfdf5]/30 border border-[#C9A84C]/10 hover:border-[#C9A84C]/30"
+                onClick={prevStep}
+                disabled={step === 0}
+                className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                  step === 0
+                    ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                    : "bg-white text-[#022c22] border border-[#C9A84C]/30 hover:bg-[#C9A84C]/10"
                 }`}
               >
-                {s.id}
+                ← Previous
               </button>
-            ))}
+
+              {step === STEP_LABELS.length - 1 ? (
+                <button
+                  onClick={() => window.location.reload()}
+                  className="px-6 py-2.5 rounded-lg text-sm font-semibold bg-[#C9A84C] text-white hover:bg-[#b8943c] transition-all"
+                >
+                  Start New Survey
+                </button>
+              ) : step === 15 ? (
+                <button
+                  onClick={handleSubmit}
+                  disabled={submitting}
+                  className="px-6 py-2.5 rounded-lg text-sm font-semibold bg-gradient-to-r from-[#C9A84C] to-[#1B4D3E] text-white hover:opacity-90 transition-all disabled:opacity-50"
+                >
+                  {submitting ? "Submitting..." : "Submit Survey →"}
+                </button>
+              ) : (
+                <button
+                  onClick={nextStep}
+                  className="px-6 py-2.5 rounded-lg text-sm font-semibold bg-gradient-to-r from-[#1B4D3E] to-[#065f46] text-white hover:opacity-90 transition-all"
+                >
+                  Next →
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Right: Context Panel */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-24">
+              <ContextPanel sectionIndex={step} />
+            </div>
           </div>
         </div>
+      </main>
 
-        {/* ── Context Strip ── */}
-        <ContextStrip sectionId={STEPS[currentStep - 1]?.group || "general"} />
-
-        {/* ── Main Form ── */}
-        <Card className="border-[#C9A84C]/20 bg-[#011a12]/60 backdrop-blur-sm">
-          <CardContent className="p-6 md:p-8">
-            {CurrentComponent && <CurrentComponent />}
-          </CardContent>
-        </Card>
-
-        {/* ── Navigation ── */}
-        <div className="flex items-center justify-between pt-2 pb-8">
-          <Button
-            variant="outline"
-            onClick={prevStep}
-            disabled={currentStep === 1}
-            className="border-[#C9A84C]/30 text-[#C9A84C] hover:bg-[#C9A84C]/10 disabled:opacity-30"
-          >
-            <ChevronLeft className="w-4 h-4 mr-2" /> Previous
-          </Button>
-
-          <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              onClick={() => {
-                const data = form.getValues();
-                localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...data, currentStep }));
-                toast({ title: "Draft Saved" });
-              }}
-              className="text-[#ecfdf5]/50 hover:text-[#C9A84C]"
-            >
-              <Save className="w-4 h-4 mr-2" /> Save Draft
-            </Button>
-
-            {currentStep < TOTAL_STEPS ? (
-              <Button onClick={nextStep} className="bg-[#C9A84C] text-[#022c22] hover:bg-[#E8C560] font-bold">
-                Next <ChevronRight className="w-4 h-4 ml-2" />
-              </Button>
-            ) : (
-              <Button
-                onClick={form.handleSubmit(onSubmit)}
-                disabled={isSubmitting}
-                className="bg-[#C9A84C] text-[#022c22] hover:bg-[#E8C560] font-bold"
-              >
-                {isSubmitting ? "Submitting..." : (<><Send className="w-4 h-4 mr-2" /> Submit Survey</>)}
-              </Button>
-            )}
-          </div>
-        </div>
-
-        {/* ── Reset Dialog ── */}
-        <Dialog open={showResetDialog} onOpenChange={setShowResetDialog}>
-          <DialogContent className="bg-[#011a12] border-[#C9A84C]/30 text-[#ecfdf5]">
-            <DialogHeader>
-              <DialogTitle className="text-[#C9A84C] font-serif">Reset Survey?</DialogTitle>
-              <DialogDescription className="text-[#ecfdf5]/60">All responses will be cleared. This cannot be undone.</DialogDescription>
-            </DialogHeader>
-            <DialogFooter>
-              <Button variant="ghost" onClick={() => setShowResetDialog(false)} className="text-[#ecfdf5]/60">Cancel</Button>
-              <Button onClick={handleReset} variant="destructive">Reset Survey</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-
-        {/* ── Pilot Mode Notice ── */}
-        <div className="text-center pb-4">
-          <p className="text-[10px] text-[#ecfdf5]/30 font-mono">
-            PILOT MODE: Navigate freely between sections. Only the final consent checkbox is required for submission.
-          </p>
-        </div>
-      </div>
-    </FormProvider>
+      {/* Floating AI Assistant */}
+      {showAIAssistant && (
+        <FloatingAIAssistant activeView={getActiveView()} />
+      )}
+    </div>
   );
-}
+};
+
+export default SurveyWizard;
