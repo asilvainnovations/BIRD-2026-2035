@@ -36,6 +36,16 @@ The SurveyWizard (`src/components/strategic/SurveyWizard.tsx`) is a 16-step wiza
 - Persist plans via Supabase Edge Functions in `supabase.ts`
 - Use `utils.ts` for SWOT metric computation and template conversion
 
+Critical To-Do: 
+[ ] Read all uploaded files to understand codebase structure
+[ ] Update bird-urls.ts with all new image/video titles, descriptions, and URLs
+[ ] Create Section0 with compelling web copy + banner + systems thinking video
+[ ] Update ContextPanel.tsx with URLs and resources
+[ ] Select critical SWOT scale questions and distribute to Sections 1-11
+[ ] Shorten Systems Mapping questions and distribute to applicable sections
+[ ] Update SurveyWizard.tsx to include Section0 + FloatingAIAssistant
+[ ] Update survey-schema.ts with new Section0 fields
+
 ---
 
 ## 2. Architecture Overview
