@@ -1,5 +1,3 @@
-// src/components/strategic/Section8_StrategicOptions.tsx
-// Section 8: Strategic Options & Roadmap Strategy
 
 import { useFormContext } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
