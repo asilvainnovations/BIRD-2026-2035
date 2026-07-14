@@ -1,6 +1,3 @@
-// src/components/strategic/Section14_Demographics.tsx
-// Section 14: Respondent Profile
-
 import { useFormContext } from "react-hook-form";
 import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
