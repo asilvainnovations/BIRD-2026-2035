@@ -96,7 +96,6 @@ const Section0_Orientation: React.FC<Section0Props> = ({ data, onChange }) => {
               </p>
             </div>
           </div>
-
           <p>
             Your participation helps answer one critical question:
             <em className="text-[#1B4D3E] font-medium">
