@@ -1,236 +1,220 @@
-// src/components/strategic/Section5_Enablers.tsx
-// Section 5: Cluster 3 — Enablers
-// Infrastructure, Human Capital, Digital & Health Systems
+import React from "react";
+import { BIRD_IMAGES } from "@/lib/bird-urls";
+import { GlassCard } from "@/components/GlassCard";
+import { cn } from "@/lib/utils";
+import { Factory, AlertTriangle } from "lucide-react";
 
-import { useFormContext } from "react-hook-form";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Checkbox } from "@/components/ui/checkbox";
-import { AlertTriangle, Building2, Wifi, GraduationCap, HeartPulse } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+export interface Section4Data {
+  q4_1_barrier: string;
+  q4_2_halal_park: string;
+  q4_3_fixes_fail: string;
+  q4_4_commodity_impact: string;
+  q4_5_heds_ranking: string[];
+  // ── SWOT Scale: Transformers-focused ─────────────────────────────────────
+  q_s4_halal_cert_impact?: number;
+  q_s4_halal_cert_likelihood?: number;
+  q_s4_global_halal_impact?: number;
+  q_s4_global_halal_likelihood?: number;
+  q_s4_competition_impact?: number;
+  q_s4_competition_likelihood?: number;
+  // ── Systems Mapping: Fixes that Fail ─────────────────────────────────────
+  q_s4_fixes_fail: string;
+}
 
-const enablerSectors = [
-  { id: "roads", label: "Farm-to-market roads & logistics", icon: Building2 },
-  { id: "digital", label: "Digital broadband infrastructure", icon: Wifi },
-  { id: "education", label: "Education & TVET alignment", icon: GraduationCap },
-  { id: "health", label: "Healthcare & nutrition", icon: HeartPulse },
-];
+interface Section4Props {
+  data: Section4Data;
+  onChange: (data: Section4Data) => void;
+}
 
-const humanCapitalItems = [
-  { name: "q5_4_literacy", label: "Functional Literacy Rate (59.3% — lowest nationally)", desc: "Severe human capital constraint on industrial investment viability." },
-  { name: "q5_5_stunting", label: "Child Stunting Prevalence (45% — highest nationally)", desc: "Long-term cognitive and productivity deficit requiring urgent intervention." },
-];
+const ScaleButton: React.FC<{ value?: number; onChange: (v: number) => void }> = ({ value, onChange }) => (
+  <div className="flex gap-2">
+    {[1, 2, 3, 4, 5].map((val) => (
+      <button key={val} onClick={() => onChange(val)}
+        className={cn("w-12 h-12 rounded-lg border text-sm font-semibold transition-all",
+          value === val ? "bg-[#C9A84C] text-white border-[#C9A84C]" : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C] hover:bg-[#C9A84C]/10")}>{val}</button>
+    ))}
+  </div>
+);
 
-export function Section5_Enablers() {
-  const form = useFormContext();
+const Section4_Transformers: React.FC<Section4Props> = ({ data, onChange }) => {
+  const update = <K extends keyof Section4Data>(field: K, value: Section4Data[K]) => onChange({ ...data, [field]: value });
+  const toggle = (val: string) => update("q4_5_heds_ranking", data.q4_5_heds_ranking.includes(val) ? data.q4_5_heds_ranking.filter(v => v !== val) : [...data.q4_5_heds_ranking, val]);
 
   return (
-    <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
-      <CardHeader>
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400">
-            <Building2 className="w-6 h-6" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <Badge variant="outline" className="text-xs border-blue-400/40 text-blue-400">Cluster 3</Badge>
-            </div>
-            <CardTitle className="text-xl text-foreground mt-1">Section 5: Enablers Cluster</CardTitle>
-            <CardDescription className="text-muted-foreground">
-              Infrastructure, Human Capital, Digital & Health Systems
-            </CardDescription>
-          </div>
+    <div className="space-y-6">
+      <div className="flex items-center gap-3 mb-4">
+        <Factory className="w-6 h-6 text-[#C9A84C]" />
+        <h2 className="text-xl font-bold text-[#022c22]">Section 4: Cluster 2 — Transformers</h2>
+      </div>
+
+      <p className="text-sm text-[#065f46] mb-4">
+        The Transformers cluster — halal industry and agro-industrial processing — converts BARMM's raw materials into higher-value products. This is where cultural authenticity becomes economic advantage.
+      </p>
+
+      {/* Cluster Image */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 shadow-lg group">
+        <img src={BIRD_IMAGES.cluster2Transformers.url} alt={BIRD_IMAGES.cluster2Transformers.alt}
+          className="w-full h-auto max-h-[500px] object-contain transition-transform group-hover:scale-[1.02]" />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+          <p className="text-xs italic text-white/70">Source: {BIRD_IMAGES.cluster2Transformers.title}</p>
         </div>
-      </CardHeader>
-      <CardContent className="space-y-8">
+      </div>
 
-        {/* Context: Elephant in the Room */}
-        <div className="p-4 rounded-lg bg-amber-500/5 border border-amber-500/20 flex gap-3">
-          <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-          <div className="text-sm text-muted-foreground">
-            <strong className="text-foreground">🐘 Elephant in the Room:</strong> BARMM has the{" "}
-            <strong className="text-amber-400">lowest functional literacy in the Philippines (59.3%)</strong> and{" "}
-            <strong className="text-amber-400">highest child stunting rate (45%)</strong>.
-            Narrative: <em>You cannot build a premier global halal hub with a stunted, illiterate workforce.</em>
-            This is the primary "Limits to Growth" constraint.
-          </div>
-        </div>
-
-        {/* Cluster 3 Enablers Framework Image — Wide Format Full View */}
-        <div className="relative w-full overflow-hidden rounded-xl border border-blue-400/30 shadow-lg group">
-          <img
-            src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/28.%20Cluster%203%20_%20Enablers.png"
-            alt="Cluster 3: Enablers Framework — Infrastructure, Human Capital, Digital and Health Systems"
-            className="w-full h-auto max-h-[500px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
-            loading="lazy"
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
-            <p className="text-xs text-[#ecfdf5]/60 italic">
-              Source: BIRD 2026-2035 BEIE Framework — Enablers Cluster
-            </p>
-          </div>
-        </div>
-
-        {/* Q5.1 Infrastructure Rating */}
-        <FormField
-          control={form.control}
-          name="q5_1_infra"
-          render={({ field }) => (
-            <FormItem className="space-y-4">
-              <FormLabel className="text-base font-semibold text-foreground">
-                5.1 How would you rate the current state of infrastructure in BARMM?
-              </FormLabel>
-              <FormControl>
-                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-5 gap-2">
-                  {["1", "2", "3", "4", "5"].map((val) => (
-                    <div key={val} className="flex flex-col items-center gap-1">
-                      <RadioGroupItem value={val} id={`q5_1_${val}`} className="peer sr-only" />
-                      <label htmlFor={`q5_1_${val}`}
-                        className="flex flex-col items-center justify-center w-full h-14 rounded-lg border-2 border-muted bg-popover p-2 hover:bg-accent peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 cursor-pointer transition-all">
-                        <span className="text-xl font-bold">{val}</span>
-                        <span className="text-[10px] text-muted-foreground">
-                          {val === "1" ? "Very Poor" : val === "5" ? "Excellent" : ""}
-                        </span>
-                      </label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Q5.2 Enabler Sectors (Checkboxes) */}
-        <FormField
-          control={form.control}
-          name="q5_2_sectors"
-          render={() => (
-            <FormItem className="space-y-4">
-              <FormLabel className="text-base font-semibold text-foreground">
-                5.2 Which enabler sectors need the most investment? (Select all that apply)
-              </FormLabel>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {enablerSectors.map((item) => (
-                  <FormField
-                    key={item.id}
-                    control={form.control}
-                    name="q5_2_sectors"
-                    render={({ field }) => (
-                      <div className="flex items-center space-x-3 p-3 rounded-lg border border-border hover:bg-accent/50 transition-colors cursor-pointer">
-                        <Checkbox
-                          id={`q5_2_${item.id}`}
-                          checked={field.value?.includes(item.id)}
-                          onCheckedChange={(checked) =>
-                            checked
-                              ? field.onChange([...(field.value || []), item.id])
-                              : field.onChange((field.value || []).filter((v: string) => v !== item.id))
-                          }
-                        />
-                        <item.icon className="w-4 h-4 text-muted-foreground" />
-                        <label htmlFor={`q5_2_${item.id}`} className="flex-1 cursor-pointer text-sm font-normal">
-                          {item.label}
-                        </label>
-                      </div>
-                    )}
-                  />
-                ))}
-              </div>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Q5.3 Broadband Realism */}
-        <FormField
-          control={form.control}
-          name="q5_3_broadband"
-          render={({ field }) => (
-            <FormItem className="space-y-4">
-              <FormLabel className="text-base font-semibold text-foreground">
-                5.3 How realistic is the target of 85% broadband penetration by 2035? (Currently &lt;30% in rural/island areas)
-              </FormLabel>
-              <FormControl>
-                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-5 gap-2">
-                  {["1", "2", "3", "4", "5"].map((val) => (
-                    <div key={val} className="flex flex-col items-center gap-1">
-                      <RadioGroupItem value={val} id={`q5_3_${val}`} className="peer sr-only" />
-                      <label htmlFor={`q5_3_${val}`}
-                        className="flex flex-col items-center justify-center w-full h-14 rounded-lg border-2 border-muted bg-popover p-2 hover:bg-accent peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 cursor-pointer transition-all">
-                        <span className="text-xl font-bold">{val}</span>
-                        <span className="text-[10px] text-muted-foreground text-center">
-                          {val === "1" ? "Unrealistic" : val === "5" ? "Highly Realistic" : ""}
-                        </span>
-                      </label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Q5.4–5.5 Human Capital Crisis (Elephant severity ratings) */}
-        <div className="space-y-4">
-          <FormLabel className="text-base font-semibold text-foreground">
-            🐘 Rate the severity of these human capital deficits as binding constraints on FDI (1=Low, 5=Severe):
-          </FormLabel>
-          {humanCapitalItems.map((item) => (
-            <FormField
-              key={item.name}
-              control={form.control}
-              name={item.name}
-              render={({ field }) => (
-                <FormItem className="p-4 rounded-lg border border-amber-500/20 bg-amber-500/5">
-                  <FormLabel className="text-sm font-bold text-foreground">{item.label}</FormLabel>
-                  <p className="text-xs text-muted-foreground mb-3">{item.desc}</p>
-                  <FormControl>
-                    <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex gap-2">
-                      {["1", "2", "3", "4", "5"].map((val) => (
-                        <div key={val} className="flex flex-col items-center gap-1">
-                          <RadioGroupItem value={val} id={`${item.name}_${val}`} className="peer sr-only" />
-                          <label htmlFor={`${item.name}_${val}`}
-                            className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-muted bg-popover hover:bg-accent peer-data-[state=checked]:border-amber-500 peer-data-[state=checked]:bg-amber-500/10 cursor-pointer transition-all font-bold text-sm">
-                            {val}
-                          </label>
-                        </div>
-                      ))}
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+      {/* Q4.1: Barrier */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">What is the single biggest barrier to growing the Transformers cluster?</h3>
+        <div className="grid grid-cols-2 gap-3">
+          {["Halal certification delays", "Lack of processing facilities", "Weak market linkages", "Skills mismatch", "Competition from Malaysia/Indonesia", "Limited cold chain"].map(opt => (
+            <button key={opt} onClick={() => update("q4_1_barrier", opt)}
+              className={cn("p-3 rounded-lg border text-sm text-left transition-all",
+                data.q4_1_barrier === opt ? "bg-[#1B4D3E] text-white border-[#1B4D3E]" : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C]")}>{opt}</button>
           ))}
         </div>
+      </GlassCard>
 
-        {/* Q5.6 Digital Divide */}
-        <FormField
-          control={form.control}
-          name="q5_6_digital_divide"
-          render={({ field }) => (
-            <FormItem className="space-y-4">
-              <FormLabel className="text-base font-semibold text-foreground">
-                🐘 To what extent does the Digital Divide in archipelagic provinces (Sulu, Tawi-Tawi, Basilan) constrain BIMP-EAGA trade formalization?
-              </FormLabel>
-              <FormControl>
-                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col gap-2">
-                  {["No Constraint", "Minor Constraint", "Moderate Constraint", "Major Constraint", "Severe Constraint"].map((opt, i) => (
-                    <div key={opt} className="flex items-center space-x-3 p-3 rounded-lg border border-border hover:bg-accent/50 transition-colors cursor-pointer">
-                      <RadioGroupItem value={String(i + 1)} id={`q5_6_${i}`} />
-                      <label htmlFor={`q5_6_${i}`} className="flex-1 cursor-pointer text-sm font-normal">{opt}</label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      {/* Q4.2: Halal Park */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">Should BARMM prioritize a dedicated Halal Industrial Park?</h3>
+        <div className="grid grid-cols-2 gap-3">
+          {["Yes — essential for competitiveness", "Yes — but after certification reform", "No — focus on distributed MSMEs", "No — too resource-intensive"].map(opt => (
+            <button key={opt} onClick={() => update("q4_2_halal_park", opt)}
+              className={cn("p-3 rounded-lg border text-sm text-left transition-all",
+                data.q4_2_halal_park === opt ? "bg-[#1B4D3E] text-white border-[#1B4D3E]" : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C]")}>{opt}</button>
+          ))}
+        </div>
+      </GlassCard>
 
-      </CardContent>
-    </Card>
+      {/* SWOT Scale: Halal-focused */}
+      <GlassCard className="!p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="px-2 py-1 rounded text-xs font-semibold bg-rose-100 text-rose-700">WEAKNESS</span>
+          <span className="px-2 py-1 rounded text-xs font-semibold bg-emerald-100 text-emerald-700">OPPORTUNITY</span>
+          <span className="px-2 py-1 rounded text-xs font-semibold bg-red-100 text-red-700">THREAT</span>
+        </div>
+        <p className="text-xs text-[#065f46] mb-4 italic">
+          Rate each factor: Impact (1–5) × Likelihood (1–5). These three factors together cover the core halal competitiveness challenge.
+        </p>
+
+        {/* W3: Weak Halal Certification */}
+        <div className="space-y-3 mb-6 pb-6 border-b border-[#C9A84C]/20">
+          <p className="text-sm font-medium text-[#022c22]">
+            <strong>Weak Halal Certification System.</strong> The Bangsamoro Halal Board lacks resources and international recognition, making it hard for local producers to export halal goods (45–60 days vs. Malaysia's 15-day benchmark).
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div><p className="text-xs text-[#065f46] mb-2">Impact (1–5)</p><ScaleButton value={data.q_s4_halal_cert_impact} onChange={(v) => update("q_s4_halal_cert_impact", v)} /></div>
+            <div><p className="text-xs text-[#065f46] mb-2">Likelihood (1–5)</p><ScaleButton value={data.q_s4_halal_cert_likelihood} onChange={(v) => update("q_s4_halal_cert_likelihood", v)} /></div>
+          </div>
+        </div>
+
+        {/* O1: Global Halal Market */}
+        <div className="space-y-3 mb-6 pb-6 border-b border-[#C9A84C]/20">
+          <p className="text-sm font-medium text-[#022c22]">
+            <strong>Global Halal Market Growth.</strong> The worldwide halal market is valued at USD 2.3 trillion and growing, creating massive export demand for BARMM's authentic halal products.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div><p className="text-xs text-[#065f46] mb-2">Impact (1–5)</p><ScaleButton value={data.q_s4_global_halal_impact} onChange={(v) => update("q_s4_global_halal_impact", v)} /></div>
+            <div><p className="text-xs text-[#065f46] mb-2">Likelihood (1–5)</p><ScaleButton value={data.q_s4_global_halal_likelihood} onChange={(v) => update("q_s4_global_halal_likelihood", v)} /></div>
+          </div>
+        </div>
+
+        {/* T2: Competition from Halal Hubs */}
+        <div className="space-y-3">
+          <p className="text-sm font-medium text-[#022c22]">
+            <strong>Competition from Established Halal Hubs.</strong> Malaysia, Indonesia, and Thailand already dominate the halal market, making it hard for BARMM to break in without first-mover advantages.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div><p className="text-xs text-[#065f46] mb-2">Impact (1–5)</p><ScaleButton value={data.q_s4_competition_impact} onChange={(v) => update("q_s4_competition_impact", v)} /></div>
+            <div><p className="text-xs text-[#065f46] mb-2">Likelihood (1–5)</p><ScaleButton value={data.q_s4_competition_likelihood} onChange={(v) => update("q_s4_competition_likelihood", v)} /></div>
+          </div>
+        </div>
+      </GlassCard>
+
+      {/* Systems Mapping: Fixes that Fail */}
+      <GlassCard className="!p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <AlertTriangle className="w-5 h-5 text-amber-600" />
+          <h3 className="text-base font-semibold text-[#022c22]">Governance Trap: Fixes that Fail</h3>
+        </div>
+        <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 mb-4">
+          <img src={BIRD_IMAGES.fixesThatFail.url} alt={BIRD_IMAGES.fixesThatFail.alt} className="w-full h-auto object-contain" />
+        </div>
+        <p className="text-sm text-[#022c22] mb-4">
+          The <strong>Fixes that Fail</strong> archetype captures how short-term tax incentives, fragmented subsidies, and piecemeal projects create the illusion of progress — but erode institutional capacity over time. Investors exit once incentives expire; subsidies without post-harvest infrastructure fail to create sustainable value.
+        </p>
+        <p className="text-sm font-medium text-[#022c22] mb-3">How accurately does this reflect industrial policy challenges in BARMM?</p>
+        <div className="grid grid-cols-2 gap-3">
+          {["Very accurately", "Somewhat accurately", "Needs revision", "Not accurate"].map(opt => (
+            <button key={opt} onClick={() => update("q_s4_fixes_fail", opt)}
+              className={cn("p-3 rounded-lg border text-sm text-left transition-all",
+                data.q_s4_fixes_fail === opt ? "bg-[#1B4D3E] text-white border-[#1B4D3E]" : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C]")}>{opt}</button>
+          ))}
+        </div>
+      </GlassCard>
+
+      {/* Farm-to-Market Pipeline */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 shadow-lg group">
+        <img src={BIRD_IMAGES.farmToMarketPipeline.url} alt={BIRD_IMAGES.farmToMarketPipeline.alt}
+          className="w-full h-auto max-h-[400px] object-contain transition-transform group-hover:scale-[1.02]" />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+          <p className="text-xs italic text-white/70">Source: {BIRD_IMAGES.farmToMarketPipeline.title}</p>
+        </div>
+      </div>
+
+      {/* Industrial Zones */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 shadow-lg group">
+        <img src={BIRD_IMAGES.transformersIndustrialZones.url} alt={BIRD_IMAGES.transformersIndustrialZones.alt}
+          className="w-full h-auto max-h-[400px] object-contain transition-transform group-hover:scale-[1.02]" />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+          <p className="text-xs italic text-white/70">Source: {BIRD_IMAGES.transformersIndustrialZones.title}</p>
+        </div>
+      </div>
+
+      {/* Capitalizing Cultural Advantage */}
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 shadow-lg group">
+        <img src={BIRD_IMAGES.capitalizingCulturalAdvantage.url} alt={BIRD_IMAGES.capitalizingCulturalAdvantage.alt}
+          className="w-full h-auto max-h-[400px] object-contain transition-transform group-hover:scale-[1.02]" />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+          <p className="text-xs italic text-white/70">Source: {BIRD_IMAGES.capitalizingCulturalAdvantage.title}</p>
+        </div>
+      </div>
+
+      {/* Q4.3: Fixes that Fail */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">Which "quick fix" in the Transformers cluster is most likely to fail without systemic reform?</h3>
+        <div className="grid grid-cols-2 gap-3">
+          {["Tax incentives alone", "One-off training programs", "Facility construction without O&amp;M", "Export promotion without certification", "Subsidy without market linkage", "Technology donation without support"].map(opt => (
+            <button key={opt} onClick={() => update("q4_3_fixes_fail", opt)}
+              className={cn("p-3 rounded-lg border text-sm text-left transition-all",
+                data.q4_3_fixes_fail === opt ? "bg-[#1B4D3E] text-white border-[#1B4D3E]" : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C]")}>{opt}</button>
+          ))}
+        </div>
+      </GlassCard>
+
+      {/* Q4.4: Commodity Impact */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">Which commodity is most vulnerable to global price volatility?</h3>
+        <div className="grid grid-cols-3 gap-3">
+          {["Rubber", "Coconut", "Seaweed", "Rice", "Corn", "Fish"].map(opt => (
+            <button key={opt} onClick={() => update("q4_4_commodity_impact", opt)}
+              className={cn("p-3 rounded-lg border text-sm text-center transition-all",
+                data.q4_4_commodity_impact === opt ? "bg-[#1B4D3E] text-white border-[#1B4D3E]" : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C]")}>{opt}</button>
+          ))}
+        </div>
+      </GlassCard>
+
+      {/* Q4.5: HEDS Ranking */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">Which HEDS value-chain segment needs the most urgent investment? (Select top 3)</h3>
+        <div className="space-y-2">
+          {["Halal certification", "Cold chain infrastructure", "Processing facilities", "Market linkages", "Skills training", "Brand development"].map(opt => (
+            <button key={opt} onClick={() => toggle(opt)}
+              className={cn("w-full p-3 rounded-lg border text-sm text-left transition-all",
+                data.q4_5_heds_ranking.includes(opt) ? "bg-[#1B4D3E] text-white border-[#1B4D3E]" : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C]")}>{opt}</button>
+          ))}
+        </div>
+      </GlassCard>
+    </div>
   );
-}
+};
+
+export default Section4_Transformers;
