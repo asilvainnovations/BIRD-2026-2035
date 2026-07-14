@@ -2,7 +2,7 @@
 // Maps exactly to Sidebar.tsx, Topbar.tsx, and MELDashboard.tsx element IDs.
 // Option B (Modal-only): tutorial stays in modal; "Try It" navigates on demand.
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   X, ChevronLeft, ChevronRight, Sparkles, LayoutDashboard, Target, Network,
   GitBranch, BarChart3, FolderKanban, FileText, Users, Layers, ClipboardCheck,
@@ -12,6 +12,24 @@ import {
   Menu, Download, Upload, ShieldAlert, User as UserIcon, LogOut, Copy,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import { Progress } from '@/components/ui/progress';
+import { Separator } from '@/components/ui/separator';
 
 // ─── Types ──────────────────────────────────────────────────────────────
 
@@ -405,69 +423,82 @@ const MiniNavPreview: React.FC<{
   const topbarItems = Object.values(NAV_CATALOG).filter(e => e.location === 'topbar');
 
   return (
-    <div className="hidden lg:flex flex-col gap-3 w-56 flex-shrink-0">
-      {/* Mini Topbar */}
-      <div className="rounded-lg border border-white/10 bg-[#0A1628]/80 p-2.5 space-y-1.5">
-        <p className="text-[9px] font-bold uppercase tracking-widest text-slate-500 mb-1.5">Topbar</p>
-        <div className="flex flex-wrap gap-1">
-          {topbarItems.slice(0, 6).map(el => {
+    <TooltipProvider>
+      <div className="hidden lg:flex flex-col gap-3 w-56 flex-shrink-0">
+        {/* Mini Topbar */}
+        <div className="rounded-lg border border-white/10 bg-[#0A1628]/80 p-2.5 space-y-1.5">
+          <p className="text-[9px] font-bold uppercase tracking-widest text-slate-500 mb-1.5">Topbar</p>
+          <div className="flex flex-wrap gap-1">
+            {topbarItems.slice(0, 6).map(el => {
+              const isActive = el.id === activeElementId;
+              const Icon = el.icon;
+              return (
+                <Tooltip key={el.id}>
+                  <TooltipTrigger asChild>
+                    <button
+                      onClick={() => onElementClick?.(el.id)}
+                      className={cn(
+                        "w-7 h-7 rounded-md flex items-center justify-center transition-all",
+                        isActive
+                          ? "bg-cyan-500/30 border border-cyan-400/50 shadow-lg shadow-cyan-500/20"
+                          : "bg-white/5 border border-white/5 hover:bg-white/10"
+                      )}
+                    >
+                      <Icon className={cn("w-3.5 h-3.5", isActive ? "text-cyan-300" : "text-slate-500")} />
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent side="top">
+                    <p>{el.label}</p>
+                  </TooltipContent>
+                </Tooltip>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Mini Sidebar */}
+        <div className="rounded-lg border border-white/10 bg-slate-900/80 p-2.5 flex-1 space-y-0.5 overflow-y-auto">
+          <p className="text-[9px] font-bold uppercase tracking-widest text-slate-500 mb-1.5">Sidebar</p>
+          {sidebarItems.map(el => {
             const isActive = el.id === activeElementId;
             const Icon = el.icon;
             return (
-              <button
-                key={el.id}
-                onClick={() => onElementClick?.(el.id)}
-                className={cn(
-                  "w-7 h-7 rounded-md flex items-center justify-center transition-all",
-                  isActive
-                    ? "bg-cyan-500/30 border border-cyan-400/50 shadow-lg shadow-cyan-500/20"
-                    : "bg-white/5 border border-white/5 hover:bg-white/10"
-                )}
-                title={el.label}
-              >
-                <Icon className={cn("w-3.5 h-3.5", isActive ? "text-cyan-300" : "text-slate-500")} />
-              </button>
+              <Tooltip key={el.id}>
+                <TooltipTrigger asChild>
+                  <button
+                    onClick={() => onElementClick?.(el.id)}
+                    className={cn(
+                      "w-full flex items-center gap-2 px-2 py-1.5 rounded-md transition-all text-left",
+                      isActive
+                        ? "bg-cyan-600/30 border border-cyan-400/40"
+                        : "hover:bg-white/5 border border-transparent"
+                    )}
+                  >
+                    <Icon className={cn("w-3.5 h-3.5 flex-shrink-0", isActive ? "text-cyan-300" : "text-slate-500")} />
+                    <span className={cn("text-[10px] font-medium truncate", isActive ? "text-cyan-200" : "text-slate-400")}>
+                      {el.label}
+                    </span>
+                    {isActive && <div className="ml-auto w-1 h-1 rounded-full bg-cyan-400 animate-pulse" />}
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent side="right">
+                  <p>{el.label}</p>
+                </TooltipContent>
+              </Tooltip>
             );
           })}
         </div>
-      </div>
 
-      {/* Mini Sidebar */}
-      <div className="rounded-lg border border-white/10 bg-slate-900/80 p-2.5 flex-1 space-y-0.5 overflow-y-auto">
-        <p className="text-[9px] font-bold uppercase tracking-widest text-slate-500 mb-1.5">Sidebar</p>
-        {sidebarItems.map(el => {
-          const isActive = el.id === activeElementId;
-          const Icon = el.icon;
-          return (
-            <button
-              key={el.id}
-              onClick={() => onElementClick?.(el.id)}
-              className={cn(
-                "w-full flex items-center gap-2 px-2 py-1.5 rounded-md transition-all text-left",
-                isActive
-                  ? "bg-cyan-600/30 border border-cyan-400/40"
-                  : "hover:bg-white/5 border border-transparent"
-              )}
-            >
-              <Icon className={cn("w-3.5 h-3.5 flex-shrink-0", isActive ? "text-cyan-300" : "text-slate-500")} />
-              <span className={cn("text-[10px] font-medium truncate", isActive ? "text-cyan-200" : "text-slate-400")}>
-                {el.label}
-              </span>
-              {isActive && <div className="ml-auto w-1 h-1 rounded-full bg-cyan-400 animate-pulse" />}
-            </button>
-          );
-        })}
+        {/* Location indicator */}
+        {activeElementId && NAV_CATALOG[activeElementId] && (
+          <div className="text-center">
+            <span className="text-[9px] text-slate-500 uppercase tracking-wider">
+              {NAV_CATALOG[activeElementId].location} &bull; {NAV_CATALOG[activeElementId].shortDesc}
+            </span>
+          </div>
+        )}
       </div>
-
-      {/* Location indicator */}
-      {activeElementId && NAV_CATALOG[activeElementId] && (
-        <div className="text-center">
-          <span className="text-[9px] text-slate-500 uppercase tracking-wider">
-            {NAV_CATALOG[activeElementId].location} &bull; {NAV_CATALOG[activeElementId].shortDesc}
-          </span>
-        </div>
-      )}
-    </div>
+    </TooltipProvider>
   );
 };
 
@@ -581,7 +612,10 @@ const NavigationTutorial: React.FC<NavigationTutorialProps> = ({
   const handleSkip = () => { onComplete?.(); onClose(); };
 
   const handleTryIt = () => {
-    if (current.viewId && onNavigate) {
+    if (current.viewId === 'validation') {
+      window.open('https://bird-app.bolt.host/validation-survey', '_blank', 'noopener,noreferrer');
+      onClose();
+    } else if (current.viewId && onNavigate) {
       onNavigate(current.viewId);
       onClose();
     }
@@ -590,8 +624,6 @@ const NavigationTutorial: React.FC<NavigationTutorialProps> = ({
   const jumpToStep = (idx: number) => {
     if (idx !== step) transition(idx, idx > step ? 'next' : 'prev');
   };
-
-  if (!isOpen) return null;
 
   const isFirst = step === 0;
   const isLast = step === totalSteps - 1;
@@ -602,203 +634,216 @@ const NavigationTutorial: React.FC<NavigationTutorialProps> = ({
       {/* Spotlight behind the modal */}
       <SpotlightOverlay elementId={current.elementId} isVisible={isOpen} />
 
-      <div
-        className="fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-hidden"
-        onClick={(e) => { if (e.target === e.currentTarget) handleSkip(); }}
-      >
-        <div className="flex items-start gap-4 max-w-4xl w-full">
-          {/* Mini Nav Preview (desktop only) */}
-          <MiniNavPreview
-            activeElementId={current.elementId}
-            onElementClick={(id) => {
-              const idx = TUTORIAL_STEPS.findIndex(s => s.elementId === id);
-              if (idx >= 0) jumpToStep(idx);
-            }}
-          />
+      <Dialog open={isOpen} onOpenChange={(open) => !open && handleSkip()}>
+        <DialogContent
+          className="max-w-4xl w-full p-0 gap-0 overflow-hidden [&>button:last-of-type]:hidden"
+          style={{
+            background: 'linear-gradient(165deg, #0d1f3c 0%, #0a1628 60%, #07111e 100%)',
+            border: '1px solid rgba(255,255,255,0.10)',
+            boxShadow: '0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05) inset',
+          }}
+        >
+          <style>{`
+            @keyframes tutSlideInRight { from { transform: translateX(40px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+            @keyframes tutSlideInLeft { from { transform: translateX(-40px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+            @keyframes tutFadeInScale { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+          `}</style>
 
-          {/* Main Modal Card */}
-          <div
-            className="relative flex-1 rounded-xl overflow-hidden shadow-2xl"
-            style={{
-              background: 'linear-gradient(165deg, #0d1f3c 0%, #0a1628 60%, #07111e 100%)',
-              border: '1px solid rgba(255,255,255,0.10)',
-              boxShadow: '0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05) inset',
-              animation: isAnimating
-                ? animDir === 'next' ? 'tutSlideInRight 0.2s ease-out' : 'tutSlideInLeft 0.2s ease-out'
-                : 'tutFadeInScale 0.3s ease-out',
-            }}
-          >
-            <style>{`
-              @keyframes tutSlideInRight { from { transform: translateX(40px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-              @keyframes tutSlideInLeft { from { transform: translateX(-40px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-              @keyframes tutFadeInScale { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-            `}</style>
+          <div className="flex items-start gap-4">
+            {/* Mini Nav Preview (desktop only) */}
+            <MiniNavPreview
+              activeElementId={current.elementId}
+              onElementClick={(id) => {
+                const idx = TUTORIAL_STEPS.findIndex(s => s.elementId === id);
+                if (idx >= 0) jumpToStep(idx);
+              }}
+            />
 
-            {/* Close */}
-            <button
-              onClick={handleSkip}
-              className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-all hover:scale-110"
-              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}
+            <div
+              className="relative flex-1"
+              style={{
+                animation: isAnimating
+                  ? animDir === 'next' ? 'tutSlideInRight 0.2s ease-out' : 'tutSlideInLeft 0.2s ease-out'
+                  : 'tutFadeInScale 0.3s ease-out',
+              }}
             >
-              <X className="w-3.5 h-3.5 text-slate-400" />
-            </button>
+              {/* Close */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={handleSkip}
+                className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full hover:scale-110 transition-all"
+                style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}
+              >
+                <X className="w-3.5 h-3.5 text-slate-400" />
+              </Button>
 
-            {/* Header */}
-            <div className="px-6 pt-6 pb-4 border-b border-white/5">
-              <div className="flex items-start gap-4 mb-3">
-                <div className={cn(
-                  "flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-br",
-                  current.gradient
-                )}>
-                  <current.icon className="w-6 h-6 text-white" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  {current.phase && (
-                    <span className={cn(
-                      "inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border mb-1.5",
-                      current.phaseColor
-                    )}>
-                      {current.phase}
-                    </span>
-                  )}
-                  <h2 className="text-lg font-bold text-white leading-tight">{current.title}</h2>
-                  <p className="text-xs text-slate-500 mt-0.5">{current.subtitle}</p>
-                </div>
-                <div className="flex-shrink-0 text-right pt-0.5 text-xs font-bold text-slate-500 tabular-nums">
-                  {step + 1} / {totalSteps}
-                </div>
-              </div>
-
-              {/* Progress */}
-              <div className="h-0.5 bg-white/10 rounded-full overflow-hidden">
-                <div
-                  className="h-full transition-all duration-500 ease-out"
-                  style={{
-                    width: `${progress}%`,
-                    background: `linear-gradient(90deg, ${current.accentFrom}, ${current.accentTo})`,
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* Body */}
-            <div className="px-6 py-5">
-              {/* Catalog element info (if this step targets a specific UI element) */}
-              {catalogEntry && (
-                <div className="flex items-center gap-3 mb-4 p-3 rounded-lg bg-white/[0.04] border border-white/[0.07]">
-                  <catalogEntry.icon className={cn("w-5 h-5 flex-shrink-0", catalogEntry.highlightColor)} />
-                  <div>
-                    <p className="text-sm font-semibold text-white">{catalogEntry.label}</p>
-                    <p className="text-[10px] text-slate-500 uppercase tracking-wider">
-                      {catalogEntry.location} navigation &bull; {catalogEntry.shortDesc}
-                    </p>
-                  </div>
+              {/* Header */}
+              <DialogHeader className="px-6 pt-6 pb-4 space-y-0">
+                <div className="flex items-start gap-4 mb-3">
                   <div className={cn(
-                    "ml-auto text-[10px] font-bold uppercase px-2 py-0.5 rounded-full border",
-                    catalogEntry.location === 'sidebar'
-                      ? "bg-blue-500/10 text-blue-300 border-blue-500/20"
-                      : catalogEntry.location === 'topbar'
-                        ? "bg-purple-500/10 text-purple-300 border-purple-500/20"
-                        : "bg-emerald-500/10 text-emerald-300 border-emerald-500/20"
+                    "flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-br",
+                    current.gradient
                   )}>
-                    {catalogEntry.location}
+                    <current.icon className="w-6 h-6 text-white" />
                   </div>
-                </div>
-              )}
-
-              {/* Highlight */}
-              <div className="flex items-center gap-2 mb-3">
-                <Lightbulb className={cn("w-4 h-4 flex-shrink-0", catalogEntry?.highlightColor || current.highlightColor || 'text-cyan-300')} />
-                <span className={cn("text-sm font-semibold", catalogEntry?.highlightColor || current.highlightColor || 'text-cyan-300')}>
-                  {catalogEntry ? catalogEntry.description : current.description}
-                </span>
-              </div>
-
-              {!catalogEntry && (
-                <p className="text-sm text-slate-400 leading-relaxed mb-5">{current.description}</p>
-              )}
-
-              {/* Tips */}
-              <div className="rounded-lg p-4 mb-5 space-y-2.5" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Key Features</p>
-                {current.tips.map((tip, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style={{ color: current.accentFrom }} />
-                    <span className="text-xs text-slate-400 leading-relaxed">{tip}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Actions */}
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex gap-2">
-                  {isFirst ? (
-                    <button onClick={handleSkip} className="text-xs font-medium text-slate-600 hover:text-slate-400 transition-colors">
-                      Skip Tour
-                    </button>
-                  ) : (
-                    <button
-                      onClick={goPrev}
-                      className="flex items-center gap-1 px-3 py-2 rounded-md text-xs font-semibold text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 transition-colors"
-                    >
-                      <ChevronLeft className="w-3.5 h-3.5" /> Back
-                    </button>
-                  )}
-                </div>
-
-                <div className="flex items-center gap-2">
-                  {/* Dot indicators */}
-                  <div className="flex items-center gap-1 mr-1">
-                    {TUTORIAL_STEPS.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => jumpToStep(i)}
-                        className="transition-all duration-300 rounded-full"
-                        style={{
-                          width: i === step ? 14 : 6,
-                          height: 6,
-                          background: i === step ? current.accentFrom : 'rgba(255,255,255,0.12)',
-                          opacity: i === step ? 1 : 0.4,
-                        }}
-                        aria-label={`Go to step ${i + 1}`}
-                      />
-                    ))}
-                  </div>
-
-                  {/* Try It button (navigates to the view) */}
-                  {hasTryIt && (
-                    <button
-                      onClick={handleTryIt}
-                      className="flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-bold text-cyan-300 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 transition-colors"
-                    >
-                      <ArrowRight className="w-3.5 h-3.5" /> Try It
-                    </button>
-                  )}
-
-                  {/* Next / Finish */}
-                  <button
-                    onClick={goNext}
-                    className="flex items-center gap-2 px-4 py-2 rounded-md text-xs font-bold text-white shadow-lg transition-transform hover:scale-105"
-                    style={{ background: `linear-gradient(135deg, ${current.accentFrom}, ${current.accentTo})` }}
-                  >
-                    {isLast ? (
-                      <><Sparkles className="w-3.5 h-3.5" /> Finish</>
-                    ) : (
-                      <>Next <ChevronRight className="w-3.5 h-3.5" /></>
+                  <div className="flex-1 min-w-0">
+                    {current.phase && (
+                      <Badge variant="outline" className={cn(
+                        "mb-1.5 text-[10px] font-bold uppercase tracking-wider",
+                        current.phaseColor
+                      )}>
+                        {current.phase}
+                      </Badge>
                     )}
-                  </button>
+                    <DialogTitle className="text-lg font-bold text-white leading-tight">{current.title}</DialogTitle>
+                    <DialogDescription className="text-xs text-slate-500 mt-0.5">{current.subtitle}</DialogDescription>
+                  </div>
+                  <div className="flex-shrink-0 text-right pt-0.5 text-xs font-bold text-slate-500 tabular-nums">
+                    {step + 1} / {totalSteps}
+                  </div>
+                </div>
+
+                {/* Progress */}
+                <Progress
+                  value={progress}
+                  className="h-0.5 bg-white/10 [&>div]:bg-gradient-to-r [&>div]:from-[var(--accent-from)] [&>div]:to-[var(--accent-to)]"
+                  style={{ '--accent-from': current.accentFrom, '--accent-to': current.accentTo } as Record<string, string>}
+                />
+              </DialogHeader>
+
+              <Separator className="bg-white/5" />
+
+              {/* Body */}
+              <div className="px-6 py-5">
+                {/* Catalog element info (if this step targets a specific UI element) */}
+                {catalogEntry && (
+                  <div className="flex items-center gap-3 mb-4 p-3 rounded-lg bg-white/[0.04] border border-white/[0.07]">
+                    <catalogEntry.icon className={cn("w-5 h-5 flex-shrink-0", catalogEntry.highlightColor)} />
+                    <div>
+                      <p className="text-sm font-semibold text-white">{catalogEntry.label}</p>
+                      <p className="text-[10px] text-slate-500 uppercase tracking-wider">
+                        {catalogEntry.location} navigation &bull; {catalogEntry.shortDesc}
+                      </p>
+                    </div>
+                    <Badge
+                      variant="outline"
+                      className={cn(
+                        "ml-auto text-[10px] font-bold uppercase",
+                        catalogEntry.location === 'sidebar'
+                          ? "bg-blue-500/10 text-blue-300 border-blue-500/20"
+                          : catalogEntry.location === 'topbar'
+                            ? "bg-purple-500/10 text-purple-300 border-purple-500/20"
+                            : "bg-emerald-500/10 text-emerald-300 border-emerald-500/20"
+                      )}
+                    >
+                      {catalogEntry.location}
+                    </Badge>
+                  </div>
+                )}
+
+                {/* Highlight */}
+                <div className="flex items-center gap-2 mb-3">
+                  <Lightbulb className={cn("w-4 h-4 flex-shrink-0", catalogEntry?.highlightColor || 'text-cyan-300')} />
+                  <span className={cn("text-sm font-semibold", catalogEntry?.highlightColor || 'text-cyan-300')}>
+                    {catalogEntry ? catalogEntry.description : current.description}
+                  </span>
+                </div>
+
+                {!catalogEntry && (
+                  <p className="text-sm text-slate-400 leading-relaxed mb-5">{current.description}</p>
+                )}
+
+                {/* Tips */}
+                <div className="rounded-lg p-4 mb-5 space-y-2.5" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Key Features</p>
+                  {current.tips.map((tip, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style={{ color: current.accentFrom }} />
+                      <span className="text-xs text-slate-400 leading-relaxed">{tip}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Actions */}
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex gap-2">
+                    {isFirst ? (
+                      <Button variant="ghost" size="sm" onClick={handleSkip} className="text-xs font-medium text-slate-600 hover:text-slate-400">
+                        Skip Tour
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={goPrev}
+                        className="flex items-center gap-1 text-xs font-semibold text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 border-white/10"
+                      >
+                        <ChevronLeft className="w-3.5 h-3.5" /> Back
+                      </Button>
+                    )}
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    {/* Dot indicators */}
+                    <div className="flex items-center gap-1 mr-1">
+                      {TUTORIAL_STEPS.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => jumpToStep(i)}
+                          className="transition-all duration-300 rounded-full"
+                          style={{
+                            width: i === step ? 14 : 6,
+                            height: 6,
+                            background: i === step ? current.accentFrom : 'rgba(255,255,255,0.12)',
+                            opacity: i === step ? 1 : 0.4,
+                          }}
+                          aria-label={`Go to step ${i + 1}`}
+                        />
+                      ))}
+                    </div>
+
+                    {/* Try It button (navigates to the view) */}
+                    {hasTryIt && (
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={handleTryIt}
+                        className="flex items-center gap-1.5 text-xs font-bold text-cyan-300 bg-cyan-500/10 hover:bg-cyan-500/20 border-cyan-500/30"
+                      >
+                        <ArrowRight className="w-3.5 h-3.5" /> Try It
+                      </Button>
+                    )}
+
+                    {/* Next / Finish */}
+                    <Button
+                      variant="default"
+                      size="sm"
+                      onClick={goNext}
+                      className="flex items-center gap-2 text-xs font-bold text-white shadow-lg transition-transform hover:scale-105"
+                      style={{ background: `linear-gradient(135deg, ${current.accentFrom}, ${current.accentTo})` }}
+                    >
+                      {isLast ? (
+                        <><Sparkles className="w-3.5 h-3.5" /> Finish</>
+                      ) : (
+                        <>Next <ChevronRight className="w-3.5 h-3.5" /></>
+                      )}
+                    </Button>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Footer */}
-            <div className="px-6 py-3 bg-black/20 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-600">
-              <span className="flex items-center gap-1"><BookOpen className="w-3 h-3" /> BIRD Guide</span>
-              <span className="font-mono">Arrow Keys Navigate</span>
+              <Separator className="bg-white/5" />
+
+              {/* Footer */}
+              <DialogFooter className="px-6 py-3 bg-black/20 border-t border-white/5 flex-row justify-between text-[11px] text-slate-600">
+                <span className="flex items-center gap-1"><BookOpen className="w-3 h-3" /> BIRD Guide</span>
+                <span className="font-mono">Arrow Keys Navigate</span>
+              </DialogFooter>
             </div>
           </div>
-        </div>
-      </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

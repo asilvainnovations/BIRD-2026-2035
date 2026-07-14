@@ -134,25 +134,21 @@ const Sidebar: React.FC<SidebarProps> = ({
     );
   };
 
-  // Hide platform-injected "Made by Bolt" badge
   useEffect(() => {
+    const styleId = 'hide-bolt-badge';
+    if (document.getElementById(styleId)) return;
     const style = document.createElement('style');
-    style.textContent = `[class*="bolt"],
-[id*="bolt"],
-.bolt-badge,
-[data-testid*="bolt"],
-a[href*="bolt.new"],
-img[alt*="Bolt"],
-div[class*="fixed"] a[href*="bolt"] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}`;
+    style.id = styleId;
+    style.textContent = `
+      [class*="bolt"], [id*="bolt"], .bolt-badge,
+      [data-testid*="bolt"], a[href*="bolt.new"],
+      img[alt*="Bolt"], div[class*="fixed"] a[href*="bolt"] {
+        display: none !important; visibility: hidden !important;
+        opacity: 0 !important; pointer-events: none !important;
+      }
+    `;
     document.head.appendChild(style);
-    return () => {
-      document.head.removeChild(style);
-    };
+    return () => { style.remove(); };
   }, []);
 
   return (
