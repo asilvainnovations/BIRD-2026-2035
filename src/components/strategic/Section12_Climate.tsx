@@ -1,6 +1,3 @@
-// src/components/strategic/Section12_Climate.tsx
-// Section 12: Climate Resilience & Green Economy
-
 import { useFormContext } from "react-hook-form";
 import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
