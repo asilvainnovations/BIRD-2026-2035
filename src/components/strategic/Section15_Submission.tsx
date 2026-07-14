@@ -1,6 +1,3 @@
-// src/components/strategic/Section15_Submission.tsx
-// Section 15: Review & Submission
-
 import { useFormContext } from "react-hook-form";
 import { CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
