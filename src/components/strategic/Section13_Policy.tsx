@@ -1,6 +1,5 @@
 import React from "react";
 import { BIRD_IMAGES } from "@/lib/bird-urls";
-import { GlassCard } from "@/components/GlassCard";
 import { cn } from "@/lib/utils";
 import { Gavel, AlertTriangle } from "lucide-react";
 
