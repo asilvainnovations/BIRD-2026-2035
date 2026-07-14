@@ -18,6 +18,7 @@ import {
   CheckCircle2, Sparkles, BarChart3, ArrowRight, Eye, Info
 } from "lucide-react";
 
+import { Section0_Orientation } from "./Section0_Orientation";
 import { Section1_BEIE } from "./Section1_BEIE";
 import { Section2_MoralGov } from "./Section2_MoralGov";
 import { Section3_Foundations } from "./Section3_Foundations";
