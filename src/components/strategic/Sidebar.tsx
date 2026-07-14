@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   LayoutDashboard, Target, Network, Sparkles, BarChart3, FolderKanban, FileText,
   ChevronLeft, ChevronRight, Cloud, Users, Layers, X, User,
@@ -67,7 +67,11 @@ const Sidebar: React.FC<SidebarProps> = ({
       <button
         id={`nav-item-${item.id}`}
         onClick={() => {
-          onViewChange(item.id);
+          if (item.id === 'validation') {
+            window.open('https://bird-app.bolt.host/validation-survey', '_blank', 'noopener,noreferrer');
+          } else {
+            onViewChange(item.id);
+          }
           if (window.innerWidth < 1024) onCloseMobileMenu();
         }}
         className={cn(
@@ -130,6 +134,27 @@ const Sidebar: React.FC<SidebarProps> = ({
     );
   };
 
+  // Hide platform-injected "Made by Bolt" badge
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `[class*="bolt"],
+[id*="bolt"],
+.bolt-badge,
+[data-testid*="bolt"],
+a[href*="bolt.new"],
+img[alt*="Bolt"],
+div[class*="fixed"] a[href*="bolt"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}`;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   return (
     <>
       {/* Mobile Overlay */}
@@ -183,7 +208,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           <div className="px-4 py-3 border-b border-slate-800/50">
             <button
               onClick={() => {
-                onViewChange('validation');
+                window.open('https://bird-app.bolt.host/validation-survey', '_blank', 'noopener,noreferrer');
                 if (window.innerWidth < 1024) onCloseMobileMenu();
               }}
               className={cn(
@@ -209,7 +234,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         {isCollapsed && !isMobileMenuOpen && (
           <div className="px-2 py-3 border-b border-slate-800/50 flex justify-center">
             <button
-              onClick={() => onViewChange('validation')}
+              onClick={() => window.open('https://bird-app.bolt.host/validation-survey', '_blank', 'noopener,noreferrer')}
               className={cn(
                 "relative p-2.5 rounded-xl transition-all",
                 activeView === 'validation'

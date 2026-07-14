@@ -191,7 +191,7 @@ const DashboardHeroSection: React.FC<{ onNavigate?: (view: string) => void }> = 
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
             </button>
             <button
-              onClick={() => onNavigate?.('validation')}
+              onClick={() => window.open('https://bird-app.bolt.host/validation-survey', '_blank', 'noopener,noreferrer')}
               className="px-8 py-4 bg-[rgba(6,78,59,0.6)] backdrop-blur-sm border-2 border-[rgba(201,168,76,0.55)] text-[#C9A84C] rounded-xl font-bold text-base hover:bg-[rgba(201,168,76,0.15)] transition-all flex items-center gap-3"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
@@ -552,6 +552,30 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
     q2:       PRIORITY_ACTIONS.filter(a => a.due.includes('Q2')).length,
     inProg:   PRIORITY_ACTIONS.filter(a => a.status === 'In Progress').length,
   }), []);
+
+  /* ── Hide platform-injected "Made by Bolt" badge ────────────────────────── */
+  useEffect(() => {
+    const styleId = 'hide-bolt-badge';
+    if (document.getElementById(styleId)) return;
+    const style = document.createElement('style');
+    style.id = styleId;
+    style.textContent = `
+      [class*="bolt"],
+      [id*="bolt"],
+      .bolt-badge,
+      [data-testid*="bolt"],
+      a[href*="bolt.new"],
+      img[alt*="Bolt"],
+      div[class*="fixed"] a[href*="bolt"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+    `;
+    document.head.appendChild(style);
+    return () => { document.getElementById(styleId)?.remove(); };
+  }, []);
 
   const reinforcing = FEEDBACK_LOOPS.filter(l => l.type === 'reinforcing').length;
   const balancing   = FEEDBACK_LOOPS.filter(l => l.type === 'balancing').length;
