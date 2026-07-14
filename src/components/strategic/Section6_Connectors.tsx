@@ -1,234 +1,148 @@
-// src/components/strategic/Section6_Connectors.tsx
-// Section 6: Cluster 4 — Connectors
-// Trade, BIMP-EAGA Integration & Export Corridors
+import React from "react";
+import { BIRD_IMAGES } from "@/lib/bird-urls";
+import { GlassCard } from "@/components/GlassCard";
+import { cn } from "@/lib/utils";
+import { Globe, AlertTriangle } from "lucide-react";
 
-import { useFormContext } from "react-hook-form";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Badge } from "@/components/ui/badge";
-import { Globe, Ship, Plane, AlertTriangle } from "lucide-react";
+export interface Section6Data {
+  q6_1_bimpeaga?: number;
+  q6_2_markets: string[];
+  q6_3_export_target?: number;
+  q6_4_uae_feasibility?: number;
+  q6_5_perception: string;
+  // ── SWOT Scale: Opportunity ──────────────────────────────────────────────
+  q_s6_asean_halal_impact?: number;
+  q_s6_asean_halal_likelihood?: number;
+  // ── Systems Mapping: Success to the Successful ───────────────────────────
+  q_s6_successful: string;
+}
 
-const exportMarkets = [
-  { id: "gcc", label: "UAE / GCC (Middle East — 10.5M consumers)", icon: Plane },
-  { id: "asean", label: "Other ASEAN Markets", icon: Globe },
-  { id: "malaysia", label: "Malaysia (BIMP-EAGA)", icon: Ship },
-  { id: "indonesia", label: "Indonesia (BIMP-EAGA)", icon: Ship },
-];
+interface Section6Props {
+  data: Section6Data;
+  onChange: (data: Section6Data) => void;
+}
 
-export function Section6_Connectors() {
-  const form = useFormContext();
+const ScaleButton: React.FC<{ value?: number; onChange: (v: number) => void }> = ({ value, onChange }) => (
+  <div className="flex gap-2">
+    {[1, 2, 3, 4, 5].map((val) => (
+      <button key={val} onClick={() => onChange(val)}
+        className={cn("w-12 h-12 rounded-lg border text-sm font-semibold transition-all",
+          value === val ? "bg-[#C9A84C] text-white border-[#C9A84C]" : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C] hover:bg-[#C9A84C]/10")}>{val}</button>
+    ))}
+  </div>
+);
+
+const Section6_Connectors: React.FC<Section6Props> = ({ data, onChange }) => {
+  const update = <K extends keyof Section6Data>(field: K, value: Section6Data[K]) => onChange({ ...data, [field]: value });
+  const toggle = (val: string) => update("q6_2_markets", data.q6_2_markets.includes(val) ? data.q6_2_markets.filter(v => v !== val) : [...data.q6_2_markets, val]);
 
   return (
-    <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
-      <CardHeader>
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
-            <Globe className="w-6 h-6" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <Badge variant="outline" className="text-xs border-emerald-400/40 text-emerald-400">Cluster 4</Badge>
-            </div>
-            <CardTitle className="text-xl text-foreground mt-1">Section 6: Connectors Cluster</CardTitle>
-            <CardDescription className="text-muted-foreground">
-              Trade, BIMP-EAGA Integration & Export Corridors
-            </CardDescription>
+    <div className="space-y-6">
+      <div className="flex items-center gap-3 mb-4">
+        <Globe className="w-6 h-6 text-[#C9A84C]" />
+        <h2 className="text-xl font-bold text-[#022c22]">Section 6: Cluster 4 — Connectors</h2>
+      </div>
+
+      <p className="text-sm text-[#065f46] mb-4">
+        The Connectors cluster integrates BARMM into regional and global markets through BIMP-EAGA corridors, maritime trade, digital linkages, and halal export channels.
+      </p>
+
+      <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 shadow-lg group">
+        <img src={BIRD_IMAGES.cluster4Connectors.url} alt={BIRD_IMAGES.cluster4Connectors.alt}
+          className="w-full h-auto max-h-[500px] object-contain transition-transform group-hover:scale-[1.02]" />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+          <p className="text-xs italic text-white/70">Source: {BIRD_IMAGES.cluster4Connectors.title}</p>
+        </div>
+      </div>
+
+      {/* Q6.1: BIMP-EAGA */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">How important is BIMP-EAGA integration to BARMM's economic future?</h3>
+        <ScaleButton value={data.q6_1_bimpeaga} onChange={(v) => update("q6_1_bimpeaga", v)} />
+        <p className="text-xs text-[#065f46] mt-2 italic">1 = Not important | 5 = Critical</p>
+      </GlassCard>
+
+      {/* SWOT Scale: ASEAN Halal Opportunity */}
+      <GlassCard className="!p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="px-2 py-1 rounded text-xs font-semibold bg-emerald-100 text-emerald-700">OPPORTUNITY</span>
+          <h3 className="text-base font-semibold text-[#022c22]">ASEAN Halal Market Access</h3>
+        </div>
+        <p className="text-xs text-[#065f46] mb-4 italic">
+          Rate: Impact (1–5) × Likelihood (1–5)
+        </p>
+        <div className="space-y-3">
+          <p className="text-sm font-medium text-[#022c22]">
+            <strong>ASEAN Halal Economy.</strong> The ASEAN halal market is worth USD 1.38 trillion. BARMM can target a share through BIMP-EAGA corridors and halal parks — especially Maguindanao del Norte and Tawi-Tawi.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div><p className="text-xs text-[#065f46] mb-2">Impact (1–5)</p><ScaleButton value={data.q_s6_asean_halal_impact} onChange={(v) => update("q_s6_asean_halal_impact", v)} /></div>
+            <div><p className="text-xs text-[#065f46] mb-2">Likelihood BARMM captures share (1–5)</p><ScaleButton value={data.q_s6_asean_halal_likelihood} onChange={(v) => update("q_s6_asean_halal_likelihood", v)} /></div>
           </div>
         </div>
-      </CardHeader>
-      <CardContent className="space-y-8">
+      </GlassCard>
 
-        {/* Elephant Context */}
-        <div className="p-4 rounded-lg bg-amber-500/5 border border-amber-500/20 flex gap-3">
-          <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-          <div className="text-sm text-muted-foreground">
-            <strong className="text-foreground">🐘 Elephants in the Room:</strong> (1) The{" "}
-            <strong className="text-amber-400">"Ghost of Conflict Past"</strong> — international investor
-            perception lags 5-10 years behind ground reality. (2) The highly lucrative{" "}
-            <strong className="text-amber-400">informal cross-border barter trade</strong> in Tawi-Tawi
-            and Sulu remains unformalized, preventing capture in BIMP-EAGA GDP metrics.
-          </div>
+      {/* Systems Mapping: Success to the Successful */}
+      <GlassCard className="!p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <AlertTriangle className="w-5 h-5 text-amber-600" />
+          <h3 className="text-base font-semibold text-[#022c22]">Equity Trap: Success to the Successful</h3>
         </div>
-
-        {/* Cluster 4 Connectors Framework Image — Wide Format Full View */}
-        <div className="relative w-full overflow-hidden rounded-xl border border-emerald-400/30 shadow-lg group">
-          <img
-            src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/33.%20Cluster%204_%20Connectors.png"
-            alt="Cluster 4: Connectors Framework — Trade, BIMP-EAGA Integration and Export Corridors"
-            className="w-full h-auto max-h-[500px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
-            loading="lazy"
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
-            <p className="text-xs text-[#ecfdf5]/60 italic">
-              Source: BIRD 2026-2035 BEIE Framework — Connectors Cluster
-            </p>
-          </div>
+        <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 mb-4">
+          <img src={BIRD_IMAGES.successToTheSuccessful.url} alt={BIRD_IMAGES.successToTheSuccessful.alt} className="w-full h-auto object-contain" />
         </div>
-
-        {/* BIMP-EAGA Connectivity Map — Wide Format */}
-        <div className="relative w-full overflow-hidden rounded-xl border border-[#C9A84C]/20 shadow-lg group">
-          <img
-            src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/BARMM%20Connectivity%20%20.png"
-            alt="BARMM Strategic Connectivity vis-à-vis BIMP-EAGA"
-            className="w-full h-auto max-h-[400px] object-contain bg-[#011a12]/60 transition-transform duration-500 group-hover:scale-[1.02]"
-            loading="lazy"
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#022c22]/90 to-transparent p-4">
-            <p className="text-xs text-[#ecfdf5]/60 italic">
-              Source: BIRD 2026-2035 — BARMM Strategic Connectivity Map
-            </p>
-          </div>
+        <p className="text-sm text-[#022c22] mb-4">
+          Mainland provinces (Maguindanao del Norte, Lanao del Sur) attract most resources due to larger economies and stronger infrastructure. Island provinces (Tawi-Tawi, Sulu, Basilan) — despite producing 40% of national seaweed and holding direct BIMP-EAGA access — suffer chronic underinvestment. <strong>Success breeds more success</strong>, regardless of merit or need.
+        </p>
+        <p className="text-sm font-medium text-[#022c22] mb-3">How accurately does this reflect the imbalance between mainland and island provinces?</p>
+        <div className="grid grid-cols-2 gap-3">
+          {["Very accurately", "Somewhat accurately", "Needs revision", "Not accurate"].map(opt => (
+            <button key={opt} onClick={() => update("q_s6_successful", opt)}
+              className={cn("p-3 rounded-lg border text-sm text-left transition-all",
+                data.q_s6_successful === opt ? "bg-[#1B4D3E] text-white border-[#1B4D3E]" : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C]")}>{opt}</button>
+          ))}
         </div>
+      </GlassCard>
 
-        {/* Q6.1 BIMP-EAGA */}
-        <FormField
-          control={form.control}
-          name="q6_1_bimpeaga"
-          render={({ field }) => (
-            <FormItem className="space-y-4">
-              <FormLabel className="text-base font-semibold text-foreground">
-                6.1 How critical is BIMP-EAGA integration for BARMM's trade competitiveness?
-              </FormLabel>
-              <FormControl>
-                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-5 gap-2">
-                  {["1", "2", "3", "4", "5"].map((val) => (
-                    <div key={val} className="flex flex-col items-center gap-1">
-                      <RadioGroupItem value={val} id={`q6_1_${val}`} className="peer sr-only" />
-                      <label htmlFor={`q6_1_${val}`}
-                        className="flex flex-col items-center justify-center w-full h-14 rounded-lg border-2 border-muted bg-popover p-2 hover:bg-accent peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 cursor-pointer transition-all">
-                        <span className="text-xl font-bold">{val}</span>
-                        <span className="text-[10px] text-muted-foreground">{val === "1" ? "Low" : val === "5" ? "Critical" : ""}</span>
-                      </label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      {/* Q6.2: Markets */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">Which export markets should BARMM prioritize? (Select all)</h3>
+        <div className="space-y-2">
+          {["Malaysia (BIMP-EAGA)", "Indonesia (ASEAN)", "UAE/GCC (halal corridor)", "China (BRI linkage)", "Domestic (Philippines)", "Japan/Korea (premium halal)"].map(opt => (
+            <button key={opt} onClick={() => toggle(opt)}
+              className={cn("w-full p-3 rounded-lg border text-sm text-left transition-all",
+                data.q6_2_markets.includes(opt) ? "bg-[#1B4D3E] text-white border-[#1B4D3E]" : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C]")}>{opt}</button>
+          ))}
+        </div>
+      </GlassCard>
 
-        {/* Q6.2 Export Markets */}
-        <FormField
-          control={form.control}
-          name="q6_2_markets"
-          render={() => (
-            <FormItem className="space-y-4">
-              <FormLabel className="text-base font-semibold text-foreground">
-                6.2 Which export markets should be prioritized for halal products? (Select all that apply)
-              </FormLabel>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {exportMarkets.map((item) => (
-                  <FormField
-                    key={item.id}
-                    control={form.control}
-                    name="q6_2_markets"
-                    render={({ field }) => (
-                      <div className="flex items-center space-x-3 p-3 rounded-lg border border-border hover:bg-accent/50 transition-colors cursor-pointer">
-                        <Checkbox
-                          id={`q6_2_${item.id}`}
-                          checked={field.value?.includes(item.id)}
-                          onCheckedChange={(checked) =>
-                            checked
-                              ? field.onChange([...(field.value || []), item.id])
-                              : field.onChange((field.value || []).filter((v: string) => v !== item.id))
-                          }
-                        />
-                        <item.icon className="w-4 h-4 text-muted-foreground" />
-                        <label htmlFor={`q6_2_${item.id}`} className="flex-1 cursor-pointer text-sm font-normal">{item.label}</label>
-                      </div>
-                    )}
-                  />
-                ))}
-              </div>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      {/* Q6.3: Export Target */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">How realistic is the ₱40 billion export target by 2035?</h3>
+        <ScaleButton value={data.q6_3_export_target} onChange={(v) => update("q6_3_export_target", v)} />
+        <p className="text-xs text-[#065f46] mt-2 italic">1 = Unrealistic | 5 = Very realistic</p>
+      </GlassCard>
 
-        {/* Q6.3 Export Target Realism */}
-        <FormField
-          control={form.control}
-          name="q6_3_export_target"
-          render={({ field }) => (
-            <FormItem className="space-y-4">
-              <FormLabel className="text-base font-semibold text-foreground">
-                6.3 How realistic is the ₱40B+ export target by 2035?
-              </FormLabel>
-              <FormControl>
-                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-5 gap-2">
-                  {["1", "2", "3", "4", "5"].map((val) => (
-                    <div key={val} className="flex flex-col items-center gap-1">
-                      <RadioGroupItem value={val} id={`q6_3_${val}`} className="peer sr-only" />
-                      <label htmlFor={`q6_3_${val}`}
-                        className="flex flex-col items-center justify-center w-full h-14 rounded-lg border-2 border-muted bg-popover p-2 hover:bg-accent peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 cursor-pointer transition-all">
-                        <span className="text-xl font-bold">{val}</span>
-                      </label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      {/* Q6.4: UAE Feasibility */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">How feasible is the UAE-GCC halal corridor partnership?</h3>
+        <ScaleButton value={data.q6_4_uae_feasibility} onChange={(v) => update("q6_4_uae_feasibility", v)} />
+        <p className="text-xs text-[#065f46] mt-2 italic">1 = Not feasible | 5 = Very feasible</p>
+      </GlassCard>
 
-        {/* Q6.4 UAE/GCC Feasibility (Tawi-Tawi context) */}
-        <FormField
-          control={form.control}
-          name="q6_4_uae_feasibility"
-          render={({ field }) => (
-            <FormItem className="space-y-4">
-              <FormLabel className="text-base font-semibold text-foreground">
-                🐘 The MAFAR-Prime Group partnership targets the UAE/GCC Halal Corridor. How feasible is this by 2028, given Tawi-Tawi's seaweed dominance (40% national share) and Sulu's informal trade networks?
-              </FormLabel>
-              <FormControl>
-                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col gap-2">
-                  {["Highly Unrealistic", "Unrealistic", "Feasible with major adjustments", "Realistic", "Highly Realistic"].map((opt, i) => (
-                    <div key={opt} className="flex items-center space-x-3 p-3 rounded-lg border border-border hover:bg-accent/50 cursor-pointer">
-                      <RadioGroupItem value={String(i + 1)} id={`q6_4_${i}`} />
-                      <label htmlFor={`q6_4_${i}`} className="flex-1 cursor-pointer text-sm font-normal">{opt}</label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Q6.5 Ghost of Conflict Past */}
-        <FormField
-          control={form.control}
-          name="q6_5_perception"
-          render={({ field }) => (
-            <FormItem className="space-y-4">
-              <FormLabel className="text-base font-semibold text-foreground">
-                🐘 Which variable most severely triggers the "Security-Investment Tensions" balancing loop, deterring Connectors cluster investment?
-              </FormLabel>
-              <FormControl>
-                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col gap-2">
-                  {[
-                    { value: "informal_trade", label: "Informal cross-border barter trade in Tawi-Tawi/Sulu" },
-                    { value: "rido", label: "Residual rido/clan conflicts in mainland provinces" },
-                    { value: "halal_hospitality", label: "Lack of Halal-certified hospitality infrastructure (Lake Lanao)" },
-                    { value: "logistics", label: "High logistics costs due to farm-to-market road deficits" },
-                  ].map((opt) => (
-                    <div key={opt.value} className="flex items-center space-x-3 p-3 rounded-lg border border-border hover:bg-accent/50 cursor-pointer">
-                      <RadioGroupItem value={opt.value} id={`q6_5_${opt.value}`} />
-                      <label htmlFor={`q6_5_${opt.value}`} className="flex-1 cursor-pointer text-sm font-normal">{opt.label}</label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-      </CardContent>
-    </Card>
+      {/* Q6.5: Perception */}
+      <GlassCard className="!p-6">
+        <h3 className="text-base font-semibold text-[#022c22] mb-3">What is the biggest perception barrier BARMM faces with external investors?</h3>
+        <div className="grid grid-cols-2 gap-3">
+          {["Security concerns", "Lack of awareness", "Competition from other regions", "Regulatory uncertainty", "Infrastructure gaps", "Cultural misunderstanding"].map(opt => (
+            <button key={opt} onClick={() => update("q6_5_perception", opt)}
+              className={cn("p-3 rounded-lg border text-sm text-left transition-all",
+                data.q6_5_perception === opt ? "bg-[#1B4D3E] text-white border-[#1B4D3E]" : "bg-white text-[#022c22] border-[#C9A84C]/30 hover:border-[#C9A84C]")}>{opt}</button>
+          ))}
+        </div>
+      </GlassCard>
+    </div>
   );
-}
+};
+
+export default Section6_Connectors;
