@@ -1,6 +1,3 @@
-// src/components/strategic/Section16_CARE.tsx
-// Section 16: C.A.R.E. & Khalifa Validation
-
 import { useFormContext } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
