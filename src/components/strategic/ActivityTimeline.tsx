@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Clock, ArrowUpRight, ArrowDownLeft, Plus, FileEdit as Edit, Trash, User, CheckCircle } from 'lucide-react';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '../../lib/supabase';
-import { useStrategicPlanStore } from '../../stores/strategicPlanStore';
-import type { ActivityLog } from '../../types';
+import { useStrategicPlanStore } from '@/stores/strategicPlanStore';
+import type { ActivityLog } from '@/types';
 
 const ACTION_ICONS: Record<string, typeof Plus> = {
   plan_created: Plus,
