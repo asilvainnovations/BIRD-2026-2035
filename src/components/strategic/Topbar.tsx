@@ -1,277 +1,262 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
-  Menu, FileText, ChevronDown, Search, Download, Upload, Moon, Sun,
-  Settings as SettingsIcon, LogOut, Share2, Copy, ShieldAlert, User as UserIcon,
-  ExternalLink, X, ClipboardCheck
+  Search, X, Share2, Moon, Sun, FileText, ChevronDown,
+  LogOut, User, Settings, Shield, Download, Upload,
+  ClipboardCheck,
 } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import { useTheme } from '@/components/theme-provider';
-import { StratLogo } from '@/components/branding/Logo';
-import { StrategicPlan } from '@/lib/strategicPlanStore';
-import { EXTERNAL_URLS } from '@/lib/supabase';
+
+// ─── Types ──────────────────────────────────────────────────────────────
 
 interface TopbarProps {
-  plans: StrategicPlan[];
-  currentPlan: StrategicPlan | null;
-  onSelectPlan: (id: string) => void;
-  onExport: () => void;
-  onImportClick: () => void;
-  fileInputRef: React.RefObject<HTMLInputElement>;
-  onImportFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onOpenMobileMenu: () => void;
-  isAuthenticated: boolean;
-  isAdmin: boolean;
-  userEmail?: string;
-  userName: string;
-  userInitials: string;
-  onSignIn: () => void;
-  onSignOut: () => void;
-  onOpenProfile: () => void;
-  onOpenSettings: () => void;
-  onOpenAdmin: () => void;
+  planName: string;
+  plans: string[];
+  onPlanChange: (plan: string) => void;
+  onCreatePlan: () => void;
   onShare: () => void;
-  onRevokeShare: () => void;
-  activeShareLink: string | null;
-  onNavigateView: (view: string) => void;
+  isAuthenticated: boolean;
+  userInitials: string;
+  userRole: string;
+  onLogout: () => void;
+  onShowProfile: () => void;
+  onShowSettings: () => void;
+  onShowAdmin?: () => void;
+  isAdmin: boolean;
+  currentPlan: boolean;
+  searchQuery: string;
+  onSearchChange: (q: string) => void;
+  searchResults: Array<{ id: string; title: string; type: string }>;
+  onSearchSelect: (id: string) => void;
 }
 
-const NAV_TARGETS = [
-  { id: 'nav-dashboard', label: 'MEL Dashboard',        view: 'dashboard', section: 'Navigation' },
-  { id: 'nav-swot',      label: 'SWOT Analysis',        view: 'swot',      section: 'Navigation' },
-  { id: 'nav-systems',   label: 'Systems Thinking',     view: 'systems',   section: 'Navigation' },
-  { id: 'nav-strategy',  label: 'Strategy Matrix',      view: 'strategy',  section: 'Navigation' },
-  { id: 'nav-scorecard', label: 'Balanced Scorecard',   view: 'scorecard', section: 'Navigation' },
-  { id: 'nav-paps',      label: 'PAPs Management',      view: 'paps',      section: 'Navigation' },
-  { id: 'nav-templates', label: 'Templates Library',    view: 'templates', section: 'Navigation' },
-  { id: 'nav-team',      label: 'Team Collaboration',   view: 'team',      section: 'Navigation' },
-  { id: 'nav-export',    label: 'Plan Generator',       view: 'export',    section: 'Navigation' },
-  { id: 'nav-validation',label: 'Validation Survey',    view: 'validation',section: 'Navigation' }, // ✅ Added
-  { id: 'nav-settings',  label: 'Settings',             view: 'settings',  section: 'Navigation' },
-];
+// ─── Component ──────────────────────────────────────────────────────────
 
 const Topbar: React.FC<TopbarProps> = ({
-  plans, currentPlan, onSelectPlan, onExport, onImportClick, fileInputRef, onImportFile,
-  onOpenMobileMenu,
-  isAuthenticated, isAdmin, userEmail, userName, userInitials,
-  onSignIn, onSignOut, onOpenProfile, onOpenSettings, onOpenAdmin,
-  onShare, onRevokeShare, activeShareLink,
-  onNavigateView,
+  planName,
+  plans,
+  onPlanChange,
+  onCreatePlan,
+  onShare,
+  isAuthenticated,
+  userInitials,
+  userRole,
+  onLogout,
+  onShowProfile,
+  onShowSettings,
+  onShowAdmin,
+  isAdmin,
+  currentPlan,
+  searchQuery,
+  onSearchChange,
+  searchResults,
+  onSearchSelect,
 }) => {
   const { theme, setTheme } = useTheme();
-  // Resolve 'system' to actual light/dark for UI state and toggle direction
-  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const isDark = theme === 'dark';
+  const ThemeIcon = isDark ? Sun : Moon;
 
   const [showPlanSelector, setShowPlanSelector] = useState(false);
-  const [showAccountMenu,  setShowAccountMenu]  = useState(false);
-  const [searchOpen,       setSearchOpen]       = useState(false);
-  const [searchTerm,       setSearchTerm]       = useState('');
+  const [showAccountMenu, setShowAccountMenu] = useState(false);
+  const [showMobileSearch, setShowMobileSearch] = useState(false);
 
+  const planRef = useRef<HTMLDivElement>(null);
   const accountRef = useRef<HTMLDivElement>(null);
-  const planRef    = useRef<HTMLDivElement>(null);
-  const searchRef  = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
 
+  // Close dropdowns on outside click
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (accountRef.current && !accountRef.current.contains(e.target as Node)) setShowAccountMenu(false);
-      if (planRef.current    && !planRef.current.contains(e.target as Node))    setShowPlanSelector(false);
-      if (searchRef.current  && !searchRef.current.contains(e.target as Node))  setSearchOpen(false);
+    const handleClick = (e: MouseEvent) => {
+      if (planRef.current && !planRef.current.contains(e.target as Node)) {
+        setShowPlanSelector(false);
+      }
+      if (accountRef.current && !accountRef.current.contains(e.target as Node)) {
+        setShowAccountMenu(false);
+      }
     };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
   }, []);
 
-  const searchResults = useMemo(() => {
-    const term = searchTerm.trim().toLowerCase();
-    if (!term) return [] as { id: string; label: string; view: string; section: string }[];
-    const out: { id: string; label: string; view: string; section: string }[] = [];
-
-    NAV_TARGETS.forEach((n) => { if (n.label.toLowerCase().includes(term)) out.push(n); });
-
-    if (currentPlan) {
-      (currentPlan.swotItems || []).forEach((s) => {
-        if ((s.description || '').toLowerCase().includes(term))
-          out.push({ id: s.id, label: `[${s.category.toUpperCase()}] ${s.description}`, view: 'swot', section: 'SWOT' });
-      });
-      (currentPlan.strategicOptions || []).forEach((o) => {
-        if (`${o.title} ${o.description}`.toLowerCase().includes(term))
-          out.push({ id: o.id, label: `[${o.optionType}] ${o.title}`, view: 'strategy', section: 'Strategy Matrix' });
-      });
-      (currentPlan.objectives || []).forEach((o) => {
-        if ((o.objective || '').toLowerCase().includes(term))
-          out.push({ id: o.id, label: `Objective: ${o.objective}`, view: 'scorecard', section: 'Balanced Scorecard' });
-        (o.kpis || []).forEach((k) => {
-          if ((k.name || '').toLowerCase().includes(term))
-            out.push({ id: k.id, label: `KPI: ${k.name}`, view: 'scorecard', section: 'KPIs' });
-        });
-      });
-      (currentPlan.paps || []).forEach((p) => {
-        if ((p.name || '').toLowerCase().includes(term))
-          out.push({ id: p.id, label: `PAP: ${p.name}`, view: 'paps', section: 'PAPs' });
-      });
-    }
-    return out.slice(0, 12);
-  }, [searchTerm, currentPlan]);
-
-  const handleSearchSelect = (view: string) => { setSearchOpen(false); setSearchTerm(''); onNavigateView(view); };
-  const ThemeIcon = isDark ? Moon : Sun;
-
-  const SearchResults = () =>
-    searchResults.length > 0 ? (
-      <div className="absolute right-0 top-full mt-2 w-80 bg-[#022c22] rounded-2xl shadow-2xl border border-white/10 p-2 z-50 max-h-80 overflow-y-auto">
-        {searchResults.map((r) => (
-          <button key={r.id} onClick={() => handleSearchSelect(r.view)} className="w-full text-left px-3 py-2 hover:bg-[#C9A84C]/10 rounded-lg">
-            <p className="text-sm font-semibold text-white truncate">{r.label}</p>
-            <p className="text-[10px] text-[#C9A84C] uppercase tracking-wider">{r.section}</p>
-          </button>
-        ))}
-      </div>
-    ) : searchTerm ? (
-      <div className="absolute right-0 top-full mt-2 w-80 bg-[#022c22] rounded-2xl shadow-2xl border border-white/10 p-4 z-50">
-        <p className="text-xs text-[#64748b]/80">No results for "{searchTerm}"</p>
-      </div>
-    ) : null;
-
   return (
-    <header className="bg-[#011a12]/80 backdrop-blur-xl border-b border-white/10 sticky top-0 z-30">
-      <div className="flex items-center justify-between px-3 sm:px-4 lg:px-6 py-2.5 sm:py-3 gap-2">
+    <header className="h-16 border-b border-white/5 bg-[#0d1f3c]/80 backdrop-blur-md flex items-center justify-between px-4 sticky top-0 z-50">
+      {/* ── Left: Plan Selector ── */}
+      <div className="flex items-center gap-3" ref={planRef}>
+        <button
+          id="topbar-plan-selector"
+          onClick={() => setShowPlanSelector((v) => !v)}
+          className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors text-sm font-medium text-[#ecfdf5]/90"
+        >
+          <FileText className="w-4 h-4 text-[#C9A84C]" />
+          <span className="max-w-[140px] truncate hidden sm:inline">{planName || 'Select Plan'}</span>
+          <ChevronDown className={cn("w-3.5 h-3.5 text-[#64748b] transition-transform", showPlanSelector && "rotate-180")} />
+        </button>
 
-        {/* ── LEFT: hamburger + brand + plan selector ─────────────────────── */}
-        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-          <button onClick={onOpenMobileMenu} className="lg:hidden p-2 text-[#64748b] hover:bg-[#C9A84C]/10 rounded-lg transition-colors flex-shrink-0" aria-label="Open navigation menu">
-            <Menu className="w-5 h-5" />
+        {/* Plan dropdown */}
+        {showPlanSelector && (
+          <div className="absolute top-14 left-4 w-64 rounded-xl border border-white/10 bg-[#0d1f3c] shadow-2xl shadow-black/40 py-2 z-50">
+            <div className="px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-[#64748b] border-b border-white/5 mb-1">
+              Your Plans
+            </div>
+            {plans.map((p) => (
+              <button
+                key={p}
+                onClick={() => { onPlanChange(p); setShowPlanSelector(false); }}
+                className={cn(
+                  "w-full flex items-center gap-2 px-3 py-2 text-sm transition-colors",
+                  p === planName ? "text-[#E8C560] bg-[#C9A84C]/10" : "text-[#64748b] hover:bg-white/5"
+                )}
+              >
+                <FileText className="w-4 h-4" />
+                <span className="truncate">{p}</span>
+              </button>
+            ))}
+            <div className="border-t border-white/5 mt-1 pt-1">
+              <button
+                onClick={() => { onCreatePlan(); setShowPlanSelector(false); }}
+                className="w-full flex items-center gap-2 px-3 py-2 text-sm text-[#6ee7b7] hover:bg-white/5 transition-colors"
+              >
+                <span className="text-lg leading-none">+</span> New Plan
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* ── Right: Actions ── */}
+      <div className="flex items-center gap-2">
+        {/* Share */}
+        {isAuthenticated && currentPlan && (
+          <button
+            id="topbar-btn-share"
+            onClick={onShare}
+            className="hidden md:flex items-center gap-1.5 px-3 py-2 bg-[#C9A84C]/10 hover:bg-[#C9A84C]/20 text-[#E8C560] rounded-xl text-xs font-bold border border-[#C9A84C]/30 transition-colors"
+          >
+            <Share2 className="w-4 h-4" />
+            <span>Share</span>
+          </button>
+        )}
+
+        {/* Validation Survey */}
+        {isAuthenticated && (
+          <button
+            id="topbar-btn-validation"
+            onClick={() => window.open('https://bird-app.bolt.host/validation-survey', '_blank', 'noopener,noreferrer')}
+            className="hidden md:flex items-center gap-1.5 px-3 py-2 bg-[#C9A84C]/10 hover:bg-[#C9A84C]/20 text-[#C9A84C] rounded-xl text-xs font-bold border border-[#C9A84C]/30 transition-colors"
+            title="Validation Survey"
+          >
+            <ClipboardCheck className="w-4 h-4" /> Survey
+          </button>
+        )}
+
+        {/* Search */}
+        <div className="relative" ref={searchRef} id="topbar-search-wrapper">
+          {/* Mobile search toggle */}
+          <button
+            className="md:hidden flex items-center justify-center w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
+            onClick={() => setShowMobileSearch((v) => !v)}
+          >
+            {showMobileSearch ? <X className="w-4 h-4 text-[#64748b]/80" /> : <Search className="w-4 h-4 text-[#64748b]/80" />}
           </button>
 
-          <a href={EXTERNAL_URLS.PWA} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity flex-shrink-0 group" title="Open BIRD 2026–2035 PWA">
-            <StratLogo size="sm" />
-            <span className="hidden xs:inline sm:inline font-black text-xs sm:text-sm tracking-tight text-white whitespace-nowrap">
-              BIRD<span className="text-[#C9A84C]"> 2026–2035</span>
-            </span>
-            <ExternalLink className="hidden sm:block w-3 h-3 text-[#64748b] group-hover:text-[#C9A84C] transition-colors" />
-          </a>
-
-          <div className="relative min-w-0" ref={planRef}>
-            <button onClick={() => setShowPlanSelector((v) => !v)} className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 bg-white/10 hover:bg-[#C9A84C]/15 rounded-lg sm:rounded-xl transition-all border border-white/10 min-w-0" aria-haspopup="listbox" aria-expanded={showPlanSelector}>
-              <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C9A84C] flex-shrink-0" />
-              <span className="font-semibold text-[#ecfdf5] text-xs sm:text-sm max-w-[80px] sm:max-w-[150px] lg:max-w-[220px] truncate">
-                {currentPlan?.name || 'Select Plan'}
-              </span>
-              <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-[#64748b]/80 flex-shrink-0" />
-            </button>
-
-            {showPlanSelector && (
-              <div className="absolute top-full left-0 mt-2 w-72 bg-[#022c22] rounded-2xl shadow-2xl border border-white/10 py-2 z-50 backdrop-blur-xl" role="listbox">
-                <div className="max-h-60 overflow-y-auto px-2">
-                  {plans.length === 0 && (<p className="text-xs text-[#64748b] px-3 py-2">No plans yet — create one to get started.</p>)}
-                  {plans.map((p) => (
-                    <button key={p.id} role="option" aria-selected={p.id === currentPlan?.id} onClick={() => { onSelectPlan(p.id); setShowPlanSelector(false); }} className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors ${p.id === currentPlan?.id ? 'bg-[#C9A84C]/20 text-[#E8C560] border border-[#C9A84C]/30' : 'hover:bg-[#C9A84C]/5 text-[#ecfdf5]/90'}`}>
-                      <div className="text-left flex-1 min-w-0">
-                        <p className="font-semibold truncate text-sm">{p.name}</p>
-                        <p className="text-[10px] text-[#64748b]/80 uppercase tracking-tight truncate">{p.organization}</p>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-                <div className="px-3 pt-2 mt-2 border-t border-white/10 flex flex-col gap-1">
-                  <button onClick={onExport} className="w-full flex items-center gap-2 px-3 py-2 text-[#64748b] hover:bg-[#C9A84C]/10 rounded-lg text-xs font-medium"><Download className="w-4 h-4" /> Export JSON Backup</button>
-                  <button onClick={onImportClick} className="w-full flex items-center gap-2 px-3 py-2 text-[#64748b] hover:bg-[#C9A84C]/10 rounded-lg text-xs font-medium"><Upload className="w-4 h-4" /> Import JSON Backup</button>
-                  <input type="file" ref={fileInputRef} onChange={onImportFile} className="hidden" accept=".json" />
-                </div>
-              </div>
+          {/* Desktop search input */}
+          <div className="hidden md:flex items-center relative">
+            <Search className="absolute left-3 w-4 h-4 text-[#64748b] pointer-events-none" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
+              placeholder="Search KPIs, SWOT, PAPs..."
+              className="w-56 lg:w-72 pl-9 pr-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm text-[#ecfdf5]/90 placeholder:text-[#ecfdf5]/80 focus:outline-none focus:border-[#C9A84C]/40 focus:bg-white/[0.07] transition-colors"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => onSearchChange('')}
+                className="absolute right-3 text-[#64748b] hover:text-[#64748b]"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
             )}
           </div>
+
+          {/* Search results dropdown */}
+          {searchQuery && searchResults.length > 0 && (
+            <div className="absolute top-12 right-0 w-80 rounded-xl border border-white/10 bg-[#0d1f3c] shadow-2xl shadow-black/40 py-2 z-50">
+              {searchResults.map((r) => (
+                <button
+                  key={r.id}
+                  onClick={() => { onSearchSelect(r.id); onSearchChange(''); }}
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-[#64748b] hover:bg-white/5 transition-colors text-left"
+                >
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#64748b] bg-white/5 px-1.5 py-0.5 rounded">
+                    {r.type}
+                  </span>
+                  <span className="truncate">{r.title}</span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* ── RIGHT: share, search, theme, account ─────────────────────────── */}
-        <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+        {/* Divider */}
+        <div className="w-px h-6 bg-white/10 mx-1" />
 
-          {/* ✅ VALIDATION SURVEY BUTTON (Accessible to all users) */}
+        {/* Theme toggle */}
+        <button
+          id="topbar-btn-theme"
+          onClick={() => setTheme(isDark ? 'light' : 'dark')}
+          className="flex items-center justify-center w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
+          title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          <ThemeIcon className="w-4 h-4 text-[#64748b]/80" />
+        </button>
+
+        {/* Account menu */}
+        <div className="relative" ref={accountRef}>
           <button
-            onClick={() => onNavigateView('validation')}
-            className="hidden md:flex items-center gap-1.5 px-3 py-2 bg-[#059669]/10 hover:bg-[#059669]/20 text-[#6ee7b7] rounded-xl text-xs font-bold border border-[#059669]/30 transition-colors"
-            title="BIRD 2026-2035 Validation Survey"
+            id="topbar-btn-account"
+            onClick={() => setShowAccountMenu((v) => !v)}
+            className="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-[#C9A84C] to-[#064e3b] text-white text-xs font-bold hover:shadow-lg hover:shadow-[#C9A84C]/20 transition-all"
           >
-            <ClipboardCheck className="w-4 h-4" /> Validation
+            {userInitials}
           </button>
 
-          {isAuthenticated && currentPlan && (
-            <button onClick={onShare} className="hidden md:flex items-center gap-1.5 px-3 py-2 bg-[#C9A84C]/10 hover:bg-[#C9A84C]/20 text-[#C9A84C] rounded-xl text-xs font-bold border border-[#C9A84C]/30 transition-colors" title="Share plan link">
-              <Share2 className="w-4 h-4" /> Share
-            </button>
-          )}
-
-          <div className="relative" ref={searchRef}>
-            <button onClick={() => setSearchOpen((v) => !v)} className="md:hidden p-2 rounded-lg text-[#64748b] hover:bg-[#C9A84C]/10 transition-colors" aria-label="Search"><Search className="w-5 h-5" /></button>
-            <div className="hidden md:flex items-center gap-2 px-3 py-2 bg-white/10 rounded-xl border border-white/10 focus-within:border-[#C9A84C]/50 transition-colors">
-              <Search className="w-4 h-4 text-[#64748b]/80 flex-shrink-0" />
-              <input type="text" placeholder="Search plans, KPIs, modules…" value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value); setSearchOpen(true); }} onFocus={() => setSearchOpen(true)} className="bg-transparent border-none outline-none text-sm w-32 lg:w-52 text-[#ecfdf5] placeholder:text-[#64748b]" aria-label="Global search" />
-              {searchTerm && (<button onClick={() => { setSearchTerm(''); setSearchOpen(false); }} className="text-[#64748b] hover:text-[#ecfdf5]/90"><X className="w-3.5 h-3.5" /></button>)}
-            </div>
-            {searchOpen && (
-              <div className="md:hidden absolute right-0 top-full mt-2 w-72 bg-[#022c22] rounded-2xl shadow-2xl border border-white/10 p-3 z-50">
-                <div className="flex items-center gap-2 px-2 py-1.5 bg-white/10 rounded-lg border border-white/10">
-                  <Search className="w-4 h-4 text-[#64748b]/80" />
-                  <input autoFocus type="text" placeholder="Search BIRD platform…" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="bg-transparent border-none outline-none text-sm w-full text-[#ecfdf5] placeholder:text-[#64748b]" />
-                </div>
-                {searchResults.length > 0 && (
-                  <div className="mt-2 max-h-60 overflow-y-auto">
-                    {searchResults.map((r) => (
-                      <button key={r.id} onClick={() => handleSearchSelect(r.view)} className="w-full text-left px-2 py-2 hover:bg-[#C9A84C]/10 rounded-lg">
-                        <p className="text-xs font-semibold text-white truncate">{r.label}</p>
-                        <p className="text-[10px] text-[#C9A84C] uppercase tracking-wider">{r.section}</p>
-                      </button>
-                    ))}
-                  </div>
-                )}
+          {/* Account dropdown */}
+          {showAccountMenu && (
+            <div className="absolute top-12 right-0 w-56 rounded-xl border border-white/10 bg-[#0d1f3c] shadow-2xl shadow-black/40 py-2 z-50">
+              <div className="px-4 py-2 border-b border-white/5 mb-1">
+                <p className="text-sm font-semibold text-white">{userInitials}</p>
+                <p className="text-[10px] text-[#64748b] uppercase tracking-wider">{userRole}</p>
               </div>
-            )}
-            {searchOpen && searchTerm && <div className="hidden md:block"><SearchResults /></div>}
-          </div>
-
-          <button onClick={() => setTheme(isDark ? 'light' : 'dark')} className="p-2 rounded-lg text-[#64748b] hover:text-yellow-400 hover:bg-[#C9A84C]/10 transition-all" aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'} title={isDark ? 'Light mode' : 'Dark mode'}>
-            <ThemeIcon className="w-5 h-5" />
-          </button>
-
-          {isAuthenticated ? (
-            <div className="relative" ref={accountRef}>
-              <button onClick={() => setShowAccountMenu((v) => !v)} className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-[#C9A84C] to-[#E8C560] flex items-center justify-center text-white text-xs font-bold shadow-lg hover:scale-105 transition-transform border border-white/20" aria-label="Account menu" aria-haspopup="menu" aria-expanded={showAccountMenu}>
-                {userInitials}
+              <button
+                onClick={() => { onShowProfile(); setShowAccountMenu(false); }}
+                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-[#64748b] hover:bg-white/5 transition-colors"
+              >
+                <User className="w-4 h-4" /> Profile
               </button>
-              {showAccountMenu && (
-                <div className="absolute right-0 top-full mt-2 w-64 bg-[#022c22] rounded-2xl shadow-2xl border border-white/10 py-2 z-50" role="menu">
-                  <div className="px-4 py-2 border-b border-white/10">
-                    <p className="text-sm font-bold text-white truncate">{userName}</p>
-                    <p className="text-xs text-[#64748b]/80 truncate">{userEmail}</p>
-                    {isAdmin && (<span className="inline-block mt-1 text-[9px] font-black px-2 py-0.5 bg-amber-500/20 text-amber-400 rounded-full">SUPER ADMIN</span>)}
-                  </div>
-                  {[
-                    { label: 'Settings', icon: SettingsIcon, action: () => { onOpenSettings(); setShowAccountMenu(false); } },
-                    { label: 'Edit Profile', icon: UserIcon, action: () => { onOpenProfile(); setShowAccountMenu(false); } },
-                  ].map(({ label, icon: Icon, action }) => (
-                    <button key={label} role="menuitem" onClick={action} className="w-full flex items-center gap-2 px-4 py-2 text-sm text-[#64748b] hover:bg-[#C9A84C]/10"><Icon className="w-4 h-4" /> {label}</button>
-                  ))}
-                  {currentPlan && (
-                    <>
-                      <button role="menuitem" onClick={onShare} className="w-full flex items-center gap-2 px-4 py-2 text-sm text-[#64748b] hover:bg-[#C9A84C]/10"><Share2 className="w-4 h-4" /> Share Plan Link</button>
-                      {activeShareLink && (
-                        <div className="mx-4 my-2 p-2 bg-[#022c22]/60 rounded-lg space-y-1">
-                          <p className="text-[10px] text-[#C9A84C] font-bold">ACTIVE LINK</p>
-                          <p className="text-[10px] text-[#64748b]/80 truncate">{activeShareLink}</p>
-                          <div className="flex gap-1">
-                            <button onClick={() => navigator.clipboard?.writeText(activeShareLink)} className="flex-1 text-[10px] py-1 bg-[#C9A84C]/20 text-[#E8C560] rounded flex items-center justify-center gap-1"><Copy className="w-3 h-3" /> Copy</button>
-                            <button onClick={onRevokeShare} className="flex-1 text-[10px] py-1 bg-rose-500/20 text-rose-300 rounded">Revoke</button>
-                          </div>
-                        </div>
-                      )}
-                    </>
-                  )}
-                  {isAdmin && (<button role="menuitem" onClick={() => { onOpenAdmin(); setShowAccountMenu(false); }} className="w-full flex items-center gap-2 px-4 py-2 text-sm text-amber-400 hover:bg-[#C9A84C]/10"><ShieldAlert className="w-4 h-4" /> Admin Dashboard</button>)}
-                  <a href={EXTERNAL_URLS.USER_MANUAL} target="_blank" rel="noopener noreferrer" role="menuitem" className="w-full flex items-center gap-2 px-4 py-2 text-sm text-[#64748b] hover:bg-[#C9A84C]/10"><ExternalLink className="w-4 h-4" /> User Manual</a>
-                  <div className="border-t border-white/10 my-1" />
-                  <button role="menuitem" onClick={() => { onSignOut(); setShowAccountMenu(false); }} className="w-full flex items-center gap-2 px-4 py-2 text-sm text-rose-400 hover:bg-[#C9A84C]/10"><LogOut className="w-4 h-4" /> Sign out</button>
-                </div>
+              <button
+                onClick={() => { onShowSettings(); setShowAccountMenu(false); }}
+                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-[#64748b] hover:bg-white/5 transition-colors"
+              >
+                <Settings className="w-4 h-4" /> Settings
+              </button>
+              {isAdmin && onShowAdmin && (
+                <button
+                  onClick={() => { onShowAdmin(); setShowAccountMenu(false); }}
+                  className="w-full flex items-center gap-2 px-4 py-2 text-sm text-amber-400 hover:bg-white/5 transition-colors"
+                >
+                  <Shield className="w-4 h-4" /> Admin Dashboard
+                </button>
               )}
+              <div className="border-t border-white/5 mt-1 pt-1">
+                <button
+                  onClick={() => { onLogout(); setShowAccountMenu(false); }}
+                  className="w-full flex items-center gap-2 px-4 py-2 text-sm text-rose-400 hover:bg-white/5 transition-colors"
+                >
+                  <LogOut className="w-4 h-4" /> Sign Out
+                </button>
+              </div>
             </div>
-          ) : (
-            <button onClick={onSignIn} className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#C9A84C] hover:bg-[#B8942E] text-white rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold transition-colors shadow-lg shadow-[#C9A84C]/20">Sign In</button>
           )}
         </div>
       </div>
@@ -279,4 +264,4 @@ const Topbar: React.FC<TopbarProps> = ({
   );
 };
 
-export default React.memo(Topbar);
+export default Topbar;
