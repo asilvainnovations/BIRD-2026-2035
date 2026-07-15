@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // BIRD 2026–2035 · Priority Action Plan — Foundation Phase (2026–2028)
 // Single source of truth for Panel C of the MEL Dashboard.
-// Source: BIRD 2026–2035 Chapter 7 — Implementation, Action and Annual Investment Plan
+// Source: BIRD 2026-2035 Chapter 7 — Implementation, Action and Annual Investment Plan
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type ActionPriority = 'critical' | 'high' | 'medium';
@@ -12,6 +12,36 @@ export type ActionStatus =
   | 'Not Started'
   | 'Completed'
   | 'On Track';
+
+/** BIRD Brand Color Constants — Deep Green + Metallic Gold */
+export const BIRD_COLORS = {
+  darkGreen: '#022c22',
+  midGreen: '#064e3b',
+  gold: '#C9A84C',
+  goldLight: '#E8C560',
+  goldDark: '#8B6C28',
+  cream: '#ecfdf5',
+  muted: '#64748b',
+} as const;
+
+/** Color mapping for each Critical Leverage Point */
+export const LP_COLOR_MAP: Record<string, { bg: string; text: string; border: string }> = {
+  LP1: { bg: 'bg-[#C9A84C]/10', text: 'text-[#C9A84C]', border: 'border-[#C9A84C]/20' },
+  LP2: { bg: 'bg-[#059669]/10', text: 'text-[#6ee7b7]', border: 'border-[#059669]/20' },
+  LP3: { bg: 'bg-[#3b82f6]/10', text: 'text-[#60a5fa]', border: 'border-[#3b82f6]/20' },
+  LP4: { bg: 'bg-[#a855f7]/10', text: 'text-[#c084fc]', border: 'border-[#a855f7]/20' },
+  LP5: { bg: 'bg-[#10b981]/10', text: 'text-[#34d399]', border: 'border-[#10b981]/20' },
+};
+
+/** Color mapping for BEIE Clusters */
+export const CLUSTER_COLOR_MAP: Record<string, { bg: string; text: string; border: string; dot: string }> = {
+  'Foundations':        { bg: 'bg-[#059669]/10', text: 'text-[#6ee7b7]', border: 'border-[#059669]/20', dot: 'bg-[#059669]' },
+  'Transformers':       { bg: 'bg-[#3b82f6]/10', text: 'text-[#60a5fa]', border: 'border-[#3b82f6]/20', dot: 'bg-[#3b82f6]' },
+  'Enablers':           { bg: 'bg-[#0891b2]/10', text: 'text-[#22d3ee]', border: 'border-[#0891b2]/20', dot: 'bg-[#0891b2]' },
+  'Connectors':         { bg: 'bg-[#a855f7]/10', text: 'text-[#c084fc]', border: 'border-[#a855f7]/20', dot: 'bg-[#a855f7]' },
+  'Financiers':         { bg: 'bg-[#d97706]/10', text: 'text-[#fbbf24]', border: 'border-[#d97706]/20', dot: 'bg-[#d97706]' },
+  'Cross-Cutting':      { bg: 'bg-[#C9A84C]/10', text: 'text-[#E8C560]', border: 'border-[#C9A84C]/20', dot: 'bg-[#C9A84C]' },
+};
 
 export interface ActionPlan {
   id: number;
