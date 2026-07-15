@@ -51,7 +51,7 @@ export const CAUSAL_LOOPS: CausalLoop[] = [
     health: 'Building',
     progress: 35,
     status: 'building',
-    color: 'green',
+    color: '#059669',  // BIRD Deep Green
     leveragePoint: 'LP1',
     cluster: 'Foundations + Transformers',
   },
@@ -64,7 +64,7 @@ export const CAUSAL_LOOPS: CausalLoop[] = [
     health: 'Initialising',
     progress: 25,
     status: 'building',
-    color: 'gold',
+    color: '#C9A84C',  // BIRD Metallic Gold
     leveragePoint: 'LP3',
     cluster: 'Cross-Cutting: Moral Governance',
   },
@@ -77,7 +77,7 @@ export const CAUSAL_LOOPS: CausalLoop[] = [
     health: 'Initiating',
     progress: 15,
     status: 'planned',
-    color: 'gold',
+    color: '#C9A84C',  // BIRD Metallic Gold
     leveragePoint: 'LP1',
     cluster: 'Transformers: Halal Processing',
   },
@@ -90,7 +90,7 @@ export const CAUSAL_LOOPS: CausalLoop[] = [
     health: 'Policy Pipeline',
     progress: 5,
     status: 'planned',
-    color: 'green',
+    color: '#059669',  // BIRD Deep Green
     leveragePoint: 'LP5',
     cluster: 'Foundations: Environment',
   },
@@ -103,7 +103,7 @@ export const CAUSAL_LOOPS: CausalLoop[] = [
     health: 'Actively Managed',
     progress: 60,
     status: 'active',
-    color: 'gold',
+    color: '#C9A84C',  // BIRD Metallic Gold
     leveragePoint: 'LP2',
     cluster: 'Enablers: Infrastructure',
   },
@@ -116,7 +116,7 @@ export const CAUSAL_LOOPS: CausalLoop[] = [
     health: 'Monitored',
     progress: 40,
     status: 'monitored',
-    color: 'blue',
+    color: '#3b82f6',  // BIRD Blue accent
     leveragePoint: 'LP3',
     cluster: 'Cross-Cutting: Peace & Security',
   },
@@ -129,7 +129,7 @@ export const CAUSAL_LOOPS: CausalLoop[] = [
     health: 'Needs Intervention',
     progress: 50,
     status: 'monitored',
-    color: 'blue',
+    color: '#3b82f6',  // BIRD Blue accent
     leveragePoint: 'LP3',
     cluster: 'All Clusters: Archipelagic Equity',
   },
@@ -142,7 +142,7 @@ export const CAUSAL_LOOPS: CausalLoop[] = [
     health: 'Structural Gap',
     progress: 30,
     status: 'building',
-    color: 'teal',
+    color: '#0891b2',  // BIRD Teal accent
     leveragePoint: 'LP4',
     cluster: 'Financiers: Islamic Banking',
   },
@@ -256,6 +256,27 @@ export const SYSTEMS_ARCHETYPES: SystemsArchetype[] = [
   },
 ];
 
+// ─── BIRD Brand Color Constants ──────────────────────────────────────────────
+export const BIRD_COLORS = {
+  darkGreen: '#022c22',
+  midGreen: '#064e3b',
+  gold: '#C9A84C',
+  goldLight: '#E8C560',
+  goldDark: '#8B6C28',
+  cream: '#ecfdf5',
+  muted: '#64748b',
+} as const;
+
+/** Cluster-to-CSS mapping for UI components */
+export const CLUSTER_UI: Record<string, { bg: string; text: string; border: string; ring: string }> = {
+  'C0': { bg: 'bg-[#C9A84C]/10', text: 'text-[#E8C560]', border: 'border-[#C9A84C]/20', ring: 'ring-[#C9A84C]/30' },
+  'C1': { bg: 'bg-[#059669]/10', text: 'text-[#6ee7b7]', border: 'border-[#059669]/20', ring: 'ring-[#059669]/30' },
+  'C2': { bg: 'bg-[#3b82f6]/10', text: 'text-[#60a5fa]', border: 'border-[#3b82f6]/20', ring: 'ring-[#3b82f6]/30' },
+  'C3': { bg: 'bg-[#0891b2]/10', text: 'text-[#22d3ee]', border: 'border-[#0891b2]/20', ring: 'ring-[#0891b2]/30' },
+  'C4': { bg: 'bg-[#a855f7]/10', text: 'text-[#c084fc]', border: 'border-[#a855f7]/20', ring: 'ring-[#a855f7]/30' },
+  'C5': { bg: 'bg-[#d97706]/10', text: 'text-[#fbbf24]', border: 'border-[#d97706]/20', ring: 'ring-[#d97706]/30' },
+};
+
 // ─── BEIE Cluster Reference ──────────────────────────────────────────────────
 export const BEIE_CLUSTERS = [
   {
@@ -263,7 +284,7 @@ export const BEIE_CLUSTERS = [
     name: 'Cross-Cutting Operating Systems',
     shortName: 'Cross-Cutting',
     desc: 'Moral Governance, Resilience, Peace & Security, Human Capital, Environmental Stewardship',
-    color: 'gold',
+    color: '#C9A84C',  // BIRD Metallic Gold
     icon: 'shield',
   },
   {
@@ -271,7 +292,7 @@ export const BEIE_CLUSTERS = [
     name: 'Cluster 1: Foundations',
     shortName: 'Foundations',
     desc: 'Agriculture, Fisheries, Forestry, Energy, and Environment',
-    color: 'green',
+    color: '#059669',  // BIRD Deep Green
     icon: 'leaf',
   },
   {
@@ -279,7 +300,7 @@ export const BEIE_CLUSTERS = [
     name: 'Cluster 2: Transformers',
     shortName: 'Transformers',
     desc: 'Industry, Manufacturing, Logistics, Halal Processing',
-    color: 'blue',
+    color: '#3b82f6',  // BIRD Blue accent
     icon: 'factory',
   },
   {
@@ -287,7 +308,7 @@ export const BEIE_CLUSTERS = [
     name: 'Cluster 3: Enablers',
     shortName: 'Enablers',
     desc: 'Infrastructure, Social Services & Protection, Health',
-    color: 'teal',
+    color: '#0891b2',  // BIRD Teal accent
     icon: 'building',
   },
   {
@@ -295,7 +316,7 @@ export const BEIE_CLUSTERS = [
     name: 'Cluster 4: Connectors',
     shortName: 'Connectors',
     desc: 'Tourism, Digital Connectivity, Trade, Exports, BIMP-EAGA Integration',
-    color: 'purple',
+    color: '#a855f7',  // BIRD Purple accent
     icon: 'network',
   },
   {
@@ -303,7 +324,7 @@ export const BEIE_CLUSTERS = [
     name: 'Cluster 5: Financiers',
     shortName: 'Financiers',
     desc: 'Islamic Banking, Waqf, Takaful, Microfinance',
-    color: 'amber',
+    color: '#d97706',  // BIRD Amber accent
     icon: 'coins',
   },
 ] as const;
