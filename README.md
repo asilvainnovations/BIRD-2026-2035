@@ -57,7 +57,7 @@ The **Bangsamoro Investment Roadmap Development (BIRD) 2026–2035** is a 10-yea
 
 ```bash
 # Clone repository
-git clone <repository-url>
+git clone https://github.com/asilvainnovations/BIRD-2026-2035
 cd bird-2026-2035
 
 # Install dependencies
@@ -108,7 +108,7 @@ VITE_ENABLE_ANALYTICS=true
 VITE_LOG_LEVEL=info
 ```
 
-> **⚠️ Supabase Secrets (Edge Functions):** The `OPENAI_API_KEY` and `SUPABASE_SERVICE_ROLE_KEY` must be configured in the Supabase Secrets dashboard for the **rgvteytgkugdqdodedxq** project (the edge function host). Supabase secret names **cannot contain hyphens** — use `OPENAI_API_KEY` (not `OPEN_AI_BIRD_2026-2035_PROJECT_API_KEY`).
+> **⚠️ Supabase Secrets (Edge Functions):** The `OPENAI_API_KEY` and `SUPABASE_SERVICE_ROLE_KEY` must be configured in the Supabase Secrets dashboard for the **rgvteytgkugdqdodedxq** project (the edge function host). Supabase secret names **cannot contain hyphens** — use `OPENAI_API_KEY'
 
 ---
 
