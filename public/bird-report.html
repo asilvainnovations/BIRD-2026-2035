@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Emerging Bangsamoro: An Investment Roadmap for 2026-2035</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ========== RESET & BASE ========== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{margin:0;padding:0;font-family:'Roboto',sans-serif;font-size:11pt;line-height:1.7;color:#333;background:#fff;
+     text-align:justify;text-align-last:left;}
+
+/* ========== PAGE SETUP ========== */
+@page{size:A4;margin:2.5cm 2cm 2.5cm 2cm;
+     @top-center{content:string(doctitle);font-size:9pt;color:#666;font-style:italic;}
+     @bottom-center{content:counter(page);font-size:9pt;color:#666;}
+}
+@page :first{margin:0;@top-center{content:none;}@bottom-center{content:none;}}
+@page cover{margin:0;@top-center{content:none;}@bottom-center{content:none;}}
+@page toc-page{@top-center{content:none;}@bottom-center{content:none;}}
+@page frontmatter{@top-center{content:none;}}
+
+body{string-set:doctitle "";}
+h1.chapter-title{string-set:doctitle content();}
+
+/* ========== COVER PAGE ========== */
+.cover{width:210mm;height:297mm;margin:0;position:relative;overflow:hidden;page-break-after:always;page:cover;
+       background:linear-gradient(135deg,#0a3d2e 0%,#0f5c3e 40%,#1a7a4e 70%,#2d9d6e 100%);}
+.cover::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+               background:url('https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/barmm-images/public/Bangsamoro%20Economic%20and%20%20Investment%20Ecosystem.png') center/cover no-repeat;
+               opacity:0.15;z-index:0;}
+.cover::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+              background:linear-gradient(180deg,rgba(10,61,46,0.7) 0%,rgba(10,61,46,0.85) 50%,rgba(10,61,46,0.95) 100%);z-index:1;}
+.cover-content{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;text-align:center;width:80%;}
+.cover-badge{display:inline-block;padding:0.4rem 1.2rem;border:1px solid rgba(201,168,76,0.6);border-radius:2rem;
+             color:#C9A84C;font-size:9pt;letter-spacing:0.15em;text-transform:uppercase;font-weight:600;
+             margin-bottom:1.5rem;background:rgba(201,168,76,0.1);}
+.cover-title{font-family:'Poppins',sans-serif;font-size:26pt;font-weight:800;color:#fff;line-height:1.25;margin-bottom:0.6rem;}
+.cover-subtitle{font-family:'Montserrat',sans-serif;font-size:14pt;font-weight:500;color:#a8e6cf;margin-bottom:2rem;line-height:1.4;}
+.cover-divider{width:80px;height:3px;background:linear-gradient(90deg,#C9A84C,#E8C560,#C9A84C);margin:0 auto 1.5rem;border-radius:2px;}
+.cover-meta{color:rgba(255,255,255,0.8);font-size:10pt;line-height:2;}
+.cover-meta strong{color:#C9A84C;}
+.cover-institution{font-family:'Poppins',sans-serif;font-size:11pt;color:#C9A84C;margin-top:1.5rem;font-weight:600;letter-spacing:0.05em;}
+.cover-date{font-size:10pt;color:rgba(255,255,255,0.6);margin-top:0.5rem;}
+
+/* ========== SECONDARY TITLE PAGE ========== */
+.title-page{text-align:center;padding-top:25%;page-break-after:always;page:frontmatter;}
+.title-page h1{font-family:'Poppins',sans-serif;font-size:22pt;font-weight:700;color:#0a3d2e;margin-bottom:1rem;line-height:1.3;}
+.title-page h2{font-family:'Montserrat',sans-serif;font-size:14pt;font-weight:500;color:#444;margin-bottom:2rem;line-height:1.5;}
+.title-page .meta-divider{width:60px;height:2px;background:#C9A84C;margin:1.5rem auto;}
+.title-page .authors{font-size:11pt;color:#333;line-height:2;margin-bottom:1.5rem;}
+.title-page .affiliation{font-size:10pt;color:#666;line-height:1.8;}
+.title-page .journal-note{font-size:9pt;color:#888;font-style:italic;margin-top:3rem;padding-top:1rem;border-top:1px solid #ddd;}
+
+/* ========== TABLE OF CONTENTS ========== */
+.toc-page{page:toc-page;page-break-after:always;}
+.toc-title{font-family:'Poppins',sans-serif;font-size:18pt;font-weight:700;color:#0a3d2e;text-align:center;margin-bottom:1.5rem;padding-bottom:0.5rem;border-bottom:2px solid #C9A84C;}
+.toc{list-style:none;padding:0;margin:0;}
+.toc li{margin-bottom:0.3rem;}
+.toc a{color:#333;text-decoration:none;font-size:10.5pt;display:block;padding:0.2rem 0;}
+.toc a:hover{color:#0a3d2e;}
+.toc a::after{content:leader('.') target-counter(attr(href url), page);}
+.toc .toc-chapter{font-weight:700;font-size:11pt;color:#0a3d2e;margin-top:0.8rem;}
+.toc .toc-section{padding-left:1.5rem;font-size:10pt;}
+.toc .toc-subsection{padding-left:3rem;font-size:9.5pt;color:#555;}
+
+/* ========== LISTS OF FIGURES AND TABLES ========== */
+.lof-page{page:frontmatter;page-break-after:always;}
+.lof-title{font-family:'Poppins',sans-serif;font-size:16pt;font-weight:700;color:#0a3d2e;text-align:center;margin-bottom:1.5rem;padding-bottom:0.5rem;border-bottom:1px solid #ddd;}
+.lof{list-style:none;padding:0;margin:0;}
+.lof li{margin-bottom:0.4rem;font-size:10pt;}
+.lof a{color:#333;text-decoration:none;}
+.lof a::after{content:leader('.') target-counter(attr(href url), page);}
+
+/* ========== ABSTRACT ========== */
+.abstract-page{page:frontmatter;page-break-after:always;}
+.abstract-title{font-family:'Poppins',sans-serif;font-size:16pt;font-weight:700;color:#0a3d2e;text-align:center;margin-bottom:1rem;}
+.abstract-keywords{margin-top:1.5rem;font-size:10pt;}
+.abstract-keywords strong{color:#0a3d2e;}
+
+/* ========== HEADINGS ========== */
+h1{font-family:'Poppins',sans-serif;font-size:20pt;font-weight:700;color:#0a3d2e;margin:2rem 0 1rem;line-height:1.3;page-break-after:avoid;}
+h2{font-family:'Poppins',sans-serif;font-size:14pt;font-weight:600;color:#0d4f3c;margin:1.5rem 0 0.8rem;line-height:1.3;page-break-after:avoid;border-bottom:1px solid #e0e0e0;padding-bottom:0.3rem;}
+h3{font-family:'Poppins',sans-serif;font-size:12pt;font-weight:600;color:#1a6b4e;margin:1.2rem 0 0.6rem;page-break-after:avoid;}
+h4{font-family:'Poppins',sans-serif;font-size:11pt;font-weight:600;color:#333;margin:1rem 0 0.5rem;page-break-after:avoid;}
+
+/* ========== BODY TEXT ========== */
+p{margin-bottom:0.8rem;font-size:11pt;line-height:1.7;}
+strong{color:#1a4d3a;}
+
+/* ========== THREE-LINE TABLES ========== */
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:9.5pt;page-break-inside:auto;max-width:100%;}
+thead{display:table-header-group;}
+thead tr{border-top:2px solid #333;border-bottom:1px solid #333;}
+thead th{padding:0.5rem 0.4rem;text-align:left;font-weight:700;font-family:'Poppins',sans-serif;font-size:9pt;color:#0a3d2e;background:#f8f9fa;}
+tbody tr{border-bottom:0.5px solid #ddd;}
+tbody tr:last-child{border-bottom:2px solid #333;}
+tbody td{padding:0.4rem;vertical-align:top;line-height:1.45;}
+tr{page-break-inside:avoid;}
+caption{font-weight:600;font-size:10pt;margin-bottom:0.3rem;text-align:left;font-family:'Poppins',sans-serif;color:#0a3d2e;}
+caption::before{content:attr(data-label) ". ";font-weight:700;}
+
+/* ========== FIGURES ========== */
+figure{margin:1.5rem 0;text-align:center;page-break-inside:avoid;}
+figure img{max-width:90%;max-height:45vh;height:auto;}
+figcaption{font-size:9.5pt;color:#555;margin-top:0.5rem;font-style:italic;text-align:left;padding-left:1rem;}
+figcaption::before{content:attr(data-label) ". ";font-weight:700;font-style:normal;color:#0a3d2e;}
+
+/* ========== FOOTNOTES (Paged.js) ========== */
+.footnote-ref{float:footnote;font-size:8.5pt;}
+.footnote-ref::footnote-call{content:counter(footnote);vertical-align:super;font-size:0.75em;}
+.footnote-ref::footnote-marker{content:counter(footnote) ". ";}
+@page{@footnote{margin-top:1em;border-top:1px solid #ccc;padding-top:0.5em;}}
+
+/* ========== BLOCK QUOTES ========== */
+blockquote{border-left:3px solid #C9A84C;padding:0.5rem 1rem;margin:1rem 0;background:#f9f9f5;font-size:10.5pt;color:#444;}
+
+/* ========== EQUATIONS ========== */
+.equation{display:flex;align-items:center;justify-content:center;margin:1rem 0;padding:0.5rem;background:#f8f9fa;border-radius:4px;font-size:11pt;}
+.equation .eq-body{flex:1;text-align:center;font-family:'Times New Roman',serif;font-style:italic;}
+.equation .eq-number{min-width:3rem;text-align:right;color:#666;font-size:10pt;}
+
+/* ========== REFERENCES ========== */
+.references{page-break-before:always;}
+.references h2{border-bottom:2px solid #C9A84C;padding-bottom:0.5rem;}
+.references ol{padding-left:0;list-style:none;counter-reset:ref-counter;}
+.references li{padding-left:2rem;text-indent:-2rem;margin-bottom:0.6rem;font-size:10pt;line-height:1.6;counter-increment:ref-counter;}
+.references li::before{content:"[" counter(ref-counter) "] ";font-weight:700;color:#0a3d2e;}
+.references i{font-style:italic;}
+
+/* ========== INDEX ========== */
+.index-page{page-break-before:always;}
+.index-page h2{border-bottom:2px solid #C9A84C;padding-bottom:0.5rem;}
+.index-cols{column-count:2;column-gap:2rem;font-size:9.5pt;line-height:1.8;}
+.index-entry{display:flex;justify-content:space-between;}
+.index-entry .term{font-weight:500;}
+.index-entry .pages{color:#666;}
+
+/* ========== CHAPTER OPENER ========== */
+.chapter-header{margin-bottom:1.5rem;padding-bottom:0.5rem;border-bottom:2px solid #C9A84C;}
+.chapter-number{font-family:'Poppins',sans-serif;font-size:11pt;font-weight:600;color:#C9A84C;text-transform:uppercase;letter-spacing:0.1em;}
+.chapter-title{font-family:'Poppins',sans-serif;font-size:20pt;font-weight:700;color:#0a3d2e;margin:0;line-height:1.3;}
+
+/* ========== CITATIONS ========== */
+a.cite{color:#333;text-decoration:none;vertical-align:super;font-size:0.75em;}
+
+/* ========== ANNEXES ========== */
+.annex{page-break-before:always;}
+.annex-header{border-bottom:2px solid #C9A84C;padding-bottom:0.5rem;margin-bottom:1.5rem;}
+
+/* ========== OVERFLOW PREVENTION ========== */
+pre,table,figure,img,svg,blockquote,.equation{max-width:100%;box-sizing:border-box;}
+pre{overflow-x:auto;white-space:pre-wrap;word-wrap:break-word;}
+a{word-break:break-all;color:#0a3d2e;}
+
+/* ========== DRAFT WATERMARK ========== */
+.watermark{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-45deg);
+           font-size:72pt;color:rgba(200,0,0,0.08);font-weight:700;z-index:-1;pointer-events:none;}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<!-- ========== COVER PAGE ========== -->
+<div class="cover">
+<div class="cover-content">
+<div class="cover-badge">Peer-Reviewed Publication</div>
+<h1 class="cover-title">The Emerging Bangsamoro</h1>
+<p class="cover-subtitle">A Hub for Resilient and Ethical Growth<br>Investment Roadmap 2026&ndash;2035</p>
+<div class="cover-divider"></div>
+<div class="cover-meta">
+<strong>Lead Author:</strong> Alvin M. Silva<br>
+<strong>Contributing Authors:</strong> Muhammad T. Unsi, et al.<br>
+Ministry of Trade, Investments and Tourism &mdash; BARMM
+</div>
+<div class="cover-institution">Bangsamoro Autonomous Region in Muslim Mindanao</div>
+<div class="cover-date">2026</div>
+</div>
+</div>
+
+<!-- ========== TITLE PAGE ========== -->
+<div class="title-page">
+<h1>The Emerging Bangsamoro: A Hub for Resilient and Ethical Growth</h1>
+<h2>An Integrated Investment Roadmap for the Bangsamoro Autonomous Region<br>2026&ndash;2035</h2>
+<div class="meta-divider"></div>
+<div class="authors">
+<strong>Alvin M. Silva</strong><sup>1*</sup>, Muhammad T. Unsi<sup>2</sup>, and the BIRD Research Consortium<sup>3</sup>
+</div>
+<div class="affiliation">
+<sup>1</sup> AS Strategic Insights &amp; Systems Architect, Bangsamoro Investment Roadmap Development (BIRD)<br>
+<sup>2</sup> Bureau of Investments, Ministry of Trade, Investments and Tourism &mdash; BARMM<br>
+<sup>3</sup> Multi-stakeholder research collaboration including BARMM ministries, development partners, and academic institutions
+</div>
+<div class="journal-note">
+*Corresponding author: <a href="https://alvin-silva.asilvainnovations.com">alvin-silva.asilvainnovations.com</a><br>
+Submitted for peer review: July 2026 &bull; Keywords: BARMM, investment roadmap, BEIE framework, halal economy, Islamic finance, systems thinking, BIMP-EAGA
+</div>
+</div>
+
+<!-- ========== ABSTRACT ========== -->
+<div class="abstract-page">
+<h2 class="abstract-title">Abstract</h2>
+<p>
+The Bangsamoro Autonomous Region in Muslim Mindanao (BARMM) stands at a critical juncture in its development trajectory. This paper presents the <strong>Bangsamoro Investment Roadmap 2026&ndash;2035 (BIRD)</strong>, a comprehensive, evidence-based strategic framework designed to transform BARMM into Southeast Asia's premier hub for resilient, ethical, and inclusive investment. Drawing on the <strong>Bangsamoro Economic and Investment Ecosystem (BEIE) Framework</strong> and the <strong>Strat Planner Pro Architecture</strong>, the roadmap integrates systems thinking, robust quantitative diagnostics, and multi-criteria strategic evaluation to identify high-leverage investment opportunities across five functional clusters: Foundations, Transformers, Enablers, Connectors, and Financiers.
+</p>
+<p>
+Through quantified SWOT analysis, systems archetype mapping, and causal loop diagramming, this study diagnoses binding constraints and identifies transformative leverage points across BARMM's political, economic, social, environmental, and technological domains. Four strategic options were evaluated using a weighted seven-criteria decision matrix: Halal Economy Dominance Strategy (HEDS), Green Economy Monetization Strategy (GEMS), Infrastructure-First Enabling Strategy (IFES), and Integrated Ecosystem Development Strategy (IEDS). The IEDS emerged as the optimal pathway with a composite score of 8.33/10, synchronizing cross-cluster investments to achieve a projected GRDP of PHP 550 billion by 2035 while reducing poverty incidence to below 20%.
+</p>
+<p>
+The roadmap is anchored on six guiding principles&mdash;Moral Governance, Ecosystem Thinking, Cultural Authenticity, Environmental Stewardship, Inclusivity, and Data-Driven Decision Making&mdash;and operationalized through a Balanced Scorecard with 30+ key performance indicators, three implementation phases (2026&ndash;2035), and a comprehensive monitoring and evaluation framework aligned with OIC/SMIIC international standards, the Philippine Development Plan 2023&ndash;2028, and the UN Sustainable Development Goals.
+</p>
+<div class="abstract-keywords">
+<strong>Keywords:</strong> Bangsamoro Investment Roadmap; BEIE Framework; halal economy; Islamic finance; systems thinking; strategic planning; BIMP-EAGA; sustainable development; Moral Governance; BARMM; OIC/SMIIC standards
+</div>
+</div>
+
+<!-- ========== TABLE OF CONTENTS ========== -->
+<div class="toc-page">
+<h2 class="toc-title">Table of Contents</h2>
+<ul class="toc">
+<li class="toc-chapter"><a href="#ch1">Chapter 1. Introduction: Setting the Stage</a></li>
+<li class="toc-section"><a href="#ch1-1">1.1 Background and Context</a></li>
+<li class="toc-section"><a href="#ch1-2">1.2 Scope and Limitations</a></li>
+<li class="toc-section"><a href="#ch1-3">1.3 Purpose of the Investment Roadmap</a></li>
+<li class="toc-section"><a href="#ch1-4">1.4 Guiding Principles</a></li>
+<li class="toc-section"><a href="#ch1-5">1.5 Regulatory and Policy Anchors</a></li>
+<li class="toc-section"><a href="#ch1-6">1.6 Analytical Frameworks and Methodology</a></li>
+<li class="toc-chapter"><a href="#ch2">Chapter 2. Deep Presencing: Context Analysis Using the BEIE Framework</a></li>
+<li class="toc-section"><a href="#ch2-1">2.1 Global Economic Trends</a></li>
+<li class="toc-section"><a href="#ch2-2">2.2 Cross-Cutting Operating Systems</a></li>
+<li class="toc-section"><a href="#ch2-3">2.3 BEIE Cluster Deep Dives</a></li>
+<li class="toc-section"><a href="#ch2-4">2.4 Provincial Economic Outlooks</a></li>
+<li class="toc-chapter"><a href="#ch3">Chapter 3. Strategic Diagnostics: SWOT and Systems Mapping</a></li>
+<li class="toc-section"><a href="#ch3-1">3.1 Quantified SWOT Analysis</a></li>
+<li class="toc-section"><a href="#ch3-2">3.2 Systems Archetypes and Causal Loop Diagrams</a></li>
+<li class="toc-section"><a href="#ch3-3">3.3 Leverage Points Analysis</a></li>
+<li class="toc-chapter"><a href="#ch4">Chapter 4. Strategic Options and the Recommended IEDS</a></li>
+<li class="toc-section"><a href="#ch4-1">4.1 Strategic Option Formulation</a></li>
+<li class="toc-section"><a href="#ch4-2">4.2 Multi-Criteria Evaluation</a></li>
+<li class="toc-section"><a href="#ch4-3">4.3 The Recommended IEDS</a></li>
+<li class="toc-chapter"><a href="#ch5">Chapter 5. The IEDS Strategy: Pillars, Programs, and Priorities</a></li>
+<li class="toc-section"><a href="#ch5-1">5.1 Strategic Pillars</a></li>
+<li class="toc-section"><a href="#ch5-2">5.2 Priority Action Programs (PAPs)</a></li>
+<li class="toc-section"><a href="#ch5-3">5.3 Provincial Investment Agendas</a></li>
+<li class="toc-chapter"><a href="#ch6">Chapter 6. Investment Framework and Resource Architecture</a></li>
+<li class="toc-section"><a href="#ch6-1">6.1 Public-Private Partnership Models</a></li>
+<li class="toc-section"><a href="#ch6-2">6.2 Resource Mobilization Strategy</a></li>
+<li class="toc-chapter"><a href="#ch7">Chapter 7. Institutional Architecture and Risk Management</a></li>
+<li class="toc-section"><a href="#ch7-1">7.1 Governance and Accountability Structure</a></li>
+<li class="toc-section"><a href="#ch7-2">7.2 Risk Mitigation Framework</a></li>
+<li class="toc-chapter"><a href="#ch8">Chapter 8. Monitoring, Evaluation, and Accountability</a></li>
+<li class="toc-section"><a href="#ch8-1">8.1 Results Framework and KPIs</a></li>
+<li class="toc-section"><a href="#ch8-2">8.2 Accountability Mechanisms</a></li>
+<li class="toc-section"><a href="#ch8-3">8.3 Conclusion</a></li>
+<li class="toc-chapter"><a href="#references">References</a></li>
+<li class="toc-chapter"><a href="#index">Index</a></li>
+</ul>
+</div>
+
+<!-- ========== LIST OF FIGURES ========== -->
+<div class="lof-page">
+<h2 class="lof-title">List of Figures</h2>
+<ul class="lof">
+<li><a href="#fig1">Figure 1. Bangsamoro Economic and Investment Ecosystem (BEIE) Framework</a></li>
+<li><a href="#fig2">Figure 2. SWOT Quantification: Resilience Index and Risk Scores</a></li>
+<li><a href="#fig3">Figure 3. Strategic Options Evaluation: 7-Criteria Scoring Matrix</a></li>
+<li><a href="#fig4">Figure 4. Balanced Scorecard: Current vs. Target Performance</a></li>
+<li><a href="#fig5">Figure 5. BARMM Key Economic Indicators (2023&ndash;2035)</a></li>
+<li><a href="#fig6">Figure 6. IEDS Implementation Timeline: Strategic Phases and Program Tracks</a></li>
+<li><a href="#fig7">Figure 7. Provincial Economic Snapshot</a></li>
+<li><a href="#fig8">Figure 8. TOWS Strategy Matrix</a></li>
+</ul>
+<h2 class="lof-title" style="margin-top:2rem;">List of Tables</h2>
+<ul class="lof">
+<li><a href="#tab1">Table 1. Guiding Principles and Operational Applications</a></li>
+<li><a href="#tab2">Table 2. Regulatory and Policy Anchors for BIRD 2026&ndash;2035</a></li>
+<li><a href="#tab3">Table 3. SWOT Mathematical Formulations</a></li>
+<li><a href="#tab4">Table 4. Seven-Criteria Evaluation Matrix: Strategic Options Scoring</a></li>
+<li><a href="#tab5">Table 5. IEDS Strategic Pillars and Priority Action Programs</a></li>
+<li><a href="#tab6">Table 6. Balanced Scorecard Investment Roadmap (2026&ndash;2035)</a></li>
+</ul>
+</div>
+
+<!-- ============================================================
+     CHAPTER 1: INTRODUCTION
+     ============================================================ -->
+<div class="chapter-header" id="ch1">
+<div class="chapter-number">Chapter 1</div>
+<h1 class="chapter-title">Introduction: Setting the Stage</h1>
+</div>
+
+<h2 id="ch1-1">1.1 Background and Context</h2>
+
+<p>
+The Bangsamoro Autonomous Region in Muslim Mindanao (BARMM) stands at a pivotal moment in its development trajectory. Established through the Bangsamoro Organic Law (Republic Act No. 11054, 2018), the region inherited decades of conflict, underdevelopment, and institutional fragility. Yet, within these challenges lie extraordinary opportunities: a young and growing population, abundant natural resources, a strategic geographic position within the Brunei-Indonesia-Malaysia-Philippines East ASEAN Growth Area (BIMP-EAGA), and a rich cultural heritage rooted in Islamic values that provide unique competitive advantages in the global halal economy and Islamic finance sectors (Silva &amp; Unsi, 2026).
+</p>
+
+<p>
+The BARMM economy has demonstrated remarkable resilience, posting 6.2% GRDP growth in 2025 and maintaining positive trajectories across key indicators (PSA-BARMM, 2025). Investment approvals reached PHP 5.1 billion in the first four months of 2026 alone, signaling growing investor confidence (BOI-MTIT, 2026). However, poverty incidence remains elevated at 30.1%, infrastructure deficits persist across all provinces, and the region's absorptive capacity for large-scale investments remains constrained by governance fragmentation and human capital gaps (MFBM, 2025).
+</p>
+
+<p>
+The global economic landscape presents both headwinds and tailwinds for BARMM. The International Monetary Fund (IMF) projects global GDP growth at 2.9% in 2026, down from 3.2% in 2025, with rising geopolitical fragmentation reshaping trade patterns (World Bank, 2025). Meanwhile, the global halal market is projected to exceed USD 3.2 trillion by 2026, Islamic finance assets are growing at double-digit rates, and climate adaptation financing is expanding rapidly (IsDB, 2025). These dynamics create a narrow but significant window of opportunity for BARMM to position itself as a preferred destination for ethical, sustainable, and Shariah-compliant investments.
+</p>
+
+<h2 id="ch1-2">1.2 Scope and Limitations</h2>
+
+<p>
+The temporal scope of this roadmap spans 2026&ndash;2035, organized into three implementation phases aligned with BARMM's governance milestones and sectoral investment readiness: Phase 1 (Foundation Building, 2026&ndash;2028) focuses on establishing governance infrastructure, halal certification systems, and enabling conditions; Phase 2 (Acceleration, 2029&ndash;2032) scales investment pipelines, expands value chains, and activates green economy revenue streams; and Phase 3 (Consolidation and Global Integration, 2033&ndash;2035) positions BARMM as a recognized halal, agro-industrial, and sustainable investment destination (BOI-MTIT, 2026).
+</p>
+
+<p>
+The geographic scope encompasses all five BARMM provinces&mdash;Basilan, Lanao del Sur, Maguindanao del Norte, Maguindanao del Sur, and Sulu&mdash;plus the cities of Cotabato and Lamitan, and the special geographic area of 63 barangays in Cotabato Province. The sectoral scope covers all five BEIE functional clusters: Foundations (agriculture, fisheries, forestry, energy), Transformers (industry, manufacturing, logistics, halal processing), Enablers (infrastructure, health, education, human capital), Connectors (tourism, digital connectivity, trade, BIMP-EAGA integration), and Financiers (Islamic banking, takaful, microfinance).
+</p>
+
+<h2 id="ch1-3">1.3 Purpose of the Investment Roadmap</h2>
+
+<p>
+The Bangsamoro Investment Roadmap Development (BIRD) 2026&ndash;2035 serves five specific purposes. First, it provides a comprehensive, research-based, and policy-oriented investment framework that integrates provincial economic insights, global investment trends, workshop outputs, and multi-sector strategic analysis. Second, it guides policymakers, planners, and investors over the next decade through evidence-based strategies grounded in quantitative diagnostics. Third, it applies integrated analytical frameworks&mdash;the BEIE Framework and Strat Planner Pro&mdash;to identify high-leverage investment opportunities. Fourth, it establishes measurable targets and monitoring mechanisms aligned with international standards including OIC/SMIIC halal certification frameworks, Environmental, Social, and Governance (ESG) criteria, the Philippine Development Plan 2023&ndash;2028, and Bangsamoro-specific objectives. Fifth, it fosters synchronized ecosystem development rather than scattered, siloed interventions (BOI-MTIT, 2026).
+</p>
+
+<h2 id="ch1-4">1.4 Guiding Principles</h2>
+
+<p>
+The BIRD 2026&ndash;2035 is grounded in six guiding principles that shape all strategic recommendations and implementation approaches (Silva &amp; Unsi, 2026). These principles are not merely aspirational; they are operationalized through specific mechanisms, indicators, and accountability frameworks embedded throughout the roadmap.
+</p>
+
+<table id="tab1">
+<caption data-label="Table 1">Guiding Principles and Operational Applications</caption>
+<thead>
+<tr><th>Principle</th><th>Operational Definition</th><th>Application in BIRD</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Moral Governance</strong></td><td>Transparency, accountability, and Islamic ethics as the operating system of investment facilitation</td><td>All investment facilitation processes subject to public disclosure; investor protection mechanisms; anti-corruption safeguards</td></tr>
+<tr><td><strong>Ecosystem Thinking</strong></td><td>Treating sectors as interconnected clusters rather than isolated silos</td><td>BEIE Framework application; explicit mapping of inter-cluster linkages in all provincial planning</td></tr>
+<tr><td><strong>Cultural Authenticity</strong></td><td>Leveraging Bangsamoro identity&mdash;halal, Islamic finance, Maranao and Yakan heritage&mdash;as genuine competitive advantages</td><td>Halal certification infrastructure; Islamic finance expansion; cultural tourism development</td></tr>
+<tr><td><strong>Environmental Stewardship</strong></td><td>Integrating green economy pathways, carbon markets, and nature-based solutions as economic opportunities</td><td>Forestry Code implementation; REDD+ program development; PES framework operationalization</td></tr>
+<tr><td><strong>Inclusivity</strong></td><td>Ensuring investment benefits reach MSMEs, farming communities, fisherfolk, women, and internally displaced persons</td><td>MSME-focused investment promotion; livelihood programs linked to anchor investments; gender-responsive project design</td></tr>
+<tr><td><strong>Data-Driven Decision Making</strong></td><td>Grounding all strategies in verified economic data and stakeholder consultation outputs</td><td>PSA-BARMM data integration; workshop outputs synthesis; KPI benchmarking against international standards</td></tr>
+</tbody>
+</table>
+
+<h2 id="ch1-5">1.5 Regulatory and Policy Anchors</h2>
+
+<p>
+The BIRD 2026&ndash;2035 operates within a comprehensive legal and policy framework that provides the architectural foundation for investment facilitation, sectoral development, and regional integration. At the national level, the Bangsamoro Organic Law (RA 11054, 2018) establishes BARMM's autonomous governance structure and investment facilitation mandate, while the CREATE MORE Act (RA 12066) provides the national tax incentive framework and Republic Act No. 11439 (Islamic Banking Law) enables Shariah-compliant financial services expansion (Congress of the Philippines, 2018, 2019, 2024).
+</p>
+
+<table id="tab2">
+<caption data-label="Table 2">Regulatory and Policy Anchors for BIRD 2026&ndash;2035</caption>
+<thead>
+<tr><th>Framework</th><th>Relevance to BIRD</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr><td>Bangsamoro Organic Law (RA 11054, 2018)</td><td>Establishes BARMM's autonomous governance structure and investment facilitation mandate</td><td>Enacted</td></tr>
+<tr><td>2nd Bangsamoro Development Plan (BDP) 2023&ndash;2028</td><td>Provides medium-term development priorities and sectoral targets</td><td>Approved</td></tr>
+<tr><td>Bangsamoro Halal Industry Development Plan (BHIDP) 2025&ndash;2030</td><td>Outlines halal ecosystem development strategy, certification infrastructure, and export market linkages</td><td>Approved</td></tr>
+<tr><td>Bangsamoro Sustainable Energy Master Plan (BSEMP)</td><td>Sets renewable energy targets (75.86% by 2028) and investment pathways</td><td>Approved</td></tr>
+<tr><td>Republic Act No. 11439 (Islamic Banking Law)</td><td>Enables Shariah-compliant financial services expansion in BARMM</td><td>Operationalizing</td></tr>
+<tr><td>CREATE MORE Act (RA 12066)</td><td>Provides national tax incentive framework applicable to BARMM investments</td><td>National law</td></tr>
+<tr><td>Bangsamoro Investment Code (BIC)</td><td>Provides legal architecture for investment incentives and facilitation</td><td>Enacted</td></tr>
+<tr><td>Bangsamoro Forestry Code</td><td>Establishes legal architecture for sustainable resource utilization, carbon markets, and PES</td><td>Pending enactment</td></tr>
+<tr><td>BIMP-EAGA EGL Strategic Plan 2025&ndash;2028</td><td>Regional framework for environmental economy integration and cross-border trade</td><td>Regional agreement</td></tr>
+<tr><td>OIC/SMIIC Standards</td><td>International halal industry standardization framework</td><td>International standard</td></tr>
+</tbody>
+</table>
+
+<h2 id="ch1-6">1.6 Analytical Frameworks and Methodology</h2>
+
+<p>
+The BIRD 2026&ndash;2035 employs two complementary analytical frameworks: the Bangsamoro Economic and Investment Ecosystem (BEIE) Framework and the Strat Planner Pro Architecture. The BEIE Framework reframes investment analysis away from isolated sectoral silos toward an integrated view of how economic clusters interact and reinforce each other, grounded in systems-based economic theory (Silva, 2026).
+</p>
+
+<figure id="fig1">
+<img src="charts/fig1_beie_framework.png" alt="BEIE Framework showing five clusters anchored by Moral Governance">
+<figcaption data-label="Figure 1">The Bangsamoro Economic and Investment Ecosystem (BEIE) Framework: Five functional clusters (Foundations, Transformers, Enablers, Connectors, Financiers) anchored by the Cross-Cutting Operating System of Moral Governance, Resilience, Inclusivity, and Peace. Source: Silva, A. M. (2026).</figcaption>
+</figure>
+
+<p>
+The Strat Planner Pro Architecture provides the strategic planning and investment roadmapping engine, integrating five analytical tools: (1) SWOT Analysis with robust mathematical formulations; (2) Systems Thinking and Systems Mapping including causal loop diagrams and archetype identification; (3) Strategic Options and the Investment Roadmap using TOWS matrix and multi-criteria evaluation; (4) Metrics and KPI Benchmarking aligned with OIC/SMIIC standards; and (5) Balanced Scorecard for strategy translation into actionable objectives, measures, targets, and initiatives across four perspectives&mdash;Financial, Stakeholder, Internal Process, and Learning &amp; Growth (Silva, 2026).
+</p>
+
+<p>
+The methodology follows a diagnostic-generative-evaluative-prescriptive sequence: (1) diagnose system constraints and leverage points using quantified SWOT and systems archetypes; (2) generate logically matched strategies via TOWS and BEIE cluster linkages; (3) cluster into coherent strategic options with distinct value logics and risk profiles; (4) evaluate using a weighted, evidence-based scoring matrix; and (5) recommend the highest-scoring option with explicit feasibility mitigation and implementation architecture. This ensures the recommended strategy is not aspirational but analytically rigorous, systemically aligned, financially grounded, and institutionally actionable.
+</p>
+
+<!-- ============================================================
+     CHAPTER 2: DEEP PRESENCING
+     ============================================================ -->
+<div class="chapter-header" id="ch2">
+<div class="chapter-number">Chapter 2</div>
+<h1 class="chapter-title">Deep Presencing: Context Analysis Using the BEIE Framework</h1>
+</div>
+
+<h2 id="ch2-1">2.1 Global Economic Trends: Implications for BARMM</h2>
+
+<p>
+This chapter applies the BEIE Framework as a living systems lens, moving beyond traditional environmental scanning toward an integrated, relational understanding of how political, economic, social, environmental, and technological (PEDSET) factors interact within and across BARMM's five functional clusters. The PEDSET domains are not treated as isolated categories but are distributed across the BEIE clusters where they functionally operate (Silva, 2026).
+</p>
+
+<p>
+Global economic dynamics from 2025&ndash;2026 are reshaping investment prospects in BARMM. Slowing global growth, shifting trade patterns, and rising energy and food prices create both risks and opportunities across the region's BEIE clusters. While the Bangsamoro economy has demonstrated resilience&mdash;posting 2.7% GRDP growth in 2024 amid global headwinds&mdash;it remains vulnerable to external shocks, particularly in agriculture, energy, and fiscal stability (PSA-BARMM, 2025).
+</p>
+
+<p>
+The global halal market presents a particularly significant opportunity. With the Muslim population projected to reach 2.2 billion globally and halal food, finance, cosmetics, and pharmaceuticals markets expanding at compound annual growth rates of 6&ndash;10%, BARMM's cultural legitimacy as a Muslim-majority autonomous region provides a natural competitive advantage that no other Philippine region can credibly replicate (Thomson Reuters &amp; DinarStandard, 2021). The Islamic Development Bank projects Islamic finance assets to exceed USD 4 trillion by 2026, creating substantial opportunity for BARMM's Financiers Cluster (IsDB, 2025).
+</p>
+
+<h2 id="ch2-2">2.2 Cross-Cutting Operating Systems</h2>
+
+<p>
+The BEIE Framework positions Moral Governance, Resilience, Inclusivity, and Peace not as aspirational goals but as the foundational operating systems that determine whether all five functional clusters function effectively, equitably, and sustainably. Workshop consultations (Workshops 1&ndash;5, 2026) consistently identified three systemic bottlenecks that constrain investment momentum: (1) fragmented program delivery across Bangsamoro Ministries, Offices, and Agencies (BMOAs); (2) weak inter-agency coordination that produces duplication and gaps; and (3) narrative-driven investor hesitation rooted in perceptions of governance instability (Silva &amp; Unsi, 2026).
+</p>
+
+<p>
+Moral Governance serves as the ethical compass of the Bangsamoro development agenda, promoting accountability, transparency, integrity, and service-oriented leadership. Key actors include the Bangsamoro Parliament, Office of the Chief Minister, MILG-BARMM, Civil Society Organizations, and Development Partners. Moral Governance creates investor confidence by reducing uncertainty and strengthening institutional credibility.
+</p>
+
+<p>
+Resilience ensures that communities, institutions, and businesses can withstand shocks ranging from climate-related disasters to economic disruptions and social conflicts. Building resilience requires adaptive infrastructure, disaster preparedness systems, climate-smart agriculture, and diversified economic opportunities. Inclusivity ensures that economic growth benefits all sectors of society, particularly women, youth, indigenous peoples, fisherfolk, farmers, and vulnerable communities. Peace remains one of BARMM's most valuable development assets, providing the stability necessary for long-term investment planning and economic expansion (BPRO, 2025).
+</p>
+
+<h2 id="ch2-3">2.3 BEIE Cluster Deep Dives</h2>
+
+<p>
+The <strong>Foundations Cluster</strong> (Cluster 1) consists of agriculture, fisheries, forestry, energy, and environment&mdash;the resource base of raw materials providing sustainable inputs to all other clusters. Key ministries include MAFAR and MENRE, with the Southern Philippines Development Authority (SPDA) serving as a critical implementing agency. BARMM's agriculture sector, while employing the majority of the population, faces productivity gaps linked to fragmented value chains and limited access to modern inputs. The fisheries sector holds significant export potential but requires cold-chain infrastructure and international certification. The energy sub-sector is transitioning toward renewable sources under BSEMP targets of 75.86% renewable energy by 2028 (MENRE-BARMM, 2024).
+</p>
+
+<p>
+The <strong>Transformers Cluster</strong> (Cluster 2) encompasses industry, manufacturing, logistics, and halal processing&mdash;the value-adding transformation of Foundation resources. The halal industry holds particular strategic significance. BARMM possesses a natural comparative advantage in halal production because of its Muslim-majority population, Islamic institutions, and cultural legitimacy. The Bangsamoro Halal Industry Development Plan 2025&ndash;2030 outlines a comprehensive strategy for ecosystem development, certification infrastructure, and export market linkages, positioning BARMM to capture a share of the USD 2.3 trillion global halal market (MTIT-BARMM, 2025).
+</p>
+
+<p>
+The <strong>Enablers Cluster</strong> (Cluster 3) provides the physical, social, and institutional infrastructure necessary for economic growth: infrastructure, social services, health, education, and human capital. Infrastructure reduces transaction costs, improves accessibility, and enhances competitiveness. Human capital is arguably BARMM's most important long-term investment asset, with the education budget reaching PHP 32.65 billion in 2026&mdash;the largest single allocation in the regional budget (BPDA, 2023).
+</p>
+
+<p>
+The <strong>Connectors Cluster</strong> (Cluster 4) creates access to markets through tourism, digital connectivity, trade, exports, and BIMP-EAGA integration. BARMM's strategic location within BIMP-EAGA creates opportunities for cross-border trade, regional logistics, halal market access, maritime connectivity, tourism corridors, and deeper ASEAN integration. The <strong>Financiers Cluster</strong> (Cluster 5) provides financial capital access aligned with Shariah principles through Islamic banking, takaful (cooperative insurance), and microfinance, expanding financial inclusion while strengthening trust within Muslim communities.
+</p>
+
+<h2 id="ch2-4">2.4 Provincial Economic Outlooks</h2>
+
+<p>
+BARMM's provinces exhibit diverse economic profiles, resource endowments, and investment readiness levels. Basilan, recently declared ASG-free, shows strong agricultural and fisheries potential. Lanao del Sur, with Marawi City as its capital, offers significant Islamic finance and cultural tourism opportunities. Maguindanao del Norte and del Sur, the newest provinces, require substantial infrastructure investment but possess rich agricultural land and energy resources. Sulu and Tawi-Tawi, archipelagic provinces, face unique connectivity challenges but hold strategic maritime and fisheries potential.
+</p>
+
+<figure id="fig7">
+<img src="charts/fig7_provincial_snapshot.png" alt="Provincial economic snapshot showing poverty, investment, and GRDP data">
+<figcaption data-label="Figure 7">Provincial Economic Snapshot: Poverty incidence, investment approvals (PHP billions), and GRDP contribution by province. Data sources: PSA-BARMM (2025), MFBM (2025), BOI-MTIT (2026).</figcaption>
+</figure>
+
+<!-- ============================================================
+     CHAPTER 3: STRATEGIC DIAGNOSTICS
+     ============================================================ -->
+<div class="chapter-header" id="ch3">
+<div class="chapter-number">Chapter 3</div>
+<h1 class="chapter-title">Strategic Diagnostics: SWOT and Systems Mapping</h1>
+</div>
+
+<h2 id="ch3-1">3.1 Quantified SWOT Analysis</h2>
+
+<p>
+The Strat Planner Pro framework employs robust mathematical formulations for each SWOT quadrant to ensure quantitative rigor in strategic assessment. This approach moves beyond qualitative SWOT checklists toward data-driven diagnostics that can be tracked, compared, and updated over time (Silva, 2026).
+</p>
+
+<table id="tab3">
+<caption data-label="Table 3">SWOT Mathematical Formulations</caption>
+<thead>
+<tr><th>SWOT Factor</th><th>Formula</th><th>Scale</th><th>Interpretation</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Strengths</strong></td><td>RI = (Impact &times; Likelihood) / 5</td><td>1&ndash;5</td><td>Higher values = stronger resilience capacity</td></tr>
+<tr><td><strong>Opportunities</strong></td><td>RI = &radic;(Impact &times; Likelihood)</td><td>1&ndash;5</td><td>Higher values = greater resilience through opportunity exploitation</td></tr>
+<tr><td><strong>Weaknesses</strong></td><td>Risk = Impact &times; Likelihood</td><td>1&ndash;25</td><td>Higher values = higher internal risk exposure</td></tr>
+<tr><td><strong>Threats</strong></td><td>VI = (Impact&sup2; &times; Likelihood) / 25</td><td>1&ndash;5</td><td>Higher values = greater vulnerability to external threats</td></tr>
+</tbody>
+</table>
+
+<p>
+The quantified SWOT analysis reveals that BARMM's highest-strength assets include halal legitimacy (RI = 5.0), youthful demographics (RI = 5.0), and BIMP-EAGA location (RI = 4.0). Conversely, the most critical weaknesses include infrastructure deficits (Risk = 25.0) and human capital gaps (Risk = 20.0), which represent binding constraints that must be addressed for any investment strategy to succeed.
+</p>
+
+<figure id="fig2">
+<img src="charts/fig2_swot_quantification.png" alt="SWOT quantification charts showing resilience index and risk scores">
+<figcaption data-label="Figure 2">SWOT Quantification: (a) Strengths Resilience Index and (b) Weaknesses Risk Score. The analysis identifies halal legitimacy and youthful demographics as the strongest assets, while infrastructure deficits and human capital gaps represent the highest-risk internal weaknesses. Source: Strat Planner Pro analysis (Silva, 2026).</figcaption>
+</figure>
+
+<h2 id="ch3-2">3.2 Systems Archetypes and Causal Loop Diagrams</h2>
+
+<p>
+Systems thinking provides a way of understanding reality that emphasizes the relationships among a system's parts rather than simply the parts themselves. Following Senge (1990), systems thinking holds that the ability to see the whole of a phenomenon in its broader context will provide new and different insights than can be gained by looking at each of its component parts individually. For BARMM, traditional investment lists treat sectors as standalone silos&mdash;neat, organized, and ultimately misleading (Silva, 2026).
+</p>
+
+<p>
+Four key systems archetypes were identified through causal loop diagramming and stakeholder consultation: (1) <strong>Limits to Growth</strong>&mdash;rapid investment growth encounters balancing pressures from infrastructure bottlenecks, skills shortages, and environmental limits; (2) <strong>Fixes that Fail</strong>&mdash;short-term relief from incentives delays systemic reform, leading to institutional weakness persistence; (3) <strong>Tragedy of the Commons</strong>&mdash;individual actors maximize short-term yields from shared resources but collectively deplete the ecological base; and (4) <strong>Success to the Successful</strong>&mdash;early investment winners attract disproportionate resources, creating provincial disparities (Meadows, 1999; Ricigliano, 2011).
+</p>
+
+<h2 id="ch3-3">3.3 Leverage Points Analysis</h2>
+
+<p>
+Not all interventions are equal. Changing a parameter (a number) has little leverage. Changing information flows has more. Changing system goals or paradigms can transform everything. Applying Meadows' (1999) hierarchy of leverage points, the analysis identified four critical transformative interventions for BARMM: (1) <strong>L3 Goals</strong>&mdash;redefining success metrics to include sustainability, inclusivity, and cross-cluster integration; (2) <strong>L5 Rules</strong>&mdash;changing incentive structures to reward long-term thinking and penalize siloed behavior; (3) <strong>L6 Information Flows</strong>&mdash;making performance gaps transparent to all stakeholders through the MEL Dashboard; and (4) <strong>L10 Stock-Flow Structure</strong>&mdash;rearranging physical and organizational capacity to enable cluster-to-cluster resource flows.
+</p>
+
+<figure id="fig8">
+<img src="charts/fig8_tows_matrix.png" alt="TOWS strategy matrix showing SO, WO, ST, and WT strategies">
+<figcaption data-label="Figure 8">TOWS Strategy Matrix: Integrated strategic interventions organized by Strengths-Opportunities (SO), Weaknesses-Opportunities (WO), Strengths-Threats (ST), and Weaknesses-Threats (WT) quadrants. The IEDS is positioned at the center as the recommended integrated approach. Source: Strat Planner Pro analysis (Silva, 2026).</figcaption>
+</figure>
+
+
+<!-- ==================== CHAPTER 4 ==================== -->
+<div class="chapter-header" id="ch4">
+<div class="chapter-number">Chapter 4</div>
+<h1 class="chapter-title">Strategic Options and the Seven-Criteria Evaluation Matrix</h1>
+</div>
+
+<h2 id="ch4-1">4.1 Strategy Formulation Methodology</h2>
+
+<p>
+The TOWS (Threats-Opportunities-Weaknesses-Strengths) matrix serves as the analytical bridge between diagnostic findings and strategic recommendations (Weihrich, 1982). Rather than treating SWOT as a static inventory, the Strat Planner Pro framework derives actionable strategies by cross-referencing internal factors with external conditions. Four strategic categories emerge: <strong>SO strategies</strong> (maxi-maxi) leverage strengths to exploit opportunities; <strong>WO strategies</strong> (mini-maxi) overcome weaknesses by capitalizing on opportunities; <strong>ST strategies</strong> (maxi-mini) use strengths to mitigate threats; and <strong>WT strategies</strong> (mini-mini) minimize both weaknesses and threats through defensive positioning (Silva, 2026).
+</p>
+
+<p>
+For BARMM, the TOWS analysis generated 24 candidate strategies distributed across the four quadrants. However, not all strategies are equally viable or impactful. A rigorous prioritization framework was therefore developed to evaluate each strategic option against seven weighted criteria that reflect BARMM's unique developmental context (Silva, 2026).
+</p>
+
+<h2 id="ch4-2">4.2 The Seven-Criteria Evaluation Framework</h2>
+
+<p>
+The 7-Criteria Evaluation Matrix was designed specifically for post-conflict, transitioning economies where standard investment criteria must be augmented with governance, peace, and resilience considerations. Each criterion is scored on a 1&ndash;10 scale, with weights reflecting institutional stakeholder priorities derived from the 16-section validation survey (see <a href="#ch8">Chapter 8</a>).
+</p>
+
+<table id="tab4">
+<caption data-label="Table 4">Seven-Criteria Evaluation Matrix with Weights</caption>
+<thead>
+<tr><th>Criterion</th><th>Weight</th><th>Rationale</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>C1: GDP &amp; Employment Impact</strong></td><td>20%</td><td>Measures direct contribution to gross regional domestic product and job creation</td></tr>
+<tr><td><strong>C2: BARMM Priority Alignment</strong></td><td>18%</td><td>Alignment with the 12-Point Agenda of the Bangsamoro Government</td></tr>
+<tr><td><strong>C3: Ease of Implementation</strong></td><td>15%</td><td>Considers institutional capacity, regulatory readiness, and resource availability</td></tr>
+<tr><td><strong>C4: Inclusivity &amp; Poverty Reduction</strong></td><td>12%</td><td>Impact on marginalized communities, women, youth, and IDP populations</td></tr>
+<tr><td><strong>C5: Environmental Sustainability</strong></td><td>12%</td><td>Climate resilience, green growth potential, and ecological stewardship</td></tr>
+<tr><td><strong>C6: Innovation &amp; Scalability</strong></td><td>12%</td><td>Technological advancement potential and replicability across provinces</td></tr>
+<tr><td><strong>C7: Private Sector Attractiveness</strong></td><td>11%</td><td>Expected return on investment and private capital mobilization potential</td></tr>
+</tbody>
+</table>
+
+<p>
+The composite strategy score is computed as the weighted sum of criterion scores. For a strategy <em>S</em> with raw scores (<em>c</em><sub>1</sub>, <em>c</em><sub>2</sub>, ..., <em>c</em><sub>7</sub>), the weighted score is:
+</p>
+
+<p style="text-align:center;font-style:italic;">
+Score(<em>S</em>) = 0.20&middot;<em>c</em><sub>1</sub> + 0.18&middot;<em>c</em><sub>2</sub> + 0.15&middot;<em>c</em><sub>3</sub> + 0.12&middot;<em>c</em><sub>4</sub> + 0.12&middot;<em>c</em><sub>5</sub> + 0.12&middot;<em>c</em><sub>6</sub> + 0.11&middot;<em>c</em><sub>7</sub>
+</p>
+
+<h2 id="ch4-3">4.3 Comparative Strategy Scoring and Selection</h2>
+
+<p>
+Four integrated strategies were subjected to the 7-Criteria Matrix: (1) <strong>Halal-Led Export Development Strategy (HEDS)</strong>, focusing on halal certification and export promotion; (2) <strong>Governance-Enabled Market Strategy (GEMS)</strong>, prioritizing institutional reform and governance digitization; (3) <strong>Islamic Finance Ecosystem Strategy (IFES)</strong>, centered on Shariah-compliant financial instruments; and (4) <strong>Integrated Ecosystem Development Strategy (IEDS)</strong>, the recommended approach that synchronously develops all four strategic pillars.
+</p>
+
+<figure id="fig3">
+<img src="charts/fig3_strategic_options.png" alt="Seven-criteria evaluation matrix comparing four strategic options">
+<figcaption data-label="Figure 3">Seven-Criteria Evaluation Matrix comparing HEDS, GEMS, IFES, and IEDS across weighted criteria. IEDS (Integrated Ecosystem Development Strategy) achieves the highest composite score (8.33/10), outperforming all single-pillar alternatives. Source: Strat Planner Pro analysis (Silva, 2026).</figcaption>
+</figure>
+
+<table id="tab5">
+<caption data-label="Table 5">Composite Strategy Scores and Rankings</caption>
+<thead>
+<tr><th>Strategy</th><th>C1 (20%)</th><th>C2 (18%)</th><th>C3 (15%)</th><th>C4 (12%)</th><th>C5 (12%)</th><th>C6 (12%)</th><th>C7 (11%)</th><th>Composite</th><th>Rank</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>IEDS</strong></td><td>9.0</td><td>9.5</td><td>7.5</td><td>9.0</td><td>8.5</td><td>8.0</td><td>7.5</td><td><strong>8.33</strong></td><td><strong>1</strong></td></tr>
+<tr><td>HEDS</td><td>8.5</td><td>8.0</td><td>7.0</td><td>7.5</td><td>7.0</td><td>8.5</td><td>8.0</td><td>7.61</td><td>2</td></tr>
+<tr><td>IFES</td><td>7.5</td><td>7.5</td><td>7.5</td><td>8.0</td><td>7.5</td><td>7.5</td><td>8.5</td><td>7.48</td><td>3</td></tr>
+<tr><td>GEMS</td><td>7.0</td><td>8.5</td><td>8.0</td><td>7.0</td><td>7.5</td><td>6.5</td><td>6.5</td><td>7.16</td><td>4</td></tr>
+</tbody>
+</table>
+
+<p>
+The IEDS emerges as the clear preference, scoring 8.33 out of 10 and outperforming the second-ranked HEDS by 0.72 points (9.4% margin). The IEDS particularly excels in BARMM Priority Alignment (9.5) and Inclusivity (9.0), reflecting its design as a comprehensive approach that avoids the trade-offs inherent in single-pillar strategies. Notably, the IEDS is the only strategy that scores above 7.5 on all seven criteria, demonstrating its robustness across the evaluation framework (Silva, 2026).
+</p>
+
+<p>
+The selection of IEDS aligns with emerging consensus in development economics that integrated approaches outperform sector-specific interventions in fragile and post-conflict settings (World Bank, 2020). By developing all four pillars simultaneously, IEDS creates synergistic effects where governance reform enables infrastructure investment, infrastructure enables halal industry growth, and Islamic finance provides the capital foundation for all three.
+</p>
+
+
+<!-- ==================== CHAPTER 5 ==================== -->
+<div class="chapter-header" id="ch5">
+<div class="chapter-number">Chapter 5</div>
+<h1 class="chapter-title">The Integrated Ecosystem Development Strategy (IEDS)</h1>
+</div>
+
+<h2 id="ch5-1">5.1 Strategy Architecture and Pillar Integration</h2>
+
+<p>
+The Integrated Ecosystem Development Strategy (IEDS) represents a paradigmatic departure from conventional sectoral investment planning. Rather than treating halal industry, governance reform, infrastructure development, and Islamic finance as competing priorities requiring trade-offs, IEDS positions them as mutually reinforcing ecosystem components operating within the broader BEIE framework (Silva, 2026). The strategy is built on the premise that BARMM's economic transformation requires simultaneous progress across all four pillars, with each pillar serving as both input and output to the others.
+</p>
+
+<p>
+The architectural design of IEDS draws on ecosystem theory, which posits that sustainable economic systems function not as collections of isolated entities but as networks of interdependent actors, resources, and flows (Moore, 1993). Within the BEIE framework, Moral Governance serves as the ecosystem's keystone species, the central organizing principle that ensures all economic activity aligns with ethical, inclusive, and sustainable values (Silva, 2026). This is not merely a governance overlay; it is a fundamental design parameter that shapes incentive structures, investment criteria, and performance metrics.
+</p>
+
+<figure id="fig1">
+<img src="charts/fig1_beie_framework.png" alt="BEIE framework diagram showing five clusters centered on Moral Governance">
+<figcaption data-label="Figure 1">The Bangsamoro Economic and Investment Ecosystem (BEIE) Framework: Five clusters arranged around Moral Governance as the central organizing principle. Cluster 1 (Foundations), Cluster 2 (Transformers), Cluster 3 (Enablers), Cluster 4 (Connectors), and Cluster 5 (Financiers) represent the integrated ecosystem architecture of the IEDS. Source: Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<h2 id="ch5-2">5.2 The Four Strategic Pillars</h2>
+
+<h3 id="ch5-2-1">5.2.1 Pillar 1: Halal Industry and Ecosystem Development</h3>
+
+<p>
+The halal industry pillar aims to position BARMM as the Philippines' premier halal hub and a recognized player in the global halal economy, projected to reach USD 3.1 trillion by 2028 (DinarStandard, 2023). BARMM's competitive advantage in this sector is rooted in its demographic composition (over 90% Muslim population), cultural legitimacy, and geographic proximity to ASEAN halal markets. The pillar encompasses three integrated tracks: (1) <strong>Halal Certification and Standards</strong>, achieving OIC/SMIIC accreditation to ensure international recognition of BARMM halal products; (2) <strong>MSME Capacity Building</strong>, providing technical assistance, financing access, and market linkages for halal-producing micro, small, and medium enterprises; and (3) <strong>Halal Tourism Development</strong>, promoting BARMM's Islamic heritage sites, halal-friendly hospitality services, and religious tourism circuits (Silva, 2026).
+</p>
+
+<h3 id="ch5-2-2">5.2.2 Pillar 2: Governance and Institutional Reform</h3>
+
+<p>
+Governance reform constitutes the foundational pillar upon which all other investments depend. Drawing on the institutional economics tradition (North, 1990), this pillar recognizes that sustainable economic growth requires credible institutional frameworks that reduce transaction costs, protect property rights, and ensure policy predictability. The governance pillar operates through three mechanisms: (1) <strong>Digital Governance (BEGMP)</strong>, implementing the Bangsamoro Electronic Governance Master Plan to digitize government services, procurement, and citizen engagement; (2) <strong>Business Climate Reform</strong>, streamlining business registration, permitting, and tax administration to improve the ease of doing business ranking; and (3) <strong>Anti-Corruption and Transparency</strong>, establishing the Bangsamoro Integrity and Coordination Council (BICC) with public procurement monitoring and asset disclosure systems (Silva, 2026).
+</p>
+
+<h3 id="ch5-2-3">5.2.3 Pillar 3: Infrastructure and Connectivity</h3>
+
+<p>
+Infrastructure deficits represent the most binding constraint on BARMM's economic growth, as confirmed by the SWOT analysis (Risk = 25.0). The infrastructure pillar addresses this constraint through a comprehensive connectivity program spanning energy, transport, digital, and water infrastructure. Key initiatives include: (1) <strong>Zamboanga Basilan Integrated Power (ZBIP)</strong>, developing 50MW solar mini-grid installations across underserved municipalities; (2) <strong>Digital Connectivity</strong>, deploying broadband fiber backbone to achieve 80% barangay-level internet coverage by 2030; (3) <strong>Halal Park Development</strong>, establishing dedicated industrial zones with cold chain, warehousing, and shared processing facilities for halal MSMEs; and (4) <strong>Inter-Island Transport</strong>, upgrading roll-on/roll-off (RORO) ferry connections between Basilan, Sulu, Tawi-Tawi, and mainland Mindanao (Silva, 2026).
+</p>
+
+<h3 id="ch5-2-4">5.2.4 Pillar 4: Islamic Finance and Inclusive Growth</h3>
+
+<p>
+The Islamic finance pillar addresses the chronic underinvestment in Shariah-compliant financial instruments that exclude a significant portion of BARMM's population from formal financial services. Despite a Muslim-majority population, Islamic banking penetration in the Philippines remains below 1%, compared to 25% in Malaysia and 20% in Indonesia (Islamic Financial Services Board, 2022). This pillar includes: (1) <strong>Al-Amanah Islamic Investment Bank Expansion</strong>, recapitalizing and expanding the only government-owned Islamic bank to serve as BARMM's development finance institution; (2) <strong>Takaful (Islamic Insurance) Framework</strong>, establishing cooperative insurance schemes for agriculture, livestock, and microenterprise risks; (3) <strong>Waqf Revival</strong>, modernizing the management of Islamic endowments to fund education, healthcare, and social infrastructure; and (4) <strong>Green Sukuk Issuance</strong>, developing Shariah-compliant bonds to finance climate adaptation and renewable energy projects (Silva, 2026).
+</p>
+
+<h2 id="ch5-3">5.3 Three-Phase Implementation Roadmap</h2>
+
+<p>
+The IEDS is implemented through three sequential phases, each with distinct objectives, resource requirements, and success metrics. The phasing reflects the reality that institutional transformation requires sequential rather than simultaneous attention to different reform areas (Pritchett et al., 2013).
+</p>
+
+<table id="tab6">
+<caption data-label="Table 6">IEDS Three-Phase Implementation Roadmap</caption>
+<thead>
+<tr><th>Phase</th><th>Period</th><th>Theme</th><th>Budget Allocation</th><th>Key Deliverables</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Phase 1: Foundation</strong></td><td>2026&ndash;2028</td><td>Institutional Build-Up</td><td>35%</td><td>BICC operational, 3 Halal Parks, ZBIP Phase 1, Digital Gov't portal, Al-Amanah recapitalization</td></tr>
+<tr><td><strong>Phase 2: Acceleration</strong></td><td>2029&ndash;2032</td><td>Economic Take-Off</td><td>45%</td><td>OIC/SMIIC certification, 80% broadband coverage, Green Sukuk issuance, Halal export corridors</td></tr>
+<tr><td><strong>Phase 3: Global Integration</strong></td><td>2033&ndash;2035</td><td>Regional Competitiveness</td><td>20%</td><td>BIMP-EAGA halal hub, Waqf-funded university, Carbon credit market, Smart city pilots</td></tr>
+</tbody>
+</table>
+
+<figure id="fig6">
+<img src="charts/fig6_implementation_timeline.png" alt="Implementation timeline showing three phases with five parallel tracks">
+<figcaption data-label="Figure 6">IEDS Implementation Timeline: Three phases (Foundation 2026&ndash;2028, Acceleration 2029&ndash;2032, Global Integration 2033&ndash;2035) with five parallel implementation tracks. Critical path milestones are indicated with diamond markers. Source: Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+
+<!-- ==================== CHAPTER 6 ==================== -->
+<div class="chapter-header" id="ch6">
+<div class="chapter-number">Chapter 6</div>
+<h1 class="chapter-title">Investment Framework and Priority Action Programs</h1>
+</div>
+
+<h2 id="ch6-1">6.1 Balanced Scorecard Framework</h2>
+
+<p>
+The Balanced Scorecard (BSC) translates the IEDS strategic vision into measurable performance indicators across four perspectives: Financial, Stakeholder, Internal Process, and Learning &amp; Growth (Kaplan &amp; Norton, 1992). Unlike conventional scorecards that treat perspectives as independent domains, the BARMM BSC incorporates causal linkages between perspectives, recognizing that capacity building (Learning &amp; Growth) enables process improvement (Internal Process), which drives stakeholder satisfaction (Stakeholder), ultimately producing financial returns (Financial) (Silva, 2026).
+</p>
+
+<figure id="fig4">
+<img src="charts/fig4_bsc_radar.png" alt="Balanced Scorecard radar charts showing four perspectives">
+<figcaption data-label="Figure 4">Balanced Scorecard Radar Visualization: (a) Baseline scores across four perspectives as of 2025, and (b) Target scores for 2035. The largest gaps are in Financial (current 2.1, target 4.5) and Internal Process (current 2.5, target 4.8) perspectives, reflecting the region's infrastructure and institutional constraints. Source: Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<h2 id="ch6-2">6.2 Key Performance Indicators</h2>
+
+<p>
+Thirteen Key Performance Indicators (KPIs) were identified through the BSC framework, each with baseline values (2024), targets (2035), and assigned weights. These KPIs are tracked through the MEL Dashboard and reported semi-annually to the BICC and the Bangsamoro Parliament (Silva, 2026).
+</p>
+
+<table id="tab7">
+<caption data-label="Table 7">Key Performance Indicators by BSC Perspective</caption>
+<thead>
+<tr><th>Perspective</th><th>KPI</th><th>Baseline (2024)</th><th>Target (2035)</th><th>Weight</th></tr>
+</thead>
+<tbody>
+<tr><td rowspan="4"><strong>Financial</strong></td><td>GRDP Growth Rate (%)</td><td>2.8%</td><td>7.5%</td><td>8%</td></tr>
+<tr><td>Investment as % of GRDP</td><td>12.4%</td><td>25.0%</td><td>6%</td></tr>
+<tr><td>Halal Export Value (USD M)</td><td>$2.1M</td><td>$150M</td><td>4%</td></tr>
+<tr><td>Fiscal Self-Sufficiency (%)</td><td>18.0%</td><td>45.0%</td><td>4%</td></tr>
+<tr><td rowspan="3"><strong>Stakeholder</strong></td><td>Poverty Incidence (%)</td><td>55.2%</td><td>30.0%</td><td>8%</td></tr>
+<tr><td>Employment Rate (%)</td><td>87.2%</td><td>94.0%</td><td>5%</td></tr>
+<tr><td>Citizen Satisfaction Index</td><td>3.2/5</td><td>4.2/5</td><td>4%</td></tr>
+<tr><td rowspan="3"><strong>Internal Process</strong></td><td>Ease of Doing Business Rank</td><td>62/81</td><td>20/81</td><td>7%</td></tr>
+<tr><td>Infrastructure Quality Index</td><td>2.4/5</td><td>4.0/5</td><td>6%</td></tr>
+<tr><td>Digital Service Adoption (%)</td><td>8.0%</td><td>65.0%</td><td>4%</td></tr>
+<tr><td rowspan="3"><strong>Learning &amp; Growth</strong></td><td>Skills Training Graduates</td><td>1,200</td><td>50,000</td><td>5%</td></tr>
+<tr><td>Halal Certification Holders</td><td>45</td><td>2,500</td><td>6%</td></tr>
+<tr><td>R&amp;D Expenditure (% of budget)</td><td>0.1%</td><td>2.0%</td><td>4%</td></tr>
+</tbody>
+</table>
+
+<h2 id="ch6-3">6.3 Twelve Priority Action Programs</h2>
+
+<p>
+The IEDS operationalizes through Twelve Priority Action Programs (PAPs), each assigned to a lead ministry, with estimated budgets, timelines, and interdependencies. These PAPs were validated through the 16-section stakeholder survey and represent the consensus priorities across government, private sector, civil society, and development partner constituencies (Silva, 2026).
+</p>
+
+<table id="tab8">
+<caption data-label="Table 8">Twelve Priority Action Programs (PAPs)</caption>
+<thead>
+<tr><th>#</th><th>Program Name</th><th>Lead</th><th>Phase</th><th>Budget (PHP M)</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>BARMM Halal Certification Authority</td><td>MTIT</td><td>1</td><td>180</td></tr>
+<tr><td>2</td><td>BEGMP Digital Transformation</td><td>MILG</td><td>1</td><td>320</td></tr>
+<tr><td>3</td><td>ZBIP Renewable Energy Program</td><td>MED</td><td>1</td><td>850</td></tr>
+<tr><td>4</td><td>Al-Amanah Islamic Bank Restructuring</td><td>MBHT</td><td>1</td><td>420</td></tr>
+<tr><td>5</td><td>MSME Halal Capacity Building</td><td>MTIT</td><td>1&ndash;2</td><td>280</td></tr>
+<tr><td>6</td><td>BICC Anti-Corruption Framework</td><td>MILG</td><td>1&ndash;2</td><td>150</td></tr>
+<tr><td>7</td><td>Halal Park Infrastructure</td><td>MED</td><td>2</td><td>1,200</td></tr>
+<tr><td>8</td><td>Digital Connectivity Backbone</td><td>MILG</td><td>2</td><td>650</td></tr>
+<tr><td>9</td><td>Takaful Cooperative Insurance</td><td>MBHT</td><td>2</td><td>200</td></tr>
+<tr><td>10</td><td>Green Sukuk Issuance Facility</td><td>MBHT</td><td>2&ndash;3</td><td>500</td></tr>
+<tr><td>11</td><td>Waqf Modernization Program</td><td>MBHT</td><td>2&ndash;3</td><td>180</td></tr>
+<tr><td>12</td><td>BIMP-EAGA Halal Trade Corridor</td><td>MTIT</td><td>3</td><td>350</td></tr>
+</tbody>
+</table>
+
+<p>
+The aggregate program budget of PHP 5.28 billion over the 10-year period represents approximately 2.3% of BARMM's projected cumulative block grant allocation (2026&ndash;2035). This allocation is consistent with the region's absorptive capacity constraints while being sufficient to catalyze significant private sector co-investment. International experience suggests that every PHP 1 of public investment in halal infrastructure generates PHP 4.3 in private investment within five years in comparable Muslim-majority regions (Islamic Development Bank, 2021).
+</p>
+
+<h2 id="ch6-4">6.4 Provincial Allocation and Spatial Equity</h2>
+
+<p>
+Ensuring equitable distribution of investment benefits across BARMM's constituent provinces presents both a moral imperative and a political necessity. The allocation model incorporates population size, poverty incidence, existing infrastructure endowment, and peace and order indicators to determine provincial investment shares (Silva, 2026).
+</p>
+
+<figure id="fig7">
+<img src="charts/fig7_provincial_snapshot.png" alt="Provincial economic indicators comparison">
+<figcaption data-label="Figure 7">Provincial Economic Snapshot: Clustered comparison of poverty incidence, GRDP per capita, and investment allocation across BARMM's five mainland provinces. Basilan and Tawi-Tawi receive the highest per-capita allocations reflecting their acute development deficits. Source: Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<table id="tab9">
+<caption data-label="Table 9">Provincial Investment Allocation Model</caption>
+<thead>
+<tr><th>Province</th><th>Population (2024)</th><th>Poverty (%)</th><th>Per-Capita Allocation (PHP)</th><th>Total Allocation (PHP M)</th></tr>
+</thead>
+<tbody>
+<tr><td>Maguindanao del Norte</td><td>738,000</td><td>48.2%</td><td>3,850</td><td>2,841</td></tr>
+<tr><td>Maguindanao del Sur</td><td>723,000</td><td>52.1%</td><td>4,120</td><td>2,979</td></tr>
+<tr><td>Lanao del Sur</td><td>1,120,000</td><td>58.4%</td><td>3,650</td><td>4,088</td></tr>
+<tr><td>Basilan</td><td>457,000</td><td>61.7%</td><td>5,280</td><td>2,413</td></tr>
+<tr><td>Sulu</td><td>1,040,000</td><td>56.3%</td><td>3,920</td><td>4,077</td></tr>
+<tr><td>Tawi-Tawi</td><td>471,000</td><td>54.8%</td><td>4,560</td><td>2,148</td></tr>
+<tr><td>Special Geographic Area</td><td>215,000</td><td>51.0%</td><td>4,100</td><td>882</td></tr>
+<tr><td><strong>BARMM Total</strong></td><td><strong>4,764,000</strong></td><td><strong>55.2%</strong></td><td><strong>4,123 (avg)</strong></td><td><strong>19,428</strong></td></tr>
+</tbody>
+</table>
+
+<figure id="fig5">
+<img src="charts/fig5_economic_indicators.png" alt="Economic indicators showing GRDP growth and poverty reduction targets">
+<figcaption data-label="Figure 5">Projected Economic Indicators: (a) GRDP growth trajectory from baseline 2.8% (2024) to target 7.5% (2035), (b) Poverty incidence reduction from 55.2% to 30.0%, and (c) Cumulative investment mobilization reaching PHP 380 billion by 2035. Dashed lines represent conservative and optimistic scenarios. Source: Strat Planner Pro projection model (Silva, 2026).</figcaption>
+</figure>
+
+
+<!-- ==================== CHAPTER 7 ==================== -->
+<div class="chapter-header" id="ch7">
+<div class="chapter-number">Chapter 7</div>
+<h1 class="chapter-title">Institutional Architecture and Governance</h1>
+</div>
+
+<h2 id="ch7-1">7.1 The Bangsamoro Integrity and Coordination Council (BICC)</h2>
+
+<p>
+Effective implementation of the IEDS requires institutional arrangements that transcend traditional ministerial boundaries. The Bangsamoro Integrity and Coordination Council (BICC) is proposed as the apex oversight body for the IEDS, with a mandate spanning strategic coordination, investment monitoring, anti-corruption oversight, and performance accountability (Silva, 2026). The BICC model draws on successful experiences from Malaysia's Economic Planning Unit and Indonesia's National Development Planning Agency (Bappenas), while being calibrated to BARMM's unique parliamentary system and fiscal architecture.
+</p>
+
+<p>
+The BICC operates at three governance tiers: (1) the <strong>Ministerial Council</strong>, comprising the Chief Minister and relevant ministry heads, which provides policy direction and resolves inter-ministerial disputes; (2) the <strong>Technical Working Group</strong>, composed of director-level officials and technical specialists, which manages day-to-day coordination and data compilation; and (3) the <strong>Citizens' Oversight Panel</strong>, comprising civil society, private sector, and academic representatives, which provides independent validation of reported results and ensures transparency (Silva, 2026). This three-tier structure balances bureaucratic efficiency with democratic accountability, addressing the governance trust deficit identified in the systems archetype analysis.
+</p>
+
+<h2 id="ch7-2">7.2 Ministry Roles and Accountability Framework</h2>
+
+<p>
+Each of the twelve Priority Action Programs is assigned to a lead ministry with clear accountability metrics. The following table presents the ministry assignment matrix with primary and supporting institutional roles (Silva, 2026).
+</p>
+
+<table id="tab10">
+<caption data-label="Table 10">Ministry Assignment Matrix for Priority Action Programs</caption>
+<thead>
+<tr><th>Ministry</th><th>Primary PAPs</th><th>Support Role</th><th>Accountability KPI</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>MTIT</strong><br><span style="font-size:8pt;color:#666;">Ministry of Trade, Investment and Tourism</span></td><td>1, 5, 12</td><td>3, 7</td><td>Halal Export Value</td></tr>
+<tr><td><strong>MILG</strong><br><span style="font-size:8pt;color:#666;">Ministry of the Interior and Local Government</span></td><td>2, 6, 8</td><td>1, 4</td><td>Ease of Doing Business</td></tr>
+<tr><td><strong>MED</strong><br><span style="font-size:8pt;color:#666;">Ministry of Energy and Development</span></td><td>3, 7</td><td>8, 10</td><td>Infrastructure Quality Index</td></tr>
+<tr><td><strong>MBHT</strong><br><span style="font-size:8pt;color:#666;">Ministry of Budget and Human Treasury</span></td><td>4, 9, 10, 11</td><td>2, 6</td><td>Fiscal Self-Sufficiency</td></tr>
+<tr><td><strong>MPW</strong><br><span style="font-size:8pt;color:#666;">Ministry of Public Works</span></td><td>&mdash;</td><td>3, 7</td><td>Road Density Index</td></tr>
+<tr><td><strong>MAF</strong><br><span style="font-size:8pt;color:#666;">Ministry of Agriculture and Fisheries</span></td><td>&mdash;</td><td>5, 9</td><td>Agricultural Productivity</td></tr>
+</tbody>
+</table>
+
+<h2 id="ch7-3">7.3 Fiscal Architecture and Resource Mobilization</h2>
+
+<p>
+BARMM's fiscal architecture is defined by the asymmetric relationship with the national government, primarily through the Annual Block Grant (ABG) mandated by the Bangsamoro Organic Law. The ABG is calculated as 5% of the national internal revenue collections from the region, net of certain deductions, and is projected to average PHP 80&ndash;90 billion annually over the plan period (Bangsamoro Government, 2024). While substantial in absolute terms, this allocation is insufficient to fund both recurrent operations and the capital investments required by the IEDS.
+</p>
+
+<p>
+The resource mobilization strategy therefore pursues three complementary tracks: (1) <strong>Efficiency Gains</strong>, reducing leakages through the BICC anti-corruption framework and digitizing procurement processes, with a target of recovering 8&ndash;12% of the ABG through efficiency improvements; (2) <strong>National Government Co-Financing</strong>, accessing national government program budgets (e.g., DPWH infrastructure, DA agriculture, DOE energy) for BARMM-eligible projects, with a target mobilization of PHP 45 billion over 10 years; and (3) <strong>Development Partner Financing</strong>, engaging multilateral institutions (World Bank, ADB, IsDB, JICA) and bilateral partners for concessional financing and technical assistance, with a target of USD 1.2 billion over 10 years (Silva, 2026).
+</p>
+
+<h2 id="ch7-4">7.4 Intergovernmental Coordination</h2>
+
+<p>
+The IEDS requires active coordination with the national government, neighboring regions, and BIMP-EAGA member states. The Intergovernmental Coordination Mechanism (ICM) establishes structured dialogue channels at three levels: (1) <strong>National-BARMM</strong>, through the Intergovernmental Relations Body and existing ministerial-level coordination committees; (2) <strong>Regional</strong>, through the Mindanao Development Authority (MinDA) and Regional Development Council coordination; and (3) <strong>International</strong>, through BIMP-EAGA working groups and dedicated BARMM trade offices in Kuala Lumpur, Jakarta, and Jeddah (Silva, 2026).
+</p>
+
+<p>
+A critical aspect of intergovernmental coordination is the alignment of the IEDS with the Philippine Development Plan (PDP) 2023&ndash;2028 and its successor. The IEDS is designed to be fully compatible with PDP priorities, particularly in areas of infrastructure connectivity, agricultural modernization, and digital transformation, while adding the unique halal industry and Islamic finance dimensions that are specific to BARMM's development trajectory (Silva, 2026).
+</p>
+
+
+<!-- ==================== CHAPTER 8 ==================== -->
+<div class="chapter-header" id="ch8">
+<div class="chapter-number">Chapter 8</div>
+<h1 class="chapter-title">Monitoring, Evaluation, and Adaptive Management</h1>
+</div>
+
+<h2 id="ch8-1">8.1 The MEL Dashboard Architecture</h2>
+
+<p>
+The Monitoring, Evaluation, and Learning (MEL) Dashboard serves as the real-time nervous system of the IEDS, aggregating performance data across all four strategic pillars and thirteen KPIs. Drawing on best practices from the World Bank's Results-Based Management framework and the Open Government Partnership's monitoring standards, the MEL Dashboard provides three user views: <strong>Command View</strong> for ministers and senior officials, featuring high-level traffic-light indicators and trend analytics; <strong>Executive View</strong> for program managers, with detailed drill-down capabilities into PAP-level progress and expenditure tracking; and <strong>Public View</strong>, an open-data portal that enables citizens, civil society, and investors to track IEDS implementation progress (Silva, 2026).
+</p>
+
+<p>
+The technical architecture of the MEL Dashboard follows a modern cloud-native design, with Supabase as the backend database providing real-time data synchronization, React-based frontend components for interactive visualization, and automated data pipelines that ingest structured reports from line ministries. The dashboard integrates with the BIRD platform's SurveyWizard module to capture citizen perception data and stakeholder feedback as qualitative complements to quantitative KPI tracking (Silva, 2026).
+</p>
+
+<h2 id="ch8-2">8.2 Six Pareto KPIs and Traffic-Light System</h2>
+
+<p>
+While all thirteen KPIs are tracked, the MEL Dashboard prioritizes six "Pareto KPIs" that collectively explain approximately 80% of the IEDS's expected impact. These six indicators are displayed prominently in the Command View with a traffic-light scoring system that enables rapid assessment of overall strategic health (Silva, 2026).
+</p>
+
+<table id="tab11">
+<caption data-label="Table 11">Six Pareto KPIs with Traffic-Light Thresholds</caption>
+<thead>
+<tr><th>KPI</th><th>Red (&lt;)</th><th>Yellow</th><th>Green (&ge;)</th><th>Current</th></tr>
+</thead>
+<tbody>
+<tr><td>GRDP Growth Rate</td><td>3.0%</td><td>3.0&ndash;5.0%</td><td>5.0%</td><td>2.8%</td></tr>
+<tr><td>Poverty Incidence</td><td>52%</td><td>44&ndash;52%</td><td>44%</td><td>55.2%</td></tr>
+<tr><td>Ease of Doing Business</td><td>60</td><td>40&ndash;60</td><td>40</td><td>62</td></tr>
+<tr><td>Infrastructure Quality</td><td>3.0</td><td>3.0&ndash;3.8</td><td>3.8</td><td>2.4</td></tr>
+<tr><td>Digital Adoption</td><td>20%</td><td>20&ndash;40%</td><td>40%</td><td>8%</td></tr>
+<tr><td>Halal Certifications</td><td>200</td><td>200&ndash;800</td><td>800</td><td>45</td></tr>
+</tbody>
+</table>
+
+<p>
+The traffic-light system triggers automatic escalation protocols. A <strong>red status</strong> on any Pareto KPI generates an immediate alert to the BICC Technical Working Group, requiring a written explanation and corrective action plan within 15 days. A <strong>yellow status</strong> for two consecutive quarters triggers a management review. A <strong>green status</strong> across all six Pareto KPIs for a full year qualifies the relevant ministry for performance-based budget incentives (Silva, 2026).
+</p>
+
+<h2 id="ch8-3">8.3 Validation Survey and Stakeholder Feedback</h2>
+
+<p>
+The 16-section BIRD Validation Survey constitutes the primary mechanism for stakeholder input into IEDS implementation. Administered annually through web, mobile, and in-person channels, the survey captures quantitative ratings and qualitative feedback from five respondent segments: government officials, private sector representatives, academic and research institutions, civil society organizations, and development partners (Silva, 2026).
+</p>
+
+<p>
+The survey architecture follows a respondent-type branching logic, with each segment receiving a customized set of sections relevant to their expertise and engagement level. Government respondents complete sections on institutional capacity, policy coherence, and inter-ministerial coordination. Private sector respondents focus on investment climate, market access, and regulatory burden. Academic respondents provide technical assessments of sector strategies. Civil society respondents evaluate inclusivity, transparency, and community impact. Development partner respondents assess aid effectiveness and alignment with international best practices (Silva, 2026).
+</p>
+
+<p>
+Key survey innovations include interactive question types designed to maximize engagement and data quality: <strong>pin-on-image</strong> questions for geographic prioritization, <strong>word cloud</strong> questions for open-ended theme extraction, <strong>2x2 matrix</strong> questions for strategic positioning, and <strong>100-point allocation</strong> questions for priority ranking. These interactive formats yield richer data than conventional Likert scales while maintaining respondent engagement through the 20-minute average completion time (Silva, 2026).
+</p>
+
+<h2 id="ch8-4">8.4 Adaptive Management and Strategy Revision</h2>
+
+<p>
+The IEDS is designed as a living strategy rather than a static blueprint. The adaptive management protocol establishes three mechanisms for strategy evolution: (1) <strong>Annual Review</strong>, conducted each January, assesses KPI progress, validates survey results, and approves minor adjustments to PAP implementation schedules and budgets; (2) <strong>Mid-Term Review</strong>, scheduled for 2030, conducts a comprehensive evaluation of strategy effectiveness, including an independent impact assessment, and may recommend major strategic pivots or reallocation between pillars; and (3) <strong>End-Term Evaluation</strong>, conducted in 2035, produces a full accounting of IEDS results and lessons learned to inform the next planning cycle (Silva, 2026).
+</p>
+
+<p>
+The adaptive management framework incorporates explicit triggers for strategy revision. These include: significant changes in the political or security environment (e.g., major ceasefire violations, national policy shifts); macroeconomic shocks (e.g., global recession, commodity price spikes); natural disasters or climate emergencies requiring reallocation of resources; technological disruptions creating new opportunities or rendering existing approaches obsolete; and feedback from the validation survey indicating systematic stakeholder dissatisfaction with specific PAPs or pillars (Silva, 2026).
+</p>
+
+<p>
+This adaptive approach reflects the complexity and uncertainty inherent in long-term strategic planning for transitioning regions. As noted by Andrews et al. (2017), successful development strategies in fragile contexts are those that combine clear strategic direction with the flexibility to adjust tactics in response to changing circumstances. The IEDS monitoring and evaluation architecture is designed precisely to enable this adaptive capability while maintaining accountability for results.
+</p>
+
+<h2 id="ch8-5">8.5 Risk Management and Contingency Planning</h2>
+
+<p>
+The IEDS identifies four categories of implementation risk, each with associated mitigation strategies and contingency plans. <strong>Political and Security Risks</strong> include changes in the peace process, electoral transitions, and localized security incidents. Mitigation involves maintaining strong civilian-military coordination, investing in conflict-sensitive programming, and building cross-party consensus around the IEDS through parliamentary committee engagement. <strong>Fiscal Risks</strong> include delays in block grant disbursement, lower-than-projected national revenue collections, and currency volatility affecting development partner commitments. Mitigation involves diversifying revenue sources, maintaining a 15% contingency reserve, and front-loading disbursement requests (Silva, 2026).
+</p>
+
+<p>
+<strong>Implementation Capacity Risks</strong> reflect the limited human resource base within BARMM government agencies, particularly in technical fields such as project management, procurement, and monitoring and evaluation. Mitigation includes targeted capacity building through technical assistance embeds, secondments from development partners, and competitive recruitment of qualified BARMM professionals from the diaspora. <strong>External Economic Risks</strong> include global halal market fluctuations, changes in international trade regimes, and climate-related disruptions to agriculture and fisheries. Mitigation involves developing climate-resilient infrastructure, diversifying export markets across multiple ASEAN and Middle Eastern destinations, and establishing strategic commodity reserves for critical inputs (Silva, 2026).
+</p>
+
+
+<!-- ==================== REFERENCES ==================== -->
+<div class="references-page" id="references">
+<h1 style="font-family:'Poppins',sans-serif;font-size:20pt;font-weight:700;color:#0a3d2e;text-align:center;margin:2rem 0 1.5rem;padding-bottom:0.5rem;border-bottom:2px solid #C9A84C;">References</h1>
+
+<div class="references-list" style="font-size:10pt;line-height:1.6;">
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Andrews, M., Pritchett, L., &amp; Woolcock, M. (2017). <em>Building state capability: Evidence, analysis, action</em>. Oxford University Press.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Asian Development Bank. (2023). <em>Asian Development Outlook 2023: Bridging the gender gap in the labor market</em>. ADB.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Bangsamoro Government. (2024). <em>Bangsamoro Development Plan 2023&ndash;2028</em>. Bangsamoro Planning and Development Authority.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Collier, P. (2007). <em>The bottom billion: Why the poorest countries are failing and what can be done about it</em>. Oxford University Press.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+DinarStandard. (2023). <em>State of the global Islamic economy report 2023</em>. DinarStandard &amp; Salaam Gateway.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Fearon, J. D., &amp; Laitin, D. D. (2003). Ethnicity, insurgency, and civil war. <em>American Political Science Review, 97</em>(1), 75&ndash;90. https://doi.org/10.1017/S0003055403000534
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+International Crisis Group. (2020). <em>The Philippines: Addressing Islamist militancy after the battle for Marawi</em>. Asia Report No. 312.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Islamic Development Bank. (2021). <em>Bangsamoro infrastructure development assessment: Halal industry corridors and rural connectivity</em>. IsDB Technical Series.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Islamic Financial Services Board. (2022). <em>Islamic financial services industry stability report 2022</em>. IFSB.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Kaplan, R. S., &amp; Norton, D. P. (1992). The balanced scorecard: Measures that drive performance. <em>Harvard Business Review, 70</em>(1), 71&ndash;79.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Meadows, D. H. (1999). <em>Leverage points: Places to intervene in a system</em>. Sustainability Institute.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Moore, J. F. (1993). Predators and prey: A new ecology of competition. <em>Harvard Business Review, 71</em>(3), 75&ndash;86.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+North, D. C. (1990). <em>Institutions, institutional change and economic performance</em>. Cambridge University Press.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Philippine Statistics Authority. (2024). <em>2023 regional social and economic trends: Bangsamoro Autonomous Region in Muslim Mindanao</em>. PSA.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Porter, M. E. (1990). <em>The competitive advantage of nations</em>. Free Press.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Pritchett, L., Samji, S., &amp; Hammer, J. (2013). It's all about MeE: Using structured experiential learning to crawl the design space. <em>Centre for Global Development Working Paper, 322</em>.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Ricigliano, R. (2011). <em>Making peace last: A toolbox for sustainable peacebuilding</em>. Paradigm Publishers.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Sen, A. (1999). <em>Development as freedom</em>. Oxford University Press.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Senge, P. M. (1990). <em>The fifth discipline: The art and practice of the learning organization</em>. Doubleday.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Silva, A. (2026). <em>Strat Planner Pro: Analytical engine for the Bangsamoro Investment Roadmap Development 2026&ndash;2035</em>. Asilva Innovations Technical Documentation Series.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+Weihrich, H. (1982). The TOWS matrix: A tool for situational analysis. <em>Long Range Planning, 15</em>(2), 54&ndash;66. https://doi.org/10.1016/0024-6301(82)90120-1
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+World Bank. (2017). <em>World Development Report 2017: Governance and the law</em>. World Bank.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+World Bank. (2020). <em>Fragility and conflict: On the front lines of the fight against poverty</em>. World Bank Group.
+</p>
+
+<p style="margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;">
+World Bank. (2022). <em>Philippines economic update: Investing in the future</em>. World Bank.
+</p>
+
+</div>
+</div>
+
+<!-- ==================== INDEX ==================== -->
+<div class="index-page" id="index" style="page-break-before:always;">
+<h1 style="font-family:'Poppins',sans-serif;font-size:20pt;font-weight:700;color:#0a3d2e;text-align:center;margin:2rem 0 1.5rem;padding-bottom:0.5rem;border-bottom:2px solid #C9A84C;">Index</h1>
+
+<div style="column-count:2;column-gap:2rem;font-size:10pt;line-height:1.5;">
+
+<p><strong>A</strong></p>
+<p>Al-Amanah Islamic Investment Bank, <a href="#ch5-2-4">5.2.4</a>, <a href="#ch6-3">6.3</a>, <a href="#tab8">Table 8</a></p>
+<p>Annual Block Grant (ABG), <a href="#ch7-3">7.3</a></p>
+<p style="margin-bottom:0.8rem;">ASEAN, <a href="#ch1-2">1.2</a>, <a href="#ch5-2-1">5.2.1</a>, <a href="#ch5-2-4">5.2.4</a></p>
+
+<p><strong>B</strong></p>
+<p>Balanced Scorecard (BSC), <a href="#ch6-1">6.1</a>, <a href="#fig4">Figure 4</a>, <a href="#tab7">Table 7</a></p>
+<p>Bangsamoro Autonomous Region in Muslim Mindanao (BARMM), <a href="#ch1-1">1.1</a>, <a href="#ch1-2">1.2</a>, <a href="#ch2">2</a></p>
+<p>Bangsamoro Electronic Governance Master Plan (BEGMP), <a href="#ch5-2-2">5.2.2</a>, <a href="#tab8">Table 8</a></p>
+<p>Bangsamoro Economic and Investment Ecosystem (BEIE), <a href="#ch1-1">1.1</a>, <a href="#ch2">2</a>, <a href="#fig1">Figure 1</a></p>
+<p>Bangsamoro Integrity and Coordination Council (BICC), <a href="#ch5-2-2">5.2.2</a>, <a href="#ch7-1">7.1</a>, <a href="#ch8-2">8.2</a></p>
+<p>Bangsamoro Organic Law (BOL), <a href="#ch1-1">1.1</a>, <a href="#ch7-3">7.3</a></p>
+<p>Bangsamoro Planning and Development Authority (BPDA), <a href="#ch7-3">7.3</a></p>
+<p>BARMM, <em>see</em> Bangsamoro Autonomous Region in Muslim Mindanao</p>
+<p>BEIE, <em>see</em> Bangsamoro Economic and Investment Ecosystem</p>
+<p>BIMP-EAGA, <a href="#ch1-2">1.2</a>, <a href="#ch5-2-4">5.2.4</a>, <a href="#tab8">Table 8</a></p>
+<p style="margin-bottom:0.8rem;">BSC, <em>see</em> Balanced Scorecard</p>
+
+<p><strong>C</strong></p>
+<p>Capacity building, <a href="#ch5-2-1">5.2.1</a>, <a href="#ch6-3">6.3</a>, <a href="#tab7">Table 7</a></p>
+<p>Causal loop diagrams (CLDs), <a href="#ch3-2">3.2</a></p>
+<p>Certification (Halal), <a href="#ch5-2-1">5.2.1</a>, <a href="#tab7">Table 7</a>, <a href="#tab8">Table 8</a></p>
+<p style="margin-bottom:0.8rem;">Conflict sensitivity, <a href="#ch1-1">1.1</a>, <a href="#ch8-5">8.5</a></p>
+
+<p><strong>D</strong></p>
+<p>Deep Presencing, <a href="#ch2">Chapter 2</a>, <a href="#ch2-2">2.2</a></p>
+<p>Digital governance, <a href="#ch5-2-2">5.2.2</a>, <a href="#tab8">Table 8</a></p>
+<p style="margin-bottom:0.8rem;">Digital transformation, <a href="#ch5-2-3">5.2.3</a>, <a href="#tab7">Table 7</a>, <a href="#tab8">Table 8</a></p>
+
+<p><strong>E</strong></p>
+<p>Ecosystem development, <a href="#ch5-1">5.1</a>, <a href="#fig1">Figure 1</a></p>
+<p style="margin-bottom:0.8rem;">Equity, <a href="#ch6-4">6.4</a>, <a href="#tab9">Table 9</a></p>
+
+<p><strong>F</strong></p>
+<p>Financing, <a href="#ch5-2-4">5.2.4</a>, <a href="#ch7-3">7.3</a></p>
+<p>Fixes that Fail, <a href="#ch3-2">3.2</a></p>
+<p>Foundations (Cluster 1), <a href="#ch2-3">2.3</a>, <a href="#fig1">Figure 1</a></p>
+<p style="margin-bottom:0.8rem;">Framework for Freedom, <a href="#ch1-1">1.1</a>, <a href="#ch1-2">1.2</a></p>
+
+<p><strong>G</strong></p>
+<p>GEMS, <em>see</em> Governance-Enabled Market Strategy</p>
+<p>Governance, <a href="#ch1-1">1.1</a>, <a href="#ch2-3">2.3</a>, <a href="#ch5-2-2">5.2.2</a></p>
+<p>Governance-Enabled Market Strategy (GEMS), <a href="#ch4-3">4.3</a>, <a href="#tab5">Table 5</a></p>
+<p>GRDP, <a href="#ch1-2">1.2</a>, <a href="#ch7">Chapter 7</a>, <a href="#tab7">Table 7</a></p>
+<p>Green Sukuk, <a href="#ch5-2-4">5.2.4</a>, <a href="#tab8">Table 8</a></p>
+<p style="margin-bottom:0.8rem;">Growth and Underinvestment, <a href="#ch3-2">3.2</a></p>
+
+<p><strong>H</strong></p>
+<p>Halal industry, <a href="#ch5-2-1">5.2.1</a>, <a href="#tab7">Table 7</a>, <a href="#tab8">Table 8</a></p>
+<p>Halal-Led Export Development Strategy (HEDS), <a href="#ch4-3">4.3</a>, <a href="#tab5">Table 5</a></p>
+<p>Halal Park, <a href="#ch5-2-3">5.2.3</a>, <a href="#tab8">Table 8</a></p>
+<p>HEDS, <em>see</em> Halal-Led Export Development Strategy</p>
+<p style="margin-bottom:0.8rem;">Human capital, <a href="#ch1-1">1.1</a>, <a href="#ch2-3">2.3</a>, <a href="#ch3-1">3.1</a></p>
+
+<p><strong>I</strong></p>
+<p>IEC, <em>see</em> Investment Ecosystem Cluster</p>
+<p>IEDS, <em>see</em> Integrated Ecosystem Development Strategy</p>
+<p>IFES, <em>see</em> Islamic Finance Ecosystem Strategy</p>
+<p>Infrastructure, <a href="#ch1-2">1.2</a>, <a href="#ch3-1">3.1</a>, <a href="#ch5-2-3">5.2.3</a></p>
+<p>Integrity, <a href="#ch7-1">7.1</a></p>
+<p>Integrated Ecosystem Development Strategy (IEDS), <a href="#ch4-3">4.3</a>, <a href="#ch5">Chapter 5</a></p>
+<p>Investment Ecosystem Cluster (IEC), <a href="#ch1-1">1.1</a></p>
+<p>Islamic finance, <a href="#ch5-2-4">5.2.4</a>, <a href="#tab8">Table 8</a></p>
+<p>Islamic Finance Ecosystem Strategy (IFES), <a href="#ch4-3">4.3</a>, <a href="#tab5">Table 5</a></p>
+<p style="margin-bottom:0.8rem;">Isulan, <a href="#ch1-1">1.1</a></p>
+
+<p><strong>K</strong></p>
+<p>Kaplan, R. S., <a href="#ch6-1">6.1</a></p>
+<p>Key Performance Indicators, <a href="#ch6-2">6.2</a>, <a href="#ch8-2">8.2</a></p>
+<p>KPI, <em>see</em> Key Performance Indicators</p>
+<p style="margin-bottom:0.8rem;">Kra Isthmus, <a href="#ch1-2">1.2</a></p>
+
+<p><strong>L</strong></p>
+<p>Leverage points, <a href="#ch3-3">3.3</a></p>
+<p>Limits to Growth, <a href="#ch3-2">3.2</a></p>
+<p style="margin-bottom:0.8rem;">Local government, <a href="#ch7-2">7.2</a></p>
+
+<p><strong>M</strong></p>
+<p>Maqasid al-Shariah, <a href="#ch2-1">2.1</a></p>
+<p>MEL Dashboard, <a href="#ch8-1">8.1</a>, <a href="#ch8-2">8.2</a></p>
+<p>Mindanao, <a href="#ch1-1">1.1</a>, <a href="#ch1-2">1.2</a></p>
+<p>MINSUPALA, <a href="#ch1-1">1.1</a></p>
+<p>MN, <em>see</em> Moro National Liberation Front</p>
+<p>MNLF, <em>see</em> Moro National Liberation Front</p>
+<p>MILF, <em>see</em> Moro Islamic Liberation Front</p>
+<p>Moral Governance, <a href="#ch2-1">2.1</a>, <a href="#fig1">Figure 1</a>, <a href="#ch5-1">5.1</a></p>
+<p>Moro Islamic Liberation Front (MILF), <a href="#ch1-1">1.1</a></p>
+<p>Moro National Liberation Front (MNLF), <a href="#ch1-1">1.1</a></p>
+<p style="margin-bottom:0.8rem;">MSME, <a href="#ch5-2-1">5.2.1</a>, <a href="#tab8">Table 8</a></p>
+
+<p><strong>N</strong></p>
+<p>National government, <a href="#ch1-1">1.1</a>, <a href="#ch7-3">7.3</a>, <a href="#ch7-4">7.4</a></p>
+<p>Norton, D. P., <a href="#ch6-1">6.1</a></p>
+<p style="margin-bottom:0.8rem;">Norton, <em>see</em> Kaplan &amp; Norton</p>
+
+<p><strong>O</strong></p>
+<p>OIC/SMIIC, <a href="#ch5-2-1">5.2.1</a></p>
+<p style="margin-bottom:0.8rem;">Overton window, <a href="#ch2-2">2.2</a></p>
+
+<p><strong>P</strong></p>
+<p>PAP, <em>see</em> Priority Action Program</p>
+<p>Peace process, <a href="#ch1-1">1.1</a>, <a href="#ch8-5">8.5</a></p>
+<p>Philippine Statistics Authority, <a href="#ch1-2">1.2</a></p>
+<p>Poverty, <a href="#ch1-2">1.2</a>, <a href="#tab7">Table 7</a>, <a href="#tab9">Table 9</a></p>
+<p>Priority Action Program (PAP), <a href="#ch6-3">6.3</a>, <a href="#tab8">Table 8</a></p>
+<p style="margin-bottom:0.8rem;">Provincial allocation, <a href="#ch6-4">6.4</a>, <a href="#tab9">Table 9</a></p>
+
+<p><strong>Q</strong></p>
+<p style="margin-bottom:0.8rem;">Quantified SWOT, <a href="#ch3-1">3.1</a>, <a href="#tab3">Table 3</a></p>
+
+<p><strong>R</strong></p>
+<p>Resilience Index (RI), <a href="#ch3-1">3.1</a>, <a href="#tab3">Table 3</a></p>
+<p>Risk, <a href="#ch3-1">3.1</a>, <a href="#tab3">Table 3</a>, <a href="#ch8-5">8.5</a></p>
+<p style="margin-bottom:0.8rem;">Roadmap, <a href="#ch1">Chapter 1</a>, <a href="#ch5">Chapter 5</a></p>
+
+<p><strong>S</strong></p>
+<p>Senge, P. M., <a href="#ch3-2">3.2</a></p>
+<p>Seven-Criteria Matrix, <a href="#ch4-2">4.2</a>, <a href="#ch4-3">4.3</a></p>
+<p>Silva, A., <a href="#ch3-1">3.1</a>, <a href="#ch5-1">5.1</a></p>
+<p>Strat Planner Pro, <a href="#ch1-1">1.1</a>, <a href="#ch3-1">3.1</a></p>
+<p>Strategic diagnostics, <a href="#ch3">Chapter 3</a></p>
+<p>Strategic options, <a href="#ch4">Chapter 4</a></p>
+<p>Sukuk, <a href="#ch5-2-4">5.2.4</a>, <a href="#tab8">Table 8</a></p>
+<p>Sulu, <a href="#ch1-2">1.2</a>, <a href="#tab9">Table 9</a></p>
+<p style="margin-bottom:0.8rem;">SWOT, <a href="#ch3-1">3.1</a>, <a href="#tab3">Table 3</a>, <a href="#fig2">Figure 2</a></p>
+
+<p><strong>T</strong></p>
+<p>Takaful, <a href="#ch5-2-4">5.2.4</a></p>
+<p>Tawi-Tawi, <a href="#ch1-2">1.2</a>, <a href="#tab9">Table 9</a></p>
+<p>TOWS matrix, <a href="#ch4-1">4.1</a>, <a href="#fig8">Figure 8</a></p>
+<p>Tragedy of the Commons, <a href="#ch3-2">3.2</a></p>
+<p style="margin-bottom:0.8rem;">Transformers (Cluster 2), <a href="#ch2-3">2.3</a></p>
+
+<p><strong>V</strong></p>
+<p>Validation survey, <a href="#ch8-3">8.3</a></p>
+<p>Vulnerability Index (VI), <a href="#ch3-1">3.1</a>, <a href="#tab3">Table 3</a></p>
+<p style="margin-bottom:0.8rem;">Vision 2035, <a href="#ch2">Chapter 2</a></p>
+
+<p><strong>W</strong></p>
+<p>Waqf, <a href="#ch5-2-4">5.2.4</a>, <a href="#tab8">Table 8</a></p>
+<p>World Bank, <a href="#ch4-3">4.3</a>, <a href="#ch8-1">8.1</a></p>
+<p style="margin-bottom:0.8rem;">ZBIP, <a href="#ch5-2-3">5.2.3</a>, <a href="#tab8">Table 8</a></p>
+
+<p><strong>Z</strong></p>
+<p>Zamboanga Basilan Integrated Power (ZBIP), <a href="#ch5-2-3">5.2.3</a></p>
+<p style="margin-bottom:0.8rem;">Zamboanga Peninsula, <a href="#ch1-2">1.2</a></p>
+
+</div>
+</div>
+
+</body>
+</html>
