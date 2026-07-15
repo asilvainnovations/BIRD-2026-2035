@@ -1,7 +1,7 @@
 # SURVEYGUIDE.md — BIRD 2026–2035 SurveyWizard Integration Guide
 
-> **Version:** 1.0  
-> **Date:** 2026-07-09  
+> **Version:** 1.1  
+> **Date:** 2026-07-16  
 > **Purpose:** Wire the SurveyWizard to the BIRD strategic planning engine, Supabase backend, and domain-specific computation layer.
 
 ---
@@ -23,6 +23,7 @@ The SurveyWizard (`src/components/strategic/SurveyWizard.tsx`) is a 16-step wiza
 
 | File | Role | Integration Necessity |
 |------|------|----------------------|
+| 'survey-schema.ts' | Core validation survey schema | **CRITICAL** - Survey responses shall call and feed into tables and policies
 | `strategicPlanStore.ts` | Core domain schema (types, factories, storage) | **CRITICAL** — Survey responses must hydrate into `StrategicPlan` entities |
 | `formulas.ts` | BIRD mathematical formulas (RI, KPI, ROI, leverage) | **CRITICAL** — Survey scoring must use official BIRD formulas |
 | `supabase.ts` | Supabase client + Edge Functions | **CRITICAL** — Survey submission must persist via `STRATEGIC_PLANNER_SYNC` |
@@ -38,7 +39,7 @@ The SurveyWizard (`src/components/strategic/SurveyWizard.tsx`) is a 16-step wiza
 
 Critical To-Do: 
 - [ ] Read all uploaded files to understand codebase structure
-- [ ] Update bird-urls.ts with all new image/video titles, descriptions, and URLs
+- [ ] Update URLs and desccriptions in bird-urls.ts with all new image/video titles
 - [ ] Create Section0 with compelling web copy + banner + systems thinking video
 - [ ] Update ContextPanel.tsx with URLs and resources
 - [ ] Select critical SWOT scale questions and distribute to Sections 1-11
@@ -118,6 +119,7 @@ import {
 
 | Survey Field | StrategicPlan Field | Section |
 |-------------|---------------------|---------|
+
 | `q1_1`, `q1_2` | `organization`, `strategicIntent` | 1 |
 | `q2_1`–`q2_4` | `swotItems` (moral governance archetype) | 2 |
 | `q3_1`–`q3_limits_growth` | `swotItems` (Foundations cluster) | 3 |
@@ -131,7 +133,7 @@ import {
 | `q11_1`–`q11_2` | `objectives` (equity KPIs) | 11 |
 | `q12_1`–`q12_2` | `objectives` (climate KPIs) | 12 |
 | `q13_1`–`q13_2` | `objectives` (governance KPIs) | 13 |
-| `demo_*` | `createdByName`, `organization` | 14 |
+| `q14_1'-q14 | `createdByName`, `organization` | 14 |
 | `care_*` | Plan metadata / validation score | 15 |
 | `consent_final` | Plan status activation | 16 |
 
@@ -311,7 +313,7 @@ const onSubmit = useCallback(async (data: SurveySchemaType) => {
 
 ```typescript
 // CURRENT (hardcoded):
-window.open("https://strategy-ai-planner-1.deploypad.app/", "_blank")
+window.open("https://bird-app.bolt.host", "_blank")
 
 // RECOMMENDED (from supabase.ts):
 import { EXTERNAL_URLS } from "@/lib/supabase";
