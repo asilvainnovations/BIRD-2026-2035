@@ -43,7 +43,7 @@ const DEFAULT_SETTINGS: Settings = {
 };
 
 const INTEGRATION_DEFS = [
-  { id: 'whatsapp', name: 'WhatsApp Business', icon: MessageSquare, color: 'text-emerald-400', desc: 'Send plan updates & alerts via WhatsApp Business API' },
+  { id: 'whatsapp', name: 'WhatsApp Business', icon: MessageSquare, color: 'text-[#6ee7b7]', desc: 'Send plan updates & alerts via WhatsApp Business API' },
   { id: 'gmail', name: 'Google Email (Gmail)', icon: Mail, color: 'text-rose-400', desc: 'Send plan summaries and team digests through Gmail' },
   { id: 'google_analytics', name: 'Google Analytics', icon: BarChart, color: 'text-amber-400', desc: 'Pull web analytics into your KPI dashboards' },
   { id: 'google_drive', name: 'Google Drive', icon: HardDrive, color: 'text-blue-400', desc: 'Auto-backup plans and exports to Drive' },
@@ -168,24 +168,24 @@ const SettingsPage: React.FC = () => {
         <StratLogo size="lg" withGlow />
         <div>
           <h1 className="text-3xl font-black text-white tracking-tight">Settings</h1>
-          <p className="text-slate-400 text-sm">Configure your BIRD 2026–2035 platform experience</p>
+          <p className="text-[#64748b]/80 text-sm">Configure your BIRD 2026–2035 platform experience</p>
         </div>
         {savedAt && (
-          <div className="ml-auto flex items-center gap-2 text-xs text-emerald-400">
+          <div className="ml-auto flex items-center gap-2 text-xs text-[#6ee7b7]">
             <CheckCircle2 className="w-4 h-4" /> Saved at {savedAt}
           </div>
         )}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-6">
-        <aside className="bg-slate-900/60 border border-slate-800 rounded-2xl p-3 h-fit lg:sticky lg:top-4">
+        <aside className="bg-[#022c22]/60 border border-[#C9A84C]/15 rounded-2xl p-3 h-fit lg:sticky lg:top-4">
           {TABS.map(t => {
             const Icon = t.icon;
             const active = tab === t.id;
             return (
               <button key={t.id} onClick={() => setTab(t.id)}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-                  active ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-900/30' : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                  active ? 'bg-[#C9A84C] text-white shadow-lg shadow-[#C9A84C]/20' : 'text-[#64748b]/80 hover:bg-[#022c22]/60 hover:text-white'
                 }`}>
                 <Icon className="w-4 h-4" /> {t.label}
               </button>
@@ -193,7 +193,7 @@ const SettingsPage: React.FC = () => {
           })}
         </aside>
 
-        <main className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 min-h-[480px]">
+        <main className="bg-[#022c22]/60 border border-[#C9A84C]/15 rounded-2xl p-6 min-h-[480px]">
           {tab === 'profile' && (
             <div className="space-y-4">
               <h2 className="text-xl font-bold text-white">Profile Settings</h2>
@@ -241,21 +241,23 @@ const SettingsPage: React.FC = () => {
           {tab === 'ai' && (
             <div className="space-y-4">
               <h2 className="text-xl font-bold text-white">AI Configuration</h2>
-              <p className="text-sm text-slate-400">Customize how the AI Strategist behaves across your strategic plans.</p>
-              <SelectField label="Default AI Model" value={settings.ai_config.model}
+              <p className="text-sm text-[#64748b]/80">Customize how BIRD AI behaves across your strategic plans.</p>
+              <SelectFieldLabeled label="BIRD AI Model" value={settings.ai_config.model}
                 options={[
-                  'moonshot-v1-128k', 'moonshot-v1-32k', 'moonshot-v1-8k'
+                  { value: 'moonshot-v1-128k', label: 'Moonshot 128K (Recommended)' },
+                  { value: 'moonshot-v1-32k', label: 'Moonshot 32K' },
+                  { value: 'moonshot-v1-8k', label: 'Moonshot 8K' },
                 ]}
                 onChange={(v) => { const next = { ...settings, ai_config: { ...settings.ai_config, model: v } }; setSettings(next); persistSettings(next); }} />
-              <SelectField label="Strategist Persona" value={settings.ai_config.persona}
+              <SelectField label="BIRD AI Persona" value={settings.ai_config.persona}
                 options={['senior_strategist', 'investment_analyst', 'systems_thinker', 'critical_consultant', 'concise_advisor']}
                 onChange={(v) => { const next = { ...settings, ai_config: { ...settings.ai_config, persona: v } }; setSettings(next); persistSettings(next); }} />
               <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Temperature ({settings.ai_config.temperature})</label>
+                <label className="block text-xs font-bold text-[#64748b]/80 uppercase tracking-wider mb-2">Temperature ({settings.ai_config.temperature})</label>
                 <input type="range" min={0} max={1.5} step={0.1} value={settings.ai_config.temperature}
                   onChange={(e) => { const next = { ...settings, ai_config: { ...settings.ai_config, temperature: parseFloat(e.target.value) } }; setSettings(next); }}
                   onMouseUp={() => persistSettings(settings)}
-                  className="w-full accent-cyan-500" />
+                  className="w-full accent-[#C9A84C]" />
               </div>
               <Toggle label="Auto-suggest improvements while editing"
                 value={settings.ai_config.auto_suggest}
@@ -276,7 +278,7 @@ const SettingsPage: React.FC = () => {
                 options={['15', '30', '60', '120', '240', '480']}
                 onChange={(v) => { const next = { ...settings, security: { ...settings.security, session_timeout: parseInt(v, 10) } }; setSettings(next); persistSettings(next); }} />
 
-              <div className="border-t border-slate-800 pt-4">
+              <div className="border-t border-[#C9A84C]/15 pt-4">
                 <h3 className="font-bold text-white mb-3">Change Password</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <Field label="New Password" type="password" value={passwordForm.next} onChange={(v) => setPasswordForm(s => ({ ...s, next: v }))} />
@@ -293,47 +295,47 @@ const SettingsPage: React.FC = () => {
               <SelectField label="Interface Language" value={settings.language}
                 options={['en', 'es', 'fr', 'de', 'pt', 'ar', 'zh', 'ja', 'ko', 'hi', 'id', 'ms', 'tl']}
                 onChange={(v) => { const next = { ...settings, language: v }; setSettings(next); persistSettings(next); }} />
-              <p className="text-xs text-slate-500">English (en), Spanish (es), French (fr), German (de), Portuguese (pt), Arabic (ar), Chinese (zh), Japanese (ja), Korean (ko), Hindi (hi), Indonesian (id), Malay (ms), Filipino (tl)</p>
+              <p className="text-xs text-[#64748b]">English (en), Spanish (es), French (fr), German (de), Portuguese (pt), Arabic (ar), Chinese (zh), Japanese (ja), Korean (ko), Hindi (hi), Indonesian (id), Malay (ms), Filipino (tl)</p>
             </div>
           )}
 
           {tab === 'integrations' && (
             <div className="space-y-3">
               <h2 className="text-xl font-bold text-white">Integrations</h2>
-              <p className="text-sm text-slate-400 mb-4">Connect external apps to extend your strategic workflow.</p>
+              <p className="text-sm text-[#64748b]/80 mb-4">Connect external apps to extend your strategic workflow.</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {INTEGRATION_DEFS.map(int => {
                   const Icon = int.icon;
                   const cfg = settings.integrations[int.id] || { enabled: false };
                   return (
-                    <div key={int.id} className="bg-slate-800/50 border border-slate-700 rounded-xl p-4 space-y-3">
+                    <div key={int.id} className="bg-[#022c22]/60/50 border border-[#C9A84C]/20 rounded-xl p-4 space-y-3">
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex items-start gap-3 flex-1">
                           <Icon className={`w-6 h-6 ${int.color} flex-shrink-0 mt-0.5`} />
                           <div>
                             <h3 className="font-bold text-white text-sm">{int.name}</h3>
-                            <p className="text-xs text-slate-400 mt-0.5">{int.desc}</p>
+                            <p className="text-xs text-[#64748b]/80 mt-0.5">{int.desc}</p>
                           </div>
                         </div>
                         <button onClick={() => toggleIntegration(int.id, !cfg.enabled)}
-                          className={`relative w-10 h-6 rounded-full transition-colors flex-shrink-0 ${cfg.enabled ? 'bg-cyan-500' : 'bg-slate-600'}`}>
+                          className={`relative w-10 h-6 rounded-full transition-colors flex-shrink-0 ${cfg.enabled ? 'bg-[#C9A84C]' : 'bg-[#64748b]'}`}>
                           <span className={`absolute top-0.5 ${cfg.enabled ? 'right-0.5' : 'left-0.5'} w-5 h-5 rounded-full bg-white transition-all`} />
                         </button>
                       </div>
                       {cfg.enabled && (
-                        <div className="space-y-2 pt-2 border-t border-slate-700">
+                        <div className="space-y-2 pt-2 border-t border-[#C9A84C]/20">
                           <input
                             type="text" placeholder="API Key / Token"
                             value={cfg.api_key || ''}
                             onChange={(e) => updateIntegrationField(int.id, 'api_key', e.target.value)}
                             onBlur={() => persistSettings(settings)}
-                            className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-xs text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-500" />
+                            className="w-full px-3 py-2 bg-background border border-[#C9A84C]/20 rounded-lg text-xs text-foreground placeholder:text-[#64748b] focus:outline-none focus:ring-1 focus:ring-[#C9A84C]" />
                           <input
                             type="text" placeholder="Webhook URL or Account ID (optional)"
                             value={cfg.webhook_url || ''}
                             onChange={(e) => updateIntegrationField(int.id, 'webhook_url', e.target.value)}
                             onBlur={() => persistSettings(settings)}
-                            className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-xs text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-500" />
+                            className="w-full px-3 py-2 bg-background border border-[#C9A84C]/20 rounded-lg text-xs text-foreground placeholder:text-[#64748b] focus:outline-none focus:ring-1 focus:ring-[#C9A84C]" />
                         </div>
                       )}
                     </div>
@@ -352,28 +354,39 @@ const SettingsPage: React.FC = () => {
 const Field: React.FC<{ label: string; value: string; onChange: (v: string) => void; type?: string; disabled?: boolean }> =
   ({ label, value, onChange, type = 'text', disabled }) => (
   <div>
-    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">{label}</label>
+    <label className="block text-xs font-bold text-[#64748b]/80 uppercase tracking-wider mb-1.5">{label}</label>
     <input type={type} value={value} onChange={(e) => onChange(e.target.value)} disabled={disabled}
-      className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:opacity-60" />
+      className="w-full px-3 py-2 bg-background border border-[#C9A84C]/20 rounded-lg text-sm text-foreground placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-[#C9A84C] disabled:opacity-60" />
   </div>
 );
 
 const SelectField: React.FC<{ label: string; value: string; options: string[]; onChange: (v: string) => void }> =
   ({ label, value, options, onChange }) => (
   <div>
-    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">{label}</label>
+    <label className="block text-xs font-bold text-[#64748b]/80 uppercase tracking-wider mb-1.5">{label}</label>
     <select value={value} onChange={(e) => onChange(e.target.value)}
-      className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-cyan-500">
+      className="w-full px-3 py-2 bg-background border border-[#C9A84C]/20 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-[#C9A84C]">
       {options.map(o => <option key={o} value={o}>{o}</option>)}
     </select>
   </div>
 );
 
+const SelectFieldLabeled: React.FC<{ label: string; value: string; options: { value: string; label: string }[]; onChange: (v: string) => void }> =
+  ({ label, value, options, onChange }) => (
+  <div>
+    <label className="block text-xs font-bold text-[#64748b]/80 uppercase tracking-wider mb-1.5">{label}</label>
+    <select value={value} onChange={(e) => onChange(e.target.value)}
+      className="w-full px-3 py-2 bg-background border border-[#C9A84C]/20 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-[#C9A84C]">
+      {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+    </select>
+  </div>
+);
+
 const Toggle: React.FC<{ label: string; value: boolean; onChange: (v: boolean) => void }> = ({ label, value, onChange }) => (
-  <div className="flex items-center justify-between bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-3">
+  <div className="flex items-center justify-between bg-[#022c22]/60/50 border border-[#C9A84C]/20 rounded-xl px-4 py-3">
     <span className="text-sm font-medium text-white capitalize">{label}</span>
     <button onClick={() => onChange(!value)}
-      className={`relative w-10 h-6 rounded-full transition-colors ${value ? 'bg-cyan-500' : 'bg-slate-600'}`}>
+      className={`relative w-10 h-6 rounded-full transition-colors ${value ? 'bg-[#C9A84C]' : 'bg-[#64748b]'}`}>
       <span className={`absolute top-0.5 ${value ? 'right-0.5' : 'left-0.5'} w-5 h-5 rounded-full bg-white transition-all`} />
     </button>
   </div>
@@ -382,7 +395,7 @@ const Toggle: React.FC<{ label: string; value: boolean; onChange: (v: boolean) =
 const PrimaryBtn: React.FC<{ onClick: () => void; loading?: boolean; children: React.ReactNode }> =
   ({ onClick, loading, children }) => (
   <button onClick={onClick} disabled={loading}
-    className="mt-4 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-cyan-500/30 disabled:opacity-50 transition-all flex items-center gap-2">
+    className="mt-4 px-5 py-2.5 bg-gradient-to-r from-[#C9A84C] to-[#B8942E] text-white rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-[#C9A84C]/20 disabled:opacity-50 transition-all flex items-center gap-2">
     {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
     {children}
   </button>
