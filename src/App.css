@@ -13,11 +13,11 @@
 }
 
 .logo:hover {
-  filter: drop-shadow(0 0 2em rgba(20, 184, 166, 0.6));
+  filter: drop-shadow(0 0 2em rgba(201, 168, 76, 0.6));
 }
 
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em rgba(20, 184, 166, 0.6));
+  filter: drop-shadow(0 0 2em rgba(201, 168, 76, 0.6));
 }
 
 @keyframes logo-spin {
@@ -38,16 +38,46 @@
 .card {
   padding: 2em;
   border-radius: 0.5rem;
-  border: 1px solid rgba(20, 184, 166, 0.1);
-  background-color: rgba(20, 184, 166, 0.02);
+  border: 1px solid rgba(201, 168, 76, 0.1);
+  background-color: rgba(6, 78, 59, 0.3);
   transition: all 0.3s ease;
 }
 
 .card:hover {
-  border-color: rgba(20, 184, 166, 0.3);
-  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.1);
+  border-color: rgba(201, 168, 76, 0.3);
+  box-shadow: 0 4px 12px rgba(201, 168, 76, 0.1);
 }
 
 .read-the-docs {
-  color: #5f7676;
+  color: #64748b;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+  PLATFORM BADGES — BIRD 2026-2035
+   ═══════════════════════════════════════════════════════════════ */
+#bolt-badge, .bolt-badge, [data-bolt-badge],
+[id*="bolt"][id*="badge"], [class*="bolt"][class*="badge"] {
+  display: none !important; visibility: hidden !important;
+  opacity: 0 !important; pointer-events: none !important;
+  position: absolute !important; left: -9999px !important;
+}
+iframe[src*="bolt"], iframe[src*="badge"], iframe[data-bolt] {
+  display: none !important; visibility: hidden !important;
+  opacity: 0 !important; height: 0 !important; width: 0 !important;
+}
+[style*="position: fixed"][style*="bottom"][style*="z-index: 999"],
+[style*="position:fixed"][style*="bottom"][style*="z-index:999"] {
+  display: none !important; visibility: hidden !important;
+  opacity: 0 !important;
+}
+[data-badge="bolt"], [data-platform="bolt"], [data-branding="bolt"],
+.platform-badge, .builder-badge, .powered-by-badge,
+[class*="made-in"], [class*="powered-by"], [class*="built-with"] {
+  display: none !important; visibility: hidden !important;
+  opacity: 0 !important; pointer-events: none !important;
+}
+[data-watermark], [data-attribution], .watermark, .attribution {
+  display: none !important; visibility: hidden !important;
+  opacity: 0 !important;
 }
