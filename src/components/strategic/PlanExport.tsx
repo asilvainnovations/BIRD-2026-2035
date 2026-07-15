@@ -27,8 +27,8 @@ import { supabase } from '@/lib/supabase';
 import { formatCurrency } from '@/lib/formulas';
 
 // Edge Function URLs
-const AI_URL = 'https://rgvteytgkugdqdodedxq.databasepad.com/functions/v1/ai-strategy-assistant';
-const SYNC_URL = 'https://rgvteytgkugdqdodedxq.databasepad.com/functions/v1/strategic-planner-sync';
+const AI_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/ai-strategy-assistant';
+const SYNC_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/strategic-planner-sync';
 
 interface PlanExportProps {
   plan: StrategicPlan;
