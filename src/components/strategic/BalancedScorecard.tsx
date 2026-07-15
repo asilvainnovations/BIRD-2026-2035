@@ -30,20 +30,20 @@ import { cn } from '@/lib/utils';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
 
 // Edge Function URLs
-const AI_ASSISTANT_URL = 'https://rgvteytgkugdqdodedxq.databasepad.com/functions/v1/ai-strategy-assistant';
-const SYNC_URL = 'https://rgvteytgkugdqdodedxq.databasepad.com/functions/v1/strategic-planner-sync';
-const EMAIL_URL = 'https://rgvteytgkugdqdodedxq.databasepad.com/functions/v1/email-notifications';
+const AI_ASSISTANT_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/ai-strategy-assistant';
+const SYNC_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/strategic-planner-sync';
+const EMAIL_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/email-notifications';
 
-// ─── NEW: CHAPTER 5 & 6 CONTEXT FOR AI EXPERTISE ─────────────────────────────
-const CHAPTER_5_6_CONTEXT = `
-=== BIRD 2026-2035 CHAPTER 5 & 6: METRICS & BSC FRAMEWORK ===
-[CHAPTER 5: KPI BENCHMARKING & CALIBRATION]
+// ─── NEW: STRATEGIC FRAMEWORK CONTEXT FOR AI EXPERTISE ─────────────────────────────
+const BIRD_STRATEGIC_CONTEXT = `
+=== BIRD 2026-2035 STRATEGIC FRAMEWORK: METRICS & BSC ===
+[KPI BENCHMARKING & CALIBRATION]
 - Calibration Tiers: Baseline (2024-25), Interim 1 (2028), Interim 2 (2030), Terminal (2035), Long-Horizon (2040).
 - External Benchmarks: OIC/SMIIC Halal Standards, ESG criteria, PDP 2023-2028, UN SDGs.
 - BEIE Clusters: Foundations (AFF, Energy), Transformers (Halal, MSMEs), Enablers (Infra, Digital, Human Capital), Connectors (Trade, BIMP-EAGA), Financiers (Islamic Finance).
 - Cross-Cutting OS Metrics: Moral Governance, Resilience, Inclusivity, Peace.
 
-[CHAPTER 6: BALANCED SCORECARD (IEDS ALIGNMENT)]
+[STRATEGY MAP & BALANCED SCORECARD (IEDS ALIGNMENT)]
 - FINANCIAL PERSPECTIVE: Investment approvals (₱15B p.a.), GRDP (₱550B+), Exports (₱40B+), Green Economy Revenue (₱500M), Islamic Finance Assets (₱20B+).
 - STAKEHOLDER PERSPECTIVE: Investor satisfaction (8.0+/10), MSME halal cert (5,000+), Poverty incidence (<20%), Financial inclusion (70%+), Jobs created (20,000+), Provincial equity (<1.5pp disparity).
 - INTERNAL PROCESS PERSPECTIVE: Business registration (1 day digital), BHB OIC/SMIIC accreditation (Full MRA), Infra budget execution (>90%), Inter-agency coordination (8/10), Climate-risk screening (100%).
@@ -67,9 +67,9 @@ const perspectiveConfig = {
     icon: DollarSign,
     color: 'emerald',
     bgGradient: 'from-emerald-500 to-teal-600',
-    lightBg: 'bg-emerald-50',
-    border: 'border-emerald-200',
-    textColor: 'text-emerald-700',
+    lightBg: 'bg-[#059669]/10',
+    border: 'border-[#059669]/20',
+    textColor: 'text-[#34d399]',
     description: 'How should we appear to funders, investors, and financial stakeholders to achieve our vision?',
     placeholder: 'e.g., Increase investment approvals to ₱15B p.a.',
   },
@@ -78,9 +78,9 @@ const perspectiveConfig = {
     icon: Users,
     color: 'blue',
     bgGradient: 'from-blue-500 to-indigo-600',
-    lightBg: 'bg-blue-50',
-    border: 'border-blue-200',
-    textColor: 'text-blue-700',
+    lightBg: 'bg-[#C9A84C]/10',
+    border: 'border-[#C9A84C]/20',
+    textColor: 'text-[#C9A84C]',
     description: 'How should we appear to investors, MSMEs, communities, and beneficiaries?',
     placeholder: 'e.g., Reduce poverty incidence to <20%',
   },
@@ -89,9 +89,9 @@ const perspectiveConfig = {
     icon: Cog,
     color: 'purple',
     bgGradient: 'from-purple-500 to-violet-600',
-    lightBg: 'bg-purple-50',
-    border: 'border-purple-200',
-    textColor: 'text-purple-700',
+    lightBg: 'bg-purple-500/10',
+    border: 'border-purple-500/20',
+    textColor: 'text-purple-400',
     description: 'What internal processes must we excel at to satisfy stakeholders and achieve financial objectives?',
     placeholder: 'e.g., Achieve 1-day digital business registration',
   },
@@ -100,15 +100,15 @@ const perspectiveConfig = {
     icon: GraduationCap,
     color: 'amber',
     bgGradient: 'from-amber-500 to-orange-600',
-    lightBg: 'bg-amber-50',
-    border: 'border-amber-200',
-    textColor: 'text-amber-700',
+    lightBg: 'bg-amber-500/10',
+    border: 'border-amber-500/20',
+    textColor: 'text-amber-400',
     description: 'How will we sustain our ability to change, improve, and achieve our vision?',
     placeholder: 'e.g., Improve functional literacy rate to 75%+',
   },
 };
 
-// ─── BIRD 2035 ROADMAP BSC TEMPLATE DATA (CHAPTER 6) ─────────────────────────
+// ─── BIRD 2035 ROADMAP BSC TEMPLATE DATA ─────────────────────────
 const BIRD_BSC_TEMPLATE_OBJECTS: BSCObjective[] = [
   // FINANCIAL PERSPECTIVE
   { id: 'bird-f1', perspective: 'financial', weight: 1, objective: 'F1: Increase Investment Approvals', description: 'Investment promotion roadshows; BIMP-EAGA missions; investor aftercare services', kpis: [{ id: 'bird-f1-k1', objectiveId: 'bird-f1', name: 'Annual investment approvals', description: '', baselineValue: 5.1, targetValue: 15, currentValue: 5.1, unit: '₱B', frequency: 'annually', owner: 'BBOI', status: 'on-track' }] },
@@ -153,10 +153,10 @@ const calculateProgress = (kpi: KPI): number => {
 };
 
 const STATUS_COLORS = {
-  'on-track': 'bg-emerald-100 text-emerald-700',
-  'at-risk': 'bg-amber-100 text-amber-700',
-  delayed: 'bg-red-100 text-red-700',
-  completed: 'bg-blue-100 text-blue-700',
+  'on-track': 'bg-[#059669]/10 text-[#34d399]',
+  'at-risk': 'bg-amber-500/100/10 text-amber-400',
+  delayed: 'bg-red-500/100/10 text-red-400',
+  completed: 'bg-[#C9A84C]/10 text-[#C9A84C]',
 };
 
 const StatusBadge: React.FC<{ status: KPI['status']; children: React.ReactNode }> = ({ status, children }) => (
@@ -167,10 +167,10 @@ const StatusBadge: React.FC<{ status: KPI['status']; children: React.ReactNode }
 
 const ProgressMeter: React.FC<{ value: number }> = ({ value }) => {
   const getColor = () => {
-    if (value >= 100) return 'bg-emerald-500';
-    if (value >= 70) return 'bg-cyan-500';
-    if (value >= 40) return 'bg-amber-500';
-    return 'bg-red-500';
+    if (value >= 100) return 'bg-[#059669]';
+    if (value >= 70) return 'bg-[#C9A84C]';
+    if (value >= 40) return 'bg-amber-500/100';
+    return 'bg-red-500/100';
   };
 
   return (
@@ -178,8 +178,8 @@ const ProgressMeter: React.FC<{ value: number }> = ({ value }) => {
       <Tooltip>
         <TooltipTrigger asChild>
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-slate-800 dark:text-slate-100">{Math.round(value)}%</span>
-            <div className="w-20 h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+            <span className="text-sm font-medium text-[#E8C560] dark:text-[#ecfdf5]">{Math.round(value)}%</span>
+            <div className="w-20 h-2 bg-[#064e3b]/20 dark:bg-[#022c22]/60 rounded-full overflow-hidden">
               <div
                 className={cn("h-full rounded-full transition-all duration-300", getColor())}
                 style={{ width: `${Math.max(value, 0)}%` }}
@@ -189,8 +189,8 @@ const ProgressMeter: React.FC<{ value: number }> = ({ value }) => {
         </TooltipTrigger>
         <TooltipContent side="top" className="max-w-[200px] z-50">
           <div className="space-y-1">
-            <p className="font-semibold text-slate-800 dark:text-slate-100">Progress Tracking</p>
-            <p className="text-xs text-slate-600 dark:text-slate-400">Track achievement against targets</p>
+            <p className="font-semibold text-[#E8C560] dark:text-[#ecfdf5]">Progress Tracking</p>
+            <p className="text-xs text-[#ecfdf5]/80 dark:text-[#64748b]/80">Track achievement against targets</p>
           </div>
         </TooltipContent>
       </Tooltip>
@@ -220,13 +220,13 @@ const KPIRow: React.FC<{
 
   if (isEditing) {
     return (
-      <tr className="bg-cyan-50 animate-in fade-in slide-in-from-top-2">
+      <tr className="bg-[#C9A84C]/10 animate-in fade-in slide-in-from-top-2">
         <td className="px-4 py-3">
           <input
             type="text"
             value={editData.name}
             onChange={(e) => setEditData((prev) => ({ ...prev, name: e.target.value }))}
-            className="w-full px-2 py-1 text-sm border border-slate-300 dark:border-slate-600 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-full px-2 py-1 text-sm border border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
             placeholder="KPI name"
           />
         </td>
@@ -235,7 +235,7 @@ const KPIRow: React.FC<{
             type="number"
             value={editData.baselineValue}
             onChange={(e) => setEditData((prev) => ({ ...prev, baselineValue: parseFloat(e.target.value) || 0 }))}
-            className="w-20 px-2 py-1 text-sm border border-slate-300 dark:border-slate-600 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-20 px-2 py-1 text-sm border border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
           />
         </td>
         <td className="px-4 py-3">
@@ -243,7 +243,7 @@ const KPIRow: React.FC<{
             type="number"
             value={editData.targetValue}
             onChange={(e) => setEditData((prev) => ({ ...prev, targetValue: parseFloat(e.target.value) || 0 }))}
-            className="w-20 px-2 py-1 text-sm border border-slate-300 dark:border-slate-600 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-20 px-2 py-1 text-sm border border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
           />
         </td>
         <td className="px-4 py-3">
@@ -251,7 +251,7 @@ const KPIRow: React.FC<{
             type="number"
             value={editData.currentValue}
             onChange={(e) => setEditData((prev) => ({ ...prev, currentValue: parseFloat(e.target.value) || 0 }))}
-            className="w-20 px-2 py-1 text-sm border border-slate-300 dark:border-slate-600 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-20 px-2 py-1 text-sm border border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
           />
         </td>
         <td className="px-4 py-3">
@@ -259,14 +259,14 @@ const KPIRow: React.FC<{
             type="text"
             value={editData.unit}
             onChange={(e) => setEditData((prev) => ({ ...prev, unit: e.target.value }))}
-            className="w-16 px-2 py-1 text-sm border border-slate-300 dark:border-slate-600 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-16 px-2 py-1 text-sm border border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
           />
         </td>
         <td className="px-4 py-3">
           <select
             value={editData.status}
             onChange={(e) => setEditData((prev) => ({ ...prev, status: e.target.value as KPI['status'] }))}
-            className="w-full px-2 py-1 text-sm border border-slate-300 dark:border-slate-600 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-full px-2 py-1 text-sm border border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
           >
             <option value="on-track">On Track</option>
             <option value="at-risk">At Risk</option>
@@ -279,16 +279,16 @@ const KPIRow: React.FC<{
             type="text"
             value={editData.owner}
             onChange={(e) => setEditData((prev) => ({ ...prev, owner: e.target.value }))}
-            className="w-24 px-2 py-1 text-sm border border-slate-300 dark:border-slate-600 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-24 px-2 py-1 text-sm border border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
             placeholder="Owner"
           />
         </td>
         <td className="px-4 py-3">
           <div className="flex items-center gap-1">
-            <button onClick={handleSave} className="p-1.5 text-emerald-600 hover:bg-emerald-100 rounded-lg">
+            <button onClick={handleSave} className="p-1.5 text-[#34d399] hover:bg-[#059669]/10 rounded-lg">
               <Check className="w-4 h-4" />
             </button>
-            <button onClick={handleCancel} className="p-1.5 text-slate-400 hover:bg-slate-100 dark:bg-slate-800 rounded-lg">
+            <button onClick={handleCancel} className="p-1.5 text-[#64748b]/80 hover:bg-[#064e3b]/20 dark:bg-[#022c22]/60 rounded-lg">
               <X className="w-4 h-4" />
             </button>
           </div>
@@ -298,30 +298,30 @@ const KPIRow: React.FC<{
   }
 
   return (
-    <tr className="hover:bg-slate-50 dark:bg-slate-900 group transition-colors">
+    <tr className="hover:bg-[#064e3b]/10 dark:bg-[#022c22] group transition-colors">
       <td className="px-4 py-3">
         <div className="flex items-center gap-2">
-          <TrendingUp className="w-4 h-4 text-slate-400" />
-          <span className="text-sm font-medium text-slate-700 dark:text-slate-200">{kpi.name}</span>
+          <TrendingUp className="w-4 h-4 text-[#64748b]/80" />
+          <span className="text-sm font-medium text-[#E8C560]/90 dark:text-[#ecfdf5]/90">{kpi.name}</span>
         </div>
       </td>
-      <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">{kpi.baselineValue}</td>
-      <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">{kpi.targetValue}</td>
+      <td className="px-4 py-3 text-sm text-[#ecfdf5]/80 dark:text-[#64748b]/80">{kpi.baselineValue}</td>
+      <td className="px-4 py-3 text-sm text-[#ecfdf5]/80 dark:text-[#64748b]/80">{kpi.targetValue}</td>
       <td className="px-4 py-3">
         <ProgressMeter value={progress} />
       </td>
-      <td className="px-4 py-3 text-sm text-slate-500 dark:text-slate-400">{kpi.unit}</td>
+      <td className="px-4 py-3 text-sm text-[#64748b] dark:text-[#64748b]/80">{kpi.unit}</td>
       <td className="px-4 py-3">
         <StatusBadge status={kpi.status}>{kpi.status.replace('-', ' ')}</StatusBadge>
       </td>
-      <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">{kpi.owner || 'Unassigned'}</td>
+      <td className="px-4 py-3 text-sm text-[#ecfdf5]/80 dark:text-[#64748b]/80">{kpi.owner || 'Unassigned'}</td>
       <td className="px-4 py-3">
         {!isTemplate && (
           <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-            <button onClick={() => setIsEditing(true)} className="p-1.5 text-slate-400 hover:bg-slate-100 dark:bg-slate-800 rounded-lg">
+            <button onClick={() => setIsEditing(true)} className="p-1.5 text-[#64748b]/80 hover:bg-[#064e3b]/20 dark:bg-[#022c22]/60 rounded-lg">
               <Edit2 className="w-4 h-4" />
             </button>
-            <button onClick={onRemove} className="p-1.5 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg">
+            <button onClick={onRemove} className="p-1.5 text-red-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg">
               <Trash2 className="w-4 h-4" />
             </button>
           </div>
@@ -427,14 +427,14 @@ const ObjectiveCard: React.FC<{
   return (
     <TooltipProvider>
       <div className={cn(
-        "bg-white dark:bg-slate-800/60 rounded-xl border overflow-hidden shadow-sm transition-shadow hover:shadow-md",
+        "bg-white dark:bg-[#022c22]/60/60 rounded-xl border overflow-hidden shadow-sm transition-shadow hover:shadow-md",
         config.border
       )}>
         <div
           className={cn(`${config.lightBg} px-4 py-3 flex items-center gap-3 cursor-pointer`)}
           onClick={() => setIsExpanded(!isExpanded)}
         >
-          {isExpanded ? <ChevronDown className="w-5 h-5 text-slate-500" /> : <ChevronRight className="w-5 h-5 text-slate-500" />}
+          {isExpanded ? <ChevronDown className="w-5 h-5 text-[#64748b]" /> : <ChevronRight className="w-5 h-5 text-[#64748b]" />}
           <Target className={`w-5 h-5 ${config.textColor}`} />
           <div className="flex-1 min-w-0">
             {isEditingObjective && !isTemplate ? (
@@ -443,15 +443,15 @@ const ObjectiveCard: React.FC<{
                 value={editObjectiveData.objective}
                 onChange={(e) => setEditObjectiveData((prev) => ({ ...prev, objective: e.target.value }))}
                 onClick={(e) => e.stopPropagation()}
-                className="w-full px-2 py-1 text-sm font-medium border border-slate-300 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                className="w-full px-2 py-1 text-sm font-medium border border-[#C9A84C]/30 rounded focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
               />
             ) : (
               <div className="flex items-center gap-2">
-                <h4 className="font-semibold text-slate-800 dark:text-slate-100 truncate">{objective.objective}</h4>
+                <h4 className="font-semibold text-[#E8C560] dark:text-[#ecfdf5] truncate">{objective.objective}</h4>
                 {!isTemplate && (
                   <button
                     onClick={(e) => { e.stopPropagation(); setIsEditingObjective(true); }}
-                    className="p-1 text-slate-400 hover:bg-slate-200 rounded"
+                    className="p-1 text-[#64748b]/80 hover:bg-slate-200 rounded"
                   >
                     <Edit2 className="w-3 h-3" />
                   </button>
@@ -463,31 +463,31 @@ const ObjectiveCard: React.FC<{
                 value={editObjectiveData.description}
                 onChange={(e) => setEditObjectiveData((prev) => ({ ...prev, description: e.target.value }))}
                 onClick={(e) => e.stopPropagation()}
-                className="w-full px-2 py-1 text-xs border border-slate-300 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500 resize-none mt-1"
+                className="w-full px-2 py-1 text-xs border border-[#C9A84C]/30 rounded focus:outline-none focus:ring-2 focus:ring-[#C9A84C] resize-none mt-1"
                 rows={1}
               />
             ) : (
-              <p className="text-xs text-slate-500 dark:text-slate-400">{objective.description}</p>
+              <p className="text-xs text-[#64748b] dark:text-[#64748b]/80">{objective.description}</p>
             )}
           </div>
           <div className="flex items-center gap-3">
             {linkedStrategies.length > 0 && (
-              <div className="flex items-center gap-1 text-xs text-purple-600 bg-purple-50 px-2 py-1 rounded-full">
+              <div className="flex items-center gap-1 text-xs text-purple-400 bg-purple-500/10 px-2 py-1 rounded-full">
                 <Link2 className="w-3 h-3" />
                 <span className="font-medium">{linkedStrategies.length}</span>
               </div>
             )}
             {averageProgress > 0 && (
               <div className="hidden md:flex items-center gap-1 text-xs">
-                <TrendingUp className="w-3 h-3 text-cyan-600" />
+                <TrendingUp className="w-3 h-3 text-[#C9A84C]" />
                 <span className="font-medium">{Math.round(averageProgress)}% avg</span>
               </div>
             )}
-            <span className="text-sm text-slate-500">{objective.kpis.length} KPIs</span>
+            <span className="text-sm text-[#64748b]">{objective.kpis.length} KPIs</span>
             {!isTemplate && (
               <button
                 onClick={(e) => { e.stopPropagation(); onRemove(); }}
-                className="p-1 text-red-400 hover:text-red-600 hover:bg-red-100 rounded transition-colors"
+                className="p-1 text-red-400 hover:text-red-400 hover:bg-red-500/100/10 rounded transition-colors"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
@@ -496,16 +496,16 @@ const ObjectiveCard: React.FC<{
         </div>
 
         {isExpanded && (
-          <div className="p-4 border-t border-slate-200 dark:border-slate-700">
+          <div className="p-4 border-t border-[#C9A84C]/20 dark:border-[#C9A84C]/20">
             {linkedStrategies.length > 0 && (
-              <div className="mb-4 p-3 bg-purple-50 rounded-lg border border-purple-200">
+              <div className="mb-4 p-3 bg-purple-500/10 rounded-lg border border-purple-500/20">
                 <div className="flex items-center gap-2 mb-2">
-                  <Link2 className="w-4 h-4 text-purple-600" />
+                  <Link2 className="w-4 h-4 text-purple-400" />
                   <h5 className="text-sm font-semibold text-purple-800">Supporting Strategies</h5>
                 </div>
                 <div className="space-y-1">
                   {linkedStrategies.map((strategy) => (
-                    <div key={strategy.id} className="text-xs text-purple-700 flex items-start gap-2">
+                    <div key={strategy.id} className="text-xs text-purple-400 flex items-start gap-2">
                       <span className="px-1.5 py-0.5 bg-purple-200 rounded text-[10px] font-bold mt-0.5">
                         {strategy.optionType}
                       </span>
@@ -520,14 +520,14 @@ const ObjectiveCard: React.FC<{
               <div className="overflow-x-auto mb-4">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-slate-200 dark:border-slate-700">
-                      <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">KPI</th>
-                      <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">Baseline</th>
-                      <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">Target</th>
-                      <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">Current</th>
-                      <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">Unit</th>
-                      <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">Status</th>
-                      <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">Owner</th>
+                    <tr className="border-b border-[#C9A84C]/20 dark:border-[#C9A84C]/20">
+                      <th className="px-4 py-2 text-left text-xs font-medium text-[#64748b] uppercase">KPI</th>
+                      <th className="px-4 py-2 text-left text-xs font-medium text-[#64748b] uppercase">Baseline</th>
+                      <th className="px-4 py-2 text-left text-xs font-medium text-[#64748b] uppercase">Target</th>
+                      <th className="px-4 py-2 text-left text-xs font-medium text-[#64748b] uppercase">Current</th>
+                      <th className="px-4 py-2 text-left text-xs font-medium text-[#64748b] uppercase">Unit</th>
+                      <th className="px-4 py-2 text-left text-xs font-medium text-[#64748b] uppercase">Status</th>
+                      <th className="px-4 py-2 text-left text-xs font-medium text-[#64748b] uppercase">Owner</th>
                       <th className="px-4 py-2"></th>
                     </tr>
                   </thead>
@@ -552,7 +552,7 @@ const ObjectiveCard: React.FC<{
                   <>
                     <button
                       onClick={() => setIsAddingKPI(true)}
-                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors"
+                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#ecfdf5]/80 border border-[#C9A84C]/30 rounded-lg hover:bg-[#064e3b]/10 transition-colors"
                     >
                       <Plus className="w-4 h-4" />
                       Add KPI
@@ -560,7 +560,7 @@ const ObjectiveCard: React.FC<{
                     <button
                       onClick={handleGenerateKPIs}
                       disabled={isGeneratingKPIs}
-                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-purple-600 border border-purple-300 rounded-lg hover:bg-purple-50 transition-colors disabled:opacity-50"
+                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-purple-400 border border-purple-300 rounded-lg hover:bg-purple-500/10 transition-colors disabled:opacity-50"
                     >
                       {isGeneratingKPIs ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
                       AI Suggest KPIs
@@ -571,52 +571,52 @@ const ObjectiveCard: React.FC<{
             )}
 
             {isAddingKPI && (
-              <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-4 space-y-3 animate-in fade-in slide-in-from-top-2">
+              <div className="bg-[#064e3b]/10 dark:bg-[#022c22] rounded-lg p-4 space-y-3 animate-in fade-in slide-in-from-top-2">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                   <div className="col-span-1 md:col-span-2 lg:col-span-1">
-                    <label className="block text-xs font-medium text-slate-600 mb-1">KPI Name *</label>
+                    <label className="block text-xs font-medium text-[#ecfdf5]/80 mb-1">KPI Name *</label>
                     <input
                       type="text"
                       value={newKPI.name}
                       onChange={(e) => setNewKPI((prev) => ({ ...prev, name: e.target.value }))}
-                      className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                      className="w-full px-3 py-2 text-sm border text-foreground bg-background border-[#C9A84C]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
                       placeholder="e.g., Stakeholder Satisfaction Rate"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 mb-1">Baseline</label>
+                    <label className="block text-xs font-medium text-[#ecfdf5]/80 mb-1">Baseline</label>
                     <input
                       type="number"
                       value={newKPI.baselineValue}
                       onChange={(e) => setNewKPI((prev) => ({ ...prev, baselineValue: parseFloat(e.target.value) || 0 }))}
-                      className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                      className="w-full px-3 py-2 text-sm border text-foreground bg-background border-[#C9A84C]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 mb-1">Target</label>
+                    <label className="block text-xs font-medium text-[#ecfdf5]/80 mb-1">Target</label>
                     <input
                       type="number"
                       value={newKPI.targetValue}
                       onChange={(e) => setNewKPI((prev) => ({ ...prev, targetValue: parseFloat(e.target.value) || 0 }))}
-                      className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                      className="w-full px-3 py-2 text-sm border text-foreground bg-background border-[#C9A84C]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 mb-1">Unit</label>
+                    <label className="block text-xs font-medium text-[#ecfdf5]/80 mb-1">Unit</label>
                     <input
                       type="text"
                       value={newKPI.unit}
                       onChange={(e) => setNewKPI((prev) => ({ ...prev, unit: e.target.value }))}
-                      className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                      className="w-full px-3 py-2 text-sm border text-foreground bg-background border-[#C9A84C]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
                       placeholder="% or $"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 mb-1">Frequency</label>
+                    <label className="block text-xs font-medium text-[#ecfdf5]/80 mb-1">Frequency</label>
                     <select
                       value={newKPI.frequency}
                       onChange={(e) => setNewKPI((prev) => ({ ...prev, frequency: e.target.value as any }))}
-                      className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                      className="w-full px-3 py-2 text-sm border text-foreground bg-background border-[#C9A84C]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
                     >
                       <option value="daily">Daily</option>
                       <option value="weekly">Weekly</option>
@@ -626,22 +626,22 @@ const ObjectiveCard: React.FC<{
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 mb-1">Owner</label>
+                    <label className="block text-xs font-medium text-[#ecfdf5]/80 mb-1">Owner</label>
                     <input
                       type="text"
                       value={newKPI.owner}
                       onChange={(e) => setNewKPI((prev) => ({ ...prev, owner: e.target.value }))}
-                      className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                      className="w-full px-3 py-2 text-sm border text-foreground bg-background border-[#C9A84C]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
                       placeholder="e.g., CFO"
                     />
                   </div>
                 </div>
                 <div className="flex justify-end gap-2 pt-2">
-                  <button onClick={() => setIsAddingKPI(false)} className="px-4 py-2 text-sm text-slate-600 rounded-lg">Cancel</button>
+                  <button onClick={() => setIsAddingKPI(false)} className="px-4 py-2 text-sm text-[#ecfdf5]/80 rounded-lg">Cancel</button>
                   <button
                     onClick={handleAddKPI}
                     disabled={!newKPI.name.trim()}
-                    className="px-4 py-2 text-sm bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 disabled:opacity-50 transition-colors"
+                    className="px-4 py-2 text-sm bg-[#C9A84C] text-white rounded-lg hover:bg-[#C9A84C] disabled:opacity-50 transition-colors"
                   >
                     Add KPI
                   </button>
@@ -676,7 +676,7 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
   const [aiMessages, setAiMessages] = useState<{role: string, content: string}[]>([
     {
       role: 'assistant',
-      content: `Hello! I'm the **BIRD AI Strategist**, specialized in **KPI Benchmarking (Chapter 5)** and **Balanced Scorecard Management (Chapter 6)** for the Bangsamoro Investment Roadmap 2026-2035.\n\nI can help you:\n• Design SMART KPIs aligned with OIC/SMIIC, ESG, and PDP benchmarks.\n• Map causal pathways across the 4 BSC perspectives (Financial, Stakeholder, Internal Process, Learning & Growth).\n• Calibrate targets across the 5 BEIE clusters (Foundations, Transformers, Enablers, Connectors, Financiers).\n\nHow can I assist your BSC strategy today?`
+      content: `Hello! I'm **BIRD AI**, your strategy map and KPI expert for the Bangsamoro Investment Roadmap 2026-2035.\n\nI can help you:\n• Design SMART KPIs aligned with OIC/SMIIC, ESG, and PDP benchmarks.\n• Map causal pathways across the 4 BSC perspectives (Financial, Stakeholder, Internal Process, Learning & Growth).\n• Calibrate targets across the 5 BEIE clusters (Foundations, Transformers, Enablers, Connectors, Financiers).\n\nHow can I assist your BSC strategy today?`
     }
   ]);
   const [aiInput, setAiInput] = useState('');
@@ -691,10 +691,10 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
     setIsAiLoading(true);
 
     try {
-      // Inject Chapter 5 & 6 context into the first user message to guide the AI
+      // Inject BIRD strategic context into the first user message to guide the AI
       const historyWithCtx = newMessages.map((m, idx) => {
         if (idx === 1 && m.role === 'user') { 
-           return { role: 'user', content: `[CONTEXT: BIRD 2026-2035 CHAPTER 5 & 6]\n${CHAPTER_5_6_CONTEXT}\n\n[USER QUESTION]: ${m.content}` };
+           return { role: 'user', content: `[CONTEXT: BIRD 2026-2035 STRATEGIC FRAMEWORK]\n${BIRD_STRATEGIC_CONTEXT}\n\n[USER QUESTION]: ${m.content}` };
         }
         return { role: m.role, content: m.content };
       });
@@ -896,30 +896,30 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
       <div className="space-y-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">Balanced Scorecard</h1>
-            <p className="text-slate-500 dark:text-slate-400">Define strategic objectives and measurable KPIs across four perspectives</p>
+            <h1 className="text-2xl font-bold text-[#E8C560] dark:text-[#ecfdf5]">Balanced Scorecard</h1>
+            <p className="text-[#64748b] dark:text-[#64748b]/80">Define strategic objectives and measurable KPIs across four perspectives</p>
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 text-sm">
               <div className="flex items-center gap-1">
-                <Target className="w-4 h-4 text-cyan-600" />
-                <span className="text-slate-600">
-                  <span className="font-medium text-cyan-600">{displayObjectives.length}</span> objectives
+                <Target className="w-4 h-4 text-[#C9A84C]" />
+                <span className="text-[#ecfdf5]/80">
+                  <span className="font-medium text-[#C9A84C]">{displayObjectives.length}</span> objectives
                 </span>
               </div>
-              <ArrowRight className="w-4 h-4 text-slate-400" />
+              <ArrowRight className="w-4 h-4 text-[#64748b]/80" />
               <div className="flex items-center gap-1">
-                <TrendingUp className="w-4 h-4 text-cyan-600" />
-                <span className="text-slate-600">
-                  <span className="font-medium text-cyan-600">{totalKPICount}</span> KPIs
+                <TrendingUp className="w-4 h-4 text-[#C9A84C]" />
+                <span className="text-[#ecfdf5]/80">
+                  <span className="font-medium text-[#C9A84C]">{totalKPICount}</span> KPIs
                 </span>
               </div>
               {avgProgress > 0 && (
                 <>
-                  <ArrowRight className="w-4 h-4 text-slate-400" />
+                  <ArrowRight className="w-4 h-4 text-[#64748b]/80" />
                   <div className="flex items-center gap-1">
-                    <span className="text-slate-600">Avg:</span>
-                    <span className="font-medium text-cyan-600">{Math.round(avgProgress)}%</span>
+                    <span className="text-[#ecfdf5]/80">Avg:</span>
+                    <span className="font-medium text-[#C9A84C]">{Math.round(avgProgress)}%</span>
                   </div>
                 </>
               )}
@@ -928,7 +928,7 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
               <button
                 onClick={handleGenerateObjectives}
                 disabled={isGeneratingObjectives}
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-xl text-sm font-medium hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#065f46] to-[#4c1d95] text-white rounded-xl text-sm font-medium hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               >
                 {isGeneratingObjectives ? (
                   <><Loader2 className="w-4 h-4 animate-spin" /> Generating...</>
@@ -941,13 +941,13 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
         </div>
 
         {isPlanEmpty && (
-          <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="bg-[#059669]/10 border border-[#059669]/20 rounded-xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="flex items-start gap-3">
-              <Cloud className="w-6 h-6 text-emerald-600 flex-shrink-0 mt-0.5" />
+              <Cloud className="w-6 h-6 text-[#34d399] flex-shrink-0 mt-0.5" />
               <div>
                 <h4 className="font-semibold text-emerald-800 mb-1">BIRD 2035 Roadmap Template Loaded</h4>
-                <p className="text-sm text-emerald-700">
-                  Pre-populated with 27 strategic objectives and KPIs across all 4 perspectives from Chapter 6 of the Bangsamoro Investment Roadmap. 
+                <p className="text-sm text-[#34d399]">
+                  Pre-populated with 27 strategic objectives and KPIs across all 4 perspectives from the Bangsamoro Investment Roadmap. 
                   Click below to apply this template to your plan.
                 </p>
               </div>
@@ -963,13 +963,13 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
         )}
 
         {selectedStrategies.length > 0 && !isPlanEmpty && (
-          <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 flex items-start gap-3">
-            <Link2 className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
+          <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4 flex items-start gap-3">
+            <Link2 className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
             <div>
               <h4 className="font-medium text-purple-800 mb-1">
                 {selectedStrategies.length} Selected Strateg{selectedStrategies.length === 1 ? 'y' : 'ies'} Available
               </h4>
-              <p className="text-sm text-purple-700">
+              <p className="text-sm text-purple-400">
                 Your objectives will be automatically linked to relevant strategies from the Strategy Matrix.
               </p>
             </div>
@@ -997,7 +997,7 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
                     </div>
                   </div>
 
-                  <div className="bg-slate-50 dark:bg-slate-900 rounded-xl p-4 space-y-4">
+                  <div className="bg-[#064e3b]/10 dark:bg-[#022c22] rounded-xl p-4 space-y-4">
                     {objectives.map((objective) => (
                       <ObjectiveCard
                         key={objective.id}
@@ -1016,24 +1016,24 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
 
                     {!isPlanEmpty && (
                       newObjective.perspective === perspective ? (
-                        <div className={cn("bg-white dark:bg-slate-800/60 rounded-xl border p-4 space-y-3 animate-in fade-in slide-in-from-top-2", config.border)}>
+                        <div className={cn("bg-white dark:bg-[#022c22]/60/60 rounded-xl border p-4 space-y-3 animate-in fade-in slide-in-from-top-2", config.border)}>
                           <div>
-                            <label className="block text-xs font-medium text-slate-600 mb-1">Strategic Objective *</label>
+                            <label className="block text-xs font-medium text-[#ecfdf5]/80 mb-1">Strategic Objective *</label>
                             <input
                               type="text"
                               value={newObjective.objective}
                               onChange={(e) => setNewObjective((prev) => ({ ...prev, objective: e.target.value }))}
-                              className="w-full px-3 py-2 text-sm font-medium border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                              className="w-full px-3 py-2 text-sm font-medium border border-[#C9A84C]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
                               placeholder={config.placeholder}
                               autoFocus
                             />
                           </div>
                           <div>
-                            <label className="block text-xs font-medium text-slate-600 mb-1">Description / Context</label>
+                            <label className="block text-xs font-medium text-[#ecfdf5]/80 mb-1">Description / Context</label>
                             <textarea
                               value={newObjective.description}
                               onChange={(e) => setNewObjective((prev) => ({ ...prev, description: e.target.value }))}
-                              className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 resize-none"
+                              className="w-full px-3 py-2 text-sm border text-foreground bg-background border-[#C9A84C]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A84C] resize-none"
                               rows={2}
                               placeholder="Provide context about why this objective is important..."
                             />
@@ -1041,14 +1041,14 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
                           <div className="flex justify-end gap-2">
                             <button
                               onClick={() => setNewObjective({ perspective: null, objective: '', description: '' })}
-                              className="px-4 py-2 text-sm text-slate-600 rounded-lg"
+                              className="px-4 py-2 text-sm text-[#ecfdf5]/80 rounded-lg"
                             >
                               Cancel
                             </button>
                             <button
                               onClick={handleAddObjective}
                               disabled={!newObjective.objective.trim()}
-                              className="px-4 py-2 text-sm bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 disabled:opacity-50 transition-colors"
+                              className="px-4 py-2 text-sm bg-[#C9A84C] text-white rounded-lg hover:bg-[#C9A84C] disabled:opacity-50 transition-colors"
                             >
                               Add Objective
                             </button>
@@ -1058,7 +1058,7 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
                         <button
                           onClick={() => setNewObjective({ perspective, objective: '', description: '' })}
                           className={cn(
-                            "w-full py-3 border-2 border-dashed rounded-xl text-sm font-medium text-slate-500 hover:text-slate-700 hover:border-slate-400 transition-colors flex items-center justify-center gap-2",
+                            "w-full py-3 border-2 border-dashed rounded-xl text-sm font-medium text-[#64748b] hover:text-[#E8C560]/90 hover:border-slate-400 transition-colors flex items-center justify-center gap-2",
                             config.lightBg
                           )}
                         >
@@ -1085,7 +1085,7 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setShowAIChat(true)}
-            className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-600 text-white shadow-xl shadow-emerald-500/30 flex items-center justify-center border border-emerald-400/50"
+            className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-[#C9A84C] text-white shadow-xl shadow-[#059669]/30 flex items-center justify-center border border-emerald-400/50"
           >
             <Sparkles className="w-6 h-6" />
           </motion.button>
@@ -1103,20 +1103,20 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
             <motion.div
               initial={{ opacity: 0, x: 320 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 320 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 h-full w-full max-w-md z-50 bg-[#0B1426] border-l border-emerald-500/30 shadow-2xl flex flex-col"
+              className="fixed right-0 top-0 h-full w-full max-w-md z-50 bg-[#0B1426] border-l border-[#059669]/30 shadow-2xl flex flex-col"
             >
               {/* Header */}
-              <div className="p-4 border-b border-emerald-500/20 flex items-center justify-between bg-[#0B1426]/90 backdrop-blur-md">
+              <div className="p-4 border-b border-[#059669]/20 flex items-center justify-between bg-[#0B1426]/90 backdrop-blur-md">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#059669] to-[#C9A84C] flex items-center justify-center shadow-lg shadow-[#059669]/20">
                     <Sparkles className="w-5 h-5 text-white" />
                   </div>
                   <div>
                     <h3 className="text-white font-bold text-sm tracking-wide">BIRD AI Strategist</h3>
-                    <p className="text-emerald-400 text-xs font-medium">KPI & BSC Expert (Ch. 5 & 6)</p>
+                    <p className="text-[#6ee7b7] text-xs font-medium">KPI & BSC Expert (Ch. 5 & 6)</p>
                   </div>
                 </div>
-                <button onClick={() => setShowAIChat(false)} className="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-white/10 transition">
+                <button onClick={() => setShowAIChat(false)} className="text-[#64748b]/80 hover:text-white p-2 rounded-lg hover:bg-white/10 transition">
                   <X className="w-5 h-5" />
                 </button>
               </div>
@@ -1133,7 +1133,7 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
                     <div className={`max-w-[85%] rounded-2xl px-4 py-3 ${
                       msg.role === 'user'
                         ? 'bg-gradient-to-br from-emerald-600 to-cyan-700 text-white rounded-br-sm shadow-lg'
-                        : 'bg-[#131F38] text-slate-200 border border-emerald-500/20 rounded-bl-sm'
+                        : 'bg-[#131F38] text-[#ecfdf5]/90 border border-[#059669]/20 rounded-bl-sm'
                     }`}>
                       <div className="text-sm leading-relaxed whitespace-pre-wrap">
                         {msg.content.split('**').map((part, i) => i % 2 === 1 ? <strong key={i} className="text-emerald-300">{part}</strong> : part)}
@@ -1143,17 +1143,17 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
                 ))}
                 {isAiLoading && (
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
-                    <div className="bg-[#131F38] border border-emerald-500/20 rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-2">
-                      <Loader2 className="w-4 h-4 text-emerald-400 animate-spin" />
-                      <span className="text-xs text-slate-400">Analyzing BSC framework...</span>
+                    <div className="bg-[#131F38] border border-[#059669]/20 rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-2">
+                      <Loader2 className="w-4 h-4 text-[#6ee7b7] animate-spin" />
+                      <span className="text-xs text-[#64748b]/80">Analyzing BSC framework...</span>
                     </div>
                   </motion.div>
                 )}
               </div>
 
               {/* Input */}
-              <div className="p-4 border-t border-emerald-500/20 bg-[#0B1426]/90 backdrop-blur-md">
-                <div className="flex gap-2 items-end bg-[#131F38] border border-emerald-500/30 rounded-2xl px-4 py-3 focus-within:border-emerald-400 transition">
+              <div className="p-4 border-t border-[#059669]/20 bg-[#0B1426]/90 backdrop-blur-md">
+                <div className="flex gap-2 items-end bg-[#131F38] border border-[#059669]/30 rounded-2xl px-4 py-3 focus-within:border-emerald-400 transition">
                   <textarea
                     value={aiInput}
                     onChange={(e) => setAiInput(e.target.value)}
@@ -1171,12 +1171,12 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
                   <button
                     onClick={handleSendAiMessage}
                     disabled={!aiInput.trim() || isAiLoading}
-                    className="p-2 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-600 text-white disabled:opacity-40 hover:shadow-lg hover:shadow-emerald-500/30 transition flex-shrink-0"
+                    className="p-2 rounded-xl bg-gradient-to-br from-emerald-500 to-[#C9A84C] text-white disabled:opacity-40 hover:shadow-lg hover:shadow-[#059669]/30 transition flex-shrink-0"
                   >
                     <Send className="w-4 h-4" />
                   </button>
                 </div>
-                <p className="text-[10px] text-slate-500 mt-2 text-center">Powered by BIRD AI • Aligned with MTIT-BARMM Strategic Plan</p>
+                <p className="text-[10px] text-[#64748b] mt-2 text-center">Powered by BIRD AI • Aligned with MTIT-BARMM Strategic Plan</p>
               </div>
             </motion.div>
           </>
