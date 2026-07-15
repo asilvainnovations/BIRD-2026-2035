@@ -25,6 +25,11 @@ import { SWOTItem, StrategicPlan } from '@/lib/strategicPlanStore';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/lib/supabase';
 
+// Edge Function URLs
+const AI_ASSISTANT_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/ai-strategy-assistant';
+const SYNC_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/strategic-planner-sync';
+const EMAIL_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/email-notifications';
+
 interface SWOTAnalysisProps {
   plan: StrategicPlan;
   onAddItem: (item: Omit<SWOTItem, 'id'>) => void;
