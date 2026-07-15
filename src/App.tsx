@@ -15,7 +15,7 @@ const AppLoadingFallback = React.memo(() => (
     <div className="relative mb-6">
       <div className="w-20 h-20 rounded-full overflow-hidden ring-2 ring-[#C9A84C] shadow-2xl border border-white/20 animate-pulse">
         <img
-          src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png"
+          src="https://rgvteytgkugdqdodedxq.supabase.co/storage/v1/object/public/bird-images/public/MTIT%20Logo.webp"
           alt="BIRD 2026-2035"
           className="w-full h-full object-cover"
           onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
