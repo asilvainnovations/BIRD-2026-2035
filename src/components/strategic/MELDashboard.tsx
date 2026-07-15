@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from '@/lib/motion-shim';
-import { TrendingUp, TriangleAlert as AlertTriangle, CircleCheck as CheckCircle2, Clock, Target, DollarSign, Users, Cog, GraduationCap, ArrowUpRight, FolderKanban, Info, X, Send, Sparkles, Globe, ChevronDown, Loader as Loader2, ExternalLink, BookOpen, GitBranch, BrainCircuit, Layers, ArrowRight, Play, Zap, Shield, Leaf } from 'lucide-react';
+import { TrendingUp, TriangleAlert as AlertTriangle, CircleCheck as CheckCircle2, Clock, Target, DollarSign, Users, Cog, GraduationCap, ArrowUpRight, FolderKanban, Info, X, Send, Sparkles, Globe, ChevronDown, Loader as Loader2, ExternalLink, BookOpen, GitBranch, BrainCircuit, Layers, ArrowRight, Play, Zap, Shield, Leaf, ClipboardCheck } from 'lucide-react';
 import { StrategicPlan } from '@/lib/strategicPlanStore';
 import { EDGE_FUNCTIONS, BRAND_ASSETS } from '@/lib/supabase';
 
@@ -9,7 +9,7 @@ import HeroSection from './HeroSection';
 
 // ─── Asset constants (env-var backed) ────────────────────────────────────────
 const BIRD_BANNER_URL =
-  'https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/bird-images/public/BIRD%20Banner.png';
+  'https://rgvteytgkugdqdodedxq.supabase.co/storage/v1/object/public/bird-images/public/BIRD%20Banner.png';
 const AI_AVATAR_URL = BRAND_ASSETS.AI_AVATAR_URL;
 const AI_ENDPOINT   = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
 
@@ -191,12 +191,12 @@ const DashboardHeroSection: React.FC<{ onNavigate?: (view: string) => void }> = 
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
             </button>
             <button
-              onClick={() => onNavigate?.('systems')}
+              onClick={() => window.open('https://bird-app.bolt.host/validation-survey', '_blank', 'noopener,noreferrer')}
               className="px-8 py-4 bg-[rgba(6,78,59,0.6)] backdrop-blur-sm border-2 border-[rgba(201,168,76,0.55)] text-[#C9A84C] rounded-xl font-bold text-base hover:bg-[rgba(201,168,76,0.15)] transition-all flex items-center gap-3"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
-              <Play className="w-5 h-5" aria-hidden="true" />
-              Explore Systems Thinking
+              <ClipboardCheck className="w-5 h-5" aria-hidden="true" />
+              Participate in Validation Survey
             </button>
           </motion.div>
 
@@ -263,7 +263,7 @@ const Tooltip: React.FC<{ children: React.ReactNode; content: string }> = ({ chi
           <motion.div
             initial={{ opacity: 0, y: -6, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.95 }} transition={{ duration: 0.15 }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 w-max max-w-xs px-3 py-2 bg-slate-900 text-white text-xs rounded-lg shadow-xl pointer-events-none"
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 w-max max-w-xs px-3 py-2 bg-[#022c22] text-white text-xs rounded-lg shadow-xl pointer-events-none"
             role="tooltip"
           >
             {content}
@@ -553,6 +553,23 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
     inProg:   PRIORITY_ACTIONS.filter(a => a.status === 'In Progress').length,
   }), []);
 
+  useEffect(() => {
+    const styleId = 'hide-bolt-badge';
+    if (document.getElementById(styleId)) return;
+    const style = document.createElement('style');
+    style.id = styleId;
+    style.textContent = `
+      [class*="bolt"], [id*="bolt"], .bolt-badge,
+      [data-testid*="bolt"], a[href*="bolt.new"],
+      img[alt*="Bolt"], div[class*="fixed"] a[href*="bolt"] {
+        display: none !important; visibility: hidden !important;
+        opacity: 0 !important; pointer-events: none !important;
+      }
+    `;
+    document.head.appendChild(style);
+    return () => { style.remove(); };
+  }, []);
+
   const reinforcing = FEEDBACK_LOOPS.filter(l => l.type === 'reinforcing').length;
   const balancing   = FEEDBACK_LOOPS.filter(l => l.type === 'balancing').length;
 
@@ -841,77 +858,6 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
                 )}
               </tbody>
             </table>
-          </div>
-        </motion.section>
-
-        {/* ── PANEL D: Feedback Loop Health Monitor ───────────────────────────── */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-          className="bg-[rgba(6,78,59,0.15)] border border-[rgba(201,168,76,0.32)] rounded-2xl p-6 md:p-8 relative overflow-hidden"
-          aria-labelledby="panel-d-title"
-        >
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e]" aria-hidden="true" />
-          <div className="flex flex-wrap justify-between items-start gap-4 mb-6">
-            <div>
-              <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">Panel D · Systems Thinking MEL</span>
-              <h2 id="panel-d-title" className="text-xl md:text-2xl font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>
-                Feedback Loop Health Monitor
-              </h2>
-              <div className="w-10 h-1 bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e] rounded-full mt-2" aria-hidden="true" />
-            </div>
-            <span className="text-xs text-[#a7f3d0]/70 bg-[rgba(6,78,59,0.4)] border border-[rgba(201,168,76,0.32)] rounded-full px-3 py-1">
-              {reinforcing} reinforcing · {balancing} balancing
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {FEEDBACK_LOOPS.map((loop, i) => (
-              <motion.article
-                key={loop.id}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                className="bg-[rgba(2,44,34,0.55)] border border-[rgba(201,168,76,0.32)] rounded-xl p-5 relative overflow-hidden hover:-translate-y-1 transition-all"
-              >
-                <div
-                  className={`text-3xl font-black leading-none mb-1 ${loop.type === 'reinforcing' ? 'text-[#10b981]' : 'text-[#C9A84C]'}`}
-                  style={{ fontFamily: "'Cinzel', serif" }}
-                  aria-label={`Loop ${loop.id}: ${loop.type}`}
-                >
-                  {loop.id}
-                </div>
-                <span className={`text-[0.6rem] font-bold uppercase tracking-wider px-2 py-0.5 rounded inline-block mb-2 ${
-                  loop.type === 'reinforcing'
-                    ? 'bg-[rgba(16,185,129,0.15)] text-[#10b981] border border-[rgba(16,185,129,0.3)]'
-                    : 'bg-[rgba(201,168,76,0.15)] text-[#C9A84C] border border-[rgba(201,168,76,0.32)]'
-                }`}>{loop.type}</span>
-                <div className="text-xs font-bold text-white mb-2 leading-tight">{loop.name}</div>
-                <div
-                  className="h-1 bg-[rgba(255,255,255,0.06)] rounded-sm overflow-hidden my-2"
-                  role="progressbar" aria-valuenow={loop.progress} aria-valuemin={0} aria-valuemax={100}
-                  aria-label={`${loop.name}: ${loop.progress}% activation`}
-                >
-                  <motion.div
-                    className={`h-full rounded-sm ${
-                      loop.color === 'green' ? 'bg-gradient-to-r from-[#10b981] to-[#6ee7b7]' :
-                      loop.color === 'gold'  ? 'bg-gradient-to-r from-[#7a5c1e] via-[#c9a84c] to-[#7a5c1e]' :
-                      'bg-gradient-to-r from-[#3b82f6] to-[#93c5fd]'
-                    }`}
-                    initial={{ width: 0 }} whileInView={{ width: `${loop.progress}%` }} viewport={{ once: true }}
-                    transition={{ duration: 1.6, ease: [0.4, 0, 0.2, 1] }}
-                  />
-                </div>
-                <div className="text-xs text-[#d1fae5]/60 leading-relaxed mt-2">{loop.desc}</div>
-                <div className="flex items-center justify-between mt-3">
-                  <span className="text-xs text-[#ecfdf5]/55">{loop.activation}</span>
-                  <span className={`text-xs font-bold px-2 py-0.5 rounded border ${
-                    loop.status === 'active'
-                      ? 'bg-[rgba(16,185,129,0.12)] text-[#10b981] border-[rgba(16,185,129,0.25)]'
-                      : loop.status === 'building'
-                      ? 'bg-[rgba(245,158,11,0.12)] text-[#f59e0b] border-[rgba(245,158,11,0.25)]'
-                      : 'bg-[rgba(59,130,246,0.12)] text-[#93c5fd] border-[rgba(59,130,246,0.25)]'
-                  }`}>{loop.health}</span>
-                </div>
-              </motion.article>
-            ))}
           </div>
         </motion.section>
 
