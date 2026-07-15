@@ -85,12 +85,14 @@ const SERVER_CONFIG = {
     'http://localhost:3000',
     'http://localhost:5173',
     'https://bird-dashboard.asilvainnovations.com',
+    'https://bird-actors-value-map.asilvainnovations.com',
     'https://bird-roadmap.asilvainnovations.com',
     'https://bird-survey.asilvainnovations.com',
     'https://bird-contact.asilvainnovations.com',
     'https://bird-resources.asilvainnovations.com',
     'https://bird-survey-dashboard.asilvainnovations.com',
     'https://bird-survey-orientation.asilvainnovations.com',
+    'https://bird-action-plan.asilvainnovations.com',
     'https://bangsamoro-investment-roadmap.asilvainnovations.com'
   ]
 };
