@@ -90,7 +90,18 @@ align-items:center;
 gap:1rem;
 min-height:var(--touch-target);
 }
-.nav-logo img { height:40px; width:auto; object-fit:contain; display:block; }
+.nav-logo {
+display: flex;
+align-items: center;
+}
+.nav-logo img { 
+height:52px; 
+width:52px; 
+border-radius: 50%;
+object-fit:contain; 
+display:block;
+border: 2px solid var(--gold-border);
+}
 /* Mobile Menu Toggle */
 .mobile-menu-toggle {
 display:block;
@@ -176,7 +187,7 @@ transition:width .3s;
 }
 .nav-links-list a:hover::after,
 .nav-links-list a:focus::after { width:100%; }
-.nav-logo img { height:52px; }
+.nav-logo img { height:52px; width:52px; }
 .nav-inner { padding:.55rem 2rem; }
 }
 /* PAGE HEADER - Mobile First */
@@ -437,13 +448,32 @@ pointer-events:none;
 .swot-card{padding:1.6rem;}
 .swot-header{font-size:1.05rem;}
 }
+/* ---- KPI SECTION ---- */
+.kpi-section-wrap{display:flex;flex-direction:column;gap:2rem;}
+.kpi-card{background:rgba(2,44,34,.5);border:1px solid var(--gold-border);border-radius:1rem;padding:1.5rem;position:relative;overflow:hidden;}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad);}
+.kpi-card-title{font-family:'Cinzel',serif;color:var(--gold);font-size:1rem;font-weight:700;margin-bottom:1rem;}
+.kpi-table{width:100%;border-collapse:collapse;font-size:.8rem;}
+.kpi-table thead th{padding:.65rem .85rem;text-align:left;color:var(--gold);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.05em;background:rgba(201,168,76,.1);border-bottom:2px solid var(--gold-border);}
+.kpi-table tbody tr{border-bottom:1px solid rgba(201,168,76,.1);}
+.kpi-table tbody tr:hover{background:rgba(201,168,76,.05);}
+.kpi-table tbody tr{border-bottom:1px solid rgba(201,168,76,.1);}
+.kpi-table tbody tr:hover{background:rgba(201,168,76,.05);}
+.kpi-table tbody td{padding:.65rem .85rem;vertical-align:top;line-height:1.45;color:rgba(209,250,229,.85);}
+.kpi-table tbody td:first-child{color:white;font-weight:500;}
+.target-2028{color:var(--gold)!important;font-weight:600!important;}
+.target-2035{color:var(--light-green)!important;font-weight:600!important;}
+@media (min-width: 640px) {
+.kpi-card{padding:1.8rem;}
+.kpi-card-title{font-size:1.1rem;}
+}
 /* ---- CLD SECTION ---- */
 .cld-section-title{font-family:'Cinzel',serif;color:var(--gold);font-size:1.1rem;font-weight:700;margin-bottom:.5rem;}
 .cld-section-sub{color:rgba(209,250,229,.75);font-size:.9rem;margin-bottom:1.8rem;line-height:1.6;}
 .cld-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-bottom:2.5rem;}
 .cld-card{background:rgba(6,24,16,.9);border-radius:1.25rem;overflow:hidden;border:1px solid var(--gold-border);transition:border-color .3s,transform .3s;}
 .cld-card:hover{border-color:var(--gold-border-strong);transform:translateY(-3px);}
-.cld-card svg{width:100%;height:auto;display:block; min-height:200px;}
+.cld-card img{width:100%;height:auto;display:block; min-height:200px; object-fit:contain;}
 .cld-explanation{padding:1.1rem 1.2rem;border-top:1px solid var(--gold-border);background:rgba(0,0,0,.3);}
 .cld-explanation h4{font-family:'Cinzel',serif;color:var(--gold);font-size:.9rem;margin-bottom:.4rem;}
 .cld-explanation p{color:rgba(209,250,229,.8);font-size:.82rem;line-height:1.55;}
@@ -463,7 +493,7 @@ pointer-events:none;
 .archetypes-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;}
 .archetype-card{background:rgba(6,24,16,.9);border-radius:1.25rem;overflow:hidden;border:1px solid var(--gold-border);transition:border-color .3s,transform .3s; cursor:pointer;}
 .archetype-card:hover{border-color:var(--gold-border-strong);transform:translateY(-3px);}
-.archetype-card svg{width:100%;height:auto;display:block; min-height:200px;}
+.archetype-card img{width:100%;height:auto;display:block; min-height:200px; object-fit:contain;}
 .arch-desc{background:rgba(0,0,0,.35);padding:1.2rem;border-top:2px solid var(--gold-border);}
 .arch-desc h4{font-family:'Cinzel',serif;color:var(--gold);font-size:.95rem;margin-bottom:.4rem;}
 .arch-desc p{color:rgba(209,250,229,.8);font-size:.82rem;line-height:1.55;margin-bottom:.6rem;}
@@ -501,6 +531,8 @@ pointer-events:none;
 .metrics-card-title{font-family:'Cinzel',serif;color:var(--gold);font-size:1rem;font-weight:700;margin-bottom:1rem;}
 .metrics-table{width:100%;border-collapse:collapse;font-size:.8rem;}
 .metrics-table thead th{padding:.65rem .85rem;text-align:left;color:var(--gold);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.05em;background:rgba(201,168,76,.1);border-bottom:2px solid var(--gold-border);}
+.metrics-table tbody tr{border-bottom:1px solid rgba(201,168,76,.1);}
+.metrics-table tbody tr:hover{background:rgba(201,168,76,.05);}
 .metrics-table tbody tr{border-bottom:1px solid rgba(201,168,76,.1);}
 .metrics-table tbody tr:hover{background:rgba(201,168,76,.05);}
 .metrics-table tbody td{padding:.65rem .85rem;vertical-align:top;line-height:1.45;color:rgba(209,250,229,.85);}
@@ -615,6 +647,20 @@ body { background:white; color:black; }
 .tab-content { display:block !important; }
 .perspective-card { break-inside:avoid; }
 }
+/* Wide Image Display */
+.wide-image-container {
+width: 100%;
+margin: 2rem 0;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+border: 1px solid var(--gold-border);
+}
+.wide-image-container img {
+width: 100%;
+height: auto;
+display: block;
+}
 </style>
 <base target="_blank">
 </head>
@@ -622,8 +668,8 @@ body { background:white; color:black; }
 <a href="#mainContent" class="skip-link">Skip to main content</a>
 <nav class="site-nav" id="siteNav" role="navigation" aria-label="Main navigation">
 <div class="nav-inner">
-<a href="https://bangsamoro-investment-roadmap.asilvainnovations.com" class="nav-logo" aria-label="BARMM MTIT – Home">
-<img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png" alt="Ministry of Trade, Investments and Tourism – BARMM" onerror="this.style.display='none'">
+<a href="https://mtit.bangsamoro.gov.ph" class="nav-logo" aria-label="MTIT BARMM – Home">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png" alt="Ministry of Trade, Investments and Tourism – BARMM" onerror="this.style.display='none'">
 </a>
 <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
 <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -635,6 +681,7 @@ body { background:white; color:black; }
 <li><a href="https://bird-survey-orientation.asilvainnovations.com" data-tooltip="Validation Survey Orientation">Survey Orientation</a></li>
 <li><a href="https://bird-survey.asilvainnovations.com" data-tooltip="Participate in Validation Survey">Validation Survey</a></li>
 <li><a href="https://bird-resources.asilvainnovations.com" data-tooltip="Access Resources">Resources</a></li>
+<li><a href="https://asilvainnovations.github.io/barmm-investment-roadmap/ieb.html" data-tooltip="Ecosystem Framework">Ecosystem Framework</a></li>
 <li><a href="https://bird-app.asilvainnovations.com" data-tooltip="Access the BIRD App">BIRD App</a></li>
 <li><a href="https://bird-contact.asilvainnovations.com" data-tooltip="Contact Us">Contact</a></li>
 </ul>
@@ -649,12 +696,13 @@ body { background:white; color:black; }
 <!-- VIDEO BANNER -->
 <div class="page-container" style="padding-top: 0; padding-bottom: 1rem;">
 <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.5); border: 1px solid var(--gold-border); background: #000;">
-<iframe src="https://www.youtube.com/embed/UCi2dVUmSbE" title="Bangsamoro Investment Roadmap 2026–2035 | Southeast Asia’s Hub for Ethical & Sustainable Growth" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+<iframe src="https://www.youtube.com/embed/UCi2dVUmSbE" title="Bangsamoro Investment Roadmap 2026–2035 | Southeast Asia's Hub for Ethical & Sustainable Growth" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div>
 </div>
 <div class="tabs-bar" role="tablist" aria-label="Strategy sections">
 <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="roadmap-tab" onclick="switchTab('roadmap-tab',this)" data-tooltip="Strategic perspectives and leverage points overview">📊 Roadmap</button>
 <button class="tab-btn" role="tab" aria-selected="false" aria-controls="swot-tab" onclick="switchTab('swot-tab',this)" data-tooltip="Strategic SWOT Analysis">🔍 SWOT</button>
+<button class="tab-btn" role="tab" aria-selected="false" aria-controls="kpi-tab" onclick="switchTab('kpi-tab',this)" data-tooltip="Key Performance Indicators">📈 KPIs</button>
 <button class="tab-btn" role="tab" aria-selected="false" aria-controls="cld-tab" onclick="switchTab('cld-tab',this)" data-tooltip="Causal Loop Diagrams showing feedback systems">🔄 CLDs</button>
 <button class="tab-btn" role="tab" aria-selected="false" aria-controls="archetypes-tab" onclick="switchTab('archetypes-tab',this)" data-tooltip="System archetypes and leverage points">⚙️ Archetypes</button>
 <button class="tab-btn" role="tab" aria-selected="false" aria-controls="bsc-matrix" onclick="switchTab('bsc-matrix',this)" data-tooltip="Balanced Scorecard Matrix">📈 BSC</button>
@@ -710,6 +758,390 @@ body { background:white; color:black; }
 <p class="instructions-bar">Hover over strategies for detailed KPIs • Click to expand perspectives • Use tabs to explore all sections</p>
 </div>
 
+<!-- ======= SWOT TAB ======= -->
+<div id="swot-tab" class="tab-content fade-in-section" role="tabpanel">
+<div class="section-intro-box">
+<h2 style="font-family:'Cinzel',serif; color:var(--gold); font-size: 1.3rem; margin-bottom: 1rem;">SWOT Analysis with Quantification</h2>
+<p>The SWOT analysis employs robust mathematical formulations to quantify strategic viability, risk exposure, and resilience capacity across all BEIE clusters.</p>
+</div>
+<div class="swot-grid">
+<div class="swot-card strength">
+<div class="swot-header">
+<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+<span>STRENGTHS (Internal Resilience Drivers)</span>
+</div>
+<div class="swot-list">
+<div class="swot-entry">
+<strong>Halal Legitimacy & Cultural Credibility (RI=5.0)</strong>
+Authentic Muslim-majority identity providing unmatched authenticity for halal branding
+</div>
+<div class="swot-entry">
+<strong>Strategic Location BIMP-EAGA (RI=4.0)</strong>
+Proximity to Sabah and ASEAN trade corridors
+</div>
+<div class="swot-entry">
+<strong>Strong AFF Base (RI=3.2)</strong>
+Rubber (Basilan), coconut, seaweed (Tawi-Tawi), fisheries, halal agri-products
+</div>
+<div class="swot-entry">
+<strong>Domestic Halal Demand (RI=5.0)</strong>
+5.69M Muslim consumer base driving local market absorption
+</div>
+<div class="swot-entry">
+<strong>Young, Growing Population (RI=5.0)</strong>
+Demographic dividend with 3.43% annual growth
+</div>
+</div>
+</div>
+<div class="swot-card weakness">
+<div class="swot-header">
+<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+<span>WEAKNESSES (Internal Risk Exposure)</span>
+</div>
+<div class="swot-list">
+<div class="swot-entry">
+<strong>Critical Infrastructure Deficits (Risk=25.0)</strong>
+Energy, transport, digital, and water gaps
+</div>
+<div class="swot-entry">
+<strong>Highest Poverty Incidence (Risk=25.0)</strong>
+34.8% limiting domestic market depth and purchasing power
+</div>
+<div class="swot-entry">
+<strong>Weak Halal Certification System (Risk=20.0)</strong>
+Resource-constrained BHB with limited international recognition
+</div>
+<div class="swot-entry">
+<strong>Lowest Functional Literacy Rate (Risk=20.0)</strong>
+59.3% creating a severe human capital constraint
+</div>
+<div class="swot-entry">
+<strong>Minimal Formal Financial Penetration (Risk=16.0)</strong>
+Capital access barriers for MSMEs, especially in rural/island areas
+</div>
+</div>
+</div>
+<div class="swot-card opportunity">
+<div class="swot-header">
+<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+<span>OPPORTUNITIES (External Resilience Drivers)</span>
+</div>
+<div class="swot-list">
+<div class="swot-entry">
+<strong>Global Halal Market (RI=5.0)</strong>
+USD 2.3 trillion market with growing demand
+</div>
+<div class="swot-entry">
+<strong>Renewable Energy Investments (RI=4.5)</strong>
+Solar, hydro rehabilitation, and biomass potential (BSEMP alignment)
+</div>
+<div class="swot-entry">
+<strong>ASEAN Halal Economy (RI=4.5)</strong>
+USD 1.38 trillion addressable market; target to capture 30% share
+</div>
+<div class="swot-entry">
+<strong>Islamic Finance Ecosystem (RI=4.5)</strong>
+Growing global Shariah-compliant capital pool seeking ethical investments
+</div>
+<div class="swot-entry">
+<strong>BIMP-EAGA Regional Integration (RI=4.0)</strong>
+Cross-border trade facilitation and eco-corridors
+</div>
+</div>
+</div>
+<div class="swot-card threat">
+<div class="swot-header">
+<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+<span>THREATS (External Vulnerability Factors)</span>
+</div>
+<div class="swot-list">
+<div class="swot-entry">
+<strong>Climate Change Vulnerabilities (VI=5.0)</strong>
+El Niño, flooding, and shifting rainfall patterns (4.2% AFF contraction in 2024)
+</div>
+<div class="swot-entry">
+<strong>Competition from Halal Hubs (VI=4.0)</strong>
+Malaysia, Indonesia, and Thailand holding established market share
+</div>
+<div class="swot-entry">
+<strong>Standards Recognition Risk (VI=4.0)</strong>
+BARMM certifications not yet aligned with OIC/SMIIC international standards
+</div>
+<div class="swot-entry">
+<strong>Residual Security Incidents (VI=1.9)</strong>
+Rido, remnant armed groups, and investor perception risks (variable by province)
+</div>
+<div class="swot-entry">
+<strong>Political Transition Uncertainties (VI=2.6)</strong>
+First parliamentary elections and governance continuity risks
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ======= KPI TAB ======= -->
+<div id="kpi-tab" class="tab-content fade-in-section" role="tabpanel">
+<div class="section-intro-box">
+<h2 style="font-family:'Cinzel',serif; color:var(--gold); font-size: 1.3rem; margin-bottom: 1rem;">Key Performance Indicators & Benchmarks</h2>
+<p>Calibrated metrics aligned with OIC/SMIIC international standards, ESG frameworks, Philippine Development Plan 2023–2028, and Bangsamoro-specific KPIs.</p>
+</div>
+<div class="metrics-section-wrap">
+<div class="metrics-card">
+<h3 class="metrics-card-title">Cross-Cutting Operating Systems KPIs</h3>
+<table class="metrics-table">
+<thead>
+<tr>
+<th>KPI Dimension</th>
+<th>Baseline (2024)</th>
+<th>Target 2028</th>
+<th>Target 2030</th>
+<th>Target 2035</th>
+<th>Lead Agency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public financial disclosure compliance rate</td>
+<td>~65% (est.)</td>
+<td class="target-2028">80%</td>
+<td>95%</td>
+<td class="target-2035">100%</td>
+<td>OCM-BARMM</td>
+</tr>
+<tr>
+<td>Investor ombudsman operationalization</td>
+<td>Not established</td>
+<td class="target-2028">Established</td>
+<td>Fully functional</td>
+<td class="target-2035">8.0+/10 satisfaction</td>
+<td>MTIT-BBOI</td>
+</tr>
+<tr>
+<td>Functional literacy rate (ages 10+)</td>
+<td>59.3%</td>
+<td class="target-2028">68%</td>
+<td>72%</td>
+<td class="target-2035">75%+</td>
+<td>DepEd-BARMM/TESDA</td>
+</tr>
+<tr>
+<td>Decommissioned combatant reintegration rate</td>
+<td>~62%</td>
+<td class="target-2028">80%</td>
+<td>100%</td>
+<td class="target-2035">Sustained >95%</td>
+<td>OPAPRU-BARMM</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="metrics-card">
+<h3 class="metrics-card-title">Foundations Cluster KPIs</h3>
+<table class="metrics-table">
+<thead>
+<tr>
+<th>KPI</th>
+<th>Baseline</th>
+<th>Target 2028</th>
+<th>Target 2030</th>
+<th>Target 2035</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Priority crop yield increase (rice, corn, rubber, seaweed)</td>
+<td>Baseline</td>
+<td class="target-2028">10%</td>
+<td>13%</td>
+<td class="target-2035">15%</td>
+</tr>
+<tr>
+<td>Post-harvest loss reduction</td>
+<td>20–40%</td>
+<td class="target-2028">25%</td>
+<td>30%</td>
+<td class="target-2035">30%+</td>
+</tr>
+<tr>
+<td>Renewable energy mix share</td>
+<td>75.86%</td>
+<td class="target-2028">78%</td>
+<td>82%</td>
+<td class="target-2035">85%</td>
+</tr>
+<tr>
+<td>Household electrification rate</td>
+<td>~39%</td>
+<td class="target-2028">65%</td>
+<td>80%</td>
+<td class="target-2035">90% (100% by 2040)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="metrics-card">
+<h3 class="metrics-card-title">Transformers Cluster KPIs</h3>
+<table class="metrics-table">
+<thead>
+<tr>
+<th>KPI</th>
+<th>Baseline</th>
+<th>Target 2028</th>
+<th>Target 2030</th>
+<th>Target 2035</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Halal-certified MSMEs</td>
+<td>~500</td>
+<td class="target-2028">1,500</td>
+<td>3,000</td>
+<td class="target-2035">5,000+</td>
+</tr>
+<tr>
+<td>BHB OIC/SMIIC accreditation status</td>
+<td>Pending</td>
+<td class="target-2028">Provisional alignment</td>
+<td>Full accreditation</td>
+<td class="target-2035">MRA signed</td>
+</tr>
+<tr>
+<td>Halal export value</td>
+<td><500M</td>
+<td class="target-2028">₱1.5B</td>
+<td>₱3B</td>
+<td class="target-2035">₱5B+</td>
+</tr>
+<tr>
+<td>Annual tourist arrivals</td>
+<td><500K</td>
+<td class="target-2028">1M</td>
+<td>2M</td>
+<td class="target-2035">3M</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="metrics-card">
+<h3 class="metrics-card-title">International Benchmark Alignment</h3>
+<div class="benchmark-highlights">
+<div class="bh-card">
+<div class="bh-num">21 days</div>
+<div class="bh-label">Halal Certification Processing<br><span class="bh-note">OIC/SMIIC Standard</span></div>
+</div>
+<div class="bh-card">
+<div class="bh-num">85%</div>
+<div class="bh-label">Renewable Energy Share<br><span class="bh-note">BSEMP Target 2035</span></div>
+</div>
+<div class="bh-card">
+<div class="bh-num">1 day</div>
+<div class="bh-label">Business Registration<br><span class="bh-note">Digital BNR System</span></div>
+</div>
+<div class="bh-card">
+<div class="bh-num">75%+</div>
+<div class="bh-label">Functional Literacy Rate<br><span class="bh-note">BDP 2023-2028</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ======= CLD TAB ======= -->
+<div id="cld-tab" class="tab-content fade-in-section" role="tabpanel">
+<div class="section-intro-box">
+<h2 class="cld-section-title">Causal Loop Diagrams & Systems Thinking</h2>
+<p class="cld-section-sub">Understanding the dynamic interrelationships and feedback loops that drive BARMM's investment ecosystem behavior over time.</p>
+</div>
+<div class="cld-grid">
+<div class="cld-card">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/14.%20Investment-Development%20Virtuous%20Cycle.png" alt="Investment-Development Virtuous Cycle">
+<div class="cld-explanation">
+<span class="cld-loop-type loop-reinforcing">Reinforcing Loop (R)</span>
+<h4>Investment-Development Virtuous Cycle</h4>
+<p>Investment inflows generate employment and income growth, which expands the domestic consumer market, improves business viability, and attracts additional investors—creating a self-reinforcing cycle of economic development.</p>
+</div>
+</div>
+<div class="cld-card">
+<img src="https://rgvteytgkugdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/15.%20Investment%20and%20Governance%20Cycles.png" alt="Investment and Governance Cycles">
+<div class="cld-explanation">
+<span class="cld-loop-type loop-reinforcing">Reinforcing Loop (R)</span>
+<h4>Governance-Investor Confidence Cycle</h4>
+<p>Improved governance (transparency, rule of law, investor protection) increases investor confidence, which drives investment, generates economic growth, expands the tax base, and provides resources for further governance improvements.</p>
+</div>
+</div>
+<div class="cld-card">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/How%20moral%20Governance%20De-Risks%20Capital.png" alt="How Moral Governance De-Risks Capital">
+<div class="cld-explanation">
+<span class="cld-loop-type loop-balancing">Balancing Loop (B)</span>
+<h4>How Moral Governance De-Risks Capital</h4>
+<p>Moral governance operating systems (transparency, accountability, Islamic ethics) reduce perceived investment risks, lower the cost of capital, and attract long-term, patient capital aligned with BARMM's values and development objectives.</p>
+</div>
+</div>
+</div>
+<div class="cld-legend">
+<div class="legend-item">
+<div class="legend-dot" style="background:#10b981;"></div>
+<span>Reinforcing Loop (R) - Amplifies change in a single direction</span>
+</div>
+<div class="legend-item">
+<div class="legend-dot" style="background:var(--gold);"></div>
+<span>Balancing Loop (B) - Stabilizes the system toward equilibrium</span>
+</div>
+</div>
+</div>
+
+<!-- ======= ARCHETYPES TAB ======= -->
+<div id="archetypes-tab" class="tab-content fade-in-section" role="tabpanel">
+<div class="section-intro-box">
+<h2 style="font-family:'Cinzel',serif; color:var(--gold); font-size: 1.3rem; margin-bottom: 1rem;">Systems Archetypes & Leverage Points</h2>
+<p>Recurring patterns of system behavior that help diagnose structural dynamics and identify high-leverage interventions for transformative change.</p>
+</div>
+<div class="archetypes-grid">
+<div class="archetype-card" onclick="openArchetypeModal(1)" role="button" tabindex="0" aria-label="View Limits to Growth archetype details">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/9LtG.png" alt="Limits to Growth Archetype">
+<div class="arch-desc">
+<h4>1. Limits to Growth</h4>
+<p>Rapid investment growth encounters balancing pressures from infrastructure bottlenecks, skills shortages, and environmental limits. Without proactive capacity investment, growth plateaus.</p>
+<div class="arch-leverage"><strong>Leverage Point:</strong> LP2 Infrastructure-Energy-Connectivity Nexus</div>
+</div>
+</div>
+<div class="archetype-card" onclick="openArchetypeModal(2)" role="button" tabindex="0" aria-label="View Success to the Successful archetype details">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/13.png" alt="Success to the Successful Archetype">
+<div class="arch-desc">
+<h4>2. Success to the Successful</h4>
+<p>Initial advantages in mainland provinces compound, attracting more resources while archipelagic provinces lag behind, deepening regional inequality.</p>
+<div class="arch-leverage"><strong>Leverage Point:</strong> Affirmative investment policies & provincial equity targets</div>
+</div>
+</div>
+<div class="archetype-card" onclick="openArchetypeModal(3)" role="button" tabindex="0" aria-label="View Fixes that Fail archetype details">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/8-FtF.png" alt="Fixes that Fail Archetype">
+<div class="arch-desc">
+<h4>3. Fixes that Fail</h4>
+<p>Ad-hoc tax incentives without systemic governance reform provide short-term investor relief but generate unintended consequences—revenue loss and weak institutions.</p>
+<div class="arch-leverage"><strong>Leverage Point:</strong> LP3 Governance-Investor Confidence Feedback</div>
+</div>
+</div>
+<div class="archetype-card">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/1-Systems%20Thinking%20Banner.png" alt="Tragedy of the Commons Archetype">
+<div class="arch-desc">
+<h4>4. Tragedy of the Commons</h4>
+<p>Fragmented governance across Foundations cluster leads to resource depletion as individual actors maximize short-term yields from shared resources (watersheds, fishing grounds, grid capacity).</p>
+<div class="arch-leverage"><strong>Leverage Point:</strong> Co-management frameworks & benefit-sharing protocols</div>
+</div>
+</div>
+<div class="archetype-card">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/10.png" alt="Growth and Underinvestment Archetype">
+<div class="arch-desc">
+<h4>5. Growth and Underinvestment</h4>
+<p>Investment approvals surge (₱5.1B in Q1 2026) but facilitation capacity (BBOI, BHB, aftercare services) remains constrained, creating bottlenecks that could undermine future growth.</p>
+<div class="arch-leverage"><strong>Leverage Point:</strong> Expand institutional capacity ahead of demand</div>
+</div>
+</div>
+</div>
+</div>
+
 <!-- ======= BALANCED SCORECARD TAB ======= -->
 <div id="bsc-matrix" class="tab-content fade-in-section" role="tabpanel">
 <div class="bsc-wrapper">
@@ -730,6 +1162,14 @@ body { background:white; color:black; }
     </div>
     <div style="position: relative; width: 100%; padding-bottom: 0; height: 100%; overflow: hidden; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.5); border: 1px solid var(--gold-border); background: #000; margin-bottom: 3rem;">
         <iframe src="https://www.youtube.com/embed/kb_snh8mo1k" title="Bangsamoro Investment Roadmap 2026–2035 | Strategic Options & Path to Growth" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+
+    <!-- Wide Images Before CTA -->
+    <div class="wide-image-container">
+        <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Invest%20in%20Bangsamoro.png" alt="Invest in Bangsamoro">
+    </div>
+    <div class="wide-image-container">
+        <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Choose%20Bangsamoro.png" alt="Choose Bangsamoro">
     </div>
 
     <!-- CTA Card -->
@@ -781,12 +1221,6 @@ body { background:white; color:black; }
 <div class="insight-box"><h4>💡 Key Insight: The Symptom Relief Trap</h4><p>Quick fixes (B loop) provide temporary relief but create unintended consequences — revenue loss and institutional weakness (R loop) — that eventually worsen the original problem.</p></div>
 <div class="insight-box"><h4>🎯 Strategic Response — LP3 Governance-Investor Confidence</h4><p>Address root causes through systemic governance reform. Streamline business registration to 1-day (Digital BNR), establish transparent regulatory frameworks, and achieve international accreditation for BHB.</p></div>
 </div>
-</div>
-
-<!-- Choose Bangsamoro Invest Bnagsamoro Wide Images -->
-<div class="page-container" style="padding-top: 0; padding-bottom: 1rem;">
-<div style="position: relative; width: 100%; padding-bottom: 0; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.5); border: 1px solid var(--gold-border); background: #000;">
-<iframe src="https://www.youtube.com/embed/UCi2dVUmSbE" title="Bangsamoro Investment Roadmap 2026–2035 | Southeast Asia’s Hub for Ethical & Sustainable Growth" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div>
 
 <!-- Install Button -->
