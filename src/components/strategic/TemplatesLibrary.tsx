@@ -65,9 +65,9 @@ const ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
 
 // Phase configuration for roadmap templates
 const ROADMAP_PHASES = [
-  { id: 'foundation', label: 'Foundation Building', years: '2026-2028', color: 'bg-[#064e3b]' },
-  { id: 'acceleration', label: 'Acceleration', years: '2029-2032', color: 'bg-[#065f46]' },
-  { id: 'consolidation', label: 'Consolidation', years: '2033-2035', color: 'bg-[#C9A84C]' },
+  { id: 'foundation', label: 'Foundation Building', years: '2026-2028', color: 'bg-[#059669]' },
+  { id: 'acceleration', label: 'Acceleration', years: '2029-2032', color: 'bg-[#C9A84C]' },
+  { id: 'consolidation', label: 'Consolidation', years: '2033-2035', color: 'bg-violet-500' },
 ];
 
 interface TemplatesLibraryProps {
@@ -411,7 +411,7 @@ Check it out in our Templates Library!`;
               className={`${size} ${
                 i <= (interactive ? ratingHover || userRating : Math.round(rating))
                   ? 'text-amber-400 fill-amber-400'
-                  : 'text-[#64748b]/60'
+                  : 'text-[#64748b]'
               }`}
             />
           </button>
@@ -430,9 +430,9 @@ Check it out in our Templates Library!`;
   // Get template complexity level
   const getComplexityLevel = (template: PlanTemplate) => {
     const score = template.plan_data.objectives.length + template.plan_data.swotItems.length;
-    if (score > 20) return { label: 'Advanced', color: 'bg-red-500/10 text-red-700' };
-    if (score > 12) return { label: 'Intermediate', color: 'bg-amber-500/10 text-amber-700' };
-    return { label: 'Beginner', color: 'bg-green-100 text-green-700' };
+    if (score > 20) return { label: 'Advanced', color: 'bg-red-500/100/10 text-red-400' };
+    if (score > 12) return { label: 'Intermediate', color: 'bg-amber-500/100/10 text-amber-400' };
+    return { label: 'Beginner', color: 'bg-[#059669]/10 text-[#6ee7b7]' };
   };
 
   // Get estimated completion time
@@ -450,7 +450,7 @@ Check it out in our Templates Library!`;
     if (!isRoadmapTemplate(template)) return null;
 
     return (
-      <div className="mb-6 bg-slate-50 rounded-xl p-4 border border-[#C9A84C]/20">
+      <div className="mb-6 bg-[#064e3b]/10 rounded-xl p-4 border border-[#C9A84C]/20">
         <h4 className="text-xs font-bold text-[#64748b] uppercase tracking-wider mb-3 flex items-center gap-2">
           <Clock className="w-3.5 h-3.5" />
           Implementation Roadmap (2026-2035)
@@ -484,19 +484,19 @@ Check it out in our Templates Library!`;
         title: 'Halal Industry Ecosystem', 
         icon: Leaf,
         items: ['BHB International Accreditation', 'Halal Park Development', 'Value Chain Integration', 'OIC/SMIIC Alignment'],
-        color: 'text-[#6ee7b7] bg-[#059669]/10 border-[#059669]/20'
+        color: 'text-[#34d399] bg-[#059669]/10 border-[#059669]/20'
       },
       { 
         title: 'Enabling Infrastructure', 
         icon: Zap,
         items: ['Energy Infrastructure (100% by 2030)', 'Digital Connectivity (70% by 2030)', 'Farm-to-Market Roads', 'Polloc Freeport Modernization'],
-        color: 'text-blue-400 bg-blue-500/10 border-blue-500/20'
+        color: 'text-[#C9A84C] bg-[#C9A84C]/10 border-[#C9A84C]/20'
       },
       { 
         title: 'Governance Strengthening', 
         icon: Shield,
         items: ['One-Stop Investment Centers', 'Moral Governance Framework', 'Business Registration Reform', 'Transparency Systems'],
-        color: 'text-purple-400 bg-purple-500/10 border-purple-500/20'
+        color: 'text-violet-600 bg-violet-50 border-violet-200'
       },
     ];
 
@@ -543,7 +543,7 @@ Check it out in our Templates Library!`;
     const estimatedTime = getEstimatedTime(template);
 
     return (
-      <div className="mb-6 bg-slate-50 rounded-xl p-4 border border-[#C9A84C]/20">
+      <div className="mb-6 bg-[#064e3b]/10 rounded-xl p-4 border border-[#C9A84C]/20">
         <div className="flex items-center justify-between mb-3">
           <h4 className="text-xs font-bold text-[#64748b] uppercase tracking-wider flex items-center gap-2">
             <Lightbulb className="w-3.5 h-3.5" />
@@ -553,7 +553,7 @@ Check it out in our Templates Library!`;
             <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${complexity.color}`}>
               {complexity.label}
             </span>
-            <span className="px-2 py-0.5 rounded-full bg-slate-100 text-[#ecfdf5]/80 text-[10px] font-bold flex items-center gap-1">
+            <span className="px-2 py-0.5 rounded-full bg-[#064e3b]/20 text-[#ecfdf5]/80 text-[10px] font-bold flex items-center gap-1">
               <Clock className="w-3 h-3" />
               {estimatedTime}
             </span>
@@ -562,7 +562,7 @@ Check it out in our Templates Library!`;
         <ul className="space-y-1.5">
           {bestFor.map((useCase, idx) => (
             <li key={idx} className="text-xs text-[#ecfdf5]/80 flex items-start gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#059669] flex-shrink-0 mt-0.5" />
               {useCase}
             </li>
           ))}
@@ -583,7 +583,7 @@ Check it out in our Templates Library!`;
     return (
       <div
         key={template.id}
-        className="group bg-[#022c22]/40 rounded-2xl border border-[#C9A84C]/20 hover:border-[#C9A84C]/20 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer relative"
+        className="group bg-white rounded-2xl border border-[#C9A84C]/20 hover:border-[#C9A84C]/30 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer relative"
         onClick={() => {
           setSelectedTemplate(template);
           setShowPreview(true);
@@ -601,7 +601,7 @@ Check it out in our Templates Library!`;
               className={`w-6 h-6 rounded-md border-2 flex items-center justify-center transition-colors ${
                 isInCompare 
                   ? 'bg-[#C9A84C] border-[#C9A84C] text-white' 
-                  : 'bg-white border-[#C9A84C]/20 hover:border-[#C9A84C]'
+                  : 'bg-white border-[#C9A84C]/30 hover:border-[#C9A84C]'
               }`}
             >
               {isInCompare && <Check className="w-3.5 h-3.5" />}
@@ -697,9 +697,9 @@ Check it out in our Templates Library!`;
           {/* Special indicators for roadmap */}
           {isRoadmap && (
             <div className="flex items-center gap-2 mb-3 text-xs text-[#ecfdf5]/80">
-              <Briefcase className="w-3.5 h-3.5 text-emerald-500" />
+              <Briefcase className="w-3.5 h-3.5 text-[#059669]" />
               <span>PHP 50B Target</span>
-              <span className="text-[#64748b]/60">•</span>
+              <span className="text-[#64748b]">•</span>
               <Globe className="w-3.5 h-3.5 text-[#C9A84C]" />
               <span>BIMP-EAGA</span>
             </div>
@@ -716,7 +716,7 @@ Check it out in our Templates Library!`;
               </span>
             ))}
             {template.tags.length > 3 && (
-              <span className="px-2 py-0.5 rounded-full bg-slate-100 text-[#64748b] text-[10px] font-semibold">
+              <span className="px-2 py-0.5 rounded-full bg-[#064e3b]/20 text-[#64748b] text-[10px] font-semibold">
                 +{template.tags.length - 3}
               </span>
             )}
@@ -827,14 +827,14 @@ Check it out in our Templates Library!`;
             <div className="flex gap-2 mt-4">
               <button
                 onClick={() => shareViaWhatsApp(template)}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#059669]/100/20 hover:bg-[#059669]/100/30 text-white rounded-lg text-xs font-semibold transition-colors border border-emerald-400/30"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#059669]/20 hover:bg-[#059669]/30 text-white rounded-lg text-xs font-semibold transition-colors border border-emerald-400/30"
               >
                 <Phone className="w-3.5 h-3.5" />
                 WhatsApp
               </button>
               <button
                 onClick={() => shareViaEmail(template)}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#C9A84C]/100/20 hover:bg-[#C9A84C]/100/30 text-white rounded-lg text-xs font-semibold transition-colors border border-blue-400/30"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#C9A84C]/20 hover:bg-[#C9A84C]/30 text-white rounded-lg text-xs font-semibold transition-colors border border-blue-400/30"
               >
                 <Mail className="w-3.5 h-3.5" />
                 Email
@@ -864,11 +864,11 @@ Check it out in our Templates Library!`;
 
             {/* Vision & Mission */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <div className="bg-slate-50 rounded-xl p-4 border border-slate-100">
+              <div className="bg-[#064e3b]/10 rounded-xl p-4 border border-slate-100">
                 <h4 className="text-xs font-bold text-[#64748b]/80 uppercase tracking-wider mb-2">Vision</h4>
                 <p className="text-sm text-[#E8C560]/90 leading-relaxed">{pd.vision}</p>
               </div>
-              <div className="bg-slate-50 rounded-xl p-4 border border-slate-100">
+              <div className="bg-[#064e3b]/10 rounded-xl p-4 border border-slate-100">
                 <h4 className="text-xs font-bold text-[#64748b]/80 uppercase tracking-wider mb-2">Mission</h4>
                 <p className="text-sm text-[#E8C560]/90 leading-relaxed">{pd.mission}</p>
               </div>
@@ -884,9 +884,9 @@ Check it out in our Templates Library!`;
             <h3 className="text-sm font-bold text-[#E8C560] uppercase tracking-wider mb-4">Template Contents</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
               <div className="bg-[#059669]/10 rounded-xl p-4 text-center border border-emerald-100">
-                <Target className="w-5 h-5 text-[#6ee7b7] mx-auto mb-2" />
-                <p className="text-2xl font-black text-[#6ee7b7]">{pd.swotItems.length}</p>
-                <p className="text-[10px] font-bold text-emerald-500 uppercase">SWOT Items</p>
+                <Target className="w-5 h-5 text-[#34d399] mx-auto mb-2" />
+                <p className="text-2xl font-black text-[#34d399]">{pd.swotItems.length}</p>
+                <p className="text-[10px] font-bold text-[#059669] uppercase">SWOT Items</p>
               </div>
               <div className="bg-violet-50 rounded-xl p-4 text-center border border-violet-100">
                 <Sparkles className="w-5 h-5 text-violet-600 mx-auto mb-2" />
@@ -899,8 +899,8 @@ Check it out in our Templates Library!`;
                 <p className="text-[10px] font-bold text-[#C9A84C] uppercase">Objectives</p>
               </div>
               <div className="bg-amber-500/10 rounded-xl p-4 text-center border border-amber-100">
-                <TrendingUp className="w-5 h-5 text-amber-600 mx-auto mb-2" />
-                <p className="text-2xl font-black text-amber-700">{totalKPIs}</p>
+                <TrendingUp className="w-5 h-5 text-amber-400 mx-auto mb-2" />
+                <p className="text-2xl font-black text-amber-400">{totalKPIs}</p>
                 <p className="text-[10px] font-bold text-amber-500 uppercase">KPIs</p>
               </div>
             </div>
@@ -908,20 +908,20 @@ Check it out in our Templates Library!`;
             {/* SWOT Breakdown */}
             <h3 className="text-sm font-bold text-[#E8C560] uppercase tracking-wider mb-3">SWOT Breakdown</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-              <div className="bg-green-50 rounded-lg p-3 border border-green-100">
-                <p className="text-xs font-bold text-green-700 mb-1">Strengths</p>
+              <div className="bg-[#059669]/10 rounded-lg p-3 border border-green-100">
+                <p className="text-xs font-bold text-[#6ee7b7] mb-1">Strengths</p>
                 <p className="text-lg font-black text-green-800">{swotCounts.strengths}</p>
               </div>
               <div className="bg-red-500/10 rounded-lg p-3 border border-red-100">
-                <p className="text-xs font-bold text-red-700 mb-1">Weaknesses</p>
+                <p className="text-xs font-bold text-red-400 mb-1">Weaknesses</p>
                 <p className="text-lg font-black text-red-800">{swotCounts.weaknesses}</p>
               </div>
               <div className="bg-[#C9A84C]/10 rounded-lg p-3 border border-blue-100">
                 <p className="text-xs font-bold text-[#C9A84C] mb-1">Opportunities</p>
-                <p className="text-lg font-black text-[#C9A84C]">{swotCounts.opportunities}</p>
+                <p className="text-lg font-black text-blue-800">{swotCounts.opportunities}</p>
               </div>
               <div className="bg-amber-500/10 rounded-lg p-3 border border-amber-100">
-                <p className="text-xs font-bold text-amber-700 mb-1">Threats</p>
+                <p className="text-xs font-bold text-amber-400 mb-1">Threats</p>
                 <p className="text-lg font-black text-amber-800">{swotCounts.threats}</p>
               </div>
             </div>
@@ -931,10 +931,10 @@ Check it out in our Templates Library!`;
             <div className="space-y-2 mb-6">
               {pd.objectives.slice(0, 4).map((obj, idx) => {
                 const perspectiveColors: Record<string, string> = {
-                  financial: 'bg-[#059669]/10 text-[#6ee7b7]',
+                  financial: 'bg-[#059669]/10 text-[#34d399]',
                   customer: 'bg-[#C9A84C]/10 text-[#C9A84C]',
                   internal_process: 'bg-violet-100 text-violet-700',
-                  learning_growth: 'bg-amber-500/10 text-amber-700',
+                  learning_growth: 'bg-amber-500/100/10 text-amber-400',
                 };
                 const perspectiveLabels: Record<string, string> = {
                   financial: 'Financial',
@@ -943,8 +943,8 @@ Check it out in our Templates Library!`;
                   learning_growth: 'Learning & Growth',
                 };
                 return (
-                  <div key={idx} className="flex items-start gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${perspectiveColors[obj.perspective] || 'bg-slate-100 text-[#ecfdf5]/80'} flex-shrink-0 mt-0.5`}>
+                  <div key={idx} className="flex items-start gap-3 p-3 bg-[#064e3b]/10 rounded-xl border border-slate-100">
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${perspectiveColors[obj.perspective] || 'bg-[#064e3b]/20 text-[#ecfdf5]/80'} flex-shrink-0 mt-0.5`}>
                       {perspectiveLabels[obj.perspective] || obj.perspective}
                     </span>
                     <div className="flex-1 min-w-0">
@@ -972,7 +972,7 @@ Check it out in our Templates Library!`;
               </button>
 
               {showRatingForm && (
-                <div className="mt-3 p-4 bg-slate-50 rounded-xl border border-[#C9A84C]/20">
+                <div className="mt-3 p-4 bg-[#064e3b]/10 rounded-xl border border-[#C9A84C]/20">
                   <p className="text-sm text-[#ecfdf5]/80 mb-2">How would you rate this template?</p>
                   <div className="mb-3">
                     {renderStars(0, 'w-6 h-6', true)}
@@ -982,7 +982,7 @@ Check it out in our Templates Library!`;
                     onChange={e => setRatingComment(e.target.value)}
                     placeholder="Share your experience with this template..."
                     rows={3}
-                    className="w-full px-3 py-2 border border-[#C9A84C]/20 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] resize-none mb-3 text-foreground bg-background"
+                    className="w-full px-3 py-2 border border-[#C9A84C]/20 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] resize-none mb-3"
                   />
                   <div className="flex gap-2">
                     <button
@@ -1015,7 +1015,7 @@ Check it out in our Templates Library!`;
           </div>
 
           {/* Modal Footer */}
-          <div className="border-t border-[#C9A84C]/20 p-6 bg-slate-50 flex items-center justify-between gap-4">
+          <div className="border-t border-[#C9A84C]/20 p-6 bg-[#064e3b]/10 flex items-center justify-between gap-4">
             <div className="flex gap-2">
               <button
                 onClick={() => setShowPreview(false)}
@@ -1027,7 +1027,7 @@ Check it out in our Templates Library!`;
                 onClick={() => toggleCompare(template.id)}
                 className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors flex items-center gap-2 ${
                   compareList.includes(template.id)
-                    ? 'bg-[#C9A84C]/10 text-[#C9A84C] hover:bg-cyan-200'
+                    ? 'bg-[#C9A84C]/10 text-[#C9A84C] hover:bg-[#C9A84C]/20'
                     : 'text-[#ecfdf5]/80 hover:bg-slate-200'
                 }`}
               >
@@ -1065,7 +1065,7 @@ Check it out in our Templates Library!`;
             </div>
             <button
               onClick={() => setShowCompare(false)}
-              className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+              className="p-2 rounded-lg hover:bg-[#064e3b]/20 transition-colors"
             >
               <X className="w-5 h-5 text-[#64748b]" />
             </button>
@@ -1144,14 +1144,14 @@ Check it out in our Templates Library!`;
             placeholder="Search templates by name, industry, or tags..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-white border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:border-transparent transition-all text-foreground bg-background"
+            className="w-full pl-12 pr-4 py-3 bg-white border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:border-transparent transition-all"
           />
         </div>
         <div className="flex gap-2">
           <select
             value={sortBy}
             onChange={e => setSortBy(e.target.value as SortOption)}
-            className="px-4 py-3 bg-white border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] text-foreground bg-background"
+            className="px-4 py-3 bg-white border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
           >
             <option value="popular">Most Popular</option>
             <option value="rating">Highest Rated</option>
@@ -1163,7 +1163,7 @@ Check it out in our Templates Library!`;
             className={`px-4 py-3 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
               showCompare 
                 ? 'bg-[#C9A84C] text-white shadow-lg' 
-                : 'bg-white text-[#ecfdf5]/80 border border-[#C9A84C]/20 hover:bg-slate-50'
+                : 'bg-white text-[#ecfdf5]/80 border border-[#C9A84C]/20 hover:bg-[#064e3b]/10'
             }`}
           >
             <GitCompare className="w-4 h-4" />
@@ -1179,7 +1179,7 @@ Check it out in our Templates Library!`;
 
       {/* Compare bar */}
       {showCompare && compareList.length > 0 && (
-        <div className="mb-6 p-4 bg-[#C9A84C]/10 border border-[#C9A84C]/30 rounded-xl flex items-center justify-between">
+        <div className="mb-6 p-4 bg-[#C9A84C]/10 border border-[#C9A84C]/20 rounded-xl flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Info className="w-5 h-5 text-[#C9A84C]" />
             <span className="text-sm text-[#C9A84C]">
@@ -1216,7 +1216,7 @@ Check it out in our Templates Library!`;
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
                 isActive
                   ? 'bg-[#022c22] text-white shadow-lg'
-                  : 'bg-white text-[#ecfdf5]/80 border border-[#C9A84C]/20 hover:bg-slate-50 hover:border-[#C9A84C]/20'
+                  : 'bg-white text-[#ecfdf5]/80 border border-[#C9A84C]/20 hover:bg-[#064e3b]/10 hover:border-[#C9A84C]/30'
               }`}
             >
               <IconComp className="w-4 h-4" />
@@ -1282,7 +1282,7 @@ Check it out in our Templates Library!`;
         </div>
       ) : (
         <div className="text-center py-16">
-          <Search className="w-12 h-12 text-[#64748b]/60 mx-auto mb-4" />
+          <Search className="w-12 h-12 text-[#64748b] mx-auto mb-4" />
           <h3 className="text-lg font-bold text-[#ecfdf5]/80 mb-2">No templates found</h3>
           <p className="text-sm text-[#64748b]/80">Try adjusting your search or filter criteria</p>
         </div>
@@ -1295,7 +1295,7 @@ Check it out in our Templates Library!`;
     if (!isAuthenticated) {
       return (
         <div className="text-center py-16">
-          <AlertCircle className="w-12 h-12 text-[#64748b]/60 mx-auto mb-4" />
+          <AlertCircle className="w-12 h-12 text-[#64748b] mx-auto mb-4" />
           <h3 className="text-lg font-bold text-[#ecfdf5]/80 mb-2">Sign in Required</h3>
           <p className="text-sm text-[#64748b]/80 max-w-md mx-auto">
             Sign in to save and manage your custom templates. Your templates will be securely stored in the cloud.
@@ -1307,7 +1307,7 @@ Check it out in our Templates Library!`;
     if (isLoading) {
       return (
         <div className="text-center py-16">
-          <Loader2 className="w-8 h-8 text-cyan-500 mx-auto mb-4 animate-spin" />
+          <Loader2 className="w-8 h-8 text-[#C9A84C] mx-auto mb-4 animate-spin" />
           <p className="text-sm text-[#64748b]">Loading your templates...</p>
         </div>
       );
@@ -1316,7 +1316,7 @@ Check it out in our Templates Library!`;
     if (userTemplates.length === 0) {
       return (
         <div className="text-center py-16">
-          <Layers className="w-12 h-12 text-[#64748b]/60 mx-auto mb-4" />
+          <Layers className="w-12 h-12 text-[#64748b] mx-auto mb-4" />
           <h3 className="text-lg font-bold text-[#ecfdf5]/80 mb-2">No saved templates yet</h3>
           <p className="text-sm text-[#64748b]/80 max-w-md mx-auto mb-6">
             Save your current strategic plan as a reusable template to quickly start new plans with the same structure.
@@ -1376,7 +1376,7 @@ Check it out in our Templates Library!`;
     if (!isAuthenticated) {
       return (
         <div className="text-center py-16">
-          <AlertCircle className="w-12 h-12 text-[#64748b]/60 mx-auto mb-4" />
+          <AlertCircle className="w-12 h-12 text-[#64748b] mx-auto mb-4" />
           <h3 className="text-lg font-bold text-[#ecfdf5]/80 mb-2">Sign in Required</h3>
           <p className="text-sm text-[#64748b]/80 max-w-md mx-auto">
             Sign in to access templates shared by your team members.
@@ -1388,7 +1388,7 @@ Check it out in our Templates Library!`;
     if (sharedTemplates.length === 0) {
       return (
         <div className="text-center py-16">
-          <Users className="w-12 h-12 text-[#64748b]/60 mx-auto mb-4" />
+          <Users className="w-12 h-12 text-[#64748b] mx-auto mb-4" />
           <h3 className="text-lg font-bold text-[#ecfdf5]/80 mb-2">No shared templates</h3>
           <p className="text-sm text-[#64748b]/80 max-w-md mx-auto">
             When team members share templates with your organization, they'll appear here. You can also share your templates when saving them.
@@ -1412,7 +1412,7 @@ Check it out in our Templates Library!`;
     if (!isAuthenticated) {
       return (
         <div className="text-center py-16">
-          <AlertCircle className="w-12 h-12 text-[#64748b]/60 mx-auto mb-4" />
+          <AlertCircle className="w-12 h-12 text-[#64748b] mx-auto mb-4" />
           <h3 className="text-lg font-bold text-[#ecfdf5]/80 mb-2">Sign in Required</h3>
           <p className="text-sm text-[#64748b]/80 max-w-md mx-auto">
             Sign in to save your plans as reusable templates.
@@ -1424,7 +1424,7 @@ Check it out in our Templates Library!`;
     if (!currentPlan) {
       return (
         <div className="text-center py-16">
-          <FileText className="w-12 h-12 text-[#64748b]/60 mx-auto mb-4" />
+          <FileText className="w-12 h-12 text-[#64748b] mx-auto mb-4" />
           <h3 className="text-lg font-bold text-[#ecfdf5]/80 mb-2">No Active Plan</h3>
           <p className="text-sm text-[#64748b]/80 max-w-md mx-auto">
             Create or select a strategic plan first, then you can save it as a reusable template.
@@ -1435,7 +1435,7 @@ Check it out in our Templates Library!`;
 
     return (
       <div className="max-w-2xl mx-auto">
-        <div className="bg-[#022c22]/40 rounded-2xl border border-[#C9A84C]/20 overflow-hidden">
+        <div className="bg-white rounded-2xl border border-[#C9A84C]/20 overflow-hidden">
           {/* Header */}
           <div className="bg-gradient-to-r from-[#C9A84C] to-[#B8942E] p-6">
             <div className="flex items-center gap-3">
@@ -1459,7 +1459,7 @@ Check it out in our Templates Library!`;
                 value={templateName}
                 onChange={e => setTemplateName(e.target.value)}
                 placeholder="e.g., Healthcare Digital Transformation"
-                className="w-full px-4 py-2.5 border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:border-transparent text-foreground bg-background"
+                className="w-full px-4 py-2.5 border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:border-transparent"
               />
             </div>
 
@@ -1471,7 +1471,7 @@ Check it out in our Templates Library!`;
                 onChange={e => setTemplateDescription(e.target.value)}
                 placeholder="Describe what this template is best used for..."
                 rows={3}
-                className="w-full px-4 py-2.5 border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:border-transparent resize-none text-foreground bg-background"
+                className="w-full px-4 py-2.5 border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:border-transparent resize-none"
               />
             </div>
 
@@ -1481,7 +1481,7 @@ Check it out in our Templates Library!`;
               <select
                 value={templateIndustry}
                 onChange={e => setTemplateIndustry(e.target.value)}
-                className="w-full px-4 py-2.5 border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:border-transparent text-foreground bg-background"
+                className="w-full px-4 py-2.5 border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:border-transparent bg-white"
               >
                 {INDUSTRY_OPTIONS.filter(o => o.value !== 'all').map(option => (
                   <option key={option.value} value={option.value}>{option.label}</option>
@@ -1497,12 +1497,12 @@ Check it out in our Templates Library!`;
                 value={templateTags}
                 onChange={e => setTemplateTags(e.target.value)}
                 placeholder="e.g., digital health, telemedicine, patient care"
-                className="w-full px-4 py-2.5 border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:border-transparent text-foreground bg-background"
+                className="w-full px-4 py-2.5 border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:border-transparent"
               />
             </div>
 
             {/* Plan Contents Summary */}
-            <div className="bg-slate-50 rounded-xl p-4 border border-slate-100">
+            <div className="bg-[#064e3b]/10 rounded-xl p-4 border border-slate-100">
               <h4 className="text-xs font-bold text-[#64748b] uppercase tracking-wider mb-3">Plan Contents to Include</h4>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <div className="text-center">
@@ -1529,24 +1529,24 @@ Check it out in our Templates Library!`;
             {/* Sharing Options */}
             <div className="space-y-3">
               <h4 className="text-sm font-bold text-[#E8C560]/90">Sharing Options</h4>
-              <label className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100 cursor-pointer hover:bg-slate-100 transition-colors">
+              <label className="flex items-center gap-3 p-3 bg-[#064e3b]/10 rounded-xl border border-slate-100 cursor-pointer hover:bg-[#064e3b]/20 transition-colors">
                 <input
                   type="checkbox"
                   checked={shareWithTeam}
                   onChange={e => setShareWithTeam(e.target.checked)}
-                  className="w-4 h-4 text-cyan-500 rounded border-[#C9A84C]/20 focus:ring-[#C9A84C]"
+                  className="w-4 h-4 text-[#C9A84C] rounded border-[#C9A84C]/30 focus:ring-[#C9A84C]"
                 />
                 <div>
                   <p className="text-sm font-semibold text-[#E8C560]/90">Share with my organization</p>
                   <p className="text-xs text-[#64748b]/80">Team members in {userOrganization || 'your organization'} can use this template</p>
                 </div>
               </label>
-              <label className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100 cursor-pointer hover:bg-slate-100 transition-colors">
+              <label className="flex items-center gap-3 p-3 bg-[#064e3b]/10 rounded-xl border border-slate-100 cursor-pointer hover:bg-[#064e3b]/20 transition-colors">
                 <input
                   type="checkbox"
                   checked={makePublic}
                   onChange={e => setMakePublic(e.target.checked)}
-                  className="w-4 h-4 text-cyan-500 rounded border-[#C9A84C]/20 focus:ring-[#C9A84C]"
+                  className="w-4 h-4 text-[#C9A84C] rounded border-[#C9A84C]/30 focus:ring-[#C9A84C]"
                 />
                 <div>
                   <p className="text-sm font-semibold text-[#E8C560]/90">Make publicly available</p>
@@ -1558,7 +1558,7 @@ Check it out in our Templates Library!`;
             {/* Save Button */}
             <div className="pt-2">
               {saveSuccess && (
-                <div className="mb-4 p-3 bg-[#059669]/10 border border-[#059669]/20 rounded-xl flex items-center gap-2 text-[#6ee7b7]">
+                <div className="mb-4 p-3 bg-[#059669]/10 border border-[#059669]/20 rounded-xl flex items-center gap-2 text-[#34d399]">
                   <Check className="w-5 h-5" />
                   <span className="text-sm font-semibold">Template saved successfully!</span>
                 </div>
@@ -1599,7 +1599,7 @@ Check it out in our Templates Library!`;
       {/* Page Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#C9A84C] to-[#B8942E] flex items-center justify-center shadow-lg shadow-cyan-500/20">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#C9A84C] to-[#064e3b] flex items-center justify-center shadow-lg shadow-[#C9A84C]/20">
             <Layers className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -1621,7 +1621,7 @@ Check it out in our Templates Library!`;
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold transition-all ${
                 isActive
                   ? 'bg-[#022c22] text-white shadow-lg'
-                  : 'text-[#64748b] hover:bg-slate-100 hover:text-[#E8C560]/90'
+                  : 'text-[#64748b] hover:bg-[#064e3b]/20 hover:text-[#E8C560]/90'
               }`}
             >
               <TabIcon className="w-4 h-4" />
