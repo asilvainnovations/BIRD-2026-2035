@@ -46,6 +46,25 @@ export interface BSCLeveragePoint {
   strategicInitiative: string;
 }
 
+// ─── BIRD Brand Color Constants ──────────────────────────────────────────────
+export const BIRD_COLORS = {
+  darkGreen: '#022c22',
+  midGreen: '#064e3b',
+  gold: '#C9A84C',
+  goldLight: '#E8C560',
+  goldDark: '#8B6C28',
+  cream: '#ecfdf5',
+  muted: '#64748b',
+} as const;
+
+/** Ring color → Tailwind CSS classes (BIRD branded) */
+export const RING_COLOR_MAP: Record<string, { bg: string; text: string; border: string; glow: string }> = {
+  gold:  { bg: 'bg-[#C9A84C]/10',  text: 'text-[#E8C560]',  border: 'border-[#C9A84C]/20',  glow: 'shadow-[#C9A84C]/20' },
+  blue:  { bg: 'bg-[#3b82f6]/10',  text: 'text-[#60a5fa]',  border: 'border-[#3b82f6]/20',  glow: 'shadow-[#3b82f6]/20' },
+  green: { bg: 'bg-[#059669]/10',  text: 'text-[#6ee7b7]',  border: 'border-[#059669]/20',  glow: 'shadow-[#059669]/20' },
+  teal:  { bg: 'bg-[#0891b2]/10',  text: 'text-[#22d3ee]',  border: 'border-[#0891b2]/20',  glow: 'shadow-[#0891b2]/20' },
+};
+
 // ─── Panel A · Pareto Vital Few (6 headline KPIs) ────────────────────────────
 export const PARETO_KPIS: KPI[] = [
   {
