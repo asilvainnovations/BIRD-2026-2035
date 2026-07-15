@@ -9,8 +9,9 @@ import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/comp
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 // ─── Edge Function URLs ───────────────────────────────────────────────────────
-const AI_ASSISTANT_URL = 'https://rgvteytgkugdqdodedxq.databasepad.com/functions/v1/ai-strategy-assistant';
-const SYNC_URL = 'https://rgvteytgkugdqdodedxq.databasepad.com/functions/v1/strategic-planner-sync';
+const AI_ASSISTANT_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/ai-strategy-assistant';
+const SYNC_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/strategic-planner-sync';
+const EMAIL_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/email-notifications';
 
 // ─── TYPES ────────────────────────────────────────────────────────────────────
 
