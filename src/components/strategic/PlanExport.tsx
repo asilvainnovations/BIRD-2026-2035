@@ -24,6 +24,7 @@ import {
 import { cn } from '@/lib/utils';
 import { StrategicPlan, CLDSnapshot } from '@/lib/strategicPlanStore';
 import { supabase } from '@/lib/supabase';
+import { formatCurrency } from '@/lib/formulas';
 
 // Edge Function URLs
 const AI_URL = 'https://rgvteytgkugdqdodedxq.databasepad.com/functions/v1/ai-strategy-assistant';
@@ -340,14 +341,14 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
       
       const totalBudget = p.paps.reduce((sum, pap) => sum + pap.budget, 0);
       const totalSpent = p.paps.reduce((sum, pap) => sum + pap.spent, 0);
-      content += `Total Budget: ₱${totalBudget.toLocaleString()}\n`;
+      content += `Total Budget: ${formatCurrency(totalBudget, 'PHP')}\n`;
       content += `Total Spent: ₱${totalSpent.toLocaleString()}\n\n`;
       
       p.paps.forEach((pap, idx) => {
         content += `${idx + 1}. ${pap.name} (${pap.papType})\n`;
         content += `   Owner: ${pap.owner}\n`;
         content += `   Status: ${pap.status}, Progress: ${pap.progress}%\n`;
-        content += `   Budget: ₱${pap.budget.toLocaleString()}, Spent: ₱${pap.spent.toLocaleString()}\n`;
+        content += `   Budget: ${formatCurrency(pap.budget, 'PHP')}, Spent: ${formatCurrency(pap.spent, 'PHP')}\n`;
         content += `   Timeline: ${pap.startDate} to ${pap.endDate}\n\n`;
       });
     }
@@ -387,20 +388,20 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800">Plan Generator</h1>
-          <p className="text-slate-500">Export professional strategic plans aligned with BIRD 2026-2035</p>
+          <h1 className="text-2xl font-bold text-[#E8C560]">Plan Generator</h1>
+          <p className="text-[#64748b]">Export professional strategic plans aligned with BIRD 2026-2035</p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={() => setShowPreview(!showPreview)}
-            className="flex items-center gap-2 px-4 py-2 border border-slate-300 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 border border-[#C9A84C]/20 text-[#E8C560]/90 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
           >
             <Eye className="w-4 h-4" />
             {showPreview ? 'Hide Preview' : 'Preview'}
           </button>
           <button
             onClick={handlePrint}
-            className="flex items-center gap-2 px-4 py-2 border border-slate-300 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 border border-[#C9A84C]/20 text-[#E8C560]/90 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
           >
             <Printer className="w-4 h-4" />
             Print
@@ -411,8 +412,8 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Section Selection */}
         <div className="lg:col-span-1 space-y-4">
-          <div className="bg-white rounded-xl border border-slate-200 p-6">
-            <h3 className="font-semibold text-slate-800 mb-4">Select Sections</h3>
+          <div className="bg-white rounded-xl border border-[#C9A84C]/20 p-6">
+            <h3 className="font-semibold text-[#E8C560] mb-4">Select Sections</h3>
             <div className="space-y-3">
               {sections.map((section) => {
                 const Icon = section.icon;
@@ -421,23 +422,23 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                   <label
                     key={section.id}
                     className={`flex items-start gap-3 p-3 rounded-lg cursor-pointer transition-colors relative ${
-                      isSelected ? 'bg-cyan-50 border border-cyan-200' : 'bg-slate-50 hover:bg-slate-100'
+                      isSelected ? 'bg-[#C9A84C]/10 border border-[#C9A84C]/30' : 'bg-slate-50 hover:bg-slate-100'
                     }`}
                   >
                     <input
                       type="checkbox"
                       checked={isSelected}
                       onChange={() => toggleSection(section.id)}
-                      className="mt-1 w-4 h-4 text-cyan-600 rounded focus:ring-cyan-500"
+                      className="mt-1 w-4 h-4 text-[#C9A84C] rounded focus:ring-[#C9A84C]"
                     />
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <Icon className={`w-4 h-4 ${isSelected ? 'text-cyan-600' : 'text-slate-400'}`} />
-                        <span className={`font-medium ${isSelected ? 'text-cyan-800' : 'text-slate-700'}`}>
+                        <Icon className={`w-4 h-4 ${isSelected ? 'text-[#C9A84C]' : 'text-[#64748b]/80'}`} />
+                        <span className={`font-medium ${isSelected ? 'text-[#C9A84C]' : 'text-[#E8C560]/90'}`}>
                           {section.label}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-500 mt-1">{section.description}</p>
+                      <p className="text-xs text-[#64748b] mt-1">{section.description}</p>
                     </div>
                   </label>
                 );
@@ -446,8 +447,8 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
           </div>
 
           {/* Export Options */}
-          <div className="bg-white rounded-xl border border-slate-200 p-6">
-            <h3 className="font-semibold text-slate-800 mb-4">Export Format</h3>
+          <div className="bg-white rounded-xl border border-[#C9A84C]/20 p-6">
+            <h3 className="font-semibold text-[#E8C560] mb-4">Export Format</h3>
             <div className="space-y-3">
               <button
                 onClick={() => handleExport('pdf')}
@@ -478,8 +479,8 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
               </button>
             </div>
             {isGenerating && (
-              <div className="mt-4 flex items-center gap-2 text-sm text-slate-600">
-                <div className="w-4 h-4 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin" />
+              <div className="mt-4 flex items-center gap-2 text-sm text-[#ecfdf5]/80">
+                <div className="w-4 h-4 border-2 border-[#C9A84C] border-t-transparent rounded-full animate-spin" />
                 Generating document...
               </div>
             )}
@@ -488,10 +489,10 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
 
         {/* Preview */}
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-xl border border-slate-200 overflow-hidden print:border-0 print:shadow-none">
-            <div className="bg-slate-100 px-6 py-3 border-b border-slate-200 flex items-center justify-between print:hidden">
-              <h3 className="font-semibold text-slate-700">Document Preview</h3>
-              <span className="text-xs text-slate-500">
+          <div className="bg-white rounded-xl border border-[#C9A84C]/20 overflow-hidden print:border-0 print:shadow-none">
+            <div className="bg-slate-100 px-6 py-3 border-b border-[#C9A84C]/20 flex items-center justify-between print:hidden">
+              <h3 className="font-semibold text-[#E8C560]/90">Document Preview</h3>
+              <span className="text-xs text-[#64748b]">
                 {Object.values(selectedSections).filter(Boolean).length} sections selected
               </span>
             </div>
@@ -499,8 +500,8 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
             <div className="p-8 space-y-8 max-h-[800px] overflow-y-auto print:max-h-none print:overflow-visible">
               {/* Cover Page */}
               {selectedSections.coverPage && (
-                <div className="text-center py-12 border-b border-slate-200 print:break-after-page">
-                  <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center shadow-lg">
+                <div className="text-center py-12 border-b border-[#C9A84C]/20 print:break-after-page">
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#C9A84C] to-[#B8942E] flex items-center justify-center shadow-lg">
                     <svg viewBox="0 0 24 24" className="w-12 h-12 text-white" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M12 2L2 19h20L12 2z" />
                       <path d="M12 6L5 17h14L12 6z" />
@@ -511,7 +512,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                     contentEditable 
                     suppressContentEditableWarning
                     onBlur={(e) => handleTextChange('name', e.currentTarget.innerText)}
-                    className="text-3xl font-bold text-slate-800 mb-2 focus:outline-cyan-500 rounded px-1"
+                    className="text-3xl font-bold text-[#E8C560] mb-2 focus:outline-[#C9A84C] rounded px-1"
                   >
                     {editablePlan.name}
                   </h1>
@@ -519,11 +520,11 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                     contentEditable 
                     suppressContentEditableWarning
                     onBlur={(e) => handleTextChange('organization', e.currentTarget.innerText)}
-                    className="text-xl text-slate-600 mb-6 focus:outline-cyan-500 rounded px-1"
+                    className="text-xl text-[#ecfdf5]/80 mb-6 focus:outline-[#C9A84C] rounded px-1"
                   >
                     {editablePlan.organization}
                   </p>
-                  <div className="flex items-center justify-center gap-2 text-slate-500">
+                  <div className="flex items-center justify-center gap-2 text-[#64748b]">
                     <Calendar className="w-4 h-4" />
                     <span 
                       contentEditable 
@@ -541,7 +542,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                       {editablePlan.planningPeriodEnd || '2035'}
                     </span>
                   </div>
-                  <p className="text-sm text-slate-400 mt-8">
+                  <p className="text-sm text-[#64748b]/80 mt-8">
                     Generated on {new Date().toLocaleDateString('en-US', { 
                       year: 'numeric', 
                       month: 'long', 
@@ -554,40 +555,40 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
               {/* Executive Summary */}
               {selectedSections.executiveSummary && (
                 <div className="print:break-after-page">
-                  <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <Target className="w-5 h-5 text-cyan-600" />
+                  <h2 className="text-xl font-bold text-[#E8C560] mb-4 flex items-center gap-2">
+                    <Target className="w-5 h-5 text-[#C9A84C]" />
                     Executive Summary
                   </h2>
                   <div className="space-y-4">
                     <div className="bg-slate-50 rounded-lg p-4">
-                      <h3 className="font-semibold text-slate-700 mb-2">Vision</h3>
+                      <h3 className="font-semibold text-[#E8C560]/90 mb-2">Vision</h3>
                       <p 
                         contentEditable 
                         suppressContentEditableWarning
                         onBlur={(e) => handleTextChange('vision', e.currentTarget.innerText)}
-                        className="text-slate-600 focus:outline-cyan-500 rounded px-1"
+                        className="text-[#ecfdf5]/80 focus:outline-[#C9A84C] rounded px-1"
                       >
                         {editablePlan.vision || 'Vision statement not defined'}
                       </p>
                     </div>
                     <div className="bg-slate-50 rounded-lg p-4">
-                      <h3 className="font-semibold text-slate-700 mb-2">Mission</h3>
+                      <h3 className="font-semibold text-[#E8C560]/90 mb-2">Mission</h3>
                       <p 
                         contentEditable 
                         suppressContentEditableWarning
                         onBlur={(e) => handleTextChange('mission', e.currentTarget.innerText)}
-                        className="text-slate-600 focus:outline-cyan-500 rounded px-1"
+                        className="text-[#ecfdf5]/80 focus:outline-[#C9A84C] rounded px-1"
                       >
                         {editablePlan.mission || 'Mission statement not defined'}
                       </p>
                     </div>
-                    <div className="bg-cyan-50 rounded-lg p-4 border border-cyan-200">
-                      <h3 className="font-semibold text-cyan-800 mb-2">Strategic Intent</h3>
+                    <div className="bg-[#C9A84C]/10 rounded-lg p-4 border border-[#C9A84C]/30">
+                      <h3 className="font-semibold text-[#C9A84C] mb-2">Strategic Intent</h3>
                       <p 
                         contentEditable 
                         suppressContentEditableWarning
                         onBlur={(e) => handleTextChange('strategicIntent', e.currentTarget.innerText)}
-                        className="text-cyan-700 focus:outline-cyan-500 rounded px-1"
+                        className="text-[#C9A84C] focus:outline-[#C9A84C] rounded px-1"
                       >
                         {editablePlan.strategicIntent || 'Strategic intent not defined'}
                       </p>
@@ -599,18 +600,18 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
               {/* SWOT Summary */}
               {selectedSections.swotAnalysis && (
                 <div className="print:break-after-page">
-                  <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <BarChart3 className="w-5 h-5 text-cyan-600" />
+                  <h2 className="text-xl font-bold text-[#E8C560] mb-4 flex items-center gap-2">
+                    <BarChart3 className="w-5 h-5 text-[#C9A84C]" />
                     SWOT Analysis Summary (Quantified)
                   </h2>
                   <div className="grid grid-cols-2 gap-4">
                     {['strength', 'weakness', 'opportunity', 'threat'].map((category) => {
                       const items = editablePlan.swotItems.filter((i) => i.category === category);
                       const colors = {
-                        strength: 'bg-emerald-50 border-emerald-200 text-emerald-800',
-                        weakness: 'bg-red-50 border-red-200 text-red-800',
-                        opportunity: 'bg-blue-50 border-blue-200 text-blue-800',
-                        threat: 'bg-amber-50 border-amber-200 text-amber-800',
+                        strength: 'bg-[#059669]/10 border-[#059669]/20 text-[#6ee7b7]',
+                        weakness: 'bg-red-500/10 border-red-500/20 text-red-800',
+                        opportunity: 'bg-[#C9A84C]/10 border-[#C9A84C]/20 text-[#C9A84C]',
+                        threat: 'bg-amber-500/10 border-amber-500/20 text-amber-800',
                       };
                       return (
                         <div key={category} className={`rounded-lg p-4 border ${colors[category as keyof typeof colors]}`}>
@@ -619,7 +620,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                             {items.slice(0, 4).map((item, idx) => (
                               <li 
                                 key={idx} 
-                                className="focus:outline-cyan-500 rounded px-1 text-xs"
+                                className="focus:outline-[#C9A84C] rounded px-1 text-xs"
                               >
                                 • <span 
                                     contentEditable
@@ -631,13 +632,13 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                                         setEditablePlan({...editablePlan, swotItems: newSwot});
                                     }}
                                   >{item.description}</span>
-                                <span className="text-slate-500 ml-1 block md:inline">
+                                <span className="text-[#64748b] ml-1 block md:inline">
                                   ({calculateSwotScore(item.category, item.impactScore, item.likelihoodScore)})
                                 </span>
                               </li>
                             ))}
                             {items.length > 4 && (
-                              <li className="text-slate-500">...and {items.length - 4} more</li>
+                              <li className="text-[#64748b]">...and {items.length - 4} more</li>
                             )}
                           </ul>
                         </div>
@@ -650,8 +651,8 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
               {/* Systems Thinking Section */}
               {selectedSections.systemsThinking && (
                 <div className="print:break-after-page">
-                  <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <Network className="w-5 h-5 text-purple-600" />
+                  <h2 className="text-xl font-bold text-[#E8C560] mb-4 flex items-center gap-2">
+                    <Network className="w-5 h-5 text-purple-400" />
                     Systems Thinking Analysis
                   </h2>
                   
@@ -662,8 +663,8 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                       getActiveSnapshotInfo().snapshot 
                         ? "bg-green-50 border-green-200" 
                         : getActiveSnapshotInfo().isActiveFromCanvas
-                        ? "bg-amber-50 border-amber-200"
-                        : "bg-slate-50 border-slate-200"
+                        ? "bg-amber-500/10 border-amber-500/20"
+                        : "bg-slate-50 border-[#C9A84C]/20"
                     )}>
                       <div className="flex items-start gap-3">
                         {getActiveSnapshotInfo().snapshot ? (
@@ -671,16 +672,16 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                         ) : getActiveSnapshotInfo().isActiveFromCanvas ? (
                           <Info className="w-5 h-5 text-amber-600 mt-0.5" />
                         ) : (
-                          <Info className="w-5 h-5 text-slate-400 mt-0.5" />
+                          <Info className="w-5 h-5 text-[#64748b]/80 mt-0.5" />
                         )}
                         <div className="flex-1">
-                          <h3 className="font-semibold text-slate-800 mb-1">Current CLD State</h3>
+                          <h3 className="font-semibold text-[#E8C560] mb-1">Current CLD State</h3>
                           {getActiveSnapshotInfo().snapshot ? (
                             <div>
                               <p className="text-sm text-green-700 mb-1">
                                 ✓ Loaded from Snapshot: <strong>"{getActiveSnapshotInfo().snapshot.label}"</strong>
                               </p>
-                              <div className="grid grid-cols-2 gap-2 text-xs text-slate-600">
+                              <div className="grid grid-cols-2 gap-2 text-xs text-[#ecfdf5]/80">
                                 <div className="flex items-center gap-1">
                                   <Clock className="w-3 h-3" />
                                   <span>{new Date(getActiveSnapshotInfo().snapshot!.createdAt).toLocaleString()}</span>
@@ -698,7 +699,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                               </p>
                             </div>
                           ) : (
-                            <p className="text-sm text-slate-600">ℹ No CLD data available</p>
+                            <p className="text-sm text-[#ecfdf5]/80">ℹ No CLD data available</p>
                           )}
                         </div>
                       </div>
@@ -708,12 +709,12 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                   {/* CLD Nodes Summary */}
                   {editablePlan.cldNodes && editablePlan.cldNodes.length > 0 && (
                     <div className="mb-6">
-                      <h3 className="font-semibold text-slate-700 mb-3 flex items-center gap-2">
+                      <h3 className="font-semibold text-[#E8C560]/90 mb-3 flex items-center gap-2">
                         <BrainCircuit className="w-4 h-4" />
                         Causal Loop Diagram Elements
                       </h3>
                       <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
-                        <p className="text-sm text-slate-600 mb-2">
+                        <p className="text-sm text-[#ecfdf5]/80 mb-2">
                           <strong>{editablePlan.cldNodes.length}</strong> nodes and{' '}
                           <strong>{editablePlan.cldLinks?.length || 0}</strong> links mapping causal relationships
                         </p>
@@ -724,7 +725,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                   {/* Applied Archetypes */}
                   {editablePlan.appliedArchetypes && editablePlan.appliedArchetypes.length > 0 && (
                     <div className="mb-6">
-                      <h3 className="font-semibold text-slate-700 mb-3 flex items-center gap-2">
+                      <h3 className="font-semibold text-[#E8C560]/90 mb-3 flex items-center gap-2">
                         <TrendingUp className="w-4 h-4" />
                         Identified Systems Archetypes (BIRD Framework)
                       </h3>
@@ -733,17 +734,17 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                           const archetype = getArchetypeData(archetypeId);
                           if (!archetype) return null;
                           return (
-                            <div key={archetypeId} className="bg-amber-50 rounded-lg p-4 border border-amber-200">
+                            <div key={archetypeId} className="bg-amber-500/10 rounded-lg p-4 border border-amber-500/20">
                               <div className="flex items-start gap-2 mb-2">
-                                <span className="px-2 py-1 bg-amber-500 text-white text-xs font-bold rounded">
+                                <span className="px-2 py-1 bg-amber-500/100 text-white text-xs font-bold rounded">
                                   #{idx + 1}
                                 </span>
-                                <h4 className="font-bold text-slate-800">{archetype.name}</h4>
+                                <h4 className="font-bold text-[#E8C560]">{archetype.name}</h4>
                               </div>
-                              <p className="text-sm text-slate-600 mb-2">{archetype.description}</p>
+                              <p className="text-sm text-[#ecfdf5]/80 mb-2">{archetype.description}</p>
                               <div className="space-y-1 text-xs">
                                 <p><strong>Leverage Points:</strong></p>
-                                <ul className="list-disc list-inside text-slate-500">
+                                <ul className="list-disc list-inside text-[#64748b]">
                                   {archetype.leverage_points.map((point: string, pIdx: number) => (
                                     <li key={pIdx}>{point}</li>
                                   ))}
@@ -761,8 +762,8 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
               {/* Strategy Summary */}
               {selectedSections.strategyMatrix && (
                 <div className="print:break-after-page">
-                  <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-cyan-600" />
+                  <h2 className="text-xl font-bold text-[#E8C560] mb-4 flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-[#C9A84C]" />
                     Strategy Matrix (TOWS)
                   </h2>
                   <div className="space-y-3">
@@ -771,10 +772,10 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                       .map((opt, idx) => (
                         <div key={opt.id} className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
                           <span className={`px-2 py-1 rounded text-xs font-bold text-white ${
-                            opt.optionType === 'SO' ? 'bg-emerald-500' :
-                            opt.optionType === 'ST' ? 'bg-blue-500' :
+                            opt.optionType === 'SO' ? 'bg-[#059669]/100' :
+                            opt.optionType === 'ST' ? 'bg-[#C9A84C]/100' :
                             opt.optionType === 'WO' ? 'bg-purple-500' :
-                            'bg-amber-500'
+                            'bg-amber-500/100'
                           }`}>
                             {opt.optionType}
                           </span>
@@ -788,7 +789,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                                     newOpts[index].title = e.currentTarget.innerText;
                                     setEditablePlan({...editablePlan, strategicOptions: newOpts});
                                 }}
-                                className="font-medium text-slate-800 focus:outline-cyan-500 rounded px-1"
+                                className="font-medium text-[#E8C560] focus:outline-[#C9A84C] rounded px-1"
                             >
                                 {opt.title}
                             </p>
@@ -801,7 +802,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                                     newOpts[index].description = e.currentTarget.innerText;
                                     setEditablePlan({...editablePlan, strategicOptions: newOpts});
                                 }}
-                                className="text-sm text-slate-600 focus:outline-cyan-500 rounded px-1"
+                                className="text-sm text-[#ecfdf5]/80 focus:outline-[#C9A84C] rounded px-1"
                             >
                                 {opt.description}
                             </p>
@@ -815,11 +816,11 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
               {/* BSC Summary */}
               {selectedSections.balancedScorecard && (
                 <div className="print:break-after-page">
-                  <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <Target className="w-5 h-5 text-cyan-600" />
+                  <h2 className="text-xl font-bold text-[#E8C560] mb-4 flex items-center gap-2">
+                    <Target className="w-5 h-5 text-[#C9A84C]" />
                     Balanced Scorecard Overview
                   </h2>
-                  <p className="text-slate-600 mb-4">
+                  <p className="text-[#ecfdf5]/80 mb-4">
                     {editablePlan.objectives.length} objectives with {editablePlan.objectives.reduce((sum, obj) => sum + obj.kpis.length, 0)} KPIs
                   </p>
                   <div className="grid grid-cols-2 gap-4">
@@ -833,11 +834,11 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                       };
                       return (
                         <div key={perspective} className="bg-slate-50 rounded-lg p-4">
-                          <h3 className="font-semibold text-slate-700 mb-2">
+                          <h3 className="font-semibold text-[#E8C560]/90 mb-2">
                             {labels[perspective]}
                           </h3>
-                          <p className="text-2xl font-bold text-cyan-600">{objectives.length}</p>
-                          <p className="text-sm text-slate-500">objectives</p>
+                          <p className="text-2xl font-bold text-[#C9A84C]">{objectives.length}</p>
+                          <p className="text-sm text-[#64748b]">objectives</p>
                         </div>
                       );
                     })}
@@ -848,41 +849,41 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
               {/* PAPs Summary */}
               {selectedSections.papsOverview && (
                 <div className="print:break-after-page">
-                  <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <FolderKanban className="w-5 h-5 text-cyan-600" />
+                  <h2 className="text-xl font-bold text-[#E8C560] mb-4 flex items-center gap-2">
+                    <FolderKanban className="w-5 h-5 text-[#C9A84C]" />
                     Programs, Activities & Projects (PAPs)
                   </h2>
                   <div className="grid grid-cols-3 gap-4 mb-4">
                     <div className="bg-purple-50 rounded-lg p-4 text-center">
-                      <p className="text-2xl font-bold text-purple-600">
+                      <p className="text-2xl font-bold text-purple-400">
                         {editablePlan.paps.filter((p) => p.papType === 'program').length}
                       </p>
-                      <p className="text-sm text-purple-700">Programs</p>
+                      <p className="text-sm text-purple-400">Programs</p>
                     </div>
-                    <div className="bg-cyan-50 rounded-lg p-4 text-center">
-                      <p className="text-2xl font-bold text-cyan-600">
+                    <div className="bg-[#C9A84C]/10 rounded-lg p-4 text-center">
+                      <p className="text-2xl font-bold text-[#C9A84C]">
                         {editablePlan.paps.filter((p) => p.papType === 'project').length}
                       </p>
-                      <p className="text-sm text-cyan-700">Projects</p>
+                      <p className="text-sm text-[#C9A84C]">Projects</p>
                     </div>
-                    <div className="bg-blue-50 rounded-lg p-4 text-center">
-                      <p className="text-2xl font-bold text-blue-600">
+                    <div className="bg-[#C9A84C]/10 rounded-lg p-4 text-center">
+                      <p className="text-2xl font-bold text-[#C9A84C]">
                         {editablePlan.paps.filter((p) => p.papType === 'activity').length}
                       </p>
-                      <p className="text-sm text-blue-700">Activities</p>
+                      <p className="text-sm text-[#C9A84C]">Activities</p>
                     </div>
                   </div>
                   <div className="bg-slate-50 rounded-lg p-4">
                     <div className="flex justify-between text-sm">
-                      <span className="text-slate-600">Total Budget:</span>
-                      <span className="font-bold text-slate-800">
-                        ₱{editablePlan.paps.reduce((sum, p) => sum + p.budget, 0).toLocaleString()}
+                      <span className="text-[#ecfdf5]/80">Total Budget:</span>
+                      <span className="font-bold text-[#E8C560]">
+                        {formatCurrency(editablePlan.paps.reduce((sum, p) => sum + p.budget, 0), 'PHP')}
                       </span>
                     </div>
                     <div className="flex justify-between text-sm mt-2">
-                      <span className="text-slate-600">Total Spent:</span>
-                      <span className="font-bold text-emerald-600">
-                        ₱{editablePlan.paps.reduce((sum, p) => sum + p.spent, 0).toLocaleString()}
+                      <span className="text-[#ecfdf5]/80">Total Spent:</span>
+                      <span className="font-bold text-[#6ee7b7]">
+                        {formatCurrency(editablePlan.paps.reduce((sum, p) => sum + p.spent, 0), 'PHP')}
                       </span>
                     </div>
                   </div>
@@ -892,33 +893,33 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
               {/* Appendix */}
               {selectedSections.appendix && (
                 <div className="print:break-after-page">
-                  <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <FileSpreadsheet className="w-5 h-5 text-cyan-600" />
+                  <h2 className="text-xl font-bold text-[#E8C560] mb-4 flex items-center gap-2">
+                    <FileSpreadsheet className="w-5 h-5 text-[#C9A84C]" />
                     Appendix
                   </h2>
-                  <div className="bg-slate-50 rounded-lg p-6 border-2 border-dashed border-slate-300 hover:border-cyan-400 transition-colors">
+                  <div className="bg-slate-50 rounded-lg p-6 border-2 border-dashed border-[#C9A84C]/20 hover:border-[#C9A84C] transition-colors">
                     <label className="flex flex-col items-center justify-center cursor-pointer">
-                      <Upload className="w-10 h-10 text-slate-400 mb-3" />
-                      <span className="text-sm text-slate-600 font-medium">Click to upload appendix files</span>
-                      <span className="text-xs text-slate-400 mt-1">PDF, DOCX, XLSX, Images, etc.</span>
+                      <Upload className="w-10 h-10 text-[#64748b]/80 mb-3" />
+                      <span className="text-sm text-[#ecfdf5]/80 font-medium">Click to upload appendix files</span>
+                      <span className="text-xs text-[#64748b]/80 mt-1">PDF, DOCX, XLSX, Images, etc.</span>
                       <input 
                         type="file" 
                         multiple 
-                        className="hidden" 
+                        className="hidden text-foreground bg-background" 
                         onChange={handleFileUpload} 
                       />
                     </label>
                   </div>
                   {appendixFiles.length > 0 && (
                     <div className="mt-4 space-y-2">
-                      <h3 className="font-semibold text-slate-700 text-sm">Uploaded Files ({appendixFiles.length})</h3>
+                      <h3 className="font-semibold text-[#E8C560]/90 text-sm">Uploaded Files ({appendixFiles.length})</h3>
                       <ul className="space-y-2">
                         {appendixFiles.map((file, idx) => (
-                          <li key={idx} className="flex items-center justify-between bg-white p-3 rounded border border-slate-200 text-sm">
+                          <li key={idx} className="flex items-center justify-between bg-white p-3 rounded border border-[#C9A84C]/20 text-sm">
                             <span className="flex items-center gap-2 truncate">
-                              <FileText className="w-4 h-4 text-slate-400 flex-shrink-0" />
-                              <span className="truncate font-medium text-slate-700">{file.name}</span>
-                              <span className="text-xs text-slate-400 flex-shrink-0">({(file.size / 1024).toFixed(1)} KB)</span>
+                              <FileText className="w-4 h-4 text-[#64748b]/80 flex-shrink-0" />
+                              <span className="truncate font-medium text-[#E8C560]/90">{file.name}</span>
+                              <span className="text-xs text-[#64748b]/80 flex-shrink-0">({(file.size / 1024).toFixed(1)} KB)</span>
                             </span>
                             <button onClick={() => removeFile(idx)} className="text-red-400 hover:text-red-600 p-1 flex-shrink-0">
                               <Trash2 className="w-4 h-4" />
