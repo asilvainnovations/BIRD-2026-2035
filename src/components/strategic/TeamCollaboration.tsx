@@ -169,6 +169,26 @@ const getWindowProperty = <T,>(name: string, defaultValue: T): T => {
   return defaultValue;
 };
 
+// ── Supabase Persistence ──────────────────────────────────
+const persistMembers = async (updatedMembers: any[]) => {
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session?.access_token) return;
+    await fetch('https://rgvteytgkugdqdodedxq.databasepad.com/functions/v1/strategic-planner-sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.access_token}` },
+      body: JSON.stringify({ action: 'sync_members', members: updatedMembers }),
+    });
+  } catch (e) { console.error('Failed to persist members:', e); }
+};
+
+// ── Activity Logging ──────────────────────────────────────
+const logActivity = async (action: string, details: any) => {
+  try {
+    await supabase.from('activity_log').insert({ action, details, created_at: new Date().toISOString() });
+  } catch (e) { /* silent */ }
+};
+
 const RESOURCES: ResourceItem[] = [
   { id: 1, title: 'The Iceberg Model: Why SWOT Listing Is Not Enough', url: 'https://youtu.be/y6h2_EcOOcM?si=3DWAm3dMJ7LzOjAS', type: 'video', category: 'Systems Thinking', description: 'Understand why surface-level analysis fails and how to see deeper systemic structures.' },
   { id: 2, title: 'How Systems Thinking is Used to Manage Complexity', url: 'https://youtu.be/Eklkuy4RBOo?si=-jLNBvPQUpKU2BU0', type: 'video', category: 'Systems Thinking', description: 'MIT instructors, faculty and industry experts break down how systems thinking is used to manage complexity.' },
@@ -209,7 +229,7 @@ export function PresenceRibbon({
 
   return (
     <div className="flex items-center gap-1" aria-label={`${users.length} collaborators online`}>
-      <span className="text-xs text-slate-500 mr-1.5 font-medium hidden lg:inline">Live</span>
+      <span className="text-xs text-[#64748b] mr-1.5 font-medium hidden lg:inline">Live</span>
       {displayUsers.map((u) => (
         <div
           key={u.user_id}
@@ -222,14 +242,14 @@ export function PresenceRibbon({
           >
             {u.user_name?.charAt(0).toUpperCase()}
           </div>
-          <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full" />
-          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
+          <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-[#059669]/100 border-2 border-white rounded-full" />
+          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-[#022c22] text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
             {u.user_name}
           </div>
         </div>
       ))}
       {remaining > 0 && (
-        <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 text-xs font-bold border-2 border-white">
+        <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-[#ecfdf5]/80 text-xs font-bold border-2 border-white">
           +{remaining}
         </div>
       )}
@@ -485,6 +505,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
         .eq('organization_id', orgId);
       if (error) throw error;
       setMembers(data || []);
+      persistMembers(data || []);
     } catch (err: any) {
       console.warn('Members error:', err.message);
     }
@@ -613,6 +634,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       setNewOrgName('');
       setNewOrgDescription('');
       setSuccess('Organization created successfully!');
+      await logActivity('organization_created', { orgId: data.id, name: newOrgName });
       await loadMembers(data.id);
     } catch (err: any) { setError(err.message); } finally { setIsLoading(false); }
   }, [newOrgName, newOrgDescription, userId, userEmail, userName, organizations, loadMembers]);
@@ -640,6 +662,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       }
       setEditingOrg(null);
       setSuccess('Organization updated successfully.');
+      logActivity('organization_updated', { orgId: editingOrg.id });
     } catch (err: any) {
       setError(err.message || 'Failed to update organization.');
     } finally {
@@ -669,6 +692,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       }
       setDeletingOrg(null);
       setSuccess('Organization deleted successfully.');
+      logActivity('organization_deleted', { orgId: deletingOrg.id });
     } catch (err: any) {
       setError(err.message || 'Failed to delete organization.');
     } finally {
@@ -707,6 +731,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       await loadMembers(resettingOrg.id);
       setResettingOrg(null);
       setSuccess('Organization reset successfully. All non-owner members have been removed.');
+      logActivity('organization_reset', { orgId: resettingOrg.id });
     } catch (err: any) {
       setError(err.message || 'Failed to reset organization.');
     } finally {
@@ -728,6 +753,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       setShowInviteModal(false);
       setInviteEmail(''); setInviteRole('viewer');
       setSuccess(`Invitation sent to ${inviteEmail}`);
+      await logActivity('member_invited', { email: inviteEmail, role: inviteRole, orgId: selectedOrg.id });
       await loadMembers(selectedOrg.id);
     } catch (err: any) { setError(err.message); } finally { setIsLoading(false); }
   }, [inviteEmail, selectedOrg, inviteRole, loadMembers, emailNotifications]);
@@ -745,6 +771,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       setShowShareModal(false);
       setShareEmail(''); setSharePermission('viewer');
       setSuccess(`Plan shared with ${shareEmail}`);
+      await logActivity('plan_shared', { email: shareEmail, permission: sharePermission });
       await loadPlanShares();
     } catch (err: any) { setError(err.message); } finally { setIsLoading(false); }
   }, [shareEmail, sharePermission, plan?.id, loadPlanShares, emailNotifications, plan?.name]);
@@ -762,6 +789,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       });
       setNewComment(''); setSelectedPapItem(''); setCommentUrgency('medium'); setCommentImportance('medium');
       setSuccess('Comment added!');
+      await logActivity('comment_added', { planId: plan?.id, content: newComment.substring(0, 100) });
       await loadComments();
     } catch (err: any) { setError(err.message); } finally { setIsLoading(false); }
   }, [newComment, userId, userName, userEmail, plan?.id, selectedPapItem, papItems, commentUrgency, commentImportance, loadComments]);
@@ -771,6 +799,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       await supabase.from('plan_comments').update({ is_resolved: true }).eq('id', commentId);
       await loadComments();
       setSuccess('Comment resolved');
+      logActivity('comment_resolved', { commentId });
     } catch (err: any) { console.error('Resolve error:', err.message); }
   }, [loadComments]);
 
@@ -779,6 +808,8 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
     try {
       await supabase.from('organization_members').delete().eq('id', memberId);
       setMembers(members.filter((m) => m.id !== memberId));
+      persistMembers(members.filter((m) => m.id !== memberId));
+      logActivity('member_removed', { memberId, memberEmail });
       setSuccess('Member removed');
     } catch (err: any) { setError('Failed to remove member'); }
   }, [members]);
@@ -849,17 +880,17 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
 
   const getRoleBadgeColor = (role: string) => {
     switch (role) {
-      case 'owner': return 'bg-amber-100 text-amber-800 border-amber-300';
-      case 'admin': return 'bg-purple-100 text-purple-800 border-purple-300';
-      case 'editor': return 'bg-blue-100 text-blue-800 border-blue-300';
-      default: return 'bg-slate-100 text-slate-700 border-slate-300';
+      case 'owner': return 'bg-amber-500/10 text-amber-800 border-amber-500/20';
+      case 'admin': return 'bg-purple-100 text-purple-400 border-purple-300';
+      case 'editor': return 'bg-[#C9A84C]/10 text-[#C9A84C] border-blue-300';
+      default: return 'bg-slate-100 text-[#E8C560]/90 border-[#C9A84C]/20';
     }
   };
 
   const getUrgencyColor = (level?: string) => {
     switch (level) {
-      case 'critical': return 'bg-red-100 text-red-800 border-red-300';
-      case 'high': return 'bg-orange-100 text-orange-800 border-orange-300';
+      case 'critical': return 'bg-red-500/10 text-red-800 border-red-300';
+      case 'high': return 'bg-orange-500/10 text-orange-800 border-orange-300';
       case 'medium': return 'bg-yellow-100 text-yellow-800 border-yellow-300';
       default: return 'bg-green-100 text-green-800 border-green-300';
     }
@@ -867,9 +898,9 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
 
   const getKpiStatusColor = (status: string) => {
     switch (status) {
-      case 'on_track': return 'bg-emerald-600';
-      case 'at_risk': return 'bg-amber-500';
-      case 'off_track': return 'bg-orange-500';
+      case 'on_track': return 'bg-[#059669]';
+      case 'at_risk': return 'bg-amber-500/100';
+      case 'off_track': return 'bg-orange-500/100';
       case 'critical': return 'bg-red-600';
       default: return 'bg-slate-500';
     }
@@ -917,11 +948,11 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
           <h2 className="text-xl font-bold text-slate-900">Organizations</h2>
-          <p className="text-base text-slate-600 mt-1 leading-relaxed">Manage teams and access control</p>
+          <p className="text-base text-[#ecfdf5]/80 mt-1 leading-relaxed">Manage teams and access control</p>
         </div>
         <button
           onClick={() => setShowCreateOrgModal(true)}
-          className="flex items-center justify-center gap-2 px-5 py-3 bg-cyan-700 text-white rounded-xl text-base font-medium hover:bg-cyan-800 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+          className="flex items-center justify-center gap-2 px-5 py-3 bg-[#C9A84C] text-white rounded-xl text-base font-medium hover:bg-[#C9A84C] shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:ring-offset-2"
           aria-label="Create new organization"
         >
           <Plus className="w-5 h-5" aria-hidden="true" /> Create Organization
@@ -930,10 +961,10 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
 
       <div className="grid gap-4 mb-8" role="list" aria-label="Organizations list">
         {organizations.length === 0 ? (
-          <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-dashed border-slate-300">
-            <Building2 className="w-12 h-12 text-slate-400 mx-auto mb-3" aria-hidden="true" />
-            <p className="text-slate-700 font-medium text-base">No organizations yet</p>
-            <p className="text-base text-slate-600 mt-2 leading-relaxed">Create one to start collaborating</p>
+          <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-dashed border-[#C9A84C]/20">
+            <Building2 className="w-12 h-12 text-[#64748b]/80 mx-auto mb-3" aria-hidden="true" />
+            <p className="text-[#E8C560]/90 font-medium text-base">No organizations yet</p>
+            <p className="text-base text-[#ecfdf5]/80 mt-2 leading-relaxed">Create one to start collaborating</p>
           </div>
         ) : (
           organizations.map((org) => (
@@ -941,10 +972,10 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
               key={org.id}
               onClick={() => { setSelectedOrg(org); loadMembers(org.id); }}
               className={cn(
-                "p-5 rounded-xl border-2 cursor-pointer transition-all focus-within:ring-2 focus-within:ring-cyan-500",
+                "p-5 rounded-xl border-2 cursor-pointer transition-all focus-within:ring-2 focus-within:ring-[#C9A84C]/200",
                 selectedOrg?.id === org.id
-                  ? 'border-cyan-600 bg-cyan-50/60 shadow-sm'
-                  : 'border-slate-200 hover:border-slate-400 hover:shadow-sm bg-white'
+                  ? 'border-[#C9A84C] bg-[#C9A84C]/10/60 shadow-sm'
+                  : 'border-[#C9A84C]/20 hover:border-slate-400 hover:shadow-sm bg-white'
               )}
               role="listitem"
               aria-selected={selectedOrg?.id === org.id}
@@ -963,16 +994,16 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-semibold text-slate-900 text-base truncate">{org.name}</p>
-                  <p className="text-sm text-slate-600 truncate leading-relaxed">{org.description || 'No description'}</p>
+                  <p className="text-sm text-[#ecfdf5]/80 truncate leading-relaxed">{org.description || 'No description'}</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  {selectedOrg?.id === org.id && <Check className="w-5 h-5 text-cyan-700" aria-hidden="true" />}
+                  {selectedOrg?.id === org.id && <Check className="w-5 h-5 text-[#C9A84C]" aria-hidden="true" />}
 
                   {canManageOrg(currentUserOrgRole) && (
                     <div className="flex items-center gap-1" onClick={e => e.stopPropagation()}>
                       <button
                         onClick={() => setEditingOrg(org)}
-                        className="p-2 text-slate-500 hover:text-cyan-700 hover:bg-cyan-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        className="p-2 text-[#64748b] hover:text-[#C9A84C] hover:bg-[#C9A84C]/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
                         aria-label={`Edit organization ${org.name}`}
                         title="Edit organization"
                       >
@@ -980,7 +1011,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                       </button>
                       <button
                         onClick={() => setResettingOrg(org)}
-                        className="p-2 text-slate-500 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500"
+                        className="p-2 text-[#64748b] hover:text-amber-700 hover:bg-amber-500/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500"
                         aria-label={`Reset organization ${org.name}`}
                         title="Reset organization"
                       >
@@ -988,7 +1019,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                       </button>
                       <button
                         onClick={() => setDeletingOrg(org)}
-                        className="p-2 text-slate-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-red-500"
+                        className="p-2 text-[#64748b] hover:text-red-700 hover:bg-red-500/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-red-500"
                         aria-label={`Delete organization ${org.name}`}
                         title="Delete organization"
                       >
@@ -1004,23 +1035,23 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       </div>
 
       {selectedOrg && (
-        <div className="border-t-2 border-slate-200 pt-6">
+        <div className="border-t-2 border-[#C9A84C]/20 pt-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
             <div>
               <h3 className="text-lg font-bold text-slate-900">Team Members</h3>
-              <p className="text-base text-slate-600 mt-1">{members.length} member{members.length !== 1 ? 's' : ''}</p>
+              <p className="text-base text-[#ecfdf5]/80 mt-1">{members.length} member{members.length !== 1 ? 's' : ''}</p>
             </div>
             <div className="flex gap-2 flex-wrap">
               <button
                 onClick={() => shareViaWhatsApp(`Join our strategic plan team: ${getPlanShareUrl(selectedOrg)}`)}
-                className="flex items-center gap-2 px-4 py-3 bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-xl text-sm font-medium hover:bg-emerald-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+                className="flex items-center gap-2 px-4 py-3 bg-[#059669]/10 text-[#6ee7b7] border border-emerald-300 rounded-xl text-sm font-medium hover:bg-emerald-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
                 aria-label="Share team invite via WhatsApp"
               >
                 <Phone className="w-4 h-4" aria-hidden="true" /> WhatsApp
               </button>
               <button
                 onClick={() => setShowInviteModal(true)}
-                className="flex items-center gap-2 px-4 py-3 bg-slate-900 text-white rounded-xl text-sm font-medium hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
+                className="flex items-center gap-2 px-4 py-3 bg-[#022c22] text-white rounded-xl text-sm font-medium hover:bg-[#022c22]/60 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
                 aria-label="Invite team member"
               >
                 <UserPlus className="w-4 h-4" aria-hidden="true" /> Invite
@@ -1030,15 +1061,15 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
 
           <div className="space-y-3" role="list" aria-label="Team members">
             {members.length === 0 ? (
-              <div className="text-center py-8 bg-slate-50 rounded-xl border-2 border-dashed border-slate-200">
-                <Users className="w-10 h-10 text-slate-400 mx-auto mb-2" aria-hidden="true" />
-                <p className="text-slate-700 text-base">No members yet</p>
+              <div className="text-center py-8 bg-slate-50 rounded-xl border-2 border-dashed border-[#C9A84C]/20">
+                <Users className="w-10 h-10 text-[#64748b]/80 mx-auto mb-2" aria-hidden="true" />
+                <p className="text-[#E8C560]/90 text-base">No members yet</p>
               </div>
             ) : (
               members.map((member) => (
                 <div
                   key={member.id}
-                  className="flex items-center gap-4 p-4 bg-white border border-slate-200 rounded-xl hover:shadow-sm transition-shadow focus-within:ring-2 focus-within:ring-cyan-500"
+                  className="flex items-center gap-4 p-4 bg-white border border-[#C9A84C]/20 rounded-xl hover:shadow-sm transition-shadow focus-within:ring-2 focus-within:ring-[#C9A84C]/200"
                   role="listitem"
                 >
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-600 to-blue-700 flex items-center justify-center text-white font-bold text-sm flex-shrink-0" aria-hidden="true">
@@ -1046,18 +1077,18 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-medium text-slate-900 text-base">{member.user_name}</p>
-                    <p className="text-sm text-slate-600">{member.user_email}</p>
+                    <p className="text-sm text-[#ecfdf5]/80">{member.user_email}</p>
                   </div>
                   <span className={cn(getRoleBadgeColor(member.role), "px-3 py-1 rounded-full text-xs font-semibold border")}>
                     {member.role}
                   </span>
                   {member.status === 'invited' && (
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300">Pending</span>
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-800 border border-amber-500/20">Pending</span>
                   )}
                   {member.role !== 'owner' && canManageOrg(currentUserOrgRole) && (
                     <button
                       onClick={() => removeMember(member.id, member.user_email)}
-                      className="p-2 text-slate-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-red-500"
+                      className="p-2 text-[#64748b] hover:text-red-700 hover:bg-red-500/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-red-500"
                       aria-label={`Remove member ${member.user_name}`}
                       title="Remove member"
                     >
@@ -1080,13 +1111,13 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
           <h2 className="text-xl font-bold text-slate-900">Plan Sharing</h2>
-          <p className="text-base text-slate-600 mt-1 leading-relaxed">Share &quot;{plan?.name}&quot; with stakeholders</p>
+          <p className="text-base text-[#ecfdf5]/80 mt-1 leading-relaxed">Share &quot;{plan?.name}&quot; with stakeholders</p>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           {!isManagingCustomUrl && (
             <button
               onClick={() => setIsManagingCustomUrl(true)}
-              className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-slate-700 border border-slate-300 rounded-xl hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
+              className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-[#E8C560]/90 border border-[#C9A84C]/20 rounded-xl hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
               aria-label="Customize share URL"
             >
               <Settings className="w-4 h-4" aria-hidden="true" /> Customize URL
@@ -1094,7 +1125,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
           )}
           <button
             onClick={() => setShowShareModal(true)}
-            className="flex items-center gap-2 px-5 py-3 bg-cyan-700 text-white rounded-xl text-sm font-medium hover:bg-cyan-800 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+            className="flex items-center gap-2 px-5 py-3 bg-[#C9A84C] text-white rounded-xl text-sm font-medium hover:bg-[#C9A84C] shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:ring-offset-2"
             aria-label="Share plan"
           >
             <Share2 className="w-4 h-4" aria-hidden="true" /> Share Plan
@@ -1102,22 +1133,22 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
         </div>
       </div>
 
-      <div className="mb-6 p-5 bg-slate-50 rounded-xl border border-slate-200">
+      <div className="mb-6 p-5 bg-slate-50 rounded-xl border border-[#C9A84C]/20">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
-          <p className="text-base font-semibold text-slate-800 flex items-center gap-2">
+          <p className="text-base font-semibold text-[#E8C560] flex items-center gap-2">
             <Link2 className="w-4 h-4" aria-hidden="true" /> Share Link
           </p>
           <div className="flex gap-2">
             <button
               onClick={() => shareViaWhatsApp(`Check out our strategic plan: ${getPlanShareUrl(selectedOrg || undefined)}`)}
-              className="flex items-center gap-1.5 px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium hover:bg-emerald-700 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+              className="flex items-center gap-1.5 px-4 py-2 bg-[#059669] text-white rounded-lg text-sm font-medium hover:bg-emerald-700 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
               aria-label="Share via WhatsApp"
             >
               <Phone className="w-4 h-4" aria-hidden="true" /> WhatsApp
             </button>
             <button
               onClick={() => sendEmailNotification('', `Strategic Plan: ${plan?.name}`, `View here: ${getPlanShareUrl(selectedOrg || undefined)}`)}
-              className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="flex items-center gap-1.5 px-4 py-2 bg-[#C9A84C] text-white rounded-lg text-sm font-medium hover:bg-[#C9A84C] transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               aria-label="Share via Email"
             >
               <Mail className="w-4 h-4" aria-hidden="true" /> Email
@@ -1129,42 +1160,42 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
             type="text"
             readOnly
             value={getPlanShareUrl(selectedOrg || undefined)}
-            className="flex-1 px-4 py-3 bg-white border border-slate-300 rounded-lg text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="flex-1 px-4 py-3 bg-white border border-[#C9A84C]/20 rounded-lg text-sm text-[#E8C560]/90 focus:outline-none focus:ring-2 focus:ring-[#C9A84C] text-foreground bg-background"
             aria-label="Shareable plan URL"
           />
           <button
             onClick={() => copyToClipboard(getPlanShareUrl(selectedOrg || undefined))}
-            className="p-3 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="p-3 bg-white border border-[#C9A84C]/20 rounded-lg hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
             aria-label="Copy link to clipboard"
             title="Copy link"
           >
-            <Copy className="w-5 h-5 text-slate-600" aria-hidden="true" />
+            <Copy className="w-5 h-5 text-[#ecfdf5]/80" aria-hidden="true" />
           </button>
           <button
             onClick={() => window.open(getPlanShareUrl(selectedOrg || undefined), '_blank')}
-            className="p-3 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="p-3 bg-white border border-[#C9A84C]/20 rounded-lg hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
             aria-label="Open share link in new tab"
             title="Open link"
           >
-            <ExternalLink className="w-5 h-5 text-slate-600" aria-hidden="true" />
+            <ExternalLink className="w-5 h-5 text-[#ecfdf5]/80" aria-hidden="true" />
           </button>
         </div>
       </div>
 
       {isManagingCustomUrl && (
-        <div className="mb-6 p-5 bg-cyan-50 border-2 border-cyan-200 rounded-xl">
+        <div className="mb-6 p-5 bg-[#C9A84C]/10 border-2 border-[#C9A84C]/30 rounded-xl">
           <div className="flex items-start gap-3 mb-4">
-            <Info className="w-5 h-5 text-cyan-700 mt-0.5 flex-shrink-0" aria-hidden="true" />
+            <Info className="w-5 h-5 text-[#C9A84C] mt-0.5 flex-shrink-0" aria-hidden="true" />
             <div className="flex-1">
               <h3 className="font-semibold text-cyan-900 text-base">Custom URL</h3>
-              <p className="text-sm text-cyan-800 mt-1 leading-relaxed">Set a memorable link for easy access</p>
+              <p className="text-sm text-[#C9A84C] mt-1 leading-relaxed">Set a memorable link for easy access</p>
             </div>
             <button
               onClick={() => setIsManagingCustomUrl(false)}
-              className="p-1 hover:bg-cyan-100 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="p-1 hover:bg-[#C9A84C]/10 rounded focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
               aria-label="Close custom URL editor"
             >
-              <X className="w-5 h-5 text-cyan-800" aria-hidden="true" />
+              <X className="w-5 h-5 text-[#C9A84C]" aria-hidden="true" />
             </button>
           </div>
           <label htmlFor="custom-url" className="sr-only">Custom URL</label>
@@ -1173,19 +1204,19 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
             type="text"
             value={customUrl}
             onChange={(e) => setCustomUrl(e.target.value)}
-            className="w-full px-4 py-3 text-base border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:border-cyan-600"
+            className="w-full px-4 py-3 text-base border border-[#C9A84C]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:border-[#C9A84C]"
           />
           <div className="flex justify-end gap-3 mt-4">
             <button
               onClick={() => setIsManagingCustomUrl(false)}
-              className="px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
+              className="px-5 py-2.5 text-sm font-medium text-[#E8C560]/90 hover:bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
             >
               Cancel
             </button>
             <button
               onClick={saveCustomUrl}
               disabled={isLoading}
-              className="px-5 py-2.5 text-sm font-medium bg-cyan-700 text-white rounded-lg hover:bg-cyan-800 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+              className="px-5 py-2.5 text-sm font-medium bg-[#C9A84C] text-white rounded-lg hover:bg-[#C9A84C] disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:ring-offset-2"
             >
               Save URL
             </button>
@@ -1199,15 +1230,15 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
         </h3>
         <div className="space-y-3" role="list" aria-label="External shares">
           {planShares.length === 0 ? (
-            <div className="text-center py-8 bg-slate-50 rounded-xl border-2 border-dashed border-slate-200">
-              <Share2 className="w-10 h-10 text-slate-400 mx-auto mb-2" aria-hidden="true" />
-              <p className="text-slate-700 text-base">Not shared externally yet</p>
+            <div className="text-center py-8 bg-slate-50 rounded-xl border-2 border-dashed border-[#C9A84C]/20">
+              <Share2 className="w-10 h-10 text-[#64748b]/80 mx-auto mb-2" aria-hidden="true" />
+              <p className="text-[#E8C560]/90 text-base">Not shared externally yet</p>
             </div>
           ) : (
             planShares.map((share) => (
               <div
                 key={share.id}
-                className="flex items-center gap-4 p-4 bg-white border border-slate-200 rounded-xl focus-within:ring-2 focus-within:ring-cyan-500"
+                className="flex items-center gap-4 p-4 bg-white border border-[#C9A84C]/20 rounded-xl focus-within:ring-2 focus-within:ring-[#C9A84C]/200"
                 role="listitem"
               >
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-pink-700 flex items-center justify-center text-white font-bold text-sm flex-shrink-0" aria-hidden="true">
@@ -1221,7 +1252,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                 </div>
                 <button
                   onClick={() => removeShare(share.id, share.shared_with_email)}
-                  className="p-2 text-slate-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="p-2 text-[#64748b] hover:text-red-700 hover:bg-red-500/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-red-500"
                   aria-label={`Revoke access for ${share.shared_with_email}`}
                   title="Revoke access"
                 >
@@ -1242,7 +1273,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
           <h2 className="text-xl font-bold text-slate-900">Discussions</h2>
-          <p className="text-base text-slate-600 mt-1 leading-relaxed">Conversations on PAP items, KPIs, and strategy</p>
+          <p className="text-base text-[#ecfdf5]/80 mt-1 leading-relaxed">Conversations on PAP items, KPIs, and strategy</p>
         </div>
         <button
           onClick={() => loadComments()}
@@ -1250,12 +1281,12 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
           aria-label="Refresh discussions"
           title="Refresh"
         >
-          <RefreshCw className="w-5 h-5 text-slate-600" aria-hidden="true" />
+          <RefreshCw className="w-5 h-5 text-[#ecfdf5]/80" aria-hidden="true" />
         </button>
       </div>
 
       {/* Comment Input */}
-      <div className="mb-6 p-5 bg-slate-50 rounded-xl border border-slate-200 space-y-4">
+      <div className="mb-6 p-5 bg-slate-50 rounded-xl border border-[#C9A84C]/20 space-y-4">
         <div className="flex gap-3">
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-600 to-blue-700 flex items-center justify-center text-white font-bold text-sm flex-shrink-0" aria-hidden="true">
             {userName.charAt(0).toUpperCase()}
@@ -1267,13 +1298,13 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             placeholder="Start a discussion... Use @ to mention"
-            className="flex-1 px-4 py-3 bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-600 text-base placeholder:text-slate-500"
+            className="flex-1 px-4 py-3 bg-white border border-[#C9A84C]/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C9A84C] text-base placeholder:text-[#64748b]"
             onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && addComment()}
           />
           <button
             onClick={addComment}
             disabled={isLoading || !newComment.trim()}
-            className="px-5 py-3 bg-cyan-700 text-white rounded-xl font-medium hover:bg-cyan-800 disabled:opacity-50 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+            className="px-5 py-3 bg-[#C9A84C] text-white rounded-xl font-medium hover:bg-[#C9A84C] disabled:opacity-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:ring-offset-2"
             aria-label="Send comment"
           >
             {isLoading ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" /> : <Send className="w-5 h-5" aria-hidden="true" />}
@@ -1286,7 +1317,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
             id="pap-select"
             value={selectedPapItem}
             onChange={(e) => setSelectedPapItem(e.target.value)}
-            className="px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="px-4 py-2.5 bg-white border border-[#C9A84C]/20 rounded-lg text-sm text-[#E8C560]/90 focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
           >
             <option value="">Link to PAP Item (optional)</option>
             {papItems.map(pap => (
@@ -1299,7 +1330,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
             id="urgency-select"
             value={commentUrgency}
             onChange={(e) => setCommentUrgency(e.target.value as any)}
-            className="px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="px-4 py-2.5 bg-white border border-[#C9A84C]/20 rounded-lg text-sm text-[#E8C560]/90 focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
           >
             <option value="low">Urgency: Low</option>
             <option value="medium">Urgency: Medium</option>
@@ -1312,7 +1343,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
             id="importance-select"
             value={commentImportance}
             onChange={(e) => setCommentImportance(e.target.value as any)}
-            className="px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="px-4 py-2.5 bg-white border border-[#C9A84C]/20 rounded-lg text-sm text-[#E8C560]/90 focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
           >
             <option value="low">Importance: Low</option>
             <option value="medium">Importance: Medium</option>
@@ -1324,8 +1355,8 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
 
       {/* Filters */}
       <div className="flex flex-wrap items-center gap-3 mb-5">
-        <div className="flex items-center gap-2 bg-white border border-slate-300 rounded-xl px-4 py-3 flex-1 min-w-[200px] focus-within:ring-2 focus-within:ring-cyan-500">
-          <Search className="w-5 h-5 text-slate-500" aria-hidden="true" />
+        <div className="flex items-center gap-2 bg-white border border-[#C9A84C]/20 rounded-xl px-4 py-3 flex-1 min-w-[200px] focus-within:ring-2 focus-within:ring-[#C9A84C]/200">
+          <Search className="w-5 h-5 text-[#64748b]" aria-hidden="true" />
           <label htmlFor="comment-search" className="sr-only">Search discussions</label>
           <input
             id="comment-search"
@@ -1333,7 +1364,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
             placeholder="Search discussions..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="flex-1 text-base outline-none text-slate-800 placeholder:text-slate-500 bg-transparent"
+            className="flex-1 text-base outline-none text-[#E8C560] placeholder:text-[#64748b] bg-transparent"
           />
         </div>
         {(['all', 'urgent', 'important', 'pap_related', 'unresolved'] as CommentFilter[]).map(filter => (
@@ -1343,8 +1374,8 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
             className={cn(
               "px-4 py-2.5 rounded-xl text-sm font-medium border transition-all focus:outline-none focus:ring-2 focus:ring-offset-1",
               commentFilter === filter
-                ? 'bg-slate-900 text-white border-slate-900 focus:ring-slate-900'
-                : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50 focus:ring-slate-400'
+                ? 'bg-[#022c22] text-white border-slate-900 focus:ring-slate-900'
+                : 'bg-white text-[#E8C560]/90 border-[#C9A84C]/20 hover:bg-slate-50 focus:ring-slate-400'
             )}
             aria-pressed={commentFilter === filter}
           >
@@ -1356,18 +1387,18 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       {/* Comments List */}
       <div className="space-y-4" role="feed" aria-label="Discussion comments">
         {filteredComments.length === 0 ? (
-          <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-dashed border-slate-300">
-            <MessageSquare className="w-12 h-12 text-slate-400 mx-auto mb-3" aria-hidden="true" />
-            <p className="text-slate-700 font-medium text-base">No discussions yet</p>
-            <p className="text-base text-slate-600 mt-2 leading-relaxed">Start the conversation above</p>
+          <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-dashed border-[#C9A84C]/20">
+            <MessageSquare className="w-12 h-12 text-[#64748b]/80 mx-auto mb-3" aria-hidden="true" />
+            <p className="text-[#E8C560]/90 font-medium text-base">No discussions yet</p>
+            <p className="text-base text-[#ecfdf5]/80 mt-2 leading-relaxed">Start the conversation above</p>
           </div>
         ) : (
           filteredComments.map((comment) => (
             <article
               key={comment.id}
               className={cn(
-                "p-5 rounded-xl border transition-all focus-within:ring-2 focus-within:ring-cyan-500",
-                comment.is_resolved ? 'bg-slate-50 opacity-70 border-slate-200' : 'bg-white border-slate-200 hover:shadow-sm'
+                "p-5 rounded-xl border transition-all focus-within:ring-2 focus-within:ring-[#C9A84C]/200",
+                comment.is_resolved ? 'bg-slate-50 opacity-70 border-[#C9A84C]/20' : 'bg-white border-[#C9A84C]/20 hover:shadow-sm'
               )}
               aria-label={`Comment by ${comment.user_name}`}
             >
@@ -1378,14 +1409,14 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2 flex-wrap">
                     <span className="font-semibold text-slate-900 text-sm">{comment.user_name}</span>
-                    <time className="text-xs text-slate-500" dateTime={comment.created_at}>{formatTimeAgo(comment.created_at)}</time>
+                    <time className="text-xs text-[#64748b]" dateTime={comment.created_at}>{formatTimeAgo(comment.created_at)}</time>
                     {comment.pap_item_name && (
                       <span className="px-2.5 py-1 bg-indigo-100 text-indigo-800 border border-indigo-300 rounded-full text-xs font-semibold flex items-center gap-1">
                         <FolderKanban className="w-3 h-3" aria-hidden="true" /> {comment.pap_item_name}
                       </span>
                     )}
                   </div>
-                  <p className="text-slate-800 text-base leading-relaxed">{comment.content}</p>
+                  <p className="text-[#E8C560] text-base leading-relaxed">{comment.content}</p>
                   <div className="flex items-center gap-2 mt-3">
                     {comment.urgency && (
                       <span className={cn("px-2.5 py-1 rounded-full text-xs font-semibold border flex items-center gap-1", getUrgencyColor(comment.urgency))}>
@@ -1402,7 +1433,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                 {!comment.is_resolved && (
                   <button
                     onClick={() => resolveComment(comment.id)}
-                    className="p-2 text-emerald-700 hover:bg-emerald-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="p-2 text-[#6ee7b7] hover:bg-[#059669]/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     aria-label="Mark comment as resolved"
                     title="Mark resolved"
                   >
@@ -1424,7 +1455,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
           <h2 className="text-xl font-bold text-slate-900">Critical KPIs</h2>
-          <p className="text-base text-slate-600 mt-1 leading-relaxed">Track performance and strategic health</p>
+          <p className="text-base text-[#ecfdf5]/80 mt-1 leading-relaxed">Track performance and strategic health</p>
         </div>
         <div className="flex gap-2">
           <button
@@ -1432,16 +1463,16 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
             className="p-3 hover:bg-slate-100 rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500"
             aria-label="Refresh KPIs"
           >
-            <RefreshCw className="w-5 h-5 text-slate-600" aria-hidden="true" />
+            <RefreshCw className="w-5 h-5 text-[#ecfdf5]/80" aria-hidden="true" />
           </button>
         </div>
       </div>
 
       <div className="grid gap-5" role="list" aria-label="Key performance indicators">
         {kpis.length === 0 ? (
-          <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-dashed border-slate-300">
-            <Target className="w-12 h-12 text-slate-400 mx-auto mb-3" aria-hidden="true" />
-            <p className="text-slate-700 font-medium text-base">No KPIs configured</p>
+          <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-dashed border-[#C9A84C]/20">
+            <Target className="w-12 h-12 text-[#64748b]/80 mx-auto mb-3" aria-hidden="true" />
+            <p className="text-[#E8C560]/90 font-medium text-base">No KPIs configured</p>
           </div>
         ) : (
           kpis.map((kpi) => {
@@ -1449,7 +1480,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
             return (
               <div
                 key={kpi.id}
-                className="p-6 bg-white border border-slate-200 rounded-xl hover:shadow-md transition-all cursor-pointer focus-within:ring-2 focus-within:ring-cyan-500"
+                className="p-6 bg-white border border-[#C9A84C]/20 rounded-xl hover:shadow-md transition-all cursor-pointer focus-within:ring-2 focus-within:ring-[#C9A84C]/200"
                 onClick={() => setShowKpiDetail(showKpiDetail === kpi.id ? null : kpi.id)}
                 role="listitem"
                 tabIndex={0}
@@ -1469,10 +1500,10 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                         {getKpiStatusText(kpi.status)}
                       </span>
                     </div>
-                    <p className="text-sm text-slate-600 leading-relaxed">{kpi.description}</p>
+                    <p className="text-sm text-[#ecfdf5]/80 leading-relaxed">{kpi.description}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl font-bold text-slate-900">{kpi.current}<span className="text-sm text-slate-500 font-normal">/{kpi.target} {kpi.unit}</span></p>
+                    <p className="text-2xl font-bold text-slate-900">{kpi.current}<span className="text-sm text-[#64748b] font-normal">/{kpi.target} {kpi.unit}</span></p>
                   </div>
                 </div>
 
@@ -1480,7 +1511,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                   <div className={cn("h-full rounded-full transition-all", getKpiStatusColor(kpi.status))} style={{ width: `${progress}%` }} />
                 </div>
 
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm text-slate-600 gap-2">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm text-[#ecfdf5]/80 gap-2">
                   <div className="flex items-center gap-4 flex-wrap">
                     <span className="flex items-center gap-1.5"><User className="w-4 h-4" aria-hidden="true" /> {kpi.owner}</span>
                     <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" aria-hidden="true" /> Due {kpi.due_date}</span>
@@ -1489,23 +1520,23 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                 </div>
 
                 {showKpiDetail === kpi.id && (
-                  <div className="mt-5 pt-5 border-t border-slate-200">
+                  <div className="mt-5 pt-5 border-t border-[#C9A84C]/20">
                     <div className="flex gap-2 flex-wrap">
                       <button
                         onClick={(e) => { e.stopPropagation(); setActiveTab('comments'); setSelectedPapItem(''); setNewComment(`Regarding KPI "${kpi.name}": `); }}
-                        className="flex items-center gap-1.5 px-4 py-2.5 bg-slate-100 text-slate-800 rounded-lg text-sm font-medium hover:bg-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500"
+                        className="flex items-center gap-1.5 px-4 py-2.5 bg-slate-100 text-[#E8C560] rounded-lg text-sm font-medium hover:bg-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500"
                       >
                         <MessageSquare className="w-4 h-4" aria-hidden="true" /> Discuss
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); shareViaWhatsApp(`KPI Update: ${kpi.name} is at ${kpi.current}/${kpi.target} ${kpi.unit} (${getKpiStatusText(kpi.status)})`); }}
-                        className="flex items-center gap-1.5 px-4 py-2.5 bg-emerald-100 text-emerald-800 rounded-lg text-sm font-medium hover:bg-emerald-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                        className="flex items-center gap-1.5 px-4 py-2.5 bg-[#059669]/10 text-[#6ee7b7] rounded-lg text-sm font-medium hover:bg-emerald-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500"
                       >
                         <Phone className="w-4 h-4" aria-hidden="true" /> Share on WhatsApp
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); sendEmailNotification('', `KPI Alert: ${kpi.name}`, `Current: ${kpi.current}/${kpi.target} ${kpi.unit}\nStatus: ${getKpiStatusText(kpi.status)}`); }}
-                        className="flex items-center gap-1.5 px-4 py-2.5 bg-blue-100 text-blue-800 rounded-lg text-sm font-medium hover:bg-blue-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="flex items-center gap-1.5 px-4 py-2.5 bg-[#C9A84C]/10 text-[#C9A84C] rounded-lg text-sm font-medium hover:bg-blue-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
                       >
                         <Mail className="w-4 h-4" aria-hidden="true" /> Email Update
                       </button>
@@ -1527,41 +1558,41 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
           <h2 className="text-xl font-bold text-slate-900">Activity Log</h2>
-          <p className="text-base text-slate-600 mt-1 leading-relaxed">Recent changes and updates</p>
+          <p className="text-base text-[#ecfdf5]/80 mt-1 leading-relaxed">Recent changes and updates</p>
         </div>
         <button
           onClick={() => loadActivities()}
           className="p-3 hover:bg-slate-100 rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500"
           aria-label="Refresh activity log"
         >
-          <RefreshCw className="w-5 h-5 text-slate-600" aria-hidden="true" />
+          <RefreshCw className="w-5 h-5 text-[#ecfdf5]/80" aria-hidden="true" />
         </button>
       </div>
       <div className="space-y-2" role="list" aria-label="Activity items">
         {activities.length === 0 ? (
-          <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-dashed border-slate-300">
-            <Activity className="w-12 h-12 text-slate-400 mx-auto mb-3" aria-hidden="true" />
-            <p className="text-slate-700 font-medium text-base">No activity recorded yet</p>
+          <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-dashed border-[#C9A84C]/20">
+            <Activity className="w-12 h-12 text-[#64748b]/80 mx-auto mb-3" aria-hidden="true" />
+            <p className="text-[#E8C560]/90 font-medium text-base">No activity recorded yet</p>
           </div>
         ) : (
           activities.map((activity) => (
             <div
               key={activity.id}
-              className="flex items-start gap-4 p-4 hover:bg-slate-50 rounded-xl transition-colors focus-within:ring-2 focus-within:ring-cyan-500"
+              className="flex items-start gap-4 p-4 hover:bg-slate-50 rounded-xl transition-colors focus-within:ring-2 focus-within:ring-[#C9A84C]/200"
               role="listitem"
             >
               <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                {activity.type === 'comment' ? <MessageSquare className="w-5 h-5 text-slate-600" /> :
-                 activity.type === 'share' ? <Share2 className="w-5 h-5 text-slate-600" /> :
-                 activity.type === 'kpi' ? <Target className="w-5 h-5 text-slate-600" /> :
-                 <Activity className="w-5 h-5 text-slate-600" />}
+                {activity.type === 'comment' ? <MessageSquare className="w-5 h-5 text-[#ecfdf5]/80" /> :
+                 activity.type === 'share' ? <Share2 className="w-5 h-5 text-[#ecfdf5]/80" /> :
+                 activity.type === 'kpi' ? <Target className="w-5 h-5 text-[#ecfdf5]/80" /> :
+                 <Activity className="w-5 h-5 text-[#ecfdf5]/80" />}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-base text-slate-800 leading-relaxed">
+                <p className="text-base text-[#E8C560] leading-relaxed">
                   <span className="font-semibold">{activity.user_name}</span>{' '}
-                  <span className="text-slate-700">{activity.description}</span>
+                  <span className="text-[#E8C560]/90">{activity.description}</span>
                 </p>
-                <time className="text-sm text-slate-500 mt-1 block" dateTime={activity.created_at}>{formatTimeAgo(activity.created_at)}</time>
+                <time className="text-sm text-[#64748b] mt-1 block" dateTime={activity.created_at}>{formatTimeAgo(activity.created_at)}</time>
               </div>
             </div>
           ))
@@ -1576,23 +1607,23 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
     <div className="p-6">
       <div className="mb-6">
         <h2 className="text-xl font-bold text-slate-900">Strategic Planning Resources</h2>
-        <p className="text-base text-slate-600 mt-1 leading-relaxed">Curated learning materials for systems thinking and strategy</p>
+        <p className="text-base text-[#ecfdf5]/80 mt-1 leading-relaxed">Curated learning materials for systems thinking and strategy</p>
       </div>
 
       <div className="grid gap-5 md:grid-cols-2" role="list" aria-label="Learning resources">
         {RESOURCES.map((resource) => (
           <article
             key={resource.id}
-            className="group p-5 bg-white border border-slate-200 rounded-xl hover:shadow-md hover:border-cyan-400 transition-all focus-within:ring-2 focus-within:ring-cyan-500"
+            className="group p-5 bg-white border border-[#C9A84C]/20 rounded-xl hover:shadow-md hover:border-[#C9A84C] transition-all focus-within:ring-2 focus-within:ring-[#C9A84C]/200"
             role="listitem"
           >
             <div className="flex items-start gap-4">
               <div
                 className={cn(
                   "w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0",
-                  resource.type === 'video' ? 'bg-red-100 text-red-700' :
-                  resource.type === 'article' ? 'bg-amber-100 text-amber-700' :
-                  'bg-emerald-100 text-emerald-700'
+                  resource.type === 'video' ? 'bg-red-500/10 text-red-700' :
+                  resource.type === 'article' ? 'bg-amber-500/10 text-amber-700' :
+                  'bg-[#059669]/10 text-[#6ee7b7]'
                 )}
                 aria-hidden="true"
               >
@@ -1602,23 +1633,23 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-2 flex-wrap">
-                  <span className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md text-xs font-semibold">{resource.category}</span>
-                  <span className="px-2.5 py-1 bg-slate-50 text-slate-600 rounded-md text-xs font-medium capitalize">{resource.type}</span>
+                  <span className="px-2.5 py-1 bg-slate-100 text-[#E8C560]/90 rounded-md text-xs font-semibold">{resource.category}</span>
+                  <span className="px-2.5 py-1 bg-slate-50 text-[#ecfdf5]/80 rounded-md text-xs font-medium capitalize">{resource.type}</span>
                 </div>
-                <h3 className="font-semibold text-slate-900 text-base leading-snug mb-2 group-hover:text-cyan-800 transition-colors">{resource.title}</h3>
-                <p className="text-sm text-slate-600 mb-4 line-clamp-2 leading-relaxed">{resource.description}</p>
+                <h3 className="font-semibold text-slate-900 text-base leading-snug mb-2 group-hover:text-[#C9A84C] transition-colors">{resource.title}</h3>
+                <p className="text-sm text-[#ecfdf5]/80 mb-4 line-clamp-2 leading-relaxed">{resource.description}</p>
                 <div className="flex items-center gap-2 flex-wrap">
                   <a
                     href={resource.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 px-4 py-2.5 bg-slate-900 text-white rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
+                    className="flex items-center gap-1.5 px-4 py-2.5 bg-[#022c22] text-white rounded-lg text-sm font-medium hover:bg-[#022c22]/60 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
                   >
                     <ExternalLink className="w-4 h-4" aria-hidden="true" /> Open
                   </a>
                   <button
                     onClick={() => copyToClipboard(resource.url)}
-                    className="p-2.5 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500"
+                    className="p-2.5 text-[#64748b] hover:text-[#E8C560] hover:bg-slate-100 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500"
                     aria-label={`Copy link for ${resource.title}`}
                     title="Copy link"
                   >
@@ -1626,7 +1657,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                   </button>
                   <button
                     onClick={() => shareViaWhatsApp(`Check out this resource: ${resource.title} - ${resource.url}`)}
-                    className="p-2.5 text-emerald-700 hover:text-emerald-800 hover:bg-emerald-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="p-2.5 text-[#6ee7b7] hover:text-[#6ee7b7] hover:bg-[#059669]/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     aria-label={`Share ${resource.title} via WhatsApp`}
                     title="Share via WhatsApp"
                   >
@@ -1634,7 +1665,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                   </button>
                   <button
                     onClick={() => sendEmailNotification('', `Resource: ${resource.title}`, `${resource.description}\n\n${resource.url}`)}
-                    className="p-2.5 text-blue-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="p-2.5 text-[#C9A84C] hover:text-[#C9A84C] hover:bg-[#C9A84C]/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
                     aria-label={`Share ${resource.title} via Email`}
                     title="Share via Email"
                   >
@@ -1653,41 +1684,41 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
 
   const CreateOrgModal = () => (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="create-org-title">
-      <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-sm" onClick={() => setShowCreateOrgModal(false)} />
-      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+      <div className="absolute inset-0 bg-[#022c22]/70 backdrop-blur-sm" onClick={() => setShowCreateOrgModal(false)} />
+      <div className="relative bg-[#022c22]/40 rounded-2xl shadow-2xl w-full max-w-md p-6">
         <button
           onClick={() => setShowCreateOrgModal(false)}
           className="absolute top-4 right-4 p-2 hover:bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
           aria-label="Close create organization modal"
         >
-          <X className="w-5 h-5 text-slate-500" aria-hidden="true" />
+          <X className="w-5 h-5 text-[#64748b]" aria-hidden="true" />
         </button>
         <h2 id="create-org-title" className="text-xl font-bold mb-1 text-slate-900">Create Organization</h2>
-        <p className="text-base text-slate-600 mb-5 leading-relaxed">Set up a new team workspace</p>
+        <p className="text-base text-[#ecfdf5]/80 mb-5 leading-relaxed">Set up a new team workspace</p>
 
-        <label htmlFor="org-name" className="block text-sm font-medium text-slate-700 mb-2">Organization Name</label>
+        <label htmlFor="org-name" className="block text-sm font-medium text-[#E8C560]/90 mb-2">Organization Name</label>
         <input
           ref={createOrgInputRef}
           id="org-name"
           value={newOrgName}
           onChange={(e) => setNewOrgName(e.target.value)}
           placeholder="e.g., Strategy Team 2026"
-          className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-600 text-base placeholder:text-slate-500"
+          className="w-full px-4 py-3 border border-[#C9A84C]/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C9A84C] text-base placeholder:text-[#64748b]"
         />
 
-        <label htmlFor="org-desc" className="block text-sm font-medium text-slate-700 mt-4 mb-2">Description <span className="text-slate-500 font-normal">(optional)</span></label>
+        <label htmlFor="org-desc" className="block text-sm font-medium text-[#E8C560]/90 mt-4 mb-2">Description <span className="text-[#64748b] font-normal">(optional)</span></label>
         <input
           id="org-desc"
           value={newOrgDescription}
           onChange={(e) => setNewOrgDescription(e.target.value)}
           placeholder="Brief description of this organization"
-          className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-600 text-base placeholder:text-slate-500"
+          className="w-full px-4 py-3 border border-[#C9A84C]/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C9A84C] text-base placeholder:text-[#64748b]"
         />
 
         <button
           onClick={createOrganization}
           disabled={isLoading || !newOrgName.trim()}
-          className="w-full py-3.5 bg-cyan-700 text-white rounded-xl mt-6 hover:bg-cyan-800 disabled:opacity-50 font-semibold transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+          className="w-full py-3.5 bg-[#C9A84C] text-white rounded-xl mt-6 hover:bg-[#C9A84C] disabled:opacity-50 font-semibold transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:ring-offset-2"
         >
           {isLoading ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" /> : <Plus className="w-5 h-5" aria-hidden="true" />} Create Organization
         </button>
@@ -1699,48 +1730,48 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
     if (!editingOrg) return null;
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="edit-org-title">
-        <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-sm" onClick={() => setEditingOrg(null)} />
-        <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+        <div className="absolute inset-0 bg-[#022c22]/70 backdrop-blur-sm" onClick={() => setEditingOrg(null)} />
+        <div className="relative bg-[#022c22]/40 rounded-2xl shadow-2xl w-full max-w-md p-6">
           <button
             onClick={() => setEditingOrg(null)}
             className="absolute top-4 right-4 p-2 hover:bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
             aria-label="Close edit organization modal"
           >
-            <X className="w-5 h-5 text-slate-500" aria-hidden="true" />
+            <X className="w-5 h-5 text-[#64748b]" aria-hidden="true" />
           </button>
           <h2 id="edit-org-title" className="text-xl font-bold mb-1 text-slate-900">Edit Organization</h2>
-          <p className="text-base text-slate-600 mb-5 leading-relaxed">Update organization details</p>
+          <p className="text-base text-[#ecfdf5]/80 mb-5 leading-relaxed">Update organization details</p>
 
-          <label htmlFor="edit-org-name" className="block text-sm font-medium text-slate-700 mb-2">Organization Name</label>
+          <label htmlFor="edit-org-name" className="block text-sm font-medium text-[#E8C560]/90 mb-2">Organization Name</label>
           <input
             ref={editOrgInputRef}
             id="edit-org-name"
             value={editingOrg.name}
             onChange={(e) => setEditingOrg({...editingOrg, name: e.target.value})}
             placeholder="Organization Name"
-            className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-600 text-base placeholder:text-slate-500"
+            className="w-full px-4 py-3 border border-[#C9A84C]/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C9A84C] text-base placeholder:text-[#64748b]"
           />
 
-          <label htmlFor="edit-org-desc" className="block text-sm font-medium text-slate-700 mt-4 mb-2">Description <span className="text-slate-500 font-normal">(optional)</span></label>
+          <label htmlFor="edit-org-desc" className="block text-sm font-medium text-[#E8C560]/90 mt-4 mb-2">Description <span className="text-[#64748b] font-normal">(optional)</span></label>
           <input
             id="edit-org-desc"
             value={editingOrg.description || ''}
             onChange={(e) => setEditingOrg({...editingOrg, description: e.target.value})}
             placeholder="Brief description"
-            className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-600 text-base placeholder:text-slate-500"
+            className="w-full px-4 py-3 border border-[#C9A84C]/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C9A84C] text-base placeholder:text-[#64748b]"
           />
 
           <div className="flex gap-3 mt-6">
             <button
               onClick={() => setEditingOrg(null)}
-              className="flex-1 py-3.5 text-sm font-semibold text-slate-700 border border-slate-300 rounded-xl hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500"
+              className="flex-1 py-3.5 text-sm font-semibold text-[#E8C560]/90 border border-[#C9A84C]/20 rounded-xl hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500"
             >
               Cancel
             </button>
             <button
               onClick={updateOrganization}
               disabled={isLoading || !editingOrg.name.trim()}
-              className="flex-1 py-3.5 bg-cyan-700 text-white rounded-xl text-sm font-semibold hover:bg-cyan-800 disabled:opacity-50 transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+              className="flex-1 py-3.5 bg-[#C9A84C] text-white rounded-xl text-sm font-semibold hover:bg-[#C9A84C] disabled:opacity-50 transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:ring-offset-2"
             >
               {isLoading ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" /> : <Check className="w-5 h-5" aria-hidden="true" />} Save Changes
             </button>
@@ -1754,32 +1785,32 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
     if (!deletingOrg) return null;
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="delete-org-title">
-        <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-sm" onClick={() => setDeletingOrg(null)} />
-        <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+        <div className="absolute inset-0 bg-[#022c22]/70 backdrop-blur-sm" onClick={() => setDeletingOrg(null)} />
+        <div className="relative bg-[#022c22]/40 rounded-2xl shadow-2xl w-full max-w-md p-6">
           <button
             onClick={() => setDeletingOrg(null)}
             className="absolute top-4 right-4 p-2 hover:bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
             aria-label="Close delete confirmation"
           >
-            <X className="w-5 h-5 text-slate-500" aria-hidden="true" />
+            <X className="w-5 h-5 text-[#64748b]" aria-hidden="true" />
           </button>
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-3 bg-red-100 rounded-full">
+            <div className="p-3 bg-red-500/10 rounded-full">
               <AlertTriangle className="w-6 h-6 text-red-700" aria-hidden="true" />
             </div>
             <h2 id="delete-org-title" className="text-xl font-bold text-slate-900">Delete Organization</h2>
           </div>
-          <p className="text-base text-slate-700 mb-2 leading-relaxed">
+          <p className="text-base text-[#E8C560]/90 mb-2 leading-relaxed">
             Are you sure you want to delete <strong>{deletingOrg.name}</strong>?
           </p>
-          <p className="text-sm text-slate-600 mb-6 leading-relaxed">
+          <p className="text-sm text-[#ecfdf5]/80 mb-6 leading-relaxed">
             This action cannot be undone. All members and associated data will be permanently removed.
           </p>
 
           <div className="flex gap-3">
             <button
               onClick={() => setDeletingOrg(null)}
-              className="flex-1 py-3.5 text-sm font-semibold text-slate-700 border border-slate-300 rounded-xl hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500"
+              className="flex-1 py-3.5 text-sm font-semibold text-[#E8C560]/90 border border-[#C9A84C]/20 rounded-xl hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500"
             >
               Cancel
             </button>
@@ -1800,32 +1831,32 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
     if (!resettingOrg) return null;
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="reset-org-title">
-        <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-sm" onClick={() => setResettingOrg(null)} />
-        <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+        <div className="absolute inset-0 bg-[#022c22]/70 backdrop-blur-sm" onClick={() => setResettingOrg(null)} />
+        <div className="relative bg-[#022c22]/40 rounded-2xl shadow-2xl w-full max-w-md p-6">
           <button
             onClick={() => setResettingOrg(null)}
             className="absolute top-4 right-4 p-2 hover:bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
             aria-label="Close reset confirmation"
           >
-            <X className="w-5 h-5 text-slate-500" aria-hidden="true" />
+            <X className="w-5 h-5 text-[#64748b]" aria-hidden="true" />
           </button>
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-3 bg-amber-100 rounded-full">
+            <div className="p-3 bg-amber-500/10 rounded-full">
               <RotateCcw className="w-6 h-6 text-amber-700" aria-hidden="true" />
             </div>
             <h2 id="reset-org-title" className="text-xl font-bold text-slate-900">Reset Organization</h2>
           </div>
-          <p className="text-base text-slate-700 mb-2 leading-relaxed">
+          <p className="text-base text-[#E8C560]/90 mb-2 leading-relaxed">
             Reset <strong>{resettingOrg.name}</strong>?
           </p>
-          <p className="text-sm text-slate-600 mb-6 leading-relaxed">
+          <p className="text-sm text-[#ecfdf5]/80 mb-6 leading-relaxed">
             This will remove all members except the owner and clear all pending invitations. Organization settings and name will be preserved.
           </p>
 
           <div className="flex gap-3">
             <button
               onClick={() => setResettingOrg(null)}
-              className="flex-1 py-3.5 text-sm font-semibold text-slate-700 border border-slate-300 rounded-xl hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500"
+              className="flex-1 py-3.5 text-sm font-semibold text-[#E8C560]/90 border border-[#C9A84C]/20 rounded-xl hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500"
             >
               Cancel
             </button>
@@ -1844,34 +1875,34 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
 
   const InviteModal = () => (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="invite-title">
-      <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-sm" onClick={() => setShowInviteModal(false)} />
-      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+      <div className="absolute inset-0 bg-[#022c22]/70 backdrop-blur-sm" onClick={() => setShowInviteModal(false)} />
+      <div className="relative bg-[#022c22]/40 rounded-2xl shadow-2xl w-full max-w-md p-6">
         <button
           onClick={() => setShowInviteModal(false)}
           className="absolute top-4 right-4 p-2 hover:bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
           aria-label="Close invite modal"
         >
-          <X className="w-5 h-5 text-slate-500" aria-hidden="true" />
+          <X className="w-5 h-5 text-[#64748b]" aria-hidden="true" />
         </button>
         <h2 id="invite-title" className="text-xl font-bold mb-1 text-slate-900">Invite Team Member</h2>
-        <p className="text-base text-slate-600 mb-5 leading-relaxed">Add colleagues to {selectedOrg?.name}</p>
+        <p className="text-base text-[#ecfdf5]/80 mb-5 leading-relaxed">Add colleagues to {selectedOrg?.name}</p>
 
-        <label htmlFor="invite-email" className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
+        <label htmlFor="invite-email" className="block text-sm font-medium text-[#E8C560]/90 mb-2">Email Address</label>
         <input
           id="invite-email"
           type="email"
           value={inviteEmail}
           onChange={(e) => setInviteEmail(e.target.value)}
           placeholder="colleague@company.com"
-          className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-600 text-base placeholder:text-slate-500 mb-4"
+          className="w-full px-4 py-3 border border-[#C9A84C]/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C9A84C] text-base placeholder:text-[#64748b] mb-4"
         />
 
-        <label htmlFor="invite-role" className="block text-sm font-medium text-slate-700 mb-2">Role</label>
+        <label htmlFor="invite-role" className="block text-sm font-medium text-[#E8C560]/90 mb-2">Role</label>
         <select
           id="invite-role"
           value={inviteRole}
           onChange={(e) => setInviteRole(e.target.value as any)}
-          className="w-full px-4 py-3 border border-slate-300 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-cyan-600 text-slate-800"
+          className="w-full px-4 py-3 border border-[#C9A84C]/20 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-[#C9A84C] text-[#E8C560]"
         >
           <option value="viewer">Viewer — Can view only</option>
           <option value="editor">Editor — Can edit content</option>
@@ -1884,15 +1915,15 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
             id="sendEmail"
             checked={emailNotifications}
             onChange={(e) => setEmailNotifications(e.target.checked)}
-            className="w-4 h-4 rounded text-cyan-700 border-slate-300 focus:ring-cyan-600"
+            className="w-4 h-4 rounded text-[#C9A84C] border-[#C9A84C]/20 focus:ring-[#C9A84C]"
           />
-          <label htmlFor="sendEmail" className="text-base text-slate-700">Send email notification</label>
+          <label htmlFor="sendEmail" className="text-base text-[#E8C560]/90">Send email notification</label>
         </div>
 
         <button
           onClick={inviteMember}
           disabled={isLoading || !inviteEmail.trim()}
-          className="w-full py-3.5 bg-cyan-700 text-white rounded-xl mt-6 hover:bg-cyan-800 disabled:opacity-50 font-semibold transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+          className="w-full py-3.5 bg-[#C9A84C] text-white rounded-xl mt-6 hover:bg-[#C9A84C] disabled:opacity-50 font-semibold transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:ring-offset-2"
         >
           {isLoading ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" /> : <UserPlus className="w-5 h-5" aria-hidden="true" />} Send Invitation
         </button>
@@ -1902,34 +1933,34 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
 
   const ShareModal = () => (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="share-title">
-      <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-sm" onClick={() => setShowShareModal(false)} />
-      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+      <div className="absolute inset-0 bg-[#022c22]/70 backdrop-blur-sm" onClick={() => setShowShareModal(false)} />
+      <div className="relative bg-[#022c22]/40 rounded-2xl shadow-2xl w-full max-w-md p-6">
         <button
           onClick={() => setShowShareModal(false)}
           className="absolute top-4 right-4 p-2 hover:bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
           aria-label="Close share modal"
         >
-          <X className="w-5 h-5 text-slate-500" aria-hidden="true" />
+          <X className="w-5 h-5 text-[#64748b]" aria-hidden="true" />
         </button>
         <h2 id="share-title" className="text-xl font-bold mb-1 text-slate-900">Share Plan</h2>
-        <p className="text-base text-slate-600 mb-5 leading-relaxed">Grant access to external stakeholders</p>
+        <p className="text-base text-[#ecfdf5]/80 mb-5 leading-relaxed">Grant access to external stakeholders</p>
 
-        <label htmlFor="share-email" className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
+        <label htmlFor="share-email" className="block text-sm font-medium text-[#E8C560]/90 mb-2">Email Address</label>
         <input
           id="share-email"
           type="email"
           value={shareEmail}
           onChange={(e) => setShareEmail(e.target.value)}
           placeholder="stakeholder@example.com"
-          className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-600 text-base placeholder:text-slate-500 mb-4"
+          className="w-full px-4 py-3 border border-[#C9A84C]/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C9A84C] text-base placeholder:text-[#64748b] mb-4"
         />
 
-        <label htmlFor="share-permission" className="block text-sm font-medium text-slate-700 mb-2">Permission Level</label>
+        <label htmlFor="share-permission" className="block text-sm font-medium text-[#E8C560]/90 mb-2">Permission Level</label>
         <select
           id="share-permission"
           value={sharePermission}
           onChange={(e) => setSharePermission(e.target.value as any)}
-          className="w-full px-4 py-3 border border-slate-300 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-cyan-600 text-slate-800"
+          className="w-full px-4 py-3 border border-[#C9A84C]/20 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-[#C9A84C] text-[#E8C560]"
         >
           <option value="viewer">Viewer</option>
           <option value="editor">Editor</option>
@@ -1939,14 +1970,14 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
         <div className="flex gap-3 mt-6">
           <button
             onClick={() => shareViaWhatsApp(`Check out our strategic plan "${plan?.name}": ${getPlanShareUrl(selectedOrg || undefined)}`)}
-            className="flex-1 py-3.5 bg-emerald-600 text-white rounded-xl text-sm font-semibold hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+            className="flex-1 py-3.5 bg-[#059669] text-white rounded-xl text-sm font-semibold hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
           >
             <Phone className="w-4 h-4" aria-hidden="true" /> WhatsApp
           </button>
           <button
             onClick={sharePlan}
             disabled={isLoading || !shareEmail.trim()}
-            className="flex-[2] py-3.5 bg-cyan-700 text-white rounded-xl text-sm font-semibold hover:bg-cyan-800 disabled:opacity-50 transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+            className="flex-[2] py-3.5 bg-[#C9A84C] text-white rounded-xl text-sm font-semibold hover:bg-[#C9A84C] disabled:opacity-50 transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:ring-offset-2"
           >
             {isLoading ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" /> : <Share2 className="w-4 h-4" aria-hidden="true" />} Share via Email
           </button>
@@ -1961,7 +1992,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       <header className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-slate-900">Team Collaboration</h1>
-          <p className="text-base text-slate-700 mt-2 leading-relaxed">Manage your team, track KPIs, and collaborate in real-time</p>
+          <p className="text-base text-[#E8C560]/90 mt-2 leading-relaxed">Manage your team, track KPIs, and collaborate in real-time</p>
         </div>
         <div className="flex items-center gap-3">
           {/* Presence Ribbon */}
@@ -1976,11 +2007,11 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
           <div className="relative" ref={notifRef}>
             <button
               onClick={() => setShowNotifications(!showNotifications)}
-              className="relative p-3 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="relative p-3 bg-white border border-[#C9A84C]/20 rounded-xl hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
               aria-label={`Notifications, ${unreadCount} unread`}
               aria-expanded={showNotifications}
             >
-              <Bell className="w-5 h-5 text-slate-700" aria-hidden="true" />
+              <Bell className="w-5 h-5 text-[#E8C560]/90" aria-hidden="true" />
               {unreadCount > 0 && (
                 <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-600 text-white text-xs font-bold rounded-full flex items-center justify-center">
                   {unreadCount}
@@ -1988,19 +2019,19 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
               )}
             </button>
             {showNotifications && (
-              <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-slate-200 z-50 overflow-hidden">
+              <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-[#C9A84C]/20 z-50 overflow-hidden">
                 <div className="p-4 border-b border-slate-100 flex items-center justify-between">
                   <h3 className="font-semibold text-base text-slate-900">Notifications</h3>
                   <button
                     onClick={() => setNotifications(prev => prev.map(n => ({ ...n, read: true })))}
-                    className="text-sm text-cyan-700 hover:text-cyan-800 font-medium focus:outline-none focus:ring-2 focus:ring-cyan-500 rounded"
+                    className="text-sm text-[#C9A84C] hover:text-[#C9A84C] font-medium focus:outline-none focus:ring-2 focus:ring-[#C9A84C] rounded"
                   >
                     Mark all read
                   </button>
                 </div>
                 <div className="max-h-80 overflow-y-auto">
                   {notifications.length === 0 ? (
-                    <p className="p-4 text-base text-slate-600 text-center">No notifications</p>
+                    <p className="p-4 text-base text-[#ecfdf5]/80 text-center">No notifications</p>
                   ) : (
                     notifications.map(n => (
                       <div
@@ -2008,7 +2039,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                         onClick={() => markNotificationRead(n.id)}
                         className={cn(
                           "p-4 border-b border-slate-50 hover:bg-slate-50 cursor-pointer transition-colors",
-                          !n.read ? 'bg-cyan-50/40' : ''
+                          !n.read ? 'bg-[#C9A84C]/10/40' : ''
                         )}
                         role="button"
                         tabIndex={0}
@@ -2018,14 +2049,14 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                           <div
                             className={cn(
                               "w-2.5 h-2.5 rounded-full mt-1.5 flex-shrink-0",
-                              n.type === 'warning' ? 'bg-amber-500' : n.type === 'urgent' ? 'bg-red-600' : n.type === 'success' ? 'bg-emerald-600' : 'bg-blue-600'
+                              n.type === 'warning' ? 'bg-amber-500/100' : n.type === 'urgent' ? 'bg-red-600' : n.type === 'success' ? 'bg-[#059669]' : 'bg-[#C9A84C]'
                             )}
                             aria-hidden="true"
                           />
                           <div className="flex-1">
                             <p className="text-sm font-semibold text-slate-900">{n.title}</p>
-                            <p className="text-sm text-slate-600 mt-1 leading-relaxed">{n.message}</p>
-                            <time className="text-xs text-slate-500 mt-1 block" dateTime={n.created_at}>{formatTimeAgo(n.created_at)}</time>
+                            <p className="text-sm text-[#ecfdf5]/80 mt-1 leading-relaxed">{n.message}</p>
+                            <time className="text-xs text-[#64748b] mt-1 block" dateTime={n.created_at}>{formatTimeAgo(n.created_at)}</time>
                           </div>
                         </div>
                       </div>
@@ -2033,30 +2064,30 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                   )}
                 </div>
                 <div className="p-4 border-t border-slate-100 bg-slate-50 space-y-3">
-                  <label className="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
+                  <label className="flex items-center gap-3 text-sm text-[#E8C560]/90 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={emailNotifications}
                       onChange={(e) => setEmailNotifications(e.target.checked)}
-                      className="w-4 h-4 rounded text-cyan-700 border-slate-300 focus:ring-cyan-600"
+                      className="w-4 h-4 rounded text-[#C9A84C] border-[#C9A84C]/20 focus:ring-[#C9A84C]"
                     />
                     Email notifications
                   </label>
-                  <label className="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
+                  <label className="flex items-center gap-3 text-sm text-[#E8C560]/90 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={whatsappNotifications}
                       onChange={(e) => setWhatsappNotifications(e.target.checked)}
-                      className="w-4 h-4 rounded text-cyan-700 border-slate-300 focus:ring-cyan-600"
+                      className="w-4 h-4 rounded text-[#C9A84C] border-[#C9A84C]/20 focus:ring-[#C9A84C]"
                     />
                     WhatsApp alerts for critical KPIs
                   </label>
-                  <label className="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
+                  <label className="flex items-center gap-3 text-sm text-[#E8C560]/90 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={mentionAlerts}
                       onChange={(e) => setMentionAlerts(e.target.checked)}
-                      className="w-4 h-4 rounded text-cyan-700 border-slate-300 focus:ring-cyan-600"
+                      className="w-4 h-4 rounded text-[#C9A84C] border-[#C9A84C]/20 focus:ring-[#C9A84C]"
                     />
                     @mention alerts
                   </label>
@@ -2074,12 +2105,12 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
 
       {/* Visual Alerts */}
       {error && (
-        <div className="flex items-center gap-3 p-4 bg-red-50 border-2 border-red-200 rounded-xl text-red-800" role="alert">
+        <div className="flex items-center gap-3 p-4 bg-red-500/10 border-2 border-red-500/20 rounded-xl text-red-800" role="alert">
           <AlertCircle className="w-5 h-5 flex-shrink-0" aria-hidden="true" />
           <span className="text-base font-medium">{error}</span>
           <button
             onClick={() => setError(null)}
-            className="ml-auto p-1 hover:bg-red-100 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="ml-auto p-1 hover:bg-red-500/10 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
             aria-label="Dismiss error"
           >
             <X className="w-4 h-4" />
@@ -2087,13 +2118,13 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
         </div>
       )}
       {success && (
-        <div className="flex items-center gap-3 p-4 bg-emerald-50 border-2 border-emerald-200 rounded-xl text-emerald-800" role="alert">
+        <div className="flex items-center gap-3 p-4 bg-[#059669]/10 border-2 border-[#059669]/20 rounded-xl text-[#6ee7b7]" role="alert">
           <Check className="w-5 h-5 flex-shrink-0" aria-hidden="true" />
           <span className="text-base font-medium">{success}</span>
         </div>
       )}
       {customUrlSuccess && (
-        <div className="flex items-center gap-3 p-4 bg-cyan-50 border-2 border-cyan-200 rounded-xl text-cyan-800" role="alert">
+        <div className="flex items-center gap-3 p-4 bg-[#C9A84C]/10 border-2 border-[#C9A84C]/30 rounded-xl text-[#C9A84C]" role="alert">
           <Check className="w-5 h-5" aria-hidden="true" />
           <span className="text-base font-medium">{customUrlSuccess}</span>
         </div>
@@ -2119,8 +2150,8 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                 className={cn(
                   "flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2",
                   isActive
-                    ? 'bg-slate-900 text-white shadow-lg focus:ring-slate-900'
-                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300 focus:ring-slate-400'
+                    ? 'bg-[#022c22] text-white shadow-lg focus:ring-slate-900'
+                    : 'bg-white text-[#E8C560]/90 hover:bg-slate-100 border border-[#C9A84C]/20 focus:ring-slate-400'
                 )}
               >
                 <Icon className="w-4 h-4" aria-hidden="true" />
@@ -2141,7 +2172,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
         id={`panel-${activeTab}`}
         role="tabpanel"
         aria-labelledby={`tab-${activeTab}`}
-        className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm"
+        className="bg-[#022c22]/40 rounded-2xl border border-[#C9A84C]/20 overflow-hidden shadow-sm"
       >
         {activeTab === 'team' && renderTeamTab()}
         {activeTab === 'sharing' && renderSharingTab()}
