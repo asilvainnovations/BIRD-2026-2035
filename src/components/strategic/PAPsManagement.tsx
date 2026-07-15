@@ -20,12 +20,11 @@ import {
 } from 'lucide-react';
 import { PAP, StrategicPlan, BSCObjective } from '@/lib/strategicPlanStore';
 import { supabase } from '@/lib/supabase';
-import { formatCurrency, getStatusColor } from '@/lib/formulas';
 
 // Edge Function URLs
-const AI_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/ai-strategy-assistant'
-const SYNC_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/strategic-planner-sync';
-const EMAIL_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/email-notifications';
+const AI_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/ai-strategy-assistant';
+const SYNC_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/strategic-planner-sync';
+const EMAIL_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/email-notifications';
 
 interface PAPsManagementProps {
   plan: StrategicPlan;
@@ -35,40 +34,17 @@ interface PAPsManagementProps {
 }
 
 const typeConfig = {
-  program: { label: 'Program', color: 'purple', bgColor: 'bg-purple-500', lightBg: 'bg-purple-50' },
-  activity: { label: 'Activity', color: 'blue', bgColor: 'bg-[#C9A84C]/100', lightBg: 'bg-[#C9A84C]/10' },
+  program: { label: 'Program', color: 'purple', bgColor: 'bg-purple-500/100', lightBg: 'bg-purple-500/10' },
+  activity: { label: 'Activity', color: 'blue', bgColor: 'bg-[#C9A84C]', lightBg: 'bg-[#C9A84C]/10' },
   project: { label: 'Project', color: 'cyan', bgColor: 'bg-[#C9A84C]', lightBg: 'bg-[#C9A84C]/10' },
 };
 
 const statusConfig = {
-  planned: { label: 'Planned', bgColor: 'bg-slate-100 dark:bg-[#022c22]/60', textColor: 'text-[#ecfdf5]/80 dark:text-[#64748b]/80', borderColor: 'border-[#C9A84C]/20 dark:border-[#C9A84C]/20' },
-  'in-progress': { label: 'In Progress', bgColor: 'bg-[#C9A84C]/10', textColor: 'text-[#C9A84C]', borderColor: 'border-[#C9A84C]/30' },
-  completed: { label: 'Completed', bgColor: 'bg-[#059669]/10', textColor: 'text-[#6ee7b7]', borderColor: 'border-[#059669]/20' },
-  delayed: { label: 'Delayed', bgColor: 'bg-red-500/10', textColor: 'text-red-700', borderColor: 'border-red-500/20' },
-  cancelled: { label: 'Cancelled', bgColor: 'bg-slate-200', textColor: 'text-[#64748b] dark:text-[#64748b]/80', borderColor: 'border-[#C9A84C]/20 dark:border-[#C9A84C]/20' },
-};
-
-
-const CLPBadge: React.FC<{ clpId?: string }> = ({ clpId }) => {
-  if (!clpId) return null;
-  const clpLabels: Record<string, string> = {
-    LP1: 'Halal Certification', LP2: 'Infrastructure', LP3: 'Governance',
-    LP4: 'Islamic Finance', LP5: 'Green Economy',
-  };
-  return (
-    <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/20">
-      {clpId} &middot; {clpLabels[clpId] || clpId}
-    </span>
-  );
-};
-
-const BEIEClusterBadge: React.FC<{ cluster?: string }> = ({ cluster }) => {
-  if (!cluster) return null;
-  return (
-    <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#059669]/10 text-[#6ee7b7] border border-[#059669]/20">
-      BEIE: {cluster}
-    </span>
-  );
+  planned: { label: 'Planned', bgColor: 'bg-[#064e3b]/20 dark:bg-[#022c22]/60', textColor: 'text-[#ecfdf5]/80 dark:text-[#64748b]/80', borderColor: 'border-[#C9A84C]/20 dark:border-[#C9A84C]/20' },
+  'in-progress': { label: 'In Progress', bgColor: 'bg-[#C9A84C]/10', textColor: 'text-[#C9A84C]', borderColor: 'border-[#C9A84C]/20' },
+  completed: { label: 'Completed', bgColor: 'bg-[#059669]/10', textColor: 'text-[#34d399]', borderColor: 'border-[#059669]/20' },
+  delayed: { label: 'Delayed', bgColor: 'bg-red-500/100/10', textColor: 'text-red-400', borderColor: 'border-red-500/20' },
+  cancelled: { label: 'Cancelled', bgColor: 'bg-slate-200', textColor: 'text-[#64748b] dark:text-[#64748b]/80', borderColor: 'border-[#C9A84C]/30 dark:border-[#C9A84C]/20' },
 };
 
 const PAPCard = ({ pap, objectives, onUpdate, onRemove }: { 
@@ -105,7 +81,7 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
 
   if (isEditing) {
     return (
-      <div className="bg-[#022c22]/40 dark:bg-[#022c22]/60/60 rounded-xl border-2 border-[#C9A84C] p-4 space-y-4 shadow-xl ring-4 ring-[#C9A84C]/20">
+      <div className="bg-white dark:bg-[#022c22]/60/60 rounded-xl border-2 border-[#C9A84C] p-4 space-y-4 shadow-xl ring-4 ring-[#C9A84C]/10">
         <div className="grid grid-cols-2 gap-4">
           <div className="col-span-2">
             <label className="block text-xs font-bold text-[#64748b] uppercase mb-1">Name</label>
@@ -113,7 +89,7 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
               type="text"
               value={editData.name}
               onChange={(e) => setEditData((prev) => ({ ...prev, name: e.target.value }))}
-              className="w-full px-3 py-2 text-sm border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-lg focus:ring-2 focus:ring-[#C9A84C] outline-none"
+              className="w-full px-3 py-2 text-sm border text-foreground bg-background border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded-lg focus:ring-2 focus:ring-[#C9A84C] outline-none"
             />
           </div>
           <div>
@@ -121,7 +97,7 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
             <select
               value={editData.papType}
               onChange={(e) => setEditData((prev) => ({ ...prev, papType: e.target.value as PAP['papType'] }))}
-              className="w-full px-3 py-2 text-sm border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-lg focus:ring-2 focus:ring-[#C9A84C] outline-none"
+              className="w-full px-3 py-2 text-sm border text-foreground bg-background border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded-lg focus:ring-2 focus:ring-[#C9A84C] outline-none"
             >
               <option value="program">Program</option>
               <option value="activity">Activity</option>
@@ -133,7 +109,7 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
             <select
               value={editData.status}
               onChange={(e) => setEditData((prev) => ({ ...prev, status: e.target.value as PAP['status'] }))}
-              className="w-full px-3 py-2 text-sm border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-lg focus:ring-2 focus:ring-[#C9A84C] outline-none"
+              className="w-full px-3 py-2 text-sm border text-foreground bg-background border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded-lg focus:ring-2 focus:ring-[#C9A84C] outline-none"
             >
               {Object.entries(statusConfig).map(([key, config]) => (
                 <option key={key} value={key}>{config.label}</option>
@@ -146,7 +122,7 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
               type="number"
               value={editData.budget}
               onChange={(e) => setEditData((prev) => ({ ...prev, budget: parseFloat(e.target.value) || 0 }))}
-              className="w-full px-3 py-2 text-sm border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-lg focus:ring-2 focus:ring-[#C9A84C] outline-none"
+              className="w-full px-3 py-2 text-sm border text-foreground bg-background border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded-lg focus:ring-2 focus:ring-[#C9A84C] outline-none"
             />
           </div>
           <div>
@@ -155,7 +131,7 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
               type="number"
               value={editData.spent}
               onChange={(e) => setEditData((prev) => ({ ...prev, spent: parseFloat(e.target.value) || 0 }))}
-              className="w-full px-3 py-2 text-sm border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-lg focus:ring-2 focus:ring-[#C9A84C] outline-none"
+              className="w-full px-3 py-2 text-sm border text-foreground bg-background border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded-lg focus:ring-2 focus:ring-[#C9A84C] outline-none"
             />
           </div>
           <div className="col-span-2">
@@ -163,7 +139,7 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
             <select
               value={editData.objectiveId || ''}
               onChange={(e) => setEditData((prev) => ({ ...prev, objectiveId: e.target.value || undefined }))}
-              className="w-full px-3 py-2 text-sm border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-lg focus:ring-2 focus:ring-[#C9A84C] outline-none"
+              className="w-full px-3 py-2 text-sm border text-foreground bg-background border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded-lg focus:ring-2 focus:ring-[#C9A84C] outline-none"
             >
               <option value="">None</option>
               {objectives.map((obj) => (
@@ -173,7 +149,7 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
           </div>
         </div>
         <div className="flex justify-end gap-2 pt-2">
-          <button onClick={() => setIsEditing(false)} className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-[#ecfdf5]/80 hover:bg-slate-100 rounded-lg">
+          <button onClick={() => setIsEditing(false)} className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-[#ecfdf5]/80 hover:bg-[#064e3b]/20 rounded-lg">
             <X className="w-4 h-4" /> Cancel
           </button>
           <button onClick={handleSave} className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium bg-[#C9A84C] text-white hover:bg-[#C9A84C] rounded-lg">
@@ -185,7 +161,7 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
   }
 
   return (
-    <div className="bg-[#022c22]/40 dark:bg-[#022c22]/60/60 rounded-xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 p-4 hover:shadow-xl hover:border-[#C9A84C]/30 transition-all group relative overflow-hidden flex flex-col h-full">
+    <div className="bg-white dark:bg-[#022c22]/60/60 rounded-xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 p-4 hover:shadow-xl hover:border-[#C9A84C]/20 transition-all group relative overflow-hidden flex flex-col h-full">
       <div className={`absolute top-0 right-0 w-24 h-1 ${typeConf.bgColor}`} />
       
       <div className="flex items-start justify-between mb-3">
@@ -199,14 +175,14 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
            <button onClick={() => setIsEditing(true)} className="p-1.5 text-[#64748b]/80 hover:text-[#C9A84C] hover:bg-[#C9A84C]/10 rounded-lg transition-all opacity-0 group-hover:opacity-100">
             <Edit2 className="w-3.5 h-3.5" />
           </button>
-          <button onClick={onRemove} className="p-1.5 text-[#64748b]/80 hover:text-red-600 hover:bg-red-500/10 rounded-lg transition-all opacity-0 group-hover:opacity-100">
+          <button onClick={onRemove} className="p-1.5 text-[#64748b]/80 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all opacity-0 group-hover:opacity-100">
             <Trash2 className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>
 
       <div className="flex-grow">
-        <h4 className="font-bold text-[#E8C560] dark:text-[#022c22]/80 leading-tight mb-2 group-hover:text-[#C9A84C] transition-colors">
+        <h4 className="font-bold text-[#E8C560] dark:text-[#ecfdf5] leading-tight mb-2 group-hover:text-[#C9A84C] transition-colors">
           {pap.name}
         </h4>
         
@@ -218,11 +194,11 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
 
         <div className="space-y-4 mb-4">
           {linkedObjective && (
-            <div className="flex items-start gap-2 p-2 bg-slate-50 dark:bg-[#022c22] rounded-lg border border-slate-100 dark:border-[#C9A84C]/20/60">
+            <div className="flex items-start gap-2 p-2 bg-[#064e3b]/10 dark:bg-[#022c22] rounded-lg border border-slate-100 dark:border-[#C9A84C]/20/60">
               <Target className="w-3.5 h-3.5 text-[#64748b]/80 mt-0.5" />
               <div className="flex-1">
                 <p className="text-[10px] uppercase font-bold text-[#64748b]/80 leading-none mb-1">Aligned Objective</p>
-                <p className="text-xs text-[#E8C560]/90 dark:text-slate-200 font-medium line-clamp-1">{linkedObjective.objective}</p>
+                <p className="text-xs text-[#E8C560]/90 dark:text-[#ecfdf5]/90 font-medium line-clamp-1">{linkedObjective.objective}</p>
               </div>
             </div>
           )}
@@ -230,11 +206,11 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
           <div className="space-y-1.5">
             <div className="flex justify-between items-end">
               <span className="text-[10px] font-bold text-[#64748b]/80 uppercase tracking-tight">Current Progress</span>
-              <span className="text-xs font-bold text-[#E8C560]/90 dark:text-slate-200">{pap.progress}%</span>
+              <span className="text-xs font-bold text-[#E8C560]/90 dark:text-[#ecfdf5]/90">{pap.progress}%</span>
             </div>
-            <div className="h-1.5 bg-slate-100 dark:bg-[#022c22]/60 rounded-full overflow-hidden">
+            <div className="h-1.5 bg-[#064e3b]/20 dark:bg-[#022c22]/60 rounded-full overflow-hidden">
               <div
-                className={`h-full transition-all duration-1000 ease-out rounded-full ${pap.progress >= 100 ? 'bg-[#059669]/100' : 'bg-gradient-to-r from-[#C9A84C] to-[#B8942E]'}`}
+                className={`h-full transition-all duration-1000 ease-out rounded-full ${pap.progress >= 100 ? 'bg-[#059669]' : 'bg-gradient-to-r from-[#C9A84C] to-blue-500'}`}
                 style={{ width: `${pap.progress}%` }}
               />
             </div>
@@ -246,16 +222,16 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
                 <DollarSign className="w-3 h-3 text-[#64748b]/80" />
                 <span className="text-[10px] font-bold text-[#64748b]/80 uppercase tracking-tight">Budget Utilization</span>
               </div>
-              <span className="text-xs font-bold text-[#E8C560]/90 dark:text-slate-200">
-                {formatCurrency(pap.spent, 'PHP')} / {formatCurrency(pap.budget, 'PHP')}
+              <span className="text-xs font-bold text-[#E8C560]/90 dark:text-[#ecfdf5]/90">
+                ${(pap.spent / 1000).toFixed(1)}k / ${(pap.budget / 1000).toFixed(1)}k
               </span>
             </div>
-            <div className="h-1.5 bg-slate-100 dark:bg-[#022c22]/60 rounded-full overflow-hidden">
+            <div className="h-1.5 bg-[#064e3b]/20 dark:bg-[#022c22]/60 rounded-full overflow-hidden">
               <div
                 className={`h-full transition-all duration-700 rounded-full ${
                   budgetUsed > 100 ? 'bg-red-500/100 shadow-[0_0_8px_rgba(239,68,68,0.5)]' : 
                   budgetUsed > 90 ? 'bg-amber-500/100' : 
-                  'bg-[#059669]/100'
+                  'bg-[#059669]'
                 }`}
                 style={{ width: `${Math.min(budgetUsed, 100)}%` }}
               />
@@ -267,12 +243,12 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
       <div className="mt-auto pt-4 border-t border-slate-100 dark:border-[#C9A84C]/20/60">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-full bg-slate-100 dark:bg-[#022c22]/60 border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 flex items-center justify-center text-[10px] font-bold text-[#ecfdf5]/80 dark:text-[#64748b]/80">
+            <div className="w-7 h-7 rounded-full bg-[#064e3b]/20 dark:bg-[#022c22]/60 border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 flex items-center justify-center text-[10px] font-bold text-[#ecfdf5]/80 dark:text-[#64748b]/80">
               {pap.ownerName ? pap.ownerName.split(' ').map(n => n[0]).join('') : <User className="w-3 h-3" />}
             </div>
             <div>
               <p className="text-[10px] font-bold text-[#64748b]/80 uppercase leading-none mb-0.5">Owner</p>
-              <p className="text-xs font-medium text-[#E8C560]/90 dark:text-slate-200">{pap.ownerName || pap.owner || 'Unassigned'}</p>
+              <p className="text-xs font-medium text-[#E8C560]/90 dark:text-[#ecfdf5]/90">{pap.ownerName || pap.owner || 'Unassigned'}</p>
             </div>
           </div>
           <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${statusConf.bgColor} ${statusConf.textColor} ${statusConf.borderColor}`}>
@@ -280,12 +256,7 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
           </span>
         </div>
 
-        <div className="flex flex-wrap gap-1">
-          <CLPBadge clpId={pap.clpId} />
-          <BEIEClusterBadge cluster={pap.cluster} />
-        </div>
-
-        <div className="flex items-center justify-between text-[10px] font-medium text-[#64748b]/80 bg-slate-50 dark:bg-[#022c22] p-2 rounded-lg">
+        <div className="flex items-center justify-between text-[10px] font-medium text-[#64748b]/80 bg-[#064e3b]/10 dark:bg-[#022c22] p-2 rounded-lg">
           <div className="flex items-center gap-1">
             <Calendar className="w-3 h-3" />
             <span>{new Date(pap.startDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</span>
@@ -492,17 +463,17 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
           <button
             onClick={handleGeneratePAPs}
             disabled={isGenerating}
-            className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-xl text-sm font-bold hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-50 transition-all"
+            className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#065f46] to-[#4c1d95] text-white rounded-xl text-sm font-bold hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-50 transition-all"
           >
             {isGenerating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
             AI Generate PAPs
           </button>
           <div className="relative group">
-            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748b]/80 group-focus-within:text-cyan-500" />
+            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748b]/80 group-focus-within:text-[#C9A84C]" />
             <input 
               type="text"
               placeholder="Search PAPs or owners..."
-              className="pl-9 pr-4 py-2.5 bg-slate-50 dark:bg-[#022c22] border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-xl text-sm focus:ring-2 focus:ring-[#C9A84C] outline-none w-64 transition-all text-foreground bg-background"
+              className="pl-9 pr-4 py-2.5 bg-[#064e3b]/10 dark:bg-[#022c22] border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-xl text-sm focus:ring-2 focus:ring-[#C9A84C] outline-none w-64 transition-all"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -518,30 +489,30 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-[#022c22]/40 dark:bg-[#022c22]/60/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
+        <div className="bg-white dark:bg-[#022c22]/60/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
           <div className="flex justify-between items-start mb-4">
             <div className="p-2 bg-[#C9A84C]/10 rounded-lg text-[#C9A84C]"><DollarSign className="w-5 h-5" /></div>
             <span className="text-[10px] font-bold text-[#64748b]/80 uppercase">Financial Scope</span>
           </div>
-          <h3 className="text-2xl font-black text-slate-900">{formatCurrency(stats.totalBudget, 'PHP')}</h3>
+          <h3 className="text-2xl font-black text-slate-900">${(stats.totalBudget / 1000).toFixed(1)}k</h3>
           <p className="text-xs text-[#64748b] font-medium">Total Portfolio Budget</p>
         </div>
         
-        <div className="bg-[#022c22]/40 dark:bg-[#022c22]/60/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
+        <div className="bg-white dark:bg-[#022c22]/60/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
           <div className="flex justify-between items-start mb-4">
-            <div className="p-2 bg-[#059669]/10 rounded-lg text-[#6ee7b7]"><TrendingUp className="w-5 h-5" /></div>
+            <div className="p-2 bg-[#059669]/10 rounded-lg text-[#34d399]"><TrendingUp className="w-5 h-5" /></div>
             <span className="text-[10px] font-bold text-[#64748b]/80 uppercase">Expenditure</span>
           </div>
-          <h3 className="text-2xl font-black text-[#6ee7b7]">{formatCurrency(stats.totalSpent, 'PHP')}</h3>
+          <h3 className="text-2xl font-black text-[#34d399]">${(stats.totalSpent / 1000).toFixed(1)}k</h3>
           <div className="flex items-center gap-2 mt-1">
-             <div className="flex-1 h-1 bg-slate-100 dark:bg-[#022c22]/60 rounded-full">
-               <div className="h-full bg-[#059669]/100 rounded-full" style={{ width: `${stats.utilization}%` }} />
+             <div className="flex-1 h-1 bg-[#064e3b]/20 dark:bg-[#022c22]/60 rounded-full">
+               <div className="h-full bg-[#059669] rounded-full" style={{ width: `${stats.utilization}%` }} />
              </div>
              <span className="text-[10px] font-bold text-[#64748b]">{stats.utilization.toFixed(0)}%</span>
           </div>
         </div>
 
-        <div className="bg-[#022c22]/40 dark:bg-[#022c22]/60/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
+        <div className="bg-white dark:bg-[#022c22]/60/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
           <div className="flex justify-between items-start mb-4">
             <div className="p-2 bg-[#C9A84C]/10 rounded-lg text-[#C9A84C]"><Check className="w-5 h-5" /></div>
             <span className="text-[10px] font-bold text-[#64748b]/80 uppercase">Throughput</span>
@@ -550,24 +521,24 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
           <p className="text-xs text-[#64748b] font-medium">{plan.paps.length} Total Registered PAPs</p>
         </div>
 
-        <div className="bg-[#022c22]/40 dark:bg-[#022c22]/60/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
+        <div className="bg-white dark:bg-[#022c22]/60/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
           <div className="flex justify-between items-start mb-4">
-            <div className="p-2 bg-red-500/10 rounded-lg text-red-600"><AlertCircle className="w-5 h-5" /></div>
+            <div className="p-2 bg-red-500/10 rounded-lg text-red-400"><AlertCircle className="w-5 h-5" /></div>
             <span className="text-[10px] font-bold text-[#64748b]/80 uppercase">Attention Needed</span>
           </div>
-          <h3 className="text-2xl font-black text-red-600">{stats.delayed}</h3>
+          <h3 className="text-2xl font-black text-red-400">{stats.delayed}</h3>
           <p className="text-xs text-[#64748b] font-medium">{stats.inProgress} Currently In Progress</p>
         </div>
       </div>
 
-      <div className="flex items-center justify-between bg-[#022c22]/40 dark:bg-[#022c22]/60/60 p-3 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
+      <div className="flex items-center justify-between bg-white dark:bg-[#022c22]/60/60 p-3 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold text-[#64748b]/80 uppercase ml-2">Filter By:</span>
             <select 
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
-              className="text-sm font-semibold text-[#E8C560]/90 bg-slate-50 dark:bg-[#022c22] px-3 py-1.5 rounded-lg border-none outline-none focus:ring-2 focus:ring-[#C9A84C]"
+              className="text-sm font-semibold text-[#E8C560]/90 bg-[#064e3b]/10 dark:bg-[#022c22] px-3 py-1.5 rounded-lg border-none outline-none focus:ring-2 focus:ring-[#C9A84C]"
             >
               <option value="all">All Types</option>
               <option value="program">Programs</option>
@@ -579,7 +550,7 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
           <select 
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="text-sm font-semibold text-[#E8C560]/90 bg-slate-50 dark:bg-[#022c22] px-3 py-1.5 rounded-lg border-none outline-none focus:ring-2 focus:ring-[#C9A84C]"
+            className="text-sm font-semibold text-[#E8C560]/90 bg-[#064e3b]/10 dark:bg-[#022c22] px-3 py-1.5 rounded-lg border-none outline-none focus:ring-2 focus:ring-[#C9A84C]"
           >
             <option value="all">All Statuses</option>
             {Object.entries(statusConfig).map(([key, config]) => (
@@ -588,11 +559,11 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
           </select>
         </div>
 
-        <div className="flex items-center gap-1 bg-slate-100 dark:bg-[#022c22]/60 p-1 rounded-xl">
-          <button onClick={() => setViewMode('grid')} className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-[#022c22]/40 dark:bg-[#022c22]/60/60 shadow-sm text-[#C9A84C]' : 'text-[#64748b]/80 hover:text-[#ecfdf5]/80'}`}>
+        <div className="flex items-center gap-1 bg-[#064e3b]/20 dark:bg-[#022c22]/60 p-1 rounded-xl">
+          <button onClick={() => setViewMode('grid')} className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-white dark:bg-[#022c22]/60/60 shadow-sm text-[#C9A84C]' : 'text-[#64748b]/80 hover:text-[#ecfdf5]/80'}`}>
             <LayoutGrid className="w-4 h-4" />
           </button>
-          <button onClick={() => setViewMode('list')} className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-[#022c22]/40 dark:bg-[#022c22]/60/60 shadow-sm text-[#C9A84C]' : 'text-[#64748b]/80 hover:text-[#ecfdf5]/80'}`}>
+          <button onClick={() => setViewMode('list')} className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-white dark:bg-[#022c22]/60/60 shadow-sm text-[#C9A84C]' : 'text-[#64748b]/80 hover:text-[#ecfdf5]/80'}`}>
             <List className="w-4 h-4" />
           </button>
         </div>
@@ -600,7 +571,7 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
 
       {isAdding && (
         <div className="fixed inset-0 bg-[#022c22]/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <form onSubmit={handleAddSubmit} className="bg-[#022c22]/40 dark:bg-[#022c22]/60/60 rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+          <form onSubmit={handleAddSubmit} className="bg-white dark:bg-[#022c22]/60/60 rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in zoom-in-95 duration-200">
             <div className="p-6 bg-[#022c22] text-white flex justify-between items-center">
               <div>
                 <h2 className="text-xl font-bold">Initiate New PAP</h2>
@@ -613,11 +584,11 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
               <div className="grid grid-cols-2 gap-6">
                 <div className="col-span-2">
                   <label className="block text-xs font-bold text-[#64748b]/80 uppercase mb-2">PAP Name</label>
-                  <input required autoFocus placeholder="e.g., Annual Customer Satisfaction Survey" className="w-full px-4 py-3 bg-slate-50 dark:bg-[#022c22] border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-xl focus:ring-2 focus:ring-[#C9A84C] outline-none text-foreground bg-background" value={newPAP.name} onChange={(e) => setNewPAP(p => ({ ...p, name: e.target.value }))} />
+                  <input required autoFocus placeholder="e.g., Annual Customer Satisfaction Survey" className="w-full px-4 py-3 bg-[#064e3b]/10 dark:bg-[#022c22] border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-xl focus:ring-2 focus:ring-[#C9A84C] outline-none" value={newPAP.name} onChange={(e) => setNewPAP(p => ({ ...p, name: e.target.value }))} />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-[#64748b]/80 uppercase mb-2">Classification</label>
-                  <select className="w-full px-4 py-3 bg-slate-50 dark:bg-[#022c22] border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-xl outline-none text-foreground bg-background" value={newPAP.papType} onChange={(e) => setNewPAP(p => ({ ...p, papType: e.target.value as any }))}>
+                  <select className="w-full px-4 py-3 bg-[#064e3b]/10 dark:bg-[#022c22] border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-xl outline-none" value={newPAP.papType} onChange={(e) => setNewPAP(p => ({ ...p, papType: e.target.value as any }))}>
                     <option value="program">Program</option>
                     <option value="activity">Activity</option>
                     <option value="project">Project</option>
@@ -625,29 +596,29 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-[#64748b]/80 uppercase mb-2">Project Owner</label>
-                  <input required placeholder="Full Name" className="w-full px-4 py-3 bg-slate-50 dark:bg-[#022c22] border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-xl focus:ring-2 focus:ring-[#C9A84C] outline-none text-foreground bg-background" value={newPAP.ownerName} onChange={(e) => setNewPAP(p => ({ ...p, ownerName: e.target.value }))} />
+                  <input required placeholder="Full Name" className="w-full px-4 py-3 bg-[#064e3b]/10 dark:bg-[#022c22] border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-xl focus:ring-2 focus:ring-[#C9A84C] outline-none" value={newPAP.ownerName} onChange={(e) => setNewPAP(p => ({ ...p, ownerName: e.target.value }))} />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-[#64748b]/80 uppercase mb-2">Start Date</label>
-                  <input type="date" className="w-full px-4 py-3 bg-slate-50 dark:bg-[#022c22] border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-xl outline-none text-foreground bg-background" value={newPAP.startDate} onChange={(e) => setNewPAP(p => ({ ...p, startDate: e.target.value }))} />
+                  <input type="date" className="w-full px-4 py-3 bg-[#064e3b]/10 dark:bg-[#022c22] border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-xl outline-none" value={newPAP.startDate} onChange={(e) => setNewPAP(p => ({ ...p, startDate: e.target.value }))} />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-[#64748b]/80 uppercase mb-2">End Date</label>
-                  <input type="date" className="w-full px-4 py-3 bg-slate-50 dark:bg-[#022c22] border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-xl outline-none text-foreground bg-background" value={newPAP.endDate} onChange={(e) => setNewPAP(p => ({ ...p, endDate: e.target.value }))} />
+                  <input type="date" className="w-full px-4 py-3 bg-[#064e3b]/10 dark:bg-[#022c22] border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-xl outline-none" value={newPAP.endDate} onChange={(e) => setNewPAP(p => ({ ...p, endDate: e.target.value }))} />
                 </div>
                 <div className="col-span-2">
                   <label className="block text-xs font-bold text-[#64748b]/80 uppercase mb-2">Initial Budget ($)</label>
                   <div className="relative">
                     <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748b]/80" />
-                    <input type="number" placeholder="0.00" className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-[#022c22] border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-xl focus:ring-2 focus:ring-[#C9A84C] outline-none text-foreground bg-background" value={newPAP.budget} onChange={(e) => setNewPAP(p => ({ ...p, budget: parseFloat(e.target.value) || 0 }))} />
+                    <input type="number" placeholder="0.00" className="w-full pl-10 pr-4 py-3 bg-[#064e3b]/10 dark:bg-[#022c22] border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-xl focus:ring-2 focus:ring-[#C9A84C] outline-none" value={newPAP.budget} onChange={(e) => setNewPAP(p => ({ ...p, budget: parseFloat(e.target.value) || 0 }))} />
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="p-6 bg-slate-50 dark:bg-[#022c22] flex justify-end gap-3 border-t border-[#C9A84C]/20 dark:border-[#C9A84C]/20">
+            <div className="p-6 bg-[#064e3b]/10 dark:bg-[#022c22] flex justify-end gap-3 border-t border-[#C9A84C]/20 dark:border-[#C9A84C]/20">
               <button type="button" onClick={() => setIsAdding(false)} className="px-6 py-2.5 font-bold text-[#64748b] hover:text-[#E8C560]/90 transition-colors">Cancel</button>
-              <button type="submit" disabled={!newPAP.name.trim()} className="px-8 py-2.5 bg-[#C9A84C] text-white font-bold rounded-xl hover:bg-[#C9A84C] disabled:opacity-50 shadow-lg shadow-cyan-600/20 transition-all">Confirm Creation</button>
+              <button type="submit" disabled={!newPAP.name.trim()} className="px-8 py-2.5 bg-[#C9A84C] text-white font-bold rounded-xl hover:bg-[#C9A84C] disabled:opacity-50 shadow-lg shadow-[#C9A84C]/20 transition-all">Confirm Creation</button>
             </div>
           </form>
         </div>
@@ -666,9 +637,9 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center py-32 bg-slate-50 dark:bg-[#022c22] border-2 border-dashed border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-3xl text-center px-6">
-          <div className="w-20 h-20 bg-slate-100 dark:bg-[#022c22]/60 rounded-full flex items-center justify-center mb-6">
-            <FolderKanban className="w-10 h-10 text-[#64748b]/60" />
+        <div className="flex flex-col items-center justify-center py-32 bg-[#064e3b]/10 dark:bg-[#022c22] border-2 border-dashed border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-3xl text-center px-6">
+          <div className="w-20 h-20 bg-[#064e3b]/20 dark:bg-[#022c22]/60 rounded-full flex items-center justify-center mb-6">
+            <FolderKanban className="w-10 h-10 text-[#64748b]" />
           </div>
           <h3 className="text-xl font-bold text-slate-900 mb-2">No results found</h3>
           <p className="text-[#64748b] max-w-sm">We couldn't find any PAPs matching your current filters. Try adjusting your search or add a new entry.</p>
