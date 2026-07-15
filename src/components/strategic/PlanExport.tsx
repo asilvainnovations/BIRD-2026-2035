@@ -24,11 +24,10 @@ import {
 import { cn } from '@/lib/utils';
 import { StrategicPlan, CLDSnapshot } from '@/lib/strategicPlanStore';
 import { supabase } from '@/lib/supabase';
-import { formatCurrency } from '@/lib/formulas';
 
 // Edge Function URLs
-const AI_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/ai-strategy-assistant';
-const SYNC_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/strategic-planner-sync';
+const AI_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/ai-strategy-assistant';
+const SYNC_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/strategic-planner-sync';
 
 interface PlanExportProps {
   plan: StrategicPlan;
@@ -341,14 +340,14 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
       
       const totalBudget = p.paps.reduce((sum, pap) => sum + pap.budget, 0);
       const totalSpent = p.paps.reduce((sum, pap) => sum + pap.spent, 0);
-      content += `Total Budget: ${formatCurrency(totalBudget, 'PHP')}\n`;
+      content += `Total Budget: ₱${totalBudget.toLocaleString()}\n`;
       content += `Total Spent: ₱${totalSpent.toLocaleString()}\n\n`;
       
       p.paps.forEach((pap, idx) => {
         content += `${idx + 1}. ${pap.name} (${pap.papType})\n`;
         content += `   Owner: ${pap.owner}\n`;
         content += `   Status: ${pap.status}, Progress: ${pap.progress}%\n`;
-        content += `   Budget: ${formatCurrency(pap.budget, 'PHP')}, Spent: ${formatCurrency(pap.spent, 'PHP')}\n`;
+        content += `   Budget: ₱${pap.budget.toLocaleString()}, Spent: ₱${pap.spent.toLocaleString()}\n`;
         content += `   Timeline: ${pap.startDate} to ${pap.endDate}\n\n`;
       });
     }
@@ -394,14 +393,14 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setShowPreview(!showPreview)}
-            className="flex items-center gap-2 px-4 py-2 border border-[#C9A84C]/20 text-[#E8C560]/90 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 border border-[#C9A84C]/30 text-[#E8C560]/90 rounded-lg text-sm font-medium hover:bg-[#064e3b]/10 transition-colors"
           >
             <Eye className="w-4 h-4" />
             {showPreview ? 'Hide Preview' : 'Preview'}
           </button>
           <button
             onClick={handlePrint}
-            className="flex items-center gap-2 px-4 py-2 border border-[#C9A84C]/20 text-[#E8C560]/90 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 border border-[#C9A84C]/30 text-[#E8C560]/90 rounded-lg text-sm font-medium hover:bg-[#064e3b]/10 transition-colors"
           >
             <Printer className="w-4 h-4" />
             Print
@@ -422,7 +421,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                   <label
                     key={section.id}
                     className={`flex items-start gap-3 p-3 rounded-lg cursor-pointer transition-colors relative ${
-                      isSelected ? 'bg-[#C9A84C]/10 border border-[#C9A84C]/30' : 'bg-slate-50 hover:bg-slate-100'
+                      isSelected ? 'bg-[#C9A84C]/10 border border-[#C9A84C]/20' : 'bg-[#064e3b]/10 hover:bg-[#064e3b]/20'
                     }`}
                   >
                     <input
@@ -462,7 +461,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
               <button
                 onClick={() => handleExport('docx')}
                 disabled={isGenerating}
-                className="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg font-medium hover:shadow-lg transition-all disabled:opacity-50"
+                className="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-[#064e3b] to-[#1e3a5f] text-white rounded-lg font-medium hover:shadow-lg transition-all disabled:opacity-50"
               >
                 <FileText className="w-5 h-5" />
                 <span>Export as Word</span>
@@ -471,7 +470,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
               <button
                 onClick={() => handleExport('xlsx')}
                 disabled={isGenerating}
-                className="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-lg font-medium hover:shadow-lg transition-all disabled:opacity-50"
+                className="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-[#064e3b] to-[#065f46] text-white rounded-lg font-medium hover:shadow-lg transition-all disabled:opacity-50"
               >
                 <FileSpreadsheet className="w-5 h-5" />
                 <span>Export as Excel</span>
@@ -490,7 +489,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
         {/* Preview */}
         <div className="lg:col-span-2">
           <div className="bg-white rounded-xl border border-[#C9A84C]/20 overflow-hidden print:border-0 print:shadow-none">
-            <div className="bg-slate-100 px-6 py-3 border-b border-[#C9A84C]/20 flex items-center justify-between print:hidden">
+            <div className="bg-[#064e3b]/20 px-6 py-3 border-b border-[#C9A84C]/20 flex items-center justify-between print:hidden">
               <h3 className="font-semibold text-[#E8C560]/90">Document Preview</h3>
               <span className="text-xs text-[#64748b]">
                 {Object.values(selectedSections).filter(Boolean).length} sections selected
@@ -501,7 +500,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
               {/* Cover Page */}
               {selectedSections.coverPage && (
                 <div className="text-center py-12 border-b border-[#C9A84C]/20 print:break-after-page">
-                  <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#C9A84C] to-[#B8942E] flex items-center justify-center shadow-lg">
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#C9A84C] to-blue-600 flex items-center justify-center shadow-lg">
                     <svg viewBox="0 0 24 24" className="w-12 h-12 text-white" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M12 2L2 19h20L12 2z" />
                       <path d="M12 6L5 17h14L12 6z" />
@@ -560,7 +559,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                     Executive Summary
                   </h2>
                   <div className="space-y-4">
-                    <div className="bg-slate-50 rounded-lg p-4">
+                    <div className="bg-[#064e3b]/10 rounded-lg p-4">
                       <h3 className="font-semibold text-[#E8C560]/90 mb-2">Vision</h3>
                       <p 
                         contentEditable 
@@ -571,7 +570,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                         {editablePlan.vision || 'Vision statement not defined'}
                       </p>
                     </div>
-                    <div className="bg-slate-50 rounded-lg p-4">
+                    <div className="bg-[#064e3b]/10 rounded-lg p-4">
                       <h3 className="font-semibold text-[#E8C560]/90 mb-2">Mission</h3>
                       <p 
                         contentEditable 
@@ -582,7 +581,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                         {editablePlan.mission || 'Mission statement not defined'}
                       </p>
                     </div>
-                    <div className="bg-[#C9A84C]/10 rounded-lg p-4 border border-[#C9A84C]/30">
+                    <div className="bg-[#C9A84C]/10 rounded-lg p-4 border border-[#C9A84C]/20">
                       <h3 className="font-semibold text-[#C9A84C] mb-2">Strategic Intent</h3>
                       <p 
                         contentEditable 
@@ -608,9 +607,9 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                     {['strength', 'weakness', 'opportunity', 'threat'].map((category) => {
                       const items = editablePlan.swotItems.filter((i) => i.category === category);
                       const colors = {
-                        strength: 'bg-[#059669]/10 border-[#059669]/20 text-[#6ee7b7]',
+                        strength: 'bg-[#059669]/10 border-[#059669]/20 text-emerald-800',
                         weakness: 'bg-red-500/10 border-red-500/20 text-red-800',
-                        opportunity: 'bg-[#C9A84C]/10 border-[#C9A84C]/20 text-[#C9A84C]',
+                        opportunity: 'bg-[#C9A84C]/10 border-[#C9A84C]/20 text-blue-800',
                         threat: 'bg-amber-500/10 border-amber-500/20 text-amber-800',
                       };
                       return (
@@ -661,16 +660,16 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                     <div className={cn(
                       "rounded-lg p-4 border",
                       getActiveSnapshotInfo().snapshot 
-                        ? "bg-green-50 border-green-200" 
+                        ? "bg-[#059669]/10 border-[#059669]/20" 
                         : getActiveSnapshotInfo().isActiveFromCanvas
                         ? "bg-amber-500/10 border-amber-500/20"
-                        : "bg-slate-50 border-[#C9A84C]/20"
+                        : "bg-[#064e3b]/10 border-[#C9A84C]/20"
                     )}>
                       <div className="flex items-start gap-3">
                         {getActiveSnapshotInfo().snapshot ? (
-                          <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5" />
+                          <CheckCircle2 className="w-5 h-5 text-[#6ee7b7] mt-0.5" />
                         ) : getActiveSnapshotInfo().isActiveFromCanvas ? (
-                          <Info className="w-5 h-5 text-amber-600 mt-0.5" />
+                          <Info className="w-5 h-5 text-amber-400 mt-0.5" />
                         ) : (
                           <Info className="w-5 h-5 text-[#64748b]/80 mt-0.5" />
                         )}
@@ -678,7 +677,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                           <h3 className="font-semibold text-[#E8C560] mb-1">Current CLD State</h3>
                           {getActiveSnapshotInfo().snapshot ? (
                             <div>
-                              <p className="text-sm text-green-700 mb-1">
+                              <p className="text-sm text-[#6ee7b7] mb-1">
                                 ✓ Loaded from Snapshot: <strong>"{getActiveSnapshotInfo().snapshot.label}"</strong>
                               </p>
                               <div className="grid grid-cols-2 gap-2 text-xs text-[#ecfdf5]/80">
@@ -694,7 +693,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                             </div>
                           ) : getActiveSnapshotInfo().isActiveFromCanvas ? (
                             <div>
-                              <p className="text-sm text-amber-700 mb-1">
+                              <p className="text-sm text-amber-400 mb-1">
                                 ⚠ Current Canvas State (Not Saved as Snapshot)
                               </p>
                             </div>
@@ -713,7 +712,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                         <BrainCircuit className="w-4 h-4" />
                         Causal Loop Diagram Elements
                       </h3>
-                      <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
+                      <div className="bg-purple-500/10 rounded-lg p-4 border border-purple-500/20">
                         <p className="text-sm text-[#ecfdf5]/80 mb-2">
                           <strong>{editablePlan.cldNodes.length}</strong> nodes and{' '}
                           <strong>{editablePlan.cldLinks?.length || 0}</strong> links mapping causal relationships
@@ -770,11 +769,11 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                     {editablePlan.strategicOptions
                       .filter((opt) => opt.selected)
                       .map((opt, idx) => (
-                        <div key={opt.id} className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
+                        <div key={opt.id} className="flex items-start gap-3 p-3 bg-[#064e3b]/10 rounded-lg">
                           <span className={`px-2 py-1 rounded text-xs font-bold text-white ${
-                            opt.optionType === 'SO' ? 'bg-[#059669]/100' :
-                            opt.optionType === 'ST' ? 'bg-[#C9A84C]/100' :
-                            opt.optionType === 'WO' ? 'bg-purple-500' :
+                            opt.optionType === 'SO' ? 'bg-[#059669]' :
+                            opt.optionType === 'ST' ? 'bg-[#C9A84C]' :
+                            opt.optionType === 'WO' ? 'bg-purple-500/100' :
                             'bg-amber-500/100'
                           }`}>
                             {opt.optionType}
@@ -833,7 +832,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                         learning_growth: 'Learning & Growth'
                       };
                       return (
-                        <div key={perspective} className="bg-slate-50 rounded-lg p-4">
+                        <div key={perspective} className="bg-[#064e3b]/10 rounded-lg p-4">
                           <h3 className="font-semibold text-[#E8C560]/90 mb-2">
                             {labels[perspective]}
                           </h3>
@@ -854,7 +853,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                     Programs, Activities & Projects (PAPs)
                   </h2>
                   <div className="grid grid-cols-3 gap-4 mb-4">
-                    <div className="bg-purple-50 rounded-lg p-4 text-center">
+                    <div className="bg-purple-500/10 rounded-lg p-4 text-center">
                       <p className="text-2xl font-bold text-purple-400">
                         {editablePlan.paps.filter((p) => p.papType === 'program').length}
                       </p>
@@ -873,17 +872,17 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                       <p className="text-sm text-[#C9A84C]">Activities</p>
                     </div>
                   </div>
-                  <div className="bg-slate-50 rounded-lg p-4">
+                  <div className="bg-[#064e3b]/10 rounded-lg p-4">
                     <div className="flex justify-between text-sm">
                       <span className="text-[#ecfdf5]/80">Total Budget:</span>
                       <span className="font-bold text-[#E8C560]">
-                        {formatCurrency(editablePlan.paps.reduce((sum, p) => sum + p.budget, 0), 'PHP')}
+                        ₱{editablePlan.paps.reduce((sum, p) => sum + p.budget, 0).toLocaleString()}
                       </span>
                     </div>
                     <div className="flex justify-between text-sm mt-2">
                       <span className="text-[#ecfdf5]/80">Total Spent:</span>
-                      <span className="font-bold text-[#6ee7b7]">
-                        {formatCurrency(editablePlan.paps.reduce((sum, p) => sum + p.spent, 0), 'PHP')}
+                      <span className="font-bold text-[#34d399]">
+                        ₱{editablePlan.paps.reduce((sum, p) => sum + p.spent, 0).toLocaleString()}
                       </span>
                     </div>
                   </div>
@@ -897,7 +896,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                     <FileSpreadsheet className="w-5 h-5 text-[#C9A84C]" />
                     Appendix
                   </h2>
-                  <div className="bg-slate-50 rounded-lg p-6 border-2 border-dashed border-[#C9A84C]/20 hover:border-[#C9A84C] transition-colors">
+                  <div className="bg-[#064e3b]/10 rounded-lg p-6 border-2 border-dashed border-[#C9A84C]/30 hover:border-[#C9A84C] transition-colors">
                     <label className="flex flex-col items-center justify-center cursor-pointer">
                       <Upload className="w-10 h-10 text-[#64748b]/80 mb-3" />
                       <span className="text-sm text-[#ecfdf5]/80 font-medium">Click to upload appendix files</span>
@@ -905,7 +904,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                       <input 
                         type="file" 
                         multiple 
-                        className="hidden text-foreground bg-background" 
+                        className="hidden" 
                         onChange={handleFileUpload} 
                       />
                     </label>
@@ -921,7 +920,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                               <span className="truncate font-medium text-[#E8C560]/90">{file.name}</span>
                               <span className="text-xs text-[#64748b]/80 flex-shrink-0">({(file.size / 1024).toFixed(1)} KB)</span>
                             </span>
-                            <button onClick={() => removeFile(idx)} className="text-red-400 hover:text-red-600 p-1 flex-shrink-0">
+                            <button onClick={() => removeFile(idx)} className="text-red-400 hover:text-red-400 p-1 flex-shrink-0">
                               <Trash2 className="w-4 h-4" />
                             </button>
                           </li>
