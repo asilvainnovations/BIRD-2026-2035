@@ -23,14 +23,14 @@ The SurveyWizard (`src/components/strategic/SurveyWizard.tsx`) is a 16-step wiza
 
 | File | Role | Integration Necessity |
 |------|------|----------------------|
-| 'survey-schema.ts' | Core validation survey schema | **CRITICAL** - Survey responses shall call and feed into tables and policies
+|  `survey-schema.ts` | Core validation survey schema | **CRITICAL** - Survey responses shall call and feed into tables and policies
 | `strategicPlanStore.ts` | Core domain schema (types, factories, storage) | **CRITICAL** — Survey responses must hydrate into `StrategicPlan` entities |
 | `formulas.ts` | BIRD mathematical formulas (RI, KPI, ROI, leverage) | **CRITICAL** — Survey scoring must use official BIRD formulas |
 | `supabase.ts` | Supabase client + Edge Functions | **CRITICAL** — Survey submission must persist via `STRATEGIC_PLANNER_SYNC` |
 | `utils.ts` | Utilities + template converter | **HIGH** — Template-to-plan conversion for survey-generated plans |
 | `motion-shim.tsx` | Framer-motion shim | **LOW** — Only if SurveyWizard uses animations |
 
-**Verdict:** All files except `motion-shim.tsx` require integration wiring. The SurveyWizard currently submits raw survey data; it must be enhanced to:
+**Note:** All files except `motion-shim.tsx` require integration wiring. The SurveyWizard currently submits raw survey data; it must be enhanced to:
 
 - Compute BIRD scores using `formulas.ts` during survey progression
 - Convert survey responses into `StrategicPlan` entities using `strategicPlanStore.ts`
