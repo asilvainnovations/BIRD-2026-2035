@@ -513,6 +513,76 @@ export const BIRD_IMAGES = {
     category: "framework", section: "general", alt: "Digital platform architecture",
     description: "Architecture diagram of the BIRD digital platform showing modules, data flows, integrations, and user interfaces.",
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════════
+  // SURVEY-SPECIFIC IMAGES (Added 2026-07-16 for Validation Survey Sections 0–5)
+  // ═══════════════════════════════════════════════════════════════════════════════
+  validationBanner: {
+    title: "BIRD Validation Survey Banner",
+    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Validation%20Survey%20Banner.png",
+    category: "survey", section: "general", alt: "BIRD validation survey banner",
+    description: "Official validation survey banner for the BIRD 2026-2035 stakeholder consultation process.",
+  },
+  sectorToEcosystem: {
+    title: "From Sector-Based Planning to BEIE Approach",
+    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/From%20Sector-Based%20Planning%20to%20BEIE%20Approach.png",
+    category: "framework", section: "section3", alt: "Sector-based vs BEIE ecosystem approach",
+    description: "Mental model shift from siloed sector-based development to an interconnected BEIE ecosystem that drives inclusive and sustainable growth in Bangsamoro.",
+  },
+  beieFrameworkDiagram: {
+    title: "BEIE Framework Diagram",
+    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/BEIE%20Framework%20-1%20.png",
+    category: "framework", section: "section3", alt: "BEIE circular framework diagram",
+    description: "The Bangsamoro Economic and Investment Ecosystem (BEIE) circular framework powered by Moral Governance at its center, with five interconnected components.",
+  },
+  cluster1FoundationsDetailed: {
+    title: "Cluster 1: Foundations — The Infrastructure-First Resource Base",
+    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Cluster%201-Foundations.png",
+    category: "cluster", section: "section4", alt: "Cluster 1 Foundations detailed diagram",
+    description: "Cluster 1 Foundations showing four sectors: Agri-Fisheries (32.4% of GRDP), Energy (75.86% renewable), Forestry (carbon potential), and Environment (green economy revenue).",
+  },
+  maguindanaoDelSurProfile: {
+    title: "Maguindanao del Sur: The Agro-Industrial Breadbasket",
+    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Maguidano-del-Sur.png",
+    category: "provincial", section: "section4", alt: "Maguindanao del Sur provincial profile",
+    description: "Three-layer economic: Raw Inputs (Pulangi River), Modern Processing (VCO, desiccated coconut), Logistics Grid (farm-to-market roads, solar-dryer warehousing).",
+  },
+  tragedyOfTheCommonsArchetype: {
+    title: "Tragedy of the Commons Archetype",
+    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Tragedy%20of%20the%20Commons%20Archetype.png",
+    category: "archetype", section: "section4", alt: "Tragedy of the Commons systems archetype",
+    description: "Systems archetype showing how shared resources get over-exploited when governance is fragmented, with each actor gaining individually but collective impact depleting resources.",
+  },
+  cluster2TransformersDetailed: {
+    title: "Cluster 2: Transformers — Engines of Value Creation",
+    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Cluster%202%20_%20Transformers.png",
+    category: "cluster", section: "section5", alt: "Cluster 2 Transformers detailed diagram",
+    description: "Three-stage progression: Raw Material, High-Value Processing (halal MSMEs, WOW Matnog SEZ), Premium Export (USD 2.3T ASEAN halal market).",
+  },
+  fixesThatFailArchetype: {
+    title: "Fixes that Fail Archetype",
+    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Fixes%20that%20Fail%20Archetype.png",
+    category: "archetype", section: "section5", alt: "Fixes that Fail systems archetype",
+    description: "How short-term tax incentives and fragmented subsidies create the illusion of progress but erode institutional capacity over time.",
+  },
+  successToTheSuccessfulArchetype: {
+    title: "Success to the Successful Archetype",
+    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Success%20to%20the%20Successful%20Aarchetype.png",
+    category: "archetype", section: "section5", alt: "Success to the Successful systems archetype",
+    description: "How mainland provinces attract bulk of resources while island provinces with high potential are left behind.",
+  },
+  halalFarmToMarketPipeline: {
+    title: "MAFAR Halal Farm-to-Market Pipeline",
+    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Transformers-Farm-to-Market%20Pipeline%20.png",
+    category: "cluster", section: "section5", alt: "Halal farm-to-market pipeline diagram",
+    description: "Four stages: Input Supply, Cold Chain & Logistics, Processing (halal livestock, poultry, seaweed), Market Linkage (BIMP-EAGA export).",
+  },
+  industrialEconomicZones: {
+    title: "Industrial & Economic Zones",
+    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Industrial%20and%20Economic%20Zones.png",
+    category: "cluster", section: "section5", alt: "Industrial and economic zones map",
+    description: "Polloc Freeport & EcoZone (119-hectare, ADB-funded) and WOW Matanog Special Economic Zone (upcoming Bangsamoro Halal Park).",
+  },
 } as const;
 
 // ═══════════════════════════════════════════════════════════════════════════════
