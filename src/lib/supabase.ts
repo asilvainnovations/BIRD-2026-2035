@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // BIRD 2026–2035 · Supabase Client & Edge Function Service Layer
 // Primary Supabase project: lydsisparsmvextskevw.supabase.co
-// Edge functions hosted on: rgvteytgkugdqdodedxq.databasepad.com
+// Edge functions hosted on: lydsisparsmvextskevw.supabase.co
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { createClient } from '@supabase/supabase-js';
@@ -46,7 +46,7 @@ export const BRAND_ASSETS = {
 // ── External URLs ──────────────────────────────────────────────────────────────
 export const EXTERNAL_URLS = {
   PWA:          import.meta.env.VITE_PWA_EXTERNAL_URL      || 'https://bangsamoro-investment-roadmap.asilvainnovations.com',
-  USER_MANUAL:  import.meta.env.VITE_USER_MANUAL_URL       || 'https://bird-user-manual.asilvainnovations.com'',
+  USER_MANUAL:  import.meta.env.VITE_USER_MANUAL_URL       || 'https://bird-user-manual.asilvainnovations.com',
   DEV_DOCS:     import.meta.env.VITE_DEVELOPER_DOCS_URL    || 'https://asilvainnovations.github.io/strat-planner-pwa/developer-doc.html',
 } as const;
 
