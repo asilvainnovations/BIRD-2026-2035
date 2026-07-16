@@ -7,41 +7,41 @@ import { submitSurvey } from "@/lib/api";
 import { surveySchema, type SurveySchemaType } from "@/lib/survey-schema";
 import { Toaster, toast } from "sonner";
 
-// ─── SECTION COMPONENTS (all from section_components/) ──────────────────────
-import Section0_Orientation from "./section_components/Section0_Orientation";
-import Section1_Privacy from "./section_components/Section1_Privacy";
-import Section2_Demographics from "./section_components/Section2_Demographics";
-import Section3_BEIE_SystemsThinking from "./section_components/Section3_BEIE_SystemsThinking";
-import Section4_Foundations from "./section_components/Section4_Foundations";
-import Section5_Transformers from "./section_components/Section5_Transformers";
-import Section6_Enablers from "./section_components/Section6_Enablers";
-import Section7_Connectors from "./section_components/Section7_Connectors";
-import Section8_Financiers from "./section_components/Section8_Financiers";
-import Section9_OperatingSystems from "./section_components/Section9_OperatingSystems";
-import Section10_IEDS from "./section_components/Section10_IEDS";
-import Section11_Metrics from "./section_components/Section11_Metrics";
-import Section12_BalancedScorecard from "./section_components/Section12_BalancedScorecard";
-import Section13_PriorityActions from "./section_components/Section13_PriorityActions";
-import Section14_AccessResources from "./section_components/Section14_AccessResources";
-import Section15_Submission from "./section_components/Section15_Submission";
+// ─── SECTION COMPONENTS (all in src/components/strategic/) ──────────────────
+import Section0_Orientation from "./Section0_Orientation";
+import Section1_Privacy from "./Section1_Privacy";
+import Section2_Demographics from "./Section2_Demographics";
+import Section3_BEIE_SystemsThinking from "./Section3_BEIE_SystemsThinking";
+import Section4_Foundations from "./Section4_Foundations";
+import Section5_Transformers from "./Section5_Transformers";
+import Section6_Enablers from "./Section6_Enablers";
+import Section7_Connectors from "./Section7_Connectors";
+import Section8_Financiers from "./Section8_Financiers";
+import Section9_OperatingSystems from "./Section9_OperatingSystems";
+import Section10_IEDS from "./Section10_IEDS";
+import Section11_Metrics from "./Section11_Metrics";
+import Section12_BalancedScorecard from "./Section12_BalancedScorecard";
+import Section13_PriorityActions from "./Section13_PriorityActions";
+import Section14_AccessResources from "./Section14_AccessResources";
+import Section15_Submission from "./Section15_Submission";
 
 // ─── TYPE IMPORTS ───────────────────────────────────────────────────────────
-import type { Section0Data } from "./section_components/Section0_Orientation";
-import type { Section1Data } from "./section_components/Section1_Privacy";
-import type { Section2Data } from "./section_components/Section2_Demographics";
-import type { Section3Data } from "./section_components/Section3_BEIE_SystemsThinking";
-import type { Section4Data } from "./section_components/Section4_Foundations";
-import type { Section5Data } from "./section_components/Section5_Transformers";
-import type { Section6Data } from "./section_components/Section6_Enablers";
-import type { Section7Data } from "./section_components/Section7_Connectors";
-import type { Section8Data } from "./section_components/Section8_Financiers";
-import type { Section9Data } from "./section_components/Section9_OperatingSystems";
-import type { Section10Data } from "./section_components/Section10_IEDS";
-import type { Section11Data } from "./section_components/Section11_Metrics";
-import type { Section12Data } from "./section_components/Section12_BalancedScorecard";
-import type { Section13Data } from "./section_components/Section13_PriorityActions";
-import type { Section14Data } from "./section_components/Section14_AccessResources";
-import type { Section15Data } from "./section_components/Section15_Submission";
+import type { Section0Data } from "./Section0_Orientation";
+import type { Section1Data } from "./Section1_Privacy";
+import type { Section2Data } from "./Section2_Demographics";
+import type { Section3Data } from "./Section3_BEIE_SystemsThinking";
+import type { Section4Data } from "./Section4_Foundations";
+import type { Section5Data } from "./Section5_Transformers";
+import type { Section6Data } from "./Section6_Enablers";
+import type { Section7Data } from "./Section7_Connectors";
+import type { Section8Data } from "./Section8_Financiers";
+import type { Section9Data } from "./Section9_OperatingSystems";
+import type { Section10Data } from "./Section10_IEDS";
+import type { Section11Data } from "./Section11_Metrics";
+import type { Section12Data } from "./Section12_BalancedScorecard";
+import type { Section13Data } from "./Section13_PriorityActions";
+import type { Section14Data } from "./Section14_AccessResources";
+import type { Section15Data } from "./Section15_Submission";
 
 // ─── BIRD FORMULAS ──────────────────────────────────────────────────────────
 import {
