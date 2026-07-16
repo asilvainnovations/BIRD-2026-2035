@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useStrategicPlan } from '@/hooks/useStrategicPlan';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabase';
+import { openValidationSurvey } from '@/lib/bird-urls';
 import { StratLogo } from '@/components/branding/Logo';
 import { PlatformBadge } from '@/components/branding/PlatformBadge';
 import { Loader2 } from 'lucide-react';
@@ -104,6 +105,12 @@ const AppLayout: React.FC = () => {
 
   // ─── HANDLERS ─────────────────────────────────────────────────────────────
   const goToView = useCallback((view: string) => {
+    // The Validation Survey is a standalone app — open it externally instead
+    // of routing to an in-app view (Sidebar, Topbar, tutorial all funnel here).
+    if (view === 'validation') {
+      openValidationSurvey();
+      return;
+    }
     setActiveView(view);
     navigate(VIEW_TO_PATH[view] || '/mel-dashboard');
   }, [setActiveView, navigate]);
@@ -129,8 +136,6 @@ const AppLayout: React.FC = () => {
   const renderContent = useCallback(() => {
     const common = { plan: currentPlan, onNavigate: navigateToView };
     switch (activeView) {
-      case 'validation':
-        return <SurveyWizard />;
       case 'swot':
         return <SWOTAnalysis {...common} onAddItem={addSWOTItem} onUpdateItem={updateSWOTItem} onRemoveItem={removeSWOTItem} onBulkAdd={bulkAddSWOTItems} />;
       case 'systems':
@@ -156,16 +161,15 @@ const AppLayout: React.FC = () => {
   }, [activeView, currentPlan, user, profile, isAuthenticated, userDisplayInfo.name, addSWOTItem, updateSWOTItem, removeSWOTItem, bulkAddSWOTItems, addStrategicOption, updateStrategicOption, removeStrategicOption, bulkAddStrategicOptions, addObjective, updateObjective, removeObjective, addKPI, updateKPI, removeKPI, addPAP, updatePAP, removePAP, navigateToView]);
 
   const isLoading = authLoading || (isAuthenticated && plansLoading);
-  const bypassLanding = location.pathname === '/validation-survey';
 
   // ─── LANDING PAGE (Hero Section) ──────────────────────────────────────────
-  if (uiState.showLanding && !currentPlan && !bypassLanding) {
+  if (uiState.showLanding && !currentPlan) {
     return (
       <HeroSection
         onStartPlanning={handleStartPlanning}
         onViewDemo={() => updateUiState({ showLanding: false })}
         onSignIn={() => updateUiState({ showAuthModal: true })}
-        onOpenValidationSurvey={() => { updateUiState({ showLanding: false }); goToView('validation'); }}
+        onOpenValidationSurvey={openValidationSurvey}
         isAuthenticated={isAuthenticated}
         userName={userDisplayInfo.name}
       />
@@ -240,6 +244,18 @@ const AppLayout: React.FC = () => {
         <div className="fixed inset-0 bg-[#022c22]/90 backdrop-blur-sm z-50 flex items-center justify-center">
           <GlobalLoader message="Syncing your strategy…" />
         </div>
+      )}
+
+      {/* NAVIGATION TUTORIAL */}
+      {uiState.showTutorial && (
+        <Suspense fallback={null}>
+          <NavigationTutorial
+            isOpen
+            onClose={() => updateUiState({ showTutorial: false })}
+            onComplete={() => updateUiState({ showTutorial: false })}
+            onNavigate={goToView}
+          />
+        </Suspense>
       )}
 
       <Suspense fallback={null}>
