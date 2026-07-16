@@ -16,7 +16,6 @@ const Topbar               = lazy(() => import('./strategic/Topbar'));
 const AuthModal            = lazy(() => import('./auth/AuthModal').then((m) => ({ default: m.AuthModal })));
 const UserProfileModal     = lazy(() => import('./auth/UserProfileModal').then((m) => ({ default: m.UserProfileModal })));
 const SettingsPage         = lazy(() => import('./settings/SettingsPage'));
-const SurveyWizard         = lazy(() => import('./strategic/SurveyWizard'));
 const MELDashboard         = lazy(() => import('./strategic/MELDashboard'));
 const SWOTAnalysis         = lazy(() => import('./strategic/SWOTAnalysis'));
 const SystemsThinking      = lazy(() => import('./strategic/SystemsThinking'));
