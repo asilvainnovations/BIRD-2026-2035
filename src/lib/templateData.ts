@@ -477,7 +477,7 @@ export const BUILTIN_TEMPLATES: PlanTemplate[] = [
           description: 'Redesign curriculum governance to enable rapid market-responsive program development and continuous industry alignment',
           weight: 1.5,
           kpis: [
-            { name: 'Curriculum Development Cycle Time', description: 'Average months from program concept approval to first student enrollment', baselineValue: 18, targetValue: 6, currentValue: 18, unit: 'months', frequency: 'quarterly', owner: 'Provost', status: 'critical' },
+            { name: 'Curriculum Development Cycle Time', description: 'Average months from program concept approval to first student enrollment', baselineValue: 18, targetValue: 6, currentValue: 18, unit: 'months', frequency: 'quarterly', owner: 'Provost', status: 'at-risk' },
             { name: 'Industry Co-Designed Programs', description: 'Number of programs with active industry co-design and advisory board governance', baselineValue: 2, targetValue: 15, currentValue: 2, unit: 'programs', frequency: 'annually', owner: 'VP Academic Affairs', status: 'on-track' },
             { name: 'Skills Alignment Index', description: 'Percentage of program learning outcomes mapped to top 50 employer-demanded skills', baselineValue: 31, targetValue: 80, currentValue: 31, unit: '%', frequency: 'annually', owner: 'Provost', status: 'at-risk' },
           ],
@@ -498,7 +498,7 @@ export const BUILTIN_TEMPLATES: PlanTemplate[] = [
           description: 'Develop faculty capacity in hybrid learning design, AI-assisted pedagogy, and evidence-based teaching to elevate educational quality and online capability',
           weight: 1.3,
           kpis: [
-            { name: 'Faculty Digital Readiness Score', description: 'Percentage of faculty meeting hybrid/online teaching competency standards', baselineValue: 34, targetValue: 80, currentValue: 34, unit: '%', frequency: 'annually', owner: 'Center for Teaching & Learning', status: 'critical' },
+            { name: 'Faculty Digital Readiness Score', description: 'Percentage of faculty meeting hybrid/online teaching competency standards', baselineValue: 34, targetValue: 80, currentValue: 34, unit: '%', frequency: 'annually', owner: 'Center for Teaching & Learning', status: 'at-risk' },
             { name: 'Hybrid Course Delivery Rate', description: 'Percentage of courses offered in hybrid or fully online format', baselineValue: 22, targetValue: 55, currentValue: 22, unit: '%', frequency: 'semester', owner: 'Provost', status: 'at-risk' },
           ],
         },
@@ -1325,7 +1325,7 @@ export const BUILTIN_TEMPLATES: PlanTemplate[] = [
           description: 'Eliminate single-country sourcing dependencies and build multi-corridor routing capability to protect delivery reliability against geopolitical and logistics disruption',
           weight: 1.5,
           kpis: [
-            { name: 'Supply Chain Concentration Index (HHI)', description: 'Herfindahl-Hirschman Index of sourcing country concentration (lower = more resilient)', baselineValue: 0.41, targetValue: 0.18, currentValue: 0.41, unit: 'index', frequency: 'quarterly', owner: 'Chief Supply Chain Officer', status: 'critical' },
+            { name: 'Supply Chain Concentration Index (HHI)', description: 'Herfindahl-Hirschman Index of sourcing country concentration (lower = more resilient)', baselineValue: 0.41, targetValue: 0.18, currentValue: 0.41, unit: 'index', frequency: 'quarterly', owner: 'Chief Supply Chain Officer', status: 'at-risk' },
             { name: 'Dual-Sourced SKU Rate', description: 'Percentage of top-50 SKUs with at least 2 qualified source suppliers in different countries', baselineValue: 18, targetValue: 85, currentValue: 18, unit: '%', frequency: 'quarterly', owner: 'VP Procurement', status: 'at-risk' },
             { name: 'Supply Chain Disruption Recovery Time', description: 'Average days to restore normal supply after a tier-1 disruption event', baselineValue: 42, targetValue: 14, currentValue: 42, unit: 'days', frequency: 'per incident', owner: 'Chief Supply Chain Officer', status: 'at-risk' },
           ],
@@ -1336,7 +1336,7 @@ export const BUILTIN_TEMPLATES: PlanTemplate[] = [
           description: 'Deploy digital trade documentation, automated compliance, and real-time shipment visibility across all key trade corridors',
           weight: 1.3,
           kpis: [
-            { name: 'FTA Utilization Rate', description: 'Percentage of FTA-eligible transactions claiming preferential tariff treatment', baselineValue: 31, targetValue: 80, currentValue: 31, unit: '%', frequency: 'quarterly', owner: 'Head of Trade Compliance', status: 'critical' },
+            { name: 'FTA Utilization Rate', description: 'Percentage of FTA-eligible transactions claiming preferential tariff treatment', baselineValue: 31, targetValue: 80, currentValue: 31, unit: '%', frequency: 'quarterly', owner: 'Head of Trade Compliance', status: 'at-risk' },
             { name: 'Digital Customs Clearance Rate', description: 'Percentage of shipments using fully electronic documentation and customs submission', baselineValue: 20, targetValue: 85, currentValue: 20, unit: '%', frequency: 'monthly', owner: 'CTO', status: 'at-risk' },
             { name: 'Customs Clearance Cycle Time', description: 'Average days from port arrival to customs clearance completion', baselineValue: 5.2, targetValue: 1.0, currentValue: 5.2, unit: 'days', frequency: 'monthly', owner: 'Head of Trade Compliance', status: 'at-risk' },
           ],

@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { generateId } from './strategicPlanStore';
-import type { UserInfo, StrategicPlan, SWOTItem, StrategicOption, BSCObjective, PAP } from './strategicPlanStore';
+import type { UserInfo, StrategicPlan, SWOTItem, StrategicOption, BSCObjective, PAP, ActionFrequency } from './strategicPlanStore';
 import type { PlanTemplate } from './templateData';
 
 export function cn(...inputs: ClassValue[]) {
@@ -44,6 +44,12 @@ export const calculateSWOTMetric = (
 // ============================================================================
 // GENERAL UTILITIES & TEMPLATE CONVERTER
 // ============================================================================
+
+/** Normalize free-form template frequency strings to the store's ActionFrequency. */
+const ACTION_FREQUENCIES: readonly string[] = ['daily', 'weekly', 'monthly', 'quarterly', 'annually'];
+const toActionFrequency = (frequency: string): ActionFrequency =>
+  ACTION_FREQUENCIES.includes(frequency) ? (frequency as ActionFrequency) : 'quarterly';
+
 export const convertTemplateToPlan = (template: PlanTemplate, userInfo: UserInfo): StrategicPlan => {
   const now = new Date().toISOString();
   const planData = template.plan_data;
@@ -95,7 +101,7 @@ export const convertTemplateToPlan = (template: PlanTemplate, userInfo: UserInfo
         targetValue: kpi.targetValue,
         currentValue: kpi.currentValue,
         unit: kpi.unit,
-        frequency: kpi.frequency,
+        frequency: toActionFrequency(kpi.frequency),
         owner: userInfo.id,
         ownerName: userInfo.name,
         ownerEmail: userInfo.email,

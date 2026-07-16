@@ -596,7 +596,7 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
       kpis: [{
         id: generateId(), objectiveId: obj3Id, name: 'Halal-Certified MSMEs', description: 'Cumulative BHB-certified MSMEs with valid certification',
         unit: 'firms', baselineValue: 500, targetValue: 5000, target2030: 2000, currentValue: 500,
-        frequency: 'quarterly', owner: userId, ownerName: userName, status: 'watch', leveragePoint: 'LP1',
+        frequency: 'quarterly', owner: userId, ownerName: userName, status: 'at-risk', leveragePoint: 'LP1',
         benchmarkSource: 'BHB Registry / BHIDP 2025-2030',
       }],
     },
@@ -609,7 +609,7 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
       kpis: [{
         id: generateId(), objectiveId: obj4Id, name: 'Poverty Incidence Rate', description: 'BARMM poverty incidence (PSA Family Income and Expenditure Survey)',
         unit: '%', baselineValue: 34.8, targetValue: 20, target2030: 25, currentValue: 34.8,
-        frequency: 'annually', owner: userId, ownerName: userName, status: 'watch', leveragePoint: 'LP1',
+        frequency: 'annually', owner: userId, ownerName: userName, status: 'at-risk', leveragePoint: 'LP1',
         benchmarkSource: 'PSA 1H 2023 / BDP 2023-2028',
       }],
     },

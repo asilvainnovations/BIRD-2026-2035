@@ -14,7 +14,7 @@ export interface SubmissionResponse {
  * Submits the validated survey data to the Netlify backend function.
  * The netlify.toml redirects /api/* to /.netlify/functions/*
  */
-export async function submitSurvey(data: SurveySchemaType): Promise<SubmissionResponse> {
+export async function submitSurvey(data: Partial<SurveySchemaType>): Promise<SubmissionResponse> {
   const payload = {
     surveyData: {
       metadata: {
@@ -23,6 +23,8 @@ export async function submitSurvey(data: SurveySchemaType): Promise<SubmissionRe
         platform: typeof navigator !== "undefined" ? navigator.platform : "unknown",
         language: typeof navigator !== "undefined" ? navigator.language : "en",
       },
+      // Full 16-section wizard responses — preserved verbatim so no answer is lost.
+      raw: data,
       responses: {
         section1_beie: { understanding: data.q1_1, relevance: data.q1_2 },
         section2_mg: {
