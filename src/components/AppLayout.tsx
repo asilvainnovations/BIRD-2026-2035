@@ -13,8 +13,8 @@ import HeroSection from './strategic/HeroSection';
 // ─── LAZY LOADED COMPONENTS (Optimizes Initial Load Time) ───────────────────
 const Sidebar              = lazy(() => import('./strategic/Sidebar'));
 const Topbar               = lazy(() => import('./strategic/Topbar'));
-const AuthModal            = lazy(() => import('./auth/AuthModal'));
-const UserProfileModal     = lazy(() => import('./auth/UserProfileModal'));
+const AuthModal            = lazy(() => import('./auth/AuthModal').then((m) => ({ default: m.AuthModal })));
+const UserProfileModal     = lazy(() => import('./auth/UserProfileModal').then((m) => ({ default: m.UserProfileModal })));
 const SettingsPage         = lazy(() => import('./settings/SettingsPage'));
 const SurveyWizard         = lazy(() => import('./strategic/SurveyWizard'));
 const MELDashboard         = lazy(() => import('./strategic/MELDashboard'));
@@ -72,7 +72,7 @@ const AppLayout: React.FC = () => {
   const location  = useLocation();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { user, profile, isAuthenticated, isAdmin, isLoading: authLoading, signUp, signIn, signOut, resetPassword, updatePassword, updateProfile, signInWithMagicLink } = useAuth();
+  const { user, profile, isAuthenticated, isAdmin, isLoading: authLoading, signOut } = useAuth();
   const { plans, currentPlan, activeView, isOnline, lastSynced, isLoading: plansLoading, setActiveView, setCurrentPlan, createPlan, addSWOTItem, updateSWOTItem, removeSWOTItem, bulkAddSWOTItems, addStrategicOption, updateStrategicOption, removeStrategicOption, bulkAddStrategicOptions, addObjective, updateObjective, removeObjective, addKPI, updateKPI, removeKPI, addPAP, updatePAP, removePAP } = useStrategicPlan();
 
   const [uiState, setUiState] = useState({
@@ -137,9 +137,9 @@ const AppLayout: React.FC = () => {
       case 'systems':
         return <SystemsThinking {...common} onUpdateItem={updateSWOTItem} />;
       case 'strategy':
-        return <StrategyMatrix {...common} onUpdateOption={updateStrategicOption} onRemoveOption={removeStrategicOption} onBulkAdd={bulkAddStrategicOptions} />;
+        return <StrategyMatrix {...common} onAddOption={addStrategicOption} onUpdateOption={updateStrategicOption} onRemoveOption={removeStrategicOption} onBulkAdd={bulkAddStrategicOptions} />;
       case 'scorecard':
-        return <BalancedScorecard {...common} onUpdateObjective={updateObjective} onAddKPI={addKPI} onUpdateKPI={updateKPI} onRemoveKPI={removeKPI} />;
+        return <BalancedScorecard {...common} onAddObjective={addObjective} onUpdateObjective={updateObjective} onRemoveObjective={removeObjective} onAddKPI={addKPI} onUpdateKPI={updateKPI} onRemoveKPI={removeKPI} />;
       case 'paps':
         return <PAPsManagement {...common} onUpdatePAP={updatePAP} onRemovePAP={removePAP} onAddPAP={addPAP} />;
       case 'templates':
@@ -154,7 +154,7 @@ const AppLayout: React.FC = () => {
       default:
         return <MELDashboard {...common} />;
     }
-  }, [activeView, currentPlan, user, profile, isAuthenticated, userDisplayInfo.name, addSWOTItem, updateSWOTItem, removeSWOTItem, bulkAddSWOTItems, updateStrategicOption, removeStrategicOption, bulkAddStrategicOptions, updateObjective, addKPI, updateKPI, removeKPI, addPAP, updatePAP, removePAP, navigateToView]);
+  }, [activeView, currentPlan, user, profile, isAuthenticated, userDisplayInfo.name, addSWOTItem, updateSWOTItem, removeSWOTItem, bulkAddSWOTItems, addStrategicOption, updateStrategicOption, removeStrategicOption, bulkAddStrategicOptions, addObjective, updateObjective, removeObjective, addKPI, updateKPI, removeKPI, addPAP, updatePAP, removePAP, navigateToView]);
 
   const isLoading = authLoading || (isAuthenticated && plansLoading);
   const bypassLanding = location.pathname === '/validation-survey';
@@ -225,11 +225,6 @@ const AppLayout: React.FC = () => {
           <AuthModal
             isOpen
             onClose={() => updateUiState({ showAuthModal: false })}
-            onSuccess={() => updateUiState({ showAuthModal: false })}
-            signUp={signUp}
-            signIn={signIn}
-            resetPassword={resetPassword}
-            signInWithMagicLink={signInWithMagicLink}
           />
         </Suspense>
       )}
@@ -238,11 +233,6 @@ const AppLayout: React.FC = () => {
           <UserProfileModal
             isOpen
             onClose={() => updateUiState({ showProfileModal: false })}
-            profile={profile}
-            userEmail={user?.email || ''}
-            onUpdateProfile={updateProfile}
-            onSignOut={handleSignOut}
-            onUpdatePassword={updatePassword}
           />
         </Suspense>
       )}
