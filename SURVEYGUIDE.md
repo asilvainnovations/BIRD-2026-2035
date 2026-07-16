@@ -377,8 +377,69 @@ Description:  “A Synchronized Mandate Coordinates Policymakers, Plan
 * Fiscal: Harmonize SIPP & CREATE MORE Act to align regional projects with national tax incentives, prioritizing high‑value manufacturing over raw exports.
 * Regulatory: Institutionalize BEIE to synchronize ministry budgets and master plans for ecosystem‑based development.
 
+12. Re-create Section 10 for Stategic Options and Leverage Points
+13. Section 10
+Video
+Title: Strategic Options & Path to Growth 
+Description: Discover the strategic choices shaping Bangsamoro’s Investment Roadmap 2026–2035. This video shows how well-crafted strategies and priorities can fuel inclusive growth, sustainability, and regional competitiveness in BARMM.”
+URL - https://youtu.be/kb_snh8mo1k 
+Duration -7 mins
 
-12. Re-create Section 10 for Stategic Options and Leverage Points 
+Present the TOWS Matrix and Leverage Points 
+How to  identify leverage points - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/How%20to%20Identify%20Leverage%20Points.png
+Description: We have a three‑step process for diagnosing and improving complex systems using Donella Meadows’ Hierarchy of System Change (L1–L12). This is how system mapping reveals leverage points for targeted, scalable change.
+1. Diagnostic Synthesis – identifying recurring patterns and limiting factors that hinder progress.
+2. Mapping the Loops – visualizing reinforcing (R) and balancing (B) feedback loops to locate delays or failures.
+3. Tiered Selection – categorizing interventions as Transformative (L1–L3), Systemic (L4–L6), or Incremental (L10–L12).
+
+
+Activating Leverage Points - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/Activating%20Leverage%20Points.png
+Descriptions: “Activating Strategic Leverage Points” simply means identifying targeted interventions to dismantle structural constraints and accelerate Bangsamoro’s economic ecosystem.
+
+As illustrated with golden balance beam representing system leverage, it highlight  three tiers of interventions:
+* L3 (Goals & Operating System): link political legitimacy to investment climate and embed moral governance.
+* L5 (Rules & Incentives): align investment incentives with institutional capacity milestones and halal accreditation.
+* L6 (Information Flows): deploy digital traceability for halal supply chains and real‑time energy dashboards.
+
+
+Leverage Points in Capacity Traps- https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Leverage%20Points%20for%20Capacity%20Traps.png
+Description: The “Prescription: Front‑Loading the Ecosystem Enablers” illustrates Leverage Point L10 (Stock‑Flow Structure) — expanding system capacity ahead of market demand to break the Limits to Growth and Growth and Underinvestment archetypes.
+It shows a capacity ceiling above a growth trendline, supported by two enablers: For example, accelerating the ₱6.67 B Zamboanga‑Basilan Interconnection Project and front‑load farm‑to‑market roads before scaling processing hubs.
+* The Software (Human Capital & Facilitation): For example, expand ing TESDA programs to address functional literacy gaps and pre‑hire/train Halal Board and BOI or BBOI officers to prevent bureaucratic chokepoints.
+The key takeaway emphasizes that enablers must precede transformers — scaling production is impossible without first removing binding constraints. This strategy directly resolves capacity traps by raising the system’s physical and human‑capital ceiling before growth stalls.
+
+
+Leverage Points in Governance Traps : The Iceberg Model- https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Iceberg%20Model%20Paradigm.png 
+Description: “The Systems Thinking Paradigm: Going Below the Waterline” uses an iceberg metaphor to illustrate how addressing only visible events leads to short‑term fixes and unintended consequences.
+It divides the system into three layers:
+* Events (Top 10%) – visible outcomes like investment approvals and budget execution.
+* Structures (Body 40%) – systemic traps such as fragmented plans and recurring bureaucratic delays.
+* Mental Models (Base 50%) – deep‑rooted beliefs that shape policy behavior.
+The key message emphasizes shifting from “fixing isolated problems” to “building interconnected ecosystems,” showing that sustainable solutions require tackling underlying structures and mindsets rather than surface symptoms.
+
+
+Architecting Collaborative Governance- https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Leverage%20Points%20in%20Governance.png 
+Description: The “Prescription: Architecting Collaborative Governance” illustrates how strategic leverage points can resolve governance traps such as the Big Man Archetype, Success to the Successful, Escalation, and Tragedy of the Commons.
+It shows a transition from disconnected, clashing nodes (zero‑sum politics) to a unified, synchronized network (collective prosperity) through three leverage points:
+* L1 – Paradigm: shift governance from Power Over (clan‑based dominance) to Power With (issue‑based collaboration).
+* L2 – Mindset: institutionalize inter‑provincial development compacts to replace internal competition with shared external goals.
+* L5 – Rules: establish transparent, formula‑based resource allocation to mathematically eliminate bias and prevent escalation.
+Overall, collaborative governance dissolves friction and aligns incentives, transforming rivalries into coordinated prosperity and avoiding short‑term, self‑reinforcing traps.
+
+6 Archetypes and Leverage Points - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Archetypes%20&%20Leverage%20Points.png
+
+Four Strategic Options  - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/Strategic%20Options.png
+Description: As a result of quantified SWOT analysis, dynamic systems mapping, BARMM has  Four Distinct Pathways to Scale Regional Value Creation and economic growth
+1. Halal Economy Dominance (HEDS): leverage cultural authenticity to capture the USD 2.3 trillion global halal market.
+2. Green Economy Monetization (GEMS): convert environmental assets (forests, marine, renewables) into revenue via carbon markets and Payment for Ecosystem Services.
+3. Infrastructure‑First Enabling (IFES): remove energy and logistics constraints to scale production.
+4. Integrated Ecosystem Development (IEDS): synchronize the first three strategies to avoid systemic bottlenecks.
+
+Question on ranking the strategic options using Criteria
+Image - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/3.%20Strategic%20Options%20Ranking.png 
+Description:“Strategic Options Ranking and Scoring Matrix” presents a comparative evaluation of four strategic pathways—HEDS, GEMS, IFES, and IEDS—across seven weighted criteria: Economic Impact (25%), Systems Leverage (15%), Identity Alignment (15%), Inclusivity (10%), Sustainability (5%), Feasibility (20%), and Risk‑Return (10%).
+Each option is scored from 1 to 10, showing that IEDS (Integrated Ecosystem Development Strategy) achieves the highest and most balanced performance—8.93/10—by excelling in all dimensions, while other strategies perform well only in specific niches.
+Several workshops tell us that integrated, cross‑sectoral approaches outperform isolated strategies, ensuring long‑term resilience and inclusive growth.
     
 15. Re-create Section 11 for IEDS and Three-Phase Implementation
 
