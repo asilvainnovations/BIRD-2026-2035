@@ -117,7 +117,92 @@ It presents two key sites:
 They represent the region’s shift toward integrated industrial growth and ASEAN halal‑economy participation.  
 **Question:**  
 > “Do you think developing specialized economic zones like Polloc Freeport and WOW Matanog will significantly boost Bangsamoro’s industrial and halal trade capacity?”
-- [ ] Re-create Section 6 for Cluster 3 - Enablers
+
+8. Section 5 Cluster 3 - Enablers - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Cluster%203%20Enablers.png
+Decription:“Cluster 3 | Enablers: Constructing the Support Architecture” illustrates four enablers for a sustainable value creation in the Bangsamoro economy. These enablers form the backbone that supports industrialization and inclusive growth across Bangsamoro.
+* Digital Connectivity — expanding broadband, e‑governance, and cybersecurity to accelerate investment facilitation.
+* Physical Infrastructure — improving ports, airports, and cold‑chain logistics to reduce post‑harvest losses and support halal integrity.
+* Education & Skills — aligning TESDA programs with industry needs to close the 59.3 % literacy and skills gap.
+* Health & Social Protection — ensuring workforce resilience through accessible healthcare and social safety nets.
+8.1 > Select critical and relevant SWOT scale questions in the attached SWOT_scale_questions.md, and insert here.
+8.2 > Select relevant Shorten Systems Mapping questions in the attached BIRD-Systems-Archetypes-Descriptions-and-Validation-Questions.md, shorten the description in a succinct way and insert here.
+8.3 Capitalizing Cultural Advantage - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Capitalizing%20Cultural%20Advantage%20-%20Halal%20Industry%20Adv.png
+Description: “The Halal Industry Advantage” highlights Bangsamoro’s cultural and geographic strengths in capturing the ASEAN halal market.
+It presents three key sectors of opportunity:
+* Halal Food & Beverage — focusing on coconut‑based by‑products.
+* Halal Cosmetics — beauty products tailored for Muslim consumers.
+* Halal Pharmaceuticals — compliant medicine and healthcare solutions.
+A map shows the BIMP‑EAGA trade corridor (Brunei‑Indonesia‑Malaysia‑Philippines), emphasizing Bangsamoro’s strategic position serving a large regional Muslim population.
+Suggested Question:
+“Rank which halal sector—Food & Beverage, Cosmetics, or Pharmaceuticals—offers the greatest growth potential for Bangsamoro’s ASEAN market integration.”
+
+8.4 The Enabling Grid - 2nd Layer of BARMM Interconnectivity - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Layer%202%20-%20The%20Enabling%20Grid%20and%20Lawof%20Sequencing.png 
+Description:  The Enabling Grid & The Law of Sequencing” illustrates the step‑by‑step infrastructure progression required before large‑scale industrial growth can occur in Bangsamoro.
+It shows four sequential stages:
+1. Energy Priming — connecting island provinces to the Mindanao grid through projects like the ₱6.67 B Zamboanga‑Basilan Interconnection.
+2. Physical Mobility — improving connectivity via major bridges and transport links to enhance labor and market access.
+3. Logistics Integrity — building modern cold‑storage and warehousing to preserve halal product quality post‑harvest.
+4. Industrial Scaling — once power, roads, and storage are secured, capital investment can safely expand agro‑industrial operations.
+The diagram emphasizes that infrastructure readiness must precede industrial scaling to ensure sustainable growth.
+Suggested Question:
+On a scale of 1 to 5, how effectively do you think Bangsamoro’s current infrastructure sequencing (energy, mobility, logistics, industrial) supports future industrial expansion?
+
+Capitalizing Cultural Advantage - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Capitalizing%20Cultural%20Advantage%20-%20Halal%20Industry%20Adv.png
+Description: “The Halal Industry Advantage” highlights Bangsamoro’s cultural and geographic strengths in capturing the ASEAN halal market.
+It presents three key sectors of opportunity:
+* Halal Food & Beverage — focusing on coconut‑based by‑products.
+* Halal Cosmetics — beauty products tailored for Muslim consumers.
+* Halal Pharmaceuticals — compliant medicine and healthcare solutions.
+
+A map shows the BIMP‑EAGA trade corridor (Brunei‑Indonesia‑Malaysia‑Philippines), emphasizing Bangsamoro’s strategic position serving a large regional Muslim population.
+Suggested Question:
+“Rank which halal sector—Food & Beverage, Cosmetics, or Pharmaceuticals—offers the greatest growth potential for Bangsamoro’s ASEAN market integration.”
+
+
+The Digital Transformation Plan - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Digital%20Transformation%20Master%20Plan.png
+“Digital Transformation (BEGMP)” presents Bangsamoro’s roadmap for bridging the digital divide and enabling efficient governance.
+It contrasts “The Gap”—low internet penetration, fragmented government systems, and limited digital skills—with “The Roadmap”, which includes:
+* Broadband & Connectivity — building data centers and last‑mile hubs.
+* Smart Cities — establishing public safety and command centers.
+* E‑Government — creating digital identities and shared services.
+* Cybersecurity — ensuring data protection and secure transactions.
+These components outline a comprehensive plan for digital inclusion and governance modernization.
+Suggested Question:
+“On a scale of 1 to 5, how confident are you that the BEGMP roadmap will effectively bridge Bangsamoro’s digital divide and improve governance efficiency?”
+
+Tourism Master Plan - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Tourism%20Master%20Plan.png
+Description: The “Tourism Master Plan (BTDP 2024–2033)” outlines Bangsamoro’s ten‑year strategy for building global tourism competitiveness.
+It shows three sequential phases:
+* Phase 1 – Organizing (2025–2026): quick wins and legislation.
+* Phase 2 – Stabilizing (2027–2028): infrastructure implementation.
+* Phase 3 – Institutionalizing (2029–2033): global branding and evaluation.
+A pie chart highlights that ₱161.97 billion will fund the plan, with 93 % allocated to physical access and connectivity—mainly tourism infrastructure support.
+Suggested Guestion:
+“On a scale of 1 to 5, how confident are you that prioritizing infrastructure and connectivity will make Bangsamoro globally competitive in tourism by 2033?”
+
+Tourism and Digital Connectivity - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Tourism%20and%20Digital%20Connectivity.png
+Description: Reinforcing Loop II: Digital Infrastructure & Smart Tourism” emphasizes that digital infrastructure enables tourism, which in turn fuels broader economic development.
+It shows two layers:
+* The Activation (Tourism Master Plan – BTDP): a ₱161.97 billion investment where 93.54 % of funds go to physical access and connectivity for sites like Ligawasan Marsh and Ramba Park.
+* The Foundation (Digital Transformation – BEGMP): broadband, smart cities, e‑government, and cybersecurity forming the digital backbone for tourism and regional growth.
+Suggested Question: “Rank these components—Broadband, Smart Cities, E‑Government, Cybersecurity—by their importance to tourism.”
+
+
+Activating the Enablers- Primed by Moral Governance- https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Activating%20the%20Enablers%20-%20Infra%20Primed%20by%20Moral%20Governance.png
+The image  illustrates how Moral Governance acts as the operating system that powers Bangsamoro’s physical development.
+* On the left, Transparency, Accountability, and Stability form the governance core that builds trust — described as the currency of investment.
+* On the right, the physical backbones show measurable infrastructure goals:
+    * 100% Electrification through renewable expansion
+    * 85% Broadband Penetration by 2035
+    * 30% Logistics Cost Reduction via improved inter‑island routes
+These elements depict how ethical governance can directly enable infrastructure growth and investor confidence.
+How realistic is it that Moral Governance can effectively deliver these physical enablers — electrification, broadband connectivity, and logistics efficiency — in BARMM?
+* ☐ Very realistic
+* ☐ Somewhat realistic
+* ☐ Needs stronger institutional support
+* ☐ Not realistic
+
+
 - [ ] Re-create Section 7 for Cluster 4 - Connectors
       Insert questions here about Provincial Equity and Specialized Nodes
 - [ ] Re-create Section 8 for Operating Systems (Moral Governance , Resilience, Inclusivity and Peace)
