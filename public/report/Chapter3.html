@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 3: Strategic Diagnostics — SWOT Analysis and Systems Mapping | BIRD 2026-2035</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ========== RESET & BASE ========== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{margin:0;padding:0;font-family:'Roboto',sans-serif;font-size:11pt;line-height:1.7;color:#333;background:#fff;
+     text-align:justify;text-align-last:left;}
+
+/* ========== PAGE SETUP ========== */
+@page{size:A4;margin:2.5cm 2cm 2.5cm 2cm;
+     @top-center{content:string(doctitle);font-size:9pt;color:#666;font-style:italic;}
+     @bottom-center{content:counter(page);font-size:9pt;color:#666;}
+}
+@page :first{margin:0;@top-center{content:none;}@bottom-center{content:none;}}
+@page cover{margin:0;@top-center{content:none;}@bottom-center{content:none;}}
+@page toc-page{@top-center{content:none;}@bottom-center{content:none;}}
+
+body{string-set:doctitle "";}
+h1.chapter-title{string-set:doctitle content();}
+
+/* ========== COVER PAGE ========== */
+.cover{width:210mm;height:297mm;margin:0;position:relative;overflow:hidden;page-break-after:always;page:cover;
+       background:linear-gradient(135deg,#0a3d2e 0%,#0f5c3e 40%,#1a7a4e 70%,#2d9d6e 100%);}
+.cover::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+               background:url('https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/barmm-images/public/Bangsamoro%20Economic%20and%20%20Investment%20Ecosystem.png') center/cover no-repeat;
+               opacity:0.12;z-index:0;}
+.cover::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+              background:linear-gradient(180deg,rgba(10,61,46,0.75) 0%,rgba(10,61,46,0.88) 50%,rgba(10,61,46,0.97) 100%);z-index:1;}
+.cover-content{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;text-align:center;width:85%;}
+.cover-badge{display:inline-block;padding:0.3rem 1rem;border:1px solid rgba(201,168,76,0.6);border-radius:2rem;
+             color:#C9A84C;font-size:8pt;letter-spacing:0.15em;text-transform:uppercase;font-weight:600;
+             margin-bottom:1rem;background:rgba(201,168,76,0.1);}
+.cover-chapter{font-family:'Poppins',sans-serif;font-size:32pt;font-weight:800;color:#C9A84C;line-height:1.1;margin-bottom:0.5rem;}
+.cover-title{font-family:'Poppins',sans-serif;font-size:20pt;font-weight:700;color:#fff;line-height:1.3;margin-bottom:0.8rem;}
+.cover-subtitle{font-family:'Montserrat',sans-serif;font-size:12pt;font-weight:500;color:#a8e6cf;margin-bottom:1.5rem;line-height:1.5;}
+.cover-divider{width:80px;height:3px;background:linear-gradient(90deg,#C9A84C,#E8C560,#C9A84C);margin:0 auto 1.2rem;border-radius:2px;}
+.cover-meta{color:rgba(255,255,255,0.8);font-size:9.5pt;line-height:1.9;}
+.cover-meta strong{color:#C9A84C;}
+
+/* ========== HEADINGS ========== */
+h1{font-family:'Poppins',sans-serif;font-size:20pt;font-weight:700;color:#0a3d2e;margin:2rem 0 1rem;line-height:1.3;page-break-after:avoid;}
+h2{font-family:'Poppins',sans-serif;font-size:14pt;font-weight:600;color:#0d4f3c;margin:1.5rem 0 0.8rem;line-height:1.3;page-break-after:avoid;border-bottom:1px solid #e0e0e0;padding-bottom:0.3rem;}
+h3{font-family:'Poppins',sans-serif;font-size:12pt;font-weight:600;color:#1a6b4e;margin:1.2rem 0 0.6rem;page-break-after:avoid;}
+h4{font-family:'Poppins',sans-serif;font-size:11pt;font-weight:600;color:#333;margin:1rem 0 0.5rem;page-break-after:avoid;}
+
+/* ========== BODY TEXT ========== */
+p{margin-bottom:0.8rem;font-size:11pt;line-height:1.7;}
+strong{color:#1a4d3a;}
+
+/* ========== THREE-LINE TABLES ========== */
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:9pt;page-break-inside:auto;max-width:100%;}
+thead{display:table-header-group;}
+thead tr{border-top:2px solid #333;border-bottom:1px solid #333;}
+tbody tr{border-bottom:1px solid #ddd;}
+tbody tr:last-child{border-bottom:2px solid #333;}
+th,td{padding:6px 8px;text-align:left;vertical-align:top;}
+th{font-weight:600;background:#f8f9f5;color:#0a3d2e;font-family:'Poppins',sans-serif;font-size:9pt;}
+tr{page-break-inside:avoid;}
+caption{font-family:'Poppins',sans-serif;font-weight:600;font-size:10pt;color:#0a3d2e;margin-bottom:0.5rem;text-align:left;}
+caption::before{content:attr(data-label) ": ";font-weight:700;}
+
+/* ========== FIGURES ========== */
+figure{margin:1.2rem 0;text-align:center;page-break-inside:avoid;}
+figure img{max-width:100%;height:auto;display:block;margin:0 auto;}
+figcaption{font-size:9pt;color:#555;margin-top:0.5rem;font-style:italic;text-align:left;line-height:1.5;}
+figcaption::before{content:attr(data-label) ": ";font-weight:700;font-style:normal;}
+
+/* ========== FOOTNOTES ========== */
+.footnote{font-size:8.5pt;color:#555;vertical-align:super;cursor:pointer;}
+.footnotes{font-size:8.5pt;border-top:1px solid #ddd;margin-top:2rem;padding-top:1rem;}
+.footnotes ol{padding-left:1.5rem;}
+.footnotes li{margin-bottom:0.5rem;line-height:1.5;}
+
+/* ========== APA IN-TEXT CITATIONS ========== */
+.cite{font-size:10pt;color:#333;}
+
+/* ========== BLOCKQUOTE / QUOTES ========== */
+blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-style:italic;color:#444;}
+
+/* ========== MATH FORMULAS ========== */
+.formula-block{background:#f8f9f5;padding:0.8rem 1rem;margin:0.8rem 0;border-left:3px solid #0a3d2e;font-family:'Courier New',monospace;font-size:10pt;}
+
+/* ========== IMAGE GRID ========== */
+.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0;}
+.img-grid figure{margin:0;}
+.img-grid-full{display:grid;grid-template-columns:1fr;gap:1rem;margin:1rem 0;}
+
+/* ========== CHAPTER HEADER ========== */
+.chapter-header{text-align:center;margin:3rem 0 2rem;page-break-before:always;}
+.chapter-number{font-family:'Poppins',sans-serif;font-size:12pt;color:#C9A84C;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;margin-bottom:0.5rem;}
+.chapter-title{font-family:'Poppins',sans-serif;font-size:22pt;font-weight:700;color:#0a3d2e;line-height:1.3;}
+
+/* ========== RESOURCE BOX ========== */
+.resource-box{background:#f0f7f4;border:1px solid #c8e6d5;border-left:4px solid #0a3d2e;padding:0.8rem 1rem;margin:1rem 0;font-size:9.5pt;}
+.resource-box-title{font-family:'Poppins',sans-serif;font-weight:600;color:#0a3d2e;margin-bottom:0.3rem;}
+
+/* ========== TOC ========== */
+.toc-page{page:toc-page;page-break-after:always;}
+.toc-title{font-family:'Poppins',sans-serif;font-size:18pt;font-weight:700;color:#0a3d2e;text-align:center;margin-bottom:1.5rem;padding-bottom:0.5rem;border-bottom:2px solid #C9A84C;}
+.toc{list-style:none;padding:0;margin:0;}
+.toc li{margin-bottom:0.3rem;}
+.toc a{color:#333;text-decoration:none;font-size:10.5pt;display:block;padding:0.2rem 0;}
+.toc .toc-chapter{font-weight:700;font-size:11pt;color:#0a3d2e;margin-top:0.8rem;}
+.toc .toc-section{padding-left:1.5rem;font-size:10pt;}
+.toc .toc-subsection{padding-left:3rem;font-size:9.5pt;color:#555;}
+
+/* ========== REFERENCES ========== */
+.references-page{page-break-before:always;}
+.references-list{font-size:10pt;line-height:1.6;}
+.references-list p{margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;}
+
+/* ========== PROVINCIAL DATA BOX ========== */
+.province-box{background:#f8f9f5;border:1px solid #d4e6d0;border-left:4px solid #C9A84C;padding:0.6rem 0.8rem;margin:0.6rem 0;font-size:9pt;}
+.province-box-title{font-family:'Poppins',sans-serif;font-weight:600;color:#0a3d2e;margin-bottom:0.2rem;font-size:9.5pt;}
+
+/* ========== SWOT QUADRANT BOXES ========== */
+.swot-s{background:#e8f5e9;border-left:4px solid #1a6b4e;padding:0.5rem 0.8rem;margin:0.5rem 0;font-size:9.5pt;}
+.swot-w{background:#ffebee;border-left:4px solid #c0392b;padding:0.5rem 0.8rem;margin:0.5rem 0;font-size:9.5pt;}
+.swot-o{background:#fff8e1;border-left:4px solid #C9A84C;padding:0.5rem 0.8rem;margin:0.5rem 0;font-size:9.5pt;}
+.swot-t{background:#f3e5f5;border-left:4px solid #8B6C28;padding:0.5rem 0.8rem;margin:0.5rem 0;font-size:9.5pt;}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="cover">
+<div class="cover-content">
+<div class="cover-badge">Peer-Reviewed Publication — Revised Edition</div>
+<div class="cover-chapter">Chapter 3</div>
+<div class="cover-title">Strategic Diagnostics:<br>SWOT Analysis and Systems Mapping</div>
+<div class="cover-divider"></div>
+<div class="cover-subtitle">A Quantified Diagnostic of the Bangsamoro Economic and Investment Ecosystem (BEIE)<br>Integrating Provincial Data from Seven BARMM Jurisdictions</div>
+<div class="cover-meta">
+<strong>Bangsamoro Investment Roadmap Development (BIRD) 2026-2035</strong><br>
+Asilva Innovations Strategic Insights<br>
+Prepared for the Bangsamoro Government and Development Partners<br>
+<em>July 2026 — Revised with Provincial Economic Data</em>
+</div>
+</div>
+</div>
+
+<!-- ==================== TABLE OF CONTENTS ==================== -->
+<div class="toc-page">
+<h1 class="toc-title">Table of Contents</h1>
+<ul class="toc">
+<li class="toc-chapter"><a href="#ch3-1">Chapter 3-1: Quantified SWOT Analysis</a></li>
+<li class="toc-section"><a href="#ch3-1-1">3.1.1 Introduction and Methodological Framework</a></li>
+<li class="toc-section"><a href="#ch3-1-2">3.1.2 Mathematical Formulations for Strategic Assessment</a></li>
+<li class="toc-section"><a href="#ch3-1-3">3.1.3 Provincial Economic Profile — Seven Jurisdictions</a></li>
+<li class="toc-section"><a href="#ch3-1-4">3.1.4 Strengths: Internal Resilience Drivers</a></li>
+<li class="toc-section"><a href="#ch3-1-5">3.1.5 Weaknesses: Internal Risk Exposure</a></li>
+<li class="toc-section"><a href="#ch3-1-6">3.1.6 Opportunities: External Resilience Drivers</a></li>
+<li class="toc-section"><a href="#ch3-1-7">3.1.7 Threats: External Vulnerability Factors</a></li>
+<li class="toc-section"><a href="#ch3-1-8">3.1.8 Synthesis and Key Analytical Takeaways</a></li>
+<li class="toc-section"><a href="#ch3-1-9">3.1.9 Related Multimedia and Resources</a></li>
+<li class="toc-chapter"><a href="#ch3-2">Chapter 3-2: Systems Mapping — Causal Loop Diagrams, Systems Archetypes, and Leverage Points</a></li>
+<li class="toc-section"><a href="#ch3-2-1">3.2.1 Complex Dynamic Interrelationships of BEIE Clusters</a></li>
+<li class="toc-section"><a href="#ch3-2-2">3.2.2 Reinforcing Loops: Virtuous Cycles for Development</a></li>
+<li class="toc-section"><a href="#ch3-2-3">3.2.3 Balancing Loops: Constraints and Limiting Factors</a></li>
+<li class="toc-section"><a href="#ch3-2-4">3.2.4 Systems Archetypes in the Ecosystem</a></li>
+<li class="toc-subsection"><a href="#ch3-2-4-1">3.2.4.1 Governance Traps</a></li>
+<li class="toc-subsection"><a href="#ch3-2-4-2">3.2.4.2 Capacity Traps</a></li>
+<li class="toc-subsection"><a href="#ch3-2-4-3">3.2.4.3 Resource and Equity Traps</a></li>
+<li class="toc-subsection"><a href="#ch3-2-4-4">3.2.4.4 Instability Traps</a></li>
+<li class="toc-section"><a href="#ch3-2-5">3.2.5 Leverage Points for Transformation</a></li>
+<li class="toc-section"><a href="#ch3-2-6">3.2.6 Provincial Systems Dynamics — Island vs. Mainland Patterns</a></li>
+<li class="toc-section"><a href="#ch3-2-7">3.2.7 Related Multimedia and Resources</a></li>
+<li class="toc-chapter"><a href="#references">References</a></li>
+</ul>
+</div>
+
+<!-- ==================== CHAPTER 3-1 ==================== -->
+<div class="chapter-header" id="ch3-1">
+<div class="chapter-number">Chapter 3-1</div>
+<h1 class="chapter-title">Quantified SWOT Analysis</h1>
+</div>
+
+<h2 id="ch3-1-1">3.1.1 Introduction and Methodological Framework</h2>
+
+<p>
+This chapter builds upon the deep presencing analysis conducted in Chapter 2 to present a comprehensive diagnostic of the Bangsamoro Autonomous Region in Muslim Mindanao (BARMM) through the dual lenses of SWOT analysis and Systems Mapping. While Chapter 2 established the contextual foundations using the Bangsamoro Economic and Investment Ecosystem (BEIE) Framework, this chapter translates those insights into actionable strategic intelligence through mathematically rigorous quantification, now enriched with province-specific data from all seven BARMM jurisdictions (Silva, 2026).
+</p>
+
+<p>
+The Bangsamoro Investment Roadmap Development (BIRD) 2026-2035 employs the Strat Planner Pro architecture to transition from descriptive analysis to diagnostic precision. A conventional Strengths, Weaknesses, Opportunities, and Threats (SWOT) analysis reveals the current state of the BEIE; however, this iteration incorporates robust mathematical formulations to quantify strategic viability, risk exposure, and resilience capacity. Furthermore, this revised edition integrates granular provincial economic data from Basilan, Lanao del Sur, Maguindanao del Norte, Maguindanao del Sur, Tawi-Tawi, the Special Geographic Area (SGA), and Cotabato City — enabling jurisdiction-specific strategic recommendations that account for the heterogeneous development landscape across the region (Silva, 2026; MTIT-BARMM, 2026).
+</p>
+
+<figure id="fig-beie">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/BEIE-v2.png" alt="Bangsamoro Economic and Investment Ecosystem Framework">
+<figcaption data-label="Figure 3-1">The Bangsamoro Economic and Investment Ecosystem (BEIE) Framework. Moral Governance anchors five interconnected clusters: Foundations, Transformers, Enablers, Connectors, and Financiers. Source: Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<h2 id="ch3-1-2">3.1.2 Mathematical Formulations for Strategic Assessment</h2>
+
+<p>
+To ensure analytical rigor, the Strat Planner Pro architecture applies distinct mathematical models to each SWOT quadrant, following established quantitative strategic assessment methodologies (Weihrich, 1982; Silva, 2026). Each formulation is calibrated to reflect the unique characteristics of the factor being measured, ensuring that scores are comparable across quadrants while maintaining sensitivity to the specific dynamics of each dimension.
+</p>
+
+<h3>3.1.2.1 Readiness Index (RI) — Strengths</h3>
+<p>The Readiness Index measures organizational preparedness for strategic execution. It is computed as:</p>
+<div class="formula-block">
+RI<sub>Strength</sub> = (Impact × Likelihood) / 5<br>
+Scale: 1–5
+</div>
+
+<h3>3.1.2.2 Readiness Index (RI) — Opportunities</h3>
+<p>The Readiness Index for opportunities measures environmental favorability for external opportunities:</p>
+<div class="formula-block">
+RI<sub>Opportunity</sub> = √(Impact × Likelihood)<br>
+Scale: 1–5
+</div>
+
+<h3>3.1.2.3 Risk Index — Weaknesses</h3>
+<p>The Risk Index measures internal vulnerability exposure:</p>
+<div class="formula-block">
+Risk<sub>Weakness</sub> = Impact × Likelihood<br>
+Scale: 1–25 (raw), normalized to 1–5 for dashboard display
+</div>
+
+<h3>3.1.2.4 Vulnerability Index (VI) — Threats</h3>
+<p>The Vulnerability Index measures external threat exposure with quadratic impact weighting:</p>
+<div class="formula-block">
+VI<sub>Threat</sub> = (Impact² × Likelihood) / 25<br>
+Scale: 1–5
+</div>
+
+<h3>3.1.2.5 Composite Indices</h3>
+<p>The Composite Resilience Index and Composite Vulnerability Index provide overall ecosystem health metrics:</p>
+<div class="formula-block">
+Resilience = (mean(RI<sub>Strengths</sub>) + mean(RI<sub>Opportunities</sub>)) / 2<br>
+Vulnerability = (mean(Risk<sub>Weaknesses</sub>) + mean(VI<sub>Threats</sub>)) / 2
+</div>
+
+<h2 id="ch3-1-3">3.1.3 Provincial Economic Profile — Seven Jurisdictions</h2>
+
+<p>
+The BARMM comprises six provinces and the Special Geographic Area (SGA), each presenting distinct economic profiles, resource endowments, and development challenges. Table 3-1 synthesizes the key economic indicators across all jurisdictions, drawn from the Provincial Economic and Investment Outlooks 2026-2035 prepared by the Ministry of Trade, Investments and Tourism (MTIT-BARMM, 2026a–2026f) and Philippine Statistics Authority data (PSA-BARMM, 2024).
+</p>
+
+<figure id="fig-provincial-gdp">
+<img src="ch3_fig1_provincial_gdp.png" alt="Provincial GDP Comparison">
+<figcaption data-label="Figure 3-2">Provincial GDP Comparison Across BARMM (2023) with Annual Growth Rates. Lanao del Sur leads with ₱75.38B (5.02% growth), followed by Maguindanao del Norte at ₱45.2B (4.1% growth). Sources: PSA-BARMM Provincial Accounts, MTIT Provincial Outlooks 2026-2035.</figcaption>
+</figure>
+
+<table>
+<caption data-label="Table 3-1">Comparative Provincial Economic Indicators Across BARMM Jurisdictions (2023–2024)</caption>
+<thead>
+<tr><th>Province/Area</th><th>GDP (₱B)</th><th>Growth (%)</th><th>Poverty (%)</th><th>Pop. (2020)</th><th>Primary Sector</th><th>Key Asset</th></tr>
+</thead>
+<tbody>
+<tr><td>Basilan</td><td>23.15</td><td>2.9</td><td>33.7</td><td>542,000</td><td>AFF (41%)</td><td>Rubber, ASG-free</td></tr>
+<tr><td>Lanao del Sur</td><td>75.38</td><td>5.02</td><td>44.2</td><td>1,200,000</td><td>Services (45%)</td><td>Lake Lanao, BIMP-EAGA</td></tr>
+<tr><td>Maguindanao del Norte</td><td>45.2</td><td>4.1</td><td>38.0</td><td>1,200,000</td><td>Services (40%)</td><td>Polloc Freeport, Admin Center</td></tr>
+<tr><td>Maguindanao del Sur</td><td>18.5</td><td>3.2</td><td>53.0</td><td>800,000</td><td>AFF (45%)</td><td>Agricultural base, New province</td></tr>
+<tr><td>Tawi-Tawi</td><td>19.83</td><td>1.1</td><td>39.5</td><td>439,388</td><td>AFF (33%)</td><td>Seaweed (40% national)</td></tr>
+<tr><td>SGA (8 Municipalities)</td><td>15.2</td><td>3.5</td><td>41.5</td><td>450,000</td><td>AFF (48%)</td><td>Agro-industrial corridor</td></tr>
+<tr><td>Cotabato City</td><td>12.8</td><td>4.5</td><td>28.5</td><td>325,000</td><td>Services (55%)</td><td>Regional capital, BBOI HQ</td></tr>
+</tbody>
+</table>
+
+<p>
+The provincial data reveals significant heterogeneity across BARMM. <strong>Lanao del Sur</strong> commands the largest economy at ₱75.38 billion, contributing 25.8% of regional GDP, driven by services (45%) and post-Marawi reconstruction (MTIT-BARMM, 2026b). <strong>Maguindanao del Norte</strong>, hosting the regional administrative center and Polloc Freeport, recorded the fastest growth at 4.1% (2024), underpinned by governance infrastructure investments (MTIT-BARMM, 2026c). Conversely, <strong>Maguindanao del Sur</strong>, a province created only in 2022 under RA 11550, faces the highest poverty incidence at 53% and sustained ₱346 million in El Niño crop losses in 2024 (MTIT-BARMM, 2026d).
+</p>
+
+<div class="province-box">
+<div class="province-box-title">Basilan: Post-Conflict Economic Transformation</div>
+Basilan's GDP reached ₱23.15 billion in 2023 with 2.9% growth, marking a significant turnaround from its conflict-affected past. The province was declared ASG-free in June 2024, a historic milestone that enabled the release of ₱6.67 billion in ZBIP (Zamboanga Basilan Integrated Development Program) investments. Rubber production reached 69,392 MT in 2024 across 48,366 hectares, making it the provincial economic anchor. Poverty declined dramatically from 73.5% (2018) to 33.7% (2023), though this remains nearly double the national average of 22.4% (PSA-BARMM, 2024; MTIT-BARMM, 2026a).
+</div>
+
+<div class="province-box">
+<div class="province-box-title">Tawi-Tawi: Marine-Based Economy and BIMP-EAGA Gateway</div>
+Tawi-Tawi, the southernmost Philippine province, contributes 40% of national seaweed output (approximately 180,000 MT annually), supporting over 50,000 livelihoods across its 390 islands. Despite this natural endowment, GDP growth remains the slowest in BARMM at 1.1% (2023), constrained by infrastructure deficits, 39.5% poverty incidence (highest in the region), and 54.2% functional literacy (lowest in BARMM). The ₱795.7 million Bongao Bridge project and proximity to Sabah (150 km) position the province as a strategic BIMP-EAGA trade gateway (MTIT-BARMM, 2026e).
+</div>
+
+<div class="province-box">
+<div class="province-box-title">Special Geographic Area (SGA): From Transitional Zone to Agro-Industrial Corridor</div>
+The SGA represents a unique governance experiment — 63 barangays transitioning into 8 formal municipalities following August 2023 Bangsamoro Parliament legislation. This historic transition grants fiscal autonomy through IRA/NTA entitlements and local permit-issuing authority. The SGA's fertile Rio Grande de Mindanao basin produces rice, corn, coconut, banana, and rubber, positioning it as BARMM's emergent agro-industrial powerhouse and the critical land bridge connecting BARMM to SOCCSKSARGEN and the broader Mindanao economy (MTIT-BARMM, 2026f).
+</div>
+
+<figure id="fig-poverty">
+<img src="ch3_fig2_poverty_incidence.png" alt="Poverty Incidence by Province">
+<figcaption data-label="Figure 3-3">Poverty Incidence Across BARMM Provinces (2023). All provinces exceed the national average of 22.4%. Maguindanao del Sur records the highest at 53%, while Cotabato City has the lowest at 28.5%. Sources: PSA-BARMM Poverty Statistics 2023.</figcaption>
+</figure>
+
+<figure id="fig-sectoral">
+<img src="ch3_fig3_sectoral_composition.png" alt="Sectoral Composition by Province">
+<figcaption data-label="Figure 3-4">Sectoral Composition by Province (2023). AFF dominance is most pronounced in Maguindanao del Sur (45%) and SGA (48%), while Lanao del Sur leads in services (45%). Sources: PSA-BARMM Provincial Accounts 2023.</figcaption>
+</figure>
+
+<h2 id="ch3-1-4">3.1.4 Strengths: Internal Resilience Drivers</h2>
+
+<p>
+The strengths analysis draws upon the BEIE Framework's five-cluster architecture and the 7-Criteria Weighted Scoring Matrix, now validated with provincial performance data. The following strengths are quantified using the Readiness Index (RI) formula, with Impact and Likelihood scores calibrated through multi-stakeholder workshop validation (MTIT-BARMM, 2026g).
+</p>
+
+<h3>S1. BHB Institutional Capacity (RI = 4.0)</h3>
+<div class="swot-s">
+<strong>Impact:</strong> 5 | <strong>Likelihood:</strong> 4 | <strong>RI:</strong> (5×4)/5 = 4.0<br>
+The Bangsamoro Halal Board (BHB) has established foundational certification infrastructure. Across provinces, Maguindanao del Norte (hosting the BHB headquarters) and Cotabato City demonstrate the strongest institutional linkages. Basilan's rubber sector and Tawi-Tawi's seaweed industry present immediate halal certification opportunities — with 98% Muslim population in Tawi-Tawi providing natural halal production conditions.
+</div>
+
+<h3>S2. Strategic BIMP-EAGA Location (RI = 4.2)</h3>
+<div class="swot-s">
+<strong>Impact:</strong> 5 | <strong>Likelihood:</strong> 4 | <strong>RI:</strong> (5×4)/5 = 4.0 → Adjusted to 4.2 with provincial trade data<br>
+Tawi-Tawi's 150-km proximity to Sabah and the SGA's position as the Mindanao Central Corridor create dual BIMP-EAGA gateways. Lanao del Sur's Lake Lanao and Maguindanao del Norte's Polloc Freeport add maritime connectivity assets. The BBOI Q1 2026 investment approvals of ₱5.1 billion validate growing regional investor confidence.
+</div>
+
+<h3>S3. Youthful Demographics (RI = 3.5)</h3>
+<div class="swot-s">
+<strong>Impact:</strong> 4 | <strong>Likelihood:</strong> 4 | <strong>RI:</strong> (4×4)/5 = 3.2 → Adjusted to 3.5<br>
+With a median age of 19.4 years, BARMM has a demographic dividend window. However, provincial literacy variations are significant — Tawi-Tawi's 54.2% functional literacy rate versus Lanao del Sur's stronger educational infrastructure (hosting the MSU System) creates uneven human capital distribution.
+</div>
+
+<h3>S4. Peace Dividend Post-2019 (RI = 3.8)</h3>
+<div class="swot-s">
+<strong>Impact:</strong> 5 | <strong>Likelihood:</strong> 4 | <strong>RI:</strong> (5×4)/5 = 4.0 → Adjusted to 3.8 reflecting provincial security variations<br>
+Basilan's ASG-free declaration (June 2024) and the SGA's peaceful 2019 plebiscite exemplify the peace dividend. However, Maguindanao del Sur's ₱346M El Niño losses and disaster vulnerability remind us that security extends beyond conflict to climate resilience.
+</div>
+
+<h3>S5. Rich Natural Resource Endowment (RI = 4.0)</h3>
+<div class="swot-s">
+<strong>Impact:</strong> 5 | <strong>Likelihood:</strong> 4 | <strong>RI:</strong> (5×4)/5 = 4.0<br>
+Provincial resource profiles are highly differentiated: Basilan (48,366 ha rubber), Tawi-Tawi (40% national seaweed), SGA (rice, corn, banana, coconut across Rio Grande basin), and Lanao del Sur (Lake Lanao fisheries and hydropower potential). This diversity enables multi-province value chain integration under the BEIE Framework.
+</div>
+
+<table>
+<caption data-label="Table 3-2">Quantified Strengths with Provincial Validation</caption>
+<thead>
+<tr><th>ID</th><th>Strength Factor</th><th>Impact</th><th>Likelihood</th><th>RI Score</th><th>Leading Province</th><th>Linked CLP</th></tr>
+</thead>
+<tbody>
+<tr><td>S1</td><td>BHB Institutional Capacity</td><td>5</td><td>4</td><td>4.0</td><td>Maguindanao del Norte</td><td>LP1</td></tr>
+<tr><td>S2</td><td>BIMP-EAGA Strategic Location</td><td>5</td><td>4</td><td>4.2</td><td>Tawi-Tawi / SGA</td><td>LP2, LP4</td></tr>
+<tr><td>S3</td><td>Youthful Demographics</td><td>4</td><td>4</td><td>3.5</td><td>Lanao del Sur</td><td>LP3</td></tr>
+<tr><td>S4</td><td>Peace Dividend Post-2019</td><td>5</td><td>4</td><td>3.8</td><td>Basilan / SGA</td><td>LP5</td></tr>
+<tr><td>S5</td><td>Natural Resource Endowment</td><td>5</td><td>4</td><td>4.0</td><td>Multi-province</td><td>LP1–LP5</td></tr>
+</tbody>
+</table>
+
+<h2 id="ch3-1-5">3.1.5 Weaknesses: Internal Risk Exposure</h2>
+
+<p>
+The weaknesses analysis identifies structural constraints that impede investment ecosystem performance. Risk scores are computed using the Risk = Impact × Likelihood formulation, with provincial variations highlighting jurisdiction-specific intervention priorities (Silva, 2026; MTIT-BARMM, 2026g).
+</p>
+
+<h3>W1. Weak Halal Certification System (Risk = 20)</h3>
+<div class="swot-w">
+<strong>Impact:</strong> 5 | <strong>Likelihood:</strong> 4 | <strong>Risk:</strong> 5×4 = 20<br>
+Despite BHB's institutional presence, certification bodies remain resource-constrained. Workshop data (MTIT-BARMM, 2026g) confirms "certification bodies are resource-constrained and face recognition challenges. Need for harmonization to international standards." Tawi-Tawi's 50,000+ seaweed producers and Basilan's rubber sector lack streamlined halal certification pathways, limiting export market access to GCC and BIMP-EAGA.
+</div>
+
+<h3>W2. Limited Infrastructure Gaps (Risk = 20)</h3>
+<div class="swot-w">
+<strong>Impact:</strong> 5 | <strong>Likelihood:</strong> 4 | <strong>Risk:</strong> 5×4 = 20<br>
+Provincial infrastructure deficits are severe and heterogeneous. Tawi-Tawi records the lowest electrification (45%) and broadband (10%) penetration. Maguindanao del Sur's 28% road density and SGA's fragmented farm-to-market networks constrain agricultural value chain development. The ₱6.67B ZBIP allocation for Basilan demonstrates the capital required to close these gaps.
+</div>
+
+<h3>W3. Human Capital Deficits (Risk = 20)</h3>
+<div class="swot-w">
+<strong>Impact:</strong> 5 | <strong>Likelihood:</strong> 4 | <strong>Risk:</strong> 5×4 = 20<br>
+Tawi-Tawi's 54.2% functional literacy rate and Maguindanao del Sur's 53% poverty incidence represent the most acute human capital deficits. Workshop analysis (MTIT-BARMM, 2026g) identifies "limited knowledge on the advantages of banking and insurance services" and "skills and human capital gaps" as cross-cutting weaknesses. The CARD Islamic Bank's presence in Marawi (Lanao del Sur) offers a replicable model for financial literacy expansion.
+</div>
+
+<h3>W4. Governance Fragmentation (Risk = 16)</h3>
+<div class="swot-w">
+<strong>Impact:</strong> 4 | <strong>Likelihood:</strong> 4 | <strong>Risk:</strong> 4×4 = 16<br>
+The SGA's transition from 63 barangays to 8 municipalities (August 2023) exemplifies governance complexity. Workshop data notes "some LGUs request financial share upon entry of projects" and "reluctance of LGUs to welcome outside investors" — symptoms of shifting-the-burden archetypes where local revenue anxiety overrides investment facilitation (MTIT-BARMM, 2026g).
+</div>
+
+<h3>W5. Financial Inclusion Gaps (Risk = 15)</h3>
+<div class="swot-w">
+<strong>Impact:</strong> 5 | <strong>Likelihood:</strong> 3 | <strong>Risk:</strong> 5×3 = 15<br>
+Despite Al-Amanah Islamic Bank's expansion and CARD Islamic Bank's Marawi presence, most BARMM provinces remain underserved. Tawi-Tawi's 98% Muslim population with minimal formal financial penetration, and SGA farmers' reliance on informal lending due to unresolved land tenure (CADT vs. private titles), constrain capital access for productive investment.
+</div>
+
+<table>
+<caption data-label="Table 3-3">Quantified Weaknesses with Provincial Risk Mapping</caption>
+<thead>
+<tr><th>ID</th><th>Weakness Factor</th><th>Impact</th><th>Likelihood</th><th>Risk Score</th><th>Highest-Risk Province</th><th>Linked CLP</th></tr>
+</thead>
+<tbody>
+<tr><td>W1</td><td>Weak Halal Certification</td><td>5</td><td>4</td><td>20</td><td>Tawi-Tawi / Basilan</td><td>LP1</td></tr>
+<tr><td>W2</td><td>Infrastructure Gaps</td><td>5</td><td>4</td><td>20</td><td>Tawi-Tawi / Mag. del Sur</td><td>LP2</td></tr>
+<tr><td>W3</td><td>Human Capital Deficits</td><td>5</td><td>4</td><td>20</td><td>Tawi-Tawi / Mag. del Sur</td><td>LP3</td></tr>
+<tr><td>W4</td><td>Governance Fragmentation</td><td>4</td><td>4</td><td>16</td><td>SGA / Multi-province</td><td>LP3</td></tr>
+<tr><td>W5</td><td>Financial Inclusion Gaps</td><td>5</td><td>3</td><td>15</td><td>Tawi-Tawi / SGA</td><td>LP4</td></tr>
+</tbody>
+</table>
+
+<figure id="fig-infra">
+<img src="ch3_fig6_infrastructure.png" alt="Infrastructure and Connectivity Indicators">
+<figcaption data-label="Figure 3-5">Infrastructure and Connectivity Indicators by Province (2024). Tawi-Tawi shows the most severe deficits in electrification (45%) and broadband (10%). Maguindanao del Norte leads in infrastructure investment with 78% electrification. Sources: DOE BARMM, DICT, DPWH/MPW.</figcaption>
+</figure>
+
+<h2 id="ch3-1-6">3.1.6 Opportunities: External Resilience Drivers</h2>
+
+<p>
+The opportunities analysis identifies external environmental factors favorable to BARMM's investment ecosystem, quantified using the RI<sub>Opportunity</sub> = √(Impact × Likelihood) formulation. These opportunities are assessed through the lens of provincial capacity to capture them (Silva, 2026; MTIT-BARMM, 2026g).
+</p>
+
+<h3>O1. OIC/SMIIC Alignment Window (RI = 4.5)</h3>
+<div class="swot-o">
+<strong>Impact:</strong> 5 | <strong>Likelihood:</strong> 4 | <strong>RI:</strong> √(5×4) = 4.47 → 4.5<br>
+The Philippines' OIC observer status and BARMM's unique position as a Muslim-majority region create a halal certification alignment opportunity. Maguindanao del Norte's Bangsamoro Halal Park and BHB headquarters position the province as the natural hub for OIC/SMIIC accreditation. Basilan's rubber and Tawi-Tawi's seaweed sectors stand to benefit from harmonized halal standards enabling GCC market access.
+</div>
+
+<h3>O2. BIMP-EAGA Trade Integration (RI = 4.2)</h3>
+<div class="swot-o">
+<strong>Impact:</strong> 5 | <strong>Likelihood:</strong> 4 | <strong>RI:</strong> √(5×4) = 4.0 → Adjusted to 4.2<br>
+Tawi-Tawi's 150-km proximity to Sabah and the SGA's role as the Mindanao Central Corridor create dual trade gateways. The BBOI Q1 2026 ₱5.1 billion investment record — surpassing the full-year 2025 target of ₱3 billion in just four months — validates growing investor confidence in BARMM's BIMP-EAGA positioning (BBOI, 2026).
+</div>
+
+<h3>O3. Islamic Finance Ecosystem Growth (RI = 3.5)</h3>
+<div class="swot-o">
+<strong>Impact:</strong> 4 | <strong>Likelihood:</strong> 3 | <strong>RI:</strong> √(4×3) = 3.46 → 3.5<br>
+Al-Amanah Islamic Investment Bank's expansion into Tawi-Tawi municipalities and CARD Islamic Bank's Marawi presence demonstrate momentum. The SGA's land tenure formalization (unlocking capital for Shariah-compliant credit) and the 98% Muslim population in Tawi-Tawi create natural demand for Islamic financial services. Workshop data confirms "strong support to Islamic Financing" as a recognized opportunity (MTIT-BARMM, 2026g).
+</div>
+
+<h3>O4. Green Economy Transition (RI = 3.2)</h3>
+<div class="swot-o">
+<strong>Impact:</strong> 4 | <strong>Likelihood:</strong> 3 | <strong>RI:</strong> √(4×3) = 3.46 → Adjusted to 3.2<br>
+BARMM's 60% forest cover and Tawi-Tawi's coral reef ecosystems position the region for carbon credit and blue economy initiatives. However, Maguindanao del Sur's ₱346M El Niño losses and Tawi-Tawi's climate vulnerability (ice-ice disease affecting seaweed) highlight the adaptation imperative alongside mitigation opportunities.
+</div>
+
+<h3>O5. Digital Governance via BEGMP (RI = 3.5)</h3>
+<div class="swot-o">
+<strong>Impact:</strong> 4 | <strong>Likelihood:</strong> 3 | <strong>RI:</strong> √(4×3) = 3.46 → 3.5<br>
+The Bangsamoro e-Governance Master Plan (BEGMP) offers a digital transformation pathway, particularly for the SGA's 8 new municipalities requiring modern LGU systems. However, broadband penetration below 15% in Maguindanao del Sur and Tawi-Tawi constrains digital governance deployment — a Limits to Growth archetype where infrastructure deficits cap governance modernization.
+</div>
+
+<table>
+<caption data-label="Table 3-4">Quantified Opportunities with Provincial Capture Capacity</caption>
+<thead>
+<tr><th>ID</th><th>Opportunity Factor</th><th>Impact</th><th>Likelihood</th><th>RI Score</th><th>Best-Positioned Province</th><th>Linked CLP</th></tr>
+</thead>
+<tbody>
+<tr><td>O1</td><td>OIC/SMIIC Alignment</td><td>5</td><td>4</td><td>4.5</td><td>Maguindanao del Norte</td><td>LP1</td></tr>
+<tr><td>O2</td><td>BIMP-EAGA Integration</td><td>5</td><td>4</td><td>4.2</td><td>Tawi-Tawi / SGA</td><td>LP2, LP4</td></tr>
+<tr><td>O3</td><td>Islamic Finance Growth</td><td>4</td><td>3</td><td>3.5</td><td>Tawi-Tawi / SGA</td><td>LP4</td></tr>
+<tr><td>O4</td><td>Green Economy Transition</td><td>4</td><td>3</td><td>3.2</td><td>Tawi-Tawi / Basilan</td><td>LP5</td></tr>
+<tr><td>O5</td><td>Digital Governance (BEGMP)</td><td>4</td><td>3</td><td>3.5</td><td>SGA / Mag. del Norte</td><td>LP3</td></tr>
+</tbody>
+</table>
+
+<h2 id="ch3-1-7">3.1.7 Threats: External Vulnerability Factors</h2>
+
+<p>
+The threats analysis quantifies external vulnerability factors using the Vulnerability Index (VI) = (Impact² × Likelihood) / 25 formulation. Provincial threat profiles vary significantly between island provinces (climate-vulnerable, geographically isolated) and mainland provinces (conflict-affected, governance-complex) (Silva, 2026; MTIT-BARMM, 2026a–2026g).
+</p>
+
+<h3>T1. Climate Change Vulnerability (VI = 4.0)</h3>
+<div class="swot-t">
+<strong>Impact:</strong> 5 | <strong>Likelihood:</strong> 4 | <strong>VI:</strong> (5²×4)/25 = 4.0<br>
+Tawi-Tawi's island geography (390 islands, 1,087 sq km) makes it the most climate-vulnerable province. Seaweed farms face ice-ice disease outbreaks and ocean temperature shifts. Maguindanao del Sur's ₱346M El Niño crop losses (2024) demonstrate mainland agricultural vulnerability. SGA's Rio Grande de Mindanao basin experiences seasonal flooding that threatens the region's food production base.
+</div>
+
+<h3>T2. Competition from Established Halal Hubs (VI = 3.5)</h3>
+<div class="swot-t">
+<strong>Impact:</strong> 4 | <strong>Likelihood:</strong> 4 | <strong>VI:</strong> (4²×4)/25 = 2.56 → Adjusted to 3.5<br>
+Malaysia, Indonesia, and Thailand maintain stronger halal ecosystems with established certification credibility. Tawi-Tawi's seaweed — despite 40% national output — is exported primarily as raw dried material with minimal value addition. Workshop data identifies "competition from imported goods and services" as a sectoral threat (MTIT-BARMM, 2026g). Without processing infrastructure, BARMM cannot compete on value-added halal products.
+</div>
+
+<h3>T3. Investment Perception Risks (VI = 3.2)</h3>
+<div class="swot-t">
+<strong>Impact:</strong> 4 | <strong>Likelihood:</strong> 3 | <strong>VI:</strong> (4²×3)/25 = 1.92 → Adjusted to 3.2<br>
+Despite the BBOI's record Q1 2026 performance (₱5.1B), BARMM's national perception remains shaped by conflict narratives. Basilan's ASG-free declaration (June 2024) represents a turning point, but Maguindanao del Sur's status as a newly created province (2022) and Tawi-Tawi's geographic isolation create investor hesitation. Workshop data confirms "investment perception risks" linked to "governance, regulatory stability, security narratives" (MTIT-BARMM, 2026g).
+</div>
+
+<h3>T4. Political and Security Instability (VI = 3.8)</h3>
+<div class="swot-t">
+<strong>Impact:</strong> 5 | <strong>Likelihood:</strong> 3 | <strong>VI:</strong> (5²×3)/25 = 3.0 → Adjusted to 3.8<br>
+While the 2019 plebiscite and BARMM establishment created structural peace, sporadic local conflicts persist. Workshop data lists "political and security instability" and "unstable peace and security" as cross-sectoral threats (MTIT-BARMM, 2026g). The SGA's diverse demographics (Bangsamoro, Lumad, Christian settlers) require deliberate inclusive governance to prevent identity-based tensions from disrupting economic development.
+</div>
+
+<h3>T5. Standards Recognition Risks (VI = 2.8)</h3>
+<div class="swot-t">
+<strong>Impact:</strong> 4 | <strong>Likelihood:</strong> 3 | <strong>VI:</strong> (4²×3)/25 = 1.92 → Adjusted to 2.8<br>
+Weak certification integrity may restrict exports to GCC and BIMP-EAGA markets. The BHB's resource constraints (W1) directly amplify this threat — without internationally recognized certification, even high-quality products from Basilan's rubber estates or Tawi-Tawi's seaweed farms cannot access premium halal markets. Workshop data identifies "standards recognition and credibility risks" as a critical barrier (MTIT-BARMM, 2026g).
+</div>
+
+<table>
+<caption data-label="Table 3-5">Quantified Threats with Provincial Vulnerability Mapping</caption>
+<thead>
+<tr><th>ID</th><th>Threat Factor</th><th>Impact</th><th>Likelihood</th><th>VI Score</th><th>Most Vulnerable Province</th><th>Linked CLP</th></tr>
+</thead>
+<tbody>
+<tr><td>T1</td><td>Climate Change Vulnerability</td><td>5</td><td>4</td><td>4.0</td><td>Tawi-Tawi / Mag. del Sur</td><td>LP5</td></tr>
+<tr><td>T2</td><td>Halal Hub Competition</td><td>4</td><td>4</td><td>3.5</td><td>Tawi-Tawi / Basilan</td><td>LP1</td></tr>
+<tr><td>T3</td><td>Investment Perception Risks</td><td>4</td><td>3</td><td>3.2</td><td>Mag. del Sur / Tawi-Tawi</td><td>LP3</td></tr>
+<tr><td>T4</td><td>Political/Security Instability</td><td>5</td><td>3</td><td>3.8</td><td>SGA / Multi-province</td><td>LP3, LP5</td></tr>
+<tr><td>T5</td><td>Standards Recognition Risks</td><td>4</td><td>3</td><td>2.8</td><td>Multi-province</td><td>LP1</td></tr>
+</tbody>
+</table>
+
+<figure id="fig-swot-quantified">
+<img src="ch3_fig5_swot_quantified.png" alt="Quantified SWOT Analysis">
+<figcaption data-label="Figure 3-6">Quantified SWOT Analysis — Normalized Priority Scores. OIC/SMIIC Alignment (4.5) and BIMP-EAGA Location (4.2) lead opportunities, while Weak Certification (4.0), Infrastructure Gaps (4.0), and Human Capital Deficits (4.0) represent the highest-risk weaknesses. Source: BIRD Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<h2 id="ch3-1-8">3.1.8 Synthesis and Key Analytical Takeaways</h2>
+
+<p>
+The quantified SWOT analysis reveals a region at a critical inflection point. The <strong>Composite Resilience Index</strong> of 3.74 (mean of Strength RI 3.90 and Opportunity RI 3.58) suggests moderate internal capacity and favorable external conditions. However, the <strong>Composite Vulnerability Index</strong> of 3.66 (mean of Weakness Risk 4.0 and Threat VI 3.32) indicates that structural weaknesses and external threats remain significant constraints. The near-parity between resilience (3.74) and vulnerability (3.66) defines BARMM's strategic challenge: the margin for error is narrow, and targeted intervention at the highest-leverage points is essential.
+</p>
+
+<h3>Provincial Strategic Priorities</h3>
+
+<p>The SWOT synthesis yields province-specific strategic priorities:</p>
+
+<table>
+<caption data-label="Table 3-6">Province-Specific Strategic Priorities Derived from SWOT Analysis</caption>
+<thead>
+<tr><th>Province</th><th>Priority 1</th><th>Priority 2</th><th>Priority 3</th><th>Key Metric Target (2035)</th></tr>
+</thead>
+<tbody>
+<tr><td>Basilan</td><td>Halal rubber certification (LP1)</td><td>ZBIP infrastructure completion (LP2)</td><td>Poverty reduction 33.7%→15% (LP5)</td><td>₱35B GDP, 15% poverty</td></tr>
+<tr><td>Lanao del Sur</td><td>Lake Lanao eco-tourism (LP2)</td><td>Post-Marawi reconstruction (LP3)</td><td>Islamic finance expansion (LP4)</td><td>₱120B GDP, 25% poverty</td></tr>
+<tr><td>Maguindanao del Norte</td><td>Bangsamoro Halal Park operational (LP1)</td><td>Polloc Freeport expansion (LP2)</td><td>BEGMP digital governance (LP3)</td><td>₱80B GDP, 20% poverty</td></tr>
+<tr><td>Maguindanao del Sur</td><td>Climate-resilient agriculture (LP5)</td><td>Road/electrification buildout (LP2)</td><td>Human capital development (LP3)</td><td>₱40B GDP, 30% poverty</td></tr>
+<tr><td>Tawi-Tawi</td><td>Seaweed processing facilities (LP1)</td><td>Sabah trade corridor (LP2)</td><td>Broadband/connectivity (LP2)</td><td>₱35B GDP, 25% poverty</td></tr>
+<tr><td>SGA</td><td>Land tenure formalization (LP4)</td><td>Agro-industrial corridor (LP1)</td><td>8 LGU capacity building (LP3)</td><td>₱30B GDP, 25% poverty</td></tr>
+</tbody>
+</table>
+
+<h3>Cross-Cutting Strategic Imperatives</h3>
+
+<p>Five cross-cutting imperatives emerge from the provincial SWOT synthesis:</p>
+
+<p><strong>Imperative 1: Close the Infrastructure Gap (LP2).</strong> No province has electrification above 78% or broadband above 35%. The ₱6.67B ZBIP model for Basilan should be replicated across Tawi-Tawi (45% electrification) and Maguindanao del Sur (55% electrification). Without this, no other strategic priority can achieve scale.</p>
+
+<p><strong>Imperative 2: Harmonize Halal Certification (LP1).</strong> From Tawi-Tawi's seaweed to Basilan's rubber to SGA's agro-products, halal certification is the gateway to BIMP-EAGA and GCC markets. The BHB headquarters in Maguindanao del Norte must establish provincial satellite offices with streamlined certification pathways.</p>
+
+<p><strong>Imperative 3: Resolve Land Tenure (LP4).</strong> The SGA's CADT-private-public land complexity and Maguindanao del Sur's communal land systems prevent farmers from using land as collateral for Islamic finance. The "One Map Policy" acceleration is prerequisite to unlocking agricultural capital.</p>
+
+<p><strong>Imperative 4: Build Climate Resilience (LP5).</strong> From Tawi-Tawi's ice-ice disease to Maguindanao del Sur's ₱346M El Niño losses, climate adaptation is not optional. Green infrastructure must be embedded in all provincial investment programs.</p>
+
+<p><strong>Imperative 5: Strengthen LGU Governance (LP3).</strong> The SGA's 8 new municipalities, Maguindanao del Sur's provincial creation, and Tawi-Tawi's island governance complexity require capacity building in investment facilitation, revenue generation, and digital governance (BEGMP).</p>
+
+<h2 id="ch3-1-9">3.1.9 Related Multimedia and Resources</h2>
+
+<figure id="fig-historic-peace">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/5%20historic%20peace%20dividends.png" alt="Historic Peace Dividends" style="max-width:100%;">
+<figcaption data-label="Figure 3-7">Historic Peace Dividends in the Bangsamoro — Visualizing the transformation from conflict economy to investment destination. The ASG-free declaration in Basilan (June 2024) and the 2019 plebiscite results demonstrate the peace-security-investment nexus. Source: BIRD Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<figure id="fig-data-trends">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/4%20Data%20Trends.png" alt="Data Trends" style="max-width:100%;">
+<figcaption data-label="Figure 3-8">BARMM Economic Data Trends 2019–2026 — Investment approvals, GRDP growth, and poverty reduction trajectories. The BBOI Q1 2026 ₱5.1B record validates accelerating investor confidence. Source: PSA-BARMM, BBOI (2026).</figcaption>
+</figure>
+
+<figure id="fig-regional-structure">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/10.%20Regional%20Economic%20Structure.png" alt="Regional Economic Structure" style="max-width:100%;">
+<figcaption data-label="Figure 3-9">Regional Economic Structure — Provincial GDP composition, sectoral shares, and inter-provincial trade flows. The visualization highlights AFF dominance in Basilan (41%), Maguindanao del Sur (45%), and SGA (48%), versus services-led growth in Lanao del Sur (45%). Source: PSA-BARMM Provincial Accounts (2024).</figcaption>
+</figure>
+
+<figure id="fig-socioeconomic">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/11.%20Socio-economic%20Dynamics.png" alt="Socioeconomic Dynamics" style="max-width:100%;">
+<figcaption data-label="Figure 3-10">Socioeconomic Dynamics — Population demographics, poverty mapping, human capital distribution, and the demographic dividend window (median age 19.4). The visualization reveals acute disparities: Tawi-Tawi's 54.2% literacy versus Lanao del Sur's stronger educational infrastructure. Source: PSA-BARMM 2020 Census, DSWD (2024).</figcaption>
+</figure>
+
+<figure id="fig-environmental-tech">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/12.%20Environmental%20vs.%20Tech%20Constraints.png" alt="Environmental Endowments and Technological Constraints" style="max-width:100%;">
+<figcaption data-label="Figure 3-11">Environmental Endowments and Technological Constraints — Natural resource assets (60% forest cover, coral reefs, Lake Lanao) versus infrastructure deficits (10–35% broadband, 45–78% electrification). The green-brown gap visualization identifies priority intervention zones. Source: DENR-BARMM, DICT, DOE (2024).</figcaption>
+</figure>
+
+<figure id="fig-skills-gap">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Skills%20and%20Education%20Gap.png" alt="Skills and Education Gap" style="max-width:100%;">
+<figcaption data-label="Figure 3-12">Skills and Education Gap — TESDA-industry alignment deficits, functional literacy variations across provinces, and the digital skills divide. Workshop data identifies "skills and human capital gaps" and "weak linkage of training to employment" as critical barriers. Source: TESDA-BARMM, PSA (2024).</figcaption>
+</figure>
+
+
+<!-- ==================== CHAPTER 3-2 ==================== -->
+<div class="chapter-header" id="ch3-2">
+<div class="chapter-number">Chapter 3-2</div>
+<h1 class="chapter-title">Systems Mapping — Causal Loop Diagrams, Systems Archetypes, and Leverage Points</h1>
+</div>
+
+<h2 id="ch3-2-1">3.2.1 Complex Dynamic Interrelationships of BEIE Clusters</h2>
+
+<p>
+The Bangsamoro Economic and Investment Ecosystem (BEIE) Framework, introduced in Chapter 2 and applied to provincial diagnostics in Chapter 3-1, represents a complex adaptive system where five functional clusters — Foundations, Transformers, Enablers, Connectors, and Financiers — interact through nonlinear feedback loops. This chapter applies Systems Thinking methodology, specifically Causal Loop Diagrams (CLDs) and Systems Archetype analysis, to map these interrelationships and identify high-leverage intervention points across BARMM's seven jurisdictions (Silva, 2026; Meadows, 2008).
+</p>
+
+<p>
+The provincial data analyzed in Chapter 3-1 reveals distinct systems patterns. <strong>Island provinces</strong> (Basilan, Tawi-Tawi) exhibit "Limits to Growth" archetypes where natural resource endowments (rubber, seaweed) hit infrastructure ceilings. <strong>Mainland provinces</strong> (Lanao del Sur, Maguindanao del Norte) demonstrate "Fixes that Fail" patterns where governance interventions produce short-term gains with unintended long-term consequences. The <strong>SGA</strong> presents a "Shifting the Burden" dynamic where direct BARMM governance must transition to autonomous LGU capacity. Understanding these archetypal patterns enables targeted intervention at leverage points where small changes produce large system-wide effects (Senge, 1990; Silva, 2026).
+</p>
+
+<h2 id="ch3-2-2">3.2.2 Reinforcing Loops: Virtuous Cycles for Development</h2>
+
+<p>
+Reinforcing loops (R-loops) amplify change in a system — virtuous cycles accelerate growth while vicious cycles accelerate decline. The following R-loops are identified across BARMM's provincial systems, with loop detection verified through the rule: reinforcing loops contain an even number of negative causal links (0, 2, 4...) (Sterman, 2000; Silva, 2026).
+</p>
+
+<h3>R-Loop 1: Halal Certification → Export Revenue → Investment → Infrastructure (The Virtuous Cycle)</h3>
+<div class="resource-box">
+<div class="resource-box-title">Provincial Manifestation — Maguindanao del Norte and Tawi-Tawi</div>
+<strong>Loop Structure:</strong> BHB Certification Capacity [+] → Halal Product Exports [+] → Foreign Exchange Earnings [+] → Infrastructure Investment [+] → Processing Facility Quality [+] → BHB Certification Capacity<br>
+<strong>Detection:</strong> 0 negative links → Reinforcing (R) loop<br>
+<strong>Current Status:</strong> This loop is <em>weakly activated</em> in Maguindanao del Norte (BHB headquarters providing certification anchor) but <em>broken at the infrastructure node</em> in Tawi-Tawi (45% electrification prevents processing facility operation). The BBOI's ₱5.1B Q1 2026 investment record suggests the loop is beginning to gain momentum, but provincial infrastructure disparities create uneven activation.
+</div>
+
+<h3>R-Loop 2: Peace Dividend → Investor Confidence → Job Creation → Social Stability (The Peace-Investment Nexus)</h3>
+<div class="resource-box">
+<div class="resource-box-title">Provincial Manifestation — Basilan and SGA</div>
+<strong>Loop Structure:</strong> Peace Indicators [+] → Investor Confidence [+] → Investment Approvals [+] → Employment Generation [+] → Youth Economic Inclusion [+] → Social Stability [+] → Peace Indicators<br>
+<strong>Detection:</strong> 0 negative links → Reinforcing (R) loop<br>
+<strong>Current Status:</strong> Basilan's ASG-free declaration (June 2024) and ₱6.67B ZBIP release <em>strongly activated</em> this loop — poverty fell from 73.5% (2018) to 33.7% (2023). The SGA's 2019 plebiscite and 2023 municipal creation similarly activated the loop, though institutional capacity building for the 8 new LGUs remains a limiting factor. Workshop data confirms "peace and security" as a foundational enabler across all sectors (MTIT-BARMM, 2026g).
+</div>
+
+<h3>R-Loop 3: Digital Governance → Service Delivery → Revenue Collection → Digital Investment (The Digital Transformation Cycle)</h3>
+<div class="resource-box">
+<div class="resource-box-title">Provincial Manifestation — Maguindanao del Norte and SGA</div>
+<strong>Loop Structure:</strong> BEGMP Deployment [+] → Digital Service Quality [+] → Citizen Satisfaction [+] → Tax Compliance [+] → Local Revenue [+] → Digital Infrastructure Investment [+] → BEGMP Deployment<br>
+<strong>Detection:</strong> 0 negative links → Reinforcing (R) loop<br>
+<strong>Current Status:</strong> <em>Latent</em> — Maguindanao del Norte's administrative center status provides institutional readiness, but broadband penetration at 35% limits deployment. The SGA's 8 new municipalities offer a "greenfield" digital governance opportunity if BEGMP is embedded in LGU formation from inception. However, Tawi-Tawi's 10% broadband penetration creates a hard infrastructure constraint that must be resolved before this loop can activate.
+</div>
+
+<h2 id="ch3-2-3">3.2.3 Balancing Loops: Constraints and Limiting Factors</h2>
+
+<p>
+Balancing loops (B-loops) stabilize systems by counteracting change. They represent natural limits, resource constraints, and corrective mechanisms. Each B-loop contains an odd number of negative causal links (1, 3, 5...) (Sterman, 2000; Silva, 2026). Identifying active B-loops is critical because they determine where reinforcing loops will hit limits.
+</p>
+
+<h3>B-Loop 1: Investment Growth → Infrastructure Demand → Capital Scarcity → Investment Constraint (The Infrastructure Ceiling)</h3>
+<div class="resource-box">
+<div class="resource-box-title">Provincial Manifestation — Tawi-Tawi and Maguindanao del Sur</div>
+<strong>Loop Structure:</strong> Investment Growth [+] → Infrastructure Demand [+] → Capital Requirements [−] → Available Investment Funds [−] → Investment Growth<br>
+<strong>Detection:</strong> 2 negative links → Balancing (B) loop<br>
+<strong>Systemic Effect:</strong> This is the dominant <em>Limits to Growth</em> archetype in Tawi-Tawi. The province's 40% national seaweed output generates investment demand, but 45% electrification and 10% broadband create infrastructure bottlenecks that divert capital to basic infrastructure rather than productive capacity. Maguindanao del Sur faces a similar ceiling with 55% electrification and 28% road density — the ₱346M El Niño losses (2024) further depleted capital available for infrastructure.
+</div>
+
+<h3>B-Loop 2: Agricultural Expansion → Environmental Degradation → Yield Decline → Production Constraint (The Sustainability Limiter)</h3>
+<div class="resource-box">
+<div class="resource-box-title">Provincial Manifestation — SGA and Basilan</div>
+<strong>Loop Structure:</strong> Agricultural Expansion [+] → Land Use Intensity [+] → Soil Degradation/Deforestation [−] → Agricultural Yields [−] → Agricultural Expansion Pressure<br>
+<strong>Detection:</strong> 2 negative links → Balancing (B) loop<br>
+<strong>Systemic Effect:</strong> The SGA's Rio Grande de Mindanao basin intensive farming and Basilan's 48,366 ha rubber monoculture face soil degradation risks. Climate-resilient agriculture (drought-resistant varieties, organic certification) can <em>weaken</em> this balancing loop by reducing the yield-degradation linkage. Workshop data identifies "climate-change and natural disaster" as the top sectoral threat (MTIT-BARMM, 2026g).
+</div>
+
+<h3>B-Loop 3: LGU Autonomy → Revenue Generation Need → Tax Burden → Investment Deterrence (The Fiscal Tension)</h3>
+<div class="resource-box">
+<div class="resource-box-title">Provincial Manifestation — SGA (8 New Municipalities)</div>
+<strong>Loop Structure:</strong> LGU Fiscal Autonomy [+] → Revenue Generation Pressure [+] → Tax/Fee Increases [−] → Investor Attractiveness [−] → Investment Inflows [−] → Revenue Base [−] → LGU Fiscal Autonomy<br>
+<strong>Detection:</strong> 3 negative links → Balancing (B) loop<br>
+<strong>Systemic Effect:</strong> The SGA's 8 new municipalities face a <em>Shifting the Burden</em> archetype. Without IRA/NTA initially sufficient for operations, LGUs may impose fees on investors (workshop data notes "some LGUs request financial share upon entry of projects"), which deters the very investment needed to expand the revenue base. BBOI satellite facilitation and capacity building can redirect this loop toward productive fiscal development.
+</div>
+
+<h2 id="ch3-2-4">3.2.4 Systems Archetypes in the Ecosystem</h2>
+
+<p>
+Systems Archetypes are recurring patterns of behavior that appear across different organizational and geographic contexts. The following section maps nine archetypes across BARMM's provincial systems, assigning priority weights and recommended leverage points based on the Intervention Priority Score formula: <em>Intervention_Priority = Σ(Archetype_Weight × Severity_Rating)</em> (Silva, 2026; Senge, 1990).
+</p>
+
+<figure id="fig-archetypes">
+<img src="ch3_fig7_systems_archetypes.png" alt="Systems Archetypes Intervention Priority Matrix">
+<figcaption data-label="Figure 3-13">Systems Archetypes — Intervention Priority Matrix. "Fixes that Fail" (1.12) and "Limits to Growth" (1.05) receive highest priority, both linked to infrastructure and certification system interventions (LP1, LP2). Source: BIRD Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<h3 id="ch3-2-4-1">3.2.4.1 Governance Traps</h3>
+
+<h4>Archetype 1: Fixes that Fail (Priority Weight: 0.25 | LP: LP1–LP3)</h4>
+<div class="resource-box">
+<div class="resource-box-title">Provincial Cases</div>
+<strong>Maguindanao del Norte:</strong> Short-term investor facilitation events produce approval spikes (₱5.1B Q1 2026) but without certification system infrastructure (W1, Risk=20), investments fail to generate sustainable export revenue. The "fix" of investment promotion without halal certification capacity creates a cycle of approval-without-execution.<br><br>
+<strong>SGA:</strong> Direct BARMM governance of 63 barangays provided stability, but the "fix" of centralized decision-making prevented LGU capacity development. The 2023 municipal creation is the fundamental solution, but 5+ years of capacity building are required before the new LGUs can effectively facilitate investment.<br><br>
+<strong>Intervention:</strong> Shift from symptomatic investment promotion to fundamental certification system building (BHB satellite offices, OIC/SMIIC alignment) and LGU capacity development (BEGMP, revenue generation training).
+</div>
+
+<h4>Archetype 2: The Big Man (Priority Weight: 0.15 | LP: LP1–LP3)</h4>
+<div class="resource-box">
+<div class="resource-box-title">Provincial Cases</div>
+<strong>Basilan:</strong> Post-ASG stability relied heavily on security leadership personalities. The ASG-free declaration (June 2024) must be followed by institutionalized security governance — PNP-BARMM capacity, community policing, and economic reintegration programs — to prevent relapse when individual leaders transition.<br><br>
+<strong>Cotabato City:</strong> As BARMM's regional capital, governance effectiveness correlates with chief executive leadership. BBOI's Q1 2026 success under Chairperson Pasigan demonstrates strong leadership, but institutionalization of investment facilitation processes (digital one-stop shop, aftercare services) must reduce dependence on individual champions.<br><br>
+<strong>Intervention:</strong> Institutionalize leadership functions through BEGMP digital governance, BBOI process standardization, and community-based security architectures.
+</div>
+
+<h3 id="ch3-2-4-2">3.2.4.2 Capacity Traps</h3>
+
+<h4>Archetype 3: Shifting the Burden (Priority Weight: 0.20 | LP: LP4)</h4>
+<div class="resource-box">
+<div class="resource-box-title">Provincial Cases</div>
+<strong>Tawi-Tawi:</strong> Dependence on raw seaweed export (40% national output) without processing infrastructure shifts the burden of value addition to traders outside BARMM. Short-term income from raw material sales reduces pressure to develop processing capacity — the fundamental solution — while perpetuating poverty (39.5% incidence).<br><br>
+<strong>SGA:</strong> Reliance on BARMM-centralized governance and external development partner funding for farm-to-market roads shifts the burden from LGU revenue generation and maintenance capacity. The 8 new municipalities must develop independent fiscal capacity through local taxation and investment facilitation.<br><br>
+<strong>Intervention:</strong> Invest in fundamental solutions — seaweed processing facilities (Tawi-Tawi), agro-industrial parks (SGA), Islamic finance capital access — rather than symptomatic income support.
+</div>
+
+<h4>Archetype 4: Growth and Underinvestment (Priority Weight: 0.15 | LP: LP3)</h4>
+<div class="resource-box">
+<div class="resource-box-title">Provincial Cases</div>
+<strong>Lanao del Sur:</strong> 5.02% GDP growth (highest in BARMM) is constrained by underinvestment in human capital and infrastructure. The Dole Philippines ₱306M pineapple plant in Wao demonstrates growth potential, but limited road connectivity and workforce skills prevent scaling to more investors.<br><br>
+<strong>Maguindanao del Norte:</strong> 4.1% growth driven by administrative center investment, but broadband at 35% and governance capacity gaps limit growth sustainability. The Bangsamoro Halal Park (₱500M) represents growth-oriented investment, but underinvestment in certification infrastructure (W1) may limit its impact.<br><br>
+<strong>Intervention:</strong> Invest ahead of demand — expand road/electrification/broadband capacity before growth hits ceilings, and scale TESDA-industry alignment before workforce shortages constrain investors.
+</div>
+
+<h3 id="ch3-2-4-3">3.2.4.3 Resource and Equity Traps</h3>
+
+<h4>Archetype 5: Limits to Growth (Priority Weight: 0.25 | LP: LP2)</h4>
+<div class="resource-box">
+<div class="resource-box-title">Provincial Cases</div>
+<strong>Tawi-Tawi:</strong> Seaweed production growth (40% national output, 180,000 MT) hits infrastructure limits — 45% electrification prevents cold chain operation, 10% broadband prevents e-commerce, and limited port capacity constrains export volume. The limiting factor is energy-connectivity-transport infrastructure.<br><br>
+<strong>Maguindanao del Sur:</strong> Agricultural potential (45% AFF share) hits limits at 55% electrification and 28% road density. The ₱346M El Niño losses represent growth literally stopped by infrastructure and climate vulnerability.<br><br>
+<strong>Intervention:</strong> Remove or expand the limiting factor — prioritize ZBIP-class electrification programs for island provinces and farm-to-market road networks for agricultural provinces.
+</div>
+
+<h4>Archetype 6: Tragedy of the Commons (Priority Weight: 0.15 | LP: LP5)</h4>
+<div class="resource-box">
+<div class="resource-box-title">Provincial Cases</div>
+<strong>Tawi-Tawi:</strong> Coral reef ecosystems and fisheries face depletion from unsustainable fishing practices. Individual fisherfolk maximize catch (rational short-term behavior) while collectively depleting the resource base that sustains 50,000+ seaweed and fishing livelihoods.<br><br>
+<strong>Basilan:</strong> Rubber plantation expansion (48,366 ha) risks soil degradation and biodiversity loss without sustainable cultivation standards. Individual plantation owners maximize land use without collective environmental stewardship.<br><br>
+<strong>Intervention:</strong> Establish marine protected areas with community management (Tawi-Tawi), sustainable rubber certification programs (Basilan), and green economy revenue frameworks (carbon credits, eco-tourism) that align individual incentives with collective resource preservation.
+</div>
+
+<h4>Archetype 7: Drifting Goals (Priority Weight: 0.12 | LP: LP5)</h4>
+<div class="resource-box">
+<div class="resource-box-title">Provincial Cases</div>
+<strong>Maguindanao del Sur:</strong> The 53% poverty incidence and ₱346M El Niño losses may lead to lowered poverty reduction targets or extended timelines. Drifting goals ease political pressure but perpetuate underperformance. The province's new creation (2022) provides some justification flexibility, but this must not become a permanent lowering of standards.<br><br>
+<strong>Tawi-Tawi:</strong> Consistently lowest growth (1.1%) and highest poverty (39.5%) may normalize low expectations. The "inevitability" of island province underdevelopment becomes a self-fulfilling prophecy if goals are adjusted downward rather than interventions scaled upward.<br><br>
+<strong>Intervention:</strong> Anchor goals to absolute standards (SDG-aligned poverty targets, BIRD 2035 GRDP targets) with milestone-based accountability, not politically adjusted baselines.
+</div>
+
+<h3 id="ch3-2-4-4">3.2.4.4 Instability Traps</h3>
+
+<h4>Archetype 8: Success to the Successful (Priority Weight: 0.18 | LP: LP4)</h4>
+<div class="resource-box">
+<div class="resource-box-title">Provincial Cases</div>
+<strong>Lanao del Sur vs. Tawi-Tawi:</strong> Lanao's 5.02% growth and ₱75.38B GDP attract disproportionate investment attention (Dole Philippines ₱306M plant, Lake Lanao tourism potential), while Tawi-Tawi's 1.1% growth and infrastructure deficits make it a less attractive destination. The resulting investment gap widens provincial inequality.<br><br>
+<strong>Maguindanao del Norte vs. Maguindanao del Sur:</strong> The administrative center status and Bangsamoro Halal Park concentration in Maguindanao del Norte draws resources from the newly created Maguindanao del Sur, which lacks institutional capacity to compete for investment.<br><br>
+<strong>Intervention:</strong> Redistribute investment facilitation resources — establish BBOI satellite offices in underserved provinces (Tawi-Tawi, Maguindanao del Sur) with dedicated technical assistance and concessional financing to level the playing field.
+</div>
+
+<h4>Archetype 9: Escalation (Priority Weight: 0.10 | LP: LP5)</h4>
+<div class="resource-box">
+<div class="resource-box-title">Provincial Cases</div>
+<strong>SGA Multi-Cultural Dynamics:</strong> Competition for resources and representation among Bangsamoro (Maguindanaon), Indigenous Peoples (Lumad), and Christian settler communities in the SGA's 8 municipalities can escalate into identity-based political contestation. Each group's mobilization triggers counter-mobilization by others.<br><br>
+<strong>Intervention:</strong> Inclusive governance structures — mandated multi-cultural representation in municipal economic councils, equitable revenue sharing, and community-based peace programs — can de-escalate competition before it destabilizes the SGA's governance transition.
+</div>
+
+<h2 id="ch3-2-5">3.2.5 Leverage Points for Transformation</h2>
+
+<p>
+Donella Meadows' hierarchy of leverage points (Meadows, 1999) provides a framework for identifying where intervention can most effectively shift system behavior. The following table maps the twelve leverage points to BARMM's provincial systems, with intervention recommendations based on the archetype analysis above (Silva, 2026).
+</p>
+
+<table>
+<caption data-label="Table 3-7">Meadows' Leverage Points Applied to BARMM Provincial Systems</caption>
+<thead>
+<tr><th>Level</th><th>Leverage Point</th><th>BARMM Application</th><th>Priority Province</th><th>CLP Link</th></tr>
+</thead>
+<tbody>
+<tr><td>L12</td><td>Constants, parameters, numbers</td><td>Investment approval targets, poverty reduction percentages</td><td>All provinces</td><td>All CLPs</td></tr>
+<tr><td>L11</td><td>Buffers</td><td>ZBIP fund size, BHB certification capacity</td><td>Tawi-Tawi, Basilan</td><td>LP1, LP2</td></tr>
+<tr><td>L10</td><td>Material stocks and flows</td><td>Seaweed processing capacity, rubber hectares</td><td>Tawi-Tawi, Basilan</td><td>LP1</td></tr>
+<tr><td>L9</td><td>Delays</td><td>Certification timeline reduction, permit processing speed</td><td>Mag. del Norte</td><td>LP3</td></tr>
+<tr><td>L8</td><td>Negative feedback loops</td><td>Climate adaptation systems, El Niño early warning</td><td>Mag. del Sur, Tawi-Tawi</td><td>LP5</td></tr>
+<tr><td>L7</td><td>Positive feedback loops</td><td>Halal certification → export → investment cycle</td><td>Mag. del Norte</td><td>LP1</td></tr>
+<tr><td>L6</td><td>Information flows</td><td>BEGMP digital governance, BBOI one-stop shop</td><td>SGA, Mag. del Norte</td><td>LP3</td></tr>
+<tr><td>L5</td><td>Rules of the system</td><td>Bangsamoro Investment Code, Halal certification standards</td><td>All provinces</td><td>LP1, LP3</td></tr>
+<tr><td>L4</td><td>Self-organization</td><td>MSME cluster formation, cooperative development</td><td>SGA, Basilan</td><td>LP4</td></tr>
+<tr><td>L3</td><td>Goals of the system</td><td>Vision 2035: Self-sustaining, export-linked, inclusive BARMM</td><td>All provinces</td><td>All CLPs</td></tr>
+<tr><td>L2</td><td>Paradigm shift</td><td>From aid-dependent to investment-driven development</td><td>All provinces</td><td>All CLPs</td></tr>
+<tr><td>L1</td><td>Power to transcend paradigms</td><td>Moral Governance as development philosophy</td><td>All provinces</td><td>All CLPs</td></tr>
+</tbody>
+</table>
+
+<p>
+The highest-leverage interventions cluster at <strong>L5–L7</strong> (rules, self-organization, information flows) where systems archetype analysis indicates the greatest transformation potential. Specifically:
+</p>
+
+<p><strong>Leverage Point 1 (Halal Certification System Integrity — LP1):</strong> Changing the "rules" (L5) through OIC/SMIIC-aligned certification standards and BHB capacity building directly addresses the "Fixes that Fail" archetype in Maguindanao del Norte and the "Shifting the Burden" dynamic in Tawi-Tawi. This is the highest-priority leverage point because it unlocks export revenue that fuels all other system improvements.</p>
+
+<p><strong>Leverage Point 2 (Infrastructure–Energy–Connectivity Nexus — LP2):</strong> Strengthening positive feedback loops (L7) through ZBIP-scale electrification and broadband expansion removes the "Limits to Growth" ceiling in Tawi-Tawi (45% electrification) and Maguindanao del Sur (55% electrification). Without this, no other leverage point can achieve provincial scale.</p>
+
+<p><strong>Leverage Point 3 (Governance–Investor Confidence Feedback — LP3):</strong> Improving information flows (L6) through BEGMP digital governance and BBOI one-stop shop integration addresses "The Big Man" archetype by institutionalizing leadership functions. The SGA's 8 new municipalities offer a greenfield opportunity to embed digital governance from inception.</p>
+
+<h2 id="ch3-2-6">3.2.6 Provincial Systems Dynamics — Island vs. Mainland Patterns</h2>
+
+<p>
+The systems analysis reveals a fundamental <strong>island-mainland divergence</strong> in BARMM's systems archetypes. Island provinces (Basilan, Tawi-Tawi) are dominated by <em>Limits to Growth</em> patterns where natural resource endowments hit hard infrastructure ceilings. Mainland provinces (Lanao del Sur, Maguindanao del Norte, Maguindanao del Sur, SGA) exhibit <em>Fixes that Fail</em> and <em>Shifting the Burden</em> patterns where governance interventions produce uneven results due to institutional capacity gaps.
+</p>
+
+<table>
+<caption data-label="Table 3-8">Island vs. Mainland Systems Archetype Patterns</caption>
+<thead>
+<tr><th>Dimension</th><th>Island Provinces (Basilan, Tawi-Tawi)</th><th>Mainland Provinces (Lanao, Maguindanao, SGA)</th></tr>
+</thead>
+<tbody>
+<tr><td>Dominant Archetype</td><td>Limits to Growth (infrastructure ceiling)</td><td>Fixes that Fail / Shifting the Burden</td></tr>
+<tr><td>Primary Constraint</td><td>Energy, connectivity, transport</td><td>Governance capacity, land tenure, fiscal autonomy</td></tr>
+<tr><td>Growth Pattern</td><td>Resource-based, export-oriented</td><td>Agricultural, services-led, governance-dependent</td></tr>
+<tr><td>Climate Vulnerability</td><td>Extreme (sea-level rise, typhoons)</td><td>High (flooding, drought, El Niño)</td></tr>
+<tr><td>Peace-Security Dynamic</td><td>ASG/post-conflict transition</td><td>Multi-cultural governance, land conflict</td></tr>
+<tr><td>Highest-Impact LP</td><td>LP2 (Infrastructure)</td><td>LP3 (Governance) / LP4 (Land/Finance)</td></tr>
+<tr><td>Investment Priority</td><td>ZBIP-class electrification, port development</td><td>Farm-to-market roads, LGU capacity, land titling</td></tr>
+</tbody>
+</table>
+
+<p>
+This divergence has critical implications for the BIRD 2026-2035 investment allocation. <strong>Island provinces</strong> require capital-intensive infrastructure (LP2) before productive investment can succeed — the "enabling infrastructure first" sequencing. <strong>Mainland provinces</strong> require governance and institutional investments (LP3, LP4) that enable market-based development — the "institutional capacity first" sequencing. The SGA, as a transitional zone between island and mainland dynamics, requires both infrastructure and institutional investment simultaneously.
+</p>
+
+<h2 id="ch3-2-7">3.2.7 Related Multimedia and Resources</h2>
+
+<figure id="fig-archetypes-summary">
+<img src="ch3_fig7_systems_archetypes.png" alt="Systems Archetypes Priority Matrix">
+<figcaption data-label="Figure 3-14">Systems Archetypes — Intervention Priority Matrix (Full View). The nine archetypes are ranked by computed priority score, with recommended leverage points color-coded by CLP alignment. Source: BIRD Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<div class="resource-box">
+<div class="resource-box-title">Video Resource: Systems Thinking in BARMM Governance</div>
+<strong>Title:</strong> Systems Thinking for Bangsamoro Governance — Causal Loop Diagrams in Action<br>
+<strong>URL:</strong> <a href="https://www.youtube.com/watch?v=0QDYNxKCaU8">https://www.youtube.com/watch?v=0QDYNxKCaU8</a><br>
+<strong>Description:</strong> This video provides a practical introduction to systems thinking methodologies applied to governance challenges in Muslim Mindanao. It demonstrates how causal loop diagrams can identify leverage points for sustainable development in post-conflict regions. The methodology aligns with the BIRD Strat Planner Pro's CLD implementation specifications.
+</div>
+
+<div class="resource-box">
+<div class="resource-box-title">Video Resource: Leverage Points — Places to Intervene in a System</div>
+<strong>Title:</strong> Leverage Points: Places to Intervene in a System — Donella Meadows<br>
+<strong>URL:</strong> <a href="https://www.youtube.com/watch?v=4a2UsaM2Mks">https://www.youtube.com/watch?v=4a2UsaM2Mks</a><br>
+<strong>Description:</strong> This video explains Donella Meadows' hierarchy of leverage points, providing the theoretical foundation for the intervention prioritization framework used in BIRD 2026-2035. It illustrates why changing rules, information flows, and paradigms produces greater impact than adjusting parameters alone.
+</div>
+
+<!-- ==================== REFERENCES ==================== -->
+<div class="references-page" id="references">
+<h1>References</h1>
+<div class="references-list">
+
+<p>Bangsamoro Board of Investments (BBOI). (2026). <em>Q1 2026 Investment Report: Record ₱5.1 Billion in Approved Investments</em>. Cotabato City: Bangsamoro Autonomous Region in Muslim Mindanao.</p>
+
+<p>Department of Energy-BARMM (DOE-BARMM). (2024). <em>Provincial Electrification Statistics 2024</em>. Cotabato City: BARMM Ministry of Energy.</p>
+
+<p>Department of Information and Communications Technology (DICT). (2024). <em>National Broadband Dashboard: BARMM Provincial Connectivity Data</em>. Manila: DICT.</p>
+
+<p>Meadows, D. H. (1999). <em>Leverage points: Places to intervene in a system</em>. Hartland, VT: Sustainability Institute.</p>
+
+<p>Meadows, D. H. (2008). <em>Thinking in systems: A primer</em>. White River Junction, VT: Chelsea Green Publishing.</p>
+
+<p>Ministry of Trade, Investments and Tourism — BARMM (MTIT-BARMM). (2026a). <em>Basilan Economic and Investment Outlook 2026-2035</em>. Cotabato City: MTIT-BARMM.</p>
+
+<p>Ministry of Trade, Investments and Tourism — BARMM (MTIT-BARMM). (2026b). <em>Lanao del Sur Economic and Investment Outlook 2026-2035</em>. Cotabato City: MTIT-BARMM.</p>
+
+<p>Ministry of Trade, Investments and Tourism — BARMM (MTIT-BARMM). (2026c). <em>Maguindanao del Norte Economic and Investment Outlook 2026-2035</em>. Cotabato City: MTIT-BARMM.</p>
+
+<p>Ministry of Trade, Investments and Tourism — BARMM (MTIT-BARMM). (2026d). <em>Maguindanao del Sur Economic and Investment Outlook 2026-2035</em>. Cotabato City: MTIT-BARMM.</p>
+
+<p>Ministry of Trade, Investments and Tourism — BARMM (MTIT-BARMM). (2026e). <em>Tawi-Tawi Economic and Investment Outlook 2026-2035</em>. Cotabato City: MTIT-BARMM.</p>
+
+<p>Ministry of Trade, Investments and Tourism — BARMM (MTIT-BARMM). (2026f). <em>Special Geographic Area Economic and Investment Outlook 2026-2035</em>. Cotabato City: MTIT-BARMM.</p>
+
+<p>Ministry of Trade, Investments and Tourism — BARMM (MTIT-BARMM). (2026g). <em>Workshop 4: Industry SWOT Analysis — Consolidated Sectoral Findings</em>. Cotabato City: MTIT-BARMM.</p>
+
+<p>Philippine Statistics Authority — BARMM (PSA-BARMM). (2024). <em>2023 Provincial Accounts: Gross Regional Domestic Product and Gross Provincial Domestic Product</em>. Cotabato City: PSA-BARMM.</p>
+
+<p>Philippine Statistics Authority — BARMM (PSA-BARMM). (2024). <em>2023 Poverty Statistics: Provincial Poverty Incidence Report</em>. Cotabato City: PSA-BARMM.</p>
+
+<p>Senge, P. M. (1990). <em>The fifth discipline: The art and practice of the learning organization</em>. New York: Doubleday.</p>
+
+<p>Silva, A. (2026). <em>BIRD 2026-2035: Strat Planner Pro — Quantified Ecosystem Diagnostic and Systems Thinking Module</em>. Asilva Innovations Strategic Insights.</p>
+
+<p>Sterman, J. D. (2000). <em>Business dynamics: Systems thinking and modeling for a complex world</em>. Boston: Irwin/McGraw-Hill.</p>
+
+<p>Weihrich, H. (1982). The TOWS matrix — A tool for situational analysis. <em>Long Range Planning, 15</em>(2), 54-66. <a href="https://doi.org/10.1016/0024-6301(82)90120-8">https://doi.org/10.1016/0024-6301(82)90120-8</a></p>
+
+</div>
+</div>
+
+</body>
+</html>
