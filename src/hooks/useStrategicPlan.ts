@@ -493,7 +493,9 @@ export const useStrategicPlan = () => {
       // Presence sync
       channel.on('presence', { event: 'sync' }, () => {
         const state = channel.presenceState();
-        setPresenceUsers(state as Record<string, PresenceUser[]>);
+        // Presence payloads carry arbitrary JSON per client; cast through
+        // unknown since the SDK types state as RealtimePresenceState<{}>.
+        setPresenceUsers(state as unknown as Record<string, PresenceUser[]>);
       });
 
       // Postgres changes — swot_items
@@ -1145,16 +1147,24 @@ export const useStrategicPlan = () => {
     (archetypeId: string) => {
       applyPlanUpdate((plan) => {
         const applied = plan.appliedArchetypes ?? [];
-        const exists = applied.includes(archetypeId);
+        const exists = applied.some((a) => a.archetypeId === archetypeId);
         return {
           ...plan,
           appliedArchetypes: exists
-            ? applied.filter((id) => id !== archetypeId)
-            : [...applied, archetypeId],
+            ? applied.filter((a) => a.archetypeId !== archetypeId)
+            : [
+                ...applied,
+                {
+                  archetypeId,
+                  appliedBy: user?.id ?? 'local',
+                  appliedByName: user?.email?.split('@')[0] ?? 'Local User',
+                  appliedAt: new Date().toISOString(),
+                },
+              ],
         };
       });
     },
-    [applyPlanUpdate]
+    [applyPlanUpdate, user]
   );
 
   // ── Public API ─────────────────────────────────────────
