@@ -38,19 +38,16 @@ export const EDGE_FUNCTIONS = {
 
 // ── Branding Assets (CDN) ─────────────────────────────────────────────────────
 export const BRAND_ASSETS = {
-  LOGO_URL: import.meta.env.VITE_BRAND_LOGO_URL ||
-    'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png',
-  AI_AVATAR_URL: import.meta.env.VITE_AI_STRATEGIST_AVATAR_URL ||
-    'https://appimize.app/assets/apps/user_1097/images/2c7d825bf937_232_1097.png',
-  BANNER_URL: import.meta.env.VITE_BANNER_INVESTMENT_URL ||
-    'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/1.Banner.png',
+  LOGO_URL: import.meta.env.VITE_BRAND_LOGO_URL || 'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png',
+  AI_AVATAR_URL: import.meta.env.VITE_AI_STRATEGIST_AVATAR_URL || 'https://appimize.app/assets/apps/user_1097/images/2c7d825bf937_232_1097.png',
+  BANNER_URL: import.meta.env.VITE_BANNER_INVESTMENT_URL || 'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/1.Banner.png',
 } as const;
 
 // ── External URLs ──────────────────────────────────────────────────────────────
 export const EXTERNAL_URLS = {
   PWA:          import.meta.env.VITE_PWA_EXTERNAL_URL      || 'https://bangsamoro-investment-roadmap.asilvainnovations.com',
   USER_MANUAL:  import.meta.env.VITE_USER_MANUAL_URL       || 'https://bird-user-manual.asilvainnovations.com'',
-  DEV_DOCS:     import.meta.env.VITE_DEVELOPER_DOCS_URL     || 'https://asilvainnovations.github.io/strat-planner-pwa/developer-doc.html',
+  DEV_DOCS:     import.meta.env.VITE_DEVELOPER_DOCS_URL    || 'https://asilvainnovations.github.io/strat-planner-pwa/developer-doc.html',
 } as const;
 
 // ── Typed Headers Helper ──────────────────────────────────────────────────────
