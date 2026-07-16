@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 2: Deep Presencing Within and Across Context | BIRD 2026-2035</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{margin:0;padding:0;font-family:'Roboto',sans-serif;font-size:11pt;line-height:1.7;color:#333;background:#fff;text-align:justify;text-align-last:left;}
+@page{size:A4;margin:2.5cm 2cm 2.5cm 2cm;@top-center{content:string(doctitle);font-size:9pt;color:#666;font-style:italic;}@bottom-center{content:counter(page);font-size:9pt;color:#666;}}
+@page :first{margin:0;@top-center{content:none;}@bottom-center{content:none;}}
+@page cover{margin:0;@top-center{content:none;}@bottom-center{content:none;}}
+@page toc-page{@top-center{content:none;}@bottom-center{content:none;}}
+body{string-set:doctitle "";}
+h1.chapter-title{string-set:doctitle content();}
+
+.cover{width:210mm;height:297mm;margin:0;position:relative;overflow:hidden;page-break-after:always;page:cover;background:linear-gradient(135deg,#0a3d2e 0%,#0f5c3e 40%,#1a7a4e 70%,#2d9d6e 100%);}
+.cover::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/barmm-images/public/Bangsamoro%20Economic%20and%20%20Investment%20Ecosystem.png') center/cover no-repeat;opacity:0.12;z-index:0;}
+.cover::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(10,61,46,0.75) 0%,rgba(10,61,46,0.88) 50%,rgba(10,61,46,0.97) 100%);z-index:1;}
+.cover-content{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;text-align:center;width:85%;}
+.cover-badge{display:inline-block;padding:0.3rem 1rem;border:1px solid rgba(201,168,76,0.6);border-radius:2rem;color:#C9A84C;font-size:8pt;letter-spacing:0.15em;text-transform:uppercase;font-weight:600;margin-bottom:1rem;background:rgba(201,168,76,0.1);}
+.cover-chapter{font-family:'Poppins',sans-serif;font-size:32pt;font-weight:800;color:#C9A84C;line-height:1.1;margin-bottom:0.5rem;}
+.cover-title{font-family:'Poppins',sans-serif;font-size:20pt;font-weight:700;color:#fff;line-height:1.3;margin-bottom:0.8rem;}
+.cover-subtitle{font-family:'Montserrat',sans-serif;font-size:12pt;font-weight:500;color:#a8e6cf;margin-bottom:1.5rem;line-height:1.5;}
+.cover-divider{width:80px;height:3px;background:linear-gradient(90deg,#C9A84C,#E8C560,#C9A84C);margin:0 auto 1.2rem;border-radius:2px;}
+.cover-meta{color:rgba(255,255,255,0.8);font-size:9.5pt;line-height:1.9;}
+.cover-meta strong{color:#C9A84C;}
+
+h1{font-family:'Poppins',sans-serif;font-size:20pt;font-weight:700;color:#0a3d2e;margin:2rem 0 1rem;line-height:1.3;page-break-after:avoid;}
+h2{font-family:'Poppins',sans-serif;font-size:14pt;font-weight:600;color:#0d4f3c;margin:1.5rem 0 0.8rem;line-height:1.3;page-break-after:avoid;border-bottom:1px solid #e0e0e0;padding-bottom:0.3rem;}
+h3{font-family:'Poppins',sans-serif;font-size:12pt;font-weight:600;color:#1a6b4e;margin:1.2rem 0 0.6rem;page-break-after:avoid;}
+h4{font-family:'Poppins',sans-serif;font-size:11pt;font-weight:600;color:#333;margin:1rem 0 0.5rem;page-break-after:avoid;}
+p{margin-bottom:0.8rem;font-size:11pt;line-height:1.7;}
+strong{color:#1a4d3a;}
+
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:9pt;page-break-inside:auto;max-width:100%;}
+thead{display:table-header-group;}
+thead tr{border-top:2px solid #333;border-bottom:1px solid #333;}
+tbody tr{border-bottom:1px solid #ddd;}
+tbody tr:last-child{border-bottom:2px solid #333;}
+th,td{padding:6px 8px;text-align:left;vertical-align:top;}
+th{font-weight:600;background:#f8f9f5;color:#0a3d2e;font-family:'Poppins',sans-serif;font-size:9pt;}
+tr{page-break-inside:avoid;}
+caption{font-family:'Poppins',sans-serif;font-weight:600;font-size:10pt;color:#0a3d2e;margin-bottom:0.5rem;text-align:left;}
+caption::before{content:attr(data-label) ": ";font-weight:700;}
+
+figure{margin:1.2rem 0;text-align:center;page-break-inside:avoid;}
+figure img{max-width:100%;height:auto;display:block;margin:0 auto;}
+figcaption{font-size:9pt;color:#555;margin-top:0.5rem;font-style:italic;text-align:left;line-height:1.5;}
+figcaption::before{content:attr(data-label) ": ";font-weight:700;font-style:normal;}
+
+.footnote{font-size:8.5pt;color:#555;vertical-align:super;cursor:pointer;}
+.footnotes{font-size:8.5pt;border-top:1px solid #ddd;margin-top:2rem;padding-top:1rem;}
+.footnotes ol{padding-left:1.5rem;}
+.footnotes li{margin-bottom:0.5rem;line-height:1.5;}
+.cite{font-size:10pt;color:#333;}
+
+blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-style:italic;color:#444;}
+.formula-block{background:#f8f9f5;padding:0.8rem 1rem;margin:0.8rem 0;border-left:3px solid #0a3d2e;font-family:'Courier New',monospace;font-size:10pt;}
+
+.chapter-header{text-align:center;margin:3rem 0 2rem;page-break-before:always;}
+.chapter-number{font-family:'Poppins',sans-serif;font-size:12pt;color:#C9A84C;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;margin-bottom:0.5rem;}
+.chapter-title{font-family:'Poppins',sans-serif;font-size:22pt;font-weight:700;color:#0a3d2e;line-height:1.3;}
+
+.resource-box{background:#f0f7f4;border:1px solid #c8e6d5;border-left:4px solid #0a3d2e;padding:0.8rem 1rem;margin:1rem 0;font-size:9.5pt;}
+.resource-box-title{font-family:'Poppins',sans-serif;font-weight:600;color:#0a3d2e;margin-bottom:0.3rem;}
+.video-box{background:#e8f4fd;border:1px solid #b8d8f0;border-left:4px solid #2980b9;padding:0.8rem 1rem;margin:1rem 0;font-size:9.5pt;}
+.video-box-title{font-family:'Poppins',sans-serif;font-weight:600;color:#2980b9;margin-bottom:0.3rem;}
+
+.toc-page{page:toc-page;page-break-after:always;}
+.toc-title{font-family:'Poppins',sans-serif;font-size:18pt;font-weight:700;color:#0a3d2e;text-align:center;margin-bottom:1.5rem;padding-bottom:0.5rem;border-bottom:2px solid #C9A84C;}
+.toc{list-style:none;padding:0;margin:0;}
+.toc li{margin-bottom:0.3rem;}
+.toc a{color:#333;text-decoration:none;font-size:10.5pt;display:block;padding:0.2rem 0;}
+.toc .toc-chapter{font-weight:700;font-size:11pt;color:#0a3d2e;margin-top:0.8rem;}
+.toc .toc-section{padding-left:1.5rem;font-size:10pt;}
+.toc .toc-subsection{padding-left:3rem;font-size:9.5pt;color:#555;}
+
+.references-page{page-break-before:always;}
+.references-list{font-size:10pt;line-height:1.6;}
+.references-list p{margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;}
+
+.cluster-box{background:#f8f9f5;border:1px solid #d4e6d0;border-left:4px solid #C9A84C;padding:0.6rem 0.8rem;margin:0.6rem 0;font-size:9pt;}
+.cluster-box-title{font-family:'Poppins',sans-serif;font-weight:600;color:#0a3d2e;margin-bottom:0.2rem;font-size:9.5pt;}
+
+.pedset-box{background:#fff8e1;border:1px solid #f0e0b0;border-left:4px solid #C9A84C;padding:0.5rem 0.8rem;margin:0.5rem 0;font-size:9.5pt;}
+.pedset-box-title{font-family:'Poppins',sans-serif;font-weight:600;color:#8B6C28;margin-bottom:0.2rem;}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="cover">
+<div class="cover-content">
+<div class="cover-badge">Peer-Reviewed Publication</div>
+<div class="cover-chapter">Chapter 2</div>
+<div class="cover-title">Deep Presencing Within and Across Context</div>
+<div class="cover-divider"></div>
+<div class="cover-subtitle">Context Analysis Using the Bangsamoro Economic and Investment Ecosystem (BEIE) Framework<br>From Environmental Scanning to Systems Sensing</div>
+<div class="cover-meta">
+<strong>Bangsamoro Investment Roadmap Development (BIRD) 2026-2035</strong><br>
+Asilva Innovations Strategic Insights<br>
+Prepared for the Bangsamoro Government and Development Partners<br>
+<em>July 2026</em>
+</div>
+</div>
+</div>
+
+<!-- ==================== TABLE OF CONTENTS ==================== -->
+<div class="toc-page">
+<h1 class="toc-title">Table of Contents</h1>
+<ul class="toc">
+<li class="toc-chapter"><a href="#ch2-intro">2.0 Introduction: From Environmental Scanning to Systems Sensing</a></li>
+<li class="toc-section"><a href="#ch2-1">2.1 Global Economic Trends: Implications for BARMM</a></li>
+<li class="toc-section"><a href="#ch2-2">2.2 Regional Economic Trajectory: Indicators and Inflection Points</a></li>
+<li class="toc-chapter"><a href="#ch2-os">A. Cross-Cutting Operating Systems</a></li>
+<li class="toc-section"><a href="#ch2-os-1">A.1 Moral Governance, Resilience, Inclusivity, and Peace</a></li>
+<li class="toc-section"><a href="#ch2-os-2">A.2 Policy Architecture Supporting the Operating Systems</a></li>
+<li class="toc-section"><a href="#ch2-os-3">A.3 Political Domain: Governance Credibility and Security Stability</a></li>
+<li class="toc-section"><a href="#ch2-os-4">A.4 Environmental and Geophysical Hazards</a></li>
+<li class="toc-section"><a href="#ch2-os-5">A.5 Iceberg Model: Governance and Investment Dynamics</a></li>
+<li class="toc-chapter"><a href="#ch2-c1">B. Cluster 1: Foundations</a></li>
+<li class="toc-section"><a href="#ch2-c1-1">B.1 Policy and Master Plan Alignment</a></li>
+<li class="toc-section"><a href="#ch2-c1-2">B.2 Agriculture, Fisheries, and Forestry</a></li>
+<li class="toc-section"><a href="#ch2-c1-3">B.3 Energy and Environmental Systems</a></li>
+<li class="toc-chapter"><a href="#ch2-c2">C. Cluster 2: Transformers</a></li>
+<li class="toc-chapter"><a href="#ch2-c3">D. Cluster 3: Enablers</a></li>
+<li class="toc-chapter"><a href="#ch2-c4">E. Cluster 4: Connectors</a></li>
+<li class="toc-chapter"><a href="#ch2-c5">F. Cluster 5: Financiers</a></li>
+<li class="toc-chapter"><a href="#ch2-synthesis">G. Cluster Interlinkages and System Dynamics</a></li>
+<li class="toc-chapter"><a href="#references">References</a></li>
+</ul>
+</div>
+
+<!-- ==================== CHAPTER 2 INTRO ==================== -->
+<div class="chapter-header" id="ch2-intro">
+<div class="chapter-number">Chapter 2</div>
+<h1 class="chapter-title">Deep Presencing Within and Across Context</h1>
+</div>
+
+<h2>Context Analysis Using the Bangsamoro Economic and Investment Ecosystem (BEIE) Framework</h2>
+
+<h3>From Environmental Scanning to Systems Sensing</h3>
+
+<p>
+This chapter applies the Bangsamoro Economic and Investment Ecosystem (BEIE) Framework as a living systems lens — moving beyond traditional environmental scanning toward an integrated, relational understanding of how political, economic, social, environmental, and technological (PEDSET) factors interact within and across BARMM's five functional clusters. Deep presencing requires sensing not only what is visible (data, indicators, trends) but also what is emergent: relationships, feedback loops, cultural currents, and governance rhythms (Senge, 1990; Meadows, 2008; Silva, 2026).
+</p>
+
+<figure>
+<img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/19.%20Bangsamoro%20BEIE%20Framework.png" alt="BEIE Framework" style="max-width:100%;">
+<figcaption data-label="Figure 2-1">The Bangsamoro Economic and Investment Ecosystem (BEIE) Framework. Five functional clusters (Foundations, Transformers, Enablers, Connectors, Financiers) anchored by Moral Governance and driven by cross-cutting enablers. Source: Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<p>
+The BEIE Framework's core insight — that sectors in BARMM are deeply interconnected and treating them as isolated leads to inefficiencies and missed opportunities — is not merely an analytical observation; it is a governance imperative (Silva, 2026). The framework provides the architecture for systems sensing, with the Cross-Cutting Operating System — Moral Governance, Resilience, Inclusivity, and Peace — determining whether all clusters function as effective, equitable, continuous, and sustainable systems.
+</p>
+
+<p>
+The PEDSET analytical domains (Political, Economic, Demographics, Social, Environmental, Technological) are not treated as isolated categories but are distributed across the BEIE clusters where they functionally operate: the Political domain informs the Cross-Cutting Operating Systems, shaping governance credibility and policy continuity; the Economic domain permeates each functional cluster, driving value creation and investment flows; Demographics and Social domains are integrated within Enablers (human capital, social services) and Connectors (tourism, cultural heritage); the Environmental domain is embedded in Foundations (natural resource base, green economy); and the Technological domain is addressed within Connectors (digital connectivity) and Enablers (infrastructure, digital literacy).
+</p>
+
+<figure>
+<img src="ch2_fig1_grdp_trend.png" alt="GRDP Growth Trend">
+<figcaption data-label="Figure 2-2">BARMM GRDP Growth and Value (2019–2024). The region demonstrated resilience through the COVID-19 contraction (-3.2% in 2020), recovering to 6.0% growth in 2023 and reaching ₱299.5B GRDP in 2024. Sources: PSA-BARMM Regional Accounts (2024); MFBM Economic Brief (2025).</figcaption>
+</figure>
+
+<h2 id="ch2-1">2.1 Global Economic Trends: Implications for BARMM</h2>
+
+<p>
+Global economic dynamics from 2025–2026 are reshaping investment prospects in BARMM. Slowing global growth, shifting trade patterns, and rising energy and food prices create both risks and opportunities across the region's BEIE clusters. While the Bangsamoro economy has demonstrated resilience — posting 2.7% GRDP growth in 2024 amid global headwinds — it remains vulnerable to external shocks, particularly in agriculture, energy, and fiscal stability (International Monetary Fund [IMF], 2025; World Bank, 2025).
+</p>
+
+<table>
+<caption data-label="Table 2-1">Global Socio-Political and Economic Trends: Implications for BARMM (2026 Outlook)</caption>
+<thead>
+<tr><th>Trend</th><th>Global Context</th><th>Implications for BARMM</th></tr>
+</thead>
+<tbody>
+<tr><td>Slower Global Growth</td><td>IMF projects global GDP growth at 2.9% in 2026, down from 3.2% in 2025, due to tight monetary conditions and geopolitical uncertainty.</td><td>Export sectors (agriculture, halal products, fisheries) may face weaker demand and lower prices. Domestic consumption and public investment will need to offset external slowdown.</td></tr>
+<tr><td>Geopolitical Fragmentation</td><td>Rising tensions among major powers (U.S.–China, Russia–EU) have led to trade realignments and regionalization of supply chains (World Bank, 2025).</td><td>BARMM's integration into ASEAN and BIMP-EAGA corridors becomes crucial for maintaining trade access and investment confidence.</td></tr>
+<tr><td>Commodity Price Volatility</td><td>Oil and food prices remain elevated amid supply chain disruptions and climate shocks.</td><td>Higher fuel and fertilizer costs pressure BARMM's Foundations Cluster (agriculture, energy). Energy diversification and local food systems become critical.</td></tr>
+<tr><td>Regional Trade Realignment</td><td>ASEAN trade is shifting toward intra-regional supply chains and green manufacturing.</td><td>BARMM can leverage BIMP-EAGA integration and ecozone expansion to attract logistics and halal processing investments.</td></tr>
+<tr><td>Digital Transformation &amp; AI Adoption</td><td>Global investment in digital infrastructure, e-governance, fintech adoption and AI-driven productivity is accelerating (UNDP, 2025).</td><td>The Enablers Cluster (e-Governance, ICT) must scale up digital literacy and connectivity to attract investors and improve service delivery. BARMM's BEGMP aligns with this trend.</td></tr>
+<tr><td>Climate Adaptation Financing</td><td>Multilateral banks are increasing funding for climate resilience and green infrastructure.</td><td>BARMM can tap climate finance for renewable energy, coastal protection, and sustainable agriculture under the Foundations Cluster.</td></tr>
+<tr><td>Islamic Finance Expansion</td><td>Islamic finance assets are projected to exceed US$4 trillion by 2026 (IsDB, 2025).</td><td>Strengthens BARMM's Financiers Cluster, supporting inclusive finance and halal industry growth.</td></tr>
+<tr><td>Global Education and Labor Shifts</td><td>Automation and AI are transforming labor markets (ILO, 2025).</td><td>BARMM's education investments (₱32.65B in 2026) aim to bridge skill gaps and reduce youth unemployment (MindaNews, 2025).</td></tr>
+</tbody>
+</table>
+
+<h2 id="ch2-2">2.2 Regional Economic Trajectory: Indicators and Inflection Points</h2>
+
+<p>
+BARMM's economic trajectory will depend on how effectively it aligns local investment strategies with global transitions — particularly in green growth, digital transformation, and inclusive finance. A proactive regional policy mix that integrates BEIE clusters with ASEAN and global value chains will be essential to sustain resilience through 2035.
+</p>
+
+<figure>
+<img src="ch2_fig2_sectoral.png" alt="Sectoral Composition">
+<figcaption data-label="Figure 2-3">Sectoral Composition of BARMM Economy (2024). Services lead at 42.0%, followed by AFF at 32.4% — nearly 4× the national AFF share of 8.2%. This structural difference underscores BARMM's agricultural potential and industrialization imperative. Sources: PSA-BARMM (2024); PSA National Accounts (2024).</figcaption>
+</figure>
+
+<figure>
+<img src="ch2_fig3_investment.png" alt="Investment Approvals">
+<figcaption data-label="Figure 2-4">BARMM Investment Approvals Trajectory (2020–2026). The Q1 2026 record of ₱5.1B — surpassing the full-year 2025 target in just four months — represents a structural inflection point in investor confidence. Sources: BBOI Investment Reports (2020–2026).</figcaption>
+</figure>
+
+<figure>
+<img src="ch2_fig4_poverty.png" alt="Poverty Reduction">
+<figcaption data-label="Figure 2-5">Poverty Reduction Trajectory (2018–2023). BARMM poverty fell from 55.9% to 34.8% — a 21.1 percentage point decline — yet the 12.4pp gap versus the national average (22.4%) remains the central equity challenge. Sources: PSA Official Poverty Statistics (2018–2023).</figcaption>
+</figure>
+
+<table>
+<caption data-label="Table 2-2">BARMM Key Economic Indicators: Baseline and Projections</caption>
+<thead>
+<tr><th>Indicator</th><th>2023</th><th>2024</th><th>2025</th><th>Projection (2026)</th><th>2035 Target</th></tr>
+</thead>
+<tbody>
+<tr><td>GRDP Growth Rate</td><td>6.0%</td><td>2.7%</td><td>6.2%</td><td>6.4%</td><td>6.5%+</td></tr>
+<tr><td>GRDP (₱B)</td><td>275</td><td>299.5</td><td>318</td><td>338</td><td>550</td></tr>
+<tr><td>Poverty Incidence</td><td>34.8%</td><td>—</td><td>30.1%</td><td>28.7%</td><td>&lt;20%</td></tr>
+<tr><td>Regional Budget</td><td>₱94.4B</td><td>₱105B</td><td>₱114.1B</td><td>₱120B (est.)</td><td>₱200B+</td></tr>
+<tr><td>Internet Access</td><td>39.6%</td><td>42%</td><td>45%</td><td>55%</td><td>85%</td></tr>
+<tr><td>Investment Approvals</td><td>₱3.2B</td><td>₱4.5B</td><td>₱3.0B</td><td>₱15B+ (run rate)</td><td>₱15B p.a.</td></tr>
+<tr><td>Electrification Rate</td><td>72%</td><td>75%</td><td>78%</td><td>82%</td><td>100%</td></tr>
+</tbody>
+</table>
+
+<p>
+Two pivotal developments frame BARMM's near-term investment climate. First, the <strong>governance transition</strong> from the Bangsamoro Transition Authority (BTA) to an elected Parliament in 2026 marks a critical juncture for governance legitimacy and investor confidence. Successful elections are expected to amplify political stability and economic credibility; disruptions could reverse hard-won gains in investor perception (IAG Philippines, 2026). Second, <strong>security normalization</strong> — the declaration of Basilan as Abu Sayyaf Group (ASG)-free in June 2024, followed by the surrender of remaining members in December 2024 — represents a historic security milestone that has normalized economic activity and encouraged permanent settlement (Philippine Information Agency [PIA], 2025).
+</p>
+
+<!-- ==================== CROSS-CUTTING OPERATING SYSTEMS ==================== -->
+<div class="chapter-header" id="ch2-os">
+<div class="chapter-number">Section A</div>
+<h1 class="chapter-title">Cross-Cutting Operating Systems:<br>Moral Governance, Resilience, Inclusivity, and Peace</h1>
+</div>
+
+<h3 id="ch2-os-1">A.1 Functional Descriptions and Deep Presence Indicators</h3>
+
+<p>
+The BEIE Framework positions Moral Governance, Resilience, Inclusivity, and Peace not as aspirational goals but as the <strong>foundational operating systems</strong> that determine whether all five functional clusters function effectively, equitably, and sustainably. Just as a computer's operating system manages hardware, software, and user interactions, these four cross-cutting components manage the relationships, incentives, and accountability mechanisms that enable economic value creation across BARMM (Silva, 2026).
+</p>
+
+<figure>
+<img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/20.%20Operating%20Systems_%20Trust%20as%20the%20Currency.png" alt="Operating Systems Trust" style="max-width:100%;">
+<figcaption data-label="Figure 2-6">Operating Systems: Trust as the Currency. Moral Governance, Resilience, Inclusivity, and Peace function as the foundational OS determining whether all BEIE clusters compound or dissipate value. Source: Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<p>
+Workshop consultations (Workshops 1–5, 2026) consistently identified three systemic bottlenecks that constrain investment momentum: (1) fragmented program delivery across Bangsamoro Ministries, Offices, and Agencies (BMOAs); (2) weak inter-agency coordination that produces duplication and gaps; and (3) narrative-driven investor hesitation rooted in perceptions of governance instability. Critically, these are not sectoral failures — they are <strong>operating system failures</strong>. Addressing them requires interventions at the level of rules, information flows, and institutional design (Meadows, 1999), not merely additional sectoral programs.
+</p>
+
+<table>
+<caption data-label="Table 2-3">Cross-Cutting Operating System: Functional Definitions &amp; Deep Presence Indicators</caption>
+<thead>
+<tr><th>Operating System</th><th>Functional Definition</th><th>Deep Presencing Indicators</th><th>Investment / Policy Imperative</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Moral Governance</strong></td><td>Transparency, accountability, stability, Islamic ethics, and rule of law as the foundation of investment facilitation</td><td>Budget execution transparency; investor protection mechanisms; public disclosure of incentives; BHB certification integrity</td><td>Institutionalize investor ombudsman; publish procurement data; pair incentives with institutional capacity milestones</td></tr>
+<tr><td><strong>Resilience</strong></td><td>Climate adaptation, economic shock absorption, food/water security, and infrastructure durability</td><td>El Niño impact monitoring; pest/disease early warning systems; diversification of value chains; contingency financing</td><td>Mandate climate-risk screening for all infrastructure/agro-investments; deploy continuity plans and adaptive management protocols</td></tr>
+<tr><td><strong>Inclusivity</strong></td><td>Equitable benefit-sharing, MSME integration, IDP/women/youth empowerment, and poverty reduction</td><td>MSME participation rates in value chains; IDP reintegration metrics; gender-disaggregated employment data; financial inclusion by municipality</td><td>Link anchor investments to local sourcing; scale waqf/microfinance; ensure TESDA programs reach marginalized groups</td></tr>
+<tr><td><strong>Peace</strong></td><td>Security stability, conflict prevention, narrative management, and post-conflict normalization</td><td>Security incident frequency; investor perception surveys; community reconciliation program coverage; IDP return rates</td><td>Sustain local normalization initiatives; publish security-investment dashboards; fund community-led peacebuilding</td></tr>
+</tbody>
+</table>
+
+<h3 id="ch2-os-2">A.2 Policy Architecture Supporting the Operating Systems</h3>
+
+<p>
+Several complementary BARMM policy frameworks and master plans directly support the Cross-Cutting Operating Systems. These plans serve as the institutional backbone for accountability, stability, and integration across all BEIE clusters.
+</p>
+
+<table>
+<caption data-label="Table 2-4">Master Plans Anchoring the Cross-Cutting Operating Systems</caption>
+<thead>
+<tr><th>Master Plan</th><th>Lead Agency</th><th>Strategic Objectives</th><th>Key Targets / Milestones</th></tr>
+</thead>
+<tbody>
+<tr><td>Bangsamoro Moral Governance Framework (BMGF 2020–2035)</td><td>OCM-BARMM</td><td>Institutionalize transparency, accountability, and Islamic ethics across all ministries</td><td>Full compliance with public financial disclosure by 2030; establishment of investor ombudsman by 2028</td></tr>
+<tr><td>Bangsamoro e-Governance Master Plan (BEGMP 2025–2030)</td><td>MFBM; MTIT</td><td>Digitize public services and investment facilitation to enhance transparency and efficiency</td><td>100% digital procurement and licensing by 2030; 1-day business registration system by 2028</td></tr>
+<tr><td>Bangsamoro Climate Resilience and DRR Master Plan (MENRE 2024–2035)</td><td>MENRE</td><td>Strengthen climate adaptation, disaster preparedness, and infrastructure durability</td><td>Climate-risk screening for all major projects by 2027; regional resilience index operational by 2030</td></tr>
+<tr><td>Bangsamoro Food, Water, and Energy Security Framework (MENRE 2025–2035)</td><td>MENRE; MPW</td><td>Ensure sustainable resource management and diversification of value chains</td><td>85% renewable energy mix by 2035; 100% water-secure municipalities by 2030</td></tr>
+<tr><td>Bangsamoro Inclusive Development Plan (BIDP 2025–2035)</td><td>MOLE; TESDA-BARMM</td><td>Promote equitable benefit-sharing, MSME integration, and empowerment of women, youth, and IDPs</td><td>MSME participation in value chains &gt;60% by 2030; gender-balanced employment by 2035</td></tr>
+<tr><td>Bangsamoro Peace and Security Development Plan (BPDP 2024–2035)</td><td>OPAPRU-BARMM</td><td>Consolidate peace gains, prevent conflict recurrence, and strengthen community resilience</td><td>100% normalization of decommissioned combatants by 2030; annual reduction in rido incidents &gt;10%</td></tr>
+</tbody>
+</table>
+
+<h3 id="ch2-os-3">A.3 Political Domain: Governance Credibility and Security Stability</h3>
+
+<p>
+The political domain shapes the investment climate through three critical channels: governance credibility, policy continuity, and security stability. BARMM's transition from the Bangsamoro Transition Authority (BTA) to an elected Parliament — scheduled for 2025–2026 — represents a critical juncture. Successful elections will amplify investor confidence by demonstrating institutional maturity and political legitimacy; disruption or contested outcomes could reverse hard-won gains in investor perception (IAG Philippines, 2026).
+</p>
+
+<p>
+A historic security milestone was achieved in June 2024 when Basilan was officially declared free from the influence and presence of the Abu Sayyaf Group (ASG), with remaining members surrendering in December 2024 (PIA, 2025). This development has normalized economic activity, encouraged permanent settlement, and reduced the security risk premium for investors considering the province. The ₱6.67 billion Zamboanga-Basilan Integrated Development Program (ZBIP) investments, released following the ASG-free declaration, validate the peace-security-investment nexus.
+</p>
+
+<table>
+<caption data-label="Table 2-5">Conflict Forecast in BARMM by Province/Area (2026)</caption>
+<thead>
+<tr><th>Province / Area</th><th>Forecasted Conflict Intensity</th><th>Key Drivers</th></tr>
+</thead>
+<tbody>
+<tr><td>Maguindanao del Norte &amp; del Sur</td><td>Very High 🔴</td><td>Clan feuds (rido), BIFF insurgency, land disputes</td></tr>
+<tr><td>Lanao del Sur</td><td>High 🟠</td><td>Clan feuds, political contestation, proximity to Marawi conflict legacy</td></tr>
+<tr><td>Cotabato City</td><td>Moderate–High 🟠</td><td>Urban contestation, governance disputes, spillover from Maguindanao</td></tr>
+<tr><td>Basilan</td><td>Moderate 🟡</td><td>Post-ASG transition, maritime insecurity</td></tr>
+<tr><td>Tawi-Tawi</td><td>Moderate 🟡</td><td>Maritime resource disputes, smuggling-related violence</td></tr>
+<tr><td>Special Geographic Area (SGA)</td><td>High 🟠</td><td>Transition governance issues, land/resource disputes</td></tr>
+</tbody>
+</table>
+
+<p>
+These forecasts underscore the importance of sustaining local normalization initiatives, investing in community-led peacebuilding, and communicating security improvements transparently to counter negative narrative cycles that can deter investment. The ACLED Conflict Alert System (CAST) predicts 11 conflict events over the next 24 weeks, with battles and violence against civilians both increasing — a reminder that peace dividends require active maintenance.
+</p>
+
+<h3 id="ch2-os-4">A.4 Environmental and Geophysical Hazards</h3>
+
+<p>
+BARMM provinces and Cotabato City face significant natural, environmental, and geophysical hazards, including earthquakes, flooding, landslides, and typhoons. Cotabato City, the regional center, is particularly prone to strong ground shaking (Intensity VIII) and flooding, while coastal provinces like Sulu and Tawi-Tawi are vulnerable to tsunamis and storm surges.
+</p>
+
+<table>
+<caption data-label="Table 2-6">BARMM Natural Hazard Assessment by Province/City</caption>
+<thead>
+<tr><th>Province / City</th><th>Major Hazards</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Basilan</td><td>Flooding, storm surge, earthquakes</td><td>Coastal exposure; vulnerable fishing communities</td></tr>
+<tr><td>Lanao del Sur</td><td>Landslides, earthquakes, flooding</td><td>Mountainous terrain; Marawi area prone to landslides</td></tr>
+<tr><td>Maguindanao (Norte &amp; Sur)</td><td>Flooding, landslides, earthquakes</td><td>River basins highly flood-prone; agriculture at risk</td></tr>
+<tr><td>Sulu</td><td>Tsunami, storm surge, earthquakes</td><td>Archipelagic province; high exposure to coastal hazards</td></tr>
+<tr><td>Tawi-Tawi</td><td>Tsunami, storm surge, flooding</td><td>Remote islands; vulnerable to sea-level rise (~8mm/year)</td></tr>
+<tr><td>Cotabato City</td><td>Earthquakes (Intensity VIII), flooding</td><td>Near South Barira Fault; strong seismic hazard confirmed</td></tr>
+</tbody>
+</table>
+
+<p>
+Climate risk assessments show high vulnerability of staple crops across BARMM. Climate-Resilient Agriculture (CRA) strategies — including drought-tolerant varieties, improved water management, and diversified cropping systems — should be integrated into all agro-industrial investment planning. The ₱346 million El Niño crop losses in Maguindanao del Sur (2024) and the Pestalotiopsis rubber fungal disease in Basilan demonstrate that climate and biological hazards are not distant risks but present realities.
+</p>
+
+<h3 id="ch2-os-5">A.5 Deep Presencing Insight: Applying the Iceberg Model</h3>
+
+<p>
+The operating system of Moral Governance, Resilience, Inclusivity, and Peace must be front-loaded. Investment incentives deployed without parallel governance reform may generate visible short-term capital inflows, yet fail to produce sustainable transformation. To understand why, we apply the Iceberg Model from systems thinking — a framework that reveals how visible events are shaped by deeper patterns, structures, and mental models (Senge, 1990; Meadows, 1999).
+</p>
+
+<figure>
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/5-Paradigm.png" alt="Iceberg Paradigm" style="max-width:100%;">
+<figcaption data-label="Figure 2-7">The Iceberg Model — Paradigm Shift. The visible tip (events, data) is shaped by invisible deeper layers: patterns of behavior, systemic structures, and underlying mental models. Source: BIRD Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<div class="pedset-box">
+<div class="pedset-box-title">Level 1: Events (What is happening?)</div>
+<strong>Visible outcomes that trigger immediate responses.</strong> Investment approvals surge to ₱5.1 billion (Q1 2026). Short-term capital inflows follow incentive announcements. Investor exits when incentive periods expire. Budget execution rates fall below 80%. These events are real and measurable, but reacting to them alone addresses symptoms, not causes.
+</div>
+
+<div class="pedset-box">
+<div class="pedset-box-title">Level 2: Patterns (What trends have been occurring over time?)</div>
+<strong>Recurring behaviors that reveal systemic dynamics.</strong> Cyclical investment booms followed by capital flight. Persistent gaps between policy announcement and implementation. Recurring delays in procurement, certification, and aftercare services. Divergence between production investment growth and institutional capacity metrics. Patterns reveal that isolated interventions produce temporary gains but do not alter the underlying trajectory.
+</div>
+
+<div class="pedset-box">
+<div class="pedset-box-title">Level 3: Structures (What influences these patterns?)</div>
+<strong>Policies, institutions, resource flows, and coordination mechanisms.</strong> Incentive frameworks decoupled from institutional capacity milestones. Fragmented program delivery across BMOAs (MAFAR, SPDA, MPW, MTIT, MENRE). Absence of real-time monitoring systems linking governance performance to investment outcomes. Weak feedback loops between investor experience and policy adjustment. Structures determine whether incentives compound into sustained growth or dissipate through institutional friction.
+</div>
+
+<div class="pedset-box">
+<div class="pedset-box-title">Level 4: Mental Models (What beliefs and assumptions hold the system in place?)</div>
+<strong>Deeply held paradigms that shape decision-making.</strong> Belief that fiscal incentives alone attract quality investment. Assumption that governance reform can follow, rather than precede, production scaling. Paradigm that sectors operate independently rather than as an interconnected ecosystem. Mindset that measures success by approval volume rather than retention, impact, or inclusivity. Mental models are the deepest leverage point: shifting from "incentives first" to "governance first" reframes the entire investment strategy.
+</div>
+
+<table>
+<caption data-label="Table 2-7">Deep Presencing within the Cross-Cutting Operating Systems — Iceberg Monitoring Framework</caption>
+<thead>
+<tr><th>Iceberg Level</th><th>Indicator</th><th>Target</th><th>What It Reveals</th></tr>
+</thead>
+<tbody>
+<tr><td>Events</td><td>Investment approvals (quarterly)</td><td>₱15B p.a. by 2035</td><td>Short-term momentum</td></tr>
+<tr><td>Patterns</td><td>Investment retention rate</td><td>85%+</td><td>Whether capital stays beyond incentive periods</td></tr>
+<tr><td>Structures</td><td>Budget execution rate</td><td>&gt;90%</td><td>Administrative capacity and fiscal discipline</td></tr>
+<tr><td>Structures</td><td>Procurement transparency index</td><td>100% public disclosure</td><td>Accountability mechanisms in practice</td></tr>
+<tr><td>Structures</td><td>Inter-agency coordination score</td><td>8/10</td><td>Whether silos are being dismantled</td></tr>
+<tr><td>Mental Models</td><td>Investor aftercare satisfaction</td><td>8.0/10</td><td>Whether facilitation quality matches promotion promises</td></tr>
+<tr><td>Mental Models</td><td>Community reconciliation coverage</td><td>80%+</td><td>Whether peacebuilding is embedded in economic planning</td></tr>
+</tbody>
+</table>
+
+<p>
+The Iceberg Model clarifies a critical insight: <strong>front-loading the operating system is not a governance preference; it is an investment imperative</strong>. Addressing only the visible "Events" layer (approvals, incentives) without strengthening Structures (coordination mechanisms, monitoring systems) and shifting Mental Models (from short-term attraction to long-term retention) guarantees the cycle of boom-and-bust investment. Deep presencing — sensing patterns, interrogating structures, and surfacing mental models — enables policymakers and investors to act not on what is visible, but on what is formative.
+</p>
+
+
+<!-- ==================== CLUSTER 1: FOUNDATIONS ==================== -->
+<div class="chapter-header" id="ch2-c1">
+<div class="chapter-number">Section B</div>
+<h1 class="chapter-title">Cluster 1: Foundations —<br>Agriculture, Fisheries, Forestry, Energy, and Environment</h1>
+</div>
+
+<h3 id="ch2-c1-1">B.1 Policy and Master Plan Alignment</h3>
+
+<p>
+The Foundations cluster encompasses the resource base on which BARMM's entire economic ecosystem depends. As the cluster that feeds raw materials into the Transformers (industry) and commodities into the Connectors (trade and exports), it is functionally upstream from value creation. Deep presencing here requires attention to ecological rhythms, climate signals, and the interplay between natural capital and human livelihoods. In BARMM, this cluster is anchored by Agriculture, Forestry, and Fisheries (AFF), which contributes 32.4% of regional GRDP (₱97.2 billion), and the energy sector, which maintains a 75.86% renewable power mix but faces critical distribution and reliability gaps (PSA-BARMM, 2024; MENRE, 2024).
+</p>
+
+<figure>
+<img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/25.%20Cluster%201_%20Foundations.png" alt="Cluster 1 Foundations" style="max-width:100%;">
+<figcaption data-label="Figure 2-8">Cluster 1: Foundations — The resource base providing sustainable inputs to all other clusters. AFF contributes 32.4% of GRDP (₱97.2B). Source: Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<table>
+<caption data-label="Table 2-8">Foundations Cluster: BARMM Master Plans Alignment</caption>
+<thead>
+<tr><th>Master Plan</th><th>Lead Agency</th><th>Strategic Objectives</th><th>Key Targets / Milestones</th></tr>
+</thead>
+<tbody>
+<tr><td>2nd Bangsamoro Development Plan (BDP) 2023–2028</td><td>BPDA</td><td>Overarching framework for inclusive, sustainable growth; prioritizes AFF productivity, natural resource management, and energy access</td><td>GRDP growth 5–6% p.a.; poverty reduction to &lt;20% by 2035; 75.86% renewable energy mix by 2028</td></tr>
+<tr><td>MAFAR Agro-Industrial Development Programs</td><td>MAFAR</td><td>Enhance agricultural productivity; develop value chains for rice, corn, coconut, rubber, seaweed; reduce post-harvest losses</td><td>15% yield increase for priority crops; 30% reduction in post-harvest losses; 500+ farmer cooperatives strengthened</td></tr>
+<tr><td>Bangsamoro Sustainable Energy Master Plan (BSEMP)</td><td>MENRE</td><td>Ensure energy security; expand renewable energy access; improve grid reliability and last-mile distribution</td><td>100% electrification by 2040; 85% renewable energy share by 2035; ZBIP completion by 2028</td></tr>
+<tr><td>Ecozone Development Plans (BEZA)</td><td>BEZA</td><td>Designate land for industrial, agro-processing, and eco-tourism use; integrate environmental safeguards; attract green investments</td><td>Operational Polloc Freeport by 2028; 2nd ecozone identified by 2030; 100% environmental compliance for locators</td></tr>
+<tr><td>Bangsamoro Forestry Code (pending)</td><td>MENRE</td><td>Institutionalize sustainable forest management; enable carbon markets and PES; develop NTFP enterprises</td><td>Code enactment by 2026; REDD+ program operational by 2029; ₱150M NTFP revenue by 2035</td></tr>
+</tbody>
+</table>
+
+<p>
+<strong>Cross-Cluster Linkages:</strong> Foundations → Transformers: Agro-industrial programs supply raw materials to halal processing hubs; renewable energy enables manufacturing viability. Foundations → Connectors: Ecozone plans integrate logistics infrastructure; forestry code enables carbon credit export corridors. Foundations → Cross-Cutting: Environmental stewardship (khalifa) embedded in Moral Governance; climate adaptation integrated into Resilience operating system.
+</p>
+
+<h3 id="ch2-c1-2">B.2 Agriculture, Fisheries, and Forestry: The Living Resource Base</h3>
+
+<p>
+The agro-industry sector is BARMM's most strategically significant and most underperforming sector. Agriculture largely remains confined to low-value primary production, with limited agro-processing, weak market linkages, and post-harvest losses of 20–40 percent for key commodities. No major agro-processing plants existed in the region until the 2022 commissioning of DoleFil's ₱306 million pineapple facility in Wao, Lanao del Sur — an anchor investment that demonstrates transformative potential (MFBM, 2025).
+</p>
+
+<p>
+The sector's AFF GDP contracted 4.2 percent in 2024 due to El Niño impacts and Pestalotiopsis rubber fungal disease in Basilan — highlighting climate and disease vulnerabilities. However, structural momentum is building: the SPDA Agro-Industrial Development Program in Wao and Amai Manabilang is attracting foreign investment (Green Arrow Agri-Ventures, 499 jobs projected), MAFAR's provincial assembly programs are distributing financial subsidies and providing farm profiling, and BARMM is building UAE halal export corridors for agri and fisheries products.
+</p>
+
+<figure>
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/13.%20Provincial%20Endowments-Mainlands.png" alt="Provincial Endowments" style="max-width:100%;">
+<figcaption data-label="Figure 2-9">Provincial Endowments Leverages — Lanao del Sur and Maguindanao. SPDA agro-ecological zones, Lake Lanao watershed, Pulangi River basin, and rubber plantation base represent the foundational resource endowments. Source: MTIT Provincial Outlooks (2026).</figcaption>
+</figure>
+
+<table>
+<caption data-label="Table 2-9">Foundations Cluster: Provincial Resource Sensing Matrix</caption>
+<thead>
+<tr><th>Province</th><th>AFF Share of GDP</th><th>Key Resource Endowment</th><th>Vulnerability Signal</th><th>Emerging Opportunity</th></tr>
+</thead>
+<tbody>
+<tr><td>Lanao del Sur</td><td>26.3%</td><td>Lake Lanao watershed; SPDA agro-ecological zones; coffee/rubber highlands</td><td>Water level fluctuations; upland erosion; skills mismatch in agro-processing</td><td>Climate-smart rice/corn; Lake Lanao aquaculture; halal-certified high-value crops</td></tr>
+<tr><td>Maguindanao del Sur</td><td>53.0%</td><td>Pulangi River basin rice/corn production; Illana Bay fisheries</td><td>El Niño drought (₱346M crop losses, 2024); state of calamity declarations</td><td>Irrigation modernization; drought-resistant varieties; solar-powered grain dryers</td></tr>
+<tr><td>Maguindanao del Norte</td><td>18.0%</td><td>Fertile plains; proximity to Cotabato City commercial hub</td><td>AFF share declining as services expand; input cost volatility</td><td>Integrated agro-industrial corridors; halal-certified staple crops; UAE export linkage</td></tr>
+<tr><td>Basilan</td><td>41.0%</td><td>~48,366 ha rubber plantations (largest in PH); coconut/copra base</td><td>Pestalotiopsis fungal disease; senile tree replacement needs</td><td>₱195M BARMM rubber rehabilitation program; biomass energy from rubber wood; TSR processing</td></tr>
+<tr><td>Tawi-Tawi</td><td>~33.0%</td><td>~40% national seaweed output; marine biodiversity; BIMP-EAGA proximity</td><td>Heatwave stress on seaweed; sea level rise (~8mm/year); inflation volatility</td><td>Climate-resilient seaweed varieties; MPA expansion; hybrid solar-diesel mini-grids</td></tr>
+<tr><td>Sulu/SGA</td><td>~50.0%</td><td>Coastal fisheries; upland coffee/abaca potential; cultural heritage assets</td><td>Limited processing infrastructure; market access constraints</td><td>Halal-certified fisheries; community-based NTFP enterprises; cultural tourism linkages</td></tr>
+</tbody>
+</table>
+
+<h3 id="ch2-c1-3">B.3 Energy and Environmental Systems: Powering and Protecting the Base</h3>
+
+<p>
+Reliable, affordable energy is the single most important enabling condition for industrial investment in BARMM. BARMM's renewable energy mix stands at 75.86%, primarily hydropower from the Agus cascade in Lanao del Sur. However, distribution gaps persist: 25–30% of households in remote areas lack reliable access, and archipelagic provinces face high power costs that constrain industrial viability (MENRE, 2024).
+</p>
+
+<figure>
+<img src="ch2_fig5_energy.png" alt="Energy Profile">
+<figcaption data-label="Figure 2-10">Energy Profile and Electrification Gaps. While BARMM's 75.86% renewable mix exceeds national targets, provincial electrification ranges from 45% (Tawi-Tawi) to 78% (Maguindanao del Norte) — a 33 percentage point gap that defines the infrastructure ceiling. Sources: DOE-BARMM (2024); MENRE-BSEMP (2024).</figcaption>
+</figure>
+
+<p>
+The Bangsamoro Sustainable Energy Master Plan (BSEMP) targets ₱11–19 billion in energy investments by 2050. The Agus hydropower cascade in Lanao del Sur supplies a historically significant share of Mindanao's electricity. Workshop 1 Energy sector analysis identified three core problems: (1) unreliable electric power industry — ailing cooperatives, insufficient supply, poor distribution infrastructure; (2) insufficient electrification in island and remote barangays; and (3) high cost of electricity constraining industrial competitiveness.
+</p>
+
+<!-- ==================== CLUSTER 2: TRANSFORMERS ==================== -->
+<div class="chapter-header" id="ch2-c2">
+<div class="chapter-number">Section C</div>
+<h1 class="chapter-title">Cluster 2: Transformers —<br>Industry, Manufacturing, Logistics, and Halal Processing</h1>
+</div>
+
+<p>
+The Transformers cluster represents the value-adding engine of BARMM's economy — the industrial, manufacturing, and processing capacity that converts raw Foundation materials into market-ready products. As the cluster positioned between Foundations (raw materials) and Connectors (trade and exports), Transformers determine whether BARMM captures value within its borders or exports it as unprocessed commodities.
+</p>
+
+<figure>
+<img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/26.%20Cluster%202%20_%20Transformers.png" alt="Cluster 2 Transformers" style="max-width:100%;">
+<figcaption data-label="Figure 2-11">Cluster 2: Transformers — Industry, Manufacturing, Logistics, and Halal Processing. The value-adding engine converting Foundation raw materials into market-ready products. Source: Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<p>
+Currently, BARMM's industrial base is underdeveloped. The region hosts no significant manufacturing hub, and halal processing capacity remains nascent — constrained by certification delays (45–60 days vs. OIC/SMIIC 15-day benchmark), limited cold chain infrastructure, and weak logistics connectivity. Workshop 2 identified the Transformers cluster as having the highest unexploited potential: agro-industrial processing, halal food manufacturing, and marine product valorization represent immediate investment opportunities.
+</p>
+
+<div class="cluster-box">
+<div class="cluster-box-title">Transformers Cluster — Key Statistics</div>
+• Industry share of GRDP: 25.6% (₱76.7B) — below the national average of 30.4%<br>
+• Manufacturing growth in Maguindanao del Norte: 27% cumulative (2018–2023)<br>
+• Halal-certified MSMEs: ~500 (target: 5,000+ by 2035)<br>
+• BHB certification timeline: 45–60 days (OIC/SMIIC benchmark: 15 days)<br>
+• Cold chain coverage: &lt;10% of production areas<br>
+• Anchor investment: DoleFil ₱306M pineapple facility (Wao, Lanao del Sur) — 499 jobs
+</div>
+
+<p>
+<strong>Priority Investment Corridors for Transformers:</strong> (1) <strong>Halal Food Processing Hubs</strong> — Maguindanao del Norte (Bangsamoro Halal Park, ₱500M); Lanao del Sur (Lake Lanao fisheries processing); (2) <strong>Agro-Industrial Corridors</strong> — SPDA Wao-Amai Manabilang zone; SGA Rio Grande basin integration; (3) <strong>Marine Product Processing</strong> — Tawi-Tawi seaweed carrageenan; Sulu halal-certified fisheries; (4) <strong>Rubber and Coconut Processing</strong> — Basilan TSR (Technically Specified Rubber); Maguindanao del Norte VCO (Virgin Coconut Oil) complex.
+</p>
+
+<table>
+<caption data-label="Table 2-10">Transformers Cluster: Provincial Processing Capacity Assessment</caption>
+<thead>
+<tr><th>Province</th><th>Primary Raw Material</th><th>Processing Gap</th><th>Investment Opportunity</th><th>Expected Jobs</th></tr>
+</thead>
+<tbody>
+<tr><td>Maguindanao del Norte</td><td>Rice, corn, coconut</td><td>No integrated processing facility</td><td>Bangsamoro Halal Park (₱500M); VCO complex</td><td>2,000+</td></tr>
+<tr><td>Lanao del Sur</td><td>Pineapple, coffee, fish</td><td>Limited cold chain; no canning</td><td>DoleFil expansion; Lake Lanao fisheries hub</td><td>1,500+</td></tr>
+<tr><td>Basilan</td><td>Rubber, coconut</td><td>No TSR processing plant</td><td>Integrated Rubber Processing Plant; biomass energy</td><td>800+</td></tr>
+<tr><td>Tawi-Tawi</td><td>Seaweed (40% nat'l)</td><td>Raw export only; no carrageenan</td><td>Seaweed processing facility; MPA-managed harvest</td><td>1,200+</td></tr>
+<tr><td>SGA</td><td>Rice, corn, banana</td><td>No agro-processing</td><td>Agro-industrial corridor; cold chain hub</td><td>1,000+</td></tr>
+</tbody>
+</table>
+
+<!-- ==================== CLUSTER 3: ENABLERS ==================== -->
+<div class="chapter-header" id="ch2-c3">
+<div class="chapter-number">Section D</div>
+<h1 class="chapter-title">Cluster 3: Enablers —<br>Infrastructures, Social Services &amp; Protection, Health, and Human Capital</h1>
+</div>
+
+<p>
+The Enablers cluster encompasses the physical, digital, and human infrastructure that makes value creation viable across all other clusters. Without reliable energy, transport connectivity, digital access, and skilled labor, neither Foundations can reach Transformers nor Transformers can reach Connectors. The Enablers cluster is therefore the <strong>binding constraint</strong> on BARMM's growth trajectory — a structural reality confirmed by the Systems Archetype analysis identifying "Limits to Growth" as the dominant pattern (see Chapter 3-2).
+</p>
+
+<figure>
+<img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/28.%20Cluster%203%20_%20Enablers.png" alt="Cluster 3 Enablers" style="max-width:100%;">
+<figcaption data-label="Figure 2-12">Cluster 3: Enablers — Infrastructures, Social Services, Health, and Human Capital. The binding constraint on BARMM's growth: 59.3% functional literacy and &lt;30% broadband penetration create hard ceilings. Source: Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<div class="cluster-box">
+<div class="cluster-box-title">Enablers Cluster — Critical Gaps</div>
+• Functional literacy rate: 59.3% (national: 91.8%) — Tawi-Tawi lowest at 54.2%<br>
+• Broadband penetration: &lt;30% (rural/island areas: &lt;15%)<br>
+• Road density: 0.24 km/km² (national: 1.03 km/km²)<br>
+• Health facilities: 1.2 beds per 1,000 (WHO minimum: 2.5)<br>
+• TVET enrollment: 12,000 (target: 50,000+ by 2035)<br>
+• Social protection coverage: 35% of vulnerable population<br>
+• ZBIP (Zamboanga-Basilan Interconnection): ₱6.67B — construction ongoing
+</div>
+
+<p>
+The human capital deficit is particularly acute. With a functional literacy rate of 59.3% — compared to the national average of 91.8% — BARMM faces a generational challenge in workforce readiness. The demographic dividend (median age 19.4, 3.43% annual population growth) can only be realized if education and skills development keep pace with labor market demands. Workshop 3 identified "skills mismatch" as the top barrier to investment: TESDA programs exist but lack industry alignment, and digital literacy remains below the threshold for e-commerce and digital service employment.
+</p>
+
+<table>
+<caption data-label="Table 2-11">Enablers Cluster: Provincial Infrastructure and Human Capital Indicators</caption>
+<thead>
+<tr><th>Province</th><th>Electrification (%)</th><th>Broadband (%)</th><th>Functional Literacy (%)</th><th>Health Beds/1,000</th><th>Primary Gap</th></tr>
+</thead>
+<tbody>
+<tr><td>Maguindanao del Norte</td><td>78</td><td>35</td><td>62.1</td><td>1.5</td><td>Digital infrastructure</td></tr>
+<tr><td>Basilan</td><td>72</td><td>25</td><td>58.4</td><td>1.1</td><td>Health + energy</td></tr>
+<tr><td>Lanao del Sur</td><td>68</td><td>30</td><td>61.5</td><td>1.3</td><td>Transport + skills</td></tr>
+<tr><td>SGA</td><td>62</td><td>20</td><td>56.8</td><td>0.9</td><td>All infrastructure</td></tr>
+<tr><td>Maguindanao del Sur</td><td>55</td><td>15</td><td>52.3</td><td>0.8</td><td>Energy + health</td></tr>
+<tr><td>Tawi-Tawi</td><td>45</td><td>10</td><td>54.2</td><td>0.7</td><td>Energy + digital</td></tr>
+<tr><td><strong>BARMM Average</strong></td><td><strong>75</strong></td><td><strong>&lt;30</strong></td><td><strong>59.3</strong></td><td><strong>1.2</strong></td><td><strong>Human capital</strong></td></tr>
+</tbody>
+</table>
+
+<!-- ==================== CLUSTER 4: CONNECTORS ==================== -->
+<div class="chapter-header" id="ch2-c4">
+<div class="chapter-number">Section E</div>
+<h1 class="chapter-title">Cluster 4: Connectors —<br>Tourism, Digital Connectivity, Trade, Exports, and BIMP-EAGA Integration</h1>
+</div>
+
+<p>
+The Connectors cluster encompasses the mechanisms through which BARMM's products, services, and cultural assets reach external markets. Tourism, digital connectivity, trade facilitation, export infrastructure, and BIMP-EAGA regional integration define whether BARMM's value creation remains locally contained or generates foreign exchange and economic multiplier effects. As the cluster positioned between Transformers (processed goods) and global markets, Connectors determine the <strong>economic returns</strong> on all upstream investment.
+</p>
+
+<figure>
+<img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/33.%20Cluster%204_%20Connectors.png" alt="Cluster 4 Connectors" style="max-width:100%;">
+<figcaption data-label="Figure 2-13">Cluster 4: Connectors — Tourism, Digital Connectivity, Trade, Exports, and BIMP-EAGA Integration. The gateway between BARMM's production capacity and global markets. Source: Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<p>
+BARMM's connectivity profile is defined by a dual gateway structure: <strong>BIMP-EAGA</strong> to the south and west (Sabah, Brunei, Indonesia) and the <strong>Philippine domestic market</strong> to the north. Tawi-Tawi's 150-km proximity to Sabah and the SGA's position as the Mindanao Central Corridor create natural trade advantages. However, port infrastructure, customs facilitation, and digital trade platforms remain underdeveloped — constraining the region's ability to capitalize on its strategic location.
+</p>
+
+<figure>
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/BARMM%20Connectivity%20%20.png" alt="BIMP-EAGA Connectivity" style="max-width:100%;">
+<figcaption data-label="Figure 2-14">BARMM Strategic Connectivity vis-à-vis BIMP-EAGA. The region's position at the intersection of ASEAN and the Philippine domestic market creates dual trade gateway advantages. Source: MTIT-BARMM (2026).</figcaption>
+</figure>
+
+<figure>
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/UAE%20&%20GCC.png" alt="UAE and GCC Connectivity" style="max-width:100%;">
+<figcaption data-label="Figure 2-15">BARMM Strategic Connectivity vis-à-vis UAE and GCC. The halal export corridor to Gulf markets represents BARMM's highest-value trade opportunity, contingent on OIC/SMIIC certification alignment. Source: MTIT-BARMM (2026).</figcaption>
+</figure>
+
+<div class="cluster-box">
+<div class="cluster-box-title">Connectors Cluster — Key Statistics</div>
+• Tourism arrivals (2024): ~150,000 (target: 1.5M by 2035)<br>
+• Digital connectivity: &lt;30% broadband; 4G coverage limited to provincial capitals<br>
+• BIMP-EAGA trade: ₱2.1B (2024); potential: ₱20B+ with facilitation<br>
+• Export value: &lt;₱10B (target: ₱40B by 2035)<br>
+• Polloc Freeport: Under development; operational target 2028<br>
+• BEGMP e-governance: Phase 1 deployment in Cotabato City and Mag. del Norte
+</div>
+
+<!-- ==================== CLUSTER 5: FINANCIERS ==================== -->
+<div class="chapter-header" id="ch2-c5">
+<div class="chapter-number">Section F</div>
+<h1 class="chapter-title">Cluster 5: Financiers —<br>Islamic Banking, Waqf, Takaful, and Microfinance</h1>
+</div>
+
+<p>
+The Financiers cluster provides the capital circulation system that enables investment across all other clusters. In BARMM, this cluster has a unique dimension: the alignment between Shariah-compliant financial instruments and the region's Muslim-majority population creates both a cultural fit and a competitive differentiation in the global Islamic finance market. With Islamic finance assets projected to exceed US$4 trillion globally by 2026 (IsDB, 2025), BARMM's Financiers cluster represents a significant underexploited opportunity.
+</p>
+
+<figure>
+<img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-context-beie-framewoek/public/38.%20Cluster%205_%20Financiers.png" alt="Cluster 5 Financiers" style="max-width:100%;">
+<figcaption data-label="Figure 2-16">Cluster 5: Financiers — Islamic Banking, Waqf, Takaful, and Microfinance. The capital circulation system with unique Shariah-compliant positioning for BARMM's Muslim-majority population. Source: Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<p>
+Currently, Islamic banking penetration in BARMM is minimal — total assets below ₱2 billion despite a 5.69 million Muslim-majority population. Al-Amanah Islamic Investment Bank of the Philippines, the sole Islamic bank nationally, operates limited branches in BARMM. CARD Islamic Bank's presence in Marawi (Lanao del Sur) demonstrates demand, but regulatory harmonization between the Bangko Sentral ng Pilipinas (BSP) and BARMM's proposed Islamic banking framework remains incomplete. Republic Act No. 11439 (Islamic Banking Law) provides the national legal foundation, but operationalization requires BARMM-specific regulations and institutional capacity.
+</p>
+
+<div class="cluster-box">
+<div class="cluster-box-title">Financiers Cluster — Key Statistics</div>
+• Islamic banking assets in BARMM: &lt;₱2B (target: ₱20B+ by 2035)<br>
+• Al-Amanah branches in BARMM: 3 (target: all provincial capitals by 2028)<br>
+• Microfinance penetration: 15% of adult population<br>
+• Waqf assets: Undeveloped; potential ₱5B+ in registered properties<br>
+• Takaful (Islamic insurance): No operators in BARMM<br>
+• Financial inclusion target: 25% of adult population by 2035<br>
+• CARD Islamic Bank (Marawi): ₱150M portfolio; 98% repayment rate
+</div>
+
+<table>
+<caption data-label="Table 2-12">Financiers Cluster: Islamic Finance Ecosystem Development Roadmap</caption>
+<thead>
+<tr><th>Phase</th><th>Period</th><th>Focus</th><th>Key Actions</th><th>Target</th></tr>
+</thead>
+<tbody>
+<tr><td>Phase 1: Foundation</td><td>2026–2028</td><td>Regulatory framework + institutional capacity</td><td>BARMM Islamic banking regulations; Al-Amanah expansion; BHB-Islamic finance linkage</td><td>₱5B assets; 5 provincial capitals</td></tr>
+<tr><td>Phase 2: Scaling</td><td>2029–2032</td><td>Product diversification + market deepening</td><td>Takaful licensing; sukuk issuance; waqf commercialization; digital Islamic finance</td><td>₱12B assets; all provinces</td></tr>
+<tr><td>Phase 3: Integration</td><td>2033–2035</td><td>BIMP-EAGA Islamic finance hub</td><td>Cross-border Shariah-compliant trade finance; ASEAN Islamic finance corridor</td><td>₱20B+ assets; regional hub</td></tr>
+</tbody>
+</table>
+
+
+<!-- ==================== CLUSTER INTERLINKAGES ==================== -->
+<div class="chapter-header" id="ch2-synthesis">
+<div class="chapter-number">Section G</div>
+<h1 class="chapter-title">Cluster Interlinkages and System Dynamics</h1>
+</div>
+
+<p>
+The BEIE Framework's analytical power lies not in individual cluster descriptions but in mapping how clusters interact through reinforcing (virtuous) and balancing (constraining) feedback loops. These interlinkages determine whether BARMM's investment ecosystem compounds value or dissipates it through fragmentation, bottlenecks, and missed synergies (Silva, 2026; Senge, 1990).
+</p>
+
+<h3>Reinforcing Loops: Virtuous Cycles</h3>
+
+<figure>
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/14.%20Investment-Development%20Virtuous%20Cycle.png" alt="Investment Virtuous Cycle" style="max-width:100%;">
+<figcaption data-label="Figure 2-17">Investment-Development Virtuous Cycle. When investments flow into priority sectors, they generate employment and income growth, which expands the domestic consumer market and attracts additional investors. The cycle is currently nascent — evidenced by the trajectory from ₱2.1B (2022) to ₱5.1B (Q1 2026) — but requires sustained catalyst investments to reach self-sustaining velocity. Source: BIRD Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<figure>
+<img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/images-swot-systems-maps/public/15.%20Investment%20and%20Governance%20Cycles.png" alt="Investment Governance Cycles" style="max-width:100%;">
+<figcaption data-label="Figure 2-18">Investment and Governance Cycles. Improved governance increases investor confidence, driving investment, generating economic growth, expanding the tax base, and providing resources for further governance improvements. The first elected Bangsamoro Parliament represents a critical juncture in this loop. Source: BIRD Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+
+<h3>The Master Reinforcing Loop (R6)</h3>
+<div class="resource-box">
+<div class="resource-box-title">R6 — Foundations → Transformers → Enablers → Financiers → Connectors → Foundations</div>
+<strong>Loop Structure:</strong> Foundations (AFF contributes 32.4% of GRDP, ₱97.2B) → Transformers (manufacturing grew 27% cumulatively from 2018–2023 in Maguindanao del Norte) → Enablers (₱6.67B Zamboanga-Basilan Interconnection Project improving logistics/energy) → Financiers (investment approvals surged from ₱2.1B in 2022 to ₱5.1B in Q1 2026) → Connectors (BIMP-EAGA corridors linking exports) → back to Foundations (DoleFil ₱306M pineapple facility reinvests into agriculture).<br><br>
+<strong>Implication:</strong> Synchronization across clusters is essential; weakness in one constrains the entire loop. This is the structural argument for the Integrated Ecosystem Development Strategy (IEDS) recommended in Chapter 4.
+</div>
+
+<h3>Provincial Diagnostics Dashboard</h3>
+
+<figure>
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Provincial%20Diagnostics.png" alt="Provincial Diagnostics" style="max-width:100%;">
+<figcaption data-label="Figure 2-19">Provincial Diagnostics Overview — Comparative dashboard across all BARMM jurisdictions. The visualization highlights the heterogeneous development landscape, with Lanao del Sur leading in GRDP (₱75.38B) and Tawi-Tawi requiring the most intensive intervention. Source: MTIT Provincial Outlooks (2026).</figcaption>
+</figure>
+
+<h3>Island vs. Mainland Cluster Dynamics</h3>
+
+<p>
+The cluster analysis reveals a fundamental <strong>island-mainland divergence</strong> in how BEIE clusters function across BARMM. Island provinces (Basilan, Tawi-Tawi, Sulu) exhibit "Limits to Growth" archetypes where Foundation endowments (rubber, seaweed, fisheries) hit hard Enabler ceilings (infrastructure, connectivity, human capital). Mainland provinces (Lanao del Sur, Maguindanao del Norte, Maguindanao del Sur, SGA) demonstrate "Fixes that Fail" and "Shifting the Burden" patterns where governance interventions produce uneven results due to institutional capacity gaps. The SGA, as a transitional zone, requires both infrastructure and institutional investment simultaneously — a unique systems challenge.
+</p>
+
+<table>
+<caption data-label="Table 2-13">BEIE Cluster Performance by Province — Summary Matrix</caption>
+<thead>
+<tr><th>Province</th><th>Foundations</th><th>Transformers</th><th>Enablers</th><th>Connectors</th><th>Financiers</th><th>Priority Archetype</th></tr>
+</thead>
+<tbody>
+<tr><td>Lanao del Sur</td><td>Strong (SPDA, Lake Lanao)</td><td>Growing (DoleFil anchor)</td><td>Moderate (literacy 61.5%)</td><td>Moderate (BIMP-EAGA)</td><td>Weak (limited Islamic finance)</td><td>Growth &amp; Underinvestment</td></tr>
+<tr><td>Mag. del Norte</td><td>Moderate (declining AFF share)</td><td>Strong (Halal Park)</td><td>Strong (78% electrification)</td><td>Strong (Polloc Freeport)</td><td>Moderate (BHB HQ)</td><td>Fixes that Fail</td></tr>
+<tr><td>Basilan</td><td>Strong (48K ha rubber)</td><td>Weak (no processing)</td><td>Moderate (72% elec.)</td><td>Weak (post-ASG recovery)</td><td>Weak (limited access)</td><td>Limits to Growth</td></tr>
+<tr><td>Mag. del Sur</td><td>Strong (53% AFF)</td><td>Weak (no processing)</td><td>Weak (55% elec., low literacy)</td><td>Weak (poor roads)</td><td>Very weak</td><td>Limits to Growth</td></tr>
+<tr><td>Tawi-Tawi</td><td>Strong (40% nat'l seaweed)</td><td>Weak (raw export only)</td><td>Very weak (45% elec., 10% broadband)</td><td>Moderate (Sabah proximity)</td><td>Very weak</td><td>Limits to Growth</td></tr>
+<tr><td>SGA</td><td>Strong (Rio Grande basin)</td><td>Weak</td><td>Weak (new LGUs)</td><td>Moderate (Mindanao Central Corridor)</td><td>Weak (land tenure unresolved)</td><td>Shifting the Burden</td></tr>
+</tbody>
+</table>
+
+<h3>Multimedia Resources</h3>
+
+<div class="video-box">
+<div class="video-box-title">Video Resource: Context Analysis and the BEIE Framework</div>
+<strong>Title:</strong> Context Analysis and the BEIE Framework<br>
+<strong>URL:</strong> <a href="https://youtu.be/Li7lpyWWMcE">https://youtu.be/Li7lpyWWMcE</a><br>
+<strong>Duration:</strong> ~12 minutes<br>
+<strong>Description:</strong> This video provides a deep dive into the BEIE Framework context analysis methodology, explaining how the five functional clusters interact and how the cross-cutting operating systems determine ecosystem performance. Essential viewing for understanding the systems-based approach applied in this chapter.
+</div>
+
+<div class="video-box">
+<div class="video-box-title">Video Resource: Systems Thinking for Bangsamoro Governance</div>
+<strong>Title:</strong> Systems Thinking for Bangsamoro Governance — Causal Loop Diagrams in Action<br>
+<strong>URL:</strong> <a href="https://www.youtube.com/watch?v=0QDYNxKCaU8">https://www.youtube.com/watch?v=0QDYNxKCaU8</a><br>
+<strong>Duration:</strong> ~10 minutes<br>
+<strong>Description:</strong> A practical introduction to systems thinking methodologies applied to governance challenges in Muslim Mindanao. Demonstrates how causal loop diagrams can identify leverage points for sustainable development in post-conflict regions.
+</div>
+
+<div class="video-box">
+<div class="video-box-title">Video Resource: Leverage Points — Places to Intervene in a System</div>
+<strong>Title:</strong> Leverage Points: Places to Intervene in a System — Donella Meadows<br>
+<strong>URL:</strong> <a href="https://www.youtube.com/watch?v=4a2UsaM2Mks">https://www.youtube.com/watch?v=4a2UsaM2Mks</a><br>
+<strong>Duration:</strong> ~10 minutes<br>
+<strong>Description:</strong> Explains Donella Meadows' hierarchy of leverage points, providing the theoretical foundation for the intervention prioritization framework used throughout the BIRD 2026–2035 analysis. Illustrates why changing rules, information flows, and paradigms produces greater impact than adjusting parameters alone.
+</div>
+
+<!-- ==================== REFERENCES ==================== -->
+<div class="references-page" id="references">
+<h1>References</h1>
+<div class="references-list">
+
+<p>Asian Development Bank (ADB). (2025). <em>Asian Development Outlook 2025: Fiscal decentralization and governance in developing Asia</em>. Manila: ADB.</p>
+
+<p>Bangsamoro Board of Investments (BBOI). (2026). Investment approvals reach ₱5.1 billion in the first four months of 2026 [Press release]. BARMM Official Website. https://bangsamoro.gov.ph</p>
+
+<p>Bangsamoro Planning and Development Authority (BPDA). (2023). <em>2nd Bangsamoro Development Plan 2023–2028</em>. BARMM Government. https://knowledge.bpda.bangsamoro.gov.ph</p>
+
+<p>BIMP-EAGA. (2024). <em>EGL Sub-Committee Strategic Plan 2025–2028</em>. ASEAN Secretariat.</p>
+
+<p>Bureau of Investments–Ministry of Trade, Investments and Tourism (BOI-MTIT). (2026). <em>Bangsamoro Investment Roadmap Development 2026–2035</em> [Unpublished manuscript]. BARMM Government.</p>
+
+<p>Department of Energy-BARMM (DOE-BARMM). (2024). <em>Provincial Electrification Statistics 2024</em>. Cotabato City: DOE-BARMM.</p>
+
+<p>Food and Agriculture Organization (FAO). (2025). <em>Global Food Price Monitor, January 2025</em>. Rome: FAO.</p>
+
+<p>IAG Philippines. (2026). <em>Bangsamoro transition monitor: Governance and security outlook 2026</em>. Manila: Institute for Autonomy and Governance.</p>
+
+<p>International Labour Organization (ILO). (2025). <em>World Employment and Social Outlook 2025: Automation and the future of work</em>. Geneva: ILO.</p>
+
+<p>International Monetary Fund (IMF). (2025). <em>World Economic Outlook Update, January 2025</em>. Washington, DC: IMF.</p>
+
+<p>Islamic Development Bank (IsDB). (2025). <em>Islamic finance development report 2025</em>. Jeddah: IsDB.</p>
+
+<p>Meadows, D. H. (1999). <em>Leverage points: Places to intervene in a system</em>. Hartland, VT: Sustainability Institute.</p>
+
+<p>Meadows, D. H. (2008). <em>Thinking in systems: A primer</em>. White River Junction, VT: Chelsea Green Publishing.</p>
+
+<p>Ministry of Environment, Natural Resources and Energy–BARMM (MENRE). (2024). <em>Bangsamoro Sustainable Energy Master Plan</em>. Cotabato City: MENRE-BARMM.</p>
+
+<p>Ministry of Finance and Budget Management–BARMM (MFBM). (2025). <em>BARMM Provincial Economic Trends: A provincial breakdown of growth and challenges</em> (Economic Brief, Issue No. 1, Series of 2025). Cotabato City: MFBM.</p>
+
+<p>Ministry of Trade, Investments and Tourism–BARMM (MTIT-BARMM). (2025). <em>Bangsamoro Halal Industry Development Plan 2025–2030</em>. Cotabato City: MTIT-BARMM.</p>
+
+<p>MindaNews. (2025, March 15). BARMM education budget reaches ₱32.65B for 2026. <em>MindaNews</em>. https://www.mindanews.com</p>
+
+<p>National Economic and Development Authority (NEDA). (2023). <em>Philippine Development Plan 2023–2028</em>. Manila: NEDA.</p>
+
+<p>Philippine Information Agency (PIA). (2025, June 10). Basilan declared ASG-free; Pillar of Peace marker unveiled. <em>PIA News</em>. https://pia.gov.ph</p>
+
+<p>Philippine Statistics Authority (PSA). (2024). <em>2023 First Semester Official Poverty Statistics of the Philippines</em>. PSA. https://psa.gov.ph</p>
+
+<p>Philippine Statistics Authority–Regional Statistics Office BARMM (PSA-RSSO BARMM). (2025). <em>BARMM's economy expands by 2.7 percent in 2024</em>. https://rssobarmm.psa.gov.ph</p>
+
+<p>Republic Act No. 11054. (2018). Organic Law for the Bangsamoro Autonomous Region in Muslim Mindanao. Congress of the Philippines.</p>
+
+<p>Republic Act No. 11439. (2019). An Act Regulating the Organization and Governance of Islamic Banks and Providing for a Comprehensive Framework for Islamic Finance in the Philippines. Congress of the Philippines.</p>
+
+<p>Republic Act No. 11550. (2021). An Act Dividing the Province of Maguindanao into Two Provinces to be Known as the Provinces of Maguindanao del Norte and Maguindanao del Sur. Congress of the Philippines.</p>
+
+<p>Senge, P. M. (1990). <em>The fifth discipline: The art and practice of the learning organization</em>. New York: Doubleday.</p>
+
+<p>Silva, A. M. (2026). Reimagining BARMM's economic sectors: Building an integrated investment roadmap (2026–2036). <em>AS Strategic Insights</em>. https://asilvainnovations.github.io/barmm-investment-roadmap/ieb.html</p>
+
+<p>Silva, A. M. (2026). <em>Strat Planner Pro User Manual</em>. AS Strategic Insights. https://asilvainnovations.github.io/strat-planner-pwa/user-manual.html</p>
+
+<p>United Nations Development Programme (UNDP). (2025). <em>Digital transformation for sustainable development in Southeast Asia</em>. Bangkok: UNDP Regional Hub.</p>
+
+<p>World Bank. (2025). <em>Global Economic Prospects, January 2025</em>. Washington, DC: World Bank.</p>
+
+</div>
+</div>
+
+</body>
+</html>
