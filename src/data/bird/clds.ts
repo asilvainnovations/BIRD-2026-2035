@@ -17,7 +17,8 @@ export interface CausalLoop {
   health: string;
   progress: number;
   status: LoopStatus;
-  color: 'green' | 'gold' | 'blue' | 'teal';
+  /** BIRD palette hex (e.g. '#059669' deep green, '#C9A84C' gold) or named token */
+  color: string;
   leveragePoint: string;
   cluster?: string; // BEIE cluster reference
 }
