@@ -38,14 +38,103 @@ The SurveyWizard (`src/components/strategic/SurveyWizard.tsx`) is a 16-step wiza
 - Use `utils.ts` for SWOT metric computation and template conversion
 
 Critical To-Do: 
-- [ ] Read all uploaded files to understand codebase structure
-- [ ] Update URLs and desccriptions in bird-urls.ts with all new image/video titles
-- [ ] Create Section0 with compelling web copy + banner + systems thinking video
+1. Read all uploaded files to understand codebase structure
+2. Create Section0 with compelling Validation Survey banner + srategic intent
+    2.1   Ensure a compelling web copy consistent with the attached survey-orientation.html
+    2.2  Incorporate a full view and wide format of this Validation Survey Banner- https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Validation%20Survey%20Banner.png
+3. Re-create Section 1 for Privacy, Consent, and Confidentiality (hyperlink public/privacy-policy.html and public/cookies-policy.html
+4. Re-create Section 2 for Demographic Profile (excluding organization)
+5. Re-create Section 3 for intro to Systems Thinking, Paradigm Shift, and BEIE 101
+5.1 Embed this video in  its Wide and Full View Format 
+Title: Systems Thinking: Moving from Checklists to Interconnected Investment Ecosystem
+Description: Discover how the Bangsamoro Investment Roadmap (BIRD 2026–2035) turns fragmented efforts into a unified engine of growth. This video unpacks: Systems Thinking — shifting from checklists to interconnected strategies; Feedback Loops — cycles that amplify progress and stabilize change; Causal Loop Diagrams — visuals that expose traps and leverage points; and  Leverage Strategies — small shifts sparking big gains in governance, infrastructure, and equity. From governance hurdles to resource equity, see how Bangsamoro can move beyond quick fixes toward lasting systemic solutions.
+URL: https://youtu.be/VBAHk0WYz_c?si=sbA9QhA4M791C1ET
+
+5. 2 From Sector-Based Planning to Ecosystem Approach - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/From%20Sector-Based%20Planning%20to%20BEIE%20Approach.png
+Description: The image illustrates a mental model shift—from siloed development to an interconnected ecosystem that drives inclusive and sustainable growth.
+* On the left, sector-based planning is shown as reactive and fragmented—where infrastructure follows production, capital is allocated by single-sector grants, and market access remains limited to raw exports.
+* On the right, the BEIE approach integrates systems thinking: infrastructure is primed first, equity extends across island provinces, financing is synchronized through Shariah-compliant instruments, and market access connects to global halal and green economies.
+How can stakeholders across government, business, and civil society work together to make the BEIE ecosystem approach more actionable in real investment planning? Write your answer in one to two sentences.
+5.3 BEIE Framework -https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/BEIE%20Framework%20-1%20.png
+Description: The “Bangsamoro Economic and Investment Ecosystem” presents a circular system powered by Moral Governance at its center—symbolizing ethical leadership as the engine of development.
+Surrounding it are five interconnected components:
+* Foundations — agriculture, forestry, and energy as the resource base.
+* Transformers — industries and halal manufacturing that create value.
+* Financiers —  Islamic banking, waqf, sukuk, taqaful, and microfinance that empower expansion.
+* Connectors — trade, tourism, and regional links (like BIMP‑EAGA) that open markets.
+* Enablers — infrastructure, health, and education providing support systems.
+Together, these parts form a cohesive ecosystem where governance, finance, production, and connectivity work in harmony to drive sustainable and inclusive growth in Bangsamoro.
+
+6. Re-create Section 4 for Cluster 1 - Foundations
+6.1 Incorporate a wide and full view format of this image[https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Cluster%201-Foundations.png]
+“Cluster 1 | Foundations: The Infrastructure‑First Resource Base”** illustrates the core resource pillars driving Bangsamoro’s economy.  
+It highlights four sectors:  
+- **Agri‑Fisheries** — contributes 32.4 % of GRDP (₱97.2 B), led by Tawi‑Tawi seaweed and Maguindanao rice/corn production.  
+- **Energy** — BARMM has a 75.86 % renewable mix from hydro, solar, and biomass, essential for industrial growth.  
+- **Forestry** — massive untapped carbon and ecosystem service potential.  
+- **Environment** — positions the green economy as a revenue generator rather than a compliance cost.  
+These elements sectors the **resource base** that supports industrialization and sustainable development under the Bangsamoro Investment Roadmap 2026‑2035 .  
+Question:
+> “How effectively do you think BARMM’s agriculture, fisheries, forestry, energy, and environmental sectors are being integrated to form a sustainable resource base for investment growth?”
+Critical Note: Transfer here questions on Green Economy in current Section 12.
+> Select critical and relevant SWOT scale questions in the attached SWOT_scale_questions.md, and insert here.
+>  Select relevant Shorten Systems Mapping questions in the attached BIRD-Systems-Archetypes-Descriptions-and-Validation-Questions.md, shorten the description in a succinct way and insert here.
+> Insert this image [https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Maguidano-del-Sur.png] Description: **“Maguindanao del Sur: The Agro‑Industrial Breadbasket”** shows how the province moves from raw production to higher‑value processing.  
+It outlines three layers of economic activity:  
+- **Raw Inputs (Foundations):** fertile plains along the Pulangi River basin support agriculture and fisheries.  
+- **Modern Processing (Transformers):** shifting from commodity exports to value‑added products like VCO, desiccated coconut, corn starch, and premium rice milling.  
+- **Logistics Grid (Enablers):** integrating farm‑to‑market roads and solar‑dryer warehousing to support distribution.  
+The key message: **capture processing margins instead of relying on low‑yield raw extraction.**  
+**Question:**  
+> “Do you agree that improving processing and logistics infrastructure in Maguindanao del Sur will significantly increase the value of its agricultural output?”
+
+7. Re-create Section 5 for Cluster 2 - Transformers
+> Select critical and relevant SWOT scale questions in the attached SWOT_scale_questions.md, and insert here.
+>  Select relevant Shorten Systems Mapping questions in the attached BIRD-Systems-Archetypes-Descriptions-and-Validation-Questions.md, shorten the description in a succinct way and insert here.
+> Insert a wide format and full view of this image [https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Cluster%202%20_%20Transformers.png]
+Description: **“Cluster 2 | Transformers: Engines of Value Creation”** shows how Bangsamoro’s industrial sector should transform raw materials into high‑value halal products for export.  
+It illustrates a three‑stage progression:  
+- **Raw Material (Tier 1):** basic agro‑processing from agriculture and fisheries.  
+- **High‑Value Processing (Tier 2):** halal‑certified MSMEs and the WOW Matnog Special Economic Zone driving industrial growth.  
+- **Premium Export (Tier 3):** halal pharmaceuticals, cosmetics, and premium foods targeting the USD 2.3 trillion ASEAN halal market.  
+**Question:**  
+> “Do you believe strengthening halal‑certified processing industries will help Bangsamoro capture a larger share of the ASEAN halal market?”
+> Insert this image [https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Transformers-Farm-to-Market%20Pipeline%20.png]
+Description: **“Transformers: MAFAR Halal Farm‑to‑Market Pipeline”** illustrates the step‑by‑step flow that connects production to export within Bangsamoro’s halal value chain.  
+It shows four linked stages:  
+1. **Input Supply** — hatcheries, aqua‑feed mills, and seaweed buying stations.  
+2. **Cold Chain & Logistics** — farm‑to‑market roads, ice plants, and cold‑storage facilities to reduce post‑harvest losses.  
+3. **Processing** — halal livestock, poultry, seaweed, and agri‑fishery plants.  
+4. **Market Linkage** — halal pasalubong centers and BIMP‑EAGA export integration.  
+These stages depict how infrastructure physically resolves historical bottlenecks and enables a seamless halal farm‑to‑market system.  
+**Question:**  
+> “Do you think improving cold‑chain and logistics infrastructure will significantly strengthen Bangsamoro’s halal farm‑to‑market pipeline?”
+> Insert this image: [https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Industrial%20and%20Economic%20Zones.png]
+Description: **“Industrial & Economic Zones”** highlights Bangsamoro’s strategic hubs for manufacturing, trade, and logistics.  
+It presents two key sites:  
+- **Polloc Freeport & EcoZone (PFEZ)** —a 119‑hectare agro‑industrial hub in Parang, Maguindanao del Norte, funded by ADB and focused on fuel and logistics.  
+- **WOW Matanog Special Economic Zone** — the upcoming Bangsamoro Halal Park, a private‑led initiative for halal‑compliant manufacturing and trade aligned with global standards.  
+They represent the region’s shift toward integrated industrial growth and ASEAN halal‑economy participation.  
+**Question:**  
+> “Do you think developing specialized economic zones like Polloc Freeport and WOW Matanog will significantly boost Bangsamoro’s industrial and halal trade capacity?”
+- [ ] Re-create Section 6 for Cluster 3 - Enablers
+- [ ] Re-create Section 7 for Cluster 4 - Connectors
+      Insert questions here about Provincial Equity and Specialized Nodes
+- [ ] Re-create Section 8 for Operating Systems (Moral Governance , Resilience, Inclusivity and Peace)
+- [ ] Re-create Section 9 for Cluster 5 - Financiers
+- [ ] Re-create Section 10 for Stategic Options and Leverage Points
+- [ ] Re-create Section 11 for IEDS and Three-Phase Implementation
+- [ ] Re-create Section 12 for the Metrics Architecture and Key Metrics
+- [ ] Re-create Section 13 for the Balanced Scorecard, Mission, and Vision
+- [ ] Re-create Section 14 for Priority Actions and Budget
+- [ ] Re-create Section 15 for Access to Resources and Optional Engagements and Commitments
+- [ ] Re-create Section 16 for Submission
 - [ ] Update ContextPanel.tsx with URLs and resources
-- [ ] Select critical SWOT scale questions and distribute to Sections 1-11
-- [ ] Shorten Systems Mapping questions and distribute to applicable sections
-- [ ] Update SurveyWizard.tsx to include Section0 + FloatingAIAssistant
--  ] Update survey-schema.ts with new Section0 fields
+- [ ] Select critical SWOT scale questions in the attached SWOT_scale_questions.md, and distribute to applicable Sections 4 - 9
+- [ ] Shorten Systems Mapping questions in the attached Systems Mapping_questions.md and distribute to applicable Sections 4 - 9
+- [ ] Update SurveyWizard.tsx with new sections
+- [ ] Update survey-schema.ts with new sections
+- [ ] Update URLs and desccriptions in bird-urls.ts with all new sections, images/videos titles and descriptions, and sites
 
 ---
 
@@ -119,7 +208,9 @@ import {
 
 | Survey Field | StrategicPlan Field | Section |
 |-------------|---------------------|---------|
-
+| `Survey Briefing` | Introduction | 1 |
+|  `Dempgraphics  | `personal info`, `contacts` | 2 |
+| `q1_1`, `q1_2` | `organization`, `strategicIntent` | 0 |
 | `q1_1`, `q1_2` | `organization`, `strategicIntent` | 1 |
 | `q2_1`–`q2_4` | `swotItems` (moral governance archetype) | 2 |
 | `q3_1`–`q3_limits_growth` | `swotItems` (Foundations cluster) | 3 |
@@ -135,7 +226,334 @@ import {
 | `q13_1`–`q13_2` | `objectives` (governance KPIs) | 13 |
 | `q14_1'-q14 | `createdByName`, `organization` | 14 |
 | `care_*` | Plan metadata / validation score | 15 |
-| `consent_final` | Plan status activation | 16 |
+
+
+
+Add Section0 - Provide a compelling web copy  consistent with the attached survey-orientation.html
+Incorporate a full view and wide format of this Validation Survey Banner- https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Validation%20Survey%20Banner.png
+
+Embed this video in  its Wide and Full View Format 
+Title: Systems Thinking: Moving from Checklists to Interconnected Investment Ecosystem
+Description: Discover how the Bangsamoro Investment Roadmap (BIRD 2026–2035) turns fragmented efforts into a unified engine of growth. This video unpacks: Systems Thinking — shifting from checklists to interconnected strategies; Feedback Loops — cycles that amplify progress and stabilize change; Causal Loop Diagrams — visuals that expose traps and leverage points; and  Leverage Strategies — small shifts sparking big gains in governance, infrastructure, and equity. From governance hurdles to resource equity, see how Bangsamoro can move beyond quick fixes toward lasting systemic solutions.
+URL: https://youtu.be/VBAHk0WYz_c?si=sbA9QhA4M791C1ET
+
+Suggested additional question in Section1
+From Sector-Based Planning tp Ecosystem Approach - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/From%20Sector-Based%20Planning%20to%20BEIE%20Approach.png
+Description: The image illustrates a mental model shift—from siloed development to an interconnected ecosystem that drives inclusive and sustainable growth.
+* On the left, sector-based planning is shown as reactive and fragmented—where infrastructure follows production, capital is allocated by single-sector grants, and market access remains limited to raw exports.
+* On the right, the BEIE approach integrates systems thinking: infrastructure is primed first, equity extends across island provinces, financing is synchronized through Shariah-compliant instruments, and market access connects to global halal and green economies.
+
+How can stakeholders across government, business, and civil society work together to make the BEIE ecosystem approach more actionable in real investment planning? Write your answer in one to two sentences.
+
+BEIE Framework -https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/BEIE-v2.png
+Description: The “Bangsamoro Economic and Investment Ecosystem” presents a circular system powered by Moral Governance at its center—symbolizing ethical leadership as the engine of development.
+Surrounding it are five interconnected components:
+* Foundations — agriculture, forestry, and energy as the resource base.
+* Transformers — industries and halal manufacturing that create value.
+* Financiers —  Islamic banking, waqf, sukuk, taqaful, and microfinance that empower expansion.
+* Connectors — trade, tourism, and regional links (like BIMP‑EAGA) that open markets.
+* Enablers — infrastructure, health, and education providing support systems.
+Together, these parts form a cohesive ecosystem where governance, finance, production, and connectivity work in harmony to drive sustainable and inclusive growth in Bangsamoro.
+
+Bangsamoro Investment Ecosystem - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/BEIE-v3.png
+Description: The Bangsamoro Investment Ecosystem” depicts a circular system powered by Moral Governance at its center.  The layers form a cohesive ecosystem where ethical governance drives sustainable development through balanced economic collaboration.
+It shows four interconnected layers:
+* Foundations — agriculture, fisheries, and energy that sustain growth.
+* Transformers — industries and halal enterprises that create value.
+* Enablers — infrastructure, labor, and health sectors that support productivity.
+* Financiers — Islamic banking and finance that empower expansion.
+
+Note: Retain questions existing questions on BEIE framework.
+
+
+Section 2
+Operating Systems - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/OS.png
+Description: Moral Governance serves as the central operating system of the Bangsamoro ecosystem.
+At the core of the Operating Systems is Moral Governance ensuring justice, transparency, accountability, and Islamic ethics (khalifa stewardship). Surrounding it are three foundational pillars:
+* 🕊️ Peace — provides long-term stability for investment.
+* 🌿 Resilience — promotes adaptive, climate-smart planning to withstand external shocks.
+* 🤝 Inclusivity — broadens participation so marginalized communities share in value creation.
+
+
+Investment-Development Loop and Governance- Investor Confidence Loop - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/Investment%20and%20Governance%20Cycles.png
+Description: The diagrams illustrate two reinforcing loop on synchronized investment and governance reforms suggesting sustaiinable inclusive economic growth.
+* Loop 1 – Investment–Development (R1): Investments create jobs and expand markets, attracting more investors and strengthening business viability.
+* Loop 2 – Governance–Investor Confidence (R2): Transparent governance builds investor trust, expands the tax base, and increases public funding, which further improves governance.
+
+To what extent do you think these loops accurately reflect how investment and governance reinforce each other in BARMM’s development?
+* ☐ Very accurately
+* ☐ Somewhat accurately
+* ☐ Needs revision
+* ☐ Not accurate
+
+Regulatory Architecture- https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Regulatory%20Architecture.png
+
+Draft JMC - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Draft%20JMC%202026-01.png
+Policy Recommendations-Policy Makers-Planners-Investors - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Policy%20Recommendations-Policy%20Makers-Planners-Investors.png
+
+Core Policy Mandates - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Policy%20recommendations-Institutional-Fiscal-Regulatory.png
+
+How Moral. Governance de-risks capital? https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/How%20moral%20Governance%20De-Risks%20Capital.png
+Description: The reinforcing feedback loop in the diagram shows how moral governance continuously strengthens a region’s economic and institutional health.
+* Moral Governance Implementation builds institutional transparency, which lowers bureaucratic friction (through systems like BIFOSS).
+* This transparency and efficiency raise investor confidence, leading to increased foreign direct investment (FDI).
+* More FDI boosts regional revenue, enabling stronger governance capacity.
+* That improved capacity further supports moral governance, completing a positive cycle where each element amplifies the next.
+In short, ethical and transparent governance creates trust and efficiency, attracting investment that funds even better governance—a self-reinforcing system of growth and stability.
+
+Five Interconnected Clusters - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/5%20Interconnected%20Clusters.png
+Description: “The Parts of the Engine” presents how the Bangsamoro economy functions as an interconnected system driven by Moral Governance at its core. It shows five clusters working together:
+* Foundations – provide natural and energy resources (agriculture, fisheries, forestry).
+* Financiers – supply capital through Islamic banking, waqf, and microfinance.
+* Transformers – create value via industry and halal manufacturing.
+* Enablers – support movement through infrastructure, health, education, and connectivity.
+* Connectors – open markets through exports, trade, and tourism
+
+
+Critical Note: Transfer in this section (Section 2) the questions on Climate Resilience in Section 12, questions on Policy and Governance Recommendations from Section 13: Policy & Governance Recommendations, in effect deleting Section 13.
+
+
+Title: SWOT Analysis & Systems Mapping Explained 
+Description: In this video, we break down the SWOT Analysis—examining Strengths, Weaknesses, Opportunities, and Threats—and use Systems Mapping to show how strategic investments can reshape the region. Through non-linear diagramming, we co-created narratives using tools like Causal Loop Diagrams and Systems Archetypes to reveal patterns of change and leverage points for transformation.
+URL: https://youtu.be/LSmBzwyX2uw
+
+
+Section 3 -  Cluster 1 -Foundations - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/10.%20Cluster%201.png
+
+Critical Note: Transfer here questions on Green Economy in Section 12. In effect, deleting Section 12.
+
+
+Section 4 -  Cluster 2 - Transformers - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/11.%20Cluster%202%20_%20Transformers.png
+
+Farm-to-Market Pipeline-  https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Transformers-Farm-to-Market%20Pipeline%20.png
+
+
+The Transformers -Capturing Value Through Industrial and Economic Zones - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Industrial%20and%20Economic%20Zones.png
+
+Capitalizing Cultural Advantage - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Capitalizing%20Cultural%20Advantage%20-%20Halal%20Industry%20Adv.png
+
+
+Section 5 Cluster 3 - Enablers - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Cluster%203%20Enablers.png
+
+Skills and Education Gap-https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Skills%20and%20Education%20Gap.png
+The Enabling Grid - 2nd Layer of BARMM Interconnectivity - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Layer%202%20-%20The%20Enabling%20Grid%20and%20Lawof%20Sequencing.png
+
+The Digital Backbone - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/The%20Digital%20Backbone.png
+Tourism Master Plan - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Tourism%20Master%20Plan.png
+Tourism and Digital Connectivity - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Tourism%20and%20Digital%20Connectivity.png
+
+Activating the Enablers- Primed by Moral Governance- https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Activating%20the%20Enablers%20-%20Infra%20Primed%20by%20Moral%20Governance.png
+The image  illustrates how Moral Governance acts as the operating system that powers Bangsamoro’s physical development.
+* On the left, Transparency, Accountability, and Stability form the governance core that builds trust — described as the currency of investment.
+* On the right, the physical backbones show measurable infrastructure goals:
+    * 100% Electrification through renewable expansion
+    * 85% Broadband Penetration by 2035
+    * 30% Logistics Cost Reduction via improved inter‑island routes
+Together, these elements depict how ethical governance can directly enable infrastructure growth and investor confidence.
+How realistic is it that Moral Governance can effectively deliver these physical enablers — electrification, broadband connectivity, and logistics efficiency — in BARMM?
+* ☐ Very realistic
+* ☐ Somewhat realistic
+* ☐ Needs stronger institutional support
+* ☐ Not realistic
+
+
+Section 6 Cluster 4 - Connectors - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Cluster%204_%20Connectors.png
+
+Does connectivity integrate economic zones? https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/Critical%20Test%20-%20Integrating%20Zones%20and%20Scaling%20Capiral%20-%20Think%20of%20one%20challenge%20%20we%20must%20overcome%20to%20achieve%20this%20vision.png
+
+
+The Connectivity Capital - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/The%20Connectivity%20Capital%20.png
+
+Critical Note: Transfer in this section questions on Provincial Equity in Section 11: Provincial Equity & Inclusion
+
+Add these images and create the right questions
+The Provincial Specialized Node and Equity - “One Bangsamoro”- https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Layer%201%20-%20Provincial%20-%20Geopolitical%20Specialized%20Nodes.png
+Revitalizing the Maritime Trade - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Revitalizing%20the%20Maritime%20Trade.png
+Provincial Endowments - Mainlands - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Mainlands%20Provincial%20Endowments.png
+Provincial Endowments - Islands - 
+Maguindanao del Sur - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Maguidano-del-Sur.png
+Maguindanao del  Norte - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Maguindanao-del-Norte.png
+Basilan and Tawi-Tawi - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Basilan%20and%20tawi-Tawi.png
+The Trapped Value - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/The%20Trapped%20Value.png
+Shattering Geographic isolation - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Shattering%20Geographical%20Isolation.png
+
+
+Global Integration - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Global%20Integration%20Vectors.png
+Global Value Chain Integration with UAE-GCC - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/UAE%20&%20GCC.png 
+Global Value Chain Integration with BIMP -EAGA-https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/BARMM%20Connectivity-BIMP-EAGA.png 
+
+Priority Tourism Clusters - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Priority%20Tourism%20Clusters%20and%20Investment%20Sites.png
+
+Section 7-  Cluster 5 Financiers - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/38.%20Cluster%205_%20Financiers.png
+
+Islamic Finance Roadmap - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Islamic%20Finance%20Roadmap.png
+
+
+Anatomy of Causal Loop Diagram - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/3-Anatomy%20of%20CLD.png
+Description: A Causal Loop Diagram (CLD)  has interconnected elements.
+* Variables — factors that change over time, such as Governance Capacity and Investor Confidence.
+* Links — arrows showing how one variable directly influences another.
+* Polarity — marked as ‘s’ for same-direction effects (e.g., higher governance increases confidence) and ‘o’ for opposite-direction effects (e.g., more bottlenecks reduce private investment).
+* The circular layout illustrates how these relationships form feedback loops that either reinforce or balance system behavior.
+In short, a CLD visually maps cause-and-effect relationships that drive dynamic change within a system.
+
+Example of Reinforcing Loop
+1. Investment-Development Loop and Governance- Investor Confidence Loop - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/Investment%20and%20Governance%20Cycles.png 
+Description: Investment and governance reinforce each other to drive sustained growth.
+🟡 Loop 1: Investment–Development (R1)
+* Starts with investments in sectors like halal, agro, and tourism.
+* These create employment and income growth, which expands the domestic market.
+* A larger market improves business viability, attracting more investors, and the cycle repeats—strengthening development.
+🟢 Loop 2: Governance–Investor Confidence (R2)
+* Improved moral governance (transparency) increases investor confidence.
+* Confidence fuels economic growth, which expands the tax base and public funding.
+* More resources allow for better governance, completing a reinforcing loop that sustains trust and growth.
+Together, these loops show how ethical governance and active investment synchronize to compound regional prosperity.
+
+2. How Moral. Governance de-risks capital? https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/How%20moral%20Governance%20De-Risks%20Capital.png
+Description: The reinforcing feedback loop in the diagram shows how moral governance continuously strengthens a region’s economic and institutional health.
+* Moral Governance Implementation builds institutional transparency, which lowers bureaucratic friction (through systems like BIFOSS).
+* This transparency and efficiency raise investor confidence, leading to increased foreign direct investment (FDI).
+* More FDI boosts regional revenue, enabling stronger governance capacity.
+* That improved capacity further supports moral governance, completing a positive cycle where each element amplifies the next.
+In short, ethical and transparent governance creates trust and efficiency, attracting investment that funds even better governance—a self-reinforcing system of growth and stability.
+
+Balancing Loops
+Unchecked Growth hits hard infrastructure and Security Ceilings - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/19.%20The%20Archetypes.png
+Description: The diagram visualizes two balancing loops that constrain Bangsamoro’s development:
+* Constraint 1 – Limits to Growth (B1): Investment expands but eventually hits resource and infrastructure ceilings—such as low literacy, limited broadband, and power shortages—that slow progress.
+* Constraint 2 – Security‑Investment Tensions (B2): Security incidents trigger investor caution, reduce capital flows, and weaken regional stability, creating a feedback loop that dampens economic growth.
+Together, these loops highlight how unchecked expansion without parallel investment in infrastructure and security can stall long‑term development.
+How accurately do these loops reflect the real constraints limiting Bangsamoro’s investment‑driven growth?
+* ☐ Very accurately
+* ☐ Somewhat accurately
+* ☐ Needs revision
+* ☐ Not accurate
+
+Why synchronization matters?  https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/6.%20Why%20Synchronization%20Matters.png
+Ask participants for  two-three phrases resulting to wordcloud.
+
+
+
+Systems Archetypes banner
+https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Systems%20Archetypes%20Banner.png
+
+Anatomy of Systems Traps or Archetypes - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/6-Anatomy%20of%20Systems%20Traps.png
+
+Capacity Traps
+https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Hitting%20the%20Growth%20Wall-%20Limits%20to%20Growth%20and%20Growth%20and%20Underinvestment.png
+
+The Capacity Traps diagrams illustrate two systemic archetypes that limit Bangsamoro’s growth:
+Limits to Growth — Investment expands rapidly but eventually hits hard ceilings such as unreliable infrastructure, low literacy, and resource bottlenecks. Without parallel capacity building, growth plateaus - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Limits%20to%20Growth%20Archetype.png
+
+Growth and Underinvestment — Rising demand outpaces institutional capacity (certifiers, staff, infrastructure). Delays and inefficiencies reduce investor confidence, creating a self‑reinforcing cycle of stagnation. https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Growth%20and%20Underinvestment.png
+
+
+
+Together, these archetypes show how unchecked expansion and chronic underinvestment can trap the region in a cycle where performance lags behind potential.
+
+How well do these two systems archetypes reflect the real capacity constraints affecting Bangsamoro’s investment and development performance?
+* ☐ Very accurately
+* ☐ Somewhat accurately
+* ☐ Needs revision
+* ☐ Not accurate
+
+
+Governance Traps
+
+Shifting the Burden - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Shifting%20the%20Burden%20Archetype.png
+Fixes that Fail - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Fixes%20that%20Fail%20Archetype.png
+Drifting Goals -https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/Drifting%20Goals.png
+
+Resource and Equity Traps
+https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Resource%20and%20Equity%20Traps%20-%20Success%20to%20the%20Successful%20and%20Growth%20and%20Tragedy%20of%20the%20Commons%20Archetypes%20.png
+
+Success to the Successful - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Success%20to%20the%20Successful%20Aarchetype.png
+
+Tragedy of the Commons - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Tragedy%20of%20the%20Commons%20Archetype.png
+
+Instability Traps
+https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Instability%20Traps%20Introduction.png
+Cycles of Exclusion and Retaliation - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Cycles%20of%20Exclusion%20and%20Retaliation.png
+
+Escalation - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/Escalation.png
+
+The “Big Man” Archetype -  https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/The%20Big%20Man%20Archetype.png
+
+
+Leverage Points Banner - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Leverage%20Points%20Banner.png
+
+How to  identify leverage points - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/How%20to%20Identify%20Leverage%20Points.png
+
+Activating Leverage Points - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/Activating%20Leverage%20Points.png
+
+Strategic Leverage Points - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/27.%20Strategic%20Leverage%20Points.png
+
+Leverage Points in Capacity Traps- https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Skills%20and%20Education%20Gap.png
+
+Leverage Points in Governance Traps : The Iceberg Model- https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Iceberg%20Model%20Paradigm.png
+
+Architecting Collaborative Governance- https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Skills%20and%20Education%20Gap.png
+
+Archetypes and Leverage Points - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Archetypes%20&%20Leverage%20Points.png
+
+Section 8
+Video
+Title: Strategic Options & Path to Growth 
+Description: Discover the strategic choices shaping Bangsamoro’s Investment Roadmap 2026–2035. This video shows how well-crafted strategies and priorities can fuel inclusive growth, sustainability, and regional competitiveness in BARMM.”
+URL - https://youtu.be/kb_snh8mo1k 
+
+Four Strategic Options  - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/3.%20Strategic%20Options%20Ranking.png
+
+The Phasing - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/Sequencing.png
+
+Section 9
+The Budget for three phases - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/22.%20Regulatory%20Architecture.png
+
+Total Capital Deployment Per Phase - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/28.%20Ecosystem%20Success.png
+
+Executing the Roadmap-timeline  - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/Executing%20the%20Roadmap.png
+
+Roadmap in Motion - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Roadmap%20on%20Motion.png
+
+Section 10 
+IEDS - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/The%20Execution%20Engine%20-IEDS.png
+
+Metrics Architecture - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Metrics%20Architecture%20(1).png
+
+Section 11 - Synthesis
+
+Investment Roadmap Infographic: https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/2035%20Bangsamoro%20Investment%20Roadmap%20Infographics.png
+The diagram presents the Bangsamoro Investment Ecosystem as a layered system built around Moral Governance at its center.
+* Foundations (Agriculture, Fishery, Energy) sustain the economy and provide essential resources.
+* Transformers (Industry, Halal) create value and drive production.
+* Enablers (Infrastructure, Labor, Health) support growth and ensure inclusivity.
+* Financiers (Islamic Banking) empower expansion through ethical financing.
+Each layer interacts dynamically, showing how governance, production, support systems, and finance form a synchronized ecosystem for sustainable and inclusive development.
+In which cluster—Foundations, Transformers, Enablers, or Financiers—does your organization believe it can contribute most meaningfully to the Bangsamoro Investment Ecosystem?
+* ☐ Foundations (Agriculture, Fishery, Energy)
+* ☐ Transformers (Industry, Halal)
+* ☐ Enablers (Infrastructure, Labor, Health)
+* ☐ Financiers (Islamic Banking, 
+Section 11 Policies 
+
+
+
+Wrapping Up
+
+Title: Bangsamoro Investment Roadmap 2026‑2035 | Southeast Asia’s Hub for Ethical & Sustainable Growth
+Description: Discover how the Bangsamoro Investment Roadmap (BIRD) 2026‑2035 positions BARMM as Southeast Asia’s hub for resilient, ethical, and sustainable investments — highlighting its growth momentum, the risks ahead, and the frameworks driving transformation.
+URL:  https://youtu.be/UCi2dVUmSbE 
+
+When Vision Meets Execution -https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/When%20Vision%20Meets%20Execution.png
+
+
+The Decade Ahead - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/The%20Decade%20Ahead_Bird%20App-CTA.png
+
+Invest in Bangsamoro - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Invest%20in%20Bangsamoro.png
+Choose Bangsamoro - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Choose%20Bangsamoro.png
+
+
 
 **Implementation Pattern:**
 
