@@ -1,7 +1,7 @@
 // src/lib/bird-urls.ts
 // BIRD 2026–2035 · Centralized URL Registry
 // Videos, Images, and Site Pages for Context, Reference, Visualizations & Interactions
-// Updated: 2026-07-16 | 70+ images, 5 videos, 12 sites | All URLs validated
+// Updated: 2026-07-16 | 63+ images, 5 videos, 12 sites | All URLs validated
 
 export const BIRD_VIDEOS = {
   overview: {
@@ -513,262 +513,9 @@ export const BIRD_IMAGES = {
     category: "framework", section: "general", alt: "Digital platform architecture",
     description: "Architecture diagram of the BIRD digital platform showing modules, data flows, integrations, and user interfaces.",
   },
-
-  // ═══════════════════════════════════════════════════════════════════════════════
-  // SURVEY-SPECIFIC IMAGES (Added 2026-07-16 for Validation Survey Sections 0–5)
-  // ═══════════════════════════════════════════════════════════════════════════════
-  validationBanner: {
-    title: "BIRD Validation Survey Banner",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Validation%20Survey%20Banner.png",
-    category: "survey", section: "general", alt: "BIRD validation survey banner",
-    description: "Official validation survey banner for the BIRD 2026-2035 stakeholder consultation process.",
-  },
-  sectorToEcosystem: {
-    title: "From Sector-Based Planning to BEIE Approach",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/From%20Sector-Based%20Planning%20to%20BEIE%20Approach.png",
-    category: "framework", section: "section3", alt: "Sector-based vs BEIE ecosystem approach",
-    description: "Mental model shift from siloed sector-based development to an interconnected BEIE ecosystem that drives inclusive and sustainable growth in Bangsamoro.",
-  },
-  beieFrameworkDiagram: {
-    title: "BEIE Framework Diagram",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/BEIE%20Framework%20-1%20.png",
-    category: "framework", section: "section3", alt: "BEIE circular framework diagram",
-    description: "The Bangsamoro Economic and Investment Ecosystem (BEIE) circular framework powered by Moral Governance at its center, with five interconnected components.",
-  },
-  cluster1FoundationsDetailed: {
-    title: "Cluster 1: Foundations — The Infrastructure-First Resource Base",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Cluster%201-Foundations.png",
-    category: "cluster", section: "section4", alt: "Cluster 1 Foundations detailed diagram",
-    description: "Cluster 1 Foundations showing four sectors: Agri-Fisheries (32.4% of GRDP), Energy (75.86% renewable), Forestry (carbon potential), and Environment (green economy revenue).",
-  },
-  maguindanaoDelSurProfile: {
-    title: "Maguindanao del Sur: The Agro-Industrial Breadbasket",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Maguidano-del-Sur.png",
-    category: "provincial", section: "section4", alt: "Maguindanao del Sur provincial profile",
-    description: "Three-layer economic: Raw Inputs (Pulangi River), Modern Processing (VCO, desiccated coconut), Logistics Grid (farm-to-market roads, solar-dryer warehousing).",
-  },
-  tragedyOfTheCommonsArchetype: {
-    title: "Tragedy of the Commons Archetype",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Tragedy%20of%20the%20Commons%20Archetype.png",
-    category: "archetype", section: "section4", alt: "Tragedy of the Commons systems archetype",
-    description: "Systems archetype showing how shared resources get over-exploited when governance is fragmented, with each actor gaining individually but collective impact depleting resources.",
-  },
-  cluster2TransformersDetailed: {
-    title: "Cluster 2: Transformers — Engines of Value Creation",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Cluster%202%20_%20Transformers.png",
-    category: "cluster", section: "section5", alt: "Cluster 2 Transformers detailed diagram",
-    description: "Three-stage progression: Raw Material, High-Value Processing (halal MSMEs, WOW Matnog SEZ), Premium Export (USD 2.3T ASEAN halal market).",
-  },
-  fixesThatFailArchetype: {
-    title: "Fixes that Fail Archetype",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Fixes%20that%20Fail%20Archetype.png",
-    category: "archetype", section: "section5", alt: "Fixes that Fail systems archetype",
-    description: "How short-term tax incentives and fragmented subsidies create the illusion of progress but erode institutional capacity over time.",
-  },
-  successToTheSuccessfulArchetype: {
-    title: "Success to the Successful Archetype",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Success%20to%20the%20Successful%20Aarchetype.png",
-    category: "archetype", section: "section5", alt: "Success to the Successful systems archetype",
-    description: "How mainland provinces attract bulk of resources while island provinces with high potential are left behind.",
-  },
-  halalFarmToMarketPipeline: {
-    title: "MAFAR Halal Farm-to-Market Pipeline",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Transformers-Farm-to-Market%20Pipeline%20.png",
-    category: "cluster", section: "section5", alt: "Halal farm-to-market pipeline diagram",
-    description: "Four stages: Input Supply, Cold Chain & Logistics, Processing (halal livestock, poultry, seaweed), Market Linkage (BIMP-EAGA export).",
-  },
-  industrialEconomicZones: {
-    title: "Industrial & Economic Zones",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Industrial%20and%20Economic%20Zones.png",
-    category: "cluster", section: "section5", alt: "Industrial and economic zones map",
-    description: "Polloc Freeport & EcoZone (119-hectare, ADB-funded) and WOW Matanog Special Economic Zone (upcoming Bangsamoro Halal Park).",
-  },
-
-  // ═══════════════════════════════════════════════════════════════════════════════
-  // SECTION 6: CLUSTER 3 — ENABLERS IMAGES
-  // ═══════════════════════════════════════════════════════════════════════════════
-  capitalizingCulturalAdvantage: {
-    title: "Capitalizing Cultural Advantage — Halal Industry Advantage",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Capitalizing%20Cultural%20Advantage%20-%20Halal%20Industry%20Adv.png",
-    category: "cluster", section: "section6", alt: "Halal industry advantage for ASEAN market",
-    description: "Three key sectors — Halal Food & Beverage (coconut by-products), Halal Cosmetics (Muslim beauty products), Halal Pharmaceuticals — with the BIMP-EAGA trade corridor connecting Bangsamoro to regional Muslim markets.",
-  },
-  enablingGrid: {
-    title: "The Enabling Grid & The Law of Sequencing",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Layer%202%20-%20The%20Enabling%20Grid%20and%20Lawof%20Sequencing.png",
-    category: "framework", section: "section6", alt: "Enabling grid and law of sequencing diagram",
-    description: "Four sequential stages for infrastructure progression: Energy Priming (island grid connection), Physical Mobility (bridges/transport), Logistics Integrity (cold-storage/warehousing), Industrial Scaling (agro-industrial expansion).",
-  },
-  digitalTransformationPlan: {
-    title: "Digital Transformation Master Plan (BEGMP)",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Digital%20Transformation%20Master%20Plan.png",
-    category: "framework", section: "section6", alt: "BEGMP digital transformation roadmap",
-    description: "Bangsamoro E-Governance Master Plan bridging the digital divide: Broadband & Connectivity, Smart Cities, E-Government (digital identities, shared services), and Cybersecurity for governance modernization.",
-  },
-  tourismMasterPlan: {
-    title: "Tourism Master Plan (BTDP 2024–2033)",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Tourism%20Master%20Plan.png",
-    category: "framework", section: "section6", alt: "BTDP tourism master plan 10-year strategy",
-    description: "Three-phase tourism strategy: Organizing (2025–2026), Stabilizing (2027–2028), Institutionalizing (2029–2033). ₱161.97B funded with 93% to physical access and connectivity for tourism sites.",
-  },
-  tourismDigitalConnectivity: {
-    title: "Tourism and Digital Connectivity — Reinforcing Loop II",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Tourism%20and%20Digital%20Connectivity.png",
-    category: "connectivity", section: "section6", alt: "Digital infrastructure and smart tourism reinforcing loop",
-    description: "How digital infrastructure enables tourism (₱161.97B BTDP) which fuels economic development, with the BEGMP digital backbone (broadband, smart cities, e-government, cybersecurity) supporting both tourism and regional growth.",
-  },
-  activatingEnablers: {
-    title: "Activating the Enablers — Infrastructure Primed by Moral Governance",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Activating%20the%20Enablers%20-%20Infra%20Primed%20by%20Moral%20Governance.png",
-    category: "governance", section: "section6", alt: "Moral governance powering infrastructure enablers",
-    description: "Moral Governance as the operating system: Transparency, Accountability, Stability build trust (the currency of investment). Physical goals: 100% Electrification, 85% Broadband by 2035, 30% Logistics Cost Reduction.",
-  },
-
-// ═══════════════════════════════════════════════════════════════════════════════
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// SECTION 7: CLUSTER 4 — CONNECTORS IMAGES
-  // ═══════════════════════════════════════════════════════════════════════════════
-  connectivityCapital: {
-    title: "The Connectivity Capital Matrix",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/The%20Connectivity%20Capital%20.png",
-    category: "connectivity", section: "section7", alt: "Connectivity capital matrix diagram",
-    description: "Three pillars defining Bangsamoro's infrastructure priorities: Physical Pipelines (₱627M MPW projects, 1,000km farm-to-market roads), Digital Backbones (fiber-optic, e-governance, 1-day business registration by 2028), and Market-Access Assets (cold-chain in Tawi-Tawi, 10 provincial port upgrades).",
-  },
-  integratingZones: {
-    title: "The Critical Test: Integrating Zones & Scaling Capital",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/Critical%20Test%20-%20Integrating%20Zones%20and%20Scaling%20Capiral%20-%20Think%20of%20one%20challenge%20%20we%20must%20overcome%20to%20achieve%20this%20vision.png",
-    category: "framework", section: "section7", alt: "Integrating economic zones and scaling capital",
-    description: "Connectivity Map (Basilan-Zamboanga Bridge, Polloc Freeport, UAE Halal Export Corridors) and the Ethical Bloodstream Pyramid (Islamic Banking & Sukuk, Takaful, Microfinance & Waqf) — showing true integration requires both physical and financial connectivity.",
-  },
-  provincialSpecializedNodes: {
-    title: "Layer 1 — Geopolitical Specialized Nodes",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Layer%201%20-%20Provincial%20-%20Geopolitical%20Specialized%20Nodes.png",
-    category: "provincial", section: "section7", alt: "Provincial specialized nodes map",
-    description: "Six provincial hubs: Mainland (Maguindanao del Norte & Cotabato — Admin/Halal, Maguindanao del Sur — Agri-Industrial, Lanao del Sur — Clean Energy/Agro, SGA — Agro-Industrial Corridor) and Archipelagic (Basilan — Logistics Gateway, Tawi-Tawi — Maritime Gateway).",
-  },
-  trappedValue: {
-    title: "The Geographic Reality: Trapped Value",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/The%20Trapped%20Value.png",
-    category: "connectivity", section: "section7", alt: "Trapped value due to limited connectivity",
-    description: "How limited connectivity traps economic potential — Basilan's 48,386ha rubber and Tawi-Tawi's 40% of national seaweed isolated from global trade. The Law of Sequencing highlights Zamboanga-Basilan Interconnection and digital backbones as essential unlocks.",
-  },
-  shatteringIsolation: {
-    title: "The Archipelagic Bridge: Shattering Geographic Isolation",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Shattering%20Geographical%20Isolation.png",
-    category: "connectivity", section: "section7", alt: "Archipelagic bridge projects",
-    description: "Three key initiatives: Zamboanga-Basilan Interconnection (₱6.67B, 69kV), Basilan-Zamboanga Bridge (31km by 2030), Bongao Bridge Tawi-Tawi (541m). Systemic interventions improving market access and labor mobility.",
-  },
-  basilanTawiTawiConnectors: {
-    title: "Basilan and Tawi-Tawi: Provincial Endowments & Strategic Leverages",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Basilan%20and%20tawi-Tawi.png",
-    category: "provincial", section: "section7", alt: "Basilan and Tawi-Tawi provincial profiles",
-    description: "Basilan — Archipelagic Catalyst: 48,366ha rubber, coastal aquaculture, ZBIP power, Basilan-Zamboanga Bridge. Tawi-Tawi — Maritime & Eco-Tourism Hub: BIMP-EAGA location, marine biodiversity, maritime gateway for blue economy.",
-  },
-  globalIntegration: {
-    title: "Layer 3: Global Integration Vectors",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Global%20Integration%20Vectors.png",
-    category: "connectivity", section: "section7", alt: "Global integration vectors BIMP-EAGA and UAE/GCC",
-    description: "Vector 1 — BIMP-EAGA Corridor: proximity-based maritime trade, 3% of ASEAN halal market via Tawi-Tawi. Vector 2 — UAE & GCC Corridor: standards-based air/sea logistics, $2.3T global halal market via Polloc Freeport and OIC/SMIIC accreditation.",
-  },
-  uaeGccConnectivity: {
-    title: "BARMM Connectivity vis-à-vis UAE & GCC",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/UAE%20&%20GCC.png",
-    category: "connectivity", section: "section7", alt: "BARMM UAE GCC connectivity map",
-    description: "Three hubs linked to $2.3T global halal market: Basilan (₱23.15B GDP, Archipelagic Logistics Gateway, ZBIP), Maguindanao del Norte (₱81.91B GDP, Admin & Halal Hub, Polloc), Maguindanao del Sur (₱39.54B GDP, Agri-Industrial Breadbasket).",
-  },
-  barmmBimpeaga: {
-    title: "BARMM Strategic Connectivity Map",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/BARMM%20Connectivity-BIMP-EAGA.png",
-    category: "connectivity", section: "section7", alt: "BARMM BIMP-EAGA strategic connectivity",
-    description: "Tawi-Tawi and Basilan as maritime gateways feeding BIMP-EAGA. Maguindanao del Norte and Polloc Freeport as halal export centers to UAE/GCC. Maguindanao del Sur and Lanao del Sur as inland production zones.",
-  },
-
-  // ═══════════════════════════════════════════════════════════════════════════════
-  // SECTION 8: CLUSTER 5 — FINANCIERS IMAGES
-  // ═══════════════════════════════════════════════════════════════════════════════
-  financiersCapitalBloodstream: {
-    title: "The Capital Bloodstream: Scaling Shariah-Compliant Finance",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Financiers.png",
-    category: "cluster", section: "section8", alt: "Capital bloodstream Shariah-compliant finance pyramid",
-    description: "Three-tier pyramid: Macro-Capital (Islamic Banking & Sukuk for infrastructure), Risk Mitigation (Takaful for agriculture/climate shocks), Micro-Access (Islamic Microfinance & Waqf for farmers/MSMEs).",
-  },
-  islamicFinanceRoadmap: {
-    title: "Islamic Finance Roadmap (2024–2028)",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Islamic%20Finance%20Roadmap.png",
-    category: "framework", section: "section8", alt: "Islamic finance roadmap 2024-2028",
-    description: "Six progressive layers: Strengthen Islamic Banking, Enhance Microfinance & Waqf, Establish Takaful, Facilitate Sukuk Capital Market, Harness Fintech, Develop Human Capital. Timeline: 2024-2025 Foundation, Mid-Term Takaful, 2028 Functional System & Tax Neutrality.",
-  },
-  // ═══════════════════════════════════════════════════════════════════════════════
-  // SECTION 10-15: IEDS, METRICS, BALANCED SCORECARD, PRIORITY ACTIONS IMAGES
-  // ═══════════════════════════════════════════════════════════════════════════════
-  executionEngine: {
-    title: "The Execution Engine: IEDS",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/The%20Execution%20Engine%20-IEDS.png",
-    category: "roadmap", section: "section10", alt: "The Execution Engine IEDS diagram",
-    description: "The Execution Engine presents the best pathway among four strategic options by sequencing HEDS, GEMS, and IFES into a coherent, time-bound execution plan. Total capital deployment: ₱120-160B across three phases.",
-  },
-  capitalDeployment: {
-    title: "Total Capital Deployment across Three Phases",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Total%20Capital%20Deployment.png",
-    category: "roadmap", section: "section13", alt: "Total capital deployment ₱120-160B",
-    description: "Total capital deployment of ₱120-160 billion across Activate (₱35-45B), Scale (₱50-65B), and Consolidate (₱35-50B) phases with funding mix: 35% block grants, 30% ODA/climate finance, 35% private capital.",
-  },
-  bscStrategyMap: {
-    title: "BSC Strategy Map: Intangibles to Economic Outcomes",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/BSC-Intangibles-to-Economic-Outcomes.png",
-    category: "framework", section: "section12", alt: "Balanced Scorecard strategy map",
-    description: "The strategy map visualizes how investments in Learning & Growth enable Internal Processes, which deliver Stakeholder value, ultimately achieving Financial objectives — ₱550B GRDP, 20,000+ jobs, <20% poverty.",
-  },
-  kpiFramework: {
-    title: "BIRD KPI Framework - 4-Tier Calibration",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/KPI-Framework.png",
-    category: "metrics", section: "section11", alt: "4-tier KPI calibration architecture",
-    description: "The 4-tier KPI calibration architecture: Baseline (2024-2025), Interim 1 (2028), Interim 2 (2030), Terminal (2035), Long-Horizon (2040) ensuring metrics remain responsive to IEDS synchronization.",
-  },
-
-  // ═══════════════════════════════════════════════════════════════════════════════
-  // SECTION 9: OPERATING SYSTEMS — MORAL GOVERNANCE IMAGES
-  // ═══════════════════════════════════════════════════════════════════════════════
-  moralGovernanceDerisksCapital: {
-    title: "How Moral Governance De-Risks Capital",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/How%20moral%20Governance%20De-Risks%20Capital.png",
-    category: "governance", section: "section9", alt: "Moral governance de-risking capital reinforcing loop",
-    description: "Reinforcing feedback loop: Moral Governance → Institutional Transparency → Lower Bureaucratic Friction (BIFOSS) → Investor Confidence → Increased FDI → Regional Revenue → Stronger Governance Capacity → Moral Governance.",
-  },
-  investmentGovernanceCyclesOS: {
-    title: "Investment-Development and Governance-Investor Confidence Loops",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/Investment%20and%20Governance%20Cycles.png",
-    category: "systems", section: "section9", alt: "Investment development and governance investor confidence cycles",
-    description: "Loop R1 — Investment-Development: investments create jobs, expand markets, attract more investors. Loop R2 — Governance-Investor Confidence: transparent governance builds trust, expands tax base, improves governance capacity.",
-  },
-  regulatoryArchitecture: {
-    title: "The Regulatory Architecture Securing Capital",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Regulatory%20Architecture.png",
-    category: "governance", section: "section9", alt: "Regulatory architecture five pillars",
-    description: "Five pillars around RA 11054: 2nd BDP & SIPP, BHIDP (halal/OIC-SMIIC), BSEMP (renewable energy), RA 11439 & CREATE MORE (Islamic banking), Pending Forestry Code (carbon credits/PES).",
-  },
-  draftJMC2026: {
-    title: "Draft JMC 2026-01: Conservation as Municipal Revenue",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Draft%20JMC%202026-01.png",
-    category: "governance", section: "section9", alt: "Draft JMC 2026-01 conservation revenue streams",
-    description: "Three channels — Carbon Credits, PES, and Eco-Tourism User Fees — merge into a Revenue River feeding LGUs for capacity building, livelihoods, and infrastructure.",
-  },
-  policyRecommendationsStakeholders: {
-    title: "Policy Recommendations: Policymakers, Planners, and Investors",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Policy%20Recommendations-Policy%20Makers-Planners-Investors.png",
-    category: "governance", section: "section9", alt: "Policy recommendations for stakeholders",
-    description: "Collaborative governance: Policymakers (Forestry Code, Investment Code, Command Center), Planners (BEIE, infrastructure sequencing, BBOI offices), Investors (agro/halal/rubber, carbon finance, fintech).",
-  },
-  policyRecommendationsFramework: {
-    title: "Policy Recommendations: Activating the Framework",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Policy%20recommendations-Institutional-Fiscal-Regulatory.png",
-    category: "governance", section: "section9", alt: "Institutional fiscal regulatory reforms",
-    description: "Three integrated reforms: Institutional (BIF-Net for inter-agency coordination), Fiscal (SIPP/CREATE MORE harmonization), Regulatory (BEIE institutionalization for synchronized budgets).",
-  },
-
 } as const;
 
+// ═══════════════════════════════════════════════════════════════════════════════
 // BIRD SITES — 12 External Reference Sites
 // ═══════════════════════════════════════════════════════════════════════════════
 
@@ -834,6 +581,11 @@ export const BIRD_SITES = {
     description: "One-stop investor portal for investment promotion, facilitation, aftercare, and grievance handling.",
   },
 } as const;
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// TYPE EXPORTS
+// ═══════════════════════════════════════════════════════════════════════════════
+
 export type BIRDVideo = typeof BIRD_VIDEOS[keyof typeof BIRD_VIDEOS];
 export type BIRDImage = typeof BIRD_IMAGES[keyof typeof BIRD_IMAGES];
 export type BIRDSite = typeof BIRD_SITES[keyof typeof BIRD_SITES];
