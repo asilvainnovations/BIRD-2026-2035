@@ -158,7 +158,6 @@ A map shows the BIMP‑EAGA trade corridor (Brunei‑Indonesia‑Malaysia‑
 Suggested Question:
 “Rank which halal sector—Food & Beverage, Cosmetics, or Pharmaceuticals—offers the greatest growth potential for Bangsamoro’s ASEAN market integration.”
 
-
 The Digital Transformation Plan - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Digital%20Transformation%20Master%20Plan.png
 “Digital Transformation (BEGMP)” presents Bangsamoro’s roadmap for bridging the digital divide and enabling efficient governance.
 It contrasts “The Gap”—low internet penetration, fragmented government systems, and limited digital skills—with “The Roadmap”, which includes:
@@ -202,21 +201,198 @@ How realistic is it that Moral Governance can effectively deliver these physical
 * ☐ Needs stronger institutional support
 * ☐ Not realistic
 
+9. Re-create Section 7 Cluster 4 - Connectors (please see additional URLs for images and their descriptions. - Insert the wide and full view format of this image https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Cluster%204_%20Connectors.png
+Description: Cluster 4 | Connectors- Linking Local Value to Global Demand” visually maps how Bangsamoro (BARMM) connects its halal and cultural assets to international markets.
+It highlights two major international trade routes:
+* Target Vector 1 – BIMP‑EAGA Corridor: leveraging BARMM’s location to capture a 3 % share of the ASEAN halal market through regulated cross‑border trade.
+* Target Vector 2 – UAE & GCC: building halal export linkages to meet global Islamic demand.
+At the base, Cultural Tourism (BTDP 2024–2033) invests ₱161.97 billion to develop Ligawasan Marsh and Lake Lanao as Muslim‑friendly eco‑tourism hubs promoting peace and revenue
 
-- [ ] Re-create Section 7 for Cluster 4 - Connectors
-      Insert questions here about Provincial Equity and Specialized Nodes
-- [ ] Re-create Section 8 for Operating Systems (Moral Governance , Resilience, Inclusivity and Peace)
-- [ ] Re-create Section 9 for Cluster 5 - Financiers
-- [ ] Re-create Section 10 for Stategic Options and Leverage Points
-- [ ] Re-create Section 11 for IEDS and Three-Phase Implementation
-- [ ] Re-create Section 12 for the Metrics Architecture and Key Metrics
-- [ ] Re-create Section 13 for the Balanced Scorecard, Mission, and Vision
-- [ ] Re-create Section 14 for Priority Actions and Budget
-- [ ] Re-create Section 15 for Access to Resources and Optional Engagements and Commitments
+9.1 Based on the matched image descriptions below, select critical and relevanr SWOT scale questions in the updloaded SWOT_scale_questions.md, and insert them here
+9.2 Based on the matched image descriptions below, select critical and relevanr Systems Mapping questions in the uploaded Systems Mapping_questions.md, shorten them and insert them here.
+The Connectivity Capital - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/The%20Connectivity%20Capital%20.png
+Description: “The Connectivity Capital Matrix: Categorizing the Investment Pipeline” presents three pillars that define Bangsamoro’s infrastructure and digital investment priorities:
+* Physical Pipelines: ₱627 million MPW projects in Basilan and 1,000 km of farm‑to‑market roads in key corridors.
+* Digital Backbones: fiber‑optic deployment and e‑governance systems targeting 1‑day business registration by 2028.
+* Market‑Access Assets: modern cold‑chain facilities in Tawi‑Tawi and Maguindanao del Norte, plus upgrades to 10 provincial ports for inter‑island trade.
+Together, these components illustrate how connectivity—physical, digital, and logistical—forms the foundation of regional economic growth.
+
+9.2 Does connectivity integrate economic zones? https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/Critical%20Test%20-%20Integrating%20Zones%20and%20Scaling%20Capiral%20-%20Think%20of%20one%20challenge%20%20we%20must%20overcome%20to%20achieve%20this%20vision.png
+Description: “The Critical Test: Integrating Zones & Scaling Capital” visualizes Bangsamoro’s challenge of linking physical connectivity with ethical financing to achieve sustainable growth.
+It has two main sections:
+* Connectivity Map: showing the Basilan–Zamboanga Bridge, Polloc Freeport, and UAE Halal Export Corridors as key links integrating isolated zones into global trade.
+* Ethical Bloodstream Pyramid: illustrating how Islamic Banking & Sukuk, Takaful Insurance, and Microfinance & Waqf form a layered capital system that scales development through Shariah‑compliant finance.
+Together, the image emphasizes that true integration requires both physical and financial connectivity.
+
+
+9.3 Critical Note: Transfer in this section questions on Provincial Equity in Section 11: Provincial Equity & Inclusion
+
+9.4 Add these images and create the right questions
+Layer 1: The Provincial Specialized Node and Equity - “One Bangsamoro”- https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Layer%201%20-%20Provincial%20-%20Geopolitical%20Specialized%20Nodes.png
+Description:  “Layer 1 – Geopolitical Specialized Nodes” maps Bangsamoro’s six provincial and island hubs, showing how each contributes to the region’s economic specialization.
+It divides the area into two clusters:
+* Mainland Nodes:
+    1. Maguindanao del Norte & Cotabato – Administrative & Halal Hub (Polloc Freeport, Halal Park).
+    2. Maguindanao del Sur – Agri‑Industrial Breadbasket (Rice/Corn production).
+    3. Lanao del Sur – Clean Energy & Agro‑Hub (Lake Lanao Hydroelectric, Coffee/Rubber).
+    4. Special Geographic Area (SGA) – Agro‑Industrial Corridor bridging BARMM with Mindanao.
+* Archipelagic Hubs:
+    1. Basilan – Logistics Gateway (ZBIP Grid Interconnection, Rubber/Coconut).
+    2. Tawi‑Tawi – Maritime Gateway (Seaweed Capital, Cross‑border Trade via BIMP‑EAGA).
+The map illustrates how each node anchors a distinct economic role, forming a connected network of halal, agricultural, and logistics hubs.
+
+9.5 The Trapped Value - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/The%20Trapped%20Value.png
+Description: The image titled “The Geographic Reality: We Cannot Export Value We Cannot Move” illustrates how limited connectivity traps Bangsamoro’s economic potential. Farm‑to‑market roads and modernized ports must precede agro‑industrial scale‑up.
+It contrasts two maps:
+* Trapped Value: shows Basilan’s 48,386 hectares of rubber and Tawi‑Tawi’s 40 % of national seaweed output isolated from global trade due to poor logistics.
+* The Law of Sequencing: highlights the Zamboanga‑Basilan Interconnection Project, ZBID zone, and digital backbones as essential steps to unlock movement and export capacity.
+The caption reinforces that 
+
+
+9.6. Revitalizing the Maritime Trade - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/
+Description : Revitalizing the Maritime Trade shows an infographic mapping maritime trade flows and proposed port and logistics upgrades to unlock regional exports. It combines a map of sea routes, icons for key ports and terminals, and callouts for infrastructure investments and expected economic benefits, showing how improved maritime links would connect producers to markets.
+
+
+9.7 Shattering Geographic isolation - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Shattering%20Geographical%20Isolation.png
+Description: “The Archipelagic Bridge: Shattering Geographic Isolation” illustrates how strategic infrastructure projects will physically and economically connect Bangsamoro’s island provinces to the Mindanao mainland.
+It highlights three key initiatives:
+* Zamboanga–Basilan Interconnection Project (ZBIP): ₱6.67 billion investment linking Basilan to the Mindanao grid via a 69 kV transmission line to boost industrial capacity.
+* Basilan–Zamboanga Bridge: a 31‑km transport corridor targeted for 2030 to cut travel time and logistics costs.
+* Bongao Bridge (Tawi‑Tawi): a 541‑meter span enhancing intra‑provincial connectivity.
+These are not just transport projects but systemic interventions improving market access and labor mobility.
+
+9.8 Basilan and Tawi-Tawi - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Basilan%20and%20tawi-Tawi.png
+Description: The “Basilan and Tawi‑Tawi: Provincial Endowments & Strategic Leverages” highlights the two provinces’ economic strengths and growth drivers. This emphasizes that both provinces use their natural assets and infrastructure to drive targeted economic growth.
+* Basilan – The Archipelagic Catalyst:
+    * Endowments: 48,366 ha of rubber plantations and coastal aquaculture potential.
+    * Leverages: Security normalization, ZBIP power project, and the planned Basilan‑Zamboanga Bridge.
+* Tawi‑Tawi – The Maritime & Eco‑Tourism Hub:
+    * Endowments: Strategic BIMP‑EAGA location, rich natural resources, and marine biodiversity.
+    * Leverages: Maritime gateway for trade, eco‑tourism, and blue economy development.
+
+
+9.9 Global Integration - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/Global%20Integration%20Vectors.png
+Desceription: “Layer 3: Global Integration Vectors” presents two strategic trade corridors that connect Bangsamoro to international halal markets.
+* Vector 1 – BIMP‑EAGA Corridor: focuses on proximity‑based maritime trade, aiming for 3 % of the ASEAN halal market by formalizing traditional barter routes through Tawi‑Tawi.
+* Vector 2 – UAE & GCC Corridor: emphasizes standards‑based air and sea logistics, targeting access to a $2.3 trillion global halal market via Polloc Freeport and OIC/SMIIC halal accreditation.
+Together, these vectors illustrate how regional and global linkages complement each other to expand Bangsamoro’s halal export reach.
+
+9.10 Global Value Chain Integration with UAE-GCC - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/UAE%20&%20GCC.png
+ Description: The image titled “BARMM Connectivity vis‑à‑vis UAE & GCC” presents a geographic map linking Bangsamoro’s key provinces to the $2.3 trillion global halal market through strategic logistics and trade corridors.
+It highlights:
+* Basilan as The Archipelagic Logistics Gateway with ₱23.15 B GDP (2.9 % growth), anchored by the ZBIP Interconnection.
+* Maguindanao del Norte as The Administrative & Halal Hub with ₱81.91 B GDP (4.1 % growth), anchored by Polloc Freeport & Halal Park.
+* Maguindanao del Sur as The Agri‑Industrial Breadbasket with ₱39.54 B GDP (3.4 % growth), anchored by Inland Warehousing & Irrigation.
+Arrows from these hubs point toward the UAE & GCC region, symbolizing export connectivity and halal trade expansion.
+
+
+9.11 BARMM Strategic Connectivity Map - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/BARMM%20Connectivity-BIMP-EAGA.png
+Description: “BARMM Strategic Connectivity Map” visually links Bangsamoro’s provincial hubs to two major international trade corridors — the BIMP‑EAGA Corridor and the UAE & GCC Route.
+It highlights:
+* Tawi‑Tawi and Basilan as maritime gateways feeding into the BIMP‑EAGA Corridor, strengthening regional sea trade with Southeast Asia.
+* Maguindanao del Norte and Polloc Freeport as administrative and halal export centers connecting to the UAE & GCC markets.
+* Maguindanao del Sur and Lanao del Sur as inland production zones supporting agro‑industrial exports.
+Together, the map emphasizes that BARMM’s growth depends on bridging local production with regional and global halal trade routes.
+
+9.12 Note: Insert questions here about Provincial Equity and Specialized Node
+
+10.  Re-create Section 8 for Cluster 5 - Financiers https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/38.%20Cluster%205_%20Financiers.png
+Description:  “Cluster 5 | Financiers: Powering the Bloodstream of the Economy” illustrates how Islamic finance underpins Bangsamoro’s economic system through ethical and faith‑aligned capital mechanisms.
+It shows two interconnected loops labeled Ethical Capital Supply and Cultural Trust, joined by Financial Inclusion at the center. Key highlights include:
+* Systemic Advantage: Islamic banking promotes risk‑sharing and asset‑backed financing consistent with Bangsamoro values.
+* Landmark Integration: Republic Act 11439 provides the legal framework for post‑conflict enterprises to access capital ethically.
+* Capital Mechanisms: Shari’ah‑compliant banking, Waqf (endowments), Takaful (insurance), and Microfinance for MSMEs.
+Ethical finance and cultural trust jointly sustain inclusive economic growth.
+
+10.1 Based on the matched image descriptions below, select critical and relevanr SWOT scale questions in the updloaded SWOT_scale_questions.md, and insert them here
+10.2 Based on the matched image descriptions below, select critical and relevanr Systems Mapping
+
+10.3 Financiers - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Financiers.png 
+Description: “The Capital Bloodstream: Scaling Shariah‑Compliant Finance to Power Inclusive Enterprise Growth” presents a layered pyramid symbolizing how Islamic finance fuels Bangsamoro’s economic development.
+It highlights three tiers:
+* Macro‑Capital – Islamic Banking & Sukuk: mobilizing large‑scale public‑private partnerships for infrastructure and green energy.
+* Risk Mitigation – Takaful (Islamic Insurance): protecting agriculture and supply chains from climate and operational shocks.
+* Micro‑Access – Islamic Microfinance & Waqf: empowering farmers, MSMEs, and cooperatives through risk‑sharing capital.
+At the base, the message reinforces that Islamic finance ensures inclusive capital access aligned with local values, turning compliance into a competitive advantage for regional growth.
+
+
+10.4 Islamic Finance Roadmap - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Islamic%20Finance%20Roadmap.png
+Description: The image titled “Islamic Finance Roadmap (2024–2028)” presents a structured plan for developing Bangsamoro’s Shariah‑compliant financial ecosystem.
+It shows six progressive layers:
+1. Strengthen Islamic Banking Foundation
+2. Enhance Islamic Microfinance & Waqf
+3. Establish Takaful (Insurance) Operations
+4. Facilitate Islamic Capital Market (Sukuk)
+5. Harness Fintech Potential
+6. Develop Human Capital
+On the right, a timeline divides the roadmap into 2024–2025 (Foundation & Governance), Mid‑Term (Takaful & Insurance), and 2028 Goal (Functional System & Tax Neutrality) — illustrating a clear evolution from institutional setup to full financial integration.
+
+
+11. Re-create Section 9 for Operating Systems (Moral Governance , Resilience, Inclusivity and Peace)
+    Section 9 Operating Systems - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/OS.png
+Description: Moral Governance serves as the central operating system of the Bangsamoro ecosystem.
+At the core of the Operating Systems is Moral Governance ensuring justice, transparency, accountability, and Islamic ethics (khalifa stewardship). Surrounding it are three foundational pillars:
+* Peace — provides long-term stability for investment.
+* Resilience — promotes adaptive, climate-smart planning to withstand external shocks.
+* Inclusivity — broadens participation so marginalized communities share in value creation9
+
+11.1 Select critical and relevant SWOT scale questions in the uploaded SWOT_scale_questions.md, and insert them here.
+11.2 Select relevant Systems Mapping questions in the attached Systems Mapping_questions.md, shorten them and distribute to applicable Sections 4 - 9
+
+11.3 How Moral Governance de-risks capital? https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/How%20moral%20Governance%20De-Risks%20Capital.png
+Description: The reinforcing feedback loop in the diagram shows how moral governance continuously strengthens a region’s economic and institutional health.
+* Moral Governance Implementation builds institutional transparency, which lowers bureaucratic friction (through systems like BIFOSS).
+* This transparency and efficiency raise investor confidence, leading to increased foreign direct investment (FDI).
+* More FDI boosts regional revenue, enabling stronger governance capacity.
+* That improved capacity further supports moral governance, completing a positive cycle where each element amplifies the next.
+In short, ethical and transparent governance creates trust and efficiency, attracting investment that funds even better governance—a self-reinforcing system of growth and stability.
+
+11.4 Investment-Development Loop and Governance- Investor Confidence Loop - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/Investment%20and%20Governance%20Cycles.png
+Description: The diagrams illustrate two reinforcing loop on synchronized investment and governance reforms suggesting sustaiinable inclusive economic growth.
+* Loop 1 – Investment–Development (R1): Investments create jobs and expand markets, attracting more investors and strengthening business viability.
+* Loop 2 – Governance–Investor Confidence (R2): Transparent governance builds investor trust, expands the tax base, and increases public funding, which further improves governance.
+
+11.5 Regulatory Architecture of the Bangsamoro Investment Roadmap 2026—2035-  https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Regulatory%20Architecture.png
+Description:“The Regulatory Architecture Securing Capital” at its core is the Bangsamoro Organic Law (RA 11054) — the constitutional mandate for economic self‑determination — supported by five pillars. These regulatory pillars illustrate how regulatory coherence secures capital and drives sustainable, values‑based development in BARMM.
+1. 2nd BDP & SIPP: Strategic investment priorities.
+2. BHIDP: Halal ecosystem strategy aligned with OIC/SMIIC standards.
+3. BSEMP: Renewable‑energy framework targeting a 75.86 % clean‑energy mix.
+4. RA 11439 & CREATE MORE Act: Islamic banking and national tax incentives.
+5. Pending Forestry Code: Legal architecture for carbon credits and payment for ecosystem services.
+
+11.6 Draft Joint Memorandum Circular 2026 -01 - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Draft%20JMC%202026-01.png
+Description: “Draft JMC 2026‑01 Transforms Conservation into Municipal Revenue Streams” visualizes how environmental protection can directly fund local development.
+* It shows three flowing channels—Carbon Credits, Payment for Ecosystem Services (PES), and Eco‑Tourism User Fees—merging into a Revenue River that feeds Local Government Units (LGUs). The funds are earmarked for capacity building, sustainable livelihood programs, and infrastructure maintenance, illustrating a system where conservation generates tangible economic returns.
+
+11.7 Policy Recommendations Specifically for Policy Makers-Planners-Investors - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Policy%20Recommendations-Policy%20Makers-Planners-Investors.png
+Description:  “A Synchronized Mandate Coordinates Policymakers, Planners, and Investors” recommends aligning government, planning, and private‑sector actions  - known as collaborative governance -  creating synergy between policy, planning, and investment to drive inclusive growth.
+* For Policymakers: enact the Forestry Code, Bangsamoro Investment Code, establish the Investment Command Center, fast‑track BHIDP, institutionalize Bangsamoro Corp, and accelerate Islamic banking.
+* For Development Planners: apply the BEIE framework, sequence infrastructure (farm‑to‑market roads before ports), and set up provincial BBOI offices.
+* For Investors: target agro, halal, and rubber clusters, pursue carbon/green finance, and invest in Islamic fintech and renewable energy.
+
+
+11.8 Policy Recommendations: Activating the Framework - https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Policy%20recommendations-Institutional-Fiscal-Regulatory.png 
+“Policy Recommendations include three integrated institutional, fiscal, and regulatory reforms to strengthen investment coordination and sustainable growth:
+* Institutional: Deploy BIF‑Net to coordinate inter‑agency investment facilitation and eliminate fragmented approvals.
+* Fiscal: Harmonize SIPP & CREATE MORE Act to align regional projects with national tax incentives, prioritizing high‑value manufacturing over raw exports.
+* Regulatory: Institutionalize BEIE to synchronize ministry budgets and master plans for ecosystem‑based development.
+
+
+12. Re-create Section 10 for Stategic Options and Leverage Points 
+    
+15. Re-create Section 11 for IEDS and Three-Phase Implementation
+
+16. Re-create Section 12 for the Metrics Architecture and Key Metrics
+    
+17. Re-create Section 13 for the Balanced Scorecard, Mission, and Vision
+
+18. Re-create Section 14 for Priority Actions and Budget
+
+19. Re-create Section 15 for Access to Resources and Optional Engagements and Commitments
 - [ ] Re-create Section 16 for Submission
 - [ ] Update ContextPanel.tsx with URLs and resources
 - [ ] Select critical SWOT scale questions in the attached SWOT_scale_questions.md, and distribute to applicable Sections 4 - 9
-- [ ] Shorten Systems Mapping questions in the attached Systems Mapping_questions.md and distribute to applicable Sections 4 - 9
+- [ ] Systems Mapping questions in the attached Systems Mapping_questions.md, shorten them and distribute to applicable Sections 4 - 9
 - [ ] Update SurveyWizard.tsx with new sections
 - [ ] Update survey-schema.ts with new sections
 - [ ] Update URLs and desccriptions in bird-urls.ts with all new sections, images/videos titles and descriptions, and sites
