@@ -194,10 +194,10 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
     setIsGenerating(false);
   };
 
-  const getCycleTypeName = (polarity: '+' | '-' | 'positive' | 'negative'): string => {
+  const getCycleTypeName = (polarity: string): string => {
     if (polarity === '+' || polarity === 'positive') return 'Positive (Reinforcing)';
     if (polarity === '-' || polarity === 'negative') return 'Negative (Balancing)';
-    return polarity.toString();
+    return String(polarity);
   };
 
   const generateExportContent = () => {
@@ -262,7 +262,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
       if (p.cldNodes && p.cldNodes.length > 0) {
         content += `CAUSAL LOOP DIAGRAM NODES (${p.cldNodes.length}):\n`;
         p.cldNodes.forEach((node, idx) => {
-          content += `  ${idx + 1}. ${node.label} (Type: ${node.type || 'variable'})\n`;
+          content += `  ${idx + 1}. ${node.label} (Type: ${node.category || 'variable'})\n`;
         });
         content += '\n';
       }
@@ -271,15 +271,17 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
         content += `CAUSAL LOOP LINKS (${p.cldLinks.length}):\n`;
         p.cldLinks.forEach((link, idx) => {
           content += `  ${idx + 1}. ${link.from} → ${link.to}\n`;
-          content += `     Polarity: ${getCycleTypeName(link.direction || link.polarity)}\n`;
-          if (link.delay && link.delay > 0) content += `     Delay: ${link.delay} time units\n`;
+          content += `     Polarity: ${getCycleTypeName(link.polarity)}\n`;
+          if (link.delay) content += `     Delay: delayed effect\n`;
         });
         content += '\n';
       }
 
       if (p.appliedArchetypes && p.appliedArchetypes.length > 0) {
         content += `IDENTIFIED SYSTEMS ARCHETYPES (${p.appliedArchetypes.length}):\n`;
-        p.appliedArchetypes.forEach((archetypeId, idx) => {
+        p.appliedArchetypes.forEach((entry, idx) => {
+          // Schema drift guard: older plans stored bare string IDs
+          const archetypeId = typeof entry === 'string' ? entry : entry.archetypeId;
           const archetype = getArchetypeData(archetypeId);
           if (archetype) {
             content += `  ${idx + 1}. ${archetype.name}\n`;
@@ -729,7 +731,9 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                         Identified Systems Archetypes (BIRD Framework)
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {editablePlan.appliedArchetypes.map((archetypeId, idx) => {
+                        {editablePlan.appliedArchetypes.map((entry, idx) => {
+                          // Schema drift guard: older plans stored bare string IDs
+                          const archetypeId = typeof entry === 'string' ? entry : entry.archetypeId;
                           const archetype = getArchetypeData(archetypeId);
                           if (!archetype) return null;
                           return (

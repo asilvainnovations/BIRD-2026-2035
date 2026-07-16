@@ -53,6 +53,7 @@ import {
   Play,
   FileText,
   Globe,
+  BookOpen,
   RotateCcw,
   Pencil,
 } from 'lucide-react';
@@ -153,7 +154,7 @@ interface ResourceItem {
   id: number;
   title: string;
   url: string;
-  type: 'video' | 'article' | 'prototype';
+  type: 'video' | 'article' | 'prototype' | 'document';
   category: string;
   description: string;
 }
@@ -1598,6 +1599,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
               >
                 {resource.type === 'video' ? <Play className="w-6 h-6" /> :
                  resource.type === 'article' ? <FileText className="w-6 h-6" /> :
+                 resource.type === 'document' ? <BookOpen className="w-6 h-6" /> :
                  <Globe className="w-6 h-6" />}
               </div>
               <div className="flex-1 min-w-0">

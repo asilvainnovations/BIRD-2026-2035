@@ -3,8 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { Clock, ArrowUpRight, ArrowDownLeft, Plus, FileEdit as Edit, Trash, User, CheckCircle } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '../../lib/supabase';
-import { useStrategicPlanStore } from '@/stores/strategicPlanStore';
-import type { ActivityLog } from '@/types';
+import { useStrategicPlan } from '@/hooks/useStrategicPlan';
+
+/** Row shape returned by the Supabase `activity_logs` table (snake_case). */
+interface ActivityLog {
+  id: string;
+  plan_id: string;
+  action_type: string;
+  entity_type: string;
+  details: Record<string, unknown> | null;
+  created_at: string;
+  user_id?: string;
+}
 
 const ACTION_ICONS: Record<string, typeof Plus> = {
   plan_created: Plus,
@@ -39,8 +49,7 @@ const ACTION_ICONS: Record<string, typeof Plus> = {
 
 export function ActivityTimeline() {
   const { isAuthenticated } = useAuth();
-  const { getCurrentPlan } = useStrategicPlanStore();
-  const currentPlan = getCurrentPlan();
+  const { currentPlan } = useStrategicPlan();
   const navigate = useNavigate();
   const [activities, setActivities] = useState<ActivityLog[]>([]);
   const [filter, setFilter] = useState<string>('all');

@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import {
   Zap,
   Wifi,
-  Road,
+  Route,
   GraduationCap,
   HeartPulse,
   Sun,
@@ -284,7 +284,7 @@ const Section6_Enablers: React.FC<Section6Props> = ({ data, onChange }) => {
       desc: "Expanding broadband, e-governance, and cybersecurity to accelerate investment facilitation",
     },
     {
-      icon: <Road className="w-5 h-5 text-[#C9A84C]" />,
+      icon: <Route className="w-5 h-5 text-[#C9A84C]" />,
       title: "Physical Infrastructure",
       desc: "Improving ports, airports, and cold-chain logistics to reduce post-harvest losses and support halal integrity",
     },

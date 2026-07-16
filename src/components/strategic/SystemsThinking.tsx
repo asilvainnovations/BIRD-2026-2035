@@ -71,8 +71,10 @@ interface ExtendedCLDNode extends CLDNode {
   leverageLevel?: number;
 }
 
-interface ExtendedCLDLink extends CLDLink {
+interface ExtendedCLDLink extends Omit<CLDLink, 'delay' | 'strength'> {
+  /** Delay in periods (0 = no delay); store layer persists boolean — converted at load */
   delay?: number;
+  /** Numeric link strength 1–5; store layer persists 'strong'|'moderate'|'weak' — converted at load */
   strength?: number;
 }
 
@@ -630,7 +632,11 @@ const ArchetypeImageTooltip: React.FC<{ imageUrl: string; archetypeName: string 
         onBlur={hide}
         onClick={e => {
           e.stopPropagation();
-          visible ? setVisible(false) : show();
+          if (visible) {
+            setVisible(false);
+          } else {
+            show();
+          }
         }}
         className={cn(
           'shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-150',
@@ -1797,7 +1803,15 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
 
   useEffect(() => {
     if (plan.cldNodes && plan.cldNodes.length > 0) setLocalCldNodes(plan.cldNodes);
-    if (plan.cldLinks && plan.cldLinks.length > 0) setLocalCldLinks(plan.cldLinks);
+    if (plan.cldLinks && plan.cldLinks.length > 0) {
+      // Convert store representation (boolean delay, categorical strength) to
+      // the canvas editor's numeric representation.
+      setLocalCldLinks(plan.cldLinks.map((l) => ({
+        ...l,
+        delay: l.delay ? 1 : 0,
+        strength: l.strength === 'strong' ? 5 : l.strength === 'weak' ? 1 : 3,
+      })));
+    }
   }, [plan.cldNodes, plan.cldLinks, planId]);
 
   const buildFromSWOT = useCallback(() => {
@@ -2292,7 +2306,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
       {/* Kimi AI Quick Actions — Systems Thinking */}
       <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-2">
         <button
-          onClick={() => setShowAnalysisPanel(true)}
+          onClick={() => setAnalysisPanelOpen(true)}
           className="group flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#C9A84C] via-[#B8942E] to-[#E8C560] text-white shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
           title="AI Loop Analysis"
         >

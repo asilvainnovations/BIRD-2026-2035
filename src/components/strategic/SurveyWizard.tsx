@@ -83,7 +83,7 @@ const SurveyWizard: React.FC = () => {
   const [s0, setS0] = useState<Section0Data>({
     ready_to_begin: "",
     ecosystem_understanding: "",
-    systems_thinking_value: "",
+    systems_thinking_value: 0,
   });
 
   // ── Section 1: Privacy & Consent ──

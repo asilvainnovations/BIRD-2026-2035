@@ -82,14 +82,6 @@ const Section8_Financiers: React.FC<Section8Props> = ({ data, onChange }) => {
     value: Section8Data[K]
   ) => onChange({ ...data, [field]: value });
 
-  const toggle = (field: keyof Section8Data, val: string) => {
-    const arr = (data[field] as string[]) || [];
-    update(
-      field,
-      arr.includes(val) ? arr.filter((v) => v !== val) : ([...arr, val] as any)
-    );
-  };
-
   const renderScaleButton = (
     val: number,
     selected: number | undefined,
