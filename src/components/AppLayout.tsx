@@ -4,7 +4,8 @@ import { useStrategicPlan } from '@/hooks/useStrategicPlan';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabase';
 import { StratLogo } from '@/components/branding/Logo';
-import { Loader as Loader2 } from 'lucide-react';
+import { PlatformBadge } from '@/components/branding/PlatformBadge';
+import { Loader2 } from 'lucide-react';
 
 // ─── CRITICAL PATH: Load HeroSection immediately (first screen) ─────────────
 import HeroSection from './strategic/HeroSection';
@@ -15,7 +16,7 @@ const Topbar               = lazy(() => import('./strategic/Topbar'));
 const AuthModal            = lazy(() => import('./auth/AuthModal'));
 const UserProfileModal     = lazy(() => import('./auth/UserProfileModal'));
 const SettingsPage         = lazy(() => import('./settings/SettingsPage'));
-const SurveyWizard         = lazy(() => import('./strategic/SurveyWizard')); // 
+const SurveyWizard         = lazy(() => import('./strategic/SurveyWizard'));
 const MELDashboard         = lazy(() => import('./strategic/MELDashboard'));
 const SWOTAnalysis         = lazy(() => import('./strategic/SWOTAnalysis'));
 const SystemsThinking      = lazy(() => import('./strategic/SystemsThinking'));
@@ -58,7 +59,7 @@ const VIEW_TO_PATH: Record<string, string> = {
   team:       '/team-collaboration',
   settings:   '/settings',
   export:     '/export-plan',
-  validation: '/validation-survey', //
+  validation: '/validation-survey',
 };
 
 const PATH_TO_VIEW: Record<string, string> = Object.fromEntries(
@@ -75,8 +76,13 @@ const AppLayout: React.FC = () => {
   const { plans, currentPlan, activeView, isOnline, lastSynced, isLoading: plansLoading, setActiveView, setCurrentPlan, createPlan, addSWOTItem, updateSWOTItem, removeSWOTItem, bulkAddSWOTItems, addStrategicOption, updateStrategicOption, removeStrategicOption, bulkAddStrategicOptions, addObjective, updateObjective, removeObjective, addKPI, updateKPI, removeKPI, addPAP, updatePAP, removePAP } = useStrategicPlan();
 
   const [uiState, setUiState] = useState({
-    showLanding: true, sidebarCollapsed: false, isMobileMenuOpen: false,
-    showAuthModal: false, showProfileModal: false, showTutorial: false, activeShareLink: null as string | null,
+    showLanding: true,
+    sidebarCollapsed: false,
+    isMobileMenuOpen: false,
+    showAuthModal: false,
+    showProfileModal: false,
+    showTutorial: false,
+    activeShareLink: null as string | null,
   });
 
   const updateUiState = useCallback((updates: Partial<typeof uiState>) => setUiState(prev => ({ ...prev, ...updates })), []);
@@ -91,7 +97,9 @@ const AppLayout: React.FC = () => {
   const userDisplayInfo = useMemo(() => {
     const email = user?.email || '';
     const name = profile?.full_name || email.split('@')[0] || 'User';
-    const initials = profile?.full_name ? profile.full_name.split(' ').map((n: string) => n[0]?.toUpperCase()).filter(Boolean).join('').slice(0, 2) : (email.charAt(0).toUpperCase() || 'U');
+    const initials = profile?.full_name
+      ? profile.full_name.split(' ').map((n: string) => n[0]?.toUpperCase()).filter(Boolean).join('').slice(0, 2)
+      : (email.charAt(0).toUpperCase() || 'U');
     return { name, initials };
   }, [profile?.full_name, user?.email]);
 
@@ -122,19 +130,31 @@ const AppLayout: React.FC = () => {
   const renderContent = useCallback(() => {
     const common = { plan: currentPlan, onNavigate: navigateToView };
     switch (activeView) {
-      case 'validation': return <SurveyWizard />; // ✅ Renders Survey Wizard
-      case 'swot': return <SWOTAnalysis {...common} onAddItem={addSWOTItem} onUpdateItem={updateSWOTItem} onRemoveItem={removeSWOTItem} onBulkAdd={bulkAddSWOTItems} />;
-      case 'systems': return <SystemsThinking {...common} onUpdateItem={updateSWOTItem} />;
-      case 'strategy': return <StrategyMatrix {...common} onUpdateOption={updateStrategicOption} onRemoveOption={removeStrategicOption} onBulkAdd={bulkAddStrategicOptions} />;
-      case 'scorecard': return <BalancedScorecard {...common} onUpdateObjective={updateObjective} onAddKPI={addKPI} onUpdateKPI={updateKPI} onRemoveKPI={removeKPI} />;
-      case 'paps': return <PAPsManagement {...common} onUpdatePAP={updatePAP} removePAP={removePAP} />;
-      case 'templates': return <TemplatesLibrary currentPlan={currentPlan} onCreateFromTemplate={() => {}} userId={user?.id} userEmail={user?.email} userName={userDisplayInfo.name} userOrganization={profile?.organization || ''} isAuthenticated={isAuthenticated} />;
-      case 'team': return <TeamCollaboration {...common} userId={user?.id} userEmail={user?.email} userName={userDisplayInfo.name} />;
-      case 'settings': return <SettingsPage />;
-      case 'export': return <PlanExport {...common} />;
-      case 'dashboard': default: return <MELDashboard {...common} />;
+      case 'validation':
+        return <SurveyWizard />;
+      case 'swot':
+        return <SWOTAnalysis {...common} onAddItem={addSWOTItem} onUpdateItem={updateSWOTItem} onRemoveItem={removeSWOTItem} onBulkAdd={bulkAddSWOTItems} />;
+      case 'systems':
+        return <SystemsThinking {...common} onUpdateItem={updateSWOTItem} />;
+      case 'strategy':
+        return <StrategyMatrix {...common} onUpdateOption={updateStrategicOption} onRemoveOption={removeStrategicOption} onBulkAdd={bulkAddStrategicOptions} />;
+      case 'scorecard':
+        return <BalancedScorecard {...common} onUpdateObjective={updateObjective} onAddKPI={addKPI} onUpdateKPI={updateKPI} onRemoveKPI={removeKPI} />;
+      case 'paps':
+        return <PAPsManagement {...common} onUpdatePAP={updatePAP} onRemovePAP={removePAP} onAddPAP={addPAP} />;
+      case 'templates':
+        return <TemplatesLibrary currentPlan={currentPlan} onCreateFromTemplate={() => {}} userId={user?.id} userEmail={user?.email} userName={userDisplayInfo.name} userOrganization={profile?.organization || ''} isAuthenticated={isAuthenticated} />;
+      case 'team':
+        return <TeamCollaboration {...common} userId={user?.id} userEmail={user?.email} userName={userDisplayInfo.name} />;
+      case 'settings':
+        return <SettingsPage />;
+      case 'export':
+        return <PlanExport {...common} />;
+      case 'dashboard':
+      default:
+        return <MELDashboard {...common} />;
     }
-  }, [activeView, currentPlan, user, profile, isAuthenticated, userDisplayInfo.name, addSWOTItem, updateSWOTItem, removeSWOTItem, bulkAddSWOTItems, updateStrategicOption, removeStrategicOption, bulkAddStrategicOptions, updateObjective, addKPI, updateKPI, removeKPI, updatePAP, removePAP, navigateToView]);
+  }, [activeView, currentPlan, user, profile, isAuthenticated, userDisplayInfo.name, addSWOTItem, updateSWOTItem, removeSWOTItem, bulkAddSWOTItems, updateStrategicOption, removeStrategicOption, bulkAddStrategicOptions, updateObjective, addKPI, updateKPI, removeKPI, addPAP, updatePAP, removePAP, navigateToView]);
 
   const isLoading = authLoading || (isAuthenticated && plansLoading);
   const bypassLanding = location.pathname === '/validation-survey';
@@ -158,23 +178,36 @@ const AppLayout: React.FC = () => {
     <div className="min-h-screen bg-[#022c22] text-[#ecfdf5] flex overflow-hidden transition-colors duration-300">
       <Suspense fallback={<div className="w-16 lg:w-64 bg-[#011a12] shrink-0" />}>
         <Sidebar
-          activeView={activeView} onViewChange={goToView}
-          isCollapsed={uiState.sidebarCollapsed} onToggleCollapse={() => updateUiState({ sidebarCollapsed: !uiState.sidebarCollapsed })}
-          isOnline={isOnline} lastSynced={lastSynced} planName={currentPlan?.name}
-          isMobileMenuOpen={uiState.isMobileMenuOpen} onCloseMobileMenu={() => updateUiState({ isMobileMenuOpen: false })}
-          onShowTutorial={() => updateUiState({ showTutorial: true })} onShowProfile={() => updateUiState({ showProfileModal: true })}
+          activeView={activeView}
+          onViewChange={goToView}
+          isCollapsed={uiState.sidebarCollapsed}
+          onToggleCollapse={() => updateUiState({ sidebarCollapsed: !uiState.sidebarCollapsed })}
+          isOnline={isOnline}
+          lastSynced={lastSynced}
+          planName={currentPlan?.name}
+          isMobileMenuOpen={uiState.isMobileMenuOpen}
+          onCloseMobileMenu={() => updateUiState({ isMobileMenuOpen: false })}
+          onShowTutorial={() => updateUiState({ showTutorial: true })}
+          onShowProfile={() => updateUiState({ showProfileModal: true })}
         />
       </Suspense>
 
       <div className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ${uiState.sidebarCollapsed ? 'lg:ml-16' : 'lg:ml-64'}`}>
         <Suspense fallback={<div className="h-14 bg-[#011a12] border-b border-[#C9A84C]/20" />}>
           <Topbar
-            plans={plans} currentPlan={currentPlan} onSelectPlan={(id) => setCurrentPlan(id)}
+            plans={plans}
+            currentPlan={currentPlan}
+            onSelectPlan={(id) => setCurrentPlan(id)}
             onOpenMobileMenu={() => updateUiState({ isMobileMenuOpen: true })}
-            isAuthenticated={isAuthenticated} isAdmin={isAdmin}
-            userEmail={user?.email} userName={userDisplayInfo.name} userInitials={userDisplayInfo.initials}
-            onSignIn={() => updateUiState({ showAuthModal: true })} onSignOut={handleSignOut}
-            onOpenProfile={() => updateUiState({ showProfileModal: true })} onOpenSettings={() => goToView('settings')}
+            isAuthenticated={isAuthenticated}
+            isAdmin={isAdmin}
+            userEmail={user?.email}
+            userName={userDisplayInfo.name}
+            userInitials={userDisplayInfo.initials}
+            onSignIn={() => updateUiState({ showAuthModal: true })}
+            onSignOut={handleSignOut}
+            onOpenProfile={() => updateUiState({ showProfileModal: true })}
+            onOpenSettings={() => goToView('settings')}
             onNavigateView={goToView}
           />
         </Suspense>
@@ -189,12 +222,28 @@ const AppLayout: React.FC = () => {
       {/* MODALS */}
       {uiState.showAuthModal && (
         <Suspense fallback={null}>
-          <AuthModal isOpen onClose={() => updateUiState({ showAuthModal: false })} onSuccess={() => updateUiState({ showAuthModal: false })} signUp={signUp} signIn={signIn} resetPassword={resetPassword} signInWithMagicLink={signInWithMagicLink} />
+          <AuthModal
+            isOpen
+            onClose={() => updateUiState({ showAuthModal: false })}
+            onSuccess={() => updateUiState({ showAuthModal: false })}
+            signUp={signUp}
+            signIn={signIn}
+            resetPassword={resetPassword}
+            signInWithMagicLink={signInWithMagicLink}
+          />
         </Suspense>
       )}
       {uiState.showProfileModal && (
         <Suspense fallback={null}>
-          <UserProfileModal isOpen onClose={() => updateUiState({ showProfileModal: false })} profile={profile} userEmail={user?.email || ''} onUpdateProfile={updateProfile} onSignOut={handleSignOut} onUpdatePassword={updatePassword} />
+          <UserProfileModal
+            isOpen
+            onClose={() => updateUiState({ showProfileModal: false })}
+            profile={profile}
+            userEmail={user?.email || ''}
+            onUpdateProfile={updateProfile}
+            onSignOut={handleSignOut}
+            onUpdatePassword={updatePassword}
+          />
         </Suspense>
       )}
 
