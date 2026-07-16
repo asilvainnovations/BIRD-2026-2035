@@ -4,31 +4,39 @@
 import React from 'react';
 
 interface LogoProps {
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   variant?: 'full' | 'icon' | 'text';
   className?: string;
+  withGlow?: boolean;
 }
 
 export const StratLogo: React.FC<LogoProps> = ({
   size = 'md',
   variant = 'full',
   className = '',
+  withGlow = false,
 }) => {
   const sizeMap = {
     sm: 'w-6 h-6',
     md: 'w-10 h-10',
     lg: 'w-16 h-16',
+    xl: 'w-24 h-24',
   };
 
   const textSizeMap = {
     sm: 'text-xs',
     md: 'text-sm',
     lg: 'text-lg',
+    xl: 'text-2xl',
   };
+
+  const glowClasses = withGlow
+    ? 'ring-2 ring-[#C9A84C]/50 shadow-lg shadow-[#C9A84C]/25 rounded-xl'
+    : '';
 
   if (variant === 'icon') {
     return (
-      <div className={`${sizeMap[size]} ${className} flex items-center justify-center`}>
+      <div className={`${sizeMap[size]} ${glowClasses} ${className} flex items-center justify-center`}>
         <svg
           viewBox="0 0 100 100"
           className="w-full h-full"
@@ -55,7 +63,7 @@ export const StratLogo: React.FC<LogoProps> = ({
   // Full variant: icon + text
   return (
     <div className={`${className} flex items-center gap-3`}>
-      <div className={`${sizeMap[size]} flex-shrink-0`}>
+      <div className={`${sizeMap[size]} ${glowClasses} flex-shrink-0`}>
         <svg
           viewBox="0 0 100 100"
           className="w-full h-full"
@@ -85,6 +93,7 @@ export const MTITLogo: React.FC<LogoProps> = ({
     sm: 'w-6 h-6',
     md: 'w-10 h-10',
     lg: 'w-16 h-16',
+    xl: 'w-24 h-24',
   };
 
   return (
