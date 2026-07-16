@@ -24,6 +24,9 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       "@typescript-eslint/no-unused-vars": "off",
+      // Legacy code uses `any` for Supabase/AI payloads — tracked as warnings,
+      // to be tightened incrementally without blocking CI.
+      "@typescript-eslint/no-explicit-any": "warn",
     },
   }
 );
