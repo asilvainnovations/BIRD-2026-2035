@@ -53,7 +53,7 @@ export interface CursorPosition {
 // Edge Function endpoint (set via env var in production)
 const SYNC_API_URL =
   import.meta.env.VITE_STRATEGIC_PLANNER_SYNC_URL ||
-  'https://rgvteytgkugdqdodedxq.databasepad.com/functions/v1/strategic-planner-sync';
+  'https://lydsisparsmvextskevw.supabase.co/functions/v1/strategic-planner-sync';
 
 // ─────────────────────────────────────────────────────────
 export const useStrategicPlan = () => {
