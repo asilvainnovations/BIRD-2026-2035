@@ -55,7 +55,13 @@ const Topbar: React.FC<TopbarProps> = ({
 }) => {
   const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
-  const isDark = theme === 'dark';
+  // Effective theme: resolve 'system' through the OS preference so the
+  // toggle icon always reflects what's actually rendered.
+  const isDark = theme === 'dark' || (
+    theme === 'system' &&
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+  );
   const ThemeIcon = isDark ? Sun : Moon;
 
   const [showPlanSelector, setShowPlanSelector] = useState(false);
@@ -123,7 +129,7 @@ const Topbar: React.FC<TopbarProps> = ({
   const planName = currentPlan?.name ?? '';
 
   return (
-    <header className="h-16 border-b border-white/5 bg-[#0d1f3c]/80 backdrop-blur-md flex items-center justify-between px-4 sticky top-0 z-50">
+    <header className="h-16 border-b border-white/5 bg-[#022c22]/80 backdrop-blur-md flex items-center justify-between px-4 sticky top-0 z-50">
       {/* ── Left: Mobile menu + Plan Selector ── */}
       <div className="flex items-center gap-3" ref={planRef}>
         <button
@@ -146,7 +152,7 @@ const Topbar: React.FC<TopbarProps> = ({
 
         {/* Plan dropdown */}
         {showPlanSelector && (
-          <div className="absolute top-14 left-4 w-64 rounded-xl border border-white/10 bg-[#0d1f3c] shadow-2xl shadow-black/40 py-2 z-50">
+          <div className="absolute top-14 left-4 w-64 rounded-xl border border-white/10 bg-[#022c22] shadow-2xl shadow-black/40 py-2 z-50">
             <div className="px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-[#64748b] border-b border-white/5 mb-1">
               Your Plans
             </div>
@@ -185,7 +191,7 @@ const Topbar: React.FC<TopbarProps> = ({
           id="topbar-btn-validation"
           onClick={() => onNavigateView('validation')}
           className="hidden md:flex items-center gap-1.5 px-3 py-2 bg-[#C9A84C]/10 hover:bg-[#C9A84C]/20 text-[#C9A84C] rounded-xl text-xs font-bold border border-[#C9A84C]/30 transition-colors"
-          title="Validation Survey"
+          title="Validation Survey (opens in new tab)"
         >
           <ClipboardCheck className="w-4 h-4" /> Survey
         </button>
@@ -230,14 +236,14 @@ const Topbar: React.FC<TopbarProps> = ({
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search KPIs, SWOT, PAPs..."
                 autoFocus
-                className="w-full pl-9 pr-4 py-2 rounded-xl bg-[#0d1f3c] border border-white/10 text-sm text-[#ecfdf5]/90 placeholder:text-[#ecfdf5]/80 focus:outline-none focus:border-[#C9A84C]/40 transition-colors"
+                className="w-full pl-9 pr-4 py-2 rounded-xl bg-[#022c22] border border-white/10 text-sm text-[#ecfdf5]/90 placeholder:text-[#ecfdf5]/80 focus:outline-none focus:border-[#C9A84C]/40 transition-colors"
               />
             </div>
           )}
 
           {/* Search results dropdown */}
           {searchQuery && searchResults.length > 0 && (
-            <div className="absolute top-12 right-0 w-80 rounded-xl border border-white/10 bg-[#0d1f3c] shadow-2xl shadow-black/40 py-2 z-50">
+            <div className="absolute top-12 right-0 w-80 rounded-xl border border-white/10 bg-[#022c22] shadow-2xl shadow-black/40 py-2 z-50">
               {searchResults.map((r) => (
                 <button
                   key={`${r.type}-${r.id}`}
@@ -280,7 +286,7 @@ const Topbar: React.FC<TopbarProps> = ({
 
             {/* Account dropdown */}
             {showAccountMenu && (
-              <div className="absolute top-12 right-0 w-56 rounded-xl border border-white/10 bg-[#0d1f3c] shadow-2xl shadow-black/40 py-2 z-50">
+              <div className="absolute top-12 right-0 w-56 rounded-xl border border-white/10 bg-[#022c22] shadow-2xl shadow-black/40 py-2 z-50">
                 <div className="px-4 py-2 border-b border-white/5 mb-1">
                   <p className="text-sm font-semibold text-white truncate">{userName}</p>
                   <p className="text-[10px] text-[#64748b] truncate">{userEmail}</p>

@@ -2,7 +2,7 @@ import React from 'react';
 import {
   LayoutDashboard, Target, Network, Sparkles, BarChart3, FolderKanban, FileText,
   ChevronLeft, ChevronRight, Cloud, Users, Layers, X, User,
-  HelpCircle, ClipboardCheck, Star, Settings
+  HelpCircle, ClipboardCheck, Star, Settings, ExternalLink
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { StratLogo } from '@/components/branding/Logo';
@@ -42,6 +42,7 @@ const specialItems = [
     description: 'BIRD 2026-2035 Feedback',
     badge: 'NEW',
     highlight: true,
+    external: true, // opens the standalone survey app in a new tab
   },
 ];
 
@@ -112,6 +113,9 @@ const Sidebar: React.FC<SidebarProps> = ({
               </p>
             )}
           </div>
+        )}
+        {item.external && (!isCollapsed || isMobileMenuOpen) && (
+          <ExternalLink className="w-3.5 h-3.5 flex-shrink-0 opacity-60 group-hover:opacity-100 transition-opacity" />
         )}
         {isCollapsed && !isMobileMenuOpen && (
           <div className="absolute left-full ml-4 px-3 py-2 bg-[#022c22]/60 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-50 border border-[#C9A84C]/20 shadow-xl">
@@ -186,15 +190,12 @@ const Sidebar: React.FC<SidebarProps> = ({
                 onViewChange('validation');
                 if (window.innerWidth < 1024) onCloseMobileMenu();
               }}
-              className={cn(
-                "w-full flex items-center gap-2 px-4 py-3 rounded-xl font-bold text-sm transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5",
-                activeView === 'validation'
-                  ? "bg-[#E8C560] text-[#022c22] shadow-[#C9A84C]/40"
-                  : "bg-gradient-to-r from-[#C9A84C] to-[#B8943F] hover:from-[#E8C560] hover:to-[#C9A84C] text-[#022c22] shadow-[#C9A84C]/20"
-              )}
+              className="w-full flex items-center gap-2 px-4 py-3 rounded-xl font-bold text-sm transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 bg-gradient-to-r from-[#C9A84C] to-[#B8943F] hover:from-[#E8C560] hover:to-[#C9A84C] text-[#022c22] shadow-[#C9A84C]/20"
+              title="Opens the standalone Validation Survey in a new tab"
             >
               <Star className="w-5 h-5 fill-current" />
               <span className="flex-1 text-left">Validation Survey</span>
+              <ExternalLink className="w-3.5 h-3.5 opacity-70" />
               <span className="px-1.5 py-0.5 text-[9px] bg-[#022c22]/20 text-[#022c22] rounded-full uppercase tracking-wider font-black">
                 NEW
               </span>
@@ -210,18 +211,11 @@ const Sidebar: React.FC<SidebarProps> = ({
           <div className="px-2 py-3 border-b border-[#C9A84C]/10 flex justify-center">
             <button
               onClick={() => onViewChange('validation')}
-              className={cn(
-                "relative p-2.5 rounded-xl transition-all",
-                activeView === 'validation'
-                  ? "bg-[#E8C560] text-[#022c22]"
-                  : "bg-[#C9A84C]/10 text-[#C9A84C] hover:bg-[#C9A84C]/20 border border-[#C9A84C]/30"
-              )}
-              title="Validation Survey"
+              className="relative p-2.5 rounded-xl transition-all bg-[#C9A84C]/10 text-[#C9A84C] hover:bg-[#C9A84C]/20 border border-[#C9A84C]/30"
+              title="Validation Survey (opens in new tab)"
             >
               <Star className="w-5 h-5" />
-              {activeView !== 'validation' && (
-                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#C9A84C] rounded-full border-2 border-[#011a12]" />
-              )}
+              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#C9A84C] rounded-full border-2 border-[#011a12]" />
             </button>
           </div>
         )}

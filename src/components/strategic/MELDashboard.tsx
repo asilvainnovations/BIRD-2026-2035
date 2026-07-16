@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from '@/lib/motion-shim';
 import { TrendingUp, TriangleAlert as AlertTriangle, CircleCheck as CheckCircle2, Clock, Target, DollarSign, Users, Cog, GraduationCap, ArrowUpRight, FolderKanban, Info, X, Send, Sparkles, Globe, ChevronDown, Loader as Loader2, ExternalLink, BookOpen, GitBranch, BrainCircuit, Layers, ArrowRight, Play, Zap, Shield, Leaf, ClipboardCheck } from 'lucide-react';
 import { StrategicPlan } from '@/lib/strategicPlanStore';
 import { EDGE_FUNCTIONS, BRAND_ASSETS } from '@/lib/supabase';
+import { openValidationSurvey } from '@/lib/bird-urls';
 
 // ─── Import HeroSection from external file ────────────────────────────────────
 import HeroSection from './HeroSection';
@@ -191,7 +192,7 @@ const DashboardHeroSection: React.FC<{ onNavigate?: (view: string) => void }> = 
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
             </button>
             <button
-              onClick={() => window.open('https://bird-app.bolt.host/validation-survey', '_blank', 'noopener,noreferrer')}
+              onClick={() => openValidationSurvey()}
               className="px-8 py-4 bg-[rgba(6,78,59,0.6)] backdrop-blur-sm border-2 border-[rgba(201,168,76,0.55)] text-[#C9A84C] rounded-xl font-bold text-base hover:bg-[rgba(201,168,76,0.15)] transition-all flex items-center gap-3"
               style={{ fontFamily: "'Cinzel', serif" }}
             >

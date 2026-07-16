@@ -348,8 +348,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
             <div className="flex gap-8 text-xs font-bold text-[#64748b] uppercase tracking-widest">
               <a href="https://bird-resources.asilvainnovations.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#C9A84C] transition-colors">Documentation</a>
-              <a href="#" className="hover:text-[#C9A84C] transition-colors">Privacy</a>
-              <a href="#" className="hover:text-[#C9A84C] transition-colors">System Status</a>
+              <a href="/privacy-policy.html" target="_blank" rel="noopener noreferrer" className="hover:text-[#C9A84C] transition-colors">Privacy</a>
+              <a href="/cookie-policy.html" target="_blank" rel="noopener noreferrer" className="hover:text-[#C9A84C] transition-colors">Cookies</a>
             </div>
           </div>
         </footer>
