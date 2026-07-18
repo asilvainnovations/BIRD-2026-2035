@@ -24,7 +24,7 @@ interface PlatformBadgeProps {
 }
 
 export const PlatformBadge: React.FC<PlatformBadgeProps> = ({
-  logoUrl = "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png",
+  logoUrl = "https://appimize.app/assets/apps/user_1097/images/2c7d825bf937_232_1097.png",
   href = "https://asilvainnovations.github.io/BIRD-2026-2035",
   size = 48,
   vPosition = "bottom",
