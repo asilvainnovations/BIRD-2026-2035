@@ -557,7 +557,7 @@ export const BIRD_SITES = {
   },
   validationSurvey: {
     title: "Validation Survey Portal",
-    url: "https://bird-survey.asilvainnovations.com",
+    url: "https://bird-validation-survey.bolt.host/",
     description: "Standalone validation survey portal for stakeholder feedback collection, analysis, and reporting.",
   },
   boiPortal: {
@@ -690,4 +690,22 @@ export function getAvailableSections(): string[] {
   Object.values(BIRD_IMAGES).forEach(img => sections.add(img.section));
   Object.values(BIRD_VIDEOS).forEach(vid => sections.add(vid.section));
   return Array.from(sections).sort();
+}
+
+// ─── EXTERNAL APP URLS ─────────────────────────────────────────────────────
+/** Canonical URL of the standalone BIRD Validation Survey app.
+ *  Every "Validation Survey" button (HeroSection, Topbar, Sidebar,
+ *  MELDashboard, tutorial) opens this single destination. */
+export const VALIDATION_SURVEY_URL = BIRD_SITES.validationSurvey.url;
+
+/** Open an external URL in a new, safe browser tab. */
+export function openExternal(url: string) {
+  if (typeof window !== 'undefined') {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+}
+
+/** Open the standalone Validation Survey in a new tab. */
+export function openValidationSurvey() {
+  openExternal(VALIDATION_SURVEY_URL);
 }
