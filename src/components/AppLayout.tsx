@@ -2,10 +2,8 @@ import React, { useState, useEffect, useRef, useMemo, useCallback, lazy, Suspens
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useStrategicPlan } from '@/hooks/useStrategicPlan';
 import { useAuth } from '@/hooks/useAuth';
-import { supabase } from '@/lib/supabase';
 import { openValidationSurvey } from '@/lib/bird-urls';
 import { StratLogo } from '@/components/branding/Logo';
-import { PlatformBadge } from '@/components/branding/PlatformBadge';
 import { Loader2 } from 'lucide-react';
 
 // ─── CRITICAL PATH: Load HeroSection immediately (first screen) ─────────────
@@ -108,7 +106,7 @@ const AppLayout: React.FC = () => {
     // The Validation Survey is a standalone app — open it externally instead
     // of routing to an in-app view (Sidebar, Topbar, tutorial all funnel here).
     if (view === 'validation') {
-      openExternal(VALIDATION_SURVEY_URL);
+      openValidationSurvey();
       return;
     }
     setActiveView(view);
