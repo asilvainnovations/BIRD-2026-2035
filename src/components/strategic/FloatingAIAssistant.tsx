@@ -160,6 +160,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
         : undefined;
 
       // Use Supabase Edge Functions invoke (recommended approach)
+      // This automatically handles auth tokens, CORS, and error handling
       const { data, error } = await supabase.functions.invoke('ai-strategy-assistant', {
         body: {
           action: 'chat',
@@ -181,25 +182,69 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
         throw new Error(`Edge function error: ${error.message}`);
       }
 
+      // ── RESPONSE FORMAT HANDLING ───────────────────────────────────────
+      // The Edge Function returns: { success: true, data: { reply: string, markdown: string } }
+      // The supabase.functions.invoke() unwraps the HTTP response, so `data` is the JSON body.
+      // Therefore: data = { success: true, data: { reply: "...", markdown: "..." } }
+      // We need to access: data.data.reply OR data.data.markdown
+      // ───────────────────────────────────────────────────────────────────
+
+      // Handle the nested { success, data } wrapper from the Edge Function
+      const responsePayload = data as any;
+      
+      // Validate the response structure
+      if (!responsePayload || typeof responsePayload !== 'object') {
+        throw new Error('Invalid response format from AI service');
+      }
+
+      // Check for Edge Function-level errors
+      if (responsePayload.success === false) {
+        const errorMessage = responsePayload.error || 'Unknown error from AI service';
+        throw new Error(errorMessage);
+      }
+
+      // Extract the actual AI response data
+      // The Edge Function returns: { success: true, data: { reply: "...", markdown: "..." } }
+      const aiData = responsePayload.data;
+      
+      if (!aiData || typeof aiData !== 'object') {
+        throw new Error('Missing AI response data');
+      }
+
+      // Extract reply from various possible formats
       const reply =
-        data?.data?.reply ||
-        data?.data?.markdown ||
-        data?.error ||
+        typeof aiData.reply === 'string' ? aiData.reply :
+        typeof aiData.markdown === 'string' ? aiData.markdown :
+        typeof aiData === 'string' ? aiData : // Fallback: if data is a plain string
         'Sorry, I could not generate a response right now. Please try again.';
 
       setMessages((p) => [...p, { role: 'assistant', content: reply, timestamp: Date.now() }]);
     } catch (err: any) {
       console.error('[BIRD AI] Error:', err);
+      
+      // Determine user-friendly error message
+      let errorMessage: string;
+      const errMsg = err?.message?.toLowerCase() || '';
+      
+      if (errMsg.includes('403') || errMsg.includes('401') || errMsg.includes('unauthorized')) {
+        errorMessage = 'Authentication failed. Please sign in again to use BIRD AI.';
+      } else if (errMsg.includes('404') || errMsg.includes('not found')) {
+        errorMessage = 'The AI service is not deployed. Please contact the administrator to deploy the ai-strategy-assistant Edge Function.';
+      } else if (errMsg.includes('429') || errMsg.includes('rate limit')) {
+        errorMessage = 'AI rate limit reached. Please wait a moment and try again.';
+      } else if (errMsg.includes('502') || errMsg.includes('503') || errMsg.includes('service')) {
+        errorMessage = 'The AI service is temporarily unavailable. Please try again in a moment.';
+      } else if (errMsg.includes('invalid response') || errMsg.includes('missing')) {
+        errorMessage = 'Received an invalid response from the AI service. Please try again.';
+      } else {
+        errorMessage = 'I had trouble reaching the AI service. Please check your connection and try again. If the issue persists, the AI edge function may need to be redeployed.';
+      }
+
       setMessages((p) => [
         ...p,
         {
           role: 'assistant',
-          content:
-            err?.message?.includes('403') || err?.message?.includes('401')
-              ? 'Authentication failed. Please sign in again to use BIRD AI.'
-              : err?.message?.includes('404')
-              ? 'The AI service is not deployed. Please contact the administrator to deploy the ai-strategy-assistant Edge Function.'
-              : 'I had trouble reaching the AI service. Please check your connection and try again. If the issue persists, the AI edge function may need to be redeployed.',
+          content: errorMessage,
           timestamp: Date.now(),
         },
       ]);
