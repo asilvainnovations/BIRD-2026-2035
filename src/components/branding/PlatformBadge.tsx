@@ -1,7 +1,3 @@
-// src/components/branding/PlatformBadge.tsx
-// Circular MTIT logo badge that replaces the Bolt platform badge
-// Place this in your App.tsx or layout root so it renders on all routes
-
 import React from "react";
 
 interface PlatformBadgeProps {
@@ -24,7 +20,7 @@ interface PlatformBadgeProps {
 }
 
 export const PlatformBadge: React.FC<PlatformBadgeProps> = ({
-  logoUrl = "https://appimize.app/assets/apps/user_1097/images/2c7d825bf937_232_1097.png",
+  logoUrl = "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/ASilva%20Innovations%20Logo.png",
   href = "https://asilvainnovations.github.io/BIRD-2026-2035",
   size = 48,
   vPosition = "bottom",
