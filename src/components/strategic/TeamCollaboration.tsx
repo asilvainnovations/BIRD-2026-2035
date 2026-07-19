@@ -182,8 +182,8 @@ const RESOURCES: ResourceItem[] = [
   { id: 9, title: 'Leverage Points (Readings)', url: 'https://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/', type: 'article', category: 'Systems Thinking', description: 'Donella Meadows\' seminal essay on intervention hierarchy.' },
   { id: 10, title: 'Systems Innovation', url: 'https://youtu.be/rVGoeFAW0FM?si=yOgB50q26R_G389G', type: 'video', category: 'Innovation', description: 'How to drive transformative change through systemic innovation.' },
   { id: 11, title: 'What is a Balanced Scorecard', url: 'https://youtu.be/OLdlpeMVmuk?si=mhHAWJr-UisjyV8P', type: 'video', category: 'BSC', description: 'Foundational overview of the Balanced Scorecard framework.' },
-  { id: 12, title: 'BIRD APP', url: 'https://bird2035.netlify.app/', type: 'prototype', category: 'Prototype', description: 'Interactive strategic roadmap prototype for reference and inspiration.' },
-  { id: 13, title: 'BIRD 2026–2035 User Manual', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/user-manual.html', type: 'document', category: 'BIRD 2026–2035', description: 'The complete guide to the BIRD 2026–2035 platform — SWOT, Systems Thinking, Balanced Scorecard, PAPs, and MEL Dashboard. For BOI-MTIT and BARMM strategic planners.' },
+  { id: 12, title: 'BIRD APP', url: 'SystemsThinkingProps', type: 'plaform', category: 'Platform', description: 'Interactive strategic roadmapping platform for reference and inspiration.' },
+  { id: 13, title: 'BIRD 2026–2035 User Manual', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/user-manual.html', type: 'site', category: 'BIRD 2026–2035', description: 'The complete guide to the BIRD 2026–2035 platform — SWOT, Systems Thinking, Balanced Scorecard, PAPs, and MEL Dashboard. For BOI-MTIT and BARMM strategic planners.' },
 ];
 
 // ── Presence Ribbon (exportable for Topbar) ──────────────
