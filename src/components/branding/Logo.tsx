@@ -141,7 +141,7 @@ export const AIStrategistAvatar: React.FC<AvatarProps> = ({
       }`}
     >
       <img
-        src="https://appimize.app/assets/apps/user_1097/images/2c7d825bf937_232_1097.png"
+        src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/ASilva%20Innovations%20Logo.png"
         alt="BIRD AI Strategist"
         className="w-full h-full object-cover"
         onError={(e) => {
