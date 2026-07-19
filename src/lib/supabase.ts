@@ -39,7 +39,7 @@ export const EDGE_FUNCTIONS = {
 // ── Branding Assets (CDN) ─────────────────────────────────────────────────────
 export const BRAND_ASSETS = {
   LOGO_URL: import.meta.env.VITE_BRAND_LOGO_URL || 'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png',
-  AI_AVATAR_URL: import.meta.env.VITE_AI_STRATEGIST_AVATAR_URL || 'https://appimize.app/assets/apps/user_1097/images/2c7d825bf937_232_1097.png',
+  AI_AVATAR_URL: import.meta.env.VITE_AI_STRATEGIST_AVATAR_URL || 'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/ASilva%20Innovations%20Logo.png',
   BANNER_URL: import.meta.env.VITE_BANNER_INVESTMENT_URL || 'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/1.Banner.png',
 } as const;
 
