@@ -50,7 +50,7 @@
   "@type": "Survey",
   "name": "BIRD 2026-2035 Validation Survey",
   "description": "A multi-stakeholder validation survey for the Bangsamoro Investment Roadmap 2026-2035. Open to government agencies, private sector, civil society, academe, and development partners across BARMM.",
-  "url": "https://bird-app.bolt.host/validation-survey",
+  "url": "https://bird-validation-survey.bolt.host",
   "inLanguage": "en",
   "author": {
     "@type": "GovernmentOrganization",
@@ -256,23 +256,6 @@ body{
 .phase-deliverables{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem;}
 .phase-tag{font-size:.68rem;background:rgba(201,168,76,.12);border:1px solid var(--gold-border);color:var(--gold-light);padding:.15rem .5rem;border-radius:.2rem;}
 
-.risk-grid{display:grid;grid-template-columns:1fr;gap:var(--s4);}
-@media(min-width:640px){.risk-grid{grid-template-columns:repeat(2,1fr);}}
-@media(min-width:1000px){.risk-grid{grid-template-columns:repeat(3,1fr);}}
-.risk-card{background:rgba(2,44,34,.55);border:1px solid var(--gold-border);border-radius:var(--r-lg);padding:var(--s5);position:relative;overflow:hidden;}
-.risk-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-.risk-card.high::before{background:var(--status-critical);}
-.risk-card.medium::before{background:var(--status-high);}
-.risk-card.low::before{background:var(--status-on-track);}
-.risk-level{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:.15rem .5rem;border-radius:.2rem;display:inline-block;margin-bottom:.5rem;}
-.risk-card.high .risk-level{background:var(--status-critical-bg);color:var(--status-critical);border:1px solid rgba(239,68,68,.3);}
-.risk-card.medium .risk-level{background:var(--status-high-bg);color:var(--status-high);border:1px solid rgba(245,158,11,.3);}
-.risk-card.low .risk-level{background:var(--status-on-track-bg);color:var(--status-on-track);border:1px solid rgba(16,185,129,.3);}
-.risk-title{font-family:'Cinzel',serif;font-size:.88rem;font-weight:700;color:white;margin-bottom:.3rem;}
-.risk-desc{font-size:.78rem;color:rgba(236,253,245,.75);line-height:1.5;margin-bottom:.5rem;}
-.risk-mitigation{font-size:.75rem;color:var(--gold-light);line-height:1.5;padding-top:.5rem;border-top:1px solid var(--gold-border);}
-.risk-mitigation strong{color:var(--gold);}
-
 .cta-section{background:linear-gradient(135deg,rgba(6,78,59,.4) 0%,rgba(2,44,34,.6) 100%);border:1px solid var(--gold-border-strong);border-radius:var(--r-xl);padding:var(--s8);text-align:center;position:relative;overflow:hidden;}
 .cta-section::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad);}
 .cta-title{font-family:'Cinzel',serif;font-size:clamp(1.2rem,3vw,1.8rem);font-weight:700;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:var(--s4);}
@@ -340,7 +323,7 @@ body{
 <nav class="site-nav" id="siteNav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo-wrap" aria-label="BIRD 2026-2035 - Bangsamoro Investment Roadmap Home">
-      <img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png"
+      <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png"
            alt="Bangsamoro Investment Roadmap 2026-2035 - Multi-Stakeholder Validation Platform"
            width="130" height="40" onerror="this.style.display='none'">
       <span class="nav-title">BIRD 2026-2035<br>Survey Orientation</span>
@@ -348,7 +331,7 @@ body{
     <div class="nav-right">
       <a href="dashboard.html" class="nav-back" aria-label="Dashboard">Dashboard</a>
       <a href="roadmap.html" class="nav-back" aria-label="Roadmap">Roadmap</a>
-      <a href="validation-survey.html" class="nav-back" aria-label="Survey">Survey</a>
+      <a href="https://bird-validation-survey.bolt.host" class="nav-back" aria-label="Survey">Survey</a>
       <div class="live-badge" role="status" aria-live="polite">
         <span class="live-dot" aria-hidden="true"></span>
         <span>Orientation</span>
@@ -921,63 +904,12 @@ body{
     </div>
   </section>
 
-  <!-- PANEL I: RISK MITIGATION -->
-  <section class="dash-section reveal" aria-labelledby="risk-title">
-    <div class="section-head">
-      <div class="section-label-wrap">
-        <span class="section-kicker">Common Questions</span>
-        <h2 class="section-title" id="risk-title">Questions Stakeholders Often Ask</h2>
-        <div class="section-rule"></div>
-      </div>
-      <span class="section-count">6 Quick Answers</span>
-    </div>
-
-    <div class="risk-grid">
-      <div class="risk-card high reveal d1">
-        <span class="risk-level">How Long?</span>
-        <div class="risk-title">"I'm busy -- how long will this really take?"</div>
-        <div class="risk-desc">The survey is designed to take about 15-20 minutes for most respondents, depending on how much detail you choose to add in the open-text questions.</div>
-        <div class="risk-mitigation"><strong>Good to know:</strong> Your progress is saved automatically as you go, so you can stop partway and pick up right where you left off later.</div>
-      </div>
-      <div class="risk-card high reveal d2">
-        <span class="risk-level">Not Sure?</span>
-        <div class="risk-title">"What if I'm not sure about an answer?"</div>
-        <div class="risk-desc">You don't need to be an expert on every topic. Answer based on what you genuinely know or observe -- there are no wrong answers, only honest ones.</div>
-        <div class="risk-mitigation"><strong>Good to know:</strong> Each question includes plain-language context, and some let you skip if a topic truly isn't relevant to you.</div>
-      </div>
-      <div class="risk-card medium reveal d3">
-        <span class="risk-level">Connection?</span>
-        <div class="risk-title">"What if my internet cuts out midway?"</div>
-        <div class="risk-desc">No problem. The survey keeps working and saving your answers locally on your device even without a connection.</div>
-        <div class="risk-mitigation"><strong>Good to know:</strong> Once you're back online, your response is submitted automatically -- you don't need to start over.</div>
-      </div>
-      <div class="risk-card medium reveal d1">
-        <span class="risk-level">Feels Long?</span>
-        <div class="risk-title">"There are 16 sections -- is that a lot?"</div>
-        <div class="risk-desc">Each section is short and focused on one topic at a time, so it moves quickly even though there are many parts.</div>
-        <div class="risk-mitigation"><strong>Good to know:</strong> A progress bar always shows exactly where you are, and you can jump back to review earlier answers.</div>
-      </div>
-      <div class="risk-card low reveal d2">
-        <span class="risk-level">Honesty?</span>
-        <div class="risk-title">"Is it safe to answer honestly about sensitive topics?"</div>
-        <div class="risk-desc">Some questions touch on governance, security, or resource allocation. Your candid view is exactly what's needed here.</div>
-        <div class="risk-mitigation"><strong>Good to know:</strong> Your answers are anonymized in all reporting -- no one can trace an individual response back to you.</div>
-      </div>
-      <div class="risk-card low reveal d3">
-        <span class="risk-level">Respect?</span>
-        <div class="risk-title">"Does this survey respect our culture and values?"</div>
-        <div class="risk-desc">The survey was built around Khalifa stewardship principles and reviewed with cultural sensitivity toward BARMM's Islamic and indigenous traditions, in consultation with community leaders, religious scholars, and civil society representatives.</div>
-        <div class="risk-mitigation"><strong>Good to know:</strong> If anything ever feels off, the BIRD development team welcomes that feedback -- it helps us improve future rounds of engagement.</div>
-      </div>
-    </div>
-  </section>
-
   <!-- PANEL J: CALL TO ACTION -->
   <section class="cta-section reveal" aria-labelledby="cta-title">
     <h2 class="cta-title" id="cta-title">Your Voice Belongs in This Roadmap</h2>
     <p class="cta-desc">The BIRD 2026-2035 Validation Survey exists because BARMM's next ten years shouldn't be planned without the people who will live them. Whether you represent a government agency, a private enterprise, a civil society organization, an academic institution, or a development partner -- your perspective helps make this roadmap real. Let's shape the Emerging Bangsamoro together.</p>
     <div class="cta-actions">
-      <a href="https://bird-app.bolt.host/validation-survey" class="cta-btn">
+      <a href="hhttps://bird-validation-survey.bolt.host" class="cta-btn">
         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
         Start Survey
       </a>
