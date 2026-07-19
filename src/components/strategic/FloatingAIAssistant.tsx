@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Sparkles, X, Send, Loader2, ChevronDown, ChevronUp, Brain, Target, BarChart3, Globe2, Leaf, Landmark } from 'lucide-react';
+import { X, Send, Loader2, ChevronDown, ChevronUp, Brain, Target, BarChart3, Globe2, Leaf, Landmark } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -57,7 +57,7 @@ const VIEW_SUGGESTIONS: Record<string, { icon: React.ElementType; label: string 
     { icon: Landmark, label: 'What WT strategies address poverty reduction through investment?' },
   ],
   default: [
-    { icon: Sparkles, label: 'What is the BIRD 2026–2035 and its strategic vision?' },
+    { icon: Target,   label: 'What is the BIRD 2026–2035 and its strategic vision?' },
     { icon: Target,   label: 'Why is halal certification a key leverage point for BARMM?' },
     { icon: Globe2,   label: 'How do I attract Islamic finance investors to BARMM?' },
     { icon: Brain,    label: 'Explain the 5 BEIE investment clusters.' },
@@ -159,17 +159,9 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
           }
         : undefined;
 
-      // Direct fetch to the Kimi AI edge function (new URL)
-      const AI_ASSISTANT_URL = 'https://cacimkjpkxflrtgspiay.supabase.co/functions/v1/ai-strategy-assistant';
-      const { data: { session } } = await supabase.auth.getSession();
-
-      const response = await fetch(AI_ASSISTANT_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session?.access_token || ''}`,
-        },
-        body: JSON.stringify({
+      // Use Supabase Edge Functions invoke (recommended approach)
+      const { data, error } = await supabase.functions.invoke('ai-strategy-assistant', {
+        body: {
           action: 'chat',
           systemContext: BIRD_SYSTEM_CONTEXT,
           data: {
@@ -182,14 +174,12 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
             },
           },
           plan: planContext,
-        }),
+        },
       });
 
-      if (!response.ok) {
-        throw new Error(`AI service error: ${response.status}`);
+      if (error) {
+        throw new Error(`Edge function error: ${error.message}`);
       }
-
-      const data = await response.json();
 
       const reply =
         data?.data?.reply ||
@@ -198,13 +188,18 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
         'Sorry, I could not generate a response right now. Please try again.';
 
       setMessages((p) => [...p, { role: 'assistant', content: reply, timestamp: Date.now() }]);
-    } catch {
+    } catch (err: any) {
+      console.error('[BIRD AI] Error:', err);
       setMessages((p) => [
         ...p,
         {
           role: 'assistant',
           content:
-            'I had trouble reaching the AI service. Please check your connection and try again. If the issue persists, the AI edge function may need to be redeployed.',
+            err?.message?.includes('403') || err?.message?.includes('401')
+              ? 'Authentication failed. Please sign in again to use BIRD AI.'
+              : err?.message?.includes('404')
+              ? 'The AI service is not deployed. Please contact the administrator to deploy the ai-strategy-assistant Edge Function.'
+              : 'I had trouble reaching the AI service. Please check your connection and try again. If the issue persists, the AI edge function may need to be redeployed.',
           timestamp: Date.now(),
         },
       ]);
@@ -222,20 +217,30 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
   // ── Render ────────────────────────────────────────────────────────────────
   return (
     <>
-      {/* ── FAB Button ─────────────────────────────────────────────────── */}
+      {/* ── FAB Button — Circular Logo Only (No Sparkles) ────────────────── */}
       {!open && (
         <button
           onClick={() => { setOpen(true); setMin(false); }}
           aria-label="Open AI Strategy Assistant"
           className={cn(
-            'fixed bottom-5 right-5 z-50 flex items-center gap-2.5 rounded-full px-5 py-3',
-            'bg-gradient-to-r from-[#C9A84C] via-[#B8942E] to-[#E8C560] text-white',
-            'shadow-xl shadow-[#022c22]/40 hover:scale-105 hover:shadow-[#C9A84C]/30',
+            'fixed bottom-5 right-5 z-50 flex items-center justify-center',
+            'w-14 h-14 rounded-full overflow-hidden',
+            'bg-gradient-to-br from-[#C9A84C] via-[#B8942E] to-[#E8C560]',
+            'shadow-xl shadow-[#022c22]/40 hover:scale-110 hover:shadow-[#C9A84C]/30',
             'transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8C560]',
+            'border-2 border-[#E8C560]/40',
           )}
         >
-          <Sparkles className="w-5 h-5 flex-shrink-0" />
-          <span className="hidden sm:inline font-semibold text-sm tracking-wide">BIRD AI</span>
+          <img
+            src={AI_LOGO_URL}
+            alt="BIRD AI"
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              const target = e.currentTarget;
+              target.style.display = 'none';
+              target.parentElement!.innerHTML = '<div class="w-full h-full flex items-center justify-center text-white font-bold text-xs">AI</div>';
+            }}
+          />
         </button>
       )}
 
@@ -261,10 +266,9 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
                   alt="AI Strategist"
                   className="w-full h-full object-cover"
                   onError={(e) => {
-                    // Fallback to Sparkles icon if image fails to load
                     const target = e.currentTarget;
                     target.style.display = 'none';
-                    target.parentElement!.innerHTML = '<div class="w-full h-full flex items-center justify-center"><svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.962 0z"/></svg></div>';
+                    target.parentElement!.innerHTML = '<div class="w-full h-full flex items-center justify-center text-white font-bold text-xs">AI</div>';
                   }}
                 />
               </div>
@@ -313,7 +317,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
                           onError={(e) => {
                             const target = e.currentTarget;
                             target.style.display = 'none';
-                            target.parentElement!.innerHTML = '<svg class="w-3 h-3 text-[#C9A84C]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.962 0z"/></svg>';
+                            target.parentElement!.innerHTML = '<div class="w-full h-full flex items-center justify-center text-[#C9A84C] font-bold text-[8px]">AI</div>';
                           }}
                         />
                       </div>
@@ -342,7 +346,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
                         onError={(e) => {
                           const target = e.currentTarget;
                           target.style.display = 'none';
-                          target.parentElement!.innerHTML = '<svg class="w-3 h-3 text-[#C9A84C]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.962 0z"/></svg>';
+                          target.parentElement!.innerHTML = '<div class="w-full h-full flex items-center justify-center text-[#C9A84C] font-bold text-[8px]">AI</div>';
                         }}
                       />
                     </div>
