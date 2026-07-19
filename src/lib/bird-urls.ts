@@ -1,7 +1,7 @@
 // src/lib/bird-urls.ts
 // BIRD 2026–2035 · Centralized URL Registry
 // Videos, Images, and Site Pages for Context, Reference, Visualizations & Interactions
-// Updated: 2026-07-16 | 63+ images, 5 videos, 12 sites | All URLs validated
+// Updated: 2026-07-19 | 72 images, 5 videos, 12 sites | All URLs validated
 
 export const BIRD_VIDEOS = {
   overview: {
