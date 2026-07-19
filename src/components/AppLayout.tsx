@@ -108,7 +108,7 @@ const AppLayout: React.FC = () => {
     // The Validation Survey is a standalone app — open it externally instead
     // of routing to an in-app view (Sidebar, Topbar, tutorial all funnel here).
     if (view === 'validation') {
-      openValidationSurvey();
+      openExternal(VALIDATION_SURVEY_URL);
       return;
     }
     setActiveView(view);
