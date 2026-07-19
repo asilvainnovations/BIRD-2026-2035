@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   LayoutDashboard, Target, Network, Sparkles, BarChart3, FolderKanban, FileText,
-  ChevronLeft, ChevronRight, Cloud, Users, Layers, X, User,
+  ChevronLeft, ChevronRight, Cloud, Users, Layers, X,
   HelpCircle, ClipboardCheck, Star, Settings, ExternalLink
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
