@@ -16,7 +16,7 @@ interface FloatingAIAssistantProps {
 }
 
 // ─── Logo URL (Appimize circular avatar) ──────────────────────────────────────
-const AI_LOGO_URL = 'https://appimize.app/assets/apps/user_1097/images/2c7d825bf937_232_1097.png';
+const AI_LOGO_URL = 'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/ASilva%20Innovations%20Logo.png';
 
 // ─── Contextual Suggestion Sets ───────────────────────────────────────────────
 const VIEW_SUGGESTIONS: Record<string, { icon: React.ElementType; label: string }[]> = {
