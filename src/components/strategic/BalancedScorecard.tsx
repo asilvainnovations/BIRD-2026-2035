@@ -30,9 +30,9 @@ import { cn } from '@/lib/utils';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
 
 // Edge Function URLs
-const AI_ASSISTANT_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/ai-strategy-assistant';
-const SYNC_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/strategic-planner-sync';
-const EMAIL_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/email-notifications';
+const AI_ASSISTANT_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/ai-strategy-assistant';
+const SYNC_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/strategic-planner-sync';
+const EMAIL_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/email-notifications';
 
 // ─── NEW: STRATEGIC FRAMEWORK CONTEXT FOR AI EXPERTISE ─────────────────────────────
 const BIRD_STRATEGIC_CONTEXT = `
