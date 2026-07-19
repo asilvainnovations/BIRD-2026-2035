@@ -26,8 +26,8 @@ import { StrategicPlan, CLDSnapshot } from '@/lib/strategicPlanStore';
 import { supabase } from '@/lib/supabase';
 
 // Edge Function URLs
-const AI_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/ai-strategy-assistant';
-const SYNC_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/strategic-planner-sync';
+const AI_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/ai-strategy-assistant';
+const SYNC_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/strategic-planner-sync';
 
 interface PlanExportProps {
   plan: StrategicPlan;
