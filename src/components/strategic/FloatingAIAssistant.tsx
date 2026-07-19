@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
-import { AIStrategistAvatar } from '@/components/branding/Logo';
 import { Sparkles, X, Send, Loader2, ChevronDown, ChevronUp, Brain, Target, BarChart3, Globe2, Leaf, Landmark } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -15,6 +14,9 @@ interface FloatingAIAssistantProps {
   plan?: any;
   activeView?: string;
 }
+
+// ─── Logo URL (Appimize circular avatar) ──────────────────────────────────────
+const AI_LOGO_URL = 'https://appimize.app/assets/apps/user_1097/images/2c7d825bf937_232_1097.png';
 
 // ─── Contextual Suggestion Sets ───────────────────────────────────────────────
 const VIEW_SUGGESTIONS: Record<string, { icon: React.ElementType; label: string }[]> = {
@@ -157,8 +159,8 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
           }
         : undefined;
 
-      // Direct fetch to the Kimi AI edge function
-      const AI_ASSISTANT_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/ai-strategy-assistant';
+      // Direct fetch to the Kimi AI edge function (new URL)
+      const AI_ASSISTANT_URL = 'https://cacimkjpkxflrtgspiay.supabase.co/functions/v1/ai-strategy-assistant';
       const { data: { session } } = await supabase.auth.getSession();
 
       const response = await fetch(AI_ASSISTANT_URL, {
@@ -202,7 +204,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
         {
           role: 'assistant',
           content:
-            'I had trouble reaching the Kimi AI service. Please check your connection and try again. If the issue persists, the AI edge function may need to be redeployed.',
+            'I had trouble reaching the AI service. Please check your connection and try again. If the issue persists, the AI edge function may need to be redeployed.',
           timestamp: Date.now(),
         },
       ]);
@@ -252,7 +254,20 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
           {/* Header */}
           <div className="flex items-center justify-between gap-2 px-4 py-3 bg-gradient-to-r from-[#B8942E] via-[#A08028] to-[#C9A84C] text-white flex-shrink-0">
             <div className="flex items-center gap-2.5 min-w-0">
-              <AIStrategistAvatar size="sm" />
+              {/* Circular Logo Avatar */}
+              <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-white/30 flex-shrink-0 bg-white/10">
+                <img
+                  src={AI_LOGO_URL}
+                  alt="AI Strategist"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    // Fallback to Sparkles icon if image fails to load
+                    const target = e.currentTarget;
+                    target.style.display = 'none';
+                    target.parentElement!.innerHTML = '<div class="w-full h-full flex items-center justify-center"><svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.962 0z"/></svg></div>';
+                  }}
+                />
+              </div>
               <div className="min-w-0">
                 <p className="font-bold text-sm leading-tight">BIRD AI</p>
                 <p className="text-[10px] text-white/70 truncate">BARMM Investment & Strategy Expert</p>
@@ -290,8 +305,17 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
                 {messages.map((m, i) => (
                   <div key={i} className={cn('flex', m.role === 'user' ? 'justify-end' : 'justify-start')}>
                     {m.role === 'assistant' && (
-                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#C9A84C] to-[#E8C560] flex-shrink-0 mr-2 mt-1 flex items-center justify-center">
-                        <Sparkles className="w-3 h-3 text-white" />
+                      <div className="w-6 h-6 rounded-full overflow-hidden border border-[#C9A84C]/30 flex-shrink-0 mr-2 mt-1 bg-white/10">
+                        <img
+                          src={AI_LOGO_URL}
+                          alt="AI"
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            const target = e.currentTarget;
+                            target.style.display = 'none';
+                            target.parentElement!.innerHTML = '<svg class="w-3 h-3 text-[#C9A84C]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.962 0z"/></svg>';
+                          }}
+                        />
                       </div>
                     )}
                     <div
@@ -310,8 +334,17 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
                 {/* Loading indicator */}
                 {loading && (
                   <div className="flex justify-start">
-                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#C9A84C] to-[#E8C560] flex-shrink-0 mr-2 mt-1 flex items-center justify-center">
-                      <Sparkles className="w-3 h-3 text-white" />
+                    <div className="w-6 h-6 rounded-full overflow-hidden border border-[#C9A84C]/30 flex-shrink-0 mr-2 mt-1 bg-white/10">
+                      <img
+                        src={AI_LOGO_URL}
+                        alt="AI"
+                        className="w-full h-full object-cover animate-pulse"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          target.style.display = 'none';
+                          target.parentElement!.innerHTML = '<svg class="w-3 h-3 text-[#C9A84C]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.962 0z"/></svg>';
+                        }}
+                      />
                     </div>
                     <div className="bg-muted rounded-2xl rounded-bl-sm px-4 py-2.5 border border-border/40 flex items-center gap-2">
                       <span className="flex gap-1">
