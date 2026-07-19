@@ -1,7 +1,3 @@
-// src/components/strategic/HeroSection.tsx
-// BIRD 2026–2035 · Landing Page with Rich Media Context
-// Embedded videos, images, and external site links as interactive reference points
-
 import React, { useState } from 'react';
 import {
   LayoutDashboard, Target, Sparkles, Network, ChartBar as BarChart3,
