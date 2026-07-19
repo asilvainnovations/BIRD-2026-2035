@@ -1,7 +1,3 @@
-// BIRD 2026–2035 · Interactive Guided Tour
-// Points to real DOM elements in Sidebar.tsx, Topbar.tsx & HeroSection
-// Features: auto-scroll spotlight, BIRD-branded tooltips, element descriptions
-
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   X, ChevronLeft, ChevronRight, Sparkles, LayoutDashboard, Target, Network,
