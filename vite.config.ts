@@ -27,6 +27,7 @@ export default defineConfig(({ mode }) => ({
           'vendor-charts': ['recharts'],
           'vendor-utils': ['date-fns', 'zod', 'clsx', 'tailwind-merge'],
           // Heavy components - loaded on demand
+          'survey-wizard': ['./src/components/strategic/SurveyWizard'],
           'templates': ['./src/components/strategic/TemplatesLibrary'],
           'systems': ['./src/components/strategic/SystemsThinking'],
         },

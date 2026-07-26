@@ -5,6 +5,9 @@
     },
     "sentry": {
       "enabled": true
+    },
+    "vs_code": {
+      "enabled": false
     }
   }
 }
