@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="BIRD 2026-2035 BEIE Actors-Value Mapping: Interactive network visualization of 31 stakeholders across the Bangsamoro Economic and Investment Ecosystem. Explore influence relationships, governance dynamics, and investment pathways shaping the Emerging Bangsamoro.">
+<meta name="description" content="BIRD 2026-2035 BEIE Actors-Value Mapping: Interactive network visualization of 34 stakeholders across the Bangsamoro Economic and Investment Ecosystem. Explore influence relationships, governance dynamics, and investment pathways shaping the Emerging Bangsamoro.">
 <meta name="keywords" content="BARMM, Bangsamoro, BEIE Framework, BIRD 2026-2035, Actors Mapping, Stakeholder Analysis, Investment Roadmap, BTA-BARMM, MILF, BOI-MTIT, Halal Economy, BEZA, Network Visualization">
 <meta name="author" content="Bureau of Investments - Ministry of Trade, Investments and Tourism (BOI-MTIT), BARMM">
 <meta property="og:title" content="BIRD 2026-2035 | BEIE Actors-Value Mapping Network">
-<meta property="og:description" content="Interactive network of 31 stakeholders shaping the Bangsamoro Investment Roadmap. Explore governance dynamics, security relationships, and investment pathways.">
+<meta property="og:description" content="Interactive network of 34 stakeholders shaping the Bangsamoro Investment Roadmap. Explore governance dynamics, security relationships, and investment pathways.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bird-app.asilvainnovations.com/actors-mapping">
 <meta name="twitter:card" content="summary_large_image">
@@ -85,7 +85,7 @@ h1{font-family:'Cinzel',serif;font-size:clamp(1.5rem,4vw,2.4rem);font-weight:700
 .network-wrap{max-width:1400px;margin:0 auto;padding:0 1rem 2rem;position:relative;}
 #network-container{background:rgba(6,78,59,.08);border:1px solid var(--gold-border);border-radius:1.25rem;overflow:hidden;position:relative;}
 #network-container::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad);z-index:5;}
-.tooltip{position:absolute;padding:.6rem .85rem;background:rgba(1,26,18,.95);border:1px solid var(--gold-border-strong);border-radius:.75rem;color:#ecfdf5;font-size:.78rem;font-family:'DM Sans',sans-serif;pointer-events:none;opacity:0;transition:opacity .25s;z-index:100;max-width:220px;line-height:1.4;box-shadow:0 8px 24px rgba(0,0,0,.4);}
+.tooltip{position:absolute;padding:.6rem .85rem;background:rgba(1,26,18,.95);border:1px solid var(--gold-border-strong);border-radius:.75rem;color:#ecfdf5;font-size:.78rem;font-family:'DM Sans',sans-serif;pointer-events:none;opacity:0;transition:opacity .25s;z-index:100;max-width:260px;line-height:1.4;box-shadow:0 8px 24px rgba(0,0,0,.4);}
 .tooltip.visible{opacity:1;}
 
 /* ── Stats ── */
@@ -172,7 +172,7 @@ footer{border-top:1px solid var(--gold-border);background:rgba(2,44,34,.7);backd
   "@type": "SoftwareApplication",
   "name": "BIRD 2026-2035 BEIE Actors-Value Mapping",
   "applicationCategory": "BusinessApplication",
-  "description": "Interactive network visualization of 31 stakeholders across the Bangsamoro Economic and Investment Ecosystem (BEIE)",
+  "description": "Interactive network visualization of 34 stakeholders across the Bangsamoro Economic and Investment Ecosystem (BEIE)",
   "author": {"@type": "Organization", "name": "BOI-MTIT, BARMM"}
 }
 </script>
@@ -194,18 +194,28 @@ footer{border-top:1px solid var(--gold-border);background:rgba(2,44,34,.7);backd
   </div>
 </nav>
 
+<!-- ── Flourish Network Banner ── -->
+<div class="flourish-banner">
+  <div class="flourish-embed flourish-network" data-src="visualisation/10095720">
+    <script src="https://public.flourish.studio/resources/embed.js"></script>
+    <noscript>
+      <img src="https://public.flourish.studio/visualisation/10095720/thumbnail" width="100%" alt="network visualization" />
+    </noscript>
+  </div>
+</div>
+
 <!-- ── Hero ── -->
 <header class="hero">
   <span class="kicker">BEIE Framework &middot; Stakeholder Analysis</span>
-  <h1>31 Actors. One Ecosystem.<br>Who Shapes the Emerging Bangsamoro?</h1>
+  <h1>34 Actors. One Ecosystem.<br>Who Shapes the Emerging Bangsamoro?</h1>
   <p class="subtitle">Every investment decision ripples through a web of governance, tradition, security, and community. Explore the relationships that will make or break the BIRD 2026&ndash;2035 roadmap.</p>
 </header>
 
 <!-- ── Stats ── -->
 <div class="stats-grid">
-  <div class="stat-card"><div class="stat-number">31</div><div class="stat-label">Key Actors</div></div>
-  <div class="stat-card"><div class="stat-number">172</div><div class="stat-label">Relationships</div></div>
-  <div class="stat-card"><div class="stat-number">9</div><div class="stat-label">Categories</div></div>
+  <div class="stat-card"><div class="stat-number">34</div><div class="stat-label">Key Actors</div></div>
+  <div class="stat-card"><div class="stat-number">110</div><div class="stat-label">Relationships</div></div>
+  <div class="stat-card"><div class="stat-number">7</div><div class="stat-label">Categories</div></div>
   <div class="stat-card"><div class="stat-number">5</div><div class="stat-label">BEIE Clusters</div></div>
 </div>
 
@@ -217,13 +227,12 @@ footer{border-top:1px solid var(--gold-border);background:rgba(2,44,34,.7);backd
 
   <!-- Legend -->
   <div class="legend-bar">
-    <div class="legend-item"><div class="legend-dot" style="background:#C9A84C;"></div>Government</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#ef4444;"></div>Security/Conflict</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#22d3ee;"></div>Economic Institutions</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#60a5fa;"></div>Private Sector</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#a78bfa;"></div>Development/CSO</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div>Traditional/Informal</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#f472b6;"></div>Beneficiaries</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#C9A84C;"></div>State & Autonomous Institutions</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#22d3ee;"></div>Economic & Investment Drivers</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ef4444;"></div>Security & Stability Actors</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div>Local Governance</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#84cc16;"></div>Civil Society & Social Partners</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#78716c;"></div>Armed Non-State Actors</div>
   </div>
 </div>
 
@@ -244,14 +253,12 @@ footer{border-top:1px solid var(--gold-border);background:rgba(2,44,34,.7);backd
 
   <div class="filters">
     <button class="filter-btn active" data-filter="all">All Actors</button>
-    <button class="filter-btn" data-filter="government">Government</button>
-    <button class="filter-btn" data-filter="security">Security</button>
-    <button class="filter-btn" data-filter="economic">Economic</button>
-    <button class="filter-btn" data-filter="finance">Finance</button>
-    <button class="filter-btn" data-filter="private">Private Sector</button>
-    <button class="filter-btn" data-filter="dev">Development</button>
-    <button class="filter-btn" data-filter="traditional">Traditional</button>
-    <button class="filter-btn" data-filter="informal">Informal</button>
+    <button class="filter-btn" data-filter="government">State Institutions</button>
+    <button class="filter-btn" data-filter="economic">Economic Drivers</button>
+    <button class="filter-btn" data-filter="security">Security & Stability</button>
+    <button class="filter-btn" data-filter="traditional">Local Governance</button>
+    <button class="filter-btn" data-filter="dev">Civil Society</button>
+    <button class="filter-btn" data-filter="informal">Armed Non-State</button>
   </div>
 
   <div class="actor-grid" id="actorGrid"></div>
@@ -260,13 +267,13 @@ footer{border-top:1px solid var(--gold-border);background:rgba(2,44,34,.7);backd
 <!-- ── CTA ── -->
 <div class="cta-section">
   <h3 class="cta-title">See Where Your Organization Fits</h3>
-  <p class="cta-text">The BIRD roadmap needs every actor at the table. Validate the framework, contribute your expertise, and help shape a roadmap that works for all 31 stakeholders.</p>
+  <p class="cta-text">The BIRD roadmap needs every actor at the table. Validate the framework, contribute your expertise, and help shape a roadmap that works for all 34 stakeholders.</p>
   <a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/validation-survey.html" class="cta-btn">Take the Validation Survey &rarr;</a>
 </div>
 
 <!-- ── Footer ── -->
 <footer>
-  <p class="footer-text">&copy; 2025 Bureau of Investments &mdash; Ministry of Trade, Investments and Tourism (BOI-MTIT), BARMM.<br>BIRD 2026&ndash;2035 Actors&ndash;Value Mapping. Part of the BEIE Framework analysis.</p>
+  <p class="footer-text">&copy; 2026 Bureau of Investments &mdash; Ministry of Trade, Investments and Tourism (BOI-MTIT), BARMM.<br>BIRD 2026&ndash;2035 Actors&ndash;Value Mapping. Part of the BEIE Framework analysis.</p>
 </footer>
 
 <!-- ── Popup ── -->
@@ -279,53 +286,60 @@ footer{border-top:1px solid var(--gold-border);background:rgba(2,44,34,.7);backd
 
 <script>
 // ═══════════════════════════════════════════════════════════════════════════════
-// DATA: 31 Actors + 172 Relationships
+// DATA: 34 Actors + 110 Relationships
 // ═══════════════════════════════════════════════════════════════════════════════
 
 const ACTORS = [
-  { id:"BTA-BARMM", name:"BTA-BARMM", category:"Government / Transition Authority", influence:100, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Bangsamoro Transition Authority is the interim government of BARMM, vested with executive and legislative powers. It oversees the transition from ARMM to BARMM, sets policy direction for the investment roadmap, and appoints the Chief Minister. As the highest governing body, it creates the enabling environment for all investment clusters through legislation, budgeting (Annual Block Grant), and intergovernmental relations with the national government." },
-  { id:"OCM-BARMM", name:"OCM-BARMM", category:"Government / Chief Minister's Office", influence:98, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Office of the Chief Minister is the executive arm of the BTA, headed by the Chief Minister who chairs the cabinet and directs all ministries. It translates parliamentary policy into executive action, oversees the BIRD 2026-2035 implementation, and serves as the primary interface between government and investors through the BOI-MTIT." },
-  { id:"GRP", name:"GRP", category:"Government / National Government", influence:95, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Government of the Republic of the Philippines is the national government that created BARMM through the Bangsamoro Organic Law. It provides the Annual Block Grant (~Php 80B), oversees AFP/PNP security operations, and represents BARMM in international treaties. GRP's policy coherence and fiscal commitment determine the investment ecosystem's macro stability." },
-  { id:"BOI-MTIT", name:"BOI-MTIT", category:"Government / Investment Promotion", influence:92, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Bureau of Investments within the Ministry of Trade, Investments and Tourism is BARMM's primary investment promotion agency. It facilitates investor registration, manages investment incentives, coordinates with BEZA on economic zones, and leads the Halal Economy Dominance Strategy. BOI-MTIT is the operational heart of the BIRD investment facilitation cluster." },
-  { id:"BEZA", name:"BEZA", category:"Economic Zone Authority", influence:85, catClass:"cat-economic", filter:"economic", color:"#22d3ee", desc:"The Bangsamoro Economic Zone Authority manages special economic zones offering tax incentives, simplified regulations, and infrastructure support to investors. Modeled after PEZA, BEZA is central to the HEDS (Halal Economy Dominance Strategy) through the proposed Halal Park in Matanog. It provides the physical and regulatory infrastructure that makes large-scale investment feasible." },
-  { id:"MILF", name:"MILF", category:"Peace Organization / Former Revolutionary Group", influence:88, catClass:"cat-security", filter:"security", color:"#ef4444", desc:"The Moro Islamic Liberation Front is the largest Moro revolutionary group that signed the Comprehensive Agreement on the Bangsamoro (CAB). Its chairman serves as BARMM's Chief Minister. MILF provides political legitimacy, grassroots mobilization, and peace infrastructure for the transition. Its transformation from armed group to governing partner is fundamental to investor confidence." },
-  { id:"AFP/PNP", name:"AFP/PNP", category:"Security Forces", influence:82, catClass:"cat-security", filter:"security", color:"#ef4444", desc:"The Armed Forces of the Philippines and Philippine National Police provide security and maintain law and order in BARMM. They conduct counter-insurgency/counter-terrorism operations against BIFF, Abu Sayyaf, and DI-Maute groups. Security stability is the precondition for all investment — AFP/PNP's effectiveness directly determines investor risk perception and the viability of the BIRD roadmap." },
-  { id:"BHB", name:"BHB", category:"Halal Standards Body", influence:80, catClass:"cat-economic", filter:"economic", color:"#22d3ee", desc:"The Bangsamoro Halal Board is the region's halal accreditation and certification body. Supported by UNIDO, it develops halal standards aligned with OIC/SMIIC, certifies halal products for export to GCC and ASEAN markets, and underpins the entire Halal Economy cluster. BHB certification is the passport for BARMM products into the $2.3 trillion global halal market." },
-  { id:"MAFAR", name:"MAFAR", category:"Agriculture Ministry", influence:78, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Ministry of Agriculture, Fisheries and Agrarian Reform manages Cluster 1 (Foundations) — agriculture, fisheries, forestry, and energy. It supports cooperatives, agricultural MSMEs, and anchor agribusiness investors. MAFAR is critical for food security, rural livelihoods, and the supply chain feeding the Halal Economy and BIMP-EAGA exports." },
-  { id:"MENRE", name:"MENRE", category:"Environment & Energy Ministry", influence:75, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Ministry of Environment, Natural Resources and Energy oversees environmental compliance, natural resource management, and renewable energy. It licenses mining/forestry, manages climate adaptation programs, and attracts green energy investments (solar, geothermal). MENRE is the gatekeeper for sustainable investment in natural resource-based industries." },
-  { id:"Islamic Banks", name:"Islamic Banks", category:"Finance / Islamic Banking", influence:75, catClass:"cat-finance", filter:"finance", color:"#a78bfa", desc:"Islamic banks in BARMM (led by Al-Amanah Islamic Investment Bank) provide Shariah-compliant financial services — sukuk (Islamic bonds), mudarabah (profit-sharing), and microfinance. They are critical for financial inclusion of Muslim communities excluded from conventional banking, and for channeling domestic savings and international Islamic finance into productive investment." },
-  { id:"Int. Dev Partners", name:"Int. Dev Partners", category:"Development Partners / Multilaterals", influence:78, catClass:"cat-dev", filter:"dev", color:"#84cc16", desc:"International development partners — JICA, World Bank, ADB, UN agencies, IsDB, USAID, EU — provide grants, concessional loans, technical assistance, and policy advice. They fund critical infrastructure, capacity building, and peace programs. Development partners are essential co-investors in the BIRD roadmap, providing both financing and international legitimacy that catalyzes private investment." },
-  { id:"Local Politicians / LGUs", name:"Local Politicians / LGUs", category:"Local Government Units", influence:73, catClass:"cat-traditional", filter:"traditional", color:"#f59e0b", desc:"Local Government Units — provincial governors, municipal mayors, barangay captains — implement national and regional policies at the local level, issue business permits, manage local infrastructure, and deliver basic services. LGUs are the frontline interface between investment projects and communities. Their efficiency, transparency, and cooperation directly determine the ease of doing business at the local level." },
-  { id:"Anchor Investors", name:"Anchor Investors", category:"Private Sector / Large Investors", influence:72, catClass:"cat-private", filter:"private", color:"#60a5fa", desc:"Large domestic and multinational corporations (e.g., Dole, San Miguel, Ayala) that commit significant capital to BARMM projects. Anchor investors create employment, develop supply chains, and signal confidence to other investors. Their presence in BEZA economic zones and agricultural concessions validates the investment climate and attracts follow-on investment from smaller firms." },
-  { id:"Clan Leaders / Big Men", name:"Clan Leaders / Big Men", category:"Traditional Power / Informal Governance", influence:70, catClass:"cat-traditional", filter:"traditional", color:"#f59e0b", desc:"Traditional leaders and political strongmen who control local patronage networks, land, and informal security arrangements. They wield significant de facto influence over local politics, business permits, and community consent. Clan leaders can either facilitate or block investment depending on whether their interests align. Engaging them through Moral Governance and inclusive processes is essential for investment localization." },
-  { id:"TESDA/Academe", name:"TESDA/Academe", category:"Education & Skills Development", influence:70, catClass:"cat-education", filter:"dev", color:"#38bdf8", desc:"TESDA (Technical Education and Skills Development Authority) and academic institutions provide workforce training, skills certification, and research. They are the Enablers cluster's human capital engine — producing the skilled labor force needed by anchor investors, halal processors, and service industries. Industry-linked training programs reduce skills mismatch and attract labor-intensive investment." },
-  { id:"Cooperatives", name:"Cooperatives", category:"Private Sector / Collective Enterprise", influence:68, catClass:"cat-private", filter:"private", color:"#60a5fa", desc:"Agricultural and consumer cooperatives aggregate smallholder production, provide shared services (processing, marketing, credit), and enable economies of scale for rural producers. They are the primary interface between MAFAR's agricultural programs and grassroots farmers. Cooperatives reduce transaction costs, improve bargaining power, and channel investment benefits to community level." },
-  { id:"Bangsamoro Corp", name:"Bangsamoro Corp", category:"Government-Owned Corporation", influence:65, catClass:"cat-economic", filter:"economic", color:"#22d3ee", desc:"Bangsamoro Government-owned and controlled corporations (GOCCs) operate in strategic sectors — energy, infrastructure, and agribusiness. They serve as anchor investors, joint venture partners, and vehicles for public-private partnerships. Bangsamoro Corp provides the institutional capacity to implement large-scale projects that private investors alone may not undertake." },
-  { id:"Foreign Investors", name:"Foreign Investors", category:"Private Sector / International Investors", influence:65, catClass:"cat-private", filter:"private", color:"#60a5fa", desc:"International investors from GCC, ASEAN, and BIMP-EAGA countries bring capital, technology, and market access. Key targets include halal food processors, Islamic banks, and infrastructure developers. Foreign direct investment is essential for filling the financing gap beyond the Block Grant, transferring technology, and linking BARMM to global value chains (especially halal and BIMP-EAGA trade)." },
-  { id:"Local CSOs", name:"Local CSOs", category:"Civil Society / Local NGOs", influence:62, catClass:"cat-dev", filter:"dev", color:"#84cc16", desc:"Local civil society organizations are community-based groups that implement development projects, advocate for vulnerable groups, monitor governance, and facilitate grassroots participation in the peace process. They have deep local knowledge, cultural legitimacy, and trust within communities. Local CSOs are the primary delivery channel for development benefits to reach marginalized populations." },
-  { id:"OIC/SMIIC", name:"OIC/SMIIC", category:"International Standards Organization", influence:60, catClass:"cat-education", filter:"dev", color:"#38bdf8", desc:"The Standards and Metrology Institute for Islamic Countries (SMIIC), under the OIC, sets international halal standards (OIC/SMIIC Halal Standards). BHB's alignment with these standards enables mutual recognition of halal certification across 57 OIC member countries. OIC/SMIIC is the gateway standard that makes BARMM halal products internationally competitive and exportable." },
-  { id:"Int. CSOs", name:"Int. CSOs", category:"Civil Society / International NGOs", influence:58, catClass:"cat-dev", filter:"dev", color:"#84cc16", desc:"International civil society organizations — CARE, Oxfam, Mercy Corps, Islamic Relief — deliver humanitarian assistance, capacity building, and advocacy. They often pioneer community-level development models that government later scales. Int. CSOs bridge the gap between international funding and grassroots implementation, particularly in conflict-affected and vulnerable communities." },
-  { id:"MSMEs", name:"MSMEs", category:"Private Sector / Small & Medium Enterprises", influence:55, catClass:"cat-private", filter:"private", color:"#60a5fa", desc:"Micro, small and medium enterprises form the backbone of BARMM's private sector — from halal food processors and artisans to service providers and digital entrepreneurs. MSMEs absorb the majority of employment, innovate at the grassroots level, and distribute investment benefits widely. Their growth is constrained by limited access to finance, markets, and infrastructure." },
-  { id:"MNLF", name:"MNLF", category:"Peace Organization / Former Revolutionary Group", influence:50, catClass:"cat-security", filter:"security", color:"#ef4444", desc:"The Moro National Liberation Front signed the 1996 Final Peace Agreement with the GRP. While it has a separate political track from MILF, some MNLF members participate in the BTA Parliament. MNLF represents an important constituency in Sulu and Tawi-Tawi, and its full integration into BARMM governance is essential for comprehensive peace and inclusive investment." },
-  { id:"Vulnerable Groups", name:"Vulnerable Groups", category:"Beneficiaries / Marginalized Communities", influence:45, catClass:"cat-beneficiaries", filter:"dev", color:"#f472b6", desc:"IDPs, women, children, indigenous peoples, persons with disabilities, and conflict survivors who face disproportionate barriers to economic participation. The BIRD roadmap's inclusivity depends on how effectively investment reaches these groups through targeted programs, MSME support, cooperative membership, and social safety nets. Vulnerable groups are both beneficiaries and potential contributors to the economy." },
-  { id:"Shadow Economies", name:"Shadow Economies", category:"Informal Economy", influence:30, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"Unregulated economic activities — smuggling, illegal logging, informal money transfers, unregistered trade — that operate outside formal governance. Shadow economies deprive government of revenue, undermine regulated businesses, and often fund armed groups. However, they also provide livelihoods where formal institutions are absent. Formalizing shadow economies (e.g., through Islamic banking, cooperative registration) can channel informal activity into productive investment." },
-  { id:"Private Militias", name:"Private Militias", category:"Informal Armed Groups", influence:25, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"Privately armed groups maintained by clan leaders and political figures for protection, electoral violence, and territorial control. Private militias represent the 'dark side' of clan politics — they create insecurity, distort political competition, and undermine the state's monopoly on violence. Their presence increases business costs (protection payments) and deters law-abiding investors. Disarmament is a normalization priority." },
-  { id:"CPP/NPA", name:"CPP/NPA", category:"Communist Insurgents", influence:20, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"The Communist Party of the Philippines-New People's Army has limited but persistent presence in BARMM's hinterlands, primarily engaging in extortion ('revolutionary taxation') of businesses and plantations. While not the primary security threat, NPA activity adds to the cost of doing business in remote agricultural areas and requires coordinated civilian-military response." },
-  { id:"BIFF", name:"BIFF", category:"Non-State Armed Group", influence:15, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"The Bangsamoro Islamic Freedom Fighters is a MILF splinter group that rejects the peace process. Operating primarily in Maguindanao, it conducts sporadic attacks on military targets and infrastructure. Its activities create investor risk, disrupt agricultural supply chains, and drain security resources. Addressing BIFF through normalization and development is key to unlocking investment in conflict-affected areas." },
-  { id:"DI-Maute Group", name:"DI-Maute Group", category:"Terrorist Organization", influence:8, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"The Dawlah Islamiyah-Maute Group was responsible for the 2017 Marawi Siege. Remnants continue asymmetric operations in Lanao del Sur. The group represents the highest-impact terrorism risk in mainland BARMM and directly affected Marawi's rehabilitation — a Php 50+ billion reconstruction program that is itself a major investment and development undertaking." },
-  { id:"Abu Sayyaf", name:"Abu Sayyaf", category:"Terrorist Organization", influence:5, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"A militant group based in Sulu and Basilan known for kidnapping-for-ransom, bombings, and ties to international terrorism. Abu Sayyaf activities severely deter investment in island provinces, increase security costs, and damage BARMM's international reputation. Counter-terrorism cooperation between AFP and local communities is gradually reducing its operational capacity." }
+  { id:"BTA-BARMM", name:"BTA-BARMM", category:"State / Transition Authority", influence:100, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Bangsamoro Transition Authority is the interim government of BARMM, vested with executive and legislative powers. It oversees the transition, sets policy direction for the investment roadmap, and appoints the Chief Minister, creating the enabling environment for all investment clusters." },
+  { id:"OCM-BARMM", name:"OCM-BARMM", category:"State / Chief Minister's Office", influence:99, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Office of the Chief Minister is the executive arm of the BTA, directing all ministries. It translates parliamentary policy into executive action, oversees BIRD 2026-2035 implementation, and serves as the primary interface between government and investors." },
+  { id:"BBOI", name:"BBOI", category:"State / Board of Investments", influence:97, catClass:"cat-economic", filter:"economic", color:"#22d3ee", desc:"The Bangsamoro Board of Investments operates under the Chief Minister's Office to drive economic growth. It facilitates investor registration, manages investment incentives, and leads the Halal Economy Dominance Strategy, acting as the operational heart of investment facilitation." },
+  { id:"GRP", name:"GRP", category:"State / National Government", influence:95, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Government of the Republic of the Philippines created BARMM through the Bangsamoro Organic Law. It provides the Annual Block Grant, oversees national security operations, and represents BARMM in international treaties, determining the ecosystem's macro stability." },
+  { id:"BOI-MTIT", name:"BOI-MTIT", category:"State / Investment Promotion (BARMM)", influence:90, catClass:"cat-economic", filter:"economic", color:"#22d3ee", desc:"The Bureau of Investments within the Ministry of Trade, Investments and Tourism is BARMM's primary investment promotion agency. It coordinates with BEZA on economic zones and facilitates investor onboarding, driving the region's economic and investment agenda." },
+  { id:"BEZA", name:"BEZA", category:"State / Economic Zone Authority", influence:85, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Bangsamoro Economic Zone Authority manages special economic zones offering tax incentives, simplified regulations, and infrastructure support. Modeled after PEZA, it is central to the Halal Economy Dominance Strategy through proposed zones like the Halal Park in Matanog." },
+  { id:"AFP", name:"AFP", category:"State / Security Forces (Military)", influence:82, catClass:"cat-security", filter:"security", color:"#ef4444", desc:"The Armed Forces of the Philippines provide military security and maintain territorial integrity in BARMM. They conduct counter-insurgency and counter-terrorism operations, with security stability being the absolute precondition for all large-scale investment." },
+  { id:"PNP", name:"PNP", category:"State / Security Forces (Police)", influence:80, catClass:"cat-security", filter:"security", color:"#ef4444", desc:"The Philippine National Police provide civil security and maintain law and order in BARMM. They work alongside the AFP to secure investment sites, protect supply chains, and ensure a safe environment for businesses and communities." },
+  { id:"BHB", name:"BHB", category:"Regulatory / Halal Standards Body", influence:75, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Bangsamoro Halal Board is the region's halal accreditation and certification body. Supported by international partners, it develops halal standards aligned with OIC/SMIIC, certifying products for export to GCC and ASEAN markets, underpinning the entire Halal Economy cluster." },
+  { id:"MAFAR", name:"MAFAR", category:"State / Agriculture & Fisheries Ministry", influence:70, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Ministry of Agriculture, Fisheries and Agrarian Reform manages foundational sectors — agriculture, fisheries, forestry, and energy. It supports cooperatives, agricultural MSMEs, and anchor agribusiness investors, critical for food security and rural livelihoods." },
+  { id:"Local Politicians", name:"Local Politicians", category:"State / Local Government Units", influence:60, catClass:"cat-traditional", filter:"traditional", color:"#f59e0b", desc:"Local political figures, including provincial governors and municipal mayors, wield significant influence over local governance, business permits, and community consent. Their cooperation directly determines the ease of doing business and investment localization at the grassroots level." },
+  { id:"LGUs", name:"LGUs", category:"State / Local Government Units", influence:60, catClass:"cat-traditional", filter:"traditional", color:"#f59e0b", desc:"Local Government Units implement national and regional policies at the local level, issue business permits, manage local infrastructure, and deliver basic services. They are the frontline interface between investment projects and communities." },
+  { id:"MENRE", name:"MENRE", category:"State / Environment & Natural Resources Ministry", influence:70, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"The Ministry of Environment, Natural Resources and Energy oversees environmental compliance, natural resource management, and renewable energy. It is the gatekeeper for sustainable investment in natural resource-based industries and green energy projects." },
+  { id:"TESDA/Academe", name:"TESDA/Academe", category:"State & Private / Education & Skills Development", influence:60, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"TESDA and academic institutions provide workforce training, skills certification, and research. They are the human capital engine producing the skilled labor force needed by anchor investors, halal processors, and service industries, reducing skills mismatch." },
+  { id:"Bangsamoro Corp", name:"Bangsamoro Corp", category:"State / Government-Owned Corporation", influence:55, catClass:"cat-gov", filter:"government", color:"#C9A84C", desc:"Bangsamoro Government-owned and controlled corporations (GOCCs) operate in strategic sectors like energy, infrastructure, and agribusiness. They serve as anchor investors, joint venture partners, and vehicles for public-private partnerships." },
+  { id:"Foreign Investors", name:"Foreign Investors", category:"Private Sector / International Capital", influence:65, catClass:"cat-economic", filter:"economic", color:"#22d3ee", desc:"International investors from GCC, ASEAN, and BIMP-EAGA countries bring capital, technology, and market access. Key targets include halal food processors, Islamic banks, and infrastructure developers, linking BARMM to global value chains." },
+  { id:"Islamic Banks", name:"Islamic Banks", category:"Private Sector / Islamic Finance", influence:65, catClass:"cat-economic", filter:"economic", color:"#22d3ee", desc:"Islamic banks in BARMM provide Shariah-compliant financial services — sukuk, mudarabah, and microfinance. They are critical for financial inclusion and channeling domestic savings and international Islamic finance into productive investment." },
+  { id:"Anchor Investors", name:"Anchor Investors", category:"Private Sector / Large-Scale Investors", influence:65, catClass:"cat-economic", filter:"economic", color:"#22d3ee", desc:"Large domestic and multinational corporations that commit significant capital to BARMM projects. They create employment, develop supply chains, and signal confidence to other investors, validating the investment climate." },
+  { id:"Cooperatives", name:"Cooperatives", category:"Private Sector / Collective Enterprise", influence:60, catClass:"cat-economic", filter:"economic", color:"#22d3ee", desc:"Agricultural and consumer cooperatives aggregate smallholder production, provide shared services, and enable economies of scale. They are the primary interface between government agricultural programs and grassroots farmers, channeling investment benefits to the community level." },
+  { id:"MSMEs", name:"MSMEs", category:"Private Sector / Micro, Small & Medium Enterprises", influence:60, catClass:"cat-economic", filter:"economic", color:"#22d3ee", desc:"Micro, small and medium enterprises form the backbone of BARMM's private sector. They absorb the majority of employment, innovate at the grassroots level, and distribute investment benefits widely, though constrained by limited access to finance and markets." },
+  { id:"MILF", name:"MILF", category:"Peace Process / Former Revolutionary Group", influence:55, catClass:"cat-security", filter:"security", color:"#ef4444", desc:"The Moro Islamic Liberation Front is the largest Moro revolutionary group that signed the Comprehensive Agreement on the Bangsamoro. It provides political legitimacy, grassroots mobilization, and peace infrastructure, fundamental to investor confidence." },
+  { id:"Int. Dev Partners", name:"Int. Dev Partners", category:"International / Development & Aid", influence:65, catClass:"cat-dev", filter:"dev", color:"#84cc16", desc:"International development partners — JICA, World Bank, ADB, UN agencies, IsDB, USAID, EU — provide grants, concessional loans, technical assistance, and policy advice, acting as essential co-investors in the BIRD roadmap." },
+  { id:"Int. CSOs", name:"Int. CSOs", category:"Civil Society / International NGOs", influence:65, catClass:"cat-dev", filter:"dev", color:"#84cc16", desc:"International civil society organizations deliver humanitarian assistance, capacity building, and advocacy. They bridge the gap between international funding and grassroots implementation, particularly in conflict-affected and vulnerable communities." },
+  { id:"OIC/SMIIC", name:"OIC/SMIIC", category:"International / Standards & Certification Body", influence:50, catClass:"cat-dev", filter:"dev", color:"#84cc16", desc:"The Standards and Metrology Institute for Islamic Countries sets international halal standards. Alignment with these standards enables mutual recognition of halal certification across 57 OIC member countries, making BARMM products internationally competitive." },
+  { id:"Local CSOs", name:"Local CSOs", category:"Civil Society / Local Community Organizations", influence:45, catClass:"cat-dev", filter:"dev", color:"#84cc16", desc:"Local civil society organizations are community-based groups that implement development projects, advocate for marginalized groups, monitor governance, and facilitate grassroots participation. They have deep local knowledge and cultural legitimacy." },
+  { id:"Vulnerable Groups", name:"Vulnerable Groups", category:"Civil Society / Marginalized Communities", influence:25, catClass:"cat-dev", filter:"dev", color:"#84cc16", desc:"IDPs, women, children, indigenous peoples, and conflict survivors who face disproportionate barriers to economic participation. The BIRD roadmap's inclusivity depends on how effectively investment reaches these groups through targeted programs and social safety nets." },
+  { id:"MNLF", name:"MNLF", category:"Peace Process / Former Revolutionary Group", influence:55, catClass:"cat-security", filter:"security", color:"#ef4444", desc:"The Moro National Liberation Front signed the 1996 Final Peace Agreement. While it has a separate political track from MILF, some MNLF members participate in the BTA Parliament. Its full integration is essential for comprehensive peace and inclusive investment." },
+  { id:"Clan Leaders / Big Men", name:"Clan Leaders / Big Men", category:"Informal / Traditional Power Brokers", influence:80, catClass:"cat-security", filter:"security", color:"#ef4444", desc:"Traditional leaders and political strongmen who control local patronage networks, land, and informal security arrangements. They wield significant de facto influence over local politics and community consent, and can either facilitate or block investment." },
+  { id:"Shadow Economies", name:"Shadow Economies", category:"Informal / Illicit Economy Networks", influence:40, catClass:"cat-security", filter:"security", color:"#ef4444", desc:"Unregulated economic activities — smuggling, illegal logging, informal money transfers — that operate outside formal governance. They deprive government of revenue and often fund armed groups, though formalizing them can channel informal activity into productive investment." },
+  { id:"Private Militias", name:"Private Militias", category:"Non-State Armed / Paramilitary Groups", influence:35, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"Privately armed groups maintained by clan leaders and political figures for protection and territorial control. They create insecurity, distort political competition, and undermine the state's monopoly on violence, deterring law-abiding investors." },
+  { id:"CPP/NPA", name:"CPP/NPA", category:"Non-State Armed / Communist Insurgents", influence:8, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"The Communist Party of the Philippines-New People's Army has a persistent presence in BARMM's hinterlands, primarily engaging in extortion of businesses and plantations. NPA activity adds to the cost of doing business in remote agricultural areas." },
+  { id:"BIFF", name:"BIFF", category:"Non-State Armed Group", influence:12, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"The Bangsamoro Islamic Freedom Fighters is a splinter group that rejects the peace process. Operating primarily in Maguindanao, its activities create investor risk, disrupt agricultural supply chains, and drain security resources." },
+  { id:"DI-Maute Group", name:"DI-Maute Group", category:"Terrorist / Extremist Organization", influence:5, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"The Dawlah Islamiyah-Maute Group was responsible for the 2017 Marawi Siege. Remnants continue asymmetric operations, representing a high-impact terrorism risk that directly affects rehabilitation and investment in mainland BARMM." },
+  { id:"Abu Sayyaf", name:"Abu Sayyaf", category:"Terrorist / Extremist Organization", influence:5, catClass:"cat-informal", filter:"informal", color:"#78716c", desc:"A militant group based in Sulu and Basilan known for kidnapping-for-ransom and ties to international terrorism. Activities severely deter investment in island provinces and increase security costs, though counter-terrorism cooperation is gradually reducing its capacity." }
 ];
 
-// 172 relationships (top 80 for visualization performance)
 const RELATIONSHIPS = [
-  {source:"BTA-BARMM",target:"OCM-BARMM",value:100},{source:"BTA-BARMM",target:"BOI-MTIT",value:90},
-  {source:"BTA-BARMM",target:"MAFAR",value:85},{source:"BTA-BARMM",target:"MILF",value:85},
-  {source:"BTA-BARMM",target:"BEZA",value:80},{source:"BTA-BARMM",target:"BHB",value:85},
-  {source:"BTA-BARMM",target:"Int. Dev Partners",value:75},{source:"BTA-BARMM",target:"Local Politicians / LGUs",value:70},
-  {source:"GRP",target:"AFP/PNP",value:100},{source:"GRP",target:"BTA-BARMM",value:80},
-  {source:"GRP",target:"MILF",value:65},{source:"GRP",target:"Local Politicians / LGUs",value:70},
-  {source:"OCM-BARMM",target:"BOI-MTIT",value:95},{source:"OCM-BARMM",target:"Local Politicians / LGUs",value:85},
+  {source:"BTA-BARMM",target:"OCM-BARMM",value:100},{source:"BTA-BARMM",target:"BBOI",value:95},
+  {source:"BTA-BARMM",target:"BOI-MTIT",value:90},{source:"BTA-BARMM",target:"MAFAR",value:85},
+  {source:"BTA-BARMM",target:"MILF",value:85},{source:"BTA-BARMM",target:"BEZA",value:80},
+  {source:"BTA-BARMM",target:"BHB",value:85},{source:"BTA-BARMM",target:"Int. Dev Partners",value:75},
+  {source:"BTA-BARMM",target:"Local Politicians",value:70},{source:"BTA-BARMM",target:"LGUs",value:70},
+  {source:"GRP",target:"AFP",value:100},{source:"GRP",target:"PNP",value:95},
+  {source:"GRP",target:"BTA-BARMM",value:80},{source:"GRP",target:"MILF",value:65},
+  {source:"GRP",target:"Local Politicians",value:70},{source:"GRP",target:"LGUs",value:70},
+  {source:"OCM-BARMM",target:"BBOI",value:95},{source:"OCM-BARMM",target:"BOI-MTIT",value:95},
+  {source:"OCM-BARMM",target:"Local Politicians",value:85},{source:"OCM-BARMM",target:"LGUs",value:85},
   {source:"OCM-BARMM",target:"BEZA",value:85},{source:"OCM-BARMM",target:"BHB",value:80},
+  {source:"BBOI",target:"BOI-MTIT",value:90},{source:"BBOI",target:"BEZA",value:85},
+  {source:"BBOI",target:"Anchor Investors",value:85},{source:"BBOI",target:"Foreign Investors",value:75},
   {source:"BOI-MTIT",target:"BEZA",value:85},{source:"BOI-MTIT",target:"BHB",value:90},
   {source:"BOI-MTIT",target:"Anchor Investors",value:85},{source:"BOI-MTIT",target:"Foreign Investors",value:75},
   {source:"BOI-MTIT",target:"Bangsamoro Corp",value:80},{source:"BOI-MTIT",target:"MSMEs",value:70},
@@ -334,21 +348,27 @@ const RELATIONSHIPS = [
   {source:"BHB",target:"OIC/SMIIC",value:95},{source:"BHB",target:"Islamic Banks",value:85},
   {source:"BHB",target:"Anchor Investors",value:70},{source:"BHB",target:"MSMEs",value:80},
   {source:"MAFAR",target:"Cooperatives",value:90},{source:"MAFAR",target:"Anchor Investors",value:75},
-  {source:"MAFAR",target:"Local Politicians / LGUs",value:70},{source:"MAFAR",target:"MENRE",value:80},
-  {source:"MENRE",target:"Int. Dev Partners",value:85},{source:"MENRE",target:"Local Politicians / LGUs",value:75},
+  {source:"MAFAR",target:"Local Politicians",value:70},{source:"MAFAR",target:"LGUs",value:70},
+  {source:"MAFAR",target:"MENRE",value:80},{source:"MENRE",target:"Int. Dev Partners",value:85},
+  {source:"MENRE",target:"Local Politicians",value:75},{source:"MENRE",target:"LGUs",value:75},
   {source:"MENRE",target:"Vulnerable Groups",value:50},{source:"MENRE",target:"Bangsamoro Corp",value:70},
   {source:"Islamic Banks",target:"MSMEs",value:80},{source:"Islamic Banks",target:"Bangsamoro Corp",value:65},
   {source:"Islamic Banks",target:"Cooperatives",value:60},{source:"Islamic Banks",target:"BHB",value:85},
   {source:"MILF",target:"Local CSOs",value:75},{source:"MILF",target:"MNLF",value:50},
-  {source:"MILF",target:"Local Politicians / LGUs",value:70},{source:"MILF",target:"Clan Leaders / Big Men",value:40},
-  {source:"AFP/PNP",target:"BIFF",value:90},{source:"AFP/PNP",target:"Abu Sayyaf",value:95},
-  {source:"AFP/PNP",target:"DI-Maute Group",value:85},{source:"AFP/PNP",target:"Clan Leaders / Big Men",value:45},
-  {source:"AFP/PNP",target:"Private Militias",value:60},{source:"AFP/PNP",target:"Shadow Economies",value:70},
-  {source:"Clan Leaders / Big Men",target:"Private Militias",value:95},{source:"Clan Leaders / Big Men",target:"Local Politicians / LGUs",value:85},
+  {source:"MILF",target:"Local Politicians",value:70},{source:"MILF",target:"LGUs",value:70},
+  {source:"MILF",target:"Clan Leaders / Big Men",value:40},{source:"AFP",target:"BIFF",value:90},
+  {source:"AFP",target:"Abu Sayyaf",value:95},{source:"AFP",target:"DI-Maute Group",value:85},
+  {source:"AFP",target:"Clan Leaders / Big Men",value:45},{source:"AFP",target:"Private Militias",value:60},
+  {source:"AFP",target:"Shadow Economies",value:70},{source:"PNP",target:"BIFF",value:85},
+  {source:"PNP",target:"Abu Sayyaf",value:90},{source:"PNP",target:"DI-Maute Group",value:80},
+  {source:"PNP",target:"Clan Leaders / Big Men",value:50},{source:"PNP",target:"Private Militias",value:65},
+  {source:"PNP",target:"Shadow Economies",value:75},{source:"Clan Leaders / Big Men",target:"Private Militias",value:95},
+  {source:"Clan Leaders / Big Men",target:"Local Politicians",value:85},{source:"Clan Leaders / Big Men",target:"LGUs",value:80},
   {source:"Clan Leaders / Big Men",target:"Shadow Economies",value:75},{source:"Clan Leaders / Big Men",target:"BIFF",value:30},
   {source:"Int. Dev Partners",target:"Int. CSOs",value:85},{source:"Int. Dev Partners",target:"Local CSOs",value:65},
   {source:"Int. Dev Partners",target:"MENRE",value:80},{source:"Int. Dev Partners",target:"BOI-MTIT",value:80},
-  {source:"Local Politicians / LGUs",target:"Cooperatives",value:75},{source:"Local Politicians / LGUs",target:"Vulnerable Groups",value:60},
+  {source:"Local Politicians",target:"Cooperatives",value:75},{source:"Local Politicians",target:"Vulnerable Groups",value:60},
+  {source:"LGUs",target:"Cooperatives",value:75},{source:"LGUs",target:"Vulnerable Groups",value:60},
   {source:"Anchor Investors",target:"MSMEs",value:55},{source:"Anchor Investors",target:"Cooperatives",value:65},
   {source:"Anchor Investors",target:"TESDA/Academe",value:70},{source:"Anchor Investors",target:"Foreign Investors",value:65},
   {source:"Foreign Investors",target:"BOI-MTIT",value:85},{source:"Foreign Investors",target:"BEZA",value:75},
@@ -358,7 +378,8 @@ const RELATIONSHIPS = [
   {source:"Cooperatives",target:"TESDA/Academe",value:65},{source:"Cooperatives",target:"Vulnerable Groups",value:45},
   {source:"Shadow Economies",target:"Abu Sayyaf",value:50},{source:"Shadow Economies",target:"Private Militias",value:80},
   {source:"Vulnerable Groups",target:"MAFAR",value:50},{source:"Vulnerable Groups",target:"Islamic Banks",value:55},
-  {source:"Bangsamoro Corp",target:"Anchor Investors",value:75},{source:"Bangsamoro Corp",target:"MENRE",value:70}
+  {source:"Bangsamoro Corp",target:"Anchor Investors",value:75},{source:"Bangsamoro Corp",target:"MENRE",value:70},
+  {source:"CPP/NPA",target:"Shadow Economies",value:40},{source:"CPP/NPA",target:"Anchor Investors",value:30}
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -373,16 +394,10 @@ function initNetwork() {
 
   svg.attr('viewBox', `0 0 ${width} ${height}`);
 
-  // Group relationships by source-target for bidirectional
   const linkData = RELATIONSHIPS.map(r => ({...r}));
-
-  // Node radius based on influence
   const radiusScale = d3.scaleSqrt().domain([0,100]).range([12,42]);
-
-  // Link width based on value
   const linkWidth = d3.scaleLinear().domain([0,100]).range([0.5,5]);
 
-  // Simulation
   const simulation = d3.forceSimulation(ACTORS)
     .force('link', d3.forceLink(linkData).id(d => d.id).distance(d => 220 - d.value * 1.5).strength(0.4))
     .force('charge', d3.forceManyBody().strength(-400))
@@ -391,19 +406,17 @@ function initNetwork() {
     .force('x', d3.forceX(width / 2).strength(0.05))
     .force('y', d3.forceY(height / 2).strength(0.05));
 
-  // Links
   const link = svg.append('g')
     .selectAll('line')
     .data(linkData)
     .enter().append('line')
     .attr('stroke', d => {
-      const avgInf = (ACTORS.find(a=>a.id===d.source)?.influence||50 + ACTORS.find(a=>a.id===d.target)?.influence||50)/2;
+      const avgInf = ((ACTORS.find(a=>a.id===d.source)?.influence||50) + (ACTORS.find(a=>a.id===d.target)?.influence||50))/2;
       return d.value >= 80 ? 'rgba(201,168,76,0.5)' : d.value >= 60 ? 'rgba(110,231,183,0.3)' : 'rgba(236,253,245,0.12)';
     })
     .attr('stroke-width', d => linkWidth(d.value))
     .attr('stroke-opacity', 0.7);
 
-  // Arrowheads for directed links
   svg.append('defs').selectAll('marker')
     .data(['arrow'])
     .enter().append('marker')
@@ -418,7 +431,6 @@ function initNetwork() {
     .attr('d', 'M0,-5L10,0L0,5')
     .attr('fill', 'rgba(201,168,76,0.4)');
 
-  // Node groups
   const node = svg.append('g')
     .selectAll('g')
     .data(ACTORS)
@@ -429,7 +441,6 @@ function initNetwork() {
       .on('drag', dragged)
       .on('end', dragended));
 
-  // Node circles with glow
   node.append('circle')
     .attr('r', d => radiusScale(d.influence))
     .attr('fill', d => d.color)
@@ -438,13 +449,11 @@ function initNetwork() {
     .attr('stroke-opacity', 0.9)
     .style('filter', d => `drop-shadow(0 0 ${d.influence > 80 ? 12 : 6}px ${d.color}66)`);
 
-  // Inner gradient overlay
   node.append('circle')
     .attr('r', d => radiusScale(d.influence) - 2)
     .attr('fill', d => `radial-gradient(circle at 30% 30%, ${d.color}88, ${d.color}33)`)
     .attr('fill-opacity', 0.4);
 
-  // Initials text
   node.append('text')
     .attr('text-anchor', 'middle')
     .attr('dy', '.35em')
@@ -459,7 +468,6 @@ function initNetwork() {
       return d.name.substring(0,3);
     });
 
-  // Labels
   const labels = svg.append('g')
     .selectAll('text')
     .data(ACTORS)
@@ -473,14 +481,12 @@ function initNetwork() {
     .style('pointer-events', 'none')
     .text(d => d.name.length > 18 ? d.name.substring(0,16) + '..' : d.name);
 
-  // Hover interactions
   node.on('mouseenter', function(event, d) {
     tooltip.innerHTML = `<strong style="color:#E8C560;font-family:Cinzel,serif;">${d.name}</strong><br><span style="color:#C9A84C;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;">${d.category}</span><br><span style="color:rgba(236,253,245,.7);margin-top:.35rem;display:block;">Influence: <strong style="color:#E8C560;">${d.influence}</strong>/100</span>`;
     tooltip.classList.add('visible');
     tooltip.style.left = (event.pageX + 15) + 'px';
     tooltip.style.top = (event.pageY - 10) + 'px';
 
-    // Highlight connected links
     link.attr('stroke-opacity', l => (l.source.id === d.id || l.target.id === d.id) ? 1 : 0.05);
     node.style('opacity', n => {
       if(n.id === d.id) return 1;
@@ -505,7 +511,6 @@ function initNetwork() {
   })
   .on('click', function(event, d) { openPopup(d.id); });
 
-  // Tick
   simulation.on('tick', () => {
     link
       .attr('x1', d => d.source.x)
@@ -563,7 +568,7 @@ function openPopup(id) {
     <div style="margin-bottom:1.25rem;"><div class="influence-bar"><div class="influence-fill ${actor.catClass}" style="width:${actor.influence}%"></div></div><div class="influence-label"><span>Influence Score</span><span class="influence-score">${actor.influence}/100</span></div></div>
     <div class="popup-desc">${actor.desc}</div>
     <div class="popup-meta">
-      <div class="meta-item"><div class="meta-label">Cluster</div><div class="meta-value" style="font-size:.85rem;text-transform:capitalize;">${actor.filter}</div></div>
+      <div class="meta-item"><div class="meta-label">Category</div><div class="meta-value" style="font-size:.85rem;text-transform:capitalize;">${actor.category.split('/')[0].trim()}</div></div>
       <div class="meta-item"><div class="meta-label">Connections</div><div class="meta-value">${connected}</div></div>
     </div>`;
   document.getElementById('popupOverlay').classList.add('active');
