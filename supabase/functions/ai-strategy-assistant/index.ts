@@ -7,11 +7,32 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 // ─── CORS ─────────────────────────────────────────────────────────────────────
-export const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-};
+// SECURITY FIX (re-applied 2026-08-01 — this reverted from an earlier fix
+// this session; see conversation history): '*' let any site on the internet
+// call this endpoint, which proxies to a paid AI API. Real allowlist instead,
+// computed per-request inside the handler below so it can check the actual
+// requesting origin.
+const ALLOWED_ORIGINS = [
+  'http://localhost:5173', 'http://localhost:8080',
+  'https://bird-validation-survey.bolt.host', 'https://asilvainnovations.com',
+];
+function isAllowedOrigin(origin: string | null): boolean {
+  if (!origin) return false;
+  if (ALLOWED_ORIGINS.includes(origin)) return true;
+  try {
+    return new URL(origin).hostname.endsWith('.webcontainer-api.io');
+  } catch {
+    return false;
+  }
+}
+function buildCorsHeaders(origin: string | null): Record<string, string> {
+  const headers: Record<string, string> = {
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  };
+  if (isAllowedOrigin(origin)) headers['Access-Control-Allow-Origin'] = origin as string;
+  return headers;
+}
 
 // ─── SUPABASE (primary data project) ─────────────────────────────────────────
 // NOTE: This edge function is hosted on project rgvteytgkugdqdodedxq but writes
@@ -20,11 +41,12 @@ const SUPABASE_DATA_URL = 'https://lydsisparsmvextskevw.supabase.co';
 const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 const supabase = createClient(SUPABASE_DATA_URL, supabaseServiceKey);
 
-// ─── OpenAI Configuration ─────────────────────────────────────────────────────
-// Env var name in Supabase secrets dashboard: OPENAI_API_KEY
-// (Supabase env var names cannot contain hyphens — use underscore form)
-const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
-const DEFAULT_MODEL  = 'gpt-4o';
+// ─── Anthropic Configuration ──────────────────────────────────────────────────
+// Migrated from OpenAI 2026-08-01 (OpenAI account hit insufficient_quota).
+// Env var name in Supabase secrets dashboard: ANTHROPIC_API_KEY
+const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
+const ANTHROPIC_VERSION = '2023-06-01';
+const DEFAULT_MODEL = 'claude-sonnet-5';
 
 // ─── Platform Constants ───────────────────────────────────────────────────────
 const PLATFORM_NAME = 'BIRD 2026-2035';
@@ -61,13 +83,9 @@ async function logAIInteraction(
     .then(({ error }) => { if (error) console.warn('AI log error (non-fatal):', error.message); });
 }
 
-const jsonResponse = (data: unknown, status = 200) =>
-  new Response(JSON.stringify(data), {
-    status,
-    headers: { 'Content-Type': 'application/json', ...corsHeaders },
-  });
-const errorResponse = (error: string, status = 400) =>
-  jsonResponse({ success: false, error }, status);
+// jsonResponse/errorResponse are defined inside Deno.serve below, where the
+// per-request origin is available for buildCorsHeaders(). They can't live at
+// module level any more now that CORS depends on the actual requesting origin.
 
 const sStr = (v: unknown, n = 5000) =>
   typeof v === 'string' ? v.substring(0, n).trim() : '';
@@ -477,6 +495,16 @@ const VALID_ACTIONS = new Set([
 
 // ─── Main Handler ─────────────────────────────────────────────────────────────
 Deno.serve(async (req: Request) => {
+  const origin = req.headers.get('Origin');
+  const corsHeaders = buildCorsHeaders(origin);
+  const jsonResponse = (data: unknown, status = 200) =>
+    new Response(JSON.stringify(data), {
+      status,
+      headers: { 'Content-Type': 'application/json', ...corsHeaders },
+    });
+  const errorResponse = (error: string, status = 400) =>
+    jsonResponse({ success: false, error }, status);
+
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
   if (req.method !== 'POST') return errorResponse('Method not allowed. Use POST.', 405);
 
@@ -501,7 +529,7 @@ Deno.serve(async (req: Request) => {
           features: {
             strategic_planning: ['SWOT Analysis', 'TOWS Strategy Matrix', 'Balanced Scorecard', 'PAPs Management', 'MEL Dashboard'],
             systems_thinking: ['Causal Loop Diagram Builder', 'Meadows Leverage Points (LP1-LP5)', 'System Archetypes Library (7 archetypes)', 'TOWS × Systems Integration'],
-            ai_assistant: 'BIRD AI — BARMM investment, strategy & systems-thinking consultant (GPT-4o)',
+            ai_assistant: 'BIRD AI — BARMM investment, strategy & systems-thinking consultant (Claude)',
             export_options: ['PDF', 'Word Document', 'Excel Spreadsheet'],
             implementation: 'Three-phase: Foundation (2026-28), Acceleration (2029-32), Consolidation (2033-35)',
           },
@@ -524,48 +552,77 @@ Deno.serve(async (req: Request) => {
     if ('_error' in config) return errorResponse(config._error as string, 400);
 
     // ── Resolve API key ────────────────────────────────────────────────────
-    // In Supabase Secrets dashboard, set the key as: OPENAI_API_KEY
-    // (hyphens not supported in Supabase secret names)
-    const openAiApiKey = Deno.env.get('OPENAI_API_KEY') ??
-                         Deno.env.get('OPEN_AI_API_KEY') ??
-                         Deno.env.get('OPEN_AI_BIRD_2026_2035_PROJECT_API_KEY');
-    if (!openAiApiKey) {
-      console.error('BIRD AI: OpenAI API key not configured. Set OPENAI_API_KEY in Supabase Secrets.');
+    // In Supabase Secrets dashboard, set the key as: ANTHROPIC_API_KEY
+    const anthropicApiKey = Deno.env.get('ANTHROPIC_API_KEY') ??
+                             Deno.env.get('ANTHROPIC_BIRD_2026_2035_PROJECT_API_KEY');
+    if (!anthropicApiKey) {
+      console.error('BIRD AI: Anthropic API key not configured. Set ANTHROPIC_API_KEY in Supabase Secrets.');
       return errorResponse('AI service not configured. Contact the platform administrator.', 503);
     }
 
-    // ── Call OpenAI ────────────────────────────────────────────────────────
+    // ── Call Anthropic ─────────────────────────────────────────────────────
+    // buildConfig()'s messages are still built in OpenAI's shape (a leading
+    // {role: 'system', content} entry followed by user/assistant turns) —
+    // that logic is untouched by this migration, since it's just an internal
+    // JS structure, not an actual OpenAI API call. Anthropic's Messages API
+    // requires the system prompt as a separate top-level field, not embedded
+    // in `messages`, so it's extracted here at the one call site that
+    // actually talks to the provider, rather than rewriting every one of
+    // buildConfig()'s ~10 action-specific prompt blocks.
+    const rawMessages = ((config as any).messages ?? []) as { role: string; content: string }[];
+    const systemMessage = rawMessages.find((m) => m.role === 'system')?.content ?? '';
+    const conversationMessages = rawMessages
+      .filter((m) => m.role !== 'system')
+      .map((m) => ({ role: m.role === 'assistant' ? 'assistant' : 'user', content: m.content }));
+
+    // Anthropic has no response_format/JSON-mode flag like OpenAI's — nudge
+    // via the system prompt instead. parseAI()'s existing markdown-fence and
+    // brace-matching fallback logic (unchanged) handles the rest.
+    const expectJson = Boolean((config as any).expectJson);
+    const finalSystem = expectJson
+      ? `${systemMessage}\n\nRespond with ONLY valid JSON. No prose before or after, no markdown code fences.`
+      : systemMessage;
+
     const payload: Record<string, unknown> = {
       model: DEFAULT_MODEL,
-      messages: (config as any).messages,
+      max_tokens: (config as any).maxTokens ?? 2048, // required by Anthropic, unlike OpenAI
+      system: finalSystem,
+      messages: conversationMessages,
       temperature: (config as any).temperature,
-      max_tokens: (config as any).maxTokens,
     };
-    if ((config as any).expectJson) payload.response_format = { type: 'json_object' };
 
-    const aiRes = await fetch(OPENAI_API_URL, {
+    const aiRes = await fetch(ANTHROPIC_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${openAiApiKey}`,
+        'x-api-key': anthropicApiKey,
+        'anthropic-version': ANTHROPIC_VERSION,
       },
       body: JSON.stringify(payload),
     });
 
     if (!aiRes.ok) {
       const errText = await aiRes.text().catch(() => 'unknown');
-      console.error(`OpenAI API error ${aiRes.status}:`, errText.substring(0, 400));
+      console.error(`Anthropic API error ${aiRes.status}:`, errText.substring(0, 400));
       const userMsg = aiRes.status === 429
         ? 'AI rate limit reached. Please wait a moment and try again.'
+        : aiRes.status === 529
+        ? 'AI service is temporarily overloaded. Please try again shortly.'
         : `AI service error (HTTP ${aiRes.status}). Please try again.`;
       return errorResponse(userMsg, 502);
     }
 
     const result = await aiRes.json();
-    const content = (result?.choices?.[0]?.message?.content) as string | undefined;
+    // Anthropic returns `content` as an array of blocks (usually one text
+    // block for a plain-text or JSON reply) — not OpenAI's
+    // choices[0].message.content string.
+    const textBlock = Array.isArray(result?.content)
+      ? result.content.find((b: { type?: string; text?: string }) => b?.type === 'text')
+      : undefined;
+    const content = textBlock?.text as string | undefined;
     if (!content) return errorResponse('Empty response from AI service.', 502);
 
-    let parsed = parseAI(content, (config as any).expectJson);
+    let parsed = parseAI(content, expectJson);
     if (action === 'generate_swot') parsed = postProcessSwot(parsed);
 
     // ── Log interaction (non-blocking) ─────────────────────────────────────
