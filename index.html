@@ -1,6 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- CRITICAL: Domain-based redirect for static HTML files in /public -->
+    <script>
+      (function() {
+        const hostname = window.location.hostname;
+        
+        // Map branded subdomains to their corresponding static HTML files in the /public folder
+        const redirects = {
+          'bangsamoro-investment-roadmap.asilvainnovations.com': '/bangsamoro-investment-roadmap.html',
+          'bird-resources.asilvainnovations.com': '/resources.html',
+          'bird-privacy-policy.asilvainnovations.com': '/privacy-policy.html',
+          'bird-terms-of-service.asilvainnovations.com': '/terms-of-service.html'
+        };
+        
+        if (redirects[hostname]) {
+          // Use replace() to prevent the redirect from cluttering browser history
+          // Preserves query parameters (e.g., ?utm_source=...) and hash fragments (#section)
+          window.location.replace(redirects[hostname] + window.location.search + window.location.hash);
+        } else {
+          // FALLBACK: If no redirect occurs (e.g., user visits the React app directly), 
+          // dynamically update SEO tags to match the current subdomain for accurate indexing.
+          const currentUrl = window.location.origin + window.location.pathname;
+          
+          const canonical = document.querySelector('link[rel="canonical"]');
+          if (canonical) canonical.href = currentUrl;
+          
+          const ogUrl = document.querySelector('meta[property="og:url"]');
+          if (ogUrl) ogUrl.content = currentUrl;
+          
+          // Update JSON-LD URLs dynamically as well
+          const scripts = document.querySelectorAll('script[type="application/ld+json"]');
+          scripts.forEach(script => {
+            try {
+              const data = JSON.parse(script.textContent);
+              if (data.url) data.url = currentUrl;
+              script.textContent = JSON.stringify(data);
+            } catch (e) {
+              // Ignore parsing errors
+            }
+          });
+        }
+      })();
+    </script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2CNG7D15Q7"></script>
     <script>
@@ -24,7 +67,7 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="googlebot" content="index, follow" />
 
-    <!-- Canonical URL -->
+    <!-- Canonical URL (Will be dynamically updated by script above if accessed via subdomain) -->
     <link rel="canonical" href="https://bangsamoro-investment-roadmap.asilvainnovations.com" />
 
     <!-- Favicon -->
@@ -81,7 +124,7 @@
         "@type": "WebApplication",
         "name": "BIRD 2026-2035",
         "description": "Bangsamoro Investment Roadmap Development - Official AI-powered strategic planning platform for BARMM, Philippines. Features SWOT analysis, Systems Thinking, Balanced Scorecard, and MEL Dashboard.",
-        "url": "https://bird.asilvainnovations.com",
+        "url": "https://bangsamoro-investment-roadmap.asilvainnovations.com",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Any",
         "author": {
@@ -114,7 +157,7 @@
         "@type": "GovernmentOrganization",
         "name": "Ministry of Trade, Investments and Tourism - BARMM",
         "alternateName": "BOI-MTIT, BARMM",
-        "url": "https://bird.asilvainnovations.com/",
+        "url": "https://bangsamoro-investment-roadmap.asilvainnovations.com/",
         "logo": "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png",
         "address": {
           "@type": "PostalAddress",
@@ -127,10 +170,26 @@
         ]
       }
     </script>
-  <base target="_blank">
-</head>
+    <base target="_blank">
+  </head>
 
   <body>
+    <!-- Fallback for users with JavaScript disabled -->
+    <noscript>
+      <div style="text-align: center; padding: 2rem; font-family: sans-serif; color: #333;">
+        <h2>JavaScript Required</h2>
+        <p>This platform requires JavaScript to route you to the correct section or load the interactive application.</p>
+        <p>Please enable JavaScript in your browser settings, or navigate directly to:</p>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="https://bird-survey.asilvainnovations.com">Validation Survey</a></li>
+          <li><a href="https://bird-app.asilvainnovations.com">BIRD App</a></li>
+          <li><a href="/roadmap.html">Roadmap</a></li>
+          <li><a href="/resouces.html">Roadmap</a></li>
+          <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </noscript>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
