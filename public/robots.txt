@@ -1,31 +1,46 @@
-# robots.txt for BIRD 2026–2035
-# https://strategy-ai-planner-1.deploypad.app/
+# ========================================================================
+# robots.txt for BIRD 2026–2035 (Bangsamoro Investment Roadmap)
+# ========================================================================
 
+User-agent: *
+Allow: /
+
+# Prevent indexing of frontend build artifacts, API routes, and private areas
+Disallow: /*.map$
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.netlify/
+Disallow: /.github/
+Disallow: /node_modules/
+
+Crawl-delay: 2
+
+# Major Search Engines
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
 
+# Social Media & Messaging Bots (Critical for Open Graph rich previews)
 User-agent: Twitterbot
 Allow: /
-
 User-agent: facebookexternalhit
 Allow: /
-
 User-agent: LinkedInBot
 Allow: /
-
-User-agent: *
+User-agent: Slackbot
 Allow: /
-Crawl-delay: 2
+User-agent: WhatsApp
+Allow: /
 
-# Sitemap location
-Sitemap: https://strategy-ai-planner-1.deploypad.app/sitemap.xml
-
-# Disallow admin and private paths
-Disallow: /admin/
-Disallow: /api/
-Disallow: /.netlify/
+# ========================================================================
+# Sitemap Locations (Primary Domains + Bolt.host)
+# ========================================================================
+Sitemap: https://bangsamoro-investment-roadmap.asilvainnovations.com/sitemap.xml
+Sitemap: https://bird-survey.asilvainnovations.com/sitemap.xml
+Sitemap: https://bird-validation-survey.bolt.host/sitemap.xml
+Sitemap: https://bird-roadmap.asilvainnovations.com/sitemap.xml
+Sitemap: https://bird-dashboard.asilvainnovations.com/sitemap.xml
+Sitemap: https://bird-app.asilvainnovations.com/sitemap.xml
