@@ -8,8 +8,8 @@ import { cn } from '@/lib/utils';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
 
 // Edge Function URLs
-const AI_ASSISTANT_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/ai-strategy-assistant';
-const SYNC_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/strategic-planner-sync';
+const AI_ASSISTANT_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/ai-strategy-assistant';
+const SYNC_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/strategic-planner-sync';
 
 export interface LeveragePoint { archetypeId?: string; leverageLevel: number; meadowsName: string; intervention: string; targetNodeIds: string[]; expectedImpact: 'high' | 'medium' | 'low'; timeHorizon: 'short' | 'medium' | 'long'; source: 'archetype' | 'cld-analysis'; }
 export interface CLDNode { id: string; label: string; category?: string; }
