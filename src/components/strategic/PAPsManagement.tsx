@@ -22,9 +22,9 @@ import { PAP, StrategicPlan, BSCObjective } from '@/lib/strategicPlanStore';
 import { supabase } from '@/lib/supabase';
 
 // Edge Function URLs
-const AI_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/ai-strategy-assistant';
-const SYNC_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/strategic-planner-sync';
-const EMAIL_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/email-notifications';
+const AI_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/ai-strategy-assistant';
+const SYNC_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/strategic-planner-sync';
+const EMAIL_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/email-notifications';
 
 interface PAPsManagementProps {
   plan: StrategicPlan;
