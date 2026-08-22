@@ -21,6 +21,14 @@ import { ACTION_PLAN_2026 as PRIORITY_ACTIONS }            from '@/data/bird/act
 import { CAUSAL_LOOPS as FEEDBACK_LOOPS }                  from '@/data/bird/clds';
 import { PHASES, TOTAL_BUDGET }                            from '@/data/bird/phases';
 
+// ─── Validation Survey & Secondary Data (n=76, 3–20 Aug 2026) ────────────────
+import { RESPONDENT_PROFILE as RESPONDENTS }               from '@/data/bird/survey';
+import { CLUSTER_SENTIMENT as CLUSTER_SIGNALS }            from '@/data/bird/survey';
+import { STRATEGY_VALIDATION as STRATEGY_SIGNALS }         from '@/data/bird/survey';
+import { BUDGET_SENTIMENT as BUDGET_SIGNALS }              from '@/data/bird/survey';
+import { BSC_ALIGNMENT, KPI_IMPORTANCE }                   from '@/data/bird/survey';
+import { REGIONAL_TOTALS }                                 from '@/data/bird/provincial';
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface MELDashboardProps {
   plan?: StrategicPlan;
@@ -159,6 +167,7 @@ const DashboardHeroSection: React.FC<{ onNavigate?: (view: string) => void }> = 
               { icon: Clock, label: 'Current Phase', value: 'Phase 1: Foundation', color: '#10b981' },
               { icon: Target, label: '2035 GRDP Target', value: '₱550B+', color: '#3b82f6' },
               { icon: Users, label: 'Jobs Target', value: '20,000+', color: '#8b5cf6' },
+              { icon: ClipboardCheck, label: 'Stakeholder Validation', value: `n=${RESPONDENTS.totalResponses}`, color: '#ef4444' },
             ].map(({ icon: Icon, label, value, color }, i) => (
               <div
                 key={label}
@@ -330,6 +339,46 @@ const StatusBadge: React.FC<{ status: string }> = ({ status }) => {
     }`}>
       <span className={`w-1.5 h-1.5 rounded-full bg-current ${isActive ? 'animate-pulse' : ''}`} aria-hidden="true" />
       {status}
+    </span>
+  );
+};
+
+// ─── Signal Bar (survey Likert / tally, 1–5 or count) ─────────────────────────
+const SignalBar: React.FC<{
+  label: string; value: number; max: number; color?: string; suffix?: string; sub?: string;
+}> = ({ label, value, max, color = '#C9A84C', suffix = '', sub }) => (
+  <div className="mb-2.5">
+    <div className="flex justify-between items-baseline gap-3 mb-1">
+      <span className="text-xs text-[#d1fae5]/80 truncate">{label}</span>
+      <span className="text-xs font-bold tabular-nums flex-shrink-0" style={{ color }}>
+        {Number.isInteger(value) ? value : value.toFixed(2)}{suffix}
+      </span>
+    </div>
+    <div className="h-1.5 rounded-full bg-[rgba(255,255,255,0.08)] overflow-hidden">
+      <motion.div
+        className="h-full rounded-full"
+        style={{ background: color }}
+        initial={{ width: 0 }}
+        whileInView={{ width: `${Math.max(2, Math.min(100, (value / max) * 100))}%` }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+      />
+    </div>
+    {sub && <div className="text-[0.6rem] text-[#ecfdf5]/28 mt-0.5">{sub}</div>}
+  </div>
+);
+
+// ─── Validation Badge — flags evidence strength on a reading ───────────────────
+const ValidationBadge: React.FC<{ level: 'validated' | 'partial' | 'unvalidated'; note?: string }> = ({ level, note }) => {
+  const map = {
+    validated:   { cls: 'bg-[rgba(16,185,129,0.12)] text-[#10b981] border-[rgba(16,185,129,0.3)]',  txt: 'Validated' },
+    partial:     { cls: 'bg-[rgba(245,158,11,0.12)] text-[#f59e0b] border-[rgba(245,158,11,0.3)]',  txt: 'Partially validated' },
+    unvalidated: { cls: 'bg-[rgba(239,68,68,0.12)] text-[#ef4444] border-[rgba(239,68,68,0.3)]',    txt: 'Not validated' },
+  }[level];
+  return (
+    <span className={`inline-flex items-center gap-1 text-[0.65rem] font-bold px-2 py-0.5 rounded border ${map.cls}`}>
+      <ClipboardCheck className="w-3 h-3" aria-hidden="true" />
+      {map.txt}{note ? ` · ${note}` : ''}
     </span>
   );
 };
@@ -554,6 +603,26 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
     inProg:   PRIORITY_ACTIONS.filter(a => a.status === 'In Progress').length,
   }), []);
 
+  // ─── Validation-survey derived metrics (Panel D) ────────────────────────────
+  const validation = useMemo(() => {
+    const weakest = [...CLUSTER_SIGNALS].sort(
+      (a, b) => (a.urgency - a.readiness) - (b.urgency - b.readiness),
+    ).reverse()[0];
+    const meanReadiness  = CLUSTER_SIGNALS.reduce((s, c) => s + c.readiness,  0) / CLUSTER_SIGNALS.length;
+    const meanConfidence = CLUSTER_SIGNALS.reduce((s, c) => s + c.confidence, 0) / CLUSTER_SIGNALS.length;
+    const meanUrgency    = CLUSTER_SIGNALS.reduce((s, c) => s + c.urgency,    0) / CLUSTER_SIGNALS.length;
+    const endorsed       = STRATEGY_SIGNALS.endorsement.find(e => e.label.startsWith('Yes'))?.n ?? 0;
+    const silentProvinces = RESPONDENTS.byProvince.filter(p => p.n === 0);
+    return {
+      weakest, meanReadiness, meanConfidence, meanUrgency, endorsed, silentProvinces,
+      endorsedPct: Math.round((endorsed / RESPONDENTS.totalResponses) * 100),
+      // Readiness converted to a 0–100 ring value so it reads like every other
+      // progress figure on this dashboard.
+      readinessRing: Math.round((meanReadiness / 5) * 100),
+      topCluster: [...BUDGET_SIGNALS.clusterPriority].sort((a, b) => b.n - a.n)[0],
+    };
+  }, []);
+
   useEffect(() => {
     const styleId = 'hide-bolt-badge';
     if (document.getElementById(styleId)) return;
@@ -613,7 +682,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
           </div>
           <div className="text-xs bg-[rgba(201,168,76,0.08)] border border-[rgba(201,168,76,0.32)] rounded px-3 py-1.5 text-[#C9A84C] flex items-center gap-1.5">
             <Target className="w-3 h-3" aria-hidden="true" />
-            Pareto Focus: 6 Critical KPIs · 10 Priority Actions · {TOTAL_BUDGET.label} Total Roadmap Budget
+            Pareto Focus: 6 Critical KPIs · 10 Priority Actions · {TOTAL_BUDGET.label} Total Roadmap Budget · Validated by {RESPONDENTS.totalResponses} stakeholders
           </div>
         </div>
       </header>
@@ -639,7 +708,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
             </div>
           ))}
           <div className="ml-auto text-[0.7rem] text-[#ecfdf5]/35">
-            Baselines: 2024 PSA / BBOI / MTIT. Targets: BIRD 2026-2035.
+            Baselines: 2024 PSA / BBOI / MTIT. Targets: BIRD 2026-2035. Validation: survey n={RESPONDENTS.totalResponses} (Aug 2026).
           </div>
         </motion.div>
 
@@ -862,6 +931,185 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
           </div>
         </motion.section>
 
+        {/* ── PANEL D: Stakeholder Validation ─────────────────────────────────── */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          className="bg-[rgba(6,78,59,0.15)] border border-[rgba(201,168,76,0.32)] rounded-2xl p-6 md:p-8 relative overflow-hidden"
+          aria-labelledby="panel-d-title"
+        >
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e]" aria-hidden="true" />
+          <div className="flex flex-wrap justify-between items-start gap-4 mb-6">
+            <div>
+              <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">Panel D · Stakeholder Validation</span>
+              <h2 id="panel-d-title" className="text-xl md:text-2xl font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>
+                Evidence Base &mdash; Validation Survey Results
+              </h2>
+              <div className="w-10 h-1 bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e] rounded-full mt-2" aria-hidden="true" />
+            </div>
+            <span className="text-xs text-[#a7f3d0]/70 bg-[rgba(6,78,59,0.4)] border border-[rgba(201,168,76,0.32)] rounded-full px-3 py-1">
+              n = {RESPONDENTS.totalResponses} &middot; {RESPONDENTS.fieldedFrom} to {RESPONDENTS.fieldedTo}
+            </span>
+          </div>
+
+          {/* Coverage warning — the roadmap's most consequential evidence gap */}
+          <div className="flex items-start gap-3 rounded-lg border border-[rgba(239,68,68,0.35)] bg-[rgba(239,68,68,0.08)] px-4 py-3 mb-6">
+            <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#ef4444]" aria-hidden="true" />
+            <div>
+              <p className="text-xs font-bold text-[#ef4444] mb-0.5">
+                Coverage gap &mdash; {validation.silentProvinces.map(p => p.label).join(', ')} returned zero respondents
+              </p>
+              <p className="text-[0.7rem] text-[#ecfdf5]/55 leading-relaxed">{RESPONDENTS.coverageGap}</p>
+            </div>
+          </div>
+
+          {/* Summary tiles — mirrors Panel C's summary card pattern */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+            {[
+              { color: '#10b981', val: RESPONDENTS.totalResponses,       lbl: 'Consented Responses' },
+              { color: '#C9A84C', val: `${validation.endorsedPct}%`,     lbl: 'Endorse IEDS Outright' },
+              { color: '#ef4444', val: validation.meanReadiness.toFixed(2), lbl: 'Mean Readiness (1–5)' },
+              { color: '#3b82f6', val: validation.silentProvinces.length, lbl: 'Provinces With No Voice' },
+            ].map(({ color, val, lbl }) => (
+              <div key={lbl} className="bg-[rgba(2,44,34,0.5)] border border-[rgba(201,168,76,0.32)] rounded-lg p-4 text-center relative overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-0.5" style={{ background: color }} aria-hidden="true" />
+                <div className="text-2xl font-bold" style={{ color, fontFamily: "'Cinzel', serif" }}>{val}</div>
+                <div className="text-[0.7rem] text-[#a7f3d0]/70 uppercase tracking-wider">{lbl}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            {/* D-1 · The readiness gap, by BEIE cluster */}
+            <div className="bg-[rgba(2,44,34,0.55)] border border-[rgba(201,168,76,0.32)] rounded-xl p-5">
+              <div className="flex items-center gap-2 mb-1">
+                <Cog className="w-4 h-4 text-[#C9A84C]" aria-hidden="true" />
+                <h3 className="text-sm font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>The Readiness Gap</h3>
+              </div>
+              <p className="text-[0.68rem] text-[#ecfdf5]/45 mb-4 leading-relaxed">
+                Every cluster rates readiness below both confidence and urgency. Widest gap:{' '}
+                <strong className="text-[#ef4444]">{validation.weakest.label}</strong>{' '}
+                (+{(validation.weakest.urgency - validation.weakest.readiness).toFixed(2)}).
+              </p>
+              {CLUSTER_SIGNALS.map(c => (
+                <SignalBar
+                  key={c.section}
+                  label={c.label}
+                  value={c.readiness}
+                  max={5}
+                  color={c.readiness < 3.45 ? '#ef4444' : '#C9A84C'}
+                  sub={`confidence ${c.confidence.toFixed(2)} · urgency ${c.urgency.toFixed(2)} · n=${c.n}`}
+                />
+              ))}
+              <div className="mt-3 pt-3 border-t border-[rgba(201,168,76,0.15)] flex items-center justify-between">
+                <span className="text-[0.68rem] text-[#ecfdf5]/40">Region-wide readiness</span>
+                <span className="text-sm font-bold text-[#ef4444]" style={{ fontFamily: "'Cinzel', serif" }}>
+                  {validation.meanReadiness.toFixed(2)} / 5
+                </span>
+              </div>
+            </div>
+
+            {/* D-2 · Strategic option validation */}
+            <div className="bg-[rgba(2,44,34,0.55)] border border-[rgba(201,168,76,0.32)] rounded-xl p-5">
+              <div className="flex items-center gap-2 mb-1">
+                <Target className="w-4 h-4 text-[#C9A84C]" aria-hidden="true" />
+                <h3 className="text-sm font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>Strategy Validation</h3>
+              </div>
+              <p className="text-[0.68rem] text-[#ecfdf5]/45 mb-4 leading-relaxed">
+                Stakeholders reproduce the consultant rank order exactly, at lower conviction. Scores below use only
+                the {STRATEGY_SIGNALS.defaultContamination.differentiators} respondents who differentiated their sliders.
+              </p>
+              {STRATEGY_SIGNALS.options.map(o => (
+                <SignalBar
+                  key={o.code}
+                  label={`${o.code} — ${o.name.replace(' Strategy', '')}`}
+                  value={o.respondentScore}
+                  max={10}
+                  color={o.code === 'IEDS' ? '#10b981' : '#3b82f6'}
+                  sub={`expert matrix ${o.expertScore.toFixed(2)} · rank ${o.expertRank}/${o.respondentRank}`}
+                />
+              ))}
+              <div className="mt-3 pt-3 border-t border-[rgba(201,168,76,0.15)]">
+                <ValidationBadge level="validated" note={`IEDS, ${validation.endorsed}/${RESPONDENTS.totalResponses}`} />
+                <p className="text-[0.62rem] text-[#ecfdf5]/28 mt-2 leading-relaxed">
+                  {STRATEGY_SIGNALS.defaultContamination.allCellsAtDefault} of {STRATEGY_SIGNALS.defaultContamination.respondents} respondents
+                  left every matrix cell at the slider default; {STRATEGY_SIGNALS.defaultContamination.pctCellsAtDefault}% of cells are
+                  midpoint-contaminated. Full-sample IEDS score is {STRATEGY_SIGNALS.options[0].fullSampleScore.toFixed(2)}.
+                </p>
+              </div>
+            </div>
+
+            {/* D-3 · Where stakeholders want the money */}
+            <div className="bg-[rgba(2,44,34,0.55)] border border-[rgba(201,168,76,0.32)] rounded-xl p-5">
+              <div className="flex items-center gap-2 mb-1">
+                <DollarSign className="w-4 h-4 text-[#C9A84C]" aria-hidden="true" />
+                <h3 className="text-sm font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>Budget Priority Signal</h3>
+              </div>
+              <p className="text-[0.68rem] text-[#ecfdf5]/45 mb-4 leading-relaxed">
+                Asked where the {TOTAL_BUDGET.label} roadmap should concentrate, respondents chose{' '}
+                <strong className="text-[#10b981]">{validation.topCluster.label}</strong> first.
+              </p>
+              {BUDGET_SIGNALS.clusterPriority.map(c => (
+                <SignalBar
+                  key={c.label}
+                  label={c.label}
+                  value={c.n}
+                  max={Math.max(...BUDGET_SIGNALS.clusterPriority.map(x => x.n))}
+                  color={c.label === validation.topCluster.label ? '#10b981' : '#3b82f6'}
+                />
+              ))}
+              <div className="mt-3 pt-3 border-t border-[rgba(201,168,76,0.15)] rounded-lg">
+                <p className="text-[0.68rem] text-[#f59e0b] leading-relaxed">
+                  <strong>Contradicts the roadmap.</strong> Transformers rank fifth-equal (8) in stakeholder priority,
+                  yet Sequence B front-loads them. Funding-mix fairness scores {BUDGET_SIGNALS.fundingMixFair.value} and
+                  target realism {BUDGET_SIGNALS.targetsRealistic.value} &mdash; the two lowest ratings in the instrument.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* D-4 · Scorecard alignment strip — ties Panel D back to Panel B */}
+          <div className="mt-6 pt-6 border-t border-[rgba(201,168,76,0.2)]">
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+              <h3 className="text-sm font-bold text-white flex items-center gap-2" style={{ fontFamily: "'Cinzel', serif" }}>
+                <Layers className="w-4 h-4 text-[#C9A84C]" aria-hidden="true" />
+                Scorecard &amp; KPI Alignment
+                <span className="text-[0.65rem] font-normal text-[#ecfdf5]/35">(validates Panel B)</span>
+              </h3>
+              <span className="text-[0.68rem] text-[#ecfdf5]/35">Sections 11–12 · 1–5 agreement scale</span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+              <div>
+                {BSC_ALIGNMENT.slice(0, 4).map(r => (
+                  <SignalBar key={r.label} label={r.label} value={r.value} max={5} color="#C9A84C" sub={`n=${r.n}`} />
+                ))}
+              </div>
+              <div>
+                {KPI_IMPORTANCE.map(r => (
+                  <SignalBar key={r.label} label={r.label} value={r.value} max={5} color="#10b981" sub={`n=${r.n}`} />
+                ))}
+              </div>
+            </div>
+            <p className="text-[0.68rem] text-[#ecfdf5]/40 mt-3 leading-relaxed">
+              Stakeholders endorse the <em>framework</em> more readily than the <em>target levels</em>: vision
+              achievability is the lowest-rated item in the section at{' '}
+              {BSC_ALIGNMENT.find(b => b.label === 'Vision is achievable')?.value ?? '—'}.
+            </p>
+          </div>
+
+          {/* Provenance */}
+          <p className="mt-6 flex items-start gap-2 text-[0.66rem] leading-relaxed text-[#ecfdf5]/32">
+            <Info className="w-3 h-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+            <span>
+              {RESPONDENTS.totalResponses} consented responses, mean {RESPONDENTS.meanFieldsAnswered} of ~245 fields
+              answered. Non-probability convenience sample with no weighting frame &mdash; these are stakeholder
+              validation signals, not population estimates. Regional baseline: &#8369;{REGIONAL_TOTALS.gdp2024B}B GRDP
+              (2024), {REGIONAL_TOTALS.growth2024}% growth; provincial outlook files cover {REGIONAL_TOTALS.coveragePct}%
+              of regional GDP.
+            </span>
+          </p>
+        </motion.section>
+
         {/* ── PANEL E: Phase Progress Tracker ─────────────────────────────────── */}
         <motion.section
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
@@ -948,7 +1196,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
           <span className="text-[#C9A84C]">The Emerging Bangsamoro</span> · Investment Roadmap 2026–2035
         </p>
         <p className="text-[0.68rem] text-[#ecfdf5]/20 mt-1">
-          Data sources: PSA, BBOI, BEZA, MTIT, MENRE (2024 baselines). Targets per BIRD 2026–2035 &amp; BDP 2023–2028.
+          Data sources: PSA, BBOI, BEZA, MTIT, MENRE (2024 baselines) · Provincial Economic &amp; Investment Outlooks · Workshops 1/2/4/5 (2025) · Validation Survey n={RESPONDENTS.totalResponses} (Aug 2026). Targets per BIRD 2026–2035 &amp; BDP 2023–2028.
         </p>
       </footer>
 
