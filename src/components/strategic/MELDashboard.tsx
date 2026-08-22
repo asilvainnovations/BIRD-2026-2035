@@ -21,13 +21,116 @@ import { ACTION_PLAN_2026 as PRIORITY_ACTIONS }            from '@/data/bird/act
 import { CAUSAL_LOOPS as FEEDBACK_LOOPS }                  from '@/data/bird/clds';
 import { PHASES, TOTAL_BUDGET }                            from '@/data/bird/phases';
 
-// ─── Validation Survey & Secondary Data (n=76, 3–20 Aug 2026) ────────────────
-import { RESPONDENT_PROFILE as RESPONDENTS }               from '@/data/bird/survey';
-import { CLUSTER_SENTIMENT as CLUSTER_SIGNALS }            from '@/data/bird/survey';
-import { STRATEGY_VALIDATION as STRATEGY_SIGNALS }         from '@/data/bird/survey';
-import { BUDGET_SENTIMENT as BUDGET_SIGNALS }              from '@/data/bird/survey';
-import { BSC_ALIGNMENT, KPI_IMPORTANCE }                   from '@/data/bird/survey';
-import { REGIONAL_TOTALS }                                 from '@/data/bird/provincial';
+// ═══════════════════════════════════════════════════════════════════════════════
+// VALIDATION SURVEY & SECONDARY DATA — inlined, no external module required
+// ═══════════════════════════════════════════════════════════════════════════════
+// Source: Supabase `survey_responses`, BIRD_2026-2035 project.
+//   76 consented responses, fielded 3–20 August 2026, mean 228.7 of ~245 fields
+//   answered. Aggregates computed server-side and frozen here so this component
+//   has no runtime data dependency.
+//
+// SAMPLING CAVEAT: non-probability convenience sample, no weighting frame.
+// These are stakeholder validation signals, NOT population estimates. Basilan,
+// Sulu and Tawi-Tawi returned ZERO respondents and ~78% of the sample sits in
+// the Cotabato City / Maguindanao del Norte mainland corridor, so any island
+// province or BIMP-EAGA (Sequence C) reading here is unvalidated.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const RESPONDENTS = {
+  totalResponses: 76,
+  consentedToAnonymisedUse: 58,
+  fieldedFrom: '3 Aug 2026',
+  fieldedTo: '20 Aug 2026',
+  meanFieldsAnswered: 228.7,
+  byProvince: [
+    { label: 'Cotabato City',                 n: 27 },
+    { label: 'Maguindanao del Norte',         n: 22 },
+    { label: 'Regional / BARMM-wide',         n: 11 },
+    { label: 'Special Geographic Area (SGA)', n:  7 },
+    { label: 'Lanao del Sur',                 n:  3 },
+    { label: 'Maguindanao del Sur',           n:  3 },
+    { label: 'Basilan',                       n:  0 },
+    { label: 'Sulu',                          n:  0 },
+    { label: 'Tawi-Tawi',                     n:  0 },
+  ],
+  coverageGap:
+    'Roughly 78% of the sample sits in the Cotabato City / Maguindanao del Norte mainland corridor. ' +
+    'Sequence C (BIMP-EAGA maritime integration) and all island-province readings are unvalidated. ' +
+    'A supplementary wave in the island provinces is required before publication.',
+} as const;
+
+/** Confidence / readiness / urgency by BEIE cluster — survey Sections 4–9, 1–5 scale. */
+const CLUSTER_SIGNALS = [
+  { section: 4, label: 'Foundations',      confidence: 3.69, readiness: 3.45, urgency: 3.70, n: 73 },
+  { section: 5, label: 'Transformers',     confidence: 3.60, readiness: 3.40, urgency: 3.69, n: 65 },
+  { section: 6, label: 'Enablers',         confidence: 3.70, readiness: 3.33, urgency: 4.04, n: 73 },
+  { section: 7, label: 'Connectors',       confidence: 3.86, readiness: 3.61, urgency: 3.94, n: 71 },
+  { section: 8, label: 'Financiers',       confidence: 3.78, readiness: 3.55, urgency: 3.88, n: 67 },
+  { section: 9, label: 'Operating Systems', confidence: 3.85, readiness: 3.58, urgency: 3.93, n: 71 },
+] as const;
+
+/**
+ * Strategic option evaluation — survey Section 10, same seven weighted criteria
+ * as BIRD Chapter 4. `respondentScore` uses only the 29 respondents who
+ * genuinely differentiated their sliders; 25 of 75 left all 28 matrix cells at
+ * the default value of 5, so `fullSampleScore` is midpoint-contaminated.
+ */
+const STRATEGY_SIGNALS = {
+  defaultContamination: { respondents: 75, allCellsAtDefault: 25, pctCellsAtDefault: 65.5, differentiators: 29 },
+  options: [
+    { code: 'IEDS', name: 'Integrated Ecosystem Development', expertScore: 8.93, respondentScore: 7.39, fullSampleScore: 6.06, expertRank: 1, respondentRank: 1 },
+    { code: 'HEDS', name: 'Halal Economy Dominance',          expertScore: 7.61, respondentScore: 6.68, fullSampleScore: 5.92, expertRank: 2, respondentRank: 2 },
+    { code: 'IFES', name: 'Infrastructure-First Enabling',    expertScore: 7.48, respondentScore: 6.51, fullSampleScore: 5.77, expertRank: 3, respondentRank: 3 },
+    { code: 'GEMS', name: 'Green Economy Monetization',       expertScore: 7.16, respondentScore: 6.49, fullSampleScore: 5.73, expertRank: 4, respondentRank: 4 },
+  ],
+  endorsement: [
+    { label: 'Yes — endorse IEDS', n: 44 },
+    { label: 'Partially agree',    n: 20 },
+    { label: 'No answer',          n: 11 },
+    { label: 'Need more evidence', n:  1 },
+  ],
+} as const;
+
+/** Budget priority & risk posture — survey Section 13. */
+const BUDGET_SIGNALS = {
+  fundingMixFair:   3.68,
+  targetsRealistic: 3.80,
+  clusterPriority: [
+    { label: 'Foundations',       n: 29 },
+    { label: 'Operating Systems', n: 15 },
+    { label: 'Connectors',        n:  8 },
+    { label: 'Transformers',      n:  8 },
+    { label: 'Enablers',          n:  6 },
+    { label: 'Financiers',        n:  5 },
+  ],
+} as const;
+
+/** Scorecard alignment & KPI importance — survey Sections 11–12, 1–5 scale. */
+const BSC_ALIGNMENT = [
+  { label: 'Learning & Growth alignment', value: 4.32, n: 69 },
+  { label: 'Stakeholder alignment',       value: 4.19, n: 74 },
+  { label: 'Financial alignment',         value: 4.16, n: 71 },
+  { label: 'Internal Process alignment',  value: 4.12, n: 74 },
+  { label: 'Vision is achievable',        value: 3.93, n: 74 },
+] as const;
+
+const KPI_IMPORTANCE = [
+  { label: 'Peace & Security KPIs', value: 4.42, n: 69 },
+  { label: 'Inclusivity KPIs',      value: 4.25, n: 69 },
+  { label: 'Governance KPIs',       value: 4.23, n: 69 },
+  { label: 'Resilience KPIs',       value: 4.23, n: 66 },
+] as const;
+
+/**
+ * Regional baseline — PSA-BARMM / MFBM 2023–2025. The five available provincial
+ * outlook files cover ₱245.77B of the ₱292.4B 2023 regional total (84.1%);
+ * ₱46.58B is Sulu, the SGA, and statistical residual.
+ */
+const REGIONAL_TOTALS = {
+  gdp2024B: 299.5,
+  growth2024: 2.7,
+  coveragePct: 84.1,
+} as const;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface MELDashboardProps {
@@ -1061,8 +1164,8 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
               <div className="mt-3 pt-3 border-t border-[rgba(201,168,76,0.15)] rounded-lg">
                 <p className="text-[0.68rem] text-[#f59e0b] leading-relaxed">
                   <strong>Contradicts the roadmap.</strong> Transformers rank fifth-equal (8) in stakeholder priority,
-                  yet Sequence B front-loads them. Funding-mix fairness scores {BUDGET_SIGNALS.fundingMixFair.value} and
-                  target realism {BUDGET_SIGNALS.targetsRealistic.value} &mdash; the two lowest ratings in the instrument.
+                  yet Sequence B front-loads them. Funding-mix fairness scores {BUDGET_SIGNALS.fundingMixFair} and
+                  target realism {BUDGET_SIGNALS.targetsRealistic} &mdash; the two lowest ratings in the instrument.
                 </p>
               </div>
             </div>
