@@ -58,6 +58,139 @@ import { BIRD_VIDEOS, BIRD_IMAGES, getImagesForSection, getVideosForSection } fr
 import { AIStrategistAvatar } from '@/components/branding/Logo';
 import FloatingAIAssistant from './FloatingAIAssistant';
 
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// BIRD 2026-2035 · VALIDATION SURVEY EVIDENCE (inlined, no external module)
+// ═══════════════════════════════════════════════════════════════════════════════
+// Source: Supabase `survey_responses` (BIRD_2026-2035). 76 consented responses,
+// fielded 3-20 August 2026.
+//
+// SAMPLING CAVEAT: non-probability convenience sample, no weighting frame.
+// Validation signals, NOT population estimates. Basilan and Tawi-Tawi
+// returned ZERO respondents; ~78% of the sample sits in the Cotabato City /
+// Maguindanao del Norte mainland corridor.
+// -----------------------------------------------------------------------------
+
+/**
+ * Archetype validation — survey Sections 3-11. Respondents were shown each
+ * archetype as it appears in this component and asked how accurately it
+ * describes BARMM. Ordinal answers scored: Very accurately 4, Accurately 3,
+ * Somewhat accurately 2, Needs revision 1, Not accurate 0.
+ *
+ * `archetypeId` maps to the SYSTEM_ARCHETYPES ids already defined below.
+ * Entries with a null archetypeId are the two standalone CLDs from Chapter 3-B.
+ */
+const ARCHETYPE_VALIDATION: Array<{
+  archetypeId: string | null;
+  field: string;
+  label: string;
+  meanScore: number;   // 0-4
+  pctAccurate: number; // % answering "Accurately" or better
+  pctRevision: number; // % answering "Needs revision" or worse
+  n: number;
+}> = [
+  { archetypeId: null,  field: 'q3_cld1_investment_development', label: 'R1 Investment-Development Cycle', meanScore: 3.28, pctAccurate: 65.6, pctRevision: 3.1, n: 64 },
+  { archetypeId: null,  field: 'q9_arch_big_man',                label: 'Big Man / Patronage Dynamic',      meanScore: 3.22, pctAccurate: 62.3, pctRevision: 1.4, n: 69 },
+  { archetypeId: 'toc', field: 'q4_arch_tragedy_commons',        label: 'Tragedy of the Commons',           meanScore: 3.08, pctAccurate: 54.9, pctRevision: 1.4, n: 71 },
+  { archetypeId: null,  field: 'q3_cld2_governance_confidence',  label: 'R2 Governance-Investor Confidence', meanScore: 3.00, pctAccurate: 55.2, pctRevision: 9.0, n: 67 },
+  { archetypeId: null,  field: 'q5_arch_growth_underinvest',     label: 'Growth and Underinvestment',       meanScore: 2.97, pctAccurate: 50.8, pctRevision: 4.8, n: 63 },
+  { archetypeId: null,  field: 'q11_arch_drifting_goals',        label: 'Drifting Goals',                   meanScore: 2.92, pctAccurate: 46.5, pctRevision: 1.4, n: 71 },
+  { archetypeId: 'ltg', field: 'q6_arch_limits_growth',          label: 'Limits to Success',                meanScore: 2.91, pctAccurate: 45.9, pctRevision: 1.4, n: 74 },
+  { archetypeId: 'esc', field: 'q9_arch_escalation',             label: 'Escalation',                       meanScore: 2.88, pctAccurate: 46.6, pctRevision: 4.1, n: 73 },
+  { archetypeId: 'sts', field: 'q7_arch_success_successful',     label: 'Success to the Successful',        meanScore: 2.75, pctAccurate: 38.9, pctRevision: 1.4, n: 72 },
+  { archetypeId: 'ftf', field: 'q9_arch_fixes_fail',             label: 'Fixes that Fail',                  meanScore: 2.68, pctAccurate: 37.0, pctRevision: 4.1, n: 73 },
+  { archetypeId: 'stb', field: 'q8_arch_shifting_burden',        label: 'Shifting the Burden',              meanScore: 2.50, pctAccurate: 27.9, pctRevision: 4.4, n: 68 },
+];
+
+/** Where stakeholders located each dynamic — survey follow-up questions. */
+const SYSTEMS_SIGNALS = {
+  moralGovernanceLever: [
+    { label: 'Transparency',   n: 42 },
+    { label: 'Islamic ethics', n: 18 },
+    { label: 'Accountability', n:  7 },
+    { label: 'Efficiency',     n:  6 },
+  ],
+  connectivityPriority: [
+    { label: 'Physical pipelines (roads, ports)',        n: 43 },
+    { label: 'Market-access assets (cold chain, logistics)', n: 24 },
+    { label: 'Digital backbones (broadband, e-gov)',     n:  6 },
+  ],
+  clusterReadiness: [
+    { label: 'Foundations',       confidence: 3.69, readiness: 3.45, urgency: 3.70, n: 73 },
+    { label: 'Transformers',      confidence: 3.60, readiness: 3.40, urgency: 3.69, n: 65 },
+    { label: 'Enablers',          confidence: 3.70, readiness: 3.33, urgency: 4.04, n: 73 },
+    { label: 'Connectors',        confidence: 3.86, readiness: 3.61, urgency: 3.94, n: 71 },
+    { label: 'Financiers',        confidence: 3.78, readiness: 3.55, urgency: 3.88, n: 67 },
+    { label: 'Operating Systems', confidence: 3.85, readiness: 3.58, urgency: 3.93, n: 71 },
+  ],
+  n: 76,
+  window: '3-20 August 2026',
+  silentProvinces: ['Basilan', 'Tawi-Tawi'],
+} as const;
+
+/**
+ * 55 SWOT factors carrying REAL respondent means (item n = 63-74). Used when
+ * the plan carries no SWOT items of its own, so the scoring, archetype
+ * recommendation and CLD-seeding logic below operate on real evidence.
+ */
+const BIRD_SWOT_BASELINE: SWOTItem[] = [
+  { id: 'bird-q4-s4-seaweed-dominance', category: 'strength', description: 'Tawi-Tawi\'s Global Seaweed Dominance — Tawi-Tawi produces 40% of the Philippines\' seaweed output, providing a massive, ready-made resource base for industrial carrageenan processing.', impactScore: 4.36, likelihoodScore: 4.19, aiGenerated: false, leveragePoint: 'LP5', beieCluster: 'foundations' },
+  { id: 'bird-q4-s1-aff-base', category: 'strength', description: 'Strong AFF Base — BARMM has strong resources in rubber, coconut, seaweed, fisheries, halal farm products, and rice.', impactScore: 4.38, likelihoodScore: 4.13, aiGenerated: false, leveragePoint: 'LP5', beieCluster: 'foundations' },
+  { id: 'bird-q5-s4-cultural-heritage', category: 'strength', description: 'Rich Cultural Heritage — Maranao, Yakan, and Tausug heritage as assets for creative/tourism industries.', impactScore: 4.23, likelihoodScore: 4.13, aiGenerated: false, leveragePoint: 'LP1', beieCluster: 'transformers' },
+  { id: 'bird-q9-s2-peace-dividend', category: 'strength', description: 'Peace Dividend Momentum — Basilan ASG-free declaration (2024) and stabilized security in select zones.', impactScore: 4.25, likelihoodScore: 4.01, aiGenerated: false, leveragePoint: 'LP3', beieCluster: 'cross-cutting' },
+  { id: 'bird-q7-s1-bimpeaga-location', category: 'strength', description: 'Strategic Location (BIMP-EAGA) — Proximity to Sabah and ASEAN trade corridors.', impactScore: 4.19, likelihoodScore: 4.05, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'connectors' },
+  { id: 'bird-q9-s1-policy-recognition', category: 'strength', description: 'Growing Policy Recognition — Institutional mandates via BOL, BIC, SIPP, and BHIDP.', impactScore: 4.18, likelihoodScore: 4.0, aiGenerated: false, leveragePoint: 'LP3', beieCluster: 'cross-cutting' },
+  { id: 'bird-q5-s3-polloc-freeport', category: 'strength', description: 'Polloc Freeport & Economic Zone — Strategic logistics hub and trade gateway in Maguindanao del Norte.', impactScore: 4.22, likelihoodScore: 3.93, aiGenerated: false, leveragePoint: 'LP1', beieCluster: 'transformers' },
+  { id: 'bird-q6-s1-youth-pop', category: 'strength', description: 'Young, Growing Population — Demographic dividend with 3.43% annual growth (highest in PH).', impactScore: 4.11, likelihoodScore: 4.0, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'enablers' },
+  { id: 'bird-q5-s2-domestic-demand', category: 'strength', description: 'Domestic Halal Demand — 5.69M Muslim consumer base driving local market absorption.', impactScore: 4.07, likelihoodScore: 4.03, aiGenerated: false, leveragePoint: 'LP1', beieCluster: 'transformers' },
+  { id: 'bird-q5-s1-halal-legitimacy', category: 'strength', description: 'Halal Legitimacy & Cultural Credibility — Authentic Muslim-majority identity providing unmatched authenticity for halal branding.', impactScore: 4.01, likelihoodScore: 3.97, aiGenerated: false, leveragePoint: 'LP1', beieCluster: 'transformers' },
+  { id: 'bird-q8-s1-islamic-finance-framework', category: 'strength', description: 'Islamic Finance Legal Framework — RA 11439 enabling Shariah-compliant capital mobilization.', impactScore: 4.01, likelihoodScore: 3.94, aiGenerated: false, leveragePoint: 'LP4', beieCluster: 'financiers' },
+  { id: 'bird-q4-s3-lake-lanao', category: 'strength', description: 'Lake Lanao — Multi-purpose resource for freshwater supply, hydroelectric power, and eco-tourism opportunities in Lanao del Sur.', impactScore: 3.94, likelihoodScore: 3.93, aiGenerated: false, leveragePoint: 'LP5', beieCluster: 'foundations' },
+  { id: 'bird-q4-s2-renewable-energy', category: 'strength', description: 'Renewable Energy Endowments — BARMM has untapped hydro (Lake Lanao), solar, and biomass energy potential.', impactScore: 4.0, likelihoodScore: 3.84, aiGenerated: false, leveragePoint: 'LP5', beieCluster: 'foundations' },
+  { id: 'bird-q6-s2-lanao-growth', category: 'strength', description: 'Lanao del Sur\'s Growth Momentum — Currently BARMM\'s fastest-growing provincial economy (5.02% in 2023).', impactScore: 3.93, likelihoodScore: 3.84, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'enablers' },
+  { id: 'bird-q6-w3-literacy', category: 'weakness', description: 'Lowest Functional Literacy Rate — 59.3%, creating a severe human capital constraint.', impactScore: 4.31, likelihoodScore: 4.12, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'enablers' },
+  { id: 'bird-q6-w4-malnutrition', category: 'weakness', description: 'Severe Child Malnutrition — 45% stunting rate among children under five.', impactScore: 4.28, likelihoodScore: 4.03, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'enablers' },
+  { id: 'bird-q6-w1-infra-deficits', category: 'weakness', description: 'Critical Infrastructure Deficits — Energy, transport, digital, and water gaps.', impactScore: 4.26, likelihoodScore: 3.97, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'enablers' },
+  { id: 'bird-q6-w2-poverty', category: 'weakness', description: 'Highest Poverty Incidence — 34.8% limiting domestic market depth and purchasing power.', impactScore: 4.15, likelihoodScore: 3.97, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'enablers' },
+  { id: 'bird-q6-w5-skills-mismatch', category: 'weakness', description: 'Skills Mismatch — TVIs not fully aligned with emerging industry needs (e.g., halal manufacturing).', impactScore: 4.15, likelihoodScore: 3.96, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'enablers' },
+  { id: 'bird-q9-w2-underspending', category: 'weakness', description: 'Underspending in Budget Execution — Delays in development program rollout; absorptive capacity challenge. (Moved here from Enablers — official BEIE Attribution is OS: Moral Governance, not Enablers.)', impactScore: 4.06, likelihoodScore: 4.03, aiGenerated: false, leveragePoint: 'LP3', beieCluster: 'cross-cutting' },
+  { id: 'bird-q6-w6-tech-adoption', category: 'weakness', description: 'Low Technology Adoption — Slow uptake of modern farming and processing technologies.', impactScore: 4.05, likelihoodScore: 3.96, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'enablers' },
+  { id: 'bird-q5-w2-cold-chain', category: 'weakness', description: 'Limited Agro-Processing/Cold Chain — High post-harvest losses (20–40%) constraining value addition.', impactScore: 4.15, likelihoodScore: 3.83, aiGenerated: false, leveragePoint: 'LP1', beieCluster: 'transformers' },
+  { id: 'bird-q5-w3-market-linkages', category: 'weakness', description: 'Weak Market Linkages — Limited access to buyers and price information for producers.', impactScore: 4.06, likelihoodScore: 3.89, aiGenerated: false, leveragePoint: 'LP1', beieCluster: 'transformers' },
+  { id: 'bird-q4-w1-land-tenure', category: 'weakness', description: 'Complex Land Tenure (SGA) — The Special Geographic Area faces a difficult overlay of Ancestral Domain (CADT), private titles, and public land, creating friction for large-scale agro-industrial parks.', impactScore: 3.95, likelihoodScore: 3.87, aiGenerated: false, leveragePoint: 'LP5', beieCluster: 'foundations' },
+  { id: 'bird-q8-w1-financial-penetration', category: 'weakness', description: 'Minimal Formal Financial Penetration — Capital access barriers for MSMEs, especially in rural/island areas.', impactScore: 3.94, likelihoodScore: 3.85, aiGenerated: false, leveragePoint: 'LP4', beieCluster: 'financiers' },
+  { id: 'bird-q5-w1-halal-cert', category: 'weakness', description: 'Weak Halal Certification System — Resource-constrained BHB with limited international recognition.', impactScore: 3.96, likelihoodScore: 3.83, aiGenerated: false, leveragePoint: 'LP1', beieCluster: 'transformers' },
+  { id: 'bird-q9-w1-fragmented-policy', category: 'weakness', description: 'Fragmented Policy Frameworks — Governance coordination gaps and underspending in budget execution.', impactScore: 3.93, likelihoodScore: 3.82, aiGenerated: false, leveragePoint: 'LP3', beieCluster: 'cross-cutting' },
+  { id: 'bird-q6-w7-fragmented-data', category: 'weakness', description: 'Fragmented Data Systems — Agencies often use incompatible databases, leading to a siloed view that causes delayed procurement and slow certification cycles.', impactScore: 3.92, likelihoodScore: 3.82, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'enablers' },
+  { id: 'bird-q4-o1-renewable-invest', category: 'opportunity', description: 'Renewable Energy Investments — Growing interest in solar farms, hydro rehabilitation, and biomass projects aligning with BARMM\'s clean energy potential.', impactScore: 4.16, likelihoodScore: 4.13, aiGenerated: false, leveragePoint: 'LP5', beieCluster: 'foundations' },
+  { id: 'bird-q7-o1-global-halal', category: 'opportunity', description: 'Global Halal Market — USD 2.3 trillion market with growing demand.', impactScore: 4.19, likelihoodScore: 4.08, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'connectors' },
+  { id: 'bird-q6-o2-digital-leapfrog', category: 'opportunity', description: 'Digital Leapfrogging (BIFOSS) — Implementing the Bangsamoro Investment Facilitation One-Stop Shop for 1-day business registration.', impactScore: 4.17, likelihoodScore: 4.05, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'enablers' },
+  { id: 'bird-q7-o3-bimpeaga-integration', category: 'opportunity', description: 'BIMP-EAGA Regional Integration — Cross-border trade facilitation and eco-corridors.', impactScore: 4.12, likelihoodScore: 4.04, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'connectors' },
+  { id: 'bird-q7-o2-asean-halal', category: 'opportunity', description: 'ASEAN Halal Economy — USD 1.38 trillion addressable market; target to capture 30% share.', impactScore: 4.18, likelihoodScore: 3.94, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'connectors' },
+  { id: 'bird-q9-o2-climate-adaptation-finance', category: 'opportunity', description: 'Climate Adaptation Finance — Tawi-Tawi can leverage a $10 million Adaptation Fund synergy to boost the climate resiliency of coastal communities.', impactScore: 4.15, likelihoodScore: 3.93, aiGenerated: false, leveragePoint: 'LP3', beieCluster: 'cross-cutting' },
+  { id: 'bird-q7-o5-landbridge', category: 'opportunity', description: 'Mindanao Central Logistics Land-Bridge — SGA serves as the primary land bridge connecting Polloc Freeport to General Santos and Davao export gateways.', impactScore: 4.11, likelihoodScore: 3.93, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'connectors' },
+  { id: 'bird-q8-o1-islamic-ecosystem', category: 'opportunity', description: 'Islamic Finance Ecosystem — Growing global Shariah-compliant capital pool seeking ethical investments.', impactScore: 4.04, likelihoodScore: 3.96, aiGenerated: false, leveragePoint: 'LP4', beieCluster: 'financiers' },
+  { id: 'bird-q4-o3-pes', category: 'opportunity', description: 'Payment for Ecosystem Services (PES) — LGUs can earn income by protecting watersheds, coastlines, and mangroves — turning conservation into a revenue source.', impactScore: 4.09, likelihoodScore: 3.89, aiGenerated: false, leveragePoint: 'LP5', beieCluster: 'foundations' },
+  { id: 'bird-q4-o4-forestry-code', category: 'opportunity', description: 'Bangsamoro Forestry Code — Pending legislation could open sustainable timber, non-timber forest products (NTFPs), and forest nursery investments.', impactScore: 4.0, likelihoodScore: 3.94, aiGenerated: false, leveragePoint: 'LP5', beieCluster: 'foundations' },
+  { id: 'bird-q6-o1-tourism-recovery', category: 'opportunity', description: 'Tourism Recovery — Isabela City Tourism Champion (2024) and Lake Lanao eco-tourism potential.', impactScore: 3.92, likelihoodScore: 3.93, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'enablers' },
+  { id: 'bird-q7-o4-uae-corridor', category: 'opportunity', description: 'UAE/GCC Halal Export Corridor — MAFAR-Prime Group partnership opening Middle Eastern markets.', impactScore: 4.08, likelihoodScore: 3.77, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'connectors' },
+  { id: 'bird-q9-o1-postconflict', category: 'opportunity', description: 'Post-Conflict Reconstruction — Marawi MAA commercial redevelopment and normalization.', impactScore: 3.93, likelihoodScore: 3.86, aiGenerated: false, leveragePoint: 'LP3', beieCluster: 'cross-cutting' },
+  { id: 'bird-q4-o2-carbon-markets', category: 'opportunity', description: 'Carbon Markets & REDD+ — BARMM\'s forests and carbon stocks can be monetized through carbon credits, creating new revenue for communities and LGUs.', impactScore: 3.77, likelihoodScore: 3.59, aiGenerated: false, leveragePoint: 'LP5', beieCluster: 'foundations' },
+  { id: 'bird-q9-t3-security-incidents', category: 'threat', description: 'Residual Security Incidents — Rido, remnant armed groups, and investor perception risks.', impactScore: 4.22, likelihoodScore: 4.12, aiGenerated: false, leveragePoint: 'LP3', beieCluster: 'cross-cutting' },
+  { id: 'bird-q9-t1-climate-change', category: 'threat', description: 'Climate Change Vulnerabilities — El Niño, flooding, and shifting rainfall patterns (4.2% AFF contraction in 2024).', impactScore: 4.25, likelihoodScore: 4.01, aiGenerated: false, leveragePoint: 'LP3', beieCluster: 'cross-cutting' },
+  { id: 'bird-q7-t3-price-volatility', category: 'threat', description: 'Market Price Volatility — Global commodity fluctuations for rubber, coconut, and seaweed.', impactScore: 4.21, likelihoodScore: 4.09, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'connectors' },
+  { id: 'bird-q6-t2-infra-cost-overruns', category: 'threat', description: 'Infrastructure Cost Overruns — Delays and budget escalations in critical infrastructure projects can discourage investors and slow the build-out of roads, power, and ports.', impactScore: 4.28, likelihoodScore: 3.9, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'enablers' },
+  { id: 'bird-q9-t2-drifting-goals', category: 'threat', description: '"Drifting Goals" Syndrome — Political/institutional pressure leading to lowering standards rather than fixing root infrastructure problems.', impactScore: 4.13, likelihoodScore: 4.08, aiGenerated: false, leveragePoint: 'LP3', beieCluster: 'cross-cutting' },
+  { id: 'bird-q7-t1-halal-competition', category: 'threat', description: 'Competition from Halal Hubs — Malaysia, Indonesia, and Thailand holding established market share.', impactScore: 4.11, likelihoodScore: 3.9, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'connectors' },
+  { id: 'bird-q7-t2-economic-downturn', category: 'threat', description: 'Global Economic Downturn — Perceived as a top global risk, weakening demand for BARMM\'s key exports like Halal and rubber.', impactScore: 4.08, likelihoodScore: 3.94, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'connectors' },
+  { id: 'bird-q9-t4-political-transition', category: 'threat', description: 'Political Transition Uncertainties — First parliamentary elections and governance continuity risks.', impactScore: 4.04, likelihoodScore: 3.99, aiGenerated: false, leveragePoint: 'LP3', beieCluster: 'cross-cutting' },
+  { id: 'bird-q9-t5-natl-coordination', category: 'threat', description: 'Limited National Coordination — Gaps in BARMM-specific infrastructure funding from the national government.', impactScore: 4.08, likelihoodScore: 3.9, aiGenerated: false, leveragePoint: 'LP3', beieCluster: 'cross-cutting' },
+  { id: 'bird-q6-t1-cyber-insecurity', category: 'threat', description: 'Cyber Insecurity & AI Risks — Emerging threats from misinformation, cyberattacks, and adverse AI outcomes disrupting digital governance.', impactScore: 4.07, likelihoodScore: 3.86, aiGenerated: false, leveragePoint: 'LP2', beieCluster: 'enablers' },
+  { id: 'bird-q5-t1-standards-recognition', category: 'threat', description: 'Standards Recognition Risk — BARMM certifications not yet aligned with OIC/SMIIC international standards.', impactScore: 3.97, likelihoodScore: 3.92, aiGenerated: false, leveragePoint: 'LP1', beieCluster: 'transformers' },
+  { id: 'bird-q9-t6-fragmented-mandates', category: 'threat', description: 'Risk of Fragmented Mandates — Islamic banking, halal certification, and trade agencies operating in silos.', impactScore: 4.0, likelihoodScore: 3.71, aiGenerated: false, leveragePoint: 'LP3', beieCluster: 'cross-cutting' },
+  { id: 'bird-q4-t1-pestalotiopsis', category: 'threat', description: 'Rubber Pestalotiopsis Disease — A fungal disease is attacking rubber plantations in Basilan and could spread to other rubber-producing areas, threatening farmer livelihoods.', impactScore: 3.89, likelihoodScore: 3.81, aiGenerated: false, leveragePoint: 'LP5', beieCluster: 'foundations' },
+];
+
 interface SystemsThinkingProps {
   plan: StrategicPlan;
   onUpdateItem?: (id: string, updates: Partial<SWOTItem>) => void;
@@ -1938,14 +2071,22 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
     }
   }, []);
 
-  const swot = useMemo(() => ({
-    strengths:     plan.swotItems?.filter(i => i.category === 'strength')     || [],
-    weaknesses:    plan.swotItems?.filter(i => i.category === 'weakness')     || [],
-    opportunities: plan.swotItems?.filter(i => i.category === 'opportunity')  || [],
-    threats:       plan.swotItems?.filter(i => i.category === 'threat')       || [],
-  }), [plan.swotItems]);
+  // Fall back to the survey-scored baseline when the plan has no SWOT items, so
+  // scoring, archetype recommendation and CLD seeding run on real evidence.
+  const usingBaseline = !plan.swotItems?.length;
+  const evidenceItems = useMemo<SWOTItem[]>(
+    () => (plan.swotItems?.length ? plan.swotItems : BIRD_SWOT_BASELINE),
+    [plan.swotItems],
+  );
 
-  const allItems = plan.swotItems || [];
+  const swot = useMemo(() => ({
+    strengths:     evidenceItems.filter(i => i.category === 'strength'),
+    weaknesses:    evidenceItems.filter(i => i.category === 'weakness'),
+    opportunities: evidenceItems.filter(i => i.category === 'opportunity'),
+    threats:       evidenceItems.filter(i => i.category === 'threat'),
+  }), [evidenceItems]);
+
+  const allItems = evidenceItems;
 
   const sortedImpact = useMemo(() =>
     allItems.map(item => ({ ...item, total: (item.impactScore || 3) * (item.likelihoodScore || 3) }))
@@ -1995,7 +2136,125 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
         <p className="text-sm text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b]">Score SWOT factors, map causal loops, and apply systems archetypes</p>
       </div>
 
-      {/* Tab Bar */}
+      {/* ── Archetype Validation (Survey n=76) ────────────────────────────── */}
+      {usingBaseline && (
+        <div className="rounded-xl border border-[#C9A84C]/30 bg-[#064e3b]/10 dark:bg-[#022c22]/60 p-5">
+          <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+            <div>
+              <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">
+                Validation Survey · Sections 3–11
+              </span>
+              <h2 className="text-base font-bold text-[#E8C560] dark:text-[#ecfdf5]">
+                How Accurately Do These Archetypes Describe BARMM?
+              </h2>
+            </div>
+            <span className="text-xs text-[#64748b] dark:text-[#a7f3d0]/70 bg-[#C9A84C]/10 border border-[#C9A84C]/30 rounded-full px-3 py-1">
+              n = {SYSTEMS_SIGNALS.n} · {SYSTEMS_SIGNALS.window}
+            </span>
+          </div>
+
+          <div className="flex items-start gap-2 rounded-lg border border-red-500/35 bg-red-500/10 px-3 py-2 mb-4">
+            <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-red-500" />
+            <p className="text-[0.72rem] leading-relaxed text-red-600 dark:text-red-300">
+              <strong>Zero respondents from {SYSTEMS_SIGNALS.silentProvinces.join(', ')}.</strong> Non-probability
+              convenience sample — validation signals, not population estimates. Loops that depend on maritime or
+              island-province dynamics are unvalidated.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-1">
+            {ARCHETYPE_VALIDATION.map(a => {
+              const strong = a.meanScore >= 3.0;
+              const weak   = a.meanScore < 2.75;
+              const color  = strong ? '#10b981' : weak ? '#ef4444' : '#C9A84C';
+              return (
+                <div key={a.field} className="mb-2.5">
+                  <div className="flex justify-between items-baseline gap-2 mb-1">
+                    <span className="text-xs text-[#334155] dark:text-[#d1fae5]/85 truncate">
+                      {a.label}
+                      {a.archetypeId && (
+                        <span className="ml-1.5 text-[0.6rem] uppercase tracking-wider text-[#94a3b8] dark:text-[#ecfdf5]/30">
+                          {a.archetypeId}
+                        </span>
+                      )}
+                    </span>
+                    <span className="text-xs font-bold tabular-nums flex-shrink-0" style={{ color }}>
+                      {a.meanScore.toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-[#e2e8f0] dark:bg-white/10 overflow-hidden">
+                    <div
+                      className="h-full rounded-full transition-all duration-700"
+                      style={{ width: `${Math.max(2, (a.meanScore / 4) * 100)}%`, background: color }}
+                    />
+                  </div>
+                  <div className="text-[0.6rem] text-[#94a3b8] dark:text-[#ecfdf5]/28 mt-0.5">
+                    {a.pctAccurate}% rated it accurate or better · {a.pctRevision}% want revision · n={a.n}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-4 pt-4 border-t border-[#C9A84C]/20 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+            <div>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#C9A84C] mb-2">
+                Critical moral-governance lever
+              </h3>
+              {SYSTEMS_SIGNALS.moralGovernanceLever.map(m => (
+                <div key={m.label} className="mb-2">
+                  <div className="flex justify-between items-baseline gap-2 mb-1">
+                    <span className="text-xs text-[#334155] dark:text-[#d1fae5]/80 truncate">{m.label}</span>
+                    <span className="text-xs font-bold tabular-nums text-[#3b82f6]">{m.n}</span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-[#e2e8f0] dark:bg-white/10 overflow-hidden">
+                    <div className="h-full rounded-full bg-[#3b82f6]" style={{ width: `${(m.n / 42) * 100}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#10b981] mb-2">
+                Readiness by BEIE cluster (1–5)
+              </h3>
+              {SYSTEMS_SIGNALS.clusterReadiness.map(c => (
+                <div key={c.label} className="mb-2">
+                  <div className="flex justify-between items-baseline gap-2 mb-1">
+                    <span className="text-xs text-[#334155] dark:text-[#d1fae5]/80 truncate">{c.label}</span>
+                    <span
+                      className="text-xs font-bold tabular-nums"
+                      style={{ color: c.readiness < 3.45 ? '#ef4444' : '#10b981' }}
+                    >
+                      {c.readiness.toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-[#e2e8f0] dark:bg-white/10 overflow-hidden">
+                    <div
+                      className="h-full rounded-full"
+                      style={{
+                        width: `${(c.readiness / 5) * 100}%`,
+                        background: c.readiness < 3.45 ? '#ef4444' : '#10b981',
+                      }}
+                    />
+                  </div>
+                  <div className="text-[0.6rem] text-[#94a3b8] dark:text-[#ecfdf5]/28 mt-0.5">
+                    urgency {c.urgency.toFixed(2)} · gap +{(c.urgency - c.readiness).toFixed(2)} · n={c.n}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <p className="mt-4 text-xs text-[#475569] dark:text-[#ecfdf5]/55 leading-relaxed">
+            <strong>Two readings worth noting.</strong> The <em>Big Man / patronage</em> dynamic scores 3.22 —
+            among the highest-validated of any archetype, and respondents named <em>transparency</em> the critical
+            lever by a margin larger than the other three options combined. Conversely,{' '}
+            <em>Shifting the Burden</em> is the weakest at 2.50, with only 27.9% rating it accurate: the
+            dependency framing does not yet resonate and may need reworking before publication.
+          </p>
+        </div>
+      )}
+
       <div className="flex items-center gap-1 bg-[#064e3b]/20 dark:bg-[#022c22]/60 rounded-xl p-1 overflow-x-auto">
         {[
           { id: 'matrix', label: 'Matrix', Icon: LayoutDashboard },
