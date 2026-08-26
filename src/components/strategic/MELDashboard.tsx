@@ -31,7 +31,7 @@ import { PHASES, TOTAL_BUDGET }                            from '@/data/bird/pha
 //
 // SAMPLING CAVEAT: non-probability convenience sample, no weighting frame.
 // These are stakeholder validation signals, NOT population estimates. Basilan,
-// Sulu and Tawi-Tawi returned ZERO respondents and ~78% of the sample sits in
+// Basilan and Tawi-Tawi returned ZERO respondents and ~78% of the sample sits in
 // the Cotabato City / Maguindanao del Norte mainland corridor, so any island
 // province or BIMP-EAGA (Sequence C) reading here is unvalidated.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -50,7 +50,6 @@ const RESPONDENTS = {
     { label: 'Lanao del Sur',                 n:  3 },
     { label: 'Maguindanao del Sur',           n:  3 },
     { label: 'Basilan',                       n:  0 },
-    { label: 'Sulu',                          n:  0 },
     { label: 'Tawi-Tawi',                     n:  0 },
   ],
   coverageGap:
@@ -122,14 +121,30 @@ const KPI_IMPORTANCE = [
 ] as const;
 
 /**
- * Regional baseline — PSA-BARMM / MFBM 2023–2025. The five available provincial
- * outlook files cover ₱245.77B of the ₱292.4B 2023 regional total (84.1%);
- * ₱46.58B is Sulu, the SGA, and statistical residual.
+ * Regional baseline — PSA-BARMM / MFBM 2023–2025.
+ *
+ * GEOPOLITICAL FRAME (post-2024 BARMM). The region comprises FIVE provinces —
+ * Tawi-Tawi, Basilan (excluding Isabela City), Maguindanao del Norte,
+ * Maguindanao del Sur, Lanao del Sur — plus the Special Geographic Area and
+ * Cotabato City. SULU IS NOT PART OF BARMM.
+ *
+ * All five current provinces have an Economic & Investment Outlook file
+ * (₱245.77B, 2023). Only the SGA lacks a disaggregated series, so provincial
+ * coverage of the CURRENT region is complete, not 84%.
+ *
+ * CAVEAT ON PUBLISHED SHARES: the outlook files state MdN = 28.0% and
+ * LdS = 25.8% of BARMM, implying a ₱292.4B denominator. Five provinces total
+ * ₱245.77B, leaving ₱46.58B — too large for 63 SGA barangays. Those shares
+ * therefore predate Sulu's exit and are computed on the OLD region. Restated on
+ * the current denominator every provincial share rises ~15% (MdN ≈ 32.3%,
+ * LdS ≈ 29.7%). Do not quote the published shares as current.
  */
 const REGIONAL_TOTALS = {
-  gdp2024B: 299.5,
-  growth2024: 2.7,
-  coveragePct: 84.1,
+  gdp2024B: 299.5,          // ₱B — verify whether PSA has restated post-Sulu
+  growth2024: 2.7,          // %
+  provincesCovered: 5,      // of 5 current provinces
+  coveragePct: 100,         // provincial outlook coverage of the CURRENT region
+  sharesRestatementNeeded: true,
 } as const;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
