@@ -117,7 +117,7 @@ const Tooltip: React.FC<{
 //   threat      → Vulnerability Index VI   = (I^2 × L) / 25
 //
 // SAMPLING CAVEAT: non-probability convenience sample, no weighting frame.
-// Validation signals, NOT population estimates. Basilan, Sulu and Tawi-Tawi
+// Validation signals, NOT population estimates. Basilan and Tawi-Tawi
 // returned ZERO respondents; ~78% of the sample sits in the Cotabato City /
 // Maguindanao del Norte corridor. Island-province factors are unvalidated.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -185,7 +185,7 @@ const SURVEY_PROVENANCE = {
   n: 76,
   window: '3-20 August 2026',
   itemRange: '63-74',
-  silentProvinces: ['Basilan', 'Sulu', 'Tawi-Tawi'],
+  silentProvinces: ['Basilan', 'Tawi-Tawi'],
   note:
     'Non-probability convenience sample with no weighting frame - stakeholder validation signals, ' +
     'not population estimates. Around 78% of respondents are based in the Cotabato City / Maguindanao ' +
