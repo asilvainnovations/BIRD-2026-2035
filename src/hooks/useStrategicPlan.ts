@@ -1206,7 +1206,7 @@ export const useStrategicPlan = () => {
     removeSWOTItem,
     bulkAddSWOTItems,
 
-    // Strategy matrix
+    // Strategic options
     addStrategicOption,
     updateStrategicOption,
     removeStrategicOption,

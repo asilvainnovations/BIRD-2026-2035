@@ -272,6 +272,85 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
   );
 };
 
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BIRD 2026–2035 · PHASE-1 PAP BASELINE & CAPITAL ABSORPTION
+   ═══════════════════════════════════════════════════════════════════════════
+   GEOPOLITICAL FRAME (post-2024 BARMM): Tawi-Tawi, Basilan (excluding Isabela
+   City), Maguindanao del Norte, Maguindanao del Sur, Lanao del Sur, plus the
+   Special Geographic Area and Cotabato City. SULU IS NOT PART OF BARMM.
+
+   THE BINDING CONSTRAINT IS ABSORPTION, NOT CAPITAL. Infrastructure budget
+   execution stands at 80% (2024 baseline, 90% target). At 80%, ₱28B of the
+   ₱140B programme never converts to output. Lifting execution to 90% recovers
+   ₱14B — cheaper than raising new capital, and the reason budget-execution
+   PAPs sit on the critical path rather than in a back office.
+
+   THE ATTRIBUTION GAP. The ten named Phase-1 actions commit ₱9.20B against a
+   ₱35–45B Phase-1 envelope — 23% attributed, 77% sitting in unitemised
+   block-grant and ODA lines. For a roadmap seeking co-investors this is the
+   first thing a due-diligence reader will find.
+
+   BSC CASCADE. Learning & Growth → Internal Process → Stakeholder → Financial.
+   A PAP's BSC code says where in the causal chain it sits; Financial-tier work
+   scheduled ahead of its enablers is a sequencing error, not a late task.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const PHASE1_ENVELOPE = { lowB: 35, highB: 45, midB: 40 } as const;
+
+const ABSORPTION = {
+  executionRate: 80,        // %, kpis.ts 2024 baseline
+  targetRate: 90,           // %
+  programmeB: 140,          // ₱B, midpoint of ₱120–160B
+  leakageB: 28,             // ₱B lost at 80%
+  recoverableB: 14,         // ₱B recovered by reaching 90%
+} as const;
+
+/** Phase windows from phases.ts. Boundaries verified: ≤2028 / ≤2032 / after. */
+const PHASE_ENVELOPES = [
+  { num: '01', title: 'Foundation Building',              years: '2026–2028', budgetMid: 40.0, annualBurn: 13.33, share: 28.6, bsc: 'Learning & Growth → Internal Process' },
+  { num: '02', title: 'Acceleration',                     years: '2029–2032', budgetMid: 57.5, annualBurn: 14.38, share: 41.1, bsc: 'Internal Process → Stakeholder' },
+  { num: '03', title: 'Consolidation & Global Integration', years: '2033–2035', budgetMid: 42.5, annualBurn: 14.17, share: 30.4, bsc: 'Stakeholder → Financial' },
+] as const;
+
+/** Stakeholder budget priority (Section 13, n=71) vs ecosystem-implied share. */
+const BUDGET_PRIORITY = [
+  { cluster: 'Foundations',       votes: 29, stakeholderPct: 40.8, ecosystemPct: 20.1 },
+  { cluster: 'Operating Systems', votes: 15, stakeholderPct: 21.1, ecosystemPct: null },
+  { cluster: 'Connectors',        votes:  8, stakeholderPct: 11.3, ecosystemPct: 19.2 },
+  { cluster: 'Transformers',      votes:  8, stakeholderPct: 11.3, ecosystemPct: 20.4 },
+  { cluster: 'Enablers',          votes:  6, stakeholderPct:  8.5, ecosystemPct: 20.8 },
+  { cluster: 'Financiers',        votes:  5, stakeholderPct:  7.0, ecosystemPct: 19.5 },
+] as const;
+
+const PAP_SURVEY_FRAME = {
+  n: 76, fundingMixFair: 3.68, targetsRealistic: 3.80,
+  riskConcern: [
+    { tier: 'High-risk actions',   value: 4.30, n: 73 },
+    { tier: 'Medium-risk actions', value: 4.03, n: 73 },
+    { tier: 'Low-risk actions',    value: 3.69, n: 72 },
+  ],
+  silentProvinces: ['Basilan', 'Tawi-Tawi'],
+} as const;
+
+/**
+ * Ten Phase-1 priority actions — the same source as MEL Dashboard Panel C and
+ * the TeamCollaboration PAP picker, so all three views stay consistent.
+ * `progress` is published MEL status; `spent` is 0 because Phase 1 opens in 2026.
+ */
+const BIRD_PAP_BASELINE: PAP[] = [
+  { id: 'bird-pap-01', objectiveId: 'bird-obj-ip', papType: 'program', name: 'BHB Operationalisation & OIC/SMIIC Accreditation', description: 'LP1 · BSC IP3 · Transformers. Accreditation stands at 0% and gates the entire halal export pathway — critical path, not compliance. MSME certification: 500 of a 5,000 target.', owner: 'BHB', ownerName: 'Bangsamoro Halal Board', budget: 850_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-06-30', progress: 35, status: 'in-progress' },
+  { id: 'bird-pap-02', objectiveId: 'bird-obj-f',  papType: 'program', name: 'Bangsamoro Forestry Code Enactment', description: 'LP5 · BSC F4 · Foundations. Gates JMC 2026-01 and all carbon/PES revenue, currently ₱0 against a ₱500M target. Renewable monetisation is the highest-scoring opportunity in the register (RI 4.14).', owner: 'MENRE', ownerName: 'Ministry of Environment, Natural Resources and Energy', budget: 120_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-06-30', progress: 25, status: 'in-progress' },
+  { id: 'bird-pap-03', objectiveId: 'bird-obj-f',  papType: 'project', name: 'Bangsamoro Halal Park — Matanog Development', description: 'LP1 · BSC F1 · Transformers. Anchor conversion asset. Maguindanao del Sur holds 53% AFF against 11% industry — resource base without conversion capacity is the region-wide pattern this addresses.', owner: 'BBOI', ownerName: 'Bangsamoro Board of Investments', budget: 2_500_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-09-30', progress: 30, status: 'in-progress' },
+  { id: 'bird-pap-04', objectiveId: 'bird-obj-ip', papType: 'program', name: 'Digital Business Registration (BNR / BEGMP) Rollout', description: 'LP2 · BSC IP1 · Enablers. Registration time 5 days → 1. Digital backbones drew only 6 of 73 connectivity votes, yet this is the cheapest throughput gain in the portfolio.', owner: 'MTIT', ownerName: 'Ministry of Trade, Investments and Tourism', budget: 450_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-09-30', progress: 30, status: 'in-progress' },
+  { id: 'bird-pap-05', objectiveId: 'bird-obj-lg', papType: 'program', name: 'Functional Literacy & TVET-Industry Alignment', description: 'LP2 · BSC LG5 · Enablers. Literacy 59.3% → 75%. HIGHEST-RISK factor in the entire SWOT register (Risk 17.76, n=74). Human capital, not infrastructure, is the binding constraint.', owner: 'MBHTE', ownerName: 'Ministry of Basic, Higher and Technical Education', budget: 1_200_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-12-31', progress: 10, status: 'planned' },
+  { id: 'bird-pap-06', objectiveId: 'bird-obj-f',  papType: 'project', name: 'Zamboanga-Basilan Interconnection Project (ZBIP)', description: 'LP5 · BSC F2 · Foundations. ₱6.67B multi-year programme; Phase-1 tranche shown. Basilan: poverty 73.5% (2018) → 33.7% (2023) post-ASG. NOTE: zero validation-survey respondents from this province.', owner: 'MPW', ownerName: 'Ministry of Public Works', budget: 1_800_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-12-31', progress: 35, status: 'in-progress' },
+  { id: 'bird-pap-07', objectiveId: 'bird-obj-ip', papType: 'project', name: 'Cold Chain & Agro-Logistics Build-Out', description: 'LP2 · BSC IP4 · Enablers. 20–40% post-harvest losses (Workshop 1). Market-access assets drew 24 of 73 connectivity votes. Tawi-Tawi supplies 40% of national seaweed and exports it raw.', owner: 'MAFAR', ownerName: 'Ministry of Agriculture, Fisheries and Agrarian Reform', budget: 950_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-09-30', progress: 10, status: 'planned' },
+  { id: 'bird-pap-08', objectiveId: 'bird-obj-f',  papType: 'program', name: 'Sukuk & Islamic Finance Framework', description: 'LP4 · BSC F5 · Financiers. Islamic banking assets ₱2B → ₱20B. Stakeholders ranked Macro-Capital first for finance sequencing (36 of 64), but put awareness and literacy ahead of capital in Section 8.', owner: 'BTFO', ownerName: 'Bangsamoro Treasury and Finance Office', budget: 380_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-12-31', progress: 5, status: 'planned' },
+  { id: 'bird-pap-09', objectiveId: 'bird-obj-ip', papType: 'program', name: 'JMC No. 2026-01 — Carbon & PES Activation', description: 'LP5 · BSC IP6 · Foundations. MRV systems and LGU capacity. Revenue currently ₱0; 200 LGU staff to be trained on carbon accounting.', owner: 'MENRE', ownerName: 'Ministry of Environment, Natural Resources and Energy', budget: 280_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-09-30', progress: 10, status: 'planned' },
+  { id: 'bird-pap-10', objectiveId: 'bird-obj-s',  papType: 'program', name: 'Provincial Equity & Island-Province Facilitation Offices', description: 'LP3 · BSC S7 · Operating Systems. Inter-provincial disparity 3.9pp → 1.5pp and WIDENING. Compounded by an evidence gap: Basilan and Tawi-Tawi returned zero survey respondents, and they carry the entire Connectors thesis.', owner: 'BPDA', ownerName: 'Bangsamoro Planning and Development Authority', budget: 670_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-12-31', progress: 5, status: 'planned' },
+];
+
 const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdatePAP, onRemovePAP }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [viewMode, setViewMode] = useState('grid');
@@ -398,35 +477,41 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
   const handleUpdatePAP = (id: string, updates: Partial<PAP>) => {
     onUpdatePAP(id, updates);
     if (updates.status === 'delayed') {
-      const pap = plan.paps.find(p => p.id === id);
+      const pap = paps.find(p => p.id === id);
       if (pap) sendPapAlertEmail({ ...pap, ...updates } as PAP);
     }
   };
 
+  // Fall back to the Phase-1 baseline when the plan carries no PAPs of its own,
+  // so the register opens populated with the ten priority actions rather than
+  // an empty state. A user's own PAPs always take precedence.
+  const usingBaseline = !plan.paps?.length;
+  const paps = useMemo<PAP[]>(() => (plan.paps?.length ? plan.paps : BIRD_PAP_BASELINE), [plan.paps]);
+
   const filteredPAPs = useMemo(() => {
-    return plan.paps.filter((pap) => {
+    return paps.filter((pap) => {
       const matchesType = filterType === 'all' || pap.papType === filterType;
       const matchesStatus = filterStatus === 'all' || pap.status === filterStatus;
       const matchesSearch = pap.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                             (pap.ownerName || '').toLowerCase().includes(searchQuery.toLowerCase());
       return matchesType && matchesStatus && matchesSearch;
     });
-  }, [plan.paps, filterType, filterStatus, searchQuery]);
+  }, [paps, filterType, filterStatus, searchQuery]);
 
   const stats = useMemo(() => {
-    const totalBudget = plan.paps.reduce((sum, p) => sum + p.budget, 0);
-    const totalSpent = plan.paps.reduce((sum, p) => sum + p.spent, 0);
+    const totalBudget = paps.reduce((sum, p) => sum + p.budget, 0);
+    const totalSpent = paps.reduce((sum, p) => sum + p.spent, 0);
     const utilization = totalBudget > 0 ? (totalSpent / totalBudget) * 100 : 0;
     
     return {
       totalBudget,
       totalSpent,
       utilization,
-      inProgress: plan.paps.filter(p => p.status === 'in-progress').length,
-      completed: plan.paps.filter(p => p.status === 'completed').length,
-      delayed: plan.paps.filter(p => p.status === 'delayed').length,
+      inProgress: paps.filter(p => p.status === 'in-progress').length,
+      completed: paps.filter(p => p.status === 'completed').length,
+      delayed: paps.filter(p => p.status === 'delayed').length,
     };
-  }, [plan.paps]);
+  }, [paps]);
 
   const handleAddSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -518,7 +603,7 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
             <span className="text-[10px] font-bold text-[#64748b]/80 uppercase">Throughput</span>
           </div>
           <h3 className="text-2xl font-black text-slate-900">{stats.completed}</h3>
-          <p className="text-xs text-[#64748b] font-medium">{plan.paps.length} Total Registered PAPs</p>
+          <p className="text-xs text-[#64748b] font-medium">{paps.length} Total Registered PAPs</p>
         </div>
 
         <div className="bg-white dark:bg-[#022c22]/60/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
@@ -529,6 +614,133 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
           <h3 className="text-2xl font-black text-red-400">{stats.delayed}</h3>
           <p className="text-xs text-[#64748b] font-medium">{stats.inProgress} Currently In Progress</p>
         </div>
+      </div>
+
+      {usingBaseline && (
+        <div className="bg-[#064e3b]/10 dark:bg-[#022c22]/60 border border-[#C9A84C]/30 rounded-2xl p-5 space-y-5">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">
+                Phase 1 · Foundation Building · 2026–2028
+              </span>
+              <h3 className="text-base font-bold text-[#E8C560]">Capital Absorption &amp; Attribution</h3>
+            </div>
+            <span className="text-xs text-[#64748b] dark:text-[#a7f3d0]/70 bg-[#C9A84C]/10 border border-[#C9A84C]/30 rounded-full px-3 py-1">
+              ₱{PHASE1_ENVELOPE.lowB}–{PHASE1_ENVELOPE.highB}B envelope
+            </span>
+          </div>
+
+          {/* The attribution gap */}
+          <div>
+            <div className="flex justify-between items-baseline mb-1.5">
+              <span className="text-xs text-[#64748b]">Named actions vs Phase-1 envelope</span>
+              <span className="text-xs font-bold text-amber-400">
+                ₱{(stats.totalBudget / 1e9).toFixed(2)}B of ₱{PHASE1_ENVELOPE.midB}B ·{' '}
+                {((stats.totalBudget / 1e9 / PHASE1_ENVELOPE.midB) * 100).toFixed(0)}% attributed
+              </span>
+            </div>
+            <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+              <div className="h-full rounded-full bg-[#C9A84C]" style={{ width: `${(stats.totalBudget / 1e9 / PHASE1_ENVELOPE.midB) * 100}%` }} />
+            </div>
+            <p className="text-[0.68rem] text-[#64748b] mt-1.5 leading-relaxed">
+              The remaining {(100 - (stats.totalBudget / 1e9 / PHASE1_ENVELOPE.midB) * 100).toFixed(0)}% sits in
+              unitemised block-grant and ODA lines. For a roadmap seeking co-investors this is the first thing a
+              due-diligence reader will find, and it should be attributed before publication.
+            </p>
+          </div>
+
+          {/* Absorption — the binding constraint */}
+          <div className="rounded-lg border border-amber-500/35 bg-amber-500/[0.08] p-3">
+            <p className="text-[0.72rem] text-amber-700 dark:text-amber-300 leading-relaxed">
+              <strong>The constraint is absorption, not capital.</strong> Infrastructure budget execution stands at{' '}
+              {ABSORPTION.executionRate}% against a {ABSORPTION.targetRate}% target. At {ABSORPTION.executionRate}%, ₱
+              {ABSORPTION.leakageB}B of the ₱{ABSORPTION.programmeB}B programme never converts to output. Reaching{' '}
+              {ABSORPTION.targetRate}% recovers ₱{ABSORPTION.recoverableB}B — cheaper than raising new capital, and the
+              reason budget-execution PAPs belong on the critical path.
+            </p>
+          </div>
+
+          {/* Phase envelopes */}
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#C9A84C] mb-2">Three-phase capital profile</h4>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+              {PHASE_ENVELOPES.map(ph => (
+                <div key={ph.num} className={`rounded-lg border p-3 ${ph.num === '01' ? 'border-[#C9A84C]/50 bg-[#C9A84C]/[0.06]' : 'border-[#C9A84C]/20 bg-white/[0.02]'}`}>
+                  <div className="flex items-baseline gap-2 mb-1">
+                    <span className="text-xs font-bold text-[#E8C560]">Phase {ph.num}</span>
+                    <span className="text-[0.6rem] text-[#64748b]">{ph.years}</span>
+                  </div>
+                  <div className="text-sm font-bold text-[#C9A84C] mb-0.5">₱{ph.budgetMid}B · {ph.share}%</div>
+                  <div className="text-[0.6rem] text-[#64748b]/70 mb-1.5">₱{ph.annualBurn.toFixed(1)}B/yr</div>
+                  <div className="h-1 rounded-full bg-white/10 overflow-hidden mb-1.5">
+                    <div className="h-full rounded-full bg-[#C9A84C]/60" style={{ width: `${ph.share}%` }} />
+                  </div>
+                  <div className="text-[0.6rem] text-[#64748b]/70">{ph.bsc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Stakeholder budget priority vs ecosystem logic */}
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#C9A84C] mb-2">
+              Stakeholder budget priority vs ecosystem-implied allocation
+            </h4>
+            <div className="space-y-1.5">
+              {BUDGET_PRIORITY.map(b => (
+                <div key={b.cluster} className="flex items-center gap-3 text-xs">
+                  <span className="w-36 flex-shrink-0 text-[#64748b] truncate">{b.cluster}</span>
+                  <div className="flex-1 h-1.5 rounded-full bg-white/10 overflow-hidden">
+                    <div className="h-full rounded-full bg-[#3b82f6]/70" style={{ width: `${b.stakeholderPct}%` }} />
+                  </div>
+                  <span className="w-12 text-right tabular-nums text-[#3b82f6]">{b.stakeholderPct.toFixed(1)}%</span>
+                  <span className="w-12 text-right tabular-nums text-[#64748b]/60">
+                    {b.ecosystemPct !== null ? `${b.ecosystemPct.toFixed(1)}%` : '—'}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <p className="text-[0.68rem] text-[#64748b] mt-2 leading-relaxed">
+              Blue is stakeholder preference (Section 13, n=71); grey is the allocation implied by serial ecosystem
+              sensitivity. Stakeholders over-weight <strong className="text-[#E8C560]/80">Foundations by ~21pp</strong>{' '}
+              and under-weight <strong className="text-red-400">Enablers by ~12pp</strong> — yet Enablers is the binding
+              constraint. That is sectoral instinct; the ecosystem says fix the bottleneck first.
+            </p>
+          </div>
+
+          {/* Risk posture */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-red-400 mb-2">Risk concern (1–5)</h4>
+              {PAP_SURVEY_FRAME.riskConcern.map(r => (
+                <div key={r.tier} className="mb-2">
+                  <div className="flex justify-between items-baseline gap-2 mb-1">
+                    <span className="text-xs text-[#64748b]">{r.tier}</span>
+                    <span className="text-xs font-bold tabular-nums text-red-400">{r.value.toFixed(2)}</span>
+                  </div>
+                  <div className="h-1 rounded-full bg-white/10 overflow-hidden">
+                    <div className="h-full rounded-full bg-red-500/60" style={{ width: `${(r.value / 5) * 100}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="text-[0.72rem] text-[#64748b] leading-relaxed">
+              <p className="mb-2">
+                <strong className="text-[#E8C560]/80">Funding-mix fairness {PAP_SURVEY_FRAME.fundingMixFair}</strong> and{' '}
+                <strong className="text-[#E8C560]/80">target realism {PAP_SURVEY_FRAME.targetsRealistic}</strong> are the
+                two lowest-rated items in the entire instrument. Stakeholders accept the portfolio and doubt both its
+                distribution and its numbers.
+              </p>
+              <p>
+                Zero respondents from {PAP_SURVEY_FRAME.silentProvinces.join(' and ')}. Post-2024 BARMM comprises five
+                provinces plus the SGA and Cotabato City; Sulu is not part of the region.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="hidden">
       </div>
 
       <div className="flex items-center justify-between bg-white dark:bg-[#022c22]/60/60 p-3 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">

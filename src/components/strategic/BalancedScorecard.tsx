@@ -146,6 +146,82 @@ const BIRD_BSC_TEMPLATE_OBJECTS: BSCObjective[] = [
   { id: 'bird-l7', perspective: 'learning_growth', weight: 1, objective: 'L7: Align TESDA with Industry', description: 'TESDA-industry councils; skills forecasting; curriculum development', kpis: [{ id: 'bird-l7-k1', objectiveId: 'bird-l7', name: 'Training regulations developed', description: '', baselineValue: 0, targetValue: 15, currentValue: 0, unit: 'TRs', frequency: 'annually', owner: 'TESDA', status: 'on-track' }] },
 ];
 
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BIRD 2026–2035 · SCORECARD VALIDATION & CASCADE ARITHMETIC
+   ═══════════════════════════════════════════════════════════════════════════
+   GEOPOLITICAL FRAME (post-2024 BARMM): Tawi-Tawi, Basilan (excluding Isabela
+   City), Maguindanao del Norte, Maguindanao del Sur, Lanao del Sur, plus the
+   Special Geographic Area and Cotabato City. SULU IS NOT PART OF BARMM.
+
+   THE CASCADE IS CAUSAL, NOT DECORATIVE. Learning & Growth → Internal Process
+   → Stakeholder → Financial. Financial outcomes are LAGGING indicators of
+   capability built two tiers earlier, which is why they land in Phase 3 and
+   why nothing done in 2033–35 can rescue a Phase-1 capability failure.
+
+   THE FEASIBILITY QUESTION. GRDP must move ₱299.5B (2024) → ₱550B (2035):
+   5.68% CAGR against a 2.70% run-rate, a 2.98pp gap. At trend BARMM lands at
+   ₱401.5B — a ₱148.5B shortfall. ΔGRDP ₱250.5B against a ₱140B public envelope
+   implies an ICOR of 0.56, versus a 3.0–5.0 developing-economy benchmark. Public
+   capital is a CATALYST, not the driver: the scorecard only closes if approvals
+   compound at 10.30% CAGR and crowd in ~5.3x public spend.
+
+   Survey evidence: n=76, 3–20 August 2026. Non-probability convenience sample.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/** Section 12 perspective alignment, 1–5. Ordered by the causal cascade. */
+const BSC_VALIDATION = [
+  { tier: 1, key: 'learning_growth',  label: 'Learning & Growth', value: 4.32, n: 69,
+    role: 'Enabler — capability that must exist first',
+    reading: 'Highest-rated perspective, and the one carrying the highest-risk factor in the entire SWOT register: functional literacy (Risk 17.76, n=74).' },
+  { tier: 2, key: 'internal_process', label: 'Internal Process',  value: 4.12, n: 74,
+    role: 'Conversion — turns capability into throughput',
+    reading: 'Lowest-rated perspective, yet it holds the binding constraint. At 80% budget execution ₱28B of the ₱140B envelope never converts; reaching 90% recovers ₱14B.' },
+  { tier: 3, key: 'stakeholder',      label: 'Stakeholder',       value: 4.19, n: 74,
+    role: 'Outcome — what beneficiaries experience',
+    reading: 'Jobs, poverty and MSME certification. Provincial equity is the exposed KPI: disparity is widening at 3.9pp against a 1.5pp target.' },
+  { tier: 4, key: 'financial',        label: 'Financial',         value: 4.16, n: 71,
+    role: 'Lagging — realised economic return',
+    reading: 'GRDP, exports and Islamic-finance assets. These are consequences of Tiers 1–3, not independent levers, and they resolve last by design.' },
+] as const;
+
+const BSC_FRAMING = [
+  { label: 'BSC framework is useful', value: 4.16, n: 74 },
+  { label: 'Mission alignment',       value: 4.16, n: 74 },
+  { label: 'Vision is clear',         value: 4.05, n: 74 },
+  { label: 'Vision is achievable',    value: 3.93, n: 74 },
+] as const;
+
+/** Section 11 KPI category importance, 1–5. */
+const KPI_IMPORTANCE = [
+  { label: 'Peace & Security KPIs', value: 4.42, n: 69 },
+  { label: 'Inclusivity KPIs',      value: 4.25, n: 69 },
+  { label: 'Governance KPIs',       value: 4.23, n: 69 },
+  { label: 'Resilience KPIs',       value: 4.23, n: 66 },
+] as const;
+
+/** The arithmetic the scorecard has to satisfy. */
+const SCORECARD_MATH = {
+  grdpBase: 299.5, grdpTarget: 550, requiredCAGR: 5.68, runRate: 2.70,
+  trendLanding: 401.5, shortfall: 148.5, publicEnvelope: 140,
+  impliedICOR: 0.56, blendedICOR: 0.98, benchmarkICOR: '3.0–5.0',
+  crowdInMultiple: 5.3, approvalsCAGR: 10.30,
+  executionRate: 80, absorptionLeakage: 28,
+} as const;
+
+/** Phase in which each perspective's outcomes are expected to land. */
+const CASCADE_PHASING: Record<string, string> = {
+  learning_growth: 'Phase 1 · 2026–2028',
+  internal_process: 'Phase 1–2 · 2026–2032',
+  stakeholder: 'Phase 2–3 · 2029–2035',
+  financial: 'Phase 3 · 2033–2035',
+};
+
+const BSC_SURVEY_FRAME = {
+  n: 76, window: '3–20 August 2026',
+  silentProvinces: ['Basilan', 'Tawi-Tawi'],
+} as const;
+
 const calculateProgress = (kpi: KPI): number => {
   if (kpi.targetValue === kpi.baselineValue) return 0;
   const progress = ((kpi.currentValue - kpi.baselineValue) / (kpi.targetValue - kpi.baselineValue)) * 100;
@@ -941,6 +1017,114 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
         </div>
 
         {isPlanEmpty && (
+          <div className="bg-[#064e3b]/10 dark:bg-[#022c22]/60 border border-[#C9A84C]/30 rounded-xl p-5 space-y-5">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">
+                  Validation Survey · Sections 11–12
+                </span>
+                <h3 className="text-base font-bold text-[#E8C560]">Scorecard Validation &amp; Cascade Arithmetic</h3>
+              </div>
+              <span className="text-xs text-[#64748b] dark:text-[#a7f3d0]/70 bg-[#C9A84C]/10 border border-[#C9A84C]/30 rounded-full px-3 py-1">
+                n = {BSC_SURVEY_FRAME.n} · {BSC_SURVEY_FRAME.window}
+              </span>
+            </div>
+
+            {/* The feasibility arithmetic the scorecard must satisfy */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {[
+                { v: `${SCORECARD_MATH.requiredCAGR}%`, l: 'Required GRDP CAGR', s: `vs ${SCORECARD_MATH.runRate}% run-rate`, c: 'text-red-400' },
+                { v: `₱${SCORECARD_MATH.shortfall}B`, l: 'Shortfall at trend', s: `lands ₱${SCORECARD_MATH.trendLanding}B of ₱${SCORECARD_MATH.grdpTarget}B`, c: 'text-amber-400' },
+                { v: `${SCORECARD_MATH.impliedICOR}`, l: 'Implied ICOR', s: `benchmark ${SCORECARD_MATH.benchmarkICOR}`, c: 'text-red-400' },
+                { v: `${SCORECARD_MATH.crowdInMultiple}x`, l: 'Required crowd-in', s: 'private : public capital', c: 'text-[#C9A84C]' },
+              ].map(m => (
+                <div key={m.l} className="rounded-lg border border-[#C9A84C]/20 bg-white/[0.02] p-3">
+                  <div className={cn('text-xl font-bold', m.c)}>{m.v}</div>
+                  <div className="text-[0.66rem] text-[#64748b] uppercase tracking-wider">{m.l}</div>
+                  <div className="text-[0.6rem] text-[#64748b]/70 mt-0.5">{m.s}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Causal cascade — tier by tier */}
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#C9A84C] mb-2">
+                Causal cascade · Learning &amp; Growth → Internal Process → Stakeholder → Financial
+              </h4>
+              <div className="space-y-2">
+                {BSC_VALIDATION.map(t => (
+                  <div key={t.key} className="rounded-lg border border-[#C9A84C]/20 bg-white/[0.02] p-3">
+                    <div className="flex flex-wrap items-baseline gap-2 mb-1">
+                      <span className="px-1.5 py-0.5 rounded text-[0.6rem] font-bold bg-[#C9A84C]/15 text-[#C9A84C] border border-[#C9A84C]/30">
+                        T{t.tier}
+                      </span>
+                      <span className="text-sm font-semibold text-[#E8C560]">{t.label}</span>
+                      <span className="text-[0.62rem] text-[#64748b]/70">{CASCADE_PHASING[t.key]}</span>
+                      <span className={cn('ml-auto text-sm font-bold tabular-nums', t.value >= 4.2 ? 'text-[#34d399]' : 'text-[#C9A84C]')}>
+                        {t.value.toFixed(2)}
+                      </span>
+                    </div>
+                    <div className="h-1 rounded-full bg-white/10 overflow-hidden mb-1.5">
+                      <div className="h-full rounded-full bg-[#C9A84C]/60" style={{ width: `${(t.value / 5) * 100}%` }} />
+                    </div>
+                    <div className="text-[0.62rem] text-[#64748b]/70 italic mb-1">{t.role} · n={t.n}</div>
+                    <p className="text-[0.7rem] text-[#64748b] leading-relaxed">{t.reading}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#C9A84C] mb-2">Framework acceptance (1–5)</h4>
+                {BSC_FRAMING.map(r => (
+                  <div key={r.label} className="mb-2">
+                    <div className="flex justify-between items-baseline gap-2 mb-1">
+                      <span className="text-xs text-[#64748b]">{r.label}</span>
+                      <span className={cn('text-xs font-bold tabular-nums', r.value < 4.0 ? 'text-amber-400' : 'text-[#C9A84C]')}>{r.value.toFixed(2)}</span>
+                    </div>
+                    <div className="h-1 rounded-full bg-white/10 overflow-hidden">
+                      <div className={cn('h-full rounded-full', r.value < 4.0 ? 'bg-amber-500/70' : 'bg-[#C9A84C]/60')} style={{ width: `${(r.value / 5) * 100}%` }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#34d399] mb-2">KPI category importance (1–5)</h4>
+                {KPI_IMPORTANCE.map(r => (
+                  <div key={r.label} className="mb-2">
+                    <div className="flex justify-between items-baseline gap-2 mb-1">
+                      <span className="text-xs text-[#64748b]">{r.label}</span>
+                      <span className="text-xs font-bold tabular-nums text-[#34d399]">{r.value.toFixed(2)}</span>
+                    </div>
+                    <div className="h-1 rounded-full bg-white/10 overflow-hidden">
+                      <div className="h-full rounded-full bg-[#059669]/70" style={{ width: `${(r.value / 5) * 100}%` }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-amber-500/35 bg-amber-500/[0.08] p-3">
+              <p className="text-[0.72rem] text-amber-700 dark:text-amber-300 leading-relaxed">
+                <strong>The gap worth naming.</strong> Stakeholders endorse the <em>framework</em> (4.16) more readily
+                than the <em>targets</em>: vision achievability scores 3.93, the lowest item in the section. That is
+                consistent with the arithmetic — a 5.68% required CAGR against a 2.70% run-rate, and an implied ICOR of{' '}
+                {SCORECARD_MATH.impliedICOR} against a {SCORECARD_MATH.benchmarkICOR} benchmark. The scepticism is
+                well-founded, and the honest resolution is either a restated GRDP target or an explicit private-capital
+                mobilisation strategy carrying {SCORECARD_MATH.crowdInMultiple}x public spend.
+              </p>
+            </div>
+
+            <p className="text-[0.68rem] text-[#64748b]/80 leading-relaxed">
+              Non-probability convenience sample — validation signals, not population estimates. Zero respondents from{' '}
+              {BSC_SURVEY_FRAME.silentProvinces.join(' and ')}. Post-2024 BARMM comprises five provinces plus the SGA and
+              Cotabato City; Sulu is not part of the region.
+            </p>
+          </div>
+        )}
+
+        {isPlanEmpty && (
           <div className="bg-[#059669]/10 border border-[#059669]/20 rounded-xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="flex items-start gap-3">
               <Cloud className="w-6 h-6 text-[#34d399] flex-shrink-0 mt-0.5" />
@@ -970,7 +1154,7 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
                 {selectedStrategies.length} Selected Strateg{selectedStrategies.length === 1 ? 'y' : 'ies'} Available
               </h4>
               <p className="text-sm text-purple-400">
-                Your objectives will be automatically linked to relevant strategies from the Strategy Matrix.
+                Your objectives will be automatically linked to relevant strategies from Strategic Options.
               </p>
             </div>
           </div>

@@ -487,157 +487,13 @@ const categoryConfig = {
   threat:      { label: 'Threat',      icon: Zap,         color: 'amber',   bgColor: 'bg-amber-500/100',   lightBg: 'bg-amber-500/10',    textColor: 'text-amber-400',   borderColor: 'border-amber-500/20',   defaultCLDPolarity: '-' as '+' | '-' },
 };
 
-// ─── SCORE BUTTON ─────────────────────────────────────────────────────────────
+// ─── SWOT SCORING UI ──────────────────────────────────────────────────────────
+// The SWOT card, quadrant, score-row and priority-badge components were
+// TRANSFERRED TO StrategicOptions.tsx along with the Matrix and Impact views.
+// TOWS options are derived from scored SWOT factors, so the register now lives
+// beside the quadrants it generates. `categoryConfig` above stays here: the CLD
+// node renderer still uses it for node colouring.
 
-const ScoreButton: React.FC<{
-  value: number; selectedValue: number; onSelect: (v: number) => void;
-  type: 'impact' | 'likelihood'; category: keyof typeof categoryConfig;
-}> = ({ value, selectedValue, onSelect, type, category }) => {
-  const config = categoryConfig[category];
-  const isSelected = value <= selectedValue;
-  return (
-    <button onClick={() => onSelect(value)}
-      className={cn('w-7 h-7 rounded-full border-2 transition-all duration-150 flex items-center justify-center',
-        isSelected
-          ? type === 'impact'
-            ? config.defaultCLDPolarity === '+' ? 'border-[#059669] bg-[#059669]' : 'border-red-500 bg-red-500/100'
-            : 'border-[#C9A84C] bg-[#C9A84C]'
-          : 'border-[#C9A84C]/30 dark:border-[#C9A84C]/20 hover:border-slate-400 hover:bg-[#064e3b]/10 dark:bg-[#022c22]'
-      )} aria-label={`${type} score ${value}`}>
-      {isSelected && <Check className='w-3.5 h-3.5 text-white' />}
-    </button>
-  );
-};
-
-const ScoreRow: React.FC<{
-  label: string; score: number; onChange: (v: number) => void;
-  type: 'impact' | 'likelihood'; category: keyof typeof categoryConfig;
-  readOnly?: boolean; labelColor?: string;
-}> = ({ label, score, onChange, type, category, readOnly, labelColor }) => (
-  <div className='flex items-center gap-2 flex-wrap'>
-    <span className={cn('text-xs font-semibold w-16 shrink-0', labelColor || 'text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b]')}>{label}</span>
-    <div className='flex gap-1'>
-      {[1, 2, 3, 4, 5].map(n => (
-        <ScoreButton key={n} value={n} selectedValue={score} onSelect={readOnly ? () => {} : onChange} type={type} category={category} />
-      ))}
-    </div>
-    <span className={cn('text-xs font-bold tabular-nums', labelColor || 'text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b]')}>{score}/5</span>
-  </div>
-);
-
-const PriorityBadge: React.FC<{ totalScore: number; category: keyof typeof categoryConfig }> = ({ totalScore, category }) => {
-  const PRIORITY_GUIDE = [
-    { level: 'Low',      range: '1–9',   color: 'text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b]', bg: 'bg-[#064e3b]/20 dark:bg-[#022c22]/60', border: 'border-[#C9A84C]/20 dark:border-[#C9A84C]/20' },
-    { level: 'Medium',   range: '10–15', color: 'text-[#C9A84C]',  bg: 'bg-[#C9A84C]/10',  border: 'border-[#C9A84C]/20' },
-    { level: 'High',     range: '16–20', color: 'text-amber-400', bg: 'bg-amber-500/100/10', border: 'border-amber-500/20' },
-    { level: 'Critical', range: '21–25', color: 'text-red-400',   bg: 'bg-red-500/100/10',   border: 'border-red-500/20' },
-  ];
-
-  const getPriorityInfo = (score: number) => {
-    if (score <= 9)  return PRIORITY_GUIDE[0];
-    if (score <= 15) return PRIORITY_GUIDE[1];
-    if (score <= 20) return PRIORITY_GUIDE[2];
-    return PRIORITY_GUIDE[3];
-  };
-
-  const priority = getPriorityInfo(totalScore);
-  return (
-    <span className={cn('px-2 py-0.5 rounded-full text-xs font-bold border', priority.bg, priority.color, priority.border)}>
-      {priority.level} · {totalScore}
-    </span>
-  );
-};
-
-// ─── SWOT CARD ────────────────────────────────────────────────────────────────
-
-const SWOTCard: React.FC<{
-  item: SWOTItem; config: typeof categoryConfig.strength;
-  onUpdate?: (id: string, updates: Partial<SWOTItem>) => void;
-  onAddToCLD?: (item: SWOTItem) => void; compact?: boolean;
-}> = ({ item, config, onUpdate, onAddToCLD, compact }) => {
-  const imp = item.impactScore || 3;
-  const lik = item.likelihoodScore || 3;
-  const total = imp * lik;
-  if (compact) {
-    return (
-      <div className={cn('rounded-lg p-3 border transition-all', config.lightBg, config.borderColor)}>
-        <p className={cn('text-sm font-medium mb-2 leading-snug', config.textColor)}>{item.description}</p>
-        <div className='flex items-center justify-between flex-wrap gap-2'>
-          <div className='flex gap-3 text-xs text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b]'>
-            <span>Impact <span className={cn('font-bold', config.textColor)}>{imp}</span></span>
-            <span>Likelihood <span className='font-bold text-[#C9A84C]'>{lik}</span></span>
-          </div>
-          <div className='flex items-center gap-2'>
-            <PriorityBadge totalScore={total} category={item.category} />
-            {onAddToCLD && (
-              <button onClick={() => onAddToCLD(item)} title='Add to CLD'
-                className='p-1 rounded bg-[#C9A84C]/10 text-[#C9A84C] hover:bg-blue-200 transition-colors'>
-                <Plus className='w-3 h-3' />
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
-  return (
-    <div className={cn('rounded-xl p-4 border transition-all', config.lightBg, config.borderColor)}>
-      <div className='flex items-start justify-between gap-2 mb-3'>
-        <p className={cn('text-sm font-medium leading-relaxed', config.textColor)}>{item.description}</p>
-        <span className={cn('px-2 py-0.5 rounded text-xs font-bold text-white shrink-0', config.bgColor)}>
-          {config.defaultCLDPolarity === '+' ? '+' : '−'}{total}
-        </span>
-      </div>
-      <div className='space-y-2 pt-3 border-t border-[#C9A84C]/20 dark:border-[#C9A84C]/20/60'>
-        <ScoreRow label='Impact' score={imp} onChange={v => onUpdate?.(item.id, { impactScore: v })} type='impact' category={item.category} labelColor={config.textColor} />
-        <ScoreRow label='Likelihood' score={lik} onChange={v => onUpdate?.(item.id, { likelihoodScore: v })} type='likelihood' category={item.category} />
-        <div className='flex items-center justify-between pt-1 border-t border-[#C9A84C]/20 dark:border-[#C9A84C]/20/40'>
-          <span className='text-xs text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b]'>Impact × Likelihood</span>
-          <div className='flex items-center gap-2'>
-            <PriorityBadge totalScore={total} category={item.category} />
-            {onAddToCLD && (
-              <button onClick={() => onAddToCLD(item)}
-                className='flex items-center gap-1 text-xs px-2 py-1 rounded bg-[#C9A84C]/10 text-[#C9A84C] hover:bg-blue-200 transition-colors font-medium'>
-                <GitBranch className='w-3 h-3' /> Add to CLD
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// ─── SWOT QUADRANT ────────────────────────────────────────────────────────────
-
-const SWOTQuadrant: React.FC<{
-  title: string; count: number; icon: React.ElementType; items: SWOTItem[];
-  config: typeof categoryConfig.strength;
-  onUpdate?: (id: string, updates: Partial<SWOTItem>) => void;
-  onAddToCLD?: (item: SWOTItem) => void;
-}> = ({ title, count, icon: Icon, items, config, onUpdate, onAddToCLD }) => {
-  const [open, setOpen] = useState(true);
-  return (
-    <div className={cn('rounded-xl border overflow-hidden', config.borderColor)}>
-      <button onClick={() => setOpen(v => !v)} className={cn('w-full flex items-center justify-between px-4 py-3', config.lightBg)}>
-        <div className='flex items-center gap-2'>
-          <Icon className={cn('w-4 h-4', config.textColor)} />
-          <h4 className={cn('font-semibold text-sm', config.textColor)}>{title}</h4>
-          <span className={cn('text-xs px-1.5 py-0.5 rounded-full font-medium', config.bgColor, 'text-white')}>{count}</span>
-        </div>
-        {open ? <ChevronUp className='w-4 h-4 text-[#64748b]/80 dark:text-[#64748b]' /> : <ChevronDown className='w-4 h-4 text-[#64748b]/80 dark:text-[#64748b]' />}
-      </button>
-      {open && (
-        <div className='p-3 space-y-2 bg-white dark:bg-[#022c22]/60/60/60'>
-          {items.length === 0
-            ? <p className='text-xs text-[#64748b]/80 dark:text-[#64748b] text-center py-4'>No items yet</p>
-            : items.map(item => <SWOTCard key={item.id} item={item} config={config} onUpdate={onUpdate} onAddToCLD={onAddToCLD} compact />)
-          }
-        </div>
-      )}
-    </div>
-  );
-};
 
 // ─── EDUCATIONAL RESOURCES ────────────────────────────────────────────────────
 
@@ -1924,7 +1780,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
     toggleArchetype,
   } = useStrategicPlan();
 
-  const [viewMode,           setViewMode]           = useState<'matrix' | 'impact' | 'cld'>('matrix');
+  const [viewMode,           setViewMode]           = useState<'cld'>('cld');
   const [showGuide,          setShowGuide]          = useState(false);
   const [selectedArchId,     setSelectedArchId]     = useState<string | null>(null);
   const [highlightedNodeIds, setHighlightedNodeIds] = useState<string[]>([]);
@@ -2087,11 +1943,6 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
   }), [evidenceItems]);
 
   const allItems = evidenceItems;
-
-  const sortedImpact = useMemo(() =>
-    allItems.map(item => ({ ...item, total: (item.impactScore || 3) * (item.likelihoodScore || 3) }))
-      .sort((a, b) => b.total - a.total),
-  [allItems]);
 
   const recommendArchetypes = useMemo(() => {
     const s = allItems.filter(i => i.category === 'strength');
@@ -2257,9 +2108,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
 
       <div className="flex items-center gap-1 bg-[#064e3b]/20 dark:bg-[#022c22]/60 rounded-xl p-1 overflow-x-auto">
         {[
-          { id: 'matrix', label: 'Matrix', Icon: LayoutDashboard },
-          { id: 'impact', label: 'Impact', Icon: AlertTriangle },
-          { id: 'cld',    label: 'CLD',    Icon: GitBranch },
+          { id: 'cld', label: 'Causal Loop Diagram', Icon: GitBranch },
         ].map(({ id, label, Icon }) => (
           <button key={id} onClick={() => setViewMode(id as typeof viewMode)}
             className={cn('flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors flex-1 justify-center',
@@ -2286,49 +2135,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
         </div>
       )}
 
-      {/* ── MATRIX VIEW ── */}
-      {viewMode === 'matrix' && (
-        <div className="space-y-3">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <SWOTQuadrant title="Strengths"     count={swot.strengths.length}     icon={Shield}      items={swot.strengths}     config={categoryConfig.strength}    onUpdate={onUpdateItem} onAddToCLD={addItemToCLD} />
-            <SWOTQuadrant title="Weaknesses"    count={swot.weaknesses.length}    icon={AlertCircle} items={swot.weaknesses}    config={categoryConfig.weakness}    onUpdate={onUpdateItem} onAddToCLD={addItemToCLD} />
-            <SWOTQuadrant title="Opportunities" count={swot.opportunities.length} icon={Lightbulb}   items={swot.opportunities} config={categoryConfig.opportunity} onUpdate={onUpdateItem} onAddToCLD={addItemToCLD} />
-            <SWOTQuadrant title="Threats"       count={swot.threats.length}       icon={Zap}         items={swot.threats}       config={categoryConfig.threat}      onUpdate={onUpdateItem} onAddToCLD={addItemToCLD} />
-          </div>
-        </div>
-      )}
 
-      {/* ── IMPACT VIEW ── */}
-      {viewMode === 'impact' && (
-        <div className="space-y-3">
-          <h3 className="font-semibold text-sm text-[#E8C560]/90 dark:text-[#ecfdf5]/90 flex items-center gap-2"><AlertTriangle className="w-4 h-4 text-amber-500" /> Ranked by Priority Score</h3>
-          {sortedImpact.length === 0 ? (
-            <p className="text-sm text-[#64748b]/80 dark:text-[#64748b] text-center py-8">No SWOT items to display yet.</p>
-          ) : sortedImpact.map((item, idx) => {
-            const cfg  = categoryConfig[item.category];
-            const Icon = cfg.icon;
-            return (
-              <div key={item.id} className="bg-white dark:bg-[#022c22]/60/60 rounded-xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 p-4 space-y-3">
-                <div className="flex items-start gap-3">
-                  <span className="text-xs font-bold text-[#64748b]/80 dark:text-[#64748b] w-6 shrink-0 mt-0.5">#{idx + 1}</span>
-                  <div className={cn('p-1.5 rounded-lg shrink-0', cfg.bgColor)}><Icon className="w-3.5 h-3.5 text-white" /></div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-2 flex-wrap mb-2">
-                      <span className={cn('text-xs font-semibold', cfg.textColor)}>{cfg.label}</span>
-                      <PriorityBadge totalScore={item.total} category={item.category} />
-                    </div>
-                    <p className="text-sm text-[#E8C560]/90 dark:text-[#ecfdf5]/90">{item.description}</p>
-                  </div>
-                </div>
-                <div className="pl-9 space-y-2">
-                  <ScoreRow label="Impact"     score={item.impactScore     || 3} onChange={v => onUpdateItem?.(item.id, { impactScore: v })}     type="impact"     category={item.category} labelColor={cfg.textColor} />
-                  <ScoreRow label="Likelihood" score={item.likelihoodScore || 3} onChange={v => onUpdateItem?.(item.id, { likelihoodScore: v })} type="likelihood" category={item.category} />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
 
       {/* ── CLD VIEW ── */}
       {viewMode === 'cld' && (

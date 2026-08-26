@@ -18,7 +18,7 @@ const SettingsPage         = lazy(() => import('./settings/SettingsPage'));
 const MELDashboard         = lazy(() => import('./strategic/MELDashboard'));
 const SWOTAnalysis         = lazy(() => import('./strategic/SWOTAnalysis'));
 const SystemsThinking      = lazy(() => import('./strategic/SystemsThinking'));
-const StrategyMatrix       = lazy(() => import('./strategic/StrategyMatrix'));
+const StrategicOptions     = lazy(() => import('./strategic/StrategicOptions'));
 const BalancedScorecard    = lazy(() => import('./strategic/BalancedScorecard'));
 const PAPsManagement       = lazy(() => import('./strategic/PAPsManagement'));
 const PlanExport           = lazy(() => import('./strategic/PlanExport'));
@@ -139,7 +139,7 @@ const AppLayout: React.FC = () => {
       case 'systems':
         return <SystemsThinking {...common} onUpdateItem={updateSWOTItem} />;
       case 'strategy':
-        return <StrategyMatrix {...common} onAddOption={addStrategicOption} onUpdateOption={updateStrategicOption} onRemoveOption={removeStrategicOption} onBulkAdd={bulkAddStrategicOptions} />;
+        return <StrategicOptions {...common} onAddOption={addStrategicOption} onUpdateOption={updateStrategicOption} onRemoveOption={removeStrategicOption} onBulkAdd={bulkAddStrategicOptions} onUpdateSWOTItem={updateSWOTItem} />;
       case 'scorecard':
         return <BalancedScorecard {...common} onAddObjective={addObjective} onUpdateObjective={updateObjective} onRemoveObjective={removeObjective} onAddKPI={addKPI} onUpdateKPI={updateKPI} onRemoveKPI={removeKPI} />;
       case 'paps':

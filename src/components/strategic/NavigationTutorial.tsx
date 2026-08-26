@@ -126,7 +126,7 @@ const NAV_CATALOG: Record<string, NavElement> = {
   },
   "nav-item-strategy": {
     id: "nav-item-strategy",
-    label: "Strategy Matrix",
+    label: "Strategic Options",
     location: "sidebar",
     description: "SO/ST/WO/WT Options. Generate strategic options from your diagnostic data using the TOWS matrix. Turn insights into board-ready investment strategies with 7-criteria scoring.",
     shortDesc: "SO/ST/WO/WT Options",
@@ -485,7 +485,7 @@ const TUTORIAL_STEPS: TutorialStep[] = [
       "Assess Foundations, Transformers, Enablers, Connectors, and Financiers",
       "AI-assisted factor discovery suggests relevant items from BARMM sector data",
       "Real-time RI (Readiness Index) and Risk scoring with formula-driven outputs",
-      "Results feed directly into the Strategy Matrix for TOWS generation",
+      "Results feed directly into Strategic Options for TOWS generation",
     ],
     gradient: "from-[#C9A84C] via-[#B8942E] to-[#7a5c1e]",
     accentFrom: "#C9A84C",
@@ -515,9 +515,9 @@ const TUTORIAL_STEPS: TutorialStep[] = [
     phaseColor: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
   },
 
-  // ── 6. Strategy Matrix ──
+  // ── 6. Strategic Options ──
   {
-    title: "Strategy Matrix",
+    title: "Strategic Options",
     subtitle: "SO/ST/WO/WT Strategic Options",
     description: NAV_CATALOG["nav-item-strategy"].description,
     icon: Sparkles,

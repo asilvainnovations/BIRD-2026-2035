@@ -116,7 +116,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
     coverPage: true,
     executiveSummary: true,
     swotAnalysis: true,
-    strategyMatrix: true,
+    strategicOptionsSection: true,
     balancedScorecard: true,
     papsOverview: true,
     systemsThinking: true,
@@ -145,7 +145,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
     { id: 'executiveSummary', label: 'Executive Summary', icon: Target, description: 'Vision, mission, and strategic intent' },
     { id: 'swotAnalysis', label: 'SWOT Analysis', icon: BarChart3, description: 'Environmental analysis with impact scores' },
     { id: 'systemsThinking', label: 'Systems Thinking', icon: Network, description: 'Causal Loops & Archetypes' },
-    { id: 'strategyMatrix', label: 'Strategy Matrix', icon: CheckCircle2, description: 'SO/ST/WO/WT strategic options' },
+    { id: 'strategicOptionsSection', label: 'Strategic Options', icon: CheckCircle2, description: 'SO/ST/WO/WT strategic options' },
     { id: 'balancedScorecard', label: 'Balanced Scorecard', icon: Target, description: 'Objectives and KPIs by perspective' },
     { id: 'papsOverview', label: 'PAPs Overview', icon: FolderKanban, description: 'Programs, activities, and projects' },
     { id: 'appendix', label: 'Appendix', icon: FileSpreadsheet, description: 'Upload detailed data tables and charts' },
@@ -292,9 +292,9 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
       }
     }
 
-    if (selectedSections.strategyMatrix) {
+    if (selectedSections.strategicOptionsSection) {
       content += `${'='.repeat(60)}\n`;
-      content += `STRATEGY MATRIX (TOWS)\n`;
+      content += `STRATEGIC OPTIONS (TOWS)\n`;
       content += `${'='.repeat(60)}\n\n`;
       
       ['SO', 'ST', 'WO', 'WT'].forEach((type) => {
@@ -405,7 +405,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
     content += `    province findings are UNVALIDATED.\n`;
     content += `  * SMALL CELLS: Lanao del Sur (n=3) and Maguindanao del Sur (n=3)\n`;
     content += `    cannot support province-level claims.\n`;
-    content += `  * STRATEGY MATRIX: 25 of 75 respondents left all 28 scoring cells\n`;
+    content += `  * STRATEGIC OPTIONS: 25 of 75 respondents left all 28 scoring cells\n`;
     content += `    at the slider default; 65.5% of cells are midpoint-contaminated.\n`;
     content += `    Quote the differentiator subset (n=29), not the full sample.\n`;
     content += `  * PROVINCIAL COVERAGE: the five available outlook files cover\n`;
@@ -830,11 +830,11 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
               )}
               
               {/* Strategy Summary */}
-              {selectedSections.strategyMatrix && (
+              {selectedSections.strategicOptionsSection && (
                 <div className="print:break-after-page">
                   <h2 className="text-xl font-bold text-[#E8C560] mb-4 flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5 text-[#C9A84C]" />
-                    Strategy Matrix (TOWS)
+                    Strategic Options (TOWS)
                   </h2>
                   <div className="space-y-3">
                     {editablePlan.strategicOptions

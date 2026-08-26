@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
-import { supabase } from '@/lib/supabase';
 import { X, Send, Loader2, ChevronDown, ChevronUp, Brain, Target, BarChart3, Globe2, Leaf, Landmark } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { generateLocalResponse } from '@/lib/localKnowledgeEngine';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface Msg {
@@ -21,15 +21,15 @@ const AI_LOGO_URL = 'https://appimize.app/assets/apps/user_1097/images/2c7d825bf
 // ─── Contextual Suggestion Sets ───────────────────────────────────────────────
 const VIEW_SUGGESTIONS: Record<string, { icon: React.ElementType; label: string }[]> = {
   dashboard: [
-    { icon: BarChart3, label: 'Why is BARMM\'s GRDP growing slower than the PDP 5% target?' },
+    { icon: BarChart3, label: "Why is BARMM's GRDP growing slower than the PDP 5% target?" },
     { icon: Target,   label: 'Which Phase 1 milestones are most time-critical in 2026?' },
     { icon: Globe2,   label: 'How does the ₱5.1B investment approval figure compare to BIMP-EAGA peers?' },
     { icon: Brain,    label: 'Explain the R1 Investment–Development virtuous cycle for BARMM.' },
   ],
   swot: [
-    { icon: Target,   label: 'Draft 3 SWOT strengths for BARMM\'s halal sector.' },
+    { icon: Target,   label: "Draft 3 SWOT strengths for BARMM's halal sector." },
     { icon: Brain,    label: 'What is the Resilience Index (RI) formula used in BIRD scoring?' },
-    { icon: Globe2,   label: 'What are the biggest threats to BARMM\'s investment climate?' },
+    { icon: Globe2,   label: "What are the biggest threats to BARMM's investment climate?" },
     { icon: Leaf,     label: 'How does environmental stewardship create economic opportunity in BARMM?' },
   ],
   systems: [
@@ -52,8 +52,8 @@ const VIEW_SUGGESTIONS: Record<string, { icon: React.ElementType; label: string 
   ],
   strategy: [
     { icon: Brain,    label: 'What is the BEIE Framework and how does it organize BARMM sectors?' },
-    { icon: Globe2,   label: 'Suggest 3 SO strategies for BARMM\'s halal tourism opportunity.' },
-    { icon: Target,   label: 'How should BARMM respond to Malaysia\'s halal hub competition (ST)?' },
+    { icon: Globe2,   label: "Suggest 3 SO strategies for BARMM's halal tourism opportunity." },
+    { icon: Target,   label: "How should BARMM respond to Malaysia's halal hub competition (ST)?" },
     { icon: Landmark, label: 'What WT strategies address poverty reduction through investment?' },
   ],
   default: [
@@ -64,50 +64,6 @@ const VIEW_SUGGESTIONS: Record<string, { icon: React.ElementType; label: string 
   ],
 };
 
-// ─── BIRD AI System Prompt Context ───────────────────────────────────────────
-const BIRD_SYSTEM_CONTEXT = `You are BIRD AI — an expert strategic advisor embedded in the BIRD 2026–2035 
-(Bangsamoro Investment Roadmap Development) platform, built for the Bureau of Investments – Ministry of Trade, 
-Industry and Tourism (BOI-MTIT) of the Bangsamoro Autonomous Region in Muslim Mindanao (BARMM), Philippines.
-
-Your expertise spans:
-1. INVESTMENT & FINANCE: FDI attraction, Islamic finance (takaful, waqf, murabaha), halal industry economics, 
-   green bonds, carbon markets, REDD+, PES, and BIMP-EAGA trade economics.
-2. STRATEGIC THINKING: Balanced Scorecard (BSC), SWOT analysis with Resilience Index scoring, Strategy Matrix 
-   (SO/ST/WO/WT), Monitoring-Evaluation-Learning (MEL), and program/project management.
-3. SYSTEMS THINKING: Causal Loop Diagrams (CLDs), Meadows Leverage Points (L1-L10), Systems Archetypes 
-   (Fixes that Fail, Shifting the Burden, Success to the Successful, Growth & Underinvestment, Escalation, 
-   Big Man, Tragedy of the Commons), Iceberg Model, and deep presencing methodology.
-4. BARMM CONTEXT: Deep knowledge of BARMM's 7 provinces (Lanao del Sur, Maguindanao del Norte/Sur, Basilan, 
-   Sulu, Tawi-Tawi, SGA), provincial economic profiles (GRDP ₱299.5B 2024, 2.7% growth), the Bangsamoro 
-   Economic and Investment Ecosystem (BEIE) Framework (Foundations, Transformers, Enablers, Connectors, 
-   Financiers), Islamic governance (moral governance, khalifa), peace-building context, and halal economy.
-5. REGULATORY ARCHITECTURE: BOL (RA 11054), CREATE MORE Act, RA 11439 (Islamic Banking), BDP 2023-2028, 
-   BHIDP 2025-2030, BSEMP, BEGMP, Forestry Code, JMC 2026-01, OIC/SMIIC standards, BIMP-EAGA EGL Plan.
-
-Key data facts you know precisely:
-- BARMM population: 5.69M (PSA 2025)
-- GRDP: ₱299.5B (2024); Services 42%, AFF 32.4%, Industry 25.6%
-- Poverty incidence: 34.8% (1H 2023), down from 55.9% in 2018
-- Investment approvals: ₱5.1B (Q1 2026)
-- Fastest growing provinces: Maguindanao del Norte (4.1%), Lanao del Sur (4.0%)
-- Island provinces (Tawi-Tawi 1.1%, Sulu 1.13%, Basilan 1.6%) suffer underinvestment
-- Halal-certified firms: ~500 (2024), target 5,000+ by 2035
-- Electrification: ~75% (target 100% by 2035); ZBIP = ₱6.67B key project
-- Broadband: <30% (target 85% by 2035)
-- Total BIRD budget: ₱120-160B across 3 phases
-- Phase 1 (2026-28): ₱35-45B; Phase 2 (2029-32): ₱50-65B; Phase 3 (2033-35): ₱35-50B
-
-The 5 Leverage Points (LP) for BIRD:
-- LP1: Halal Certification Integrity (OIC/SMIIC accreditation) — Critical
-- LP2: Infrastructure & Human Capital (ZBIP, BSEMP, BEGMP, TVET) — Critical
-- LP3: Governance & Investor Confidence (BICC, moral governance) — High
-- LP4: Islamic Finance Mobilization (Al-Amanah, Takaful, Waqf) — High
-- LP5: Green Economy Activation (JMC 2026-01, Forestry Code, REDD+) — High
-
-Respond with practical insight, cite BIRD data sources when relevant, and always connect 
-recommendations to specific leverage points, BSC perspectives, or systems archetypes. 
-Use a collegial, professional tone. Where appropriate, structure responses with clear headers.`;
-
 // ─── Component ────────────────────────────────────────────────────────────────
 const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeView }) => {
   const [open, setOpen]       = useState(false);
@@ -117,7 +73,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
   const [messages, setMessages] = useState<Msg[]>([{
     role: 'assistant',
     content:
-      'As-salamu alaykum! I\'m the BIRD AI — your investment, strategy & systems-thinking consultant for the Bangsamoro Investment Roadmap 2026–2035.\n\nI can help you analyze SWOT data, explain causal loops, identify leverage points, draft strategic options, and interpret BARMM\'s economic context.\n\nWhat would you like to explore?',
+      "As-salamu alaykum! I'm the BIRD Local Intelligence Engine — your offline-capable strategy consultant for the Bangsamoro Investment Roadmap 2026–2035.\n\nI can help you analyze SWOT data, explain causal loops, identify leverage points, draft strategic options, and interpret BARMM's economic context — all without external AI services.\n\nWhat would you like to explore?",
     timestamp: Date.now(),
   }]);
   const endRef    = useRef<HTMLDivElement>(null);
@@ -136,121 +92,39 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
     [activeView],
   );
 
+  /**
+   * LOCAL INTELLIGENCE — replaces supabase.functions.invoke()
+   * Uses embedded knowledge base from:
+   *   • public/user-manual.html  (17 sections)
+   *   • README.md                (BEIE Framework, Architecture)
+   *   • src/lib/utils.ts         (BIRD mathematical formulas)
+   *
+   * Zero network calls. 100% offline-capable. Deterministic.
+   */
   const send = useCallback(async (text: string) => {
     const q = text.trim();
     if (!q || loading) return;
 
-    const history = messages.slice(-12).map(({ role, content }) => ({ role, content }));
+    // Push user message immediately
     setMessages((p) => [...p, { role: 'user', content: q, timestamp: Date.now() }]);
     setInput('');
     setLoading(true);
 
-    try {
-      // Build enriched plan context for AI
-      const planContext = plan
-        ? {
-            name: plan.name,
-            organization: plan.organization,
-            vision: plan.vision,
-            planningPeriod: `${plan.planningPeriodStart}–${plan.planningPeriodEnd}`,
-            swotItemCount: plan.swotItems?.length || 0,
-            objectiveCount: plan.objectives?.length || 0,
-            papCount: plan.paps?.length || 0,
-          }
-        : undefined;
+    // Simulate brief "thinking" delay for UX (local responses are instant)
+    await new Promise((res) => setTimeout(res, 350 + Math.random() * 250));
 
-      // Use Supabase Edge Functions invoke (recommended approach)
-      // This automatically handles auth tokens, CORS, and error handling
-      const { data, error } = await supabase.functions.invoke('ai-strategy-assistant', {
-        body: {
-          action: 'chat',
-          systemContext: BIRD_SYSTEM_CONTEXT,
-          data: {
-            message: q,
-            activeView: activeView || 'general',
-            messages: history,
-            birdContext: {
-              phase: 'Phase 1: Foundation Building (2026-2028)',
-              currentYear: new Date().getFullYear(),
-            },
-          },
-          plan: planContext,
-        },
-      });
+    // Build context for local knowledge engine
+    const history = messages.slice(-12).map(({ role, content }) => ({ role, content }));
 
-      if (error) {
-        throw new Error(`Edge function error: ${error.message}`);
-      }
+    const reply = generateLocalResponse({
+      query: q,
+      activeView: activeView || 'default',
+      plan,
+      history,
+    });
 
-      // ── RESPONSE FORMAT HANDLING ───────────────────────────────────────
-      // The Edge Function returns: { success: true, data: { reply: string, markdown: string } }
-      // The supabase.functions.invoke() unwraps the HTTP response, so `data` is the JSON body.
-      // Therefore: data = { success: true, data: { reply: "...", markdown: "..." } }
-      // We need to access: data.data.reply OR data.data.markdown
-      // ───────────────────────────────────────────────────────────────────
-
-      // Handle the nested { success, data } wrapper from the Edge Function
-      const responsePayload = data as any;
-      
-      // Validate the response structure
-      if (!responsePayload || typeof responsePayload !== 'object') {
-        throw new Error('Invalid response format from AI service');
-      }
-
-      // Check for Edge Function-level errors
-      if (responsePayload.success === false) {
-        const errorMessage = responsePayload.error || 'Unknown error from AI service';
-        throw new Error(errorMessage);
-      }
-
-      // Extract the actual AI response data
-      // The Edge Function returns: { success: true, data: { reply: "...", markdown: "..." } }
-      const aiData = responsePayload.data;
-      
-      if (!aiData || typeof aiData !== 'object') {
-        throw new Error('Missing AI response data');
-      }
-
-      // Extract reply from various possible formats
-      const reply =
-        typeof aiData.reply === 'string' ? aiData.reply :
-        typeof aiData.markdown === 'string' ? aiData.markdown :
-        typeof aiData === 'string' ? aiData : // Fallback: if data is a plain string
-        'Sorry, I could not generate a response right now. Please try again.';
-
-      setMessages((p) => [...p, { role: 'assistant', content: reply, timestamp: Date.now() }]);
-    } catch (err: any) {
-      console.error('[BIRD AI] Error:', err);
-      
-      // Determine user-friendly error message
-      let errorMessage: string;
-      const errMsg = err?.message?.toLowerCase() || '';
-      
-      if (errMsg.includes('403') || errMsg.includes('401') || errMsg.includes('unauthorized')) {
-        errorMessage = 'Authentication failed. Please sign in again to use BIRD AI.';
-      } else if (errMsg.includes('404') || errMsg.includes('not found')) {
-        errorMessage = 'The AI service is not deployed. Please contact the administrator to deploy the ai-strategy-assistant Edge Function.';
-      } else if (errMsg.includes('429') || errMsg.includes('rate limit')) {
-        errorMessage = 'AI rate limit reached. Please wait a moment and try again.';
-      } else if (errMsg.includes('502') || errMsg.includes('503') || errMsg.includes('service')) {
-        errorMessage = 'The AI service is temporarily unavailable. Please try again in a moment.';
-      } else if (errMsg.includes('invalid response') || errMsg.includes('missing')) {
-        errorMessage = 'Received an invalid response from the AI service. Please try again.';
-      } else {
-        errorMessage = 'I had trouble reaching the AI service. Please check your connection and try again. If the issue persists, the AI edge function may need to be redeployed.';
-      }
-
-      setMessages((p) => [
-        ...p,
-        {
-          role: 'assistant',
-          content: errorMessage,
-          timestamp: Date.now(),
-        },
-      ]);
-    } finally {
-      setLoading(false);
-    }
+    setMessages((p) => [...p, { role: 'assistant', content: reply, timestamp: Date.now() }]);
+    setLoading(false);
   }, [messages, loading, activeView, plan]);
 
   const handleKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -262,11 +136,11 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
   // ── Render ────────────────────────────────────────────────────────────────
   return (
     <>
-      {/* ── FAB Button — Circular Logo Only (No Sparkles) ────────────────── */}
+      {/* ── FAB Button — Circular Logo Only ─────────────────────────────── */}
       {!open && (
         <button
           onClick={() => { setOpen(true); setMin(false); }}
-          aria-label="Open AI Strategy Assistant"
+          aria-label="Open BIRD Local Intelligence"
           className={cn(
             'fixed bottom-5 right-5 z-50 flex items-center justify-center',
             'w-14 h-14 rounded-full overflow-hidden',
@@ -299,7 +173,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
             minimized ? 'h-14' : 'h-[72vh] max-h-[600px]',
           )}
           role="dialog"
-          aria-label="BIRD AI Strategy Assistant"
+          aria-label="BIRD Local Intelligence Engine"
         >
           {/* Header */}
           <div className="flex items-center justify-between gap-2 px-4 py-3 bg-gradient-to-r from-[#B8942E] via-[#A08028] to-[#C9A84C] text-white flex-shrink-0">
@@ -319,7 +193,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
               </div>
               <div className="min-w-0">
                 <p className="font-bold text-sm leading-tight">BIRD AI</p>
-                <p className="text-[10px] text-white/70 truncate">BARMM Investment & Strategy Expert</p>
+                <p className="text-[10px] text-white/70 truncate">Local Intelligence · Offline Capable</p>
               </div>
               {loading && (
                 <div className="flex items-center gap-1 bg-white/10 rounded-full px-2 py-0.5">
@@ -475,7 +349,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
               {/* Footer note */}
               <div className="px-4 py-1.5 bg-card border-t border-border/30 flex-shrink-0">
                 <p className="text-[10px] text-muted-foreground/50 text-center">
-                  BIRD AI · BOI-MTIT, BARMM 
+                  BIRD Local Intelligence · BOI-MTIT, BARMM · Offline Capable
                 </p>
               </div>
             </>

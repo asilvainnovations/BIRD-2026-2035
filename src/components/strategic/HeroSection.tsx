@@ -26,7 +26,7 @@ const features = [
   { icon: LayoutDashboard, title: 'MEL Dashboard', description: 'Monitor, evaluate, and learn in one place with live status and insights.', color: 'from-[#C9A84C] to-[#B8942E]' },
   { icon: Target, title: 'SWOT Analysis', description: 'Guided forms ensure complete, consistent environmental diagnostics.', color: 'from-emerald-500 to-teal-600' },
   { icon: Network, title: 'Systems Thinking', description: 'Visualize non-linear relationships across SWOT elements to surface leverage points.', color: 'from-pink-500 to-rose-600' },
-  { icon: Sparkles, title: 'Strategy Matrix', description: 'Auto-derive SO, ST, WO, and WT strategic options aligned to your context.', color: 'from-amber-500 to-orange-600' },
+  { icon: Sparkles, title: 'Strategic Options', description: 'Auto-derive SO, ST, WO, and WT strategic options aligned to your context.', color: 'from-amber-500 to-orange-600' },
   { icon: BarChart3, title: 'Balanced Scorecard', description: 'Smart categorization into four perspectives with automated KPI tracking.', color: 'from-[#C9A84C] to-indigo-600' },
   { icon: FolderKanban, title: 'PAPs Management', description: 'Track Programs, Activities, and Projects with automated budget totaling.', color: 'from-teal-500 to-[#B8942E]' },
   { icon: FileText, title: 'Plan Generator', description: 'Produce print-ready, professional reports for official documentation.', color: 'from-[#64748b] to-[#022c22]/80' },

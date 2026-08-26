@@ -25,7 +25,7 @@ const mainMenuItems = [
   { id: 'dashboard', label: 'MEL Dashboard', icon: LayoutDashboard, description: 'Monitor, Evaluate, Learn' },
   { id: 'swot', label: 'SWOT Analysis', icon: Target, description: 'Structured Diagnostics' },
   { id: 'systems', label: 'Systems Thinking', icon: Network, description: 'Visualize Relationships' },
-  { id: 'strategy', label: 'Strategy Matrix', icon: Sparkles, description: 'SO/ST/WO/WT Options' },
+  { id: 'strategy', label: 'Strategic Options', icon: Sparkles, description: 'SO/ST/WO/WT Options' },
   { id: 'scorecard', label: 'Balanced Scorecard', icon: BarChart3, description: 'Objectives & KPIs' },
   { id: 'paps', label: 'PAPs Management', icon: FolderKanban, description: 'Programs & Projects' },
   { id: 'templates', label: 'Templates Library', icon: Layers, description: 'Reusable Plan Templates' },
