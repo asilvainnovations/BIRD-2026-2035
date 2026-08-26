@@ -154,9 +154,7 @@ interface ResourceItem {
   id: number;
   title: string;
   url: string;
-  type: 'video' | 'article' | 'prototype' | 'document' | 'dashboard' | 'outlook';
-  duration?: string;
-  meta?: string;
+  type: 'video' | 'article' | 'prototype' | 'document';
   category: string;
   description: string;
 }
@@ -172,122 +170,20 @@ const getWindowProperty = <T,>(name: string, defaultValue: T): T => {
   return defaultValue;
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// BIRD 2026–2035 · RESOURCE LIBRARY
-// ═══════════════════════════════════════════════════════════════════════════════
-// Mirrors the canonical library published at public/resources.html so the BIRD
-// App and the BIRD Validation Survey Platform surface the SAME resource set to
-// the same stakeholders. Update both when a resource is added or retired.
-// ─────────────────────────────────────────────────────────────────────────────
-
 const RESOURCES: ResourceItem[] = [
-  // ── Core Navigation ───────────────────────────────────────────────────────
-  { id: 1, title: 'Home — Bangsamoro Investment Roadmap', url: 'https://bangsamoro-investment-roadmap.asilvainnovations.com', type: 'dashboard', category: 'Core Navigation', description: 'Official home page for the BIRD 2026–2035 initiative: the decade-long strategic vision, key statistics, and quick access to all platform resources.' },
-  { id: 2, title: 'MEL Dashboard', url: 'https://bird-dashboard.asilvainnovations.com', type: 'dashboard', category: 'Core Navigation', description: 'Monitoring, Evaluation & Learning. Real-time tracking of implementation progress, KPI performance, investment approvals, and provincial economic indicators.' },
-  { id: 3, title: 'Contact & Investment Inquiries', url: 'https://bird-contact.asilvainnovations.com', type: 'dashboard', category: 'Core Navigation', description: 'Direct contact channels with BOI-MTIT BARMM for investment facilitation, stakeholder engagement, and technical assistance.' },
-
-  // ── Provincial Economic and Investment Outlooks ───────────────────────────
-  { id: 10, title: 'Lanao del Sur', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/lanao-delsur-outlook.html', type: 'outlook', category: 'Provincial Outlooks', meta: 'GDP growth 2023: 5.02% · GDP share 25.8% · Pop. 1.2M · Key sector: Services', description: 'Post-Conflict Recovery & Growth Leader. Second-largest economy and highest 2023 real growth in BARMM.' },
-  { id: 11, title: 'Maguindanao del Norte', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/maguindanao-delnorte-outlook.html', type: 'outlook', category: 'Provincial Outlooks', meta: 'GDP growth 2024: 4.1% · GDP share 28% · Pop. 1.2M+ · Key sector: Halal Industry', description: 'BARMM Administrative & Economic Center. Largest provincial economy; hosts Cotabato City and the Bangsamoro Halal Park.' },
-  { id: 12, title: 'Maguindanao del Sur', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/maguindanao-delsur-outlook.html', type: 'outlook', category: 'Provincial Outlooks', meta: '24 municipalities · Pop. 800K+ · Poverty incidence 53.0% · Key sector: Agriculture', description: 'Agricultural Heartland & Rice Producer. The clearest agro-processing value-addition gap in the region.' },
-  { id: 13, title: 'Special Geographic Area', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/sga-outlook.html', type: 'outlook', category: 'Provincial Outlooks', meta: '63 barangays · 8 new municipalities · BARMM direct governance · Key sector: Agro-Industrial', description: '8 New Municipalities & Cross-Provincial Hub. Land tenure and CADT overlay is the binding constraint on park siting.' },
-  { id: 14, title: 'Tawi-Tawi', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/tawi-tawi-outlook.html', type: 'outlook', category: 'Provincial Outlooks', meta: '40% national seaweed share · Pop. 439K · 390 islands · Key sector: Marine/Aquaculture', description: 'Seaweed Capital & BIMP-EAGA Gateway. Note: returned zero validation-survey respondents.' },
-  { id: 15, title: 'Basilan', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/basilan-outlook.html', type: 'outlook', category: 'Provincial Outlooks', meta: 'Poverty 55.9%→29.8% · ZBIP ₱6.67B · ASG-free 2024 · Key sector: Rubber/Coconut', description: 'Peace Dividend & Rubber Industry. Note: returned zero validation-survey respondents.' },
-
-  // ── Video Resource Library ────────────────────────────────────────────────
-  { id: 20, title: 'Bangsamoro Investment Roadmap 2026–2035', url: 'https://youtu.be/UCi2dVUmSbE', type: 'video', category: 'Video Library', duration: '7 mins', description: "How BIRD positions BARMM as Southeast Asia's hub for resilient, ethical and sustainable investment — growth momentum, risks ahead, and the strategic response." },
-  { id: 21, title: 'Regional Context and Outlook', url: 'https://youtu.be/Li7lpyWWMcE', type: 'video', category: 'Video Library', duration: '6 mins', description: "A deep dive into Bangsamoro's evolving economic landscape, policy environment, and investment ecosystem." },
-  { id: 22, title: 'SWOT Analysis & Systems Mapping Explained', url: 'https://youtu.be/LSmBzwyX2uw', type: 'video', category: 'Video Library', duration: '8 mins', description: 'Breaks down the SWOT analysis and uses systems mapping to show how strategic investments reshape the region.' },
-  { id: 23, title: 'Strategic Options & Path to Growth', url: 'https://youtu.be/kb_snh8mo1k', type: 'video', category: 'Video Library', duration: '7 mins', description: "The strategic choices shaping BARMM's roadmap, and how priorities fuel inclusive growth and regional competitiveness." },
-  { id: 24, title: 'Systems Thinking: From Checklists to an Interconnected Ecosystem', url: 'https://youtu.be/VBAHk0WYz_c?si=sbA9QhA4M791C1ET', type: 'video', category: 'Video Library', duration: '4 mins', description: 'How BIRD turns fragmented efforts into a unified engine of growth — shifting from checklists to interconnected strategy.' },
-  { id: 25, title: 'Bangsamoro Economic & Investment Ecosystem (BEIE) Framework', url: 'https://youtu.be/0J491Vqya_4', type: 'video', category: 'Video Library', duration: '3 mins', description: 'How the BEIE Framework transforms BARMM into a resilient, ethical and globally connected hub.' },
-
-  // ── Strategic Framework ───────────────────────────────────────────────────
-  { id: 30, title: 'BEIE Framework for Grade Six Pupils', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/student-guide.html', type: 'document', category: 'Strategic Framework', description: 'Age-appropriate introduction to the BEIE Framework — economic systems, investment concepts and sustainability for young learners.' },
-  { id: 31, title: 'Metrics Architecture for Benchmarking', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/kpi.html', type: 'document', category: 'Strategic Framework', description: 'KPI framework and performance indicators: Pareto KPIs, Balanced Scorecard indicators, and provincial economic metrics.' },
-  { id: 32, title: 'Ecosystem Framework (IEB)', url: 'https://asilvainnovations.github.io/barmm-investment-roadmap/ieb.html', type: 'document', category: 'Strategic Framework', description: 'The Investment Ecosystem Blueprint underpinning the five BEIE clusters and the cross-cutting operating system.' },
-
-  // ── Planning & Roadmap ────────────────────────────────────────────────────
-  { id: 40, title: 'Strategic Options — HEDS, GEMS, IFES, IEDS', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/options.html', type: 'document', category: 'Planning & Roadmap', description: 'Analysis of the four development pathways. IEDS is the recommended strategy and is independently validated first by stakeholders (7.39/10 vs 8.93 expert).' },
-  { id: 41, title: 'Investment Roadmap 2026–2035', url: 'https://bird-roadmap.asilvainnovations.com', type: 'document', category: 'Planning & Roadmap', description: 'The 10-year roadmap: phased implementation, ₱120–160B budget allocation, priority investment corridors, and milestone targets.' },
-  { id: 42, title: '1-Year Action Plan (2026)', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/action-plan.html', type: 'document', category: 'Planning & Roadmap', description: 'Priority programmes, activities and projects for 2026 with lead agencies, budgets, timelines and performance indicators.' },
-
-  // ── Data Visualisations & Analytics ───────────────────────────────────────
-  { id: 50, title: 'BARMM Actors and Value Network', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/actors-value-network.html', type: 'prototype', category: 'Data & Analytics', description: 'Interactive network mapping the relationships between stakeholders, institutions and value chains in the investment ecosystem.' },
-  { id: 51, title: '10-Year Roadmap Simulation', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/roadmap.html', type: 'prototype', category: 'Data & Analytics', description: 'Dynamic visualisation of key economic indicators and investment priorities across BARMM provinces, 2026 to 2035.' },
-
-  // ── Digital Tools & Platforms ─────────────────────────────────────────────
-  { id: 60, title: 'BIRD App', url: 'https://bird-app.asilvainnovations.com', type: 'prototype', category: 'Digital Tools', description: 'The interactive BIRD web application — ecosystem data, strategic pillars, and the full 2026–2035 platform.' },
-  { id: 61, title: 'BIRD App User Manual', url: 'https://bird-user-manual.asilvainnovations.com', type: 'document', category: 'Digital Tools', description: 'Step-by-step manual for SWOT, Systems Thinking, Balanced Scorecard, PAPs and the MEL Dashboard. For BOI-MTIT and BARMM strategic planners.' },
-
-  // ── Stakeholder Engagement ────────────────────────────────────────────────
-  { id: 70, title: 'Validation Survey Instrument', url: 'https://bird-survey.asilvainnovations.com', type: 'prototype', category: 'Stakeholder Engagement', meta: '76 responses · 3–20 Aug 2026', description: 'The official validation survey collecting stakeholder feedback on strategic assumptions, BEIE cluster dynamics, systems archetypes and investment priorities. The sister platform to this app.' },
-  { id: 71, title: 'Validation Survey Orientation', url: 'https://bird-survey-orientation.asilvainnovations.com', type: 'document', category: 'Stakeholder Engagement', description: 'Orientation briefing for BOI-MTIT staff on survey methodology, technical architecture and deployment protocols.' },
-  { id: 72, title: 'Resource Library (Full)', url: 'https://bird-resources.asilvainnovations.com', type: 'document', category: 'Stakeholder Engagement', description: 'The complete published resource library — the canonical source this tab mirrors.' },
-
-  // ── Systems Thinking Learning Path ────────────────────────────────────────
-  { id: 80, title: 'The Iceberg Model: Why SWOT Listing Is Not Enough', url: 'https://youtu.be/y6h2_EcOOcM?si=3DWAm3dMJ7LzOjAS', type: 'video', category: 'Systems Thinking', description: 'Why surface-level analysis fails and how to see deeper systemic structures.' },
-  { id: 81, title: 'Causal Loop Diagrams', url: 'https://youtu.be/tTo06jbSZ4M?si=mSyIfuUvpeXPsrW', type: 'video', category: 'Systems Thinking', description: 'Visual tools for mapping feedback loops and system behaviour.' },
-  { id: 82, title: 'Systems Archetypes', url: 'https://youtu.be/zRmEh-PMvWo?si=DnxR-3n4I-382hKT', type: 'video', category: 'Systems Thinking', description: 'Common recurring systemic patterns and their dynamics — the eleven archetypes validated in the BIRD survey.' },
-  { id: 83, title: 'Leverage Points (Meadows)', url: 'https://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/', type: 'article', category: 'Systems Thinking', description: "Donella Meadows' seminal essay on the intervention hierarchy underpinning LP1–LP5." },
-  { id: 84, title: 'What is a Balanced Scorecard', url: 'https://youtu.be/OLdlpeMVmuk?si=mhHAWJr-UisjyV8P', type: 'video', category: 'Systems Thinking', description: 'Foundational overview of the Balanced Scorecard framework used in Chapters 5–6.' },
-
-  // ── Legal ─────────────────────────────────────────────────────────────────
-  { id: 90, title: 'Privacy Policy', url: 'https://asilvainnovations.github.io/bird-validation-survey/public/privacy-policy.html', type: 'document', category: 'Legal', description: 'Data collection, usage, security measures and your rights over information submitted through the BIRD platform.' },
-  { id: 91, title: 'Cookie Policy', url: 'https://asilvainnovations.github.io/bird-validation-survey/public/cookie-policy.html', type: 'document', category: 'Legal', description: 'How cookies are used to improve browsing, personalise content, analyse traffic and ensure essential functionality.' },
-];
-
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// BIRD MEL DASHBOARD WIRING — Urgent & Important Critical Data
-// ═══════════════════════════════════════════════════════════════════════════════
-// These constants mirror the MEL Dashboard (Panels A, B and C) so that
-// accountability and the calendar of activities stay identical across both
-// views. Baselines: 2024 PSA / BBOI / MTIT / MENRE actuals. Targets: BIRD
-// 2026–2035. Due dates are the Phase-1 (2026–2028) milestone dates.
-//
-// Status mapping follows the MEL convention:
-//   on_track  ≥ 70% of trajectory   at_risk   40–69%
-//   off_track 15–39%                critical  < 15% or unstarted & overdue
-// ─────────────────────────────────────────────────────────────────────────────
-
-const BIRD_CRITICAL_KPIS: KpiItem[] = [
-  // ── Pareto Vital Few (Panel A) ────────────────────────────────────────────
-  { id: 'f1', name: 'Annual Investment Approvals', target: 15, current: 5.1, unit: '₱B', status: 'at_risk', owner: 'BBOI', due_date: '2035-12-31', description: 'Panel A · Pareto KPI. Investment promotion roadshows, BIMP-EAGA missions, investor aftercare. Baseline ₱5.1B (2024).' },
-  { id: 'f2', name: 'BARMM GRDP', target: 550, current: 299.5, unit: '₱B', status: 'at_risk', owner: 'BPDA', due_date: '2035-12-31', description: 'Panel A · Pareto KPI. Regional output; 2024 actual ₱299.5B growing 2.7%. Requires sustained 7%+ to reach target.' },
-  { id: 's6', name: 'Jobs Created (BOI-registered firms)', target: 20000, current: 2029, unit: 'jobs', status: 'off_track', owner: 'BBOI', due_date: '2035-12-31', description: 'Panel A · Pareto KPI. Labour-intensive sector prioritisation, skills matching, TESDA alignment.' },
-  { id: 's3', name: 'MSMEs with Halal Certification', target: 5000, current: 500, unit: 'MSMEs', status: 'off_track', owner: 'BHB', due_date: '2035-12-31', description: 'Panel A · Pareto KPI. BHB MSME certification programme and BHIDP implementation.' },
-  { id: 's4', name: 'Poverty Incidence (BARMM)', target: 20, current: 34.8, unit: '%', status: 'at_risk', owner: 'PSA', due_date: '2035-12-31', description: 'Panel A · Pareto KPI. Jobs-focused facilitation, MSME development, inclusive value chains. Lower is better.' },
-  { id: 'f3', name: 'Annual Exports from BARMM', target: 40, current: 10, unit: '₱B', status: 'off_track', owner: 'MTIT', due_date: '2035-12-31', description: 'Panel A · Pareto KPI. UAE halal corridor, BIMP-EAGA trade facilitation, export readiness.' },
-
-  // ── Critical / urgent Balanced Scorecard indicators (Panel B) ─────────────
-  { id: 'p3', name: 'BHB OIC/SMIIC Accreditation', target: 100, current: 0, unit: '%', status: 'critical', owner: 'BHB', due_date: '2028-12-31', description: 'Panel B · LP1. Unstarted. Blocks the entire halal export pathway — without mutual recognition, certification carries no international weight.' },
-  { id: 'p1', name: 'Business Registration Time', target: 1, current: 5, unit: 'days', status: 'at_risk', owner: 'MTIT', due_date: '2028-06-30', description: 'Panel B · LP2. Digital BNR system and BEGMP e-governance. Lower is better.' },
-  { id: 'p4', name: 'Infrastructure Budget Execution', target: 90, current: 80, unit: '%', status: 'at_risk', owner: 'MPW', due_date: '2028-12-31', description: 'Panel B · LP2. Underspending was rated 4.06 impact / 4.03 likelihood by validation-survey respondents — a live weakness, not a theoretical one.' },
-  { id: 'l5', name: 'Functional Literacy Rate', target: 75, current: 59.3, unit: '%', status: 'off_track', owner: 'MBHTE / DepEd', due_date: '2035-12-31', description: 'Panel B · LP2. HIGHEST-RISK factor in the entire SWOT register (Risk 17.76 from 74 respondents). Human capital, not infrastructure, is the binding constraint.' },
-  { id: 'p5', name: 'Inter-Agency Coordination Score', target: 8, current: 5.5, unit: '/10', status: 'off_track', owner: 'BICC', due_date: '2028-12-31', description: 'Panel B · LP3. Fragmented mandates scored 4.00 impact in the validation survey; transparency was named the critical governance lever by 42 of 73 respondents.' },
-  { id: 's7', name: 'Inter-Provincial Growth Disparity', target: 1.5, current: 3.9, unit: 'pp', status: 'critical', owner: 'BPDA', due_date: '2035-12-31', description: 'Panel B · LP3. Widening. Compounded by an evidence gap: Basilan, Sulu and Tawi-Tawi returned ZERO validation-survey respondents. Lower is better.' },
-  { id: 'f5', name: 'Islamic Banking Assets in BARMM', target: 20, current: 2, unit: '₱B', status: 'off_track', owner: 'BSP / Al-Amanah', due_date: '2035-12-31', description: 'Panel B · LP4. Stakeholders ranked Macro-Capital (Sukuk, infrastructure banking) first for finance sequencing, 36 of 64.' },
-  { id: 'f4', name: 'Carbon Credit + PES Revenue', target: 500, current: 0, unit: '₱M', status: 'critical', owner: 'MENRE', due_date: '2030-12-31', description: 'Panel B · LP5. Unstarted. Gated on the Forestry Code and JMC No. 2026-01 — renewable-energy monetisation scored highest of any opportunity (RI 4.14).' },
-];
-
-/**
- * Phase-1 priority actions from the MEL Dashboard Action Board (Panel C).
- * `priority` follows the board: 1 = critical, 2 = high, 3 = medium.
- * Comments raised against these items therefore reference the same work
- * packages that appear on the dashboard and in the Plan Generator export.
- */
-const BIRD_PRIORITY_PAPS: PapItem[] = [
-  { id: 'pap-01', name: 'BHB Operationalisation & OIC/SMIIC Accreditation (Q2 2026)', priority: 1, status: 'in_progress' },
-  { id: 'pap-02', name: 'Bangsamoro Forestry Code Enactment (Q2 2026)', priority: 1, status: 'drafting' },
-  { id: 'pap-03', name: 'Bangsamoro Halal Park — Matanog Development (Q3 2026)', priority: 1, status: 'in_progress' },
-  { id: 'pap-04', name: 'Digital Business Registration (BNR / BEGMP) Rollout (Q3 2026)', priority: 1, status: 'development' },
-  { id: 'pap-05', name: 'Functional Literacy & TVET-Industry Alignment (Q4 2026)', priority: 1, status: 'scoping' },
-  { id: 'pap-06', name: 'Zamboanga-Basilan Interconnection Project (ZBIP) (Q4 2026)', priority: 2, status: 'in_progress' },
-  { id: 'pap-07', name: 'Cold Chain & Agro-Logistics Build-Out (Q3 2026)', priority: 2, status: 'pre_dev' },
-  { id: 'pap-08', name: 'Sukuk & Islamic Finance Framework (Q4 2026)', priority: 2, status: 'scoping' },
-  { id: 'pap-09', name: 'JMC No. 2026-01 — Carbon & PES Activation (Q3 2026)', priority: 2, status: 'pre_dev' },
-  { id: 'pap-10', name: 'Provincial Equity & Island-Province Facilitation Offices (Q4 2026)', priority: 1, status: 'urgent' },
+  { id: 1, title: 'The Iceberg Model: Why SWOT Listing Is Not Enough', url: 'https://youtu.be/y6h2_EcOOcM?si=3DWAm3dMJ7LzOjAS', type: 'video', category: 'Systems Thinking', description: 'Understand why surface-level analysis fails and how to see deeper systemic structures.' },
+  { id: 2, title: 'How Systems Thinking is Used to Manage Complexity', url: 'https://youtu.be/Eklkuy4RBOo?si=-jLNBvPQUpKU2BU0', type: 'video', category: 'Systems Thinking', description: 'MIT instructors, faculty and industry experts break down how systems thinking is used to manage complexity.' },
+  { id: 3, title: 'Introduction to Systems Thinking In Local Government Finance', url: 'https://youtu.be/gsogqS__Ljo?si=Ttlck54LP1puxJYW', type: 'video', category: 'Systems Thinking', description: 'Applying systems thinking frameworks to public financial management.' },
+  { id: 4, title: 'Systems Story', url: 'https://youtu.be/rDxOyJxgJeA?si=5BEduhhg-0t9ER1S', type: 'video', category: 'Systems Thinking', description: 'Narrative approach to understanding complex adaptive systems.' },
+  { id: 5, title: 'Causal Loop Diagrams', url: 'https://youtu.be/tTo06jbSZ4M?si=mSyIfuUvpeXPsrW', type: 'video', category: 'Systems Thinking', description: 'Visual tools for mapping feedback loops and system behavior.' },
+  { id: 6, title: 'Systems Archetypes', url: 'https://youtu.be/zRmEh-PMvWo?si=DnxR-3n4I-382hKT', type: 'video', category: 'Systems Thinking', description: 'Common recurring systemic patterns and their dynamics.' },
+  { id: 7, title: 'Systems Mapping', url: 'https://youtu.be/fXxFz-Tr6Zg?si=ex8z5t7u3HtmBrbW', type: 'video', category: 'Systems Thinking', description: 'Methodologies for creating comprehensive system maps.' },
+  { id: 8, title: 'Leverage Points', url: 'https://youtu.be/ZKdyIz14Niw?si=i6J-8SNjFSuPzDMz', type: 'video', category: 'Systems Thinking', description: 'Identifying high-impact intervention points in complex systems.' },
+  { id: 9, title: 'Leverage Points (Readings)', url: 'https://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/', type: 'article', category: 'Systems Thinking', description: 'Donella Meadows\' seminal essay on intervention hierarchy.' },
+  { id: 10, title: 'Systems Innovation', url: 'https://youtu.be/rVGoeFAW0FM?si=yOgB50q26R_G389G', type: 'video', category: 'Innovation', description: 'How to drive transformative change through systemic innovation.' },
+  { id: 11, title: 'What is a Balanced Scorecard', url: 'https://youtu.be/OLdlpeMVmuk?si=mhHAWJr-UisjyV8P', type: 'video', category: 'BSC', description: 'Foundational overview of the Balanced Scorecard framework.' },
+  { id: 12, title: 'BIRD APP', url: 'https://bird2035.netlify.app/', type: 'prototype', category: 'Prototype', description: 'Interactive strategic roadmap prototype for reference and inspiration.' },
+  { id: 13, title: 'BIRD 2026–2035 User Manual', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/user-manual.html', type: 'document', category: 'BIRD 2026–2035', description: 'The complete guide to the BIRD 2026–2035 platform — SWOT, Systems Thinking, Balanced Scorecard, PAPs, and MEL Dashboard. For BOI-MTIT and BARMM strategic planners.' },
 ];
 
 // ── Presence Ribbon (exportable for Topbar) ──────────────
@@ -411,7 +307,6 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
   const [showNotifications, setShowNotifications] = useState(false);
   const [commentFilter, setCommentFilter] = useState<CommentFilter>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [resourceCategory, setResourceCategory] = useState<string>('All');
 
   // Modal States
   const [showCreateOrgModal, setShowCreateOrgModal] = useState(false);
@@ -651,13 +546,12 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       setKpis(data || []);
     } catch (err: any) {
       console.warn('KPIs error:', err.message);
-      // MEL Dashboard fallback — the six Pareto "vital few" KPIs and the
-      // urgent/critical Balanced Scorecard indicators carried by the BIRD MEL
-      // Dashboard (Panels A and B). Baselines are 2024 PSA / BBOI / MTIT /
-      // MENRE actuals; targets are BIRD 2026–2035. These are the SAME figures
-      // the MEL Dashboard renders, so accountability stays consistent across
-      // the two views rather than diverging into placeholder numbers.
-      setKpis(BIRD_CRITICAL_KPIS);
+      // Demo data fallback
+      setKpis([
+        { id: '1', name: 'Revenue Growth', target: 100, current: 78, unit: '%', status: 'on_track', owner: 'Finance Team', due_date: '2026-12-31', description: 'Annual revenue growth target' },
+        { id: '2', name: 'Customer Satisfaction', target: 90, current: 82, unit: 'NPS', status: 'at_risk', owner: 'CX Team', due_date: '2026-06-30', description: 'Net Promoter Score target' },
+        { id: '3', name: 'Operational Efficiency', target: 85, current: 60, unit: '%', status: 'off_track', owner: 'Operations', due_date: '2026-09-30', description: 'Process automation rate' },
+      ]);
     }
   }, [plan?.id]);
 
@@ -672,7 +566,11 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       setPapItems(data || []);
     } catch (err: any) {
       console.warn('PAP error:', err.message);
-      setPapItems(BIRD_PRIORITY_PAPS);
+      setPapItems([
+        { id: 'p1', name: 'Digital Transformation Initiative', priority: 1, status: 'in_progress' },
+        { id: 'p2', name: 'Stakeholder Engagement Program', priority: 2, status: 'pending' },
+        { id: 'p3', name: 'Risk Mitigation Protocol', priority: 1, status: 'urgent' },
+      ]);
     }
   }, [plan?.id]);
 
@@ -1540,99 +1438,6 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
         </div>
       </div>
 
-      {/* ── MEL Accountability Summary ─────────────────────────────────────── */}
-      <div className="mb-6 rounded-xl border border-[#C9A84C]/30 bg-[#064e3b]/10 p-5">
-        <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
-          <div>
-            <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">
-              Wired to the MEL Dashboard
-            </span>
-            <h3 className="text-base font-bold text-[#E8C560]">Accountability &amp; Calendar of Activities</h3>
-          </div>
-          <a
-            href="https://bird-dashboard.asilvainnovations.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-4 py-2 bg-[#022c22] text-white rounded-lg text-sm font-medium hover:bg-[#022c22]/80 transition-colors"
-          >
-            <BarChart3 className="w-4 h-4" aria-hidden="true" /> Open MEL Dashboard
-          </a>
-        </div>
-
-        {/* Status roll-up */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
-          {([
-            { key: 'critical',  label: 'Critical',   color: '#ef4444' },
-            { key: 'off_track', label: 'Off Track',  color: '#f97316' },
-            { key: 'at_risk',   label: 'At Risk',    color: '#f59e0b' },
-            { key: 'on_track',  label: 'On Track',   color: '#10b981' },
-          ] as const).map(({ key, label, color }) => (
-            <div key={key} className="bg-[#022c22]/40 border border-[#C9A84C]/20 rounded-lg p-3 text-center">
-              <div className="text-2xl font-bold" style={{ color }}>
-                {kpis.filter(k => k.status === key).length}
-              </div>
-              <div className="text-[0.7rem] text-[#a7f3d0]/70 uppercase tracking-wider">{label}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Owner accountability — who carries the critical and off-track load */}
-        <h4 className="text-xs font-bold uppercase tracking-wider text-[#C9A84C] mb-2">
-          Accountable units — urgent &amp; important indicators
-        </h4>
-        <div className="flex flex-wrap gap-2 mb-5">
-          {Array.from(
-            kpis
-              .filter(k => k.status === 'critical' || k.status === 'off_track')
-              .reduce((m, k) => m.set(k.owner || 'Unassigned', (m.get(k.owner || 'Unassigned') || 0) + 1), new Map<string, number>())
-          )
-            .sort((a, b) => b[1] - a[1])
-            .map(([owner, count]) => (
-              <span
-                key={owner}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-red-500/10 text-red-300 border border-red-500/30"
-              >
-                <User className="w-3 h-3" aria-hidden="true" />
-                {owner}
-                <span className="px-1.5 py-0.5 rounded-full bg-red-500/20 text-[0.65rem]">{count}</span>
-              </span>
-            ))}
-        </div>
-
-        {/* Calendar of activities — Phase-1 milestone dates, soonest first */}
-        <h4 className="text-xs font-bold uppercase tracking-wider text-[#C9A84C] mb-2">
-          Calendar of activities — next milestones
-        </h4>
-        <div className="space-y-1.5">
-          {[...kpis]
-            .filter(k => k.due_date)
-            .sort((a, b) => (a.due_date || '').localeCompare(b.due_date || ''))
-            .slice(0, 6)
-            .map(k => {
-              const overdue = (k.due_date || '') < new Date().toISOString().slice(0, 10);
-              return (
-                <div key={k.id} className="flex items-center gap-3 text-xs border-b border-[#C9A84C]/10 pb-1.5">
-                  <Calendar className="w-3.5 h-3.5 flex-shrink-0 text-[#64748b]" aria-hidden="true" />
-                  <time className="tabular-nums font-semibold flex-shrink-0 w-24" dateTime={k.due_date} style={{ color: overdue ? '#ef4444' : '#C9A84C' }}>
-                    {k.due_date}
-                  </time>
-                  <span className="flex-1 truncate text-[#d1fae5]/80">{k.name}</span>
-                  <span className="flex-shrink-0 text-[#64748b]">{k.owner}</span>
-                  <span className={cn("px-2 py-0.5 rounded-full text-[0.6rem] font-bold text-white flex-shrink-0", getKpiStatusColor(k.status))}>
-                    {getKpiStatusText(k.status)}
-                  </span>
-                </div>
-              );
-            })}
-        </div>
-
-        <p className="mt-4 text-[0.68rem] text-[#ecfdf5]/40 leading-relaxed">
-          Baselines: 2024 PSA / BBOI / MTIT / MENRE actuals. Targets: BIRD 2026–2035. Risk readings referenced in KPI
-          descriptions come from the Validation Survey (n=76, 3–20 Aug 2026) — a non-probability convenience sample with
-          zero respondents from Basilan, Sulu and Tawi-Tawi.
-        </p>
-      </div>
-
       <div className="grid gap-5" role="list" aria-label="Key performance indicators">
         {kpis.length === 0 ? (
           <div className="text-center py-12 bg-[#064e3b]/10 rounded-xl border-2 border-dashed border-[#C9A84C]/30">
@@ -1771,37 +1576,12 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
   const renderResourcesTab = () => (
     <div className="p-6">
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-slate-900">BIRD 2026–2035 Resource Library</h2>
-        <p className="text-base text-[#ecfdf5]/80 mt-1 leading-relaxed">
-          Mirrors the published library at <span className="text-[#C9A84C]">bird-resources.asilvainnovations.com</span> —
-          the same {RESOURCES.length} resources available to validation-survey respondents and workshop participants.
-        </p>
-      </div>
-
-      {/* Category filter */}
-      <div className="flex flex-wrap gap-2 mb-6">
-        {['All', ...Array.from(new Set(RESOURCES.map(r => r.category)))].map(cat => (
-          <button
-            key={cat}
-            onClick={() => setResourceCategory(cat)}
-            className={cn(
-              "px-4 py-2 rounded-xl text-sm font-medium border transition-all focus:outline-none focus:ring-2 focus:ring-offset-1",
-              resourceCategory === cat
-                ? 'bg-[#022c22] text-white border-slate-900 focus:ring-slate-900'
-                : 'bg-white text-[#E8C560]/90 border-[#C9A84C]/30 hover:bg-[#064e3b]/10 focus:ring-slate-400'
-            )}
-            aria-pressed={resourceCategory === cat}
-          >
-            {cat}
-            <span className="ml-1.5 text-xs opacity-60">
-              {cat === 'All' ? RESOURCES.length : RESOURCES.filter(r => r.category === cat).length}
-            </span>
-          </button>
-        ))}
+        <h2 className="text-xl font-bold text-slate-900">Strategic Planning Resources</h2>
+        <p className="text-base text-[#ecfdf5]/80 mt-1 leading-relaxed">Curated learning materials for systems thinking and strategy</p>
       </div>
 
       <div className="grid gap-5 md:grid-cols-2" role="list" aria-label="Learning resources">
-        {RESOURCES.filter(r => resourceCategory === 'All' || r.category === resourceCategory).map((resource) => (
+        {RESOURCES.map((resource) => (
           <article
             key={resource.id}
             className="group p-5 bg-white border border-[#C9A84C]/20 rounded-xl hover:shadow-md hover:border-[#C9A84C] transition-all focus-within:ring-2 focus-within:ring-[#C9A84C]"
@@ -1813,8 +1593,6 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                   "w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0",
                   resource.type === 'video' ? 'bg-red-500/100/10 text-red-400' :
                   resource.type === 'article' ? 'bg-amber-500/100/10 text-amber-400' :
-                  resource.type === 'dashboard' ? 'bg-[#C9A84C]/10 text-[#C9A84C]' :
-                  resource.type === 'outlook' ? 'bg-indigo-500/10 text-indigo-300' :
                   'bg-[#059669]/10 text-[#34d399]'
                 )}
                 aria-hidden="true"
@@ -1822,8 +1600,6 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                 {resource.type === 'video' ? <Play className="w-6 h-6" /> :
                  resource.type === 'article' ? <FileText className="w-6 h-6" /> :
                  resource.type === 'document' ? <BookOpen className="w-6 h-6" /> :
-                 resource.type === 'dashboard' ? <LayoutDashboard className="w-6 h-6" /> :
-                 resource.type === 'outlook' ? <TrendingUp className="w-6 h-6" /> :
                  <Globe className="w-6 h-6" />}
               </div>
               <div className="flex-1 min-w-0">
@@ -1832,14 +1608,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                   <span className="px-2.5 py-1 bg-[#064e3b]/10 text-[#ecfdf5]/80 rounded-md text-xs font-medium capitalize">{resource.type}</span>
                 </div>
                 <h3 className="font-semibold text-slate-900 text-base leading-snug mb-2 group-hover:text-[#C9A84C] transition-colors">{resource.title}</h3>
-                <p className="text-sm text-[#ecfdf5]/80 mb-2 line-clamp-2 leading-relaxed">{resource.description}</p>
-                {(resource.duration || resource.meta) && (
-                  <p className="text-[0.68rem] text-[#C9A84C]/80 mb-3 leading-relaxed">
-                    {resource.duration && <span className="font-semibold">Duration: {resource.duration}</span>}
-                    {resource.duration && resource.meta && ' · '}
-                    {resource.meta}
-                  </p>
-                )}
+                <p className="text-sm text-[#ecfdf5]/80 mb-4 line-clamp-2 leading-relaxed">{resource.description}</p>
                 <div className="flex items-center gap-2 flex-wrap">
                   <a
                     href={resource.url}

@@ -26,8 +26,8 @@ import { StrategicPlan, CLDSnapshot } from '@/lib/strategicPlanStore';
 import { supabase } from '@/lib/supabase';
 
 // Edge Function URLs
-const AI_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/ai-strategy-assistant
-const SYNC_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/strategic-planner-sync';
+const AI_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/ai-strategy-assistant';
+const SYNC_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/strategic-planner-sync';
 
 interface PlanExportProps {
   plan: StrategicPlan;
@@ -122,7 +122,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
     systemsThinking: true,
     appendix: true,
   });
-  const [isGenerating, setIsGenerating] = useState(false); // was true: disabled every export button on mount
+  const [isGenerating, setIsGenerating] = useState(true);
   const [showPreview, setShowPreview] = useState(true);
   const [appendixFiles, setAppendixFiles] = useState<File[]>([]);
 
@@ -316,7 +316,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
       
       const perspectiveLabels: Record<string, string> = {
         financial: 'FINANCIAL PERSPECTIVE',
-        stakeholder: 'STAKEHOLDER PERSPECTIVE',
+        customer: 'STAKEHOLDER PERSPECTIVE',
         internal_process: 'INTERNAL PROCESS PERSPECTIVE',
         learning_growth: 'LEARNING & GROWTH PERSPECTIVE'
       };
@@ -369,67 +369,9 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
       content += '\n';
     }
 
-    // ── METHODOLOGY & PROVENANCE ────────────────────────────────────────────
-    // Every figure above is traceable. Without this block a reader has no way
-    // to know which numbers are stakeholder-validated and which are not.
-    content += `${'='.repeat(60)}\n`;
-    content += `METHODOLOGY & DATA PROVENANCE\n`;
-    content += `${'='.repeat(60)}\n\n`;
-
-    content += `EVIDENCE BASE\n`;
-    content += `  1. Validation Survey - 76 consented responses, 3-20 August 2026.\n`;
-    content += `     Collected via the BIRD Validation Survey Platform, the sister\n`;
-    content += `     application to this planner. Mean 228.7 of ~245 fields answered.\n`;
-    content += `     SWOT Impact/Likelihood scores are per-item respondent means\n`;
-    content += `     (item n = 63-74).\n`;
-    content += `  2. Workshop Outputs - Workshops 1, 2, 4 and 5 (MTIT-BARMM, 2025).\n`;
-    content += `     388 normalised records across 6 sectors.\n`;
-    content += `  3. Secondary Data - Provincial Economic & Investment Outlooks\n`;
-    content += `     (Lanao del Sur, Maguindanao del Norte/Sur, Tawi-Tawi, Basilan,\n`;
-    content += `     SGA); PSA / MFBM 2023-2025 series.\n\n`;
-
-    content += `SCORING MODEL (applied to the SWOT section above)\n`;
-    content += `  Strengths     Resilience Index    RI   = (Impact x Likelihood) / 5\n`;
-    content += `  Opportunities Resilience Index    RI   = sqrt(Impact x Likelihood)\n`;
-    content += `  Weaknesses    Risk Score          Risk = Impact x Likelihood\n`;
-    content += `  Threats       Vulnerability Index VI   = (Impact^2 x Likelihood) / 25\n\n`;
-
-    content += `LIMITATIONS - READ BEFORE CITING ANY FIGURE\n`;
-    content += `  * The survey is a NON-PROBABILITY CONVENIENCE SAMPLE with no\n`;
-    content += `    weighting frame. Results are stakeholder validation signals,\n`;
-    content += `    NOT population estimates for BARMM.\n`;
-    content += `  * COVERAGE GAP: Basilan, Sulu and Tawi-Tawi returned ZERO\n`;
-    content += `    respondents. Approximately 78% of the sample is based in the\n`;
-    content += `    Cotabato City / Maguindanao del Norte mainland corridor.\n`;
-    content += `    Sequence C (BIMP-EAGA maritime integration) and all island-\n`;
-    content += `    province findings are UNVALIDATED.\n`;
-    content += `  * SMALL CELLS: Lanao del Sur (n=3) and Maguindanao del Sur (n=3)\n`;
-    content += `    cannot support province-level claims.\n`;
-    content += `  * STRATEGY MATRIX: 25 of 75 respondents left all 28 scoring cells\n`;
-    content += `    at the slider default; 65.5% of cells are midpoint-contaminated.\n`;
-    content += `    Quote the differentiator subset (n=29), not the full sample.\n`;
-    content += `  * PROVINCIAL COVERAGE: the five available outlook files cover\n`;
-    content += `    PHP 245.77B of the PHP 292.4B 2023 regional total (84.1%).\n`;
-    content += `    PHP 46.58B - Sulu, the SGA and statistical residual - is\n`;
-    content += `    unaccounted for.\n\n`;
-
-    content += `STRATEGIC OPTION VALIDATION\n`;
-    content += `  Stakeholders independently reproduced the consultant rank order:\n`;
-    content += `  IEDS > HEDS > IFES > GEMS. IEDS scored 7.39/10 among the 29\n`;
-    content += `  differentiating respondents, against 8.93/10 in the expert matrix -\n`;
-    content += `  same ranking, lower conviction. Endorsement: 44 yes, 20 partial,\n`;
-    content += `  1 needs more evidence.\n\n`;
-
-    content += `UNRESOLVED CONTRADICTION\n`;
-    content += `  Asked where budget should concentrate, respondents ranked\n`;
-    content += `  Foundations first (29) and Operating Systems second (15), with\n`;
-    content += `  Transformers fifth-equal (8). The roadmap front-loads Transformers\n`;
-    content += `  in Sequence B. This should be reconciled before publication.\n\n`;
-
     content += `\n${'='.repeat(60)}\n`;
     content += `Generated by Strategic Planner Pro\n`;
     content += `Aligned with BIRD 2026-2035 Framework\n`;
-    content += `Bureau of Investments - MTIT, BARMM\n`;
     content += `${'='.repeat(60)}\n`;
 
     return content;
@@ -608,15 +550,6 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                       day: 'numeric' 
                     })}
                   </p>
-                  <div className="mt-6 mx-auto max-w-lg text-left rounded-lg border border-[#C9A84C]/30 bg-[#064e3b]/10 px-4 py-3">
-                    <p className="text-xs font-bold text-[#C9A84C] mb-1">Evidence Base</p>
-                    <p className="text-[0.7rem] text-[#ecfdf5]/70 leading-relaxed">
-                      Validation Survey (n=76, 3–20 Aug 2026) · Workshops 1, 2, 4 &amp; 5 (MTIT-BARMM 2025) ·
-                      Provincial Economic &amp; Investment Outlooks (PSA/MFBM 2023–2025).
-                      Non-probability convenience sample — validation signals, not population estimates.
-                      Zero respondents from Basilan, Sulu and Tawi-Tawi. Full methodology in the exported document.
-                    </p>
-                  </div>
                 </div>
               )}
 
@@ -898,7 +831,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                       const objectives = editablePlan.objectives.filter((o) => o.perspective === perspective);
                       const labels: Record<string, string> = {
                         financial: 'Financial',
-                        stakeholder: 'Stakeholder',
+                        customer: 'Stakeholder',
                         internal_process: 'Internal Process',
                         learning_growth: 'Learning & Growth'
                       };
