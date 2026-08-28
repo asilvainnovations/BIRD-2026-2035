@@ -10,13 +10,15 @@ import HeroSection from './HeroSection';
 
 // ─── Asset constants (env-var backed) ────────────────────────────────────────
 const BIRD_BANNER_URL =
-  'https://rgvteytgkugdqdodedxq.supabase.co/storage/v1/object/public/bird-images/public/BIRD%20Banner.png';
+  'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/public/BIRD%20Banner.png';
 const AI_AVATAR_URL = BRAND_ASSETS.AI_AVATAR_URL;
 const AI_ENDPOINT   = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
 
 // ─── BIRD 2026-2035 Data ──────────────────────────────────────────────────────
 import { PARETO_KPIS }                                     from '@/data/bird/kpis';
 import { BSC_LEVERAGE_POINTS as BSC_POINTS }               from '@/data/bird/kpis';
+import { ALL_BSC_KPIS }                                    from '@/data/bird/kpis';
+import type { KPI, BSCPerspective }                        from '@/data/bird/kpis';
 import { ACTION_PLAN_2026 as PRIORITY_ACTIONS }            from '@/data/bird/actions';
 import { CAUSAL_LOOPS as FEEDBACK_LOOPS }                  from '@/data/bird/clds';
 import { PHASES, TOTAL_BUDGET }                            from '@/data/bird/phases';
@@ -38,7 +40,10 @@ import { PHASES, TOTAL_BUDGET }                            from '@/data/bird/pha
 
 const RESPONDENTS = {
   totalResponses: 76,
-  consentedToAnonymisedUse: 58,
+  /** VERIFIED 2026-08-28 against survey_responses: consent_final = true on all 76
+   *  rows, consent_quarantined = 0. A prior build of this file asserted 58; that
+   *  figure is not reproducible from the table and has been retired. */
+  consentedToAnonymisedUse: 76,
   fieldedFrom: '3 Aug 2026',
   fieldedTo: '20 Aug 2026',
   meanFieldsAnswered: 228.7,
@@ -49,24 +54,88 @@ const RESPONDENTS = {
     { label: 'Special Geographic Area (SGA)', n:  7 },
     { label: 'Lanao del Sur',                 n:  3 },
     { label: 'Maguindanao del Sur',           n:  3 },
+    { label: 'Unattributed (no province)',    n:  3 },
     { label: 'Basilan',                       n:  0 },
     { label: 'Tawi-Tawi',                     n:  0 },
   ],
   coverageGap:
-    'Roughly 78% of the sample sits in the Cotabato City / Maguindanao del Norte mainland corridor. ' +
-    'Sequence C (BIMP-EAGA maritime integration) and all island-province readings are unvalidated. ' +
-    'A supplementary wave in the island provinces is required before publication.',
+    'Roughly 64% of the sample sits in the Cotabato City / Maguindanao del Norte mainland corridor, ' +
+    'and 2 of the 5 BARMM provinces — Basilan and Tawi-Tawi — returned zero respondents. ' +
+    'Sequence C (BIMP-EAGA maritime integration) and every island-province reading is therefore ' +
+    'unvalidated by the constituencies it most affects. A supplementary island wave is required ' +
+    'before any of this is published as regional consensus.',
 } as const;
 
 /** Confidence / readiness / urgency by BEIE cluster — survey Sections 4–9, 1–5 scale. */
 const CLUSTER_SIGNALS = [
-  { section: 4, label: 'Foundations',      confidence: 3.69, readiness: 3.45, urgency: 3.70, n: 73 },
-  { section: 5, label: 'Transformers',     confidence: 3.60, readiness: 3.40, urgency: 3.69, n: 65 },
-  { section: 6, label: 'Enablers',         confidence: 3.70, readiness: 3.33, urgency: 4.04, n: 73 },
-  { section: 7, label: 'Connectors',       confidence: 3.86, readiness: 3.61, urgency: 3.94, n: 71 },
-  { section: 8, label: 'Financiers',       confidence: 3.78, readiness: 3.55, urgency: 3.88, n: 67 },
-  { section: 9, label: 'Operating Systems', confidence: 3.85, readiness: 3.58, urgency: 3.93, n: 71 },
+  { section: 4, label: 'Foundations',       confidence: 3.69, readiness: 3.45, urgency: 3.70, sdReadiness: 0.82, n: 73 },
+  { section: 5, label: 'Transformers',      confidence: 3.60, readiness: 3.40, urgency: 3.69, sdReadiness: 0.77, n: 65 },
+  { section: 6, label: 'Enablers',          confidence: 3.70, readiness: 3.33, urgency: 4.04, sdReadiness: 0.80, n: 73 },
+  { section: 7, label: 'Connectors',        confidence: 3.86, readiness: 3.61, urgency: 3.94, sdReadiness: 0.76, n: 71 },
+  { section: 8, label: 'Financiers',        confidence: 3.78, readiness: 3.55, urgency: 3.88, sdReadiness: 0.66, n: 67 },
+  { section: 9, label: 'Operating Systems', confidence: 3.85, readiness: 3.58, urgency: 3.93, sdReadiness: 0.69, n: 71 },
 ] as const;
+
+/**
+ * SEQUENCING VALIDATION — survey Section 10, items q10_2 / q10_3 / q10_4, 1–5.
+ * The three IEDS investment sequences, rated on priority. Verified 2026-08-28.
+ *
+ * Read this with the coverage gap in mind: Sequence C is the BIMP-EAGA maritime
+ * corridor, and the two provinces that corridor actually runs through — Basilan
+ * and Tawi-Tawi — contributed zero respondents. Its 4.00 is a mainland opinion
+ * about an island programme.
+ */
+const SEQUENCE_SIGNALS = [
+  { code: 'A', label: 'Halal & agro-industrial core',    mean: 4.20, sd: 0.79, n: 65, validation: 'partial'     as const },
+  { code: 'B', label: 'Green economy & resource base',   mean: 4.09, sd: 0.69, n: 67, validation: 'partial'     as const },
+  { code: 'C', label: 'BIMP-EAGA maritime integration',  mean: 4.00, sd: 0.74, n: 66, validation: 'unvalidated' as const },
+] as const;
+
+/**
+ * PHASE FUNDING PREFERENCE — survey item q13_6, n=68. Verified 2026-08-28.
+ * Materially important for a roadmap: respondents split almost evenly between
+ * spreading the budget across all three phases (24) and front-loading Phase 1
+ * (23). There is no mandate for back-loading — only 9 of 68 favoured the
+ * consolidation phase, against a plan that allocates ₱35–50B to it.
+ */
+const PHASE_FUNDING_PREFERENCE = [
+  { key: 'equal',       label: 'Spread evenly across phases', n: 24, phase: null },
+  { key: 'activate',    label: 'Front-load Phase 1 (Activate)', n: 23, phase: '01' },
+  { key: 'scale',       label: 'Weight Phase 2 (Scale)',        n: 12, phase: '02' },
+  { key: 'consolidate', label: 'Weight Phase 3 (Consolidate)',  n:  9, phase: '03' },
+] as const;
+
+/**
+ * WORKSHOP EVIDENCE DENSITY — MTIT-BARMM sector workshops 1, 2, 4 and 5.
+ * Counted 2026-08-28 from the four source workbooks. A record counts as
+ * substantive when at least one cell in the row carries a narrative entry of
+ * >40 characters; header rows and "1.0 / 2.0 / 3.0" placeholder rows are
+ * excluded. Total substantive records: 125.
+ *
+ * This matrix is the point of the panel, not decoration. Infrastructure carries
+ * the single largest challenge inventory in the entire workshop series (27
+ * records) and has NO SWOT and NO strategy sheet behind it. Tourism has a
+ * strategy but no SWOT. Four of six sectors never completed the opportunity
+ * translation step. Any sector strategy drawn from W4/W5 for Infrastructure or
+ * Tourism is currently an analyst inference, not a stakeholder output.
+ */
+const WORKSHOP_EVIDENCE = {
+  workshops: [
+    { code: 'W1', label: 'Challenges'  },
+    { code: 'W2', label: 'Opportunities' },
+    { code: 'W4', label: 'Industry SWOT' },
+    { code: 'W5', label: 'Industry Strategy' },
+  ],
+  sectors: [
+    { sector: 'Agro-Industry',      W1:  9, W2: 2, W4:  2, W5:  7 },
+    { sector: 'Halal',              W1:  6, W2: 4, W4:  5, W5:  6 },
+    { sector: 'Infrastructure',     W1: 27, W2: 1, W4:  0, W5:  0 },
+    { sector: 'Services',           W1:  3, W2: 1, W4: 17, W5: 10 },
+    { sector: 'Tourism',            W1:  4, W2: 1, W4:  0, W5:  9 },
+    { sector: 'Energy & Utilities', W1:  3, W2: 1, W4:  2, W5:  5 },
+  ],
+  totalRecords: 125,
+} as const;
 
 /**
  * Strategic option evaluation — survey Section 10, same seven weighted criteria
@@ -75,13 +144,25 @@ const CLUSTER_SIGNALS = [
  * the default value of 5, so `fullSampleScore` is midpoint-contaminated.
  */
 const STRATEGY_SIGNALS = {
-  defaultContamination: { respondents: 75, allCellsAtDefault: 25, pctCellsAtDefault: 65.5, differentiators: 29 },
+  /** Verified 2026-08-28. Of the 75 respondents who touched the 4×7 matrix, 25
+   *  left every one of their 28 cells on the identical default and 50 moved at
+   *  least one slider. `fullSampleScore` is therefore pulled toward 5.00 by a
+   *  third of the sample; `differentiatorScore` uses only the 50 who moved. */
+  defaultContamination: { respondents: 75, allCellsAtDefault: 25, differentiators: 50 },
+  /** expertScore = BIRD Ch.4 weighted composite (formulas.ts weights).
+   *  Respondent columns are UNWEIGHTED criterion means — the weighted respondent
+   *  aggregate could not be recomputed at build time and is deliberately not
+   *  asserted here. Compare ranks, not levels, across the two columns. */
   options: [
-    { code: 'IEDS', name: 'Integrated Ecosystem Development', expertScore: 8.93, respondentScore: 7.39, fullSampleScore: 6.06, expertRank: 1, respondentRank: 1 },
-    { code: 'HEDS', name: 'Halal Economy Dominance',          expertScore: 7.61, respondentScore: 6.68, fullSampleScore: 5.92, expertRank: 2, respondentRank: 2 },
-    { code: 'IFES', name: 'Infrastructure-First Enabling',    expertScore: 7.48, respondentScore: 6.51, fullSampleScore: 5.77, expertRank: 3, respondentRank: 3 },
-    { code: 'GEMS', name: 'Green Economy Monetization',       expertScore: 7.16, respondentScore: 6.49, fullSampleScore: 5.73, expertRank: 4, respondentRank: 4 },
+    { code: 'IEDS', name: 'Integrated Ecosystem Development', expertScore: 8.93, differentiatorScore: 6.61, fullSampleScore: 6.07, expertRank: 1, respondentRank: 1 },
+    { code: 'HEDS', name: 'Halal Economy Dominance',          expertScore: 7.61, differentiatorScore: 6.37, fullSampleScore: 5.91, expertRank: 2, respondentRank: 2 },
+    { code: 'IFES', name: 'Infrastructure-First Enabling',    expertScore: 7.48, differentiatorScore: 6.20, fullSampleScore: 5.80, expertRank: 3, respondentRank: 3 },
+    { code: 'GEMS', name: 'Green Economy Monetization',       expertScore: 7.16, differentiatorScore: 6.15, fullSampleScore: 5.77, expertRank: 4, respondentRank: 4 },
   ],
+  /** The finding that actually carries weight: the ordinal ranking is identical
+   *  across the expert panel, the full sample and the differentiators-only
+   *  subset. Level agreement is weak; rank agreement is total. */
+  rankStable: true,
   endorsement: [
     { label: 'Yes — endorse IEDS', n: 44 },
     { label: 'Partially agree',    n: 20 },
@@ -105,12 +186,20 @@ const BUDGET_SIGNALS = {
 } as const;
 
 /** Scorecard alignment & KPI importance — survey Sections 11–12, 1–5 scale. */
+/** Verified 2026-08-28. `perspective` keys these rows to the strategy-map layers
+ *  so each BSC perspective renders with its own stakeholder alignment score. */
 const BSC_ALIGNMENT = [
-  { label: 'Learning & Growth alignment', value: 4.32, n: 69 },
-  { label: 'Stakeholder alignment',       value: 4.19, n: 74 },
-  { label: 'Financial alignment',         value: 4.16, n: 71 },
-  { label: 'Internal Process alignment',  value: 4.12, n: 74 },
-  { label: 'Vision is achievable',        value: 3.93, n: 74 },
+  { label: 'Learning & Growth alignment', value: 4.32, sd: 0.74, pct4plus: 84, n: 69, perspective: 'Learning & Growth' as const },
+  { label: 'Stakeholder alignment',       value: 4.19, sd: 0.90, pct4plus: 78, n: 74, perspective: 'Stakeholder'       as const },
+  { label: 'Financial alignment',         value: 4.15, sd: 0.87, pct4plus: 80, n: 71, perspective: 'Financial'         as const },
+  { label: 'Internal Process alignment',  value: 4.12, sd: 0.76, pct4plus: 77, n: 74, perspective: 'Internal Process'  as const },
+] as const;
+
+/** Whole-scorecard readings — not perspective-specific. Verified 2026-08-28. */
+const SCORECARD_META = [
+  { label: 'Scorecard is a useful frame', value: 4.16, sd: 0.70, n: 74 },
+  { label: 'Vision is clearly stated',    value: 4.05, sd: 0.81, n: 74 },
+  { label: 'Vision is achievable',        value: 3.93, sd: 0.76, n: 74 },
 ] as const;
 
 const KPI_IMPORTANCE = [
@@ -700,6 +789,304 @@ const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// STRATEGY MAP — Balanced Scorecard rendered as a causal roadmap
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// A strategy map is not a grid of tiles; it is a causal claim read BOTTOM-UP:
+// capabilities (Learning & Growth) enable processes (Internal Process), which
+// produce outcomes for people (Stakeholder), which produce economic results
+// (Financial). Panel B previously rendered BSC_LEVERAGE_POINTS.slice(0, 8) as a
+// flat grid — 8 of the 20 objectives in the catalogue, in arbitrary order, with
+// the causal logic invisible. That is a scorecard fragment, not a map.
+//
+// This rebuild renders ALL_BSC_KPIS — the 20-objective canonical catalogue that
+// already existed in kpis.ts but was imported nowhere — as four collapsible
+// layers in causal order, enriched on `bscCode` by BSC_LEVERAGE_POINTS for
+// leverage-point and initiative narrative. Where an objective has no enrichment
+// row it renders a provenance flag rather than silently appearing complete.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Perspective layers, ordered bottom-up as the causal chain actually reads. */
+const MAP_LAYERS: ReadonlyArray<{
+  perspective: BSCPerspective;
+  tier: number;
+  role: string;
+  because: string;
+  accent: string;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+}> = [
+  {
+    perspective: 'Learning & Growth', tier: 1, accent: '#0891b2', icon: GraduationCap,
+    role: 'Capabilities we must build',
+    because: 'Literacy, halal technical depth and MSME capacity are the binding constraints. Nothing above this layer moves without them.',
+  },
+  {
+    perspective: 'Internal Process', tier: 2, accent: '#3b82f6', icon: Cog,
+    role: 'Processes we must run well',
+    because: 'Certification integrity, registration speed and infrastructure delivery convert capability into a functioning investment environment.',
+  },
+  {
+    perspective: 'Stakeholder', tier: 3, accent: '#10b981', icon: Users,
+    role: 'Outcomes for Bangsamoro people & investors',
+    because: 'Poverty, jobs, gender parity and investor retention are what the processes are for. This is the moral test of the roadmap.',
+  },
+  {
+    perspective: 'Financial', tier: 4, accent: '#C9A84C', icon: DollarSign,
+    role: 'Economic results by 2035',
+    because: 'GRDP, investment approvals, exports and green revenue are lagging indicators — consequences of the three layers beneath, never inputs.',
+  },
+];
+
+/** One objective inside a layer — collapsed to a strip, expanded to full detail. */
+const ObjectiveCard: React.FC<{
+  kpi: KPI;
+  accent: string;
+  enrichment?: typeof BSC_POINTS[number];
+  linkedActions: typeof PRIORITY_ACTIONS;
+}> = ({ kpi, accent, enrichment, linkedActions }) => {
+  const [open, setOpen] = useState(false);
+  const panelId = `obj-panel-${kpi.bscCode}`;
+
+  return (
+    <div className="bg-[rgba(2,44,34,0.55)] border border-[rgba(201,168,76,0.22)] rounded-xl overflow-hidden hover:border-[rgba(201,168,76,0.45)] transition-colors">
+      <button
+        onClick={() => setOpen(o => !o)}
+        aria-expanded={open}
+        aria-controls={panelId}
+        className="w-full text-left px-4 py-3 flex items-center gap-3"
+      >
+        <span
+          className="text-[0.6rem] font-black tracking-wider px-1.5 py-0.5 rounded flex-shrink-0"
+          style={{ background: `${accent}22`, color: accent }}
+        >
+          {kpi.bscCode}
+        </span>
+
+        <span className="flex-1 min-w-0">
+          <span className="block text-sm font-semibold text-white truncate">{kpi.label}</span>
+          <span className="block text-[0.68rem] text-[#ecfdf5]/45 truncate">
+            {kpi.current} {kpi.currentSub} → {kpi.target}
+          </span>
+        </span>
+
+        {/* Compact progress read, always visible so a layer scans without expanding */}
+        <span className="hidden sm:flex items-center gap-2 flex-shrink-0 w-28">
+          <span className="flex-1 h-1.5 rounded-full bg-[rgba(255,255,255,0.08)] overflow-hidden">
+            <motion.span
+              className="block h-full rounded-full"
+              style={{ background: accent }}
+              initial={{ width: 0 }}
+              whileInView={{ width: `${kpi.progress}%` }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+            />
+          </span>
+          <span className="text-[0.7rem] font-bold tabular-nums" style={{ color: accent }}>
+            {kpi.progress}%
+          </span>
+        </span>
+
+        <ChevronDown
+          className={`w-4 h-4 text-[#ecfdf5]/40 flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`}
+          aria-hidden="true"
+        />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            id={panelId}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="px-4 pb-4 pt-1 border-t border-[rgba(201,168,76,0.15)] space-y-3">
+              {/* Milestone ladder: baseline → 2030 → 2035 */}
+              <div className="grid grid-cols-3 gap-2 mt-3">
+                {[
+                  { t: 'Baseline',    v: kpi.current,    s: kpi.currentSub },
+                  { t: '2030 target', v: kpi.target2030, s: 'interim'      },
+                  { t: '2035 target', v: kpi.target,     s: 'roadmap end'  },
+                ].map(m => (
+                  <div key={m.t} className="bg-[rgba(6,78,59,0.35)] rounded-lg px-2.5 py-2">
+                    <div className="text-[0.58rem] uppercase tracking-wider text-[#ecfdf5]/40 font-bold">{m.t}</div>
+                    <div className="text-[0.8rem] font-bold text-white leading-tight mt-0.5">{m.v}</div>
+                    <div className="text-[0.58rem] text-[#ecfdf5]/30">{m.s}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-1.5">
+                <span className="text-[0.62rem] font-bold px-2 py-0.5 rounded border border-[rgba(201,168,76,0.3)] text-[#C9A84C]">
+                  {kpi.leveragePoint}
+                </span>
+                {kpi.benchmark && (
+                  <span className="text-[0.62rem] px-2 py-0.5 rounded border border-[rgba(255,255,255,0.12)] text-[#ecfdf5]/50">
+                    {kpi.benchmark}
+                  </span>
+                )}
+              </div>
+
+              {enrichment ? (
+                <div>
+                  <div className="text-[0.6rem] uppercase tracking-wider text-[#ecfdf5]/40 font-bold mb-1">
+                    Strategic initiative
+                  </div>
+                  <p className="text-xs text-[#d1fae5]/75 leading-relaxed">{enrichment.strategicInitiative}</p>
+                </div>
+              ) : (
+                <div className="text-[0.68rem] text-[#f59e0b] bg-[rgba(245,158,11,0.08)] border border-[rgba(245,158,11,0.25)] rounded-lg px-2.5 py-1.5">
+                  No strategic initiative defined. This objective exists in the KPI catalogue but has no
+                  matching row in BSC_LEVERAGE_POINTS — it is measured, but not yet resourced.
+                </div>
+              )}
+
+              {linkedActions.length > 0 ? (
+                <div>
+                  <div className="text-[0.6rem] uppercase tracking-wider text-[#ecfdf5]/40 font-bold mb-1.5">
+                    Linked 2026 actions ({linkedActions.length})
+                  </div>
+                  <ul className="space-y-1">
+                    {linkedActions.map(a => (
+                      <li key={a.id} className="flex items-start gap-2 text-xs text-[#d1fae5]/70">
+                        <span className="text-[#C9A84C] mt-0.5" aria-hidden="true">▸</span>
+                        <span className="flex-1">
+                          {a.action}
+                          <span className="text-[#ecfdf5]/35"> · {a.due} · {a.budget} · {a.lead}</span>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <div className="text-[0.68rem] text-[#ecfdf5]/40">
+                  No 2026 action traces to this objective — delivery in Phase 1 is unfunded.
+                </div>
+              )}
+
+              <div className="text-[0.6rem] text-[#ecfdf5]/30 pt-1">Source: {kpi.source}</div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+/** One collapsible perspective layer of the strategy map. */
+const PerspectiveLayer: React.FC<{
+  layer: typeof MAP_LAYERS[number];
+  kpis: KPI[];
+  alignment?: typeof BSC_ALIGNMENT[number];
+  enrichmentFor: (code: string) => typeof BSC_POINTS[number] | undefined;
+  actionsFor: (code: string) => typeof PRIORITY_ACTIONS;
+  defaultOpen: boolean;
+}> = ({ layer, kpis, alignment, enrichmentFor, actionsFor, defaultOpen }) => {
+  const [open, setOpen] = useState(defaultOpen);
+  const Icon = layer.icon;
+  const meanProgress = kpis.length
+    ? Math.round(kpis.reduce((s, k) => s + k.progress, 0) / kpis.length)
+    : 0;
+  const unresourced = kpis.filter(k => !enrichmentFor(k.bscCode)).length;
+  const panelId = `layer-${layer.tier}`;
+
+  return (
+    <div className="relative">
+      {/* Causal connector — what makes this a map rather than a list */}
+      {layer.tier < 4 && (
+        <div
+          className="absolute left-1/2 -translate-x-1/2 -bottom-[22px] flex flex-col items-center z-10"
+          aria-hidden="true"
+        >
+          <ArrowUpRight className="w-4 h-4 -rotate-45" style={{ color: layer.accent }} />
+        </div>
+      )}
+
+      <div
+        className="border rounded-2xl overflow-hidden"
+        style={{ borderColor: `${layer.accent}44`, background: `${layer.accent}0A` }}
+      >
+        <button
+          onClick={() => setOpen(o => !o)}
+          aria-expanded={open}
+          aria-controls={panelId}
+          className="w-full text-left px-5 py-4 flex items-center gap-4"
+        >
+          <div
+            className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+            style={{ background: `${layer.accent}1F` }}
+          >
+            <Icon className="w-5 h-5" style={{ color: layer.accent }} />
+          </div>
+
+          <div className="flex-1 min-w-0">
+            <div className="flex items-baseline gap-2 flex-wrap">
+              <h3 className="text-base font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>
+                {layer.perspective}
+              </h3>
+              <span className="text-[0.62rem] uppercase tracking-wider font-bold" style={{ color: layer.accent }}>
+                Tier {layer.tier} · {layer.role}
+              </span>
+            </div>
+            <p className="text-[0.72rem] text-[#ecfdf5]/45 leading-snug mt-0.5 pr-4">{layer.because}</p>
+          </div>
+
+          <div className="hidden md:flex flex-col items-end gap-1 flex-shrink-0">
+            <span className="text-[0.62rem] text-[#ecfdf5]/40">
+              {kpis.length} objective{kpis.length === 1 ? '' : 's'} · {meanProgress}% mean
+            </span>
+            {alignment && (
+              <span className="text-[0.62rem] text-[#ecfdf5]/40">
+                Alignment{' '}
+                <span className="font-bold" style={{ color: layer.accent }}>
+                  {alignment.value.toFixed(2)}
+                </span>
+                /5 · n={alignment.n}
+              </span>
+            )}
+            {unresourced > 0 && (
+              <span className="text-[0.62rem] text-[#f59e0b]">{unresourced} unresourced</span>
+            )}
+          </div>
+
+          <ChevronDown
+            className={`w-5 h-5 text-[#ecfdf5]/40 flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`}
+            aria-hidden="true"
+          />
+        </button>
+
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              id={panelId}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="px-4 pb-4 grid grid-cols-1 lg:grid-cols-2 gap-2.5">
+                {kpis.map(k => (
+                  <ObjectiveCard
+                    key={k.bscCode}
+                    kpi={k}
+                    accent={layer.accent}
+                    enrichment={enrichmentFor(k.bscCode)}
+                    linkedActions={actionsFor(k.bscCode)}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // MEL DASHBOARD (Main Component)
 // ═══════════════════════════════════════════════════════════════════════════════
 const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
@@ -720,6 +1107,45 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
     q2:       PRIORITY_ACTIONS.filter(a => a.due.includes('Q2')).length,
     inProg:   PRIORITY_ACTIONS.filter(a => a.status === 'In Progress').length,
   }), []);
+
+  // ─── Strategy map reconciliation (Panel B) ──────────────────────────────────
+  // Joins three independently-maintained structures on `bscCode`:
+  //   ALL_BSC_KPIS        — 20-objective measurement catalogue (spine)
+  //   BSC_LEVERAGE_POINTS — 10 rows of initiative / leverage narrative
+  //   ACTION_PLAN_2026    — 11 funded Phase-1 actions, bscCode is a "A / B" list
+  // The gaps this join exposes are the finding, so they are surfaced, not hidden.
+  const strategyMap = useMemo(() => {
+    const enrichmentIndex = new Map(BSC_POINTS.map(p => [p.bscCode, p]));
+
+    // An action's bscCode may name several objectives, e.g. 'IP2 / LG2'.
+    const actionIndex = new Map<string, typeof PRIORITY_ACTIONS>();
+    PRIORITY_ACTIONS.forEach(a => {
+      String(a.bscCode).split('/').map(c => c.trim()).filter(Boolean).forEach(code => {
+        actionIndex.set(code, [...(actionIndex.get(code) ?? []), a]);
+      });
+    });
+
+    const enrichmentFor = (code: string) => enrichmentIndex.get(code);
+    const actionsFor    = (code: string) => actionIndex.get(code) ?? [];
+
+    const layers = MAP_LAYERS.map(layer => ({
+      layer,
+      kpis: ALL_BSC_KPIS.filter(k => k.perspective === layer.perspective),
+      alignment: BSC_ALIGNMENT.find(a => a.perspective === layer.perspective),
+    }));
+
+    const totalObjectives = ALL_BSC_KPIS.length;
+    const unresourced     = ALL_BSC_KPIS.filter(k => !enrichmentIndex.has(k.bscCode));
+    const unactioned      = ALL_BSC_KPIS.filter(k => actionsFor(k.bscCode).length === 0);
+
+    return {
+      layers, enrichmentFor, actionsFor, totalObjectives,
+      renderedBefore: 8, // BSC_POINTS.slice(0, 8) — what Panel B used to show
+      unresourcedCount: unresourced.length,
+      unactionedCount:  unactioned.length,
+      unactionedCodes:  unactioned.map(k => k.bscCode),
+    };
+  }, []);
 
   // ─── Validation-survey derived metrics (Panel D) ────────────────────────────
   const validation = useMemo(() => {
@@ -874,71 +1300,100 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
           </div>
         </motion.section>
 
-        {/* ── PANEL B: BSC Leverage Points ────────────────────────────────────── */}
+        {/* ── PANEL B: Strategy Map (Balanced Scorecard as roadmap) ───────────── */}
         <motion.section
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
           className="bg-[rgba(6,78,59,0.15)] border border-[rgba(201,168,76,0.32)] rounded-2xl p-6 md:p-8 relative overflow-hidden"
           aria-labelledby="panel-b-title"
         >
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e]" aria-hidden="true" />
+
           <div className="flex flex-wrap justify-between items-start gap-4 mb-6">
             <div>
-              <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">Panel B · Balanced Scorecard</span>
+              <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">
+                Panel B · Strategy Map
+              </span>
               <h2 id="panel-b-title" className="text-xl md:text-2xl font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>
-                Critical Leverage Points — 4 BSC Perspectives
+                The Balanced Scorecard as a Roadmap
               </h2>
               <div className="w-10 h-1 bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e] rounded-full mt-2" aria-hidden="true" />
+              <p className="text-xs text-[#ecfdf5]/50 mt-3 max-w-2xl leading-relaxed">
+                Read this bottom-up. Each layer is a causal precondition for the one above it:
+                capabilities enable processes, processes produce stakeholder outcomes, stakeholder
+                outcomes produce financial results. Expand a layer to see its objectives; expand an
+                objective to see its 2030/2035 milestone ladder, strategic initiative and funded
+                2026 actions.
+              </p>
             </div>
-            <span className="text-xs text-[#a7f3d0]/70 bg-[rgba(6,78,59,0.4)] border border-[rgba(201,168,76,0.32)] rounded-full px-3 py-1">
-              LP1–LP5 · Financial · Stakeholder · Internal Process · L&amp;G
-            </span>
+            <div className="flex flex-col items-end gap-2">
+              <span className="text-xs text-[#a7f3d0]/70 bg-[rgba(6,78,59,0.4)] border border-[rgba(201,168,76,0.32)] rounded-full px-3 py-1">
+                {strategyMap.totalObjectives} objectives · 4 perspectives
+              </span>
+              <span className="text-[0.62rem] text-[#ecfdf5]/35 text-right max-w-[14rem] leading-snug">
+                Previous build surfaced {strategyMap.renderedBefore} of {strategyMap.totalObjectives}.
+              </span>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {BSC_POINTS.slice(0, 8).map((pt, i) => (
-              <motion.article
-                key={i}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                className="bg-[rgba(2,44,34,0.55)] border border-[rgba(201,168,76,0.32)] rounded-xl p-5 relative overflow-hidden flex flex-col gap-3 hover:-translate-y-1 hover:border-[rgba(201,168,76,0.55)] transition-all"
-              >
-                <div className={`absolute top-0 bottom-0 left-0 w-1 ${
-                  pt.color === 'gold'  ? 'bg-gradient-to-b from-[#C9A84C] to-[#7a5c1e]'   :
-                  pt.color === 'blue'  ? 'bg-gradient-to-b from-[#3b82f6] to-[#1e3a8a]'   :
-                  pt.color === 'teal'  ? 'bg-gradient-to-b from-[#0d9488] to-[#134e4a]'   :
-                                         'bg-gradient-to-b from-[#10b981] to-[#065f46]'
-                }`} aria-hidden="true" />
-                <span className="bg-gradient-to-r from-[#7a5c1e] via-[#c9a84c] to-[#7a5c1e] text-[#022c22] text-[0.62rem] font-black tracking-wider uppercase px-2 py-0.5 rounded-full w-fit">
-                  {pt.lp}
-                </span>
-                <span className="text-[0.66rem] font-bold uppercase tracking-wider text-[#ecfdf5]/40">{pt.perspective}</span>
-                <div className="text-sm font-bold text-white leading-tight flex-1" style={{ fontFamily: "'Cinzel', serif" }}>{pt.action}</div>
-                <div className="text-xs text-[#6ee7b7] italic leading-tight">{pt.kpi}</div>
-                <div className="mt-auto">
-                  <div className="flex justify-between items-center mb-1">
-                    <span className="text-[0.7rem] text-[#ecfdf5]/55">{pt.current}</span>
-                    <span className="text-[0.7rem] font-bold text-[#C9A84C]">{pt.target}</span>
-                  </div>
-                  <div className="h-1 bg-[rgba(255,255,255,0.08)] rounded-sm overflow-hidden" role="progressbar" aria-valuenow={pt.progress} aria-valuemin={0} aria-valuemax={100} aria-label={`${pt.kpi}: ${pt.progress}%`}>
-                    <motion.div
-                      className={`h-full rounded-sm ${
-                        pt.color === 'gold'  ? 'bg-gradient-to-r from-[#C9A84C] to-[#E8C560]'  :
-                        pt.color === 'blue'  ? 'bg-gradient-to-r from-[#3b82f6] to-[#93c5fd]'  :
-                        pt.color === 'teal'  ? 'bg-gradient-to-r from-[#0d9488] to-[#6ee7b7]'  :
-                                               'bg-gradient-to-r from-[#10b981] to-[#6ee7b7]'
-                      }`}
-                      initial={{ width: 0 }} whileInView={{ width: `${pt.progress}%` }} viewport={{ once: true }}
-                      transition={{ duration: 1.6, ease: [0.4, 0, 0.2, 1] }}
-                    />
-                  </div>
-                  <div className="flex justify-between items-center mt-1.5">
-                    <StatusBadge status={pt.status} />
-                    {pt.statusSub && <span className="text-[0.68rem] text-[#ecfdf5]/35 truncate ml-2">{pt.statusSub}</span>}
-                  </div>
+          {/* Coverage strip — the join result, stated before the map is read */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+            {[
+              {
+                icon: Layers, color: '#10b981',
+                v: `${strategyMap.totalObjectives}`,
+                l: 'Objectives now mapped',
+                s: 'Full ALL_BSC_KPIS catalogue, grouped by causal tier',
+              },
+              {
+                icon: AlertTriangle, color: '#f59e0b',
+                v: `${strategyMap.unresourcedCount}`,
+                l: 'Measured but not resourced',
+                s: 'No strategic initiative row in BSC_LEVERAGE_POINTS',
+              },
+              {
+                icon: FolderKanban, color: '#ef4444',
+                v: `${strategyMap.unactionedCount}`,
+                l: 'No funded 2026 action',
+                s: `Unlinked: ${strategyMap.unactionedCodes.join(', ')}`,
+              },
+            ].map(({ icon: Icon, color, v, l, s }) => (
+              <div key={l} className="bg-[rgba(2,44,34,0.5)] border border-[rgba(201,168,76,0.2)] rounded-xl px-4 py-3 flex items-start gap-3">
+                <Icon className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color }} aria-hidden="true" />
+                <div className="min-w-0">
+                  <div className="text-lg font-bold leading-none" style={{ color, fontFamily: "'Cinzel', serif" }}>{v}</div>
+                  <div className="text-[0.7rem] text-white font-semibold mt-1">{l}</div>
+                  <div className="text-[0.6rem] text-[#ecfdf5]/35 leading-snug mt-0.5 break-words">{s}</div>
                 </div>
-              </motion.article>
+              </div>
             ))}
           </div>
+
+          {/* The map itself — rendered top-down (Financial first) so the page reads
+              as a roadmap toward 2035, while the tier labels and connectors carry
+              the bottom-up causal direction. */}
+          <div className="space-y-8">
+            {[...strategyMap.layers].reverse().map(({ layer, kpis, alignment }) => (
+              <PerspectiveLayer
+                key={layer.perspective}
+                layer={layer}
+                kpis={kpis}
+                alignment={alignment}
+                enrichmentFor={strategyMap.enrichmentFor}
+                actionsFor={strategyMap.actionsFor}
+                defaultOpen={layer.tier === 4}
+              />
+            ))}
+          </div>
+
+          <p className="text-[0.62rem] text-[#ecfdf5]/30 mt-6 leading-relaxed">
+            Objectives and targets: BIRD 2026–2035 Chapters 5–6 via <code>ALL_BSC_KPIS</code>.
+            Initiatives: <code>BSC_LEVERAGE_POINTS</code>. Actions: <code>ACTION_PLAN_2026</code>,
+            joined on <code>bscCode</code>. Per-layer alignment scores are stakeholder validation
+            means (survey §12, 1–5), not delivery measures — a high alignment score on a layer with
+            low progress means stakeholders endorse an objective that is not yet being delivered.
+          </p>
         </motion.section>
+
 
         {/* ── PANEL C: Priority Action Board ──────────────────────────────────── */}
         <motion.section
@@ -1141,7 +1596,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
                 <SignalBar
                   key={o.code}
                   label={`${o.code} — ${o.name.replace(' Strategy', '')}`}
-                  value={o.respondentScore}
+                  value={o.differentiatorScore}
                   max={10}
                   color={o.code === 'IEDS' ? '#10b981' : '#3b82f6'}
                   sub={`expert matrix ${o.expertScore.toFixed(2)} · rank ${o.expertRank}/${o.respondentRank}`}
@@ -1151,8 +1606,11 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
                 <ValidationBadge level="validated" note={`IEDS, ${validation.endorsed}/${RESPONDENTS.totalResponses}`} />
                 <p className="text-[0.62rem] text-[#ecfdf5]/28 mt-2 leading-relaxed">
                   {STRATEGY_SIGNALS.defaultContamination.allCellsAtDefault} of {STRATEGY_SIGNALS.defaultContamination.respondents} respondents
-                  left every matrix cell at the slider default; {STRATEGY_SIGNALS.defaultContamination.pctCellsAtDefault}% of cells are
-                  midpoint-contaminated. Full-sample IEDS score is {STRATEGY_SIGNALS.options[0].fullSampleScore.toFixed(2)}.
+                  left all 28 matrix cells on the identical default; bars above use only the
+                  {' '}{STRATEGY_SIGNALS.defaultContamination.differentiators} who moved at least one slider.
+                  Full-sample IEDS score is {STRATEGY_SIGNALS.options[0].fullSampleScore.toFixed(2)}.
+                  Ranking is identical across expert, full-sample and differentiator sets — rank
+                  agreement is total even though level agreement is weak.
                 </p>
               </div>
             </div>
@@ -1211,7 +1669,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
             <p className="text-[0.68rem] text-[#ecfdf5]/40 mt-3 leading-relaxed">
               Stakeholders endorse the <em>framework</em> more readily than the <em>target levels</em>: vision
               achievability is the lowest-rated item in the section at{' '}
-              {BSC_ALIGNMENT.find(b => b.label === 'Vision is achievable')?.value ?? '—'}.
+              {SCORECARD_META.find(b => b.label === 'Vision is achievable')?.value ?? '—'}.
             </p>
           </div>
 
@@ -1227,6 +1685,216 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
             </span>
           </p>
         </motion.section>
+
+        {/* ── PANEL F: Evidence Provenance ────────────────────────────────────── */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          className="bg-[rgba(6,78,59,0.15)] border border-[rgba(201,168,76,0.32)] rounded-2xl p-6 md:p-8 relative overflow-hidden"
+          aria-labelledby="panel-f-title"
+        >
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e]" aria-hidden="true" />
+
+          <div className="flex flex-wrap justify-between items-start gap-4 mb-6">
+            <div>
+              <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">
+                Panel F · Evidence Provenance
+              </span>
+              <h2 id="panel-f-title" className="text-xl md:text-2xl font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>
+                What the Evidence Actually Covers
+              </h2>
+              <div className="w-10 h-1 bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e] rounded-full mt-2" aria-hidden="true" />
+              <p className="text-xs text-[#ecfdf5]/50 mt-3 max-w-2xl leading-relaxed">
+                A MEL dashboard that reports only findings is half a dashboard. This panel reports
+                the shape of the evidence base itself — where stakeholder input exists, and where a
+                confident-looking number is standing on nothing.
+              </p>
+            </div>
+            <span className="text-xs text-[#a7f3d0]/70 bg-[rgba(6,78,59,0.4)] border border-[rgba(201,168,76,0.32)] rounded-full px-3 py-1">
+              {WORKSHOP_EVIDENCE.totalRecords} workshop records · n={RESPONDENTS.totalResponses} survey
+            </span>
+          </div>
+
+          {/* F-1 · Workshop coverage matrix */}
+          <div className="bg-[rgba(2,44,34,0.5)] border border-[rgba(201,168,76,0.2)] rounded-xl p-5 mb-4">
+            <h3 className="text-sm font-bold text-white mb-1" style={{ fontFamily: "'Cinzel', serif" }}>
+              Workshop Coverage by Sector
+            </h3>
+            <p className="text-[0.68rem] text-[#ecfdf5]/40 mb-4">
+              Substantive records per sector per workshop. Empty cells are not low signal — they are
+              no signal.
+            </p>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs border-collapse">
+                <caption className="sr-only">
+                  Count of substantive workshop records by sector and workshop stage
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col" className="text-left text-[0.62rem] uppercase tracking-wider text-[#ecfdf5]/40 font-bold pb-2 pr-3">
+                      Sector
+                    </th>
+                    {WORKSHOP_EVIDENCE.workshops.map(w => (
+                      <th key={w.code} scope="col" className="text-center text-[0.62rem] uppercase tracking-wider text-[#ecfdf5]/40 font-bold pb-2 px-2">
+                        {w.code}
+                        <span className="block font-normal normal-case tracking-normal text-[0.58rem] text-[#ecfdf5]/25">
+                          {w.label}
+                        </span>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {WORKSHOP_EVIDENCE.sectors.map(row => (
+                    <tr key={row.sector} className="border-t border-[rgba(255,255,255,0.06)]">
+                      <th scope="row" className="text-left text-[0.72rem] text-white font-semibold py-2 pr-3 whitespace-nowrap">
+                        {row.sector}
+                      </th>
+                      {(['W1', 'W2', 'W4', 'W5'] as const).map(code => {
+                        const v = row[code];
+                        // Intensity scaled against 12; 27 saturates deliberately.
+                        const a = v === 0 ? 0 : Math.min(0.85, 0.15 + (v / 12) * 0.7);
+                        return (
+                          <td key={code} className="text-center py-2 px-2">
+                            <span
+                              className="inline-flex items-center justify-center w-9 h-7 rounded-md text-[0.72rem] font-bold tabular-nums"
+                              style={
+                                v === 0
+                                  ? { background: 'rgba(239,68,68,0.10)', color: '#ef4444', border: '1px solid rgba(239,68,68,0.35)' }
+                                  : { background: `rgba(16,185,129,${a})`, color: a > 0.5 ? '#022c22' : '#6ee7b7' }
+                              }
+                              title={`${row.sector} · ${code}: ${v} record${v === 1 ? '' : 's'}`}
+                            >
+                              {v}
+                            </span>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="mt-4 text-[0.7rem] text-[#f59e0b] bg-[rgba(245,158,11,0.08)] border border-[rgba(245,158,11,0.25)] rounded-lg px-3 py-2 leading-relaxed">
+              <strong>Infrastructure carries the largest challenge inventory in the series (27
+              records) and has no SWOT and no strategy sheet behind it.</strong> Tourism has a
+              strategy with no SWOT beneath it. Four of six sectors never completed the opportunity
+              translation step (W2 ≤ 2). Any Infrastructure or Tourism strategy content in this
+              platform is analyst inference, not a stakeholder output, and should not be presented
+              to BOI-MTIT as validated.
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {/* F-2 · Sequencing validation */}
+            <div className="bg-[rgba(2,44,34,0.5)] border border-[rgba(201,168,76,0.2)] rounded-xl p-5">
+              <h3 className="text-sm font-bold text-white mb-1" style={{ fontFamily: "'Cinzel', serif" }}>
+                IEDS Sequencing — Priority &amp; Standing
+              </h3>
+              <p className="text-[0.68rem] text-[#ecfdf5]/40 mb-4">Survey §10 · 1–5 priority scale</p>
+
+              {SEQUENCE_SIGNALS.map(s => (
+                <div key={s.code} className="mb-3 last:mb-0">
+                  <SignalBar
+                    label={`Sequence ${s.code} — ${s.label}`}
+                    value={s.mean}
+                    max={5}
+                    color={s.validation === 'unvalidated' ? '#ef4444' : '#10b981'}
+                    sub={`n=${s.n} · SD ${s.sd.toFixed(2)}`}
+                  />
+                  {s.validation === 'unvalidated' && (
+                    <div className="mt-1">
+                      <ValidationBadge level="unvalidated" note="zero island respondents" />
+                    </div>
+                  )}
+                </div>
+              ))}
+
+              <p className="text-[0.68rem] text-[#ecfdf5]/45 leading-relaxed mt-3 pt-3 border-t border-[rgba(255,255,255,0.06)]">
+                The three sequences are separated by 0.20 of a scale point against SDs near 0.75 —
+                statistically these are one undifferentiated block, not a ranked order. Sequence C is
+                the BIMP-EAGA maritime corridor, and Basilan and Tawi-Tawi returned zero respondents.
+                Its 4.00 is a mainland opinion about an island programme.
+              </p>
+            </div>
+
+            {/* F-3 · Phase funding preference vs plan */}
+            <div className="bg-[rgba(2,44,34,0.5)] border border-[rgba(201,168,76,0.2)] rounded-xl p-5">
+              <h3 className="text-sm font-bold text-white mb-1" style={{ fontFamily: "'Cinzel', serif" }}>
+                Phase Funding Preference vs. Plan
+              </h3>
+              <p className="text-[0.68rem] text-[#ecfdf5]/40 mb-4">Survey §13 · q13_6 · n=68</p>
+
+              {PHASE_FUNDING_PREFERENCE.map(p => {
+                const planned = p.phase ? PHASES.find(ph => ph.num === p.phase) : undefined;
+                return (
+                  <SignalBar
+                    key={p.key}
+                    label={p.label}
+                    value={p.n}
+                    max={30}
+                    color={p.phase === '03' ? '#ef4444' : '#C9A84C'}
+                    suffix=" resp."
+                    sub={planned ? `plan allocates ${planned.budget}` : 'no single-phase weighting'}
+                  />
+                );
+              })}
+
+              <p className="text-[0.68rem] text-[#ecfdf5]/45 leading-relaxed mt-3 pt-3 border-t border-[rgba(255,255,255,0.06)]">
+                No mandate exists for back-loading. Only 9 of 68 respondents favoured weighting the
+                consolidation phase, against a plan that allocates {PHASES[2].budget} to it. The
+                modal preference — even spread (24) — is also the one the current three-phase profile
+                does not deliver.
+              </p>
+            </div>
+          </div>
+
+          {/* F-4 · Survey geographic coverage */}
+          <div className="bg-[rgba(2,44,34,0.5)] border border-[rgba(201,168,76,0.2)] rounded-xl p-5 mt-4">
+            <div className="flex items-center justify-between flex-wrap gap-2 mb-1">
+              <h3 className="text-sm font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>
+                Survey Coverage — Who Actually Answered
+              </h3>
+              <ValidationBadge level="partial" note={`${validation.silentProvinces.length} provinces silent`} />
+            </div>
+            <p className="text-[0.68rem] text-[#ecfdf5]/40 mb-4">
+              All {RESPONDENTS.totalResponses} responses carry final consent; none quarantined.
+              Fielded {RESPONDENTS.fieldedFrom} – {RESPONDENTS.fieldedTo}.
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {RESPONDENTS.byProvince.map(p => (
+                <div
+                  key={p.label}
+                  className="rounded-lg px-3 py-2 border"
+                  style={
+                    p.n === 0
+                      ? { background: 'rgba(239,68,68,0.08)', borderColor: 'rgba(239,68,68,0.35)' }
+                      : { background: 'rgba(6,78,59,0.35)', borderColor: 'rgba(201,168,76,0.2)' }
+                  }
+                >
+                  <div
+                    className="text-base font-bold leading-none tabular-nums"
+                    style={{ color: p.n === 0 ? '#ef4444' : '#C9A84C', fontFamily: "'Cinzel', serif" }}
+                  >
+                    {p.n}
+                  </div>
+                  <div className="text-[0.65rem] text-[#ecfdf5]/55 leading-snug mt-1">{p.label}</div>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-[0.68rem] text-[#ecfdf5]/45 leading-relaxed mt-4">
+              {RESPONDENTS.coverageGap}
+            </p>
+            <p className="text-[0.62rem] text-[#ecfdf5]/30 leading-relaxed mt-2">
+              Non-probability convenience sample with no weighting frame. Every figure in Panels D
+              and F is a stakeholder validation signal, not a population estimate for BARMM.
+            </p>
+          </div>
+        </motion.section>
+
 
         {/* ── PANEL E: Phase Progress Tracker ─────────────────────────────────── */}
         <motion.section
