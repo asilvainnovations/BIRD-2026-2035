@@ -67,7 +67,15 @@ export default {
       },
       fontFamily: {
         mono: ['JetBrains Mono', 'monospace'],
-        sans: ['Inter', 'sans-serif'],
+        // 'Inter' was declared here but never imported by index.css, so every
+        // body-text surface in the app fell back to the generic system sans.
+        // MELDashboard papered over this with an inline "'DM Sans'" style, which
+        // is why it looked different from every other page. DM Sans is now the
+        // real default and is actually loaded.
+        sans: ['DM Sans', 'Inter', 'system-ui', 'sans-serif'],
+        // Display face for headings. Previously applied only via 34 inline
+        // fontFamily styles inside MELDashboard; no other component had it.
+        display: ['Cinzel', 'Georgia', 'serif'],
       },
       borderRadius: {
         lg: 'calc(var(--radius) + 2px)',
