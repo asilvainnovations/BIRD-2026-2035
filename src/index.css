@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Roboto+Condensed:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Roboto+Condensed:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -88,48 +88,48 @@
   }
 
   .dark {
-    /* Core Colors */
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Core Colors — BIRD deep green #022c22 / cream #ecfdf5 */
+    --background: 166 91% 9%;
+    --foreground: 152 81% 96%;
 
     /* Glass Material Colors */
-    --glass-background: 222.2 84% 8%;
+    --glass-background: 166 82% 12%;
     --glass-background-alpha: 0.6;
-    --glass-border: 210 40% 98%;
-    --glass-border-alpha: 0.1;
+    --glass-border: 45 55% 55%;
+    --glass-border-alpha: 0.2;
 
-    /* Card */
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    /* Card — #022c22 */
+    --card: 166 91% 9%;
+    --card-foreground: 152 81% 96%;
 
-    /* Popover */
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    /* Popover — #022c22 */
+    --popover: 166 91% 9%;
+    --popover-foreground: 152 81% 96%;
 
-    /* Primary */
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Primary — BIRD metallic gold #C9A84C on deep green */
+    --primary: 45 55% 55%;
+    --primary-foreground: 166 91% 9%;
 
-    /* Secondary */
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    /* Secondary — #064e3b */
+    --secondary: 162 84% 16%;
+    --secondary-foreground: 152 81% 96%;
 
-    /* Muted */
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Muted — foreground kept at >=4.5:1 on --background */
+    --muted: 162 84% 16%;
+    --muted-foreground: 152 40% 78%;
 
     /* Accent */
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 162 84% 16%;
+    --accent-foreground: 152 81% 96%;
 
     /* Destructive */
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 40%;
+    --destructive-foreground: 152 81% 96%;
 
-    /* Borders & Inputs */
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    /* Borders & Inputs — gold at low alpha reads as a hairline on green */
+    --border: 45 40% 30%;
+    --input: 45 40% 30%;
+    --ring: 45 55% 55%;
 
     /* Shadows - Enhanced for dark mode */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
@@ -140,14 +140,14 @@
     --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 
     /* Sidebar */
-    --sidebar-background: 215 28% 17%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 217.2 91.2% 59.8%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 25% 27%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 215 25% 27%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 166 87% 6%;
+    --sidebar-foreground: 152 81% 96%;
+    --sidebar-primary: 45 55% 55%;
+    --sidebar-primary-foreground: 166 91% 9%;
+    --sidebar-accent: 162 84% 16%;
+    --sidebar-accent-foreground: 152 81% 96%;
+    --sidebar-border: 45 40% 30%;
+    --sidebar-ring: 45 55% 55%;
   }
 }
 
@@ -176,102 +176,58 @@
   ::selection {
     @apply bg-primary/20 text-foreground;
   }
-}
 
-@layer components {
-  @layer base {
-  * {
-    @apply border-border;
-  }
+  /* NOTE: this block previously sat as a nested `@layer base { ... }` INSIDE
+     `@layer components { ... }`, and duplicated the `*` and `body` rules already
+     declared in the real base layer above. It is now flattened into the
+     components layer, deduplicated, and its specificity reduced.
 
-  body {
-    @apply bg-background text-foreground font-sans antialiased;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transition: background-color var(--transition-base), color var(--transition-base);
-  }
+     Two behavioural fixes are folded in:
 
-  /* ðŸ”§ FIX: Ensure all text inputs have visible text color */
-  input,
-  textarea,
-  select,
-  button,
-  [contenteditable="true"],
-  [contenteditable=""],
-  .ProseMirror,
-  .CodeMirror,
-  .monaco-editor,
-  .ace_editor {
+     1. `button` was in the forced-colour selector list, so every button without
+        an explicit text colour inherited --foreground. On a gold #C9A84C button
+        in dark mode that is near-white on gold (~2.4:1).  Buttons are removed;
+        they set their own colours.
+
+     2. The form-control rules used `input[type="text"]` etc. — element + attribute
+        selectors with specificity (0,1,1), which OUTRANKS a Tailwind utility class
+        (0,1,0). Any `bg-[#022c22]/60` or `text-[#ecfdf5]` applied to an input was
+        therefore silently discarded. Wrapping the selectors in `:where()` drops
+        their specificity to (0,0,0) so they act as true defaults and utilities win.
+
+     It also lives in @layer base rather than @layer components: Tailwind
+     tree-shakes the components layer against detected class names, and the
+     original selector list named .ProseMirror / .CodeMirror / .monaco-editor /
+     .ace_editor, none of which exist here — so the whole rule was purged from
+     the build and the "input visibility fix" never actually shipped. */
+
+  :where(input, textarea, select, [contenteditable="true"], [contenteditable=""]) {
     @apply text-foreground;
     caret-color: hsl(var(--primary));
   }
 
-  /* Explicit input styles for better visibility */
-  input::placeholder,
-  textarea::placeholder {
+  :where(input, textarea)::placeholder {
     @apply text-muted-foreground;
+    opacity: 1;
   }
 
-  input:-ms-input-placeholder,
-  textarea:-ms-input-placeholder {
-    @apply text-muted-foreground;
+  :where(
+    input[type="text"], input[type="email"], input[type="password"],
+    input[type="number"], input[type="search"], input[type="tel"],
+    input[type="url"], input[type="date"], input[type="datetime-local"],
+    input[type="time"], input[type="month"], input[type="week"], textarea
+  ) {
+    @apply bg-background text-foreground border-border;
   }
 
-  input::-ms-input-placeholder,
-  textarea::-ms-input-placeholder {
-    @apply text-muted-foreground;
-  }
-
-  /* Fix for markdown editor specifically */
-  .markdown-editor {
-    @apply text-foreground !important;
-    color: hsl(var(--foreground)) !important;
-  }
-
-  /* Fix for code editors and preformatted text in inputs */
-  pre,
-  code {
-    @apply font-mono text-foreground;
-  }
-
-  /* Ensure form controls always have visible text */
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="number"],
-  input[type="search"],
-  input[type="tel"],
-  input[type="url"],
-  input[type="date"],
-  input[type="datetime-local"],
-  input[type="time"],
-  input[type="month"],
-  input[type="week"],
-  textarea {
-    @apply bg-background text-foreground;
-    @apply border-border;
-    @apply placeholder:text-muted-foreground;
-  }
-
-  /* Fix for readonly/disabled states */
-  input:disabled,
-  textarea:disabled,
-  input[readonly],
-  textarea[readonly] {
+  :where(input, textarea):disabled,
+  :where(input, textarea)[readonly] {
     @apply opacity-70 text-foreground;
   }
-
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
-  }
-
-  /* Selection colors */
-  ::selection {
-    @apply bg-primary/20 text-foreground;
-  }
 }
-  /* Liquid Glass Surface */
+
+@layer components {
+    /* Liquid Glass Surface */
   .glass {
     background: hsla(var(--glass-background) / var(--glass-background-alpha));
     backdrop-filter: blur(var(--blur-lg)) saturate(180%);
@@ -622,15 +578,43 @@
   }
 }
 /* ========================================
-   ðŸ›¡ï¸ ENHANCED PLATFORM BADGES
+   PLATFORM BADGE SUPPRESSION
+   ========================================
+
+   REWRITTEN. The previous ruleset matched on inline-style substrings and generic
+   class fragments, which made it capable of hiding the application's own UI:
+
+     [style*="position: fixed"][style*="bottom"]   any fixed bottom-anchored element
+     div[style*="z-index: 999"]                    any high-z overlay
+     div[style*="z-index: 9999"]                   modal and dialog portals
+     body > div:last-child[style*="position:fixed"]  the toast portal — sonner
+                                                   renders last in <body> and sets
+                                                   position via inline style
+     [class*="powered-by"], [class*="built-with"]  substring match on any class
+     .attribution, [data-attribution]              legitimate provenance UI, which
+                                                   this platform actively uses to
+                                                   label data sources
+     iframe[src*="badge"], iframe[title*="badge"]  any embed with "badge" in it
+
+   Anything hidden this way fails silently and is close to undebuggable, because
+   the element is present in the DOM with correct styles and simply not painted.
+   Selectors are now anchored to the vendor name only. If a badge reappears,
+   add a specific selector for it here rather than widening these.
    ======================================== */
 
-/* Primary Badge Selectors */
-#bolt-badge, 
+#bolt-badge,
 .bolt-badge,
 [data-bolt-badge],
+[data-badge="bolt"],
+[data-platform="bolt"],
+[data-branding="bolt"],
 [id*="bolt"][id*="badge"],
-[class*="bolt"][class*="badge"] {
+[class*="bolt"][class*="badge"],
+a[href*="bolt.new"],
+a[href*="bolt.diy"],
+iframe[src*="bolt.new"],
+iframe[src*="bolt.diy"],
+iframe[data-bolt] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
@@ -641,142 +625,5 @@
   height: 0 !important;
   width: 0 !important;
   overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
   clip-path: inset(50%) !important;
-  white-space: nowrap !important;
-}
-
-/* Iframe-based badges */
-iframe[src*="bolt"],
-iframe[src*="badge"],
-iframe[title*="bolt"],
-iframe[title*="badge"],
-iframe[data-bolt],
-iframe.badge {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  height: 0 !important;
-  width: 0 !important;
-}
-
-/* Fixed position badges (common placement) */
-[style*="position: fixed"][style*="bottom"],
-[style*="position:fixed"][style*="bottom"],
-div[style*="z-index: 999"],
-div[style*="z-index:999"],
-div[style*="z-index: 9999"],
-a[href*="bolt.new"],
-a[href*="bolt.diy"] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-}
-
-/* Additional common badge patterns */
-[data-badge="bolt"],
-[data-platform="bolt"],
-[data-branding="bolt"],
-.platform-badge,
-.builder-badge,
-.powered-by-badge,
-[class*="made-in"],
-[class*="powered-by"],
-[class*="built-with"] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Bottom-right corner elements (typical badge placement) */
-body > div:last-child[style*="position: fixed"],
-body > div:last-child[style*="position:fixed"],
-body > a:last-child[style*="position: fixed"],
-body > a:last-child[style*="position:fixed"] {
-  display: none !important;
-}
-
-/* SVG-based badges */
-svg[data-badge],
-svg[class*="badge"],
-svg[id*="badge"] {
-  display: none !important;
-  visibility: hidden !important;
-}
-
-/* Watermark and attribution elements */
-[data-watermark],
-[data-attribution],
-.watermark,
-.attribution {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-}
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   THEME-AWARE COMPONENT UTILITIES
-   These ensure all module pages respond correctly to light/dark mode.
-   Use these classes instead of hard-coded dark-only color values.
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-
-/* Surface layers — BIRD Deep Green palette */
-.surface-base   { @apply bg-white dark:bg-[#022c22]; }
-.surface-raised { @apply bg-white dark:bg-[#022c22]/60; }
-.surface-sunken { @apply bg-[#ecfdf5]/5 dark:bg-[#011a12]; }
-.surface-panel  { @apply bg-[#064e3b]/10 dark:bg-[#022c22]/40 border border-[#C9A84C]/20; }
-
-/* Text layers — BIRD Metallic Gold + Cream */
-.text-primary-content   { @apply text-[#022c22] dark:text-[#E8C560]; }
-.text-secondary-content { @apply text-[#064e3b] dark:text-[#ecfdf5]/80; }
-.text-tertiary-content  { @apply text-[#64748b] dark:text-[#64748b]/80; }
-
-/* Border layers — BIRD Gold accents */
-.border-subtle  { @apply border-[#C9A84C]/20 dark:border-[#C9A84C]/15; }
-.border-strong  { @apply border-[#C9A84C]/30 dark:border-[#C9A84C]/25; }
-
-/* Input fields — BIRD branded */
-.input-field {
-  @apply bg-white dark:bg-[#022c22]/60
-         text-slate-900 dark:text-[#ecfdf5]
-         border-[#C9A84C]/30 dark:border-[#C9A84C]/20
-         placeholder:text-[#64748b] dark:placeholder:text-[#64748b]/60
-         focus:ring-[#C9A84C] focus:border-[#C9A84C];
-}
-
-/* Card surface — BIRD branded */
-.card-surface {
-  @apply bg-white dark:bg-[#022c22]/40
-         border border-[#C9A84C]/20 dark:border-[#C9A84C]/15
-         rounded-xl shadow-sm;
-}
-
-/* Tab / pill navigation — BIRD Gold */
-.tab-bar { @apply bg-[#064e3b]/10 dark:bg-[#022c22]/60 rounded-xl p-1 border border-[#C9A84C]/20; }
-.tab-item { @apply text-[#64748b] dark:text-[#64748b] hover:text-[#C9A84C] dark:hover:text-[#E8C560]; }
-.tab-item-active { @apply bg-[#C9A84C]/20 shadow-sm text-[#022c22] dark:text-[#E8C560] ring-1 ring-[#C9A84C]/30; }
-
-/* Stat badges — BIRD branded */
-.badge-neutral { @apply bg-[#064e3b]/10 dark:bg-[#022c22]/60 text-[#64748b] dark:text-[#64748b]; }
-
-/* CLD canvas background — BIRD branded */
-.cld-canvas-bg {
-  @apply bg-gradient-to-br from-[#ecfdf5]/5 via-[#022c22]/20 to-[#064e3b]/10
-         dark:from-[#011a12] dark:via-[#022c22] dark:to-[#064e3b]/20
-         border border-[#C9A84C]/20 dark:border-[#C9A84C]/15;
-}
-
-/* Panel overlays — BIRD branded */
-.panel-overlay {
-  @apply bg-white dark:bg-[#022c22]
-         border border-[#C9A84C]/20 dark:border-[#C9A84C]/15
-         shadow-xl;
-}
-
-/* Section header strip — BIRD branded */
-.section-header {
-  @apply bg-gradient-to-r from-[#064e3b]/5 to-[#064e3b]/10
-         dark:from-[#022c22] dark:to-[#011a12]
-         border-b border-[#C9A84C]/20 dark:border-[#C9A84C]/15;
 }
