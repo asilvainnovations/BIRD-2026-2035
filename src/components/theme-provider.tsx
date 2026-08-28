@@ -25,12 +25,19 @@ const ThemeContext = createContext<ThemeContextType | null>(null)
 export function ThemeProvider({
   children,
   defaultTheme = "system",
+  storageKey = "theme",
   value: _value,
   ...props
 }: ThemeProviderProps) {
+  // NOTE: `storageKey` was previously declared in the props interface, passed by
+  // App.tsx as "bird-theme", and then never read — the provider hard-coded
+  // "theme" for both read and write. Any value already persisted under
+  // "theme" by an earlier build therefore silently overrode defaultTheme="dark",
+  // which is how users ended up in light mode on a shell that only ever had a
+  // dark palette. The key is now honoured on both sides.
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== "undefined") {
-      const savedTheme = localStorage.getItem("theme")
+      const savedTheme = localStorage.getItem(storageKey)
       return (savedTheme && (savedTheme === "dark" || savedTheme === "light" || savedTheme === "system")
         ? savedTheme
         : defaultTheme) as Theme
@@ -57,7 +64,7 @@ export function ThemeProvider({
   const value: ThemeContextType = {
     theme,
     setTheme: (theme: Theme) => {
-      localStorage.setItem("theme", theme)
+      localStorage.setItem(storageKey, theme)
       setTheme(theme)
     },
   }
