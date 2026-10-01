@@ -9,11 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{margin:0;padding:0;font-family:'Roboto',sans-serif;font-size:11pt;line-height:1.7;color:#333;background:#fff;text-align:justify;text-align-last:left;}
+body{margin:0;padding:0;font-family:'Roboto',sans-serif;font-size:11pt;line-height:1.7;color:#333;background:#fff;text-align:justify;text-align-last:left;} p,li,td,th{ text-align:justify; hyphens:auto; } figure,figure img{margin-left:auto;margin-right:auto;text-align:center;}
 @page{size:A4;margin:2.5cm 2cm 2.5cm 2cm;@top-center{content:string(doctitle);font-size:9pt;color:#666;font-style:italic;}@bottom-center{content:counter(page);font-size:9pt;color:#666;}}
 @page :first{margin:0;@top-center{content:none;}@bottom-center{content:none;}}
 @page cover{margin:0;@top-center{content:none;}@bottom-center{content:none;}}
-@page toc-page{@top-center{content:none;}@bottom-center{content:none;}}
+@page {@top-center{content:none;}@bottom-center{content:none;}}
 body{string-set:doctitle "";}
 h1.chapter-title{string-set:doctitle content();}
 
@@ -70,14 +70,6 @@ blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-st
 .video-box{background:#e8f4fd;border:1px solid #b8d8f0;border-left:4px solid #2980b9;padding:0.8rem 1rem;margin:1rem 0;font-size:9.5pt;}
 .video-box-title{font-family:'Poppins',sans-serif;font-weight:600;color:#2980b9;margin-bottom:0.3rem;}
 
-.toc-page{page:toc-page;page-break-after:always;}
-.toc-title{font-family:'Poppins',sans-serif;font-size:18pt;font-weight:700;color:#0a3d2e;text-align:center;margin-bottom:1.5rem;padding-bottom:0.5rem;border-bottom:2px solid #C9A84C;}
-.toc{list-style:none;padding:0;margin:0;}
-.toc li{margin-bottom:0.3rem;}
-.toc a{color:#333;text-decoration:none;font-size:10.5pt;display:block;padding:0.2rem 0;}
-.toc .toc-chapter{font-weight:700;font-size:11pt;color:#0a3d2e;margin-top:0.8rem;}
-.toc .toc-section{padding-left:1.5rem;font-size:10pt;}
-.toc .toc-subsection{padding-left:3rem;font-size:9.5pt;color:#555;}
 
 .references-page{page-break-before:always;}
 .references-list{font-size:10pt;line-height:1.6;}
@@ -88,6 +80,33 @@ blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-st
 
 .pedset-box{background:#fff8e1;border:1px solid #f0e0b0;border-left:4px solid #C9A84C;padding:0.5rem 0.8rem;margin:0.5rem 0;font-size:9.5pt;}
 .pedset-box-title{font-family:'Poppins',sans-serif;font-weight:600;color:#8B6C28;margin-bottom:0.2rem;}
+
+/* ===== INTEGRATED BEIE DIAGNOSTICS — CONSOLIDATED FROM the integrated diagnostic ===== */
+.beie-diagnostic{margin:2rem 0 2.5rem;border:1px solid #d7e5de;border-radius:8px;overflow:hidden;background:#fff;page-break-inside:avoid;}
+.beie-diagnostic-header{background:linear-gradient(135deg,#0a3d2e,#0f5c3e);color:#fff;padding:1rem 1.2rem;border-bottom:3px solid #C9A84C;}
+.beie-diagnostic-header .eyebrow{font-family:'Poppins',sans-serif;font-size:8.5pt;letter-spacing:.12em;text-transform:uppercase;color:#E8C560;font-weight:700;margin-bottom:.25rem;}
+.beie-diagnostic-header h3{color:#fff;margin:.1rem 0 0;font-size:14pt;}
+.beie-diagnostic-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:1rem;background:#f7faf8;}
+.swot-card{border:1px solid #dbe5df;border-radius:6px;padding:.8rem;background:#fff;page-break-inside:avoid;}
+.swot-card h4{margin:0 0 .45rem;color:#0a3d2e;font-size:10.5pt;}
+.swot-card .metric{font-family:'Poppins',sans-serif;font-size:17pt;font-weight:800;color:#0a3d2e;}
+.swot-card .formula{font-family:'Roboto Mono','Courier New',monospace;font-size:8pt;color:#66736d;margin-top:.25rem;}
+.swot-card .note{font-size:8pt;color:#66736d;margin-top:.35rem;}
+.swot-s{border-top:3px solid #2f7d57}.swot-o{border-top:3px solid #C9A84C}.swot-w{border-top:3px solid #b36b3d}.swot-t{border-top:3px solid #8b3d3d}
+.swot-register{padding:1rem;background:#fff;}
+.swot-register table{font-size:8.5pt;margin:.5rem 0 0;}
+.swot-register th{background:#edf4ef;}
+.systems-map{padding:1rem;background:#fff;border-top:1px solid #e1e9e4;}
+.systems-map figure{margin:.5rem auto 1rem;}
+.systems-map img{max-width:94%;height:auto;display:block;margin:auto;}
+.systems-map .loop-box{background:#f8f9f5;border-left:4px solid #C9A84C;padding:.75rem 1rem;margin:.65rem 0;font-size:9.5pt;}
+.systems-map .loop-box strong{color:#0a3d2e;}
+.leverage-box{margin:1rem;padding:.85rem 1rem;background:#f0f7f4;border:1px solid #c8e6d5;border-left:4px solid #0a3d2e;font-size:9.5pt;}
+.data-note{margin:0 1rem 1rem;padding:.65rem .8rem;background:#fff8e1;border:1px solid #ead9a4;border-left:4px solid #C9A84C;font-size:8.5pt;color:#5e522f;}
+.cluster-summary{padding:1rem;background:#f8faf9;border-top:1px solid #e1e9e4;}
+.cluster-summary table{font-size:8.5pt;}
+@media print{.beie-diagnostic-grid{grid-template-columns:1fr 1fr}.beie-diagnostic{page-break-inside:avoid}.systems-map img{max-width:90%}}
+
 </style>
 <base target="_blank">
 </head>
@@ -100,43 +119,16 @@ blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-st
 <div class="cover-chapter">Chapter 2</div>
 <div class="cover-title">Deep Presencing Within and Across Context</div>
 <div class="cover-divider"></div>
-<div class="cover-subtitle">Context Analysis Using the Bangsamoro Economic and Investment Ecosystem (BEIE) Framework<br>From Environmental Scanning to Systems Sensing</div>
+<div class="cover-subtitle">Context Analysis, Quantified SWOT and Systems Mapping Using the Bangsamoro Economic and Investment Ecosystem (BEIE) Framework<br>From Environmental Scanning to Systems Sensing</div>
 <div class="cover-meta">
 <strong>Bangsamoro Investment Roadmap Development (BIRD) 2026-2035</strong><br>
 Asilva Innovations Strategic Insights<br>
 Prepared for the Bangsamoro Government and Development Partners<br>
-<em>July 2026</em>
+<em>Integrated publication update · 2026</em>
 </div>
 </div>
 </div>
 
-<!-- ==================== TABLE OF CONTENTS ==================== -->
-<div class="toc-page">
-<h1 class="toc-title">Table of Contents</h1>
-<ul class="toc">
-<li class="toc-chapter"><a href="#ch2-intro">2.0 Introduction: From Environmental Scanning to Systems Sensing</a></li>
-<li class="toc-section"><a href="#ch2-1">2.1 Global Economic Trends: Implications for BARMM</a></li>
-<li class="toc-section"><a href="#ch2-2">2.2 Regional Economic Trajectory: Indicators and Inflection Points</a></li>
-<li class="toc-chapter"><a href="#ch2-os">A. Cross-Cutting Operating Systems</a></li>
-<li class="toc-section"><a href="#ch2-os-1">A.1 Moral Governance, Resilience, Inclusivity, and Peace</a></li>
-<li class="toc-section"><a href="#ch2-os-2">A.2 Policy Architecture Supporting the Operating Systems</a></li>
-<li class="toc-section"><a href="#ch2-os-3">A.3 Political Domain: Governance Credibility and Security Stability</a></li>
-<li class="toc-section"><a href="#ch2-os-4">A.4 Environmental and Geophysical Hazards</a></li>
-<li class="toc-section"><a href="#ch2-os-5">A.5 Iceberg Model: Governance and Investment Dynamics</a></li>
-<li class="toc-chapter"><a href="#ch2-c1">B. Cluster 1: Foundations</a></li>
-<li class="toc-section"><a href="#ch2-c1-1">B.1 Policy and Master Plan Alignment</a></li>
-<li class="toc-section"><a href="#ch2-c1-2">B.2 Agriculture, Fisheries, and Forestry</a></li>
-<li class="toc-section"><a href="#ch2-c1-3">B.3 Energy and Environmental Systems</a></li>
-<li class="toc-chapter"><a href="#ch2-c2">C. Cluster 2: Transformers</a></li>
-<li class="toc-chapter"><a href="#ch2-c3">D. Cluster 3: Enablers</a></li>
-<li class="toc-chapter"><a href="#ch2-c4">E. Cluster 4: Connectors</a></li>
-<li class="toc-chapter"><a href="#ch2-c5">F. Cluster 5: Financiers</a></li>
-<li class="toc-chapter"><a href="#ch2-synthesis">G. Cluster Interlinkages and System Dynamics</a></li>
-<li class="toc-chapter"><a href="#references">References</a></li>
-</ul>
-</div>
-
-<!-- ==================== CHAPTER 2 INTRO ==================== -->
 <div class="chapter-header" id="ch2-intro">
 <div class="chapter-number">Chapter 2</div>
 <h1 class="chapter-title">Deep Presencing Within and Across Context</h1>
@@ -231,6 +223,21 @@ BARMM's economic trajectory will depend on how effectively it aligns local inves
 <p>
 Two pivotal developments frame BARMM's near-term investment climate. First, the <strong>governance transition</strong> from the Bangsamoro Transition Authority (BTA) to an elected Parliament in 2026 marks a critical juncture for governance legitimacy and investor confidence. Successful elections are expected to amplify political stability and economic credibility; disruptions could reverse hard-won gains in investor perception (IAG Philippines, 2026). Second, <strong>security normalization</strong> — the declaration of Basilan as Abu Sayyaf Group (ASG)-free in June 2024, followed by the surrender of remaining members in December 2024 — represents a historic security milestone that has normalized economic activity and encouraged permanent settlement (Philippine Information Agency [PIA], 2025).
 </p>
+
+
+<!-- ==================== INTEGRATED QUANTIFIED SWOT + SYSTEMS DIAGNOSTICS ==================== -->
+<div class="chapter-header" id="ch2-diagnostics">
+<div class="chapter-number">Integrated Strategic Diagnostics</div>
+<h1 class="chapter-title">Quantified SWOT and Systems Mapping Within the BEIE Clusters</h1>
+</div>
+
+<p>
+The strategic diagnostic layer previously presented as the integrated diagnostic is consolidated here into Chapter 2 so that context, ecosystem structure, quantified stakeholder evidence, systems dynamics, and investment implications are read as one analytical chain. The five BEIE clusters are treated as interdependent subsystems rather than independent sectors. Each cluster therefore combines: (1) stakeholder-validated SWOT signals; (2) the applicable systems archetype and feedback structure; (3) a leverage-point interpretation; and (4) an investment and institutional response.
+</p>
+
+<div class="data-note">
+<strong>Evidence and scoring note.</strong> The current validation dataset contains 76 consented responses. SWOT ratings use the survey's paired Impact (1–5) and Likelihood (1–5) inputs and the canonical BIRD formulas: Strength RI = (Impact × Likelihood) / 5; Opportunity RI = √(Impact × Likelihood); Weakness Risk = Impact × Likelihood; Threat VI = (Impact² × Likelihood) / 25. fileciteturn22file0L189-L194 The analytics service computes these metrics at item level and separately reports observation/coverage metadata. Where a cluster has no valid observations for a SWOT family, the publication reports <strong>n/a</strong> rather than treating missing data as zero. The Strategic Balance Index (SBI) shown below follows the current analytics contract; where one or more families are missing, it must be interpreted as an incomplete diagnostic rather than as a fully observed equilibrium measure.
+</div>
 
 <!-- ==================== CROSS-CUTTING OPERATING SYSTEMS ==================== -->
 <div class="chapter-header" id="ch2-os">
@@ -474,6 +481,25 @@ The Bangsamoro Sustainable Energy Master Plan (BSEMP) targets ₱11–19 billion
 </p>
 
 <!-- ==================== CLUSTER 2: TRANSFORMERS ==================== -->
+<div class="beie-diagnostic" id="ch2-c1-diagnostic">
+<div class="beie-diagnostic-header"><div class="eyebrow">Cluster 1 · Foundations</div><h3>Quantified SWOT + Systems Diagnostic — Resource Base, Land, Energy and Ecological Resilience</h3></div>
+<div class="beie-diagnostic-grid">
+<div class="swot-card swot-s"><h4>Strength Readiness Index</h4><div class="metric">3.45</div><div class="formula">mean of (I × L) / 5</div><div class="note">654 valid item observations.</div></div>
+<div class="swot-card swot-o"><h4>Opportunity Readiness Index</h4><div class="metric">3.93</div><div class="formula">mean of √(I × L)</div><div class="note">Renewables, carbon markets, PES and forestry pathways are present in the validated register.</div></div>
+<div class="swot-card swot-w"><h4>Weakness Risk</h4><div class="metric">15.92</div><div class="formula">mean of I × L</div><div class="note">Land-tenure friction is the cluster's explicit internal constraint in the survey register.</div></div>
+<div class="swot-card swot-t"><h4>Threat Vulnerability Index</h4><div class="metric">2.69</div><div class="formula">mean of (I² × L) / 25</div><div class="note">Pestalotiopsis disease is the explicit registered threat.</div></div>
+</div>
+<div class="swot-register"><table><thead><tr><th>Diagnostic</th><th>Current validated reading</th><th>Investment implication</th></tr></thead><tbody>
+<tr><td>Strengths</td><td>Strong AFF base; renewable energy endowments; Lake Lanao; Tawi-Tawi seaweed.</td><td>Move from raw endowment extraction toward processing, resilient infrastructure and ecosystem-service revenue.</td></tr>
+<tr><td>Weakness</td><td>Complex SGA land-tenure overlay.</td><td>Land due diligence, tenure formalization and transaction-ready land information should precede large agro-industrial commitments.</td></tr>
+<tr><td>Opportunity</td><td>Renewables, carbon markets/REDD+, PES and the Forestry Code.</td><td>Develop bankable green projects with community benefit-sharing and measurable environmental safeguards.</td></tr>
+<tr><td>Threat</td><td>Rubber Pestalotiopsis disease.</td><td>Pair plantation investment with biosecurity, surveillance, diversification and climate-resilient production.</td></tr>
+</tbody></table></div>
+<div class="systems-map"><figure><img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Tragedy%20of%20the%20Commons%20Archetype.png" alt="Tragedy of the Commons systems archetype for Foundations"><figcaption data-label="Systems Map">Tragedy of the Commons — shared-resource exploitation can reinforce short-term gains while weakening the resource base. Source: BIRD Validation Survey Systems Archetypes.</figcaption></figure>
+<div class="loop-box"><strong>System structure.</strong> Resource gains attract additional users; expanding demand increases extraction; ecological limits eventually constrain output, while delayed environmental feedback allows degradation to accumulate. The leverage logic is to align individual economic incentives with collective resource stewardship.</div>
+<div class="leverage-box"><strong>Leverage response.</strong> Combine watershed and fisheries co-management, sustainable rubber standards, carbon/PES revenue mechanisms, and investment screening that prices ecological risk into project design. The critical shift is from managing individual projects to managing the resource system on which multiple investments depend.</div></div>
+</div>
+
 <div class="chapter-header" id="ch2-c2">
 <div class="chapter-number">Section C</div>
 <h1 class="chapter-title">Cluster 2: Transformers —<br>Industry, Manufacturing, Logistics, and Halal Processing</h1>
@@ -521,13 +547,32 @@ Currently, BARMM's industrial base is underdeveloped. The region hosts no signif
 </table>
 
 <!-- ==================== CLUSTER 3: ENABLERS ==================== -->
+<div class="beie-diagnostic" id="ch2-c2-diagnostic">
+<div class="beie-diagnostic-header"><div class="eyebrow">Cluster 2 · Transformers</div><h3>Quantified SWOT + Systems Diagnostic — Halal, Manufacturing, Processing and Value Addition</h3></div>
+<div class="beie-diagnostic-grid">
+<div class="swot-card swot-s"><h4>Strength Readiness Index</h4><div class="metric">3.41</div><div class="formula">mean of (I × L) / 5</div><div class="note">539 valid item observations.</div></div>
+<div class="swot-card swot-o"><h4>Opportunity Readiness Index</h4><div class="metric">n/a</div><div class="formula">no valid opportunity observations</div><div class="note">Do not interpret missing opportunity data as zero readiness.</div></div>
+<div class="swot-card swot-w"><h4>Weakness Risk</h4><div class="metric">16.15</div><div class="formula">mean of I × L</div><div class="note">Halal certification, cold-chain and market-linkage constraints dominate the registered weaknesses.</div></div>
+<div class="swot-card swot-t"><h4>Threat Vulnerability Index</h4><div class="metric">2.77</div><div class="formula">mean of (I² × L) / 25</div><div class="note">Standards recognition is the registered external threat.</div></div>
+</div>
+<div class="swot-register"><table><thead><tr><th>Diagnostic</th><th>Current validated reading</th><th>Investment implication</th></tr></thead><tbody>
+<tr><td>Strengths</td><td>Halal legitimacy, domestic demand, Polloc Freeport, cultural heritage.</td><td>Build credible value chains that convert cultural legitimacy into certified products, processing capacity and exportable brands.</td></tr>
+<tr><td>Weaknesses</td><td>Certification capacity, cold chain and market linkages.</td><td>Invest in shared quality infrastructure, certification laboratories, cold-chain nodes and buyer-market information.</td></tr>
+<tr><td>Opportunity data</td><td>No valid opportunity observations in the current live dataset.</td><td>Maintain the opportunity register from the survey instrument, but avoid quantitative claims until responses are available.</td></tr>
+<tr><td>Threat</td><td>Standards recognition.</td><td>Align certification processes with internationally recognized requirements and pursue mutual-recognition pathways.</td></tr>
+</tbody></table></div>
+<div class="systems-map"><figure><img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Growth%20and%20Underinvestment%20(1).png" alt="Growth and Underinvestment systems archetype for Transformers"><figcaption data-label="Systems Map">Growth and Underinvestment — investment growth can stall when certification, processing and facilitation capacity fails to scale with demand.</figcaption></figure>
+<div class="loop-box"><strong>System structure.</strong> Investment can expand capacity and approvals, creating a reinforcing growth loop. Once institutional capacity reaches its ceiling, backlogs and delays increase, lowering attractiveness and reducing new demand.</div>
+<div class="leverage-box"><strong>Leverage response.</strong> Invest ahead of demand in BHB certification capacity, QA laboratories, shared processing and cold-chain facilities, and digital investor facilitation. The objective is to prevent a successful investment pipeline from becoming its own bottleneck.</div></div>
+</div>
+
 <div class="chapter-header" id="ch2-c3">
 <div class="chapter-number">Section D</div>
 <h1 class="chapter-title">Cluster 3: Enablers —<br>Infrastructures, Social Services &amp; Protection, Health, and Human Capital</h1>
 </div>
 
 <p>
-The Enablers cluster encompasses the physical, digital, and human infrastructure that makes value creation viable across all other clusters. Without reliable energy, transport connectivity, digital access, and skilled labor, neither Foundations can reach Transformers nor Transformers can reach Connectors. The Enablers cluster is therefore the <strong>binding constraint</strong> on BARMM's growth trajectory — a structural reality confirmed by the Systems Archetype analysis identifying "Limits to Growth" as the dominant pattern (see Chapter 3-2).
+The Enablers cluster encompasses the physical, digital, and human infrastructure that makes value creation viable across all other clusters. Without reliable energy, transport connectivity, digital access, and skilled labor, neither Foundations can reach Transformers nor Transformers can reach Connectors. The Enablers cluster is therefore the <strong>binding constraint</strong> on BARMM's growth trajectory — a structural reality confirmed by the Systems Archetype analysis identifying "Limits to Growth" as the dominant pattern (see the integrated diagnostic).
 </p>
 
 <figure>
@@ -567,6 +612,25 @@ The human capital deficit is particularly acute. With a functional literacy rate
 </table>
 
 <!-- ==================== CLUSTER 4: CONNECTORS ==================== -->
+<div class="beie-diagnostic" id="ch2-c3-diagnostic">
+<div class="beie-diagnostic-header"><div class="eyebrow">Cluster 3 · Enablers</div><h3>Quantified SWOT + Systems Diagnostic — Infrastructure, Digital Systems, Health and Human Capital</h3></div>
+<div class="beie-diagnostic-grid">
+<div class="swot-card swot-s"><h4>Strength Readiness Index</h4><div class="metric">3.26</div><div class="formula">mean of (I × L) / 5</div><div class="note">880 valid item observations.</div></div>
+<div class="swot-card swot-o"><h4>Opportunity Readiness Index</h4><div class="metric">4.01</div><div class="formula">mean of √(I × L)</div><div class="note">Tourism recovery and digital leapfrogging are the registered opportunities.</div></div>
+<div class="swot-card swot-w"><h4>Weakness Risk</h4><div class="metric">17.13</div><div class="formula">mean of I × L</div><div class="note">The highest cluster weakness-risk reading in the current quantified dataset.</div></div>
+<div class="swot-card swot-t"><h4>Threat Vulnerability Index</h4><div class="metric">2.80</div><div class="formula">mean of (I² × L) / 25</div><div class="note">Cyber insecurity and AI-related risks are the registered threat.</div></div>
+</div>
+<div class="swot-register"><table><thead><tr><th>Diagnostic</th><th>Current validated reading</th><th>Investment implication</th></tr></thead><tbody>
+<tr><td>Strengths</td><td>Young population and Lanao del Sur growth momentum.</td><td>Convert demographic potential into productive capability through skills, health and enterprise-linked education.</td></tr>
+<tr><td>Weaknesses</td><td>Infrastructure deficits, poverty, literacy, malnutrition, skills mismatch, technology adoption and fragmented data.</td><td>Treat enabling infrastructure and human capital as preconditions for productive investment rather than parallel social programs.</td></tr>
+<tr><td>Opportunities</td><td>Tourism recovery and digital leapfrogging/BIFOSS.</td><td>Use digital public infrastructure to reduce transaction costs and connect underserved firms and communities to markets.</td></tr>
+<tr><td>Threat</td><td>Cyber insecurity and AI risks.</td><td>Build cybersecurity, data governance, digital literacy and responsible-AI controls into digital investment programs.</td></tr>
+</tbody></table></div>
+<div class="systems-map"><figure><img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Limits%20to%20Growth%20Archetype.png" alt="Limits to Growth systems archetype for Enablers"><figcaption data-label="Systems Map">Limits to Growth — infrastructure, skills and environmental ceilings can cause an initially reinforcing investment cycle to plateau.</figcaption></figure>
+<div class="loop-box"><strong>System structure.</strong> Initial investment raises productive capacity, but bottlenecks in energy, transport, broadband, literacy and other enabling systems progressively reduce the marginal return to further investment.</div>
+<div class="leverage-box"><strong>Leverage response.</strong> Sequence infrastructure, digital connectivity and workforce capability ahead of productive-sector scale-up. The investment test is not simply whether a project is bankable, but whether the enabling system can absorb and sustain the additional load.</div></div>
+</div>
+
 <div class="chapter-header" id="ch2-c4">
 <div class="chapter-number">Section E</div>
 <h1 class="chapter-title">Cluster 4: Connectors —<br>Tourism, Digital Connectivity, Trade, Exports, and BIMP-EAGA Integration</h1>
@@ -606,6 +670,25 @@ BARMM's connectivity profile is defined by a dual gateway structure: <strong>BIM
 </div>
 
 <!-- ==================== CLUSTER 5: FINANCIERS ==================== -->
+<div class="beie-diagnostic" id="ch2-c4-diagnostic">
+<div class="beie-diagnostic-header"><div class="eyebrow">Cluster 4 · Connectors</div><h3>Quantified SWOT + Systems Diagnostic — Trade Corridors, Logistics and Regional Integration</h3></div>
+<div class="beie-diagnostic-grid">
+<div class="swot-card swot-s"><h4>Strength Readiness Index</h4><div class="metric">3.50</div><div class="formula">mean of (I × L) / 5</div><div class="note">642 valid item observations.</div></div>
+<div class="swot-card swot-o"><h4>Opportunity Readiness Index</h4><div class="metric">4.04</div><div class="formula">mean of √(I × L)</div><div class="note">Highest observed opportunity RI among the five functional clusters.</div></div>
+<div class="swot-card swot-w"><h4>Weakness Risk</h4><div class="metric">n/a</div><div class="formula">no valid weakness observations</div><div class="note">The current dataset cannot quantify the weakness family for this cluster.</div></div>
+<div class="swot-card swot-t"><h4>Threat Vulnerability Index</h4><div class="metric">2.97</div><div class="formula">mean of (I² × L) / 25</div><div class="note">Halal competition, downturn and commodity price volatility are registered threats.</div></div>
+</div>
+<div class="swot-register"><table><thead><tr><th>Diagnostic</th><th>Current validated reading</th><th>Investment implication</th></tr></thead><tbody>
+<tr><td>Strength</td><td>BIMP-EAGA strategic location.</td><td>Prioritize corridor reliability, port/landbridge interoperability and trade facilitation.</td></tr>
+<tr><td>Opportunities</td><td>Global and ASEAN halal markets, BIMP-EAGA integration, UAE/GCC corridor and Mindanao Central Logistics Land-Bridge.</td><td>Build a connected export system rather than isolated logistics projects; link production, certification, processing and ports.</td></tr>
+<tr><td>Weakness data</td><td>No valid weakness observations in the current live dataset.</td><td>Retain the qualitative diagnostic but do not assign a quantitative weakness score.</td></tr>
+<tr><td>Threats</td><td>Established halal hubs, global downturn and commodity volatility.</td><td>Diversify markets, improve product differentiation and reduce logistics cost per unit.</td></tr>
+</tbody></table></div>
+<div class="systems-map"><figure><img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Success%20to%20the%20Successful%20Aarchetype.png" alt="Success to the Successful systems archetype for Connectors"><figcaption data-label="Systems Map">Success to the Successful — initial infrastructure and investment advantages can concentrate further resources in already-connected mainland locations.</figcaption></figure>
+<div class="loop-box"><strong>System structure.</strong> Better-connected jurisdictions attract more investment; additional investment improves infrastructure and market access; these gains then reinforce the original advantage. Island and remote provinces can consequently fall further behind despite strong resource endowments.</div>
+<div class="leverage-box"><strong>Leverage response.</strong> Design corridor investments as an inclusion mechanism: prioritize missing links, island logistics, digital connectivity and trade facilitation capacity where they unlock otherwise stranded productive assets. Track corridor performance by province, not only aggregate regional throughput.</div></div>
+</div>
+
 <div class="chapter-header" id="ch2-c5">
 <div class="chapter-number">Section F</div>
 <h1 class="chapter-title">Cluster 5: Financiers —<br>Islamic Banking, Waqf, Takaful, and Microfinance</h1>
@@ -649,6 +732,36 @@ Currently, Islamic banking penetration in BARMM is minimal — total assets belo
 
 
 <!-- ==================== CLUSTER INTERLINKAGES ==================== -->
+<div class="beie-diagnostic" id="ch2-c5-diagnostic">
+<div class="beie-diagnostic-header"><div class="eyebrow">Cluster 5 · Financiers</div><h3>Quantified SWOT + Systems Diagnostic — Islamic Finance, MSME Capital and Investment Mobilization</h3></div>
+<div class="beie-diagnostic-grid">
+<div class="swot-card swot-s"><h4>Strength Readiness Index</h4><div class="metric">3.29</div><div class="formula">mean of (I × L) / 5</div><div class="note">199 valid item observations.</div></div>
+<div class="swot-card swot-o"><h4>Opportunity Readiness Index</h4><div class="metric">3.99</div><div class="formula">mean of √(I × L)</div><div class="note">Islamic finance ecosystem development is the registered opportunity.</div></div>
+<div class="swot-card swot-w"><h4>Weakness Risk</h4><div class="metric">15.66</div><div class="formula">mean of I × L</div><div class="note">Formal financial penetration remains the registered structural weakness.</div></div>
+<div class="swot-card swot-t"><h4>Threat Vulnerability Index</h4><div class="metric">n/a</div><div class="formula">no valid threat observations</div><div class="note">No quantitative threat estimate is published for this cluster.</div></div>
+</div>
+<div class="swot-register"><table><thead><tr><th>Diagnostic</th><th>Current validated reading</th><th>Investment implication</th></tr></thead><tbody>
+<tr><td>Strength</td><td>Islamic finance legal framework under RA 11439.</td><td>Convert enabling legislation into accessible products, institutions, talent and transaction infrastructure.</td></tr>
+<tr><td>Weakness</td><td>Minimal formal financial penetration.</td><td>Expand MSME and rural/island access through Islamic microfinance, cooperative finance and digitally enabled distribution.</td></tr>
+<tr><td>Opportunity</td><td>Growing Islamic finance ecosystem.</td><td>Position BARMM projects for Shariah-compliant capital while maintaining commercial and impact-investment discipline.</td></tr>
+<tr><td>Threat data</td><td>No valid threat observations in the current live dataset.</td><td>Do not infer a low-threat environment; treat this as a data-coverage gap.</td></tr>
+</tbody></table></div>
+<div class="systems-map"><figure><img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Shifting%20the%20Burden.png" alt="Shifting the Burden systems archetype for Financiers"><figcaption data-label="Systems Map">Shifting the Burden — short-term financing substitutes can relieve immediate capital constraints while delaying development of durable Islamic-finance capacity.</figcaption></figure>
+<div class="loop-box"><strong>System structure.</strong> Conventional or ad-hoc capital can solve immediate liquidity needs, but weak institutional development and fragmented certification can perpetuate dependence on symptomatic fixes. Delays can then reduce confidence and demand for purpose-built Islamic finance products.</div>
+<div class="leverage-box"><strong>Leverage response.</strong> Build the fundamental solution: Islamic finance institutions, product capability, financial literacy, MSME readiness, Shariah governance and investable project pipelines. Use blended finance strategically to build market capacity rather than create permanent subsidy dependence.</div></div>
+</div>
+
+
+<div class="beie-diagnostic" id="ch2-cross-cluster-systems">
+<div class="beie-diagnostic-header"><div class="eyebrow">Cross-Cluster Systems Synthesis</div><h3>From Five Diagnostics to One Investment System</h3></div>
+<div class="systems-map">
+<figure><img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/14.%20Investment-Development%20Virtuous%20Cycle.png" alt="Investment-Development Virtuous Cycle"><figcaption data-label="Systems Map">Investment–Development Virtuous Cycle — investment, jobs, household income, local demand, business climate and further investment form a reinforcing development loop.</figcaption></figure>
+<figure><img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/15.%20Investment%20and%20Governance%20Cycles.png" alt="Investment and Governance Cycles"><figcaption data-label="Systems Map">Investment and Governance Cycles — governance quality, investor confidence, approvals, revenues and public capacity form a second reinforcing loop.</figcaption></figure>
+<div class="loop-box"><strong>System sequencing.</strong> Foundations supply the productive and ecological base; Enablers remove capacity ceilings; Transformers convert resources into higher-value products; Connectors move those products into domestic, ASEAN and global markets; Financiers mobilize capital across the system. The Cross-Cutting Operating Systems determine whether these flows are trustworthy, inclusive, resilient and peaceful.</div>
+<div class="leverage-box"><strong>Integrated investment logic.</strong> The diagnostic evidence supports a sequencing principle rather than five independent sector programs: <strong>secure the resource base → build enabling capacity → scale transformation → connect markets → deepen finance</strong>. Governance, resilience, inclusivity and peace operate across every step. This architecture is consistent with the survey's BEIE framing that SWOT questions are mapped to the five clusters and Operating Systems sections. fileciteturn22file0L23-L24</div>
+</div>
+</div>
+
 <div class="chapter-header" id="ch2-synthesis">
 <div class="chapter-number">Section G</div>
 <h1 class="chapter-title">Cluster Interlinkages and System Dynamics</h1>
