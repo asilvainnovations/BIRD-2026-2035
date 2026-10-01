@@ -73,7 +73,7 @@ const ECOSYSTEM_MATH = {
 
 /**
  * Strategic pathway evaluation — survey Section 10, scored on the same seven
- * criteria as Chapter 4 using formulas.ts weights. `respondentScore` uses only
+ * criteria as Chapter 3 using formulas.ts weights. `respondentScore` uses only
  * the 29 respondents who differentiated their sliders: 25 of 75 left all 28
  * cells at the default of 5, so 65.5% of cells are midpoint-contaminated and
  * the full-sample means understate the spread.
