@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // BIRD 2026–2035 · Balanced Scorecard KPIs & Leverage Points
-// Single source of truth — derived strictly from BIRD 2026–2035 Chapters 5–6.
+// Single source of truth — derived strictly from BIRD 2026–2035 Chapters 4–5.
 // Source: BOI-MTIT, BARMM (2026). Bangsamoro Investment Roadmap 2026–2035.
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -171,7 +171,7 @@ export const PARETO_KPIS: KPI[] = [
   },
 ];
 
-// ─── Panel B · Full Balanced Scorecard KPI Set (Chapters 5–6) ─────────────────
+// ─── Panel B · Full Balanced Scorecard KPI Set (Chapters 4–5) ─────────────────
 export const ALL_BSC_KPIS: KPI[] = [
   // FINANCIAL PERSPECTIVE ─────────────────────────────────────────────────────
   ...PARETO_KPIS.filter(k => k.perspective === 'Financial'),
