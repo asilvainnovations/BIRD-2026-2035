@@ -554,7 +554,7 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
     createItem({ id: generateId(), optionType: 'WT' as TOWSQuadrant, title: 'Green Economy Revenue Diversification (Shifting the Burden Corrective)', description: 'Reduce dependency on national transfers by activating autonomous revenue streams: carbon credits, PES, eco-tourism fees (JMC 2026-01 + Forestry Code). Converts shared environmental assets from threat vectors to income generators.', priorityScore: 3, feasibilityScore: 3, selected: false, leveragePoint: 'LP5' as LeveragePoint, beieCluster: 'foundations' as BEIECluster, birdPhase: '2' as BIRDPhase, swotPairs: 'W3 × T4', leverageLevel: 4, resourceRequirement: 'medium' }),
   ];
 
-  // ── BSC Objectives (sample — Chapter 6 BIRD 2026-2035) ────────────────────
+  // ── BSC Objectives (sample — Chapter 5 BIRD 2026-2035) ────────────────────
   const obj1Id = generateId();
   const obj2Id = generateId();
   const obj3Id = generateId();
