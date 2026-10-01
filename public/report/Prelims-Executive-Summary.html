@@ -2,458 +2,850 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BIRD 2026–2035 | Preliminary Pages and Executive Summary</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preliminary Pages and Executive Summary | BIRD 2026–2035</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
 <style>
+/* ===== Design tokens (shared with Indexes.html and Chapters 1–7) ===== */
 :root{
- --green:#0a3d2e;--green2:#1b5e20;--green3:#2e7d32;--gold:#c9a84c;
- --ink:#202522;--muted:#56615b;--soft:#f4f7f3;--cream:#faf8f3;--line:#d8ddd8;
+  --green-900:#0a3d2e; --green-700:#1B5E20; --green-500:#2E7D32; --mint:#a8e6cf;
+  --gold:#C9A84C; --gold-light:#E8C560; --gold-dark:#8B6C28;
+  --ink:#1a1a1a; --ink-2:#3d3d3d; --ink-3:#5f5f5f;
+  --mist:#f0f7f4; --mist-line:#c8e6d5; --warm:#f5f3f0; --line:#dfe5e1; --desk:#e6ebe7;
+  --bar-h:64px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:"Roboto","Arial",sans-serif;font-size:10.5pt;line-height:1.68;color:var(--ink);background:#fff}
-p,li,td,th,figcaption{ text-align:justify;hyphens:auto}
-p{margin:0 0 10px}
-a{color:var(--green2);text-decoration:none}
-a:hover{text-decoration:underline}
-.cover-page{width:210mm;height:297mm;position:relative;overflow:hidden;page-break-after:always;background:#0a3d2e}
-.cover-page img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.cover-page:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,61,46,.60),rgba(10,61,46,.91))}
-.cover-content{position:absolute;z-index:2;left:10%;right:10%;top:16%;bottom:13%;display:flex;flex-direction:column;justify-content:center;color:#fff;text-align:justify}
-.cover-content>*{max-width:88%;margin-left:auto;margin-right:auto}
-.cover-title{font-family:"Montserrat","Arial",sans-serif;font-size:27pt;line-height:1.18;font-weight:800;color:#fff;text-align:justify;text-align-last:center}
-.cover-subtitle{font-size:13pt;line-height:1.5;color:#e5f1eb;margin-top:14px;text-align:justify;text-align-last:center}
-.cover-divider{height:3px;width:90px;background:var(--gold);margin:20px auto}
-.cover-meta{font-size:9.5pt;line-height:1.9;color:#f3f6f4;text-align:justify;text-align-last:center}
-.cover-meta strong{color:#f0d98a}
-.page{max-width:210mm;min-height:297mm;margin:0 auto;padding:17mm 18mm;page-break-after:always;background:#fff}
-.page:last-child{page-break-after:auto}
-.prelim-title{font-family:"Montserrat","Arial",sans-serif;font-size:19pt;color:var(--green);text-align:center;border-bottom:2px solid var(--gold);padding-bottom:9px;margin-bottom:22px}
-.smallcaps{font-size:8.5pt;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);font-weight:700}
-.center{text-align:center;text-align-last:center}
-.justified{text-align:justify}
-.copyright-box{min-height:235mm;display:flex;flex-direction:column;justify-content:center;text-align:justify}
-.copyright-box p{font-size:9.5pt}
-.pub-title{font-size:16pt;font-weight:800;color:var(--green);text-align:center;text-align-last:center;margin-bottom:15px}
-.meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 22px;margin:18px 0}
-.meta-grid div{padding:8px 10px;background:var(--soft);border-left:3px solid var(--gold);font-size:9pt}
-.toc{list-style:none}
-.toc li{margin:5px 0}
-.toc .front{font-weight:700;color:var(--green);margin-top:10px}
-.toc .chapter{font-weight:800;color:var(--green);font-size:11.2pt;margin-top:15px;padding:7px 9px;background:var(--soft);border-left:4px solid var(--gold)}
-.toc .section{padding-left:22px;font-size:9.7pt}
-.toc .subsection{padding-left:42px;font-size:9.2pt;color:var(--muted)}
-.abbr{width:100%;border-collapse:collapse;font-size:8.7pt}
-.abbr th{background:var(--green);color:#fff;padding:6px 8px;text-align:left}
-.abbr td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}
-.abbr td:first-child{width:18%;font-weight:800;color:var(--green);white-space:nowrap}
-.abbr tr:nth-child(even){background:var(--soft)}
-.glossary{columns:2 250px;column-gap:26px}
-.term{break-inside:avoid;margin:0 0 10px}
-.term strong{display:block;color:var(--green);font-size:10pt}
-.term span{display:block;color:var(--muted);font-size:8.9pt;padding-left:10px;border-left:2px solid var(--gold)}
-.message{border-left:4px solid var(--gold);background:var(--soft);padding:15px 17px;margin:14px 0;break-inside:avoid}
-.message h3{color:var(--green);font-family:"Montserrat","Arial",sans-serif;font-size:12pt;margin-bottom:8px}
-.message .signature{margin-top:16px;font-weight:700;color:var(--green)}
-.exec-box{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;padding:19px 22px;border-radius:7px;margin:0 0 18px}
-.exec-box h3{font-family:"Montserrat","Arial",sans-serif;color:#f0d98a;font-size:13pt;margin-bottom:8px}
-.exec-box p{color:#fff;margin-bottom:7px}
-.exec-box strong{color:#f0d98a}
-h2{font-family:"Montserrat","Arial",sans-serif;color:var(--green);font-size:14pt;margin:23px 0 10px;border-bottom:1px solid #ddd;padding-bottom:4px;page-break-after:avoid}
-h3{font-family:"Montserrat","Arial",sans-serif;color:var(--green2);font-size:11pt;margin:15px 0 7px;page-break-after:avoid}
-ul,ol{margin:0 0 12px 22px}
-li{margin-bottom:5px}
-.key-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0}
-.stat{background:var(--soft);border-top:3px solid var(--gold);padding:10px;text-align:center}
-.stat b{display:block;font-size:18pt;color:var(--green)}
-.stat span{font-size:8pt;color:var(--muted)}
-table{width:100%;border-collapse:collapse;margin:12px 0 17px;font-size:8.25pt;page-break-inside:auto}
-caption{text-align:justify;font-weight:800;color:var(--green);font-size:9.2pt;margin-bottom:5px}
-th{background:var(--soft);color:var(--green);font-weight:800;padding:6px 7px;border-top:2px solid var(--green);border-bottom:1px solid #aaa}
-td{padding:5px 7px;border-bottom:1px solid var(--line);vertical-align:top}
-tr:last-child td{border-bottom:2px solid #777}
-.note{background:#fff9e8;border-left:4px solid var(--gold);padding:10px 13px;margin:12px 0;font-size:9pt}
-.callout{background:#f0f7f4;border:1px solid #c9dfd3;border-left:4px solid var(--green);padding:12px 14px;margin:13px 0}
-.phase{background:var(--soft);border-left:4px solid var(--green);padding:12px 14px;margin:10px 0}
-.phase b{color:var(--green)}
-.quote{font-family:Georgia,serif;font-size:12pt;font-style:italic;color:var(--green);background:var(--cream);border-left:4px solid var(--gold);padding:14px 18px;margin:18px 0}
-.kpi-table td:first-child{font-weight:800;color:var(--green)}
-.footer-note{font-size:8pt;color:#737b76;margin-top:18px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:'Montserrat',Arial,sans-serif;font-size:10pt;line-height:1.66;color:var(--ink);background:var(--desk);
+  padding:76px 0 calc(var(--bar-h) + 28px)}
+a{color:var(--green-700)}
+p,li,td,figcaption,.term span{text-align:justify;text-align-last:left;hyphens:auto;-webkit-hyphens:auto}
+p{margin:0 0 3mm}
+strong{color:var(--green-900);font-weight:600}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ===== Reader chrome ===== */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:20;height:60px;display:flex;align-items:center;gap:10px;padding:0 16px;
+  background:var(--green-900);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.topbar .brand{font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:var(--gold-light);white-space:nowrap}
+.topbar .where{font-family:'Roboto Condensed',sans-serif;font-size:13px;color:#d6efe3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.progress{position:fixed;top:60px;left:0;height:3px;background:var(--gold);z-index:21;transition:width .25s ease}
+.btn{font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;line-height:1;border-radius:6px;border:1px solid transparent;
+  padding:9px 13px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;text-decoration:none;white-space:nowrap}
+.btn svg{width:16px;height:16px;flex:none}
+.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+.btn-gold{background:var(--gold);color:#1a1a1a}
+.btn-gold:hover{background:var(--gold-light)}
+.btn-green{background:var(--green-900);color:#fff}
+.btn-green:hover{background:var(--green-700)}
+.btn-line{background:#fff;color:var(--green-900);border-color:var(--green-900)}
+.btn-line:hover{background:var(--mist)}
+.btn[disabled]{opacity:.38;cursor:not-allowed}
+.navbar{position:fixed;bottom:0;left:0;right:0;z-index:20;height:var(--bar-h);display:flex;align-items:center;justify-content:center;gap:14px;
+  background:rgba(255,255,255,.97);border-top:1px solid var(--line);box-shadow:0 -2px 10px rgba(0,0,0,.06);padding:0 12px}
+.navbar .count{font-family:'Roboto Condensed',sans-serif;font-size:13.5px;color:var(--ink-2);min-width:220px;text-align:center}
+.navbar .count b{color:var(--green-900)}
+.hint{font-family:'Roboto Condensed',sans-serif;font-size:11.5px;color:var(--ink-3);text-align:center;margin:10px auto 0;max-width:210mm}
+
+/* Contents drawer */
+dialog.drawer{margin:0 0 0 auto;height:100vh;max-height:100vh;width:min(420px,92vw);border:none;padding:0;background:#fff;box-shadow:-6px 0 24px rgba(0,0,0,.2)}
+dialog.drawer::backdrop{background:rgba(6,40,30,.45)}
+.drawer-head{position:sticky;top:0;background:var(--green-900);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:14px 16px}
+.drawer-head h2{font-family:'Poppins',sans-serif;font-size:15px;color:var(--gold-light);margin:0;border:0;padding:0}
+.drawer-body{padding:12px 16px 30px}
+.drawer-body h3{font-family:'Roboto Condensed',sans-serif;font-size:12px;letter-spacing:.06em;color:var(--gold-dark);margin:14px 0 6px}
+.drawer-body button.pg,.drawer-body a.ch{display:block;width:100%;text-align:left;background:none;border:0;border-left:3px solid transparent;
+  padding:7px 10px;font:500 13px/1.35 'Montserrat',sans-serif;color:var(--ink);cursor:pointer;text-decoration:none;border-radius:0 4px 4px 0}
+.drawer-body button.pg:hover,.drawer-body a.ch:hover{background:var(--mist)}
+.drawer-body button.pg[aria-current="page"]{border-left-color:var(--gold);background:var(--mist);font-weight:700;color:var(--green-900)}
+.drawer-body a.ch small{display:block;color:var(--ink-3);font-size:11.5px;font-weight:400}
+
+/* Toast */
+.toast{position:fixed;left:50%;bottom:calc(var(--bar-h) + 14px);transform:translateX(-50%);background:var(--green-900);color:#fff;padding:9px 15px;border-radius:6px;
+  font-size:12.5px;z-index:30;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+
+/* ===== A4 sheets ===== */
+.sheet{width:210mm;min-height:297mm;margin:0 auto;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.12);padding:20mm 20mm 22mm;position:relative}
+.sheet[hidden]{display:none}
+.sheet:focus{outline:none}
+.folio{position:absolute;left:20mm;right:20mm;bottom:10mm;display:flex;justify-content:space-between;font-family:'Roboto Condensed',sans-serif;
+  font-size:8.5pt;color:#888;border-top:1px solid var(--line);padding-top:2mm}
+.prelim-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:20pt;color:var(--green-900);text-align:center;
+  border-bottom:2px solid var(--gold);padding-bottom:3mm;margin-bottom:7mm}
+.kicker{font-family:'Roboto Condensed',sans-serif;font-size:10pt;color:var(--gold-dark);text-align:center;margin-bottom:2mm}
+h2{font-family:'Poppins',sans-serif;font-weight:700;font-size:13.5pt;color:var(--green-900);margin:6mm 0 2.5mm;padding-left:3.5mm;border-left:4px solid var(--gold);text-align:left}
+h3{font-family:'Poppins',sans-serif;font-weight:600;font-size:11pt;color:var(--green-700);margin:4.5mm 0 2mm;text-align:left}
+ul.plain{margin:0 0 3mm 6mm}
+ul.plain li{margin-bottom:1.6mm}
+
+/* Cover: identical treatment to Indexes.html */
+.sheet.cover{padding:0;overflow:hidden;background:linear-gradient(135deg,#0a3d2e,#0f5c3e 45%,#1a7a4e 75%,#2d9d6e);color:#fff}
+.sheet.cover::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,61,46,.82),rgba(10,61,46,.96)),url('../assets/BIRD-Report-Cover.webp') center/cover no-repeat}
+.cover-content{position:relative;z-index:1;min-height:297mm;padding:30mm 25mm;display:flex;flex-direction:column;justify-content:center;text-align:justify;text-align-last:center}
+.cover-badge{align-self:center;display:inline-block;padding:.32rem 1.2rem;border:1.5px solid rgba(201,168,76,.7);border-radius:2rem;color:var(--gold);
+  font-size:9pt;letter-spacing:.18em;text-transform:uppercase;font-weight:600;background:rgba(201,168,76,.08)}
+.cover-title{font-family:'Poppins',sans-serif;font-size:36pt;font-weight:700;color:var(--gold);line-height:1.1;margin:.8rem 0;text-align:center;text-align-last:center}
+.cover-subtitle{font-family:'Montserrat',sans-serif;font-size:13pt;font-weight:500;color:var(--mint);line-height:1.5;margin-bottom:1.2rem}
+.cover-divider{width:80px;height:3px;background:var(--gold);margin:1.2rem auto}
+.cover-meta{color:rgba(255,255,255,.86);font-size:9.5pt;line-height:1.9}
+.cover-meta strong{color:var(--gold)}
+
+/* Front-matter components */
+.copyright{min-height:250mm;display:flex;flex-direction:column;justify-content:center}
+.pub-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:17pt;line-height:1.25;color:var(--green-900);text-align:center;margin-bottom:4mm}
+.center{text-align:center!important;text-align-last:center!important}
+.meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:3mm 6mm;margin:6mm 0}
+.meta-grid div{padding:3mm 3.5mm;background:var(--mist);border-left:3px solid var(--gold);font-size:9pt}
+.fine{font-family:'Roboto Condensed',sans-serif;font-size:8.8pt;color:var(--ink-3)}
+.message{border-left:4px solid var(--gold);background:var(--mist);padding:5mm 6mm;margin:4mm 0}
+.message h3{margin-top:0}
+.message .sig{margin-top:4mm;font-weight:600;color:var(--green-900);text-align:left}
+.note{background:#fbf6e8;border:1px solid #ecdcae;border-left:4px solid var(--gold);padding:3.5mm 4.5mm;margin:3mm 0 4mm;font-size:9.2pt}
+.callout{background:var(--mist);border:1px solid var(--mist-line);border-left:4px solid var(--green-900);padding:3.5mm 4.5mm;margin:3mm 0 4mm;font-size:9.4pt}
+.quote{font-style:italic;color:var(--green-900);background:var(--warm);border-left:4px solid var(--gold);padding:4mm 5mm;margin:5mm 0;font-size:10.5pt}
+
+/* Contents page */
+.toc-grid{display:flex;gap:7mm;align-items:flex-start}
+.toc-col{flex:1 1 0;min-width:0}
+.toc-block{break-inside:avoid;margin-bottom:3.5mm}
+.toc-block .chap{display:block;font-family:'Poppins',sans-serif;font-weight:600;font-size:10pt;color:var(--green-900);text-decoration:none;
+  background:var(--mist);border-left:3px solid var(--gold);padding:1.6mm 2.5mm;margin-bottom:1mm}
+.toc-block a.sec{display:block;font-size:8.8pt;color:var(--ink-2);text-decoration:none;padding:.6mm 0 .6mm 4mm;border-bottom:1px dotted var(--line)}
+.toc-block a.sec.sub{padding-left:8mm;color:var(--ink-3)}
+.toc-block a:hover{color:var(--green-700);text-decoration:underline}
+.front-list{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5mm 4mm;margin-bottom:5mm}
+.front-list button{all:unset;cursor:pointer;font-size:9pt;color:var(--green-900);font-weight:600;padding:1.5mm 2.5mm;background:var(--warm);border-radius:3px}
+.front-list button:hover{background:var(--mist)}
+.front-list button:focus-visible{outline:3px solid var(--gold)}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;font-size:8.6pt;line-height:1.42;margin:2mm 0 4mm}
+caption{caption-side:top;text-align:left;font-family:'Roboto Condensed',sans-serif;font-size:9.4pt;color:var(--green-900);font-weight:700;margin-bottom:1.5mm}
+th{background:var(--green-900);color:#fff;font-family:'Roboto Condensed',sans-serif;font-weight:700;padding:4.5px 6px;text-align:left;vertical-align:bottom}
+td{padding:4px 6px;border-bottom:1px solid #e3e0d8;vertical-align:top;text-align:left;hyphens:manual}
+tbody tr:nth-child(even){background:var(--warm)}
+tbody tr:last-child td{border-bottom:2px solid var(--green-900)}
+td.k{font-weight:700;color:var(--green-900);white-space:nowrap;width:22%}
+.src{font-family:'Roboto Condensed',sans-serif;font-size:8pt;color:var(--ink-3);margin:-2mm 0 4mm}
+
+/* Glossary */
+.glossary{columns:2;column-gap:7mm}
+.term{break-inside:avoid;margin:0 0 3mm}
+.term strong{display:block;font-size:9.6pt}
+.term span{display:block;color:var(--ink-2);font-size:8.8pt;padding-left:3mm;border-left:2px solid var(--gold)}
+
+/* Executive summary */
+.exec-box{background:linear-gradient(135deg,var(--green-900),#14563a);color:#eef8f3;padding:6mm 7mm;border-radius:2px;margin-bottom:5mm}
+.exec-box h3{color:var(--gold-light);margin:0 0 2.5mm;font-size:12pt}
+.exec-box p{color:#eef8f3}
+.exec-box strong{color:var(--gold-light)}
+.keys{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--green-900);border-bottom:2px solid var(--green-900);margin:4mm 0 5mm}
+.keys div{padding:3mm;border-right:1px solid var(--line)}
+.keys div:last-child{border-right:0}
+.keys b{display:block;font-family:'Poppins',sans-serif;font-size:15.5pt;color:var(--green-900);line-height:1.15}
+.keys span{display:block;font-family:'Roboto Condensed',sans-serif;font-size:8.4pt;color:var(--ink-3);margin-top:1mm;text-align:left}
+.phase{background:var(--mist);border-left:4px solid var(--green-900);padding:3mm 4mm;margin:2.5mm 0}
+.phase b{color:var(--green-900)}
+.chain{display:flex;flex-wrap:wrap;gap:1.5mm;margin:3mm 0 4mm}
+.chain span{background:var(--green-900);color:#fff;font-family:'Roboto Condensed',sans-serif;font-size:8.8pt;padding:1.4mm 2.6mm;border-radius:2px}
+.chain span:nth-child(even){background:var(--green-700)}
+.continue{margin-top:8mm;padding:5mm 6mm;border:1px solid var(--mist-line);background:var(--mist);display:flex;align-items:center;justify-content:space-between;gap:4mm}
+.continue p{margin:0}
+
+/* ===== Responsive ===== */
+@media screen and (max-width:860px){
+  body{padding-top:68px}
+  .sheet{width:100%;min-height:auto;padding:9mm 6mm 18mm;box-shadow:none}
+  .sheet.cover .cover-content{min-height:88vh;padding:14mm 8mm}
+  .cover-title{font-size:26pt}
+  .meta-grid,.front-list{grid-template-columns:1fr}
+  .toc-grid{display:block}
+  .glossary{columns:1}
+  .keys{grid-template-columns:repeat(2,1fr)}
+  .keys div:nth-child(2){border-right:0}
+  .topbar .where{display:none}
+  .btn .lbl-long{display:none}
+  .topbar .btn>span{display:none}
+  .topbar .btn{padding:9px 10px}
+  .navbar .count{min-width:0}
+  table{display:block;overflow-x:auto}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ===== Print / PDF: every page, A4, no reader chrome ===== */
 @media print{
- @page{size:A4;margin:14mm 17mm}
- @page :first{margin:0}
- .cover-page{page-break-after:always}
- .page{padding:0;min-height:auto}
- table,figure,.message,.phase,.callout{page-break-inside:avoid}
- h2,h3{page-break-after:avoid}
-}
-@media(max-width:700px){
- .page{padding:28px 22px}.key-stats{grid-template-columns:repeat(2,1fr)}.meta-grid{grid-template-columns:1fr}
- .cover-title{font-size:22pt}.cover-content{left:7%;right:7%}
+  @page{size:A4;margin:16mm 18mm 18mm}
+  @page cover{size:A4;margin:0}
+  body{background:#fff;padding:0;font-size:10pt}
+  .topbar,.navbar,.progress,.hint,.toast,dialog,.no-print{display:none!important}
+  .sheet,.sheet[hidden]{display:block!important;width:auto;min-height:0;margin:0;padding:0;box-shadow:none;
+    break-after:page;page-break-after:always}
+  .sheet:last-of-type{break-after:auto;page-break-after:auto}
+  .sheet.cover{page:cover;width:210mm;height:297mm;overflow:hidden}
+  .sheet.cover .cover-content{min-height:297mm}
+  .copyright{min-height:240mm}
+  tr,.term,.message,.phase,.callout,.note,.keys,.chain{break-inside:avoid;page-break-inside:avoid}
+  h2,h3{break-after:avoid;page-break-after:avoid}
+  a{color:inherit;text-decoration:none}
 }
 </style>
-<base target="_blank">
 </head>
 <body>
 
-<!-- COVER -->
-<section class="cover-page" id="cover">
-<img src="https://asilvainnovations.github.io/BIRD-2026-2035/public/assets/BIRD-Report-Cover.webp" alt="Bangsamoro Investment Roadmap Development 2026–2035 cover">
+<!-- ===== Reader chrome ===== -->
+<header class="topbar no-print" role="banner">
+  <span class="brand">BIRD 2026–2035</span>
+  <span class="where" id="where" aria-hidden="true"></span>
+  <button class="btn btn-ghost" id="btn-contents" type="button" aria-label="Open contents" aria-haspopup="dialog" aria-controls="contents-dialog">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Contents</span></button>
+  <button class="btn btn-ghost" id="btn-word" type="button" aria-label="Download as Word, A4" title="Download all pages as an A4 Word document">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg><span>Word<span class="lbl-long"> (.doc)</span></span></button>
+  <button class="btn btn-gold" id="btn-pdf" type="button" aria-label="Save as PDF, A4" title="Open the print dialog; choose Save as PDF and A4 paper">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3h12v6M6 18H4v-7h16v7h-2M8 14h8v7H8z"/></svg><span>Save as PDF</span></button>
+</header>
+<div class="progress no-print" id="progress" aria-hidden="true"></div>
+
+<main id="reader">
+
+<!-- ================= 1. COVER ================= -->
+<section class="sheet cover" id="cover" data-title="Cover" data-group="Front matter">
 <div class="cover-content">
-<div class="smallcaps">Bangsamoro Investment Roadmap Development</div>
-<div class="cover-title">The Emerging Bangsamoro:<br>A Hub for Resilient and Ethical Growth</div>
-<div class="cover-subtitle">Investment Roadmap Development 2026–2035</div>
+<div class="cover-badge">BIRD 2026–2035</div>
+<h1 class="cover-title" tabindex="-1">Preliminary Pages and Executive Summary</h1>
 <div class="cover-divider"></div>
-<div class="cover-meta">
-<strong>BIRD 2026–2035</strong><br>
-Bureau of Investments — Ministry of Trade, Investments and Tourism (BOI-MTIT)<br>
-Bangsamoro Autonomous Region in Muslim Mindanao (BARMM), Philippines<br><br>
-Prepared for the Bangsamoro Government, BOI-MTIT and Development Partners<br>
-September 2026
-</div>
+<div class="cover-subtitle">Front matter, abbreviations, glossary and the executive summary of the Bangsamoro Investment Roadmap Development 2026–2035</div>
+<div class="cover-meta"><strong>The Emerging Bangsamoro: A Hub for Resilient and Ethical Growth</strong><br>Bangsamoro Investment Roadmap Development 2026–2035<br><br>
+Bureau of Investments, Ministry of Trade, Investments and Tourism (BOI-MTIT), BARMM<br>September 2026</div>
 </div>
 </section>
 
-<!-- COPYRIGHT -->
-<section class="page" id="copyright">
-<div class="copyright-box">
-<div class="smallcaps center">Preliminary Pages</div>
-<div class="pub-title">The Emerging Bangsamoro:<br>A Hub for Resilient and Ethical Growth</div>
+<!-- ================= 2. COPYRIGHT ================= -->
+<section class="sheet" id="copyright" data-title="Copyright and publication information" data-group="Front matter">
+<div class="copyright">
+<div class="kicker">Preliminary pages</div>
+<h1 class="pub-title" tabindex="-1">The Emerging Bangsamoro: A Hub for Resilient and Ethical Growth</h1>
 <p class="center"><strong>Bangsamoro Investment Roadmap Development (BIRD) 2026–2035</strong></p>
 <div class="cover-divider"></div>
-<p class="center">© 2026 Bureau of Investments — Ministry of Trade, Investments and Tourism (BOI-MTIT). All rights reserved.</p>
-<p>This publication is intended as a strategic planning and investment coordination document. It may be reproduced or adapted for non-commercial purposes with appropriate attribution, identification of modifications, and preservation of the applicable license terms. Any use as an official government policy, budget, investment approval, or regulatory instrument remains subject to the competent authority and applicable law.</p>
+<p class="center">© 2026 Bureau of Investments, Ministry of Trade, Investments and Tourism (BOI-MTIT), BARMM.</p>
+<p>This publication is a strategic planning and investment coordination document. It may be reproduced or adapted for non-commercial purposes under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International licence, with attribution and identification of any changes. Its use as an official policy, budget, investment approval or regulatory instrument remains subject to the competent authority and applicable law.</p>
 <div class="meta-grid">
-<div><strong>Published by</strong><br>Bureau of Investments — MTIT, BARMM</div>
-<div><strong>Edition</strong><br>First Edition · September 2026</div>
-<div><strong>Prepared by</strong><br>Alvin M. Silva, MDM<br>Consultant / Systems Architect</div>
-<div><strong>Technical platform</strong><br>Strat Planner Pro / BIRD analytical architecture</div>
+<div><strong>Published by</strong><br>Bureau of Investments, MTIT, BARMM</div>
+<div><strong>Edition</strong><br>First edition, September 2026; revised October 2026</div>
+<div><strong>Prepared by</strong><br>Alvin M. Silva, MDM<br>Consultant and systems architect</div>
+<div><strong>Analytical platform</strong><br>Strat Planner Pro and the BIRD analytical architecture</div>
 </div>
-<p><strong>Suggested citation:</strong><br>Silva, A. M. (2026). <em>The Emerging Bangsamoro: A Hub for Resilient and Ethical Growth — Bangsamoro Investment Roadmap Development 2026–2035.</em> Bureau of Investments, Ministry of Trade, Investments and Tourism, BARMM.</p>
-<p class="footer-note">ISBN: To be assigned. Publication status: strategic planning draft for institutional review and validation.</p>
+<p><strong>Suggested citation</strong><br>Silva, A. M. (2026). <em>The emerging Bangsamoro: A hub for resilient and ethical growth. Bangsamoro Investment Roadmap Development 2026–2035.</em> Bureau of Investments, Ministry of Trade, Investments and Tourism, BARMM.</p>
+<p class="fine">ISBN to be assigned. Status: strategic planning draft for institutional review and validation.</p>
 </div>
 </section>
 
-<!-- ACKNOWLEDGEMENT -->
-<section class="page" id="acknowledgements">
-<h1 class="prelim-title">Acknowledgements</h1>
-<p>The Bangsamoro Investment Roadmap Development (BIRD) 2026–2035 is the product of an integrated planning process that brings together economic analysis, investment facilitation, systems thinking, stakeholder perspectives, policy and institutional review, and performance-management design.</p>
-<p>The preparation of this roadmap acknowledges the contribution of the Bangsamoro Government and its ministries, offices and agencies; local government units; development partners; business and investment stakeholders; academic and training institutions; civil society and community organizations; and practitioners whose information, experience and perspectives help strengthen the investment ecosystem.</p>
-<p>Particular recognition is due to the institutions responsible for official statistics, economic planning, investment facilitation, infrastructure, trade, agriculture, environment, finance, human capital, tourism and local development. Their administrative and statistical systems provide the foundation for the transition from analytical findings to implementable programs, activities and projects.</p>
-<p>The roadmap also draws on the BIRD validation survey and associated analytical architecture. The latest linked validation snapshot contains 76 consented responses. These responses are used as validation and diagnostic evidence rather than as a substitute for official administrative baselines or statutory targets.</p>
+<!-- ================= 3. ACKNOWLEDGEMENTS ================= -->
+<section class="sheet" id="acknowledgements" data-title="Acknowledgements" data-group="Front matter">
+<h1 class="prelim-title" tabindex="-1">Acknowledgements</h1>
+<p>The Bangsamoro Investment Roadmap Development (BIRD) 2026–2035 is the product of a planning process that brings together economic analysis, investment facilitation, systems thinking, stakeholder perspectives, policy and institutional review, and performance-management design.</p>
+<p>The roadmap acknowledges the contributions of the Bangsamoro Government and its ministries, offices and agencies; local government units; development partners; business and investment stakeholders; academic and training institutions; civil society and community organisations; and the practitioners whose information, experience and perspectives strengthen the investment ecosystem.</p>
+<p>Particular recognition is due to the institutions responsible for official statistics, economic planning, investment facilitation, infrastructure, trade, agriculture, environment, finance, human capital, tourism and local development. Their administrative and statistical systems are the foundation on which analytical findings become implementable programmes, activities and projects.</p>
+<p>The roadmap also draws on the participants of the five structured workshops held in early 2026 and on the BIRD Validation Survey, fielded from 3 to 20 August 2026. All 76 published survey responses carry final consent under the Data Privacy Act of 2012. These responses are used as validation and diagnostic evidence, not as a substitute for official administrative baselines or statutory targets.</p>
 <p class="quote">The roadmap is designed to be strengthened through continued institutional validation, implementation learning and evidence-based recalibration.</p>
 </section>
 
-<!-- DRAFT MESSAGES -->
-<section class="page" id="messages">
-<h1 class="prelim-title">Draft Messages</h1>
-<div class="note"><strong>Editorial status:</strong> The following messages are draft institutional texts for review and approval by the respective offices. They do not purport to quote or represent any current officeholder until formally adopted.</div>
-
+<!-- ================= 4–5. MESSAGES ================= -->
+<section class="sheet" id="messages" data-title="Messages (1 of 3)" data-group="Front matter">
+<h1 class="prelim-title" tabindex="-1">Messages</h1>
+<div class="note"><strong>Editorial status.</strong> The messages below are draft institutional texts for review and approval by the offices concerned. They do not represent any officeholder until formally adopted. The first Bangsamoro Parliament convenes and elects the Chief Minister on 30 October 2026.</div>
 <div class="message">
 <h3>Message from the Chief Minister</h3>
 <p>The Bangsamoro Investment Roadmap Development 2026–2035 presents a shared framework for turning the region's peace and autonomy dividend into durable economic opportunity. Its central proposition is clear: investment must be connected to productive capacity, infrastructure, human capability, environmental stewardship, market access and accountable institutions.</p>
-<p>The roadmap therefore places ecosystem development at the center of investment policy. It recognizes the diversity of our provinces and communities while identifying the systems that connect them. It also emphasizes that growth must be resilient, inclusive and consistent with the values of ethical and responsible governance.</p>
+<p>The roadmap places ecosystem development at the centre of investment policy. It recognises the diversity of our provinces and communities while identifying the systems that connect them, and it insists that growth be resilient, inclusive and consistent with ethical and responsible governance.</p>
 <p>Implementation will require sustained cooperation among the Bangsamoro Government, local governments, national agencies, investors, financial institutions, development partners, civil society and communities. The BIRD provides a common direction; its success will depend on disciplined execution, transparent monitoring and continuous learning.</p>
-<p class="signature">[Name of the Chief Minister]<br>Chief Minister, BARMM</p>
+<p class="sig">[Name of the Chief Minister]<br>Chief Minister, BARMM</p>
 </div>
 
+</section>
+
+<section class="sheet" id="messages-2" data-title="Messages (2 of 3)" data-group="Front matter">
+<h1 class="prelim-title" tabindex="-1">Messages</h1>
 <div class="message">
 <h3>Message from the Minister of Trade, Investments and Tourism</h3>
-<p>The BIRD 2026–2035 provides MTIT with an investment-facilitation architecture that connects promotion, investor services, sector development and market access. It moves beyond a project-by-project perspective toward a system in which investment readiness and investment outcomes reinforce one another.</p>
-<p>The roadmap highlights halal value chains, green economy opportunities, infrastructure and connectivity, tourism, trade, digital services and Islamic finance as interconnected components of the Bangsamoro Economic and Investment Ecosystem. It also places investor confidence, standards, aftercare and institutional coordination alongside physical investment requirements.</p>
-<p>MTIT will need to work across government and with the private sector to convert these strategic directions into bankable opportunities, credible investment facilitation services, reliable information and measurable results.</p>
-<p class="signature">[Name of the Minister]<br>Minister, Ministry of Trade, Investments and Tourism</p>
+<p>The BIRD 2026–2035 gives MTIT an investment-facilitation architecture that connects promotion, investor services, sector development and market access. It moves beyond a project-by-project view toward a system in which investment readiness and investment outcomes reinforce one another.</p>
+<p>The roadmap treats halal value chains, green economy opportunities, infrastructure and connectivity, tourism, trade, digital services and Islamic finance as connected parts of the Bangsamoro Economic and Investment Ecosystem. It places investor confidence, standards, aftercare and institutional coordination alongside physical investment requirements.</p>
+<p>MTIT will work across government and with the private sector to convert these directions into bankable opportunities, credible facilitation services, reliable information and measurable results.</p>
+<p class="sig">[Name of the Minister]<br>Minister, Ministry of Trade, Investments and Tourism</p>
 </div>
 
 <div class="message">
 <h3>Message from the Director General, MTIT</h3>
-<p>The value of the BIRD is in its translation of strategy into an operating architecture. The Balanced Scorecard connects capabilities, internal processes, stakeholder outcomes and financial results; the KPI framework provides a disciplined measurement layer; and the implementation plan identifies the programs and actions needed to move from intention to execution.</p>
-<p>The roadmap also recognizes that implementation conditions change. Baselines must be verified, targets must be governed, variances must be classified, and evidence must be refreshed. BIF-Net is therefore conceived as a facilitation and coordination network that supports shared visibility and action without replacing the mandates of participating agencies.</p>
+<p>The value of the BIRD lies in translating strategy into an operating architecture. The Balanced Scorecard connects capabilities, internal processes, stakeholder outcomes and financial results; the KPI framework provides a disciplined measurement layer; and the implementation plan identifies the programmes and actions needed to move from intention to execution.</p>
+<p>The roadmap also recognises that conditions change. Baselines must be verified, targets governed, variances classified and evidence refreshed. BIF-Net is therefore conceived as a facilitation and coordination network that supports shared visibility and action without replacing the mandates of participating agencies.</p>
 <p>This management discipline is essential if investment promotion is to generate durable economic and social value across the Bangsamoro.</p>
-<p class="signature">[Name of the Director General]<br>Director General, MTIT</p>
+<p class="sig">[Name of the Director General]<br>Director General, MTIT</p>
 </div>
 
+</section>
+
+<section class="sheet" id="messages-3" data-title="Messages (3 of 3)" data-group="Front matter">
+<h1 class="prelim-title" tabindex="-1">Messages</h1>
 <div class="message">
-<h3>Message from the Director, Bureau of Investments — MTIT</h3>
-<p>The Bureau of Investments is at the practical interface between the investment strategy and investors, enterprises and implementing institutions. The BIRD provides a common framework for identifying investment opportunities, resolving constraints, improving investor experience and tracking the performance of the investment pipeline.</p>
-<p>Our task is not simply to increase the volume of investment approvals. We must help build a pipeline of investments that is feasible, responsible, resilient and connected to local value creation. This requires stronger facilitation, aftercare, information systems, provincial coordination and evidence-based investment promotion.</p>
+<h3>Message from the Director, Bureau of Investments, MTIT</h3>
+<p>The Bureau of Investments sits at the practical interface between the investment strategy and investors, enterprises and implementing institutions. The BIRD gives us a common framework for identifying opportunities, resolving constraints, improving the investor experience and tracking the performance of the investment pipeline.</p>
+<p>Our task is not simply to increase the volume of approvals. We must help build a pipeline of investments that is feasible, responsible, resilient and connected to local value creation. That requires stronger facilitation, aftercare, information systems, provincial coordination and evidence-based promotion.</p>
 <p>The Bureau looks forward to working with the Bangsamoro Government, local governments, investors and partners to translate the roadmap into credible opportunities and measurable development outcomes.</p>
-<p class="signature">[Name of the Director]<br>Director, Bureau of Investments — MTIT</p>
+<p class="sig">[Name of the Director]<br>Director, Bureau of Investments, MTIT</p>
 </div>
+
 </section>
 
-<!-- TOC -->
-<section class="page" id="toc">
-<h1 class="prelim-title">Table of Contents</h1>
-<ul class="toc">
-<li class="front"><a href="#cover">Cover</a></li>
-<li class="front"><a href="#copyright">Copyright and Publication Information</a></li>
-<li class="front"><a href="#acknowledgements">Acknowledgements</a></li>
-<li class="front"><a href="#messages">Draft Messages</a></li>
-<li class="front"><a href="#toc">Table of Contents</a></li>
-<li class="front"><a href="#abbreviations">List of Abbreviations</a></li>
-<li class="front"><a href="#glossary">Glossary of Terms</a></li>
-<li class="front"><a href="#executive-summary">Executive Summary</a></li>
-
-<li class="chapter"><a href="Chapter1.html">Chapter 1 — Introduction, Background, Regulatory Anchors and Methodology</a></li>
-<li class="section"><a href="Chapter1.html#ch1-a">A. Background and Rationale</a></li>
-<li class="section"><a href="Chapter1.html#ch1-b">B. Scope, Coverage and Temporal Horizon</a></li>
-<li class="subsection"><a href="Chapter1.html#ch1-b1">B.1 Geographic Scope</a></li>
-<li class="subsection"><a href="Chapter1.html#ch1-b2">B.2 Sectoral Coverage</a></li>
-<li class="subsection"><a href="Chapter1.html#ch1-b3">B.3 Temporal Scope and Three-Phase Architecture</a></li>
-<li class="section"><a href="Chapter1.html#ch1-c">C. Purpose of the Investment Roadmap Development</a></li>
-<li class="section"><a href="Chapter1.html#ch1-d">D. Guiding Principles</a></li>
-<li class="section"><a href="Chapter1.html#ch1-e">E. Regulatory and Policy Anchors</a></li>
-<li class="section"><a href="Chapter1.html#ch1-f">F. Analytical Frameworks and Methodology</a></li>
-
-<li class="chapter"><a href="Chapter2.html">Chapter 2 — Context, BEIE Framework and Integrated Strategic Diagnostics</a></li>
-<li class="section"><a href="Chapter2.html#ch2-1">2.1 Global Economic Trends</a></li>
-<li class="section"><a href="Chapter2.html#ch2-2">2.2 Regional Economic Trajectory</a></li>
-<li class="section"><a href="Chapter2.html#ch2-diagnostics">Quantified SWOT and Systems Mapping</a></li>
-<li class="section"><a href="Chapter2.html#ch2-os">Cross-Cutting Operating Systems</a></li>
-<li class="section"><a href="Chapter2.html#ch2-c1">Cluster 1 — Foundations</a></li>
-<li class="section"><a href="Chapter2.html#ch2-c2">Cluster 2 — Transformers</a></li>
-<li class="section"><a href="Chapter2.html#ch2-c3">Cluster 3 — Enablers</a></li>
-<li class="section"><a href="Chapter2.html#ch2-c4">Cluster 4 — Connectors</a></li>
-<li class="section"><a href="Chapter2.html#ch2-c5">Cluster 5 — Financiers</a></li>
-<li class="section"><a href="Chapter2.html#ch2-cross-cluster-systems">Cross-Cluster Systems Synthesis</a></li>
-
-<li class="chapter"><a href="Chapter3.html">Chapter 3 — Strategic Options, Leverage Points and the Roadmap Strategy</a></li>
-<li class="section"><a href="Chapter3.html#ch3-a">A. Systems-Based Strategy Matrix</a></li>
-<li class="subsection"><a href="Chapter3.html#ch3-a-1">A.1 SO Strategies</a></li>
-<li class="subsection"><a href="Chapter3.html#ch3-a-2">A.2 WO Strategies</a></li>
-<li class="subsection"><a href="Chapter3.html#ch3-a-3">A.3 ST Strategies</a></li>
-<li class="subsection"><a href="Chapter3.html#ch3-a-4">A.4 WT Strategies</a></li>
-<li class="subsection"><a href="Chapter3.html#ch3-a-5">A.5 Strategic Options Formulation and Evaluation</a></li>
-<li class="subsection"><a href="Chapter3.html#ch3-a-7">A.7 IEDS</a></li>
-<li class="section"><a href="Chapter3.html#ch3-b">B. Systems Archetype-Informed Strategic Leverage Points</a></li>
-<li class="subsection"><a href="Chapter3.html#ch3-b-1">B.1 Identifying Leverage Points</a></li>
-<li class="subsection"><a href="Chapter3.html#ch3-b-6">B.6 Leverage Point Effectiveness and Archetype Resolution</a></li>
-
-<li class="chapter"><a href="Chapter4.html">Chapter 4 — Metrics, KPI Benchmarking and Performance Calibration</a></li>
-<li class="section"><a href="Chapter4.html#ch4-a">A. Strategic Alignment with IEDS</a></li>
-<li class="section"><a href="Chapter4.html#ch4-b">B. KPI Architecture and Calibration Methodology</a></li>
-<li class="subsection"><a href="Chapter4.html#ch4-b-1">B.1 Four Calibration Tiers</a></li>
-<li class="subsection"><a href="Chapter4.html#ch4-b-2">B.2 Six Pareto-Style Headline KPIs</a></li>
-<li class="section"><a href="Chapter4.html#ch4-c">C. Cross-Cutting Operating Systems Metrics</a></li>
-<li class="section"><a href="Chapter4.html#ch4-d">D. Cluster-Specific Performance Indicators</a></li>
-<li class="section"><a href="Chapter4.html#ch4-e">E. International, National and Regional Benchmark Alignment</a></li>
-
-<li class="chapter"><a href="Chapter5.html">Chapter 5 — Balanced Scorecard, Causal Architecture and Strategy Execution</a></li>
-<li class="section"><a href="Chapter5.html#ch5-a">A–E. Four BSC Perspectives and Strategic Objectives</a></li>
-<li class="section"><a href="Chapter5.html#ch5-f">F. Strategy Map and Causal Linkages</a></li>
-<li class="section"><a href="Chapter5.html#ch5-g">G. BIF-Net and MEL Dashboard</a></li>
-<li class="section"><a href="Chapter5.html#ch5-h">H. Priority Action Plan</a><br><span style="padding-left:42px"><a href="Chapter5.html#ch5-i">I. Strategy Execution Governance</a></span></li>
-
-<li class="chapter"><a href="Chapter6.html">Chapter 6 — Implementation, Action and Annual Investment Plan</a></li>
-<li class="section"><a href="Chapter6.html#ch6-1">6.1 Implementation Principles</a></li>
-<li class="section"><a href="Chapter6.html#ch6-2">6.2 Governance and Coordination Architecture</a></li>
-<li class="section"><a href="Chapter6.html#ch6-3">6.3 Phased Implementation Framework</a></li>
-<li class="section"><a href="Chapter6.html#ch6-4">6.4 Programs, Activities and Projects</a></li>
-<li class="section"><a href="Chapter6.html#ch6-5">6.5 One-Year Action Plan</a></li>
-<li class="section"><a href="Chapter6.html#ch6-6">6.6 Monitoring, Evaluation and Learning</a></li>
-
-<li class="chapter"><a href="Chapter7.html">Chapter 7 — Policy Recommendations and the Way Forward</a></li>
-<li class="section"><a href="Chapter7.html#sec-7-1">A. Policy and Institutional Enablers</a></li>
-<li class="section"><a href="Chapter7.html#sec-7-2">B. Planning, Budgeting and Territorial Delivery</a></li>
-<li class="section"><a href="Chapter7.html#sec-7-3">C. Investment Mobilization and Market Development</a></li>
-<li class="section"><a href="Chapter7.html#sec-7-4">D. Governance of the Way Forward</a></li>
-</ul>
+<!-- ================= 6. CONTENTS ================= -->
+<section class="sheet" id="toc" data-title="Table of contents (1 of 2)" data-group="Front matter">
+<h1 class="prelim-title" tabindex="-1">Table of Contents</h1>
+<h3>Preliminary pages</h3><div class="front-list" id="front-list" aria-label="Preliminary pages"></div><h3>Chapters</h3><div class="toc-grid"><div class="toc-col"><div class="toc-block"><a class="chap" href="Chapter1.html">Chapter 1: Introduction, Background, Regulatory Anchors and Methodology</a>
+<a class="sec" href="Chapter1.html#ch1-a">A. Background and Rationale</a>
+<a class="sec" href="Chapter1.html#ch1-b">B. Scope, Coverage and Temporal Horizon</a>
+<a class="sec sub" href="Chapter1.html#ch1-b1">B.1 Geographic Scope</a>
+<a class="sec sub" href="Chapter1.html#ch1-b2">B.2 Sectoral Coverage</a>
+<a class="sec sub" href="Chapter1.html#ch1-b3">B.3 Temporal Scope and Three-Phase Architecture</a>
+<a class="sec" href="Chapter1.html#ch1-c">C. Purpose of the Roadmap</a>
+<a class="sec" href="Chapter1.html#ch1-d">D. Guiding Principles</a>
+<a class="sec" href="Chapter1.html#ch1-e">E. Regulatory and Policy Anchors</a>
+<a class="sec" href="Chapter1.html#ch1-f">F. Analytical Frameworks and Methodology</a></div></div><div class="toc-col"><div class="toc-block"><a class="chap" href="Chapter2.html">Chapter 2: Context, BEIE Framework and Integrated Strategic Diagnostics</a>
+<a class="sec" href="Chapter2.html#ch2-1">2.1 Global Economic Trends</a>
+<a class="sec" href="Chapter2.html#ch2-2">2.2 Regional Economic Trajectory</a>
+<a class="sec" href="Chapter2.html#ch2-diagnostics">Quantified SWOT and Systems Mapping</a>
+<a class="sec" href="Chapter2.html#ch2-os">Cross-Cutting Operating Systems</a>
+<a class="sec" href="Chapter2.html#ch2-c1">Cluster 1: Foundations</a>
+<a class="sec" href="Chapter2.html#ch2-c2">Cluster 2: Transformers</a>
+<a class="sec" href="Chapter2.html#ch2-c3">Cluster 3: Enablers</a>
+<a class="sec" href="Chapter2.html#ch2-c4">Cluster 4: Connectors</a>
+<a class="sec" href="Chapter2.html#ch2-c5">Cluster 5: Financiers</a>
+<a class="sec" href="Chapter2.html#ch2-cross-cluster-systems">Cross-Cluster Systems Synthesis</a></div></div></div>
 </section>
 
-<!-- ABBREVIATIONS -->
-<section class="page" id="abbreviations">
-<h1 class="prelim-title">List of Abbreviations</h1>
-<table class="abbr"><thead><tr><th>Abbreviation</th><th>Full Term</th></tr></thead><tbody>
-<tr><td>ADB</td><td>Asian Development Bank</td></tr>
-<tr><td>ASEAN</td><td>Association of Southeast Asian Nations</td></tr>
-<tr><td>BARMM</td><td>Bangsamoro Autonomous Region in Muslim Mindanao</td></tr>
-<tr><td>BEIE</td><td>Bangsamoro Economic and Investment Ecosystem</td></tr>
-<tr><td>BEGMP</td><td>Bangsamoro E-Governance and Management Program</td></tr>
-<tr><td>BHB</td><td>Bangsamoro Halal Board</td></tr>
-<tr><td>BIF-Net</td><td>Bangsamoro Investment Facilitation Network</td></tr>
-<tr><td>BIRD</td><td>Bangsamoro Investment Roadmap Development</td></tr>
-<tr><td>BMOA</td><td>Bangsamoro Ministries, Offices and Agencies</td></tr>
-<tr><td>BPLS</td><td>Business Permits and Licensing System</td></tr>
-<tr><td>BSC</td><td>Balanced Scorecard</td></tr>
-<tr><td>BSP</td><td>Bangko Sentral ng Pilipinas</td></tr>
-<tr><td>CLP</td><td>Critical Leverage Point</td></tr>
-<tr><td>CREATE MORE</td><td>Corporate Recovery and Tax Incentives for Enterprises to Maximize Opportunities for Reinvigorating the Economy</td></tr>
-<tr><td>DA</td><td>Department of Agriculture</td></tr>
-<tr><td>DICT</td><td>Department of Information and Communications Technology</td></tr>
-<tr><td>DOE</td><td>Department of Energy</td></tr>
-<tr><td>DPWH</td><td>Department of Public Works and Highways</td></tr>
-<tr><td>DRR</td><td>Disaster Risk Reduction</td></tr>
-<tr><td>ESG</td><td>Environmental, Social and Governance</td></tr>
-<tr><td>FDI</td><td>Foreign Direct Investment</td></tr>
-<tr><td>F1–F6</td><td>Financial Perspective Strategic Objectives</td></tr>
-<tr><td>FIES</td><td>Family Income and Expenditure Survey</td></tr>
-<tr><td>GAHP</td><td>Gender-Responsive Agricultural and Halal Production</td></tr>
-<tr><td>GDP</td><td>Gross Domestic Product</td></tr>
-<tr><td>GF</td><td>Green Financing</td></tr>
-<tr><td>GHG</td><td>Greenhouse Gas</td></tr>
-<tr><td>GRDP</td><td>Gross Regional Domestic Product</td></tr>
-<tr><td>GVC</td><td>Global Value Chain</td></tr>
-<tr><td>HEDS</td><td>Halal Economy Dominance Strategy</td></tr>
-<tr><td>IEDS</td><td>Integrated Ecosystem Development Strategy</td></tr>
-<tr><td>IFES</td><td>Infrastructure-First Enabling Strategy</td></tr>
-<tr><td>IP</td><td>Indigenous Peoples</td></tr>
-<tr><td>IsDB</td><td>Islamic Development Bank</td></tr>
-<tr><td>JMC</td><td>Joint Memorandum Circular</td></tr>
-<tr><td>KPI</td><td>Key Performance Indicator</td></tr>
-<tr><td>L1–L7</td><td>Learning and Growth Perspective Strategic Objectives</td></tr>
-<tr><td>LGU</td><td>Local Government Unit</td></tr>
-<tr><td>MAFAR</td><td>Ministry of Agriculture, Fisheries and Agrarian Reform</td></tr>
-<tr><td>MBHTE</td><td>Ministry of Basic, Higher and Technical Education</td></tr>
-<tr><td>MEL</td><td>Monitoring, Evaluation and Learning</td></tr>
-<tr><td>MENRE</td><td>Ministry of Environment, Natural Resources and Energy</td></tr>
-<tr><td>MFBM</td><td>Ministry of Finance and Budget Management</td></tr>
-<tr><td>MICT</td><td>Ministry of Information and Communications Technology</td></tr>
-<tr><td>MOLE</td><td>Ministry of Labor and Employment</td></tr>
-<tr><td>MPW</td><td>Ministry of Public Works</td></tr>
-<tr><td>MRA</td><td>Mutual Recognition Agreement</td></tr>
-<tr><td>MSME</td><td>Micro, Small and Medium Enterprise</td></tr>
-<tr><td>MTIT</td><td>Ministry of Trade, Investments and Tourism</td></tr>
-<tr><td>MYIP</td><td>Multi-Year Investment Plan</td></tr>
-<tr><td>NEDA</td><td>National Economic and Development Authority</td></tr>
-<tr><td>NGO</td><td>Non-Governmental Organization</td></tr>
-<tr><td>OCC</td><td>Office of the Chief Minister</td></tr>
-<tr><td>ODA</td><td>Official Development Assistance</td></tr>
-<tr><td>OIC</td><td>Organisation of Islamic Cooperation</td></tr>
-<tr><td>P1–P7</td><td>Internal Process Perspective Strategic Objectives</td></tr>
-<tr><td>PAP</td><td>Program, Activity and Project</td></tr>
-<tr><td>PDP</td><td>Philippine Development Plan</td></tr>
-<tr><td>PES</td><td>Payment for Ecosystem Services</td></tr>
-<tr><td>PIFO</td><td>Provincial Investment Facilitation Office</td></tr>
-<tr><td>PPP</td><td>Public-Private Partnership</td></tr>
-<tr><td>PSA</td><td>Philippine Statistics Authority</td></tr>
-<tr><td>QA</td><td>Quality Assurance</td></tr>
-<tr><td>REDD+</td><td>Reducing Emissions from Deforestation and Forest Degradation</td></tr>
-<tr><td>S1–S7</td><td>Stakeholder Perspective Strategic Objectives</td></tr>
-<tr><td>SDG</td><td>Sustainable Development Goal</td></tr>
-<tr><td>SMIIC</td><td>Standards and Metrology Institute for Islamic Countries</td></tr>
-<tr><td>STI</td><td>Science, Technology and Innovation</td></tr>
-<tr><td>TOWS</td><td>Threats, Opportunities, Weaknesses and Strengths strategic matrix</td></tr>
-<tr><td>TVET</td><td>Technical and Vocational Education and Training</td></tr>
-<tr><td>UAE</td><td>United Arab Emirates</td></tr>
-<tr><td>ZBIP</td><td>Zamboanga–Basilan Interconnection Project</td></tr>
+<section class="sheet" id="toc-2" data-title="Table of contents (2 of 2)" data-group="Front matter">
+<h1 class="prelim-title" tabindex="-1">Table of Contents</h1>
+<div class="toc-grid"><div class="toc-col"><div class="toc-block"><a class="chap" href="Chapter3.html">Chapter 3: Strategic Options, Leverage Points and the Roadmap Strategy</a>
+<a class="sec" href="Chapter3.html#ch3-a">A. Systems-Based Strategy Matrix</a>
+<a class="sec sub" href="Chapter3.html#ch3-a-1">A.1 SO Strategies</a>
+<a class="sec sub" href="Chapter3.html#ch3-a-2">A.2 WO Strategies</a>
+<a class="sec sub" href="Chapter3.html#ch3-a-3">A.3 ST Strategies</a>
+<a class="sec sub" href="Chapter3.html#ch3-a-4">A.4 WT Strategies</a>
+<a class="sec sub" href="Chapter3.html#ch3-a-5">A.5 Strategic Options: Formulation and Evaluation</a>
+<a class="sec sub" href="Chapter3.html#ch3-a-7">A.7 Integrated Ecosystem Development Strategy</a>
+<a class="sec" href="Chapter3.html#ch3-b">B. Archetype-Informed Leverage Points</a>
+<a class="sec sub" href="Chapter3.html#ch3-b-1">B.1 Identifying Leverage Points</a>
+<a class="sec sub" href="Chapter3.html#ch3-b-6">B.6 Leverage Point Effectiveness</a></div><div class="toc-block"><a class="chap" href="Chapter4.html">Chapter 4: Metrics, KPI Benchmarking and Performance Calibration</a>
+<a class="sec" href="Chapter4.html#ch4-a">A. Strategic Alignment with the IEDS</a>
+<a class="sec" href="Chapter4.html#ch4-b">B. KPI Architecture and Calibration</a>
+<a class="sec sub" href="Chapter4.html#ch4-b-1">B.1 Four Calibration Tiers</a>
+<a class="sec sub" href="Chapter4.html#ch4-b-2">B.2 Six Headline KPIs</a>
+<a class="sec" href="Chapter4.html#ch4-c">C. Cross-Cutting Operating System Metrics</a>
+<a class="sec" href="Chapter4.html#ch4-d">D. Cluster Performance Indicators</a>
+<a class="sec" href="Chapter4.html#ch4-e">E. Benchmark Alignment</a></div></div><div class="toc-col"><div class="toc-block"><a class="chap" href="Chapter5.html">Chapter 5: Balanced Scorecard, Causal Architecture and Strategy Execution</a>
+<a class="sec" href="Chapter5.html#ch5-a">A. From Strategy Map to Investment Roadmap</a>
+<a class="sec" href="Chapter5.html#ch5-b">B–E. The Four Perspectives</a>
+<a class="sec" href="Chapter5.html#ch5-f">F. Strategy Map and Causal Linkages</a>
+<a class="sec" href="Chapter5.html#ch5-g">G. BIF-Net and the MEL Dashboard</a>
+<a class="sec" href="Chapter5.html#ch5-h">H. Priority Action Plan</a>
+<a class="sec" href="Chapter5.html#ch5-i">I. Strategy Execution Governance</a></div><div class="toc-block"><a class="chap" href="Chapter6.html">Chapter 6: Implementation, Action and Annual Investment Plan</a>
+<a class="sec" href="Chapter6.html#ch6-1">6.1 Implementation Principles</a>
+<a class="sec" href="Chapter6.html#ch6-2">6.2 Governance and Coordination</a>
+<a class="sec" href="Chapter6.html#ch6-3">6.3 Phased Implementation Framework</a>
+<a class="sec" href="Chapter6.html#ch6-4">6.4 Programmes, Activities and Projects</a>
+<a class="sec" href="Chapter6.html#ch6-5">6.5 One-Year Action Plan</a>
+<a class="sec" href="Chapter6.html#ch6-6">6.6 Monitoring, Evaluation and Learning</a></div><div class="toc-block"><a class="chap" href="Chapter7.html">Chapter 7: Policy Recommendations and the Way Forward</a>
+<a class="sec" href="Chapter7.html#sec-7-1">A. Policy and Institutional Enablers</a>
+<a class="sec" href="Chapter7.html#sec-7-2">B. Planning, Budgeting and Territorial Delivery</a>
+<a class="sec" href="Chapter7.html#sec-7-3">C. Investment Mobilisation and Market Development</a>
+<a class="sec" href="Chapter7.html#sec-7-4">D. Governance of the Way Forward</a></div><div class="toc-block"><a class="chap" href="Indexes.html">Subject Index</a></div></div></div>
+</section>
+
+<!-- ================= 7–8. ABBREVIATIONS ================= -->
+<section class="sheet" id="abbreviations" data-title="Abbreviations (A–D)" data-group="Front matter">
+<h1 class="prelim-title" tabindex="-1">List of Abbreviations</h1>
+<table><thead><tr><th>Abbreviation</th><th>Full term</th></tr></thead><tbody>
+<tr><td class="k">ADB</td><td>Asian Development Bank</td></tr>
+<tr><td class="k">ASEAN</td><td>Association of Southeast Asian Nations</td></tr>
+<tr><td class="k">BARMM</td><td>Bangsamoro Autonomous Region in Muslim Mindanao</td></tr>
+<tr><td class="k">BBOI</td><td>Bangsamoro Board of Investments</td></tr>
+<tr><td class="k">BEGMP</td><td>Bangsamoro e-Governance Master Plan</td></tr>
+<tr><td class="k">BEIE</td><td>Bangsamoro Economic and Investment Ecosystem</td></tr>
+<tr><td class="k">BEZA</td><td>Bangsamoro Economic Zone Authority</td></tr>
+<tr><td class="k">BHB</td><td>Bangsamoro Halal Board</td></tr>
+<tr><td class="k">BHIDP</td><td>Bangsamoro Halal Industry Development Plan</td></tr>
+<tr><td class="k">BIF-Net</td><td>Bangsamoro Investment Facilitation Network</td></tr>
+<tr><td class="k">BIMP-EAGA</td><td>Brunei Darussalam–Indonesia–Malaysia–Philippines East ASEAN Growth Area</td></tr>
+<tr><td class="k">BIRD</td><td>Bangsamoro Investment Roadmap Development</td></tr>
+<tr><td class="k">BMOA</td><td>Bangsamoro ministries, offices and agencies</td></tr>
+<tr><td class="k">BMSMED</td><td>Bangsamoro MSME Development Plan</td></tr>
+<tr><td class="k">BOI-MTIT</td><td>Bureau of Investments, Ministry of Trade, Investments and Tourism</td></tr>
+<tr><td class="k">BPDA</td><td>Bangsamoro Planning and Development Authority</td></tr>
+<tr><td class="k">BPLS</td><td>Business Permits and Licensing System</td></tr>
+<tr><td class="k">BSC</td><td>Balanced Scorecard</td></tr>
+<tr><td class="k">BSEMP</td><td>Bangsamoro Sustainable Energy Master Plan</td></tr>
+<tr><td class="k">BSP</td><td>Bangko Sentral ng Pilipinas</td></tr>
+<tr><td class="k">BTDP</td><td>Bangsamoro Tourism Development Plan</td></tr>
+<tr><td class="k">CARD</td><td>Center for Agriculture and Rural Development (CARD Islamic Bank)</td></tr>
+<tr><td class="k">CLP / LP</td><td>Critical Leverage Point (LP1 to LP5)</td></tr>
+<tr><td class="k">CMO / OCM</td><td>Office of the Chief Minister</td></tr>
+<tr><td class="k">CREATE MORE</td><td>Corporate Recovery and Tax Incentives for Enterprises to Maximize Opportunities for Reinvigorating the Economy Act (RA 12066)</td></tr>
+<tr><td class="k">DICT</td><td>Department of Information and Communications Technology</td></tr>
+<tr><td class="k">DOE</td><td>Department of Energy</td></tr>
+<tr><td class="k">DPWH</td><td>Department of Public Works and Highways</td></tr>
 </tbody></table>
 </section>
 
-<!-- GLOSSARY -->
-<section class="page" id="glossary">
-<h1 class="prelim-title">Glossary of Terms</h1>
+<section class="sheet" id="abbreviations-2" data-title="Abbreviations (D–M)" data-group="Front matter">
+<h1 class="prelim-title" tabindex="-1">List of Abbreviations</h1>
+<table><thead><tr><th>Abbreviation</th><th>Full term</th></tr></thead><tbody>
+<tr><td class="k">DRR</td><td>Disaster risk reduction</td></tr>
+<tr><td class="k">ESG</td><td>Environmental, social and governance</td></tr>
+<tr><td class="k">F1–F6</td><td>Financial perspective objectives</td></tr>
+<tr><td class="k">FDI</td><td>Foreign direct investment</td></tr>
+<tr><td class="k">FLEMMS</td><td>Functional Literacy, Education and Mass Media Survey</td></tr>
+<tr><td class="k">GCC</td><td>Gulf Cooperation Council</td></tr>
+<tr><td class="k">GEMS</td><td>Green Economy Monetization Strategy</td></tr>
+<tr><td class="k">GRDP</td><td>Gross regional domestic product</td></tr>
+<tr><td class="k">HEDS</td><td>Halal Economy Dominance Strategy</td></tr>
+<tr><td class="k">IEDS</td><td>Integrated Ecosystem Development Strategy</td></tr>
+<tr><td class="k">IFES</td><td>Infrastructure-First Enabling Strategy</td></tr>
+<tr><td class="k">IPs</td><td>Indigenous Peoples</td></tr>
+<tr><td class="k">IsDB</td><td>Islamic Development Bank</td></tr>
+<tr><td class="k">JMC</td><td>Joint Memorandum Circular</td></tr>
+<tr><td class="k">KPI</td><td>Key performance indicator</td></tr>
+<tr><td class="k">L1–L7</td><td>Learning and Growth perspective objectives</td></tr>
+<tr><td class="k">LGU</td><td>Local government unit</td></tr>
+<tr><td class="k">MAFAR</td><td>Ministry of Agriculture, Fisheries and Agrarian Reform</td></tr>
+<tr><td class="k">MBHTE</td><td>Ministry of Basic, Higher and Technical Education</td></tr>
+<tr><td class="k">MEL</td><td>Monitoring, evaluation and learning</td></tr>
+<tr><td class="k">MENRE</td><td>Ministry of Environment, Natural Resources and Energy</td></tr>
+<tr><td class="k">MFBM</td><td>Ministry of Finance and Budget Management</td></tr>
+<tr><td class="k">MICT</td><td>Ministry of Information and Communications Technology</td></tr>
+<tr><td class="k">MILG</td><td>Ministry of the Interior and Local Government</td></tr>
+<tr><td class="k">MOLE</td><td>Ministry of Labor and Employment</td></tr>
+<tr><td class="k">MPW</td><td>Ministry of Public Works</td></tr>
+<tr><td class="k">MRA</td><td>Mutual recognition agreement</td></tr>
+<tr><td class="k">MSME</td><td>Micro, small and medium enterprise</td></tr>
+</tbody></table>
+</section>
+
+<section class="sheet" id="abbreviations-3" data-title="Abbreviations (M–Z)" data-group="Front matter">
+<h1 class="prelim-title" tabindex="-1">List of Abbreviations</h1>
+<table><thead><tr><th>Abbreviation</th><th>Full term</th></tr></thead><tbody>
+<tr><td class="k">MTIT</td><td>Ministry of Trade, Investments and Tourism</td></tr>
+<tr><td class="k">MYIP</td><td>Multi-year investment plan</td></tr>
+<tr><td class="k">NEDA</td><td>National Economic and Development Authority (reorganised in 2025 as the Department of Economy, Planning, and Development)</td></tr>
+<tr><td class="k">NGO</td><td>Non-governmental organisation</td></tr>
+<tr><td class="k">ODA</td><td>Official development assistance</td></tr>
+<tr><td class="k">OIC</td><td>Organisation of Islamic Cooperation</td></tr>
+<tr><td class="k">P1–P7</td><td>Internal Process perspective objectives</td></tr>
+<tr><td class="k">PAP</td><td>Programme, activity and project</td></tr>
+<tr><td class="k">PDP</td><td>Philippine Development Plan</td></tr>
+<tr><td class="k">PES</td><td>Payment for ecosystem services</td></tr>
+<tr><td class="k">PIFO</td><td>Provincial Investment Facilitation Office</td></tr>
+<tr><td class="k">PPP</td><td>Public–private partnership</td></tr>
+<tr><td class="k">PSA</td><td>Philippine Statistics Authority</td></tr>
+<tr><td class="k">QA</td><td>Quality assurance</td></tr>
+<tr><td class="k">REDD+</td><td>Reducing Emissions from Deforestation and Forest Degradation</td></tr>
+<tr><td class="k">S1–S7</td><td>Stakeholder perspective objectives</td></tr>
+<tr><td class="k">SDG</td><td>Sustainable Development Goal</td></tr>
+<tr><td class="k">SGA</td><td>Special Geographic Area</td></tr>
+<tr><td class="k">SIPP</td><td>Strategic Investment Priority Plan</td></tr>
+<tr><td class="k">SMIIC</td><td>Standards and Metrology Institute for the Islamic Countries</td></tr>
+<tr><td class="k">SPDA</td><td>Southern Philippines Development Authority</td></tr>
+<tr><td class="k">TESDA</td><td>Technical Education and Skills Development Authority</td></tr>
+<tr><td class="k">TOWS</td><td>Threats, opportunities, weaknesses and strengths matrix</td></tr>
+<tr><td class="k">TVET</td><td>Technical and vocational education and training</td></tr>
+<tr><td class="k">UAE</td><td>United Arab Emirates</td></tr>
+<tr><td class="k">ZBIP</td><td>Zamboanga–Basilan Interconnection Project</td></tr>
+</tbody></table>
+</section>
+
+<!-- ================= 9. GLOSSARY ================= -->
+<section class="sheet" id="glossary" data-title="Glossary (1 of 2)" data-group="Front matter">
+<h1 class="prelim-title" tabindex="-1">Glossary of Terms</h1>
 <div class="glossary">
-<div class="term"><strong>Adaptive Management</strong><span>A management approach that uses monitoring, feedback, learning and governed recalibration to respond to changing implementation conditions.</span></div>
-<div class="term"><strong>Balanced Scorecard (BSC)</strong><span>The strategic-management architecture used in BIRD to translate strategy-map logic into four linked perspectives: Financial, Stakeholder, Internal Process, and Learning &amp; Growth.</span></div>
-<div class="term"><strong>Bangsamoro Economic and Investment Ecosystem (BEIE)</strong><span>The BIRD framework organizing economic activity into five interdependent clusters: Foundations, Transformers, Enablers, Connectors and Financiers.</span></div>
-<div class="term"><strong>BIF-Net</strong><span>The proposed Bangsamoro Investment Facilitation Network serving as a coordination and facilitation layer for investment information, investor support, action tracking and performance visibility. It does not replace statutory agency mandates.</span></div>
-<div class="term"><strong>Critical Leverage Point (CLP)</strong><span>A high-impact intervention point identified through systems analysis. BIRD identifies five principal leverage points covering halal certification, infrastructure-energy-connectivity, governance-investor confidence, Islamic finance and green economy revenue.</span></div>
-<div class="term"><strong>Integrated Ecosystem Development Strategy (IEDS)</strong><span>The organizing strategic approach that connects the BIRD strategic options and aligns investment, production, infrastructure, finance, market access and governance across the BEIE ecosystem.</span></div>
-<div class="term"><strong>Investment Roadmap</strong><span>A decision and coordination framework connecting strategy, investment facilitation, programs, projects, financing, implementation and performance management. It is not a substitute for feasibility studies, appropriations or statutory approvals.</span></div>
-<div class="term"><strong>Implementation Framework</strong><span>The three-phase sequencing architecture used to organize implementation readiness and dependencies: Phase 1 Foundation Building (2026–2028), Phase 2 Acceleration (2029–2031), and Phase 3 Consolidation and Global Integration (2032–2035).</span></div>
-<div class="term"><strong>Moral Governance</strong><span>A cross-cutting operating principle emphasizing transparency, accountability, ethical conduct, institutional integrity and confidence-building in investment and public administration.</span></div>
-<div class="term"><strong>Pareto-style Headline KPI</strong><span>A compact, high-signal management KPI selected for executive monitoring. In BIRD, the six headline KPIs are a management shortlist; the term does not assert that they cause a fixed percentage of total impact.</span></div>
-<div class="term"><strong>Strategy Map</strong><span>A visual causal architecture showing how Learning &amp; Growth capabilities enable Internal Processes, which create Stakeholder value and contribute to Financial outcomes.</span></div>
-<div class="term"><strong>Systems Archetype</strong><span>A recurring pattern of system behavior used to diagnose feedback structures and unintended consequences, including Limits to Growth, Fixes that Fail, Tragedy of the Commons, Growth and Underinvestment and Shifting the Burden.</span></div>
-<div class="term"><strong>TOWS Matrix</strong><span>A strategic formulation tool matching strengths and weaknesses with opportunities and threats to generate SO, WO, ST and WT strategy options.</span></div>
-<div class="term"><strong>Value Chain</strong><span>The linked activities through which inputs are transformed into products or services and delivered to markets and end users.</span></div>
+<div class="term"><strong>Adaptive management</strong><span>Using monitoring, feedback, learning and governed recalibration to respond to changing implementation conditions.</span></div>
+<div class="term"><strong>Balanced Scorecard (BSC)</strong><span>The management architecture that translates the strategy map into four linked perspectives: Financial, Stakeholder, Internal Process, and Learning and Growth.</span></div>
+<div class="term"><strong>Bangsamoro Economic and Investment Ecosystem (BEIE)</strong><span>The BIRD framework that organises economic activity into five interdependent clusters (Foundations, Transformers, Enablers, Connectors and Financiers) governed by cross-cutting operating systems.</span></div>
+<div class="term"><strong>BIF-Net</strong><span>The proposed Bangsamoro Investment Facilitation Network: a coordination layer for investment information, investor support, action tracking and performance visibility. It does not replace statutory agency mandates.</span></div>
+<div class="term"><strong>Catalytic capital</strong><span>Public funds deployed to attract a larger volume of private, national and partner investment. The ₱120–160 billion BIRD envelope is catalytic, targeting 11 to 14 times its value in total investment.</span></div>
+<div class="term"><strong>Critical Leverage Point (CLP)</strong><span>A high-impact intervention point identified through systems analysis. BIRD uses five: halal certification integrity; the infrastructure, energy and connectivity nexus; governance and investor confidence; the Islamic finance ecosystem; and green economy revenue.</span></div>
+<div class="term"><strong>Green Lane status</strong><span>Priority facilitation for qualified strategic investments, granted by the investment council under the proposed BIF-Net Executive Order.</span></div>
+<div class="term"><strong>Implementation framework</strong><span>The three-phase sequence for delivery: Phase 1 Foundation Building (2026–2028), Phase 2 Acceleration (2029–2031) and Phase 3 Consolidation and Global Integration (2032–2035).</span></div>
+<div class="term"><strong>Incremental capital-output ratio (ICOR)</strong><span>The investment needed to add one unit of output. BIRD applies 3.5 to 4.0 to estimate the total investment the growth path requires.</span></div>
 </div>
 </section>
 
-<!-- EXECUTIVE SUMMARY -->
-<section class="page" id="executive-summary">
-<h1 class="prelim-title">Executive Summary</h1>
-<div class="exec-box">
-<h3>The Emerging Bangsamoro: From Strategic Diagnosis to Investment Execution</h3>
-<p>The <strong>Bangsamoro Investment Roadmap Development (BIRD) 2026–2035</strong> provides an evidence-informed strategic and implementation architecture for strengthening BARMM's investment ecosystem. It connects the regional context and diagnostic evidence in Chapters 1–2 with strategic options and leverage points in Chapter 3, KPI calibration in Chapter 4, strategy-map-to-investment-roadmap logic in Chapter 5, implementation and annual investment planning in Chapter 6, and policy recommendations in Chapter 7.</p>
-<p>The central proposition is that investment performance depends not only on the volume of capital mobilized, but on the quality of the ecosystem that converts capital into productive capacity, jobs, market access, resilience and public value.</p>
+<section class="sheet" id="glossary-2" data-title="Glossary (2 of 2)" data-group="Front matter">
+<h1 class="prelim-title" tabindex="-1">Glossary of Terms</h1>
+<div class="glossary">
+<div class="term"><strong>Integrated Ecosystem Development Strategy (IEDS)</strong><span>The recommended strategy, which aligns investment, production, infrastructure, finance, market access and governance across the BEIE rather than optimising one sector.</span></div>
+<div class="term"><strong>Investment roadmap</strong><span>A decision and coordination framework that links strategy, facilitation, programmes, financing, implementation and performance management. It does not replace feasibility studies, appropriations or statutory approvals.</span></div>
+<div class="term"><strong>Moral governance</strong><span>A cross-cutting operating principle emphasising transparency, accountability, ethical conduct and institutional integrity in investment and public administration.</span></div>
+<div class="term"><strong>Pareto-style headline KPI</strong><span>One of six high-signal indicators chosen for executive monitoring. The term is a management designation; it does not claim that six indicators cause a fixed share of impact.</span></div>
+<div class="term"><strong>Special Geographic Area (SGA)</strong><span>The 63 barangays in North Cotabato that voted to join BARMM, organised into eight municipalities.</span></div>
+<div class="term"><strong>Strategy map</strong><span>A causal diagram showing how Learning and Growth capabilities enable internal processes, which create stakeholder value and contribute to financial outcomes.</span></div>
+<div class="term"><strong>Systems archetype</strong><span>A recurring pattern of system behaviour, such as Limits to Growth, Fixes that Fail, Tragedy of the Commons, Growth and Underinvestment, or Shifting the Burden.</span></div>
+<div class="term"><strong>TOWS matrix</strong><span>A tool that pairs strengths and weaknesses with opportunities and threats to generate SO, WO, ST and WT strategies.</span></div>
+<div class="term"><strong>Value chain</strong><span>The linked activities through which inputs become products or services delivered to markets and end users.</span></div>
 </div>
+</section>
 
-<h2>1. Purpose and Strategic Direction</h2>
-<p>Chapter 1 establishes the scope, rationale, principles, regulatory anchors, analytical frameworks and methodology of BIRD. The roadmap covers the Bangsamoro investment ecosystem over 2026–2035 and is designed as a decision and coordination framework rather than a substitute for project feasibility studies, statutory approvals, annual appropriations or agency mandates.</p>
-<p>The analytical architecture combines the <strong>Bangsamoro Economic and Investment Ecosystem (BEIE)</strong> with systems thinking, TOWS strategy formulation, leverage-point analysis, KPI benchmarking and the Balanced Scorecard. This creates a continuous logic from <strong>context → diagnosis → strategy → measurement → execution → policy learning</strong>.</p>
+<!-- ================= 10–15. EXECUTIVE SUMMARY ================= -->
+<section class="sheet" id="executive-summary" data-title="Executive Summary (1 of 7)" data-group="Executive Summary">
+<h1 class="prelim-title" tabindex="-1">Executive Summary</h1>
+<div class="exec-box">
+<h3>From strategic diagnosis to investment execution</h3>
+<p>The <strong>Bangsamoro Investment Roadmap Development (BIRD) 2026–2035</strong> sets out an evidence-informed strategic and implementation architecture for BARMM's investment ecosystem. Chapters 1 and 2 establish the context and diagnosis; Chapter 3 sets the strategy and its leverage points; Chapter 4 calibrates the measures; Chapter 5 turns the strategy map into an investment roadmap; Chapter 6 sequences implementation and the annual investment plan; and Chapter 7 sets out the policy conditions for continuity.</p>
+<p>The central proposition: investment performance depends not only on the volume of capital mobilised but on the quality of the ecosystem that converts capital into productive capacity, jobs, market access, resilience and public value.</p>
+</div>
+<div class="keys">
+<div><b>₱120–160B</b><span>Public catalytic capital, 2026–2035</span></div>
+<div><b>11–14×</b><span>Leverage needed to reach ₱1.55–1.77 trillion of total investment</span></div>
+<div><b>₱550B+</b><span>GRDP target by 2035, from ₱299.5B in 2024</span></div>
+<div><b>76</b><span>Consented validation responses, August 2026</span></div>
+</div>
+<h2>1. Purpose, scope and direction</h2>
+<p>Chapter 1 sets the scope, rationale, principles, regulatory anchors, analytical frameworks and methodology. The roadmap covers BARMM as now constituted: <strong>five provinces</strong> (Lanao del Sur, Maguindanao del Norte, Maguindanao del Sur, Basilan excluding Isabela City, and Tawi-Tawi), <strong>the Special Geographic Area and Cotabato City</strong>, home to about 4.54 million people. Sulu has been outside BARMM since the Supreme Court ruling of 9 September 2024.</p>
+<p>Two facts frame the decade. The economy grew 2.7 percent in 2024 while the population grew about 3.43 percent a year, so output per person fell; every target in the roadmap must clear that demographic hurdle before it improves living standards. And governance is in transition: the first Bangsamoro Parliament was elected on 14 September 2026 with no majority bloc, and it convenes and elects the Chief Minister on 30 October 2026. The roadmap is written for that incoming government.</p>
 
-<h2>2. Diagnostic Findings: The Investment Ecosystem Must Be Treated as a System</h2>
-<p>Chapter 2 organizes BARMM's investment economy into five mutually dependent BEIE clusters: <strong>Foundations</strong> (agriculture, fisheries, forestry, energy and environmental assets); <strong>Transformers</strong> (processing, manufacturing, logistics and halal value addition); <strong>Enablers</strong> (infrastructure, digital systems, social services and human capital); <strong>Connectors</strong> (tourism, trade, exports, connectivity and BIMP-EAGA integration); and <strong>Financiers</strong> (Islamic banking, waqf, takaful, microfinance and investment capital).</p>
-<p>The integrated quantified SWOT and systems diagnostics show that the principal challenge is not the absence of individual assets or opportunities. It is the interaction among infrastructure constraints, market access, standards and certification, institutional coordination, skills, finance, environmental risk and investor confidence. Systems archetypes such as <em>Limits to Growth</em>, <em>Fixes that Fail</em>, <em>Growth and Underinvestment</em>, <em>Shifting the Burden</em> and <em>Tragedy of the Commons</em> help explain why isolated interventions can produce temporary gains without durable system improvement.</p>
-<div class="callout"><strong>Validation evidence.</strong> The latest linked validation snapshot contains 76 consented survey responses and uses analyticsVersion 2. Survey-derived SWOT diagnostics use the canonical formulas implemented in the validation-survey analytics function. Missing SWOT families are treated as missing observations, not zeros. These diagnostics inform prioritization and learning; official administrative baselines and targets must be verified by their authoritative data owners.</div>
-<p>The cluster-level diagnostics provide a disciplined basis for identifying leverage points, but they should be interpreted as decision-support evidence rather than as a substitute for official administrative statistics. This distinction is central to the roadmap's measurement governance.</p>
+</section>
 
-<h2>3. Strategy: Four Options, One Integrated Strategic Architecture</h2>
-<p>Chapter 3 converts diagnosis into strategic choice. It formulates four strategic options—<strong>Halal Economy Dominance Strategy (HEDS)</strong>, <strong>Green Economy Monetization Strategy (GEMS)</strong>, <strong>Infrastructure-First Enabling Strategy (IFES)</strong>, and <strong>Integrated Ecosystem Development Strategy (IEDS)</strong>—and evaluates them using a seven-criteria analytical decision aid covering strategic alignment, economic impact, social inclusion, environmental sustainability, feasibility, risk mitigation and moral-governance alignment.</p>
-<p>IEDS serves as the <strong>organizing ecosystem strategy</strong> that connects the options rather than reducing the roadmap to a single-sector intervention. The strategy is reinforced by five Critical Leverage Points: <strong>LP1 Halal Certification System Integrity; LP2 Infrastructure–Energy–Connectivity Nexus; LP3 Governance–Investor Confidence Feedback; LP4 Islamic Finance Ecosystem; and LP5 Green Economy Revenue Framework.</strong></p>
-<p>The strategic logic is therefore portfolio-oriented: halal value chains, green economy activation, infrastructure and connectivity, finance, governance, skills and market access are mutually reinforcing components of one investment ecosystem.</p>
+<section class="sheet" id="executive-summary-2" data-title="Executive Summary (2 of 7)" data-group="Executive Summary">
+<h1 class="prelim-title" tabindex="-1">Executive Summary</h1>
+<h2>1. Purpose, scope and direction (continued)</h2>
+<p>The analytical architecture combines the <strong>Bangsamoro Economic and Investment Ecosystem (BEIE)</strong> with systems thinking, TOWS strategy formulation, leverage-point analysis, KPI benchmarking and the Balanced Scorecard, creating one continuous logic from context to diagnosis, strategy, measurement, execution and policy learning. The roadmap is a decision and coordination framework; it does not replace feasibility studies, statutory approvals, appropriations or agency mandates.</p>
 
-<h2>4. Measurement: From Indicators to Governed Performance</h2>
-<p>Chapter 4 establishes the BIRD measurement architecture. It uses six <strong>Pareto-style headline KPIs</strong> as a high-signal executive shortlist: annual investment approvals, BARMM GRDP, exports, halal-certified MSMEs, electrification and broadband connectivity. The term “Pareto-style” is intentionally used as a management designation and does not claim that six indicators cause a fixed share of total BIRD impact.</p>
-<table class="kpi-table">
-<caption>Executive Headline KPI Reference — calibrated targets from Chapters 4–5</caption>
-<thead><tr><th>Headline KPI</th><th>2030 reference</th><th>2035 reference</th></tr></thead>
-<tbody>
-<tr><td>Annual investment approvals</td><td>₱10B p.a.</td><td>₱15B+ p.a.</td></tr>
-<tr><td>BARMM GRDP</td><td>₱440B</td><td>₱550B+</td></tr>
-<tr><td>Exports</td><td>₱26B</td><td>₱40B+</td></tr>
-<tr><td>Halal-certified MSMEs</td><td>3,000</td><td>5,000+</td></tr>
-<tr><td>Electrification</td><td>See calibrated infrastructure trajectory</td><td>100%</td></tr>
-<tr><td>Broadband connectivity</td><td>See calibrated connectivity trajectory</td><td>85%</td></tr>
-</tbody>
-</table>
-<p>Chapter 4 also establishes calibration governance: baselines should be verified before formal adoption; target changes require traceability; and variance should be classified as data-quality, implementation or external-shock variance. The framework is designed for adaptive management rather than static reporting.</p>
+<h2>2. Diagnosis: the investment economy is a system</h2>
+<p>Chapter 2 organises BARMM's investment economy into five interdependent clusters: <strong>Foundations</strong> (agriculture, fisheries, forestry, energy and environmental assets); <strong>Transformers</strong> (processing, manufacturing, logistics and halal value addition); <strong>Enablers</strong> (infrastructure, digital systems, social services and human capital); <strong>Connectors</strong> (tourism, trade, exports and BIMP-EAGA integration); and <strong>Financiers</strong> (Islamic banking, waqf, takaful, microfinance and investment capital).</p>
+<p>The integrated SWOT and systems diagnostics show that the main challenge is not a lack of individual assets or opportunities. It is the interaction among infrastructure constraints, market access, standards, coordination, skills, finance, environmental risk and investor confidence. Archetypes such as <em>Limits to Growth</em>, <em>Fixes that Fail</em>, <em>Growth and Underinvestment</em>, <em>Shifting the Burden</em> and <em>Tragedy of the Commons</em> explain why isolated interventions produce temporary gains without lasting improvement.</p>
+<p>The validation evidence makes the point in numbers. Stakeholders rated institutional readiness lowest of three measures in <strong>all six clusters</strong>. Because value passes through the clusters in sequence, readiness compounds: averaged, the clusters look about 69 percent ready; multiplied through the chain, system throughput is about 16 percent, and 11.5 percent once governance is applied. Enablers is the binding cluster.</p>
+<div class="callout"><strong>How survey evidence is used.</strong> The Validation Survey (3–20 August 2026) holds 76 consented responses. Its SWOT diagnostics use the same canonical formulas as the planning platform, and unanswered SWOT items are treated as missing rather than as zero. Survey findings inform priorities and learning; official baselines and targets must be verified by their data owners. The sample is about three-quarters government-affiliated, and Basilan and Tawi-Tawi returned no respondents.</div>
+</section>
 
-<h2>5. Balanced Scorecard: Translating the Strategy Map into an Investment Roadmap</h2>
-<p>Chapter 5 is the strategic management bridge between the strategy architecture and the implementation system. The BSC translates the <strong>Strategy Map</strong> into an <strong>Investment Roadmap</strong> by specifying how capabilities enable processes, processes create stakeholder value, and stakeholder outcomes contribute to financial and economic results.</p>
-<p>The four perspectives retain their causal order: <strong>Learning &amp; Growth → Internal Process → Stakeholder → Financial</strong>. The three-phase implementation architecture described in Chapter 6 is <strong>not the roadmap itself</strong>; it is the implementation framework used to sequence delivery according to readiness, dependencies and investment capacity.</p>
+<section class="sheet" id="executive-summary-3" data-title="Executive Summary (3 of 7)" data-group="Executive Summary">
+<h1 class="prelim-title" tabindex="-1">Executive Summary</h1>
+<h2>3. Strategy: four options, one integrated architecture</h2>
+<p>Chapter 3 turns diagnosis into choice. It formulates four options, the <strong>Halal Economy Dominance Strategy (HEDS)</strong>, <strong>Green Economy Monetization Strategy (GEMS)</strong>, <strong>Infrastructure-First Enabling Strategy (IFES)</strong> and <strong>Integrated Ecosystem Development Strategy (IEDS)</strong>, and scores them on seven weighted criteria: economic impact, feasibility, identity alignment, systems leverage, risk and return, inclusivity, and sustainability. The IEDS ranks first with both the expert panel and survey respondents; of respondents who answered, 67.7 percent endorsed it outright and 30.8 percent in part.</p>
+<p>The IEDS connects the options rather than reducing the roadmap to a single sector, and it works through five Critical Leverage Points: <strong>LP1 halal certification integrity; LP2 the infrastructure, energy and connectivity nexus; LP3 governance and investor confidence; LP4 the Islamic finance ecosystem; and LP5 green economy revenue.</strong></p>
 
-<h3>Critical BSC Strategic Objectives and KPIs</h3>
+<h2>4. Measurement: from indicators to governed performance</h2>
+<p>Chapter 4 sets six <strong>Pareto-style headline KPIs</strong> as a compact executive shortlist: investment approvals, GRDP, exports, halal-certified MSMEs, electrification and broadband. "Pareto-style" is a management designation; it does not claim that six indicators cause a fixed share of total impact.</p>
 <table>
-<caption>Selected critical objectives and measures — not an exhaustive list of the 27 BSC objectives</caption>
-<thead><tr><th>Perspective</th><th>Critical strategic objective</th><th>Critical KPI / measure</th><th>2030</th><th>2035</th></tr></thead>
+<caption>Headline KPIs: baselines and calibrated targets (Chapter 4)</caption>
+<thead><tr><th>Headline KPI</th><th>Baseline</th><th>2028</th><th>2030</th><th>2035</th></tr></thead>
 <tbody>
-<tr><td rowspan="3"><strong>Financial<br>30%</strong></td><td>F1 — Increase investment approvals</td><td>Annual investment approvals</td><td>₱10B p.a.</td><td>₱15B+ p.a.</td></tr>
-<tr><td>F2 — Grow the regional economy</td><td>BARMM GRDP</td><td>₱440B</td><td>₱550B+</td></tr>
-<tr><td>F3 — Expand export revenue</td><td>Annual exports from BARMM</td><td>₱26B</td><td>₱40B+</td></tr>
-<tr><td rowspan="3"><strong>Stakeholder<br>25%</strong></td><td>S1 — Enhance investor satisfaction</td><td>Investor satisfaction score</td><td>7.0/10</td><td>8.0+/10</td></tr>
-<tr><td>S3 — Empower MSMEs through certification</td><td>Halal-certified MSMEs</td><td>3,000</td><td>5,000+</td></tr>
-<tr><td>S4 — Reduce poverty</td><td>BARMM poverty incidence</td><td>&lt;25%</td><td>&lt;20%</td></tr>
-<tr><td rowspan="3"><strong>Internal Process<br>25%</strong></td><td>P1 — Streamline investment facilitation</td><td>Business registration time</td><td>2 days</td><td>1 day digital</td></tr>
-<tr><td>P3 — Strengthen halal certification</td><td>BHB OIC/SMIIC accreditation</td><td>Provisional alignment</td><td>Full accreditation + MRA</td></tr>
-<tr><td>P4 — Accelerate infrastructure delivery</td><td>Infrastructure budget execution</td><td>88%</td><td>&gt;90%</td></tr>
-<tr><td rowspan="3"><strong>Learning &amp; Growth<br>20%</strong></td><td>L1 — Build halal expertise</td><td>Halal certification officers trained</td><td>70</td><td>100+</td></tr>
-<tr><td>L3 — Strengthen investment-facilitation capacity</td><td>IPA staff with certification/training</td><td>70%</td><td>80%</td></tr>
-<tr><td>L4 — Foster digital innovation</td><td>Digital services launched through BEGMP</td><td>15</td><td>20+</td></tr>
+<tr><td>Annual investment approvals</td><td>₱5.1B (Jan–Apr 2026)</td><td>₱6.5B</td><td>₱10B</td><td>₱15B+</td></tr>
+<tr><td>BARMM GRDP</td><td>₱299.5B (2024)</td><td>₱385B</td><td>₱440B</td><td>₱550B+</td></tr>
+<tr><td>Total exports</td><td>&lt;₱10B</td><td>₱20B</td><td>₱26B</td><td>₱40B+</td></tr>
+<tr><td>Halal-certified MSMEs</td><td>~500</td><td>1,500</td><td>3,000</td><td>5,000+</td></tr>
+<tr><td>Household electrification</td><td>~39%</td><td>65%</td><td>75%</td><td>90% (100% by 2040)</td></tr>
+<tr><td>Broadband connectivity</td><td>&lt;30%</td><td>58%</td><td>70%</td><td>85%</td></tr>
 </tbody></table>
+<p class="src">Notes: the approvals baseline covers four months and should be replaced by the full-year 2026 total once closed. Electrification is measured by household connections (about 39 percent per the National Electrification Administration), not by barangay energisation; the 75.86 percent figure in the Sustainable Energy Master Plan is a renewable share of generation, not an access rate.</p>
+<p>Chapter 4 also sets calibration rules. Baselines are verified before adoption; target changes must be traceable; and every variance is classified as a data-quality, implementation or external-shock variance. The framework is built for adaptive management, not static reporting.</p>
+</section>
 
-<h2>6. Implementation Framework: Three Phases, Not Three Roadmap Alternatives</h2>
-<p>Chapter 6 converts the strategy and scorecard into programs, activities, projects, governance arrangements, a one-year action plan and MEL processes. The three phases are the <strong>implementation framework</strong> for sequencing the Investment Roadmap:</p>
-<div class="phase"><b>Phase 1 — Foundation Building (2026–2028).</b> Strengthen governance and investor confidence; operationalize halal certification and standards alignment; address priority infrastructure and connectivity constraints; launch digital facilitation; establish coordination protocols and priority PAPs.</div>
-<div class="phase"><b>Phase 2 — Acceleration (2029–2031).</b> Scale value-adding production, halal processing, green-economy programs, Islamic finance, logistics, cold-chain and market-access systems as enabling conditions mature.</div>
-<div class="phase"><b>Phase 3 — Consolidation and Global Integration (2032–2035).</b> Consolidate mature systems, deepen BIMP-EAGA and international market integration, strengthen green and halal market positioning, and institutionalize performance and investment facilitation systems.</div>
-<p>The indicative decade-wide investment envelope is <strong>₱120–160 billion</strong>. It remains subject to project readiness, feasibility, safeguards, financing availability, annual appropriations and applicable approvals. The Year 1 action plan identified in Chapter 6 lists approximately <strong>₱2.063 billion</strong> of programmed spending, with the ZBIP component accounting for the overwhelming majority of that listed amount.</p>
+<section class="sheet" id="executive-summary-4" data-title="Executive Summary (4 of 7)" data-group="Executive Summary">
+<h1 class="prelim-title" tabindex="-1">Executive Summary</h1>
+<h2>5. Balanced Scorecard: from strategy map to investment roadmap</h2>
+<p>Chapter 5 bridges strategy and implementation. The Balanced Scorecard specifies how capabilities enable processes, processes create stakeholder value, and stakeholder outcomes contribute to financial and economic results, in the causal order <strong>Learning and Growth, Internal Process, Stakeholder, Financial</strong>. The three phases in Chapter 6 are not the roadmap itself; they are the framework for sequencing delivery by readiness, dependency and investment capacity.</p>
+<table>
+<caption>Selected critical objectives and measures (not the full scorecard)</caption>
+<thead><tr><th>Perspective</th><th>Objective</th><th>Measure</th><th>2030</th><th>2035</th></tr></thead>
+<tbody>
+<tr><td><strong>Financial</strong></td><td>F1 Increase investment approvals</td><td>Annual approvals</td><td>₱10B p.a.</td><td>₱15B+ p.a.</td></tr>
+<tr><td></td><td>F2 Grow the regional economy</td><td>BARMM GRDP</td><td>₱440B</td><td>₱550B+</td></tr>
+<tr><td></td><td>F3 Expand export revenue</td><td>Annual exports</td><td>₱26B</td><td>₱40B+</td></tr>
+<tr><td><strong>Stakeholder</strong></td><td>S1 Enhance investor satisfaction</td><td>Investor satisfaction score</td><td>7.0/10</td><td>8.0+/10</td></tr>
+<tr><td></td><td>S3 Empower MSMEs through certification</td><td>Halal-certified MSMEs</td><td>3,000</td><td>5,000+</td></tr>
+<tr><td></td><td>S4 Reduce poverty</td><td>Poverty incidence</td><td>&lt;25%</td><td>&lt;20%</td></tr>
+<tr><td><strong>Internal Process</strong></td><td>P1 Streamline investment facilitation</td><td>Business registration time</td><td>2 days</td><td>1 day, digital</td></tr>
+<tr><td></td><td>P3 Strengthen halal certification</td><td>BHB OIC/SMIIC accreditation</td><td>Provisional alignment</td><td>Full accreditation and MRA</td></tr>
+<tr><td></td><td>P4 Accelerate infrastructure delivery</td><td>Infrastructure budget execution</td><td>88%</td><td>&gt;90%</td></tr>
+<tr><td><strong>Learning and Growth</strong></td><td>L1 Build halal expertise</td><td>Certification officers trained</td><td>70</td><td>100+</td></tr>
+<tr><td></td><td>L3 Strengthen facilitation capacity</td><td>Agency staff certified or trained</td><td>70%</td><td>80%</td></tr>
+<tr><td></td><td>L4 Foster digital innovation</td><td>Digital services launched through BEGMP</td><td>15</td><td>20+</td></tr>
+</tbody></table>
+<p>Stakeholders endorsed the frame: each of the four perspectives scored between 4.12 and 4.32 of 5 in the Validation Survey, a band too close to rank. Budget execution matters as much as any target. At the current execution rate of about 80 percent, ₱28 billion of a ₱140 billion programme would not convert to output, so delivery capacity is monitored alongside results.</p>
+</section>
 
-<h2>7. BIF-Net and Execution Governance</h2>
-<p>Chapter 5 and Chapter 6 establish <strong>BIF-Net</strong> as the investment facilitation and coordination layer. It is not a replacement for existing ministries, offices, LGUs or statutory mandates. Its purpose is to improve shared visibility of investment opportunities, investor issues, PAP status, KPI performance and cross-agency dependencies.</p>
-<p>The execution model combines role-based information views, KPI monitoring, action tracking and adaptive-management protocols. Data architecture should preserve the distinction between survey-derived validation evidence, official administrative data and management targets. This prevents analytical estimates from being silently converted into official baselines.</p>
+<section class="sheet" id="executive-summary-5" data-title="Executive Summary (5 of 7)" data-group="Executive Summary">
+<h1 class="prelim-title" tabindex="-1">Executive Summary</h1>
+<h2>6. Implementation: three phases, not three roadmaps</h2>
+<p>Chapter 6 converts the strategy and scorecard into programmes, activities and projects, governance arrangements, a one-year action plan and MEL processes. The three phases are the implementation framework for the roadmap.</p>
+<div class="phase"><b>Phase 1, Foundation Building (2026–2028), ₱35–45 billion.</b> Strengthen governance and investor confidence; operationalise halal certification and standards alignment; address priority infrastructure and connectivity constraints; launch digital facilitation; establish coordination protocols and priority PAPs.</div>
+<div class="phase"><b>Phase 2, Acceleration (2029–2031), ₱50–65 billion.</b> Scale value-adding production, halal processing, green economy programmes, Islamic finance, logistics, cold chain and market-access systems as enabling conditions mature.</div>
+<div class="phase"><b>Phase 3, Consolidation and Global Integration (2032–2035), ₱35–50 billion.</b> Consolidate mature systems, deepen BIMP-EAGA and international market integration, strengthen halal and green market positioning, and institutionalise facilitation and performance systems.</div>
+<p>The <strong>₱120–160 billion</strong> envelope is public catalytic capital, blended from the Block Grant (35 percent), national programmes (25 percent), development and climate finance (30 percent) and private, PPP and Islamic finance (10 percent). At a credible capital-output ratio of 3.5 to 4.0, the growth path needs <strong>₱1.55–1.77 trillion</strong> of total investment, so each public peso must attract 11 to 14 pesos more. Phase 2 and 3 releases depend on delivery in the preceding phase, with a 20 percent contingency reserve. All amounts remain subject to project readiness, feasibility, safeguards, financing, appropriations and approvals.</p>
+<p>The first-year action plan programmes <strong>₱2.063 billion</strong>. The Zamboanga–Basilan Interconnection Project accounts for ₱2.0 billion of that (97 percent); the nine institutional actions together cost ₱63 million and carry most of the delivery risk because they depend on decisions by the incoming government.</p>
+</section>
 
-<h2>8. Policy Recommendations and the Way Forward</h2>
-<p>Chapter 7 converts the roadmap into policy and institutional recommendations under four broad areas: <strong>policy and institutional enablers; planning, budgeting and territorial delivery; investment mobilization and market development; and governance of the way forward.</strong></p>
-<ul>
-<li><strong>Institutional enablement:</strong> strengthen the policy, standards, governance and coordination conditions required for investment facilitation, halal development, green-economy activation and investor confidence.</li>
-<li><strong>Territorial delivery:</strong> align infrastructure, value chains, human capital and investment facilitation with provincial and geographic differences rather than applying a uniform intervention model.</li>
-<li><strong>Investment mobilization:</strong> develop credible, feasible and market-oriented investment opportunities supported by aftercare, information, standards, infrastructure and financing pathways.</li>
+<section class="sheet" id="executive-summary-6" data-title="Executive Summary (6 of 7)" data-group="Executive Summary">
+<h1 class="prelim-title" tabindex="-1">Executive Summary</h1>
+<h2>7. BIF-Net and execution governance</h2>
+<p>Chapters 5 and 6 establish <strong>BIF-Net</strong> as the investment facilitation and coordination layer. It does not replace ministries, offices, local governments or statutory mandates; its purpose is shared visibility of opportunities, investor issues, PAP status, KPI performance and cross-agency dependencies. Because the draft Bangsamoro Investment Code also proposes a council with similar powers, the two instruments should be harmonised so that a single council holds Green Lane authority, with BIF-Net as its operating network.</p>
+<p>The execution model combines role-based information views, KPI monitoring, action tracking and adaptive-management protocols. The data architecture keeps survey-derived validation evidence, official administrative data and management targets separate, so that analytical estimates are never silently converted into official baselines.</p>
+<h2>8. Policy recommendations and the way forward</h2>
+<p>Chapter 7 converts the roadmap into recommendations in four areas:</p>
+<ul class="plain">
+<li><strong>Institutional enablement:</strong> strengthen the policy, standards, governance and coordination conditions for investment facilitation, halal development, green economy activation and investor confidence, beginning with enactment of the Bangsamoro Investment Code and Forestry Code.</li>
+<li><strong>Territorial delivery:</strong> align infrastructure, value chains, human capital and facilitation with provincial and geographic differences rather than applying one model everywhere, with explicit attention to Maguindanao del Sur, the Special Geographic Area and the island provinces.</li>
+<li><strong>Investment mobilisation:</strong> develop credible, feasible and market-oriented opportunities supported by aftercare, information, standards, infrastructure and financing pathways.</li>
 <li><strong>Governance and learning:</strong> maintain target traceability, evidence quality, adaptive review and cross-agency accountability through BIF-Net and the MEL architecture.</li>
 </ul>
-<p>Across these recommendations, the roadmap treats ethical governance, resilience, inclusion and peace as operating conditions for investment—not as parallel themes detached from economic performance.</p>
-
-<h2>9. The Investment Logic in One Chain</h2>
-<div class="quote">Context and assets → BEIE diagnosis → quantified SWOT and systems sensing → strategic options and leverage points → Strategy Map → Investment Roadmap objectives and KPIs → implementation framework and PAPs → MEL and adaptive management → policy learning and reinvestment.</div>
-<p>This chain is the core coherence mechanism of BIRD 2026–2035. Each chapter has a distinct role: <strong>Chapter 1 establishes the frame; Chapter 2 explains the system; Chapter 3 defines strategic choices and leverage; Chapter 4 defines measurement and calibration; Chapter 5 translates the Strategy Map into the Investment Roadmap; Chapter 6 sequences and manages implementation; and Chapter 7 establishes the policy and institutional conditions for continuity.</strong></p>
-
-<h2>10. Conclusion</h2>
-<p>The BIRD 2026–2035 is designed to help BARMM move from fragmented investment interventions toward a coordinated investment ecosystem. Its emphasis is not simply on attracting more capital, but on improving the conditions under which capital becomes productive, inclusive, resilient and sustainable economic activity.</p>
-<p>The roadmap's success will ultimately depend on institutional ownership, investment readiness, credible implementation, reliable data, transparent governance and continuous learning. The document therefore provides a framework for coordinated action while preserving the authority of competent institutions to validate baselines, approve projects, allocate budgets, regulate activities and revise priorities as evidence and conditions change.</p>
-<p class="quote"><strong>The roadmap provides the architecture; implementation, institutional learning and the Bangsamoro's collective choices will determine the outcomes.</strong></p>
+<p>Across these areas the roadmap treats ethical governance, resilience, inclusion and peace as operating conditions for investment, not as parallel themes detached from economic performance.</p>
 </section>
 
+<section class="sheet" id="executive-summary-7" data-title="Executive Summary (7 of 7)" data-group="Executive Summary">
+<h1 class="prelim-title" tabindex="-1">Executive Summary</h1>
+<h2>9. The investment logic in one chain</h2>
+<div class="chain" role="list" aria-label="BIRD investment logic">
+<span role="listitem">Context and assets</span><span role="listitem">BEIE diagnosis</span><span role="listitem">Quantified SWOT and systems sensing</span>
+<span role="listitem">Options and leverage points</span><span role="listitem">Strategy map</span><span role="listitem">Objectives and KPIs</span>
+<span role="listitem">Phases and PAPs</span><span role="listitem">MEL and adaptive management</span><span role="listitem">Policy learning and reinvestment</span></div>
+<p>Each chapter plays one part in this chain: Chapter 1 sets the frame; Chapter 2 explains the system; Chapter 3 defines the strategic choice and its leverage; Chapter 4 defines measurement; Chapter 5 turns the strategy map into the investment roadmap; Chapter 6 sequences and manages implementation; and Chapter 7 sets the policy conditions for continuity.</p>
+<h2>10. Conclusion</h2>
+<p>The BIRD 2026–2035 is designed to move BARMM from fragmented investment interventions to a coordinated investment ecosystem. Its emphasis is not simply on attracting more capital but on improving the conditions under which capital becomes productive, inclusive, resilient and sustainable economic activity. Success will depend on institutional ownership, investment readiness, credible implementation, reliable data, transparent governance and continuous learning, while the competent institutions retain their authority to validate baselines, approve projects, allocate budgets, regulate activities and revise priorities as evidence changes.</p>
+<p class="quote"><strong>The roadmap provides the architecture; implementation, institutional learning and the Bangsamoro's collective choices will determine the outcomes.</strong></p>
+<div class="continue no-print"><p><strong>Continue reading</strong><br>Chapter 1: Introduction, Background, Regulatory Anchors and Methodology</p>
+<a class="btn btn-green" href="Chapter1.html">Open Chapter 1</a></div>
+</section>
+
+</main>
+
+<p class="hint no-print" id="hint">Use the arrow keys or swipe to turn pages. Press C for contents.</p>
+
+<nav class="navbar no-print" aria-label="Page navigation">
+  <button class="btn btn-line" id="btn-back" type="button" aria-label="Previous page">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg><span>Back</span></button>
+  <div class="count" id="count" aria-live="polite"></div>
+  <button class="btn btn-green" id="btn-next" type="button" aria-label="Next page">
+    <span id="next-label">Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+</nav>
+
+<dialog class="drawer" id="contents-dialog" aria-labelledby="drawer-title">
+  <div class="drawer-head"><h2 id="drawer-title">Contents</h2>
+    <button class="btn btn-ghost" type="button" id="btn-close" aria-label="Close contents">Close</button></div>
+  <div class="drawer-body">
+    <h3>In this document</h3><div id="drawer-pages"></div>
+    <h3>Chapters</h3>
+    <a class="ch" href="Chapter1.html">Chapter 1<small>Introduction, background, anchors and methodology</small></a>
+    <a class="ch" href="Chapter2.html">Chapter 2<small>Context, BEIE Framework and strategic diagnostics</small></a>
+    <a class="ch" href="Chapter3.html">Chapter 3<small>Strategic options, leverage points and the roadmap strategy</small></a>
+    <a class="ch" href="Chapter4.html">Chapter 4<small>Metrics, KPI benchmarking and calibration</small></a>
+    <a class="ch" href="Chapter5.html">Chapter 5<small>Balanced Scorecard, causal architecture and execution</small></a>
+    <a class="ch" href="Chapter6.html">Chapter 6<small>Implementation, action and annual investment plan</small></a>
+    <a class="ch" href="Chapter7.html">Chapter 7<small>Policy recommendations and the way forward</small></a>
+    <a class="ch" href="Indexes.html">Subject Index<small>Navigational index to all chapters</small></a>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.sheet'));
+  var total = pages.length;
+  var byId = {};
+  pages.forEach(function (p, i) { byId[p.id] = i; });
+  var NEXT_DOC = { href: 'Chapter1.html', label: 'Chapter 1' };
+  var current = -1;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var btnBack = $('btn-back'), btnNext = $('btn-next'), nextLabel = $('next-label');
+  var count = $('count'), where = $('where'), progress = $('progress');
+  var dialog = $('contents-dialog');
+
+  function indexFromHash() {
+    var h = decodeURIComponent((location.hash || '').slice(1));
+    if (!h) return 0;
+    if (byId.hasOwnProperty(h)) return byId[h];
+    var el = document.getElementById(h);
+    if (el) { var s = el.closest('.sheet'); if (s && byId.hasOwnProperty(s.id)) return byId[s.id]; }
+    return 0;
+  }
+
+  function show(i, opts) {
+    opts = opts || {};
+    i = Math.max(0, Math.min(total - 1, i));
+    if (i === current && !opts.force) return;
+    pages.forEach(function (p, k) { p.hidden = k !== i; });
+    current = i;
+    var p = pages[i];
+    var title = p.getAttribute('data-title');
+    count.innerHTML = 'Page <b>' + (i + 1) + '</b> of ' + total + ': ' + title;
+    where.textContent = (p.getAttribute('data-group') || '') + ', ' + title;
+    document.title = title + ' | BIRD 2026–2035';
+    progress.style.width = ((i + 1) / total * 100) + '%';
+    btnBack.disabled = i === 0;
+    var last = i === total - 1;
+    nextLabel.textContent = last ? NEXT_DOC.label : 'Next';
+    btnNext.setAttribute('aria-label', last ? 'Go to ' + NEXT_DOC.label : 'Next page');
+    var items = document.querySelectorAll('#drawer-pages .pg');
+    for (var k = 0; k < items.length; k++) {
+      if (k === i) items[k].setAttribute('aria-current', 'page'); else items[k].removeAttribute('aria-current');
+    }
+    if (opts.updateHash !== false) {
+      var target = '#' + p.id;
+      if (location.hash !== target) {
+        if (opts.replace) history.replaceState(null, '', target); else history.pushState(null, '', target);
+      }
+    }
+    window.scrollTo(0, 0);
+    if (opts.focus !== false) {
+      var h = p.querySelector('[tabindex="-1"]') || p;
+      if (!h.hasAttribute('tabindex')) h.setAttribute('tabindex', '-1');
+      h.focus({ preventScroll: true });
+    }
+  }
+
+  function next() { if (current < total - 1) show(current + 1); else location.href = NEXT_DOC.href; }
+  function back() { if (current > 0) show(current - 1); }
+
+  // Build page lists (drawer and contents page) from the sheets themselves, so they never drift.
+  var drawerPages = $('drawer-pages'), frontList = $('front-list');
+  pages.forEach(function (p, i) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'pg';
+    b.textContent = (i + 1) + '. ' + p.getAttribute('data-title');
+    b.addEventListener('click', function () { dialog.close(); show(i); });
+    drawerPages.appendChild(b);
+    if ((p.getAttribute('data-group') === 'Front matter' && !/^toc/.test(p.id) && !/-\d+$/.test(p.id)) || p.id === 'executive-summary') {
+      var f = document.createElement('button');
+      f.type = 'button';
+      f.textContent = p.getAttribute('data-title').replace(/ \([^)]*\)$/, '');
+      f.addEventListener('click', function () { show(i); });
+      frontList.appendChild(f);
+    }
+  });
+
+  btnNext.addEventListener('click', next);
+  btnBack.addEventListener('click', back);
+  window.addEventListener('popstate', function () { show(indexFromHash(), { updateHash: false }); });
+  window.addEventListener('hashchange', function () { show(indexFromHash(), { updateHash: false }); });
+
+  // Contents drawer
+  function openContents() {
+    if (typeof dialog.showModal === 'function') { dialog.showModal(); }
+    else { show(byId.toc); }
+  }
+  $('btn-contents').addEventListener('click', openContents);
+  $('btn-close').addEventListener('click', function () { dialog.close(); });
+  dialog.addEventListener('click', function (e) { if (e.target === dialog) dialog.close(); });
+
+  // Keyboard
+  document.addEventListener('keydown', function (e) {
+    if (dialog.open || e.altKey || e.ctrlKey || e.metaKey) return;
+    var t = e.target.tagName;
+    if (t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT') return;
+    switch (e.key) {
+      case 'ArrowRight': case 'PageDown': e.preventDefault(); next(); break;
+      case 'ArrowLeft': case 'PageUp': e.preventDefault(); back(); break;
+      case 'Home': e.preventDefault(); show(0); break;
+      case 'End': e.preventDefault(); show(total - 1); break;
+      case 'c': case 'C': e.preventDefault(); openContents(); break;
+    }
+  });
+
+  // Swipe
+  var x0 = null, y0 = null;
+  document.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+  document.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.5) { dx < 0 ? next() : back(); }
+    x0 = y0 = null;
+  }, { passive: true });
+
+  function toast(msg) {
+    var t = $('toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove('show'); }, 4200);
+  }
+
+  // PDF: print stylesheet lays every sheet out on its own A4 page.
+  $('btn-pdf').addEventListener('click', function () {
+    toast('In the print dialog, choose "Save as PDF" and A4 paper. Turn on background graphics for the cover.');
+    setTimeout(function () { window.print(); }, 350);
+  });
+
+  // Word: A4 HTML-format .doc that Word opens and can re-save as .docx.
+  $('btn-word').addEventListener('click', function () {
+    try {
+      var base = location.href.replace(/[#?].*$/, '').replace(/[^\/]*$/, '');
+      var css = [
+        '@page WordSection1{size:21.0cm 29.7cm;margin:2.0cm 2.0cm 2.2cm 2.0cm;mso-page-orientation:portrait;}',
+        'div.WordSection1{page:WordSection1;}',
+        'body{font-family:Montserrat,Arial,sans-serif;font-size:10pt;line-height:1.5;color:#1a1a1a;}',
+        'p,li{text-align:justify;margin:0 0 6pt 0;}',
+        'h1{font-family:Poppins,Arial,sans-serif;font-size:18pt;color:#0a3d2e;text-align:center;border-bottom:2pt solid #C9A84C;padding-bottom:4pt;margin:0 0 12pt 0;}',
+        'h2{font-family:Poppins,Arial,sans-serif;font-size:13pt;color:#0a3d2e;border-left:4pt solid #C9A84C;padding-left:6pt;margin:12pt 0 6pt 0;}',
+        'h3{font-family:Poppins,Arial,sans-serif;font-size:11pt;color:#1B5E20;margin:10pt 0 4pt 0;}',
+        'table{border-collapse:collapse;width:100%;font-size:8.5pt;}',
+        'th{background:#0a3d2e;color:#ffffff;padding:3pt 4pt;text-align:left;border:0.5pt solid #0a3d2e;}',
+        'td{padding:3pt 4pt;border:0.5pt solid #d9d4c7;vertical-align:top;text-align:left;}',
+        'caption{font-weight:bold;color:#0a3d2e;text-align:left;}',
+        'strong,b{color:#0a3d2e;}',
+        '.box{background:#f0f7f4;border-left:4pt solid #0a3d2e;padding:6pt;}'
+      ].join('\n');
+      var parts = [];
+      pages.forEach(function (p, i) {
+        var html;
+        if (p.classList.contains('cover')) {
+          html = '<table style="width:100%;height:24cm;background:#0a3d2e;border:none"><tr><td style="background:#0a3d2e;border:none;padding:60pt 40pt;text-align:center;vertical-align:middle">' +
+            '<p style="text-align:center;color:#C9A84C;font-size:9pt;letter-spacing:2pt">BIRD 2026–2035</p>' +
+            '<p style="text-align:center;font-family:Poppins,Arial;font-size:32pt;font-weight:bold;color:#C9A84C;line-height:1.15">Preliminary Pages and Executive Summary</p>' +
+            '<p style="text-align:center;color:#a8e6cf;font-size:13pt">Front matter, abbreviations, glossary and the executive summary of the Bangsamoro Investment Roadmap Development 2026–2035</p>' +
+            '<p style="text-align:center;color:#ffffff;font-size:9.5pt;margin-top:30pt"><b style="color:#C9A84C">The Emerging Bangsamoro: A Hub for Resilient and Ethical Growth</b><br>Bangsamoro Investment Roadmap Development 2026–2035<br><br>Bureau of Investments, Ministry of Trade, Investments and Tourism (BOI-MTIT), BARMM<br>September 2026</p>' +
+            '</td></tr></table>';
+        } else {
+          var c = p.cloneNode(true);
+          Array.prototype.forEach.call(c.querySelectorAll('.no-print,script,button'), function (n) { n.remove(); });
+          Array.prototype.forEach.call(c.querySelectorAll('.exec-box,.callout,.note,.message,.phase,.quote'), function (n) { n.setAttribute('class', 'box'); });
+          Array.prototype.forEach.call(c.querySelectorAll('.chain'), function (n) {
+            var txt = Array.prototype.map.call(n.querySelectorAll('span'), function (s) { return s.textContent; }).join(' → ');
+            var para = document.createElement('p'); para.innerHTML = '<strong>' + txt + '</strong>'; n.replaceWith(para);
+          });
+          Array.prototype.forEach.call(c.querySelectorAll('.keys'), function (n) {
+            var cells = Array.prototype.map.call(n.children, function (d) {
+              return '<td style="text-align:center;border:0.5pt solid #d9d4c7"><b style="font-size:15pt">' + d.querySelector('b').textContent + '</b><br>' + d.querySelector('span').textContent + '</td>';
+            }).join('');
+            var tbl = document.createElement('div'); tbl.innerHTML = '<table><tr>' + cells + '</tr></table>'; n.replaceWith(tbl);
+          });
+          Array.prototype.forEach.call(c.querySelectorAll('a[href]'), function (a) {
+            var href = a.getAttribute('href');
+            if (!/^(https?:|mailto:|#)/.test(href)) a.setAttribute('href', base + href);
+          });
+          html = c.innerHTML;
+        }
+        if (i > 0) parts.push('<br clear="all" style="mso-special-character:line-break;page-break-before:always">');
+        parts.push(html);
+      });
+      var doc = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">' +
+        '<head><meta charset="utf-8"><title>BIRD 2026–2035 Preliminary Pages and Executive Summary</title>' +
+        '<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->' +
+        '<style>' + css + '</style></head><body><div class="WordSection1">' + parts.join('\n') + '</div></body></html>';
+      var blob = new Blob(['\ufeff', doc], { type: 'application/msword' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'BIRD-2026-2035_Prelims-Executive-Summary_A4.doc';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+      toast('Word file downloaded (A4). In Word, use File > Save As to keep it as .docx.');
+    } catch (err) {
+      toast('Word export failed in this browser. Use "Save as PDF" instead, or try Chrome, Edge or Firefox.');
+      if (window.console) console.error(err);
+    }
+  });
+
+  show(indexFromHash(), { replace: true, focus: false });
+})();
+</script>
 </body>
 </html>
