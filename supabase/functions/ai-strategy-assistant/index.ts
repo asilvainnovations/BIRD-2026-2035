@@ -147,7 +147,7 @@ LP4 — Islamic Finance Mobilization [High]: Al-Amanah, Takaful, Waqf, Islamic f
 LP5 — Green Economy Activation [High]: JMC 2026-01 (Carbon Credits + PES),
       Bangsamoro Forestry Code, REDD+ program, eco-tourism fees
 
-▌BALANCED SCORECARD (Chapter 6, BIRD 2026-2035)
+▌BALANCED SCORECARD (Chapter 5, BIRD 2026-2035)
 Financial Perspective:
   F1: Investment approvals ₱5.1B → ₱8B (2030) → ₱15B p.a. (2035)
   F2: GRDP ₱299.5B → ₱400B (2030) → ₱550B+ (2035)
