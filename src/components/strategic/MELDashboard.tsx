@@ -138,8 +138,7 @@ const WORKSHOP_EVIDENCE = {
 } as const;
 
 /**
- * Strategic option evaluation — survey Section 10, same seven weighted criteria
- * as BIRD Chapter 4. `respondentScore` uses only the 29 respondents who
+ * Strategic option evaluation — survey Section 10, same seven weighted criteria as BIRD Chapter 3. `respondentScore` uses only the 29 respondents who
  * genuinely differentiated their sliders; 25 of 75 left all 28 matrix cells at
  * the default value of 5, so `fullSampleScore` is midpoint-contaminated.
  */
