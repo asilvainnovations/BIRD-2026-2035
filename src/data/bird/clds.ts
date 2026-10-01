@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // BIRD 2026–2035 · Causal Loop Diagrams & Systems Archetypes
 // Single source of truth for the Systems Thinking layer.
-// Source: BIRD 2026–2035 Chapter 3 — SWOT Analysis and Systems Mapping
+// Source: BIRD 2026–2035 Chapter 2 — SWOT Analysis and Systems Mapping
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type LoopType = 'reinforcing' | 'balancing';
