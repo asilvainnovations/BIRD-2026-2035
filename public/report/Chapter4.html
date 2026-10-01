@@ -1,138 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chapter 4: Metrics, KPI Benchmarking and Performance Calibration | BIRD 2026-2035</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Chapter 4: Metrics, KPI Benchmarking and Performance Calibration | BIRD 2026–2035</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&amp;family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Roboto+Condensed:wght@400;700&amp;display=swap" rel="stylesheet"/>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{margin:0;padding:0;font-family:'Roboto',sans-serif;font-size:11pt;line-height:1.7;color:#333;background:#fff;text-align:justify;text-align-last:left;}p,li,td,th{text-align:justify;hyphens:auto;}figure,figure img{margin-left:auto;margin-right:auto;text-align:center;}
-@page{size:A4;margin:2.5cm 2cm 2.5cm 2cm;@top-center{content:string(doctitle);font-size:9pt;color:#666;font-style:italic;}@bottom-center{content:counter(page);font-size:9pt;color:#666;}}
-@page :first{margin:0;@top-center{content:none;}@bottom-center{content:none;}}
-@page cover{margin:0;@top-center{content:none;}@bottom-center{content:none;}}
-@page toc-page{@top-center{content:none;}@bottom-center{content:none;}}
-body{string-set:doctitle "";}
-h1.chapter-title{string-set:doctitle content();}
-.cover{width:210mm;height:297mm;margin:0;position:relative;overflow:hidden;page-break-after:always;page:cover;background:linear-gradient(135deg,#0a3d2e 0%,#0f5c3e 40%,#1a7a4e 70%,#2d9d6e 100%);}
-.cover::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/barmm-images/public/Bangsamoro%20Economic%20and%20%20Investment%20Ecosystem.png') center/cover no-repeat;opacity:0.12;z-index:0;}
-.cover::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(10,61,46,0.75) 0%,rgba(10,61,46,0.88) 50%,rgba(10,61,46,0.97) 100%);z-index:1;}
-.cover-content{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;text-align:center;width:85%;}
-.cover-badge{display:inline-block;padding:0.3rem 1rem;border:1px solid rgba(201,168,76,0.6);border-radius:2rem;color:#C9A84C;font-size:8pt;letter-spacing:0.15em;text-transform:uppercase;font-weight:600;margin-bottom:1rem;background:rgba(201,168,76,0.1);}
-.cover-chapter{font-family:'Poppins',sans-serif;font-size:32pt;font-weight:800;color:#C9A84C;line-height:1.1;margin-bottom:0.5rem;}
-.cover-title{font-family:'Poppins',sans-serif;font-size:20pt;font-weight:700;color:#fff;line-height:1.3;margin-bottom:0.8rem;}
-.cover-subtitle{font-family:'Montserrat',sans-serif;font-size:12pt;font-weight:500;color:#a8e6cf;margin-bottom:1.5rem;line-height:1.5;}
-.cover-divider{width:80px;height:3px;background:linear-gradient(90deg,#C9A84C,#E8C560,#C9A84C);margin:0 auto 1.2rem;border-radius:2px;}
-.cover-meta{color:rgba(255,255,255,0.8);font-size:9.5pt;line-height:1.9;}
-.cover-meta strong{color:#C9A84C;}
-h1{font-family:'Poppins',sans-serif;font-size:20pt;font-weight:700;color:#0a3d2e;margin:2rem 0 1rem;line-height:1.3;page-break-after:avoid;}
-h2{font-family:'Poppins',sans-serif;font-size:14pt;font-weight:600;color:#0d4f3c;margin:1.5rem 0 0.8rem;line-height:1.3;page-break-after:avoid;border-bottom:1px solid #e0e0e0;padding-bottom:0.3rem;}
-h3{font-family:'Poppins',sans-serif;font-size:12pt;font-weight:600;color:#1a6b4e;margin:1.2rem 0 0.6rem;page-break-after:avoid;}
-h4{font-family:'Poppins',sans-serif;font-size:11pt;font-weight:600;color:#333;margin:1rem 0 0.5rem;page-break-after:avoid;}
-p{margin-bottom:0.8rem;font-size:11pt;line-height:1.7;}
-strong{color:#1a4d3a;}
-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:9pt;page-break-inside:auto;max-width:100%;}
-thead{display:table-header-group;}thead tr{border-top:2px solid #333;border-bottom:1px solid #333;}
-tbody tr{border-bottom:1px solid #ddd;}tbody tr:last-child{border-bottom:2px solid #333;}
-th,td{padding:6px 8px;text-align:justify;vertical-align:top;}
-th{font-weight:600;background:#f8f9f5;color:#0a3d2e;font-family:'Poppins',sans-serif;font-size:9pt;}
-tr{page-break-inside:avoid;}
-caption{font-family:'Poppins',sans-serif;font-weight:600;font-size:10pt;color:#0a3d2e;margin-bottom:0.5rem;text-align:justify;}
-caption::before{content:attr(data-label) ": ";font-weight:700;}
-figure{margin:1.2rem 0;text-align:center;page-break-inside:avoid;}
-figure img{max-width:100%;height:auto;display:block;margin:0 auto;}
-figcaption{font-size:9pt;color:#555;margin-top:0.5rem;font-style:italic;text-align:justify;line-height:1.5;}
-figcaption::before{content:attr(data-label) ": ";font-weight:700;font-style:normal;}
-.footnote{font-size:8.5pt;color:#555;vertical-align:super;}
-.footnotes{font-size:8.5pt;border-top:1px solid #ddd;margin-top:2rem;padding-top:1rem;}
-.footnotes ol{padding-left:1.5rem;}
-.footnotes li{margin-bottom:0.5rem;line-height:1.5;}
-blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-style:italic;color:#444;}
-.chapter-header{text-align:center;margin:3rem 0 2rem;page-break-before:always;}
-.chapter-number{font-family:'Poppins',sans-serif;font-size:12pt;color:#C9A84C;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;margin-bottom:0.5rem;}
-.chapter-title{font-family:'Poppins',sans-serif;font-size:22pt;font-weight:700;color:#0a3d2e;line-height:1.3;}
-.resource-box{background:#f0f7f4;border:1px solid #c8e6d5;border-left:4px solid #0a3d2e;padding:0.8rem 1rem;margin:1rem 0;font-size:9.5pt;}
-.resource-box-title{font-family:'Poppins',sans-serif;font-weight:600;color:#0a3d2e;margin-bottom:0.3rem;}
-.references-page{page-break-before:always;}
-.references-list{font-size:10pt;line-height:1.6;}
-.references-list p{margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;}
-.province-tag{display:inline-block;padding:2px 8px;border-radius:3px;font-size:8pt;font-weight:600;margin-right:3px;}
-.tag-mdn{background:#e0f2e9;color:#064e3b;}
-.tag-lds{background:#dbeafe;color:#1e40af;}
-.tag-bas{background:#fef3c7;color:#92400e;}
-.tag-tt{background:#fce7f3;color:#9d174d;}
-.tag-mds{background:#f3e8ff;color:#6b21a8;}
-.tag-sga{background:#ecfdf5;color:#065f46;border:1px solid #6ee7b7;}
-.data-callout{background:#fefce8;border:1px solid #fbbf24;border-left:4px solid #f59e0b;padding:0.6rem 1rem;margin:0.8rem 0;font-size:9.5pt;}
-.kpi-box{background:#f0fdf4;border:1px solid #bbf7d0;border-left:4px solid #16a34a;padding:0.6rem 1rem;margin:0.6rem 0;font-size:9.5pt;}
-.kpi-box-title{font-family:'Poppins',sans-serif;font-weight:600;color:#16a34a;margin-bottom:0.2rem;font-size:10pt;}
-.phase-marker{display:inline-block;padding:2px 8px;border-radius:3px;font-size:8pt;font-weight:600;margin-right:3px;}
-.phase-1{background:#dbeafe;color:#1e40af;}
-.phase-2{background:#fef3c7;color:#92400e;}
-.phase-3{background:#d1fae5;color:#065f46;}
+
+:root{
+  --green-900:#0a3d2e; --green-700:#1B5E20; --green-500:#2E7D32; --mint:#a8e6cf;
+  --gold:#C9A84C; --gold-light:#E8C560; --gold-dark:#8B6C28;
+  --ink:#1a1a1a; --ink-2:#3d3d3d; --ink-3:#5f5f5f;
+  --mist:#f0f7f4; --mist-line:#c8e6d5; --warm:#f5f3f0; --line:#dfe5e1; --desk:#e6ebe7;
+  --bar-h:64px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:'Montserrat',Arial,sans-serif;font-size:10pt;line-height:1.66;color:var(--ink);background:var(--desk);
+  padding:76px 0 calc(var(--bar-h) + 28px)}
+a{color:var(--green-700)}
+p,li,td,figcaption{text-align:justify;text-align-last:left;hyphens:auto;-webkit-hyphens:auto}
+p{margin:0 0 3mm}
+strong{color:var(--green-900);font-weight:600}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.topbar{position:fixed;top:0;left:0;right:0;z-index:20;height:60px;display:flex;align-items:center;gap:10px;padding:0 16px;
+  background:var(--green-900);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.topbar .brand{font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:var(--gold-light);white-space:nowrap}
+.topbar .where{font-family:'Roboto Condensed',sans-serif;font-size:13px;color:#d6efe3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.progress{position:fixed;top:60px;left:0;height:3px;background:var(--gold);z-index:21;transition:width .25s ease}
+.btn{font-family:'Montserrat',sans-serif;font-weight:600;font-size:12.5px;line-height:1;border-radius:6px;border:1px solid transparent;
+  padding:9px 13px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;text-decoration:none;white-space:nowrap}
+.btn svg{width:16px;height:16px;flex:none}
+.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+.btn-gold{background:var(--gold);color:#1a1a1a}
+.btn-gold:hover{background:var(--gold-light)}
+.btn-green{background:var(--green-900);color:#fff}
+.btn-green:hover{background:var(--green-700)}
+.btn-line{background:#fff;color:var(--green-900);border-color:var(--green-900)}
+.btn-line:hover{background:var(--mist)}
+.btn[disabled]{opacity:.38;cursor:not-allowed}
+.navbar{position:fixed;bottom:0;left:0;right:0;z-index:20;height:var(--bar-h);display:flex;align-items:center;justify-content:center;gap:14px;
+  background:rgba(255,255,255,.97);border-top:1px solid var(--line);box-shadow:0 -2px 10px rgba(0,0,0,.06);padding:0 12px}
+.navbar .count{font-family:'Roboto Condensed',sans-serif;font-size:13.5px;color:var(--ink-2);min-width:220px;text-align:center}
+.navbar .count b{color:var(--green-900)}
+.hint{font-family:'Roboto Condensed',sans-serif;font-size:11.5px;color:var(--ink-3);text-align:center;margin:10px auto 0;max-width:210mm}
+
+dialog.drawer{margin:0 0 0 auto;height:100vh;max-height:100vh;width:min(420px,92vw);border:none;padding:0;background:#fff;box-shadow:-6px 0 24px rgba(0,0,0,.2)}
+dialog.drawer::backdrop{background:rgba(6,40,30,.45)}
+.drawer-head{position:sticky;top:0;background:var(--green-900);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:14px 16px}
+.drawer-head h2{font-family:'Poppins',sans-serif;font-size:15px;color:var(--gold-light);margin:0;border:0;padding:0}
+.drawer-body{padding:12px 16px 30px}
+.drawer-body h3{font-family:'Roboto Condensed',sans-serif;font-size:12px;letter-spacing:.06em;color:var(--gold-dark);margin:14px 0 6px}
+.drawer-body button.pg,.drawer-body a.ch{display:block;width:100%;text-align:left;background:none;border:0;border-left:3px solid transparent;
+  padding:7px 10px;font:500 13px/1.35 'Montserrat',sans-serif;color:var(--ink);cursor:pointer;text-decoration:none;border-radius:0 4px 4px 0}
+.drawer-body button.pg:hover,.drawer-body a.ch:hover{background:var(--mist)}
+.drawer-body button.pg[aria-current="page"]{border-left-color:var(--gold);background:var(--mist);font-weight:700;color:var(--green-900)}
+.drawer-body a.ch small{display:block;color:var(--ink-3);font-size:11.5px;font-weight:400}
+
+.toast{position:fixed;left:50%;bottom:calc(var(--bar-h) + 14px);transform:translateX(-50%);background:var(--green-900);color:#fff;padding:9px 15px;border-radius:6px;
+  font-size:12.5px;z-index:30;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+
+.sheet{width:210mm;min-height:297mm;margin:0 auto;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.12);padding:18mm 18mm 22mm;position:relative}
+.sheet[hidden]{display:none}
+.sheet:focus{outline:none}
+.folio{position:absolute;left:18mm;right:18mm;bottom:10mm;display:flex;justify-content:space-between;font-family:'Roboto Condensed',sans-serif;
+  font-size:8.5pt;color:#888;border-top:1px solid var(--line);padding-top:2mm}
+.kicker{font-family:'Roboto Condensed',sans-serif;font-size:10pt;color:var(--gold-dark);text-align:center;margin-bottom:2mm}
+h1{font-family:'Poppins',sans-serif;font-weight:700;font-size:15pt;color:var(--green-900);margin:0 0 3mm;text-align:left}
+h2{font-family:'Poppins',sans-serif;font-weight:700;font-size:12.5pt;color:var(--green-900);margin:5mm 0 2.5mm;padding-left:3.5mm;border-left:4px solid var(--gold);text-align:left}
+h3{font-family:'Poppins',sans-serif;font-weight:600;font-size:11pt;color:var(--green-700);margin:4mm 0 2mm;text-align:left}
+h4{font-family:'Poppins',sans-serif;font-weight:600;font-size:10.5pt;color:#333;margin:3mm 0 1.5mm}
+ul,ol{margin:0 0 3mm 6mm}
+li{margin-bottom:1.4mm}
+.center{text-align:center!important;text-align-last:center!important}
+
+.sheet.cover{padding:0;overflow:hidden;background:linear-gradient(135deg,#0a3d2e,#0f5c3e 45%,#1a7a4e 75%,#2d9d6e);color:#fff}
+.sheet.cover::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,61,46,.82),rgba(10,61,46,.96))}
+.cover-content{position:relative;z-index:1;min-height:297mm;padding:28mm 22mm;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.cover-badge{align-self:center;display:inline-block;padding:.32rem 1.2rem;border:1.5px solid rgba(201,168,76,.7);border-radius:2rem;color:var(--gold);
+  font-size:9pt;letter-spacing:.18em;text-transform:uppercase;font-weight:600;background:rgba(201,168,76,.08)}
+.cover-chapter{font-family:'Poppins',sans-serif;font-size:28pt;font-weight:800;color:var(--gold);line-height:1.1;margin:.6rem 0 .3rem}
+.cover-title{font-family:'Poppins',sans-serif;font-size:18pt;font-weight:700;color:#fff;line-height:1.25;margin:.4rem 0}
+.cover-subtitle{font-family:'Montserrat',sans-serif;font-size:11pt;font-weight:500;color:var(--mint);line-height:1.45;margin:0.6rem 0 1rem}
+.cover-divider{width:80px;height:3px;background:var(--gold);margin:1rem auto}
+.cover-meta{color:rgba(255,255,255,.86);font-size:9.5pt;line-height:1.85}
+.cover-meta strong{color:var(--gold)}
+
+table{width:100%;border-collapse:collapse;font-size:8.2pt;line-height:1.38;margin:2mm 0 3.5mm}
+caption{caption-side:top;text-align:left;font-family:'Roboto Condensed',sans-serif;font-size:9pt;color:var(--green-900);font-weight:700;margin-bottom:1.2mm}
+th{background:var(--green-900);color:#fff;font-family:'Roboto Condensed',sans-serif;font-weight:700;padding:4px 5px;text-align:left;vertical-align:bottom}
+td{padding:3.5px 5px;border-bottom:1px solid #e3e0d8;vertical-align:top;text-align:left}
+tbody tr:nth-child(even){background:var(--warm)}
+tbody tr:last-child td{border-bottom:2px solid var(--green-900)}
+
+figure{margin:3mm 0;text-align:center}
+figure img{max-width:100%;height:auto;display:block;margin:0 auto}
+figcaption,.figure-caption,.chart-caption{font-size:8.5pt;color:#555;margin-top:1.5mm;font-style:italic;text-align:left;line-height:1.4}
+
+.principle-box,.resource-box,.evidence-box,.cluster-box,.data-callout,.strategy-box,.lp-box,.note,.callout,.message,.phase,
+.perspective-box,.strategy-question,.pull-quote,.bifnet-box,.kpi-box,.mel-box,.phase-box,.exec-summary{
+  background:var(--mist);border:1px solid var(--mist-line);border-left:4px solid var(--green-900);padding:3mm 4mm;margin:2.5mm 0 3mm;font-size:9.2pt}
+.data-callout,.strategy-question{background:#fbf6e8;border-color:#ecdcae;border-left-color:var(--gold)}
+.pull-quote,.exec-summary{background:linear-gradient(135deg,#0a3d2e,#14563a);color:#eef8f3;border:none}
+.pull-quote{font-style:italic;color:#eef8f3}
+.exec-summary h3{color:var(--gold-light);margin:0 0 2mm;font-size:11pt;border:0;padding:0}
+.exec-summary p{color:#eef8f3}
+.exec-summary strong{color:var(--gold-light)}
+.video-box{background:#e8f4fd;border:1px solid #b8d8f0;border-left:4px solid #2980b9;padding:3mm 4mm;margin:2.5mm 0;font-size:9pt}
+.formula-block{background:#f8f9f5;padding:3mm 4mm;margin:2.5mm 0;border-left:3px solid var(--green-900);font-family:'Courier New',monospace;font-size:9pt}
+.quote{font-style:italic;color:var(--green-900);background:var(--warm);border-left:4px solid var(--gold);padding:3.5mm 4.5mm;margin:3mm 0;font-size:10pt}
+.continue{margin-top:6mm;padding:4mm 5mm;border:1px solid var(--mist-line);background:var(--mist);display:flex;align-items:center;justify-content:space-between;gap:4mm}
+.continue p{margin:0}
+.phase-marker{display:inline-block;padding:1px 6px;border-radius:3px;font-size:7.5pt;font-weight:600;margin-right:2px}
+.phase-1{background:#dbeafe;color:#1e40af}.phase-2{background:#fef3c7;color:#92400e}.phase-3{background:#d1fae5;color:#065f46}
+.clp-badge{display:inline-block;padding:1px 5px;border-radius:3px;font-size:7.5pt;font-weight:600;margin-right:2px;background:#e0f2e9;color:#064e3b}
+.key-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2mm;margin:3mm 0}
+.stat-card{background:var(--mist);border:1px solid var(--mist-line);padding:3mm;text-align:center}
+.stat-number{font-family:'Poppins',sans-serif;font-size:16pt;font-weight:800;color:var(--green-900)}
+.stat-label{font-size:8pt;color:var(--ink-3)}
+
+@media screen and (max-width:860px){
+  body{padding-top:68px}
+  .sheet{width:100%;min-height:auto;padding:9mm 6mm 18mm;box-shadow:none}
+  .sheet.cover .cover-content{min-height:88vh;padding:14mm 8mm}
+  .cover-chapter{font-size:22pt}.cover-title{font-size:14pt}
+  .key-stats{grid-template-columns:1fr 1fr}
+  .topbar .where{display:none}
+  .btn .lbl-long{display:none}
+  .topbar .btn>span{display:none}
+  .topbar .btn{padding:9px 10px}
+  .navbar .count{min-width:0}
+  table{display:block;overflow-x:auto}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  @page{size:A4;margin:16mm 18mm 18mm}
+  @page cover{size:A4;margin:0}
+  body{background:#fff;padding:0;font-size:10pt}
+  .topbar,.navbar,.progress,.hint,.toast,dialog,.no-print{display:none!important}
+  .sheet,.sheet[hidden]{display:block!important;width:auto;min-height:0;margin:0;padding:0;box-shadow:none;
+    break-after:page;page-break-after:always}
+  .sheet:last-of-type{break-after:auto;page-break-after:auto}
+  .sheet.cover{page:cover;width:210mm;height:297mm;overflow:hidden}
+  .sheet.cover .cover-content{min-height:297mm}
+  tr,figure,.principle-box,.resource-box,.data-callout,.exec-summary{break-inside:avoid;page-break-inside:avoid}
+  h2,h3{break-after:avoid;page-break-after:avoid}
+  a{color:inherit;text-decoration:none}
+}
+
 </style>
-<base target="_blank">
 </head>
 <body>
-
-<!-- ==================== COVER PAGE ==================== -->
-<div class="cover">
+<header class="topbar no-print" role="banner">
+<span class="brand">BIRD 2026–2035</span>
+<span aria-hidden="true" class="where" id="where"></span>
+<button aria-controls="contents-dialog" aria-haspopup="dialog" aria-label="Open contents" class="btn btn-ghost" id="btn-contents" type="button">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"></path></svg><span>Contents</span></button>
+<button aria-label="Download as Word, A4" class="btn btn-ghost" id="btn-word" title="Download all pages as an A4 Word document" type="button">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"></path></svg><span>Word<span class="lbl-long"> (.doc)</span></span></button>
+<button aria-label="Save as PDF, A4" class="btn btn-gold" id="btn-pdf" title="Open the print dialog; choose Save as PDF and A4 paper" type="button">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9V3h12v6M6 18H4v-7h16v7h-2M8 14h8v7H8z"></path></svg><span>Save as PDF</span></button>
+</header>
+<div aria-hidden="true" class="progress no-print" id="progress"></div>
+<main id="reader">
+<section class="sheet cover" data-group="Front matter" data-title="Cover" id="cover">
 <div class="cover-content">
-<div class="cover-badge">Peer-Reviewed Publication — Data-Enriched Edition</div>
+<div class="cover-badge">BIRD 2026–2035</div>
 <div class="cover-chapter">Chapter 4</div>
-<div class="cover-title">Metrics, KPI Benchmarking<br>and Performance Calibration</div>
+<div class="cover-title">Metrics, KPI Benchmarking and Performance Calibration</div>
 <div class="cover-divider"></div>
-<div class="cover-subtitle">A Calibrated, Evidence-Based Architecture for Measuring<br>Cross-Cluster Synchronization and Ecosystem Transformation</div>
+<div class="cover-subtitle">A calibrated, evidence-based architecture for measuring cross-cluster synchronization and ecosystem transformation</div>
 <div class="cover-meta">
-<strong>Bangsamoro Investment Roadmap Development (BIRD) 2026-2035</strong><br>
-<br>
-Prepared for the Bangsamoro Government and Development Partners<br>
-<em>Integrated publication update · 2026</em>
+<strong>Bangsamoro Investment Roadmap Development (BIRD) 2026–2035</strong><br/><br/>
+Bureau of Investments, Ministry of Trade, Investments and Tourism (BOI-MTIT), BARMM<br/>
+September 2026
 </div>
 </div>
-</div>
-
-<!-- ==================== SECTION A ==================== -->
+</section>
+<section class="sheet" data-group="Section A" data-title="Strategic Alignment with the Integrated Ecosystem Development Strategy" id="p1">
+<div class="kicker">Section A</div>
 <div class="chapter-header" id="ch4-a">
 <div class="chapter-number">Section A</div>
 <h1 class="chapter-title">Strategic Alignment with the Integrated Ecosystem Development Strategy</h1>
-</div>
-
-<p>
+</div><p>
 The Integrated Ecosystem Development Strategy (IEDS), recommended in Chapter 3, operationalizes a synchronized, cluster-integrated investment pathway that treats economic growth as a function of interdependent systems rather than isolated sectoral outputs. Consequently, the metrics and Key Performance Indicator (KPI) framework for the Bangsamoro Investment Roadmap Development (BIRD) 2026-2035 must transcend traditional siloed monitoring. It must measure <strong>cross-cluster synchronization</strong>, <strong>governance operating system health</strong>, and the conversion of foundational endowments into export-ready, culturally authentic, and environmentally sustainable value (Silva, 2026; Kaplan &amp; Norton, 1992).
-</p>
-
-<p>
+</p><p>
 This chapter establishes a calibrated, evidence-based benchmarking architecture anchored in BARMM's master plans, regulatory frameworks, and international standards. Each KPI is phased to align with the IEDS implementation timeline: <span class="phase-marker phase-1">Phase 1: Foundation Building (2026-2028)</span>, <span class="phase-marker phase-2">Phase 2: Acceleration (2029-2031)</span>, and <span class="phase-marker phase-3">Phase 3: Consolidation &amp; Global Integration (2032-2035)</span>. The framework ensures that progress is measurable, comparable, and adaptive, enabling policymakers, development planners, and investors to track systemic transformation rather than incremental activity.
-</p>
-
-<p>
+</p><p>
 The KPI framework is designed to feed directly into the Balanced Scorecard (Chapter 5), which organizes metrics across four causal perspectives: Financial, Stakeholder, Internal Process, and Learning &amp; Growth. This chapter provides the <em>what</em> and <em>how much</em> of measurement; Chapter 5 provides the <em>why</em> and <em>so what</em> by linking each KPI to strategic objectives and causal pathways. Together, Chapters 4 and 5 form the measurement and management engine of the BIRD 2026-2035 (Kaplan &amp; Norton, 1996; Silva, 2026).
-</p>
-
-<div class="data-callout">
+</p><div class="data-callout">
 <strong>Measurement Integrity and Data Contract.</strong> The KPI layer should be read together with the consolidated Chapter 2 diagnostic and Chapter 3 strategy architecture. The latest linked validation snapshot contains 76 consented survey responses, while the live analytics contract is <strong>analyticsVersion 2</strong>. Survey-derived SWOT diagnostics use the repository's canonical formulas: Strength RI = (Impact × Likelihood) / 5; Opportunity RI = √(Impact × Likelihood); Weakness Risk = Impact × Likelihood; and Threat VI = (Impact² × Likelihood) / 25. Missing SWOT families are treated as missing observations, not as zero scores. These diagnostics support prioritization and learning; they do not, by themselves, constitute official administrative baselines or future targets.
-</div>
-
-<div class="data-callout">
+</div><div class="data-callout">
 <strong>Beyond Checklists: The Capabilities-Based Approach.</strong> Conventional ESG and development monitoring relies on checklists — counting activities completed rather than capabilities built. The BIRD KPI framework, informed by capabilities-based thinking (Beyond ESG, 2025), measures not whether a training was conducted but whether functional literacy improved; not whether a road was built but whether logistics costs declined; not whether a halal certificate was issued but whether export revenue grew. This shift from output metrics to outcome metrics is essential for tracking genuine ecosystem transformation.
-</div>
-
-<!-- ==================== SECTION B ==================== -->
+</div> ==================== SECTION B ==================== 
+<div class="folio"><span>BIRD 2026–2035 · Chapter 4</span><span>Page 2</span></div>
+</section>
+<section class="sheet" data-group="Section B" data-title="KPI Architecture and Calibration Methodology" id="p2">
+<div class="kicker">Section B</div>
 <div class="chapter-header" id="ch4-b">
 <div class="chapter-number">Section B</div>
 <h1 class="chapter-title">KPI Architecture and Calibration Methodology</h1>
-</div>
-
-<p>
+</div><p>
 The KPI framework is structured across four calibration tiers to ensure strategic relevance, operational feasibility, and alignment with the IEDS synchronized development logic. Calibration follows the Strat Planner Pro Layer 4 methodology, integrating SMART criteria (Specific, Measurable, Achievable, Relevant, Time-bound), dynamic feedback loops, and cross-cluster dependency mapping. KPIs are weighted by strategic leverage: cross-cutting operating system indicators carry the highest governance weight (30% in composite scoring), while cluster-specific metrics carry 45% and benchmark alignment carries 25% to ensure global competitiveness without sacrificing local ecosystem health (Silva, 2026).
-</p>
-
-<h2 id="ch4-b-1">B.1 Four Calibration Tiers</h2>
-
-<table id="tab-calibration">
+</p><h2 id="ch4-b-1">B.1 Four Calibration Tiers</h2><table id="tab-calibration">
 <caption data-label="Table 4-1">KPI Calibration and Phasing Architecture</caption>
 <thead>
 <tr><th>Calibration Tier</th><th>Time Horizon</th><th>Strategic Focus</th><th>Strategy Phase Alignment</th><th>Data Verification Mechanism</th></tr>
@@ -144,24 +220,14 @@ The KPI framework is structured across four calibration tiers to ensure strategi
 <tr><td><strong>Terminal</strong></td><td>2035</td><td>Global integration and ecosystem maturity</td><td>Phase 3: Consolidation</td><td>PSA-BARMM GRDP; BIMP-EAGA trade data; OIC/SMIIC accreditation reports</td></tr>
 <tr><td><strong>Long-Horizon</strong></td><td>2040</td><td>Energy security and human capital maturation</td><td>Post-BIRD transition</td><td>BSEMP grid audits; DepEd/TESDA longitudinal cohorts</td></tr>
 </tbody>
-</table>
-
-<p>
+</table><p>
 The calibration architecture ensures that KPIs remain responsive to IEDS synchronization requirements. Cross-cluster metrics are prioritized to prevent siloed progress from masking systemic bottlenecks. For example, tracking halal certification processing speed (Transformers cluster) in isolation would miss its direct influence on export volume (Connectors cluster) and investor retention (Stakeholder perspective). The framework explicitly maps these interdependencies, ensuring that lagging indicators in one cluster trigger diagnostic attention in connected clusters (Silva, 2026).
-</p>
-
-<h2 id="ch4-b-2">B.2 The Six Pareto KPIs</h2>
-
-<p>
+</p><h2 id="ch4-b-2">B.2 The Six Pareto KPIs</h2><p>
 For executive monitoring, the BIRD framework uses six Pareto-style headline KPIs as a compact management shortlist. They should not be interpreted as a statistically established claim that exactly 80% of IEDS impact is caused by six variables; they provide a high-signal navigation layer that complements the full KPI register. These KPIs are tracked in real-time through the Bangsamoro Investment Command Center (BICC) MEL Dashboard and serve as the primary navigational instruments for strategy execution. Each Pareto KPI is linked to specific Leverage Points (LP1-LP5) and Systems Archetypes, enabling rapid identification of intervention points when deviations occur (Silva, 2026).
-</p>
-
-<figure id="fig-pareto-kpis">
-<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/34-Metrics.png" alt="BIRD metrics and KPI dashboard">
+</p><figure id="fig-pareto-kpis">
+<img alt="BIRD metrics and KPI dashboard" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/34-Metrics.png"/>
 <figcaption data-label="Figure 4-1">BIRD Metrics and KPI Architecture. The metrics layer provides the management view for implementation performance across the BEIE clusters and cross-cutting operating systems. It is read together with the KPI register, source definitions, owners, and verification rules rather than as a standalone score. Source: BIRD KPI Framework; Strat Planner Pro architecture (Silva, 2026).</figcaption>
-</figure>
-
-<table id="tab-pareto-kpis">
+</figure><table id="tab-pareto-kpis">
 <caption data-label="Table 4-2">Six Pareto KPIs — Strat Planner Pro MEL Dashboard Tracking</caption>
 <thead>
 <tr><th>#</th><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Primary CLPs</th><th>Data Source</th></tr>
@@ -174,44 +240,32 @@ For executive monitoring, the BIRD framework uses six Pareto-style headline KPIs
 <tr><td><strong>5</strong></td><td>Electrification Rate (%)</td><td>~39%</td><td>65%</td><td>75%</td><td>90% (100% by 2040)</td><td>LP2</td><td>DOE/MPW field data</td></tr>
 <tr><td><strong>6</strong></td><td>Broadband Connectivity (%)</td><td>&lt;30%</td><td>58%</td><td>70%</td><td>85%</td><td>LP2</td><td>DICT/MICT surveys</td></tr>
 </tbody>
-</table>
-
-<figure id="fig-kpi-trajectories">
-<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/KPI-Framework.png" alt="BIRD KPI framework">
+</table><figure id="fig-kpi-trajectories">
+<img alt="BIRD KPI framework" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/KPI-Framework.png"/>
 <figcaption data-label="Figure 4-2">BIRD KPI Framework. Leading and lagging indicators are organized around baselines, targets, owners, and measurement methods so that implementation monitoring can distinguish capacity-building progress from downstream outcomes. Source: BIRD KPI Framework; Strat Planner Pro architecture (Silva, 2026).</figcaption>
-</figure>
-
-<div class="kpi-box">
+</figure><div class="kpi-box">
 <div class="kpi-box-title">Adaptive Recalibration Protocol</div>
 <p style="font-size:9pt;margin-bottom:0.3rem;">To prevent the "Fixes that Fail" systems archetype, the BIRD framework employs adaptive recalibration: incentives and resource releases are conditional on enabler capacity meeting production demand thresholds. If a KPI deviates &gt;15% from its approved trajectory, the following protocol activates:</p>
 <p style="font-size:9pt;margin-bottom:0.2rem;"><strong>Step 1:</strong> Automated alert via BEGMP dashboard to BICC operators and ministry leads.</p>
 <p style="font-size:9pt;margin-bottom:0.2rem;"><strong>Step 2:</strong> Cross-cluster diagnostic — is the deviation caused by internal cluster failure or upstream/downstream dependency?</p>
 <p style="font-size:9pt;margin-bottom:0.2rem;"><strong>Step 3:</strong> Leverage Point activation — which LP (L1-L12) addresses the root cause?</p>
 <p style="font-size:9pt;margin-bottom:0.2rem;"><strong>Step 4:</strong> Trigger-based intervention — release contingency funds, adjust sequencing, or escalate to Bangsamoro Investment Command Center.</p>
-</div>
-
-<!-- ==================== SECTION C ==================== -->
+</div> ==================== SECTION C ==================== 
+<div class="folio"><span>BIRD 2026–2035 · Chapter 4</span><span>Page 3</span></div>
+</section>
+<section class="sheet" data-group="Section C" data-title="Cross-Cutting Operating Systems Metrics" id="p3">
+<div class="kicker">Section C</div>
 <div class="chapter-header" id="ch4-c">
 <div class="chapter-number">Section C</div>
 <h1 class="chapter-title">Cross-Cutting Operating Systems Metrics</h1>
-</div>
-
-<p>
+</div><p>
 The IEDS positions Moral Governance, Resilience, Inclusivity, and Peace as the operational backbone of economic transformation. KPIs in this dimension measure institutional health, adaptive capacity, equitable participation, and security-investment alignment. These cross-cutting metrics carry the highest weight in the Balanced Scorecard (30% of composite scoring) because they function as <em>systemic multipliers</em> — improvements in governance transparency, climate resilience, social inclusion, and peace directly amplify performance across all five BEIE clusters (Silva, 2026; OCM-BARMM, 2020).
-</p>
-
-<figure id="fig-crosscutting-os">
-<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/KPI-Framework.png" alt="Cross-cutting KPI framework">
+</p><figure id="fig-crosscutting-os">
+<img alt="Cross-cutting KPI framework" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/KPI-Framework.png"/>
 <figcaption data-label="Figure 4-3">Cross-Cutting Operating Systems Measurement Architecture. Moral Governance, Resilience, Inclusivity, and Peace and Security are treated as system-level conditions that affect the performance of all five BEIE clusters. Source: BIRD KPI Framework and Chapter 2 diagnostic architecture (Silva, 2026).</figcaption>
-</figure>
-
-<h2 id="ch4-c-1">C.1 Moral Governance</h2>
-
-<p>
+</figure><h2 id="ch4-c-1">C.1 Moral Governance</h2><p>
 Moral Governance, anchored in the Bangsamoro Moral Governance Framework 2020-2035 (OCM-BARMM, 2020), is the operating system that determines whether all other clusters function effectively. The framework operationalizes Islamic ethics (khalifa stewardship), transparency, and accountability as foundational governance principles. KPIs in this dimension track the institutionalization of these principles across BARMM government operations (Silva, 2026).
-</p>
-
-<table id="tab-moral-governance">
+</p><table id="tab-moral-governance">
 <caption data-label="Table 4-3">Moral Governance KPIs and Master Plan Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Lead Agency</th><th>Policy Anchor</th></tr>
@@ -223,19 +277,11 @@ Moral Governance, anchored in the Bangsamoro Moral Governance Framework 2020-203
 <tr><td>Budget execution rate</td><td>&lt;80%</td><td>85%</td><td>88%</td><td>&gt;90%</td><td>MFBM</td><td>BDP 2023-2028</td></tr>
 <tr><td>Inter-agency coordination score</td><td>~5.5/10</td><td>6.5/10</td><td>7.5/10</td><td>8/10</td><td>BDP / Bangsamoro Corp</td><td>BDP / MOA framework</td></tr>
 </tbody>
-</table>
-
-<p>
+</table><p>
 The budget execution rate KPI is particularly critical because it captures the absorptive capacity constraint that has historically undermined BARMM's development. At less than 80% execution, BARMM effectively leaves 20%+ of allocated funds unspent — a pattern that constitutes both fiscal waste and lost development opportunity. The 2035 target of &gt;90% requires systematic reform of procurement processes, human resource deployment, and inter-agency coordination. Provincial variation is significant: Maguindanao del Norte (administrative center) likely exceeds 85% execution, while the SGA (8 newly created municipalities) may execute below 60% due to capacity constraints. The BEGMP digital platform provides real-time tracking of budget execution at provincial and municipal levels, enabling targeted capacity-building interventions (MFBM, 2025; BDP, 2023).
-</p>
-
-<h2 id="ch4-c-2">C.2 Resilience</h2>
-
-<p>
+</p><h2 id="ch4-c-2">C.2 Resilience</h2><p>
 Resilience metrics capture BARMM's capacity to absorb, adapt to, and recover from climate shocks, economic disruptions, and security incidents. The climate resilience dimension is particularly urgent: El Nino-induced crop losses of ₱346 million in Maguindanao del Sur (2024) and Pestalotiopsis disease infestation of 800+ hectares of rubber plantations demonstrate the vulnerability of the agricultural base that supports 32.4% of BARMM's GRDP (MENRE-BARMM, 2024; PSA-RSSO BARMM, 2025).
-</p>
-
-<table id="tab-resilience">
+</p><table id="tab-resilience">
 <caption data-label="Table 4-4">Resilience KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Lead Agency</th><th>Policy Anchor</th></tr>
@@ -246,19 +292,16 @@ Resilience metrics capture BARMM's capacity to absorb, adapt to, and recover fro
 <tr><td>Early warning system coverage (provinces)</td><td>2 (est.)</td><td>4</td><td>5</td><td>6 (all provinces + SGA)</td><td>MENRE / OCD</td><td>Climate Resilience Master Plan</td></tr>
 <tr><td>Climate-takaful products deployed</td><td>0</td><td>2</td><td>5</td><td>10+</td><td>MFBM / Al-Amanah</td><td>Climate Resilience Master Plan</td></tr>
 </tbody>
-</table>
-
-<div class="data-callout">
+</table><div class="data-callout">
 <strong>Provincial Resilience Insight:</strong> The resilience KPIs must be disaggregated by province because climate vulnerability varies dramatically. Tawi-Tawi faces sea-level rise threatening 50,000+ seaweed livelihoods; Maguindanao del Sur faces El Nino crop losses (₱346M in 2024); Basilan faces rubber Pestalotiopsis disease (800+ ha); and Lanao del Sur faces Lake Lanao watershed degradation affecting 340 sq km of water resources. A single regional resilience score would mask these distinct vulnerability profiles. The MENRE-BARMM Climate Resilience Master Plan (2024-2035) provides province-specific risk assessments that should inform disaggregated KPI targets.
 </div>
-
-<h2 id="ch4-c-3">C.3 Inclusivity</h2>
-
-<p>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 4</span><span>Page 4</span></div>
+</section>
+<section class="sheet" data-group="Section C" data-title="C.3 Inclusivity" id="p4">
+<div class="kicker">Section C</div>
+<h2 id="ch4-c-3">C.3 Inclusivity</h2><p>
 Inclusivity metrics ensure that economic growth translates into equitable benefit distribution across provinces, genders, age groups, and marginalized communities. With poverty incidence at 34.8% (nationally highest), functional literacy at 59.3% (vs. 91.6% national), and significant provincial disparities (Maguindanao del Sur at 53% vs. Lanao del Sur at 31.5%), inclusivity is not merely a social objective but an economic imperative — inclusive growth generates larger markets, more productive workforces, and more stable communities (PSA, 2024; PSA-RSSO BARMM, 2024).
-</p>
-
-<table id="tab-inclusivity">
+</p><table id="tab-inclusivity">
 <caption data-label="Table 4-5">Inclusivity KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Lead Agency</th><th>Policy Anchor</th></tr>
@@ -272,15 +315,9 @@ Inclusivity metrics ensure that economic growth translates into equitable benefi
 <tr><td>Youth-led enterprises supported</td><td>TBD</td><td>TBD</td><td>1,500</td><td>7,500</td><td>BYC / MTIT</td><td>BIDP 2025-2035</td></tr>
 <tr><td>IDP resettlement/return rate</td><td>&lt;50%</td><td>80%</td><td>100%</td><td>100%+</td><td>OPAPRU-BARMM</td><td>BPDP 2024-2035; Normalization Plan</td></tr>
 </tbody>
-</table>
-
-<h2 id="ch4-c-4">C.4 Peace and Security</h2>
-
-<p>
+</table><h2 id="ch4-c-4">C.4 Peace and Security</h2><p>
 Peace and security metrics capture the intersection of conflict dynamics and investment climate. BARMM's post-conflict context — including Basilan's ASG-free declaration (June 2024), the Marawi rehabilitation (₱15B+), and ongoing normalization of former combatants — requires KPIs that track both security outcomes and their translation into investor confidence (OPAPRU, 2024; PIA, 2025).
-</p>
-
-<table id="tab-peace">
+</p><table id="tab-peace">
 <caption data-label="Table 4-6">Peace and Security KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Lead Agency</th><th>Policy Anchor</th></tr>
@@ -291,34 +328,24 @@ Peace and security metrics capture the intersection of conflict dynamics and inv
 <tr><td>Investor perception improvement index</td><td>Baseline survey</td><td>+10% cumulative</td><td>+15% cumulative</td><td>+25% cumulative</td><td>BBOI / OCM-BARMM</td><td>Narrative Management Framework</td></tr>
 <tr><td>Security-incident-free investment zones</td><td>2 (est.)</td><td>4</td><td>6</td><td>All economic zones</td><td>MPOS / BBOI</td><td>Security-Investment Dashboard</td></tr>
 </tbody>
-</table>
-
-<p>
+</table><p>
 The investor perception index is a leading indicator that predicts investment approval trends with a 6-12 month lag. Baseline survey data (BBOI, 2026) indicates that investor satisfaction correlates strongly with: (a) business registration time (r = -0.72), (b) permit processing predictability (r = 0.68), and (c) security incident frequency (r = -0.81). This correlation structure validates the causal pathways in the Balanced Scorecard (Chapter 5): improvements in Internal Process (P1-P2) and Peace &amp; Security directly translate into Financial outcomes (F1) through investor confidence mechanisms (Kaplan &amp; Norton, 1992; Silva, 2026).
-</p>
-
-<!-- ==================== SECTION D ==================== -->
+</p> ==================== SECTION D ==================== 
+<div class="folio"><span>BIRD 2026–2035 · Chapter 4</span><span>Page 5</span></div>
+</section>
+<section class="sheet" data-group="Section D" data-title="Cluster-Specific Performance Indicators" id="p5">
+<div class="kicker">Section D</div>
 <div class="chapter-header" id="ch4-d">
 <div class="chapter-number">Section D</div>
 <h1 class="chapter-title">Cluster-Specific Performance Indicators</h1>
-</div>
-
-<p>
+</div><p>
 Cluster KPIs are calibrated to measure throughput, value addition, market access, and financial channeling. Each indicator is explicitly linked to IEDS synchronization requirements and master plan milestones. These metrics carry 45% weight in composite scoring and are organized around the five BEIE clusters: Foundations (agriculture, fisheries, forestry, energy, environment), Transformers (industry, manufacturing, logistics, halal, tourism, MSMEs), Enablers (infrastructure, digital, health, education, human capital), Connectors (trade, exports, BIMP-EAGA, digital trade), and Financiers (Islamic banking, takaful, microfinance, waqf) (Silva, 2026).
-</p>
-
-<figure id="fig-cluster-radar">
-<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/34-Metrics.png" alt="BEIE cluster KPI metrics">
+</p><figure id="fig-cluster-radar">
+<img alt="BEIE cluster KPI metrics" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/34-Metrics.png"/>
 <figcaption data-label="Figure 4-4">BEIE Cluster KPI Measurement View. Cluster performance should be interpreted as a portfolio of leading, throughput, and outcome indicators rather than as a single composite radar score. This preserves the distinction between cluster diagnostics in Chapter 2 and implementation performance in the present chapter. Source: BIRD KPI Framework; BEIE architecture (Silva, 2026).</figcaption>
-</figure>
-
-<h2 id="ch4-d-1">D.1 Foundations Cluster</h2>
-
-<p>
+</figure><h2 id="ch4-d-1">D.1 Foundations Cluster</h2><p>
 The Foundations Cluster captures BARMM's natural resource endowments — agriculture (32.4% of GRDP), fisheries, forestry, and renewable energy (75.86% mix). KPIs in this cluster measure productivity gains, post-harvest loss reduction, cooperative strengthening, renewable energy expansion, and environmental conservation. Provincial data integration is essential because each province specializes in different commodities: Basilan (rubber, 48,366 ha, 69,392 MT), Tawi-Tawi (seaweed, 40% national output), Lanao del Sur (pineapple, corn, Lake Lanao fisheries), and Maguindanao del Sur (rice, corn, coconut) (PSA-RSSO BARMM, 2024; MAFAR, 2025).
-</p>
-
-<table id="tab-foundations">
+</p><table id="tab-foundations">
 <caption data-label="Table 4-7">Foundations Cluster KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Policy Anchor</th></tr>
@@ -334,19 +361,11 @@ The Foundations Cluster captures BARMM's natural resource endowments — agricul
 <tr><td>NTFP enterprise revenue generation</td><td>Minimal</td><td>₱50M</td><td>₱100M</td><td>₱150M+</td><td>Forestry Code / Community forestry</td></tr>
 <tr><td>Net forest cover increase</td><td>Baseline</td><td>+4%</td><td>+7%</td><td>+10%</td><td>BIMP-EAGA EGL / Forestry Code</td></tr>
 </tbody>
-</table>
-
-<p>
+</table><p>
 The post-harvest loss reduction KPI illustrates the cross-cluster dependency that the BIRD framework captures: reducing losses from 20-40% to 30%+ requires cold chain infrastructure (Enablers cluster), cooperative organization (Foundations cluster), and market linkages (Connectors cluster). Basilan's 69,392 MT rubber production currently loses an estimated 25-30% value between harvest and export due to lack of processing facilities — a loss of approximately ₱400M annually that could be captured through halal-certified rubber goods manufacturing if the Transformers cluster develops concurrently (MAFAR, 2025; MTIT-BARMM, 2025).
-</p>
-
-<h2 id="ch4-d-2">D.2 Transformers Cluster</h2>
-
-<p>
+</p><h2 id="ch4-d-2">D.2 Transformers Cluster</h2><p>
 The Transformers Cluster measures value addition, manufacturing, and market-readiness across halal industry, tourism, MSME development, and ecozone operations. This cluster is where BARMM's foundational endowments are converted into export-ready products and services. KPIs track halal certification expansion, export value growth, tourism development, MSME formalization, and industrial locator performance (MTIT-BARMM, 2025; BEZA, 2025).
-</p>
-
-<table id="tab-transformers">
+</p><table id="tab-transformers">
 <caption data-label="Table 4-8">Transformers Cluster KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Policy Anchor</th></tr>
@@ -362,19 +381,16 @@ The Transformers Cluster measures value addition, manufacturing, and market-read
 <tr><td>Ecozone investment pipeline</td><td>₱1.35B</td><td>₱1.6B</td><td>₱1.8B</td><td>₱2B+</td><td>BEZA / PFEZ expansion</td></tr>
 <tr><td>Industrial locators operational</td><td>~40</td><td>60</td><td>80</td><td>100+</td><td>BEZA / PPP frameworks</td></tr>
 </tbody>
-</table>
-
-<p>
+</table><p>
 The halal-certified MSME trajectory — from ~500 (2024) to 5,000+ (2035) — is the single highest-leverage Transformers KPI because each certified MSME represents: (a) a micro-enterprise with formal market access, (b) a household with increased income, (c) a node in the halal value chain, and (d) a data point in the BHB certification system. At scale, 5,000+ certified MSMEs create a self-reinforcing ecosystem where certification demand drives BHB capacity, BHB capacity drives certification quality, and certification quality drives export revenue. This is the Investment-Development Virtuous Cycle (R1) identified in Chapter 3-2 (Silva, 2026; BHIDP, 2025).
 </p>
-
-<h2 id="ch4-d-3">D.3 Enablers Cluster and Human Capital</h2>
-
-<p>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 4</span><span>Page 6</span></div>
+</section>
+<section class="sheet" data-group="Section D" data-title="D.3 Enablers Cluster and Human Capital" id="p6">
+<div class="kicker">Section D</div>
+<h2 id="ch4-d-3">D.3 Enablers Cluster and Human Capital</h2><p>
 The Enablers Cluster captures the physical, digital, and human infrastructure that enables all other clusters to function. This is the highest-priority cluster in IEDS Sequence A (2026-2028) because, as the systems mapping in Chapter 3-2 demonstrated, infrastructure and human capital deficits constitute the binding "Limits to Growth" constraints that stall economic transformation. The Enablers KPIs are divided into two sub-dimensions: physical/digital infrastructure and human capital development (BEGMP, 2025; TESDA-BARMM, 2025).
-</p>
-
-<table id="tab-enablers">
+</p><table id="tab-enablers">
 <caption data-label="Table 4-9">Enablers Cluster KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Policy Anchor</th></tr>
@@ -387,18 +403,12 @@ The Enablers Cluster captures the physical, digital, and human infrastructure th
 <tr><td>Inter-agency coordination score</td><td>~5.5/10</td><td>6.5/10</td><td>7.5/10</td><td>8/10</td><td>BDP / Bangsamoro Corp</td></tr>
 <tr><td>Tourism jobs created (Isabela baseline: 2,049)</td><td>2,049</td><td>3,500</td><td>5,000</td><td>8,000+</td><td>BTDP / BEDC sub-committee</td></tr>
 </tbody>
-</table>
-
-<p>
+</table><p>
 The human capital development sub-dimension addresses BARMM's most persistent binding constraint: the lowest functional literacy rate in the Philippines (59.3% vs. 91.6% national). Human capital is the "software" that determines whether physical infrastructure investments generate returns — a road without skilled drivers is underutilized, a processing facility without trained technicians is inefficient, and a digital platform without literate users is empty. The human capital KPIs span employment, education, skills alignment, health access, and digital literacy (PSA, 2024; TESDA-BARMM, 2025; MOLE, 2025).
-</p>
-
-<figure id="fig-human-capital">
-<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/KPI-Framework.png" alt="Human capital KPI framework">
+</p><figure id="fig-human-capital">
+<img alt="Human capital KPI framework" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/KPI-Framework.png"/>
 <figcaption data-label="Figure 4-5">Human Capital KPI Architecture. Functional literacy, industry-aligned skills, digital capability, and health access are treated as enabling-capacity indicators whose improvement should be linked to downstream productivity and inclusion outcomes. Source: BIRD KPI Framework; Strat Planner Pro architecture (Silva, 2026).</figcaption>
-</figure>
-
-<table id="tab-human-capital">
+</figure><table id="tab-human-capital">
 <caption data-label="Table 4-10">Human Capital Development KPIs — Comprehensive Matrix</caption>
 <thead>
 <tr><th>Category / KPI</th><th>Baseline</th><th>2028 Target</th><th>2035 Target</th><th>Data Source</th></tr>
@@ -430,19 +440,16 @@ The human capital development sub-dimension addresses BARMM's most persistent bi
 <tr><td>ICT / Digital Literacy Centers Established</td><td>0</td><td>50</td><td>100</td><td>MICT-BARMM</td></tr>
 <tr><td>STEM Scholarship Graduates</td><td>TBD</td><td>500/year</td><td>1,500/year</td><td>MOST-BARMM</td></tr>
 </tbody>
-</table>
-
-<div class="data-callout">
+</table><div class="data-callout">
 <strong>Human Capital as the Master Enabler:</strong> The functional literacy rate (59.3% → 75%+) is the single most important enabler KPI because it determines the absorptive capacity of all other investments. At 59.3% functional literacy, BARMM cannot fully utilize digital governance platforms (BEGMP), operate complex processing machinery (Transformers), or engage with Islamic financial products (Financiers). The 15.7 percentage point improvement target requires coordinated action across DepEd (basic education), TESDA (technical skills), and MICT (digital literacy) — a cross-agency coordination challenge that the inter-agency coordination score (5.5/10 → 8/10) directly measures.
 </div>
-
-<h2 id="ch4-d-4">D.4 Connectors Cluster</h2>
-
-<p>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 4</span><span>Page 7</span></div>
+</section>
+<section class="sheet" data-group="Section D" data-title="D.4 Connectors Cluster" id="p7">
+<div class="kicker">Section D</div>
+<h2 id="ch4-d-4">D.4 Connectors Cluster</h2><p>
 The Connectors Cluster measures trade facilitation, export readiness, BIMP-EAGA integration, and digital trade infrastructure. This cluster becomes the priority in IEDS Sequence C (2032-2035) because market access is only valuable when production capacity (Transformers) and logistics infrastructure (Enablers) are already in place. Premature focus on Connectors without adequate Foundations, Transformers, and Enablers creates "empty corridors" — trade routes with insufficient volume to justify their cost (BIMP-EAGA, 2024; MTIT-BARMM, 2025).
-</p>
-
-<table id="tab-connectors">
+</p><table id="tab-connectors">
 <caption data-label="Table 4-11">Connectors Cluster KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Policy Anchor</th></tr>
@@ -454,15 +461,9 @@ The Connectors Cluster measures trade facilitation, export readiness, BIMP-EAGA 
 <tr><td>Halal hospitality and tourism facilities certified</td><td>~20</td><td>50</td><td>100</td><td>200+</td><td>BTDP / BHB</td></tr>
 <tr><td>Provincial investment facilitation offices</td><td>1 (Cotabato)</td><td>3</td><td>5</td><td>7 (all capitals)</td><td>BIRD Ch. 11 / BBOI satellite model</td></tr>
 </tbody>
-</table>
-
-<h2 id="ch4-d-5">D.5 Financiers Cluster</h2>
-
-<p>
+</table><h2 id="ch4-d-5">D.5 Financiers Cluster</h2><p>
 The Financiers Cluster measures the depth and reach of Islamic banking, takaful, microfinance, and waqf instruments across BARMM. With Islamic banking assets below ₱2 billion and adult financial inclusion at approximately 38% (vs. national targets of 70%+), the Financiers cluster represents both a significant gap and a transformative opportunity. Islamic finance is uniquely aligned with BARMM's identity — Shariah-compliant instruments provide culturally appropriate financial access for Muslim communities that may avoid conventional banking for religious reasons (IsDB-ICD, 2025; BSP, 2024).
-</p>
-
-<table id="tab-financiers">
+</p><table id="tab-financiers">
 <caption data-label="Table 4-12">Financiers Cluster KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Policy Anchor</th></tr>
@@ -475,28 +476,22 @@ The Financiers Cluster measures the depth and reach of Islamic banking, takaful,
 <tr><td>Annual investment approvals (BBOI)</td><td>₱5.1B (Q1 2026)</td><td>₱8B p.a.</td><td>₱12B p.a.</td><td>₱15B+</td><td>SIPP 2022 / MFBM tracking</td></tr>
 <tr><td>Waqf-managed community enterprises</td><td>~12</td><td>25</td><td>40</td><td>60+</td><td>MTIT-ETD / LGU endowment</td></tr>
 </tbody>
-</table>
-
-<p>
+</table><p>
 The adult financial inclusion rate target requires careful interpretation: the baseline of ~38% reflects the proportion of adults with access to any formal financial product (including conventional banking). The 2035 target of 35%+ specifically measures Islamic financial product penetration — a more demanding metric because it requires not just financial access but culturally appropriate financial access. This distinction is critical for BARMM, where surveys indicate that 40-50% of unbanked adults cite religious incompatibility with conventional banking as a primary barrier. The CARD Islamic Bank (Lanao del Sur) and Al-Amanah Islamic Investment Bank of the Philippines serve as the anchor institutions for this expansion (BSP, 2024; IsDB-ICD, 2025).
-</p>
-
-<!-- ==================== SECTION E ==================== -->
+</p> ==================== SECTION E ==================== 
+<div class="folio"><span>BIRD 2026–2035 · Chapter 4</span><span>Page 8</span></div>
+</section>
+<section class="sheet" data-group="Section E" data-title="International, National and Regional Benchmark Alignment" id="p8">
+<div class="kicker">Section E</div>
 <div class="chapter-header" id="ch4-e">
 <div class="chapter-number">Section E</div>
 <h1 class="chapter-title">International, National and Regional Benchmark Alignment</h1>
-</div>
-
-<p>
+</div><p>
 To ensure global competitiveness and policy coherence, BIRD KPIs are explicitly calibrated against four external benchmarking frameworks: OIC/SMIIC halal standards, ESG disclosure criteria, the Philippine Development Plan (PDP) 2023-2028, and the UN Sustainable Development Goals (SDGs). This multi-layer alignment ensures that BARMM's metrics remain investable, auditable, and comparable to ASEAN and OIC member economies — critical for attracting foreign direct investment, accessing ODA and climate finance, and securing halal market recognition (SMIIC, 2021; NEDA, 2023; UNDP, 2023).
-</p>
-
-<figure id="fig-benchmark-matrix">
-<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/30-Phases.png" alt="BIRD implementation phases">
+</p><figure id="fig-benchmark-matrix">
+<img alt="BIRD implementation phases" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/30-Phases.png"/>
 <figcaption data-label="Figure 4-6">BIRD Implementation Phases and Benchmarking Logic. KPI baselines and milestones are interpreted within the three-phase architecture established in Chapter 3: Foundation Building (2026–2028), Acceleration (2029–2031), and Consolidation &amp; Global Integration (2032–2035). Source: Strat Planner Pro; IEDS sequencing logic (Silva, 2026).</figcaption>
-</figure>
-
-<table id="tab-benchmark-alignment">
+</figure><table id="tab-benchmark-alignment">
 <caption data-label="Table 4-13">Multi-Layer Benchmark Alignment Matrix</caption>
 <thead>
 <tr><th>Benchmark Framework</th><th>Alignment Indicator</th><th>BARMM Baseline</th><th>2030 Target</th><th>2035 Target</th><th>Reference Standard</th></tr>
@@ -520,42 +515,32 @@ To ensure global competitiveness and policy coherence, BIRD KPIs are explicitly 
 <tr><td>SDGs</td><td>Decent work and gender parity</td><td>~42%</td><td>48%</td><td>50%+</td><td>SDG 5 &amp; 8; MOLE mandates</td></tr>
 <tr><td>SDGs</td><td>No poverty (incidence reduction)</td><td>34.8%</td><td>&lt;25%</td><td>&lt;20%</td><td>SDG 1; PSA; BIDP</td></tr>
 </tbody>
-</table>
-
-<p>
+</table><p>
 The benchmark alignment analysis reveals strategic complementarities and potential tensions. The strongest alignment is between the SDGs and PDP — both frameworks prioritize poverty reduction, education, and inclusive growth, creating a unified national-regional policy environment. The OIC/SMIIC halal standards provide a distinctive benchmark that differentiates BARMM from other Philippine regions — no other region tracks halal certification processing time or OIC accreditation status, giving BARMM a unique positioning metric for Islamic market investors.
-</p>
-
-<p>
+</p><p>
 The ESG framework adds a global investability dimension. With international investors increasingly screening for ESG compliance, BARMM's renewable energy share (75.86%, already among the highest in the Philippines), carbon credit potential (1M+ tCO2e/year target), and climate-risk screening coverage (0% → 100%) create compelling ESG narratives for green finance and climate-focused development partners. The TCFD (Task Force on Climate-Related Financial Disclosures) alignment ensures that BARMM's climate metrics meet international reporting standards, enabling access to green bonds, climate insurance, and carbon market mechanisms (MENRE-BARMM, 2024; NEDA, 2023).
-</p>
-
-<div class="data-callout">
+</p><div class="data-callout">
 <strong>Benchmark Alignment Insight:</strong> The halal certification processing time target (45-60 days → ≤21 days) directly benchmarks Malaysia's 15-day standard — the regional best practice. Achieving ≤21 days by 2035 positions BARMM as competitive within ASEAN while maintaining the quality rigor that OIC/SMIIC accreditation requires. The intermediate target of 30 days by 2030 is calibrated to be achievable given BHB capacity constraints while demonstrating progressive improvement to prospective investors. This is a "stretch but achievable" target — ambitious enough to drive institutional reform but realistic enough to maintain credibility.
-</div>
-
-<div class="kpi-box">
+</div><div class="kpi-box">
 <div class="kpi-box-title">KPI Composite Scoring Weights</div>
 <p style="font-size:9pt;margin-bottom:0.3rem;">The BIRD composite score combines three weighted dimensions:</p>
 <p style="font-size:9pt;margin-bottom:0.2rem;"><strong>Cross-Cutting OS Metrics (30%):</strong> Moral Governance, Resilience, Inclusivity, Peace &amp; Security — systemic multiplier effect on all clusters.</p>
 <p style="font-size:9pt;margin-bottom:0.2rem;"><strong>Cluster-Specific Throughput (45%):</strong> Foundations, Transformers, Enablers, Connectors, Financiers — direct production and service delivery.</p>
 <p style="font-size:9pt;margin-bottom:0.2rem;"><strong>Benchmark Alignment (25%):</strong> OIC/SMIIC, ESG, PDP, SDG compliance — global competitiveness and investability.</p>
 <p style="font-size:9pt;margin-bottom:0.2rem;"><em>Note: Weights are calibrated to prioritize ecosystem health over isolated output maximization. A province could score highly on cluster throughput while failing on inclusivity — the 30% OS weight prevents such siloed success from masking systemic inequity.</em></p>
-</div>
-
-<div class="resource-box">
+</div><div class="resource-box">
 <div class="resource-box-title">BIRD Platform Resources</div>
 <p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Home:</strong> <a href="https://bangsamoro-investment-roadmap.asilvainnovations.com">bangsamoro-investment-roadmap.asilvainnovations.com</a></p>
 <p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Validation Survey:</strong> <a href="https://bird-survey.asilvainnovations.com">bird-survey.asilvainnovations.com</a></p>
 <p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Dashboard:</strong> <a href="https://bird-dashboard.asilvainnovations.com">bird-dashboard.asilvainnovations.com</a></p>
 <p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Actors and Value Map:</strong> <a href="https://bird-actors-value-map.asilvainnovations.com">bird-actors-value-map.asilvainnovations.com</a></p>
-</div>
-
-<div class="data-callout">
+</div><div class="data-callout">
 <strong>Calibration Governance Rule.</strong> Baselines should be frozen only after source verification; targets should be treated as approved planning targets rather than observed facts; and any target revision should record the reason, approving authority, effective date, and affected data series. Quarterly variance review should distinguish <em>data-quality variance</em>, <em>implementation variance</em>, and <em>external-shock variance</em> before corrective action is assigned. This preserves comparability across the 2026–2035 horizon and prevents target drift from being mistaken for performance improvement.
 </div>
-
-<!-- ==================== REFERENCES ==================== -->
+<div class="continue no-print"><p><strong>Continue reading</strong><br/>Chapter 5: Balanced Scorecard, Causal Architecture and Strategy Execution</p><a class="btn btn-green" href="Chapter5.html">Open Chapter 5</a></div><div class="folio"><span>BIRD 2026–2035 · Chapter 4</span><span>Page 9</span></div>
+</section>
+<section class="sheet" data-group="Back matter" data-title="References" id="p9">
+<div class="kicker">Back matter</div>
 <div class="references-page" id="references">
 <h1>References</h1>
 <div class="references-list">
@@ -596,6 +581,230 @@ The ESG framework adds a global investability dimension. With international inve
 <p>UNDP (United Nations Development Programme). (2023). <em>Sustainable Development Goals Monitoring Framework for Autonomous Regions</em>. Manila: UNDP Philippines.</p>
 </div>
 </div>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 4</span><span>Page 10</span></div>
+</section>
+</main>
+<p class="hint no-print" id="hint">Use the arrow keys or swipe to turn pages. Press C for contents.</p>
+<nav aria-label="Page navigation" class="navbar no-print">
+<button aria-label="Previous page" class="btn btn-line" id="btn-back" type="button">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6"></path></svg><span>Back</span></button>
+<div aria-live="polite" class="count" id="count"></div>
+<button aria-label="Next page" class="btn btn-green" id="btn-next" type="button">
+<span id="next-label">Next</span><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></button>
+</nav>
+<dialog aria-labelledby="drawer-title" class="drawer" id="contents-dialog">
+<div class="drawer-head"><h2 id="drawer-title">Contents</h2>
+<button aria-label="Close contents" class="btn btn-ghost" id="btn-close" type="button">Close</button></div>
+<div class="drawer-body">
+<h3>In this document</h3><div id="drawer-pages"></div>
+<h3>Chapters</h3>
+<a class="ch" href="Prelims-Executive-Summary.html">Prelims &amp; Executive Summary<small>Front matter and executive summary</small></a>
+<a class="ch" href="Chapter1.html">Chapter 1<small>Introduction, background, anchors and methodology</small></a>
+<a class="ch" href="Chapter2.html">Chapter 2<small>Context, BEIE Framework and strategic diagnostics</small></a>
+<a class="ch" href="Chapter3.html">Chapter 3<small>Strategic options, leverage points and the roadmap strategy</small></a>
+<a class="ch" href="Chapter4.html">Chapter 4<small>Metrics, KPI benchmarking and calibration</small></a>
+<a class="ch" href="Chapter5.html">Chapter 5<small>Balanced Scorecard, causal architecture and execution</small></a>
+<a class="ch" href="Chapter6.html">Chapter 6<small>Implementation, action and annual investment plan</small></a>
+<a class="ch" href="Chapter7.html">Chapter 7<small>Policy recommendations and the way forward</small></a>
+<a class="ch" href="Indexes.html">Subject Index<small>Navigational index to all chapters</small></a>
+</div>
+</dialog>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+<script>
 
+(function () {
+  'use strict';
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.sheet'));
+  var total = pages.length;
+  var byId = {};
+  pages.forEach(function (p, i) { byId[p.id] = i; });
+  var NEXT_DOC = { href: 'Chapter5.html', label: 'Chapter 5' };
+  var PREV_DOC = { href: 'Chapter3.html', label: 'Chapter 3' };
+  var current = -1;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var btnBack = $('btn-back'), btnNext = $('btn-next'), nextLabel = $('next-label');
+  var count = $('count'), where = $('where'), progress = $('progress');
+  var dialog = $('contents-dialog');
+
+  function indexFromHash() {
+    var h = decodeURIComponent((location.hash || '').slice(1));
+    if (!h) return 0;
+    if (byId.hasOwnProperty(h)) return byId[h];
+    var el = document.getElementById(h);
+    if (el) { var s = el.closest('.sheet'); if (s && byId.hasOwnProperty(s.id)) return byId[s.id]; }
+    return 0;
+  }
+
+  function show(i, opts) {
+    opts = opts || {};
+    i = Math.max(0, Math.min(total - 1, i));
+    if (i === current && !opts.force) return;
+    pages.forEach(function (p, k) { p.hidden = k !== i; });
+    current = i;
+    var p = pages[i];
+    var title = p.getAttribute('data-title') || ('Page ' + (i + 1));
+    count.innerHTML = 'Page <b>' + (i + 1) + '</b> of ' + total + ': ' + title;
+    where.textContent = (p.getAttribute('data-group') || '') + (title ? ', ' + title : '');
+    document.title = title + ' | BIRD 2026–2035';
+    progress.style.width = ((i + 1) / total * 100) + '%';
+    btnBack.disabled = false;
+    var last = i === total - 1;
+    if (last && NEXT_DOC.href) {
+      nextLabel.textContent = NEXT_DOC.label;
+      btnNext.setAttribute('aria-label', 'Go to ' + NEXT_DOC.label);
+      btnNext.disabled = false;
+    } else {
+      nextLabel.textContent = 'Next';
+      btnNext.setAttribute('aria-label', 'Next page');
+      btnNext.disabled = last && !NEXT_DOC.href;
+    }
+    if (i === 0 && PREV_DOC.href) {
+      btnBack.setAttribute('aria-label', 'Go to ' + PREV_DOC.label);
+    } else {
+      btnBack.setAttribute('aria-label', 'Previous page');
+    }
+    var items = document.querySelectorAll('#drawer-pages .pg');
+    for (var k = 0; k < items.length; k++) {
+      if (k === i) items[k].setAttribute('aria-current', 'page'); else items[k].removeAttribute('aria-current');
+    }
+    if (opts.updateHash !== false) {
+      var target = '#' + p.id;
+      if (location.hash !== target) {
+        if (opts.replace) history.replaceState(null, '', target); else history.pushState(null, '', target);
+      }
+    }
+    window.scrollTo(0, 0);
+    if (opts.focus !== false) {
+      var h = p.querySelector('[tabindex="-1"]') || p;
+      if (!h.hasAttribute('tabindex')) h.setAttribute('tabindex', '-1');
+      try { h.focus({ preventScroll: true }); } catch (e) {}
+    }
+  }
+
+  function next() {
+    if (current < total - 1) show(current + 1);
+    else if (NEXT_DOC.href) location.href = NEXT_DOC.href;
+  }
+  function back() {
+    if (current > 0) show(current - 1);
+    else if (PREV_DOC.href) location.href = PREV_DOC.href;
+  }
+
+  var drawerPages = $('drawer-pages');
+  pages.forEach(function (p, i) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'pg';
+    b.textContent = (i + 1) + '. ' + (p.getAttribute('data-title') || ('Page ' + (i + 1)));
+    b.addEventListener('click', function () { dialog.close(); show(i); });
+    drawerPages.appendChild(b);
+  });
+
+  btnNext.addEventListener('click', next);
+  btnBack.addEventListener('click', back);
+  window.addEventListener('popstate', function () { show(indexFromHash(), { updateHash: false }); });
+  window.addEventListener('hashchange', function () { show(indexFromHash(), { updateHash: false }); });
+
+  function openContents() {
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+  }
+  $('btn-contents').addEventListener('click', openContents);
+  $('btn-close').addEventListener('click', function () { dialog.close(); });
+  dialog.addEventListener('click', function (e) { if (e.target === dialog) dialog.close(); });
+
+  document.addEventListener('keydown', function (e) {
+    if (dialog.open || e.altKey || e.ctrlKey || e.metaKey) return;
+    var t = e.target.tagName;
+    if (t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT') return;
+    switch (e.key) {
+      case 'ArrowRight': case 'PageDown': e.preventDefault(); next(); break;
+      case 'ArrowLeft': case 'PageUp': e.preventDefault(); back(); break;
+      case 'Home': e.preventDefault(); show(0); break;
+      case 'End': e.preventDefault(); show(total - 1); break;
+      case 'c': case 'C': e.preventDefault(); openContents(); break;
+    }
+  });
+
+  var x0 = null, y0 = null;
+  document.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+  document.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.5) { dx < 0 ? next() : back(); }
+    x0 = y0 = null;
+  }, { passive: true });
+
+  function toast(msg) {
+    var t = $('toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove('show'); }, 4200);
+  }
+
+  $('btn-pdf').addEventListener('click', function () {
+    toast('In the print dialog, choose "Save as PDF" and A4 paper. Turn on background graphics for the cover.');
+    setTimeout(function () { window.print(); }, 350);
+  });
+
+  $('btn-word').addEventListener('click', function () {
+    try {
+      var base = location.href.replace(/[#?].*$/, '').replace(/[^\/]*$/, '');
+      var css = [
+        '@page WordSection1{size:21.0cm 29.7cm;margin:2.0cm 2.0cm 2.2cm 2.0cm;mso-page-orientation:portrait;}',
+        'div.WordSection1{page:WordSection1;}',
+        'body{font-family:Montserrat,Arial,sans-serif;font-size:10pt;line-height:1.5;color:#1a1a1a;}',
+        'p,li{text-align:justify;margin:0 0 6pt 0;}',
+        'h1{font-family:Poppins,Arial,sans-serif;font-size:18pt;color:#0a3d2e;text-align:center;border-bottom:2pt solid #C9A84C;padding-bottom:4pt;margin:0 0 12pt 0;}',
+        'h2{font-family:Poppins,Arial,sans-serif;font-size:13pt;color:#0a3d2e;border-left:4pt solid #C9A84C;padding-left:6pt;margin:12pt 0 6pt 0;}',
+        'h3{font-family:Poppins,Arial,sans-serif;font-size:11pt;color:#1B5E20;margin:10pt 0 4pt 0;}',
+        'table{border-collapse:collapse;width:100%;font-size:8.5pt;}',
+        'th{background:#0a3d2e;color:#ffffff;padding:3pt 4pt;text-align:left;border:0.5pt solid #0a3d2e;}',
+        'td{padding:3pt 4pt;border:0.5pt solid #d9d4c7;vertical-align:top;}',
+        'caption{font-weight:bold;color:#0a3d2e;text-align:left;}',
+        'strong,b{color:#0a3d2e;}',
+        '.box{background:#f0f7f4;border-left:4pt solid #0a3d2e;padding:6pt;}'
+      ].join('\\n');
+      var parts = [];
+      pages.forEach(function (p, i) {
+        var html;
+        if (p.classList.contains('cover')) {
+          html = '<table style="width:100%;height:24cm;background:#0a3d2e;border:none"><tr><td style="background:#0a3d2e;border:none;padding:50pt 36pt;text-align:center;vertical-align:middle">' +
+            '<p style="text-align:center;color:#C9A84C;font-size:9pt;letter-spacing:2pt">BIRD 2026–2035</p>' +
+            '<p style="text-align:center;font-family:Poppins,Arial;font-size:28pt;font-weight:bold;color:#C9A84C;line-height:1.15">' + (p.getAttribute('data-title') || 'Chapter') + '</p>' +
+            '<p style="text-align:center;color:#a8e6cf;font-size:12pt">Bangsamoro Investment Roadmap Development 2026–2035</p>' +
+            '<p style="text-align:center;color:#ffffff;font-size:9.5pt;margin-top:24pt"><b style="color:#C9A84C">BOI-MTIT, BARMM</b><br>September 2026</p>' +
+            '</td></tr></table>';
+        } else {
+          var c = p.cloneNode(true);
+          Array.prototype.forEach.call(c.querySelectorAll('.no-print,script,button,.folio'), function (n) { n.remove(); });
+          Array.prototype.forEach.call(c.querySelectorAll('.principle-box,.resource-box,.evidence-box,.data-callout,.strategy-box,.note,.callout,.message,.phase,.perspective-box,.strategy-question,.pull-quote,.bifnet-box,.kpi-box,.mel-box,.phase-box,.exec-summary,.formula-block,.quote'), function (n) { n.setAttribute('class', 'box'); });
+          Array.prototype.forEach.call(c.querySelectorAll('a[href]'), function (a) {
+            var href = a.getAttribute('href');
+            if (href && !/^(https?:|mailto:|#)/.test(href)) a.setAttribute('href', base + href);
+          });
+          html = c.innerHTML;
+        }
+        if (i > 0) parts.push('<br clear="all" style="mso-special-character:line-break;page-break-before:always">');
+        parts.push(html);
+      });
+      var doc = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">' +
+        '<head><meta charset="utf-8"><title>BIRD 2026–2035 Chapter 4</title>' +
+        '<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->' +
+        '<style>' + css + '</style></head><body><div class="WordSection1">' + parts.join('\\n') + '</div></body></html>';
+      var blob = new Blob(['\\ufeff', doc], { type: 'application/msword' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'BIRD-2026-2035_Chapter4_A4.doc';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+      toast('Word file downloaded (A4). In Word, use File > Save As to keep it as .docx.');
+    } catch (err) {
+      toast('Word export failed in this browser. Use "Save as PDF" instead.');
+      if (window.console) console.error(err);
+    }
+  });
+
+  show(indexFromHash(), { replace: true, focus: false });
+})();
+
+</script>
 </body>
 </html>
