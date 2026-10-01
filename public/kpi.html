@@ -697,10 +697,77 @@
     </style>
 </head>
 <body>
+<style>
+:root{--gold-border:rgba(201,168,76,0.32);--gold:#C9A84C;--light-green:#6ee7b7;--dark-green:#022c22;--gold-grad:linear-gradient(135deg,#7a5c1e 0%,#c9a84c 35%,#e8c560 50%,#c9a84c 65%,#7a5c1e 100%);--focus-ring:0 0 0 3px rgba(201,168,76,0.5);--touch-target:44px;}
+.site-nav{background:rgba(2,44,34,.97);backdrop-filter:blur(18px);position:sticky;top:0;width:100%;z-index:200;border-bottom:2px solid var(--gold-border);}
+.nav-inner{max-width:1400px;margin:0 auto;padding:.75rem 1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;min-height:44px;}
+
+.nav-logo { display: flex; align-items: center; }
+.nav-logo img { 
+height:52px; width:52px; border-radius: 50%;
+object-fit:contain; display:block;
+border: 2px solid var(--gold-border);
+}
+.mobile-menu-toggle {
+display:block; background:none; border:none; color:var(--gold);
+cursor:pointer; padding:.5rem; border-radius:.375rem;
+min-width:var(--touch-target); min-height:var(--touch-target);
+}
+.mobile-menu-toggle:focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+.nav-links-list {
+display:none; position:absolute; top:100%; left:0; right:0;
+background:rgba(2,44,34,.98); flex-direction:column; gap:0;
+list-style:none; padding:1rem; border-bottom:2px solid var(--gold-border);
+max-height:80vh; overflow-y:auto;
+}
+.nav-links-list.active { display:flex; }
+.nav-links-list a {
+color:var(--light-green); text-decoration:none; font-size:1rem;
+font-weight:500; letter-spacing:.03em; position:relative;
+transition:color .3s; display:flex; align-items:center;
+padding:1rem; border-radius:.5rem; min-height:var(--touch-target);
+}
+.nav-links-list a:hover, .nav-links-list a:focus {
+color:var(--gold); background:rgba(201,168,76,.1); outline:none;
+}
+.nav-links-list a:focus-visible { box-shadow:var(--focus-ring); }
+.nav-links-list a.active { color:var(--gold); font-weight:700; }
+@media (min-width: 900px) {
+.mobile-menu-toggle { display:none; }
+.nav-links-list {
+display:flex !important; position:static; flex-direction:row;
+gap:1.5rem; padding:0; background:transparent; border:none;
+}
+.nav-links-list a { padding:.25rem 0; font-size:.82rem; white-space:nowrap; }
+.nav-links-list a:hover, .nav-links-list a:focus { background:none; }
+.nav-links-list a::after {
+content:''; position:absolute; bottom:-3px; left:0; width:0;
+height:2px; background:var(--gold); transition:width .3s;
+}
+.nav-links-list a:hover::after, .nav-links-list a:focus::after, .nav-links-list a.active::after { width:100%; }
+.nav-logo img { height:52px; width:52px; }
+.nav-inner { padding:.55rem 2rem; }
+}
+
+</style>
+<nav class="site-nav" id="siteNav" role="navigation" aria-label="Main navigation">
+<div class="nav-inner">
+<a href="roadmap.html" class="nav-logo" aria-label="MTIT BARMM – Home">
+<img src="https://asilvainnovations.github.io/BIRD-2026-2035/public/assets/MTIT-logo.png" alt="Ministry of Trade, Investments and Tourism – BARMM" onerror="this.src='https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png'; this.onerror=null;">
+</a>
+<button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+<svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+</button>
+<ul class="nav-links-list" id="navLinks" role="list">
+<li><a href="https://asilvainnovations.github.io/BIRD-2026-2035/public/report/Prelims-Executive-Summary.html" data-tooltip="BIRD Report">Report</a></li><li><a href="dashboard.html" data-tooltip="View the Strategic MEL Dashboard">Dashboard</a></li><li><a href="roadmap.html" data-tooltip="Interactive Investment Roadmap 2026-2035">Roadmap</a></li><li><a href="action-plan.html" data-tooltip="Detailed Action Plan">Action Plan</a></li><li><a href="https://bird-survey.asilvainnovations.com" data-tooltip="Participate in Validation Survey">Validation Survey</a></li><li><a href="resources.html" data-tooltip="Access Resources">Resources</a></li><li><a href="ieb.html" data-tooltip="Ecosystem Framework">Ecosystem Framework</a></li><li><a href="kpi.html" style="color:var(--gold); font-weight:700;" class="active" data-tooltip="KPI Framework">KPIs | Metrics</a></li><li><a href="contact.html" data-tooltip="Contact Us">Contact</a></li>
+</ul>
+</div>
+</nav>
+
 
     <header>
         <h1>BARMM INVESTMENT ROADMAP DEVELOPMENT</h1>
-        <p>Strategy Map & KPI Dashboard Framework Calibration (2026–2035)</p>
+        <p>Chapter 4 Metrics Architecture — calibrated KPIs, BSC strategy map, and BEIE cluster performance (2026–2035)</p>
     </header>
 
     <main class="dashboard-container">
@@ -1590,5 +1657,36 @@
             });
         }
     </script>
+<footer class="site-footer" style="text-align:center;padding:2.5rem 1.5rem;border-top:1px solid var(--gold-border);margin-top:3rem;">
+<div style="margin-bottom:1rem;display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;">
+<a href="roadmap.html" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;">Roadmap</a>
+<a href="dashboard.html" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;">Dashboard</a>
+<a href="action-plan.html" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;">Action Plan</a>
+<a href="kpi.html" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;">KPIs</a>
+<a href="resources.html" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;">Resources</a>
+<a href="contact.html" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;">Contact</a>
+</div>
+<p style="font-size:.75rem;color:rgba(255,255,255,.3);">© 2026 BARMM · Ministry of Trade, Investments and Tourism · <span style="color:var(--gold);">The Emerging Bangsamoro</span> · Investment Roadmap 2026–2035</p>
+<p style="font-size:.68rem;color:rgba(255,255,255,.2);margin-top:.3rem;">Data sources: PSA, BBOI, BEZA, MTIT, MENRE (2024 baselines). Targets per BIRD 2026–2035 Chapters 4–6 &amp; BDP 2023–2028.</p>
+</footer><script>
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const navLinks = document.getElementById('navLinks');
+if (mobileMenuToggle && navLinks) {
+  mobileMenuToggle.addEventListener('click', () => {
+    const isExpanded = navLinks.classList.toggle('active');
+    mobileMenuToggle.setAttribute('aria-expanded', isExpanded);
+  });
+  document.addEventListener('click', (e) => {
+    if (!mobileMenuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+      navLinks.classList.remove('active');
+      mobileMenuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('siteNav');
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+}, {passive: true});
+</script>
 </body>
 </html>
