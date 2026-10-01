@@ -67,10 +67,10 @@ blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-st
 </div>
 
 <!-- ============================================================ -->
-<!-- EXECUTIVE SUMMARY -->
+<!-- SUMMARY -->
 <!-- ============================================================ -->
 <div class="exec-summary">
-  <h3>Chapter Executive Summary</h3>
+  <h3>Chapter Summary</h3>
   <p><strong>27 strategic objectives</strong> across four Balanced Scorecard perspectives translate the Integrated Ecosystem Development Strategy (IEDS) into an executable investment roadmap for BARMM 2026&ndash;2035.</p>
   <p><strong>Causal hypothesis chain:</strong> Learning &amp; Growth (20%) &rarr; Internal Process (25%) &rarr; Stakeholder (25%) &rarr; Financial (30%). Investments in human capital and digital systems enable operational excellence, which delivers stakeholder value, ultimately generating the ₱550B GRDP target, 20,000+ jobs, and poverty reduction below 20%.</p>
   <p><strong>5 critical causal pathways</strong> &mdash; Halal Economy Value Chain, Infrastructure-Enabled Growth, Green Economy Monetization, Inclusive Development, and Islamic Finance Ecosystem &mdash; map each Learning objective through Process and Stakeholder to Financial outcomes with explicit Critical Leverage Point (CLP) alignment.</p>
@@ -390,7 +390,7 @@ blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-st
       <td>&lt;80%</td>
       <td>88%</td>
       <td>&gt;90%</td>
-      <td>MPW-BBOI-LGU coordination; ROW resolution; PPP frameworks</td>
+      <td>MPW-BOI-LGU coordination; ROW resolution; PPP frameworks</td>
       <td><span class="clp-badge clp-lp2">LP2</span></td>
     </tr>
     <tr>
@@ -500,7 +500,7 @@ blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-st
       <td>&lt;50%</td>
       <td>70%</td>
       <td>80%</td>
-      <td>Capacity building programs; BBOI-MTIT HRD plan; performance incentives</td>
+      <td>Capacity building programs; BOI-MTIT HRD plan; performance incentives</td>
       <td><span class="clp-badge clp-lp3">LP3</span></td>
     </tr>
     <tr>
@@ -653,15 +653,15 @@ blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-st
 
 
 <!-- ============================================================ -->
-<!-- SECTION G: BICC INTEGRATION & MEL DASHBOARD -->
+<!-- SECTION G: BIF-Net INTEGRATION & MEL DASHBOARD -->
 <!-- ============================================================ -->
-<h1>G. Bangsamoro Investment Command Center and MEL Dashboard</h1>
+<h1>G. Bangsamoro Investment Facilitaton Network (BIF-Net) and MEL Dashboard</h1>
 
 <p>The Balanced Scorecard transforms the Integrated Ecosystem Development Strategy from a conceptual framework into an executable investment roadmap. By establishing causal linkages across four perspectives, the BSC ensures that intangible investments are explicitly linked to tangible outcomes. The <strong>Bangsamoro Investment Command Center (BICC)</strong> and its <strong>MEL (Monitoring, Evaluation, and Learning) Dashboard</strong> serve as the operational layer that tracks, visualizes, and manages BSC execution in real time.</p>
 
 <div class="bicc-box">
-  <h3>BICC: Three-View Command Architecture</h3>
-  <p>The BICC provides three distinct views for different stakeholder groups, each with role-based access control enforced through Supabase Row Level Security (RLS):</p>
+  <h3>BICC: Three-View Facilitattion Architecture</h3>
+  <p>The BIF-Net provides three distinct views for different stakeholder groups, each with role-based access control enforced through Supabase Row Level Security (RLS):</p>
   <ul style="font-size:9.5pt;">
     <li><strong>Command View</strong> &mdash; Full-screen dashboard for BICC operations center with real-time KPI updates, automated alerts when KPIs deviate &gt;10% from trajectory, and drill-down to provincial/municipal disaggregation</li>
     <li><strong>Executive View</strong> &mdash; Condensed summary for CMO/BITI presentations with sparkline trends, gap-to-target visualization, and CLP coverage heatmaps</li>
@@ -695,7 +695,7 @@ blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-st
       <td>₱5.1B</td>
       <td>₱15B p.a.</td>
       <td><span class="clp-badge clp-lp1">LP1</span> <span class="clp-badge clp-lp3">LP3</span></td>
-      <td>BBOI tracking system (weekly API)</td>
+      <td>BOI tracking system (weekly API)</td>
       <td>F1, F6</td>
     </tr>
     <tr>
@@ -782,7 +782,7 @@ blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-st
       <td>Supabase realtime subscription</td>
     </tr>
     <tr>
-      <td>BBOI Approval Tracking</td>
+      <td>BOI Approval Tracking</td>
       <td>Investment approvals, project status</td>
       <td>Weekly</td>
       <td>API connector</td>
@@ -810,11 +810,11 @@ blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-st
 
 <h2>G.4 Automated Alerting and Adaptive Management</h2>
 
-<p>The BICC employs <strong>automated alerting</strong> when KPIs deviate more than 10% from their planned trajectory. This trigger-based intervention system enables adaptive management through quarterly strategy reviews. When a KPI falls off-track:</p>
+<p>The BIF-Net employs <strong>automated alerting</strong> when KPIs deviate more than 10% from their planned trajectory. This trigger-based intervention system enables adaptive management through quarterly strategy reviews. When a KPI falls off-track:</p>
 
 <ol>
   <li><strong>Alert Generation:</strong> The <code>mel-sync</code> Supabase Edge Function detects deviation during external data source polling</li>
-  <li><strong>Root Cause Analysis:</strong> BICC operators drill down to identify which CLP is underperforming</li>
+  <li><strong>Root Cause Analysis:</strong> BIF-Net operators drill down to identify which CLP is underperforming</li>
   <li><strong>Intervention Trigger:</strong> The system recommends specific Phase 1 actions aligned with the affected CLP</li>
   <li><strong>Escalation:</strong> Off-track KPIs for more than two consecutive quarters escalate to Executive View for CMO decision</li>
 </ol>
@@ -822,7 +822,7 @@ blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-st
 <div class="figure">
   <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/28.png" alt="BIRD Investment Roadmap">
   <div class="figure-caption">
-    <strong>Figure 5-6.</strong> BIRD Investment Roadmap. The roadmap visualizes the three-phase implementation timeline (Phase 1: 2026&ndash;2028 Foundation Building; Phase 2: 2029&ndash;2031 Acceleration; Phase 3: 2032&ndash;2035 Consolidation) with key milestones for each BSC perspective. The BICC MEL Dashboard tracks progress against this roadmap in real time. Source: BIRD Strategic Planning Platform.
+    <strong>Figure 5-6.</strong> Bangsamoro Investment Roadmap. The roadmap visualizes the three-phase implementation timeline (Phase 1: 2026&ndash;2028 Foundation Building; Phase 2: 2029&ndash;2031 Acceleration; Phase 3: 2032&ndash;2035 Consolidation) with key milestones for each BSC perspective. The BICC MEL Dashboard tracks progress against this roadmap in real time. Source: BIRD Strategic Planning Platform.
   </div>
 </div>
 
@@ -880,7 +880,7 @@ blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-st
       <td><strong>4</strong></td>
       <td>Bangsamoro Halal Park Groundbreaking</td>
       <td>₱500M</td>
-      <td>MTIT / BBOI</td>
+      <td>MTIT / BOI</td>
       <td><span class="clp-badge clp-lp1">LP1</span> <span class="clp-badge clp-lp2">LP2</span></td>
       <td>F1, F3, S3</td>
       <td>Phase 1 · 2026</td>
@@ -1033,7 +1033,7 @@ blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-st
     <tr>
       <td><strong>Quarterly</strong></td>
       <td>BSC strategy review; causal pathway assessment</td>
-      <td>CMO, BITI, BBOI Board, development partners</td>
+      <td>CMO, BITI, BOI, development partners</td>
       <td>Quarterly scorecard; adaptive management decisions</td>
     </tr>
     <tr>
