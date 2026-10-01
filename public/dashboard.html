@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2CNG7D15Q7"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -13,9 +13,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <meta name="theme-color" content="#022c22">
-<meta name="description" content="BARMM Strategic MEL Dashboard 2026-2035 — Real-time Monitoring, Evaluation & Learning based on the BIRD 2026–2035 Investment Roadmap">
+<meta name="description" content="BOI-MTIT Strategic MEL Dashboard 2026–2035 — Real-time Monitoring, Evaluation & Learning for the Bangsamoro Investment Roadmap (BIRD)">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<title>BARMM Strategic Dashboard — MEL 2026–2035</title>
+<title>BOI-MTIT Strategic MEL Dashboard — BIRD 2026–2035</title>
 <style>
 /* ============================================================
    DESIGN TOKENS — mirrors roadmap.html exactly
@@ -86,7 +86,11 @@ body{
 .live-badge{display:flex;align-items:center;gap:.4rem;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);border-radius:2rem;padding:.3rem .8rem;font-size:.72rem;font-weight:700;color:#10b981;letter-spacing:.04em;text-transform:uppercase;}
 .live-dot{width:7px;height:7px;background:#10b981;border-radius:50%;animation:livePulse 2s infinite;}
 @keyframes livePulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
-@media(min-width:768px){.nav-title{display:block;}.nav-inner{padding:.55rem 2rem;}.nav-logo-wrap img{height:48px;}}
+@media(min-width:768px){.nav-title{display:block;}.nav-inner{padding:.55rem 2rem;}.nav-logo img {
+height:52px; width:52px; border-radius: 50%;
+object-fit:contain; display:block;
+border: 2px solid var(--gold-border);
+}}
 
 /* ============================================================
    DASHBOARD HEADER
@@ -369,6 +373,23 @@ body{
 
 /* Print */
 @media print{.site-nav,.mel-legend{display:none!important;}body{background:white;color:black;}.dash-title,.section-title{color:black!important;-webkit-text-fill-color:black!important;}}
+
+.mobile-menu-toggle{display:block;background:none;border:none;color:var(--gold);cursor:pointer;padding:.5rem;border-radius:.375rem;min-width:44px;min-height:44px;}
+.nav-links-list{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(2,44,34,.98);flex-direction:column;gap:0;list-style:none;padding:1rem;border-bottom:2px solid var(--gold-border);max-height:80vh;overflow-y:auto;}
+.nav-links-list.active{display:flex;}
+.nav-links-list a{color:var(--light-green);text-decoration:none;font-size:1rem;font-weight:500;padding:1rem;border-radius:.5rem;display:flex;align-items:center;min-height:44px;}
+.nav-links-list a:hover{color:var(--gold);background:rgba(201,168,76,.1);}
+@media(min-width:900px){
+.mobile-menu-toggle{display:none;}
+.nav-links-list{display:flex!important;position:static;flex-direction:row;gap:1.5rem;padding:0;background:transparent;border:none;}
+.nav-links-list a{padding:.25rem 0;font-size:.82rem;white-space:nowrap;position:relative;}
+.nav-links-list a:hover{background:none;}
+.nav-links-list a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--gold);transition:width .3s;}
+.nav-links-list a:hover::after{width:100%;}
+}
+.nav-logo{display:flex;align-items:center;}
+.nav-logo img{height:52px;width:52px;border-radius:50%;object-fit:contain;display:block;border:2px solid var(--gold-border);}
+
 </style>
 </head>
 <body>
@@ -379,23 +400,25 @@ body{
      NAV
      ============================================================ -->
 <nav class="site-nav" id="siteNav" role="navigation" aria-label="Main navigation">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo-wrap" aria-label="BARMM MTIT — Home">
-      <img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png"
-           alt="Ministry of Trade, Investments and Tourism – BARMM"
-           width="130" height="40" onerror="this.style.display='none'">
-      <span class="nav-title">BARMM<br>Strategic Dashboard</span>
-    </a>
-    <div class="nav-right">
-      <a href="dashboard.html" class="nav-back active-nav" aria-label="Dashboard">Dashboard</a>
-      <a href="roadmap.html" class="nav-back" aria-label="Roadmap">Roadmap</a>
-      <a href="action-plan.html" class="nav-back" aria-label="Action Plan">Action Plan</a>
-      <div class="live-badge" role="status" aria-live="polite">
-        <span class="live-dot" aria-hidden="true"></span>
-        <span>Live MEL</span>
-      </div>
-    </div>
-  </div>
+<div class="nav-inner">
+<a href="https://bangsamoro-investment-roadmap.asilvainnovations.com" class="nav-logo" aria-label="MTIT BARMM – Home">
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png" alt="Ministry of Trade, Investments and Tourism – BARMM" onerror="this.style.display='none'">
+</a>
+<button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+<svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+</button>
+<ul class="nav-links-list" id="navLinks" role="list">
+<li><a href="https://bangsamoro-investment-roadmap.asilvainnovations.com" data-tooltip="Home">Home</a></li>
+<li><a href="dashboard.html" style="color:var(--gold); font-weight:700;" data-tooltip="View the Strategic MEL Dashboard">Dashboard</a></li>
+<li><a href="https://bird-roadmap.asilvainnovations.com" data-tooltip="Interactive Strategy Map 2026-2035">Roadmap</a></li>
+<li><a href="https://bird-survey-orientation.asilvainnovations.com" data-tooltip="Validation Survey Orientation">Survey Orientation</a></li>
+<li><a href="https://bird-survey.asilvainnovations.com" data-tooltip="Participate in Validation Survey">Validation Survey</a></li>
+<li><a href="https://bird-resources.asilvainnovations.com" data-tooltip="Access Resources">Resources</a></li>
+<li><a href="https://asilvainnovations.github.io/barmm-investment-roadmap/ieb.html" data-tooltip="Ecosystem Framework">Ecosystem Framework</a></li>
+<li><a href="https://bird-app.asilvainnovations.com" data-tooltip="Access the BIRD App">BIRD App</a></li>
+<li><a href="https://bird-contact.asilvainnovations.com" data-tooltip="Contact Us">Contact</a></li>
+</ul>
+</div>
 </nav>
 
 <!-- ============================================================
@@ -431,7 +454,7 @@ body{
     <div class="mel-leg-item"><div class="mel-leg-dot" style="background:#3b82f6;"></div>Watch / Early Stage</div>
     <div class="mel-leg-item"><div class="mel-leg-dot" style="background:#f59e0b;"></div>At Risk</div>
     <div class="mel-leg-item"><div class="mel-leg-dot" style="background:#ef4444;"></div>Critical / Behind</div>
-    <div class="mel-leg-item" style="margin-left:auto;font-size:.7rem;color:rgba(255,255,255,.35);">Baselines: 2024 PSA / BBOI / MTIT. Targets: BIRD 2026-2035 Roadmap.</div>
+    <div class="mel-leg-item" style="margin-left:auto;font-size:.7rem;color:rgba(255,255,255,.35);">Baselines: 2024 PSA / BOI-MTIT. Targets: BIRD 2026-2035 Roadmap.</div>
   </div>
 
   <!-- ========================================================
@@ -468,7 +491,7 @@ body{
         <div class="kpi-current">₱5.1B <span style="font-size:.65rem;opacity:.6;">(Q1 2026)</span></div>
         <div class="kpi-target">Target: ₱15B p.a. by 2035</div>
         <span class="kpi-delta up">▲ Structural Shift</span>
-        <div class="kpi-source">BBOI / BEZA · ⭐ LP1+LP3</div>
+        <div class="kpi-source">BOI-MTIT / BEZA · ⭐ LP1+LP3</div>
       </div>
 
       <!-- KPI 2 — Total Export Value -->
@@ -793,13 +816,13 @@ body{
             </td>
             <td>
               <strong>BEGMP Digital Rollout</strong>
-              <div class="action-desc">Complete deployment of Bangsamoro e-Governance Master Plan; 1-day digital business registration via BBOI.</div>
+              <div class="action-desc">Complete deployment of Bangsamoro e-Governance Master Plan; 1-day digital business registration via BOI-MTIT.</div>
             </td>
             <td style="text-align:center;"><span class="pri-badge high">● High</span></td>
             <td class="due-cell" style="text-align:center;">Q3 2026</td>
             <td><span class="status-badge in-progress"><span class="status-dot-anim"></span>Development</span></td>
             <td class="budget-cell" style="text-align:right;">₱150M</td>
-            <td class="agency-cell"><strong style="color:white;">BDTA</strong><br>BBOI, MICT</td>
+            <td class="agency-cell"><strong style="color:white;">BDTA</strong><br>BOI-MTIT, MICT</td>
           </tr>
 
           <tr data-priority="high" data-quarter="q4">
@@ -931,7 +954,7 @@ body{
         <h2 class="section-title" id="phase-title">Phase Progress Tracker — 2026–2035</h2>
         <div class="section-rule"></div>
       </div>
-      <span class="section-count">₱55B total · 3 phases</span>
+      <span class="section-count">₱120–160B total · 3 phases</span>
     </div>
 
     <div class="phase-tracker" role="list">
@@ -941,7 +964,7 @@ body{
         <div class="phase-num-badge" aria-hidden="true">01</div>
         <div class="phase-track-title">Foundation Building</div>
         <div class="phase-track-years">2026 – 2028</div>
-        <div class="phase-track-budget">PHP 15B</div>
+        <div class="phase-track-budget">₱35–45B</div>
         <span class="status-badge in-progress" style="margin-bottom:.6rem;"><span class="status-dot-anim"></span>Current Phase</span>
         <div class="phase-track-bar" style="background:rgba(16,185,129,.12);">
           <div class="phase-track-fill" style="background:linear-gradient(90deg,#10b981,#6ee7b7);width:0%;" data-w="26"></div>
@@ -961,7 +984,7 @@ body{
         <div class="phase-num-badge" aria-hidden="true">02</div>
         <div class="phase-track-title">Acceleration</div>
         <div class="phase-track-years">2029 – 2032</div>
-        <div class="phase-track-budget">PHP 20B</div>
+        <div class="phase-track-budget">₱50–65B</div>
         <span class="status-badge not-started" style="margin-bottom:.6rem;"><span class="status-dot-anim"></span>Upcoming</span>
         <div class="phase-track-bar">
           <div class="phase-track-fill" style="background:linear-gradient(90deg,#3b82f6,#93c5fd);width:0%;" data-w="0"></div>
@@ -980,7 +1003,7 @@ body{
         <div class="phase-num-badge" aria-hidden="true">03</div>
         <div class="phase-track-title">Consolidation</div>
         <div class="phase-track-years">2033 – 2035</div>
-        <div class="phase-track-budget">PHP 20B</div>
+        <div class="phase-track-budget">₱35–50B</div>
         <span class="status-badge not-started" style="margin-bottom:.6rem;"><span class="status-dot-anim"></span>Future Phase</span>
         <div class="phase-track-bar">
           <div class="phase-track-fill" style="background:linear-gradient(90deg,#8b5cf6,#c4b5fd);width:0%;" data-w="0"></div>
@@ -1000,14 +1023,17 @@ body{
 </main>
 
 <!-- Footer -->
-<footer style="text-align:center;padding:2rem 1rem;border-top:1px solid var(--gold-border);margin-top:var(--s8);">
-  <div style="margin-bottom:1rem;display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
-    <a href="dashboard.html" style="color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600;">Dashboard</a>
-    <a href="roadmap.html" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;">Roadmap</a>
-    <a href="action-plan.html" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;">Action Plan</a>
-  </div>
-  <p style="font-size:.75rem;color:rgba(255,255,255,.3);">© 2026 BARMM · Ministry of Trade, Investments and Tourism · <span style="color:var(--gold);">The Emerging Bangsamoro</span> · Investment Roadmap 2026–2035</p>
-  <p style="font-size:.68rem;color:rgba(255,255,255,.2);margin-top:.3rem;">Data sources: PSA, BBOI, BEZA, MTIT, MENRE (2024 baselines). Targets per BIRD 2026–2035 Roadmap &amp; BDP 2023–2028.</p>
+<footer class="site-footer" style="text-align:center;padding:2.5rem 1.5rem;border-top:1px solid var(--gold-border);margin-top:3rem;">
+<div style="margin-bottom:1rem;display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;">
+<a href="https://bangsamoro-investment-roadmap.asilvainnovations.com" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;">Home</a>
+<a href="dashboard.html" style="color:var(--gold);font-weight:600;text-decoration:none;font-size:.8rem;">Dashboard</a>
+<a href="roadmap.html" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;">Roadmap</a>
+<a href="action-plan.html" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;">Action Plan</a>
+<a href="resources.html" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;">Resources</a>
+<a href="contact.html" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;">Contact</a>
+</div>
+<p style="font-size:.75rem;color:rgba(255,255,255,.3);">© 2026 BARMM · Bureau of Investments — Ministry of Trade, Investments and Tourism (BOI-MTIT) · <span style="color:var(--gold);">The Emerging Bangsamoro</span> · Investment Roadmap 2026–2035</p>
+<p style="font-size:.68rem;color:rgba(255,255,255,.2);margin-top:.3rem;">Data sources: PSA, BOI-MTIT, BEZA, MENRE (2024 baselines). Targets per BIRD 2026–2035 Chapters 4–6 &amp; BDP 2023–2028.</p>
 </footer>
 
 <script>
