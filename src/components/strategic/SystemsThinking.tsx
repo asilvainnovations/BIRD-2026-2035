@@ -78,7 +78,7 @@ import FloatingAIAssistant from './FloatingAIAssistant';
  * Somewhat accurately 2, Needs revision 1, Not accurate 0.
  *
  * `archetypeId` maps to the SYSTEM_ARCHETYPES ids already defined below.
- * Entries with a null archetypeId are the two standalone CLDs from Chapter 3-B.
+ * Entries with a null archetypeId are the two standalone CLDs from Chapter 2.
  */
 const ARCHETYPE_VALIDATION: Array<{
   archetypeId: string | null;
