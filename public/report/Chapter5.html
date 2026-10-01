@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chapter 5: Metrics and KPI Benchmarking Framework | BIRD 2026-2035</title>
+<title>Chapter 4: Metrics, KPI Benchmarking and Performance Calibration | BIRD 2026-2035</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{margin:0;padding:0;font-family:'Roboto',sans-serif;font-size:11pt;line-height:1.7;color:#333;background:#fff;text-align:justify;text-align-last:left;}
+body{margin:0;padding:0;font-family:'Roboto',sans-serif;font-size:11pt;line-height:1.7;color:#333;background:#fff;text-align:justify;text-align-last:left;}p,li,td,th{text-align:justify;hyphens:auto;}figure,figure img{margin-left:auto;margin-right:auto;text-align:center;}
 @page{size:A4;margin:2.5cm 2cm 2.5cm 2cm;@top-center{content:string(doctitle);font-size:9pt;color:#666;font-style:italic;}@bottom-center{content:counter(page);font-size:9pt;color:#666;}}
 @page :first{margin:0;@top-center{content:none;}@bottom-center{content:none;}}
 @page cover{margin:0;@top-center{content:none;}@bottom-center{content:none;}}
@@ -36,14 +36,14 @@ strong{color:#1a4d3a;}
 table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:9pt;page-break-inside:auto;max-width:100%;}
 thead{display:table-header-group;}thead tr{border-top:2px solid #333;border-bottom:1px solid #333;}
 tbody tr{border-bottom:1px solid #ddd;}tbody tr:last-child{border-bottom:2px solid #333;}
-th,td{padding:6px 8px;text-align:left;vertical-align:top;}
+th,td{padding:6px 8px;text-align:justify;vertical-align:top;}
 th{font-weight:600;background:#f8f9f5;color:#0a3d2e;font-family:'Poppins',sans-serif;font-size:9pt;}
 tr{page-break-inside:avoid;}
-caption{font-family:'Poppins',sans-serif;font-weight:600;font-size:10pt;color:#0a3d2e;margin-bottom:0.5rem;text-align:left;}
+caption{font-family:'Poppins',sans-serif;font-weight:600;font-size:10pt;color:#0a3d2e;margin-bottom:0.5rem;text-align:justify;}
 caption::before{content:attr(data-label) ": ";font-weight:700;}
 figure{margin:1.2rem 0;text-align:center;page-break-inside:avoid;}
 figure img{max-width:100%;height:auto;display:block;margin:0 auto;}
-figcaption{font-size:9pt;color:#555;margin-top:0.5rem;font-style:italic;text-align:left;line-height:1.5;}
+figcaption{font-size:9pt;color:#555;margin-top:0.5rem;font-style:italic;text-align:justify;line-height:1.5;}
 figcaption::before{content:attr(data-label) ": ";font-weight:700;font-style:normal;}
 .footnote{font-size:8.5pt;color:#555;vertical-align:super;}
 .footnotes{font-size:8.5pt;border-top:1px solid #ddd;margin-top:2rem;padding-top:1rem;}
@@ -55,14 +55,6 @@ blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-st
 .chapter-title{font-family:'Poppins',sans-serif;font-size:22pt;font-weight:700;color:#0a3d2e;line-height:1.3;}
 .resource-box{background:#f0f7f4;border:1px solid #c8e6d5;border-left:4px solid #0a3d2e;padding:0.8rem 1rem;margin:1rem 0;font-size:9.5pt;}
 .resource-box-title{font-family:'Poppins',sans-serif;font-weight:600;color:#0a3d2e;margin-bottom:0.3rem;}
-.toc-page{page:toc-page;page-break-after:always;}
-.toc-title{font-family:'Poppins',sans-serif;font-size:18pt;font-weight:700;color:#0a3d2e;text-align:center;margin-bottom:1.5rem;padding-bottom:0.5rem;border-bottom:2px solid #C9A84C;}
-.toc{list-style:none;padding:0;margin:0;}
-.toc li{margin-bottom:0.3rem;}
-.toc a{color:#333;text-decoration:none;font-size:10.5pt;display:block;padding:0.2rem 0;}
-.toc .toc-chapter{font-weight:700;font-size:11pt;color:#0a3d2e;margin-top:0.8rem;}
-.toc .toc-section{padding-left:1.5rem;font-size:10pt;}
-.toc .toc-subsection{padding-left:3rem;font-size:9.5pt;color:#555;}
 .references-page{page-break-before:always;}
 .references-list{font-size:10pt;line-height:1.6;}
 .references-list p{margin-bottom:0.7rem;padding-left:2rem;text-indent:-2rem;}
@@ -89,45 +81,21 @@ blockquote{border-left:3px solid #C9A84C;padding-left:1rem;margin:1rem 0;font-st
 <div class="cover">
 <div class="cover-content">
 <div class="cover-badge">Peer-Reviewed Publication — Data-Enriched Edition</div>
-<div class="cover-chapter">Chapter 5</div>
-<div class="cover-title">Metrics and KPI<br>Benchmarking and Calibration</div>
+<div class="cover-chapter">Chapter 4</div>
+<div class="cover-title">Metrics, KPI Benchmarking<br>and Performance Calibration</div>
 <div class="cover-divider"></div>
 <div class="cover-subtitle">A Calibrated, Evidence-Based Architecture for Measuring<br>Cross-Cluster Synchronization and Ecosystem Transformation</div>
 <div class="cover-meta">
 <strong>Bangsamoro Investment Roadmap Development (BIRD) 2026-2035</strong><br>
 Asilva Innovations Strategic Insights<br>
 Prepared for the Bangsamoro Government and Development Partners<br>
-<em>July 2026</em>
+<em>Integrated publication update · 2026</em>
 </div>
 </div>
-</div>
-
-<!-- ==================== TABLE OF CONTENTS ==================== -->
-<div class="toc-page">
-<h1 class="toc-title">Table of Contents</h1>
-<ul class="toc">
-<li class="toc-chapter"><a href="#ch5-a">A. Strategic Alignment with the Integrated Ecosystem Development Strategy</a></li>
-<li class="toc-chapter"><a href="#ch5-b">B. KPI Architecture and Calibration Methodology</a></li>
-<li class="toc-section"><a href="#ch5-b-1">B.1 Four Calibration Tiers</a></li>
-<li class="toc-section"><a href="#ch5-b-2">B.2 The Six Pareto KPIs</a></li>
-<li class="toc-chapter"><a href="#ch5-c">C. Cross-Cutting Operating Systems Metrics</a></li>
-<li class="toc-section"><a href="#ch5-c-1">C.1 Moral Governance</a></li>
-<li class="toc-section"><a href="#ch5-c-2">C.2 Resilience</a></li>
-<li class="toc-section"><a href="#ch5-c-3">C.3 Inclusivity</a></li>
-<li class="toc-section"><a href="#ch5-c-4">C.4 Peace and Security</a></li>
-<li class="toc-chapter"><a href="#ch5-d">D. Cluster-Specific Performance Indicators</a></li>
-<li class="toc-section"><a href="#ch5-d-1">D.1 Foundations Cluster</a></li>
-<li class="toc-section"><a href="#ch5-d-2">D.2 Transformers Cluster</a></li>
-<li class="toc-section"><a href="#ch5-d-3">D.3 Enablers Cluster and Human Capital</a></li>
-<li class="toc-section"><a href="#ch5-d-4">D.4 Connectors Cluster</a></li>
-<li class="toc-section"><a href="#ch5-d-5">D.5 Financiers Cluster</a></li>
-<li class="toc-chapter"><a href="#ch5-e">E. International, National and Regional Benchmark Alignment</a></li>
-<li class="toc-chapter"><a href="#references">References</a></li>
-</ul>
 </div>
 
 <!-- ==================== SECTION A ==================== -->
-<div class="chapter-header" id="ch5-a">
+<div class="chapter-header" id="ch4-a">
 <div class="chapter-number">Section A</div>
 <h1 class="chapter-title">Strategic Alignment with the Integrated Ecosystem Development Strategy</h1>
 </div>
@@ -137,19 +105,23 @@ The Integrated Ecosystem Development Strategy (IEDS), recommended in Chapter 3, 
 </p>
 
 <p>
-This chapter establishes a calibrated, evidence-based benchmarking architecture anchored in BARMM's master plans, regulatory frameworks, and international standards. Each KPI is phased to align with the IEDS implementation timeline: <span class="phase-marker phase-1">Phase 1: Foundation Building (2026-2028)</span>, <span class="phase-marker phase-2">Phase 2: Acceleration (2029-2032)</span>, and <span class="phase-marker phase-3">Phase 3: Consolidation &amp; Global Integration (2033-2035)</span>. The framework ensures that progress is measurable, comparable, and adaptive, enabling policymakers, development planners, and investors to track systemic transformation rather than incremental activity.
+This chapter establishes a calibrated, evidence-based benchmarking architecture anchored in BARMM's master plans, regulatory frameworks, and international standards. Each KPI is phased to align with the IEDS implementation timeline: <span class="phase-marker phase-1">Phase 1: Foundation Building (2026-2028)</span>, <span class="phase-marker phase-2">Phase 2: Acceleration (2029-2031)</span>, and <span class="phase-marker phase-3">Phase 3: Consolidation &amp; Global Integration (2033-2035)</span>. The framework ensures that progress is measurable, comparable, and adaptive, enabling policymakers, development planners, and investors to track systemic transformation rather than incremental activity.
 </p>
 
 <p>
-The KPI framework is designed to feed directly into the Balanced Scorecard (Chapter 6), which organizes metrics across four causal perspectives: Financial, Stakeholder, Internal Process, and Learning &amp; Growth. This chapter provides the <em>what</em> and <em>how much</em> of measurement; Chapter 6 provides the <em>why</em> and <em>so what</em> by linking each KPI to strategic objectives and causal pathways. Together, Chapters 5 and 6 form the measurement and management engine of the BIRD 2026-2035 (Kaplan &amp; Norton, 1996; Silva, 2026).
+The KPI framework is designed to feed directly into the Balanced Scorecard (Chapter 5), which organizes metrics across four causal perspectives: Financial, Stakeholder, Internal Process, and Learning &amp; Growth. This chapter provides the <em>what</em> and <em>how much</em> of measurement; Chapter 5 provides the <em>why</em> and <em>so what</em> by linking each KPI to strategic objectives and causal pathways. Together, Chapters 4 and 5 form the measurement and management engine of the BIRD 2026-2035 (Kaplan &amp; Norton, 1996; Silva, 2026).
 </p>
+
+<div class="data-callout">
+<strong>Measurement Integrity and Data Contract.</strong> The KPI layer should be read together with the consolidated Chapter 2 diagnostic and Chapter 3 strategy architecture. The latest linked validation snapshot contains 76 consented survey responses, while the live analytics contract is <strong>analyticsVersion 2</strong>. Survey-derived SWOT diagnostics use the repository's canonical formulas: Strength RI = (Impact × Likelihood) / 5; Opportunity RI = √(Impact × Likelihood); Weakness Risk = Impact × Likelihood; and Threat VI = (Impact² × Likelihood) / 25. Missing SWOT families are treated as missing observations, not as zero scores. These diagnostics support prioritization and learning; they do not, by themselves, constitute official administrative baselines or future targets.
+</div>
 
 <div class="data-callout">
 <strong>Beyond Checklists: The Capabilities-Based Approach.</strong> Conventional ESG and development monitoring relies on checklists — counting activities completed rather than capabilities built. The BIRD KPI framework, informed by capabilities-based thinking (Beyond ESG, 2025), measures not whether a training was conducted but whether functional literacy improved; not whether a road was built but whether logistics costs declined; not whether a halal certificate was issued but whether export revenue grew. This shift from output metrics to outcome metrics is essential for tracking genuine ecosystem transformation.
 </div>
 
 <!-- ==================== SECTION B ==================== -->
-<div class="chapter-header" id="ch5-b">
+<div class="chapter-header" id="ch4-b">
 <div class="chapter-number">Section B</div>
 <h1 class="chapter-title">KPI Architecture and Calibration Methodology</h1>
 </div>
@@ -158,10 +130,10 @@ The KPI framework is designed to feed directly into the Balanced Scorecard (Chap
 The KPI framework is structured across four calibration tiers to ensure strategic relevance, operational feasibility, and alignment with the IEDS synchronized development logic. Calibration follows the Strat Planner Pro Layer 4 methodology, integrating SMART criteria (Specific, Measurable, Achievable, Relevant, Time-bound), dynamic feedback loops, and cross-cluster dependency mapping. KPIs are weighted by strategic leverage: cross-cutting operating system indicators carry the highest governance weight (30% in composite scoring), while cluster-specific metrics carry 45% and benchmark alignment carries 25% to ensure global competitiveness without sacrificing local ecosystem health (Silva, 2026).
 </p>
 
-<h2 id="ch5-b-1">B.1 Four Calibration Tiers</h2>
+<h2 id="ch4-b-1">B.1 Four Calibration Tiers</h2>
 
 <table id="tab-calibration">
-<caption data-label="Table 5-1">KPI Calibration and Phasing Architecture</caption>
+<caption data-label="Table 4-1">KPI Calibration and Phasing Architecture</caption>
 <thead>
 <tr><th>Calibration Tier</th><th>Time Horizon</th><th>Strategic Focus</th><th>Strategy Phase Alignment</th><th>Data Verification Mechanism</th></tr>
 </thead>
@@ -178,19 +150,19 @@ The KPI framework is structured across four calibration tiers to ensure strategi
 The calibration architecture ensures that KPIs remain responsive to IEDS synchronization requirements. Cross-cluster metrics are prioritized to prevent siloed progress from masking systemic bottlenecks. For example, tracking halal certification processing speed (Transformers cluster) in isolation would miss its direct influence on export volume (Connectors cluster) and investor retention (Stakeholder perspective). The framework explicitly maps these interdependencies, ensuring that lagging indicators in one cluster trigger diagnostic attention in connected clusters (Silva, 2026).
 </p>
 
-<h2 id="ch5-b-2">B.2 The Six Pareto KPIs</h2>
+<h2 id="ch4-b-2">B.2 The Six Pareto KPIs</h2>
 
 <p>
-Drawing on the Pareto principle (80/20 rule), the BIRD framework identifies six KPIs that collectively drive approximately 80% of the IEDS impact. These KPIs are tracked in real-time through the Bangsamoro Investment Command Center (BICC) MEL Dashboard and serve as the primary navigational instruments for strategy execution. Each Pareto KPI is linked to specific Leverage Points (LP1-LP5) and Systems Archetypes, enabling rapid identification of intervention points when deviations occur (Silva, 2026).
+For executive monitoring, the BIRD framework uses six Pareto-style headline KPIs as a compact management shortlist. They should not be interpreted as a statistically established claim that exactly 80% of IEDS impact is caused by six variables; they provide a high-signal navigation layer that complements the full KPI register. These KPIs are tracked in real-time through the Bangsamoro Investment Command Center (BICC) MEL Dashboard and serve as the primary navigational instruments for strategy execution. Each Pareto KPI is linked to specific Leverage Points (LP1-LP5) and Systems Archetypes, enabling rapid identification of intervention points when deviations occur (Silva, 2026).
 </p>
 
 <figure id="fig-pareto-kpis">
-<img src="file:///mnt/agents/output/bird_ch5/ch5_pareto_kpis.png" alt="Six Pareto KPIs">
-<figcaption data-label="Figure 5-1">Six Pareto KPIs: Baseline (2024) vs. Terminal Targets (2035). These six indicators — Investment Approvals, GRDP, Export Value, Halal MSMEs, Electrification Rate, and Broadband Connectivity — collectively drive approximately 80% of IEDS impact. Each KPI is linked to specific Leverage Points and tracked in real-time through the BICC MEL Dashboard. Source: PSA-BARMM; BBOI; BHB; DOE; DICT (2025).</figcaption>
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/34-Metrics.png" alt="BIRD metrics and KPI dashboard">
+<figcaption data-label="Figure 4-1">BIRD Metrics and KPI Architecture. The metrics layer provides the management view for implementation performance across the BEIE clusters and cross-cutting operating systems. It is read together with the KPI register, source definitions, owners, and verification rules rather than as a standalone score. Source: BIRD KPI Framework; Strat Planner Pro architecture (Silva, 2026).</figcaption>
 </figure>
 
 <table id="tab-pareto-kpis">
-<caption data-label="Table 5-2">Six Pareto KPIs — Strat Planner Pro MEL Dashboard Tracking</caption>
+<caption data-label="Table 4-2">Six Pareto KPIs — Strat Planner Pro MEL Dashboard Tracking</caption>
 <thead>
 <tr><th>#</th><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Primary CLPs</th><th>Data Source</th></tr>
 </thead>
@@ -205,13 +177,13 @@ Drawing on the Pareto principle (80/20 rule), the BIRD framework identifies six 
 </table>
 
 <figure id="fig-kpi-trajectories">
-<img src="file:///mnt/agents/output/bird_ch5/ch5_kpi_trajectories.png" alt="KPI Calibration Trajectories">
-<figcaption data-label="Figure 5-2">KPI Calibration Trajectories (2024-2035): Phased trajectories for all six Pareto KPIs showing interim milestones at 2028 (Phase 1 end) and 2032 (Phase 2 end). The trajectories follow an S-curve pattern reflecting the IEDS sequencing logic: slower initial progress during enabler deployment, accelerated growth during transformer scaling, and steady-state consolidation during global integration. Source: Strat Planner Pro; BIRD MEL Dashboard (Silva, 2026).</figcaption>
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/KPI-Framework.png" alt="BIRD KPI framework">
+<figcaption data-label="Figure 4-2">BIRD KPI Framework. Leading and lagging indicators are organized around baselines, targets, owners, and measurement methods so that implementation monitoring can distinguish capacity-building progress from downstream outcomes. Source: BIRD KPI Framework; Strat Planner Pro architecture (Silva, 2026).</figcaption>
 </figure>
 
 <div class="kpi-box">
 <div class="kpi-box-title">Adaptive Recalibration Protocol</div>
-<p style="font-size:9pt;margin-bottom:0.3rem;">To prevent the "Fixes that Fail" systems archetype, the BIRD framework employs adaptive recalibration: incentives and resource releases are conditional on enabler capacity meeting production demand thresholds. If a KPI deviates &gt;10% from its trajectory, the following protocol activates:</p>
+<p style="font-size:9pt;margin-bottom:0.3rem;">To prevent the "Fixes that Fail" systems archetype, the BIRD framework employs adaptive recalibration: incentives and resource releases are conditional on enabler capacity meeting production demand thresholds. If a KPI deviates &gt;15% from its approved trajectory, the following protocol activates:</p>
 <p style="font-size:9pt;margin-bottom:0.2rem;"><strong>Step 1:</strong> Automated alert via BEGMP dashboard to BICC operators and ministry leads.</p>
 <p style="font-size:9pt;margin-bottom:0.2rem;"><strong>Step 2:</strong> Cross-cluster diagnostic — is the deviation caused by internal cluster failure or upstream/downstream dependency?</p>
 <p style="font-size:9pt;margin-bottom:0.2rem;"><strong>Step 3:</strong> Leverage Point activation — which LP (L1-L12) addresses the root cause?</p>
@@ -219,7 +191,7 @@ Drawing on the Pareto principle (80/20 rule), the BIRD framework identifies six 
 </div>
 
 <!-- ==================== SECTION C ==================== -->
-<div class="chapter-header" id="ch5-c">
+<div class="chapter-header" id="ch4-c">
 <div class="chapter-number">Section C</div>
 <h1 class="chapter-title">Cross-Cutting Operating Systems Metrics</h1>
 </div>
@@ -229,18 +201,18 @@ The IEDS positions Moral Governance, Resilience, Inclusivity, and Peace as the o
 </p>
 
 <figure id="fig-crosscutting-os">
-<img src="file:///mnt/agents/output/bird_ch5/ch5_crosscutting_os.png" alt="Cross-Cutting Operating Systems Metrics">
-<figcaption data-label="Figure 5-3">Cross-Cutting Operating Systems Metrics by Calibration Phase: Moral Governance (financial disclosure), Resilience (climate-risk screening), Inclusivity (gender-balanced employment), and Peace &amp; Security (combatant reintegration). Cross-cutting KPIs are weighted highest in the Balanced Scorecard (30%) to reflect their systemic multiplier effect on cluster performance. Source: OCM-BARMM; MENRE; MOLE; OPAPRU (2025).</figcaption>
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/KPI-Framework.png" alt="Cross-cutting KPI framework">
+<figcaption data-label="Figure 4-3">Cross-Cutting Operating Systems Measurement Architecture. Moral Governance, Resilience, Inclusivity, and Peace and Security are treated as system-level conditions that affect the performance of all five BEIE clusters. Source: BIRD KPI Framework and Chapter 2 diagnostic architecture (Silva, 2026).</figcaption>
 </figure>
 
-<h2 id="ch5-c-1">C.1 Moral Governance</h2>
+<h2 id="ch4-c-1">C.1 Moral Governance</h2>
 
 <p>
 Moral Governance, anchored in the Bangsamoro Moral Governance Framework 2020-2035 (OCM-BARMM, 2020), is the operating system that determines whether all other clusters function effectively. The framework operationalizes Islamic ethics (khalifa stewardship), transparency, and accountability as foundational governance principles. KPIs in this dimension track the institutionalization of these principles across BARMM government operations (Silva, 2026).
 </p>
 
 <table id="tab-moral-governance">
-<caption data-label="Table 5-3">Moral Governance KPIs and Master Plan Anchors</caption>
+<caption data-label="Table 4-3">Moral Governance KPIs and Master Plan Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Lead Agency</th><th>Policy Anchor</th></tr>
 </thead>
@@ -257,14 +229,14 @@ Moral Governance, anchored in the Bangsamoro Moral Governance Framework 2020-203
 The budget execution rate KPI is particularly critical because it captures the absorptive capacity constraint that has historically undermined BARMM's development. At less than 80% execution, BARMM effectively leaves 20%+ of allocated funds unspent — a pattern that constitutes both fiscal waste and lost development opportunity. The 2035 target of &gt;90% requires systematic reform of procurement processes, human resource deployment, and inter-agency coordination. Provincial variation is significant: Maguindanao del Norte (administrative center) likely exceeds 85% execution, while the SGA (8 newly created municipalities) may execute below 60% due to capacity constraints. The BEGMP digital platform provides real-time tracking of budget execution at provincial and municipal levels, enabling targeted capacity-building interventions (MFBM, 2025; BDP, 2023).
 </p>
 
-<h2 id="ch5-c-2">C.2 Resilience</h2>
+<h2 id="ch4-c-2">C.2 Resilience</h2>
 
 <p>
 Resilience metrics capture BARMM's capacity to absorb, adapt to, and recover from climate shocks, economic disruptions, and security incidents. The climate resilience dimension is particularly urgent: El Nino-induced crop losses of ₱346 million in Maguindanao del Sur (2024) and Pestalotiopsis disease infestation of 800+ hectares of rubber plantations demonstrate the vulnerability of the agricultural base that supports 32.4% of BARMM's GRDP (MENRE-BARMM, 2024; PSA-RSSO BARMM, 2025).
 </p>
 
 <table id="tab-resilience">
-<caption data-label="Table 5-4">Resilience KPIs and Policy Anchors</caption>
+<caption data-label="Table 4-4">Resilience KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Lead Agency</th><th>Policy Anchor</th></tr>
 </thead>
@@ -280,14 +252,14 @@ Resilience metrics capture BARMM's capacity to absorb, adapt to, and recover fro
 <strong>Provincial Resilience Insight:</strong> The resilience KPIs must be disaggregated by province because climate vulnerability varies dramatically. Tawi-Tawi faces sea-level rise threatening 50,000+ seaweed livelihoods; Maguindanao del Sur faces El Nino crop losses (₱346M in 2024); Basilan faces rubber Pestalotiopsis disease (800+ ha); and Lanao del Sur faces Lake Lanao watershed degradation affecting 340 sq km of water resources. A single regional resilience score would mask these distinct vulnerability profiles. The MENRE-BARMM Climate Resilience Master Plan (2024-2035) provides province-specific risk assessments that should inform disaggregated KPI targets.
 </div>
 
-<h2 id="ch5-c-3">C.3 Inclusivity</h2>
+<h2 id="ch4-c-3">C.3 Inclusivity</h2>
 
 <p>
 Inclusivity metrics ensure that economic growth translates into equitable benefit distribution across provinces, genders, age groups, and marginalized communities. With poverty incidence at 34.8% (nationally highest), functional literacy at 59.3% (vs. 91.6% national), and significant provincial disparities (Maguindanao del Sur at 53% vs. Lanao del Sur at 31.5%), inclusivity is not merely a social objective but an economic imperative — inclusive growth generates larger markets, more productive workforces, and more stable communities (PSA, 2024; PSA-RSSO BARMM, 2024).
 </p>
 
 <table id="tab-inclusivity">
-<caption data-label="Table 5-5">Inclusivity KPIs and Policy Anchors</caption>
+<caption data-label="Table 4-5">Inclusivity KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Lead Agency</th><th>Policy Anchor</th></tr>
 </thead>
@@ -302,14 +274,14 @@ Inclusivity metrics ensure that economic growth translates into equitable benefi
 </tbody>
 </table>
 
-<h2 id="ch5-c-4">C.4 Peace and Security</h2>
+<h2 id="ch4-c-4">C.4 Peace and Security</h2>
 
 <p>
 Peace and security metrics capture the intersection of conflict dynamics and investment climate. BARMM's post-conflict context — including Basilan's ASG-free declaration (June 2024), the Marawi rehabilitation (₱15B+), and ongoing normalization of former combatants — requires KPIs that track both security outcomes and their translation into investor confidence (OPAPRU, 2024; PIA, 2025).
 </p>
 
 <table id="tab-peace">
-<caption data-label="Table 5-6">Peace and Security KPIs and Policy Anchors</caption>
+<caption data-label="Table 4-6">Peace and Security KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Lead Agency</th><th>Policy Anchor</th></tr>
 </thead>
@@ -322,11 +294,11 @@ Peace and security metrics capture the intersection of conflict dynamics and inv
 </table>
 
 <p>
-The investor perception index is a leading indicator that predicts investment approval trends with a 6-12 month lag. Baseline survey data (BBOI, 2026) indicates that investor satisfaction correlates strongly with: (a) business registration time (r = -0.72), (b) permit processing predictability (r = 0.68), and (c) security incident frequency (r = -0.81). This correlation structure validates the causal pathways in the Balanced Scorecard (Chapter 6): improvements in Internal Process (P1-P2) and Peace &amp; Security directly translate into Financial outcomes (F1) through investor confidence mechanisms (Kaplan &amp; Norton, 1992; Silva, 2026).
+The investor perception index is a leading indicator that predicts investment approval trends with a 6-12 month lag. Baseline survey data (BBOI, 2026) indicates that investor satisfaction correlates strongly with: (a) business registration time (r = -0.72), (b) permit processing predictability (r = 0.68), and (c) security incident frequency (r = -0.81). This correlation structure validates the causal pathways in the Balanced Scorecard (Chapter 5): improvements in Internal Process (P1-P2) and Peace &amp; Security directly translate into Financial outcomes (F1) through investor confidence mechanisms (Kaplan &amp; Norton, 1992; Silva, 2026).
 </p>
 
 <!-- ==================== SECTION D ==================== -->
-<div class="chapter-header" id="ch5-d">
+<div class="chapter-header" id="ch4-d">
 <div class="chapter-number">Section D</div>
 <h1 class="chapter-title">Cluster-Specific Performance Indicators</h1>
 </div>
@@ -336,18 +308,18 @@ Cluster KPIs are calibrated to measure throughput, value addition, market access
 </p>
 
 <figure id="fig-cluster-radar">
-<img src="file:///mnt/agents/output/bird_ch5/ch5_cluster_radar.png" alt="Cluster Performance Radar">
-<figcaption data-label="Figure 5-4">Cluster-Specific KPI Performance Radar (2024 Baseline): Each of the five BEIE clusters is assessed across its key performance dimensions on a 1-10 scale. Foundations shows strong renewable energy mix (8/10) but weak electrification (2/10) and ZBIP progress (3/10). Transformers shows uniformly low scores reflecting nascent halal certification, limited tourism, and minimal digital MSME penetration. Enablers shows moderate scores with significant room for improvement in broadband connectivity and digital governance. Source: PSA-BARMM; BBOI; BHB; DOE; TESDA (2025).</figcaption>
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/34-Metrics.png" alt="BEIE cluster KPI metrics">
+<figcaption data-label="Figure 4-4">BEIE Cluster KPI Measurement View. Cluster performance should be interpreted as a portfolio of leading, throughput, and outcome indicators rather than as a single composite radar score. This preserves the distinction between cluster diagnostics in Chapter 2 and implementation performance in the present chapter. Source: BIRD KPI Framework; BEIE architecture (Silva, 2026).</figcaption>
 </figure>
 
-<h2 id="ch5-d-1">D.1 Foundations Cluster</h2>
+<h2 id="ch4-d-1">D.1 Foundations Cluster</h2>
 
 <p>
 The Foundations Cluster captures BARMM's natural resource endowments — agriculture (32.4% of GRDP), fisheries, forestry, and renewable energy (75.86% mix). KPIs in this cluster measure productivity gains, post-harvest loss reduction, cooperative strengthening, renewable energy expansion, and environmental conservation. Provincial data integration is essential because each province specializes in different commodities: Basilan (rubber, 48,366 ha, 69,392 MT), Tawi-Tawi (seaweed, 40% national output), Lanao del Sur (pineapple, corn, Lake Lanao fisheries), and Maguindanao del Sur (rice, corn, coconut) (PSA-RSSO BARMM, 2024; MAFAR, 2025).
 </p>
 
 <table id="tab-foundations">
-<caption data-label="Table 5-7">Foundations Cluster KPIs and Policy Anchors</caption>
+<caption data-label="Table 4-7">Foundations Cluster KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Policy Anchor</th></tr>
 </thead>
@@ -368,14 +340,14 @@ The Foundations Cluster captures BARMM's natural resource endowments — agricul
 The post-harvest loss reduction KPI illustrates the cross-cluster dependency that the BIRD framework captures: reducing losses from 20-40% to 30%+ requires cold chain infrastructure (Enablers cluster), cooperative organization (Foundations cluster), and market linkages (Connectors cluster). Basilan's 69,392 MT rubber production currently loses an estimated 25-30% value between harvest and export due to lack of processing facilities — a loss of approximately ₱400M annually that could be captured through halal-certified rubber goods manufacturing if the Transformers cluster develops concurrently (MAFAR, 2025; MTIT-BARMM, 2025).
 </p>
 
-<h2 id="ch5-d-2">D.2 Transformers Cluster</h2>
+<h2 id="ch4-d-2">D.2 Transformers Cluster</h2>
 
 <p>
 The Transformers Cluster measures value addition, manufacturing, and market-readiness across halal industry, tourism, MSME development, and ecozone operations. This cluster is where BARMM's foundational endowments are converted into export-ready products and services. KPIs track halal certification expansion, export value growth, tourism development, MSME formalization, and industrial locator performance (MTIT-BARMM, 2025; BEZA, 2025).
 </p>
 
 <table id="tab-transformers">
-<caption data-label="Table 5-8">Transformers Cluster KPIs and Policy Anchors</caption>
+<caption data-label="Table 4-8">Transformers Cluster KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Policy Anchor</th></tr>
 </thead>
@@ -396,14 +368,14 @@ The Transformers Cluster measures value addition, manufacturing, and market-read
 The halal-certified MSME trajectory — from ~500 (2024) to 5,000+ (2035) — is the single highest-leverage Transformers KPI because each certified MSME represents: (a) a micro-enterprise with formal market access, (b) a household with increased income, (c) a node in the halal value chain, and (d) a data point in the BHB certification system. At scale, 5,000+ certified MSMEs create a self-reinforcing ecosystem where certification demand drives BHB capacity, BHB capacity drives certification quality, and certification quality drives export revenue. This is the Investment-Development Virtuous Cycle (R1) identified in Chapter 3-2 (Silva, 2026; BHIDP, 2025).
 </p>
 
-<h2 id="ch5-d-3">D.3 Enablers Cluster and Human Capital</h2>
+<h2 id="ch4-d-3">D.3 Enablers Cluster and Human Capital</h2>
 
 <p>
 The Enablers Cluster captures the physical, digital, and human infrastructure that enables all other clusters to function. This is the highest-priority cluster in IEDS Sequence A (2026-2028) because, as the systems mapping in Chapter 3-2 demonstrated, infrastructure and human capital deficits constitute the binding "Limits to Growth" constraints that stall economic transformation. The Enablers KPIs are divided into two sub-dimensions: physical/digital infrastructure and human capital development (BEGMP, 2025; TESDA-BARMM, 2025).
 </p>
 
 <table id="tab-enablers">
-<caption data-label="Table 5-9">Enablers Cluster KPIs and Policy Anchors</caption>
+<caption data-label="Table 4-9">Enablers Cluster KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Policy Anchor</th></tr>
 </thead>
@@ -422,12 +394,12 @@ The human capital development sub-dimension addresses BARMM's most persistent bi
 </p>
 
 <figure id="fig-human-capital">
-<img src="file:///mnt/agents/output/bird_ch5/ch5_human_capital.png" alt="Human Capital Development KPIs">
-<figcaption data-label="Figure 5-5">Human Capital Development KPIs: Baseline vs. 2035 Targets. Functional literacy (59.3% → 75%+) is the critical enabler for all other strategies. TVET graduate employment (70.9% → 80%) and youth employment (60% → 80%) directly feed into the Stakeholder Perspective of the Balanced Scorecard (Chapter 6). Source: PSA-BARMM; TESDA-BARMM; MOLE (2025).</figcaption>
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/KPI-Framework.png" alt="Human capital KPI framework">
+<figcaption data-label="Figure 4-5">Human Capital KPI Architecture. Functional literacy, industry-aligned skills, digital capability, and health access are treated as enabling-capacity indicators whose improvement should be linked to downstream productivity and inclusion outcomes. Source: BIRD KPI Framework; Strat Planner Pro architecture (Silva, 2026).</figcaption>
 </figure>
 
 <table id="tab-human-capital">
-<caption data-label="Table 5-10">Human Capital Development KPIs — Comprehensive Matrix</caption>
+<caption data-label="Table 4-10">Human Capital Development KPIs — Comprehensive Matrix</caption>
 <thead>
 <tr><th>Category / KPI</th><th>Baseline</th><th>2028 Target</th><th>2035 Target</th><th>Data Source</th></tr>
 </thead>
@@ -464,14 +436,14 @@ The human capital development sub-dimension addresses BARMM's most persistent bi
 <strong>Human Capital as the Master Enabler:</strong> The functional literacy rate (59.3% → 75%+) is the single most important enabler KPI because it determines the absorptive capacity of all other investments. At 59.3% functional literacy, BARMM cannot fully utilize digital governance platforms (BEGMP), operate complex processing machinery (Transformers), or engage with Islamic financial products (Financiers). The 15.7 percentage point improvement target requires coordinated action across DepEd (basic education), TESDA (technical skills), and MICT (digital literacy) — a cross-agency coordination challenge that the inter-agency coordination score (5.5/10 → 8/10) directly measures.
 </div>
 
-<h2 id="ch5-d-4">D.4 Connectors Cluster</h2>
+<h2 id="ch4-d-4">D.4 Connectors Cluster</h2>
 
 <p>
 The Connectors Cluster measures trade facilitation, export readiness, BIMP-EAGA integration, and digital trade infrastructure. This cluster becomes the priority in IEDS Sequence C (2032-2035) because market access is only valuable when production capacity (Transformers) and logistics infrastructure (Enablers) are already in place. Premature focus on Connectors without adequate Foundations, Transformers, and Enablers creates "empty corridors" — trade routes with insufficient volume to justify their cost (BIMP-EAGA, 2024; MTIT-BARMM, 2025).
 </p>
 
 <table id="tab-connectors">
-<caption data-label="Table 5-11">Connectors Cluster KPIs and Policy Anchors</caption>
+<caption data-label="Table 4-11">Connectors Cluster KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Policy Anchor</th></tr>
 </thead>
@@ -484,14 +456,14 @@ The Connectors Cluster measures trade facilitation, export readiness, BIMP-EAGA 
 </tbody>
 </table>
 
-<h2 id="ch5-d-5">D.5 Financiers Cluster</h2>
+<h2 id="ch4-d-5">D.5 Financiers Cluster</h2>
 
 <p>
 The Financiers Cluster measures the depth and reach of Islamic banking, takaful, microfinance, and waqf instruments across BARMM. With Islamic banking assets below ₱2 billion and adult financial inclusion at approximately 38% (vs. national targets of 70%+), the Financiers cluster represents both a significant gap and a transformative opportunity. Islamic finance is uniquely aligned with BARMM's identity — Shariah-compliant instruments provide culturally appropriate financial access for Muslim communities that may avoid conventional banking for religious reasons (IsDB-ICD, 2025; BSP, 2024).
 </p>
 
 <table id="tab-financiers">
-<caption data-label="Table 5-12">Financiers Cluster KPIs and Policy Anchors</caption>
+<caption data-label="Table 4-12">Financiers Cluster KPIs and Policy Anchors</caption>
 <thead>
 <tr><th>KPI</th><th>Baseline (2024)</th><th>2028 Target</th><th>2030 Target</th><th>2035 Target</th><th>Policy Anchor</th></tr>
 </thead>
@@ -510,7 +482,7 @@ The adult financial inclusion rate target requires careful interpretation: the b
 </p>
 
 <!-- ==================== SECTION E ==================== -->
-<div class="chapter-header" id="ch5-e">
+<div class="chapter-header" id="ch4-e">
 <div class="chapter-number">Section E</div>
 <h1 class="chapter-title">International, National and Regional Benchmark Alignment</h1>
 </div>
@@ -520,12 +492,12 @@ To ensure global competitiveness and policy coherence, BIRD KPIs are explicitly 
 </p>
 
 <figure id="fig-benchmark-matrix">
-<img src="file:///mnt/agents/output/bird_ch5/ch5_benchmark_matrix.png" alt="Multi-Layer Benchmark Alignment Matrix">
-<figcaption data-label="Figure 5-6">Multi-Layer Benchmark Alignment Matrix: Each BIRD indicator is scored for alignment (0-10) against four external frameworks — OIC/SMIIC Halal, ESG/Climate, PDP 2023-2028, and SDGs. Higher scores (green) indicate stronger alignment. The matrix reveals that poverty reduction (SDG 1) and literacy (SDG 4) achieve the highest cross-framework alignment, while halal certification time is primarily an OIC/SMIIC metric. Source: OIC/SMIIC; TCFD; NEDA; UNDP (2025).</figcaption>
+<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/30-Phases.png" alt="BIRD implementation phases">
+<figcaption data-label="Figure 4-6">BIRD Implementation Phases and Benchmarking Logic. KPI baselines and milestones are interpreted within the three-phase architecture established in Chapter 3: Foundation Building (2026–2028), Acceleration (2029–2031), and Consolidation &amp; Global Integration (2032–2035). Source: Strat Planner Pro; IEDS sequencing logic (Silva, 2026).</figcaption>
 </figure>
 
 <table id="tab-benchmark-alignment">
-<caption data-label="Table 5-13">Multi-Layer Benchmark Alignment Matrix</caption>
+<caption data-label="Table 4-13">Multi-Layer Benchmark Alignment Matrix</caption>
 <thead>
 <tr><th>Benchmark Framework</th><th>Alignment Indicator</th><th>BARMM Baseline</th><th>2030 Target</th><th>2035 Target</th><th>Reference Standard</th></tr>
 </thead>
@@ -577,6 +549,10 @@ The ESG framework adds a global investability dimension. With international inve
 <p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Validation Survey:</strong> <a href="https://bird-survey.asilvainnovations.com">bird-survey.asilvainnovations.com</a></p>
 <p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Dashboard:</strong> <a href="https://bird-dashboard.asilvainnovations.com">bird-dashboard.asilvainnovations.com</a></p>
 <p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Actors and Value Map:</strong> <a href="https://bird-actors-value-map.asilvainnovations.com">bird-actors-value-map.asilvainnovations.com</a></p>
+</div>
+
+<div class="data-callout">
+<strong>Calibration Governance Rule.</strong> Baselines should be frozen only after source verification; targets should be treated as approved planning targets rather than observed facts; and any target revision should record the reason, approving authority, effective date, and affected data series. Quarterly variance review should distinguish <em>data-quality variance</em>, <em>implementation variance</em>, and <em>external-shock variance</em> before corrective action is assigned. This preserves comparability across the 2026–2035 horizon and prevents target drift from being mistaken for performance improvement.
 </div>
 
 <!-- ==================== REFERENCES ==================== -->
