@@ -251,12 +251,6 @@ export const BIRD_IMAGES = {
     category: "provincial-outlook", section: "section14", alt: "Tawi-Tawi provincial outlook",
     description: "Tawi-Tawi provincial outlook highlighting seaweed industry, tourism potential, and maritime connectivity opportunities.",
   },
-  provincialOutlookSulu: {
-    title: "Provincial Outlook: Sulu",
-    url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/5.%20Sulu.png",
-    category: "provincial-outlook", section: "section14", alt: "Sulu provincial outlook",
-    description: "Provincial outlook for Sulu with focus on pearl industry, tourism, and peace-building economic initiatives.",
-  },
   provincialOutlookCotabato: {
     title: "Provincial Outlook: Special Geographic Area",
     url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/6.%20Cotabato.png",
