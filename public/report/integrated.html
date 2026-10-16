@@ -96,9 +96,21 @@ ul.plain li{margin-bottom:1.6mm}
 .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:3mm 6mm;margin:6mm 0}
 .meta-grid div{padding:3mm 3.5mm;background:var(--mist);border-left:3px solid var(--gold);font-size:9pt}
 .fine{font-family:'Roboto Condensed',sans-serif;font-size:8.8pt;color:var(--ink-3)}
-.message{border-left:4px solid var(--gold);background:var(--mist);padding:5mm 6mm;margin:4mm 0}
+.message{border-left:4px solid var(--gold);background:var(--mist);padding:5mm 6mm;margin:4mm 0;position:relative;overflow:hidden}
 .message h3{margin-top:0}
 .message .sig{margin-top:4mm;font-weight:600;color:var(--green-900);text-align:left}
+.message-head{display:flex;align-items:center;gap:5mm;margin:0 0 3mm;min-height:29mm}
+.message-head .portrait{width:27mm;height:27mm;flex:0 0 27mm;border-radius:50%;object-fit:cover;object-position:center 25%;border:2px solid #fff;outline:2px solid var(--gold);box-shadow:0 3px 12px rgba(10,61,46,.15);background:#fff}
+.message-head .message-role{min-width:0}
+.message-head h3{margin:0 0 1.5mm}
+.message-head .office-label{font-family:'Roboto Condensed',sans-serif;font-size:8.5pt;letter-spacing:.04em;text-transform:uppercase;color:var(--gold-dark);margin:0;text-align:left}
+.message-head .portrait-meta{font-size:8.5pt;color:var(--ink-3);margin:0;text-align:left}
+.section-figure{margin:4mm 0 5mm;text-align:center;break-inside:avoid;page-break-inside:avoid}
+.section-figure img{display:block;width:100%;max-width:100%;height:auto;max-height:190mm;object-fit:contain;margin:0 auto;border:1px solid var(--line);border-radius:3px;background:#fff}
+.section-figure figcaption{font-family:'Roboto Condensed',sans-serif;font-size:8.5pt;color:var(--ink-3);margin-top:2mm;text-align:center;text-align-last:center}
+.logic-figure img{max-height:205mm;border:0;border-radius:0}
+@media screen and (max-width:860px){.message-head{gap:4mm;min-height:0}.message-head .portrait{width:23mm;height:23mm;flex-basis:23mm}.section-figure img{max-height:none}}
+@media print{.message-head .portrait{print-color-adjust:exact;-webkit-print-color-adjust:exact}.section-figure img{max-height:235mm}}
 .note{background:#fbf6e8;border:1px solid #ecdcae;border-left:4px solid var(--gold);padding:3.5mm 4.5mm;margin:3mm 0 4mm;font-size:9.2pt}
 .callout{background:var(--mist);border:1px solid var(--mist-line);border-left:4px solid var(--green-900);padding:3.5mm 4.5mm;margin:3mm 0 4mm;font-size:9.4pt}
 .quote{font-style:italic;color:var(--green-900);background:var(--warm);border-left:4px solid var(--gold);padding:4mm 5mm;margin:5mm 0;font-size:10.5pt}
@@ -238,7 +250,7 @@ td.k{font-weight:700;color:var(--green-900);white-space:nowrap;width:22%}
 <h1 class="prelim-title" tabindex="-1">Messages</h1>
 <div class="note"><strong>Editorial status.</strong> The messages below are draft institutional texts for review and approval by the offices concerned. They do not represent any officeholder until formally adopted. The first Bangsamoro Parliament convenes and elects the Chief Minister on 30 October 2026.</div>
 <div class="message">
-<h3>Message from Chief Minister of BARMM</h3>
+<div class="message-head"><img class="portrait" src="../assets/Chief_Minister.png" alt="Portrait of the Chief Minister of BARMM" loading="lazy" decoding="async"/><div class="message-role"><h3>Message from Chief Minister of BARMM</h3><p class="office-label">Office of the Chief Minister</p><p class="portrait-meta">Bangsamoro Autonomous Region in Muslim Mindanao</p></div></div>
 <p>The Bangsamoro Investment Roadmap Development 2026–2035 presents a shared framework for turning the region's peace and autonomy dividend into durable economic opportunity. Its central proposition is clear: investment must be connected to productive capacity, infrastructure, human capability, environmental stewardship, market access and accountable institutions.</p>
 <p>The roadmap places ecosystem development at the centre of investment policy. It recognises the diversity of our provinces and communities while identifying the systems that connect them, and it insists that growth be resilient, inclusive and consistent with ethical and responsible governance.</p>
 <p>Implementation will require sustained cooperation among the Bangsamoro Government, local governments, national agencies, investors, financial institutions, development partners, civil society and communities. The BIRD provides a common direction; its success will depend on disciplined execution, transparent monitoring and continuous learning.</p>
@@ -248,14 +260,14 @@ td.k{font-weight:700;color:var(--green-900);white-space:nowrap;width:22%}
 <section class="sheet" data-group="Front matter" data-title="Messages (2 of 3)" id="messages-2">
 <h1 class="prelim-title" tabindex="-1">Messages</h1>
 <div class="message">
-<h3>Message from the Minister of Ministry of Trade, Investments and Tourism (MTIT)</h3>
+<div class="message-head"><img class="portrait" src="../assets/Minister.png" alt="Portrait of the Minister of Trade, Investments and Tourism" loading="lazy" decoding="async"/><div class="message-role"><h3>Message from the Minister of Ministry of Trade, Investments and Tourism (MTIT)</h3><p class="office-label">Ministry of Trade, Investments and Tourism</p><p class="portrait-meta">Bangsamoro Autonomous Region in Muslim Mindanao</p></div></div>
 <p>The BIRD 2026–2035 gives MTIT an investment-facilitation architecture that connects promotion, investor services, sector development and market access. It moves beyond a project-by-project view toward a system in which investment readiness and investment outcomes reinforce one another.</p>
 <p>The roadmap treats halal value chains, green economy opportunities, infrastructure and connectivity, tourism, trade, digital services and Islamic finance as connected parts of the Bangsamoro Economic and Investment Ecosystem. It places investor confidence, standards, aftercare and institutional coordination alongside physical investment requirements.</p>
 <p>MTIT will work across government and with the private sector to convert these directions into bankable opportunities, credible facilitation services, reliable information and measurable results.</p>
 <p class="sig">Farsernina A. Mohammad<br/>Minister, Ministry of Trade, Investments and Tourism</p>
 </div>
 <div class="message">
-<h3>Message from the Director General of MTIT</h3>
+<div class="message-head"><img class="portrait" src="../assets/Director_General.png" alt="Portrait of the Director General of MTIT" loading="lazy" decoding="async"/><div class="message-role"><h3>Message from the Director General of MTIT</h3><p class="office-label">Ministry of Trade, Investments and Tourism</p><p class="portrait-meta">Directorate and operational coordination</p></div></div>
 <p>The value of the BIRD lies in translating strategy into an operating architecture. The Balanced Scorecard connects capabilities, internal processes, stakeholder outcomes and financial results; the KPI framework provides a disciplined measurement layer; and the implementation plan identifies the programmes and actions needed to move from intention to execution.</p>
 <p>The roadmap also recognises that conditions change. Baselines must be verified, targets governed, variances classified and evidence refreshed. BIF-Net is therefore conceived as a facilitation and coordination network that supports shared visibility and action without replacing the mandates of participating agencies.</p>
 <p>This management discipline is essential if investment promotion is to generate durable economic and social value across the Bangsamoro.</p>
@@ -265,7 +277,7 @@ td.k{font-weight:700;color:var(--green-900);white-space:nowrap;width:22%}
 <section class="sheet" data-group="Front matter" data-title="Messages (3 of 3)" id="messages-3">
 <h1 class="prelim-title" tabindex="-1">Messages</h1>
 <div class="message">
-<h3>Message from the Bureau Director, Bureau of Investments, MTIT</h3>
+<div class="message-head"><img class="portrait" src="../assets/Bureau_Director.png" alt="Portrait of the Director, Bureau of Investments" loading="lazy" decoding="async"/><div class="message-role"><h3>Message from the Bureau Director, Bureau of Investments, MTIT</h3><p class="office-label">Bureau of Investments</p><p class="portrait-meta">Ministry of Trade, Investments and Tourism</p></div></div>
 <p>The Bureau of Investments sits at the practical interface between the investment strategy and investors, enterprises and implementing institutions. The BIRD gives us a common framework for identifying opportunities, resolving constraints, improving the investor experience and tracking the performance of the investment pipeline.</p>
 <p>Our task is not simply to increase the volume of approvals. We must help build a pipeline of investments that is feasible, responsible, resilient and connected to local value creation. That requires stronger facilitation, aftercare, information systems, provincial coordination and evidence-based promotion.</p>
 <p>The Bureau looks forward to working with the Bangsamoro Government, local governments, investors and partners to translate the roadmap into credible opportunities and measurable development outcomes.</p>
@@ -547,6 +559,7 @@ td.k{font-weight:700;color:var(--green-900);white-space:nowrap;width:22%}
 <h2>7. BIF-Net and Execution Governance</h2>
 <p>Chapters 5 and 6 establish <strong>BIF-Net</strong> as the investment facilitation and coordination layer. It does not replace ministries, offices, local governments or statutory mandates; its purpose is shared visibility of opportunities, investor issues, PAP status, KPI performance and cross-agency dependencies. Because the draft Bangsamoro Investment Code also proposes a council with similar powers, the two instruments should be harmonised so that a single council holds Green Lane authority, with BIF-Net as its operating network.</p>
 <p>The execution model combines role-based information views, KPI monitoring, action tracking and adaptive-management protocols. The data architecture keeps survey-derived validation evidence, official administrative data and management targets separate, so that analytical estimates are never silently converted into official baselines.</p>
+<figure class="section-figure" aria-label="BIF-Net investment facilitation network and execution governance diagram"><img src="../assets/BIF-Net.png" alt="BIF-Net diagram showing the Bangsamoro Investment Facilitation Network and its execution governance relationships" loading="lazy" decoding="async"/><figcaption>BIF-Net: proposed investment facilitation, coordination and execution-governance architecture.</figcaption></figure>
 <h2>8. Policy recommendations and the way forward</h2>
 <p>Chapter 7 converts the roadmap into recommendations in four areas:</p>
 <ul class="plain">
@@ -560,10 +573,7 @@ td.k{font-weight:700;color:var(--green-900);white-space:nowrap;width:22%}
 <section class="sheet" data-group="Executive Summary" data-title="Executive Summary (7 of 7)" id="executive-summary-7">
 <h1 class="prelim-title" tabindex="-1">Executive Summary</h1>
 <h2>9. The investment logic in one chain</h2>
-<div aria-label="BIRD investment logic" class="chain" role="list">
-<span role="listitem">Context and assets</span><span role="listitem">BEIE diagnosis</span><span role="listitem">Quantified SWOT and systems sensing</span>
-<span role="listitem">Options and leverage points</span><span role="listitem">Strategy map</span><span role="listitem">Objectives and KPIs</span>
-<span role="listitem">Phases and PAPs</span><span role="listitem">MEL and adaptive management</span><span role="listitem">Policy learning and reinvestment</span></div>
+<figure class="section-figure logic-figure" aria-label="BIRD investment roadmapping logic"><img src="../assets/Investment_Roadmapping_logic.png" alt="Investment roadmapping logic linking the BIRD evidence base, ecosystem diagnosis, strategy, KPIs, implementation programmes, monitoring and policy learning" loading="lazy" decoding="async"/><figcaption>Investment roadmapping logic: linking diagnosis, strategy, measures, implementation, learning and reinvestment.</figcaption></figure>
 <p>Each chapter plays one part in this chain: Chapter 1 sets the frame; Chapter 2 explains the system; Chapter 3 defines the strategic choice and its leverage; Chapter 4 defines measurement; Chapter 5 turns the strategy map into the investment roadmap; Chapter 6 sequences and manages implementation; and Chapter 7 sets the policy conditions for continuity.</p>
 <h2>10. Conclusion</h2>
 <p>The BIRD 2026–2035 is designed to move BARMM from fragmented investment interventions to a coordinated investment ecosystem. Its emphasis is not simply on attracting more capital but on improving the conditions under which capital becomes productive, inclusive, resilient and sustainable economic activity. Success will depend on institutional ownership, investment readiness, credible implementation, reliable data, transparent governance and continuous learning, while the competent institutions retain their authority to validate baselines, approve projects, allocate budgets, regulate activities and revise priorities as evidence changes.</p>
@@ -754,6 +764,11 @@ td.k{font-weight:700;color:var(--green-900);white-space:nowrap;width:22%}
           var c = p.cloneNode(true);
           Array.prototype.forEach.call(c.querySelectorAll('.no-print,script,button'), function (n) { n.remove(); });
           Array.prototype.forEach.call(c.querySelectorAll('.exec-box,.callout,.note,.message,.phase,.quote'), function (n) { n.setAttribute('class', 'box'); });
+          // Resolve repository-relative image paths for the downloaded Word document.
+          Array.prototype.forEach.call(c.querySelectorAll('img[src]'), function (img) {
+            var src = img.getAttribute('src');
+            if (src && !/^(https?:|data:|blob:)/.test(src)) img.setAttribute('src', base + src.replace(/^\.\//, ''));
+          });
           Array.prototype.forEach.call(c.querySelectorAll('.chain'), function (n) {
             var txt = Array.prototype.map.call(n.querySelectorAll('span'), function (s) { return s.textContent; }).join(' → ');
             var para = document.createElement('p'); para.innerHTML = '<strong>' + txt + '</strong>'; n.replaceWith(para);
