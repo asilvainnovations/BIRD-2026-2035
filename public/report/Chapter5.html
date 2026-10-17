@@ -155,6 +155,27 @@ figcaption,.figure-caption,.chart-caption{font-size:8.5pt;color:#555;margin-top:
   a{color:inherit;text-decoration:none}
 }
 
+
+/* Chapter 5 layout repairs and BIRD-wide component styles */
+.chapter-header{margin:0 0 4mm;padding:0 0 4mm;border-bottom:2px solid var(--gold)}
+.chapter-number{font-family:'Roboto Condensed',sans-serif;text-transform:uppercase;letter-spacing:.09em;color:var(--gold-dark);font-size:10pt}
+.chapter-title{font-family:'Poppins',sans-serif;font-size:17pt;font-weight:700;line-height:1.25;color:var(--green-900);margin:2mm 0}
+.chapter-subtitle{font-family:'Montserrat',sans-serif;font-size:9.5pt;color:var(--ink-3);line-height:1.5}
+.perspective-box{background:var(--mist);border:1px solid var(--mist-line);border-left:5px solid var(--green-900);padding:3mm 4mm;margin:2.5mm 0 3mm}
+.perspective-title{font-family:'Poppins',sans-serif;font-size:10.5pt;font-weight:700;color:var(--green-900);margin-bottom:1mm}
+.perspective-box.financial{border-left-color:#8b6c28}.perspective-box.stakeholder{border-left-color:#0e7490}
+.perspective-box.internal{border-left-color:#6d28d9}.perspective-box.learning{border-left-color:#2e7d32}
+.pathway-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3mm;margin:3mm 0}
+.pathway-card{border:1px solid var(--mist-line);border-top:3px solid var(--gold);border-radius:5px;background:#fff;padding:3mm 3.5mm;break-inside:avoid}
+.pathway-card h4{margin-top:0;color:var(--green-900)}
+.pathway-flow{font-family:'Roboto Condensed',sans-serif;font-weight:700;color:var(--green-700);background:var(--mist);padding:2mm;margin:2mm 0;text-align:center;letter-spacing:.02em}
+.clp-lp1{background:#fef3c7;color:#92400e}.clp-lp2{background:#dbeafe;color:#1e40af}
+.clp-lp3{background:#ede9fe;color:#5b21b6}.clp-lp4{background:#fce7f3;color:#9d174d}
+.clp-lp5{background:#d1fae5;color:#065f46}
+.data-callout{border-left-color:var(--gold);background:#fbf6e8;border-color:#ecdcae;padding:3mm 4mm;margin:2.5mm 0 3mm;font-size:9.1pt}
+.data-callout strong{color:var(--green-900)}
+@media(max-width:860px){.pathway-grid{grid-template-columns:1fr}.chapter-title{font-size:15pt}}
+
 </style>
 </head>
 <body>
@@ -179,7 +200,7 @@ figcaption,.figure-caption,.chart-caption{font-size:8.5pt;color:#555;margin-top:
 <div class="cover-subtitle">Translating the BIRD strategy and KPI architecture into a coherent causal management system for investment, development and institutional performance</div>
 <div class="cover-meta">
 <strong>Bangsamoro Investment Roadmap Development (BIRD) 2026–2035</strong><br/><br/>
-Bureau of Investments, Ministry of Trade, Investments and Tourism (BOI-MTIT), BARMM<br/>
+Bureau of Investments, Ministry of Trade, Investments and Tourism (MTIT), BARMM<br/>
 September 2026
 </div>
 </div>
@@ -188,33 +209,44 @@ September 2026
 <div class="kicker">Chapter 5</div>
 <div class="chapter-header">
 <div class="chapter-number">Chapter 5</div><div class="chapter-title">Balanced Scorecard, Causal Architecture and Strategy Execution</div><div class="chapter-subtitle">From Strategic Options and KPI Calibration to an Executable Investment Management System for BARMM 2026–2035</div>
-</div> ============================================================  SUMMARY  ============================================================ <div class="exec-summary">
+</div>
+<div class="exec-summary">
 <h3>Chapter Summary</h3>
-<p><strong>27 Strategic Objectives</strong> across Four Balanced Scorecard perspectives translate the Integrated Ecosystem Development Strategy (IEDS) into an executable investment roadmap for BARMM 2026–2035.</p>
-<p><strong>Causal Hypothesis Chain:</strong> Learning &amp; Growth (20%) → Internal Process (25%) → Stakeholder (25%) → Financial (30%). Investments in human capital and digital systems enable operational excellence, which delivers stakeholder value, ultimately generating the ₱550B GRDP target, 20,000+ jobs, and poverty reduction below 20%.</p>
-<p><strong>5 Critical Causal Pathways</strong> — Halal Economy Value Chain, Infrastructure-Enabled Growth, Green Economy Monetization, Inclusive Development, and Islamic Finance Ecosystem — map each Learning objective through Process and Stakeholder to Financial outcomes with explicit Critical Leverage Point (CLP) alignment.</p>
-<p><strong>Phase 1 (2026–2028, ₱35–45B envelope)</strong> deploys 10 priority actions across all 5 CLPs, monitored through the Bangsamoro Investment Facilitation Network (BIF-Net) and its six Pareto-style headline KPIs.</p>
-</div><div class="data-callout"><strong>Evidence, Measurement and Governance Contract.</strong> Chapter 5 is the management layer between the strategy architecture in Chapter 3 and the KPI/calibration architecture in Chapter 4. The latest linked validation snapshot contains <strong>76 consented survey responses</strong>; the live analytics contract is <strong>analyticsVersion 2</strong>. Survey-derived SWOT diagnostics use the canonical formulas implemented in the validation-survey analytics function: Strength RI = (Impact × Likelihood) / 5; Opportunity RI = √(Impact × Likelihood); Weakness Risk = Impact × Likelihood; and Threat VI = (Impact² × Likelihood) / 25. Missing SWOT families are treated as missing observations, not zeros. Survey diagnostics inform prioritization and learning, but administrative baselines, investment approvals, GRDP, exports, poverty, infrastructure and other official indicators must be verified from their authoritative data owners before being treated as formal baselines or targets.</div> ============================================================  SECTION A: FROM STRATEGY MAP TO INVESTMENT ROADMAP  ============================================================ 
+<p><strong>Management role.</strong> Chapter 5 turns the Integrated Ecosystem Development Strategy (IEDS) in Chapter 3 into a manageable set of objectives, causal hypotheses, accountable actions and review routines. Chapter 4 remains the authority for KPI definitions, evidence rules, baseline qualification and calibration; Chapter 5 organises how that evidence informs decisions and execution.</p>
+<p><strong>Balanced Scorecard.</strong> The management design comprises 27 strategic objectives across four perspectives: Financial (30%), Stakeholder (25%), Internal Process (25%), and Learning &amp; Growth (20%). These weights are a proposed management weighting scheme, not a substitute for indicator-level definitions or data quality checks.</p>
+<p><strong>Causal hypotheses.</strong> Five pathways connect capability-building and enabling processes to stakeholder value and economic outcomes. They express testable hypotheses, not proof that one intervention alone causes an observed change. Dependency, time-lag, external factors and unintended effects must be assessed at each review.</p>
+<p><strong>Phased execution.</strong> The three-phase roadmap in Chapter 3 provides the sequencing frame. The Phase 1 investment envelope of ₱35–45 billion is indicative and remains subject to project readiness, safeguards, financing confirmation and annual budget decisions. The ten actions below are a proposed management pipeline, not evidence of approved allocations or procurement commitments.</p>
+</div><div class="data-callout"><strong>Evidence, Measurement and Governance Contract.</strong> Chapter 5 is the management layer between the strategy architecture in Chapter 3 and the KPI/calibration architecture in Chapter 4. The latest linked validation snapshot contains <strong>76 consented survey responses</strong>; the live analytics contract is <strong>analyticsVersion 2</strong>. Survey-derived SWOT diagnostics use the canonical formulas implemented in the validation-survey analytics function: Strength RI = (Impact × Likelihood) / 5; Opportunity RI = √(Impact × Likelihood); Weakness Risk = Impact × Likelihood; and Threat VI = (Impact² × Likelihood) / 25. Missing SWOT families are treated as missing observations, not zeros. These survey diagnostics inform prioritisation, hypothesis formation and learning; they are not official regional baselines. Administrative baselines, investment approvals, GRDP, exports, poverty, infrastructure, certification, jobs and other official indicators must be verified with their authoritative data owners and documented with definitions, periods, geography, units, revision status and provenance before being adopted as formal baselines or targets. A figure in this chapter marked as a baseline or target is provisional unless this verification is recorded.
 <div class="folio"><span>BIRD 2026–2035 · Chapter 5</span><span>Page 2</span></div>
 </section>
 <section class="sheet" data-group="Chapter 5" data-title="A. From Strategy Map to Investment Roadmap" id="p2">
 <div class="kicker">Chapter 5</div>
-<h1 id="ch5-a">A. From Strategy Map to Investment Roadmap</h1><p>The Balanced Scorecard (BSC), developed by Kaplan and Norton (1992, 1996), serves as a strategic management tool that translates vision and strategy into actionable objectives across four interconnected perspectives. In the context of the Bangsamoro Investment Roadmap Development (BIRD) 2026–2035, the Balanced Scorecard functions not merely as a performance measurement system but as an <strong>investment strategy roadmap</strong> that maps causal relationships between strategic objectives.</p><p>The BSC creates a strategy map that visualizes how intangible assets — human capital, information systems, and organizational culture — are transformed into tangible outcomes: financial returns, poverty reduction, and economic growth (Kaplan &amp; Norton, 1996). For BARMM, this means mapping how investments in governance systems, infrastructure, and human capital ultimately generate the ₱550B GRDP target, 20,000+ quality jobs, and poverty reduction to below 20%.</p><div class="pull-quote">
+<h1 id="ch5-a">A. From Strategy Map to Investment Roadmap</h1><p>The Balanced Scorecard (BSC), developed by Kaplan and Norton (1992, 1996), serves as a strategic management tool that translates vision and strategy into actionable objectives across four interconnected perspectives. In the context of the Bangsamoro Investment Roadmap Development (BIRD) 2026–2035, the Balanced Scorecard functions not merely as a performance measurement system but as an <strong>investment strategy roadmap</strong> that maps causal relationships between strategic objectives.</p><p>The BSC creates a strategy map that connects intangible assets — human capital, information systems and organisational culture — to intended economic and social outcomes (Kaplan &amp; Norton, 1996). In BIRD, the GRDP, employment and poverty figures are strategic aspirations carried forward from the roadmap, not guaranteed effects of the BSC. Chapter 4 governs their definitions and calibration; formal baselines, trajectories and targets remain provisional until verified with authoritative data owners.</p><div class="pull-quote">
 "The Balanced Scorecard is not merely a performance measurement tool; it is the strategic operating system that ensures the IEDS strategy is executed with discipline, coordination, and accountability."
-</div><p>The BSC employs a <strong>causal hypothesis chain</strong>: Learning &amp; Growth (enablers) → Internal Process (operational excellence) → Stakeholder (customer/community outcomes) → Financial (economic results). Each perspective carries a defined weight in the overall BSC score: Financial at 30%, Stakeholder at 25%, Internal Process at 25%, and Learning &amp; Growth at 20% (Silva, 2026). This weighting reflects the understanding that sustainable financial outcomes in BARMM depend on building foundational capabilities first.</p><h2>A.1 Chapter Organization</h2><p>This chapter presents the Balanced Scorecard organized in the following sequence:</p><ol>
+</div><p>The BSC employs a <strong>causal hypothesis chain</strong>: Learning &amp; Growth (enablers) → Internal Process (delivery capability) → Stakeholder (investor and community outcomes) → Financial (economic results). The proposed score weights are Financial 30%, Stakeholder 25%, Internal Process 25%, and Learning &amp; Growth 20%. Use these weights only as a portfolio-level management convention; they do not alter Chapter 4 KPI formulas, data-quality rules, or the need to verify baseline evidence. Reviewers should test the assumed direction of causality and identify external influences, delays and possible trade-offs.</p><h2>A.1 How the BIRD Chapters Fit Together</h2>
+<table><caption>Chapter-to-management crosswalk</caption><thead><tr><th>Chapter</th><th>Role in the BIRD system</th><th>How Chapter 5 uses it</th></tr></thead><tbody>
+<tr><td><strong>Chapter 2</strong></td><td>Context, systems mapping, strategic diagnostics and structural constraints.</td><td>Frames the problem, risks, feedback loops and hypotheses to be managed; survey diagnostics are treated as prioritisation evidence, not official baselines.</td></tr>
+<tr><td><strong>Chapter 3</strong></td><td>Integrated Ecosystem Development Strategy (IEDS), strategy clusters and phased investment direction.</td><td>Translates strategy into 27 objectives, five causal pathways, leverage-point linkages and sequenced priorities.</td></tr>
+<tr><td><strong>Chapter 4</strong></td><td>KPI dictionary, measurement definitions, calibration, baselines and evidence rules.</td><td>Remains the source of truth for KPI definitions and qualification. Chapter 5 must not create competing formulas or certify unverified targets.</td></tr>
+<tr><td><strong>Chapter 5</strong></td><td>Management and execution layer.</td><td>Assigns objectives, reviews dependencies, connects actions to indicators, convenes learning cycles and records decisions.</td></tr>
+<tr><td><strong>Chapter 6</strong></td><td>Implementation, action planning and annual investment planning.</td><td>Receives validated priorities and readiness-gated actions; budgets and milestones need formal owner and appropriation checks.</td></tr>
+<tr><td><strong>Chapter 7</strong></td><td>Policy recommendations and implementation safeguards.</td><td>Incorporates data-source verification, readiness-gated budgeting, territorial equity, investor aftercare, financing-stack discipline, legal reconciliation and risk reviews.</td></tr>
+</tbody></table>
+<h2>A.2 Chapter Organisation</h2><p>The scorecard and its management components are presented in the following sequence:</p><ol>
 <li><strong>Financial Perspective</strong> (30%) — Investment mobilization, GRDP growth, export revenue, green economy revenue, Islamic finance assets, and foreign direct investment</li>
 <li><strong>Stakeholder Perspective</strong> (25%) — Investor satisfaction, project retention, MSME certification, poverty reduction, financial inclusion, employment creation, and provincial equity</li>
 <li><strong>Internal Process Perspective</strong> (25%) — Investment facilitation, permit processing, halal certification, infrastructure delivery, BMOA synchronization, green economy activation, and climate resilience</li>
-<li><strong>Learning and Growth Perspective</strong> (20%) — Halal expertise, Islamic finance professionals, IPA capacity, digital innovation, functional literacy, green economy expertise, and TESDA-industry alignment</li>
-</ol><p>Each perspective contains strategic objectives derived from the Integrated Ecosystem Development Strategy (IEDS) in Chapter 3, with performance measures calibrated against the KPI framework in Chapter 4. The chapter concludes with the <strong>Strategy Map</strong> showing causal linkages across perspectives, the <strong>Phase 1 Priority Action Plan</strong>, and <strong>BIF-Net/MEL Dashboard integration specifications</strong>.</p> ============================================================  BSC ARCHITECTURE RADAR CHART  ============================================================ <figure class="figure">
-<img alt="BIRD Balanced Scorecard and KPI management architecture" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/KPI-Framework.png" style="max-width:760px;"/> <div class="chart-caption"><strong>Figure 5-1.</strong> BIRD Balanced Scorecard and KPI Management Architecture. The Balanced Scorecard links the strategy layer to measurable financial, stakeholder, internal-process, and learning-and-growth outcomes. It should be interpreted together with the calibrated KPI register in Chapter 4 and the BIF-Net/MEL operating model described in this chapter.</div></figure> ============================================================  SECTION B: FINANCIAL PERSPECTIVE  ============================================================ 
+<li><strong>Learning &amp; Growth Perspective</strong> (20%) — Halal expertise, Islamic finance professionals, IPA capacity, digital innovation, functional literacy, green economy expertise, and TESDA-industry alignment</li>
+</ol><p>Each perspective contains strategic objectives derived from the Integrated Ecosystem Development Strategy (IEDS) in Chapter 3, with proposed measures linked to the KPI framework in Chapter 4, which remains authoritative for definitions and calibration. The chapter concludes with the <strong>Strategy Map</strong> showing causal linkages across perspectives, the <strong>Phase 1 Priority Action Plan</strong>, and <strong>BIF-Net/MEL Dashboard integration specifications</strong>.</p>
+<figure class="figure">
+<img alt="BIRD Balanced Scorecard and KPI management architecture" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/BEIE-images/KPI-Framework.png" style="max-width:760px;"/> <div class="chart-caption"><strong>Figure 5-1.</strong> BIRD Balanced Scorecard and KPI Management Architecture. The Balanced Scorecard links the strategy layer to measurable financial, stakeholder, internal-process, and learning-and-growth outcomes. It should be interpreted together with the calibrated KPI register in Chapter 4 and the BIF-Net/MEL operating model described in this chapter.</div></figure>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 5</span><span>Page 3</span></div>
 </section>
 <section class="sheet" data-group="Chapter 5" data-title="B. Financial Perspective: Investment and Revenue Objectives" id="p3">
 <div class="kicker">Chapter 5</div>
 <h1 id="ch5-b">B. Financial Perspective: Investment and Revenue Objectives</h1><div class="strategy-question">
 <strong>Strategic Question:</strong> "How should we appear to funders, investors, and financial stakeholders to achieve our vision?"
-</div><p>The Financial Perspective addresses how the BIRD strategy creates economic value for the Bangsamoro region. It focuses on investment mobilization, revenue generation, and economic growth targets that demonstrate fiscal sustainability and return on investment. With a <strong>30% weight</strong> in the overall BSC score, this perspective represents the ultimate lag indicator of strategic success.</p><div class="perspective-box financial">
+</div><p>The Financial Perspective addresses how the BIRD strategy creates economic value for the Bangsamoro region. It focuses on investment mobilization, revenue generation, and economic growth targets that demonstrate fiscal sustainability and return on investment. With a <strong>30% proposed weight</strong> in the overall BSC score, this perspective tracks intended economic results, many of which are lagging indicators and affected by factors beyond the roadmap.</p><div class="perspective-box financial">
 <div class="perspective-title">Financial Perspective Overview</div>
 <p style="font-size:9.5pt;"><strong>Weight:</strong> 30% of BSC Overall Score | <strong>Objectives:</strong> F1–F6 (6 strategic objectives) | <strong>Primary CLPs:</strong> LP1 (Halal Certification), LP2 (Infrastructure-Energy), LP4 (Islamic Finance)</p>
 </div><h2>B.1 Strategic Objectives and Measures</h2><table><caption data-label="Table 5-1">KPI-aligned Financial Perspective Objectives</caption>
@@ -222,9 +254,9 @@ September 2026
 <tr>
 <th style="width:22%">Objective</th>
 <th style="width:18%">Measure (KPI)</th>
-<th style="width:10%">Baseline</th>
-<th style="width:8%">2030</th>
-<th style="width:8%">2035</th>
+<th style="width:10%">Draft baseline* </th>
+<th style="width:8%">2030 ambition*</th>
+<th style="width:8%">2035 ambition*</th>
 <th style="width:22%">Strategic Initiative</th>
 <th style="width:12%">CLPs</th>
 </tr>
@@ -249,9 +281,9 @@ September 2026
 <tr>
 <td><strong>F3:</strong> Expand Export Revenue</td>
 <td>Annual exports from BARMM (₱B)</td>
-<td>&lt;₱10B</td>
+<td>&lt;₱10B (draft; verify)</td>
 <td>₱26B</td><td>₱40B+</td>
-<td>UAE halal corridor; BIMP-EAGA trade facilitation; export readiness programs</td>
+<td>UAE halal corridor; BIMP-EAGA trade facilitation; export readiness programmemes</td>
 <td><span class="clp-badge clp-lp1">LP1</span></td>
 </tr>
 <tr>
@@ -260,7 +292,7 @@ September 2026
 <td>Zero</td>
 <td>₱100M p.a.</td>
 <td>₱500M p.a.</td>
-<td>REDD+ program registration; JMC No. 2026-01 implementation; carbon market access</td>
+<td>REDD+ programme registration; JMC No. 2026-01 implementation; carbon market access</td>
 <td><span class="clp-badge clp-lp5">LP5</span></td>
 </tr>
 <tr>
@@ -282,7 +314,7 @@ September 2026
 <td><span class="clp-badge clp-lp1">LP1</span> <span class="clp-badge clp-lp3">LP3</span></td>
 </tr>
 </tbody>
-</table><h2>B.2 Strategy Map Logic: Financial Perspective</h2><p>The Financial Perspective objectives create an integrated <strong>value creation chain</strong> where each objective reinforces the others:</p><ul>
+</table><div class="data-callout"><strong>Baseline and target status.</strong> Values shown here are planning hypotheses from the current draft, not independently verified official statistics or adopted targets. Confirm the metric definition, reference period, geographic coverage, price basis where relevant, calculation method and source-owner approval against Chapter 4 before using any value as a formal baseline, trajectory or performance commitment. Where no authoritative baseline is available, record it as “to be established” rather than substituting zero or an unverified estimate.</div><h2>B.2 Strategy Map Logic: Financial Perspective</h2><p>The Financial Perspective objectives create an integrated <strong>value creation chain</strong> where each objective reinforces the others:</p><ul>
 <li><strong>F1 → F2:</strong> Investment approvals provide capital for GRDP growth through direct productive capacity expansion and multiplier effects</li>
 <li><strong>F2 → public services:</strong> GRDP growth generates the tax base for public services and infrastructure reinvestment</li>
 <li><strong>F3 → F2:</strong> Export revenue brings foreign exchange that strengthens GRDP through trade multiplier effects</li>
@@ -294,14 +326,14 @@ September 2026
 <div class="figure-caption">
 <strong>Figure 5-2.</strong> Investment and Governance Cycles. The virtuous cycle demonstrates how F1 (investment approvals) generates F2 (GRDP growth), which funds infrastructure and governance improvements, creating conditions for further investment attraction. Source: BIRD Systems Mapping, Chapter 2.
   </div>
-</div> ============================================================  SECTION C: STAKEHOLDER PERSPECTIVE  ============================================================ 
+</div>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 5</span><span>Page 4</span></div>
 </section>
 <section class="sheet" data-group="Chapter 5" data-title="C. Stakeholder Perspective: Investor and Community Outcomes" id="p4">
 <div class="kicker">Chapter 5</div>
 <h1 id="ch5-c">C. Stakeholder Perspective: Investor and Community Outcomes</h1><div class="strategy-question">
 <strong>Strategic Question:</strong> "How should we appear to investors, MSMEs, communities, and beneficiaries to achieve our vision?"
-</div><p>The Stakeholder Perspective defines the value proposition for different stakeholder groups. For BARMM, this includes investors seeking returns, MSMEs seeking market access, communities seeking inclusive development, and marginalized groups seeking empowerment. With a <strong>25% weight</strong>, this perspective captures the social and relational dimensions of investment strategy.</p><div class="perspective-box stakeholder">
+</div><p>The Stakeholder Perspective defines the value proposition for different stakeholder groups. For BARMM, this includes investors seeking returns, MSMEs seeking market access, communities seeking inclusive development, and marginalized groups seeking empowerment. With a <strong>25% proposed weight</strong>, this perspective tracks investor experience, enterprise capability and community outcomes.</p><div class="perspective-box stakeholder">
 <div class="perspective-title">Stakeholder Perspective Overview</div>
 <p style="font-size:9.5pt;"><strong>Weight:</strong> 25% of BSC Overall Score | <strong>Objectives:</strong> S1–S7 (7 strategic objectives) | <strong>Primary CLPs:</strong> LP1 (Halal Certification), LP3 (Governance-Confidence), LP4 (Islamic Finance)</p>
 </div><h2>C.1 Strategic Objectives and Measures</h2><table><caption data-label="Table 5-2">KPI-aligned Stakeholder Perspective Objectives</caption>
@@ -309,9 +341,9 @@ September 2026
 <tr>
 <th style="width:20%">Objective</th>
 <th style="width:16%">Measure (KPI)</th>
-<th style="width:10%">Baseline</th>
-<th style="width:8%">2030</th>
-<th style="width:8%">2035</th>
+<th style="width:10%">Draft baseline* </th>
+<th style="width:8%">2030 ambition*</th>
+<th style="width:8%">2035 ambition*</th>
 <th style="width:24%">Strategic Initiative</th>
 <th style="width:14%">CLPs</th>
 </tr>
@@ -332,15 +364,15 @@ September 2026
 <td>Not measured</td>
 <td>80%</td>
 <td>85%</td>
-<td>Problem resolution mechanisms; one-stop shop; regulatory predictability</td>
+<td>Problem resolution mechanisms; one-stop-shop; regulatory predictability</td>
 <td><span class="clp-badge clp-lp3">LP3</span></td>
 </tr>
 <tr>
 <td><strong>S3:</strong> Empower MSMEs through Certification</td>
 <td>MSMEs with halal certification</td>
-<td>~500</td>
+<td>~500 (draft; verify)</td>
 <td>3,000</td><td>5,000+</td>
-<td>BHB MSME certification program; BHIDP implementation; capacity building</td>
+<td>BHB MSME certification programme; BHIDP implementation; capacity building</td>
 <td><span class="clp-badge clp-lp1">LP1</span></td>
 </tr>
 <tr>
@@ -363,11 +395,11 @@ September 2026
 </tr>
 <tr>
 <td><strong>S6:</strong> Create Quality Employment</td>
-<td>BOI-registered firm jobs created</td>
+<td>Jobs reported by investment-approved firms</td>
 <td>2,029 (2025)</td>
 <td>10,000+</td>
 <td>20,000+</td>
-<td>Labor-intensive sector prioritization; skills matching; TESDA alignment</td>
+<td>Labor-intensive sector prioritisation; skills matching; TESDA alignment</td>
 <td><span class="clp-badge clp-lp1">LP1</span> <span class="clp-badge clp-lp3">LP3</span></td>
 </tr>
 <tr>
@@ -380,19 +412,19 @@ September 2026
 <td><span class="clp-badge clp-lp2">LP2</span></td>
 </tr>
 </tbody>
-</table><h2>C.2 Strategy Map Logic: Stakeholder Perspective</h2><p>The Stakeholder Perspective creates a <strong>value delivery chain</strong> that connects investor confidence to community welfare:</p><ul>
-<li><strong>S1 + S2 → F1:</strong> Investor satisfaction and project retention sustain investment approvals, creating the capital base for economic growth</li>
+</table><div class="data-callout"><strong>Baseline and target status.</strong> Values shown here are planning hypotheses from the current draft, not independently verified official statistics or adopted targets. Confirm the metric definition, reference period, geographic coverage, price basis where relevant, calculation method and source-owner approval against Chapter 4 before using any value as a formal baseline, trajectory or performance commitment. Where no authoritative baseline is available, record it as “to be established” rather than substituting zero or an unverified estimate.</div><h2>C.2 Strategy Map Logic: Stakeholder Perspective</h2><p>The Stakeholder Perspective creates a <strong>value delivery chain</strong> that connects investor confidence to community welfare:</p><ul>
+<li><strong>S1 + S2 → F1:</strong> Investor satisfaction and project retention sustain investment approvals, creating a potential capital base for economic growth</li>
 <li><strong>S3 + S5 → S4:</strong> MSME empowerment through halal certification and financial inclusion enable inclusive growth, directly contributing to poverty reduction</li>
 <li><strong>S6 → S4:</strong> Quality employment creation directly lifts households out of poverty through wage income</li>
-<li><strong>S7 → S4:</strong> Provincial equity prevents the "Success to the Successful" archetype (Silva &amp; Unsi, 2026) by ensuring growth reaches all seven provinces, not just the most developed</li>
-</ul><p>The S7 objective is particularly critical in the BARMM context. The 3.9 percentage point inter-provincial growth disparity (2024) reflects the concentration of investment in Lanao del Sur and Maguindanao del Norte, while provinces like Tawi-Tawi and Sulu lag behind. Reducing this disparity to below 1.5 percentage points by 2035 requires affirmative infrastructure allocation and provincial facilitation offices that actively channel investments toward underserved areas.</p> ============================================================  SECTION D: INTERNAL PROCESS PERSPECTIVE  ============================================================ 
+<li><strong>S7 → S4:</strong> Provincial equity prevents the "Success to the Successful" archetype (Silva &amp; Unsi, 2026) by testing whether investment and outcomes are distributed equitably across the applicable territorial units</li>
+</ul><p>The S7 objective is particularly critical in the BARMM context. The draft cites a 3.9 percentage-point inter-provincial growth disparity for 2024. Treat this as an unverified diagnostic until its calculation, geographic coverage and data owner are confirmed; any interpretation of which provinces lag must use a consistent territorial baseline. The proposed 2035 ambition is to reduce the disparity below 1.5 percentage points. Options such as infrastructure allocation criteria and provincial facilitation support should be assessed through territorial equity analysis and adopted only through the relevant budget and governance processes.</p>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 5</span><span>Page 5</span></div>
 </section>
 <section class="sheet" data-group="Chapter 5" data-title="D. Internal Process Perspective: Critical Excellence Areas" id="p5">
 <div class="kicker">Chapter 5</div>
 <h1 id="ch5-d">D. Internal Process Perspective: Critical Excellence Areas</h1><div class="strategy-question">
 <strong>Strategic Question:</strong> "What internal processes must we excel at to satisfy stakeholders and achieve financial objectives?"
-</div><p>The Internal Process Perspective identifies the critical operational and management processes that enable BARMM to deliver the stakeholder value proposition and achieve financial objectives. These processes span investment facilitation, governance, infrastructure delivery, and ecosystem coordination. With a <strong>25% weight</strong>, this perspective captures the operational engine of strategy execution.</p><div class="perspective-box internal">
+</div><p>The Internal Process Perspective identifies the critical operational and management processes that enable BARMM to deliver the stakeholder value proposition and achieve financial objectives. These processes span investment facilitation, governance, infrastructure delivery, and ecosystem coordination. With a <strong>25% proposed weight</strong>, this perspective tracks the operating processes needed to execute the strategy.</p><div class="perspective-box internal">
 <div class="perspective-title">Internal Process Perspective Overview</div>
 <p style="font-size:9.5pt;"><strong>Weight:</strong> 25% of BSC Overall Score | <strong>Objectives:</strong> P1–P7 (7 strategic objectives) | <strong>Primary CLPs:</strong> LP1–LP5 (all leverage points)</p>
 </div><h2>D.1 Strategic Objectives and Measures</h2><table><caption data-label="Table 5-3">KPI-aligned Internal Process Perspective Objectives</caption>
@@ -400,9 +432,9 @@ September 2026
 <tr>
 <th style="width:20%">Objective</th>
 <th style="width:16%">Measure (KPI)</th>
-<th style="width:10%">Baseline</th>
-<th style="width:8%">2030</th>
-<th style="width:8%">2035</th>
+<th style="width:10%">Draft baseline* </th>
+<th style="width:8%">2030 ambition*</th>
+<th style="width:8%">2035 ambition*</th>
 <th style="width:24%">Strategic Initiative</th>
 <th style="width:14%">CLPs</th>
 </tr>
@@ -414,7 +446,7 @@ September 2026
 <td>Multiple days</td>
 <td>2 days</td>
 <td>1 day (digital)</td>
-<td>Digital BNR system; BEGMP e-governance; one-stop shop expansion</td>
+<td>Digital BNR system; BEGMP e-governance; one-stop-shop expansion</td>
 <td><span class="clp-badge clp-lp3">LP3</span></td>
 </tr>
 <tr>
@@ -441,7 +473,7 @@ September 2026
 <td>&lt;80%</td>
 <td>88%</td>
 <td>&gt;90%</td>
-<td>MPW-BOI-LGU coordination; ROW resolution; PPP frameworks</td>
+<td>MPW–Bureau of Investments–LGU coordination; ROW resolution; PPP frameworks</td>
 <td><span class="clp-badge clp-lp2">LP2</span></td>
 </tr>
 <tr>
@@ -472,7 +504,7 @@ September 2026
 <td><span class="clp-badge clp-lp2">LP2</span> <span class="clp-badge clp-lp5">LP5</span></td>
 </tr>
 </tbody>
-</table><h2>D.2 Strategy Map Logic: Internal Process Perspective</h2><p>The Internal Process Perspective creates an <strong>operational excellence chain</strong> that converts intangible capabilities into tangible stakeholder outcomes:</p><ul>
+</table><div class="data-callout"><strong>Baseline and target status.</strong> Values shown here are planning hypotheses from the current draft, not independently verified official statistics or adopted targets. Confirm the metric definition, reference period, geographic coverage, price basis where relevant, calculation method and source-owner approval against Chapter 4 before using any value as a formal baseline, trajectory or performance commitment. Where no authoritative baseline is available, record it as “to be established” rather than substituting zero or an unverified estimate.</div><h2>D.2 Strategy Map Logic: Internal Process Perspective</h2><p>The Internal Process Perspective creates an <strong>operational excellence chain</strong> that converts intangible capabilities into tangible stakeholder outcomes:</p><ul>
 <li><strong>P1 + P2 → S1:</strong> Streamlined business registration and permit processing directly enhance investor satisfaction by reducing time-to-operation</li>
 <li><strong>P3 → S3 + F3:</strong> Halal certification unlocks MSME empowerment and export revenue by opening OIC/SMIIC-compliant market access</li>
 <li><strong>P4 → F2:</strong> Infrastructure delivery removes binding constraints (the B1 loop ceiling identified in Chapter 2 Systems Mapping), enabling GRDP growth</li>
@@ -482,16 +514,16 @@ September 2026
 </ul><div class="figure">
 <img alt="Meadows Hierarchy of Leverage Points" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/public/24.%20Meadows%20Hierarchy%20of%20Leverage%20Points.png"/>
 <div class="figure-caption">
-<strong>Figure 5-3.</strong> Meadows' Hierarchy of Leverage Points. The Internal Process objectives target leverage points 4–6 (rules, self-organization, goals) by redesigning business registration rules (P1), synchronizing inter-agency coordination (P5), and activating green economy paradigms (P6). Source: Meadows (1999); BIRD Systems Mapping, Chapter 2.
+<strong>Figure 5-3.</strong> Meadows' Hierarchy of Leverage Points. The Internal Process objectives target leverage points 4–6 (rules, self-organisation, goals) by redesigning business registration rules (P1), synchronizing inter-agency coordination (P5), and activating green economy paradigms (P6). Source: Meadows (1999); BIRD Systems Mapping, Chapter 2.
   </div>
-</div> ============================================================  SECTION E: LEARNING AND GROWTH PERSPECTIVE  ============================================================ 
+</div>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 5</span><span>Page 6</span></div>
 </section>
-<section class="sheet" data-group="Chapter 5" data-title="E. Learning and Growth Perspective: Intangible Assets and Capabilities" id="p6">
+<section class="sheet" data-group="Chapter 5" data-title="E. Learning &amp; Growth Perspective: Intangible Assets and Capabilities" id="p6">
 <div class="kicker">Chapter 5</div>
-<h1 id="ch5-e">E. Learning and Growth Perspective: Intangible Assets and Capabilities</h1><div class="strategy-question">
+<h1 id="ch5-e">E. Learning &amp; Growth Perspective: Intangible Assets and Capabilities</h1><div class="strategy-question">
 <strong>Strategic Question:</strong> "How will we sustain our ability to change, improve, and achieve our vision?"
-</div><p>The Learning and Growth Perspective defines the intangible assets that support value-creating internal processes. For BARMM, this includes <strong>human capital</strong> (skills and knowledge), <strong>information capital</strong> (systems and databases), and <strong>organization capital</strong> (culture, leadership, and alignment). With a <strong>20% weight</strong>, this foundational perspective invests in the region's capacity to execute strategy over the long term.</p><div class="perspective-box learning">
+</div><p>The Learning &amp; Growth Perspective defines the intangible assets that support value-creating internal processes. For BARMM, this includes <strong>human capital</strong> (skills and knowledge), <strong>information capital</strong> (systems and databases), and <strong>organisation capital</strong> (culture, leadership, and alignment). With a <strong>20% weight</strong>, this foundational perspective invests in the region's capacity to execute strategy over the long term.</p><div class="perspective-box learning">
 <div class="perspective-title">Learning &amp; Growth Perspective Overview</div>
 <p style="font-size:9.5pt;"><strong>Weight:</strong> 20% of BSC Overall Score | <strong>Objectives:</strong> L1–L7 (7 strategic objectives) | <strong>Primary CLPs:</strong> LP1 (Halal), LP2 (Infrastructure), LP3 (Governance), LP4 (Islamic Finance)</p>
 </div><h2>E.1 Strategic Objectives and Measures</h2><table><caption data-label="Table 5-4">KPI-aligned Learning &amp; Growth Objectives</caption>
@@ -499,9 +531,9 @@ September 2026
 <tr>
 <th style="width:20%">Objective</th>
 <th style="width:16%">Measure (KPI)</th>
-<th style="width:10%">Baseline</th>
-<th style="width:8%">2030</th>
-<th style="width:8%">2035</th>
+<th style="width:10%">Draft baseline* </th>
+<th style="width:8%">2030 ambition*</th>
+<th style="width:8%">2035 ambition*</th>
 <th style="width:24%">Strategic Initiative</th>
 <th style="width:14%">CLPs</th>
 </tr>
@@ -522,7 +554,7 @@ September 2026
 <td>&lt;20</td>
 <td>35</td>
 <td>50+</td>
-<td>BSP-aligned scholarship program; professional certification; IsDB training</td>
+<td>BSP-aligned scholarship programme; professional certification; IsDB training</td>
 <td><span class="clp-badge clp-lp4">LP4</span></td>
 </tr>
 <tr>
@@ -531,7 +563,7 @@ September 2026
 <td>&lt;50%</td>
 <td>70%</td>
 <td>80%</td>
-<td>Capacity building programs; BOI-MTIT HRD plan; performance incentives</td>
+<td>Capacity building programmemes; Bureau of Investments capacity-development plan; performance incentives</td>
 <td><span class="clp-badge clp-lp3">LP3</span></td>
 </tr>
 <tr>
@@ -549,7 +581,7 @@ September 2026
 <td>59.3%</td>
 <td>72%</td>
 <td>75%+</td>
-<td>TESDA programs; DepEd alternative learning; adult literacy campaigns</td>
+<td>TESDA programmemes; DepEd alternative learning; adult literacy campaigns</td>
 <td><span class="clp-badge clp-lp1">LP1</span></td>
 </tr>
 <tr>
@@ -558,7 +590,7 @@ September 2026
 <td>0</td>
 <td>120</td>
 <td>200+</td>
-<td>MENRE-DILG training program; JMC implementation; carbon accounting</td>
+<td>MENRE-DILG training programme; JMC implementation; carbon accounting</td>
 <td><span class="clp-badge clp-lp5">LP5</span></td>
 </tr>
 <tr>
@@ -571,24 +603,24 @@ September 2026
 <td><span class="clp-badge clp-lp1">LP1</span> <span class="clp-badge clp-lp3">LP3</span></td>
 </tr>
 </tbody>
-</table><h2>E.2 Strategy Map Logic: Learning and Growth Perspective</h2><p>The Learning and Growth Perspective creates a <strong>capability development chain</strong> that builds the human, information, and organizational capital required for operational excellence:</p><ul>
+</table><div class="data-callout"><strong>Baseline and target status.</strong> Values shown here are planning hypotheses from the current draft, not independently verified official statistics or adopted targets. Confirm the metric definition, reference period, geographic coverage, price basis where relevant, calculation method and source-owner approval against Chapter 4 before using any value as a formal baseline, trajectory or performance commitment. Where no authoritative baseline is available, record it as “to be established” rather than substituting zero or an unverified estimate.</div><h2>E.2 Strategy Map Logic: Learning &amp; Growth Perspective</h2><p>The Learning &amp; Growth Perspective creates a <strong>capability development chain</strong> that builds the human, information, and organisational capital required for operational excellence:</p><ul>
 <li><strong>L1 + L2 → P3 + F5:</strong> Halal expertise and Islamic finance professionals enable halal certification processes and expand Shariah-compliant financing</li>
 <li><strong>L3 → P1 → S1:</strong> IPA capacity improves investment facilitation, enhancing investor satisfaction</li>
 <li><strong>L4 → P1 + P2:</strong> Digital innovation enables streamlined business registration and permit processing</li>
 <li><strong>L5 → S6:</strong> Functional literacy provides the skilled workforce foundation for quality employment creation</li>
-<li><strong>L6 → P6 → F4:</strong> Green economy expertise enables green economy program activation, generating carbon revenue</li>
+<li><strong>L6 → P6 → F4:</strong> Green economy expertise enables green economy programme activation, generating carbon revenue</li>
 <li><strong>L7 → S6:</strong> TESDA-industry alignment resolves the skills mismatch identified in Chapter 2 provincial diagnostics, enabling employment creation</li>
 </ul><div class="figure">
 <img alt="Moral Governance as Leverage Point" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/26.png"/>
 <div class="figure-caption">
 <strong>Figure 5-4.</strong> Moral Governance as Leverage Point. The Learning &amp; Growth perspective embeds moral governance as a meta-leverage point that amplifies all other L-objectives. IPA capacity building (L3) under moral governance frameworks ensures that investment facilitation serves community welfare, not just economic efficiency. Source: BIRD Systems Mapping, Chapter 2.
   </div>
-</div> ============================================================  SECTION F: STRATEGY MAP — CAUSAL LINKAGES  ============================================================ 
+</div>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 5</span><span>Page 7</span></div>
 </section>
 <section class="sheet" data-group="Chapter 5" data-title="F. Strategy Map: Causal Linkages Across Perspectives" id="p7">
 <div class="kicker">Chapter 5</div>
-<h1 id="ch5-f">F. Strategy Map: Causal Linkages Across Perspectives</h1><p>The Balanced Scorecard strategy map visualizes how objectives across the four perspectives create <strong>causal linkages</strong> that drive the IEDS strategy. The map demonstrates how investments in intangible assets (Learning &amp; Growth) enable critical processes (Internal Process), which deliver value to stakeholders (Stakeholder), ultimately achieving financial and economic objectives (Financial). This architecture transforms the BSC from a measurement tool into a <strong>predictive management framework</strong>.</p> CAUSAL CHAIN DIAGRAM <h2>F.1 Strategy Map Architecture</h2><p>The strategy map operates across four hierarchical levels:</p><h3>Level 1: Learning and Growth (Foundation)</h3><ul>
+<h1 id="ch5-f">F. Strategy Map: Causal Linkages Across Perspectives</h1><p>The Balanced Scorecard strategy map sets out <strong>causal hypotheses</strong> across the four perspectives. It proposes that capability investments (Learning &amp; Growth) may improve delivery processes (Internal Process), which may improve investor and community outcomes (Stakeholder), contributing to economic results (Financial). It is a learning model rather than a predictive guarantee. Reviews should test assumptions against verified evidence, track external factors and time lags, and revise or retire pathways where the evidence does not support them.</p>  <h2>F.1 Strategy Map Architecture</h2><p>The strategy map operates across four hierarchical levels:</p><h3>Level 1: Learning &amp; Growth (Foundation)</h3><ul>
 <li><strong>Human Capital:</strong> L1–L7 — Halal expertise, Islamic finance professionals, IPA capacity, digital skills, literacy, green expertise, industry-aligned training</li>
 <li><strong>Information Capital:</strong> Digital systems (BEGMP), databases (BHB certification logs), MRV systems for carbon accounting</li>
 <li><strong>Organization Capital:</strong> Culture of excellence under Moral Governance, leadership alignment across BMOA, institutional memory</li>
@@ -605,7 +637,7 @@ September 2026
 <li><strong>Investment Mobilization:</strong> F1, F6 — Domestic and foreign investment approvals</li>
 <li><strong>Economic Growth:</strong> F2 — GRDP expansion</li>
 <li><strong>Revenue Diversification:</strong> F3–F5 — Exports, green economy, Islamic finance</li>
-</ul><h2>F.2 Five Critical Causal Pathways</h2><p>The strategy map reveals five critical causal pathways that connect Learning objectives to Financial outcomes. Each pathway represents a distinct theory of change with specific CLP alignments:</p><div class="pathway-grid">
+</ul><h2>F.2 Five Critical Causal Pathways</h2><p>The strategy map sets out five proposed causal pathways linking capability objectives to intended financial outcomes. Each pathway represents a distinct theory of change with specific CLP alignments and should be reviewed against measurable intermediate outcomes. The pathways operationalise the IEDS sequencing logic in Chapter 3: build foundations first, establish enabling conditions, scale productive transformers, strengthen connectors and financing, then consolidate results. The exact sequencing of individual projects remains subject to readiness, interdependency and financing checks.</p><div class="pathway-grid">
 <div class="pathway-card">
 <h4>Pathway 1: Halal Economy Value Chain</h4>
 <div class="pathway-flow">L1 → P3 → S3 → F3</div>
@@ -619,7 +651,7 @@ September 2026
 <div class="pathway-card">
 <h4>Pathway 3: Green Economy Monetization</h4>
 <div class="pathway-flow">L6 → P6 + P7 → F4 → F2</div>
-<p style="font-size:9pt;">Green economy expertise activates carbon programs and climate resilience, generating green revenue that contributes to GRDP. <strong>CLP:</strong> <span class="clp-badge clp-lp5">LP5</span></p>
+<p style="font-size:9pt;">Green economy expertise activates carbon programmemes and climate resilience, generating green revenue that contributes to GRDP. <strong>CLP:</strong> <span class="clp-badge clp-lp5">LP5</span></p>
 </div>
 <div class="pathway-card">
 <h4>Pathway 4: Inclusive Development</h4>
@@ -635,26 +667,26 @@ September 2026
 <div class="figure-caption">
 <strong>Figure 5-5.</strong> Leverage Points in Archetypes. Each of the 5 critical causal pathways targets specific systems archetypes: Pathway 1 addresses "Fixes that Fail" through proactive halal standard-setting; Pathway 2 targets "Limits to Growth" by removing infrastructure constraints; Pathway 3 resolves "Tragedy of the Commons" via green economy monetization; Pathway 4 counters "Success to the Successful" through inclusive development; Pathway 5 addresses "Shifting the Burden" by building Islamic finance self-reliance. Source: Meadows (1999); BIRD Systems Mapping, Chapter 2.
   </div>
-</div> ============================================================  SECTION G: BIF-Net INTEGRATION &amp; MEL DASHBOARD  ============================================================ 
+</div>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 5</span><span>Page 8</span></div>
 </section>
 <section class="sheet" data-group="Chapter 5" data-title="G. Bangsamoro Investment Facilitation Network (BIF-Net) and MEL Dashboard" id="p8">
 <div class="kicker">Chapter 5</div>
-<h1 id="ch5-g">G. Bangsamoro Investment Facilitation Network (BIF-Net) and MEL Dashboard</h1><p>The Balanced Scorecard transforms the Integrated Ecosystem Development Strategy from a conceptual framework into an executable investment roadmap. By establishing causal linkages across four perspectives, the BSC ensures that intangible investments are explicitly linked to tangible outcomes. The <strong>Bangsamoro Investment Facilitation Network (BIF-Net)</strong> and its <strong>MEL (Monitoring, Evaluation, and Learning) Dashboard</strong> serve as the operational layer that tracks, visualizes, and manages BSC execution in real time.</p><div class="bifnet-box">
+<h1 id="ch5-g">G. Bangsamoro Investment Facilitation Network (BIF-Net) and MEL Dashboard</h1><p>The Balanced Scorecard transforms the Integrated Ecosystem Development Strategy from a conceptual framework into an executable investment roadmap. By establishing causal linkages across four perspectives, the BSC ensures that intangible investments are explicitly linked to tangible outcomes. The <strong>Bangsamoro Investment Facilitation Network (BIF-Net)</strong> and its <strong>MEL (Monitoring, Evaluation and Learning) Dashboard</strong> serve as the operational layer that tracks, visualises, and manages BSC execution in real time.</p><div class="bifnet-box">
 <h3>BIF-Net: Three-View Facilitation Architecture</h3>
-<p>The BIF-Net provides three distinct views for different stakeholder groups, each with role-based access control enforced through Supabase Row Level Security (RLS):</p>
+<p>The proposed BIF-Net may provide three role-based views. Any Supabase Row Level Security (RLS), access model, audit logging and public-data release must be implemented and security-tested before the design is described as operational:</p>
 <ul style="font-size:9.5pt;">
-<li><strong>Command View</strong> — Full-screen dashboard for BIF-Net operations center with real-time KPI updates, automated alerts when KPIs deviate &gt;15% from trajectory, and drill-down to provincial/municipal disaggregation</li>
-<li><strong>Executive View</strong> — Condensed summary for CMO/BITI presentations with sparkline trends, gap-to-target visualization, and CLP coverage heatmaps</li>
-<li><strong>Public View</strong> — Sanitized open-data portal for investor research with read-only access to investment climate indicators</li>
+<li><strong>Operations View</strong> — Dashboard for authorised operators, with validated KPI updates, proposed variance alerts and territorial disaggregation where the underlying data permit</li>
+<li><strong>Executive View</strong> — Summary for authorised decision-makers, showing trends, gaps to approved trajectories and leverage-point coverage</li>
+<li><strong>Public View</strong> — Proposed, disclosure-reviewed open-data presentation with read-only access to approved investment-climate indicators</li>
 </ul>
-</div><h2>G.1 Six Pareto-Style Headline KPIs</h2><p>The MEL Dashboard tracks <strong>six Pareto-style headline KPIs</strong> as a compact, high-signal management shortlist rather than as a fixed causal share of BIRD impact. Each KPI maps to specific BSC Financial and Stakeholder objectives and carries CLP badges for leverage point alignment:</p> KPI GAP-TO-TARGET CHART <table><caption data-label="Table 5-5">Six Pareto-Style Headline KPIs and Management Navigation</caption>
+</div><h2>G.1 Six Pareto-Style Headline KPIs</h2><p>The MEL Dashboard uses <strong>six headline KPIs</strong> as a compact management shortlist. “Pareto-style” refers only to the shortlist concept: it does not establish that these indicators account for 80% of impact or replace the complete KPI register in Chapter 4. Each KPI maps to specific BSC Financial and Stakeholder objectives and carries CLP badges for leverage point alignment:</p>  <table><caption data-label="Table 5-5">Six Headline KPIs and Management Navigation</caption>
 <thead>
 <tr>
 <th style="width:5%">#</th>
 <th style="width:22%">KPI</th>
-<th style="width:12%">Baseline</th>
-<th style="width:12%">Target 2035</th>
+<th style="width:12%">Draft baseline*</th>
+<th style="width:12%">2035 ambition*</th>
 <th style="width:15%">Primary CLPs</th>
 <th style="width:20%">Data Source</th>
 <th style="width:14%">BSC Link</th>
@@ -664,25 +696,25 @@ September 2026
 <tr>
 <td><strong>1</strong></td>
 <td>Annual Investment Approvals</td>
-<td>₱5.1B</td>
+<td>₱5.1B (draft; verify)</td>
 <td>₱15B p.a.</td>
 <td><span class="clp-badge clp-lp1">LP1</span> <span class="clp-badge clp-lp3">LP3</span></td>
-<td>BOI tracking system (weekly API)</td>
+<td>Bureau of Investments’ authoritative register; refresh agreement to be confirmed</td>
 <td>F1, F6</td>
 </tr>
 <tr>
 <td><strong>2</strong></td>
 <td>BARMM GRDP</td>
-<td>₱299.5B</td>
+<td>₱299.5B (draft; verify)</td>
 <td>₱550B+</td>
 <td><span class="clp-badge clp-lp1">LP1</span> <span class="clp-badge clp-lp2">LP2</span></td>
-<td>PSA-BARMM (quarterly API)</td>
+<td>PSA regional accounts; confirm release schedule and permitted interface</td>
 <td>F2</td>
 </tr>
 <tr>
 <td><strong>3</strong></td>
 <td>Total Export Value</td>
-<td>&lt;₱10B</td>
+<td>&lt;₱10B (draft; verify)</td>
 <td>₱40B+</td>
 <td><span class="clp-badge clp-lp1">LP1</span></td>
 <td>PSA-BARMM trade data</td>
@@ -691,38 +723,38 @@ September 2026
 <tr>
 <td><strong>4</strong></td>
 <td>Halal-Certified MSMEs</td>
-<td>~500</td>
+<td>~500 (draft; verify)</td>
 <td>5,000+</td>
 <td><span class="clp-badge clp-lp1">LP1</span></td>
-<td>BHB certification logs (real-time Supabase)</td>
+<td>Bangsamoro Halal Board registry; confirm data-sharing, quality and refresh arrangements</td>
 <td>S3, F3</td>
 </tr>
 <tr>
 <td><strong>5</strong></td>
 <td>Electrification Rate</td>
-<td>~75%</td>
+<td>~75% (draft; verify)</td>
 <td>100%</td>
 <td><span class="clp-badge clp-lp2">LP2</span></td>
-<td>DOE/MPW field data (monthly)</td>
+<td>Authoritative energy/infrastructure data owners; coverage and refresh to be confirmed</td>
 <td>S7, F2</td>
 </tr>
 <tr>
 <td><strong>6</strong></td>
 <td>Broadband Connectivity</td>
-<td>&lt;30%</td>
+<td>&lt;30% (draft; verify)</td>
 <td>85%</td>
 <td><span class="clp-badge clp-lp2">LP2</span></td>
-<td>DICT/MICT surveys (monthly API)</td>
+<td>Authoritative connectivity data owners; indicator definition and refresh to be confirmed</td>
 <td>S7, F2</td>
 </tr>
 </tbody>
-</table><h2>G.2 Dashboard Display Requirements</h2><p>Each KPI card on the MEL Dashboard must include:</p><ul>
-<li><strong>Sparkline trends</strong> — 5-year trailing visualization showing trajectory</li>
-<li><strong>Gap-to-target visualization</strong> — Actual value vs. planned trajectory with percentage completion</li>
+</table><div class="data-callout"><strong>Baseline and target status.</strong> Values shown here are planning hypotheses from the current draft, not independently verified official statistics or adopted targets. Confirm the metric definition, reference period, geographic coverage, price basis where relevant, calculation method and source-owner approval against Chapter 4 before using any value as a formal baseline, trajectory or performance commitment. Where no authoritative baseline is available, record it as “to be established” rather than substituting zero or an unverified estimate.</div><h2>G.2 Dashboard Display Requirements</h2><p>Once data-sharing and governance arrangements are approved, each KPI card should include the following; features should not be presented as live until implemented and tested:</p><ul>
+<li><strong>Sparkline trends</strong> — 5-year trailing visualisation showing trajectory</li>
+<li><strong>Gap-to-target visualisation</strong> — Actual value vs. planned trajectory with percentage completion</li>
 <li><strong>CLP tag badges</strong> — Color-coded leverage point indicators on each KPI card</li>
 <li><strong>Traffic light status</strong> — On-track (green), At-risk (yellow), Off-track (red) based on deviation from trajectory</li>
 <li><strong>Drill-down capability</strong> — Provincial and municipal disaggregation for spatial equity monitoring</li>
-</ul><h2>G.3 Real-Time Data Integration</h2><table><caption data-label="Table 5-6">BIF-Net MEL Dashboard Data Integration</caption>
+</ul><h2>G.3 Data Integration Requirements and Readiness</h2><table><caption data-label="Table 5-6">Proposed BIF-Net MEL Data Integration — Subject to Validation</caption>
 <thead>
 <tr>
 <th>Source</th>
@@ -735,38 +767,38 @@ September 2026
 <tr>
 <td>PSA-BARMM</td>
 <td>GRDP, trade, demographics</td>
-<td>Quarterly</td>
-<td>API connector</td>
+<td>Subject to data-sharing agreement</td>
+<td>To be designed and tested</td>
 </tr>
 <tr>
 <td>BHB Certification Logs</td>
 <td>Halal MSME count, certification stages</td>
-<td>Real-time</td>
+<td>Near-real-time</td>
 <td>Supabase realtime subscription</td>
 </tr>
 <tr>
-<td>BOI Approval Tracking</td>
+<td>Bureau of Investments approval tracking</td>
 <td>Investment approvals, project status</td>
-<td>Weekly</td>
-<td>API connector</td>
+<td>To be agreed with data owner</td>
+<td>To be designed, approved and tested</td>
 </tr>
 <tr>
 <td>DOE/MPW</td>
 <td>Electrification, ZBIP progress</td>
-<td>Monthly</td>
-<td>Batch upload</td>
+<td>To be agreed with data owner</td>
+<td>Approved manual upload or validated interface</td>
 </tr>
 <tr>
 <td>DICT/MICT</td>
 <td>Broadband coverage, BEGMP usage</td>
-<td>Monthly</td>
-<td>API connector</td>
+<td>To be agreed with data owner</td>
+<td>To be designed, approved and tested</td>
 </tr>
 <tr>
 <td>TESDA</td>
 <td>Training completion, certification</td>
-<td>Quarterly</td>
-<td>Batch upload</td>
+<td>To be agreed with data owner</td>
+<td>Approved manual upload or validated interface</td>
 </tr>
 </tbody>
 </table>
@@ -774,31 +806,31 @@ September 2026
 </section>
 <section class="sheet" data-group="Chapter 5" data-title="G.4 Automated Alerting and Adaptive Management" id="p9">
 <div class="kicker">Chapter 5</div>
-<h2>G.4 Automated Alerting and Adaptive Management</h2><p>The BIF-Net employs <strong>automated alerting</strong> when KPIs deviate more than 10% from their planned trajectory. This trigger-based intervention system enables adaptive management through quarterly strategy reviews. When a KPI falls off-track:</p><ol>
-<li><strong>Alert Generation:</strong> The <code>mel-sync</code> Supabase Edge Function detects deviation during external data source polling</li>
+<h2>G.4 Automated Alerting and Adaptive Management</h2><p>The proposed BIF-Net operating model may use <strong>variance alerts</strong> when verified KPIs depart from an approved trajectory. The threshold must be standardised with Chapter 4 and formally adopted; this chapter uses 15% as an illustrative candidate, not an already deployed system rule. This trigger-based intervention system enables adaptive management through quarterly strategy reviews. When a KPI falls off-track:</p><ol>
+<li><strong>Alert Generation:</strong> An approved data workflow (automated only after implementation and testing) detects deviation using version-controlled KPI definitions and validated refresh timestamps</li>
 <li><strong>Root Cause Analysis:</strong> BIF-Net operators drill down to identify which CLP is underperforming</li>
 <li><strong>Intervention Trigger:</strong> The system recommends specific Phase 1 actions aligned with the affected CLP</li>
-<li><strong>Escalation:</strong> Off-track KPIs for more than two consecutive quarters escalate to Executive View for CMO decision</li>
+<li><strong>Escalation:</strong> KPI deviations persisting for two consecutive quarterly reviews are escalated to the designated accountable decision-maker under an approved governance protocol</li>
 </ol><div class="figure">
 <img alt="BIRD Investment Roadmap" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/28.png"/>
 <div class="figure-caption">
-<strong>Figure 5-6.</strong> Bangsamoro Investment Roadmap. The roadmap visualizes the three-phase implementation timeline (Phase 1: 2026–2028 Foundation Building; Phase 2: 2029–2031 Acceleration; Phase 3: 2032–2035 Consolidation) with key milestones for each BSC perspective. The BIF-Net MEL Dashboard tracks progress against this roadmap in real time. Source: BIRD Strategic Planning Platform.
+<strong>Figure 5-6.</strong> Bangsamoro Investment Roadmap. The roadmap visualises the three-phase implementation timeline (Phase 1: 2026–2028 Foundation Building; Phase 2: 2029–2031 Acceleration; Phase 3: 2032–2035 Consolidation) with key milestones for each BSC perspective. The BIF-Net MEL Dashboard tracks progress against this roadmap in real time. Source: BIRD Strategic Planning Platform.
   </div>
-</div> ============================================================  PHASE 1 ACTION PLAN  ============================================================ 
+</div>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 5</span><span>Page 10</span></div>
 </section>
 <section class="sheet" data-group="Chapter 5" data-title="H. Phase 1 Priority Action Plan (2026–2028)" id="p10">
 <div class="kicker">Chapter 5</div>
-<h1 id="ch5-h">H. Phase 1 Priority Action Plan (2026–2028)</h1><p>Phase 1 — Foundation Building (₱35–45B envelope) — deploys 10 priority actions across all 5 Critical Leverage Points. These actions represent the operational commitments that translate BSC objectives into budgeted, scheduled, and accountable interventions.</p> PHASE 1 GANTT CHART <div class="figure"><img alt="BIRD phased implementation architecture" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/30-Phases.png"/><div class="figure-caption"><strong>Figure 5-7.</strong> BIRD Phased Implementation Architecture. The implementation sequence is organized as Foundation Building (2026–2028), Acceleration (2029–2031), and Consolidation &amp; Global Integration (2032–2035), providing the temporal frame within which the BSC objectives and priority actions are managed.</div></div><table><caption data-label="Table 5-7">Phase 1 Priority Action Plan and CLP Alignment</caption>
+<h1 id="ch5-h">H. Phase 1 Priority Action Plan (2026–2028)</h1><p>Phase 1 — Foundation Building (indicative ₱35–45B envelope) — proposes ten priority actions across all 5 Critical Leverage Points. These actions are a proposed pipeline to connect BSC objectives to scoped, costed, scheduled and accountable interventions. They are not, by inclusion in this table, approved projects, appropriations, procurement commitments or confirmed start dates. Each proposal needs an accountable lead, defined scope, feasibility and safeguards checks, a financing source, annual cash flow, territorial impact review and formal approval before being treated as committed.</p>  <div class="figure"><img alt="BIRD phased implementation architecture" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/30-Phases.png"/><div class="figure-caption"><strong>Figure 5-7.</strong> BIRD Phased Implementation Architecture. The implementation sequence is organised as Foundation Building (2026–2028), Acceleration (2029–2031), and Consolidation &amp; Global Integration (2032–2035), providing the temporal frame within which the BSC objectives and priority actions are managed.</div></div><table><caption data-label="Table 5-7">Proposed Phase 1 Priority Action Pipeline and CLP Alignment</caption>
 <thead>
 <tr>
 <th style="width:4%">#</th>
 <th style="width:28%">Action</th>
-<th style="width:10%">Budget</th>
+<th style="width:10%">Indicative cost (unverified)</th>
 <th style="width:14%">Lead</th>
 <th style="width:14%">CLPs</th>
 <th style="width:14%">BSC Link</th>
-<th style="width:16%">Status</th>
+<th style="width:16%">Planning status</th>
 </tr>
 </thead>
 <tbody>
@@ -809,7 +841,7 @@ September 2026
 <td>BHB / MTIT</td>
 <td><span class="clp-badge clp-lp1">LP1</span></td>
 <td>P3, L1, S3</td>
-<td>Phase 1 · 2026</td>
+<td>Proposed for Phase 1; readiness and budget to be confirmed</td>
 </tr>
 <tr>
 <td><strong>2</strong></td>
@@ -818,7 +850,7 @@ September 2026
 <td>MENRE / Parliament</td>
 <td><span class="clp-badge clp-lp5">LP5</span></td>
 <td>P6, L6, F4</td>
-<td>Phase 1 · 2026</td>
+<td>Proposed for Phase 1; readiness and budget to be confirmed</td>
 </tr>
 <tr>
 <td><strong>3</strong></td>
@@ -827,16 +859,16 @@ September 2026
 <td>BDTA / MICT</td>
 <td><span class="clp-badge clp-lp3">LP3</span></td>
 <td>P1, L4, S1</td>
-<td>Phase 1 · 2026</td>
+<td>Proposed for Phase 1; readiness and budget to be confirmed</td>
 </tr>
 <tr>
 <td><strong>4</strong></td>
 <td>Bangsamoro Halal Park Groundbreaking</td>
 <td>₱500M</td>
-<td>MTIT / BOI</td>
+<td>MTIT / Bureau of Investments</td>
 <td><span class="clp-badge clp-lp1">LP1</span> <span class="clp-badge clp-lp2">LP2</span></td>
 <td>F1, F3, S3</td>
-<td>Phase 1 · 2026</td>
+<td>Proposed for Phase 1; readiness and budget to be confirmed</td>
 </tr>
 <tr>
 <td><strong>5</strong></td>
@@ -845,7 +877,7 @@ September 2026
 <td>DOE / MPW</td>
 <td><span class="clp-badge clp-lp2">LP2</span></td>
 <td>P4, P7, F2</td>
-<td>Phase 1 · 2026</td>
+<td>Proposed for Phase 1; readiness and budget to be confirmed</td>
 </tr>
 <tr>
 <td><strong>6</strong></td>
@@ -854,7 +886,7 @@ September 2026
 <td>MFBM / Al-Amanah</td>
 <td><span class="clp-badge clp-lp4">LP4</span></td>
 <td>F5, L2, S5</td>
-<td>Phase 1 · 2026</td>
+<td>Proposed for Phase 1; readiness and budget to be confirmed</td>
 </tr>
 <tr>
 <td><strong>7</strong></td>
@@ -863,7 +895,7 @@ September 2026
 <td>MTIT-BTI</td>
 <td><span class="clp-badge clp-lp1">LP1</span> <span class="clp-badge clp-lp4">LP4</span></td>
 <td>F3, F6, S1</td>
-<td>Phase 1 · 2026</td>
+<td>Proposed for Phase 1; readiness and budget to be confirmed</td>
 </tr>
 <tr>
 <td><strong>8</strong></td>
@@ -872,7 +904,7 @@ September 2026
 <td>MAFAR / SPDA</td>
 <td><span class="clp-badge clp-lp1">LP1</span> <span class="clp-badge clp-lp2">LP2</span></td>
 <td>F2, S6, S7</td>
-<td>Phase 1 · 2026</td>
+<td>Proposed for Phase 1; readiness and budget to be confirmed</td>
 </tr>
 <tr>
 <td><strong>9</strong></td>
@@ -881,36 +913,22 @@ September 2026
 <td>TESDA / MOLE</td>
 <td><span class="clp-badge clp-lp1">LP1</span> <span class="clp-badge clp-lp3">LP3</span></td>
 <td>L7, L1, S6</td>
-<td>Phase 1 · 2026</td>
+<td>Proposed for Phase 1; readiness and budget to be confirmed</td>
 </tr>
 <tr>
 <td><strong>10</strong></td>
 <td>BIF-Net &amp; MEL Dashboard Deployment</td>
 <td>₱80M</td>
-<td>MTIT / BBOI</td>
+<td>MTIT / Bureau of Investments</td>
 <td><span class="clp-badge clp-lp3">LP3</span></td>
 <td>L4, P5, All KPIs</td>
-<td>Phase 1 · 2026</td>
+<td>Proposed for Phase 1; readiness and budget to be confirmed</td>
 </tr>
 </tbody>
-</table><h2>H.1 CLP Coverage Analysis</h2><p>The 10 Phase 1 actions provide comprehensive coverage of all 5 Critical Leverage Points:</p><div class="key-stats">
-<div class="stat-card">
-<div class="stat-number" style="color:var(--financial);">LP1</div>
-<div class="stat-label">6 Actions<br>₱2.0B</br></div>
-</div>
-<div class="stat-card">
-<div class="stat-number" style="color:var(--stakeholder);">LP2</div>
-<div class="stat-label">3 Actions<br>₱7.97B</br></div>
-</div>
-<div class="stat-card">
-<div class="stat-number" style="color:var(--internal);">LP3</div>
-<div class="stat-label">3 Actions<br>₱480M</br></div>
-</div>
-<div class="stat-card">
-<div class="stat-number" style="color:var(--accent-gold);">LP4</div>
-<div class="stat-label">2 Actions<br/>₱500M</div>
-</div>
-</div><p style="text-align:center; font-size:9pt; color:var(--text-light); margin-top:10px;"><strong>LP5</strong> (Green Economy): 1 Action (₱50M) + integrated into LP2 actions via climate-resilient design standards</p><h2>H.2 Action Tracking Requirements</h2><p>Each Phase 1 action is tracked through BIF-Net with the following management infrastructure:</p><ul>
+</table><div class="data-callout"><strong>Chapter 7 alignment and decision gates.</strong> Before an action advances from pipeline to funded implementation, apply the relevant Chapter 7 recommendations: verify the evidence owner and baseline; complete project-readiness and safeguards checks; reconcile legal mandates and approvals; test financing additionality and the proposed capital stack; assess territorial equity and investor aftercare needs; and define measurable output, outcome and risk indicators. Record recommendation IDs, decision authority, conditions precedent, funding status and review date in the action register. Proposed legal or institutional arrangements remain design options until reconciled with the applicable legal framework.</div><h2>H.1 CLP Coverage Analysis</h2>
+<p>The action pipeline maps to all five Critical Leverage Points (CLPs), but a single action may support more than one CLP. Accordingly, action counts must not be summed as though each action belongs to only one category. Costs should be attributed to the action once in the pipeline total, with a separate, explicitly documented method used for any CLP-level portfolio allocation.</p>
+<div class="data-callout"><strong>Financial reconciliation.</strong> The ten indicative action-cost entries in Table 5-7 should be rechecked against their scope and currency basis before aggregation. Do not infer that their sum represents the full Phase 1 investment envelope of ₱35–45 billion. Reconcile the action pipeline with Chapter 3’s phased envelope and Chapter 6’s PAP register, identifying overlaps, multi-year costs, funding sources, approvals and annual cash requirements.</div>
+<h2>H.2 Action Tracking Requirements</h2><p>Each Phase 1 action is tracked in the proposed action register or BIF-Net once implemented, using the following management requirements:</p><ul>
 <li><strong>Gantt timeline view</strong> (2026–2028) with quarterly milestones and dependency mapping</li>
 <li><strong>Budget utilization vs. allocation</strong> tracking with automated variance alerts at 15% deviation</li>
 <li><strong>Responsible party dashboard</strong> showing lead agency accountability and cross-agency coordination status</li>
@@ -921,19 +939,20 @@ September 2026
 <div class="figure-caption">
 <strong>Figure 5-8.</strong> Investment-Development Virtuous Cycle. Phase 1 actions are designed to activate the virtuous cycle: Action 1 (BHB) and Action 4 (Halal Park) boost investor confidence; Action 5 (ZBIP) and Action 8 (Agro-Industrial) remove infrastructure constraints; Action 6 (Al-Amanah) channels Islamic finance into productive investment. The cycle generates jobs (S6), reduces poverty (S4), and creates the political economy for further reform. Source: BIRD Systems Mapping, Chapter 2.
   </div>
-</div> ============================================================  SECTION I: FROM MEASUREMENT TO STRATEGY EXECUTION  ============================================================ 
+</div>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 5</span><span>Page 11</span></div>
 </section>
 <section class="sheet" data-group="Chapter 5" data-title="I. From Measurement to Strategy Execution" id="p11">
 <div class="kicker">Chapter 5</div>
 <h1 id="ch5-i">I. From Measurement to Strategy Execution</h1><p>The Balanced Scorecard transforms the Integrated Ecosystem Development Strategy from a conceptual framework into an executable investment roadmap. By establishing causal linkages across four perspectives, the BSC ensures that:</p><ol>
-<li><strong>Intangible investments are linked to tangible outcomes.</strong> Human capital development (L1–L7), digital system deployment (L4), and organizational culture change under Moral Governance are explicitly connected to GRDP growth (F2), poverty reduction (S4), and export revenue (F3).</li>
-<li><strong>Leading indicators predict lagging indicators.</strong> Training completion rates (L-objectives), system deployment milestones (P1, P3), and process efficiency metrics (P1–P2) provide early signals of whether Financial targets will be achieved, enabling proactive intervention before outcomes diverge.</li>
+<li><strong>Intangible investments are linked to tangible outcomes.</strong> Human capital development (L1–L7), digital system deployment (L4), and organisational culture change under Moral Governance are hypothesised to contribute to GRDP growth (F2), poverty reduction (S4) and export revenue (F3), with contribution tested against verified data and alternative explanations.</li>
+<li><strong>Leading indicators predict lagging indicators.</strong> Training completion rates (L-objectives), system deployment milestones (P1, P3), and process efficiency metrics (P1–P2) provide early signals about delivery conditions and the plausibility of Financial targets, enabling proactive intervention before outcomes diverge.</li>
 <li><strong>Cross-cluster synchronization is measured and managed.</strong> The BMOA synchronization score (P5) and inter-agency coordination metrics ensure that interventions across the Halal industry, infrastructure, governance, and Islamic finance pillars reinforce rather than fragment each other.</li>
 <li><strong>Adaptive management is institutionalized.</strong> Quarterly BSC reviews using the BIF-Net MEL Dashboard enable trigger-based interventions when KPIs deviate from trajectory, replacing static annual planning with dynamic strategy management.</li>
 </ol><div class="pull-quote">
-"As BARMM embarks on its journey toward ₱550B GRDP by 2035, the Balanced Scorecard provides the navigational framework that transforms vision into reality — ensuring that every peso invested in human capital, every digital service launched, and every halal certificate issued contributes to a coherent theory of change."
-</div><h2>I.1 BSC Governance and Review Cycle</h2><p>The BSC operates on a multi-frequency review cycle:</p><table><caption data-label="Table 5-8">BSC Governance and Review Cycle</caption>
+"As BARMM embarks on its journey toward ₱550B GRDP by 2035, the Balanced Scorecard provides the navigational framework that transforms vision into reality — ensuring that every peso invested in human capital, every digital service launched, and every halal certificate issued is aligned with a coherent, testable theory of change."
+</div><h2>I.1 BSC Governance and Review Cycle</h2>
+<p>Chapter 7’s recommendations are to be operationalised through explicit decision gates rather than treated as additional scorecard targets. At each annual review, management should document: (i) whether each source and baseline has been verified; (ii) whether proposed projects meet readiness, safeguards and financing criteria; (iii) whether territorial distribution and community impacts have been assessed; (iv) whether investor aftercare issues are resolved or assigned; (v) whether institutional mandates and legal instruments are reconciled; and (vi) whether the data, risk and financing assumptions remain credible. Decisions, dissenting evidence, accountable owners and next review dates should be recorded in a decision log.<p>The BSC operates on a multi-frequency review cycle:</p><table><caption data-label="Table 5-8">BSC Governance and Review Cycle</caption>
 <thead>
 <tr>
 <th>Frequency</th>
@@ -944,37 +963,38 @@ September 2026
 </thead>
 <tbody>
 <tr>
-<td><strong>Weekly</strong></td>
-<td>BIF-Net Command View monitoring; KPI status updates</td>
-<td>BIF-Net operators, ministry focal points</td>
-<td>Alert notifications; action status updates</td>
-</tr>
-<tr>
-<td><strong>Monthly</strong></td>
-<td>KPI trend analysis; CLP performance review</td>
-<td>MTIT-BBOI, BHB, ministry M&amp;E units</td>
-<td>Monthly dashboard report; variance analysis</td>
+<td><strong>Monthly (or at source refresh)</strong></td>
+<td>Data completeness, source changes, action status and emerging variance checks</td>
+<td>Designated MTIT–Bureau of Investments focal points and data-owning agencies</td>
+<td>Quality log, variance note, updated action register</td>
 </tr>
 <tr>
 <td><strong>Quarterly</strong></td>
-<td>BSC strategy review; causal pathway assessment</td>
-<td>CMO, BITI, BOI, development partners</td>
-<td>Quarterly scorecard; adaptive management decisions</td>
+<td>KPI trend analysis, action dependencies and leverage-point performance review</td>
+<td>MTIT–Bureau of Investments, BHB and designated agency monitoring focal points</td>
+<td>Quarterly scorecard; data-quality issues and variance analysis</td>
+</tr>
+<tr>
+<td><strong>Twice yearly</strong></td>
+<td>Strategy and causal-pathway review; resolution of cross-agency bottlenecks</td>
+<td>Designated MTIT leadership, Bureau of Investments, relevant agencies and partners as appropriate</td>
+<td>Recorded management decisions, owners, dates and conditions</td>
 </tr>
 <tr>
 <td><strong>Annually</strong></td>
-<td>BSC recalibration; target adjustment; CLP reprioritization</td>
+<td>BSC recalibration; target adjustment; CLP reprioritisation</td>
 <td>Full BMOA, Parliament committees, civil society</td>
-<td>Annual Investment Program (AIP); updated roadmap</td>
+<td>Annual Investment Programme (AIP); updated roadmap</td>
 </tr>
 </tbody>
 </table><h2>I.2 Integration with Other BIRD Chapters</h2><p>The Balanced Scorecard in Chapter 5 integrates with all other chapters of the BIRD publication:</p><ul>
-<li><strong>Chapter 2 (Context &amp; BEIE Framework):</strong> The 4 Strategic Pillars and 5 CLPs provide the architectural foundation for BSC perspective design</li>
-<li><strong>Chapter 2 (SWOT &amp; Systems Mapping):</strong> Systems archetypes identify the structural barriers that BSC objectives must overcome; SWOT indices inform priority weighting</li>
+<li><strong>Chapter 2 (Context and Systems Mapping):</strong> Systems archetypes, structural constraints and the diagnostic evidence frame BSC hypotheses and risk reviews</li>
+<li><strong>Chapter 2 (diagnostics):</strong> Survey-derived SWOT indices inform prioritisation and learning; missing SWOT families remain missing observations, not zero scores</li>
 <li><strong>Chapter 3 (Strategic Options):</strong> The IEDS strategies are decomposed into the 27 BSC objectives with measurable targets</li>
-<li><strong>Chapter 4 (Metrics and KPI Benchmarking):</strong> The six Pareto-style headline KPIs serve as the lag indicators for BSC Financial and Stakeholder perspectives</li>
+<li><strong>Chapter 4 (Metrics and KPI Benchmarking):</strong> The six headline KPIs provide a compact management view; they do not replace the full KPI register or its calibration rules</li>
 <li><strong>the implementation chapter:</strong> The Phase 1 Action Plan (Section H) translates BSC objectives into budgeted, scheduled interventions</li>
-</ul> ============================================================  KEY STATS SUMMARY  ============================================================ <div class="key-stats" style="margin-top:35px;">
+</ul>
+<div class="key-stats" style="margin-top:35px;">
 <div class="stat-card">
 <div class="stat-number">27</div>
 <div class="stat-label">Strategic Objectives<br/>Across 4 Perspectives</div>
@@ -989,9 +1009,9 @@ September 2026
 </div>
 <div class="stat-card">
 <div class="stat-number">6</div>
-<div class="stat-label">Pareto KPIs<br/>Headline KPI Navigation</div>
+<div class="stat-label">Headline KPIs<br/>Management shortlist</div>
 </div>
-</div> ============================================================  REFERENCES  ============================================================ 
+</div>
 <div class="continue no-print"><p><strong>Continue reading</strong><br/>Chapter 6: Implementation, Action and Annual Investment Plan</p><a class="btn btn-green" href="Chapter6.html">Open Chapter 6</a></div><div class="folio"><span>BIRD 2026–2035 · Chapter 5</span><span>Page 12</span></div>
 </section>
 <section class="sheet" data-group="Back matter" data-title="References" id="p12">
@@ -1007,7 +1027,7 @@ Silva, A. M. (2026). Reimagining BARMM's economic sectors: Building an integrate
 </p><p style="padding-left:25px; text-indent:-25px; margin-bottom:10px;">
 Silva, A. M., &amp; Unsi, M. (2026). <em>The Emerging Bangsamoro: A Hub for Resilient and Ethical Growth — Strategic Investment Analysis Report</em>. AS Strategic Insights.
 </p><p style="padding-left:25px; text-indent:-25px; margin-bottom:10px;">
-Bangsamoro Board of Investments. (2026). <em>Investment approval tracking system — Q1 2026 report</em>. Ministry of Trade, Investment and Tourism, BARMM.
+Bureau of Investments, Ministry of Trade, Investments and Tourism (MTIT), BARMM. (2026). <em>Investment approval tracking system — Q1 2026 report</em>. [Confirm report title, publication details and public availability before final citation.]
 </p><p style="padding-left:25px; text-indent:-25px; margin-bottom:10px;">
 Philippine Statistics Authority — BARMM. (2024). <em>2024 Regional Accounts of Bangsamoro</em>. PSA-BARMM Regional Statistical Services Office.
 </p><p style="padding-left:25px; text-indent:-25px; margin-bottom:10px;">
@@ -1016,10 +1036,11 @@ Bangsamoro Halal Board. (2025). <em>Halal certification registry — Annual repo
 Department of Energy. (2025). <em>Bangsamoro electrification status report 2025</em>. DOE-BARMM Field Office.
 </p><p style="padding-left:25px; text-indent:-25px; margin-bottom:10px;">
 Department of Information and Communications Technology. (2025). <em>BARMM broadband connectivity assessment</em>. DICT-MICT Joint Survey.
-</p> ============================================================  FOOTER  ============================================================ <div style="margin-top:50px; padding-top:20px; border-top:2px solid var(--primary-dark); text-align:center; font-size:9pt; color:var(--text-light);">
+</p>
+<div style="margin-top:50px; padding-top:20px; border-top:2px solid var(--primary-dark); text-align:center; font-size:9pt; color:var(--text-light);">
 <p><strong>Bangsamoro Investment Roadmap Development (BIRD) 2026–2035</strong></p>
 <p>Chapter 5: Balanced Scorecard, Causal Architecture and Strategy Execution</p>
-<p>Bureau of Investments — Ministry of Trade, Investment and Tourism (BOI-MTIT), BARMM</p>
+<p>Bureau of Investments, Ministry of Trade, Investments and Tourism (MTIT), BARMM</p>
 <p style="margin-top:10px;">Licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</p>
 </div>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 5</span><span>Page 13</span></div>
@@ -1211,7 +1232,7 @@ Department of Information and Communications Technology. (2025). <em>BARMM broad
             '<p style="text-align:center;color:#C9A84C;font-size:9pt;letter-spacing:2pt">BIRD 2026–2035</p>' +
             '<p style="text-align:center;font-family:Poppins,Arial;font-size:28pt;font-weight:bold;color:#C9A84C;line-height:1.15">' + (p.getAttribute('data-title') || 'Chapter') + '</p>' +
             '<p style="text-align:center;color:#a8e6cf;font-size:12pt">Bangsamoro Investment Roadmap Development 2026–2035</p>' +
-            '<p style="text-align:center;color:#ffffff;font-size:9.5pt;margin-top:24pt"><b style="color:#C9A84C">BOI-MTIT, BARMM</b><br>September 2026</p>' +
+            '<p style="text-align:center;color:#ffffff;font-size:9.5pt;margin-top:24pt"><b style="color:#C9A84C">Bureau of Investments, MTIT, BARMM</b><br>September 2026</p>' +
             '</td></tr></table>';
         } else {
           var c = p.cloneNode(true);
