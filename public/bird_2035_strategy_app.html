@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#064e3b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>BIRD 2035 Strategy PWA</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4; /* Emerald 50 */
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+        }
+        
+        /* Hide scrollbar for clean PWA look */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        .safe-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .safe-top {
+            padding-top: env(safe-area-inset-top);
+        }
+
+        /* Circular Strategy Engine Animations */
+        .orbit {
+            animation: spin 40s linear infinite;
+        }
+        .orbit-reverse {
+            animation: spin-reverse 40s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
+        
+        .pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            700: '#047857',
+                            900: '#064e3b',
+                            gold: '#fbbf24'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="text-slate-800 antialiased h-screen w-screen overflow-hidden flex flex-col">
+    <div id="root" class="h-full w-full flex flex-col"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- DATA MODELS ---
+        const PARETO_KPIS = [
+            { id: 'grdp', title: 'GRDP Growth', value: '₱550B+', icon: 'TrendingUp', color: 'bg-emerald-100 text-emerald-700' },
+            { id: 'inv', title: 'Investments', value: '₱15B+', icon: 'Briefcase', color: 'bg-blue-100 text-blue-700' },
+            { id: 'exp', title: 'Exports', value: '₱40B+', icon: 'Globe', color: 'bg-amber-100 text-amber-700' },
+            { id: 'msme', title: 'Halal MSMEs', value: '5,000+', icon: 'Store', color: 'bg-purple-100 text-purple-700' },
+            { id: 'elec', title: 'Electrification', value: '100%', icon: 'Zap', color: 'bg-yellow-100 text-yellow-700' },
+            { id: 'web', title: 'Broadband', value: '85%', icon: 'Wifi', color: 'bg-cyan-100 text-cyan-700' },
+        ];
+
+        const GROWTH_DRIVERS = [
+            { id: 'fnd', name: 'Foundations', desc: 'Agriculture, Fisheries, Renewables' },
+            { id: 'trn', name: 'Transformers', desc: 'Halal Industry, Agro-processing' },
+            { id: 'enb', name: 'Enablers', desc: 'Power Grid, Broadband' },
+            { id: 'fin', name: 'Financiers', desc: 'Islamic Finance, PPPs' },
+            { id: 'con', name: 'Connectors', desc: 'Trade Corridors, DCC Markets' },
+        ];
+
+        const ALLOCATIONS = [
+            { id: 'gov', name: 'Governance & Enablers', pct: 35, color: 'bg-brand-700' },
+            { id: 'clim', name: 'Climate & Dev Finance', pct: 30, color: 'bg-emerald-500' },
+            { id: 'inf', name: 'Infrastructure Programs', pct: 25, color: 'bg-brand-gold' },
+            { id: 'priv', name: 'Private Capital (PPPs)', pct: 10, color: 'bg-blue-500' },
+        ];
+
+        const GEOSPATIAL_NODES = [
+            { name: 'Maguindanao Del Norte', role: 'Logistics & Halal Hub', tag: 'Mainland' },
+            { name: 'Maguindanao Del Sur', role: 'Agri-Industrial Breadbasket', tag: 'Mainland' },
+            { name: 'Basilan', role: 'Rubber & Energy Gateway', tag: 'Island' },
+            { name: 'Tawi-Tawi', role: 'Seaweed & Maritime Trade', tag: 'Island' },
+            { name: 'Lanao Del Sur', role: 'Hydropower & Upland Agri', tag: 'Mainland' },
+            { name: 'SGA', role: 'Logistics Land Bridge', tag: 'Mainland' },
+        ];
+
+        // --- COMPONENTS ---
+
+        const Icon = ({ name, size = 24, className = '' }) => {
+            useEffect(() => {
+                lucide.createIcons();
+            }, [name]);
+            return <i data-lucide={name} width={size} height={size} className={className}></i>;
+        };
+
+        const ExecutiveDashboard = () => (
+            <div className="p-4 space-y-6 animate-fade-in pb-24 overflow-y-auto h-full">
+                <div className="space-y-1">
+                    <h2 className="text-2xl font-bold text-brand-900">Executive War Room</h2>
+                    <p className="text-sm text-slate-500">Tracking 2035 Pareto Outcomes</p>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                    {PARETO_KPIS.map(kpi => (
+                        <div key={kpi.id} className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-center">
+                            <div className={`p-3 rounded-full mb-3 ${kpi.color}`}>
+                                <Icon name={kpi.icon} size={20} />
+                            </div>
+                            <h3 className="text-2xl font-black text-slate-800">{kpi.value}</h3>
+                            <p className="text-xs font-medium text-slate-500 uppercase tracking-wide mt-1">{kpi.title}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="bg-brand-900 rounded-2xl p-5 text-white shadow-lg relative overflow-hidden mt-6">
+                    <div className="absolute top-0 right-0 -mr-8 -mt-8 opacity-10">
+                        <Icon name="Target" size={120} />
+                    </div>
+                    <h3 className="font-bold text-lg mb-1 relative z-10">Private Capital Multiplier</h3>
+                    <div className="text-4xl font-black text-brand-gold relative z-10">11x - 14x</div>
+                    <p className="text-brand-100 text-sm mt-2 relative z-10">Target multiplier for every ₱1 of blended capital deployed.</p>
+                </div>
+            </div>
+        );
+
+        const StrategyEngine = () => {
+            const [activeDriver, setActiveDriver] = useState(null);
+
+            return (
+                <div className="p-4 h-full flex flex-col pb-24 animate-fade-in">
+                    <div className="space-y-1 mb-8">
+                        <h2 className="text-2xl font-bold text-brand-900">Circular Engine</h2>
+                        <p className="text-sm text-slate-500">Core operating system & growth drivers</p>
+                    </div>
+
+                    <div className="flex-1 flex items-center justify-center relative min-h-[350px]">
+                        {/* Center Core */}
+                        <div className="absolute z-20 w-32 h-32 bg-white rounded-full shadow-xl border-4 border-brand-500 flex flex-col items-center justify-center text-center p-2 pulse-slow cursor-pointer" onClick={() => setActiveDriver(null)}>
+                            <Icon name="ShieldCheck" size={28} className="text-brand-700 mb-1" />
+                            <span className="text-[11px] font-bold text-brand-900 uppercase leading-tight">Moral<br/>Governance</span>
+                        </div>
+
+                        {/* Orbits */}
+                        <div className="absolute w-[280px] h-[280px] rounded-full border-2 border-dashed border-brand-200 orbit"></div>
+                        <div className="absolute w-[280px] h-[280px] orbit">
+                            {GROWTH_DRIVERS.map((driver, idx) => {
+                                const angle = (idx * 360) / 5;
+                                const radius = 140;
+                                const x = radius * Math.cos((angle - 90) * (Math.PI / 180));
+                                const y = radius * Math.sin((angle - 90) * (Math.PI / 180));
+                                
+                                return (
+                                    <div 
+                                        key={driver.id}
+                                        className="absolute w-16 h-16 bg-white rounded-full shadow-md border-2 border-brand-100 flex items-center justify-center cursor-pointer transition-transform hover:scale-110 orbit-reverse"
+                                        style={{ 
+                                            transform: `translate(${x}px, ${y}px) translate(-50%, -50%)`,
+                                            left: '50%',
+                                            top: '50%'
+                                        }}
+                                        onClick={() => setActiveDriver(driver)}
+                                    >
+                                        <div className="text-[10px] font-bold text-center text-slate-700 leading-tight">{driver.name}</div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    {/* Info Card */}
+                    <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 min-h-[100px]">
+                        {activeDriver ? (
+                            <div>
+                                <h3 className="font-bold text-brand-700 text-lg">{activeDriver.name}</h3>
+                                <p className="text-sm text-slate-600 mt-1">{activeDriver.desc}</p>
+                            </div>
+                        ) : (
+                            <div className="text-center text-slate-400 text-sm flex flex-col items-center py-2">
+                                <Icon name="TapContext" size={24} className="mb-2 opacity-50" />
+                                Tap a node to explore driver details
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        const CapitalAndGeo = () => (
+            <div className="p-4 space-y-8 animate-fade-in pb-24 overflow-y-auto h-full">
+                {/* Capital Allocation */}
+                <section>
+                    <h2 className="text-xl font-bold text-brand-900 mb-4">Capital Allocation</h2>
+                    <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
+                        <div className="flex h-6 rounded-full overflow-hidden mb-4">
+                            {ALLOCATIONS.map(alloc => (
+                                <div key={alloc.id} className={`${alloc.color} h-full`} style={{ width: `${alloc.pct}%` }}></div>
+                            ))}
+                        </div>
+                        <div className="space-y-3">
+                            {ALLOCATIONS.map(alloc => (
+                                <div key={alloc.id} className="flex justify-between items-center text-sm">
+                                    <div className="flex items-center">
+                                        <div className={`w-3 h-3 rounded-full mr-2 ${alloc.color}`}></div>
+                                        <span className="font-medium text-slate-700">{alloc.name}</span>
+                                    </div>
+                                    <span className="font-bold text-slate-900">{alloc.pct}%</span>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                            <span className="text-xs text-slate-500 font-medium">Target Funding Framework</span>
+                            <span className="font-bold text-brand-700">₱120-160B</span>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Geospatial Nodes */}
+                <section>
+                    <h2 className="text-xl font-bold text-brand-900 mb-4">Geospatial Hubs</h2>
+                    <div className="space-y-3">
+                        {GEOSPATIAL_NODES.map((node, i) => (
+                            <div key={i} className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-start">
+                                <div className={`p-2 rounded-lg mr-4 mt-1 ${node.tag === 'Mainland' ? 'bg-amber-100 text-amber-700' : 'bg-cyan-100 text-cyan-700'}`}>
+                                    <Icon name={node.tag === 'Mainland' ? 'Map' : 'Anchor'} size={20} />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-slate-800">{node.name}</h4>
+                                    <p className="text-xs text-slate-500 mt-1">{node.role}</p>
+                                    <span className="inline-block mt-2 text-[10px] uppercase font-bold tracking-wider text-slate-400 bg-slate-100 px-2 py-1 rounded-md">
+                                        {node.tag}
+                                    </span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            </div>
+        );
+
+        const App = () => {
+            const [activeTab, setActiveTab] = useState('dashboard');
+
+            // Force icon refresh on tab change
+            useEffect(() => {
+                setTimeout(() => lucide.createIcons(), 50);
+            }, [activeTab]);
+
+            return (
+                <div className="h-full w-full flex flex-col relative bg-slate-50">
+                    {/* Top App Bar */}
+                    <div className="safe-top bg-brand-900 text-white shadow-md z-50">
+                        <div className="h-14 px-4 flex items-center justify-between">
+                            <div className="flex items-center">
+                                <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center mr-3 backdrop-blur-sm">
+                                    <Icon name="Bird" size={20} className="text-brand-gold" />
+                                </div>
+                                <h1 className="font-bold text-lg tracking-tight">BIRD 2035</h1>
+                            </div>
+                            <button className="p-2 rounded-full hover:bg-white/10 transition">
+                                <Icon name="Bell" size={20} />
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Main Content Area */}
+                    <main className="flex-1 overflow-hidden relative">
+                        {activeTab === 'dashboard' && <ExecutiveDashboard />}
+                        {activeTab === 'engine' && <StrategyEngine />}
+                        {activeTab === 'allocation' && <CapitalAndGeo />}
+                    </main>
+
+                    {/* Bottom Navigation (PWA style) */}
+                    <div className="safe-bottom bg-white border-t border-slate-200 absolute bottom-0 w-full z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+                        <div className="flex justify-around items-center h-16">
+                            <NavButton 
+                                id="dashboard" 
+                                icon="LayoutDashboard" 
+                                label="War Room" 
+                                active={activeTab === 'dashboard'} 
+                                onClick={() => setActiveTab('dashboard')} 
+                            />
+                            <NavButton 
+                                id="engine" 
+                                icon="RefreshCcw" 
+                                label="Engine" 
+                                active={activeTab === 'engine'} 
+                                onClick={() => setActiveTab('engine')} 
+                            />
+                            <NavButton 
+                                id="allocation" 
+                                icon="PieChart" 
+                                label="Capital" 
+                                active={activeTab === 'allocation'} 
+                                onClick={() => setActiveTab('allocation')} 
+                            />
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const NavButton = ({ icon, label, active, onClick }) => (
+            <button 
+                onClick={onClick}
+                className={`flex flex-col items-center justify-center w-20 h-full transition-colors duration-200 ${
+                    active ? 'text-brand-700' : 'text-slate-400 hover:text-slate-600'
+                }`}
+            >
+                <div className={`mb-1 transition-transform duration-200 ${active ? 'scale-110' : ''}`}>
+                    <Icon name={icon} size={22} />
+                </div>
+                <span className={`text-[10px] font-medium ${active ? 'font-bold' : ''}`}>
+                    {label}
+                </span>
+            </button>
+        );
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
