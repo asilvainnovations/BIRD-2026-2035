@@ -165,10 +165,52 @@ figcaption{font-size:8.5pt;color:#555;margin-top:1.5mm;font-style:italic;text-al
   .sheet.cover{page:cover;width:210mm;height:297mm;overflow:hidden}
   .sheet.cover .cover-content{min-height:297mm}
   tr,figure,.principle-box,.resource-box,.beie-diagnostic{break-inside:avoid;page-break-inside:avoid}
+  .sheet:not(.cover){height:263mm;position:relative;overflow:hidden}
+  .folio{left:0;right:0;bottom:0}
   h2,h3{break-after:avoid;page-break-after:avoid}
   a{color:inherit;text-decoration:none}
 }
 
+
+/* ===== Chapter components (aligned with Prelims and Chapter 7) ===== */
+h1{font-family:'Poppins',sans-serif;font-weight:700;font-size:15pt;color:var(--green-900);margin:0 0 3mm;text-align:left}
+.chapter-header{margin:0 0 4mm}
+.chapter-number{font-family:'Roboto Condensed',sans-serif;font-size:10pt;letter-spacing:.08em;color:var(--gold-dark);text-transform:uppercase}
+.chapter-title{font-size:17pt;border-bottom:2px solid var(--gold);padding-bottom:2mm}
+.principle-title{font-family:'Poppins',sans-serif;font-weight:600;font-size:10pt;color:var(--green-900);margin-bottom:1mm}
+.video-box-title{font-family:'Poppins',sans-serif;font-weight:600;font-size:10pt;color:#1f5f8b;margin-bottom:1mm}
+.data-note strong{color:#5e522f}
+.references-list p{font-size:8.8pt;padding-left:6mm;text-indent:-6mm;text-align:left;margin-bottom:2mm}
+.tool-card span,.option-card span{display:block}
+.stage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2mm;margin:3mm 0 1.5mm;text-align:left}
+.stage-card{background:var(--mist);border:1px solid var(--mist-line);border-top:3px solid var(--green-900);padding:2.5mm;font-size:8pt;line-height:1.4}
+.stage-card .stage-no{display:inline-block;font-family:'Roboto Condensed',sans-serif;font-weight:700;font-size:7.5pt;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--green-900);border-radius:2px;padding:.4mm 1.6mm;margin-bottom:1.2mm}
+.stage-card strong{display:block;font-family:'Poppins',sans-serif;font-size:9pt;color:var(--green-900);margin-bottom:.8mm}
+.stage-card .stage-when{display:block;font-family:'Roboto Condensed',sans-serif;color:var(--gold-dark);font-weight:700;margin-bottom:.8mm}
+.stage-card span{display:block}
+.stage-pending{background:#fbf6e8;border:1px dashed var(--gold);padding:1.8mm 3mm;font-size:8.2pt;text-align:left;color:#5e522f}
+@media screen and (max-width:860px){.stage-grid{grid-template-columns:1fr 1fr}}
+@media print{.stage-grid,.stage-card,.video-box,.evidence-box,.data-note,table{break-inside:avoid;page-break-inside:avoid}}
+
+.cluster-box-title,.pedset-box-title,.resource-box-title,.strategy-box-title,.lp-box-title{font-family:'Poppins',sans-serif;font-weight:600;font-size:10pt;color:var(--green-900);margin-bottom:1mm}
+.pedset-box{background:#fbf6e8;border-color:#ecdcae;border-left-color:var(--gold)}
+.callout{border-left-color:var(--gold);background:#f8f9f5}
+ol.tight-list{margin:0 0 3mm 6mm}ol.tight-list li{margin:0 0 1.6mm;padding-left:1mm}
+.tows-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm;margin:3mm 0 1.5mm}
+.tows-cell{border:1px solid #dbe5df;border-radius:4px;padding:2.5mm 3mm;background:#fff;font-size:9pt}
+.tows-cell p{margin:0;text-align:left;line-height:1.6}
+.tows-head{font-family:'Roboto Condensed',sans-serif;font-weight:700;font-size:9pt;color:var(--green-900);margin-bottom:1.2mm}
+.tows-so{border-top:3px solid #2f7d57}.tows-wo{border-top:3px solid #C9A84C}.tows-st{border-top:3px solid #b36b3d}.tows-wt{border-top:3px solid #8b3d3d}
+.figcap{font-size:8.5pt;color:#555;font-style:italic;text-align:left;line-height:1.4;margin:0 0 3mm}
+.bar-chart{border:1px solid #dbe5df;border-radius:4px;padding:2.5mm 3.5mm;background:#fff;margin:2mm 0 1.5mm}
+.bar-group-title{font-family:'Roboto Condensed',sans-serif;font-weight:700;font-size:8.8pt;color:var(--green-900);margin:1.2mm 0 1mm}
+.bar-row{display:grid;grid-template-columns:14mm 1fr 12mm;align-items:center;gap:2.5mm;font-size:8.6pt;margin:.8mm 0}
+.bar-row span:last-child{text-align:right;font-weight:600;color:var(--green-900)}
+.bar-track{background:#eef2ec;height:4mm;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:var(--green-700)}.bar-fill.gold{background:var(--gold)}
+tr.total-row td{background:#f0f7f4;border-top:2px solid var(--green-900)}
+code{font-family:'Roboto Mono',Consolas,monospace;font-size:8.4pt;background:#f2f4f2;padding:0 3px;border-radius:2px}
+@media (max-width:700px){.tows-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -190,353 +232,636 @@ figcaption{font-size:8.5pt;color:#555;margin-top:1.5mm;font-style:italic;text-al
 <div class="cover-chapter">Chapter 3</div>
 <div class="cover-title">Strategic Options, Leverage Points and the Roadmap Strategy</div>
 <div class="cover-divider"></div>
-<div class="cover-subtitle">From TOWS Strategy Formulation to Systems Leverage and Phased Investment Sequencing</div>
+<div class="cover-subtitle">From TOWS strategy formulation to systems leverage and phased investment sequencing</div>
 <div class="cover-meta">
 <strong>Bangsamoro Investment Roadmap Development (BIRD) 2026–2035</strong><br/><br/>
-Bureau of Investments, Ministry of Trade, Investments and Tourism (BOI-MTIT), BARMM<br/>
+Bureau of Investments, Ministry of Trade, Investments and Tourism (BoI-MTIT), BARMM<br/>
 September 2026
 </div>
 </div>
 </section>
-<section class="sheet" data-group="Chapter 3" data-title="Strategic Options and the Roadmap Strategy" id="p3">
+
+<section class="sheet" data-group="Chapter 3" data-title="Strategic Options, Leverage Points and the Roadmap Strategy" id="p1">
 <div class="kicker">Chapter 3</div>
 <div class="chapter-header" id="ch3-intro">
 <div class="chapter-number">Chapter 3</div>
-<h1 class="chapter-title">Strategic Options and the Roadmap Strategy</h1>
-</div><h2>Introduction: From Diagnosis to Strategy</h2><p>
-This chapter translates the diagnostic insights from Chapter 2 into actionable strategic options for the Bangsamoro Investment Roadmap Development (BIRD) 2026-2035. The comprehensive SWOT analysis from Chapter 2 identified 12 strengths, 12 weaknesses, 12 opportunities, and 11 threats — each quantified using the Strat Planner Pro mathematical formulations (Readiness Index, Risk Score, and Vulnerability Index). The systems mapping from Chapter 2 revealed a portfolio of systems archetypes, including Limits to Growth, Fixes that Fail, Tragedy of the Commons, Success to the Successful, Growth and Underinvestment, Escalation, Big Man, Shifting the Burden, and Drifting Goals — each mapped to specific leverage points within Donella Meadows' (1999) hierarchy (Silva, 2026; Meadows, 1999). Building upon these analytical foundations, this chapter employs the TOWS (Threats-Opportunities-Weaknesses-Strengths) framework to generate four distinct strategy matrices: SO (Strengths-Opportunities), WO (Weaknesses-Opportunities), ST (Strengths-Threats), and WT (Weaknesses-Threats).
-</p><p>
-The strategic formulation process integrates three analytical layers: (1) <strong>SWOT-to-Strategy Matrix conversion</strong> using the TOWS framework; (2) <strong>systems-archetype-informed leverage point identification</strong>, mapping strategies to intervention points within the Meadows hierarchy; and (3) <strong>multi-criteria strategic option evaluation</strong> across four pathways — Halal Economy Dominance (HEDS), Green Economy Monetization (GEMS), Infrastructure-First Enabling (IFES), and Integrated Ecosystem Development (IEDS). The option matrix is an analytical decision aid; its baseline scores should be distinguished from subsequent stakeholder-validation results reported by the BIRD survey platform.
-</p><p>
-This rigorous approach ensures that recommended strategies are not only analytically sound but also operationally feasible and aligned with BARMM's unique context as a post-conflict, Muslim-majority autonomous region with significant untapped potential. Provincial data from the six major economic zones — Maguindanao del Norte, Lanao del Sur, Basilan, Tawi-Tawi, Maguindanao del Sur, and the Special Geographic Area — is integrated throughout to ensure geographically targeted interventions that address the "dual-speed BARMM" reality identified in Chapter 2 (PSA-RSSO BARMM, 2024; BPDA, 2024).
-</p><figure id="fig-four-options">
-<img alt="Four Strategic Options" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/Strategic%20Options.png"/>
-<figcaption data-label="Figure 3-1">Four Distinct Pathways to Scale Regional Value Creation: (1) Halal Economy Dominance (HEDS) — leverage cultural authenticity for the USD 2.3 trillion global halal market; (2) Green Economy Monetization (GEMS) — convert environmental assets into revenue via carbon markets and PES; (3) Infrastructure-First Enabling (IFES) — remove energy and logistics constraints to scale production; (4) Integrated Ecosystem Development (IEDS) — synchronize all three strategies to avoid systemic bottlenecks. Source: Strat Planner Pro (Silva, 2026).</figcaption>
-</figure> ==================== SECTION A ==================== 
+<h1 class="chapter-title">Strategic Options, Leverage Points and the Roadmap Strategy</h1>
+</div>
+<h2>Introduction: From Diagnosis to Strategy</h2>
+<p>Chapter 2 diagnosed the Bangsamoro economy as one connected system. It quantified 55 strengths, weaknesses, opportunities and threats across the cross-cutting operating systems and the five clusters of the Bangsamoro Economic and Investment Ecosystem (BEIE) Framework; it identified the systems archetypes that keep the region's investment performance below its potential; and it showed that readiness gaps compound along the value chain, so that clusters that look about 69 percent ready on average deliver only about 11.5 percent of their potential as a system. This chapter turns that diagnosis into a strategic choice.</p>
+<p>It does so through three analytical layers, each building on the one before:</p>
+<ol class="tight-list">
+<li><strong>SWOT-to-strategy conversion (Section A, A.1–A.4).</strong> The quantified SWOT register is converted into SO, WO, ST and WT strategies using the TOWS matrix (Weihrich, 1982). Every strategy is traced to scored survey items, the BEIE cluster that owns it and the archetype it addresses.</li>
+<li><strong>Systems-archetype-informed leverage points (Section B).</strong> Each archetype is mapped to the levels of Donella Meadows' hierarchy of places to intervene in a system (Meadows, 1999), and the results are consolidated into the five Critical Leverage Points (LP1–LP5) used in Chapters 4 to 7.</li>
+<li><strong>Multi-criteria evaluation of four strategic options (Section A, A.5–A.7).</strong> Halal Economy Dominance (HEDS), Green Economy Monetisation (GEMS), Infrastructure-First Enabling (IFES) and Integrated Ecosystem Development (IEDS) are scored against seven weighted criteria, tested for sensitivity and then compared with stakeholder validation results.</li>
+</ol>
+<figure>
+<img alt="The investment logic in one chain, from Chapter 1 to Chapter 7" src="https://asilvainnovations.github.io/BIRD-2026-2035/public/assets/Investment_Roadmapping_logic.png" style="max-width:76%"/>
+<figcaption data-label="Figure 3-1">Figure 3-1. The investment logic in one chain. Chapter 3 converts the quantified SWOT and systems sensing of Chapter 2 into a strategic choice and its leverage points, which Chapters 4 to 7 then measure, map, implement and anchor in policy. Source: Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 2</span></div>
 </section>
-<section class="sheet" data-group="Section A" data-title="Systems-Based Strategy Matrix" id="p4">
-<div class="kicker">Section A</div>
-<div class="chapter-header" id="ch3-a">
-<div class="chapter-number">Section A</div>
-<h1 class="chapter-title">Systems-Based Strategy Matrix</h1>
-</div><p>
-The SWOT analysis from Chapter 2 identified the full spectrum of internal resilience drivers (Strengths), internal risk exposures (Weaknesses), external resilience drivers (Opportunities), and external vulnerability factors (Threats). These elements are now synthesized into a Strategy Matrix using the TOWS framework (Weihrich, 1982), which generates four distinct strategic approaches. Each cell in the TOWS matrix represents a unique strategic pathway derived from the intersection of SWOT elements, with corresponding leverage points identified from the systems archetype analysis in Chapter 2.
-</p><figure id="fig-options-ranking">
-<img alt="Strategic Options Ranking and Scoring Matrix" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-strategic-options-roadmap/3.%20Strategic%20Options%20Ranking.png"/>
-<figcaption data-label="Figure 3-2">Strategic Options Ranking and Scoring Matrix: Comparative evaluation of HEDS, GEMS, IFES, and IEDS across seven weighted criteria. IEDS achieves the highest composite score (8.93/10) by excelling in all dimensions, while other strategies perform well only in specific niches. Source: Strat Planner Pro; BIRD Workshop Data (MTIT-BARMM, 2025).</figcaption>
-</figure><div class="data-callout"><strong>Validation and analytical-contract note:</strong> The BIRD validation platform currently reports <strong>76 consented survey responses</strong> in the latest linked analytical snapshot. The production <code>survey-analytics</code> contract (analyticsVersion 2) separates analytical baseline scores from respondent-derived scores and exposes respondent coverage and missingness metadata. Accordingly, the option scores presented in this chapter are treated as <strong>strategy-formulation baselines</strong>; future editions should report respondent validation separately rather than blending the two evidence streams. The four BIRD diagnostic families use the repository-defined formulas: Strength RI = (impact × likelihood) / 5; Opportunity RI = √(impact × likelihood); Weakness Risk = impact × likelihood; Threat VI = (impact² × likelihood) / 25. Missing SWOT families are not equivalent to zero and should be reported as missing.</div><h2 id="ch3-a-1">A.1 SO Strategies — Maximizing Strengths to Capitalize Opportunities</h2><p>
-SO strategies represent the most aggressive growth pathway: leveraging internal strengths to capture external opportunities. These strategies align high-Readiness Index strengths (RI = 5.0) with high-RI opportunities (RI = 4.5-5.0) to create virtuous cycles of investment and development. Three SO strategies are derived from the TOWS matrix, each targeting a distinct dimension of BARMM's competitive advantage.
-</p><table id="tab-so">
-<caption data-label="Table 3-1">Strengths-Opportunities (SO) Strategy Matrix with Leverage Points Integration</caption>
-<thead>
-<tr><th>Strategy</th><th>Strength</th><th>Opportunity</th><th>CLD Loop</th><th>Leverage Points</th><th>Expected Impact</th></tr>
-</thead>
+
+<section class="sheet" data-group="Chapter 3" data-title="What Chapter 2 hands to Chapter 3" id="p2">
+<div class="kicker">Chapter 3</div>
+<div class="data-note"><strong>Baseline scores and validation results are reported separately.</strong> The option matrix in Section A.6 is an analytical decision aid: its baseline scores are structured expert judgements made with the Strat Planner Pro method. Stakeholder validation results from the BIRD Validation Survey are a second, independent evidence stream and are reported beside the baseline, never blended into it. Where the two agree, confidence rises; where they differ, the difference is reported as a finding.</div>
+<h3 id="ch3-intro-carry">What Chapter 2 hands to Chapter 3</h3>
+<p>Table 3-1 lists the diagnostic findings that shape the strategy, and the design requirement each one places on any option the region adopts. These requirements become the tests that the four options must pass in Section A.6.</p>
+<table>
+<caption data-label="Table 3-1">Table 3-1. Diagnostic findings carried forward and the strategic requirement each creates</caption>
+<thead><tr><th style="width:38%">Chapter 2 finding (evidence)</th><th>Requirement for the strategy</th></tr></thead>
 <tbody>
-<tr><td><strong>SO-1:</strong> Halal Economy Dominance</td><td>Halal legitimacy (RI=5.0), cultural credibility, 5.69M Muslim consumers, strong AFF base (RI=3.2)</td><td>Global halal market (USD 2.3T, RI=5.0), ASEAN halal economy (USD 1.38T, RI=4.5), UAE/GCC export corridor (RI=4.0)</td><td>Investment-Development Virtuous Cycle (R1)</td><td>L5 (Rules: OIC/SMIIC, BHB), L6 (Information: traceability), L9 (Delay: 21-day certification)</td><td>₱5B+ halal exports; 5,000+ certified MSMEs; 30% ASEAN halal market share by 2035</td></tr>
-<tr><td><strong>SO-2:</strong> Green Economy Monetization</td><td>Renewable energy endowments (75.86% RE mix, RI=3.2), Lake Lanao (RI=2.4), forest/marine resources</td><td>Carbon markets/REDD+ (RI=3.5), PES (RI=3.5), BIMP-EAGA eco-corridors (RI=3.5), renewable energy investment (RI=4.5)</td><td>Growth-Resource Constraints (R1+B2)</td><td>L5 (Rules: Forestry Code), L6 (Information: MRV systems), L7 (Feedback: PES revenue sharing)</td><td>₱500M+ carbon/PES revenue; 1M+ tCO2e/year; 10% forest cover increase</td></tr>
-<tr><td><strong>SO-3:</strong> BIMP-EAGA Gateway</td><td>Strategic location (RI=4.0), Polloc Freeport (RI=3.2), cultural authenticity, young population (RI=5.0)</td><td>BIMP-EAGA integration (RI=4.0), cross-border trade, Islamic finance ecosystem (RI=4.5)</td><td>Governance-Investor Confidence Cycle (R2)</td><td>L4 (Self-Organization: trade councils), L5 (Rules: MRA, Polloc Freeport), L10 (Stock-Flow: infrastructure)</td><td>₱40B+ exports; 3M tourist arrivals; Philippine gateway to ASEAN</td></tr>
+<tr><td><strong>Enablers is the binding cluster.</strong> Lowest readiness (3.33 of 5) and the highest weakness risk (17.13), led by low literacy (18.19), malnutrition (17.84) and infrastructure deficits (17.41).</td><td>Infrastructure, energy and human capital must be financed ahead of, or alongside, productive scale-up; no option may assume them.</td></tr>
+<tr><td><strong>Readiness gaps compound.</strong> Mean cluster readiness is about 69 percent, but serial throughput falls to 16.0 percent across the chain and about 11.5 percent once the operating systems are applied.</td><td>Clusters must be developed in a synchronised sequence; improving one cluster in isolation yields little system output.</td></tr>
+<tr><td><strong>Opportunities are not the constraint.</strong> Opportunity ratings are uniformly high (cluster means 3.93–4.04); the global halal market (4.13), renewable investment (4.12) and digital leapfrogging (4.10) lead.</td><td>The strategy should concentrate on converting opportunity into investable projects, rather than on identifying new opportunities.</td></tr>
+<tr><td><strong>Structural archetypes are recognised.</strong> Between 95 and 99 percent of respondents rated each cluster archetype accurate; the governance archetypes (Big Man, Escalation, Drifting Goals) were rated accurate by 96–99 percent.</td><td>Interventions must work at the level of rules, information flows, goals and mindsets, not only at the level of projects and budgets.</td></tr>
+<tr><td><strong>Security and climate are the leading threats.</strong> Security incidents (VI 3.20) and climate change (3.14) carry the highest vulnerability indices, followed by price volatility (3.19) and infrastructure cost overruns (3.07).</td><td>Every option needs explicit risk buffers: peace-conditioned delivery, climate screening and cost-control gates.</td></tr>
+<tr><td><strong>Territorial divergence.</strong> Maguindanao del Norte is the largest economy (₱81.91 billion, 2023); Tawi-Tawi, the smallest, holds the region's maritime gateway and about 40 percent of national seaweed output, and was named by 44 of 72 respondents as the province with the most trapped value.</td><td>The strategy must counter "Success to the Successful" with explicit island and lagging-area priorities.</td></tr>
 </tbody>
-</table><p>
-<strong>SO-1: Halal Economy Dominance (HEDS)</strong> is the highest-priority SO strategy, combining BARMM's unmatched halal legitimacy (RI = 5.0) with the USD 2.3 trillion global halal market opportunity (RI = 5.0). This strategy directly activates the Investment-Development Virtuous Cycle (R1): halal processing investments create employment, which expands domestic demand, which attracts additional investment. Provincial activation pathways are critical: Maguindanao del Norte leverages the Bangsamoro Halal Park and Polloc Freeport for manufacturing and export logistics; Lanao del Sur develops halal processing integrated with Lake Lanao eco-tourism; Basilan connects its 48,366 ha rubber and 69,392 MT production to halal-certified rubber goods; and Tawi-Tawi develops halal seaweed processing for BIMP-EAGA export. The leverage points focus on L5 (Rules) for OIC/SMIIC accreditation and BHB operationalization, L6 (Information Flows) for halal traceability systems, and L9 (Delay Lengths) for reducing certification processing from 45-60 days to 21 days (Silva, 2026; SMIIC, 2021).
-</p>
+</table>
+<p class="src">Sources: BIRD Validation Survey (2026), n = 76 consented responses, 60–74 valid ratings per item; MTIT (2026); Chapter 2, Tables 2-4, 2-5 and 2-16.</p>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 3</span></div>
 </section>
-<section class="sheet" data-group="Section A" data-title="A.2 WO Strategies — Overcoming Weaknesses by Capturing Opportunities" id="p5">
-<div class="kicker">Section A</div>
-<h2 id="ch3-a-2">A.2 WO Strategies — Overcoming Weaknesses by Capturing Opportunities</h2><p>
-WO strategies are turnaround initiatives: they address high-risk internal weaknesses by leveraging high-RI external opportunities. These strategies are essential because BARMM's binding constraints — infrastructure deficits (Risk = 25.0), poverty (Risk = 25.0), human capital gaps (Risk = 20.0), and weak institutional capacity (Risk = 20.0) — cannot be resolved through internal resources alone. External opportunities provide the capital, technology, and market access needed to transform weaknesses into emerging strengths.
-</p><table id="tab-wo">
-<caption data-label="Table 3-2">Weaknesses-Opportunities (WO) Strategy Matrix with Leverage Points Integration</caption>
-<thead>
-<tr><th>Strategy</th><th>Weakness</th><th>Opportunity</th><th>Archetype</th><th>Leverage Points</th><th>Expected Impact</th></tr>
-</thead>
+
+<section class="sheet" data-group="Chapter 3" data-title="Systems-Based Strategy Matrix and Strategic Options" id="p3">
+<div class="kicker">Chapter 3</div>
+<div class="chapter-header" id="ch3-a">
+<div class="chapter-number">Section A</div>
+<h1 class="chapter-title">Systems-Based Strategy Matrix and Strategic Options</h1>
+</div>
+<p>The TOWS matrix (Weihrich, 1982) pairs internal factors (strengths and weaknesses) with external factors (opportunities and threats) to generate four families of strategy. BIRD applies it with three disciplines borrowed from systems thinking. First, only scored items enter the matrix: each pairing uses factors from the BIRD Validation Survey register rather than descriptive lists. Second, each strategy is assigned to the BEIE cluster that owns its delivery, so that the matrix can be read as a map of the ecosystem. Third, each strategy is tagged with the archetype it is designed to weaken and the Meadows level at which it intervenes, which links Section A to Section B.</p>
+<table>
+<caption data-label="Table 3-2">Table 3-2. The scored SWOT register: top-ranked items in each family</caption>
+<thead><tr><th style="width:25%">Strengths (RI, 0–5)</th><th style="width:25%">Weaknesses (Risk, 1–25)</th><th style="width:25%">Opportunities (RI, 0–5)</th><th style="width:25%">Threats (VI, 0–5)</th></tr></thead>
 <tbody>
-<tr><td><strong>WO-1:</strong> Infrastructure-First Enabling</td><td>Critical infrastructure deficits (Risk=25.0): 25-30% households without electricity, &lt;30% broadband, farm-to-market road gaps</td><td>Renewable energy investment (RI=4.5), PPP frameworks, ODA availability, CREATE MORE Act incentives</td><td>Limits to Growth: Remove balancing constraints</td><td>L9 (Delay: fast-track ZBIP), L10 (Stock-Flow: roads, grid), L11 (Buffer: 20% reserve capacity)</td><td>100% electrification target; 85% broadband; 30% logistics cost reduction</td></tr>
-<tr><td><strong>WO-2:</strong> Human Capital Transformation</td><td>Lowest functional literacy (59.3%, Risk=20.0), skills mismatch (Risk=16.0), highest poverty (34.8%, Risk=25.0)</td><td>Islamic finance ecosystem (RI=4.5), TESDA programs, digital skills training, post-conflict reconstruction demand (RI=3.5)</td><td>Fixes that Fail: Build capacity, not just relief</td><td>L3 (Goals: 75% literacy target), L5 (Rules: TESDA alignment), L10 (Stock-Flow: training centers)</td><td>75%+ literacy; 50+ Islamic finance professionals; 20,000+ jobs</td></tr>
-<tr><td><strong>WO-3:</strong> Institutional Capacity Building</td><td>Weak halal certification (Risk=20.0), fragmented policy (Risk=16.0), underspending (&lt;80%, Risk=12.0)</td><td>Bangsamoro Forestry Code enactment, JMC No. 2026-01, BHIDP 2025-2030, OIC/SMIIC alignment</td><td>Tragedy of the Commons: Prevent fragmentation</td><td>L5 (Rules: JMC 2026-01), L6 (Information: dashboard), L8 (Negative Feedback: coordination score)</td><td>90%+ budget execution; 8/10 coordination score</td></tr>
+<tr><td>Seaweed dominance 3.71 <em>(F)</em></td><td>Low literacy 18.19 <em>(E)</em></td><td>Global halal market 4.13 <em>(C)</em></td><td>Security incidents 3.20 <em>(OS)</em></td></tr>
+<tr><td>Agriculture, fisheries and forestry base 3.69 <em>(F)</em></td><td>Malnutrition 17.84 <em>(E)</em></td><td>Renewable energy investment 4.12 <em>(F)</em></td><td>Commodity price volatility 3.19 <em>(C)</em></td></tr>
+<tr><td>Cultural heritage 3.59 <em>(T)</em></td><td>Infrastructure deficits 17.41 <em>(E)</em></td><td>Digital leapfrogging 4.10 <em>(E)</em></td><td>Climate change 3.14 <em>(OS)</em></td></tr>
+<tr><td>Peace dividend 3.50 <em>(OS)</em></td><td>Poverty 17.15 <em>(E)</em></td><td>BIMP-EAGA integration 4.08 <em>(C)</em></td><td>Infrastructure cost overruns 3.07 <em>(E)</em></td></tr>
+<tr><td>BIMP-EAGA location 3.50 <em>(C)</em></td><td>Skills mismatch 16.96 <em>(E)</em></td><td>ASEAN halal economy 4.05 <em>(C)</em></td><td>Drifting goals 3.03 <em>(OS)</em></td></tr>
+<tr><td>Policy recognition 3.45 <em>(OS)</em></td><td>Underspending 16.85 <em>(OS)</em></td><td>Climate-adaptation finance 4.03 <em>(OS)</em></td><td>National coordination gaps 2.91 <em>(OS)</em></td></tr>
+<tr><td>Polloc Freeport 3.43 <em>(T)</em></td><td>Low technology adoption 16.62 <em>(E)</em></td><td>Mindanao–Sabah landbridge 4.02 <em>(C)</em></td><td>Halal hub competition 2.88 <em>(C)</em></td></tr>
+<tr><td>Young population 3.37 <em>(E)</em></td><td>Cold chain gaps 16.42 <em>(T)</em></td><td>Payment for ecosystem services 3.99 <em>(F)</em></td><td>Economic downturn 2.86 <em>(C)</em></td></tr>
+<tr><td>Domestic halal demand 3.36 <em>(T)</em></td><td>Weak market linkages 16.41 <em>(T)</em></td><td>Islamic finance ecosystem 3.99 <em>(Fi)</em></td><td>Political transition 2.85 <em>(OS)</em></td></tr>
+<tr><td>Islamic finance framework 3.29 <em>(Fi)</em></td><td>Land tenure 15.92 <em>(F)</em></td><td>Forestry Code 3.97 <em>(F)</em></td><td>Cyber insecurity 2.80 <em>(E)</em></td></tr>
 </tbody>
-</table><p>
-<strong>WO-1: Infrastructure-First Enabling (IFES)</strong> addresses the single highest-risk weakness — infrastructure deficits (Risk = 25.0) — by leveraging the renewable energy investment opportunity (RI = 4.5) and PPP/ODA availability. This strategy directly resolves the "Limits to Growth" archetype by removing binding constraints before they can stall economic expansion. The ₱6.67 billion Zamboanga-Basilan Interconnection Project (ZBIP) is the flagship initiative: completing it by 2028 will provide Basilan (48,366 ha rubber, 69,392 MT production) with reliable electricity for processing facilities, transforming raw commodity exports into value-added halal products. In Tawi-Tawi, the Bongao Bridge (PHP 795.7M, 96% complete) will reduce logistics costs and enable market access for 50,000+ seaweed livelihoods. The leverage points emphasize L9 (Delay Lengths) for fast-tracking critical infrastructure, L10 (Stock-Flow Structure) for systematic deployment of roads, grids, and digital backbone, and L11 (Buffer Sizes) for maintaining 20% reserve capacity to handle demand surges (BPDA, 2024; MFBM, 2025).
-</p>
+</table>
+<p class="src">Register size: 14 strengths, 14 weaknesses, 14 opportunities and 13 threats (55 items). The remaining items are halal legitimacy 3.26, Lake Lanao 3.24, renewable endowments 3.15 and Lanao del Sur growth 3.15 (strengths); fragmented data 15.75, financial penetration 15.66, halal certification 15.65 and fragmented policy 15.46 (weaknesses); post-conflict reconstruction 3.90, UAE corridor 3.92, tourism recovery 3.91 and carbon markets 3.66 (opportunities); standards recognition 2.77, Pestalotiopsis rubber disease 2.69 and fragmented mandates 2.57 (threats). Cluster codes: OS operating systems; F Foundations; T Transformers; E Enablers; C Connectors; Fi Financiers. Source: BIRD Validation Survey (2026); 60–74 valid ratings per item.</p>
+<div class="callout"><strong>Scoring conventions.</strong> SWOT items use the canonical Strat Planner Pro formulas applied in Chapter 2: Strength Resilience Index (RI) = (I × L) / 5; Opportunity RI = √(I × L); Weakness Risk = I × L on a 1–25 scale; Threat Vulnerability Index (VI) = (I² × L) / 25, where I is impact and L is likelihood, each rated 1–5. The four families therefore sit on different scales and are compared within, not across, families.</div>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 4</span></div>
 </section>
-<section class="sheet" data-group="Section A" data-title="A.3 ST Strategies — Capitalizing Strengths to Mitigate Threats" id="p6">
-<div class="kicker">Section A</div>
-<h2 id="ch3-a-3">A.3 ST Strategies — Capitalizing Strengths to Mitigate Threats</h2><p>
-ST strategies are diversification initiatives: they deploy internal strengths to neutralize or offset external threats. These strategies are defensive-offensive — they protect BARMM's competitive position while simultaneously building resilience against climate change, competitive pressure from established halal hubs, and standards recognition risks. The key insight from the ST matrix is that BARMM's highest-RI strengths (halal legitimacy, demographic dynamism, cultural authenticity) can be weaponized against its highest-VI threats (climate vulnerability, hub competition, standards risk).
-</p><table id="tab-st">
-<caption data-label="Table 3-3">Strengths-Threats (ST) Strategy Matrix with Leverage Points Integration</caption>
-<thead>
-<tr><th>Strategy</th><th>Strength</th><th>Threat</th><th>Archetype</th><th>Leverage Points</th><th>Expected Impact</th></tr>
-</thead>
-<tbody>
-<tr><td><strong>ST-1:</strong> Standards Alignment &amp; Quality Assurance</td><td>Halal legitimacy (RI=5.0), cultural authority, Islamic finance framework (RA 11439, RI=2.4)</td><td>Competition from established halal hubs (VI=4.0), standards recognition risk (VI=4.0), market price volatility (VI=2.6)</td><td>Success to the Successful: Compete on quality, not price</td><td>L5 (Rules: OIC/SMIIC MRA), L6 (Information: QA system), L12 (Parameters: premium pricing)</td><td>OIC endorsement; 21-day certification; premium market access</td></tr>
-<tr><td><strong>ST-2:</strong> Climate Resilience &amp; Risk Mitigation</td><td>Renewable energy mix (75.86%, RI=3.2), Lake Lanao watershed (RI=2.4), peace dividend momentum (RI=2.4)</td><td>Climate change vulnerabilities (VI=5.0), El Nino impacts (₱346M crop losses), Pestalotiopsis disease (800+ ha)</td><td>Shift the Burden: Address root cause, not symptoms</td><td>L5 (Rules: climate-smart mandate), L6 (Information: early warning), L10 (Stock-Flow: irrigation)</td><td>30% drought-resistant crops; 100% climate-risk screening</td></tr>
-<tr><td><strong>ST-3:</strong> Security-Investment Confidence</td><td>Peace dividend (Basilan ASG-free, RI=2.4), young population (RI=5.0), growing policy recognition (RI=3.2)</td><td>Residual security incidents (VI=1.9), political transition uncertainty (VI=2.6), investor perception risk</td><td>Security-Investment Tensions: Rapid response cycle</td><td>L6 (Information: real-time dashboard), L8 (Negative Feedback: rapid response), L9 (Delay: incident resolution)</td><td>Zero investment disruptions; 8.0/10 investor satisfaction</td></tr>
-</tbody>
-</table><p>
-<strong>ST-1: Standards Alignment &amp; Quality Assurance</strong> deploys BARMM's highest strength — halal legitimacy (RI = 5.0) — against its most persistent threat: competition from Malaysia, Indonesia, and Thailand (VI = 4.0). Rather than competing on price, which BARMM cannot win against established hubs with mature supply chains, this strategy positions BARMM as the <em>premium authenticity player</em> — leveraging 95%+ Muslim demographics across Maguindanao del Norte and Lanao del Sur to guarantee cultural integrity that no non-Muslim majority region can replicate. The leverage points target L5 (Rules) for OIC/SMIIC mutual recognition agreements, L6 (Information Flows) for transparent quality assurance systems with international benchmarking, and L12 (Parameters) for premium pricing mechanisms that capture the value of cultural authenticity. The target: 21-day certification (matching Malaysia's benchmark) by 2028, OIC endorsement by 2030, and ₱5B+ annual halal exports by 2035 (SMIIC, 2021; MTIT-BARMM, 2025).
-</p>
+
+<section class="sheet" data-group="Chapter 3" data-title="The strategy matrix at a glance" id="p4">
+<div class="kicker">Chapter 3</div>
+<h3 id="ch3-a-overview">The strategy matrix at a glance</h3>
+<p>Figure 3-2 summarises the fourteen strategies derived in Sections A.1 to A.4. Read as a portfolio, the matrix is lopsided in a revealing way: the weaknesses are concentrated in one cluster (Enablers holds six of the ten highest-rated weaknesses and seven of the fourteen in the register), whereas strengths and opportunities are spread across Foundations, Transformers and Connectors. The binding constraint is therefore internal and structural, which is why the WO and WT quadrants, rather than the SO quadrant alone, carry the heaviest weight in the option evaluation that follows.</p>
+<div class="tows-grid" role="figure" aria-label="Figure 3-2. TOWS strategy matrix">
+<div class="tows-cell tows-so"><div class="tows-head">SO · Maxi–maxi (use strengths to capture opportunities)</div>
+<p><strong>SO-1</strong> Halal and agro-industrial value chains (T)<br/><strong>SO-2</strong> Renewable energy and natural-capital monetisation (F)<br/><strong>SO-3</strong> BIMP-EAGA gateway and Muslim-friendly tourism (C)</p></div>
+<div class="tows-cell tows-wo"><div class="tows-head">WO · Mini–maxi (use opportunities to overcome weaknesses)</div>
+<p><strong>WO-1</strong> Infrastructure and energy enabling (E)<br/><strong>WO-2</strong> Human-capital transformation (E)<br/><strong>WO-3</strong> Cold chain, market linkage and certification capacity (T)<br/><strong>WO-4</strong> Islamic financial inclusion for MSMEs (Fi)</p></div>
+<div class="tows-cell tows-st"><div class="tows-head">ST · Maxi–mini (use strengths to absorb threats)</div>
+<p><strong>ST-1</strong> Standards recognition and halal quality assurance (T)<br/><strong>ST-2</strong> Climate-resilient Foundations (F)<br/><strong>ST-3</strong> Peace-conditioned investment confidence (OS)</p></div>
+<div class="tows-cell tows-wt"><div class="tows-head">WT · Mini–mini (reduce weaknesses and avoid threats)</div>
+<p><strong>WT-1</strong> Delivery, budget execution and data reform (OS)<br/><strong>WT-2</strong> Infrastructure cost and delivery assurance (E)<br/><strong>WT-3</strong> Land tenure and shared-resource governance (F)<br/><strong>WT-4</strong> Investment continuity through political transition (OS)</p></div>
+</div>
+<p class="figcap" data-label="Figure 3-2">Figure 3-2. The BIRD TOWS strategy matrix: fourteen strategies, each assigned to the BEIE cluster that owns its delivery. Source: BIRD analysis of the BIRD Validation Survey (2026) SWOT register, using Weihrich (1982).</p>
+<div class="callout"><strong>How to read Sections A.1 to A.4.</strong> Each table gives the paired SWOT items with their scores, the archetype the strategy is designed to weaken, the Meadows level at which it intervenes (L-numbers follow Meadows, 1999, from L12 parameters to L1 transcending paradigms) and the Critical Leverage Point (LP1–LP5) it serves. Expected results are directional; quantified targets are set and calibrated in Chapter 4.</div>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 5</span></div>
 </section>
-<section class="sheet" data-group="Section A" data-title="A.4 WT Strategies — Defensive Strategies to Minimize Weaknesses and Avoid Threat" id="p7">
-<div class="kicker">Section A</div>
-<h2 id="ch3-a-4">A.4 WT Strategies — Defensive Strategies to Minimize Weaknesses and Avoid Threats</h2><p>
-WT strategies are survival initiatives: they address the intersection of high-risk weaknesses and high-VI threats, where the region is most vulnerable. These strategies are defensive in nature but proactive in intent — they seek to transform vulnerability clusters into resilience foundations through governance reform, institutional redesign, and systemic risk mitigation. Two WT strategies address the governance and financial inclusion dimensions of BARMM's vulnerability profile.
-</p><table id="tab-wt">
-<caption data-label="Table 3-4">Weaknesses-Threats (WT) Strategy Matrix with Leverage Points Integration</caption>
-<thead>
-<tr><th>Strategy</th><th>Weakness</th><th>Threat</th><th>Archetype</th><th>Leverage Points</th><th>Expected Impact</th></tr>
-</thead>
+
+<section class="sheet" data-group="Chapter 3" data-title="A.1 SO Strategies: Using Strengths to Capture Opportunities" id="p5">
+<div class="kicker">Chapter 3</div>
+<h2 id="ch3-a-1">A.1 SO Strategies: Using Strengths to Capture Opportunities</h2>
+<p>SO strategies are the growth pathway. They connect the region's strongest scored assets (a large resource base, seaweed and agricultural specialisation, cultural credibility and location) with its highest-rated external opportunities (halal markets, renewable investment and regional integration). They are attractive but conditional: each depends on Enablers that Chapter 2 found to be the weakest cluster.</p>
+<table>
+<caption data-label="Table 3-3">Table 3-3. SO strategies with leverage-point integration</caption>
+<thead><tr><th style="width:17%">Strategy</th><th style="width:21%">Strengths (RI)</th><th style="width:21%">Opportunities (RI)</th><th style="width:17%">Archetype addressed</th><th style="width:12%">Meadows level</th><th style="width:12%">CLP</th></tr></thead>
 <tbody>
-<tr><td><strong>WT-1:</strong> Governance Reform &amp; Anti-Corruption</td><td>Fragmented policy frameworks (Risk=16.0), weak market linkages (Risk=16.0), informal economy prevalence (Risk=16.0)</td><td>Limited national coordination (VI=1.9), mandate risk (VI=2.6), infrastructure cost overruns (VI=2.6)</td><td>Fixes that Fail: Build systems, not shortcuts; Tragedy of the Commons: Prevent fragmentation</td><td>L4 (Self-Organization: Bangsamoro Corp), L5 (Rules: inter-agency MOAs), L6 (Information: procurement transparency)</td><td>100% MOA coverage; synchronized delivery; 8/10 coordination score</td></tr>
-<tr><td><strong>WT-2:</strong> Financial Inclusion &amp; MSME Formalization</td><td>Minimal formal financial penetration (Risk=16.0), limited agro-processing (Risk=16.0), low technology adoption (Risk=12.0)</td><td>Competition for investment capital (VI=2.6), market volatility (VI=2.6), standards recognition risk (VI=4.0)</td><td>Growth and Underinvestment: Invest ahead of demand</td><td>L5 (Rules: Islamic banking mandate), L10 (Stock-Flow: branches, fintech), L12 (Parameters: 25% inclusion target)</td><td>25% adult financial inclusion; ₱20B+ Islamic banking assets; 100+ outlets</td></tr>
+<tr><td><strong>SO-1</strong> Halal and agro-industrial value chains</td><td>Seaweed dominance 3.71; AFF base 3.69; Polloc Freeport 3.43; domestic halal demand 3.36; halal legitimacy 3.26</td><td>Global halal market 4.13; ASEAN halal economy 4.05; UAE corridor 3.92</td><td>Growth and Underinvestment</td><td>L10 stock-and-flow; L5 rules</td><td>LP1</td></tr>
+<tr><td><strong>SO-2</strong> Renewable energy and natural-capital monetisation</td><td>Lake Lanao 3.24; renewable endowments 3.15</td><td>Renewable investment 4.12; PES 3.99; Forestry Code 3.97; carbon markets 3.66</td><td>Tragedy of the Commons</td><td>L5 rules; L4 self-organisation; L6 information</td><td>LP5, LP2</td></tr>
+<tr><td><strong>SO-3</strong> BIMP-EAGA gateway and Muslim-friendly tourism</td><td>Cultural heritage 3.59; BIMP-EAGA location 3.50</td><td>BIMP-EAGA integration 4.08; landbridge 4.02; tourism recovery 3.91</td><td>Success to the Successful</td><td>L10 stock-and-flow; L5 rules</td><td>LP2, LP3</td></tr>
 </tbody>
-</table><p>
-<strong>WT-1: Governance Reform &amp; Anti-Corruption</strong> addresses the "Fixes that Fail" archetype at its root: BARMM's fragmented policy landscape creates a tragedy of the commons where individual agencies maximize short-term outputs (investment approvals, project launches) while collectively depleting institutional capacity. The prescription: establish the <strong>Bangsamoro Corporation</strong> as an anchor financing and implementation vehicle (L4: Self-Organization), institutionalize inter-agency Memoranda of Agreement (MOAs) for all major programs (L5: Rules), and mandate transparent procurement data publication (L6: Information Flows). This strategy directly addresses the workshop finding (MTIT-BARMM, 2025) that some LGUs in Maguindanao del Sur request financial shares from investors — a practice that creates zero-sum dynamics and deters private capital. By establishing transparent, formula-based resource allocation, the Bangsamoro Corporation mathematically eliminates bias and prevents escalation (Silva, 2026).
-</p><h2 id="ch3-a-5">A.5 Strategic Options Formulation and Evaluation</h2><p>
-Based on the Systems-Based Strategy Matrix and systems archetype leverage points, four distinct strategic options are formulated for BARMM's investment roadmap. Each option represents a coherent pathway with different emphasis, sequencing, and risk-return profiles. The options are not mutually exclusive — in fact, the analysis demonstrates that they are interdependent — but each presents a distinct strategic logic that must be understood before integration.
-</p><figure id="fig-strategic-ranking-chart">
-<img alt="Strategic Options Portfolio" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/29-Options.png"/>
-<figcaption data-label="Figure 3-3">Strategic Options Ranking — 7-Criteria Weighted Scoring Matrix. IEDS (Integrated Ecosystem Development Strategy) achieves the highest composite score across all seven criteria, particularly excelling in Systems Leverage (10.0/10) and Economic Impact (9.5/10). Source: Strat Planner Pro; BIRD Workshop Data (MTIT-BARMM, 2025).</figcaption>
-</figure><h3>Option 1: Halal Economy Dominance Strategy (HEDS)</h3><p>
-<strong>Core Thesis:</strong> Leverage BARMM's unique halal legitimacy and cultural authenticity to capture a significant share of the USD 2.3 trillion global halal market, positioning the region as the Philippines' premier halal production and certification hub. HEDS directly builds on SO-1 strategy with investment requirements of ₱45-60 billion (2026-2035), targeting 5,000+ halal-certified MSMEs, ₱5B+ annual halal exports, and 30% share of the ASEAN halal market by 2035. The strategy addresses the "Fixes that Fail" archetype by building institutional capacity (BHB accreditation) rather than relying on short-term incentives, and leverages "Success to the Successful" dynamics by capitalizing on existing halal legitimacy. However, workshop data reveals a critical vulnerability: HEDS alone cannot resolve the "Limits to Growth" constraints — without concurrent infrastructure investment, halal processing capacity will hit ceilings in Basilan (electricity), Tawi-Tawi (connectivity), and Maguindanao del Sur (LGU capacity) (MTIT-BARMM, 2025; DinarStandard, 2023).
-</p><h3>Option 2: Green Economy Monetization Strategy (GEMS)</h3><p>
-<strong>Core Thesis:</strong> Transform BARMM's extraordinary environmental endowments — forests, marine ecosystems, water resources, renewable energy — into revenue-generating assets through carbon markets, Payment for Ecosystem Services (PES), eco-tourism, and sustainable resource utilization. GEMS builds on SO-2 strategy with investment requirements of ₱35-50 billion (2026-2035), targeting ₱500M+ annual carbon/PES revenue, 1M+ tCO2e/year carbon credits, and 10% net forest cover increase. GEMS scores highest on Sustainability (9.0/10) and addresses the "Tragedy of the Commons" by aligning conservation with economic incentives. The Lake Lanao PES mechanism (Lanao del Sur) and Tawi-Tawi marine conservation corridor exemplify provincial activation: upstream communities receive payments for watershed protection, while downstream users (fisheries, hydroelectric, tourism) benefit from improved water quality. However, GEMS has the lowest standalone Economic Impact score (6.5/10) — ₱500M annual green revenue represents less than 0.1% of the ₱550B GRDP target, limiting its role to a complementary rather than primary strategy (MENRE-BARMM, 2024).
-</p>
+</table>
+<p><strong>SO-1</strong> is the core of the halal pathway. Its strongest pairing is not halal legitimacy itself, which scores in the middle of the strength register (3.26), but the resource base that halal products are made from: seaweed (3.71) and agriculture, fisheries and forestry (3.69), matched with the highest-rated opportunity in the register, the global halal market (4.13). The constraint is conversion, not supply: Tawi-Tawi exports most of its seaweed raw, and cold chain (16.42) and market linkage (16.41) are among the highest-rated weaknesses. SO-1 therefore intervenes at L10 (processing, testing and cold-chain capacity built ahead of demand) and at L5 (accreditation rules that open export markets), anchored by the Bangsamoro Halal Park in Matanog and agro-industrial corridors in Lanao del Sur and the SGA (MTIT, 2025; MTIT, 2026).</p>
+<p><strong>SO-2</strong> converts environmental endowments into revenue through renewable energy, payment for ecosystem services (PES) and, where eligible, carbon markets. Its legal precondition is the Bangsamoro Forestry Code and the joint MENRE–MILG issuance on benefit sharing, both still pending. Without these rules, SO-2 would accelerate the Tragedy of the Commons rather than resolve it. <strong>SO-3</strong> uses location and culture to reach BIMP-EAGA and Muslim-friendly tourism markets; it intervenes in physical links (ports, the Mindanao–Sabah landbridge concept, island logistics) and in rules that spread benefits beyond the already-connected mainland.</p>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 6</span></div>
 </section>
-<section class="sheet" data-group="Section A" data-title="Option 3: Infrastructure-First Enabling Strategy (IFES)" id="p8">
-<div class="kicker">Section A</div>
-<h3>Option 3: Infrastructure-First Enabling Strategy (IFES)</h3><p>
-<strong>Core Thesis:</strong> Prioritize removal of binding infrastructure and human capital constraints as prerequisite for scaling production investments, recognizing that rapid growth without enabling capacity will plateau due to "Limits to Growth" dynamics. IFES builds on WO-1 and WO-2 strategies with investment requirements of ₱80-110 billion (2026-2035), the highest of all options. IFES scores highest on Systems Leverage among standalone options (9.0/10) because it directly dismantles the "Limits to Growth" archetype. The provincial data validates this approach: Tawi-Tawi's 1.1% growth rate — the lowest in BARMM — directly reflects infrastructure bottlenecks (B1: Infrastructure Capacity Limit), while Maguindanao del Norte's 4.1% growth demonstrates what becomes possible when infrastructure is adequate. However, IFES has the lowest Identity Alignment score (7.0/10) because infrastructure serves as a cross-cutting enabler rather than a culturally defining asset, and carries a high fiscal burden (₱80-110B) with extended payback horizons (BPDA, 2024; PSA-RSSO BARMM, 2024).
-</p><h3>Option 4: Integrated Ecosystem Development Strategy (IEDS)</h3><p>
-<strong>Core Thesis:</strong> The highest leverage for BARMM lies not in choosing one sector over another, but in <em>sequencing the synchronization</em> of the Halal Economy (Option 1), Green Economy (Option 2), and Infrastructure Enablers (Option 3). IEDS argues that isolated execution of Options 1-3 will fail due to binding constraints; therefore, they must be woven together where Enablers (Infrastructure) lay the base for Transformers (Halal/Green), which in turn generate the capital for Connectors (Markets). IEDS requires ₱120-160 billion (2026-2035), structured around three sequences that match the BEIE logic: Foundations → Enablers → Transformers → Connectors.
-</p><figure id="fig-ieds-sequencing">
-<img alt="BIRD Implementation Phases" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/30-Phases.png"/>
-<figcaption data-label="Figure 3-4">IEDS Strategic Sequencing Timeline (2026-2035). Sequence A (2026-2028) front-loads Enablers and governance foundations. Sequence B (2029-2031) scales Transformers with infrastructure in place. Sequence C (2032-2035) activates Connectors for global market integration. Source: Strat Planner Pro; IEDS Sequencing Logic (Silva, 2026).</figcaption>
-</figure><table id="tab-ieds-sequences">
-<caption data-label="Table 3-5">IEDS Strategic Sequencing with Cluster Synchronization</caption>
-<thead>
-<tr><th>Sequence</th><th>Period</th><th>Focus Clusters</th><th>Key Capital Deployments</th><th>Estimated Allocation</th></tr>
-</thead>
+
+<section class="sheet" data-group="Chapter 3" data-title="A.2 WO Strategies: Using Opportunities to Overcome Weaknesses" id="p6">
+<div class="kicker">Chapter 3</div>
+<h2 id="ch3-a-2">A.2 WO Strategies: Using Opportunities to Overcome Weaknesses</h2>
+<p>WO strategies are turnaround initiatives. They matter most in BARMM because the register's highest-risk items are internal: six of the ten highest-rated weaknesses sit in the Enablers cluster. External opportunities, such as concessional climate finance, digital technology and Islamic finance, supply the capital and capability that internal resources alone cannot.</p>
+<table>
+<caption data-label="Table 3-4">Table 3-4. WO strategies with leverage-point integration</caption>
+<thead><tr><th style="width:17%">Strategy</th><th style="width:22%">Weaknesses (Risk)</th><th style="width:21%">Opportunities (RI)</th><th style="width:16%">Archetype addressed</th><th style="width:13%">Meadows level</th><th style="width:11%">CLP</th></tr></thead>
 <tbody>
-<tr><td><strong>Sequence A:</strong> Foundation &amp; Enablers</td><td>2026-2028</td><td>Enablers, Foundations, Cross-Cutting OS</td><td>₱6.67B ZBIP completion; 800km farm-to-market roads; digital backbone (fiber, BEGMP); BHB operationalization; Forestry Code &amp; JMC 2026-01 enactment; Islamic finance regulatory sandbox</td><td>₱35-45B</td></tr>
-<tr><td><strong>Sequence B:</strong> Transformers &amp; Green Economy</td><td>2029-2031</td><td>Transformers, Foundations, Financiers</td><td>Bangsamoro Halal Park (Matanog) &amp; 10 agro-industrial corridors; modern rubber/coconut/seaweed processing; REDD+ registry &amp; MRV systems; Al-Amanah/CARD expansion; TESDA-industry alignment academies</td><td>₱50-65B</td></tr>
-<tr><td><strong>Sequence C:</strong> Connectors &amp; Global Integration</td><td>2032-2035</td><td>Connectors, Cross-Cutting OS</td><td>UAE/GCC halal export logistics hubs; eco-tourism infrastructure &amp; marine sanctuaries; carbon credit/PES monetization (₱500M+/yr); innovation hubs, halal R&amp;D, cross-border MRA</td><td>₱35-50B</td></tr>
+<tr><td><strong>WO-1</strong> Infrastructure and energy enabling</td><td>Infrastructure deficits 17.41; low technology adoption 16.62</td><td>Renewable investment 4.12; climate-adaptation finance 4.03; digital leapfrogging 4.10</td><td>Limits to Growth</td><td>L10 stock-and-flow; L9 delays; L11 buffers</td><td>LP2</td></tr>
+<tr><td><strong>WO-2</strong> Human-capital transformation</td><td>Low literacy 18.19; malnutrition 17.84; poverty 17.15; skills mismatch 16.96</td><td>Digital leapfrogging 4.10; post-conflict reconstruction 3.90</td><td>Limits to Growth; Fixes that Fail</td><td>L10 stock-and-flow; L3 goals</td><td>LP2</td></tr>
+<tr><td><strong>WO-3</strong> Cold chain, market linkage and certification capacity</td><td>Cold chain 16.42; market linkages 16.41; halal certification 15.65</td><td>Global halal market 4.13; ASEAN halal economy 4.05</td><td>Growth and Underinvestment</td><td>L10 stock-and-flow; L9 delays; L6 information</td><td>LP1</td></tr>
+<tr><td><strong>WO-4</strong> Islamic financial inclusion for MSMEs</td><td>Financial penetration 15.66</td><td>Islamic finance ecosystem 3.99</td><td>Shifting the Burden</td><td>L4 self-organisation; L5 rules</td><td>LP4</td></tr>
 </tbody>
-</table><div class="data-callout">
-<strong>Sequencing Insight:</strong> The IEDS sequencing logic deliberately front-loads enabling infrastructure and governance (Sequence A) to prevent the "Limits to Growth" constraint from derailing Sequences B and C. This is validated by provincial evidence: Basilan's ZBIP (₱6.67B) must be completed before rubber processing investments can succeed; Tawi-Tawi's Bongao Bridge must be operational before seaweed value chains can be developed; and the SGA's 8 municipalities must establish governance capacity before economic investments can be absorbed. Workshop data (MTIT-BARMM, 2025) confirms that integrated, cross-sectoral approaches outperform isolated strategies, ensuring long-term resilience and inclusive growth.
-</div>
+</table>
+<p><strong>WO-1</strong> addresses the physical ceiling on growth. Household electrification reached 67.52 percent region-wide at the end of 2025, against a Bangsamoro Sustainable Energy Master Plan target of 90 percent by 2035 and 100 percent by 2040; broadband coverage is estimated in the BIRD KPI register at below 30 percent (MENRE-BARMM, 2024; Context.ph, 2026). The ₱6.67 billion Zamboanga–Basilan Interconnection Project is the clearest example of a single enabling asset that changes what Basilan can process (MTIT, 2026). WO-1 intervenes mainly at L10 (building the stock of roads, power and connectivity), L9 (shortening project preparation and delivery delays) and L11 (reserve capacity so that new investment does not immediately saturate the grid).</p>
+<p><strong>WO-2</strong> addresses the highest-rated risk in the entire register. In 2024 only 64.7 percent of BARMM residents were functionally literate, against 70.8 percent nationally, and basic literacy (81.0 percent) was the lowest of any region (PSA, 2025). Because human capital accumulates slowly, WO-2 must start in Phase 1 even though its returns arrive mainly in Phases 2 and 3; this is the classic delay that makes capacity investment easy to postpone. <strong>WO-3</strong> builds the conversion capacity that SO-1 depends on, and <strong>WO-4</strong> builds Islamic financial capability (products, providers and financial literacy) rather than relying on one-off conventional or grant financing, the pattern that Chapter 2 identified as Shifting the Burden.</p>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 7</span></div>
 </section>
-<section class="sheet" data-group="Section A" data-title="A.6 Strategic Options Evaluation and Ranking" id="p9">
-<div class="kicker">Section A</div>
-<h2 id="ch3-a-6">A.6 Strategic Options Evaluation and Ranking</h2><p>
-Each strategic option is evaluated against seven criteria derived from BARMM's development priorities, investment climate realities, and systems thinking principles. The evaluation employs a weighted scoring matrix (1-10 scale, where 10 = excellent), following the 7-Criteria Weighted Scoring Matrix methodology from the Strat Planner Pro architecture (Silva, 2026). The criteria and weights reflect the integrated nature of the BEIE Framework: economic impact and systems leverage receive the highest weights (25% and 15% respectively) because they capture both material outcomes and structural transformation potential.
-</p><table id="tab-evaluation">
-<caption data-label="Table 3-6">Strategic Option Evaluation Matrix — 7-Criteria Weighted Scoring</caption>
-<thead>
-<tr><th>Criterion</th><th>Weight</th><th>HEDS</th><th>GEMS</th><th>IFES</th><th>IEDS</th></tr>
-</thead>
+
+<section class="sheet" data-group="Chapter 3" data-title="A.3 ST Strategies: Using Strengths to Absorb Threats" id="p7">
+<div class="kicker">Chapter 3</div>
+<h2 id="ch3-a-3">A.3 ST Strategies: Using Strengths to Absorb Threats</h2>
+<p>ST strategies are protective. They deploy the region's strengths against the threats that could reverse investment gains. The threat register is led by security incidents (VI 3.20), commodity price volatility (3.19) and climate change (3.14), all external pressures that BARMM cannot remove but can buffer.</p>
+<table>
+<caption data-label="Table 3-5">Table 3-5. ST strategies with leverage-point integration</caption>
+<thead><tr><th style="width:17%">Strategy</th><th style="width:21%">Strengths (RI)</th><th style="width:21%">Threats (VI)</th><th style="width:17%">Archetype addressed</th><th style="width:13%">Meadows level</th><th style="width:11%">CLP</th></tr></thead>
 <tbody>
-<tr><td><strong>Economic Impact</strong><br/><span style="font-size:8pt;color:#666;">GRDP contribution, jobs, poverty reduction, exports</span></td><td>25%</td><td>8.0<br/><em>(2.00)</em></td><td>6.5<br/><em>(1.63)</em></td><td>7.5<br/><em>(1.88)</em></td><td>9.5<br/><em>(2.38)</em></td></tr>
-<tr><td><strong>Systems Leverage</strong><br/><span style="font-size:8pt;color:#666;">LP activation, archetype resolution</span></td><td>15%</td><td>7.0<br/><em>(1.05)</em></td><td>8.5<br/><em>(1.28)</em></td><td>9.0<br/><em>(1.35)</em></td><td>10.0<br/><em>(1.50)</em></td></tr>
-<tr><td><strong>Identity Alignment</strong><br/><span style="font-size:8pt;color:#666;">Islamic values, cultural authenticity, moral governance</span></td><td>15%</td><td>9.5<br/><em>(1.43)</em></td><td>8.0<br/><em>(1.20)</em></td><td>7.0<br/><em>(1.05)</em></td><td>9.0<br/><em>(1.35)</em></td></tr>
-<tr><td><strong>Inclusivity</strong><br/><span style="font-size:8pt;color:#666;">Provincial equity, MSMEs, marginalized groups</span></td><td>10%</td><td>7.0<br/><em>(0.70)</em></td><td>8.0<br/><em>(0.80)</em></td><td>8.5<br/><em>(0.85)</em></td><td>9.0<br/><em>(0.90)</em></td></tr>
-<tr><td><strong>Sustainability</strong><br/><span style="font-size:8pt;color:#666;">Environmental, fiscal, institutional beyond 2035</span></td><td>5%</td><td>7.5<br/><em>(0.38)</em></td><td>9.0<br/><em>(0.45)</em></td><td>7.0<br/><em>(0.35)</em></td><td>9.0<br/><em>(0.45)</em></td></tr>
-<tr><td><strong>Feasibility</strong><br/><span style="font-size:8pt;color:#666;">Technical, financial, institutional readiness</span></td><td>20%</td><td>7.0<br/><em>(1.40)</em></td><td>6.0<br/><em>(1.20)</em></td><td>6.5<br/><em>(1.30)</em></td><td>8.0<br/><em>(1.60)</em></td></tr>
-<tr><td><strong>Risk-Return Profile</strong><br/><span style="font-size:8pt;color:#666;">Expected returns vs. threat exposure</span></td><td>10%</td><td>6.5<br/><em>(0.65)</em></td><td>6.0<br/><em>(0.60)</em></td><td>7.0<br/><em>(0.70)</em></td><td>7.5<br/><em>(0.75)</em></td></tr>
-<tr style="background:#f0f7f4;font-weight:bold;"><td><strong>TOTAL WEIGHTED SCORE</strong></td><td>100%</td><td><strong>7.61</strong></td><td><strong>7.16</strong></td><td><strong>7.48</strong></td><td><strong>8.93</strong></td></tr>
-<tr style="font-weight:bold;color:#0a3d2e;"><td><strong>RANK</strong></td><td></td><td>2nd</td><td>4th</td><td>3rd</td><td>1st</td></tr>
+<tr><td><strong>ST-1</strong> Standards recognition and halal quality assurance</td><td>Halal legitimacy 3.26; cultural heritage 3.59</td><td>Halal hub competition 2.88; standards recognition 2.77</td><td>Success to the Successful (at international scale)</td><td>L5 rules; L6 information</td><td>LP1</td></tr>
+<tr><td><strong>ST-2</strong> Climate-resilient Foundations</td><td>AFF base 3.69; renewable endowments 3.15</td><td>Climate change 3.14; price volatility 3.19; Pestalotiopsis 2.69</td><td>Fixes that Fail</td><td>L11 buffers; L6 information; L5 rules</td><td>LP5, LP2</td></tr>
+<tr><td><strong>ST-3</strong> Peace-conditioned investment confidence</td><td>Peace dividend 3.50; policy recognition 3.45; young population 3.37</td><td>Security incidents 3.20; political transition 2.85</td><td>Escalation</td><td>L8 balancing loops; L6 information</td><td>LP3</td></tr>
 </tbody>
-</table><p style="font-size:8pt;color:#666;margin-top:-0.5rem;"><em>Note. Weighted score = raw score × weight. Scoring based on: (1) PSA-BARMM (2025), MFBM (2025); (2) Feasibility from Workshop 1-5 (2026); (3) Identity alignment from Silva &amp; Unsi (2026); (4) Systems leverage from Meadows (1999); (5) Risk from SWOT threats VI scores; (6) Inclusivity from provincial equity analysis; (7) Sustainability from environmental/fiscal projections.</em></p><p>
-The evaluation matrix reveals a decisive result: <strong>IEDS achieves the highest composite score (8.93/10)</strong>, outperforming all standalone options by a significant margin. The analysis shows that IEDS is the only option scoring above 8.0 on five of seven criteria, while no standalone option scores above 8.0 on more than three criteria. The key differentiator is <strong>Systems Leverage</strong> (10.0/10): IEDS is the only option that simultaneously addresses all five systems archetypes identified in Chapter 2 — Limits to Growth, Fixes that Fail, Tragedy of the Commons, Success to the Successful, and Growth and Underinvestment. HEDS scores highest on Identity Alignment (9.5/10) but falters on Systems Leverage (7.0/10) because it does not resolve foundational infrastructure and human capital constraints. GEMS scores highest on Sustainability (9.0/10) but has the lowest Economic Impact (6.5/10) and Feasibility (6.0/10). IFES scores highest on Systems Leverage among standalone options (9.0/10) but lacks cultural and sectoral integration.
-</p>
+</table>
+<p><strong>ST-1</strong> rests on a realistic reading of competition. Established halal hubs in Malaysia, Indonesia and Thailand have deeper supply chains and recognised certification systems. BARMM's route to premium markets is therefore not price but trust: certification that importing authorities accept, backed by laboratory testing and traceability. This makes accreditation and mutual recognition under OIC/SMIIC standards a critical-path item for the halal pathway rather than a compliance formality (SMIIC, 2021; MTIT, 2025).</p>
+<p><strong>ST-2</strong> treats climate risk as a present cost. El Niño-related drought led Maguindanao del Sur to declare a state of calamity in 2024, and Pestalotiopsis leaf disease has affected at least 800 hectares of rubber in Basilan (Chapter 2). The strategy combines buffers (irrigation, crop diversification, climate-resilient varieties), information (early warning and climate-risk screening of projects) and rules (adaptation conditions on subsidies), avoiding relief-only responses that recreate the problem. <strong>ST-3</strong> uses the peace dividend, including Basilan's declaration as free of the Abu Sayyaf Group on 9 June 2025 (PIA, 2025), to strengthen the balancing loops that keep isolated incidents from becoming investor-wide risk premiums: rapid incident response, verified security information for investors and protection of project sites.</p>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 8</span></div>
 </section>
-<section class="sheet" data-group="Section A" data-title="A.7 Recommended Strategy: The Integrated Ecosystem Development Strategy (IEDS)" id="p10">
-<div class="kicker">Section A</div>
-<h2 id="ch3-a-7">A.7 Recommended Strategy: The Integrated Ecosystem Development Strategy (IEDS)</h2><p>
-Based on the comprehensive evaluation, the <strong>Integrated Ecosystem Development Strategy (IEDS)</strong> is recommended as the overarching strategy for the Bangsamoro Investment Roadmap Development (BIRD) 2026-2035. The data unequivocally demonstrates that isolated strategic options cannot achieve BARMM's ₱550B GRDP target: Option 1 (HEDS) contributes ₱150-200B (27-36% of target), Option 2 (GEMS) contributes ₱80-120B (15-22%), Option 3 (IFES) contributes ₱200-280B (36-51%, primarily through enabling effects), while <strong>Option 4 (IEDS) contributes ₱550B+ (100%+ of target through synchronized clusters)</strong>. The mathematical reality is clear: only synchronized ecosystem development can achieve the transformational change BARMM requires.
-</p><table id="tab-ieds-kpis">
-<caption data-label="Table 3-7">IEDS 2035 Target Metrics by BEIE Cluster Driver</caption>
-<thead>
-<tr><th>Metric Category</th><th>2035 Target</th><th>BEIE Cluster Driver</th></tr>
-</thead>
+
+<section class="sheet" data-group="Chapter 3" data-title="A.4 WT Strategies: Reducing Weaknesses and Avoiding Threats" id="p8">
+<div class="kicker">Chapter 3</div>
+<h2 id="ch3-a-4">A.4 WT Strategies: Reducing Weaknesses and Avoiding Threats</h2>
+<p>WT strategies address the points where internal weakness meets external threat, and where the region is most exposed. They are defensive in form but preventive in purpose: they protect the roadmap itself from the failure modes Chapter 7 identifies, namely being ignored after a change of government, executed in silos or allowed to drift.</p>
+<table>
+<caption data-label="Table 3-6">Table 3-6. WT strategies with leverage-point integration</caption>
+<thead><tr><th style="width:17%">Strategy</th><th style="width:22%">Weaknesses (Risk)</th><th style="width:20%">Threats (VI)</th><th style="width:16%">Archetype addressed</th><th style="width:14%">Meadows level</th><th style="width:11%">CLP</th></tr></thead>
 <tbody>
-<tr><td><strong>Macroeconomic</strong></td><td>GRDP ₱550B+; ₱15B+ annual investment approvals; ₱40B+ export value</td><td>Transformers + Connectors + Financiers</td></tr>
-<tr><td><strong>Employment &amp; Poverty</strong></td><td>20,000+ BOI-registered jobs; poverty incidence &lt;20%</td><td>Enablers (Human Capital) + Foundations</td></tr>
-<tr><td><strong>Halal &amp; Green Economy</strong></td><td>5,000+ halal-certified MSMEs; ₱500M+ annual carbon/PES revenue; 1M+ tCO2e/yr</td><td>Transformers + Foundations + Connectors</td></tr>
-<tr><td><strong>Financial Inclusion</strong></td><td>₱20B+ Islamic banking assets; 25% adult financial penetration</td><td>Financiers + Cross-Cutting OS</td></tr>
-<tr><td><strong>Governance &amp; OS</strong></td><td>90%+ budget execution; 8/10 inter-agency coordination; 1-day digital registration; 75%+ functional literacy</td><td>Cross-Cutting OS + Enablers</td></tr>
-<tr><td><strong>Infrastructure &amp; Connectivity</strong></td><td>100% electrification; 85% household broadband; 30% logistics cost reduction</td><td>Enablers + Connectors</td></tr>
+<tr><td><strong>WT-1</strong> Delivery, budget execution and data reform</td><td>Underspending 16.85; fragmented data 15.75; fragmented policy 15.46</td><td>Drifting goals 3.03; national coordination 2.91; fragmented mandates 2.57</td><td>Drifting Goals; Fixes that Fail</td><td>L6 information; L5 rules; L3 goals</td><td>LP3</td></tr>
+<tr><td><strong>WT-2</strong> Infrastructure cost and delivery assurance</td><td>Infrastructure deficits 17.41</td><td>Cost overruns 3.07; cyber insecurity 2.80</td><td>Limits to Growth</td><td>L9 delays; L8 balancing loops</td><td>LP2</td></tr>
+<tr><td><strong>WT-3</strong> Land tenure and shared-resource governance</td><td>Land tenure 15.92</td><td>Security incidents 3.20; Pestalotiopsis 2.69</td><td>Tragedy of the Commons</td><td>L5 rules; L4 self-organisation</td><td>LP5</td></tr>
+<tr><td><strong>WT-4</strong> Investment continuity through political transition</td><td>Fragmented policy 15.46</td><td>Political transition 2.85; drifting goals 3.03</td><td>Big Man; Drifting Goals</td><td>L3 goals; L5 rules; L2 paradigm</td><td>LP3</td></tr>
 </tbody>
-</table><p>
-The IEDS feasibility challenge (score: 8.0/10) is actively managed through four mechanisms: (1) <strong>Phased Implementation</strong> — Sequence A (2026-2028) builds foundations before scaling, reducing complexity; (2) <strong>Institutional Mechanisms</strong> — the Bangsamoro Investment Command Center provides centralized coordination with real-time tracking and cross-agency coordination; (3) <strong>Resource Mobilization</strong> — ₱120-160B total requirement represents 15-20% of projected block grant allocations, funded through blended finance (35% BARMM block grants, 30% ODA/climate finance, 35% private capital/PPP/Islamic finance); and (4) <strong>Risk Mitigation</strong> — trigger-based budgeting, 20% contingency reserve, and political transition risk management through Bangsamoro Parliament legislation (Silva, 2026; MFBM, 2025).
-</p> ==================== SECTION B ==================== 
+</table>
+<p><strong>WT-1</strong> is the cheapest source of additional capital in the roadmap. Underspending is rated a high risk (16.85), and every percentage point of budget execution recovered is capital that does not have to be raised. The strategy works through information (one version-controlled baseline and project register, as recommended in Chapter 7, B1), rules (readiness gates and published service standards) and goals (protecting targets from being lowered quietly when performance lags). Respondents rated the Drifting Goals archetype accurate at 98.6 percent, and 30 of 45 who answered the follow-up said both of its loops are equally observable (BIRD Validation Survey, 2026).</p>
+<p><strong>WT-2</strong> introduces cost and schedule assurance, because infrastructure cost overruns carry the highest impact rating of any threat (I = 4.28). <strong>WT-3</strong> resolves the land-tenure overlaps (ancestral domain claims, private titles and public land) that block agro-industrial siting, with free, prior and informed consent where indigenous peoples' rights apply. <strong>WT-4</strong> responds to the first elected Bangsamoro Parliament: the roadmap must be anchored in law, budget rules and published targets so that it outlasts any single administration (Chapter 7, D1).</p>
 <div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 9</span></div>
 </section>
-<section class="sheet" data-group="Section B" data-title="Systems Archetype-Informed Strategic Leverage Points" id="p11">
-<div class="kicker">Section B</div>
+
+<section class="sheet" data-group="Chapter 3" data-title="A.5 Strategic Options Formulation" id="p9">
+<div class="kicker">Chapter 3</div>
+<h2 id="ch3-a-5">A.5 Strategic Options Formulation</h2>
+<p>The fourteen TOWS strategies can be bundled in different ways, and each bundle expresses a different theory of how BARMM's economy should grow. Four coherent options were formulated during the BIRD workshops and tested in the validation survey. The options are not mutually exclusive in content; they differ in emphasis, sequencing and the constraint they treat as binding.</p>
+<figure>
+<img alt="Four strategic options: HEDS, GEMS, IFES and IEDS" src="https://asilvainnovations.github.io/BIRD-2026-2035/public/assets/4-strategic-options.png" style="max-width:86%"/>
+<figcaption data-label="Figure 3-3">Figure 3-3. Four distinct pathways to scale regional value creation. The global halal market size shown in the graphic is a widely cited industry estimate; market-size figures vary by source and definition and are not used in the scoring. Source: Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+<table>
+<caption data-label="Table 3-7">Table 3-7. How the TOWS strategies combine into the four options</caption>
+<thead><tr><th style="width:15%">Option</th><th style="width:22%">TOWS strategies bundled</th><th style="width:23%">Constraint treated as binding</th><th>Failure mode if pursued alone</th></tr></thead>
+<tbody>
+<tr><td><strong>HEDS</strong> Halal Economy Dominance</td><td>SO-1, WO-3, ST-1</td><td>Market access and certification</td><td>Processing and export capacity outrun power, logistics and skills; growth stalls at the Enablers ceiling (Growth and Underinvestment becomes Limits to Growth).</td></tr>
+<tr><td><strong>GEMS</strong> Green Economy Monetisation</td><td>SO-2, ST-2, WT-3</td><td>Unpriced natural capital</td><td>Revenue depends on legal instruments, measurement systems and buyers not yet in place; green revenue currently stands near zero.</td></tr>
+<tr><td><strong>IFES</strong> Infrastructure-First Enabling</td><td>WO-1, WO-2, WT-2</td><td>Infrastructure and human capital</td><td>Capacity is built ahead of conversion; value accumulates upstream with no processing or market link to release it, and political support erodes before returns appear.</td></tr>
+<tr><td><strong>IEDS</strong> Integrated Ecosystem Development</td><td>All fourteen, sequenced in three phases</td><td>The weakest link in a serial chain, wherever it lies</td><td>Coordination overload: too many fronts for the available institutional capacity unless a single orchestration function and readiness gates are in place.</td></tr>
+</tbody>
+</table>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 10</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="Option profiles" id="p10">
+<div class="kicker">Chapter 3</div>
+<h3 id="ch3-a-5-profiles">Option profiles</h3>
+<div class="strategy-box"><div class="strategy-box-title">Option 1 · Halal Economy Dominance Strategy (HEDS)</div>
+<strong>Thesis.</strong> Use the region's halal legitimacy and resource base to build certified, processed and exported halal products, with the Bangsamoro Halal Park, Polloc Freeport and provincial agro-industrial corridors as anchors. <strong>Strengths.</strong> The strongest identity fit and the clearest investor narrative. <strong>Weakness.</strong> It concentrates on the Transformers cluster while the binding constraint lies in Enablers; it also exposes the region to the threat of competition from mature halal hubs (VI 2.88) before certification is internationally accepted.</div>
+<div class="strategy-box"><div class="strategy-box-title">Option 2 · Green Economy Monetisation Strategy (GEMS)</div>
+<strong>Thesis.</strong> Turn forests, watersheds, marine ecosystems and renewable resources into revenue through renewable energy, PES, eco-tourism and eligible carbon instruments. <strong>Strengths.</strong> The highest sustainability score and a direct response to the Tragedy of the Commons. <strong>Weakness.</strong> The thinnest institutional base: the Forestry Code and the benefit-sharing issuance are pending, measurement, reporting and verification (MRV) systems are not yet built, and community safeguards must precede any transaction.</div>
+<div class="strategy-box"><div class="strategy-box-title">Option 3 · Infrastructure-First Enabling Strategy (IFES)</div>
+<strong>Thesis.</strong> Remove the binding infrastructure, energy and human-capital constraints first, then scale production. <strong>Strengths.</strong> It targets the cluster that Chapter 2 identified as binding and has high systems leverage. <strong>Weakness.</strong> It is sequential: by deferring conversion and market capacity, it leaves returns invisible for years, which weakens the political and fiscal case for continuing investment.</div>
+<div class="strategy-box"><div class="strategy-box-title">Option 4 · Integrated Ecosystem Development Strategy (IEDS)</div>
+<strong>Thesis.</strong> Synchronise the strongest elements of Options 1 to 3 according to their dependencies: Enablers and Foundations are prepared first, Transformers scale as their prerequisites are verified, and Connectors and Financiers deepen as product and project flows grow, with the operating systems working throughout. <strong>Strengths.</strong> It is the only option consistent with the serial-throughput finding of Chapter 2 and the only one that addresses every diagnosed archetype. <strong>Weakness.</strong> It is the most demanding to coordinate, which is why its feasibility depends on the orchestration arrangements set out in Chapters 6 and 7.</div>
+<div class="callout"><strong>Why serial throughput favours synchronisation.</strong> When value must pass through several clusters in sequence, system output is the product of their readiness levels, not the average. In a product, a one percent improvement in any cluster raises total throughput by about one percent, so no cluster can be safely deferred; and because the absolute gain is largest where readiness is lowest, the weakest link (Enablers) must be raised first. A single-sector option improves one factor of the product and leaves the others unchanged.</div>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 11</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="A.6 Strategic Options Evaluation and Ranking" id="p11">
+<div class="kicker">Chapter 3</div>
+<h2 id="ch3-a-6">A.6 Strategic Options Evaluation and Ranking</h2>
+<p>The options are evaluated with the seven-criterion weighted scoring matrix of the Strat Planner Pro architecture. Each option is scored from 1 to 10 against each criterion, and the composite is the weighted sum. The weights below are the canonical values coded in the BIRD analytical engine (<code>formulas.ts</code>), and are the only weights used in this chapter.</p>
+<table>
+<caption data-label="Table 3-8">Table 3-8. Evaluation criteria, weights and evidence basis</caption>
+<thead><tr><th style="width:18%">Criterion</th><th style="width:9%">Weight</th><th style="width:37%">What is assessed</th><th>Principal evidence</th></tr></thead>
+<tbody>
+<tr><td><strong>Economic impact</strong></td><td>20%</td><td>Contribution to GRDP, jobs, exports and poverty reduction</td><td>PSA-RSSO BARMM (2025) regional accounts; provincial outlooks (MTIT, 2026)</td></tr>
+<tr><td><strong>Feasibility</strong></td><td>18%</td><td>Technical, financial and institutional readiness to deliver</td><td>Cluster readiness ratings; workshop findings (BoI-MTIT, 2026)</td></tr>
+<tr><td><strong>Risk–return</strong></td><td>16%</td><td>Expected return relative to exposure to scored threats</td><td>Threat VI register (Table 3-2)</td></tr>
+<tr><td><strong>Identity alignment</strong></td><td>15%</td><td>Fit with Islamic values, moral governance and cultural authenticity</td><td>Moral governance principles; Bangsamoro Halal Industry Development Plan</td></tr>
+<tr><td><strong>Systems leverage</strong></td><td>15%</td><td>Depth of intervention and number of archetypes addressed</td><td>Archetype map (Section B); Meadows (1999)</td></tr>
+<tr><td><strong>Inclusivity</strong></td><td>10%</td><td>Reach to island and lagging areas, MSMEs, women, youth and indigenous peoples</td><td>Provincial diagnostics; poverty and literacy data</td></tr>
+<tr><td><strong>Sustainability</strong></td><td>6%</td><td>Environmental, fiscal and institutional durability beyond 2035</td><td>Climate and resource diagnostics; fiscal analysis</td></tr>
+</tbody>
+</table>
+<p class="src">Source: BIRD analytical engine, <code>calculateStrategyOverallScore</code> (Silva, 2026). Earlier circulating drafts used a superseded weight set (economic impact 25%, feasibility 20%, risk–return 10%, sustainability 5%); results under both sets are shown in Table 3-10.</p>
+<h3 id="ch3-a-6-baseline">Analytical baseline scores</h3>
+<table>
+<caption data-label="Table 3-9">Table 3-9. Strategic option evaluation matrix: analytical baseline (scores 1–10; weighted contribution in brackets)</caption>
+<thead><tr><th style="width:24%">Criterion (weight)</th><th>HEDS</th><th>GEMS</th><th>IFES</th><th>IEDS</th></tr></thead>
+<tbody>
+<tr><td>Economic impact (20%)</td><td>8.0 (1.60)</td><td>6.5 (1.30)</td><td>7.5 (1.50)</td><td>9.5 (1.90)</td></tr>
+<tr><td>Feasibility (18%)</td><td>7.0 (1.26)</td><td>6.0 (1.08)</td><td>6.5 (1.17)</td><td>8.0 (1.44)</td></tr>
+<tr><td>Risk–return (16%)</td><td>6.5 (1.04)</td><td>6.0 (0.96)</td><td>7.0 (1.12)</td><td>7.5 (1.20)</td></tr>
+<tr><td>Identity alignment (15%)</td><td>9.5 (1.43)</td><td>8.0 (1.20)</td><td>7.0 (1.05)</td><td>9.0 (1.35)</td></tr>
+<tr><td>Systems leverage (15%)</td><td>7.0 (1.05)</td><td>8.5 (1.28)</td><td>9.0 (1.35)</td><td>10.0 (1.50)</td></tr>
+<tr><td>Inclusivity (10%)</td><td>7.0 (0.70)</td><td>8.0 (0.80)</td><td>8.5 (0.85)</td><td>9.0 (0.90)</td></tr>
+<tr><td>Sustainability (6%)</td><td>7.5 (0.45)</td><td>9.0 (0.54)</td><td>7.0 (0.42)</td><td>9.0 (0.54)</td></tr>
+<tr class="total-row"><td><strong>Weighted composite</strong></td><td><strong>7.53</strong></td><td><strong>7.16</strong></td><td><strong>7.46</strong></td><td><strong>8.83</strong></td></tr>
+<tr><td>Rank</td><td>2nd</td><td>4th</td><td>3rd</td><td>1st</td></tr>
+</tbody>
+</table>
+<p class="src">Composite = Σ (score × weight), using the weights in Table 3-8; contributions are rounded, so columns may not sum exactly. Raw scores are structured expert judgements from the Strat Planner Pro baseline (Silva, 2026), informed by the evidence in Table 3-8.</p>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 12</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="Sensitivity of the ranking" id="p12">
+<div class="kicker">Chapter 3</div>
+<p>Three readings follow. First, IEDS leads on five of the seven criteria and is never ranked below second. Second, each single-sector option leads where its thesis predicts: HEDS on identity alignment, GEMS on sustainability (tied with IEDS) and IFES on systems leverage among the standalone options. Third, the decisive gap is in systems leverage and economic impact, the two criteria that capture whether an option changes the structure of the system, which is precisely what Chapter 2's throughput analysis says is required. The lowest score for IEDS is risk–return (7.5): integration spreads exposure across more fronts, a cost that the phase gates in Section A.7 are designed to manage.</p>
+<h3 id="ch3-a-6-sensitivity">Sensitivity of the ranking</h3>
+<p>A ranking that changes when the weights change slightly is not a robust basis for a ten-year roadmap (Belton and Stewart, 2002). Table 3-10 re-scores the baseline under alternative weightings and under a stress test that penalises IEDS for its coordination burden.</p>
+<table>
+<caption data-label="Table 3-10">Table 3-10. Sensitivity of the analytical baseline to weights and to an IEDS stress test</caption>
+<thead><tr><th style="width:42%">Scenario</th><th>HEDS</th><th>GEMS</th><th>IFES</th><th>IEDS</th></tr></thead>
+<tbody>
+<tr><td>Canonical weights (Table 3-8)</td><td>7.53</td><td>7.16</td><td>7.46</td><td><strong>8.83</strong></td></tr>
+<tr><td>Equal weights (each criterion 1/7)</td><td>7.50</td><td>7.43</td><td>7.50</td><td><strong>8.86</strong></td></tr>
+<tr><td>Feasibility-led (feasibility raised to 30%, others rescaled)</td><td>7.47</td><td>7.03</td><td>7.36</td><td><strong>8.74</strong></td></tr>
+<tr><td>Risk-averse (risk–return raised to 30%, others rescaled)</td><td>7.40</td><td>7.01</td><td>7.40</td><td><strong>8.67</strong></td></tr>
+<tr><td>Superseded draft weights (25/20/15/15/10/10/5)</td><td>7.60</td><td>7.15</td><td>7.48</td><td><strong>8.93</strong></td></tr>
+<tr><td>Stress test: IEDS feasibility and risk–return each cut to 6.0</td><td>7.53</td><td>7.16</td><td>7.46</td><td><strong>8.23</strong></td></tr>
+</tbody>
+</table>
+<p>IEDS ranks first in every scenario, and remains first even when its feasibility and risk–return scores are cut below those of HEDS. The order of the three single-sector options is less stable: HEDS and IFES tie under equal and risk-averse weights. The practical conclusion is that the choice of IEDS is robust, whereas the relative priority of the halal and infrastructure components within it should be decided by sequencing logic (Section A.7) rather than by the scores alone.</p>
+<div class="data-note"><strong>Correction to earlier drafts.</strong> The composite of 8.93 for IEDS that appeared in earlier drafts and graphics was computed with the superseded weight set. Under the canonical weights the IEDS baseline composite is 8.83. The ranking is unchanged.</div>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 13</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="Stakeholder validation results (reported separately)" id="p13">
+<div class="kicker">Chapter 3</div>
+<div class="keep">
+<h3 id="ch3-a-6-validation">Stakeholder validation results (reported separately)</h3>
+<p>The BIRD Validation Survey asked respondents to score the same four options against the same seven criteria. These results are a separate evidence stream: they test whether the people who will finance, regulate and deliver the roadmap read the options as the analytical baseline does.</p>
+<div class="bar-chart" role="figure" aria-label="Figure 3-4. Stakeholder weighted scores by option">
+<div class="bar-group-title">Weighted stakeholder score, all respondents (n = 75)</div>
+<div class="bar-row"><span>IEDS</span><div class="bar-track"><div class="bar-fill gold" style="width:60.5%"></div></div><span>6.05</span></div>
+<div class="bar-row"><span>HEDS</span><div class="bar-track"><div class="bar-fill" style="width:59.0%"></div></div><span>5.90</span></div>
+<div class="bar-row"><span>IFES</span><div class="bar-track"><div class="bar-fill" style="width:57.7%"></div></div><span>5.77</span></div>
+<div class="bar-row"><span>GEMS</span><div class="bar-track"><div class="bar-fill" style="width:57.3%"></div></div><span>5.73</span></div>
+<div class="bar-group-title">Weighted stakeholder score, respondents who moved at least one slider (n = 50)</div>
+<div class="bar-row"><span>IEDS</span><div class="bar-track"><div class="bar-fill gold" style="width:65.7%"></div></div><span>6.57</span></div>
+<div class="bar-row"><span>HEDS</span><div class="bar-track"><div class="bar-fill" style="width:63.5%"></div></div><span>6.35</span></div>
+<div class="bar-row"><span>IFES</span><div class="bar-track"><div class="bar-fill" style="width:61.6%"></div></div><span>6.16</span></div>
+<div class="bar-row"><span>GEMS</span><div class="bar-track"><div class="bar-fill" style="width:61.0%"></div></div><span>6.10</span></div>
+</div>
+<p class="figcap" data-label="Figure 3-4">Figure 3-4. Stakeholder validation of the four options, weighted with the canonical criteria weights (scale 1–10). Source: BIRD Validation Survey (2026), Section 10 option matrix; computed by BoI-MTIT from consented responses.</p>
+</div>
+<table>
+<caption data-label="Table 3-11">Table 3-11. Baseline and validation compared</caption>
+<thead><tr><th style="width:30%">Evidence stream</th><th>HEDS</th><th>GEMS</th><th>IFES</th><th>IEDS</th><th style="width:27%">Order</th></tr></thead>
+<tbody>
+<tr><td>Analytical baseline (Table 3-9)</td><td>7.53</td><td>7.16</td><td>7.46</td><td>8.83</td><td>IEDS › HEDS › IFES › GEMS</td></tr>
+<tr><td>Survey, all respondents (n = 75)</td><td>5.90</td><td>5.73</td><td>5.77</td><td>6.05</td><td>IEDS › HEDS › IFES › GEMS</td></tr>
+<tr><td>Survey, slider movers (n = 50)</td><td>6.35</td><td>6.10</td><td>6.16</td><td>6.57</td><td>IEDS › HEDS › IFES › GEMS</td></tr>
+</tbody>
+</table>
+<h3 id="ch3-a-6-reading">Reading the validation evidence</h3>
+<p><strong>The order is fully reproduced; the conviction is not.</strong> Stakeholders reproduced the baseline order exactly, in the full sample and in the subset who moved at least one slider. However, their scores are lower and closer together: the IEDS lead over HEDS is 0.15 points in the full sample and 0.22 among slider movers, against 1.30 points in the baseline. At the level of individual respondents, IEDS was the strict first choice of 22 percent of slider movers (32 percent including ties). The baseline should therefore be read as a well-supported direction, not as a decisive margin of stakeholder preference.</p>
+<p><strong>Default responses compress the spread.</strong> Twenty-five of the 75 respondents who reached the matrix left all 28 cells at the default value of 5. Their answers pull every option towards the midpoint, which is why the slider-mover subset is reported alongside the full sample.</p>
+<p><strong>Where stakeholders see it differently.</strong> Among slider movers, HEDS outscored IEDS on identity alignment (6.74 against 6.58), and inclusivity was IEDS's strongest criterion (7.06). Stakeholders thus see the integrated strategy as the more inclusive choice and the halal strategy as the more authentic expression of Bangsamoro identity. IEDS should carry the halal agenda visibly, rather than subsume it.</p>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 14</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="Stakeholder validation results (reported separately) (continued)" id="p14">
+<div class="kicker">Chapter 3</div>
+<p><strong>Direct endorsement.</strong> Asked whether IEDS should be the overarching strategy, 44 of 65 respondents (67.7 percent) answered yes, 20 (30.8 percent) agreed partially and one asked for more evidence; none rejected it. Respondents agreed that the expected outcomes are achievable (mean 4.00 of 5; 80.3 percent agree) and that the sequencing logic is sound (59 of 66 agree or strongly agree).</p>
+<div class="callout"><strong>Survey frame.</strong> The survey is a non-probability sample of 76 consented respondents, collected 3–20 August 2026. Of the 72 who named a location, 27 were from Cotabato City, 22 from Maguindanao del Norte, 11 region-wide, 7 from the SGA, 3 from Maguindanao del Sur and 2 from Lanao del Sur; none were from Basilan or Tawi-Tawi. Results are validation signals, not population estimates, and island perspectives must be gathered through the scheduled Tawi-Tawi workshop and follow-up consultations before the island-specific elements of the roadmap are finalised.</div>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 15</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="A.7 Recommended Strategy: The Integrated Ecosystem Development Strategy (IEDS)" id="p15">
+<div class="kicker">Chapter 3</div>
+<h2 id="ch3-a-7">A.7 Recommended Strategy: The Integrated Ecosystem Development Strategy (IEDS)</h2>
+<p>The Integrated Ecosystem Development Strategy is recommended as the overarching strategy for BIRD 2026–2035. Three arguments support the recommendation, each independent of the others:</p>
+<ol class="tight-list">
+<li><strong>Structural fit.</strong> The economy behaves as a serial chain whose output is capped by its weakest cluster. Only an option that raises all clusters in dependency order can lift system throughput materially (Chapter 2, Section G).</li>
+<li><strong>Archetype coverage.</strong> IEDS is the only option that responds to all six cluster archetypes and the three governance archetypes diagnosed in Chapter 2 (Section B.2).</li>
+<li><strong>Robustness.</strong> IEDS ranks first under every weighting tested and in both stakeholder samples, and was endorsed outright or partially by 64 of 65 respondents.</li>
+</ol>
+<p>IEDS does not mean doing everything at once. It means testing each project against the upstream conditions it needs (reliable power and logistics, lawful land access, capable workers, accepted standards, finance, safeguards and credible offtake) and funding those conditions alongside the project where justified. The sequence is implemented through the three phases that Chapter 6 operationalises.</p>
+<figure>
+<img alt="The three-phase capital sequencing architecture, 2026–2035" src="https://asilvainnovations.github.io/BIRD-2026-2035/public/assets/3-Phase_Capital_Sequencing.png" style="max-width:86%"/>
+<figcaption data-label="Figure 3-5">Figure 3-5. The three-phase capital sequencing architecture. The ₱120–160 billion public catalytic envelope and the ₱1.55–1.77 trillion total-investment estimate are planning parameters derived from a capital–output ratio of 3.5 to 4.0; they are not approved appropriations. Source: Strat Planner Pro (Silva, 2026); Chapter 6.</figcaption>
+</figure>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 16</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="IEDS sequencing with cluster synchronisation" id="p16">
+<div class="kicker">Chapter 3</div>
+<h3 id="ch3-a-7-sequence">IEDS sequencing with cluster synchronisation</h3>
+<table>
+<caption data-label="Table 3-12">Table 3-12. IEDS phases, cluster emphasis and stakeholder support</caption>
+<thead><tr><th style="width:21%">Phase (survey label)</th><th style="width:18%">Cluster emphasis</th><th style="width:33%">Representative capital deployments</th><th style="width:13%">Indicative envelope</th><th style="width:15%">Priority rating (1–5)</th></tr></thead>
+<tbody>
+<tr><td><strong>Phase 1</strong> Foundations and enabling conditions, 2026–2028 (Sequence A)</td><td>Enablers, Foundations, operating systems</td><td>Energy interconnection and mini-grids; farm-to-market roads; digital public services; halal assurance capacity; Forestry Code and safeguards; baseline register and project pipeline</td><td>₱35–45 billion</td><td>4.20 (80.0% rate 4+; n = 65)</td></tr>
+<tr><td><strong>Phase 2</strong> Value addition and market formation, 2029–2031 (Sequence B)</td><td>Transformers, Foundations, Financiers</td><td>Halal and agro-industrial processing, including the Halal Park where feasible; cold chain; PES and eligible carbon projects; Islamic finance products; industry-aligned skills</td><td>₱50–65 billion</td><td>4.09 (80.6%; n = 67)</td></tr>
+<tr><td><strong>Phase 3</strong> Consolidation and global integration, 2032–2035 (Sequence C)</td><td>Connectors, operating systems</td><td>BIMP-EAGA and GCC export logistics; standards recognition; eco-tourism; applied research; mature green and Islamic finance revenue streams</td><td>₱35–50 billion</td><td>4.00 (75.8%; n = 66)</td></tr>
+</tbody>
+</table>
+<p class="src">Sources: Chapter 6, Sections 6.3.1–6.3.3; BIRD Validation Survey (2026), Section 10. Phase 3 has the least validation evidence because it concerns island and maritime corridors, and no respondents from Basilan or Tawi-Tawi took part.</p>
+<p><strong>Gates, not dates.</strong> A later phase is not authorised because its planned start date has arrived. Each project passes a readiness gate before scale-up (verified scope, owner, financing, safeguards, land access and offtake), consistent with Chapter 6. Phases therefore overlap in practice: a Phase 2 processing investment can proceed in 2027 if its power, land and market prerequisites are already verified.</p>
+<p><strong>The budget-priority tension.</strong> Asked where budget should concentrate, respondents put Foundations first (29 of 71) and the operating systems second (15), with Enablers fifth (6), even though readiness data identify Enablers as the binding cluster. The two views are reconciled rather than overruled: Enablers investments are selected and justified by the Foundations pipelines they unlock, such as farm-to-market roads, cold chain and power for agro-processing (Chapter 7, B4).</p>
+<h3 id="ch3-a-7-finance">Financing logic and 2035 targets</h3>
+<p>The ₱120–160 billion envelope is an indicative requirement for public and catalytic finance over the decade, not a single approved budget. Chapter 6 sets out an illustrative financing scenario of 35 percent from BARMM appropriations and other regional public resources, 25 percent from national government programmes, 30 percent from official development assistance and climate finance, and 10 percent from private capital, public–private partnerships and Islamic finance. Stakeholders broadly support blended finance (63 of 72 agree or strongly agree), but rated the fairness of the proposed mix more cautiously (3.68 of 5). Each share must be replaced by verified appropriations or signed commitments as they become available.</p>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 17</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="Managing the risks of integration" id="p17">
+<div class="kicker">Chapter 3</div>
+<table>
+<caption data-label="Table 3-13">Table 3-13. IEDS strategic targets for 2035 by BEIE cluster driver</caption>
+<thead><tr><th style="width:24%">Outcome area</th><th style="width:44%">2035 strategic target</th><th>Principal cluster drivers</th></tr></thead>
+<tbody>
+<tr><td>Macroeconomy and investment</td><td>GRDP of ₱550 billion or more; investment approvals of ₱15 billion or more a year; export growth</td><td>Transformers, Connectors, Financiers</td></tr>
+<tr><td>Employment and poverty</td><td>At least 20,000 jobs; poverty incidence below 20 percent</td><td>Enablers, Foundations</td></tr>
+<tr><td>Halal and green economy</td><td>Growth in halal-certified MSMEs and accepted export certificates; ₱500 million or more a year in verified green revenue</td><td>Transformers, Foundations, Connectors</td></tr>
+<tr><td>Financial inclusion</td><td>Deeper Islamic banking assets and adult financial account ownership</td><td>Financiers, operating systems</td></tr>
+<tr><td>Infrastructure and human capital</td><td>Household electrification of 90 percent (100 percent by 2040); higher functional literacy; broadband expansion</td><td>Enablers, Connectors</td></tr>
+<tr><td>Governance</td><td>Budget execution of at least 90 percent; published service standards; one verified baseline register</td><td>Operating systems</td></tr>
+</tbody>
+</table>
+<p class="src">Targets are strategic ambitions to be assessed against verified, five-province baselines; definitions, baselines and calibration are set in Chapter 4 and the BSC objectives in Chapter 5. Sources: Chapters 4–6; MENRE-BARMM (2024).</p>
+<h3 id="ch3-a-7-risks">Managing the risks of integration</h3>
+<p>The principal risk of IEDS is the one its feasibility score anticipates: coordination load. Integration multiplies interfaces between ministries, local governments, investors and development partners, and the weakest interface sets the pace. Table 3-14 lists the main risks and the mitigation built into the roadmap.</p>
+<table>
+<caption data-label="Table 3-14">Table 3-14. Principal risks of the integrated strategy and their mitigation</caption>
+<thead><tr><th style="width:24%">Risk</th><th style="width:36%">How it would show</th><th>Mitigation in the roadmap</th></tr></thead>
+<tbody>
+<tr><td><strong>Coordination overload</strong></td><td>Projects wait for permits and decisions held by different agencies; issues escalate without resolution</td><td>One investment-facilitation network (BIF-Net) with an Orchestration Office in MTIT-BoI for case management, data and aftercare; five BEIE cluster councils (Chapter 7, A2–A3)</td></tr>
+<tr><td><strong>Resource dilution</strong></td><td>Many small allocations, few completed assets</td><td>Readiness gates and a ranked, version-controlled project pipeline (Chapter 6)</td></tr>
+<tr><td><strong>Target drift</strong></td><td>Targets lowered quietly when performance lags</td><td>Variance triggers and documented corrective plans; quarterly BSC review (Chapters 5–6)</td></tr>
+<tr><td><strong>Political transition</strong></td><td>Reprioritisation after a change of administration</td><td>Anchoring in law and budget rules; policy review calendar to 2035 (Chapter 7, D1)</td></tr>
+<tr><td><strong>Territorial concentration</strong></td><td>Investment clusters in the mainland corridor</td><td>Proposed allocation floor for lagging and island areas; provincial investment nodes (Chapter 7, B3)</td></tr>
+</tbody>
+</table>
+<p>Stakeholders favoured the same direction. Asked which mitigation mattered most, 45 of 61 chose a single coordination centre for investment delivery (presented in the survey as an investment command centre), ahead of trigger-based budgeting (9), climate finance for green sequencing (5) and a 20 percent contingency reserve (2). Chapter 7 gives this function its institutional form as the BIF-Net Orchestration Office: a coordinating and case-management function, not an additional approving body. On reform sequencing, 42 of 73 respondents preferred institutional, fiscal and regulatory reforms to proceed in parallel.</p>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 18</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="Systems Archetype-Informed Strategic Leverage Points" id="p18">
+<div class="kicker">Chapter 3</div>
 <div class="chapter-header" id="ch3-b">
 <div class="chapter-number">Section B</div>
 <h1 class="chapter-title">Systems Archetype-Informed Strategic Leverage Points</h1>
-</div><p>
-The systems mapping in Chapter 3 identified five critical archetypes constraining BARMM's investment ecosystem: Limits to Growth, Fixes that Fail, Tragedy of the Commons, Success to the Successful, and Growth and Underinvestment. Each archetype reveals specific leverage points that must be activated to achieve transformative change. This section operationalizes Donella Meadows' (1999) hierarchy of twelve leverage points — from Mindset/Paradigm Shift (LP1) to Parameters (LP12) — as a diagnostic and intervention framework for BIRD implementation. Rather than treating leverage points as abstract concepts, this section maps each to specific provincial contexts, quantifiable actions, and measurable outcomes.
-</p><h2 id="ch3-b-1">B.1 Identifying Leverage Points: A Three-Step Diagnostic Process</h2><p>
-The identification of leverage points follows a rigorous three-step process derived from the Strat Planner Pro architecture. This process translates systems thinking from conceptual analysis to operational diagnostics, enabling decision-makers to locate the highest-impact intervention points within BARMM's complex investment ecosystem (Silva, 2026; Meadows, 1999).
-</p><figure id="fig-identify-leverage">
-<img alt="How to Identify Leverage Points" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/How%20to%20Identify%20Leverage%20Points.png"/>
-<figcaption data-label="Figure 3-5">How to Identify Leverage Points: A Three-Step Process using Donella Meadows' Hierarchy of System Change (L1-L12). Step 1 — Diagnostic Synthesis: identifying recurring patterns and limiting factors that hinder progress. Step 2 — Mapping the Loops: visualizing reinforcing (R) and balancing (B) feedback loops to locate delays or failures. Step 3 — Tiered Selection: categorizing interventions as Transformative (L1-L3), Systemic (L4-L6), or Incremental (L10-L12). Source: Strat Planner Pro; Meadows (1999).</figcaption>
-</figure><p>
-<strong>Step 1: Diagnostic Synthesis</strong> involves identifying recurring patterns and limiting factors across the provincial landscape. In BARMM, the diagnostic synthesis reveals five dominant patterns: (a) infrastructure bottlenecks preventing production scaling in Tawi-Tawi, Basilan, and Maguindanao del Sur; (b) institutional capacity gaps creating "Growth and Underinvestment" dynamics in the SGA's 8 new municipalities; (c) resource depletion threatening Lake Lanao and coastal marine ecosystems; (d) inter-provincial inequality where Maguindanao del Norte and Lanao del Sur attract disproportionate investment; and (e) governance fragmentation undermining coordinated action across ministries and LGUs (BPDA, 2024; PSA-RSSO BARMM, 2024).
-</p><p>
-<strong>Step 2: Mapping the Loops</strong> visualizes reinforcing (R) and balancing (B) feedback loops to locate delays or failures. Chapter 2 identified two critical reinforcing loops (R1: Investment-Development Cycle; R2: Governance-Investor Confidence Cycle) and four balancing loops (B1-B4: Infrastructure, Ecological, LGU Service, and Skills Supply Limits). The loop mapping reveals that Tawi-Tawi is trapped in B1 dominance (infrastructure limits growth), Maguindanao del Sur in B2 dominance (ecological limits from El Nino), and the SGA in B3 dominance (LGU capacity limits service delivery). Each trap requires a different leverage point activation (Silva, 2026).
-</p><p>
-<strong>Step 3: Tiered Selection</strong> categorizes interventions into three tiers: <strong>Transformative</strong> (L1-L3: Mindset, Information, Self-Organization) — highest impact, hardest to implement; <strong>Systemic</strong> (L4-L6: Rules, Incentives, Information Flows) — moderate impact, moderate difficulty; and <strong>Incremental</strong> (L10-L12: Stock-Flow, Buffers, Parameters) — lower impact but immediate implementation. The BIRD analysis reveals that BARMM has historically focused on incremental leverage points (building roads, providing subsidies) while underinvesting in transformative and systemic interventions. The IEDS corrects this imbalance by front-loading transformative and systemic interventions in Sequence A (2026-2028).
-</p>
-<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 10</span></div>
-</section>
-<section class="sheet" data-group="Section B" data-title="B.2 Activating Leverage Points: Three Tiers of Intervention" id="p12">
-<div class="kicker">Section B</div>
-<h2 id="ch3-b-2">B.2 Activating Leverage Points: Three Tiers of Intervention</h2><p>
-"Activating Strategic Leverage Points" means identifying targeted interventions to dismantle structural constraints and accelerate Bangsamoro's economic ecosystem. The golden balance beam — a metaphor for system leverage — highlights three tiers of interventions that must be activated simultaneously for transformative change.
-</p><figure id="fig-activating-leverage">
-<img alt="Activating Leverage Points" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/Activating%20Leverage%20Points.png"/>
-<figcaption data-label="Figure 3-6">Activating Strategic Leverage Points: Three tiers of interventions illustrated with the golden balance beam metaphor. L3 (Goals &amp; Operating System): link political legitimacy to investment climate and embed moral governance. L5 (Rules &amp; Incentives): align investment incentives with institutional capacity milestones and halal accreditation. L6 (Information Flows): deploy digital traceability for halal supply chains and real-time energy dashboards. Source: Strat Planner Pro (Silva, 2026).</figcaption>
-</figure><p>
-<strong>L3 — Goals &amp; Operating System:</strong> This leverage point operates at the paradigm level — it changes the fundamental goals that the system seeks to achieve. For BARMM, L3 activation means linking political legitimacy directly to investment climate performance and embedding Moral Governance (khalifa stewardship) as the operating system for all economic activity. Provincial application: in the SGA, L3 activation means establishing investment climate targets as core KPIs for the 8 newly created municipal governments, ensuring that economic development is not an afterthought but a foundational governance mandate. Target: all 8 SGA municipalities adopt investment codes with Shariah-compliant frameworks by 2028 (Silva, 2026).
-</p><p>
-<strong>L5 — Rules &amp; Incentives:</strong> This leverage point changes the rules of the game — the incentives, constraints, and boundaries that shape behavior. For BARMM, L5 activation means aligning investment incentives with institutional capacity milestones (e.g., BHB accreditation triggers access to halal export facilities) and halal accreditation requirements (e.g., only OIC/SMIIC-certified products access UAE/GCC export corridors). Provincial application: in Maguindanao del Sur, L5 activation means reforming LGU investment codes to eliminate financial share requests from investors and replace them with standardized tax incentives linked to job creation and local hiring targets. Target: 100% of Maguindanao del Sur LGUs adopt standardized investment codes by 2027 (MTIT-BARMM, 2025).
-</p><p>
-<strong>L6 — Information Flows:</strong> This leverage point changes what information is available to whom — the data, metrics, and feedback that enable informed decision-making. For BARMM, L6 activation means deploying digital traceability for halal supply chains (enabling consumers to verify halal compliance from farm to fork) and real-time energy dashboards (enabling grid operators to manage load and prevent outages). Provincial application: in Basilan, L6 activation means creating a digital commodity exchange that connects 48,366 ha of rubber smallholders to processing investors and international buyers, replacing opaque middleman networks with transparent market information. Target: Basilan Rubber Digital Exchange operational by 2027, connecting 10,000+ farmers (Silva, 2026).
-</p>
-<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 11</span></div>
-</section>
-<section class="sheet" data-group="Section B" data-title="B.3 Prescription: Front-Loading the Ecosystem Enablers" id="p13">
-<div class="kicker">Section B</div>
-<h2 id="ch3-b-3">B.3 Prescription: Front-Loading the Ecosystem Enablers</h2><p>
-The "Prescription: Front-Loading the Ecosystem Enablers" addresses Leverage Point L10 (Stock-Flow Structure) — expanding system capacity ahead of market demand to break the Limits to Growth and Growth and Underinvestment archetypes. This prescription is grounded in the empirical observation that BARMM's growth has historically stalled not because of insufficient demand or investment interest, but because infrastructure and human capital capacity could not support scaled production (PSA-RSSO BARMM, 2024; MFBM, 2025).
-</p><figure id="fig-capacity-traps">
-<img alt="Leverage Points for Capacity Traps" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Leverage%20Points%20for%20Capacity%20Traps.png"/>
-<figcaption data-label="Figure 3-7">Prescription: Front-Loading the Ecosystem Enablers — Leverage Point L10 (Stock-Flow Structure). The capacity ceiling (dashed line) constrains growth until enablers are deployed. Two enabler tracks: (1) Hardware — ₱6.67B ZBIP, farm-to-market roads, processing hubs; (2) Software — TESDA programs for literacy gaps, pre-hire/train Halal Board and BOI/BBOI officers. The key insight: enablers must precede transformers — scaling production is impossible without first removing binding constraints. Source: Strat Planner Pro (Silva, 2026).</figcaption>
-</figure><p>
-The capacity trap diagram illustrates the fundamental sequencing logic: the capacity ceiling (represented as a horizontal barrier above the growth trendline) must be raised <em>before</em> growth can sustainably accelerate. Two enabler tracks operate in parallel:
-</p><div class="lp-box">
-<div class="lp-box-title">Hardware Enablers (Physical Infrastructure)</div>
-<p style="font-size:9pt;margin-bottom:0.3rem;"><strong>₱6.67B Zamboanga-Basilan Interconnection Project (ZBIP):</strong> Completion by 2028 provides Basilan with reliable grid electricity, enabling rubber processing, cold chain logistics, and digital connectivity. Without ZBIP, Basilan's 48,366 ha rubber and 69,392 MT production remain locked in raw export mode with 20-40% post-harvest losses.</p>
-<p style="font-size:9pt;margin-bottom:0.3rem;"><strong>800km Farm-to-Market Roads:</strong> Constructed in priority corridors across Maguindanao del Sur, the SGA, and Tawi-Tawi, reducing logistics costs by 30% and enabling just-in-time delivery to processing facilities.</p>
-<p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Processing Hubs:</strong> 10 agro-industrial corridors with cold chain nodes established by 2030, creating value addition capacity for rubber (Basilan), seaweed (Tawi-Tawi), coconut (Lanao del Sur), and rice/corn (Maguindanao del Sur).</p>
-</div><div class="lp-box">
-<div class="lp-box-title">Software Enablers (Human Capital &amp; Facilitation)</div>
-<p style="font-size:9pt;margin-bottom:0.3rem;"><strong>TESDA Program Expansion:</strong> Functional literacy improvement from 59.3% to 75%+ by 2035, with provincial targets: Tawi-Tawi (54.2% → 70%), Maguindanao del Sur (58.0% → 72%), Basilan (62.5% → 75%). Industry-aligned curricula for halal certification, agro-processing, and renewable energy.</p>
-<p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Halal Board &amp; BOI/BBOI Officer Pre-Training:</strong> 100+ officers hired and trained before BHB operationalization to prevent bureaucratic chokepoints. Target: BHB achieves OIC/SMIIC accreditation by 2030.</p>
-<p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Digital Literacy Hubs:</strong> 100+ centers deployed across all provinces by 2030, achieving 85% household broadband penetration and enabling e-governance, e-commerce, and digital financial services.</p>
-</div><p>
-The key insight from the capacity trap analysis is that <strong>enablers must precede transformers</strong> — scaling halal production (HEDS) or green monetization (GEMS) is impossible without first removing binding constraints. This is validated by provincial evidence: Basilan's rubber sector has reached a processing capacity ceiling because electricity, logistics, and skilled labor are insufficient. Attempting to scale rubber production without first completing ZBIP, building farm-to-market roads, and training processing technicians would simply increase post-harvest losses and farmer frustration — a classic "Limits to Growth" trap. The IEDS sequencing logic (Sequence A: 2026-2028) front-loads these enablers to prevent exactly this outcome (Silva, 2026; BPDA, 2024).
-</p>
-<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 12</span></div>
-</section>
-<section class="sheet" data-group="Section B" data-title="B.4 The Systems Thinking Paradigm: Going Below the Waterline" id="p14">
-<div class="kicker">Section B</div>
-<h2 id="ch3-b-4">B.4 The Systems Thinking Paradigm: Going Below the Waterline</h2><p>
-The Iceberg Model provides a powerful metaphor for understanding why conventional development approaches have underperformed in BARMM — and why the BEIE ecosystem approach is necessary. Addressing only visible events leads to short-term fixes and unintended consequences because the deeper structures and mental models that generate those events remain unchanged (Meadows, 1999; Senge, 2006).
-</p><figure id="fig-iceberg">
-<img alt="The Iceberg Model Paradigm" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Iceberg%20Model%20Paradigm.png"/>
-<figcaption data-label="Figure 3-8">The Systems Thinking Paradigm: Going Below the Waterline. The iceberg divides into three layers: Events (top 10% — visible outcomes like investment approvals and budget execution), Structures (body 40% — systemic traps such as fragmented plans and recurring bureaucratic delays), and Mental Models (base 50% — deep-rooted beliefs that shape policy behavior). Sustainable solutions require tackling underlying structures and mindsets rather than surface symptoms. Source: Strat Planner Pro (Silva, 2026).</figcaption>
-</figure><p>
-<strong>Events (Top 10%, Visible):</strong> These are the outcomes that make headlines — investment approvals (₱5.1B in Q1 2026), budget execution rates, poverty statistics, electrification percentages. Conventional development practice focuses almost entirely on this layer: if poverty is high, run a cash transfer program; if investment is low, offer tax incentives; if roads are bad, build roads. These are <em>event-level interventions</em> — they address symptoms but not causes. The workshop data (MTIT-BARMM, 2025) reveals that BARMM has accumulated hundreds of event-level interventions without systemic transformation.
-</p><p>
-<strong>Structures (Body 40%, Systemic):</strong> These are the systemic traps that generate recurring event patterns — fragmented plans across ministries, recurring bureaucratic delays, inter-provincial competition for resources, LGU capacity gaps, and institutional memory loss from political transitions. The archetypes identified in Chapter 2 are structural-level phenomena: "Fixes that Fail" is a structural pattern where short-term relief mechanisms undermine long-term capacity; "Success to the Successful" is a structural pattern where resource allocation algorithms favor already-advantaged provinces. BIRD's structural interventions include: the Bangsamoro Investment Command Center (centralized coordination), inter-agency MOAs (mandated collaboration), provincial equity formulas (affirmative allocation), and trigger-based budgeting (adaptive fiscal management) (Silva, 2026).
-</p><p>
-<strong>Mental Models (Base 50%, Paradigmatic):</strong> These are the deep-rooted beliefs that shape policy behavior — the assumptions, values, and worldviews held by decision-makers, investors, and communities. In BARMM, four mental models constrain development: (1) the <em>scarcity mindset</em> — the belief that resources are insufficient, leading to zero-sum competition between provinces and clans; (2) the <em>extractive agriculture paradigm</em> — the belief that farming means growing raw commodities for export rather than adding value locally; (3) the <em>aid dependency narrative</em> — the belief that development requires external funding rather than internal value creation; and (4) the <em>clan-based governance model</em> — the belief that political loyalty trumps institutional merit. BIRD's mental model interventions include: the khalifa stewardship framework (Islamic environmental ethics), the "Power With" governance paradigm (collaborative rather than competitive provincial relations), and the integrated ecosystem narrative (BARMM as a self-sustaining economic system rather than a dependent region) (Silva &amp; Unsi, 2026; Senge, 1990).
-</p><div class="data-callout">
-<strong>Iceberg Insight:</strong> The difference between scattered progress and synchronized ecosystem development is the depth of intervention. Event-level interventions (cash transfers, road building) produce temporary, localized improvements. Structural interventions (command center, MOAs, equity formulas) produce sustained, regional improvements. Mental model interventions (khalifa stewardship, "Power With" governance) produce generational, transformative change. The IEDS operates at all three levels simultaneously: Sequence A builds structures (command center, MOAs), Sequence B scales structures and introduces mental model shifts (stewardship training, collaborative governance), and Sequence C consolidates mental model transformation (institutionalized khalifa ethics, self-sustaining ecosystem governance).
 </div>
-<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 13</span></div>
-</section>
-<section class="sheet" data-group="Section B" data-title="B.5 Prescription: Architecting Collaborative Governance" id="p15">
-<div class="kicker">Section B</div>
-<h2 id="ch3-b-5">B.5 Prescription: Architecting Collaborative Governance</h2><p>
-The "Prescription: Architecting Collaborative Governance" illustrates how strategic leverage points can resolve governance traps — the Big Man Archetype, Success to the Successful, Escalation, and Tragedy of the Commons — that have historically undermined coordinated development in post-conflict regions. The visual metaphor transitions from disconnected, clashing nodes (zero-sum politics) to a unified, synchronized network (collective prosperity) through three strategic leverage points (Silva, 2026; Ricigliano, 2011).
-</p><figure id="fig-collaborative-gov">
-<img alt="Architecting Collaborative Governance" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/Leverage%20Points%20in%20Governance.png"/>
-<figcaption data-label="Figure 3-9">Prescription: Architecting Collaborative Governance — Resolving governance traps through three leverage points. L1 (Paradigm): shift from Power Over (clan-based dominance) to Power With (issue-based collaboration). L2 (Mindset): institutionalize inter-provincial development compacts to replace internal competition with shared external goals. L5 (Rules): establish transparent, formula-based resource allocation to mathematically eliminate bias. Source: Strat Planner Pro (Silva, 2026).</figcaption>
-</figure><p>
-<strong>L1 — Paradigm Shift: From "Power Over" to "Power With"</strong> addresses the Big Man Archetype — over-reliance on charismatic leaders creates fragility when those leaders depart or lose influence. The shift from "Power Over" (clan-based dominance where political authority is exercised through patronage and hierarchy) to "Power With" (issue-based collaboration where stakeholders co-create solutions across clan, provincial, and sectoral boundaries) is the deepest leverage point in the governance system. Provincial application: in the SGA, L1 activation means designing the 8 new municipal governments around collaborative governance principles from inception — shared service arrangements, rotating leadership in inter-municipal councils, and citizen assemblies that transcend clan affiliations. Target: all 8 SGA municipalities adopt collaborative governance charters by 2027 (Silva, 2026).
-</p><p>
-<strong>L2 — Mindset: Inter-Provincial Development Compacts</strong> address Success to the Successful dynamics — where Maguindanao del Norte (28% of BARMM GDP, 4.1% growth) and Lanao del Sur (5.02% growth) attract disproportionate resources while Tawi-Tawi (1.1% growth), Basilan (2.9% growth), and Maguindanao del Sur (3.5% growth, 53% poverty) lag behind. Inter-provincial development compacts replace internal competition with shared external goals: provinces pool resources for regional infrastructure (e.g., the BARMM-wide digital backbone), share expertise (e.g., Lanao del Sur's Dole investment model replicated in other provinces), and coordinate market access (e.g., joint BIMP-EAGA trade missions). Target: 5 inter-provincial compacts signed by 2028, covering infrastructure, halal value chains, renewable energy, human capital, and tourism (BPDA, 2024).
-</p><p>
-<strong>L5 — Rules: Transparent, Formula-Based Resource Allocation</strong> addresses Escalation dynamics — where provinces, clans, or ministries compete for limited resources, each escalating claims in response to others, leading to zero-sum outcomes. Transparent, formula-based allocation mathematically eliminates bias: 30% minimum infrastructure budget for lagging provinces, population-weighted NTA distribution, performance-based budget releases linked to coordination milestones. Provincial application: in Maguindanao del Sur, L5 activation means replacing ad hoc resource requests with a standardized formula that allocates infrastructure, capacity-building, and social services based on objective indicators (poverty rate, population growth, economic diversification index). Target: 100% of BARMM ministries adopt formula-based allocation by 2027, published on BEGMP (MFBM, 2025).
-</p><div class="strategy-box">
-<div class="strategy-box-title">Collaborative Governance Outcome</div>
-<p style="font-size:9pt;margin-bottom:0.3rem;">When all three leverage points are activated, the governance system transforms from:</p>
-<p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Fragmented</strong> (each province, ministry, clan competing independently) → <strong>Coordinated</strong> (inter-provincial compacts, inter-agency MOAs) → <strong>Collaborative</strong> (shared goals, mutual accountability, collective prosperity).</p>
-<p style="font-size:9pt;margin-bottom:0.3rem;">This transformation dissolves friction and aligns incentives, turning rivalries into coordinated prosperity and avoiding short-term, self-reinforcing traps that have historically derailed development in post-conflict regions.</p>
-</div>
-<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 14</span></div>
-</section>
-<section class="sheet" data-group="Section B" data-title="B.6 Leverage Point Effectiveness and Archetype Resolution" id="p16">
-<div class="kicker">Section B</div>
-<h2 id="ch3-b-6">B.6 Leverage Point Effectiveness and Archetype Resolution</h2><p>
-The final section of this chapter synthesizes the leverage point analysis into an actionable effectiveness matrix. Each leverage point is scored for its effectiveness in resolving specific systems archetypes, enabling decision-makers to prioritize interventions based on the archetypes most constraining their provincial context. The matrix reveals that no single leverage point resolves all archetypes — effective intervention requires a <em>portfolio approach</em> that activates multiple leverage points simultaneously (Meadows, 1999; Silva, 2026).
-</p><table id="tab-leverage-synthesis">
-<caption data-label="Table 3-8">Leverage Point Synthesis: Provincial Implementation Priorities</caption>
-<thead>
-<tr><th>Province</th><th>Dominant Archetype(s)</th><th>Priority LP</th><th>Target Intervention</th><th>Timeline</th><th>Budget (₱M)</th></tr>
-</thead>
+<p>Section A chose the strategy; Section B identifies where, within the system, that strategy should push. A leverage point is a place in a system where a small, well-placed change produces a large and lasting shift in behaviour (Meadows, 1999). Meadows ranked twelve such places from the least to the most powerful, and the hierarchy is used here as a practical diagnostic: for each archetype diagnosed in Chapter 2, it asks which level of intervention would weaken the structure that produces the problem.</p>
+<table>
+<caption data-label="Table 3-15">Table 3-15. Meadows' hierarchy of leverage points, grouped into four realms</caption>
+<thead><tr><th style="width:24%">Realm</th><th style="width:34%">Meadows levels</th><th>Typical BIRD intervention</th></tr></thead>
 <tbody>
-<tr><td><span class="province-tag tag-mdn">Mag. del Norte</span></td><td>Success to the Successful</td><td>LP4 (Rules)</td><td>Formula-based allocation: 30% minimum for lagging provinces</td><td>2026-2027</td><td>15</td></tr>
-<tr><td><span class="province-tag tag-lds">Lanao del Sur</span></td><td>Tragedy of the Commons</td><td>LP5 (Stocks/Flows)</td><td>Lake Lanao watershed PES; 10 community forest nurseries</td><td>2026-2029</td><td>250</td></tr>
-<tr><td><span class="province-tag tag-bas">Basilan</span></td><td>Limits to Growth</td><td>LP2 (Information)</td><td>Digital rubber exchange; ZBIP completion</td><td>2026-2028</td><td>6,700</td></tr>
-<tr><td><span class="province-tag tag-tt">Tawi-Tawi</span></td><td>Limits to Growth; Shifting the Burden</td><td>LP2 (Information); LP4 (Rules)</td><td>Marine conservation corridor; diversification incentives</td><td>2026-2030</td><td>800</td></tr>
-<tr><td><span class="province-tag tag-mds">Mag. del Sur</span></td><td>Fixes that Fail; Drifting Goals</td><td>LP1 (Mindset); LP10 (Goals)</td><td>Climate-smart agriculture pivot; SDG-anchored targets</td><td>2026-2028</td><td>350</td></tr>
-<tr><td><span class="province-tag tag-sga">SGA</span></td><td>Growth &amp; Underinvestment</td><td>LP3 (Self-Organization)</td><td>Cross-municipal shared services; collaborative governance charters</td><td>2026-2028</td><td>50</td></tr>
+<tr><td><strong>Parameters</strong> (shallow; quick to change)</td><td>L12 constants and numbers; L11 buffers; L10 stock-and-flow structures</td><td>Incentive rates, budget amounts, reserve capacity, physical infrastructure</td></tr>
+<tr><td><strong>Feedbacks</strong></td><td>L9 delays; L8 balancing loops; L7 reinforcing loops</td><td>Faster approvals and project delivery, rapid-response mechanisms, performance-linked funding</td></tr>
+<tr><td><strong>Design</strong></td><td>L6 information flows; L5 rules; L4 self-organisation</td><td>Published delivery data, accreditation rules, co-management and cluster councils</td></tr>
+<tr><td><strong>Intent</strong> (deep; slow to change, most durable)</td><td>L3 goals; L2 paradigms; L1 transcending paradigms</td><td>Inclusive and stewardship-based goals, a shift from competition to collaboration</td></tr>
 </tbody>
-</table><p>
-The provincial implementation priorities reveal that each province requires a distinct leverage point portfolio. Maguindanao del Norte, despite being the most economically advanced province, requires LP4 (Rules &amp; Incentives) intervention to prevent "Success to the Successful" dynamics from widening inter-provincial gaps. Basilan, with its rubber production ceiling, requires LP2 (Information Flows) and LP10 (Stock-Flow Structure) to unlock value addition through ZBIP and digital market access. Tawi-Tawi, trapped in both "Limits to Growth" (infrastructure) and "Shifting the Burden" (seaweed monoculture), requires a dual LP2/LP4 approach. The total budget for provincial leverage point activation is approximately ₱8.2 billion — less than 7% of the total IEDS investment requirement (₱120-160B) but targeting the highest-impact intervention points in the system (Silva, 2026; BPDA, 2024).
-</p><div class="resource-box">
-<div class="resource-box-title">Related Video Resources</div>
-<p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Strategic Options and the Investment Roadmap</strong> (~20 mins): TOWS strategy formulation, option evaluation, leverage points, and phased IEDS sequencing. <a href="https://youtu.be/kb_snh8mo1k">Watch on YouTube</a></p>
-<p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Systems Thinking: Leverage Points for Transformation</strong> (6 mins): How to identify and activate leverage points in complex systems. <a href="https://youtu.be/VBAHk0WYz_c">Watch on YouTube</a></p>
-<p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Bangsamoro Investment Roadmap 2026-2035</strong> (7 mins): Overview of BARMM as Southeast Asia's hub for ethical and sustainable investments. <a href="https://youtu.be/UCi2dVUmSbE">Watch on YouTube</a></p>
-</div><div class="resource-box">
-<div class="resource-box-title">BIRD Platform Resources</div>
-<p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Home:</strong> <a href="https://bangsamoro-investment-roadmap.asilvainnovations.com">bangsamoro-investment-roadmap.asilvainnovations.com</a></p>
-<p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Validation Survey:</strong> <a href="https://bird-validation-survey.bolt.host/">bird-survey.asilvainnovations.com</a></p>
-<p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Dashboard:</strong> <a href="https://bird-validation-survey.bolt.host/">bird-dashboard.asilvainnovations.com</a></p>
-<p style="font-size:9pt;margin-bottom:0.3rem;"><strong>Actors and Value Map:</strong> <a href="https://bangsamoro-investment-roadmap.asilvainnovations.com/">bird-actors-value-map.asilvainnovations.com</a></p>
-</div><div class="data-callout"><strong>Publication note:</strong> This chapter is the strategy-formulation bridge between the consolidated Chapter 2 diagnostic and the subsequent investment programming, implementation, and monitoring chapters. Quantitative values are retained where they are traceable to the BIRD analytical baseline or repository data contract; claims that depend on future stakeholder validation should be refreshed from the live survey analytics before each formal edition.</div> ==================== REFERENCES ==================== 
-<div class="continue no-print"><p><strong>Continue reading</strong><br/>Chapter 4: Metrics, KPI Benchmarking and Calibration</p><a class="btn btn-green" href="Chapter4.html">Open Chapter 4</a></div><div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 15</span></div>
+</table>
+<p class="src">Sources: Meadows (1999); the four realms follow Abson et al. (2017).</p>
+<div class="data-note"><strong>Three numbering systems, kept distinct.</strong> In this report, L1–L12 refer to Meadows' levels; LP1–LP5 are the five Critical Leverage Points (identifiers, not Meadows levels); and the Balanced Scorecard's Learning and Growth objectives in Chapter 5 use separate codes.</div>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 19</span></div>
 </section>
-<section class="sheet" data-group="Back matter" data-title="References" id="p17">
+
+<section class="sheet" data-group="Chapter 3" data-title="B.1 Identifying Leverage Points: A Three-Step Diagnostic Process" id="p19">
+<div class="kicker">Chapter 3</div>
+<h2 id="ch3-b-1">B.1 Identifying Leverage Points: A Three-Step Diagnostic Process</h2>
+<p>Leverage points were identified through a three-step process from the Strat Planner Pro architecture, applied first in the regional and provincial workshops and then tested in the validation survey (Silva, 2026; BoI-MTIT, 2026).</p>
+<figure>
+<img alt="How to identify leverage points: a three-step process" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/How%20to%20Identify%20Leverage%20Points.png" style="max-width:80%"/>
+<figcaption data-label="Figure 3-6">Figure 3-6. How to identify leverage points: diagnostic synthesis, loop mapping and tiered selection, using Meadows' hierarchy of system change. Source: Strat Planner Pro (Silva, 2026); Meadows (1999).</figcaption>
+</figure>
+<p><strong>Step 1: Diagnostic synthesis.</strong> Recurring patterns are identified from the scored SWOT register and the workshops: production that cannot scale beyond local power and logistics limits; certification and processing capacity that lags demand; shared resources degraded by fragmented governance; investment concentrated in the mainland corridor; and short-term financing that delays durable institutions.</p>
+<p><strong>Step 2: Loop mapping.</strong> Each pattern is traced to its feedback structure. Chapter 2 mapped the investment–development reinforcing loop and the governance–investor confidence loop (rated accurate by 97 and 91 percent of respondents) and the balancing loops that cap them. The question at this step is where a loop is delayed, broken or dominated by a balancing limit.</p>
+<p><strong>Step 3: Tiered selection.</strong> Interventions are chosen across realms. Parameter changes are fast but shallow; design and intent changes are slow but durable. A credible portfolio uses both, with deeper interventions protecting the gains of shallower ones. Respondents found the leverage points clear (mean 4.00 of 5; 76.7 percent agree) and agreed that activating them would accelerate the ecosystem (4.03; 79.5 percent).</p>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 20</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="B.2 From Archetypes to Leverage Points" id="p20">
+<div class="kicker">Chapter 3</div>
+<h2 id="ch3-b-2">B.2 From Archetypes to Leverage Points</h2>
+<p>Table 3-16 maps each archetype to the levels at which it can be weakened, the Critical Leverage Point that carries the response and the TOWS strategies that deliver it. It is the bridge between the diagnosis of Chapter 2 and the objectives and actions of Chapters 5 and 6.</p>
+<table>
+<caption data-label="Table 3-16">Table 3-16. Archetype-to-leverage map</caption>
+<thead><tr><th style="width:17%">Archetype (cluster; rated accurate)</th><th style="width:27%">Structure that produces the problem</th><th style="width:20%">Leverage levels</th><th style="width:8%">CLP</th><th>TOWS response</th></tr></thead>
+<tbody>
+<tr><td><strong>Fixes that Fail</strong> (OS; 96%)</td><td>Quick fixes, such as incentives without capacity milestones, relieve pressure and then recreate the problem</td><td>L5 performance-linked rules; L6 published delivery data; L3 goals</td><td>LP3</td><td>WT-1, ST-2, WO-2</td></tr>
+<tr><td><strong>Tragedy of the Commons</strong> (F; 99%)</td><td>Shared watersheds, forests and fishing grounds are over-used under fragmented governance</td><td>L5 Forestry Code and benefit sharing; L4 co-management; L6 resource monitoring</td><td>LP5</td><td>SO-2, WT-3</td></tr>
+<tr><td><strong>Growth and Underinvestment</strong> (T; 95%)</td><td>Certification, testing and processing capacity lag demand, so performance erodes</td><td>L10 capacity ahead of demand; L9 shorter delays; L7 performance-linked funding</td><td>LP1</td><td>SO-1, WO-3, ST-1</td></tr>
+<tr><td><strong>Limits to Growth</strong> (E; 99%)</td><td>Investment growth meets power, logistics and skills ceilings</td><td>L10 infrastructure and skills stock; L11 reserve capacity; L9 delivery delays</td><td>LP2</td><td>WO-1, WO-2, WT-2</td></tr>
+<tr><td><strong>Success to the Successful</strong> (C; 99%)</td><td>Early advantages draw more resources to the connected mainland</td><td>L5 allocation floor; L3 provincial equity goals; L10 island links</td><td>LP3, LP2</td><td>SO-3, WT-4</td></tr>
+<tr><td><strong>Shifting the Burden</strong> (Fi; 96%)</td><td>Ad hoc or conventional finance meets immediate needs and delays Islamic finance capacity</td><td>L4 new providers and products; L5 enabling regulation</td><td>LP4</td><td>WO-4</td></tr>
+<tr><td><strong>Drifting Goals</strong> (OS; 99%)</td><td>Persistent gaps create pressure to lower targets</td><td>L3 protected goals; L6 transparent variance reporting</td><td>LP3</td><td>WT-1, WT-4</td></tr>
+<tr><td><strong>Escalation</strong> (OS; 96%)</td><td>Provinces, groups or agencies match each other's claims, draining resources</td><td>L2 shared superordinate goals; L5 formula-based allocation; L8 de-escalation</td><td>LP3</td><td>ST-3, WT-4</td></tr>
+<tr><td><strong>Big Man</strong> (OS; 99%)</td><td>Reliance on individual authority makes delivery fragile when leaders change</td><td>L2 "power with" governance; L5 merit and transparent procurement; L6 open budget data</td><td>LP3</td><td>WT-1, WT-4</td></tr>
+</tbody>
+</table>
+<p class="src">Accuracy = share of respondents rating the archetype "very" or "somewhat" accurate; 63–74 valid answers per archetype. Big Man had the strongest endorsement of any archetype (62 percent "very accurately"). Sources: BIRD Validation Survey (2026); BIRD systems map (Silva, 2026).</p>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 21</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="Activating leverage points" id="p21">
+<div class="kicker">Chapter 3</div>
+<h3 id="ch3-b-2-activate">Activating leverage points</h3>
+<figure>
+<img alt="Activating strategic leverage points across three tiers" src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/Activating%20Leverage%20Points.png" style="max-width:80%"/>
+<figcaption data-label="Figure 3-7">Figure 3-7. Activating strategic leverage points: goals (L3), rules and incentives (L5) and information flows (L6) work together, balancing quick, visible actions against deeper structural change. Source: Strat Planner Pro (Silva, 2026).</figcaption>
+</figure>
+<p>The archetype map shows a clear pattern. Four levels recur across almost every archetype: <strong>L10</strong> (building the stock of physical and human capacity), <strong>L6</strong> (making performance visible), <strong>L5</strong> (changing the rules that shape behaviour) and <strong>L3</strong> (protecting the goals). BARMM's past interventions have concentrated on L12 and L10, through budget amounts, incentive rates and infrastructure projects. These remain necessary, but without the design and intent levels they are vulnerable to Fixes that Fail and Drifting Goals. IEDS therefore pairs every major capital programme with a rule, an information flow and a goal that protect it.</p>
+<div class="leverage-box"><strong>Design principle.</strong> No major investment without its protecting rule. For example: a processing facility (L10) is paired with an accreditation pathway (L5) and published certification times (L6); an energy interconnection (L10) with a tariff and dispatch arrangement (L5) and a reliability dashboard (L6); a provincial allocation (L12) with an equity floor (L5) and a provincial disparity indicator (L3, L6).</div>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 22</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="B.3 The Five Critical Leverage Points" id="p22">
+<div class="kicker">Chapter 3</div>
+<h2 id="ch3-b-3">B.3 The Five Critical Leverage Points</h2>
+<p>The archetype map converges on five Critical Leverage Points (CLPs). They are the points where intervention changes the behaviour of the whole BEIE system, and they are used throughout Chapters 4 to 7: as badges on the headline KPIs, as anchors of the BSC causal pathways and as the organising logic for the policy recommendations.</p>
+<table>
+<caption data-label="Table 3-17">Table 3-17. Critical Leverage Points: definition, depth and links to later chapters</caption>
+<thead><tr><th style="width:17%">CLP</th><th style="width:26%">What changes</th><th style="width:16%">Dominant Meadows levels</th><th style="width:17%">Archetypes weakened</th><th>Links to Chapters 5–7</th></tr></thead>
+<tbody>
+<tr><td><strong>LP1</strong> Halal certification integrity</td><td>Accepted, traceable certification that opens export markets; testing and certifier capacity built ahead of demand</td><td>L5, L6, L10</td><td>Growth and Underinvestment</td><td>BSC Pathway 1 (halal value chain); Chapter 7, A4 and C2</td></tr>
+<tr><td><strong>LP2</strong> Infrastructure, energy and human capital</td><td>Power, logistics, connectivity and skills that raise the growth ceiling</td><td>L10, L9, L11</td><td>Limits to Growth</td><td>Pathway 2 (infrastructure-enabled growth); Chapter 7, B2–B3</td></tr>
+<tr><td><strong>LP3</strong> Governance and investor confidence</td><td>One facilitation network, published service standards, protected goals and equitable allocation</td><td>L6, L5, L3, L2</td><td>Fixes that Fail; Drifting Goals; Escalation; Big Man; Success to the Successful</td><td>Pathway 2; Chapter 7, A1–A3 and D1–D3</td></tr>
+<tr><td><strong>LP4</strong> Islamic finance ecosystem</td><td>New Shariah-compliant providers, products and financial capability for MSMEs and projects</td><td>L4, L5</td><td>Shifting the Burden</td><td>Pathways 4–5 (inclusive development; Islamic finance); Chapter 7, C3</td></tr>
+<tr><td><strong>LP5</strong> Green economy revenue</td><td>Lawful, safeguarded revenue from PES, renewable energy and eligible carbon instruments</td><td>L5, L4, L6</td><td>Tragedy of the Commons</td><td>Pathway 3 (green economy); Chapter 7, A1 and A4</td></tr>
+</tbody>
+</table>
+<p class="src">Sources: BIRD systems map and CLP register (Silva, 2026); Chapter 5, Section F.2; Chapter 7.</p>
+<p>LP3 stands apart: it weakens five of the nine archetypes, and it is the leverage point on which the others depend, because certification, infrastructure delivery, finance and green revenue all require agencies to coordinate, publish and keep their commitments. This is consistent with what respondents said: asked who should lead stakeholder alignment, 40 of 65 named the Bangsamoro Government through BoI-MTIT and a further 18 named all stakeholders equally through BIF-Net. Stakeholders also identified inclusive development as the strongest causal pathway (25 of 69), ahead of infrastructure-enabled growth (16) and the halal economy (14).</p>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 23</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="B.4 Prescription: Front-Loading the Ecosystem Enablers" id="p23">
+<div class="kicker">Chapter 3</div>
+<h2 id="ch3-b-4">B.4 Prescription: Front-Loading the Ecosystem Enablers</h2>
+<p>The first prescription addresses the Limits to Growth and Growth and Underinvestment archetypes. BARMM's growth has repeatedly stalled not for want of opportunity or investor interest, but because power, logistics, certification and skills could not support production at scale. The prescription is to raise capacity ahead of demand, so that the ceiling moves before growth reaches it. Respondents agreed that capacity traps are a real constraint (mean 3.99 of 5; 74.0 percent agree).</p>
+<table>
+<caption data-label="Table 3-18">Table 3-18. Why the weakest link sets the pace: cluster readiness and system throughput</caption>
+<thead><tr><th style="width:36%">Stage in the value chain</th><th>Readiness (1–5)</th><th>As share of 5</th><th>Cumulative throughput</th></tr></thead>
+<tbody>
+<tr><td>C1 Foundations</td><td>3.45</td><td>69.0%</td><td>69.0%</td></tr>
+<tr><td>C3 Enablers (binding)</td><td>3.33</td><td>66.6%</td><td>46.0%</td></tr>
+<tr><td>C2 Transformers</td><td>3.40</td><td>68.0%</td><td>31.2%</td></tr>
+<tr><td>C4 Connectors</td><td>3.61</td><td>72.2%</td><td>22.6%</td></tr>
+<tr><td>C5 Financiers</td><td>3.55</td><td>71.0%</td><td>16.0%</td></tr>
+<tr><td>Operating systems (applied to the chain)</td><td>3.58</td><td>71.6%</td><td>11.5%</td></tr>
+</tbody>
+</table>
+<p class="src">Readiness is an indicative stakeholder rating, not an econometric estimate. Source: Chapter 2, Table 2-16; BIRD Validation Survey (2026).</p>
+<p>Two enabler tracks run in parallel from Phase 1. The <strong>hardware track</strong> (L10, L11) covers energy interconnection and renewable mini-grids, including completion of the Zamboanga–Basilan Interconnection Project; farm-to-market roads in the production corridors of Maguindanao del Sur, the SGA and Lanao del Sur; port and island logistics for Tawi-Tawi and Basilan; cold-chain nodes; and digital connectivity under the Bangsamoro e-Governance Master Plan (MICT, 2025). The <strong>software track</strong> (L9, L10) covers functional literacy and industry-aligned technical and vocational training; certifiers, laboratory analysts and investment-facilitation officers recruited and trained before demand peaks; and shorter preparation and approval times for priority projects.</p>
+<p>The test for every Phase 1 project is not only whether it is worthwhile in itself, but which downstream investment it unlocks. Basilan illustrates the point: improved power supply and the province's declaration as free of the Abu Sayyaf Group change what its 48,366 hectares of rubber can support, from raw cup-lump sales towards processing and rubber-wood products, but only if processing, logistics and skills follow in the same sequence.</p>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 24</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="B.5 Prescription: Going Below the Waterline and Architecting Collaborative Governance" id="p24">
+<div class="kicker">Chapter 3</div>
+<h2 id="ch3-b-5">B.5 Prescription: Going Below the Waterline and Architecting Collaborative Governance</h2>
+<p>The second prescription works at the deeper levels of the hierarchy. The iceberg model distinguishes visible events from the patterns, structures and mental models beneath them; intervening only at the level of events produces short-term fixes (Senge, 1990). Respondents strongly endorsed this framing (mean 4.26 of 5; 85.1 percent agree), and agreed that collaborative governance is essential to the roadmap (4.08; 80.6 percent).</p>
+<table>
+<caption data-label="Table 3-19">Table 3-19. Interventions at each level of the iceberg</caption>
+<thead><tr><th style="width:17%">Level</th><th style="width:38%">What it looks like in BARMM</th><th>IEDS response</th></tr></thead>
+<tbody>
+<tr><td><strong>Events</strong></td><td>Approvals announced; budget releases; individual projects launched or delayed</td><td>Track realised investment, not only approvals; report physical as well as financial progress (L12, L6)</td></tr>
+<tr><td><strong>Patterns</strong></td><td>Approvals rising faster than realised investment; execution below target; recurring delays at the same agencies</td><td>Variance triggers and corrective plans; quarterly cluster reviews (L8, L6)</td></tr>
+<tr><td><strong>Structures</strong></td><td>Overlapping mandates; fragmented data; ad hoc allocation; capacity gaps in new municipalities in the SGA</td><td>One facilitation network and register; cluster councils; formula-based allocation with an equity floor (L5, L4)</td></tr>
+<tr><td><strong>Mental models</strong></td><td>Zero-sum competition for resources; value seen in raw commodities rather than processing; development equated with external funding; authority vested in individuals rather than institutions</td><td>Shared regional goals through inter-provincial compacts; stewardship (<em>khalifa</em>) and moral governance as operating principles; "power with" rather than "power over" (L3, L2)</td></tr>
+</tbody>
+</table>
+<p>Collaborative governance resolves three governance traps together. <strong>Big Man</strong> dynamics are weakened by institutionalising decisions: merit-based appointments, transparent procurement and open budget data (L5, L6), and by a shift from authority exercised over others to authority exercised with them (L2). <strong>Escalation</strong> is weakened by shared superordinate goals, such as the halal hub and BIMP-EAGA integration, that make cooperation between provinces more valuable than competition (L2), and by transparent, formula-based allocation (L5). <strong>Success to the Successful</strong> is weakened by explicit equity goals and a proposed allocation floor for lagging and island areas, subject to legal design (L3, L5; Chapter 7, B3).</p>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 25</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="B.6 Leverage Point Effectiveness and Territorial Priorities" id="p25">
+<div class="kicker">Chapter 3</div>
+<h2 id="ch3-b-6">B.6 Leverage Point Effectiveness and Territorial Priorities</h2>
+<p>No single leverage point resolves every archetype, and no single province faces the same mix. Table 3-20 shows which CLP carries the primary and supporting response to each archetype; Table 3-21 translates the analysis into Phase 1 entry points by territory.</p>
+<table>
+<caption data-label="Table 3-20">Table 3-20. Leverage-point effectiveness matrix (● primary response; ○ supporting response)</caption>
+<thead><tr><th style="width:30%">Archetype</th><th>LP1 Halal</th><th>LP2 Infrastructure</th><th>LP3 Governance</th><th>LP4 Islamic finance</th><th>LP5 Green</th></tr></thead>
+<tbody>
+<tr><td>Fixes that Fail</td><td>○</td><td></td><td>●</td><td></td><td>○</td></tr>
+<tr><td>Tragedy of the Commons</td><td></td><td></td><td>○</td><td></td><td>●</td></tr>
+<tr><td>Growth and Underinvestment</td><td>●</td><td>○</td><td></td><td>○</td><td></td></tr>
+<tr><td>Limits to Growth</td><td></td><td>●</td><td>○</td><td></td><td>○</td></tr>
+<tr><td>Success to the Successful</td><td></td><td>○</td><td>●</td><td>○</td><td></td></tr>
+<tr><td>Shifting the Burden</td><td></td><td></td><td>○</td><td>●</td><td>○</td></tr>
+<tr><td>Drifting Goals</td><td></td><td></td><td>●</td><td></td><td></td></tr>
+<tr><td>Escalation</td><td></td><td></td><td>●</td><td></td><td></td></tr>
+<tr><td>Big Man</td><td></td><td></td><td>●</td><td></td><td></td></tr>
+</tbody>
+</table>
+<p class="src">Source: BIRD analysis, derived from Table 3-16. The matrix is a qualitative judgement for prioritisation; it is not a scored model.</p>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 26</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="Territorial entry points" id="p26">
+<div class="kicker">Chapter 3</div>
+<h3 id="ch3-b-6-territory">Territorial entry points</h3>
+<table>
+<caption data-label="Table 3-21">Table 3-21. Leverage-point priorities by territory: Phase 1 entry points</caption>
+<thead><tr><th style="width:17%">Territory</th><th style="width:27%">Dominant constraint (Chapter 2)</th><th style="width:17%">Priority archetype</th><th style="width:11%">Priority CLP</th><th>Phase 1 entry intervention</th></tr></thead>
+<tbody>
+<tr><td><span class="province-tag tag-mdn">MDN</span> Maguindanao del Norte</td><td>Largest economy; risk of drawing a disproportionate share of resources</td><td>Success to the Successful</td><td>LP3, LP1</td><td>Halal Park and Polloc as regional platforms with supplier links to other provinces; publish provincial investment distribution</td></tr>
+<tr><td><span class="province-tag tag-lds">LDS</span> Lanao del Sur</td><td>Lake Lanao watershed and Agus hydropower under shared-resource pressure</td><td>Tragedy of the Commons</td><td>LP5, LP2</td><td>Watershed co-management and PES design; agro-industrial corridor around existing anchors</td></tr>
+<tr><td><span class="province-tag tag-mds">MDS</span> Maguindanao del Sur</td><td>Agriculture-dependent; drought and flood losses</td><td>Fixes that Fail</td><td>LP2, LP5</td><td>Climate-resilient production and irrigation; adaptation conditions on input support; farm-to-market roads</td></tr>
+<tr><td><span class="province-tag tag-bas">BAS</span> Basilan (excluding Isabela City)</td><td>Rubber base without processing; power and logistics gaps</td><td>Limits to Growth</td><td>LP2</td><td>Power interconnection; rubber rehabilitation and processing preparation; disease control</td></tr>
+<tr><td><span class="province-tag tag-tt">TT</span> Tawi-Tawi</td><td>Seaweed exported raw; island logistics; most trapped value</td><td>Limits to Growth; Success to the Successful</td><td>LP2, LP1</td><td>Seaweed drying, storage and processing preparation; port and Sabah corridor logistics; consultation through the Tawi-Tawi workshop scheduled for 26 October 2026</td></tr>
+<tr><td><span class="province-tag tag-sga">SGA</span> Special Geographic Area</td><td>New municipalities with limited administrative capacity</td><td>Growth and Underinvestment</td><td>LP3</td><td>Shared services between municipalities; local investment focal points; land-tenure clarification</td></tr>
+<tr><td>Cotabato City</td><td>Administrative and services hub</td><td>Fixes that Fail</td><td>LP3</td><td>Seat of the BIF-Net Orchestration Office in MTIT-BoI; digital investor services and aftercare for the region</td></tr>
+</tbody>
+</table>
+<p class="src">Sources: Chapter 2 provincial diagnostics; MTIT (2026); BIRD Validation Survey (2026). Budgets for these entry points are determined through the PAP register and annual programming in Chapter 6.</p>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 27</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="From strategy to execution" id="p27">
+<div class="kicker">Chapter 3</div>
+<div class="keep">
+<h3 id="ch3-handoff">From strategy to execution</h3>
+<p>Chapter 3 closes the analytical half of the roadmap. The choice of IEDS, the fourteen TOWS strategies and the five Critical Leverage Points now pass to the chapters that measure, manage, implement and anchor them.</p>
+<table>
+<caption data-label="Table 3-22">Table 3-22. How later chapters use the outputs of Chapter 3</caption>
+<thead><tr><th style="width:22%">Chapter</th><th style="width:38%">What it takes from Chapter 3</th><th>What it adds</th></tr></thead>
+<tbody>
+<tr><td>Chapter 4: Metrics, KPI Benchmarking and Performance Calibration</td><td>Strategic targets for 2035; CLPs as KPI tags</td><td>Definitions, baselines, benchmarks and calibration tiers</td></tr>
+<tr><td>Chapter 5: Balanced Scorecard, Causal Architecture and Strategy Execution</td><td>IEDS and the TOWS strategies; CLPs as anchors of the five causal pathways</td><td>Objectives in four perspectives; strategy map; dashboard logic</td></tr>
+<tr><td>Chapter 6: Implementation, Action and Annual Investment Plan</td><td>Three-phase sequence; envelope and financing scenario; readiness logic</td><td>PAP register; first-year plan; MEL and adaptive management</td></tr>
+<tr><td>Chapter 7: Policy Recommendations and the Way Forward</td><td>Archetype map and governance leverage points (LP3)</td><td>Legislative agenda; BIF-Net orchestration; transition-proofing</td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout"><strong>Publication note.</strong> Option scores, survey results and phase envelopes in this chapter are traceable to the BIRD analytical engine, the validation survey snapshot of 3–20 August 2026 and Chapter 6. The stakeholder validation results should be refreshed from the live survey analytics before each formal edition, and island perspectives added once the Tawi-Tawi consultations are complete.</div>
+<h3 id="ch3-media">Multimedia and platform resources</h3>
+<div class="video-box"><div class="video-box-title">Strategic options and the investment roadmap</div>
+<strong>URL:</strong> <a href="https://youtu.be/kb_snh8mo1k">https://youtu.be/kb_snh8mo1k</a> · about 20 minutes<br/>
+TOWS strategy formulation, option evaluation, leverage points and the phased IEDS sequence.</div>
+<div class="video-box"><div class="video-box-title">Systems thinking: leverage points for transformation</div>
+<strong>URL:</strong> <a href="https://youtu.be/VBAHk0WYz_c">https://youtu.be/VBAHk0WYz_c</a> · about 6 minutes<br/>
+How to identify and activate leverage points in complex systems.</div>
+<div class="video-box"><div class="video-box-title">Bangsamoro Investment Roadmap 2026–2035</div>
+<strong>URL:</strong> <a href="https://youtu.be/UCi2dVUmSbE">https://youtu.be/UCi2dVUmSbE</a> · about 7 minutes<br/>
+An overview of the Bangsamoro as a destination for ethical and sustainable investment.</div>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 28</span></div>
+</section>
+
+<section class="sheet" data-group="Chapter 3" data-title="From strategy to execution (continued)" id="p28">
+<div class="kicker">Chapter 3</div>
+<div class="resource-box"><div class="resource-box-title">BIRD platform</div>
+Home: <a href="https://bangsamoro-investment-roadmap.asilvainnovations.com">bangsamoro-investment-roadmap.asilvainnovations.com</a><br/>
+Validation survey: <a href="https://bird-survey.asilvainnovations.com">bird-survey.asilvainnovations.com</a><br/>
+Dashboard: <a href="https://bird-dashboard.asilvainnovations.com">bird-dashboard.asilvainnovations.com</a><br/>
+Actors and value map: <a href="https://bird-actors-value-map.asilvainnovations.com">bird-actors-value-map.asilvainnovations.com</a></div>
+<div class="continue no-print"><p><strong>Continue reading</strong><br/>Chapter 4: Metrics, KPI Benchmarking and Performance Calibration</p><a class="btn btn-green" href="Chapter4.html">Open Chapter 4</a></div>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 29</span></div>
+</section>
+
+<section class="sheet" data-group="Back matter" data-title="References" id="references">
 <div class="kicker">Back matter</div>
-<div class="references-page" id="references">
-<h1>References</h1>
+<div class="references-page">
+<h2>References</h2>
 <div class="references-list">
-<p>BPDA (Bangsamoro Planning and Development Authority). (2024). <em>Provincial Development Indicators 2023-2024: Maguindanao del Norte, Lanao del Sur, Basilan, Tawi-Tawi, Maguindanao del Sur, and Special Geographic Area</em>. Cotabato City: Bangsamoro Autonomous Region in Muslim Mindanao.</p>
-<p>BBOI-MTIT BARMM. (2026). <em>Q1 2026 Investment Monitoring Report: PHP 5.1 billion in approved investments across BARMM provinces</em>. Cotabato City: Bangsamoro Autonomous Region in Muslim Mindanao.</p>
-<p>DinarStandard. (2023). <em>State of the Global Islamic Economy Report 2023-2024</em>. Dubai: DinarStandard Research.</p>
-<p>Kaplan, R. S., &amp; Norton, D. P. (1992). The balanced scorecard — Measures that drive performance. <em>Harvard Business Review, 70</em>(1), 71-79.</p>
-<p>Meadows, D. H. (1999). <em>Leverage Points: Places to Intervene in a System</em>. Hartland, VT: Sustainability Institute.</p>
-<p>MENRE-BARMM (Ministry of Environment, Natural Resources and Energy). (2024). <em>Climate Change Vulnerability Assessment: El Nino Impacts on Agricultural Productivity in BARMM</em>. Cotabato City: Bangsamoro Autonomous Region in Muslim Mindanao.</p>
-<p>MFBM (Ministry of Finance and Budget Management, BARMM). (2025). <em>BARMM Provincial Economic Trends: A provincial breakdown of growth and challenges</em> (Economic Brief, Issue No. 1, Series of 2025). Cotabato City: Bangsamoro Autonomous Region in Muslim Mindanao.</p>
-<p>MTIT-BARMM (Ministry of Trade, Investments and Tourism). (2025). <em>Bangsamoro Halal Industry Development Plan (BHIDP) 2025-2030</em>. Cotabato City: Bangsamoro Autonomous Region in Muslim Mindanao.</p>
-<p>PSA-RSSO BARMM. (2024). <em>Provincial Accounts 2023: Gross Domestic Product by Province and Industry</em>. Cotabato City: Philippine Statistics Authority - Regional Statistical Services Office.</p>
-<p>PSA-RSSO BARMM. (2025). <em>BARMM's economy expands by 2.7 percent in 2024</em>. Cotabato City: Philippine Statistics Authority.</p>
-<p>Ricigliano, R. (2011). <em>Making Sense of Complex Systems: A Guide for Practitioners</em>. CDA Collaborative Learning Projects.</p>
-<p>Senge, P. M. (2006). <em>The Fifth Discipline: The Art and Practice of the Learning Organization</em> (Rev. ed.). New York: Doubleday.</p>
-<p>Silva, A. (2026). <em>Bangsamoro Investment Roadmap Development (BIRD) 2026-2035: Strat Planner Pro Architecture and BEIE Framework</em>. Asilva Innovations Strategic Insights.</p>
-<p>Silva, A., &amp; Unsi, M. (2026). <em>The Emerging Bangsamoro: A Hub for Resilient and Ethical Growth — Strategic Investment Analysis Report</em>. Asilva Innovations Strategic Insights.</p>
-<p>SMIIC (Standards and Metrology Institute for Islamic Countries). (2021). <em>Strategic Plan 2021-2030</em>. Istanbul: Organisation of Islamic Cooperation.</p>
-<p>Weihrich, H. (1982). The TOWS matrix: A tool for situational analysis. <em>Long Range Planning, 15</em>(2), 54-66. <a href="https://doi.org/10.1016/0024-6301(82)90120-1">https://doi.org/10.1016/0024-6301(82)90120-1</a></p>
-<p>World Bank. (2025). <em>Global Halal Market Outlook 2025-2030</em>. Washington, DC: World Bank Group.</p>
+<p>Abson, D. J., Fischer, J., Leventon, J., Newig, J., Schomerus, T., Vilsmaier, U., von Wehrden, H., Abernethy, P., Ives, C. D., Jager, N. W., &amp; Lang, D. J. (2017). Leverage points for sustainability transformation. <em>Ambio, 46</em>(1), 30–39. https://doi.org/10.1007/s13280-016-0800-y</p>
+<p>Belton, V., &amp; Stewart, T. J. (2002). <em>Multiple criteria decision analysis: An integrated approach</em>. Kluwer Academic Publishers.</p>
+<p>BIRD Validation Survey. (2026). <em>Consented responses, 3–20 August 2026</em> (n = 76) [Data set]. BoI-MTIT and AS Strategic Insights.</p>
+<p>Bureau of Investments–Ministry of Trade, Investments and Tourism. (2026). <em>BIRD 2026–2035 workshop records: Regional and provincial workshops, January–June 2026</em> [Unpublished workshop outputs]. Bangsamoro Government.</p>
+<p>Context.ph. (2026, June 3). <em>DOE transfers power sector function to BARMM-MENRE under new transition deal</em>. https://context.ph/2026/06/03/doe-transfers-power-sector-function-to-barmm-menre-under-new-transition-deal/</p>
+<p>Meadows, D. H. (1999). <em>Leverage points: Places to intervene in a system</em>. Sustainability Institute.</p>
+<p>Ministry of Environment, Natural Resources and Energy–BARMM. (2024). <em>Bangsamoro Sustainable Energy Master Plan</em>. MENRE-BARMM.</p>
+<p>Ministry of Information and Communications Technology–BARMM. (2025). <em>Bangsamoro e-Governance Master Plan (BEGMP): Salient points and strategic milestones</em>. MICT.</p>
+<p>Ministry of Trade, Investments and Tourism–BARMM. (2025). <em>Bangsamoro Halal Industry Development Plan 2025–2030</em>. MTIT-BARMM.</p>
 </div>
 </div>
-<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 16</span></div>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 30</span></div>
 </section>
+
+<section class="sheet" data-group="Back matter" data-title="References (continued)" id="references-2">
+<div class="kicker">Back matter</div>
+<div class="references-page">
+<div class="references-list">
+<p>Ministry of Trade, Investments and Tourism–BARMM. (2026). <em>Provincial economic and investment outlooks: Basilan, Lanao del Sur, Maguindanao del Norte, Maguindanao del Sur and Tawi-Tawi</em>. MTIT Bureau of Investments.</p>
+<p>Philippine Information Agency. (2025, June 10). <em>Basilan declared ASG-free; Pillar of Peace marker unveiled</em>. https://pia.gov.ph</p>
+<p>Philippine Statistics Authority. (2025, June 30). <em>2024 Functional Literacy, Education and Mass Media Survey (FLEMMS): Final results</em> [Press release]. https://psa.gov.ph</p>
+<p>Philippine Statistics Authority–RSSO BARMM. (2025). <em>BARMM's economy expands by 2.7 percent in 2024</em> (Reference No. 2025-033). https://rssobarmm.psa.gov.ph</p>
+<p>Senge, P. M. (1990). <em>The fifth discipline: The art and practice of the learning organization</em>. Doubleday.</p>
+<p>Silva, A. M. (2026). <em>Bangsamoro Investment Roadmap Development (BIRD) 2026–2035: Analytical architecture and strategic planning materials</em>. AS Strategic Insights.</p>
+<p>Standards and Metrology Institute for the Islamic Countries. (2021). <em>SMIIC strategic plan 2021–2030</em>. SMIIC.</p>
+<p>Weihrich, H. (1982). The TOWS matrix: A tool for situational analysis. <em>Long Range Planning, 15</em>(2), 54–66. https://doi.org/10.1016/0024-6301(82)90120-1</p>
+</div>
+</div>
+<div class="folio"><span>BIRD 2026–2035 · Chapter 3</span><span>Page 31</span></div>
+</section>
+
 </main>
 <p class="hint no-print" id="hint">Use the arrow keys or swipe to turn pages. Press C for contents.</p>
 <nav aria-label="Page navigation" class="navbar no-print">
@@ -725,7 +1050,7 @@ The provincial implementation priorities reveal that each province requires a di
             '<p style="text-align:center;color:#C9A84C;font-size:9pt;letter-spacing:2pt">BIRD 2026–2035</p>' +
             '<p style="text-align:center;font-family:Poppins,Arial;font-size:28pt;font-weight:bold;color:#C9A84C;line-height:1.15">' + (p.getAttribute('data-title') || 'Chapter') + '</p>' +
             '<p style="text-align:center;color:#a8e6cf;font-size:12pt">Bangsamoro Investment Roadmap Development 2026–2035</p>' +
-            '<p style="text-align:center;color:#ffffff;font-size:9.5pt;margin-top:24pt"><b style="color:#C9A84C">BOI-MTIT, BARMM</b><br>September 2026</p>' +
+            '<p style="text-align:center;color:#ffffff;font-size:9.5pt;margin-top:24pt"><b style="color:#C9A84C">BoI-MTIT, BARMM</b><br>September 2026</p>' +
             '</td></tr></table>';
         } else {
           var c = p.cloneNode(true);
