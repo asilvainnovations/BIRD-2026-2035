@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#022c22">
+<meta name="description" content="Live voting for the BIRD 2026–2035 Tawi-Tawi Validation Workshop, Bongao, 28 October 2026. Convened by the MTIT Bureau of Investments.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BIRD Vote">
+<title>Tawi-Tawi Validation · BIRD 2026–2035</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<style>
+:root{
+  --g900:#022c22;--g800:#064e3b;--g700:#065f46;--g500:#10b981;--g300:#6ee7b7;--g50:#ecfdf5;
+  --gold:#C9A84C;--gold-l:#E8C560;--gold-d:#8B6C28;--gold-p:#fdf6e3;
+  --ink:#0f172a;--muted:#5b6b7f;--line:#d7e4dd;--card:#ffffff;--bg:#f3f8f5;
+  --red:#b42318;--red-p:#fde8e7;--amber:#b54708;--amber-p:#fef0c7;--ok:#067647;--ok-p:#dcfae6;
+  --s1:#0f766e;--s2:#b45309;--s3:#1d4ed8;--s4:#9f1239;
+  --r:14px;--tap:48px;
+  --sh:0 1px 2px rgba(2,44,34,.06),0 6px 20px rgba(2,44,34,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;font-size:16px;min-height:100dvh;padding-bottom:env(safe-area-inset-bottom)}
+h1,h2,h3{font-family:Poppins,Montserrat,sans-serif;line-height:1.25;color:var(--g800)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hidden{display:none!important}
+
+/* ---------- top bar ---------- */
+.bar{position:sticky;top:0;z-index:20;background:var(--g900);color:#fff;border-bottom:2px solid var(--gold);padding:calc(.55rem + env(safe-area-inset-top)) 1rem .55rem;display:flex;align-items:center;gap:.75rem}
+.bar .brand{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+.bar .brand b{font-family:Poppins,sans-serif;font-size:.95rem;color:var(--gold-l);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .brand small{font-size:.7rem;color:var(--g300);letter-spacing:.04em}
+.bar .sp{flex:1}
+.pill{display:inline-flex;align-items:center;gap:.35rem;font-size:.72rem;font-weight:600;padding:.25rem .6rem;border-radius:99px;background:rgba(255,255,255,.1);color:#fff;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:#94a3b8}
+.dot.on{background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.25)}
+.dot.warn{background:#f59e0b}
+.dot.off{background:#ef4444}
+
+main{max-width:760px;margin:0 auto;padding:1rem}
+.wide main{max-width:1280px}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);padding:1.1rem;margin-bottom:1rem;border:1px solid var(--line)}
+.card h2{font-size:1.15rem;margin-bottom:.5rem}
+.card h3{font-size:1rem;margin:.25rem 0 .5rem}
+.lead{color:var(--muted);font-size:.92rem}
+.kicker{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-d)}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;padding:.15rem .5rem;border-radius:6px;background:var(--g50);color:var(--g700);border:1px solid #b7e4cf;margin-right:.35rem}
+.small{font-size:.8rem;color:var(--muted)}
+.row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.stack>*+*{margin-top:.75rem}
+
+.btn{min-height:var(--tap);padding:.7rem 1.1rem;border-radius:12px;border:1.5px solid var(--g800);background:#fff;color:var(--g800);font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;text-decoration:none;transition:transform .08s}
+.btn:active{transform:scale(.98)}
+.btn.primary{background:var(--g800);color:#fff}
+.btn.gold{background:linear-gradient(135deg,#9b7a2c,#c9a84c 40%,#e8c560 55%,#c9a84c 70%);border-color:var(--gold-d);color:var(--g900)}
+.btn.ghost{border-color:var(--line);color:var(--ink)}
+.btn.danger{border-color:var(--red);color:var(--red)}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.sm{min-height:38px;padding:.4rem .75rem;font-size:.85rem}
+
+label.fld{display:block;font-weight:600;font-size:.88rem;margin:.6rem 0 .3rem}
+input[type=text],input[type=url],input[type=password],select,textarea{width:100%;min-height:var(--tap);border:1.5px solid var(--line);border-radius:10px;padding:.6rem .75rem;background:#fff}
+textarea{min-height:90px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--g700);outline:none;box-shadow:0 0 0 3px rgba(16,185,129,.15)}
+.chk{display:flex;gap:.7rem;align-items:flex-start;padding:.8rem;border:1.5px solid var(--line);border-radius:12px;background:var(--g50)}
+.chk input{width:24px;height:24px;flex-shrink:0;margin-top:.1rem;accent-color:var(--g800)}
+
+/* ---------- answer controls ---------- */
+.opts{display:grid;gap:.55rem}
+.opt{min-height:var(--tap);text-align:left;padding:.75rem .9rem;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-weight:600;display:flex;gap:.6rem;align-items:center}
+.opt[aria-pressed=true]{border-color:var(--g800);background:var(--g50);box-shadow:inset 0 0 0 1.5px var(--g800)}
+.opt .k{flex-shrink:0;width:30px;height:30px;border-radius:8px;background:var(--g800);color:#fff;display:grid;place-items:center;font-size:.8rem}
+.opt small{display:block;font-weight:500;color:var(--muted);font-size:.78rem}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:.35rem}
+.scale button{min-height:52px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-weight:700;font-size:1.05rem;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05}
+.scale button small{font-size:.58rem;font-weight:600;color:var(--muted);margin-top:.15rem;text-align:center}
+.scale button[aria-pressed=true]{background:var(--g800);border-color:var(--g800);color:#fff}
+.scale button[aria-pressed=true] small{color:var(--g300)}
+.scale.compact button{min-height:44px;font-size:.95rem}
+.scale.compact button small{display:none}
+.anchors{display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted);margin-top:.25rem}
+.prop{background:var(--gold-p);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:.8rem .9rem;font-weight:600;margin:.4rem 0 .9rem}
+.item{padding:.75rem 0;border-top:1px solid var(--line)}
+.item:first-child{border-top:none}
+.item .lbl{font-weight:600;font-size:.92rem;margin-bottom:.4rem;display:flex;gap:.45rem}
+.item .lbl .code{flex-shrink:0;font-size:.7rem;font-weight:800;padding:.15rem .4rem;border-radius:5px;color:#fff;height:fit-content;margin-top:.15rem}
+.quad{font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin:1rem 0 .1rem}
+.rank li{list-style:none;display:flex;align-items:center;gap:.5rem;padding:.55rem .6rem;border:1.5px solid var(--line);border-radius:12px;background:#fff;margin-bottom:.45rem}
+.rank .n{width:30px;height:30px;border-radius:50%;background:var(--gold);color:var(--g900);display:grid;place-items:center;font-weight:800;flex-shrink:0}
+.rank .t{flex:1;font-weight:600;font-size:.9rem}
+.rank .t small{display:block;color:var(--muted);font-weight:500;font-size:.75rem}
+.rank .mv{display:flex;flex-direction:column;gap:.2rem}
+.rank .mv button{width:40px;height:34px;border-radius:8px;border:1.5px solid var(--line);background:#fff;font-weight:800}
+.progress{height:6px;background:#dbe7e1;border-radius:99px;overflow:hidden;margin:.4rem 0 .9rem}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--g700),var(--gold));transition:width .3s}
+.stickyfoot{position:sticky;bottom:0;background:linear-gradient(transparent,var(--bg) 30%);padding:1rem 0 calc(.5rem + env(safe-area-inset-bottom));margin-top:.5rem}
+.toast{position:fixed;left:50%;bottom:calc(1rem + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(calc(100% + 4rem));visibility:hidden;background:var(--g900);color:#fff;padding:.7rem 1rem;border-radius:12px;font-weight:600;font-size:.9rem;z-index:50;transition:transform .25s;max-width:92vw;border:1px solid var(--gold)}
+.toast.show{transform:translateX(-50%) translateY(0);visibility:visible}
+.banner{border-radius:12px;padding:.75rem .9rem;font-size:.88rem;font-weight:500;margin-bottom:1rem}
+.banner.info{background:var(--g50);border:1px solid #b7e4cf}
+.banner.warn{background:var(--amber-p);border:1px solid #fedf89;color:#7a2e0e}
+.banner.err{background:var(--red-p);border:1px solid #fecdca;color:#7a271a}
+.waiting{text-align:center;padding:2.5rem 1rem}
+.waiting .spin{width:42px;height:42px;border-radius:50%;border:4px solid #cfe3d9;border-top-color:var(--g800);margin:0 auto 1rem;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.navq{display:flex;gap:.5rem}
+.navq .btn{flex:1}
+
+/* ---------- results ---------- */
+.verdict{display:inline-flex;align-items:center;gap:.35rem;font-weight:800;font-size:.75rem;padding:.25rem .6rem;border-radius:99px;letter-spacing:.02em}
+.v-ok{background:var(--ok-p);color:var(--ok)}
+.v-am{background:var(--amber-p);color:var(--amber)}
+.v-no{background:var(--red-p);color:var(--red)}
+.v-na{background:#eef2f6;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.6rem 0}
+.kpi{background:var(--g50);border-radius:10px;padding:.55rem .6rem;text-align:center}
+.kpi b{display:block;font-family:Poppins,sans-serif;font-size:1.35rem;color:var(--g800);line-height:1.1}
+.kpi span{font-size:.68rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.chart svg{width:100%;height:auto;display:block}
+.cloud{display:flex;flex-wrap:wrap;gap:.3rem .7rem;align-items:center;justify-content:center;padding:1rem .5rem;min-height:120px}
+.cloud span{font-weight:700;line-height:1.1}
+.quotes{list-style:none;max-height:360px;overflow:auto}
+.quotes li{padding:.55rem .7rem;border-left:3px solid var(--gold);background:#fbfaf5;margin-bottom:.4rem;border-radius:0 8px 8px 0;font-size:.9rem}
+table.res{width:100%;border-collapse:collapse;font-size:.85rem}
+table.res th{background:var(--g800);color:#fff;text-align:left;padding:.5rem;font-weight:600}
+table.res td{padding:.5rem;border-bottom:1px solid var(--line);vertical-align:top}
+table.res tr:nth-child(even) td{background:#f7fbf9}
+.syn{display:grid;gap:.75rem}
+.syn .col{border-radius:12px;padding:.8rem;border:1px solid var(--line);background:#fff}
+.syn .col h3{font-size:.9rem;display:flex;justify-content:space-between}
+.syn .col ul{list-style:none}
+.syn .col li{font-size:.85rem;padding:.4rem 0;border-top:1px dashed var(--line)}
+.syn .col li b{color:var(--g800)}
+
+/* ---------- presenter ---------- */
+.present{display:grid;gap:1rem}
+.qlist{display:flex;gap:.4rem;overflow-x:auto;padding-bottom:.3rem;scrollbar-width:thin}
+.qlist button{flex-shrink:0;min-height:40px;padding:.35rem .7rem;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-weight:700;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.qlist button.cur{background:var(--g800);border-color:var(--g800);color:#fff}
+.qlist button.live{box-shadow:0 0 0 3px var(--gold)}
+.joinbox{display:flex;gap:1rem;align-items:center}
+.joinbox .qr{background:#fff;padding:8px;border-radius:10px;border:1px solid var(--line);flex-shrink:0}
+.joinbox .qr img,.joinbox .qr canvas{display:block;width:132px!important;height:132px!important}
+.joinurl{font-weight:700;color:var(--g800);word-break:break-all;font-size:.85rem}
+.bigcode{font-family:Poppins,sans-serif;font-size:1.6rem;letter-spacing:.12em;color:var(--g900)}
+.tabs{display:flex;gap:.3rem;border-bottom:2px solid var(--line);margin-bottom:1rem;overflow-x:auto}
+.tabs button{border:none;background:none;padding:.65rem .9rem;font-weight:700;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;min-height:var(--tap)}
+.tabs button[aria-selected=true]{color:var(--g800);border-bottom-color:var(--gold)}
+.ptitle{font-size:1.25rem}
+.present .prop{font-size:1.02rem}
+
+@media(min-width:720px){
+  .opts.two{grid-template-columns:1fr 1fr}
+  .kpis{grid-template-columns:repeat(4,1fr)}
+}
+@media(min-width:1024px){
+  .present{grid-template-columns:320px 1fr;align-items:start}
+  .present aside{position:sticky;top:76px}
+  .qlist{flex-direction:column;overflow:visible}
+  .qlist button{text-align:left}
+  .syn{grid-template-columns:repeat(3,1fr)}
+  .ptitle{font-size:1.6rem}
+  .present .prop{font-size:1.2rem}
+  body.wide{font-size:17px}
+}
+@media print{
+  .bar,.noprint,#view-join,#view-vote,#view-admin,#view-present{display:none!important}
+  #report{display:block!important}
+  body{background:#fff}
+  .card{box-shadow:none;break-inside:avoid}
+}
+#report{display:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="bar" role="banner">
+  <div class="brand"><b>Tawi-Tawi Validation</b><small>BIRD 2026–2035 · Bongao · 28 Oct 2026</small></div>
+  <div class="sp"></div>
+  <span class="pill" id="netPill" title="Connection status"><span class="dot" id="netDot"></span><span id="netTxt">…</span></span>
+  <span class="pill hidden" id="queuePill" title="Answers waiting to send"></span>
+</header>
+
+<main id="main">
+<!-- ===================== JOIN ===================== -->
+<section id="view-join" class="hidden" aria-labelledby="joinH">
+  <div class="card">
+    <p class="kicker">MTIT Bureau of Investments · Provincial validation</p>
+    <h1 id="joinH" style="font-size:1.45rem;margin:.3rem 0 .5rem">BIRD 2026–2035 Tawi-Tawi Validation Workshop</h1>
+    <p class="lead">You will score propositions that the Bangsamoro Investment and Development Roadmap has already drafted for Tawi-Tawi from secondary data. Your answers are input to the roadmap's first recalibration. They are not an endorsement.</p>
+  </div>
+  <div class="card">
+    <h2>Before you start</h2>
+    <ul class="small" style="padding-left:1.1rem;margin:.3rem 0 .8rem">
+      <li>We record your sector, municipality and scores. We do not ask for your name, email or phone number.</li>
+      <li>Your organisation is optional. It is stored for the secretariat only and is never shown to the room.</li>
+      <li>Results are reported in aggregate. The data is held by the MTIT Bureau of Investments (Data Privacy Act of 2012).</li>
+      <li>You can change an answer while voting is open. Answers are saved on this phone if the signal drops and sent when it returns.</li>
+    </ul>
+    <label class="chk"><input type="checkbox" id="consent"><span><b>I agree</b> to take part and to the use of my answers as described above.</span></label>
+    <label class="fld" for="sessionCode">Session code</label>
+    <input type="text" id="sessionCode" inputmode="text" autocapitalize="characters" autocomplete="off" value="TAWI28">
+    <div style="margin-top:1rem"><button class="btn gold block" id="joinBtn" disabled>Join the workshop</button></div>
+  </div>
+  <p class="small" style="text-align:center">Facilitator? <a href="#present">Presenter view</a> · <a href="#admin">Admin</a></p>
+</section>
+
+<!-- ===================== VOTE ===================== -->
+<section id="view-vote" class="hidden" aria-live="polite">
+  <div id="paperBanner" class="banner warn hidden"></div>
+  <div id="voteBody"></div>
+</section>
+
+<!-- ===================== PRESENTER ===================== -->
+<section id="view-present" class="hidden">
+  <div class="present">
+    <aside>
+      <div class="card">
+        <div class="joinbox">
+          <div class="qr" id="qr" aria-label="QR code to join"></div>
+          <div>
+            <div class="small">Join at</div>
+            <div class="joinurl" id="joinUrl"></div>
+            <div class="small" style="margin-top:.35rem">Code</div>
+            <div class="bigcode" id="joinCode">TAWI28</div>
+          </div>
+        </div>
+        <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+          <div class="kpi"><b id="kPart">0</b><span>Joined</span></div>
+          <div class="kpi"><b id="kApp">0</b><span>Phones</span></div>
+          <div class="kpi"><b id="kPaper">0</b><span>Paper</span></div>
+        </div>
+        <div class="row small" id="liveCtl"></div>
+      </div>
+      <div class="card noprint">
+        <label class="fld" for="filterSector" style="margin-top:0">Show results for</label>
+        <select id="filterSector"><option value="">All participants</option></select>
+        <div class="qlist" id="qlist" role="tablist" aria-label="Questions" style="margin-top:.8rem"></div>
+      </div>
+    </aside>
+    <div>
+      <div class="tabs" role="tablist">
+        <button role="tab" data-tab="q" aria-selected="true">Question</button>
+        <button role="tab" data-tab="swot" aria-selected="false">SWOT board</button>
+        <button role="tab" data-tab="syn" aria-selected="false">Synthesis</button>
+        <button role="tab" data-tab="who" aria-selected="false">Who is here</button>
+      </div>
+      <div id="presentBody"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ADMIN ===================== -->
+<section id="view-admin" class="hidden">
+  <div class="card">
+    <p class="kicker">Facilitator</p>
+    <h2>Data connection</h2>
+    <p class="small">Paste the Google Apps Script web-app URL (ends in <code>/exec</code>). Without it the app runs in <b>this-device mode</b>: answers stay in this browser and can be exported.</p>
+    <label class="fld" for="apiUrl">Web app URL</label>
+    <input type="url" id="apiUrl" placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off">
+    <div class="row" style="margin-top:.7rem">
+      <button class="btn primary sm" id="saveApi">Save and test</button>
+      <button class="btn ghost sm" id="copyJoin">Copy participant link</button>
+    </div>
+    <p class="small" id="apiStatus" style="margin-top:.5rem"></p>
+  </div>
+
+  <div class="card">
+    <h2>Unlock controls</h2>
+    <label class="fld" for="pin">Facilitator PIN</label>
+    <div class="row"><input type="password" id="pin" inputmode="numeric" autocomplete="off" style="flex:1;min-width:140px"><button class="btn primary sm" id="pinBtn">Unlock</button></div>
+    <p class="small" id="pinStatus" style="margin-top:.4rem"></p>
+  </div>
+
+  <div class="card" id="ctlCard">
+    <h2>Session controls</h2>
+    <label class="fld" for="ctlQ">Question shown on phones</label>
+    <select id="ctlQ"></select>
+    <div class="opts two" style="margin-top:.8rem">
+      <button class="opt" id="ctlMode" aria-pressed="false"><span class="k">⇄</span><span>Paced by facilitator<small>Tap to let participants move freely</small></span></button>
+      <button class="opt" id="ctlLock" aria-pressed="false"><span class="k">🔒</span><span>Voting open<small>Tap to close voting</small></span></button>
+      <button class="opt" id="ctlShow" aria-pressed="true"><span class="k">📊</span><span>Participants see results<small>Tap to hide live charts on phones</small></span></button>
+    </div>
+    <p class="small" style="margin-top:.6rem">Controls need the PIN and a data connection. In this-device mode they apply to this browser only.</p>
+  </div>
+
+  <div class="card">
+    <h2>Paper sheets</h2>
+    <p class="small">If fewer than two-thirds of participants can join, switch to paper for the round and encode each sheet here. Each sheet becomes one respondent tagged <b>paper</b>.</p>
+    <div class="row" style="margin-top:.6rem"><button class="btn gold sm" id="paperBtn">Encode a paper sheet</button></div>
+  </div>
+
+  <div class="card">
+    <h2>Save and export</h2>
+    <p class="small">Every answer is written to the Google Sheet as it arrives. These exports are extra copies.</p>
+    <div class="row" style="margin-top:.6rem">
+      <button class="btn primary sm" id="expRaw">Raw responses (CSV)</button>
+      <button class="btn ghost sm" id="expSum">Results summary (CSV)</button>
+      <button class="btn ghost sm" id="expJson">Everything (JSON)</button>
+      <button class="btn ghost sm" id="expPrint">Results report (print / PDF)</button>
+    </div>
+    <p class="small" style="margin-top:.5rem">Raw responses include participant IDs and organisations; keep that file with the secretariat.</p>
+  </div>
+
+  <div class="card">
+    <h2>Before the session</h2>
+    <p class="small">Archive the test votes. The current responses are copied to an "Archive" tab in the sheet, then cleared.</p>
+    <label class="fld" for="resetTxt">Type <b>RESET TAWI28</b> to confirm</label>
+    <div class="row"><input type="text" id="resetTxt" autocomplete="off" style="flex:1;min-width:160px"><button class="btn danger sm" id="resetBtn">Archive and clear</button></div>
+  </div>
+  <p class="small" style="text-align:center"><a href="#present">Presenter view</a> · <a href="#join">Participant view</a></p>
+</section>
+</main>
+
+<div id="report"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+'use strict';
+/* =====================================================================
+   CONFIG — paste the Apps Script /exec URL here before hosting, so the
+   QR code carries a short link. It can also be set in Admin, or passed
+   as ?api=… in the link.
+   ===================================================================== */
+const CONFIG = {
+  API_URL: '',
+  SESSION: 'TAWI28',
+  POLL_STATE_MS: 4000,
+  POLL_RESULTS_MS: 3000,
+  RETRY_MS: 8000,
+  VALIDATED: 0.70,       // share scoring 4–5
+  AMEND: 0.50
+};
+
+/* ---------------- Question set (mirrors the facilitator guide, M1–M16) ---------------- */
+const MUNIS = ['Bongao','Languyan','Mapun','Panglima Sugala','Sapa-Sapa','Sibutu','Simunul','Sitangkai','South Ubian','Tandubas','Turtle Islands'];
+const SECTORS = ['Private sector','BMOA','LGU','Academe or civil society'];
+const QUAD = {S:['Strengths','var(--s1)'],W:['Weaknesses','var(--s2)'],O:['Opportunities','var(--s3)'],T:['Threats','var(--s4)']};
+const SWOT = [
+  ['S1','Seaweed: about 40% of national output'],
+  ['S2','Strategic location near Sabah and BIMP-EAGA'],
+  ['W1','Most seaweed exported raw; little processing in the province'],
+  ['W2','Cold-chain and market-linkage gaps'],
+  ['W3','High cost and low reliability of island power'],
+  ['O1','Global halal market and carrageenan demand'],
+  ['O2','Formalised cross-border trade with Sabah'],
+  ['T1','Heat stress and sea-level rise on seaweed farms'],
+  ['T2','Smuggling and informal trade undercut formal investment']
+];
+const OPTIONS = [['IEDS','Integrated Ecosystem Development'],['HEDS','Halal Economy Dominance'],['IFES','Infrastructure-First Enabling'],['GEMS','Green Economy Monetisation']];
+const PHASES = [
+  ['A','Phase 1, 2026–2028','Foundations and enabling conditions','4.20'],
+  ['B','Phase 2, 2029–2031','Value addition and market formation','4.09'],
+  ['C','Phase 3, 2032–2035','Consolidation and global integration','4.00']
+];
+const INVEST = [
+  ['INV1','Seaweed drying, storage and processing hub'],
+  ['INV2','Fish port and cold chain'],
+  ['INV3','Bongao commercial and tourism hub'],
+  ['INV4','BIMP-EAGA trade gateway (port, logistics)'],
+  ['INV5','Island hybrid mini-grids']
+];
+const Q = [
+  {id:'M1',round:'About you',type:'choice',title:'Your sector',opts:SECTORS,profile:true},
+  {id:'M2',round:'About you',type:'choice',title:'Your municipality',opts:MUNIS,profile:true},
+  {id:'M3',round:'About you',type:'text',title:'Your organisation (optional, never shown to the room)',profile:true,hidden:true,max:1},
+  {id:'M4',round:'Round 1 · Diagnosis',type:'swot',title:'How far do you agree with each item in the Tawi-Tawi diagnosis?'},
+  {id:'M5',round:'Round 1 · Diagnosis',type:'text',title:'What is missing from the diagnosis?',hint:'Add an item with evidence: a figure, a project or a direct observation.',max:3},
+  {id:'M6',round:'Round 2 · Strategy',type:'scale',p:'P1',short:'Seaweed: drying and storage before processing',text:'The binding constraint on seaweed is conversion, not supply. The first investments should be drying, storage and quality capacity, with carrageenan processing prepared after.',src:'SO-1 · Chapter 3'},
+  {id:'M7',round:'Round 2 · Strategy',type:'scale',p:'P2',short:'Bongao node with outer-island sub-nodes',text:'Bongao should be the provincial delivery node for investment facilitation, with sub-nodes needed for outer islands (for example Sitangkai, Sibutu, Mapun).',src:'Chapter 7 · B3'},
+  {id:'M8',round:'Round 2 · Strategy',type:'scale',p:'P3',short:'Ports and a lawful Sabah corridor',text:'Port and wharf upgrades and a lawful, formalised Sabah trade corridor are the priority Connectors investment.',src:'SO-3 · Chapter 3'},
+  {id:'M9',round:'Round 2 · Strategy',type:'scale',p:'P4',short:'Hybrid mini-grids by 2030',text:'Hybrid renewable mini-grids are the realistic route to reliable power for island businesses by 2030.',src:'SO-2 · Chapter 2'},
+  {id:'M10',round:'Round 2 · Strategy',type:'scale',p:'P5',short:'Climate risk to seaweed in Phase 1',text:'Climate heat stress is a material risk to seaweed incomes and needs resilient varieties and marine protected areas within Phase 1.',src:'Chapters 2 and 4'},
+  {id:'M11',round:'Round 2 · Strategy',type:'scale',p:'P6',short:'Bongao halal and heritage tourism hub',text:'Bongao can support a halal and heritage tourism hub if air and sea access improve.',src:'Outlook VI · BTDP'},
+  {id:'M12',round:'Round 2 · Strategy',type:'rank',p:'P7',short:'Rank the strategic options',text:"Island stakeholders share the region's ranking of strategic options: IEDS > HEDS > IFES > GEMS.",src:'Chapter 6 · Validation Survey',hint:'Put the option that would change Tawi-Tawi’s economy most at the top.'},
+  {id:'M13',round:'Round 2 · Strategy',type:'phase',p:'P8',short:'Which phase matters most for Tawi-Tawi',text:'For Tawi-Tawi, the phase that deserves the highest priority is ___ (choose A, B or C).',src:'Chapter 6 · Validation Survey',hint:'All three phases will happen. Regional survey ratings are shown; no island-province respondent rated them.'},
+  {id:'M14',round:'Round 3 · Investments',type:'matrix',short:'Readiness × impact of priority investments',title:'Score each priority investment',hint:'Readiness: land, permits, a proponent and a feasible design exist. Impact: jobs and incomes in Tawi-Tawi.'},
+  {id:'M15',round:'Round 3 · Investments',type:'scale',p:'P9',short:'Finance gap is binding',text:'Access to Islamic and microfinance is a binding constraint for seaweed farmers and cooperatives.',src:'Islamic finance roadmap · Chapter 3, WO-4'},
+  {id:'M16',round:'Round 3 · Investments',type:'choice',title:'Should BIRD set a minimum allocation floor for island provinces?',hint:'No figure is being set today.',opts:['Yes','No','Not sure']}
+];
+const QI = Object.fromEntries(Q.map(q=>[q.id,q]));
+const ANCH = ['Strongly disagree','Disagree','Neutral','Agree','Strongly agree'];
+const PROF_IDS = ['M1','M2','M3'];
+const qLabel = q => q.p ? `${q.p} · ${q.short}` : (q.short || q.title);
+
+/* ---------------- Small helpers ---------------- */
+const $ = s => document.querySelector(s);
+const el = (tag, attrs={}, html='') => { const e=document.createElement(tag); for(const k in attrs){ if(k==='on') for(const ev in attrs.on) e.addEventListener(ev,attrs.on[ev]); else if(attrs[k]!==false&&attrs[k]!=null) e.setAttribute(k,attrs[k]); } if(html) e.innerHTML=html; return e; };
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem('ttvw_'+k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem('ttvw_'+k,JSON.stringify(v)); }catch(e){} },
+  del(k){ try{ localStorage.removeItem('ttvw_'+k); }catch(e){} }
+};
+const sess = {
+  get(k,d){ try{ const v=sessionStorage.getItem('ttvw_'+k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ sessionStorage.setItem('ttvw_'+k,JSON.stringify(v)); }catch(e){} },
+  del(k){ try{ sessionStorage.removeItem('ttvw_'+k); }catch(e){} }
+};
+const uuid = () => (crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return (c==='x'?r:(r&3|8)).toString(16);}));
+let toastT; function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2600); }
+function download(name, text, type){ const b=new Blob([text],{type}); const a=el('a',{href:URL.createObjectURL(b),download:name}); document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500); }
+const csvCell = v => { let s=String(v==null?'':v); if(/^[=+\-@]/.test(s)) s="'"+s; return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s; };
+const toCSV = rows => '﻿'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n');
+const stamp = () => new Date().toLocaleString('sv-SE',{timeZone:'Asia/Manila'}).replace(/[: ]/g,'').slice(0,13);
+
+/* ---------------- Connection & data layer ---------------- */
+const params = new URLSearchParams(location.search);
+if (params.get('api')) store.set('api', params.get('api'));
+let API = store.get('api', CONFIG.API_URL) || '';
+const LOCAL = () => !API;
+let STATE = {current_q:'M1',mode:'paced',locked:false,show_results:true,title:'BIRD 2026–2035 Tawi-Tawi Validation Workshop'};
+if (LOCAL()) STATE = Object.assign(STATE, store.get('local_state', {}));
+let online = null;
+
+function setNet(kind, txt){ online = kind==='on'; $('#netDot').className='dot '+kind; $('#netTxt').textContent=txt; }
+async function apiGet(action){
+  const u = `${API}${API.includes('?')?'&':'?'}action=${action}&session=${CONFIG.SESSION}&t=${Date.now()}`;
+  const r = await fetch(u,{method:'GET',redirect:'follow',cache:'no-store'});
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  return r.json();
+}
+async function apiPost(body){
+  const r = await fetch(API,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({session:CONFIG.SESSION},body))});
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  return r.json();
+}
+
+/* local (this-device) store uses the same row shape as the sheet */
+function localRows(){ return store.get('local_rows', []); }
+function localUpsert(pid, channel, answers){
+  const rows = localRows(); const now = new Date().toISOString();
+  answers.forEach(a=>{
+    const i = rows.findIndex(r=>r.p===pid&&r.q===a.q&&r.item===(a.item||'score'));
+    const row = {p:pid,channel,q:a.q,item:a.item||'score',score:a.score==null?null:a.score,text:a.text||'',updated:now};
+    if(i>=0) rows[i]=Object.assign(rows[i],row); else rows.push(Object.assign({created:now},row));
+  });
+  store.set('local_rows', rows);
+}
+
+/* participant identity */
+function paperMode(){ return !!sess.get('paper_pid', null); }
+function myPid(){ if(paperMode()) return sess.get('paper_pid'); let p=store.get('pid',null); if(!p){ p=uuid(); store.set('pid',p);} return p; }
+function myChannel(){ return paperMode()?'paper':'app'; }
+function answersKey(){ return paperMode()? 'paper_answers_'+myPid() : 'answers'; }
+function myAnswers(){ return paperMode()? sess.get(answersKey(),{}) : store.get('answers',{}); }
+function saveMyAnswers(a){ paperMode()? sess.set(answersKey(),a) : store.set('answers',a); }
+
+/* offline queue */
+function queue(){ return store.get('queue', []); }
+function setQueue(qs){ store.set('queue', qs); const n=qs.length; const p=$('#queuePill'); p.classList.toggle('hidden', !n); p.textContent = n? `${n} waiting to send` : ''; }
+async function submit(answers){
+  const pid=myPid(), channel=myChannel();
+  const mine = myAnswers();
+  answers.forEach(a=>{ (mine[a.q]=mine[a.q]||{})[a.item||'score']={score:a.score==null?null:a.score,text:a.text||''}; });
+  saveMyAnswers(mine);
+  if(LOCAL()){ localUpsert(pid,channel,answers); return {ok:true,local:true}; }
+  const job = {participant:pid,channel,answers,at:Date.now()};
+  try{
+    const res = await apiPost(Object.assign({action:'submit'},job));
+    if(res.ok){ setNet('on','Live'); return res; }
+    if(res.error==='voting_closed') return res;
+    if(res.error==='busy_retry') throw new Error('busy');
+    return res;
+  }catch(e){
+    const qs=queue(); qs.push(job); setQueue(qs); setNet('warn','Saved on phone');
+    return {ok:true,queued:true};
+  }
+}
+let flushing=false;
+async function flushQueue(){
+  if(LOCAL()||flushing) return; let qs=queue(); if(!qs.length) return;
+  flushing=true;
+  try{
+    while(qs.length){
+      const res = await apiPost(Object.assign({action:'submit'},qs[0]));
+      if(!res.ok && res.error==='busy_retry') break;
+      qs.shift(); setQueue(qs);
+    }
+    if(!qs.length){ setNet('on','Live'); toast('All saved answers sent'); }
+  }catch(e){ setNet('warn','Saved on phone'); }
+  finally{ flushing=false; }
+}
+setInterval(flushQueue, CONFIG.RETRY_MS);
+addEventListener('online', flushQueue);
+
+async function refreshState(){
+  if(LOCAL()){ STATE=Object.assign(STATE, store.get('local_state',{})); setNet('warn','This device only'); return STATE; }
+  try{ const r=await apiGet('state'); if(r.ok){ STATE=r.state; setNet('on','Live'); } else setNet('off', r.error||'Error'); }
+  catch(e){ setNet('off','Offline'); }
+  return STATE;
+}
+async function fetchResults(){
+  if(LOCAL()){
+    const rows = localRows();
+    const people = new Set(rows.map(r=>r.p)), app=new Set(), paper=new Set();
+    rows.forEach(r=>(r.channel==='paper'?paper:app).add(r.p));
+    return {participants:people.size, by_channel:{app:app.size,paper:paper.size},
+      rows: rows.filter(r=>r.q!=='M3').map(r=>({q:r.q,item:r.item,score:r.score,text:r.text,p:r.p}))};
+  }
+  const r = await apiGet('results');
+  if(!r.ok) throw new Error(r.error||'error');
+  STATE = r.state || STATE;
+  return {participants:r.participants, by_channel:r.by_channel||{}, rows:(r.rows||[]).map(x=>({q:x[0],item:x[1],score:x[2],text:x[3],p:x[4]}))};
+}
+async function adminCall(op, args={}){
+  const pin = sess.get('pin','');
+  if(LOCAL()){
+    if(op==='set_state'){ const s=Object.assign(store.get('local_state',{}),args); store.set('local_state',s); STATE=Object.assign(STATE,s); return {ok:true,state:STATE}; }
+    if(op==='check') return {ok:true};
+    if(op==='export'){ return {ok:true,headers:['Submitted','Updated','Session','Participant ID','Channel','Question','Item','Score','Text','Source','Province'],
+      rows: localRows().map(r=>[r.created,r.updated,CONFIG.SESSION,r.p,r.channel,r.q,r.item,r.score??'',r.text,'workshop_pulse','Tawi-Tawi'])}; }
+    if(op==='reset'){ if(args.confirm!=='RESET '+CONFIG.SESSION) return {ok:false,error:'confirm_required'}; store.set('local_archive_'+stamp(), localRows()); store.set('local_rows',[]); return {ok:true,archived_as:'browser archive'}; }
+  }
+  return apiPost({action:'admin',pin,op,args});
+}
+
+/* ---------------- Aggregation ---------------- */
+function verdictOf(share,n){
+  if(!n) return ['No responses yet','v-na'];
+  if(share>=CONFIG.VALIDATED) return ['Validated','v-ok'];
+  if(share>=CONFIG.AMEND) return ['Validated with amendment','v-am'];
+  return ['Contested','v-no'];
+}
+function scaleStats(rows,q,item='score'){
+  const c=[0,0,0,0,0]; rows.forEach(r=>{ if(r.q===q&&r.item===item&&r.score>=1&&r.score<=5) c[r.score-1]++; });
+  const n=c.reduce((a,b)=>a+b,0), mean=n? c.reduce((a,v,i)=>a+v*(i+1),0)/n : 0, agree=n?(c[3]+c[4])/n:0;
+  return {c,n,mean,agree,verdict:verdictOf(agree,n)};
+}
+function choiceCounts(rows,q,opts,item='score'){
+  const m=Object.fromEntries(opts.map(o=>[o,0])); let n=0;
+  rows.forEach(r=>{ if(r.q===q&&r.item===item&&r.text){ m[r.text]=(m[r.text]||0)+1; n++; } });
+  return {m,n};
+}
+function rankStats(rows){
+  const s={}, cnt={}; OPTIONS.forEach(([k])=>{s[k]=0;cnt[k]=0;});
+  rows.forEach(r=>{ if(r.q==='M12'&&s[r.item]!=null&&r.score){ s[r.item]+=r.score; cnt[r.item]++; } });
+  const n=Math.max(0,...Object.values(cnt));
+  return {n, items:OPTIONS.map(([k,l])=>({k,l,avg:cnt[k]?s[k]/cnt[k]:null,borda:cnt[k]?(cnt[k]*5 - s[k]):0})).sort((a,b)=>(a.avg??9)-(b.avg??9))};
+}
+function matrixStats(rows){
+  return INVEST.map(([k,l])=>{ const r=scaleStats(rows,'M14',k+'_R'), i=scaleStats(rows,'M14',k+'_I'); return {k,l,r:r.mean,i:i.mean,nr:r.n,ni:i.n}; });
+}
+function comments(rows,q,item='comment'){ return rows.filter(r=>r.q===q&&r.item===item&&r.text).map(r=>r.text); }
+function filterRows(rows, sector){
+  if(!sector) return rows;
+  const ids=new Set(rows.filter(r=>r.q==='M1'&&r.text===sector).map(r=>r.p));
+  return rows.filter(r=>ids.has(r.p));
+}
+
+/* ---------------- SVG charts ---------------- */
+const C = {g:'#064e3b',g2:'#10b981',gold:'#C9A84C',red:'#d92d20',amb:'#f79009',grey:'#98a2b3',ink:'#0f172a',mut:'#5b6b7f',line:'#e3ece7'};
+const DIST = ['#d92d20','#f79009','#98a2b3','#34a853','#0b6b4f'];
+function svgDist(st,compact){
+  const W=compact?360:640,H=compact?190:230,pad=compact?10:36,bw=(W-pad*2)/5, max=Math.max(1,...st.c);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Score distribution"><rect width="${W}" height="${H}" fill="#fff"/>`;
+  st.c.forEach((v,i)=>{ const h=(H-80)*v/max, x=pad+i*bw+10, y=H-44-h;
+    s+=`<rect x="${x}" y="${y}" width="${bw-20}" height="${Math.max(h,1)}" rx="6" fill="${DIST[i]}"/>`;
+    s+=`<text x="${x+(bw-20)/2}" y="${y-7}" text-anchor="middle" font-size="18" font-weight="700" fill="${C.ink}" font-family="Montserrat,sans-serif">${v}</text>`;
+    s+=`<text x="${x+(bw-20)/2}" y="${H-24}" text-anchor="middle" font-size="16" font-weight="700" fill="${C.ink}" font-family="Montserrat,sans-serif">${i+1}</text>`;
+    if(!compact) s+=`<text x="${x+(bw-20)/2}" y="${H-7}" text-anchor="middle" font-size="11" fill="${C.mut}" font-family="Montserrat,sans-serif">${ANCH[i]}</text>`; });
+  return s+'</svg>';
+}
+function svgHBars(items, opts={}){
+  // items: [{label, value, color?, note?}]
+  const W=680, rowH=opts.rowH||44, lw=opts.labelW||250, H=items.length*rowH+20, max=opts.max||Math.max(1,...items.map(i=>i.value||0));
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opts.aria||'Bar chart')}"><rect width="${W}" height="${H}" fill="#fff"/>`;
+  if(opts.ref!=null){ const x=lw+(W-lw-70)*opts.ref/max; s+=`<line x1="${x}" x2="${x}" y1="4" y2="${H-8}" stroke="${C.gold}" stroke-dasharray="5 4" stroke-width="2"/>`; }
+  items.forEach((it,i)=>{ const y=10+i*rowH, bw=(W-lw-70)*(it.value||0)/max;
+    s+=`<text x="${lw-10}" y="${y+rowH/2}" text-anchor="end" dominant-baseline="middle" font-size="14" fill="${C.ink}" font-family="Montserrat,sans-serif">${esc(it.label.length>34?it.label.slice(0,33)+'…':it.label)}</text>`;
+    s+=`<rect x="${lw}" y="${y+8}" width="${W-lw-70}" height="${rowH-16}" rx="6" fill="#f1f5f3"/>`;
+    s+=`<rect x="${lw}" y="${y+8}" width="${Math.max(bw,0)}" height="${rowH-16}" rx="6" fill="${it.color||C.g}"/>`;
+    s+=`<text x="${lw+bw+8}" y="${y+rowH/2}" dominant-baseline="middle" font-size="14" font-weight="700" fill="${C.ink}" font-family="Montserrat,sans-serif">${esc(it.note!=null?it.note:it.value)}</text>`; });
+  return s+'</svg>';
+}
+function svgStacked(rowsSpec){
+  // rowsSpec: [{code,label,c:[5], color}]
+  const W=980,rowH=46,lw=470,H=rowsSpec.length*rowH+44, bwTot=W-lw-80;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Agreement by item"><rect width="${W}" height="${H}" fill="#fff"/>`;
+  const x70 = lw+bwTot*(1-CONFIG.VALIDATED);
+  rowsSpec.forEach((r,i)=>{ const y=8+i*rowH, n=r.c.reduce((a,b)=>a+b,0)||1; let x=lw;
+    s+=`<rect x="6" y="${y+12}" width="34" height="22" rx="5" fill="${r.color}"/><text x="23" y="${y+23}" text-anchor="middle" dominant-baseline="middle" font-size="14" font-weight="800" fill="#fff" font-family="Montserrat,sans-serif">${r.code}</text>`;
+    s+=`<text x="48" y="${y+rowH/2}" dominant-baseline="middle" font-size="18" fill="${C.ink}" font-family="Montserrat,sans-serif">${esc(r.label.length>40?r.label.slice(0,39)+'…':r.label)}</text>`;
+    r.c.forEach((v,j)=>{ const w=bwTot*v/n; if(w>0) s+=`<rect x="${x}" y="${y+10}" width="${w}" height="${rowH-20}" fill="${DIST[j]}"/>`; x+=w; });
+    if(!r.c.some(Boolean)) s+=`<rect x="${lw}" y="${y+10}" width="${bwTot}" height="${rowH-20}" fill="#f1f5f3"/>`;
+    const agree=(r.c[3]+r.c[4])/n; s+=`<text x="${lw+bwTot+8}" y="${y+rowH/2}" dominant-baseline="middle" font-size="18" font-weight="800" fill="${C.ink}" font-family="Montserrat,sans-serif">${r.c.some(Boolean)?Math.round(agree*100)+'%':'–'}</text>`; });
+  s+=`<line x1="${x70}" x2="${x70}" y1="2" y2="${H-36}" stroke="${C.ink}" stroke-dasharray="4 4"/>`;
+  s+=`<text x="${x70}" y="${H-20}" text-anchor="middle" font-size="11" fill="${C.mut}" font-family="Montserrat,sans-serif">70% agree line (bars read from right)</text>`;
+  let lx=lw; ANCH.forEach((a,j)=>{ s+=`<rect x="${lx}" y="${H-12}" width="10" height="10" fill="${DIST[j]}"/><text x="${lx+14}" y="${H-3}" font-size="10" fill="${C.mut}" font-family="Montserrat,sans-serif">${j+1}</text>`; lx+=40; });
+  return s+'</svg>';
+}
+function svgMatrix(pts){
+  const W=640,H=520,pad=60, sx=v=>pad+(W-pad*1.5)*(v-1)/4, sy=v=>H-pad-(H-pad*1.8)*(v-1)/4;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Readiness by impact"><rect width="${W}" height="${H}" fill="#fff"/>`;
+  s+=`<rect x="${sx(3)}" y="${sy(5)}" width="${sx(5)-sx(3)}" height="${sy(3)-sy(5)}" fill="#ecfdf5"/>`;
+  s+=`<text x="${sx(5)-8}" y="${sy(5)+18}" text-anchor="end" font-size="12" font-weight="700" fill="${C.g}" font-family="Montserrat,sans-serif">Prepare early</text>`;
+  for(let v=1;v<=5;v++){ s+=`<line x1="${sx(v)}" x2="${sx(v)}" y1="${sy(1)}" y2="${sy(5)}" stroke="${C.line}"/><line x1="${sx(1)}" x2="${sx(5)}" y1="${sy(v)}" y2="${sy(v)}" stroke="${C.line}"/>`;
+    s+=`<text x="${sx(v)}" y="${sy(1)+20}" text-anchor="middle" font-size="12" fill="${C.mut}" font-family="Montserrat,sans-serif">${v}</text><text x="${sx(1)-12}" y="${sy(v)+4}" text-anchor="end" font-size="12" fill="${C.mut}" font-family="Montserrat,sans-serif">${v}</text>`; }
+  s+=`<line x1="${sx(3)}" x2="${sx(3)}" y1="${sy(1)}" y2="${sy(5)}" stroke="${C.gold}" stroke-width="2" stroke-dasharray="5 4"/><line x1="${sx(1)}" x2="${sx(5)}" y1="${sy(3)}" y2="${sy(3)}" stroke="${C.gold}" stroke-width="2" stroke-dasharray="5 4"/>`;
+  s+=`<text x="${(sx(1)+sx(5))/2}" y="${H-12}" text-anchor="middle" font-size="13" font-weight="700" fill="${C.ink}" font-family="Montserrat,sans-serif">Readiness (1–5)</text>`;
+  s+=`<text transform="translate(16 ${(sy(1)+sy(5))/2}) rotate(-90)" text-anchor="middle" font-size="13" font-weight="700" fill="${C.ink}" font-family="Montserrat,sans-serif">Impact (1–5)</text>`;
+  const placed=[];
+  pts.forEach((p,i)=>{ if(!p.nr||!p.ni) return; let x=sx(p.r), y=sy(p.i);
+    while(placed.some(([a,b])=>Math.hypot(a-x,b-y)<30)) x+=30; placed.push([x,y]);
+    s+=`<circle cx="${x}" cy="${y}" r="16" fill="${C.g}" stroke="#fff" stroke-width="3"/><text x="${x}" y="${y+1}" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="800" fill="#fff" font-family="Montserrat,sans-serif">${i+1}</text>`; });
+  return s+'</svg>';
+}
+const STOP = new Set('the a an and or of to in on for with is are be by at as it this that from we our more not no need needs should can will have has its their there into than also very but so if'.split(' '));
+function cloudHTML(list){
+  const f={}; list.forEach(t=>t.toLowerCase().replace(/[^a-z0-9À-ɏ\s-]/g,' ').split(/\s+/).forEach(w=>{ if(w.length>2&&!STOP.has(w)) f[w]=(f[w]||0)+1; }));
+  const top=Object.entries(f).sort((a,b)=>b[1]-a[1]).slice(0,40); if(!top.length) return '<p class="small" style="text-align:center">No answers yet.</p>';
+  const max=top[0][1], cols=[C.g,C.gold,'#0f766e','#8B6C28','#065f46'];
+  return top.sort(()=>Math.random()-.5).map(([w,n],i)=>`<span style="font-size:${(0.85+1.9*n/max).toFixed(2)}rem;color:${cols[i%cols.length]}" title="${n}">${esc(w)}</span>`).join('');
+}
+
+/* ---------------- Result renderers (shared by phones, presenter, report) ---------------- */
+function resultHTML(q, R, big){
+  const rows=R.rows;
+  if(q.type==='scale'){
+    const st=scaleStats(rows,q.id), [vt,vc]=st.verdict, cm=comments(rows,q.id);
+    return `<div class="row" style="justify-content:space-between"><span class="verdict ${vc}">${vt}</span><span class="small">${st.n} response${st.n===1?'':'s'}</span></div>
+      <div class="kpis"><div class="kpi"><b>${st.n?Math.round(st.agree*100)+'%':'–'}</b><span>Score 4–5</span></div><div class="kpi"><b>${st.n?st.mean.toFixed(2):'–'}</b><span>Mean (1–5)</span></div><div class="kpi"><b>${st.n?Math.round((st.c[0]+st.c[1])/st.n*100)+'%':'–'}</b><span>Score 1–2</span></div>${big?`<div class="kpi"><b>${cm.length}</b><span>Amendments</span></div>`:''}</div>
+      <div class="chart" data-name="${q.id}">${svgDist(st,!big)}</div>
+      ${big&&cm.length?`<h3 style="margin-top:1rem">Suggested amendments</h3><ul class="quotes">${cm.slice(-12).reverse().map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:''}`;
+  }
+  if(q.type==='swot'){
+    const spec=SWOT.map(([k,l])=>({code:k,label:l,c:scaleStats(rows,'M4',k).c,color:QUAD[k[0]][1].replace('var(--s1)','#0f766e').replace('var(--s2)','#b45309').replace('var(--s3)','#1d4ed8').replace('var(--s4)','#9f1239')}));
+    const n=Math.max(0,...SWOT.map(([k])=>scaleStats(rows,'M4',k).n));
+    return `<p class="small">${n} respondent${n===1?'':'s'} · bar segments show scores 1 (left, red) to 5 (right, green); the figure is the share scoring 4–5.</p><div class="chart" data-name="M4_swot">${svgStacked(spec)}</div>`;
+  }
+  if(q.type==='choice'){
+    const {m,n}=choiceCounts(rows,q.id,q.opts);
+    const items=q.opts.map(o=>({label:o,value:m[o]||0,note:`${m[o]||0}${n?` (${Math.round((m[o]||0)/n*100)}%)`:''}`,color:q.id==='M16'?({Yes:C.g,No:C.red,'Not sure':C.grey}[o]):C.g}));
+    return `<p class="small">${n} response${n===1?'':'s'}</p><div class="chart" data-name="${q.id}">${svgHBars(items,{aria:q.title,labelW:q.id==='M2'?180:240,rowH:q.opts.length>6?36:46})}</div>`;
+  }
+  if(q.type==='text'){
+    const list=rows.filter(r=>r.q===q.id&&r.text).map(r=>r.text);
+    return `<p class="small">${list.length} answer${list.length===1?'':'s'}</p><div class="cloud">${cloudHTML(list)}</div>${big?`<ul class="quotes">${list.slice(-15).reverse().map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:''}`;
+  }
+  if(q.type==='rank'){
+    const st=rankStats(rows); const regional=['IEDS','HEDS','IFES','GEMS'];
+    const order=st.items.filter(i=>i.avg!=null).map(i=>i.k); const same=order.length===4&&order.join()===regional.join();
+    const items=st.items.map(i=>({label:`${i.k} · ${i.l}`,value:i.avg?5-i.avg:0,note:i.avg?`avg rank ${i.avg.toFixed(2)}`:'–',color:i.k==='IEDS'?C.g:C.gold}));
+    return `<div class="row" style="justify-content:space-between"><span class="verdict ${st.n?(same?'v-ok':'v-am'):'v-na'}">${st.n?(same?'Same order as the region':'Order differs from the region'):'No responses yet'}</span><span class="small">${st.n} ranking${st.n===1?'':'s'}</span></div>
+      <p class="small" style="margin:.5rem 0">Room order (best first). Regional order: IEDS › HEDS › IFES › GEMS.</p>
+      <div class="chart" data-name="M12_rank">${svgHBars(items,{max:4,labelW:300,aria:'Average rank'})}</div>`;
+  }
+  if(q.type==='phase'){
+    const {m,n}=choiceCounts(rows,'M13',['A','B','C']); const rs=comments(rows,'M13','reason');
+    const items=PHASES.map(([k,t,d])=>({label:`${k} · ${t}`,value:m[k]||0,note:`${m[k]||0}${n?` (${Math.round((m[k]||0)/n*100)}%)`:''}`,color:k==='C'?C.gold:C.g}));
+    return `<p class="small">${n} response${n===1?'':'s'} · regional survey ratings: A 4.20 · B 4.09 · C 4.00 (no island respondents)</p><div class="chart" data-name="M13_phase">${svgHBars(items,{labelW:240})}</div>
+      ${big&&rs.length?`<h3 style="margin-top:1rem">Reasons given</h3><ul class="quotes">${rs.slice(-12).reverse().map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:''}`;
+  }
+  if(q.type==='matrix'){
+    const pts=matrixStats(rows); const n=Math.max(0,...pts.map(p=>p.nr));
+    return `<p class="small">${n} respondent${n===1?'':'s'} · dots show average scores; top-right = candidates for early project preparation.</p>
+      <div class="chart" data-name="M14_matrix">${svgMatrix(pts)}</div>
+      <table class="res" style="margin-top:.6rem"><thead><tr><th>#</th><th>Investment</th><th>Readiness</th><th>Impact</th></tr></thead><tbody>
+      ${pts.map((p,i)=>`<tr><td>${i+1}</td><td>${esc(p.l)}</td><td>${p.nr?p.r.toFixed(2):'–'}</td><td>${p.ni?p.i.toFixed(2):'–'}</td></tr>`).join('')}</tbody></table>`;
+  }
+  return '';
+}
+
+/* ===================================================================
+   PARTICIPANT VIEW
+   =================================================================== */
+let draft = {};               // unsent edits for the visible question
+let selfIdx = null;           // index in self-paced mode
+let lastShownQ = null;
+
+function profileDone(){ const a=myAnswers(); return !!(a.M1&&a.M1.score&&a.M1.score.text && a.M2&&a.M2.score&&a.M2.score.text); }
+
+function renderVote(force){
+  const body=$('#voteBody');
+  $('#paperBanner').classList.toggle('hidden', !paperMode());
+  if(paperMode()) $('#paperBanner').innerHTML = `<b>Paper encoding.</b> Entering one paper sheet as a separate respondent. <button class="btn sm ghost" id="nextPaper" style="margin-left:.4rem">Next sheet</button> <button class="btn sm ghost" id="endPaper">Finish</button>`;
+  if(paperMode()){ $('#nextPaper').onclick=()=>{ sess.set('paper_pid',uuid()); selfIdx=0; draft={}; renderVote(true); toast('New paper sheet'); }; $('#endPaper').onclick=()=>{ sess.del('paper_pid'); location.hash='#admin'; }; }
+
+  if(!paperMode() && !profileDone()) return renderProfile(body);
+  if(STATE.locked && !paperMode()){ body.innerHTML=`<div class="card waiting"><h2>Voting is closed</h2><p class="lead">Thank you. Your answers are saved. Watch the screen for results.</p></div>`; lastShownQ=null; return; }
+
+  const self = STATE.mode==='self' || paperMode();
+  let q;
+  if(self){
+    const list=Q.filter(x=>paperMode()||!x.profile);
+    if(selfIdx==null) selfIdx=0;
+    selfIdx=Math.max(0,Math.min(list.length-1,selfIdx));
+    q=list[selfIdx];
+    if(!force && lastShownQ===q.id) return;
+    renderQuestion(body,q,{index:selfIdx,total:list.length,self:true,list});
+  } else {
+    q=QI[STATE.current_q]||Q[3];
+    if(q.profile){ body.innerHTML=`<div class="card waiting"><div class="spin"></div><h2>You're in</h2><p class="lead">Thanks for joining. The first question will appear here when the facilitator starts.</p><p class="small" style="margin-top:.8rem">Sector: <b>${esc(myAnswers().M1.score.text)}</b> · ${esc(myAnswers().M2.score.text)} · <a href="#" id="editProf">change</a></p></div>`; $('#editProf').onclick=e=>{e.preventDefault(); const a=myAnswers(); delete a.M1; saveMyAnswers(a); renderVote(true);}; lastShownQ=q.id; return; }
+    if(!force && lastShownQ===q.id) return;
+    renderQuestion(body,q,{index:Q.indexOf(q)-3,total:Q.length-3,self:false});
+  }
+  lastShownQ=q.id;
+}
+
+function renderProfile(body){
+  const a=myAnswers(); draft={M1:a.M1?.score?.text||'',M2:a.M2?.score?.text||'',M3:a.M3?.score?.text||''};
+  body.innerHTML=`<div class="card"><p class="kicker">About you</p><h2>Two quick questions</h2><p class="small">Used only to show results by sector and island. No names.</p>
+    <label class="fld" id="l1">Your sector</label><div class="opts two" id="p1" role="group" aria-labelledby="l1"></div>
+    <label class="fld" for="p2">Your municipality</label><select id="p2"><option value="">Choose…</option>${MUNIS.map(m=>`<option ${draft.M2===m?'selected':''}>${m}</option>`).join('')}</select>
+    <label class="fld" for="p3">Your organisation <span class="small">(optional · never shown to the room)</span></label><input type="text" id="p3" maxlength="120" value="${esc(draft.M3)}" autocomplete="organization">
+    <div class="stickyfoot"><button class="btn gold block" id="pGo" disabled>Continue</button></div></div>`;
+  const p1=$('#p1');
+  SECTORS.forEach((s,i)=>{ const b=el('button',{class:'opt','aria-pressed':String(draft.M1===s),type:'button'},`<span class="k">${i+1}</span><span>${s}</span>`); b.onclick=()=>{ draft.M1=s; [...p1.children].forEach(c=>c.setAttribute('aria-pressed','false')); b.setAttribute('aria-pressed','true'); chk(); }; p1.appendChild(b); });
+  const chk=()=>{ $('#pGo').disabled=!(draft.M1&&$('#p2').value); };
+  $('#p2').onchange=chk; chk();
+  $('#pGo').onclick=async()=>{
+    $('#pGo').disabled=true;
+    const ans=[{q:'M1',item:'score',text:draft.M1},{q:'M2',item:'score',text:$('#p2').value}];
+    const org=$('#p3').value.trim(); if(org) ans.push({q:'M3',item:'score',text:org});
+    const r=await submit(ans); if(r.ok===false){ toast(r.error==='voting_closed'?'Voting is closed':'Could not save, try again'); $('#pGo').disabled=false; return; }
+    lastShownQ=null; renderVote(true);
+  };
+}
+
+function renderQuestion(body,q,nav){
+  const a=myAnswers()[q.id]||{}; draft={};
+  Object.keys(a).forEach(k=>draft[k]=Object.assign({},a[k]));
+  const answered=Object.keys(a).length>0;
+  const pct=Math.round((nav.index+1)/nav.total*100);
+  let h=`<div class="card"><div class="row" style="justify-content:space-between"><span class="kicker">${esc(q.round)}</span><span class="small">${nav.index+1} of ${nav.total}</span></div>
+    <div class="progress" aria-hidden="true"><i style="width:${pct}%"></i></div>`;
+  if(q.p){ h+=`<span class="tag">${q.p}</span><span class="small">${esc(q.src||'')}</span><h2 style="margin-top:.4rem">${esc(q.short)}</h2><div class="prop">${esc(q.text)}</div>`; }
+  else h+=`<h2>${esc(q.title)}</h2>`;
+  if(q.hint) h+=`<p class="small" style="margin-bottom:.7rem">${esc(q.hint)}</p>`;
+  h+=`<div id="ctl"></div>`;
+  if(answered) h+=`<p class="small" style="margin-top:.6rem">✓ You answered this. You can change it while voting is open.</p>`;
+  h+=`<div class="stickyfoot"><div class="navq">${nav.self?`<button class="btn ghost" id="prevQ" ${nav.index===0?'disabled':''}>‹ Back</button>`:''}<button class="btn gold" id="sendQ">${answered?'Update answer':'Submit'}</button>${nav.self?`<button class="btn ghost" id="nextQ" ${nav.index===nav.total-1?'disabled':''}>Next ›</button>`:''}</div></div></div>
+    <div id="myRes"></div>`;
+  body.innerHTML=h;
+  const ctl=$('#ctl');
+
+  const scaleCtl=(item, compact)=>{ const wrap=el('div',{class:'scale'+(compact?' compact':''),role:'radiogroup'});
+    for(let v=1;v<=5;v++){ const cur=draft[item]?.score===v; const b=el('button',{type:'button','aria-pressed':String(cur),'aria-label':`${v}, ${ANCH[v-1]}`},`${v}<small>${ANCH[v-1].replace('Strongly ','Strongly<br>')}</small>`);
+      b.onclick=()=>{ draft[item]=Object.assign(draft[item]||{},{score:v}); [...wrap.children].forEach(c=>c.setAttribute('aria-pressed','false')); b.setAttribute('aria-pressed','true'); };
+      wrap.appendChild(b);} return wrap; };
+
+  if(q.type==='scale'){
+    ctl.appendChild(scaleCtl('score'));
+    ctl.appendChild(el('div',{class:'anchors'},'<span>1 Strongly disagree</span><span>5 Strongly agree</span>'));
+    ctl.appendChild(el('label',{class:'fld',for:'cm'},'Suggested amendment <span class="small">(optional)</span>'));
+    const t=el('textarea',{id:'cm',maxlength:'400',placeholder:'How would you reword it, or what must be true for it to work in Tawi-Tawi?'}); t.value=draft.comment?.text||''; t.oninput=()=>draft.comment={text:t.value}; ctl.appendChild(t);
+  }
+  if(q.type==='swot'){
+    let lastQuad='';
+    SWOT.forEach(([k,l])=>{ if(k[0]!==lastQuad){ lastQuad=k[0]; ctl.appendChild(el('div',{class:'quad',style:`color:${QUAD[k[0]][1]}`},QUAD[k[0]][0])); }
+      const it=el('div',{class:'item'}); it.appendChild(el('div',{class:'lbl'},`<span class="code" style="background:${QUAD[k[0]][1]}">${k}</span><span>${esc(l)}</span>`)); it.appendChild(scaleCtl(k,true)); ctl.appendChild(it); });
+    ctl.appendChild(el('div',{class:'anchors'},'<span>1 Strongly disagree</span><span>5 Strongly agree</span>'));
+  }
+  if(q.type==='choice'){
+    const g=el('div',{class:'opts'+(q.opts.length>4?' two':''),role:'radiogroup'});
+    q.opts.forEach((o,i)=>{ const b=el('button',{type:'button',class:'opt','aria-pressed':String(draft.score?.text===o)},`<span class="k">${i+1}</span><span>${esc(o)}</span>`);
+      b.onclick=()=>{ draft.score={text:o}; [...g.children].forEach(c=>c.setAttribute('aria-pressed','false')); b.setAttribute('aria-pressed','true'); }; g.appendChild(b); });
+    ctl.appendChild(g);
+  }
+  if(q.type==='text'){
+    const n=q.max||1;
+    for(let i=1;i<=n;i++){ const key=q.id==='M3'?'score':'t'+i; const t=el('textarea',{maxlength:'300',placeholder:i===1?'Type your answer':'Another item (optional)','aria-label':`Answer ${i}`,style:'margin-bottom:.5rem;min-height:70px'}); t.value=draft[key]?.text||''; t.oninput=()=>draft[key]={text:t.value}; ctl.appendChild(t); }
+  }
+  if(q.type==='rank'){
+    let order=OPTIONS.map(o=>o[0]);
+    const existing=OPTIONS.filter(([k])=>draft[k]?.score).sort((x,y)=>draft[x[0]].score-draft[y[0]].score).map(o=>o[0]);
+    if(existing.length===4) order=existing;
+    const ul=el('ol',{class:'rank'}); ctl.appendChild(ul);
+    const paint=()=>{ ul.innerHTML=''; order.forEach((k,i)=>{ const lab=OPTIONS.find(o=>o[0]===k)[1];
+      const li=el('li',{},`<span class="n">${i+1}</span><span class="t">${k}<small>${lab}</small></span><span class="mv"><button type="button" aria-label="Move ${k} up" ${i===0?'disabled':''}>▲</button><button type="button" aria-label="Move ${k} down" ${i===3?'disabled':''}>▼</button></span>`);
+      const [up,dn]=li.querySelectorAll('button'); up.onclick=()=>{ [order[i-1],order[i]]=[order[i],order[i-1]]; paint(); }; dn.onclick=()=>{ [order[i+1],order[i]]=[order[i],order[i+1]]; paint(); };
+      ul.appendChild(li); }); order.forEach((k,i)=>draft[k]={score:i+1}); };
+    paint();
+  }
+  if(q.type==='phase'){
+    const g=el('div',{class:'opts',role:'radiogroup'});
+    PHASES.forEach(([k,t,d,r])=>{ const b=el('button',{type:'button',class:'opt','aria-pressed':String(draft.score?.text===k)},`<span class="k">${k}</span><span>${t}<small>${d} · regional rating ${r}</small></span>`);
+      b.onclick=()=>{ draft.score={text:k}; [...g.children].forEach(c=>c.setAttribute('aria-pressed','false')); b.setAttribute('aria-pressed','true'); }; g.appendChild(b); });
+    ctl.appendChild(g);
+    ctl.appendChild(el('label',{class:'fld',for:'rsn'},'Give one reason'));
+    const t=el('textarea',{id:'rsn',maxlength:'300'}); t.value=draft.reason?.text||''; t.oninput=()=>draft.reason={text:t.value}; ctl.appendChild(t);
+  }
+  if(q.type==='matrix'){
+    INVEST.forEach(([k,l],i)=>{ const it=el('div',{class:'item'}); it.appendChild(el('div',{class:'lbl'},`<span class="code" style="background:var(--g800)">${i+1}</span><span>${esc(l)}</span>`));
+      it.appendChild(el('div',{class:'small',style:'font-weight:700;margin:.2rem 0'},'Readiness')); it.appendChild(scaleCtl(k+'_R',true));
+      it.appendChild(el('div',{class:'small',style:'font-weight:700;margin:.5rem 0 .2rem'},'Impact')); it.appendChild(scaleCtl(k+'_I',true));
+      ctl.appendChild(it); });
+    ctl.appendChild(el('div',{class:'anchors'},'<span>1 Low</span><span>5 High</span>'));
+  }
+
+  if(nav.self){
+    $('#prevQ').onclick=()=>{ selfIdx--; renderVote(true); scrollTo(0,0); };
+    $('#nextQ').onclick=()=>{ selfIdx++; renderVote(true); scrollTo(0,0); };
+  }
+  $('#sendQ').onclick=async()=>{
+    const ans=[];
+    Object.entries(draft).forEach(([item,v])=>{ if(v.score!=null||(v.text&&v.text.trim())||(item==='comment'||item==='reason'||/^t\d$/.test(item))) ans.push({q:q.id,item,score:v.score??null,text:(v.text||'').trim()}); });
+    const need = {scale:()=>draft.score?.score, swot:()=>SWOT.every(([k])=>draft[k]?.score), choice:()=>draft.score?.text, text:()=>ans.some(x=>x.text), rank:()=>true, phase:()=>draft.score?.text, matrix:()=>INVEST.every(([k])=>draft[k+'_R']?.score&&draft[k+'_I']?.score)}[q.type];
+    if(!need()){ toast(q.type==='swot'||q.type==='matrix'?'Please score every item':'Please choose an answer first'); return; }
+    $('#sendQ').disabled=true;
+    const r=await submit(ans);
+    $('#sendQ').disabled=false;
+    if(r.ok===false){ toast(r.error==='voting_closed'?'Voting is closed':'Could not save: '+(r.error||'error')); return; }
+    toast(r.queued?'Saved on your phone; it will send when the signal returns':(r.local?'Saved on this device':'Answer saved ✓'));
+    $('#sendQ').textContent='Update answer';
+    if(nav.self && nav.index<nav.total-1){ selfIdx++; renderVote(true); scrollTo(0,0); return; }
+    showMyResult(q);
+  };
+  if(answered) showMyResult(q);
+}
+
+async function showMyResult(q){
+  if(!STATE.show_results || q.hidden || paperMode()) return;
+  const box=$('#myRes'); if(!box) return;
+  try{ const R=await fetchResults(); box.innerHTML=`<div class="card"><p class="kicker">Room so far</p>${resultHTML(q,R,false)}</div>`; }catch(e){}
+}
+
+/* ===================================================================
+   PRESENTER VIEW
+   =================================================================== */
+let pQ = 'M4', pTab='q', pTimer=null, lastR=null, wakeLock=null;
+function joinLink(){
+  const base = location.href.split('#')[0].split('?')[0];
+  const p = new URLSearchParams(); if(API && API!==CONFIG.API_URL) p.set('api',API);
+  const qs=p.toString(); return base+(qs?'?'+qs:'')+'#join';
+}
+function drawQR(){
+  const box=$('#qr'); box.innerHTML=''; const url=joinLink();
+  $('#joinUrl').textContent = url.replace(/^https?:\/\//,'').replace(/\?api=.*#/,'?api=…#');
+  if(window.QRCode){ new QRCode(box,{text:url,width:264,height:264,colorDark:'#022c22',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M}); }
+  else box.innerHTML='<div class="small" style="width:132px;padding:.5rem">QR needs internet; share the link instead.</div>';
+}
+function renderQList(){
+  const wrap=$('#qlist'); wrap.innerHTML='';
+  Q.filter(q=>!q.hidden).forEach(q=>{ const b=el('button',{role:'tab',class:(q.id===pQ?'cur ':'')+(q.id===STATE.current_q&&STATE.mode==='paced'?'live':''),'aria-selected':String(q.id===pQ),title:qLabel(q)},`${q.id} · ${esc(q.p||'')} ${esc(q.short||q.title)}`);
+    b.onclick=()=>selectPQ(q.id); wrap.appendChild(b); });
+}
+async function selectPQ(id){
+  pQ=id; pTab='q'; setTabs(); renderQList(); paintPresent();
+  if(sess.get('pin',null)){ const r=await adminCall('set_state',{current_q:id}); if(r.ok){ STATE=r.state||STATE; renderQList(); paintLiveCtl(); } }
+}
+function setTabs(){ document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===pTab))); }
+function paintLiveCtl(){
+  const unlocked=!!sess.get('pin',null);
+  $('#liveCtl').innerHTML = `<span class="pill" style="background:var(--g50);color:var(--g800)">${STATE.mode==='paced'?'Paced':'Self-paced'}</span>
+    <span class="pill" style="background:${STATE.locked?'var(--red-p)':'var(--ok-p)'};color:${STATE.locked?'var(--red)':'var(--ok)'}">${STATE.locked?'Voting closed':'Voting open'}</span>
+    ${unlocked?'<span class="small">Selecting a question sends it to phones.</span>':'<a class="small" href="#admin">Unlock controls</a>'}`;
+}
+function paintPresent(){
+  const R=lastR||{participants:0,by_channel:{},rows:[]}, sector=$('#filterSector').value;
+  const FR=Object.assign({},R,{rows:filterRows(R.rows,sector)});
+  $('#kPart').textContent=R.participants; $('#kApp').textContent=R.by_channel.app||0; $('#kPaper').textContent=R.by_channel.paper||0;
+  const body=$('#presentBody'); const tag=sector?`<span class="tag">${esc(sector)} only</span>`:'';
+  if(pTab==='q'){
+    const q=QI[pQ];
+    body.innerHTML=`<div class="card"><div class="row" style="justify-content:space-between"><span class="kicker">${esc(q.round)} · ${q.id}</span>${tag}</div>
+      ${q.p?`<h2 class="ptitle" style="margin:.3rem 0">${q.p} · ${esc(q.short)}</h2><div class="prop">${esc(q.text)}</div>`:`<h2 class="ptitle" style="margin:.3rem 0 .6rem">${esc(q.title)}</h2>`}
+      ${resultHTML(q,FR,true)}
+      <div class="row noprint" style="margin-top:.8rem"><button class="btn sm ghost" id="pngBtn">Save chart (PNG)</button><button class="btn sm ghost" id="prevP">‹ Previous</button><button class="btn sm ghost" id="nextP">Next ›</button></div></div>`;
+    $('#pngBtn').onclick=()=>savePNG(body.querySelector('.chart svg'), `TawiTawi_${q.id}_${stamp()}.png`);
+    const vis=Q.filter(x=>!x.hidden).map(x=>x.id), i=vis.indexOf(pQ);
+    $('#prevP').onclick=()=>i>0&&selectPQ(vis[i-1]); $('#nextP').onclick=()=>i<vis.length-1&&selectPQ(vis[i+1]);
+  }
+  if(pTab==='swot'){
+    body.innerHTML=`<div class="card"><div class="row" style="justify-content:space-between"><h2 class="ptitle">Round 1 · Tawi-Tawi diagnosis</h2>${tag}</div>${resultHTML(QI.M4,FR,true)}</div>
+      <div class="card"><h2>What is missing (M5)</h2>${resultHTML(QI.M5,FR,true)}</div>`;
+  }
+  if(pTab==='syn') body.innerHTML=synthesisHTML(FR,tag);
+  if(pTab==='who'){
+    body.innerHTML=`<div class="card"><h2>By sector</h2>${resultHTML(QI.M1,R,false)}</div><div class="card"><h2>By municipality</h2>${resultHTML(QI.M2,R,false)}</div>
+      <div class="card"><h2>By channel</h2><p>${R.by_channel.app||0} on phones · ${R.by_channel.paper||0} encoded from paper</p><p class="small">Organisations are stored for the secretariat only and are not shown here.</p></div>`;
+  }
+}
+function synthesisHTML(R,tag){
+  const items=[];
+  SWOT.forEach(([k,l])=>{ const s=scaleStats(R.rows,'M4',k); items.push({id:k,label:l,s,cm:0}); });
+  Q.filter(q=>q.type==='scale').forEach(q=>{ const s=scaleStats(R.rows,q.id); items.push({id:q.p,label:q.short,s,cm:comments(R.rows,q.id).length}); });
+  const col=(title,cls,f)=>{ const xs=items.filter(f).sort((a,b)=>b.s.agree-a.s.agree);
+    return `<div class="col"><h3><span class="verdict ${cls}">${title}</span><span class="small">${xs.length}</span></h3><ul>${xs.map(x=>`<li><b>${x.id}</b> ${esc(x.label)} <span class="small">· ${Math.round(x.s.agree*100)}% · n=${x.s.n}${x.cm?` · ${x.cm} amendment${x.cm>1?'s':''}`:''}</span></li>`).join('')||'<li class="small">None yet</li>'}</ul></div>`; };
+  const rk=rankStats(R.rows), ph=choiceCounts(R.rows,'M13',['A','B','C']), fl=choiceCounts(R.rows,'M16',['Yes','No','Not sure']);
+  const topPh=Object.entries(ph.m).sort((a,b)=>b[1]-a[1])[0];
+  return `<div class="card"><div class="row" style="justify-content:space-between"><h2 class="ptitle">Synthesis</h2>${tag}</div>
+    <p class="small">Decision rule: share of participants scoring 4 or 5. ≥70% validated; 50–69% validated with amendment; below 50% contested. Items with no responses are left out.</p></div>
+    <div class="syn">${col('Validated','v-ok',x=>x.s.n&&x.s.agree>=CONFIG.VALIDATED)}${col('Validated with amendment','v-am',x=>x.s.n&&x.s.agree>=CONFIG.AMEND&&x.s.agree<CONFIG.VALIDATED)}${col('Contested','v-no',x=>x.s.n&&x.s.agree<CONFIG.AMEND)}</div>
+    <div class="card" style="margin-top:1rem"><h3>P7 · Strategic options (room order)</h3><p>${rk.n?rk.items.filter(i=>i.avg!=null).map(i=>`<b>${i.k}</b> (${i.avg.toFixed(2)})`).join(' › '):'No rankings yet'}</p>
+    <h3>P8 · Priority phase</h3><p>${ph.n?`Most chosen: <b>${topPh[0]}</b> (${topPh[1]} of ${ph.n})`:'No responses yet'}</p>
+    <h3>Island allocation floor</h3><p>${fl.n?`Yes ${fl.m.Yes} · No ${fl.m.No} · Not sure ${fl.m['Not sure']}`:'No responses yet'}</p></div>`;
+}
+async function pollPresent(){
+  try{ lastR=await fetchResults(); if(!LOCAL()) setNet('on','Live'); }catch(e){ setNet('off','Offline'); }
+  paintLiveCtl(); renderQList();
+  if(!document.activeElement || !document.activeElement.closest('#presentBody')) paintPresent();
+}
+function savePNG(svg,name){
+  if(!svg){ toast('No chart on this view'); return; }
+  const xml=new XMLSerializer().serializeToString(svg), vb=svg.viewBox.baseVal, scale=2;
+  const img=new Image(); img.onload=()=>{ const c=document.createElement('canvas'); c.width=vb.width*scale; c.height=vb.height*scale; const g=c.getContext('2d'); g.fillStyle='#fff'; g.fillRect(0,0,c.width,c.height); g.drawImage(img,0,0,c.width,c.height); c.toBlob(b=>{ const a=el('a',{href:URL.createObjectURL(b),download:name}); document.body.appendChild(a); a.click(); a.remove(); }); };
+  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(xml);
+}
+
+/* ===================================================================
+   ADMIN VIEW
+   =================================================================== */
+function paintAdmin(){
+  $('#apiUrl').value=API;
+  $('#ctlQ').innerHTML=Q.filter(q=>!q.hidden).map(q=>`<option value="${q.id}" ${q.id===STATE.current_q?'selected':''}>${q.id} · ${esc(qLabel(q))}</option>`).join('');
+  const m=$('#ctlMode'), l=$('#ctlLock'), s=$('#ctlShow');
+  m.setAttribute('aria-pressed',String(STATE.mode==='self')); m.querySelector('span:last-child').innerHTML= STATE.mode==='paced'?'Paced by facilitator<small>Tap to let participants move freely</small>':'Self-paced<small>Tap to make phones follow the facilitator</small>';
+  l.setAttribute('aria-pressed',String(STATE.locked)); l.querySelector('span:last-child').innerHTML= STATE.locked?'Voting closed<small>Tap to reopen voting</small>':'Voting open<small>Tap to close voting</small>';
+  s.setAttribute('aria-pressed',String(STATE.show_results)); s.querySelector('span:last-child').innerHTML= STATE.show_results?'Participants see results<small>Tap to hide live charts on phones</small>':'Results hidden on phones<small>Tap to show live charts</small>';
+  const unlocked=!!sess.get('pin',null);
+  $('#pinStatus').textContent = unlocked?'Controls unlocked for this browser tab.':(LOCAL()?'This-device mode: any PIN unlocks.':'Enter the PIN set in the Apps Script.');
+  $('#ctlCard').style.opacity = unlocked?1:.5;
+  $('#apiStatus').textContent = LOCAL()?'Not connected: this-device mode.':'Connected to '+API.replace(/^https:\/\/script\.google\.com\/macros\/s\//,'…/').slice(0,48)+'…';
+}
+async function setState(args){
+  if(!sess.get('pin',null)){ toast('Unlock with the PIN first'); return; }
+  const r=await adminCall('set_state',args);
+  if(r.ok){ STATE=r.state||Object.assign(STATE,args); toast('Updated'); paintAdmin(); } else toast('Not changed: '+(r.error||'error'));
+}
+function bindAdmin(){
+  $('#saveApi').onclick=async()=>{
+    const v=$('#apiUrl').value.trim();
+    if(v && !/^https:\/\/script\.google(usercontent)?\.com\/.+/.test(v)){ toast('That does not look like an Apps Script web-app URL'); return; }
+    API=v; store.set('api',v); STATE.current_q=STATE.current_q||'M1';
+    if(!v){ paintAdmin(); toast('This-device mode'); return; }
+    try{ const r=await apiGet('state'); if(r.ok){ STATE=r.state; setNet('on','Live'); toast('Connected ✓'); } else toast('Connected, but: '+r.error); }
+    catch(e){ setNet('off','Offline'); toast('Could not reach the web app. Check the URL and that access is set to Anyone.'); }
+    paintAdmin();
+  };
+  $('#copyJoin').onclick=async()=>{ try{ await navigator.clipboard.writeText(joinLink()); toast('Participant link copied'); }catch(e){ prompt('Copy this link',joinLink()); } };
+  $('#pinBtn').onclick=async()=>{
+    const pin=$('#pin').value.trim(); if(!pin) return;
+    sess.set('pin',pin);
+    const r=await adminCall('check');
+    if(r.ok){ toast('Unlocked'); $('#pin').value=''; } else { sess.del('pin'); toast(r.error==='pin_locked'?'Too many attempts. Wait 15 minutes.':'Wrong PIN'); }
+    paintAdmin();
+  };
+  $('#ctlQ').onchange=e=>setState({current_q:e.target.value});
+  $('#ctlMode').onclick=()=>setState({mode:STATE.mode==='paced'?'self':'paced'});
+  $('#ctlLock').onclick=()=>setState({locked:!STATE.locked});
+  $('#ctlShow').onclick=()=>setState({show_results:!STATE.show_results});
+  $('#paperBtn').onclick=()=>{ sess.set('paper_pid',uuid()); selfIdx=0; location.hash='#vote'; };
+  $('#expRaw').onclick=async()=>{
+    if(!sess.get('pin',null)){ toast('Unlock with the PIN first'); return; }
+    const r=await adminCall('export'); if(!r.ok){ toast('Export failed: '+(r.error||'')); return; }
+    download(`TawiTawi_validation_raw_${stamp()}.csv`, toCSV([r.headers].concat(r.rows)), 'text/csv;charset=utf-8'); };
+  $('#expSum').onclick=async()=>{ const R=await fetchResults(); download(`TawiTawi_validation_summary_${stamp()}.csv`, toCSV(summaryRows(R)), 'text/csv;charset=utf-8'); };
+  $('#expJson').onclick=async()=>{
+    const R=await fetchResults(); let raw=null;
+    if(sess.get('pin',null)){ const r=await adminCall('export'); if(r.ok) raw=r; }
+    download(`TawiTawi_validation_${stamp()}.json`, JSON.stringify({session:CONFIG.SESSION,exported_at:new Date().toISOString(),state:STATE,questions:Q,results:R,summary:summaryRows(R),raw},null,1),'application/json'); };
+  $('#expPrint').onclick=async()=>{ const R=await fetchResults(); buildReport(R); setTimeout(()=>print(),300); };
+  $('#resetBtn').onclick=async()=>{
+    if(!sess.get('pin',null)){ toast('Unlock with the PIN first'); return; }
+    if($('#resetTxt').value.trim()!=='RESET '+CONFIG.SESSION){ toast('Type RESET '+CONFIG.SESSION+' to confirm'); return; }
+    const r=await adminCall('reset',{confirm:'RESET '+CONFIG.SESSION});
+    toast(r.ok?'Archived as '+r.archived_as+' and cleared':'Not reset: '+(r.error||'error')); $('#resetTxt').value=''; };
+}
+function summaryRows(R){
+  const out=[['Question','Item','Label','Responses','Mean (1–5)','Share scoring 4–5','Verdict','Amendments']];
+  SWOT.forEach(([k,l])=>{ const s=scaleStats(R.rows,'M4',k); out.push(['M4',k,l,s.n,s.n?s.mean.toFixed(2):'',s.n?(s.agree*100).toFixed(0)+'%':'',s.verdict[0],'']); });
+  Q.filter(q=>q.type==='scale').forEach(q=>{ const s=scaleStats(R.rows,q.id); out.push([q.id,q.p,q.short,s.n,s.n?s.mean.toFixed(2):'',s.n?(s.agree*100).toFixed(0)+'%':'',s.verdict[0],comments(R.rows,q.id).length]); });
+  rankStats(R.rows).items.forEach(i=>out.push(['M12',i.k,'P7 average rank (1 = top)','',i.avg!=null?i.avg.toFixed(2):'','','','']));
+  const ph=choiceCounts(R.rows,'M13',['A','B','C']); PHASES.forEach(([k,t])=>out.push(['M13',k,'P8 '+t,ph.m[k]||0,'','','','']));
+  matrixStats(R.rows).forEach(p=>{ out.push(['M14',p.k+'_R',p.l+' · readiness',p.nr,p.nr?p.r.toFixed(2):'','','','']); out.push(['M14',p.k+'_I',p.l+' · impact',p.ni,p.ni?p.i.toFixed(2):'','','','']); });
+  const fl=choiceCounts(R.rows,'M16',['Yes','No','Not sure']); ['Yes','No','Not sure'].forEach(o=>out.push(['M16',o,'Island allocation floor',fl.m[o]||0,'','','','']));
+  out.push([]); out.push(['Participants',R.participants,'Phones',R.by_channel.app||0,'Paper',R.by_channel.paper||0,'Exported (PHT)',new Date().toLocaleString('en-GB',{timeZone:'Asia/Manila'})]);
+  return out;
+}
+function buildReport(R){
+  const rep=$('#report');
+  rep.innerHTML=`<div style="max-width:900px;margin:0 auto;padding:1rem"><p class="kicker">MTIT Bureau of Investments · BIRD 2026–2035</p><h1 style="margin:.3rem 0">Tawi-Tawi Validation Workshop · Results</h1>
+    <p class="small">Bongao, 28 October 2026 · ${R.participants} participants (${R.by_channel.app||0} phones, ${R.by_channel.paper||0} paper) · generated ${new Date().toLocaleString('en-GB',{timeZone:'Asia/Manila'})} PHT. Input to the first recalibration of BIRD; not an endorsement.</p>
+    ${synthesisHTML(R,'')}
+    ${Q.filter(q=>!q.hidden).map(q=>`<div class="card"><p class="kicker">${esc(q.round)} · ${q.id}</p><h2>${q.p?q.p+' · '+esc(q.short):esc(q.title)}</h2>${q.p?`<div class="prop">${esc(q.text)}</div>`:''}${resultHTML(q,R,true)}</div>`).join('')}</div>`;
+}
+
+/* ===================================================================
+   ROUTER & BOOT
+   =================================================================== */
+let stateTimer=null;
+function show(view){
+  ['join','vote','present','admin'].forEach(v=>$('#view-'+v).classList.toggle('hidden',v!==view));
+  document.body.classList.toggle('wide', view==='present');
+  clearInterval(stateTimer); clearInterval(pTimer);
+  if(view==='join'){
+    const ok=store.get('consent',false); $('#consent').checked=ok; $('#joinBtn').disabled=!ok;
+    if(ok && !paperMode()){ location.hash='#vote'; return; }
+  }
+  if(view==='vote'){
+    if(!store.get('consent',false) && !paperMode()){ location.hash='#join'; return; }
+    refreshState().then(()=>renderVote(true));
+    stateTimer=setInterval(async()=>{ const before=JSON.stringify([STATE.current_q,STATE.mode,STATE.locked]); await refreshState(); if(JSON.stringify([STATE.current_q,STATE.mode,STATE.locked])!==before) renderVote(false); }, CONFIG.POLL_STATE_MS);
+  }
+  if(view==='present'){
+    drawQR(); renderQList(); paintLiveCtl(); pollPresent();
+    pTimer=setInterval(pollPresent, CONFIG.POLL_RESULTS_MS);
+    if('wakeLock' in navigator) navigator.wakeLock.request('screen').then(w=>wakeLock=w).catch(()=>{});
+  }
+  if(view==='admin'){ refreshState().then(paintAdmin); paintAdmin(); }
+}
+function route(){ const h=(location.hash||'#join').slice(1); show(['join','vote','present','admin'].includes(h)?h:'join'); }
+
+$('#consent').onchange=e=>{ $('#joinBtn').disabled=!e.target.checked; };
+$('#joinBtn').onclick=()=>{
+  const code=$('#sessionCode').value.trim().toUpperCase();
+  if(code!==CONFIG.SESSION){ toast('That session code is not active'); return; }
+  store.set('consent',true); store.set('consent_at',new Date().toISOString()); location.hash='#vote';
+};
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{ pTab=b.dataset.tab; setTabs(); paintPresent(); });
+$('#filterSector').innerHTML='<option value="">All participants</option>'+SECTORS.map(s=>`<option>${s}</option>`).join('');
+$('#filterSector').onchange=paintPresent;
+addEventListener('keydown',e=>{
+  if($('#view-present').classList.contains('hidden')||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+  const vis=Q.filter(x=>!x.hidden).map(x=>x.id), i=vis.indexOf(pQ);
+  if(e.key==='ArrowRight'&&i<vis.length-1) selectPQ(vis[i+1]);
+  if(e.key==='ArrowLeft'&&i>0) selectPQ(vis[i-1]);
+  if(e.key==='f') document.documentElement.requestFullscreen?.();
+});
+addEventListener('hashchange',route);
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden){ flushQueue(); if(location.hash==='#vote') refreshState().then(()=>renderVote(false)); } });
+
+/* installable web app: manifest built in place so this stays a single file */
+(function(){
+  const icon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="96" fill="#022c22"/><rect x="104" y="250" width="70" height="150" rx="14" fill="#6ee7b7"/><rect x="221" y="170" width="70" height="230" rx="14" fill="#C9A84C"/><rect x="338" y="110" width="70" height="290" rx="14" fill="#E8C560"/></svg>');
+  const m={name:'BIRD Tawi-Tawi Validation',short_name:'BIRD Vote',start_url:location.href.split('#')[0]+'#join',display:'standalone',background_color:'#f3f8f5',theme_color:'#022c22',icons:[{src:icon,sizes:'any',type:'image/svg+xml',purpose:'any maskable'}]};
+  const l=document.createElement('link'); l.rel='manifest'; l.href=URL.createObjectURL(new Blob([JSON.stringify(m)],{type:'application/manifest+json'})); document.head.appendChild(l);
+  const a=document.createElement('link'); a.rel='apple-touch-icon'; a.href=icon; document.head.appendChild(a);
+  const f=document.createElement('link'); f.rel='icon'; f.href=icon; document.head.appendChild(f);
+})();
+
+bindAdmin();
+setQueue(queue());
+if(LOCAL()) setNet('warn','This device only'); else { setNet('warn','Connecting'); refreshState(); flushQueue(); }
+route();
+</script>
+</body>
+</html>
