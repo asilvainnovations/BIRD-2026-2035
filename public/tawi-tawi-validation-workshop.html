@@ -270,8 +270,10 @@ table.res tr:nth-child(even) td{background:#f7fbf9}
     <div class="row" style="margin-top:.7rem">
       <button class="btn primary sm" id="saveApi">Save and test</button>
       <button class="btn ghost sm" id="copyJoin">Copy participant link</button>
+      <button class="btn ghost sm" id="useDefault">Use the workshop web app</button>
     </div>
     <p class="small" id="apiStatus" style="margin-top:.5rem"></p>
+    <p class="small hidden" id="sheetLinkWrap" style="margin-top:.4rem">Responses are saved to the <a id="sheetLink" target="_blank" rel="noopener">Google Sheet</a>.</p>
   </div>
 
   <div class="card">
@@ -332,7 +334,10 @@ table.res tr:nth-child(even) td{background:#f7fbf9}
    as ?api=… in the link.
    ===================================================================== */
 const CONFIG = {
-  API_URL: '',
+  // Apps Script deployment AKfycbxeisNyZiAxNgDSQB53X0e9aZPGnVk-yJP1uCdDnA-1-jT0dwlMj1lC1oCfZpPzWrwj
+  API_URL: 'https://script.google.com/macros/s/AKfycbxeisNyZiAxNgDSQB53X0e9aZPGnVk-yJP1uCdDnA-1-jT0dwlMj1lC1oCfZpPzWrwj/exec',
+  // Response sheet: shown to the facilitator only, after the PIN is accepted
+  SHEET_URL: 'https://docs.google.com/spreadsheets/d/1ZOml4hRx6VwBPydrFMtynCE9NKJl3VleX8CPtS2Ff2M/edit',
   SESSION: 'TAWI28',
   POLL_STATE_MS: 4000,
   POLL_RESULTS_MS: 3000,
@@ -920,6 +925,8 @@ function paintAdmin(){
   const unlocked=!!sess.get('pin',null);
   $('#pinStatus').textContent = unlocked?'Controls unlocked for this browser tab.':(LOCAL()?'This-device mode: any PIN unlocks.':'Enter the PIN set in the Apps Script.');
   $('#ctlCard').style.opacity = unlocked?1:.5;
+  const showSheet = unlocked && !LOCAL() && API===CONFIG.API_URL && CONFIG.SHEET_URL;
+  $('#sheetLinkWrap').classList.toggle('hidden', !showSheet); if(showSheet) $('#sheetLink').href = CONFIG.SHEET_URL;
   $('#apiStatus').textContent = LOCAL()?'Not connected: this-device mode.':'Connected to '+API.replace(/^https:\/\/script\.google\.com\/macros\/s\//,'…/').slice(0,48)+'…';
 }
 async function setState(args){
@@ -937,6 +944,7 @@ function bindAdmin(){
     catch(e){ setNet('off','Offline'); toast('Could not reach the web app. Check the URL and that access is set to Anyone.'); }
     paintAdmin();
   };
+  $('#useDefault').onclick=()=>{ $('#apiUrl').value=CONFIG.API_URL; $('#saveApi').click(); };
   $('#copyJoin').onclick=async()=>{ try{ await navigator.clipboard.writeText(joinLink()); toast('Participant link copied'); }catch(e){ prompt('Copy this link',joinLink()); } };
   $('#pinBtn').onclick=async()=>{
     const pin=$('#pin').value.trim(); if(!pin) return;
