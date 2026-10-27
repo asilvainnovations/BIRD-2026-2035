@@ -97,7 +97,6 @@ const BARMM_REGIONAL_CONTEXT: BARMMContext = {
     'Maguindanao del Norte',
     'Maguindanao del Sur',
     'Basilan',
-    'Sulu',
     'Tawi-Tawi',
     'Special Geographic Area (SGA)',
   ],

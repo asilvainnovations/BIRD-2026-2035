@@ -194,7 +194,7 @@ SWOT Diagnosis → Systems Thinking → TOWS Strategy Matrix → Balanced Scorec
 
 **Provincial Growth Disparity:**
 • **Fastest growing:** Maguindanao del Norte (4.1%), Lanao del Sur (4.0%)
-• **Underinvested islands:** Tawi-Tawi (1.1%), Sulu (1.13%), Basilan (1.6%)
+• **Underinvested islands:** Tawi-Tawi (1.1% in 2024), Basilan (1.6%)
 
 **Infrastructure Gaps:**
 • Electrification: ~75% (target 100% by 2035)
@@ -228,7 +228,7 @@ Halal is BARMM's **highest-leverage economic differentiator** (LP1). The sector 
 
 **Strategic Projects:**
 • **Bangsamoro Halal Park** — integrated halal manufacturing & logistics hub
-• **Halal Tourism Circuits** — Marawi, Tawi-Tawi marine heritage, Sulu pearl routes
+• **Halal Tourism Circuits** — Marawi, Tawi-Tawi marine heritage and Bongao
 • **MSME Capacity Building** — technical assistance for certification readiness
 
 **Why it matters:** OIC/SMIIC accreditation unlocks the ₱40B export target and BIMP-EAGA halal trade corridor. Without LP1 integrity, downstream pillars cannot scale.`,

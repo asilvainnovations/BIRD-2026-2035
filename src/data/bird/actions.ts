@@ -147,7 +147,7 @@ export const ACTION_PLAN_2026: ActionPlan[] = [
     cluster: 'Foundations: Energy',
     action: 'ZBIP Construction Commencement & Solar Mini-Grid Deployment',
     actionDesc:
-      'Commence ₱6.67B Zamboanga-Basilan Interconnection Project (ZBIP) to expand Mindanao grid to Basilan. Simultaneously deploy solar mini-grid systems for remote island communities in Tawi-Tawi and Sulu (25–30% without access). Target: 80% electrification across BARMM by 2028.',
+      'Commence ₱6.67B Zamboanga-Basilan Interconnection Project (ZBIP) to expand Mindanao grid to Basilan. Simultaneously deploy solar mini-grid systems for remote island communities in Tawi-Tawi and Basilan (25–30% without access). Target: 80% electrification across BARMM by 2028.',
     priority: 'critical',
     due: 'Q2 2026 (commence)',
     status: 'In Progress',

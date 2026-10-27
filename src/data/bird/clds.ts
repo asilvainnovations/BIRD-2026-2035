@@ -183,7 +183,7 @@ export const SYSTEMS_ARCHETYPES: SystemsArchetype[] = [
     id: 'A3',
     name: 'Success to the Successful',
     pattern: 'Two competing activities; the one that succeeds first receives more resources, increasing its advantage and starving the other of opportunities.',
-    birdContext: 'Mainland provinces (Maguindanao del Norte: ₱81.91B GDP, 4.1% growth) attract bulk of investment while island provinces (Tawi-Tawi: 1.1%, Sulu: 1.13%, Basilan: 1.6%) suffer capital starvation despite comparative advantages in seaweed, fisheries, and BIMP-EAGA proximity.',
+    birdContext: 'Mainland provinces (Maguindanao del Norte: ₱81.91B GDP, 4.1% growth) attract bulk of investment while island provinces (Tawi-Tawi: 1.1% in 2024, Basilan: 1.6%) suffer capital starvation despite comparative advantages in seaweed, fisheries, and BIMP-EAGA proximity.',
     intervention: 'Affirmative investment policies. Provincial equity KPIs tracked by BBOI. Mandatory archipelagic connectivity thresholds in the BARMM Infrastructure Investment Sequencing Plan.',
     leveragePoint: 'LP3',
     impact: 'high',
