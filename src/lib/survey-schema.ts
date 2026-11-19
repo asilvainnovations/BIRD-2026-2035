@@ -397,9 +397,9 @@ export const surveySchema = z.object({
   lanao_lake_questions: z.string().optional(),
 
   // ═══ Section 15: Final Consent ═══
-  consent_final: z.literal(true, {
-    errorMap: () => ({ message: "You must consent to submit" }),
-  }),
+  // DPA 2012 consent gate — must stay literal(true). Zod 4 replaced
+  // `errorMap` with `error`; the rule and message are unchanged.
+  consent_final: z.literal(true, { error: "You must consent to submit" }),
 
   // ═══ Section 16: C.A.R.E. Validation ═══
   care_context: requiredNumber,
