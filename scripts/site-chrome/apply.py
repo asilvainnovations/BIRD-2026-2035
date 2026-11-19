@@ -269,6 +269,10 @@ def after_body_open(s: str, block: str) -> str:
         pos += skip.end()
     return s[:pos] + block + s[pos:]
 
+def before_last_body(s: str, block: str) -> str:
+    i = s.rfind("</body>")
+    return s[:i] + block + s[i:]
+
 def apply(path: Path) -> str:
     page = path.relative_to(ROOT).as_posix()
     pre = "../" if "/" in page else ""
@@ -313,9 +317,9 @@ def apply(path: Path) -> str:
         assert n == 1, f"{page}: no brand slot for embedded chrome"
         s = new
     if mode in ("full", "embedded"):
-        s = s.replace("</body>", footer(pre, page, notes) + "</body>", 1)
+        s = before_last_body(s, footer(pre, page, notes))
     if legacy:
-        s = s.replace("</body>", stub(legacy) + "</body>", 1)
+        s = before_last_body(s, stub(legacy))
     return s
 
 

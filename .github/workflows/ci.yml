@@ -17,6 +17,8 @@ jobs:
           cache: npm
       - name: Static pages use the shared site chrome
         run: python3 scripts/site-chrome/apply.py --check
+      - name: Inline scripts in static pages parse
+        run: node scripts/check-inline-js.cjs $(ls public/*.html public/report/*.html | grep -v '^public/feedback.html$')
       - run: npm ci --no-audit --no-fund
       - run: npm run typecheck
       - run: npm run lint
