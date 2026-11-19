@@ -339,8 +339,7 @@ const DashboardHeroSection: React.FC<{ onNavigate?: (view: string) => void }> = 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-black leading-[1.05] mb-6"
-            style={{ fontFamily: "'Cinzel', serif" }}
+            className="text-5xl md:text-7xl font-black leading-[1.05] mb-6 font-display"
           >
             <span className="bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e] bg-clip-text text-transparent">
               The Emerging
@@ -384,7 +383,7 @@ const DashboardHeroSection: React.FC<{ onNavigate?: (view: string) => void }> = 
                 </div>
                 <div>
                   <div className="text-[0.65rem] text-[#ecfdf5]/50 uppercase tracking-wider font-bold">{label}</div>
-                  <div className="text-sm font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>{value}</div>
+                  <div className="text-sm font-bold text-white font-display">{value}</div>
                 </div>
               </div>
             ))}
@@ -399,8 +398,7 @@ const DashboardHeroSection: React.FC<{ onNavigate?: (view: string) => void }> = 
           >
             <button
               onClick={() => onNavigate?.('dashboard')}
-              className="group px-8 py-4 bg-gradient-to-r from-[#7a5c1e] via-[#c9a84c] to-[#7a5c1e] text-[#022c22] rounded-xl font-bold text-base hover:shadow-2xl hover:shadow-[#C9A84C]/40 transition-all flex items-center gap-3"
-              style={{ fontFamily: "'Cinzel', serif" }}
+              className="group px-8 py-4 bg-gradient-to-r from-[#7a5c1e] via-[#c9a84c] to-[#7a5c1e] text-[#022c22] rounded-xl font-bold text-base hover:shadow-2xl hover:shadow-[#C9A84C]/40 transition-all flex items-center gap-3 font-display"
             >
               <Target className="w-5 h-5" aria-hidden="true" />
               Open MEL Dashboard
@@ -408,8 +406,7 @@ const DashboardHeroSection: React.FC<{ onNavigate?: (view: string) => void }> = 
             </button>
             <button
               onClick={() => openValidationSurvey()}
-              className="px-8 py-4 bg-[rgba(6,78,59,0.6)] backdrop-blur-sm border-2 border-[rgba(201,168,76,0.55)] text-[#C9A84C] rounded-xl font-bold text-base hover:bg-[rgba(201,168,76,0.15)] transition-all flex items-center gap-3"
-              style={{ fontFamily: "'Cinzel', serif" }}
+              className="px-8 py-4 bg-[rgba(6,78,59,0.6)] backdrop-blur-sm border-2 border-[rgba(201,168,76,0.55)] text-[#C9A84C] rounded-xl font-bold text-base hover:bg-[rgba(201,168,76,0.15)] transition-all flex items-center gap-3 font-display"
             >
               <ClipboardCheck className="w-5 h-5" aria-hidden="true" />
               Participate in Validation Survey
@@ -438,7 +435,7 @@ const DashboardHeroSection: React.FC<{ onNavigate?: (view: string) => void }> = 
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform" style={{ background: `${color}20` }}>
                   <Icon className="w-6 h-6" style={{ color }} aria-hidden="true" />
                 </div>
-                <h3 className="text-base font-bold text-white mb-2" style={{ fontFamily: "'Cinzel', serif" }}>{title}</h3>
+                <h3 className="text-base font-bold text-white mb-2 font-display">{title}</h3>
                 <p className="text-sm text-[#ecfdf5]/60 leading-relaxed">{desc}</p>
                 <div className="flex items-center gap-2 mt-4 text-xs font-bold" style={{ color }}>
                   <span>Explore</span>
@@ -511,7 +508,7 @@ const CircularProgress: React.FC<{ progress: number; color: string }> = ({ progr
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-[#C9A84C] font-bold text-sm" style={{ fontFamily: "'Cinzel', serif" }}>{progress}%</span>
+        <span className="text-[#C9A84C] font-bold text-sm font-display">{progress}%</span>
         <span className="text-[0.6rem] text-[rgba(167,243,208,0.6)]">of target</span>
       </div>
     </div>
@@ -687,7 +684,7 @@ const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       <div className="flex items-center gap-3 px-5 py-4 border-b border-[rgba(201,168,76,0.32)] bg-[rgba(6,78,59,0.5)] flex-shrink-0">
         <AIAvatar size={36} />
         <div className="flex-1 min-w-0">
-          <p className="font-bold text-[#ecfdf5] text-sm" style={{ fontFamily: "'Cinzel', serif" }}>BIRD AI Strategist</p>
+          <p className="font-bold text-[#ecfdf5] text-sm font-display">BIRD AI Strategist</p>
           <p className="text-xs text-[#C9A84C] flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" aria-hidden="true" />
             BIRD 2026–2035 · MEL Dashboard
@@ -1022,7 +1019,7 @@ const PerspectiveLayer: React.FC<{
 
           <div className="flex-1 min-w-0">
             <div className="flex items-baseline gap-2 flex-wrap">
-              <h3 className="text-base font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>
+              <h3 className="text-base font-bold text-white font-display">
                 {layer.perspective}
               </h3>
               <span className="text-[0.62rem] uppercase tracking-wider font-bold" style={{ color: layer.accent }}>
@@ -1205,8 +1202,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
           Strategic MEL Dashboard · Phase 1: Foundation Building
         </div>
         <h1
-          className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e] bg-clip-text text-transparent leading-tight mb-2"
-          style={{ fontFamily: "'Cinzel', serif" }}
+          className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e] bg-clip-text text-transparent leading-tight mb-2 font-display"
         >
           Monitoring, Evaluation &amp; Learning
         </h1>
@@ -1265,7 +1261,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
           <div className="flex flex-wrap justify-between items-start gap-4 mb-6">
             <div>
               <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">Panel A · Pareto Vital Few</span>
-              <h2 id="panel-a-title" className="text-xl md:text-2xl font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>
+              <h2 id="panel-a-title" className="text-xl md:text-2xl font-bold text-white font-display">
                 Key Investment Targets — 2035 Vision
               </h2>
               <div className="w-10 h-1 bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e] rounded-full mt-2" aria-hidden="true" />
@@ -1285,7 +1281,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
               >
                 <div className={`absolute top-0 left-0 right-0 h-0.5 ${kpi.status === 'on-track' ? 'bg-gradient-to-r from-[#10b981] to-[#6ee7b7]' : 'bg-gradient-to-r from-[#3b82f6] to-[#93c5fd]'}`} aria-hidden="true" />
                 <CircularProgress progress={kpi.progress} color={kpi.ringColor} />
-                <div className="text-xs font-bold text-white mb-1 leading-tight" style={{ fontFamily: "'Cinzel', serif" }}>{kpi.label}</div>
+                <div className="text-xs font-bold text-white mb-1 leading-tight font-display">{kpi.label}</div>
                 <div className="text-xs text-[#6ee7b7] font-semibold mb-0.5">
                   {kpi.current} <span className="text-[0.65rem] opacity-60">{kpi.currentSub}</span>
                 </div>
@@ -1312,7 +1308,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
               <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">
                 Panel B · Strategy Map
               </span>
-              <h2 id="panel-b-title" className="text-xl md:text-2xl font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>
+              <h2 id="panel-b-title" className="text-xl md:text-2xl font-bold text-white font-display">
                 The Balanced Scorecard as a Roadmap
               </h2>
               <div className="w-10 h-1 bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e] rounded-full mt-2" aria-hidden="true" />
@@ -1404,7 +1400,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
           <div className="flex flex-wrap justify-between items-start gap-4 mb-6">
             <div>
               <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">Panel C · Priority Action Plan 2026</span>
-              <h2 id="panel-c-title" className="text-xl md:text-2xl font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>
+              <h2 id="panel-c-title" className="text-xl md:text-2xl font-bold text-white font-display">
                 Urgent &amp; Priority Actions — Foundation Phase
               </h2>
               <div className="w-10 h-1 bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e] rounded-full mt-2" aria-hidden="true" />
@@ -1461,7 +1457,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
               <thead>
                 <tr className="bg-[rgba(201,168,76,0.1)] border-b-2 border-[rgba(201,168,76,0.32)]">
                   {['Strategic Objective','Programme / Action','Priority','Due','MEL Status','Budget','Lead Unit'].map(h => (
-                    <th key={h} className="p-3 text-left text-[#C9A84C] font-bold text-xs tracking-wider" style={{ fontFamily: "'Cinzel', serif" }} scope="col">{h}</th>
+                    <th key={h} className="p-3 text-left text-[#C9A84C] font-bold text-xs tracking-wider font-display" scope="col">{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -1485,7 +1481,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
                       <td className="p-4 align-top text-center"><PriorityBadge priority={action.priority} /></td>
                       <td className="p-4 align-top text-center text-xs text-[#6ee7b7] font-semibold whitespace-nowrap">{action.due}</td>
                       <td className="p-4 align-top"><StatusBadge status={action.status} /></td>
-                      <td className="p-4 align-top text-right font-bold text-[#C9A84C] whitespace-nowrap" style={{ fontFamily: "'Cinzel', serif" }}>{action.budget}</td>
+                      <td className="p-4 align-top text-right font-bold text-[#C9A84C] whitespace-nowrap font-display">{action.budget}</td>
                       <td className="p-4 align-top">
                         <div className="text-xs font-bold text-white">{action.lead}</div>
                         <div className="text-xs text-[#a7f3d0]/80">{action.support}</div>
@@ -1513,7 +1509,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
           <div className="flex flex-wrap justify-between items-start gap-4 mb-6">
             <div>
               <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">Panel D · Stakeholder Validation</span>
-              <h2 id="panel-d-title" className="text-xl md:text-2xl font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>
+              <h2 id="panel-d-title" className="text-xl md:text-2xl font-bold text-white font-display">
                 Evidence Base &mdash; Validation Survey Results
               </h2>
               <div className="w-10 h-1 bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e] rounded-full mt-2" aria-hidden="true" />
@@ -1556,7 +1552,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
             <div className="bg-[rgba(2,44,34,0.55)] border border-[rgba(201,168,76,0.32)] rounded-xl p-5">
               <div className="flex items-center gap-2 mb-1">
                 <Cog className="w-4 h-4 text-[#C9A84C]" aria-hidden="true" />
-                <h3 className="text-sm font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>The Readiness Gap</h3>
+                <h3 className="text-sm font-bold text-white font-display">The Readiness Gap</h3>
               </div>
               <p className="text-[0.68rem] text-[#ecfdf5]/45 mb-4 leading-relaxed">
                 Every cluster rates readiness below both confidence and urgency. Widest gap:{' '}
@@ -1575,7 +1571,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
               ))}
               <div className="mt-3 pt-3 border-t border-[rgba(201,168,76,0.15)] flex items-center justify-between">
                 <span className="text-[0.68rem] text-[#ecfdf5]/40">Region-wide readiness</span>
-                <span className="text-sm font-bold text-[#ef4444]" style={{ fontFamily: "'Cinzel', serif" }}>
+                <span className="text-sm font-bold text-[#ef4444] font-display">
                   {validation.meanReadiness.toFixed(2)} / 5
                 </span>
               </div>
@@ -1585,7 +1581,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
             <div className="bg-[rgba(2,44,34,0.55)] border border-[rgba(201,168,76,0.32)] rounded-xl p-5">
               <div className="flex items-center gap-2 mb-1">
                 <Target className="w-4 h-4 text-[#C9A84C]" aria-hidden="true" />
-                <h3 className="text-sm font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>Strategy Validation</h3>
+                <h3 className="text-sm font-bold text-white font-display">Strategy Validation</h3>
               </div>
               <p className="text-[0.68rem] text-[#ecfdf5]/45 mb-4 leading-relaxed">
                 Stakeholders reproduce the consultant rank order exactly, at lower conviction. Scores below use only
@@ -1618,7 +1614,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
             <div className="bg-[rgba(2,44,34,0.55)] border border-[rgba(201,168,76,0.32)] rounded-xl p-5">
               <div className="flex items-center gap-2 mb-1">
                 <DollarSign className="w-4 h-4 text-[#C9A84C]" aria-hidden="true" />
-                <h3 className="text-sm font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>Budget Priority Signal</h3>
+                <h3 className="text-sm font-bold text-white font-display">Budget Priority Signal</h3>
               </div>
               <p className="text-[0.68rem] text-[#ecfdf5]/45 mb-4 leading-relaxed">
                 Asked where the {TOTAL_BUDGET.label} roadmap should concentrate, respondents chose{' '}
@@ -1646,7 +1642,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
           {/* D-4 · Scorecard alignment strip — ties Panel D back to Panel B */}
           <div className="mt-6 pt-6 border-t border-[rgba(201,168,76,0.2)]">
             <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-              <h3 className="text-sm font-bold text-white flex items-center gap-2" style={{ fontFamily: "'Cinzel', serif" }}>
+              <h3 className="text-sm font-bold text-white flex items-center gap-2 font-display">
                 <Layers className="w-4 h-4 text-[#C9A84C]" aria-hidden="true" />
                 Scorecard &amp; KPI Alignment
                 <span className="text-[0.65rem] font-normal text-[#ecfdf5]/35">(validates Panel B)</span>
@@ -1698,7 +1694,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
               <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">
                 Panel F · Evidence Provenance
               </span>
-              <h2 id="panel-f-title" className="text-xl md:text-2xl font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>
+              <h2 id="panel-f-title" className="text-xl md:text-2xl font-bold text-white font-display">
                 What the Evidence Actually Covers
               </h2>
               <div className="w-10 h-1 bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e] rounded-full mt-2" aria-hidden="true" />
@@ -1715,7 +1711,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
 
           {/* F-1 · Workshop coverage matrix */}
           <div className="bg-[rgba(2,44,34,0.5)] border border-[rgba(201,168,76,0.2)] rounded-xl p-5 mb-4">
-            <h3 className="text-sm font-bold text-white mb-1" style={{ fontFamily: "'Cinzel', serif" }}>
+            <h3 className="text-sm font-bold text-white mb-1 font-display">
               Workshop Coverage by Sector
             </h3>
             <p className="text-[0.68rem] text-[#ecfdf5]/40 mb-4">
@@ -1788,7 +1784,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* F-2 · Sequencing validation */}
             <div className="bg-[rgba(2,44,34,0.5)] border border-[rgba(201,168,76,0.2)] rounded-xl p-5">
-              <h3 className="text-sm font-bold text-white mb-1" style={{ fontFamily: "'Cinzel', serif" }}>
+              <h3 className="text-sm font-bold text-white mb-1 font-display">
                 IEDS Sequencing — Priority &amp; Standing
               </h3>
               <p className="text-[0.68rem] text-[#ecfdf5]/40 mb-4">Survey §10 · 1–5 priority scale</p>
@@ -1820,7 +1816,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
 
             {/* F-3 · Phase funding preference vs plan */}
             <div className="bg-[rgba(2,44,34,0.5)] border border-[rgba(201,168,76,0.2)] rounded-xl p-5">
-              <h3 className="text-sm font-bold text-white mb-1" style={{ fontFamily: "'Cinzel', serif" }}>
+              <h3 className="text-sm font-bold text-white mb-1 font-display">
                 Phase Funding Preference vs. Plan
               </h3>
               <p className="text-[0.68rem] text-[#ecfdf5]/40 mb-4">Survey §13 · q13_6 · n=68</p>
@@ -1852,7 +1848,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
           {/* F-4 · Survey geographic coverage */}
           <div className="bg-[rgba(2,44,34,0.5)] border border-[rgba(201,168,76,0.2)] rounded-xl p-5 mt-4">
             <div className="flex items-center justify-between flex-wrap gap-2 mb-1">
-              <h3 className="text-sm font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>
+              <h3 className="text-sm font-bold text-white font-display">
                 Survey Coverage — Who Actually Answered
               </h3>
               <ValidationBadge level="partial" note={`${validation.silentProvinces.length} provinces silent`} />
@@ -1905,7 +1901,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
           <div className="flex flex-wrap justify-between items-start gap-4 mb-6">
             <div>
               <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">Panel E · Implementation Roadmap</span>
-              <h2 id="panel-e-title" className="text-xl md:text-2xl font-bold text-white" style={{ fontFamily: "'Cinzel', serif" }}>
+              <h2 id="panel-e-title" className="text-xl md:text-2xl font-bold text-white font-display">
                 Phase Progress Tracker — 2026–2035
               </h2>
               <div className="w-10 h-1 bg-gradient-to-r from-[#7a5c1e] via-[#E8C560] to-[#7a5c1e] rounded-full mt-2" aria-hidden="true" />
@@ -1923,14 +1919,13 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
                 className="bg-[rgba(2,44,34,0.55)] border border-[rgba(201,168,76,0.32)] rounded-xl p-5 relative overflow-hidden"
               >
                 <div
-                  className="text-4xl font-black text-[#C9A84C] opacity-20 absolute top-4 right-5 select-none"
-                  style={{ fontFamily: "'Cinzel', serif" }} aria-hidden="true"
+                  className="text-4xl font-black text-[#C9A84C] opacity-20 absolute top-4 right-5 select-none font-display" aria-hidden="true"
                 >
                   {phase.num}
                 </div>
-                <div className="text-sm font-bold text-white mb-0.5" style={{ fontFamily: "'Cinzel', serif" }}>{phase.title}</div>
+                <div className="text-sm font-bold text-white mb-0.5 font-display">{phase.title}</div>
                 <div className="text-xs text-[#6ee7b7] font-medium mb-3">{phase.years}</div>
-                <div className="text-lg font-bold text-[#C9A84C] mb-1" style={{ fontFamily: "'Cinzel', serif" }}>{phase.budget}</div>
+                <div className="text-lg font-bold text-[#C9A84C] mb-1 font-display">{phase.budget}</div>
                 <div className="text-[0.65rem] text-[#ecfdf5]/35 mb-3">{phase.focus}</div>
                 <StatusBadge status={phase.statusClass === 'in-progress' ? 'In Progress' : phase.statusClass === 'upcoming' ? 'Planned' : 'Pre-Dev'} />
 

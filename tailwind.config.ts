@@ -21,6 +21,14 @@ export default {
     },
     extend: {
       colors: {
+        // Liquid Glass brand gold. Referenced as bg-gold / text-gold-light etc.
+        // by AuthModal, UserProfileModal and ActivityTimeline — previously
+        // undefined, so those classes generated no CSS at all.
+        gold: {
+          DEFAULT: '#C9A84C',
+          light: '#E8C560',
+          dark: '#7a5c1e',
+        },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -76,6 +84,8 @@ export default {
         // Display face for headings. Previously applied only via 34 inline
         // fontFamily styles inside MELDashboard; no other component had it.
         display: ['Cinzel', 'Georgia', 'serif'],
+        // Alias kept so existing `font-cinzel` usages resolve to the same face.
+        cinzel: ['Cinzel', 'Georgia', 'serif'],
       },
       borderRadius: {
         lg: 'calc(var(--radius) + 2px)',

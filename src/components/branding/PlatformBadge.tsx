@@ -73,8 +73,7 @@ export const PlatformBadge: React.FC<PlatformBadgeProps> = ({
         className="absolute right-full mr-3 px-3 py-1.5 rounded-lg 
           bg-[#022c22] border border-[#C9A84C]/30 text-[#ecfdf5] text-xs 
           whitespace-nowrap opacity-0 group-hover:opacity-100 
-          transition-opacity duration-200 pointer-events-none shadow-lg"
-        style={{ fontFamily: "'Cinzel', serif" }}
+          transition-opacity duration-200 pointer-events-none shadow-lg font-display"
       >
         {tooltip}
       </span>

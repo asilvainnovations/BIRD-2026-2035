@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useStrategicPlan } from '@/hooks/useStrategicPlan';
 import { useAuth } from '@/hooks/useAuth';
 import { openValidationSurvey } from '@/lib/bird-urls';
+import { generateId, type ActionFrequency, type StrategicPlan } from '@/lib/strategicPlanStore';
+import type { PlanTemplate } from '@/lib/templateData';
 import { StratLogo } from '@/components/branding/Logo';
 import { Loader2 } from 'lucide-react';
 
@@ -130,9 +132,62 @@ const AppLayout: React.FC = () => {
 
   const navigateToView = useCallback((viewId: string) => goToView(viewId), [goToView]);
 
+  // Templates Library → new plan. Previously wired to a no-op, so "Use template"
+  // closed the preview without creating anything.
+  const handleCreateFromTemplate = useCallback((t: PlanTemplate['plan_data']) => {
+    const FREQS: ActionFrequency[] = ['daily', 'weekly', 'monthly', 'quarterly', 'annually'];
+    const toFreq = (f: string): ActionFrequency => {
+      const v = f.toLowerCase();
+      if (v === 'annual' || v === 'yearly') return 'annually';
+      return (FREQS as string[]).includes(v) ? (v as ActionFrequency) : 'quarterly';
+    };
+    const data: Partial<StrategicPlan> = {
+      name: t.name,
+      organization: t.organization || profile?.organization || 'My Organization',
+      vision: t.vision,
+      mission: t.mission,
+      strategicIntent: t.strategicIntent,
+      swotItems: t.swotItems.map((i) => ({ ...i, id: generateId(), aiGenerated: false })),
+      strategicOptions: t.strategicOptions.map((o) => ({ ...o, id: generateId() })),
+      objectives: t.objectives.map((o) => {
+        const objectiveId = generateId();
+        return {
+          ...o,
+          id: objectiveId,
+          kpis: o.kpis.map((k) => ({ ...k, id: generateId(), objectiveId, frequency: toFreq(k.frequency) })),
+        };
+      }),
+    };
+    createPlan(data);
+    goToView('dashboard');
+  }, [createPlan, goToView, profile?.organization]);
+
   // ─── CONTENT RENDERER ─────────────────────────────────────────────────────
   const renderContent = useCallback(() => {
-    const common = { plan: currentPlan, onNavigate: navigateToView };
+    // Settings and Templates work without a plan; every other module needs one.
+    if (!currentPlan && activeView !== 'settings' && activeView !== 'templates') {
+      return (
+        <div className="flex flex-col items-center justify-center py-24 text-center gap-4">
+          <p className="text-[#ecfdf5]/80">No strategic plan is selected.</p>
+          <div className="flex gap-3">
+            <button
+              onClick={handleStartPlanning}
+              className="px-4 py-2 rounded-lg bg-[#C9A84C] text-[#022c22] font-semibold hover:bg-[#E8C560] transition-colors"
+            >
+              {plans.length > 0 ? 'Open my latest plan' : 'Create a new plan'}
+            </button>
+            <button
+              onClick={() => goToView('templates')}
+              className="px-4 py-2 rounded-lg border border-[#C9A84C]/30 text-[#ecfdf5] hover:bg-[#C9A84C]/10 transition-colors"
+            >
+              Start from a template
+            </button>
+          </div>
+        </div>
+      );
+    }
+    const plan = currentPlan as StrategicPlan;
+    const common = { plan, onNavigate: navigateToView };
     switch (activeView) {
       case 'swot':
         return <SWOTAnalysis {...common} onAddItem={addSWOTItem} onUpdateItem={updateSWOTItem} onRemoveItem={removeSWOTItem} onBulkAdd={bulkAddSWOTItems} />;
@@ -145,7 +200,7 @@ const AppLayout: React.FC = () => {
       case 'paps':
         return <PAPsManagement {...common} onUpdatePAP={updatePAP} onRemovePAP={removePAP} onAddPAP={addPAP} />;
       case 'templates':
-        return <TemplatesLibrary currentPlan={currentPlan} onCreateFromTemplate={() => {}} userId={user?.id} userEmail={user?.email} userName={userDisplayInfo.name} userOrganization={profile?.organization || ''} isAuthenticated={isAuthenticated} />;
+        return <TemplatesLibrary currentPlan={currentPlan} onCreateFromTemplate={handleCreateFromTemplate} userId={user?.id} userEmail={user?.email} userName={userDisplayInfo.name} userOrganization={profile?.organization || ''} isAuthenticated={isAuthenticated} />;
       case 'team':
         return <TeamCollaboration {...common} userId={user?.id} userEmail={user?.email} userName={userDisplayInfo.name} />;
       case 'settings':
@@ -156,7 +211,7 @@ const AppLayout: React.FC = () => {
       default:
         return <MELDashboard {...common} />;
     }
-  }, [activeView, currentPlan, user, profile, isAuthenticated, userDisplayInfo.name, addSWOTItem, updateSWOTItem, removeSWOTItem, bulkAddSWOTItems, addStrategicOption, updateStrategicOption, removeStrategicOption, bulkAddStrategicOptions, addObjective, updateObjective, removeObjective, addKPI, updateKPI, removeKPI, addPAP, updatePAP, removePAP, navigateToView]);
+  }, [activeView, currentPlan, user, profile, isAuthenticated, userDisplayInfo.name, addSWOTItem, updateSWOTItem, removeSWOTItem, bulkAddSWOTItems, addStrategicOption, updateStrategicOption, removeStrategicOption, bulkAddStrategicOptions, addObjective, updateObjective, removeObjective, addKPI, updateKPI, removeKPI, addPAP, updatePAP, removePAP, navigateToView, handleCreateFromTemplate, handleStartPlanning, goToView, plans.length]);
 
   const isLoading = authLoading || (isAuthenticated && plansLoading);
 

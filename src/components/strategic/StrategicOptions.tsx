@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { EDGE_FUNCTIONS } from '@/lib/supabase';
 import { Activity, AlertCircle, AlertTriangle, Anchor, ArrowRight, BarChart2, BookOpen, Brain, Check, ChevronDown, ChevronUp, Clock, Crosshair, Edit2, Gauge, GitBranch, Info, Layers, LayoutDashboard, Lightbulb, Link as LinkIcon, Loader2, Plus, Shield, Sparkles, Star, Target, Trash2, TrendingUp, Workflow, X, Zap } from 'lucide-react';
 import { StrategicOption, StrategicPlan, SWOTItem } from '@/lib/strategicPlanStore';
 import { supabase } from '@/lib/supabase';
@@ -6,8 +7,8 @@ import { cn } from '@/lib/utils';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
 
 // Edge Function URLs
-const AI_ASSISTANT_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/ai-strategy-assistant';
-const SYNC_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/strategic-planner-sync';
+const AI_ASSISTANT_URL = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
+const SYNC_URL = EDGE_FUNCTIONS.STRATEGIC_PLANNER_SYNC;
 
 export interface LeveragePoint { archetypeId?: string; leverageLevel: number; meadowsName: string; intervention: string; targetNodeIds: string[]; expectedImpact: 'high' | 'medium' | 'low'; timeHorizon: 'short' | 'medium' | 'long'; source: 'archetype' | 'cld-analysis'; }
 export interface CLDNode { id: string; label: string; category?: string; }
@@ -151,9 +152,9 @@ const BIRD_TOWS_BASELINE: Omit<StrategicOption, 'id'>[] = [
 
 const swotCategoryConfig = {
   strength:    { label: 'Strength',    icon: Shield,      color: 'emerald', bgColor: 'bg-[#059669]', lightBg: 'bg-[#059669]/10',  textColor: 'text-[#34d399]', borderColor: 'border-[#059669]/20', defaultCLDPolarity: '+' as '+' | '-' },
-  weakness:    { label: 'Weakness',    icon: AlertCircle, color: 'red',     bgColor: 'bg-red-500/100',     lightBg: 'bg-red-500/10',      textColor: 'text-red-400',     borderColor: 'border-red-500/20',     defaultCLDPolarity: '-' as '+' | '-' },
+  weakness:    { label: 'Weakness',    icon: AlertCircle, color: 'red',     bgColor: 'bg-red-500',     lightBg: 'bg-red-500/10',      textColor: 'text-red-400',     borderColor: 'border-red-500/20',     defaultCLDPolarity: '-' as '+' | '-' },
   opportunity: { label: 'Opportunity', icon: Lightbulb,   color: 'blue',    bgColor: 'bg-[#C9A84C]',    lightBg: 'bg-[#C9A84C]/10',     textColor: 'text-[#C9A84C]',    borderColor: 'border-[#C9A84C]/20',    defaultCLDPolarity: '+' as '+' | '-' },
-  threat:      { label: 'Threat',      icon: Zap,         color: 'amber',   bgColor: 'bg-amber-500/100',   lightBg: 'bg-amber-500/10',    textColor: 'text-amber-400',   borderColor: 'border-amber-500/20',   defaultCLDPolarity: '-' as '+' | '-' },
+  threat:      { label: 'Threat',      icon: Zap,         color: 'amber',   bgColor: 'bg-amber-500',   lightBg: 'bg-amber-500/10',    textColor: 'text-amber-400',   borderColor: 'border-amber-500/20',   defaultCLDPolarity: '-' as '+' | '-' },
 };
 
 // ─── SCORE BUTTON ─────────────────────────────────────────────────────────────
@@ -169,7 +170,7 @@ const SwotScoreButton: React.FC<{
       className={cn('w-7 h-7 rounded-full border-2 transition-all duration-150 flex items-center justify-center',
         isSelected
           ? type === 'impact'
-            ? config.defaultCLDPolarity === '+' ? 'border-[#059669] bg-[#059669]' : 'border-red-500 bg-red-500/100'
+            ? config.defaultCLDPolarity === '+' ? 'border-[#059669] bg-[#059669]' : 'border-red-500 bg-red-500'
             : 'border-[#C9A84C] bg-[#C9A84C]'
           : 'border-[#C9A84C]/30 dark:border-[#C9A84C]/20 hover:border-slate-400 hover:bg-[#064e3b]/10 dark:bg-[#022c22]'
       )} aria-label={`${type} score ${value}`}>
@@ -198,8 +199,8 @@ const SwotPriorityBadge: React.FC<{ totalScore: number; category: keyof typeof s
   const PRIORITY_GUIDE = [
     { level: 'Low',      range: '1–9',   color: 'text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b]', bg: 'bg-[#064e3b]/20 dark:bg-[#022c22]/60', border: 'border-[#C9A84C]/20 dark:border-[#C9A84C]/20' },
     { level: 'Medium',   range: '10–15', color: 'text-[#C9A84C]',  bg: 'bg-[#C9A84C]/10',  border: 'border-[#C9A84C]/20' },
-    { level: 'High',     range: '16–20', color: 'text-amber-400', bg: 'bg-amber-500/100/10', border: 'border-amber-500/20' },
-    { level: 'Critical', range: '21–25', color: 'text-red-400',   bg: 'bg-red-500/100/10',   border: 'border-red-500/20' },
+    { level: 'High',     range: '16–20', color: 'text-amber-400', bg: 'bg-amber-500', border: 'border-amber-500/20' },
+    { level: 'Critical', range: '21–25', color: 'text-red-400',   bg: 'bg-red-500',   border: 'border-red-500/20' },
   ];
 
   const getPriorityInfo = (score: number) => {
@@ -250,10 +251,10 @@ const SwotCard: React.FC<{
           {config.defaultCLDPolarity === '+' ? '+' : '−'}{total}
         </span>
       </div>
-      <div className='space-y-2 pt-3 border-t border-[#C9A84C]/20 dark:border-[#C9A84C]/20/60'>
+      <div className='space-y-2 pt-3 border-t border-[#C9A84C]/20 dark:border-[#C9A84C]/20'>
         <SwotScoreRow label='Impact' score={imp} onChange={v => onUpdate?.(item.id, { impactScore: v })} type='impact' category={item.category} labelColor={config.textColor} />
         <SwotScoreRow label='Likelihood' score={lik} onChange={v => onUpdate?.(item.id, { likelihoodScore: v })} type='likelihood' category={item.category} />
-        <div className='flex items-center justify-between pt-1 border-t border-[#C9A84C]/20 dark:border-[#C9A84C]/20/40'>
+        <div className='flex items-center justify-between pt-1 border-t border-[#C9A84C]/20 dark:border-[#C9A84C]/20'>
           <span className='text-xs text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b]'>Impact × Likelihood</span>
           <div className='flex items-center gap-2'>
             <SwotPriorityBadge totalScore={total} category={item.category} />
@@ -283,7 +284,7 @@ const SwotQuadrant: React.FC<{
         {open ? <ChevronUp className='w-4 h-4 text-[#64748b]/80 dark:text-[#64748b]' /> : <ChevronDown className='w-4 h-4 text-[#64748b]/80 dark:text-[#64748b]' />}
       </button>
       {open && (
-        <div className='p-3 space-y-2 bg-white dark:bg-[#022c22]/60/60/60'>
+        <div className='p-3 space-y-2 bg-white dark:bg-[#022c22]/60/60'>
           {items.length === 0
             ? <p className='text-xs text-[#64748b]/80 dark:text-[#64748b] text-center py-4'>No items yet</p>
             : items.map(item => <SwotCard key={item.id} item={item} config={config} onUpdate={onUpdate} compact />)
@@ -304,7 +305,7 @@ const quadrantConfig = {
 };
 
 const MEADOWS_ICONS: Record<number, React.ElementType> = { 12: Gauge, 11: Anchor, 10: Workflow, 9: Clock, 8: Activity, 7: TrendingUp, 6: BarChart2, 5: BookOpen, 4: Sparkles, 3: Target, 2: Brain, 1: Crosshair };
-const MEADOWS_LEVEL_COLORS: Record<string, string> = { high: 'bg-violet-600 text-white', mid: 'bg-red-500/100 text-white', feedback: 'bg-amber-500/100 text-white', params: 'bg-slate-400 text-white' };
+const MEADOWS_LEVEL_COLORS: Record<string, string> = { high: 'bg-violet-600 text-white', mid: 'bg-red-500 text-white', feedback: 'bg-amber-500 text-white', params: 'bg-slate-400 text-white' };
 const getMeadowsBadgeColor = (level: number) => { if (level <= 3) return MEADOWS_LEVEL_COLORS.high; if (level <= 6) return MEADOWS_LEVEL_COLORS.mid; if (level <= 9) return MEADOWS_LEVEL_COLORS.feedback; return MEADOWS_LEVEL_COLORS.params; };
 
 const SCORE_DESCRIPTIONS = {
@@ -318,7 +319,7 @@ const SCORE_DESCRIPTIONS = {
 const TOTAL_SCORE_GUIDE = [
   { range: '9-10', color: 'text-[#34d399]', bg: 'bg-[#059669]/10', label: 'Excellent' },
   { range: '7-8', color: 'text-[#C9A84C]', bg: 'bg-[#C9A84C]/10', label: 'Good' },
-  { range: '5-6', color: 'text-amber-400', bg: 'bg-amber-500/100/10', label: 'Fair' },
+  { range: '5-6', color: 'text-amber-400', bg: 'bg-amber-500', label: 'Fair' },
   { range: '<5', color: 'text-[#ecfdf5]/80', bg: 'bg-[#064e3b]/20', label: 'Low' },
 ];
 
@@ -406,7 +407,7 @@ const StrategyCard: React.FC<{ option: StrategicOption; config: typeof quadrantC
             </div>
           </div>
           <p className="text-sm text-[#ecfdf5]/80 mb-3 line-clamp-2">{option.description}</p>
-          <div className="flex items-center justify-between pt-3 border-t border-[#C9A84C]/20/50 flex-wrap gap-2">
+          <div className="flex items-center justify-between pt-3 border-t border-[#C9A84C]/20 flex-wrap gap-2">
             <div className="flex items-center gap-3 flex-wrap">
               <div className="flex items-center gap-1.5">
                 <span className="text-xs font-medium text-[#ecfdf5]/80">Priority:</span>
@@ -453,8 +454,8 @@ const SystemsContextPanel: React.FC<{ leveragePoints: LeveragePoint[]; archetype
               <p className="text-[10px] font-bold uppercase tracking-wider text-violet-500">Identified Leverage Points</p>
               <div className="flex flex-wrap gap-1.5 text-[9px] font-bold">
                 <span className="px-2 py-0.5 rounded bg-violet-600 text-white">L1–3: Paradigm</span>
-                <span className="px-2 py-0.5 rounded bg-red-500/100 text-white">L4–6: Info/Rules</span>
-                <span className="px-2 py-0.5 rounded bg-amber-500/100 text-white">L7–9: Feedback</span>
+                <span className="px-2 py-0.5 rounded bg-red-500 text-white">L4–6: Info/Rules</span>
+                <span className="px-2 py-0.5 rounded bg-amber-500 text-white">L7–9: Feedback</span>
                 <span className="px-2 py-0.5 rounded bg-slate-400 text-white">L10–12: Params</span>
               </div>
               {[{ label: 'High Leverage', lps: highLPs }, { label: 'Mid Leverage', lps: midLPs }, { label: 'Lower Leverage', lps: lowLPs }].map(({ label, lps }) => lps.length > 0 && (
@@ -841,7 +842,7 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
                 const tier = getTotalScoreTier(total);
                 return (
                   <div key={opt.id} className="bg-white rounded-lg p-3 border border-[#C9A84C]/20 flex items-start gap-3 hover:shadow-sm transition-shadow">
-                    <span className={cn('px-2 py-1 rounded text-xs font-bold text-white shrink-0', opt.optionType === 'SO' ? 'bg-[#059669]' : opt.optionType === 'ST' ? 'bg-[#C9A84C]' : opt.optionType === 'WO' ? 'bg-purple-500/100' : 'bg-amber-500/100')}>{opt.optionType}</span>
+                    <span className={cn('px-2 py-1 rounded text-xs font-bold text-white shrink-0', opt.optionType === 'SO' ? 'bg-[#059669]' : opt.optionType === 'ST' ? 'bg-[#C9A84C]' : opt.optionType === 'WO' ? 'bg-purple-500' : 'bg-amber-500')}>{opt.optionType}</span>
                     <div className="flex-1 min-w-0"><p className="font-medium text-[#E8C560] text-sm truncate">{opt.title}</p><p className={cn('text-xs font-semibold', tier.color)}>Score: {total}/10</p></div>
                   </div>
                 );

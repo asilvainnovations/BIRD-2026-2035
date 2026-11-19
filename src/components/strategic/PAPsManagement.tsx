@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { EDGE_FUNCTIONS } from '@/lib/supabase';
 import {
   FolderKanban,
   Plus,
@@ -22,9 +23,9 @@ import { PAP, StrategicPlan, BSCObjective } from '@/lib/strategicPlanStore';
 import { supabase } from '@/lib/supabase';
 
 // Edge Function URLs
-const AI_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/ai-strategy-assistant';
-const SYNC_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/strategic-planner-sync';
-const EMAIL_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/email-notifications';
+const AI_URL = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
+const SYNC_URL = EDGE_FUNCTIONS.STRATEGIC_PLANNER_SYNC;
+const EMAIL_URL = EDGE_FUNCTIONS.EMAIL_NOTIFICATIONS;
 
 interface PAPsManagementProps {
   plan: StrategicPlan;
@@ -34,7 +35,7 @@ interface PAPsManagementProps {
 }
 
 const typeConfig = {
-  program: { label: 'Program', color: 'purple', bgColor: 'bg-purple-500/100', lightBg: 'bg-purple-500/10' },
+  program: { label: 'Program', color: 'purple', bgColor: 'bg-purple-500', lightBg: 'bg-purple-500/10' },
   activity: { label: 'Activity', color: 'blue', bgColor: 'bg-[#C9A84C]', lightBg: 'bg-[#C9A84C]/10' },
   project: { label: 'Project', color: 'cyan', bgColor: 'bg-[#C9A84C]', lightBg: 'bg-[#C9A84C]/10' },
 };
@@ -43,7 +44,7 @@ const statusConfig = {
   planned: { label: 'Planned', bgColor: 'bg-[#064e3b]/20 dark:bg-[#022c22]/60', textColor: 'text-[#ecfdf5]/80 dark:text-[#64748b]/80', borderColor: 'border-[#C9A84C]/20 dark:border-[#C9A84C]/20' },
   'in-progress': { label: 'In Progress', bgColor: 'bg-[#C9A84C]/10', textColor: 'text-[#C9A84C]', borderColor: 'border-[#C9A84C]/20' },
   completed: { label: 'Completed', bgColor: 'bg-[#059669]/10', textColor: 'text-[#34d399]', borderColor: 'border-[#059669]/20' },
-  delayed: { label: 'Delayed', bgColor: 'bg-red-500/100/10', textColor: 'text-red-400', borderColor: 'border-red-500/20' },
+  delayed: { label: 'Delayed', bgColor: 'bg-red-500', textColor: 'text-red-400', borderColor: 'border-red-500/20' },
   cancelled: { label: 'Cancelled', bgColor: 'bg-slate-200', textColor: 'text-[#64748b] dark:text-[#64748b]/80', borderColor: 'border-[#C9A84C]/30 dark:border-[#C9A84C]/20' },
 };
 
@@ -81,7 +82,7 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
 
   if (isEditing) {
     return (
-      <div className="bg-white dark:bg-[#022c22]/60/60 rounded-xl border-2 border-[#C9A84C] p-4 space-y-4 shadow-xl ring-4 ring-[#C9A84C]/10">
+      <div className="bg-white dark:bg-[#022c22]/60 rounded-xl border-2 border-[#C9A84C] p-4 space-y-4 shadow-xl ring-4 ring-[#C9A84C]/10">
         <div className="grid grid-cols-2 gap-4">
           <div className="col-span-2">
             <label className="block text-xs font-bold text-[#64748b] uppercase mb-1">Name</label>
@@ -161,7 +162,7 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
   }
 
   return (
-    <div className="bg-white dark:bg-[#022c22]/60/60 rounded-xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 p-4 hover:shadow-xl hover:border-[#C9A84C]/20 transition-all group relative overflow-hidden flex flex-col h-full">
+    <div className="bg-white dark:bg-[#022c22]/60 rounded-xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 p-4 hover:shadow-xl hover:border-[#C9A84C]/20 transition-all group relative overflow-hidden flex flex-col h-full">
       <div className={`absolute top-0 right-0 w-24 h-1 ${typeConf.bgColor}`} />
       
       <div className="flex items-start justify-between mb-3">
@@ -194,7 +195,7 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
 
         <div className="space-y-4 mb-4">
           {linkedObjective && (
-            <div className="flex items-start gap-2 p-2 bg-[#064e3b]/10 dark:bg-[#022c22] rounded-lg border border-slate-100 dark:border-[#C9A84C]/20/60">
+            <div className="flex items-start gap-2 p-2 bg-[#064e3b]/10 dark:bg-[#022c22] rounded-lg border border-slate-100 dark:border-[#C9A84C]/20">
               <Target className="w-3.5 h-3.5 text-[#64748b]/80 mt-0.5" />
               <div className="flex-1">
                 <p className="text-[10px] uppercase font-bold text-[#64748b]/80 leading-none mb-1">Aligned Objective</p>
@@ -229,8 +230,8 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
             <div className="h-1.5 bg-[#064e3b]/20 dark:bg-[#022c22]/60 rounded-full overflow-hidden">
               <div
                 className={`h-full transition-all duration-700 rounded-full ${
-                  budgetUsed > 100 ? 'bg-red-500/100 shadow-[0_0_8px_rgba(239,68,68,0.5)]' : 
-                  budgetUsed > 90 ? 'bg-amber-500/100' : 
+                  budgetUsed > 100 ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]' : 
+                  budgetUsed > 90 ? 'bg-amber-500' : 
                   'bg-[#059669]'
                 }`}
                 style={{ width: `${Math.min(budgetUsed, 100)}%` }}
@@ -240,7 +241,7 @@ const PAPCard = ({ pap, objectives, onUpdate, onRemove }: {
         </div>
       </div>
 
-      <div className="mt-auto pt-4 border-t border-slate-100 dark:border-[#C9A84C]/20/60">
+      <div className="mt-auto pt-4 border-t border-slate-100 dark:border-[#C9A84C]/20">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-full bg-[#064e3b]/20 dark:bg-[#022c22]/60 border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 flex items-center justify-center text-[10px] font-bold text-[#ecfdf5]/80 dark:text-[#64748b]/80">
@@ -574,7 +575,7 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-[#022c22]/60/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
+        <div className="bg-white dark:bg-[#022c22]/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
           <div className="flex justify-between items-start mb-4">
             <div className="p-2 bg-[#C9A84C]/10 rounded-lg text-[#C9A84C]"><DollarSign className="w-5 h-5" /></div>
             <span className="text-[10px] font-bold text-[#64748b]/80 uppercase">Financial Scope</span>
@@ -583,7 +584,7 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
           <p className="text-xs text-[#64748b] font-medium">Total Portfolio Budget</p>
         </div>
         
-        <div className="bg-white dark:bg-[#022c22]/60/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
+        <div className="bg-white dark:bg-[#022c22]/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
           <div className="flex justify-between items-start mb-4">
             <div className="p-2 bg-[#059669]/10 rounded-lg text-[#34d399]"><TrendingUp className="w-5 h-5" /></div>
             <span className="text-[10px] font-bold text-[#64748b]/80 uppercase">Expenditure</span>
@@ -597,7 +598,7 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#022c22]/60/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
+        <div className="bg-white dark:bg-[#022c22]/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
           <div className="flex justify-between items-start mb-4">
             <div className="p-2 bg-[#C9A84C]/10 rounded-lg text-[#C9A84C]"><Check className="w-5 h-5" /></div>
             <span className="text-[10px] font-bold text-[#64748b]/80 uppercase">Throughput</span>
@@ -606,7 +607,7 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
           <p className="text-xs text-[#64748b] font-medium">{paps.length} Total Registered PAPs</p>
         </div>
 
-        <div className="bg-white dark:bg-[#022c22]/60/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
+        <div className="bg-white dark:bg-[#022c22]/60 p-5 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
           <div className="flex justify-between items-start mb-4">
             <div className="p-2 bg-red-500/10 rounded-lg text-red-400"><AlertCircle className="w-5 h-5" /></div>
             <span className="text-[10px] font-bold text-[#64748b]/80 uppercase">Attention Needed</span>
@@ -743,7 +744,7 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
       <div className="hidden">
       </div>
 
-      <div className="flex items-center justify-between bg-white dark:bg-[#022c22]/60/60 p-3 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
+      <div className="flex items-center justify-between bg-white dark:bg-[#022c22]/60 p-3 rounded-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold text-[#64748b]/80 uppercase ml-2">Filter By:</span>
@@ -772,10 +773,10 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
         </div>
 
         <div className="flex items-center gap-1 bg-[#064e3b]/20 dark:bg-[#022c22]/60 p-1 rounded-xl">
-          <button onClick={() => setViewMode('grid')} className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-white dark:bg-[#022c22]/60/60 shadow-sm text-[#C9A84C]' : 'text-[#64748b]/80 hover:text-[#ecfdf5]/80'}`}>
+          <button onClick={() => setViewMode('grid')} className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-white dark:bg-[#022c22]/60 shadow-sm text-[#C9A84C]' : 'text-[#64748b]/80 hover:text-[#ecfdf5]/80'}`}>
             <LayoutGrid className="w-4 h-4" />
           </button>
-          <button onClick={() => setViewMode('list')} className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-white dark:bg-[#022c22]/60/60 shadow-sm text-[#C9A84C]' : 'text-[#64748b]/80 hover:text-[#ecfdf5]/80'}`}>
+          <button onClick={() => setViewMode('list')} className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-white dark:bg-[#022c22]/60 shadow-sm text-[#C9A84C]' : 'text-[#64748b]/80 hover:text-[#ecfdf5]/80'}`}>
             <List className="w-4 h-4" />
           </button>
         </div>
@@ -783,7 +784,7 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
 
       {isAdding && (
         <div className="fixed inset-0 bg-[#022c22]/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <form onSubmit={handleAddSubmit} className="bg-white dark:bg-[#022c22]/60/60 rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+          <form onSubmit={handleAddSubmit} className="bg-white dark:bg-[#022c22]/60 rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in zoom-in-95 duration-200">
             <div className="p-6 bg-[#022c22] text-white flex justify-between items-center">
               <div>
                 <h2 className="text-xl font-bold">Initiate New PAP</h2>

@@ -952,8 +952,8 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
 
   const getRoleBadgeColor = (role: string) => {
     switch (role) {
-      case 'owner': return 'bg-amber-500/100/10 text-amber-800 border-amber-300';
-      case 'admin': return 'bg-purple-500/100/10 text-purple-800 border-purple-300';
+      case 'owner': return 'bg-amber-500 text-amber-800 border-amber-300';
+      case 'admin': return 'bg-purple-500 text-purple-800 border-purple-300';
       case 'editor': return 'bg-[#C9A84C]/10 text-blue-800 border-blue-300';
       default: return 'bg-[#064e3b]/20 text-[#E8C560]/90 border-[#C9A84C]/30';
     }
@@ -961,7 +961,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
 
   const getUrgencyColor = (level?: string) => {
     switch (level) {
-      case 'critical': return 'bg-red-500/100/10 text-red-800 border-red-300';
+      case 'critical': return 'bg-red-500 text-red-800 border-red-300';
       case 'high': return 'bg-orange-500/10 text-orange-800 border-orange-300';
       case 'medium': return 'bg-yellow-100 text-yellow-800 border-yellow-300';
       default: return 'bg-[#059669]/10 text-green-800 border-green-300';
@@ -971,10 +971,10 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
   const getKpiStatusColor = (status: string) => {
     switch (status) {
       case 'on_track': return 'bg-emerald-600';
-      case 'at_risk': return 'bg-amber-500/100';
+      case 'at_risk': return 'bg-amber-500';
       case 'off_track': return 'bg-orange-500';
       case 'critical': return 'bg-red-600';
-      default: return 'bg-[#064e3b]/100';
+      default: return 'bg-[#064e3b]';
     }
   };
 
@@ -1046,7 +1046,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
               className={cn(
                 "p-5 rounded-xl border-2 cursor-pointer transition-all focus-within:ring-2 focus-within:ring-[#C9A84C]",
                 selectedOrg?.id === org.id
-                  ? 'border-[#C9A84C] bg-[#C9A84C]/10/60 shadow-sm'
+                  ? 'border-[#C9A84C] bg-[#C9A84C]/10 shadow-sm'
                   : 'border-[#C9A84C]/20 hover:border-slate-400 hover:shadow-sm bg-white'
               )}
               role="listitem"
@@ -1155,7 +1155,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                     {member.role}
                   </span>
                   {member.status === 'invited' && (
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/100/10 text-amber-800 border border-amber-300">Pending</span>
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-amber-500 text-amber-800 border border-amber-300">Pending</span>
                   )}
                   {member.role !== 'owner' && canManageOrg(currentUserOrgRole) && (
                     <button
@@ -1811,8 +1811,8 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
               <div
                 className={cn(
                   "w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0",
-                  resource.type === 'video' ? 'bg-red-500/100/10 text-red-400' :
-                  resource.type === 'article' ? 'bg-amber-500/100/10 text-amber-400' :
+                  resource.type === 'video' ? 'bg-red-500 text-red-400' :
+                  resource.type === 'article' ? 'bg-amber-500 text-amber-400' :
                   resource.type === 'dashboard' ? 'bg-[#C9A84C]/10 text-[#C9A84C]' :
                   resource.type === 'outlook' ? 'bg-indigo-500/10 text-indigo-300' :
                   'bg-[#059669]/10 text-[#34d399]'
@@ -1997,7 +1997,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
             <X className="w-5 h-5 text-[#64748b]" aria-hidden="true" />
           </button>
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-3 bg-red-500/100/10 rounded-full">
+            <div className="p-3 bg-red-500 rounded-full">
               <AlertTriangle className="w-6 h-6 text-red-400" aria-hidden="true" />
             </div>
             <h2 id="delete-org-title" className="text-xl font-bold text-slate-900">Delete Organization</h2>
@@ -2043,7 +2043,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
             <X className="w-5 h-5 text-[#64748b]" aria-hidden="true" />
           </button>
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-3 bg-amber-500/100/10 rounded-full">
+            <div className="p-3 bg-amber-500 rounded-full">
               <RotateCcw className="w-6 h-6 text-amber-400" aria-hidden="true" />
             </div>
             <h2 id="reset-org-title" className="text-xl font-bold text-slate-900">Reset Organization</h2>
@@ -2241,7 +2241,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                         onClick={() => markNotificationRead(n.id)}
                         className={cn(
                           "p-4 border-b border-slate-50 hover:bg-[#064e3b]/10 cursor-pointer transition-colors",
-                          !n.read ? 'bg-[#C9A84C]/10/40' : ''
+                          !n.read ? 'bg-[#C9A84C]/10' : ''
                         )}
                         role="button"
                         tabIndex={0}
@@ -2251,7 +2251,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
                           <div
                             className={cn(
                               "w-2.5 h-2.5 rounded-full mt-1.5 flex-shrink-0",
-                              n.type === 'warning' ? 'bg-amber-500/100' : n.type === 'urgent' ? 'bg-red-600' : n.type === 'success' ? 'bg-emerald-600' : 'bg-blue-600'
+                              n.type === 'warning' ? 'bg-amber-500' : n.type === 'urgent' ? 'bg-red-600' : n.type === 'success' ? 'bg-emerald-600' : 'bg-blue-600'
                             )}
                             aria-hidden="true"
                           />
@@ -2312,7 +2312,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
           <span className="text-base font-medium">{error}</span>
           <button
             onClick={() => setError(null)}
-            className="ml-auto p-1 hover:bg-red-500/100/10 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="ml-auto p-1 hover:bg-red-500 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
             aria-label="Dismiss error"
           >
             <X className="w-4 h-4" />

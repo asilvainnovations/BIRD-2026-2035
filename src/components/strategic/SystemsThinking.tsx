@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { EDGE_FUNCTIONS } from '@/lib/supabase';
 import { supabase } from '@/lib/supabase';
 import {
   Shield,
@@ -52,7 +53,7 @@ import {
 // Import your actual hook
 import { useStrategicPlan } from '@/hooks/useStrategicPlan';
 
-import { StrategicPlan, SWOTItem, CLDNode, CLDLink, CLDSnapshot } from '@/lib/strategicPlanStore';
+import { StrategicPlan, SWOTItem, CLDNode, CLDLink, CLDSnapshot, CLDNodeCategory } from '@/lib/strategicPlanStore';
 import { cn } from '@/lib/utils';
 import { BIRD_VIDEOS, BIRD_IMAGES, getImagesForSection, getVideosForSection } from '@/lib/bird-urls';
 import { AIStrategistAvatar } from '@/components/branding/Logo';
@@ -480,11 +481,11 @@ const systemArchetypes: SystemArchetype[] = [
 
 // ─── CATEGORY CONFIG ──────────────────────────────────────────────────────────
 
-const categoryConfig = {
+const categoryConfig: Partial<Record<CLDNodeCategory, { label: string; icon: React.ComponentType<{ className?: string }>; bgColor: string; [k: string]: unknown }>> = {
   strength:    { label: 'Strength',    icon: Shield,      color: 'emerald', bgColor: 'bg-[#059669]', lightBg: 'bg-[#059669]/10',  textColor: 'text-[#34d399]', borderColor: 'border-[#059669]/20', defaultCLDPolarity: '+' as '+' | '-' },
-  weakness:    { label: 'Weakness',    icon: AlertCircle, color: 'red',     bgColor: 'bg-red-500/100',     lightBg: 'bg-red-500/10',      textColor: 'text-red-400',     borderColor: 'border-red-500/20',     defaultCLDPolarity: '-' as '+' | '-' },
+  weakness:    { label: 'Weakness',    icon: AlertCircle, color: 'red',     bgColor: 'bg-red-500',     lightBg: 'bg-red-500/10',      textColor: 'text-red-400',     borderColor: 'border-red-500/20',     defaultCLDPolarity: '-' as '+' | '-' },
   opportunity: { label: 'Opportunity', icon: Lightbulb,   color: 'blue',    bgColor: 'bg-[#C9A84C]',    lightBg: 'bg-[#C9A84C]/10',     textColor: 'text-[#C9A84C]',    borderColor: 'border-[#C9A84C]/20',    defaultCLDPolarity: '+' as '+' | '-' },
-  threat:      { label: 'Threat',      icon: Zap,         color: 'amber',   bgColor: 'bg-amber-500/100',   lightBg: 'bg-amber-500/10',    textColor: 'text-amber-400',   borderColor: 'border-amber-500/20',   defaultCLDPolarity: '-' as '+' | '-' },
+  threat:      { label: 'Threat',      icon: Zap,         color: 'amber',   bgColor: 'bg-amber-500',   lightBg: 'bg-amber-500/10',    textColor: 'text-amber-400',   borderColor: 'border-amber-500/20',   defaultCLDPolarity: '-' as '+' | '-' },
 };
 
 // ─── SWOT SCORING UI ──────────────────────────────────────────────────────────
@@ -515,7 +516,7 @@ const EducationalResources: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {systemsVideos.map(v => (
               <a key={v.url} href={v.url} target="_blank" rel="noopener noreferrer"
-                className="group flex items-center gap-3 px-4 py-3 rounded-lg bg-white dark:bg-[#022c22]/60/60 border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 hover:border-blue-400 hover:shadow-md transition-all">
+                className="group flex items-center gap-3 px-4 py-3 rounded-lg bg-white dark:bg-[#022c22]/60 border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 hover:border-blue-400 hover:shadow-md transition-all">
                 <div className="shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center group-hover:scale-105 transition-transform">
                   <PlayCircle className="w-5 h-5 text-white" />
                 </div>
@@ -537,7 +538,7 @@ const EducationalResources: React.FC = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {systemsImages.slice(0, 6).map(img => (
               <a key={img.url} href={img.url} target="_blank" rel="noopener noreferrer"
-                className="group block rounded-lg overflow-hidden border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 hover:border-blue-400 hover:shadow-md transition-all bg-white dark:bg-[#022c22]/60/60">
+                className="group block rounded-lg overflow-hidden border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 hover:border-blue-400 hover:shadow-md transition-all bg-white dark:bg-[#022c22]/60">
                 <img src={img.url} alt={img.alt} className="w-full h-24 object-cover group-hover:scale-105 transition-transform"
                   onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
                 <div className="px-3 py-2">
@@ -560,7 +561,7 @@ const EducationalResources: React.FC = () => {
             { title: 'Virtuous Cycle', url: 'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/images-swot-systems-maps/14.%20Investment-Development%20Virtuous%20Cycle.png', icon: TrendingUp },
           ].map(r => (
             <a key={r.title} href={r.url} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white dark:bg-[#022c22]/60/60 border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 hover:border-blue-400 hover:shadow-sm transition-all text-xs font-medium text-[#E8C560]/90 dark:text-[#ecfdf5]/90">
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white dark:bg-[#022c22]/60 border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 hover:border-blue-400 hover:shadow-sm transition-all text-xs font-medium text-[#E8C560]/90 dark:text-[#ecfdf5]/90">
               <r.icon className="w-3.5 h-3.5 text-[#C9A84C]" />
               {r.title}
               <ExternalLink className="w-3 h-3 text-[#64748b]/80" />
@@ -641,7 +642,7 @@ const ArchetypeImageTooltip: React.FC<{ imageUrl: string; archetypeName: string 
 
       {visible && pos && !imgError && (
         <div
-          className="fixed z-50 rounded-xl shadow-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 bg-white dark:bg-[#022c22]/60/60 overflow-hidden animate-in fade-in zoom-in-95 duration-150"
+          className="fixed z-50 rounded-xl shadow-2xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 bg-white dark:bg-[#022c22]/60 overflow-hidden animate-in fade-in zoom-in-95 duration-150"
           style={{ top: pos.top, left: pos.left, width: 268 }}
           onMouseEnter={() => { clearHide(); setVisible(true); }}
           onMouseLeave={hide}
@@ -679,7 +680,7 @@ const ArchetypeImageTooltip: React.FC<{ imageUrl: string; archetypeName: string 
           </div>
 
           {/* Footer hint */}
-          <div className="px-3 py-1.5 bg-[#064e3b]/10 dark:bg-[#022c22] border-t border-slate-100 dark:border-[#C9A84C]/20/60">
+          <div className="px-3 py-1.5 bg-[#064e3b]/10 dark:bg-[#022c22] border-t border-slate-100 dark:border-[#C9A84C]/20">
             <p className="text-[9px] text-[#64748b]/80 dark:text-[#64748b] text-center">Hover to keep open · click eye to pin</p>
           </div>
         </div>
@@ -691,8 +692,8 @@ const ArchetypeImageTooltip: React.FC<{ imageUrl: string; archetypeName: string 
 // ─── LEVERAGE POINTS PANEL ────────────────────────────────────────────────────
 
 const impactColors = {
-  high:   { badge: 'bg-red-500/100/10 text-red-400 border-red-500/20',       dot: 'bg-red-500/100'    },
-  medium: { badge: 'bg-amber-500/100/10 text-amber-400 border-amber-500/20', dot: 'bg-amber-500/100'  },
+  high:   { badge: 'bg-red-500 text-red-400 border-red-500/20',       dot: 'bg-red-500'    },
+  medium: { badge: 'bg-amber-500 text-amber-400 border-amber-500/20', dot: 'bg-amber-500'  },
   low:    { badge: 'bg-[#064e3b]/20 dark:bg-[#022c22]/60 text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b] border-[#C9A84C]/20 dark:border-[#C9A84C]/20', dot: 'bg-slate-400'  },
 };
 
@@ -841,21 +842,21 @@ const LeveragePointsPanel: React.FC<{
             <div key={idx}
               className={cn(
                 'rounded-xl border p-3 transition-all cursor-pointer group',
-                isHighlighted ? 'border-violet-400 bg-violet-50 shadow-md' : 'border-[#C9A84C]/20 dark:border-[#C9A84C]/20 bg-white dark:bg-[#022c22]/60/60 hover:border-violet-300 hover:shadow-sm',
+                isHighlighted ? 'border-violet-400 bg-violet-50 shadow-md' : 'border-[#C9A84C]/20 dark:border-[#C9A84C]/20 bg-white dark:bg-[#022c22]/60 hover:border-violet-300 hover:shadow-sm',
               )}
               onClick={() => onHighlightNodes(isHighlighted ? [] : point.targetNodeIds)}>
               <div className="flex items-start justify-between gap-2 mb-2">
                 <div className="flex items-center gap-2">
                   <div className={cn('w-7 h-7 rounded-lg flex items-center justify-center shrink-0',
-                    point.leverageLevel <= 3 ? 'bg-violet-100' : point.leverageLevel <= 6 ? 'bg-red-500/100/10' : point.leverageLevel <= 9 ? 'bg-amber-500/100/10' : 'bg-[#064e3b]/20 dark:bg-[#022c22]/60')}>
+                    point.leverageLevel <= 3 ? 'bg-violet-100' : point.leverageLevel <= 6 ? 'bg-red-500' : point.leverageLevel <= 9 ? 'bg-amber-500' : 'bg-[#064e3b]/20 dark:bg-[#022c22]/60')}>
                     <MeadowIcon className={cn('w-3.5 h-3.5', meadow?.color || 'text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b]')} />
                   </div>
                   <div>
                     <div className="flex items-center gap-1.5">
                       <span className={cn('text-[10px] font-black tabular-nums px-1.5 py-0.5 rounded',
                         point.leverageLevel <= 3 ? 'bg-violet-600 text-white' :
-                        point.leverageLevel <= 6 ? 'bg-red-500/100 text-white' :
-                        point.leverageLevel <= 9 ? 'bg-amber-500/100 text-white' : 'bg-slate-400 text-white')}>
+                        point.leverageLevel <= 6 ? 'bg-red-500 text-white' :
+                        point.leverageLevel <= 9 ? 'bg-amber-500 text-white' : 'bg-slate-400 text-white')}>
                         L{point.leverageLevel}
                       </span>
                       <span className="text-[10px] font-semibold text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b]">{meadow?.name}</span>
@@ -893,7 +894,7 @@ const LeveragePointsPanel: React.FC<{
         </div>
         <div className="flex items-center gap-1 text-[9px] font-medium">
           {['L1–3\nParadigm', 'L4–6\nInformation', 'L7–9\nFeedback', 'L10–12\nParameters'].map((label, i) => {
-            const colors = ['bg-violet-600 text-white', 'bg-red-500/100 text-white', 'bg-amber-500/100 text-white', 'bg-slate-400 text-white'];
+            const colors = ['bg-violet-600 text-white', 'bg-red-500 text-white', 'bg-amber-500 text-white', 'bg-slate-400 text-white'];
             return (
               <div key={i} className={cn('flex-1 rounded px-1.5 py-1 text-center leading-tight', colors[i])}>
                 {label.split('\n').map((l, j) => <div key={j}>{l}</div>)}
@@ -1092,7 +1093,7 @@ const CLDCanvas: React.FC<{
   const isEmpty = nodes.length === 0;
 
   const nodeColorClass = (node: ExtendedCLDNode) => {
-    if (node.category) return categoryConfig[node.category]?.bgColor || 'bg-[#064e3b]/100';
+    if (node.category) return categoryConfig[node.category]?.bgColor || 'bg-[#064e3b]';
     return 'bg-gradient-to-br from-slate-500 to-slate-700';
   };
 
@@ -1312,7 +1313,7 @@ const CLDCanvas: React.FC<{
                 >→</button>
                 <button
                   onClick={e => { e.stopPropagation(); deleteNode(node.id); }}
-                  className="w-6 h-6 bg-red-500/100 rounded-full text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+                  className="w-6 h-6 bg-red-500 rounded-full text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
                   title="Delete node"
                 >
                   <X className="w-3 h-3" />
@@ -1342,7 +1343,7 @@ const CLDCanvas: React.FC<{
       {/* ── Toolbar: top-left ────────────────────────────────────────────── */}
       <div className="absolute top-3 left-3 flex gap-2 flex-wrap" style={{ zIndex: 15 }}>
         <button onClick={() => setShowHelp(v => !v)}
-          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/90 dark:bg-[#022c22]/60/90 backdrop-blur border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 text-[#ecfdf5]/80 dark:text-[#64748b] text-xs font-medium hover:bg-white dark:hover:bg-[#022c22]/40 hover:shadow-md transition-all">
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/90 dark:bg-[#022c22]/60 backdrop-blur border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 text-[#ecfdf5]/80 dark:text-[#64748b] text-xs font-medium hover:bg-white dark:hover:bg-[#022c22]/40 hover:shadow-md transition-all">
           <BookOpen className="w-3.5 h-3.5 text-[#C9A84C]" />
           {showHelp ? 'Hide guide' : 'How to use'}
         </button>
@@ -1356,7 +1357,7 @@ const CLDCanvas: React.FC<{
 
       {/* ── Help panel ──────────────────────────────────────────────────── */}
       {showHelp && (
-        <div className="absolute top-14 left-3 right-3 md:right-auto md:max-w-[340px] bg-white/97 dark:bg-[#022c22]/60/97 backdrop-blur rounded-xl shadow-xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 p-4 z-20 animate-in slide-in-from-top-2 fade-in duration-200">
+        <div className="absolute top-14 left-3 right-3 md:right-auto md:max-w-[340px] bg-white/97 dark:bg-[#022c22]/60 backdrop-blur rounded-xl shadow-xl border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 p-4 z-20 animate-in slide-in-from-top-2 fade-in duration-200">
           <div className="flex items-start justify-between mb-3">
             <h4 className="font-semibold text-sm text-[#E8C560] dark:text-[#ecfdf5] flex items-center gap-1.5">
               <BookOpen className="w-4 h-4 text-[#C9A84C]" /> CLD Builder Guide
@@ -1365,19 +1366,19 @@ const CLDCanvas: React.FC<{
           </div>
           <div className="space-y-2 text-xs text-[#ecfdf5]/80 dark:text-[#64748b]">
             <div className="grid grid-cols-2 gap-2">
-              <div className="bg-[#064e3b]/10 dark:bg-[#022c22]/40/50 rounded-lg p-2">
+              <div className="bg-[#064e3b]/10 dark:bg-[#022c22]/40 rounded-lg p-2">
                 <p className="font-bold text-[#E8C560]/90 dark:text-[#ecfdf5]/90 mb-1">Adding nodes</p>
                 <p>Click <strong>"Add Node"</strong> (bottom-right) or <strong>"Build from SWOT"</strong> to auto-populate.</p>
               </div>
-              <div className="bg-[#064e3b]/10 dark:bg-[#022c22]/40/50 rounded-lg p-2">
+              <div className="bg-[#064e3b]/10 dark:bg-[#022c22]/40 rounded-lg p-2">
                 <p className="font-bold text-[#E8C560]/90 dark:text-[#ecfdf5]/90 mb-1">Drawing arrows</p>
                 <p><strong>Shift+drag</strong> from a node, or hover → click the <span className="text-indigo-400 font-bold">→</span> button.</p>
               </div>
-              <div className="bg-[#064e3b]/10 dark:bg-[#022c22]/40/50 rounded-lg p-2">
+              <div className="bg-[#064e3b]/10 dark:bg-[#022c22]/40 rounded-lg p-2">
                 <p className="font-bold text-[#E8C560]/90 dark:text-[#ecfdf5]/90 mb-1">Moving nodes</p>
                 <p>Just <strong>drag</strong> any node to reposition it freely on the canvas.</p>
               </div>
-              <div className="bg-[#064e3b]/10 dark:bg-[#022c22]/40/50 rounded-lg p-2">
+              <div className="bg-[#064e3b]/10 dark:bg-[#022c22]/40 rounded-lg p-2">
                 <p className="font-bold text-[#E8C560]/90 dark:text-[#ecfdf5]/90 mb-1">Editing arrows</p>
                 <p>Click the <span className="text-[#34d399] font-bold">+</span>/<span className="text-red-500 font-bold">−</span> badge to toggle polarity or change strength. Hover → <span className="text-red-500">×</span> to delete.</p>
               </div>
@@ -1388,17 +1389,17 @@ const CLDCanvas: React.FC<{
             </div>
             <div className="flex items-center gap-4 text-[10px] text-[#64748b] dark:text-[#64748b]/80 pt-1">
               <span className="flex items-center gap-1"><span className="w-3 h-0.5 bg-[#059669] rounded inline-block"/><span className="w-0 h-0 border-l-2 border-r-0 border-t-2 border-b-2 border-transparent border-l-emerald-500 inline-block -ml-0.5 mr-1"/>Reinforcing (+)</span>
-              <span className="flex items-center gap-1"><span className="w-3 h-0.5 bg-red-500/100 rounded inline-block"/><span className="w-0 h-0 border-l-2 border-r-0 border-t-2 border-b-2 border-transparent border-l-red-500 inline-block -ml-0.5 mr-1"/>Balancing (−)</span>
-              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500/100 inline-block"/>Delay</span>
+              <span className="flex items-center gap-1"><span className="w-3 h-0.5 bg-red-500 rounded inline-block"/><span className="w-0 h-0 border-l-2 border-r-0 border-t-2 border-b-2 border-transparent border-l-red-500 inline-block -ml-0.5 mr-1"/>Balancing (−)</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500 inline-block"/>Delay</span>
             </div>
           </div>
         </div>
       )}
 
       {/* ── Legend: bottom-left ──────────────────────────────────────────── */}
-      <div className="absolute bottom-3 left-3 bg-white/90 dark:bg-[#022c22]/60/90 backdrop-blur rounded-lg px-3 py-2 text-xs text-[#ecfdf5]/80 dark:text-[#64748b] flex flex-wrap gap-3 shadow-md border border-[#C9A84C]/20 dark:border-[#C9A84C]/20" style={{ zIndex: 15 }}>
+      <div className="absolute bottom-3 left-3 bg-white/90 dark:bg-[#022c22]/60 backdrop-blur rounded-lg px-3 py-2 text-xs text-[#ecfdf5]/80 dark:text-[#64748b] flex flex-wrap gap-3 shadow-md border border-[#C9A84C]/20 dark:border-[#C9A84C]/20" style={{ zIndex: 15 }}>
         <span className="flex items-center gap-1.5 font-medium"><span className="w-3 h-0.5 bg-[#059669] rounded" />Reinforcing (+)</span>
-        <span className="flex items-center gap-1.5 font-medium"><span className="w-3 h-0.5 bg-red-500/100 rounded" />Balancing (−)</span>
+        <span className="flex items-center gap-1.5 font-medium"><span className="w-3 h-0.5 bg-red-500 rounded" />Balancing (−)</span>
         {highlightedNodeIds.length > 0 && (
           <span className="flex items-center gap-1.5 font-medium text-violet-600 dark:text-violet-400">
             <Circle className="w-2.5 h-2.5 fill-violet-500 text-violet-500" />Leverage target
@@ -1444,7 +1445,7 @@ const CLDCanvas: React.FC<{
                       onClick={() => setLinkDialog({ ...linkDialog, polarity: p })}
                       className={cn('flex-1 py-2.5 rounded-lg text-xs font-semibold transition-all',
                         linkDialog.polarity === p
-                          ? p === '+' ? 'bg-[#059669] text-white shadow-md' : 'bg-red-500/100 text-white shadow-md'
+                          ? p === '+' ? 'bg-[#059669] text-white shadow-md' : 'bg-red-500 text-white shadow-md'
                           : 'bg-[#064e3b]/20 dark:bg-[#022c22]/40 text-[#ecfdf5]/80 dark:text-[#64748b] hover:bg-slate-200 dark:hover:bg-slate-600'
                       )}>
                       {p === '+' ? '+ Reinforcing (same direction)' : '− Balancing (opposite direction)'}
@@ -1482,7 +1483,7 @@ const CLDCanvas: React.FC<{
                 </button>
                 {!linkDialog.isNew && (
                   <button onClick={() => { deleteLink(linkDialog.from, linkDialog.to); setLinkDialog(null); }}
-                    className="px-3 py-2 rounded-lg bg-red-500/10 dark:bg-red-900/30 hover:bg-red-500/100/10 dark:hover:bg-red-900/50 text-red-400 dark:text-red-400 text-sm font-medium transition-colors">
+                    className="px-3 py-2 rounded-lg bg-red-500/10 dark:bg-red-900/30 hover:bg-red-500 dark:hover:bg-red-900/50 text-red-400 dark:text-red-400 text-sm font-medium transition-colors">
                     Delete
                   </button>
                 )}
@@ -1566,7 +1567,7 @@ const SnapshotsPanel: React.FC<{
               </span>
               {snap.id !== activeSnapshotId && (
                 <div className="flex items-center gap-1">
-                  <button onClick={() => { setShowRenameDialog(snap.id); setNewSnapshotName(snap.label); }}
+                  <button onClick={() => { setShowRenameDialog(snap.id); setNewSnapshotName(snap.label ?? ''); }}
                     className="text-[#64748b]/80 dark:text-[#64748b] hover:text-[#C9A84C]" title="Rename">
                     <FileText className="w-3 h-3" />
                   </button>
@@ -1583,7 +1584,7 @@ const SnapshotsPanel: React.FC<{
 
       {showSaveDialog && (
         <div className="fixed inset-0 bg-[#022c22]/50 backdrop-blur-sm flex items-center justify-center z-50 animate-in fade-in duration-150">
-          <div className="bg-white dark:bg-[#022c22]/60/60 rounded-2xl shadow-2xl p-5 border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 w-full max-w-sm mx-3 animate-in zoom-in-95 duration-200">
+          <div className="bg-white dark:bg-[#022c22]/60 rounded-2xl shadow-2xl p-5 border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 w-full max-w-sm mx-3 animate-in zoom-in-95 duration-200">
             <h3 className="font-semibold text-[#E8C560] dark:text-[#ecfdf5] mb-4 flex items-center gap-2"><Save className="w-5 h-5 text-[#C9A84C]" /> Save CLD Snapshot</h3>
             <input autoFocus value={newSnapshotName} onChange={e => setNewSnapshotName(e.target.value)}
               placeholder="Enter snapshot name..."
@@ -1599,7 +1600,7 @@ const SnapshotsPanel: React.FC<{
 
       {showRenameDialog && (
         <div className="fixed inset-0 bg-[#022c22]/50 backdrop-blur-sm flex items-center justify-center z-50 animate-in fade-in duration-150">
-          <div className="bg-white dark:bg-[#022c22]/60/60 rounded-2xl shadow-2xl p-5 border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 w-full max-w-sm mx-3 animate-in zoom-in-95 duration-200">
+          <div className="bg-white dark:bg-[#022c22]/60 rounded-2xl shadow-2xl p-5 border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 w-full max-w-sm mx-3 animate-in zoom-in-95 duration-200">
             <h3 className="font-semibold text-[#E8C560] dark:text-[#ecfdf5] mb-4 flex items-center gap-2"><FileText className="w-5 h-5 text-[#C9A84C]" /> Rename Snapshot</h3>
             <input autoFocus value={newSnapshotName} onChange={e => setNewSnapshotName(e.target.value)}
               placeholder="Enter new name..."
@@ -1654,7 +1655,7 @@ const AnalysisSidePanel: React.FC<AnalysisSidePanelProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed right-0 top-0 h-full w-full md:w-[400px] bg-white dark:bg-[#022c22]/60/60 shadow-2xl border-l border-[#C9A84C]/20 dark:border-[#C9A84C]/20 z-50 flex flex-col">
+    <div className="fixed right-0 top-0 h-full w-full md:w-[400px] bg-white dark:bg-[#022c22]/60 shadow-2xl border-l border-[#C9A84C]/20 dark:border-[#C9A84C]/20 z-50 flex flex-col">
       <div className="p-4 border-b border-[#C9A84C]/20 dark:border-[#C9A84C]/20 flex items-center justify-between bg-gradient-to-r from-blue-50 to-indigo-50">
         <div className="flex items-center gap-2">
           <Bot className="w-5 h-5 text-[#C9A84C]" />
@@ -1700,7 +1701,7 @@ const AnalysisSidePanel: React.FC<AnalysisSidePanelProps> = ({
               {analysisData.detected_loops.map((loop, idx) => (
                 <div key={idx} className="rounded-lg border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 bg-[#064e3b]/10 dark:bg-[#022c22] p-2">
                   <div className="flex items-center gap-2">
-                    <span className={`text-[10px] font-black px-1.5 py-0.5 rounded ${loop.type === 'R' ? 'bg-[#059669]/10 text-[#34d399]' : 'bg-amber-500/100/10 text-amber-400'}`}>
+                    <span className={`text-[10px] font-black px-1.5 py-0.5 rounded ${loop.type === 'R' ? 'bg-[#059669]/10 text-[#34d399]' : 'bg-amber-500 text-amber-400'}`}>
                       {loop.type}
                     </span>
                     <span className="text-xs text-[#E8C560]/90 dark:text-[#ecfdf5]/90 truncate flex-1">{loop.name}</span>
@@ -1737,9 +1738,9 @@ const AnalysisSidePanel: React.FC<AnalysisSidePanelProps> = ({
             </h4>
             <div className="space-y-2">
               {analysisData.ranked_leverage_points.slice(0, 5).map((point, idx) => (
-                <div key={idx} className="rounded-lg border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 bg-white dark:bg-[#022c22]/60/60 p-2">
+                <div key={idx} className="rounded-lg border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 bg-white dark:bg-[#022c22]/60 p-2">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-red-500/100 text-white">L{point.leverageLevel}</span>
+                    <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-red-500 text-white">L{point.leverageLevel}</span>
                     <span className="text-[10px] text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b]">{MEADOWS_LEVELS[point.leverageLevel]?.name || ''}</span>
                   </div>
                   <p className="text-xs text-[#E8C560]/90 dark:text-[#ecfdf5]/90 leading-relaxed">{point.intervention}</p>
@@ -1892,7 +1893,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
   const handleUpdateLinks = useCallback((newLinks: ExtendedCLDLink[]) => setLocalCldLinks(newLinks), []);
 
   // ── AI Analysis via Kimi Edge Function ─────────────────────────────────────
-  const AI_STRATEGY_URL = 'https://lydsisparsmvextskevw.supabase.co/functions/v1/ai-strategy-assistant';
+  const AI_STRATEGY_URL = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
 
   const executeAIAnalysis = useCallback(async (
     nodes: ExtendedCLDNode[], links: ExtendedCLDLink[], strategies: string[],
@@ -2112,7 +2113,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
         ].map(({ id, label, Icon }) => (
           <button key={id} onClick={() => setViewMode(id as typeof viewMode)}
             className={cn('flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors flex-1 justify-center',
-              viewMode === id ? 'bg-white dark:bg-[#022c22]/60/60 shadow-sm text-[#E8C560] dark:text-[#ecfdf5]' : 'text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b] hover:text-[#E8C560]/90 dark:text-[#ecfdf5]/90')}>
+              viewMode === id ? 'bg-white dark:bg-[#022c22]/60 shadow-sm text-[#E8C560] dark:text-[#ecfdf5]' : 'text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b] hover:text-[#E8C560]/90 dark:text-[#ecfdf5]/90')}>
             <Icon className="w-3.5 h-3.5" />
             {label}
           </button>
@@ -2189,7 +2190,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
                   const arch = systemArchetypes.find(a => a.id === rec.archetypeId);
                   if (!arch) return null;
                   return (
-                    <div key={rec.archetypeId} className="bg-white dark:bg-[#022c22]/60/60 rounded-lg p-3 border border-violet-200/60">
+                    <div key={rec.archetypeId} className="bg-white dark:bg-[#022c22]/60 rounded-lg p-3 border border-violet-200/60">
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 flex-wrap mb-1">
@@ -2217,15 +2218,15 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
           <div className="flex items-center gap-1 bg-[#064e3b]/20 dark:bg-[#022c22]/60 rounded-xl p-1">
             <button onClick={() => setCldSubView('diagram')}
               className={cn('flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors flex-1 justify-center',
-                cldSubView === 'diagram' ? 'bg-white dark:bg-[#022c22]/60/60 shadow-sm text-[#E8C560] dark:text-[#ecfdf5]' : 'text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b] hover:text-[#E8C560]/90 dark:text-[#ecfdf5]/90')}>
+                cldSubView === 'diagram' ? 'bg-white dark:bg-[#022c22]/60 shadow-sm text-[#E8C560] dark:text-[#ecfdf5]' : 'text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b] hover:text-[#E8C560]/90 dark:text-[#ecfdf5]/90')}>
               <GitBranch className="w-3.5 h-3.5" /> CLD Diagram
             </button>
             <button onClick={() => setCldSubView('leverage')}
               className={cn('flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors flex-1 justify-center relative',
-                cldSubView === 'leverage' ? 'bg-white dark:bg-[#022c22]/60/60 shadow-sm text-[#E8C560] dark:text-[#ecfdf5]' : 'text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b] hover:text-[#E8C560]/90 dark:text-[#ecfdf5]/90')}>
+                cldSubView === 'leverage' ? 'bg-white dark:bg-[#022c22]/60 shadow-sm text-[#E8C560] dark:text-[#ecfdf5]' : 'text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b] hover:text-[#E8C560]/90 dark:text-[#ecfdf5]/90')}>
               <Target className="w-3.5 h-3.5" /> Leverage Points
               {leverageCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-red-500/100 text-white text-[9px] font-black flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-red-500 text-white text-[9px] font-black flex items-center justify-center">
                   {leverageCount > 9 ? '9+' : leverageCount}
                 </span>
               )}
@@ -2282,7 +2283,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
               {systemArchetypes.map(arch => (
                 <div key={arch.id}
                   className={cn('rounded-xl border-2 transition-all cursor-pointer',
-                    selectedArchId === arch.id ? 'border-[#C9A84C] bg-[#C9A84C]/10' : 'border-[#C9A84C]/20 dark:border-[#C9A84C]/20 bg-white dark:bg-[#022c22]/60/60 hover:border-blue-300')}>
+                    selectedArchId === arch.id ? 'border-[#C9A84C] bg-[#C9A84C]/10' : 'border-[#C9A84C]/20 dark:border-[#C9A84C]/20 bg-white dark:bg-[#022c22]/60 hover:border-blue-300')}>
 
                   {/* ── Card header row ── */}
                   <div
@@ -2314,7 +2315,7 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
 
                   {/* ── Expanded body ── */}
                   {selectedArchId === arch.id && (
-                    <div className="px-4 pb-4 space-y-3 border-t border-[#C9A84C]/20 dark:border-[#C9A84C]/20/60 pt-3">
+                    <div className="px-4 pb-4 space-y-3 border-t border-[#C9A84C]/20 dark:border-[#C9A84C]/20 pt-3">
                       {/* Diagram preview inside expanded panel */}
                       {arch.imageUrl && (
                         <div className="rounded-xl overflow-hidden border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 bg-[#064e3b]/10 dark:bg-[#022c22]">
