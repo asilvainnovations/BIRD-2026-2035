@@ -99,6 +99,7 @@ COMPACT = {"tawi-tawi-validation-workshop.html"}
 for _n in ["Chapter1", "Chapter2", "Chapter3", "Chapter4", "Chapter5", "Chapter6", "Chapter7",
            "Indexes", "integrated-report", "integrated-report-updated", "integrated"]:
     MODES[f"report/{_n}.html"] = "embedded"
+MODES["report/integrated-report-updated.html"] = "head"   # now a redirect to integrated-report.html
 
 # Pages whose first <nav> is page furniture, not the site nav — never removed.
 KEEP_NAV = {"strategy-map.html", "user-manual.html"}
