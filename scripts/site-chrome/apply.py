@@ -47,7 +47,7 @@ NAV = [
     ("The Report", [
         ("Executive Summary", "report/executive-summary.html", None),
         ("Read the report", "report/Chapter1.html", "Chapters 1–7"),
-        ("Integrated report", "report/integrated-report.html", "Single-page edition"),
+        ("Integrated report", "report/integrated-report.html", "Single-volume edition"),
         ("Strategic dashboard", "report/strategic-dashboard.html", None),
         ("Subject index", "report/Indexes.html", None),
     ]),
@@ -319,8 +319,8 @@ def apply(path: Path) -> str:
         s = new
     if mode in ("full", "embedded"):
         s = before_last_body(s, footer(pre, page, notes))
-    if legacy:
-        s = before_last_body(s, stub(legacy))
+    if legacy:  # right after <body>, so stubs exist before any page script runs
+        s = after_body_open(s, stub(legacy))
     return s
 
 
