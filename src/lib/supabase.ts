@@ -15,7 +15,10 @@ const supabaseUrl =
   (import.meta.env.VITE_SUPABASE_URL as string) ||
   'https://lydsisparsmvextskevw.supabase.co';
 
+// Accepts either the modern publishable key (sb_publishable_…, the name the
+// Supabase dashboard now suggests) or the legacy anon JWT. Both are public.
 const supabaseKey =
+  (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string) ||
   (import.meta.env.VITE_SUPABASE_ANON_KEY as string) || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5ZHNpc3BhcnNtdmV4dHNrZXZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5NzIxNzEsImV4cCI6MjA5NzU0ODE3MX0.VM8BPXPLw7wGYCcUvwlTGeP4qB-M02Nq3x720OG5jIs';
 
 export const supabase = createClient(supabaseUrl, supabaseKey, {
