@@ -1,0 +1,140 @@
+/* =====================================================================
+   BIRD 2026–2035 · Shared site chrome (nav bar, menu, sub-nav, footer)
+   Generated markup comes from scripts/site-chrome/apply.py — edit the
+   config there, not the HTML of individual pages.
+
+   Isolation: pages carry their own CSS with bare element selectors
+   (nav{position:fixed}, footer{text-align:center}, a{…}). Every chrome
+   element is first reset with `all: revert` at (0,1,1) specificity,
+   which beats those element selectors, then styled at (0,2,x).
+   ===================================================================== */
+
+.bc-bar, .bc-footer, .bc-subnav,
+.bc-scope :is(nav, header, footer, div, ul, ol, li, a, button, img, details, summary, p, span, small, strong, h2) {
+  all: revert;
+  box-sizing: border-box;
+}
+.bc-bar *, .bc-footer *, .bc-subnav * { box-sizing: border-box; }
+[hidden][data-legacy-stub] { display: none !important; }
+
+:root { --bc-h: 60px; --bc-green: #022c22; --bc-green-2: #011a12; --bc-gold: #C9A84C;
+        --bc-gold-2: #E8C560; --bc-cream: #ecfdf5; --bc-muted: #a3bfb3; --bc-line: rgba(201,168,76,.28); }
+
+/* ── Bar ─────────────────────────────────────────────────────────────── */
+.bc-scope.bc-bar {
+  position: sticky; top: 0; z-index: 1000; display: block; width: 100%; margin: 0;
+  height: auto; min-height: var(--bc-h); padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
+  background: rgba(2,44,34,.98); color: var(--bc-cream);
+  border: 0; border-bottom: 1px solid var(--bc-line);
+  /* No backdrop-filter: it would make the bar the containing block of the
+     position:fixed menu panel and collapse it to the bar's height. */
+  font: 400 15px/1.4 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  text-align: left;
+}
+.bc-scope .bc-in { display: flex; align-items: center; gap: 12px; max-width: 1400px; height: var(--bc-h); margin: 0 auto; padding: 0 14px; }
+.bc-scope .bc-brand { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; color: var(--bc-cream); flex-shrink: 0; }
+.bc-scope .bc-seal { display: block; width: 38px; height: 38px; border-radius: 50%; object-fit: contain; background: var(--bc-green);
+  border: 2px solid rgba(201,168,76,.32); margin: 0; padding: 0; max-width: none; }
+.bc-scope .bc-word { display: flex; flex-direction: column; line-height: 1.1; }
+.bc-scope .bc-word strong { font: 700 15px/1.1 'Cinzel', Georgia, serif; letter-spacing: .02em; color: var(--bc-cream); }
+.bc-scope .bc-word strong span { color: var(--bc-gold); }
+.bc-scope .bc-word small { font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--bc-muted); margin-top: 2px; }
+
+.bc-scope nav.bc-primary { display: none; margin: 0 0 0 auto; padding: 0; position: static; background: none; border: 0; }
+.bc-scope .bc-primary a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 10px; margin: 0; border-radius: 8px;
+  color: var(--bc-cream); text-decoration: none; font-size: 14px; font-weight: 500; white-space: nowrap; }
+.bc-scope .bc-primary a:hover, .bc-scope .bc-primary a:focus-visible { background: rgba(201,168,76,.12); color: var(--bc-gold-2); }
+.bc-scope .bc-primary a[aria-current="page"] { color: var(--bc-gold-2); box-shadow: inset 0 -2px 0 var(--bc-gold); border-radius: 8px 8px 0 0; }
+
+.bc-scope .bc-cta { display: none; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 10px; flex-shrink: 0;
+  background: var(--bc-gold); color: var(--bc-green); font-weight: 700; font-size: 13.5px; text-decoration: none; white-space: nowrap; }
+.bc-scope .bc-cta:hover, .bc-scope .bc-cta:focus-visible { background: var(--bc-gold-2); }
+
+/* ── Menu (no-JS <details>; JS adds outside-click / Escape) ────────────── */
+.bc-scope details.bc-menu { display: block; margin: 0 0 0 auto; position: static; }
+.bc-scope .bc-menu > summary { list-style: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; min-width: 44px;
+  padding: 0 12px; border-radius: 10px; border: 1px solid var(--bc-line); color: var(--bc-cream); cursor: pointer;
+  font-size: 14px; font-weight: 600; user-select: none; background: transparent; }
+.bc-scope .bc-menu > summary::-webkit-details-marker { display: none; }
+.bc-scope .bc-menu > summary:hover, .bc-scope .bc-menu > summary:focus-visible, .bc-scope .bc-menu[open] > summary { border-color: var(--bc-gold); color: var(--bc-gold-2); }
+.bc-scope .bc-menu > summary svg { width: 20px; height: 20px; display: block; flex-shrink: 0; fill: none; stroke: currentColor; }
+.bc-scope .bc-panel { position: fixed; left: 0; right: 0; top: var(--bc-h); bottom: 0; z-index: 1001; overflow-y: auto; overscroll-behavior: contain;
+  margin: 0; padding: 18px 16px calc(24px + env(safe-area-inset-bottom)); background: var(--bc-green); border-top: 1px solid var(--bc-line);
+  display: grid; grid-template-columns: 1fr; gap: 18px; align-content: start; }
+.bc-scope .bc-group h2 { margin: 0 0 6px; padding: 0; font: 700 11px/1.3 'DM Sans', system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--bc-gold); }
+.bc-scope .bc-group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.bc-scope .bc-group li { margin: 0; padding: 0; }
+.bc-scope .bc-group a { display: flex; align-items: center; min-height: 44px; padding: 6px 10px; border-radius: 8px; color: var(--bc-cream);
+  text-decoration: none; font-size: 15px; line-height: 1.3; }
+.bc-scope .bc-group a small { display: block; color: var(--bc-muted); font-size: 12px; margin-top: 1px; }
+.bc-scope .bc-group a:hover, .bc-scope .bc-group a:focus-visible { background: rgba(201,168,76,.12); color: var(--bc-gold-2); }
+.bc-scope .bc-group a[aria-current="page"] { color: var(--bc-gold-2); background: rgba(201,168,76,.10); box-shadow: inset 3px 0 0 var(--bc-gold); }
+.bc-scope .bc-ext::after { content: "↗"; margin-left: 6px; font-size: 12px; color: var(--bc-muted); }
+
+@media (min-width: 640px) {
+  .bc-scope .bc-panel { grid-template-columns: repeat(2, 1fr); padding: 22px 24px 28px; }
+  .bc-scope .bc-cta { display: inline-flex; }
+}
+@media (min-width: 1100px) {
+  .bc-scope nav.bc-primary { display: flex; align-items: center; gap: 2px; }
+  .bc-scope details.bc-menu { margin-left: 4px; }
+  .bc-scope .bc-in { padding: 0 24px; }
+  .bc-scope .bc-panel { position: absolute; top: 100%; bottom: auto; left: 0; right: 0; max-height: calc(100vh - var(--bc-h));
+    grid-template-columns: repeat(5, 1fr); padding: 26px max(24px, calc((100vw - 1400px) / 2 + 24px)) 30px; box-shadow: 0 24px 48px rgba(0,0,0,.45); }
+}
+
+/* ── Embedded mode (pages that keep their own app bar) ──────────────── */
+.bc-scope.bc-embedded { display: inline-flex; align-items: center; gap: 8px; margin: 0; padding: 0; background: none; border: 0; position: static; }
+.bc-scope.bc-embedded .bc-seal { width: 32px; height: 32px; }
+.bc-scope.bc-embedded .bc-word small { display: none; }
+.bc-scope.bc-embedded .bc-word strong { font-size: 13.5px; }
+.bc-scope.bc-embedded details.bc-menu { margin: 0; }
+.bc-scope.bc-embedded .bc-menu > summary { min-height: 36px; padding: 0 10px; font-size: 13px; }
+.bc-scope.bc-embedded .bc-panel { top: var(--bc-embed-top, 60px); }
+@media (min-width: 1100px) { .bc-scope.bc-embedded .bc-panel { position: fixed; top: var(--bc-embed-top, 60px); } }
+
+/* ── In-page section sub-nav (rebuilt from a page's old anchor nav) ─── */
+.bc-scope.bc-subnav { display: block; position: sticky; top: var(--bc-h); z-index: 999; margin: 0; padding: 0;
+  background: rgba(1,26,18,.97); border: 0; border-bottom: 1px solid var(--bc-line); }
+.bc-scope.bc-subnav ul { list-style: none; display: flex; gap: 6px; margin: 0 auto; padding: 8px 14px; max-width: 1400px;
+  overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.bc-scope.bc-subnav ul::-webkit-scrollbar { display: none; }
+.bc-scope.bc-subnav li { margin: 0; padding: 0; flex-shrink: 0; }
+.bc-scope.bc-subnav a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px; border-radius: 999px; white-space: nowrap;
+  border: 1px solid rgba(110,231,183,.25); color: #d1fae5; text-decoration: none; font: 500 13px/1 'DM Sans', system-ui, sans-serif; }
+.bc-scope.bc-subnav a:hover, .bc-scope.bc-subnav a:focus-visible { border-color: var(--bc-gold); color: var(--bc-gold-2); }
+
+/* ── Footer ──────────────────────────────────────────────────────────── */
+.bc-scope.bc-footer { display: block; position: static; width: 100%; margin: 0; padding: 40px 16px calc(28px + env(safe-area-inset-bottom));
+  background: var(--bc-green-2); color: var(--bc-muted); border: 0; border-top: 3px solid var(--bc-line); text-align: left;
+  font: 400 14px/1.6 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+.bc-scope .bc-fin { max-width: 1200px; margin: 0 auto; }
+.bc-scope .bc-fgrid { display: grid; grid-template-columns: 1fr; gap: 26px; margin: 0; padding: 0; }
+.bc-scope .bc-fbrand p { margin: 12px 0 0; color: var(--bc-muted); font-size: 13.5px; max-width: 34ch; }
+.bc-scope .bc-fbrand .bc-cta { display: inline-flex; margin-top: 14px; }
+.bc-scope .bc-fcol h2 { margin: 0 0 8px; font: 700 11px/1.3 'DM Sans', system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--bc-gold); }
+.bc-scope .bc-fcol ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.bc-scope .bc-fcol li { margin: 0; padding: 0; }
+.bc-scope .bc-fcol a { display: inline-flex; align-items: center; min-height: 36px; color: #d1fae5; text-decoration: none; font-size: 14px; }
+.bc-scope .bc-fcol a:hover, .bc-scope .bc-fcol a:focus-visible { color: var(--bc-gold-2); text-decoration: underline; text-underline-offset: 3px; }
+.bc-scope .bc-fbottom { display: flex; flex-wrap: wrap; gap: 10px 18px; justify-content: space-between; align-items: center;
+  margin: 30px 0 0; padding: 18px 0 0; border-top: 1px solid rgba(201,168,76,.15); font-size: 12.5px; color: var(--bc-muted); }
+.bc-scope .bc-fbottom p { margin: 0; }
+.bc-scope .bc-fbottom a { color: #d1fae5; text-decoration: none; }
+.bc-scope .bc-fbottom a:hover, .bc-scope .bc-fbottom a:focus-visible { color: var(--bc-gold-2); text-decoration: underline; }
+.bc-scope .bc-flegal { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+@media (min-width: 640px)  { .bc-scope .bc-fgrid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .bc-scope .bc-fgrid { grid-template-columns: 1.4fr repeat(4, 1fr); } .bc-scope.bc-footer { padding: 52px 24px 30px; } }
+
+/* ── Focus + motion + print ─────────────────────────────────────────── */
+.bc-scope a:focus-visible, .bc-scope summary:focus-visible { outline: 3px solid var(--bc-gold); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .bc-scope * { transition: none !important; } }
+@media print { .bc-bar, .bc-subnav, .bc-footer, .bc-embedded details { display: none !important; } }
+
+/* ── Per-layout adjustments for pages whose old nav was position:fixed ── */
+.bc-on .banner-wrap { margin-top: 0 !important; }               /* provincial outlooks */
+.bc-on nav.sticky.top-0 { top: var(--bc-h) !important; }        /* strategy-map (Tailwind) */
+.bc-on .progress-wrap { top: var(--bc-h) !important; }          /* feedback.html */
+.bc-scope .bc-fnotes { margin: 0 0 24px; padding: 0 0 18px; border-bottom: 1px solid rgba(201,168,76,.15); font-size: 12.5px; color: var(--bc-muted); }
+.bc-scope .bc-fnotes p { margin: 0 0 6px; }
+@media (max-width: 760px) { .bc-on .top-bar .header-center { display: none !important; } }   /* user-manual */
