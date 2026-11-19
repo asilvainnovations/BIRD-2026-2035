@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#022c22">
-<meta name="description" content="Tawi-Tawi Economic and Investment Outlook (2026-2035) - Strategic analysis of the southernmost BARMM province's seaweed industry, BIMP-EAGA trade corridors, and marine-based economy transformation">
+<meta name="description" content="Tawi-Tawi Economic and Investment Outlook (2026-2035): seaweed value chain, BIMP-EAGA trade corridors and island economy, with the results of the 28 October 2026 provincial validation in Bongao (water security, seaweed pricing, community safety).">
 <meta name="keywords" content="Tawi-Tawi investment, BARMM economic outlook, seaweed industry Philippines, BIMP-EAGA trade, halal marine products, Bongao development, island province investment, marine aquaculture BARMM">
 <meta name="author" content="Ministry of Trade, Investments and Tourism - BARMM">
 <meta property="og:title" content="Tawi-Tawi Economic and Investment Outlook 2026-2035">
@@ -19,7 +19,7 @@ DESIGN TOKENS
 ===================================================== */
 :root{
 --primary-green:#064e3b;--dark-green:#022c22;--mid-green:#065f46;
---light-green:#6ee7b7;--cream:#ecfdf5;--text-dark:#0f172a;--text-muted:#64748b;
+--light-green:#6ee7b7;--cream:#ecfdf5;--text-dark:#0f172a;--text-muted:#475569;
 --gold:#C9A84C;--gold-light:#E8C560;--gold-dark:#8B6C28;--gold-pale:#fdf6e3;
 --gold-border:rgba(201,168,76,0.35);
 --gold-grad:linear-gradient(135deg,#7a5c1e 0%,#c9a84c 35%,#e8c560 50%,#c9a84c 65%,#7a5c1e 100%);
@@ -139,7 +139,7 @@ section{padding:var(--sp-12) var(--sp-4);}
 .section-header h2.white{color:white;}
 .section-divider{width:60px;height:4px;background:var(--gold-grad);border-radius:2px;margin:.8rem auto var(--sp-4);}
 .section-header p{color:var(--text-muted);font-size:.95rem;max-width:600px;margin:0 auto;line-height:1.65;}
-.section-header p.light{color:rgba(255,255,255,.65);}
+.section-header p.light,.economic-section .section-header p,.recommendations-section .section-header p{color:rgba(236,253,245,.78);}
 /* Section Navigation */
 .section-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--sp-2);margin-bottom:var(--sp-12);}
 .section-nav-btn{background:rgba(6,78,59,.1);color:var(--text-muted);border:1px solid rgba(6,78,59,.2);border-radius:var(--r-full);padding:var(--sp-2) var(--sp-4);font-size:.85rem;font-weight:500;transition:all .3s;white-space:nowrap;}
@@ -157,7 +157,7 @@ PROVINCIAL OVERVIEW SECTION
 .overview-card p{color:var(--text-muted);font-size:.84rem;line-height:1.5;}
 .overview-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-4);margin-top:var(--sp-6);}
 .stat-item{background:white;border-radius:var(--r-md);padding:var(--sp-4);text-align:center;box-shadow:0 4px 12px rgba(6,78,59,.05);}
-.stat-value{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:var(--gold);display:block;margin-bottom:.2rem;}
+.stat-value{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:var(--gold-dark);display:block;margin-bottom:.2rem;}
 .stat-label{font-size:.75rem;color:var(--text-muted);}
 @media(min-width:480px){.overview-stats{grid-template-columns:repeat(3,1fr);}}
 @media(min-width:900px){
@@ -194,9 +194,9 @@ BEIE FRAMEWORK SECTION
 .cluster-badge{display:inline-block;font-size:.65rem;font-weight:700;padding:.15rem .55rem;border-radius:.25rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.08em;}
 .badge-foundations{background:rgba(16,185,129,.15);color:#10b981;border:1px solid rgba(16,185,129,.3);}
 .badge-transformers{background:rgba(201,168,76,.15);color:var(--gold);border:1px solid var(--gold-border);}
-.badge-enablers{background:rgba(59,130,246,.15);color:#3b82f6;border:1px solid rgba(59,130,246,.3);}
-.badge-connectors{background:rgba(147,51,234,.15);color:#9333ea;border:1px solid rgba(147,51,234,.3);}
-.badge-financiers{background:rgba(239,68,68,.15);color:#ef4444;border:1px solid rgba(239,68,68,.3);}
+.badge-enablers{background:rgba(59,130,246,.15);color:#60a5fa;border:1px solid rgba(59,130,246,.3);}
+.badge-connectors{background:rgba(147,51,234,.15);color:#c084fc;border:1px solid rgba(147,51,234,.3);}
+.badge-financiers{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3);}
 .cluster-crosscutting{background:rgba(245,158,11,.15);color:#f59e0b;border:1px solid rgba(245,158,11,.3);}
 .cluster-explanation h4{font-family:'Cinzel',serif;color:var(--gold);font-size:.95rem;margin-bottom:.45rem;}
 .cluster-explanation p{color:rgba(209,250,229,.8);font-size:.83rem;line-height:1.6;margin-bottom:.5rem;}
@@ -289,7 +289,7 @@ FOOTER
 footer{background:#011a12;color:white;padding:var(--sp-8) var(--sp-4) var(--sp-6);border-top:3px solid var(--gold-border);}
 .footer-inner{max-width:1200px;margin:0 auto;}
 .footer-logo img{height:42px;width:auto;object-fit:contain;margin-bottom:var(--sp-4);}
-.footer-bottom{text-align:center;padding-top:var(--sp-4);border-top:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.38);font-size:.78rem;line-height:1.7;}
+.footer-bottom{text-align:center;padding-top:var(--sp-4);border-top:1px solid rgba(255,255,255,.08);color:rgba(236,253,245,.68);font-size:.78rem;line-height:1.7;}
 .footer-bottom span{color:var(--gold);}
 /* =====================================================
 SCROLL ANIMATIONS
@@ -297,6 +297,57 @@ SCROLL ANIMATIONS
 .fade-in{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
 .fade-in.visible{opacity:1;transform:none;}
 .fd1{transition-delay:.08s;}.fd2{transition-delay:.16s;}.fd3{transition-delay:.24s;}
+
+/* =====================================================
+PROVINCIAL VALIDATION SECTION (28 Oct 2026)
+===================================================== */
+.validation-section{background:var(--cream);border-top:3px solid var(--gold-border);}
+.validation-section .section-header p{color:#475569;}
+.val-facts{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-3);margin-bottom:var(--sp-8);}
+.val-fact{background:white;border:1px solid rgba(6,78,59,.12);border-radius:var(--r-md);padding:var(--sp-4);}
+.val-fact span{display:block;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:.2rem;}
+.val-fact strong{font-family:'Cinzel',serif;color:var(--primary-green);font-size:.95rem;line-height:1.35;display:block;}
+@media(min-width:768px){.val-facts{grid-template-columns:repeat(4,1fr);}}
+.val-method{background:var(--dark-green);color:white;border-radius:var(--r-lg);padding:var(--sp-6);margin-bottom:var(--sp-8);border:1px solid var(--gold-border);}
+.val-method h3{font-family:'Cinzel',serif;color:var(--gold);font-size:1.05rem;margin-bottom:.5rem;}
+.val-method>p{color:rgba(236,253,245,.85);font-size:.88rem;line-height:1.65;margin-bottom:var(--sp-4);}
+.val-method-name{display:inline-block;background:rgba(201,168,76,.12);border:1px solid var(--gold-border);color:var(--gold-light);border-radius:var(--r-sm);padding:.35rem .75rem;font-size:.82rem;font-weight:600;margin-bottom:var(--sp-4);}
+.val-steps{list-style:none;counter-reset:step;display:grid;grid-template-columns:1fr;gap:var(--sp-3);}
+.val-steps li{counter-increment:step;position:relative;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-sm);padding:.85rem .9rem .85rem 3.1rem;font-size:.84rem;color:rgba(236,253,245,.85);line-height:1.55;}
+.val-steps li::before{content:counter(step);position:absolute;left:.85rem;top:.8rem;width:1.65rem;height:1.65rem;border-radius:50%;background:var(--gold);color:var(--dark-green);font-weight:700;font-size:.8rem;display:flex;align-items:center;justify-content:center;}
+.val-steps li strong{color:var(--gold-light);display:block;margin-bottom:.1rem;}
+@media(min-width:768px){.val-steps{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1100px){.val-steps{grid-template-columns:repeat(3,1fr);}}
+.val-sequence{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:var(--sp-4);align-items:center;}
+.val-sequence span{background:rgba(110,231,183,.08);border:1px solid rgba(110,231,183,.25);color:var(--light-green);border-radius:var(--r-full);padding:.3rem .8rem;font-size:.8rem;}
+.val-sequence span.vote{background:var(--gold);color:var(--dark-green);border-color:var(--gold);font-weight:700;}
+.val-findings{display:grid;grid-template-columns:1fr;gap:var(--sp-6);margin-bottom:var(--sp-8);}
+.val-finding{background:white;border-radius:var(--r-lg);border:1px solid rgba(6,78,59,.12);border-top:5px solid var(--gold);overflow:hidden;display:flex;flex-direction:column;}
+.val-finding header{padding:var(--sp-4) var(--sp-6) 0;}
+.val-rank{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:.3rem;}
+.val-finding h3{font-family:'Cinzel',serif;color:var(--primary-green);font-size:1.05rem;line-height:1.3;margin-bottom:.6rem;}
+.val-block{padding:.25rem var(--sp-6) var(--sp-4);}
+.val-block h4{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#475569;margin:.6rem 0 .3rem;}
+.val-block p,.val-block li{font-size:.86rem;color:#334155;line-height:1.6;}
+.val-block ul{padding-left:1.1rem;}
+.val-quote{border-left:3px solid var(--gold);background:var(--gold-pale);padding:.6rem .85rem;border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:.88rem;color:#3f3a2a;font-style:italic;line-height:1.6;}
+.val-system{margin-top:auto;background:var(--dark-green);color:rgba(236,253,245,.88);padding:var(--sp-4) var(--sp-6);font-size:.82rem;line-height:1.6;}
+.val-system strong{color:var(--gold);}
+.val-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.6rem;}
+.val-tags span{font-size:.68rem;font-weight:700;letter-spacing:.06em;padding:.15rem .5rem;border-radius:.25rem;background:rgba(201,168,76,.15);color:var(--gold-light);border:1px solid var(--gold-border);}
+@media(min-width:1000px){.val-findings{grid-template-columns:repeat(3,1fr);}}
+.val-grid2{display:grid;grid-template-columns:1fr;gap:var(--sp-6);}
+.val-panel{background:white;border-radius:var(--r-md);border:1px solid rgba(6,78,59,.12);border-left:4px solid var(--gold);padding:var(--sp-6);}
+.val-panel h3{font-family:'Cinzel',serif;color:var(--primary-green);font-size:1rem;margin-bottom:.6rem;}
+.val-panel p,.val-panel li{font-size:.86rem;color:#334155;line-height:1.65;}
+.val-panel ul{padding-left:1.1rem;}
+.val-panel li{margin-bottom:.35rem;}
+@media(min-width:900px){.val-grid2{grid-template-columns:1fr 1fr;}}
+.challenge-tag{display:inline-block;font-size:.64rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--gold);color:var(--dark-green);padding:.12rem .5rem;border-radius:.25rem;margin-bottom:.5rem;}
+.challenge-card.raised{border-left-color:var(--primary-green);background:linear-gradient(180deg,#fff9e8 0%,var(--cream) 100%);}
+.hero-validated{display:inline-flex;align-items:center;gap:.45rem;margin:0 auto var(--sp-6);background:rgba(110,231,183,.08);border:1px solid rgba(110,231,183,.3);color:var(--light-green);border-radius:var(--r-full);padding:.4rem 1rem;font-size:.8rem;text-decoration:none;}
+.hero-validated:hover,.hero-validated:focus-visible{border-color:var(--gold);color:var(--gold);}
+.src-note{font-size:.74rem;color:#475569;line-height:1.55;margin-top:.5rem;}
 /* =====================================================
 UTILS
 ===================================================== */
@@ -305,7 +356,6 @@ UTILS
 body{background:var(--cream);}
 }
 </style>
-<base target="_blank">
 <style id="mtit-seal">
 /* Shared MTIT seal: one circular treatment on every page (matches the SPA's <MTITLogo/>). */
 img.mtit-seal{width:52px;height:52px;max-width:none;border-radius:50%;object-fit:contain;border:2px solid rgba(201,168,76,.32);background:#022c22;display:block;flex-shrink:0}
@@ -332,6 +382,7 @@ NAVIGATION — MOBILE-FIRST
 <ul class="nav-links" id="navLinksDesktop" role="list">
 <li role="none"><a href="#overview" role="menuitem">Overview</a></li>
 <li role="none"><a href="#macro" role="menuitem">Macroeconomic</a></li>
+<li role="none"><a href="#validation" role="menuitem">Validation</a></li>
 <li role="none"><a href="#beie" role="menuitem">BEIE Framework</a></li>
 <li role="none"><a href="#performance" role="menuitem">Performance</a></li>
 <li role="none"><a href="#challenges" role="menuitem">Challenges</a></li>
@@ -350,6 +401,7 @@ NAVIGATION — MOBILE-FIRST
 <ul class="nav-links" id="navLinksMobile" role="list" aria-label="Mobile navigation">
 <li><a href="#overview">Overview</a></li>
 <li><a href="#macro">Macroeconomic</a></li>
+<li><a href="#validation">Validation</a></li>
 <li><a href="#beie">BEIE Framework</a></li>
 <li><a href="#performance">Performance</a></li>
 <li><a href="#challenges">Challenges</a></li>
@@ -373,6 +425,7 @@ HERO CONTENT
 <div class="hero-badge" aria-label="Document type">Investment Outlook 2026–2035</div>
 <h1>Tawi-Tawi Economic and<br><span class="gold">Investment Outlook 2026-2035</span></h1>
 <p class="hero-sub">Transforming the southernmost island province into a marine-based economic powerhouse and BIMP-EAGA trade gateway through integrated seaweed value chain development and sustainable aquaculture.</p>
+<a href="#validation" class="hero-validated" aria-label="Read the 28 October 2026 provincial validation results">✓ Validated in plenary · 28 Oct 2026 · Bongao — water, seaweed pricing and community safety raised</a>
 <div class="hero-cta-wrap">
 <a href="#overview" class="cta-btn" aria-label="Explore the outlook">Explore the Outlook</a>
 <a href="#recommendations" class="cta-btn" style="background:none;border:1px solid var(--gold-border);color:var(--gold);" aria-label="View investment recommendations">Investment Opportunities</a>
@@ -402,6 +455,7 @@ SECTION NAVIGATION
 <div class="section-nav" id="sectionNav" role="navigation" aria-label="Section navigation">
 <a href="#overview" class="section-nav-btn">Overview</a>
 <a href="#macro" class="section-nav-btn">Macroeconomic</a>
+<a href="#validation" class="section-nav-btn">Validation</a>
 <a href="#beie" class="section-nav-btn">BEIE Framework</a>
 <a href="#performance" class="section-nav-btn">Performance</a>
 <a href="#challenges" class="section-nav-btn">Challenges</a>
@@ -531,7 +585,7 @@ MACROECONOMIC SECTION
 </tr>
 </tbody>
 </table>
-<p style="font-size:.75rem;color:var(--text-muted);margin-top:.5rem;">Constant 2018 prices. Sources: PSA-RSSO BARMM Provincial Product Accounts (2022 release, 14 December 2023; 2025 release, 9 October 2026); MFBM-BARMM (2025) for the 2023 level. *2024 level derived from the 2025 level and growth rate; PSA revises earlier years with each release.</p>
+<p style="font-size:.75rem;color:rgba(236,253,245,.7);margin-top:.5rem;">Constant 2018 prices. Sources: PSA-RSSO BARMM Provincial Product Accounts (2022 release, 14 December 2023; 2025 release, 9 October 2026); MFBM-BARMM (2025) for the 2023 level. *2024 level derived from the 2025 level and growth rate; PSA revises earlier years with each release.</p>
 </div>
 </article>
 <article class="economic-card fade-in fd2" role="listitem">
@@ -627,16 +681,16 @@ MACROECONOMIC SECTION
 <div style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);margin-bottom:.3rem;">8.0%</div>
 </div>
 </div>
-<p style="font-size:.75rem;color:rgba(255,255,255,.5);margin-top:.5rem;margin-bottom:0;">Year-on-year headline inflation. Source: PSA-RSSO BARMM, CPI and Inflation releases (2025–2026).</p>
+<p style="font-size:.75rem;color:rgba(236,253,245,.7);margin-top:.5rem;margin-bottom:0;">Year-on-year headline inflation. Source: PSA-RSSO BARMM, CPI and Inflation releases (2025–2026).</p>
 </div>
 </article>
 <article class="economic-card fade-in fd1" role="listitem">
 <h3>Evidence Status within BIRD 2026–2035</h3>
-<p>Tawi-Tawi is covered in the current edition of BIRD by secondary data. The BIRD Validation Survey (n=76) returned no respondents from the province, yet 44 of 72 respondents (61.1%) named Tawi-Tawi as the province holding the most trapped value. BIRD diagnoses two systems traps to test locally: <em>Limits to Growth</em> (seaweed exported raw; island logistics cap growth) and <em>Success to the Successful</em> (resources follow existing mainland capacity). A provincial validation workshop convened by the MTIT Bureau of Investments is scheduled for 28 October 2026 in Bongao; its results are input to the roadmap's first recalibration, not an endorsement.</p>
+<p>The regional BIRD Validation Survey (n=76) returned no respondents from Tawi-Tawi, yet 44 of 72 respondents (61.1%) named it the province holding the most trapped value. BIRD diagnoses two systems traps to test locally: <em>Limits to Growth</em> (seaweed exported raw; island logistics cap growth) and <em>Success to the Successful</em> (resources follow existing mainland capacity). That gap was addressed on <strong>28 October 2026</strong>, when the MTIT Tawi-Tawi Provincial Office convened a provincial validation in Bongao. Participants confirmed the trapped-value diagnosis and added three constraints the diagnosis had not named: <strong>water</strong>, <strong>seaweed pricing power</strong> and <strong>substance abuse</strong> (see <a href="#validation" style="color:var(--gold-light);">Provincial Validation</a>). The results are input to the roadmap's first recalibration, not an endorsement.</p>
 <div class="economic-chart">
 <div style="display:flex;gap:var(--sp-4);flex-wrap:wrap;">
 <div style="flex:1;min-width:120px;">
-<h4 style="color:var(--gold);font-size:.9rem;margin-bottom:.5rem;">Survey Respondents</h4>
+<h4 style="color:var(--gold);font-size:.9rem;margin-bottom:.5rem;">Regional Survey</h4>
 <div style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);margin-bottom:.3rem;">0 of 76</div>
 </div>
 <div style="flex:1;min-width:120px;">
@@ -644,13 +698,128 @@ MACROECONOMIC SECTION
 <div style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);margin-bottom:.3rem;">61.1%</div>
 </div>
 <div style="flex:1;min-width:120px;">
-<h4 style="color:var(--gold);font-size:.9rem;margin-bottom:.5rem;">Validation</h4>
-<div style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);margin-bottom:.3rem;">28 Oct 2026</div>
+<h4 style="color:var(--gold);font-size:.9rem;margin-bottom:.5rem;">Provincial Validation</h4>
+<div style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);margin-bottom:.3rem;">Held 28 Oct</div>
 </div>
 </div>
 </div>
 </article>
 </div>
+</div>
+</section>
+<!-- =====================================================
+PROVINCIAL VALIDATION SECTION — 28 OCTOBER 2026, BONGAO
+===================================================== -->
+<section class="validation-section" id="validation" aria-labelledby="validation-heading">
+<div class="container">
+<div class="section-header fade-in">
+<span class="section-label">Stakeholder Evidence</span>
+<h2 id="validation-heading">Provincial Validation · 28 October 2026</h2>
+<div class="section-divider"></div>
+<p>What Tawi-Tawi stakeholders confirmed, questioned and added when this outlook was tested with them in Bongao, and how their input changes the investment diagnosis.</p>
+</div>
+
+<div class="val-facts fade-in" role="list" aria-label="Workshop facts">
+<div class="val-fact" role="listitem"><span>Date</span><strong>28 October 2026</strong></div>
+<div class="val-fact" role="listitem"><span>Venue</span><strong>Rachel's Place, Bongao</strong></div>
+<div class="val-fact" role="listitem"><span>Organiser</span><strong>MTIT Tawi-Tawi Provincial Office</strong></div>
+<div class="val-fact" role="listitem"><span>Format</span><strong>Single plenary, no breakout groups</strong></div>
+</div>
+
+<div class="val-method fade-in">
+<h3>Method</h3>
+<div class="val-method-name">Facilitated Plenary Consultation with Open Dialogue and Hand-Raise Consensus Voting</div>
+<p>The workshop was designed around a live digital polling tool. On the day, the venue's internet was intermittent, and hotel data vouchers were too costly for participants to buy individually, so live polling was not used. The facilitator instead used this outlook as the shared visual reference: each critical datapoint was put on screen, discussed in open plenary and settled by a show of hands. Participants took part as individuals, not as representatives of formal groups.</p>
+<ol class="val-steps">
+<li><strong>Set the ground rules</strong>Everyone speaks as an individual; all viewpoints are welcome; the aim is collective sense-making before decision-making; votes are by show of hands, and a raised hand can also mean "I want to add an insight or concern".</li>
+<li><strong>One question at a time</strong>The facilitator posed a guiding question with the relevant visual from this outlook on screen.</li>
+<li><strong>Open conversational sharing</strong>Participants raised hands to share insights, concerns, local experience, supporting evidence and alternative views. Key points were captured visibly for the room.</li>
+<li><strong>Synthesise before voting</strong>The facilitator played back what was heard ("I am hearing three key themes…", "The primary concern raised is…"), so participants could see their input reflected before deciding.</li>
+<li><strong>Simple vote</strong>"Based on the discussion, who supports this proposal?" Hands were raised for Yes, No, or Abstain / Need more information, and the result was recorded visibly.</li>
+<li><strong>Capture minority views</strong>Before moving on, those who voted No, or who appeared hesitant, were invited to state concerns for the record, so the session did not become winner-takes-all.</li>
+</ol>
+<p style="margin:var(--sp-6) 0 .4rem;">For each proposition, the dialogue followed a fixed sequence so that participants contributed insight before being asked to take a position:</p>
+<div class="val-sequence" aria-label="Question sequence">
+<span>1 · What resonates?</span><span>2 · What concerns you?</span><span>3 · What is missing?</span><span>4 · Can you support moving forward?</span><span class="vote">5 · Hands: Yes / No / Abstain</span>
+</div>
+</div>
+
+<div class="section-header fade-in" style="margin-bottom:var(--sp-6);">
+<h2 style="font-size:clamp(1.15rem,2.4vw,1.6rem);">Three critical concerns raised by participants</h2>
+<p>None of the three was named in the pre-workshop diagnosis. They arrived through the "What is missing?" question, which is exactly what a validation is for. Each is set out below as participants put it, alongside public evidence that corroborates it and what it means for the roadmap.</p>
+</div>
+
+<div class="val-findings">
+<article class="val-finding fade-in fd1" aria-labelledby="vf1">
+<header><span class="val-rank">Concern 1 · Named first</span><h3 id="vf1">Water and water sources: the basic, binding constraint</h3></header>
+<div class="val-block">
+<h4>What participants said</h4>
+<p class="val-quote">Water is the basic and critical concern for now. People in the island municipalities spend a great deal of money and effort transporting or buying gallons of water from Bongao, and it affects seaweed production. Water is both a driver of development and of underdevelopment: if sources stay absent or unexplored, the province is stuck.</p>
+<h4>Corroborating evidence</h4>
+<ul>
+<li>The Tawi-Tawi Chamber of Commerce and Industry reports that the only water sources are deep wells and rain; residents of Sitangkai and Sibutu travel four to six hours to mainland Tawi-Tawi for water when there is no rain (MindaNews, Aug 2025).</li>
+<li>Sitangkai has no potable source of its own; drinking water arrives by boat in gallons from Bongao or from Sandakan, Malaysia (SunStar, ADDU solar-desalination project).</li>
+<li>The US$10 million Adaptation Fund water–energy–food nexus project allots US$5.65 million to resilient water systems tied to renewable energy, but in two island municipalities only.</li>
+</ul>
+</div>
+<div class="val-system"><strong>Systems reading — Limits to Growth.</strong> Water is the limiting factor beneath the seaweed, processing and tourism loops: every unit of growth raises demand on a supply that does not grow. Until supply is addressed, investment in the loops above it hits the same ceiling.
+<div class="val-tags"><span>BEIE · Enablers</span><span>LP2 · Infrastructure–energy nexus</span><span>Phase 1 candidate</span></div></div>
+</article>
+
+<article class="val-finding fade-in fd2" aria-labelledby="vf2">
+<header><span class="val-rank">Concern 2</span><h3 id="vf2">Seaweed pricing: value captured outside the province</h3></header>
+<div class="val-block">
+<h4>What participants said</h4>
+<p class="val-quote">Farmers lack the facilities to produce high-value carrageenan, and middlemen in Cebu, Tacloban and Manila dictate low prices. In response, producers turn to cross-border trading with Indonesia, which is nearer than Cebu or Tacloban and where they can negotiate higher prices.</p>
+<h4>Corroborating evidence</h4>
+<ul>
+<li>Earlier field reporting documented that traders set the farm-gate price by grading quality and dryness themselves, leaving individual farmers little room to negotiate (Manila Times / Mindanao Examiner, 2017 — dated, but the pattern matches today's testimony).</li>
+<li>The national SEAGIFT programme (launched 4 February 2026) targets the same gaps: planting materials and insufficient post-harvest facilities.</li>
+<li>Ice-ice disease and low prices are the key problems FAO identifies for Tawi-Tawi seaweed farmers (INFOFISH, 2025).</li>
+</ul>
+</div>
+<div class="val-system"><strong>Systems reading — Shifting the Burden.</strong> Selling across the border is a rational short-term fix that raises income now, but it routes value and volume around the provincial economy and weakens the case for local processing, which is the fundamental fix. Formalising the trade lawfully and building local price power are complementary, not competing.
+<div class="val-tags"><span>BEIE · Transformers + Connectors</span><span>LP1 · Value capture</span><span>Phase 1–2</span></div></div>
+</article>
+
+<article class="val-finding fade-in fd3" aria-labelledby="vf3">
+<header><span class="val-rank">Concern 3</span><h3 id="vf3">Substance abuse: peace and safety compromised</h3></header>
+<div class="val-block">
+<h4>What participants said</h4>
+<p class="val-quote">Peace and safety are compromised. Participants observed that dealing in shabu (methamphetamine) is rampant in communities and that even underage children are vulnerable.</p>
+<h4>Corroborating evidence</h4>
+<ul>
+<li>PDEA-BARMM and partner agencies reported repeated large shabu seizures in Tawi-Tawi through 2026, in Bongao (January, August, September), Sibutu (March, about ₱47.6 million) and Sitangkai (April).</li>
+<li>Several cases involved Malaysian nationals, which points to the same maritime border that carries legitimate trade also carrying illicit trade.</li>
+<li>An anti-drug operation in Bongao on 9 August 2026 ended in a shootout in which a PDEA agent was killed.</li>
+</ul>
+</div>
+<div class="val-system"><strong>Systems reading — erodes the human-capital and confidence loops.</strong> Drug trade draws youth away from the seaweed, processing and tourism labour pool and raises investors' perceived risk, which undermines the governance-confidence loop the roadmap relies on.
+<div class="val-tags"><span>BEIE · Cross-cutting: Peace &amp; Security</span><span>LP3 · Governance–confidence</span><span>Human capital</span></div></div>
+</article>
+</div>
+
+<div class="val-grid2">
+<div class="val-panel fade-in">
+<h3>What changes in the outlook</h3>
+<ul>
+<li><strong>Water becomes an explicit Enabler.</strong> It is added to the BEIE Enablers cluster and proposed as a Phase 1 precondition alongside seaweed drying and storage, paired with renewable power because desalination needs energy.</li>
+<li><strong>Price power joins processing.</strong> The seaweed recommendation now covers who sets the price (grading, bulking, price information and a lawful cross-border channel), not only how much is processed.</li>
+<li><strong>Community safety is now a named risk.</strong> Substance abuse is now a named risk under Peace &amp; Security and in the investor risk disclosure.</li>
+<li>Challenges and Recommendations below are updated accordingly; items raised at the validation are marked.</li>
+</ul>
+</div>
+<div class="val-panel fade-in fd2">
+<h3>Reading these results responsibly</h3>
+<ul>
+<li><strong>Visible voting.</strong> Show-of-hands votes are not anonymous and can be swayed by the room. The step that invites minority views was used to offset this.</li>
+<li><strong>Testimony, not statistics.</strong> The three concerns are participant testimony, corroborated by public sources. They are not province-wide statistics.</li>
+<li><strong>Where the record sits.</strong> Hand-count results and the list of participants are held in the workshop documentation of the MTIT Tawi-Tawi Provincial Office and are not reproduced here.</li>
+<li><strong>Next test.</strong> Findings feed the roadmap's first recalibration. The 2027 second validation wave (Recommendation D2) should test them again with province quotas and, where connectivity allows, anonymous voting.</li>
+</ul>
+</div>
+</div>
+<p class="src-note fade-in">Sources for corroborating evidence: MindaNews (21 Aug 2025, Tawi-Tawi Chamber of Commerce and Industry); SunStar Davao (ADDU solar-still project, Sitangkai); Adaptation Fund project document AFB.PPRC.34 (2024); GMA Regional TV (SEAGIFT launch, 4 Feb 2026); INFOFISH International 6/2025; Manila Times / Mindanao Examiner (2017); PDEA-BARMM releases reported by SunStar Zamboanga, GMA, Daily Tribune and BusinessWorld (Jan–Nov 2026).</p>
 </div>
 </section>
 <!-- =====================================================
@@ -708,13 +877,14 @@ loading="lazy" style="width:100%;height:auto;object-fit:contain;object-position:
 <div class="cluster-card" role="article" aria-labelledby="enablers-title">
 <div class="cluster-explanation">
 <span class="cluster-badge badge-enablers">Cluster 3</span>
-<h4 id="enablers-title">Enablers — Port Infrastructure & Digital Connectivity</h4>
+<h4 id="enablers-title">Enablers — Water, Ports, Power & Digital Connectivity</h4>
 <p>No production capability can generate export value without physical infrastructure to move goods. Infrastructure gaps remain key investment constraints for Tawi-Tawi.</p>
 <ul class="recommendation-list">
+<li><strong>Water Security <span style="color:var(--gold);font-weight:600;">(raised at validation)</span>:</strong> Island municipalities depend on rain, deep wells and water shipped in from Bongao. Reliable fresh water underpins households, seaweed post-harvest work and any processing plant, so it is treated as an Enabler in its own right, paired with renewable power for desalination.</li>
 <li><strong>Port Infrastructure:</strong> The Bongao Port and other municipal wharves require significant upgrades to handle increased trade volumes. The Bongao Bridge project will enhance intra-provincial connectivity.</li>
 <li><strong>Digital Connectivity:</strong> Broadband penetration remains limited in rural areas. Investment in digital infrastructure is essential for e-commerce, digital financial services, and modern supply chain management.</li>
 </ul>
-<div class="cluster-insight"><strong>Investment Opportunities:</strong> Port modernisation, Bongao Bridge completion, digital connectivity expansion, renewable energy for island communities, and cold chain logistics facilities.</div>
+<div class="cluster-insight"><strong>Investment Opportunities:</strong> Solar-powered desalination and rainwater systems for island municipalities, port modernisation, Bongao Bridge completion, digital connectivity expansion, renewable energy for island communities, and cold chain logistics facilities.</div>
 </div>
 </div>
 <!-- Connectors -->
@@ -724,7 +894,7 @@ loading="lazy" style="width:100%;height:auto;object-fit:contain;object-position:
 <h4 id="connectors-title">Connectors — BIMP-EAGA Trade & Export Corridors</h4>
 <p>This cluster links Tawi-Tawi's production to regional and global markets through BIMP-EAGA integration and strategic export corridors.</p>
 <ul class="recommendation-list">
-<li><strong>BIMP-EAGA Integration:</strong> Tawi-Tawi's proximity to Sabah (about 20 km at the nearest point) and North Kalimantan creates natural trade corridors; formalising barter and cross-border trade under lawful arrangements is a precondition for investment. The province is positioned as a gateway for marine products entering Southeast Asian markets.</li>
+<li><strong>BIMP-EAGA Integration:</strong> Tawi-Tawi's proximity to Sabah (about 20 km at the nearest point) and North Kalimantan creates natural trade corridors. Validation participants reported that seaweed producers already sell to Indonesian buyers because prices are higher and the market is nearer than Cebu or Tacloban. Formalising this barter and cross-border trade under lawful arrangements is a precondition for investment and for keeping value visible in provincial accounts. The province is positioned as a gateway for marine products entering Southeast Asian markets.</li>
 <li><strong>Export Markets:</strong> BARMM is pursuing the UAE and GCC as major export destinations for halal marine and seaweed products. Tawi-Tawi's halal certification infrastructure will be critical for accessing these premium markets.</li>
 </ul>
 <div class="cluster-insight"><strong>Investment Opportunities:</strong> BIMP-EAGA trade facilitation services, halal export certification, cross-border logistics hubs, and digital trade platforms connecting Tawi-Tawi to regional markets.</div>
@@ -747,11 +917,12 @@ loading="lazy" style="width:100%;height:auto;object-fit:contain;object-position:
 <div class="cluster-card" role="article" aria-labelledby="crosscutting-title">
 <div class="cluster-explanation">
 <span class="cluster-badge cluster-crosscutting">Cross-Cutting</span>
-<h4 id="crosscutting-title">Cross-Cutting Drivers — Marine Tourism & Climate Adaptation</h4>
+<h4 id="crosscutting-title">Cross-Cutting Drivers — Marine Tourism, Climate Adaptation & Community Safety</h4>
 <p>These drivers operate across all clusters and determine the effectiveness of the entire ecosystem.</p>
 <ul class="recommendation-list">
 <li><strong>Marine Eco-Tourism:</strong> Tawi-Tawi's pristine coral reefs, diverse marine life, and Sama-Bajau cultural heritage create significant tourism potential. Development must balance conservation with economic opportunity.</li>
 <li><strong>Climate Adaptation:</strong> As an island province, Tawi-Tawi is highly vulnerable to climate change, sea-level rise, and extreme weather events. Climate-resilient infrastructure and adaptation planning are essential.</li>
+<li><strong>Peace, Security &amp; Community Safety <span style="color:var(--gold);font-weight:600;">(raised at validation)</span>:</strong> Participants reported that drug dealing is rampant in communities and that minors are vulnerable. This is a direct threat to the youth labour pool and to investor confidence, and it needs prevention and livelihood responses alongside enforcement.</li>
 </ul>
 <div class="cluster-insight"><strong>Investment Opportunities:</strong> Marine eco-tourism infrastructure, coral reef conservation, climate-resilient seaweed varieties, early warning systems, and sustainable fisheries management.</div>
 </div>
@@ -776,7 +947,7 @@ INVESTMENT PERFORMANCE SECTION
 <p>BARMM's investment climate has undergone a structural upswing. The Bangsamoro Board of Investments (BBOI) had set a 2025 target of ₱3 billion in new investment approvals. This target was breached in April 2025, with ₱3.2 billion in registered investments by mid-year. By October 2025, total 2025 investments had reached ₱5 billion, generating 2,029 jobs across BARMM.</p>
 <p>The momentum accelerated dramatically into 2026. In the first quarter of 2026 alone, BARMM registered ₱2.4 billion in investments, projected to generate 930 jobs. By April 2026, the region had already surpassed its entire 2025 full-year record, with total approved investments reaching ₱5.1 billion—exceeding the ₱3.2 billion annual target in just four months. These investments are expected to create 2,583 jobs for Bangsamoro constituents.</p>
 <p>Philippine Statistics Authority data placed BARMM second in Mindanao in approved investments, behind only the Davao Region, and within the top 10 regions nationally for Q2 2025. No Tawi-Tawi-specific project has been publicly confirmed among the 2026 approvals; the April 2026 release names a ₱2.2 billion project in an island province without identifying it.</p>
-<p>The governance outlook is in transition. The first regular Bangsamoro Parliament was elected on 14 September 2026 with turnout of about 80 percent; with no party winning a majority, the Chief Minister will be chosen through a coalition once members take office after 30 October 2026. A peaceful transition would strengthen governance credibility, while a contested coalition process would test it. Investors should treat policy continuity, including incentive rules under the draft Bangsamoro Investment Code and CREATE MORE (RA 12066), as a monitored assumption rather than a given.</p>
+<p>The governance outlook has moved from transition to the first regular government. The first regular Bangsamoro Parliament was elected on 14 September 2026 with no party winning a majority. At its inaugural session on 30 October 2026, it elected Abdulraof Macacua as the region's first regular Chief Minister by 51 votes to 27. Investors should still treat policy continuity, including incentive rules under the draft Bangsamoro Investment Code and CREATE MORE (RA 12066), as a monitored assumption rather than a given until the new cabinet's economic agenda is set out.</p>
 </div>
 <div class="performance-text-block fade-in">
 <h3>Tawi-Tawi Investment Highlights (2022–2026)</h3>
@@ -858,6 +1029,7 @@ INVESTMENT PERFORMANCE SECTION
 <h4>How BIRD 2026–2035 Sequences Tawi-Tawi</h4>
 <ul>
 <li><strong>Leverage sequence:</strong> seaweed drying, storage, and quality capacity first; carrageenan processing preparation next; then port and Sabah-corridor logistics. The binding constraint is conversion capacity, not raw supply.</li>
+<li><strong>Validation adjustment (proposed for recalibration):</strong> fresh-water supply joins drying and storage as a Phase 1 precondition. Farm-gate price transparency and a lawful cross-border sales channel are added to the seaweed sequence so that processing investment is matched by price power.</li>
 <li><strong>Delivery:</strong> Recommendation B3 calls for a place-based delivery node in Bongao, using provincial diagnostics and documented project readiness to allocate technical assistance and enabling infrastructure, with allocation floors for island provinces.</li>
 <li><strong>Capital phasing:</strong> island and maritime corridors fall mainly in Phase 3 (2032–2035, ₱35–50B) of the indicative ₱120–160 billion public catalytic envelope, targeting 11–14× private leverage. These are planning parameters, not appropriations.</li>
 <li><strong>Validation:</strong> Phase 3 carries the least validation evidence; Recommendation D2 provides for a second validation wave in 2027 with minimum quotas per province.</li>
@@ -872,6 +1044,7 @@ INVESTMENT PERFORMANCE SECTION
 <li><strong>BIMP-EAGA Trade Gateway</strong>: Logistics hubs, port infrastructure, and trade facilitation services linking Tawi-Tawi to Sabah, Malaysia, and eastern Indonesia.</li>
 <li><strong>Marine Eco-Tourism Circuit</strong>: Development of pristine island destinations, Sama-Bajau cultural heritage sites, and halal-certified hospitality infrastructure.</li>
 <li><strong>Renewable Energy for Island Communities</strong>: Solar and marine renewable energy projects to address high power costs and improve energy access in remote islands.</li>
+<li><strong>Island Water–Energy Systems</strong> (outer-island municipalities): Solar-powered desalination, rainwater harvesting and storage, sized for households and seaweed post-harvest use. This corridor was added after the validation.</li>
 </ul>
 </div>
 </div>
@@ -890,6 +1063,24 @@ CHALLENGES SECTION
 <p>Identifying the key obstacles and vulnerabilities that must be addressed to realise the investment outlook and ensure sustainable development.</p>
 </div>
 <div class="challenges-grid" role="list">
+<article class="challenge-card raised fade-in fd1" role="listitem">
+<span class="challenge-tag">Raised at validation · 28 Oct 2026</span>
+<div class="challenge-icon" aria-hidden="true">💧</div>
+<h3>Water Security</h3>
+<p>Island municipalities have no reliable fresh-water source; households rely on rain, deep wells and gallons shipped from Bongao, at significant cost in money and time. Participants linked water directly to seaweed production and described it as the factor that decides whether the province develops or stays stuck. Existing projects, including desalination units and the Adaptation Fund programme, are real but cover only part of the province.</p>
+</article>
+<article class="challenge-card raised fade-in fd2" role="listitem">
+<span class="challenge-tag">Raised at validation · 28 Oct 2026</span>
+<div class="challenge-icon" aria-hidden="true">⚖️</div>
+<h3>Market Power and Seaweed Pricing</h3>
+<p>Without facilities to produce higher-value carrageenan, farmers sell raw seaweed to traders who grade it and set the price, and buyers in Cebu, Tacloban and Manila dictate low prices. Producers respond by selling across the border to Indonesia, where prices are higher. That raises incomes now, but it moves value outside provincial accounts and weakens the case for local processing.</p>
+</article>
+<article class="challenge-card raised fade-in fd3" role="listitem">
+<span class="challenge-tag">Raised at validation · 28 Oct 2026</span>
+<div class="challenge-icon" aria-hidden="true">🚫</div>
+<h3>Substance Abuse and Community Safety</h3>
+<p>Participants reported that shabu dealing is rampant in communities and that minors are vulnerable, compromising peace and safety. Repeated large seizures by PDEA-BARMM in Bongao, Sibutu and Sitangkai during 2026, several involving foreign nationals, confirm an active maritime drug route. The risk falls on the youth labour pool and on investor confidence.</p>
+</article>
 <article class="challenge-card fade-in fd1" role="listitem">
 <div class="challenge-icon" aria-hidden="true">⚠️</div>
 <h3>Poverty and Human Development</h3>
@@ -918,7 +1109,7 @@ CHALLENGES SECTION
 <article class="challenge-card fade-in fd3" role="listitem">
 <div class="challenge-icon" aria-hidden="true">🛡️</div>
 <h3>Security and Governance</h3>
-<p>Tawi-Tawi has maintained relative peace and is the fifth BARMM province to implement the Local Normalization Initiative. Localised risks remain, including lawless elements and cross-border crime such as smuggling and illegal fishing, which require maritime security cooperation with neighbouring countries. Coordinating programmes across 11 municipalities and 203 barangays also demands stronger institutional capacity.</p>
+<p>Tawi-Tawi has maintained relative peace and is the fifth BARMM province to implement the Local Normalization Initiative. Localised risks remain, including lawless elements and cross-border crime such as smuggling, drug trafficking and illegal fishing, which require maritime security cooperation with neighbouring countries. Coordinating programmes across 11 municipalities and 203 barangays also demands stronger institutional capacity.</p>
 </article>
 </div>
 </div>
@@ -935,13 +1126,16 @@ RECOMMENDATIONS SECTION
 <p>Defining the ten-year economic vision and prioritising ecosystem-based investments to transform Tawi-Tawi into a self-sustaining, export-linked, and inclusive marine-based economic hub.</p>
 </div>
 <div class="recommendations-intro fade-in" role="note">
-<strong>Vision Statement:</strong> Transform Tawi-Tawi from a frontier island province into a self-sustaining, export-linked, and inclusive marine-based economic hub within BARMM, grounded in its comparative advantages—seaweed industry dominance, strategic BIMP-EAGA location, cultural heritage, and alignment with the global halal economy.<br><br><strong>Risk disclosure:</strong> The opportunities below are indicative and drawn from secondary data pending provincial validation. They are not investment advice; returns depend on project-level feasibility, logistics costs, climate exposure, price volatility, and policy continuity.
+<strong>Vision Statement:</strong> Transform Tawi-Tawi from a frontier island province into a self-sustaining, export-linked, and inclusive marine-based economic hub within BARMM, grounded in its comparative advantages—seaweed industry dominance, strategic BIMP-EAGA location, cultural heritage, and alignment with the global halal economy.<br><br><strong>Risk disclosure:</strong> The opportunities below are indicative. They draw on secondary data and on the 28 October 2026 provincial validation, which was plenary testimony and not a statistical survey. They are not investment advice. Returns depend on project-level feasibility, water and power availability, logistics costs, climate exposure, seaweed price volatility, community safety, and policy continuity.
 </div>
 <div class="recommendations-grid" role="list">
 <article class="recommendation-card fade-in fd1" role="listitem">
 <h3>Policy Recommendations for Policymakers</h3>
 <p>Strategic actions to create an enabling environment for investment and sustainable development.</p>
 <ul class="recommendation-list">
+<li><strong>Treat water as a Phase 1 enabler (raised at validation).</strong> Commission a province-wide water source and demand assessment covering every island municipality. Pair desalination and rainwater systems with renewable power, and prioritise seaweed-producing islands.</li>
+<li><strong>Give seaweed farmers price power (raised at validation).</strong> Publish weekly farm-gate prices by grade and set up cooperative bulking and grading points, so that quality, not the buyer, sets the price. Formalise sales to Indonesia and Sabah through a lawful BIMP-EAGA barter channel rather than leaving them informal.</li>
+<li><strong>Address substance abuse as an economic risk (raised at validation).</strong> Coordinate with PDEA-BARMM, MILG and LGUs on community-based prevention, and tie it to youth livelihood and skills programmes in seaweed, processing and tourism. This lies outside MTIT's mandate, but it bears directly on the province's investment climate.</li>
 <li>Establish a Bongao delivery node for investment facilitation under the proposed Bangsamoro Investment Facilitation Network (BIF-Net), with sub-nodes for outer islands, to reduce transaction costs and coordination delays (BIRD Recommendation B3).</li>
 <li>Fast-track the seaweed industry modernisation programme, sequencing drying and storage before processing and integrating MAFAR support, climate adaptation measures, and value-addition infrastructure into a coherent seaweed development strategy.</li>
 <li>Prioritise completion of port and bridge infrastructure projects including the Bongao Bridge and key wharf developments to enhance intra-provincial and international connectivity.</li>
@@ -957,6 +1151,8 @@ RECOMMENDATIONS SECTION
 <li><strong>Seaweed processing investors:</strong> Consider Tawi-Tawi for semi-refined and refined carrageenan facilities, where about 40% of national raw material is produced but little processing occurs. Feasibility depends on reliable power, drying and storage capacity, and consistent raw-material quality.</li>
 <li><strong>Halal marine products sector:</strong> The province offers a potential early-entry position for halal-certified marine products targeting BIMP-EAGA and GCC markets, subject to certification capacity and OIC/SMIIC-aligned quality systems.</li>
 <li><strong>Infrastructure investors:</strong> Assess port development, bridge construction, and digital connectivity gaps as high-priority corridors with significant development impact; returns are likely to depend on blended or public–private structures.</li>
+<li><strong>Water–energy investors (raised at validation):</strong> Outer-island municipalities are an underserved market for solar-powered desalination and water storage. Viable structures are likely to combine public or donor capital with user fees and anchor demand from seaweed post-harvest operations.</li>
+<li><strong>Seaweed trading and post-harvest investors:</strong> Dryers, warehouses and grading services that let farmers sell by quality can capture margin now taken by distant buyers. Due diligence should account for informal cross-border competition and price volatility.</li>
 <li><strong>Renewable energy investors:</strong> Recognise Tawi-Tawi as a significant underserved market: an island province with growing electricity demand, high power costs, and abundant solar and marine renewable energy resources.</li>
 <li><strong>Tourism investors:</strong> Conduct feasibility studies for marine eco-tourism, cultural heritage circuits, and halal hospitality in anticipation of the province's continued tourism development under the Tourism Master Plan.</li>
 </ul>
@@ -967,10 +1163,10 @@ RECOMMENDATIONS SECTION
 <ul class="recommendation-list">
 <li><strong>Foundations:</strong> Seaweed farming modernisation, climate-resilient aquaculture (Target: 2026–2030) - Expanded AFF output, export-ready supply chains.</li>
 <li><strong>Transformers:</strong> Modern seaweed processing plants, halal marine products (Target: 2026–2032) - Value-added exports, MSME employment.</li>
-<li><strong>Enablers:</strong> Port infrastructure, digital connectivity, renewable energy (Target: 2026–2030) - Reduced logistics costs, market access.</li>
+<li><strong>Enablers:</strong> Water supply (desalination, rainwater), port infrastructure, digital connectivity, renewable energy (Target: 2026–2030) - Household and production water security, reduced logistics costs, market access.</li>
 <li><strong>Connectors:</strong> BIMP-EAGA trade linkages, halal export certification (Target: 2026–2035) - Export revenue, regional market integration.</li>
 <li><strong>Financiers:</strong> Islamic banking expansion, microfinance, digital payments (Target: 2026–2030) - Inclusive capital access, MSME financing.</li>
-<li><strong>Cross-Cutting:</strong> Marine eco-tourism, cultural heritage, climate adaptation (Target: 2026–2035) - Diversified income, resilient communities.</li>
+<li><strong>Cross-Cutting:</strong> Marine eco-tourism, cultural heritage, climate adaptation, community safety and drug prevention (Target: 2026–2035) - Diversified income, resilient and safe communities.</li>
 </ul>
 </article>
 </div>
@@ -1103,7 +1299,7 @@ FOOTER
 <div class="footer-bottom">
 <p>© 2026 Bangsamoro Autonomous Region in Muslim Mindanao (BARMM). All rights reserved.</p>
 <p style="margin-top:.3rem;"><span>Tawi-Tawi Economic and Investment Outlook</span> — 2026–2035</p>
-<p style="margin-top:.3rem;">Data as at 27 October 2026. Sources: PSA-RSSO BARMM; MFBM-BARMM; MTIT (2026) Tawi-Tawi Economic and Investment Outlook; BBOI and Bangsamoro Government releases; BIRD 2026–2035 Validation Survey.</p>
+<p style="margin-top:.3rem;">Data as at 20 November 2026. Sources: PSA-RSSO BARMM; MFBM-BARMM; MTIT (2026) Tawi-Tawi Economic and Investment Outlook; BBOI and Bangsamoro Government releases; BIRD 2026–2035 Validation Survey; Tawi-Tawi Provincial Validation, 28 October 2026 (MTIT Tawi-Tawi Provincial Office); PDEA-BARMM releases; Adaptation Fund.</p>
 </div>
 </div>
 </footer>
