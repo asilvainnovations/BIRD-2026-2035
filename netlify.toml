@@ -1,13 +1,18 @@
 # BIRD 2026–2035 | Netlify deployment configuration
 # Site domain: bird-boi.mtit-barmm.com
 # Build from the repository root.
+# Package manager: npm ONLY. Do not commit yarn.lock / pnpm-lock.yaml — Netlify
+# auto-detects any yarn.lock and runs `yarn install` before this command, which
+# is what broke the 2026-11-20 deploy.
 
 [build]
   command = "npm ci && npm run build"
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20"
+  # @supabase/supabase-js >= 2.110 declares engines.node ">=22.0.0".
+  # Keep in sync with .nvmrc and package.json "engines".
+  NODE_VERSION = "22"
   NPM_FLAGS = "--no-audit --no-fund"
 
 # React Router / Vite SPA fallback.
@@ -40,9 +45,8 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
-# Do not cache the service worker aggressively; this lets PWA updates propagate.
 [[headers]]
-  for = "/sw.js"
+  for = "/manifest.json"
   [headers.values]
+    Content-Type = "application/manifest+json"
     Cache-Control = "public, max-age=0, must-revalidate"
-    Service-Worker-Allowed = "/"

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { EDGE_FUNCTIONS } from '@/lib/supabase';
 import { supabase } from '@/lib/supabase';
 import { User, Session } from '@supabase/supabase-js';
 
@@ -168,7 +169,7 @@ export const useAuth = () => {
       try {
         const { data: { session } } = await supabase.auth.getSession();
         await fetch(
-          'https://lydsisparsmvextskevw.supabase.co/functions/v1/email-notifications',
+          EDGE_FUNCTIONS.EMAIL_NOTIFICATIONS,
           {
             method: 'POST',
             headers: {

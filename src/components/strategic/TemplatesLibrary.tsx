@@ -430,8 +430,8 @@ Check it out in our Templates Library!`;
   // Get template complexity level
   const getComplexityLevel = (template: PlanTemplate) => {
     const score = template.plan_data.objectives.length + template.plan_data.swotItems.length;
-    if (score > 20) return { label: 'Advanced', color: 'bg-red-500/100/10 text-red-400' };
-    if (score > 12) return { label: 'Intermediate', color: 'bg-amber-500/100/10 text-amber-400' };
+    if (score > 20) return { label: 'Advanced', color: 'bg-red-500 text-red-400' };
+    if (score > 12) return { label: 'Intermediate', color: 'bg-amber-500 text-amber-400' };
     return { label: 'Beginner', color: 'bg-[#059669]/10 text-[#6ee7b7]' };
   };
 
@@ -934,7 +934,7 @@ Check it out in our Templates Library!`;
                   financial: 'bg-[#059669]/10 text-[#34d399]',
                   customer: 'bg-[#C9A84C]/10 text-[#C9A84C]',
                   internal_process: 'bg-violet-100 text-violet-700',
-                  learning_growth: 'bg-amber-500/100/10 text-amber-400',
+                  learning_growth: 'bg-amber-500 text-amber-400',
                 };
                 const perspectiveLabels: Record<string, string> = {
                   financial: 'Financial',
@@ -1358,7 +1358,7 @@ Check it out in our Templates Library!`;
                     e.stopPropagation();
                     handleDeleteTemplate(template.id);
                   }}
-                  className="p-2 rounded-lg bg-red-500/100 text-white hover:bg-red-600 transition-colors shadow-lg"
+                  className="p-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors shadow-lg"
                   title="Delete template"
                 >
                   <X className="w-3.5 h-3.5" />

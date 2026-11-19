@@ -308,7 +308,7 @@ const SettingsPage: React.FC = () => {
                   const Icon = int.icon;
                   const cfg = settings.integrations[int.id] || { enabled: false };
                   return (
-                    <div key={int.id} className="bg-[#022c22]/60/50 border border-[#C9A84C]/20 rounded-xl p-4 space-y-3">
+                    <div key={int.id} className="bg-[#022c22]/60 border border-[#C9A84C]/20 rounded-xl p-4 space-y-3">
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex items-start gap-3 flex-1">
                           <Icon className={`w-6 h-6 ${int.color} flex-shrink-0 mt-0.5`} />
@@ -383,7 +383,7 @@ const SelectFieldLabeled: React.FC<{ label: string; value: string; options: { va
 );
 
 const Toggle: React.FC<{ label: string; value: boolean; onChange: (v: boolean) => void }> = ({ label, value, onChange }) => (
-  <div className="flex items-center justify-between bg-[#022c22]/60/50 border border-[#C9A84C]/20 rounded-xl px-4 py-3">
+  <div className="flex items-center justify-between bg-[#022c22]/60 border border-[#C9A84C]/20 rounded-xl px-4 py-3">
     <span className="text-sm font-medium text-white capitalize">{label}</span>
     <button onClick={() => onChange(!value)}
       className={`relative w-10 h-6 rounded-full transition-colors ${value ? 'bg-[#C9A84C]' : 'bg-[#64748b]'}`}>

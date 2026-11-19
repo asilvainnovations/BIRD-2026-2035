@@ -968,4 +968,4 @@ export function isCalculationQuery(query: string): boolean {
 
 /** Export the knowledge base for inspection / extension */
 export { KB as knowledgeBase };
-export type { KnowledgeEntry, ResponseContext, KnowledgeCategory };
+// KnowledgeEntry, ResponseContext and KnowledgeCategory are already exported at their declarations.

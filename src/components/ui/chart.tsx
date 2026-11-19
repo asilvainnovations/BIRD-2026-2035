@@ -100,10 +100,20 @@ ${colorConfig
 
 const ChartTooltip = RechartsPrimitive.Tooltip
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type TooltipPayloadItem = { name?: string | number; value?: any; dataKey?: string | number; color?: string; fill?: string; payload?: any; [k: string]: any }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type LegendPayloadItem = { value?: any; dataKey?: string | number; color?: string; [k: string]: any }
+
 const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
-    React.ComponentProps<"div"> & {
+  Omit<React.ComponentProps<typeof RechartsPrimitive.Tooltip>, "payload" | "label"> &
+    Omit<React.ComponentProps<"div">, "color"> & {
+      // Recharts v3 passes these to custom tooltip content but no longer
+      // declares them on TooltipProps, so they are typed explicitly here.
+      payload?: TooltipPayloadItem[]
+      label?: React.ReactNode
+      color?: string
       hideLabel?: boolean
       hideIndicator?: boolean
       indicator?: "line" | "dot" | "dashed"
@@ -147,7 +157,8 @@ const ChartTooltipContent = React.forwardRef<
       if (labelFormatter) {
         return (
           <div className={cn("font-medium", labelClassName)}>
-            {labelFormatter(value, payload)}
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+            {labelFormatter(value, payload as any)}
           </div>
         )
       }
@@ -197,7 +208,8 @@ const ChartTooltipContent = React.forwardRef<
                 )}
               >
                 {formatter && item?.value !== undefined && item.name ? (
-                  formatter(item.value, item.name, item, index, item.payload)
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  formatter(item.value, item.name, item as any, index, item.payload)
                 ) : (
                   <>
                     {itemConfig?.icon ? (
@@ -259,7 +271,10 @@ const ChartLegend = RechartsPrimitive.Legend
 const ChartLegendContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> &
-    Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
+    {
+      payload?: LegendPayloadItem[]
+      verticalAlign?: "top" | "middle" | "bottom"
+    } & {
       hideIcon?: boolean
       nameKey?: string
     }

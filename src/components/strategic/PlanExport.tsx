@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { EDGE_FUNCTIONS } from '@/lib/supabase';
 import {
   FileText,
   Download,
@@ -26,8 +27,8 @@ import { StrategicPlan, CLDSnapshot } from '@/lib/strategicPlanStore';
 import { supabase } from '@/lib/supabase';
 
 // Edge Function URLs
-const AI_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/ai-strategy-assistant';
-const SYNC_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/strategic-planner-sync';
+const AI_URL = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
+const SYNC_URL = EDGE_FUNCTIONS.STRATEGIC_PLANNER_SYNC;
 
 interface PlanExportProps {
   plan: StrategicPlan;
@@ -131,8 +132,9 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
   }, [plan]);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setAppendixFiles(prev => [...prev, ...Array.from(event.target.files)]);
+    const files = event.target.files;
+    if (files) {
+      setAppendixFiles(prev => [...prev, ...Array.from(files)]);
     }
   };
 
@@ -747,7 +749,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                           {getActiveSnapshotInfo().snapshot ? (
                             <div>
                               <p className="text-sm text-[#6ee7b7] mb-1">
-                                ✓ Loaded from Snapshot: <strong>"{getActiveSnapshotInfo().snapshot.label}"</strong>
+                                ✓ Loaded from Snapshot: <strong>"{getActiveSnapshotInfo().snapshot?.label}"</strong>
                               </p>
                               <div className="grid grid-cols-2 gap-2 text-xs text-[#ecfdf5]/80">
                                 <div className="flex items-center gap-1">
@@ -806,7 +808,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                           return (
                             <div key={archetypeId} className="bg-amber-500/10 rounded-lg p-4 border border-amber-500/20">
                               <div className="flex items-start gap-2 mb-2">
-                                <span className="px-2 py-1 bg-amber-500/100 text-white text-xs font-bold rounded">
+                                <span className="px-2 py-1 bg-amber-500 text-white text-xs font-bold rounded">
                                   #{idx + 1}
                                 </span>
                                 <h4 className="font-bold text-[#E8C560]">{archetype.name}</h4>
@@ -844,8 +846,8 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                           <span className={`px-2 py-1 rounded text-xs font-bold text-white ${
                             opt.optionType === 'SO' ? 'bg-[#059669]' :
                             opt.optionType === 'ST' ? 'bg-[#C9A84C]' :
-                            opt.optionType === 'WO' ? 'bg-purple-500/100' :
-                            'bg-amber-500/100'
+                            opt.optionType === 'WO' ? 'bg-purple-500' :
+                            'bg-amber-500'
                           }`}>
                             {opt.optionType}
                           </span>

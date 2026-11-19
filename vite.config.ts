@@ -51,7 +51,7 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "./src"),
+        "@": path.resolve(import.meta.dirname, "./src"),
       },
     },
     // Pre-bundle the heavy, stable dependencies so cold dev starts are fast.
@@ -60,7 +60,8 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       target: "es2020",
-      minify: "esbuild",
+      // Vite 8 minifies with its built-in Oxc minifier; esbuild is no longer
+      // bundled, so `minify: "esbuild"` fails the build. Use the default.
       // Hidden sourcemaps in production: the bundle stays clean, but stack
       // traces remain resolvable if the maps are uploaded to an error tracker.
       sourcemap: isProd ? "hidden" : true,

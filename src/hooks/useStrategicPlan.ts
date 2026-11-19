@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { EDGE_FUNCTIONS } from '@/lib/supabase';
 import {
   StrategicPlan,
   SWOTItem,
@@ -53,7 +54,7 @@ export interface CursorPosition {
 // Edge Function endpoint (set via env var in production)
 const SYNC_API_URL =
   import.meta.env.VITE_STRATEGIC_PLANNER_SYNC_URL ||
-  'https://lydsisparsmvextskevw.supabase.co/functions/v1/strategic-planner-sync';
+  EDGE_FUNCTIONS.STRATEGIC_PLANNER_SYNC;
 
 // ─────────────────────────────────────────────────────────
 export const useStrategicPlan = () => {

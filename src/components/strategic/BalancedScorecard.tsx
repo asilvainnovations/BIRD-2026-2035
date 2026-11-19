@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { EDGE_FUNCTIONS } from '@/lib/supabase';
 import { motion, AnimatePresence } from '@/lib/motion-shim';
 import {
   DollarSign,
@@ -30,9 +31,9 @@ import { cn } from '@/lib/utils';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
 
 // Edge Function URLs
-const AI_ASSISTANT_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/ai-strategy-assistant';
-const SYNC_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/strategic-planner-sync';
-const EMAIL_URL = 'https://rgvteytgkugdqdodedxq.supabase.co/functions/v1/email-notifications';
+const AI_ASSISTANT_URL = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
+const SYNC_URL = EDGE_FUNCTIONS.STRATEGIC_PLANNER_SYNC;
+const EMAIL_URL = EDGE_FUNCTIONS.EMAIL_NOTIFICATIONS;
 
 // ─── NEW: STRATEGIC FRAMEWORK CONTEXT FOR AI EXPERTISE ─────────────────────────────
 const BIRD_STRATEGIC_CONTEXT = `
@@ -230,8 +231,8 @@ const calculateProgress = (kpi: KPI): number => {
 
 const STATUS_COLORS = {
   'on-track': 'bg-[#059669]/10 text-[#34d399]',
-  'at-risk': 'bg-amber-500/100/10 text-amber-400',
-  delayed: 'bg-red-500/100/10 text-red-400',
+  'at-risk': 'bg-amber-500 text-amber-400',
+  delayed: 'bg-red-500 text-red-400',
   completed: 'bg-[#C9A84C]/10 text-[#C9A84C]',
 };
 
@@ -245,8 +246,8 @@ const ProgressMeter: React.FC<{ value: number }> = ({ value }) => {
   const getColor = () => {
     if (value >= 100) return 'bg-[#059669]';
     if (value >= 70) return 'bg-[#C9A84C]';
-    if (value >= 40) return 'bg-amber-500/100';
-    return 'bg-red-500/100';
+    if (value >= 40) return 'bg-amber-500';
+    return 'bg-red-500';
   };
 
   return (
@@ -503,7 +504,7 @@ const ObjectiveCard: React.FC<{
   return (
     <TooltipProvider>
       <div className={cn(
-        "bg-white dark:bg-[#022c22]/60/60 rounded-xl border overflow-hidden shadow-sm transition-shadow hover:shadow-md",
+        "bg-white dark:bg-[#022c22]/60 rounded-xl border overflow-hidden shadow-sm transition-shadow hover:shadow-md",
         config.border
       )}>
         <div
@@ -563,7 +564,7 @@ const ObjectiveCard: React.FC<{
             {!isTemplate && (
               <button
                 onClick={(e) => { e.stopPropagation(); onRemove(); }}
-                className="p-1 text-red-400 hover:text-red-400 hover:bg-red-500/100/10 rounded transition-colors"
+                className="p-1 text-red-400 hover:text-red-400 hover:bg-red-500 rounded transition-colors"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
@@ -1200,7 +1201,7 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
 
                     {!isPlanEmpty && (
                       newObjective.perspective === perspective ? (
-                        <div className={cn("bg-white dark:bg-[#022c22]/60/60 rounded-xl border p-4 space-y-3 animate-in fade-in slide-in-from-top-2", config.border)}>
+                        <div className={cn("bg-white dark:bg-[#022c22]/60 rounded-xl border p-4 space-y-3 animate-in fade-in slide-in-from-top-2", config.border)}>
                           <div>
                             <label className="block text-xs font-medium text-[#ecfdf5]/80 mb-1">Strategic Objective *</label>
                             <input
