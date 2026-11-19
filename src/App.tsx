@@ -1,4 +1,5 @@
 import React, { lazy, Suspense } from 'react';
+import { MTITLogo } from '@/components/branding/Logo';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '@/components/theme-provider';
@@ -15,18 +16,11 @@ const NotFound       = lazy(() => import('@/pages/NotFound'));
 const AppLoadingFallback = React.memo(() => (
   <div className="min-h-screen bg-[#011a12] flex flex-col items-center justify-center p-6">
     <div className="relative mb-6">
-      <div className="w-20 h-20 rounded-full overflow-hidden ring-2 ring-[#C9A84C] shadow-2xl border border-white/20 animate-pulse">
-        <img
-          src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png"
-          alt="BIRD 2026-2035"
-          className="w-full h-full object-cover"
-          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-        />
-      </div>
+      <MTITLogo size="xl" withGlow className="animate-pulse" />
       <div className="absolute -bottom-2 -right-2 w-8 h-8 border-2 border-[#C9A84C] border-t-transparent rounded-full animate-spin" />
     </div>
     <h2 className="text-[#ecfdf5] font-bold text-xl mb-2">Loading BIRD 2026-2035</h2>
-    <p className="text-[#64748b] text-sm">Initializing your strategic workspace…</p>
+    <p className="text-[#a3bfb3] text-sm">Initializing your strategic workspace…</p>
   </div>
 ));
 

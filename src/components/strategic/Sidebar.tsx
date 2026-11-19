@@ -5,7 +5,7 @@ import {
   HelpCircle, ClipboardCheck, Star, Settings, ExternalLink
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { StratLogo } from '@/components/branding/Logo';
+import { MTITLogo } from '@/components/branding/Logo';
 
 interface SidebarProps {
   activeView: string;
@@ -76,10 +76,10 @@ const Sidebar: React.FC<SidebarProps> = ({
           isActive
             ? isHighlighted
               ? "bg-[#C9A84C] text-[#022c22] shadow-lg shadow-[#C9A84C]/30"
-              : "bg-[#C9A84C] text-white shadow-lg shadow-[#C9A84C]/20"
+              : "bg-[#C9A84C] text-[#022c22] shadow-lg shadow-[#C9A84C]/20"
             : isHighlighted
               ? "text-[#E8C560] hover:bg-[#C9A84C]/10 hover:text-[#C9A84C] border border-[#C9A84C]/20"
-              : "text-[#64748b]/80 hover:bg-[#022c22]/60 hover:text-[#ecfdf5]",
+              : "text-[#a3bfb3] hover:bg-[#022c22]/60 hover:text-[#ecfdf5]",
           isSubItem && !isCollapsed ? "pl-9 py-2" : ""
         )}
         aria-current={isActive ? 'page' : undefined}
@@ -106,8 +106,8 @@ const Sidebar: React.FC<SidebarProps> = ({
               <p className={cn(
                 "text-[10px] truncate",
                 isActive
-                  ? isHighlighted ? "text-[#022c22]/80" : "text-[#E8C560]/80"
-                  : isHighlighted ? "text-[#E8C560]/70" : "text-[#64748b]"
+                  ? isHighlighted ? "text-[#022c22]/90" : "text-[#022c22]/90"
+                  : isHighlighted ? "text-[#E8C560]/70" : "text-[#a3bfb3]"
               )}>
                 {item.description}
               </p>
@@ -127,7 +127,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 </span>
               )}
             </div>
-            <p className="text-[#64748b]/80 text-[10px] mt-0.5">{item.description}</p>
+            <p className="text-[#a3bfb3] text-[10px] mt-0.5">{item.description}</p>
           </div>
         )}
       </button>
@@ -155,16 +155,16 @@ const Sidebar: React.FC<SidebarProps> = ({
         {/* Header/Logo */}
         <div className="p-4 border-b border-[#C9A84C]/15 flex items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => onViewChange('dashboard')}>
-            <StratLogo size="md" className="w-8 h-8 ring-2 ring-[#C9A84C]/40" />
+            <MTITLogo size="md" />
             {(!isCollapsed || isMobileMenuOpen) && (
-              <h1 className="font-bold text-sm tracking-tight text-white whitespace-nowrap">
-                BIRD <span className="text-[#C9A84C]">2026-2035</span>
+              <h1 className="font-display font-bold text-sm tracking-wide text-[#ecfdf5] whitespace-nowrap">
+                BIRD <span className="text-[#C9A84C]">2026–2035</span>
               </h1>
             )}
           </div>
           {isMobileMenuOpen && (
             <button onClick={onCloseMobileMenu} className="p-1 hover:bg-[#022c22]/60 rounded-md lg:hidden">
-              <X className="w-5 h-5 text-[#64748b]/80" />
+              <X className="w-5 h-5 text-[#a3bfb3]" />
             </button>
           )}
         </div>
@@ -172,7 +172,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         {/* Plan Context */}
         {(!isCollapsed || isMobileMenuOpen) && (
           <div className="px-4 py-4 bg-[#022c22]/30">
-            <p className="text-[10px] text-[#64748b] uppercase tracking-widest font-bold mb-1">Current Focus</p>
+            <p className="text-[10px] text-[#a3bfb3] uppercase tracking-widest font-bold mb-1">Current Focus</p>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-[#C9A84C] animate-pulse" />
               <p className="text-sm font-medium text-[#ecfdf5]/90 truncate">{planName || 'Select a Plan'}</p>
@@ -200,7 +200,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 NEW
               </span>
             </button>
-            <p className="text-[10px] text-[#C9A84C]/60 text-center mt-2 leading-tight">
+            <p className="text-[10px] text-[#C9A84C] text-center mt-2 leading-tight">
               Help shape BARMM 2026–2035
             </p>
           </div>
@@ -244,7 +244,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             <button
               onClick={onShowTutorial}
               id="sidebar-btn-tutorial"
-              className="w-full flex items-center gap-3 px-3 py-2.5 mt-1 rounded-xl text-[#64748b]/80 hover:bg-[#C9A84C]/10 hover:text-[#C9A84C] transition-all"
+              className="w-full flex items-center gap-3 px-3 py-2.5 mt-1 rounded-xl text-[#a3bfb3] hover:bg-[#C9A84C]/10 hover:text-[#C9A84C] transition-all"
             >
               <HelpCircle className="w-5 h-5 flex-shrink-0" />
               {(!isCollapsed || isMobileMenuOpen) && (
@@ -261,16 +261,16 @@ const Sidebar: React.FC<SidebarProps> = ({
               <Cloud className={cn("w-4 h-4", isOnline ? "text-[#6ee7b7]" : "text-amber-400")} />
               {(!isCollapsed || isMobileMenuOpen) && (
                 <div className="flex flex-col">
-                  <span className="text-[10px] font-bold text-[#64748b] leading-none">
+                  <span className="text-[10px] font-bold text-[#a3bfb3] leading-none">
                     {isOnline ? 'CLOUD CONNECTED' : 'OFFLINE MODE'}
                   </span>
-                  <span className="text-[9px] text-[#64748b] mt-1">{lastSynced}</span>
+                  <span className="text-[9px] text-[#a3bfb3] mt-1">{lastSynced}</span>
                 </div>
               )}
             </div>
             <button
               onClick={onToggleCollapse}
-              className="hidden lg:flex w-full items-center gap-3 px-2 py-2 rounded-lg hover:bg-[#022c22]/60 text-[#64748b] hover:text-white transition-colors"
+              className="hidden lg:flex w-full items-center gap-3 px-2 py-2 rounded-lg hover:bg-[#022c22]/60 text-[#a3bfb3] hover:text-white transition-colors"
             >
               {isCollapsed ? <ChevronRight className="w-5 h-5 mx-auto" /> : (
                 <>

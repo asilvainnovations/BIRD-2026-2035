@@ -229,13 +229,18 @@ footer{background:#011a12;color:white;padding:var(--sp-8) var(--sp-4) var(--sp-6
 @media(prefers-color-scheme:dark){body{background:var(--cream);}}
 </style>
 <base target="_blank">
+<style id="mtit-seal">
+/* Shared MTIT seal: one circular treatment on every page (matches the SPA's <MTITLogo/>). */
+img.mtit-seal{width:52px;height:52px;max-width:none;border-radius:50%;object-fit:contain;border:2px solid rgba(201,168,76,.32);background:#022c22;display:block;flex-shrink:0}
+img.mtit-seal.mtit-seal--sm{width:44px;height:44px}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
 <nav id="navbar" role="navigation" aria-label="Main site navigation">
 <div class="nav-container">
 <a href="/" class="nav-logo-wrap" aria-label="SGA Investment Outlook — Home">
-<img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png" alt="Ministry of Trade, Investments and Tourism – BARMM" width="140" height="44" onerror="this.style.display='none'">
+<img src="assets/MTIT-logo-circle.webp" class="mtit-seal" alt="Ministry of Trade, Investments and Tourism – BARMM" width="52" height="52" decoding="async" onerror="this.onerror=null;this.src='assets/MTIT-logo-circle.png'">
 <span class="nav-site-name">Special Geographic Area<br>Investment Outlook</span>
 </a>
 <div class="nav-right" aria-label="Desktop navigation" role="menubar">
@@ -881,7 +886,7 @@ footer{background:#011a12;color:white;padding:var(--sp-8) var(--sp-4) var(--sp-6
 <footer role="contentinfo">
 <div class="footer-inner">
 <div class="footer-logo">
-<img src="https://mtit.bangsamoro.gov.ph/wp-content/uploads/2024/04/MTIT-HEADER-2024.png" alt="MTIT BARMM logo" width="140" height="42" loading="lazy" onerror="this.style.display='none'">
+<img src="assets/MTIT-logo-circle.webp" class="mtit-seal mtit-seal--sm" alt="MTIT BARMM logo" width="52" height="52" decoding="async" onerror="this.onerror=null;this.src='assets/MTIT-logo-circle.png'">
 </div>
 <div class="footer-bottom">
 <p>© 2026 Bangsamoro Autonomous Region in Muslim Mindanao (BARMM). All rights reserved.</p>

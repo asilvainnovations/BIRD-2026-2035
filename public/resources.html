@@ -361,6 +361,11 @@ body { background:white; color:black; }
 }
 </style>
 <base target="_blank">
+<style id="mtit-seal">
+/* Shared MTIT seal: one circular treatment on every page (matches the SPA's <MTITLogo/>). */
+img.mtit-seal{width:52px;height:52px;max-width:none;border-radius:50%;object-fit:contain;border:2px solid rgba(201,168,76,.32);background:#022c22;display:block;flex-shrink:0}
+img.mtit-seal.mtit-seal--sm{width:44px;height:44px}
+</style>
 </head>
 <body>
 <a href="#mainContent" class="skip-link">Skip to main content</a>
@@ -368,7 +373,7 @@ body { background:white; color:black; }
 <nav class="site-nav" id="siteNav" role="navigation" aria-label="Main navigation">
 <div class="nav-inner">
 <a href="https://bangsamoro-investment-roadmap.asilvainnovations.com" class="nav-logo" aria-label="MTIT BARMM – Home">
-<img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png" alt="Ministry of Trade, Investments and Tourism – BARMM" onerror="this.style.display='none'">
+<img src="assets/MTIT-logo-circle.webp" class="mtit-seal" alt="Ministry of Trade, Investments and Tourism – BARMM" width="52" height="52" decoding="async" onerror="this.onerror=null;this.src='assets/MTIT-logo-circle.png'">
 </a>
 <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
 <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>

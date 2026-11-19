@@ -245,7 +245,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
                       className={cn(
                         'max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm whitespace-pre-wrap leading-relaxed',
                         m.role === 'user'
-                          ? 'bg-gradient-to-br from-[#C9A84C] to-blue-600 text-white rounded-br-sm'
+                          ? 'bg-gradient-to-br from-[#C9A84C] to-blue-600 text-[#022c22] rounded-br-sm'
                           : 'bg-muted text-foreground rounded-bl-sm border border-border/40',
                       )}
                     >

@@ -21,7 +21,7 @@ const NotFound = () => {
         </div>
         <h1 className="text-2xl font-bold mb-3 text-[#E8C560]">Page Not Found</h1>
         <p className="text-[#ecfdf5]/70 mb-2">The page you are looking for does not exist or has been moved.</p>
-        <p className="text-[#64748b] text-sm mb-6">BIRD 2026-2035 Strategic Investment Roadmap</p>
+        <p className="text-[#a3bfb3] text-sm mb-6">BIRD 2026-2035 Strategic Investment Roadmap</p>
         <a 
           href="/" 
           className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#C9A84C] to-[#E8C560] text-[#022c22] font-semibold rounded-xl transition-all hover:shadow-lg hover:shadow-[#C9A84C]/20 hover:scale-[1.02]"

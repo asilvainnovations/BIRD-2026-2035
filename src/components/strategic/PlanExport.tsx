@@ -450,7 +450,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-[#E8C560]">Plan Generator</h1>
-          <p className="text-[#64748b]">Export professional strategic plans aligned with BIRD 2026-2035</p>
+          <p className="text-[#a3bfb3]">Export professional strategic plans aligned with BIRD 2026-2035</p>
         </div>
         <div className="flex items-center gap-3">
           <button
@@ -473,7 +473,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Section Selection */}
         <div className="lg:col-span-1 space-y-4">
-          <div className="bg-white rounded-xl border border-[#C9A84C]/20 p-6">
+          <div className="bg-[#022c22]/60 rounded-xl border border-[#C9A84C]/20 p-6">
             <h3 className="font-semibold text-[#E8C560] mb-4">Select Sections</h3>
             <div className="space-y-3">
               {sections.map((section) => {
@@ -494,12 +494,12 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                     />
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <Icon className={`w-4 h-4 ${isSelected ? 'text-[#C9A84C]' : 'text-[#64748b]/80'}`} />
+                        <Icon className={`w-4 h-4 ${isSelected ? 'text-[#C9A84C]' : 'text-[#a3bfb3]'}`} />
                         <span className={`font-medium ${isSelected ? 'text-[#C9A84C]' : 'text-[#E8C560]/90'}`}>
                           {section.label}
                         </span>
                       </div>
-                      <p className="text-xs text-[#64748b] mt-1">{section.description}</p>
+                      <p className="text-xs text-[#a3bfb3] mt-1">{section.description}</p>
                     </div>
                   </label>
                 );
@@ -508,7 +508,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
           </div>
 
           {/* Export Options */}
-          <div className="bg-white rounded-xl border border-[#C9A84C]/20 p-6">
+          <div className="bg-[#022c22]/60 rounded-xl border border-[#C9A84C]/20 p-6">
             <h3 className="font-semibold text-[#E8C560] mb-4">Export Format</h3>
             <div className="space-y-3">
               <button
@@ -550,10 +550,10 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
 
         {/* Preview */}
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-xl border border-[#C9A84C]/20 overflow-hidden print:border-0 print:shadow-none">
+          <div className="bg-[#022c22]/60 rounded-xl border border-[#C9A84C]/20 overflow-hidden print:border-0 print:shadow-none">
             <div className="bg-[#064e3b]/20 px-6 py-3 border-b border-[#C9A84C]/20 flex items-center justify-between print:hidden">
               <h3 className="font-semibold text-[#E8C560]/90">Document Preview</h3>
-              <span className="text-xs text-[#64748b]">
+              <span className="text-xs text-[#a3bfb3]">
                 {Object.values(selectedSections).filter(Boolean).length} sections selected
               </span>
             </div>
@@ -585,7 +585,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                   >
                     {editablePlan.organization}
                   </p>
-                  <div className="flex items-center justify-center gap-2 text-[#64748b]">
+                  <div className="flex items-center justify-center gap-2 text-[#a3bfb3]">
                     <Calendar className="w-4 h-4" />
                     <span 
                       contentEditable 
@@ -603,7 +603,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                       {editablePlan.planningPeriodEnd || '2035'}
                     </span>
                   </div>
-                  <p className="text-sm text-[#64748b]/80 mt-8">
+                  <p className="text-sm text-[#a3bfb3] mt-8">
                     Generated on {new Date().toLocaleDateString('en-US', { 
                       year: 'numeric', 
                       month: 'long', 
@@ -678,10 +678,10 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                     {['strength', 'weakness', 'opportunity', 'threat'].map((category) => {
                       const items = editablePlan.swotItems.filter((i) => i.category === category);
                       const colors = {
-                        strength: 'bg-[#059669]/10 border-[#059669]/20 text-emerald-800',
-                        weakness: 'bg-red-500/10 border-red-500/20 text-red-800',
-                        opportunity: 'bg-[#C9A84C]/10 border-[#C9A84C]/20 text-blue-800',
-                        threat: 'bg-amber-500/10 border-amber-500/20 text-amber-800',
+                        strength: 'bg-[#059669]/10 border-[#059669]/20 text-emerald-300',
+                        weakness: 'bg-red-500/10 border-red-500/20 text-red-300',
+                        opportunity: 'bg-[#C9A84C]/10 border-[#C9A84C]/20 text-blue-300',
+                        threat: 'bg-amber-500/10 border-amber-500/20 text-amber-300',
                       };
                       return (
                         <div key={category} className={`rounded-lg p-4 border ${colors[category as keyof typeof colors]}`}>
@@ -702,13 +702,13 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                                         setEditablePlan({...editablePlan, swotItems: newSwot});
                                     }}
                                   >{item.description}</span>
-                                <span className="text-[#64748b] ml-1 block md:inline">
+                                <span className="text-[#a3bfb3] ml-1 block md:inline">
                                   ({calculateSwotScore(item.category, item.impactScore, item.likelihoodScore)})
                                 </span>
                               </li>
                             ))}
                             {items.length > 4 && (
-                              <li className="text-[#64748b]">...and {items.length - 4} more</li>
+                              <li className="text-[#a3bfb3]">...and {items.length - 4} more</li>
                             )}
                           </ul>
                         </div>
@@ -742,7 +742,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                         ) : getActiveSnapshotInfo().isActiveFromCanvas ? (
                           <Info className="w-5 h-5 text-amber-400 mt-0.5" />
                         ) : (
-                          <Info className="w-5 h-5 text-[#64748b]/80 mt-0.5" />
+                          <Info className="w-5 h-5 text-[#a3bfb3] mt-0.5" />
                         )}
                         <div className="flex-1">
                           <h3 className="font-semibold text-[#E8C560] mb-1">Current CLD State</h3>
@@ -808,7 +808,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                           return (
                             <div key={archetypeId} className="bg-amber-500/10 rounded-lg p-4 border border-amber-500/20">
                               <div className="flex items-start gap-2 mb-2">
-                                <span className="px-2 py-1 bg-amber-500 text-white text-xs font-bold rounded">
+                                <span className="px-2 py-1 bg-amber-500 text-[#022c22] text-xs font-bold rounded">
                                   #{idx + 1}
                                 </span>
                                 <h4 className="font-bold text-[#E8C560]">{archetype.name}</h4>
@@ -816,7 +816,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                               <p className="text-sm text-[#ecfdf5]/80 mb-2">{archetype.description}</p>
                               <div className="space-y-1 text-xs">
                                 <p><strong>Leverage Points:</strong></p>
-                                <ul className="list-disc list-inside text-[#64748b]">
+                                <ul className="list-disc list-inside text-[#a3bfb3]">
                                   {archetype.leverage_points.map((point: string, pIdx: number) => (
                                     <li key={pIdx}>{point}</li>
                                   ))}
@@ -843,11 +843,11 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                       .filter((opt) => opt.selected)
                       .map((opt, idx) => (
                         <div key={opt.id} className="flex items-start gap-3 p-3 bg-[#064e3b]/10 rounded-lg">
-                          <span className={`px-2 py-1 rounded text-xs font-bold text-white ${
-                            opt.optionType === 'SO' ? 'bg-[#059669]' :
-                            opt.optionType === 'ST' ? 'bg-[#C9A84C]' :
-                            opt.optionType === 'WO' ? 'bg-purple-500' :
-                            'bg-amber-500'
+                          <span className={`px-2 py-1 rounded text-xs font-bold ${
+                            opt.optionType === 'SO' ? 'bg-[#047857] text-white' :
+                            opt.optionType === 'ST' ? 'bg-[#C9A84C] text-[#022c22]' :
+                            opt.optionType === 'WO' ? 'bg-purple-700 text-white' :
+                            'bg-amber-500 text-[#022c22]'
                           }`}>
                             {opt.optionType}
                           </span>
@@ -910,7 +910,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                             {labels[perspective]}
                           </h3>
                           <p className="text-2xl font-bold text-[#C9A84C]">{objectives.length}</p>
-                          <p className="text-sm text-[#64748b]">objectives</p>
+                          <p className="text-sm text-[#a3bfb3]">objectives</p>
                         </div>
                       );
                     })}
@@ -971,9 +971,9 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                   </h2>
                   <div className="bg-[#064e3b]/10 rounded-lg p-6 border-2 border-dashed border-[#C9A84C]/30 hover:border-[#C9A84C] transition-colors">
                     <label className="flex flex-col items-center justify-center cursor-pointer">
-                      <Upload className="w-10 h-10 text-[#64748b]/80 mb-3" />
+                      <Upload className="w-10 h-10 text-[#a3bfb3] mb-3" />
                       <span className="text-sm text-[#ecfdf5]/80 font-medium">Click to upload appendix files</span>
-                      <span className="text-xs text-[#64748b]/80 mt-1">PDF, DOCX, XLSX, Images, etc.</span>
+                      <span className="text-xs text-[#a3bfb3] mt-1">PDF, DOCX, XLSX, Images, etc.</span>
                       <input 
                         type="file" 
                         multiple 
@@ -987,11 +987,11 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                       <h3 className="font-semibold text-[#E8C560]/90 text-sm">Uploaded Files ({appendixFiles.length})</h3>
                       <ul className="space-y-2">
                         {appendixFiles.map((file, idx) => (
-                          <li key={idx} className="flex items-center justify-between bg-white p-3 rounded border border-[#C9A84C]/20 text-sm">
+                          <li key={idx} className="flex items-center justify-between bg-[#022c22]/60 p-3 rounded border border-[#C9A84C]/20 text-sm">
                             <span className="flex items-center gap-2 truncate">
-                              <FileText className="w-4 h-4 text-[#64748b]/80 flex-shrink-0" />
+                              <FileText className="w-4 h-4 text-[#a3bfb3] flex-shrink-0" />
                               <span className="truncate font-medium text-[#E8C560]/90">{file.name}</span>
-                              <span className="text-xs text-[#64748b]/80 flex-shrink-0">({(file.size / 1024).toFixed(1)} KB)</span>
+                              <span className="text-xs text-[#a3bfb3] flex-shrink-0">({(file.size / 1024).toFixed(1)} KB)</span>
                             </span>
                             <button onClick={() => removeFile(idx)} className="text-red-400 hover:text-red-400 p-1 flex-shrink-0">
                               <Trash2 className="w-4 h-4" />

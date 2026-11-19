@@ -1,14 +1,11 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Search, X, Moon, Sun, FileText, ChevronDown,
+  Search, X, FileText, ChevronDown,
   LogOut, User, Settings, Shield,
   ClipboardCheck, Menu, LogIn,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useTheme } from '@/components/theme-provider';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { Toggle } from '@/components/ui/toggle';
 import {
   Tooltip,
   TooltipContent,
@@ -61,16 +58,7 @@ const Topbar: React.FC<TopbarProps> = ({
   onOpenSettings,
   onNavigateView,
 }) => {
-  const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
-  // Effective theme: resolve 'system' through the OS preference so the
-  // toggle icon always reflects what's actually rendered.
-  const isDark = theme === 'dark' || (
-    theme === 'system' &&
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches
-  );
-  const ThemeIcon = isDark ? Sun : Moon;
 
   const [showPlanSelector, setShowPlanSelector] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
@@ -170,13 +158,13 @@ const Topbar: React.FC<TopbarProps> = ({
           >
             <FileText className="w-4 h-4 text-[#C9A84C]" />
             <span className="max-w-[140px] truncate hidden sm:inline">{planName || 'Select Plan'}</span>
-            <ChevronDown className={cn("w-3.5 h-3.5 text-[#64748b] transition-transform", showPlanSelector && "rotate-180")} />
+            <ChevronDown className={cn("w-3.5 h-3.5 text-[#a3bfb3] transition-transform", showPlanSelector && "rotate-180")} />
           </button>
 
           {/* Plan dropdown */}
           {showPlanSelector && (
             <div className="absolute top-14 left-4 w-64 rounded-xl border border-white/10 bg-[#022c22] shadow-2xl shadow-black/40 py-2 z-50">
-              <div className="px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-[#64748b] border-b border-white/5 mb-1">
+              <div className="px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-[#a3bfb3] border-b border-white/5 mb-1">
                 Your Plans
               </div>
               {plans.map((p) => (
@@ -185,7 +173,7 @@ const Topbar: React.FC<TopbarProps> = ({
                   onClick={() => { onSelectPlan(p.id); setShowPlanSelector(false); }}
                   className={cn(
                     "w-full flex items-center gap-2 px-3 py-2 text-sm transition-colors",
-                    p.id === currentPlan?.id ? "text-[#E8C560] bg-[#C9A84C]/10" : "text-[#64748b] hover:bg-white/5"
+                    p.id === currentPlan?.id ? "text-[#E8C560] bg-[#C9A84C]/10" : "text-[#a3bfb3] hover:bg-white/5"
                   )}
                 >
                   <FileText className="w-4 h-4" />
@@ -193,7 +181,7 @@ const Topbar: React.FC<TopbarProps> = ({
                 </button>
               ))}
               {plans.length === 0 && (
-                <p className="px-3 py-2 text-xs text-[#64748b]">No plans yet.</p>
+                <p className="px-3 py-2 text-xs text-[#a3bfb3]">No plans yet.</p>
               )}
               <div className="border-t border-white/5 mt-1 pt-1">
                 <button
@@ -234,7 +222,7 @@ const Topbar: React.FC<TopbarProps> = ({
                   className="md:hidden flex items-center justify-center w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
                   onClick={() => setShowMobileSearch((v) => !v)}
                 >
-                  {showMobileSearch ? <X className="w-4 h-4 text-[#64748b]/80" /> : <Search className="w-4 h-4 text-[#64748b]/80" />}
+                  {showMobileSearch ? <X className="w-4 h-4 text-[#a3bfb3]" /> : <Search className="w-4 h-4 text-[#a3bfb3]" />}
                 </button>
               </TooltipTrigger>
               <TooltipContent side="bottom" className="bg-[#022c22] border-[#C9A84C]/30 text-[#E8C560]">
@@ -244,7 +232,7 @@ const Topbar: React.FC<TopbarProps> = ({
 
             {/* Desktop search input */}
             <div className="hidden md:flex items-center relative">
-              <Search className="absolute left-3 w-4 h-4 text-[#64748b] pointer-events-none" />
+              <Search className="absolute left-3 w-4 h-4 text-[#a3bfb3] pointer-events-none" />
               <input
                 type="text"
                 value={searchQuery}
@@ -255,7 +243,7 @@ const Topbar: React.FC<TopbarProps> = ({
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 text-[#64748b] hover:text-[#64748b]"
+                  className="absolute right-3 text-[#a3bfb3] hover:text-[#a3bfb3]"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -265,7 +253,7 @@ const Topbar: React.FC<TopbarProps> = ({
             {/* Mobile search input */}
             {showMobileSearch && (
               <div className="absolute top-12 right-0 w-72 md:hidden flex items-center relative">
-                <Search className="absolute left-3 w-4 h-4 text-[#64748b] pointer-events-none" />
+                <Search className="absolute left-3 w-4 h-4 text-[#a3bfb3] pointer-events-none" />
                 <input
                   type="text"
                   value={searchQuery}
@@ -284,9 +272,9 @@ const Topbar: React.FC<TopbarProps> = ({
                   <button
                     key={`${r.type}-${r.id}`}
                     onClick={() => handleSearchSelect(r)}
-                    className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-[#64748b] hover:bg-white/5 transition-colors text-left"
+                    className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-[#a3bfb3] hover:bg-white/5 transition-colors text-left"
                   >
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#64748b] bg-white/5 px-1.5 py-0.5 rounded">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#a3bfb3] bg-white/5 px-1.5 py-0.5 rounded">
                       {r.type}
                     </span>
                     <span className="truncate">{r.title}</span>
@@ -296,70 +284,7 @@ const Topbar: React.FC<TopbarProps> = ({
             )}
           </div>
 
-          {/* Divider */}
-          <div className="w-px h-6 bg-white/10 mx-1" />
-
-          {/* Theme toggle — wired to theme-provider with ToggleGroup */}
-          <ToggleGroup
-            type="single"
-            value={theme}
-            onValueChange={(value) => value && setTheme(value as 'light' | 'dark' | 'system')}
-            className="bg-white/5 border border-white/10 rounded-xl p-0.5"
-          >
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <ToggleGroupItem
-                  value="light"
-                  aria-label="Light mode"
-                  className={cn(
-                    'h-8 w-8 rounded-lg data-[state=on]:bg-[#C9A84C]/20 data-[state=on]:text-[#E8C560',
-                    'text-[#64748b]/80 hover:text-[#ecfdf5]/90 transition-colors'
-                  )}
-                >
-                  <Sun className="w-4 h-4" />
-                </ToggleGroupItem>
-              </TooltipTrigger>
-              <TooltipContent side="bottom" className="bg-[#022c22] border-[#C9A84C]/30 text-[#E8C560]">
-                <p className="text-xs">Light mode</p>
-              </TooltipContent>
-            </Tooltip>
-
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <ToggleGroupItem
-                  value="dark"
-                  aria-label="Dark mode"
-                  className={cn(
-                    'h-8 w-8 rounded-lg data-[state=on]:bg-[#C9A84C]/20 data-[state=on]:text-[#E8C560]',
-                    'text-[#64748b]/80 hover:text-[#ecfdf5]/90 transition-colors'
-                  )}
-                >
-                  <Moon className="w-4 h-4" />
-                </ToggleGroupItem>
-              </TooltipTrigger>
-              <TooltipContent side="bottom" className="bg-[#022c22] border-[#C9A84C]/30 text-[#E8C560]">
-                <p className="text-xs">Dark mode</p>
-              </TooltipContent>
-            </Tooltip>
-
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <ToggleGroupItem
-                  value="system"
-                  aria-label="System preference"
-                  className={cn(
-                    'h-8 w-8 rounded-lg data-[state=on]:bg-[#C9A84C]/20 data-[state=on]:text-[#E8C560]',
-                    'text-[#64748b]/80 hover:text-[#ecfdf5]/90 transition-colors'
-                  )}
-                >
-                  <Settings className="w-4 h-4" />
-                </ToggleGroupItem>
-              </TooltipTrigger>
-              <TooltipContent side="bottom" className="bg-[#022c22] border-[#C9A84C]/30 text-[#E8C560]">
-                <p className="text-xs">System preference</p>
-              </TooltipContent>
-            </Tooltip>
-          </ToggleGroup>
+          {/* Theme toggle removed: BIRD uses the single brand dark theme (see theme-provider.tsx). */}
 
           {/* Account menu / Sign in */}
           {isAuthenticated ? (
@@ -369,7 +294,7 @@ const Topbar: React.FC<TopbarProps> = ({
                   <button
                     id="topbar-btn-account"
                     onClick={() => setShowAccountMenu((v) => !v)}
-                    className="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-[#C9A84C] to-[#064e3b] text-white text-xs font-bold hover:shadow-lg hover:shadow-[#C9A84C]/20 transition-all"
+                    className="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-[#C9A84C] to-[#064e3b] text-[#022c22] text-xs font-bold hover:shadow-lg hover:shadow-[#C9A84C]/20 transition-all"
                   >
                     {userInitials}
                   </button>
@@ -384,18 +309,18 @@ const Topbar: React.FC<TopbarProps> = ({
                 <div className="absolute top-12 right-0 w-56 rounded-xl border border-white/10 bg-[#022c22] shadow-2xl shadow-black/40 py-2 z-50">
                   <div className="px-4 py-2 border-b border-white/5 mb-1">
                     <p className="text-sm font-semibold text-white truncate">{userName}</p>
-                    <p className="text-[10px] text-[#64748b] truncate">{userEmail}</p>
-                    <p className="text-[10px] text-[#64748b] uppercase tracking-wider">{isAdmin ? 'admin' : 'member'}</p>
+                    <p className="text-[10px] text-[#a3bfb3] truncate">{userEmail}</p>
+                    <p className="text-[10px] text-[#a3bfb3] uppercase tracking-wider">{isAdmin ? 'admin' : 'member'}</p>
                   </div>
                   <button
                     onClick={() => { onOpenProfile(); setShowAccountMenu(false); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-[#64748b] hover:bg-white/5 transition-colors"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-[#a3bfb3] hover:bg-white/5 transition-colors"
                   >
                     <User className="w-4 h-4" /> Profile
                   </button>
                   <button
                     onClick={() => { onOpenSettings(); setShowAccountMenu(false); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-[#64748b] hover:bg-white/5 transition-colors"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-[#a3bfb3] hover:bg-white/5 transition-colors"
                   >
                     <Settings className="w-4 h-4" /> Settings
                   </button>

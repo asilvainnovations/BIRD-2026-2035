@@ -3,6 +3,7 @@
 // Embedded videos, images, and external site links as interactive reference points
 
 import React, { useState } from 'react';
+import { MTITLogo } from '@/components/branding/Logo';
 import {
   LayoutDashboard, Target, Sparkles, Network, ChartBar as BarChart3,
   FolderKanban, FileText, Wifi, ArrowRight, Play, LogIn, User,
@@ -30,7 +31,7 @@ const features = [
   { icon: BarChart3, title: 'Balanced Scorecard', description: 'Smart categorization into four perspectives with automated KPI tracking.', color: 'from-[#C9A84C] to-indigo-600' },
   { icon: FolderKanban, title: 'PAPs Management', description: 'Track Programs, Activities, and Projects with automated budget totaling.', color: 'from-teal-500 to-[#B8942E]' },
   { icon: FileText, title: 'Plan Generator', description: 'Produce print-ready, professional reports for official documentation.', color: 'from-[#64748b] to-[#022c22]/80' },
-  { icon: Wifi, title: 'Offline-First', description: 'Progressive Web App (PWA) capabilities allow you to plan anywhere, anytime.', color: 'from-purple-500 to-violet-600' },
+  { icon: Wifi, title: 'Offline-First', description: 'Progressive Web App (PWA) capabilities allow you to plan anywhere, anytime.', color: 'from-[#C9A84C] to-[#7a5c1e]' },
 ];
 
 /** Video card with embedded player dialog */
@@ -128,19 +129,16 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         <nav className="max-w-7xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-[#C9A84C]/50 shadow-lg shadow-[#C9A84C]/20 bg-[#022c22]">
-                <img src="https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/bird-images/public/MTIT%20Logo.webp"
-                  alt="BIRD 2026-2035" className="w-full h-full object-cover" />
-              </div>
+              <MTITLogo size="md" withGlow />
               <div className="hidden sm:block">
                 <h1 className="font-bold text-sm tracking-tight text-white">BIRD<span className="text-[#C9A84C] font-black"> 2026-2035</span></h1>
-                <p className="text-[10px] text-[#64748b] font-bold tracking-widest uppercase">Strategic Plan</p>
+                <p className="text-[10px] text-[#a3bfb3] font-bold tracking-widest uppercase">Strategic Plan</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
               <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-[#022c22]/50 rounded-full border border-[#C9A84C]/20">
                 <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-[10px] text-[#64748b] font-bold uppercase tracking-wider">Live</span>
+                <span className="text-[10px] text-[#a3bfb3] font-bold uppercase tracking-wider">Live</span>
               </div>
               {isAuthenticated ? (
                 <button onClick={onStartPlanning}
@@ -149,7 +147,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 </button>
               ) : (
                 <button onClick={onSignIn}
-                  className="flex items-center gap-2 px-4 py-2 bg-white text-[#022c22] hover:bg-[#E8C560] rounded-lg text-sm font-bold transition-all">
+                  className="flex items-center gap-2 px-4 py-2 bg-[#022c22]/60 text-[#022c22] hover:bg-[#E8C560] rounded-lg text-sm font-bold transition-all">
                   <LogIn className="w-4 h-4" /> Sign In
                 </button>
               )}
@@ -168,7 +166,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               A Hub for Resilient and Ethical Growth.
             </span>
           </h1>
-          <p className="text-lg text-[#64748b]/80 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-[#a3bfb3] mb-12 max-w-2xl mx-auto leading-relaxed">
             The official AI-powered platform for the Bangsamoro Investment Roadmap Development 2026–2035.
             Diagnose, strategize, monitor, and learn — all in one place, grounded in the BEIE framework
             and five strategic leverage points.
@@ -177,7 +175,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           {/* Primary Actions */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <button onClick={onStartPlanning}
-              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[#C9A84C] to-[#B8942E] text-white rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-[#C9A84C]/40 transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
+              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[#C9A84C] to-[#B8942E] text-[#022c22] rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-[#C9A84C]/40 transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
               Open My Strategic Workspace <ArrowRight className="w-5 h-5" />
             </button>
             <button onClick={onViewDemo}
@@ -214,7 +212,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Learn the <span className="text-[#C9A84C]">Framework</span>
             </h2>
-            <p className="text-[#64748b]/80 max-w-2xl mx-auto">
+            <p className="text-[#a3bfb3] max-w-2xl mx-auto">
               Explore the videos, visualizations, and reference materials that ground the BIRD 2026–2035 methodology.
             </p>
           </div>
@@ -260,7 +258,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-white group-hover:text-[#E8C560] transition-colors">{site.title}</p>
-                    <p className="text-[10px] text-[#64748b] truncate">{site.description}</p>
+                    <p className="text-[10px] text-[#a3bfb3] truncate">{site.description}</p>
                   </div>
                   <ChevronRight className="w-4 h-4 text-[#ecfdf5]/80 group-hover:text-[#C9A84C]" />
                 </a>
@@ -280,7 +278,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-lg font-bold text-white mb-3 tracking-tight">{feature.title}</h3>
-                  <p className="text-sm text-[#64748b]/80 leading-relaxed">{feature.description}</p>
+                  <p className="text-sm text-[#a3bfb3] leading-relaxed">{feature.description}</p>
                 </div>
               );
             })}
@@ -296,7 +294,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               The <span className="text-[#6ee7b7]">C.A.R.E.</span> Framework & <span className="text-amber-400">Khalifa</span> Stewardship
             </h2>
-            <p className="text-[#64748b]/80 max-w-3xl mx-auto text-lg">
+            <p className="text-[#a3bfb3] max-w-3xl mx-auto text-lg">
               Transforming the Bangsamoro requires more than capital; it requires a paradigm rooted in stewardship.
             </p>
           </div>
@@ -312,7 +310,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                   {item.letter}
                 </div>
                 <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
-                <p className="text-sm text-[#64748b]/80 leading-relaxed">{item.desc}</p>
+                <p className="text-sm text-[#a3bfb3] leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -322,11 +320,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="max-w-3xl mx-auto px-6 pb-32 text-center">
           <div className="p-12 rounded-3xl bg-gradient-to-b from-[#022c22]/60 to-[#011a12] border border-[#C9A84C]/20 shadow-3xl">
             <h2 className="text-3xl font-black text-white mb-4">Ready to Drive the Bangsamoro Investment Boom?</h2>
-            <p className="text-[#64748b]/80 mb-10">
+            <p className="text-[#a3bfb3] mb-10">
               Join BOI-MTIT BARMM's BIRD 2026–2035 platform and transform the Bangsamoro investment vision into structured, measurable, and executable reality.
             </p>
             <button onClick={onStartPlanning}
-              className="px-10 py-5 bg-white text-[#022c22] rounded-2xl font-black text-xl hover:bg-[#C9A84C] transition-all hover:scale-105 active:scale-95">
+              className="px-10 py-5 bg-[#022c22]/60 text-[#022c22] rounded-2xl font-black text-xl hover:bg-[#C9A84C] transition-all hover:scale-105 active:scale-95">
               Start Planning Now →
             </button>
           </div>
@@ -346,7 +344,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               </div>
               <p className="text-[10px] text-[#ecfdf5]/80 font-bold uppercase tracking-[0.2em]">BOI-MTIT, BARMM © 2026 · Built by ASilva Innovations</p>
             </div>
-            <div className="flex gap-8 text-xs font-bold text-[#64748b] uppercase tracking-widest">
+            <div className="flex gap-8 text-xs font-bold text-[#a3bfb3] uppercase tracking-widest">
               <a href="https://bird-resources.asilvainnovations.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#C9A84C] transition-colors">Documentation</a>
               <a href="/privacy-policy.html" target="_blank" rel="noopener noreferrer" className="hover:text-[#C9A84C] transition-colors">Privacy</a>
               <a href="/cookie-policy.html" target="_blank" rel="noopener noreferrer" className="hover:text-[#C9A84C] transition-colors">Cookies</a>
