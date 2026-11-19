@@ -1,0 +1,20 @@
+{
+  "repo": "asilvainnovations/BIRD-2026-2035",
+  "auditedAgainst": "BIRD_DEPLOYMENT_ASSESSMENT.md (2026-07-11)",
+  "auditedOn": "2026-11-19",
+  "branchCreated": false,
+  "pullRequestCreated": false,
+  "mainModified": false,
+  "reason": "GitHub create-reference request returned 403 Resource not accessible by integration; network DNS blocked clone/build",
+  "bundleType": "patch-bundle-not-full-clone",
+  "files": [
+    "vercel.json",
+    "src/lib/supabase.ts",
+    "public/sw.js",
+    "tsconfig.json",
+    "tsconfig.app.json",
+    ".env.example",
+    "src/pwa-register.ts",
+    "docs/PRODUCTION_READINESS_REMEDIATION.md"
+  ]
+}
