@@ -172,7 +172,7 @@ const SwotScoreButton: React.FC<{
           ? type === 'impact'
             ? config.defaultCLDPolarity === '+' ? 'border-[#059669] bg-[#059669]' : 'border-red-500 bg-red-500'
             : 'border-[#C9A84C] bg-[#C9A84C]'
-          : 'border-[#C9A84C]/30 dark:border-[#C9A84C]/20 hover:border-slate-400 hover:bg-[#064e3b]/10 dark:bg-[#022c22]'
+          : 'border-[#C9A84C]/20 hover:border-slate-400 hover:bg-[#064e3b]/10 bg-[#022c22]'
       )} aria-label={`${type} score ${value}`}>
       {isSelected && <Check className='w-3.5 h-3.5 text-white' />}
     </button>
@@ -185,22 +185,22 @@ const SwotScoreRow: React.FC<{
   readOnly?: boolean; labelColor?: string;
 }> = ({ label, score, onChange, type, category, readOnly, labelColor }) => (
   <div className='flex items-center gap-2 flex-wrap'>
-    <span className={cn('text-xs font-semibold w-16 shrink-0', labelColor || 'text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b]')}>{label}</span>
+    <span className={cn('text-xs font-semibold w-16 shrink-0', labelColor || 'text-[#a3bfb3]')}>{label}</span>
     <div className='flex gap-1'>
       {[1, 2, 3, 4, 5].map(n => (
         <SwotScoreButton key={n} value={n} selectedValue={score} onSelect={readOnly ? () => {} : onChange} type={type} category={category} />
       ))}
     </div>
-    <span className={cn('text-xs font-bold tabular-nums', labelColor || 'text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b]')}>{score}/5</span>
+    <span className={cn('text-xs font-bold tabular-nums', labelColor || 'text-[#a3bfb3]')}>{score}/5</span>
   </div>
 );
 
 const SwotPriorityBadge: React.FC<{ totalScore: number; category: keyof typeof swotCategoryConfig }> = ({ totalScore, category }) => {
   const PRIORITY_GUIDE = [
-    { level: 'Low',      range: '1–9',   color: 'text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b]', bg: 'bg-[#064e3b]/20 dark:bg-[#022c22]/60', border: 'border-[#C9A84C]/20 dark:border-[#C9A84C]/20' },
+    { level: 'Low',      range: '1–9',   color: 'text-[#a3bfb3]', bg: 'bg-[#022c22]/60', border: 'border-[#C9A84C]/20' },
     { level: 'Medium',   range: '10–15', color: 'text-[#C9A84C]',  bg: 'bg-[#C9A84C]/10',  border: 'border-[#C9A84C]/20' },
-    { level: 'High',     range: '16–20', color: 'text-amber-400', bg: 'bg-amber-500', border: 'border-amber-500/20' },
-    { level: 'Critical', range: '21–25', color: 'text-red-400',   bg: 'bg-red-500',   border: 'border-red-500/20' },
+    { level: 'High',     range: '16–20', color: 'text-amber-300', bg: 'bg-amber-500/15', border: 'border-amber-500/20' },
+    { level: 'Critical', range: '21–25', color: 'text-red-300',   bg: 'bg-red-500/15',   border: 'border-red-500/20' },
   ];
 
   const getPriorityInfo = (score: number) => {
@@ -232,7 +232,7 @@ const SwotCard: React.FC<{
       <div className={cn('rounded-lg p-3 border transition-all', config.lightBg, config.borderColor)}>
         <p className={cn('text-sm font-medium mb-2 leading-snug', config.textColor)}>{item.description}</p>
         <div className='flex items-center justify-between flex-wrap gap-2'>
-          <div className='flex gap-3 text-xs text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b]'>
+          <div className='flex gap-3 text-xs text-[#a3bfb3]'>
             <span>Impact <span className={cn('font-bold', config.textColor)}>{imp}</span></span>
             <span>Likelihood <span className='font-bold text-[#C9A84C]'>{lik}</span></span>
           </div>
@@ -251,11 +251,11 @@ const SwotCard: React.FC<{
           {config.defaultCLDPolarity === '+' ? '+' : '−'}{total}
         </span>
       </div>
-      <div className='space-y-2 pt-3 border-t border-[#C9A84C]/20 dark:border-[#C9A84C]/20'>
+      <div className='space-y-2 pt-3 border-t border-[#C9A84C]/20'>
         <SwotScoreRow label='Impact' score={imp} onChange={v => onUpdate?.(item.id, { impactScore: v })} type='impact' category={item.category} labelColor={config.textColor} />
         <SwotScoreRow label='Likelihood' score={lik} onChange={v => onUpdate?.(item.id, { likelihoodScore: v })} type='likelihood' category={item.category} />
-        <div className='flex items-center justify-between pt-1 border-t border-[#C9A84C]/20 dark:border-[#C9A84C]/20'>
-          <span className='text-xs text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b]'>Impact × Likelihood</span>
+        <div className='flex items-center justify-between pt-1 border-t border-[#C9A84C]/20'>
+          <span className='text-xs text-[#a3bfb3]'>Impact × Likelihood</span>
           <div className='flex items-center gap-2'>
             <SwotPriorityBadge totalScore={total} category={item.category} />
           </div>
@@ -281,12 +281,12 @@ const SwotQuadrant: React.FC<{
           <h4 className={cn('font-semibold text-sm', config.textColor)}>{title}</h4>
           <span className={cn('text-xs px-1.5 py-0.5 rounded-full font-medium', config.bgColor, 'text-white')}>{count}</span>
         </div>
-        {open ? <ChevronUp className='w-4 h-4 text-[#64748b]/80 dark:text-[#64748b]' /> : <ChevronDown className='w-4 h-4 text-[#64748b]/80 dark:text-[#64748b]' />}
+        {open ? <ChevronUp className='w-4 h-4 text-[#a3bfb3]' /> : <ChevronDown className='w-4 h-4 text-[#a3bfb3]' />}
       </button>
       {open && (
-        <div className='p-3 space-y-2 bg-white dark:bg-[#022c22]/60/60'>
+        <div className='p-3 space-y-2 bg-[#022c22]/60/60'>
           {items.length === 0
-            ? <p className='text-xs text-[#64748b]/80 dark:text-[#64748b] text-center py-4'>No items yet</p>
+            ? <p className='text-xs text-[#a3bfb3] text-center py-4'>No items yet</p>
             : items.map(item => <SwotCard key={item.id} item={item} config={config} onUpdate={onUpdate} compact />)
           }
         </div>
@@ -300,12 +300,12 @@ type QuadrantType = typeof QUADRANT_TYPES[number];
 const quadrantConfig = {
   SO: { label: 'SO Strategies', subtitle: 'Strengths + Opportunities', description: 'Use strengths to capitalize on opportunities', color: 'emerald', bgGradient: 'from-emerald-500 to-teal-600', lightBg: 'bg-[#059669]/10', border: 'border-[#059669]/20', textColor: 'text-[#34d399]', icons: [Shield, Lightbulb], leverageLevels: [7, 4, 8], leverageRationale: 'Amplify reinforcing growth loops & self-organizing capabilities' },
   ST: { label: 'ST Strategies', subtitle: 'Strengths + Threats', description: 'Use strengths to mitigate threats', color: 'blue', bgGradient: 'from-blue-500 to-indigo-600', lightBg: 'bg-[#C9A84C]/10', border: 'border-[#C9A84C]/20', textColor: 'text-[#C9A84C]', icons: [Shield, Zap], leverageLevels: [8, 5, 6], leverageRationale: 'Strengthen balancing loops, governance rules & information access' },
-  WO: { label: 'WO Strategies', subtitle: 'Weaknesses + Opportunities', description: 'Overcome weaknesses by pursuing opportunities', color: 'purple', bgGradient: 'from-purple-500 to-violet-600', lightBg: 'bg-purple-500/10', border: 'border-purple-500/20', textColor: 'text-purple-400', icons: [AlertCircle, Lightbulb], leverageLevels: [3, 6, 9], leverageRationale: 'Redefine goals, expose information gaps & reduce structural delays' },
+  WO: { label: 'WO Strategies', subtitle: 'Weaknesses + Opportunities', description: 'Overcome weaknesses by pursuing opportunities', color: 'purple', bgGradient: 'from-[#C9A84C] to-[#7a5c1e]', lightBg: 'bg-purple-500/10', border: 'border-purple-500/20', textColor: 'text-purple-400', icons: [AlertCircle, Lightbulb], leverageLevels: [3, 6, 9], leverageRationale: 'Redefine goals, expose information gaps & reduce structural delays' },
   WT: { label: 'WT Strategies', subtitle: 'Weaknesses + Threats', description: 'Minimize weaknesses and avoid threats', color: 'amber', bgGradient: 'from-amber-500 to-orange-600', lightBg: 'bg-amber-500/10', border: 'border-amber-500/20', textColor: 'text-amber-400', icons: [AlertCircle, Zap], leverageLevels: [2, 5, 10], leverageRationale: 'Challenge paradigms, restructure stock-flow & establish defensive rules' },
 };
 
 const MEADOWS_ICONS: Record<number, React.ElementType> = { 12: Gauge, 11: Anchor, 10: Workflow, 9: Clock, 8: Activity, 7: TrendingUp, 6: BarChart2, 5: BookOpen, 4: Sparkles, 3: Target, 2: Brain, 1: Crosshair };
-const MEADOWS_LEVEL_COLORS: Record<string, string> = { high: 'bg-violet-600 text-white', mid: 'bg-red-500 text-white', feedback: 'bg-amber-500 text-white', params: 'bg-slate-400 text-white' };
+const MEADOWS_LEVEL_COLORS: Record<string, string> = { high: 'bg-[#C9A84C] text-[#022c22]', mid: 'bg-red-500 text-white', feedback: 'bg-amber-500 text-[#022c22]', params: 'bg-slate-400 text-white' };
 const getMeadowsBadgeColor = (level: number) => { if (level <= 3) return MEADOWS_LEVEL_COLORS.high; if (level <= 6) return MEADOWS_LEVEL_COLORS.mid; if (level <= 9) return MEADOWS_LEVEL_COLORS.feedback; return MEADOWS_LEVEL_COLORS.params; };
 
 const SCORE_DESCRIPTIONS = {
@@ -319,7 +319,7 @@ const SCORE_DESCRIPTIONS = {
 const TOTAL_SCORE_GUIDE = [
   { range: '9-10', color: 'text-[#34d399]', bg: 'bg-[#059669]/10', label: 'Excellent' },
   { range: '7-8', color: 'text-[#C9A84C]', bg: 'bg-[#C9A84C]/10', label: 'Good' },
-  { range: '5-6', color: 'text-amber-400', bg: 'bg-amber-500', label: 'Fair' },
+  { range: '5-6', color: 'text-amber-300', bg: 'bg-amber-500/15', label: 'Fair' },
   { range: '<5', color: 'text-[#ecfdf5]/80', bg: 'bg-[#064e3b]/20', label: 'Low' },
 ];
 
@@ -360,7 +360,7 @@ const ScoreButton: React.FC<{ value: number; selectedValue: number; onSelect: (v
   return (
     <TooltipProvider><Tooltip><TooltipTrigger asChild>
       <button onClick={() => onSelect(value)} className="transition-all transform hover:scale-110 active:scale-95">
-        {Icon === Star ? <Star className={cn('w-4 h-4 transition-colors', value <= selectedValue ? 'text-amber-400 fill-current' : 'text-[#64748b]')} /> : <div className={cn('w-5 h-5 rounded-full border-2 flex items-center justify-center', value <= selectedValue ? 'border-[#C9A84C] bg-[#C9A84C]' : 'border-[#C9A84C]/30 hover:border-[#C9A84C]/30')}>{value <= selectedValue && <Check className="w-3 h-3 text-white" />}</div>}
+        {Icon === Star ? <Star className={cn('w-4 h-4 transition-colors', value <= selectedValue ? 'text-amber-400 fill-current' : 'text-[#a3bfb3]')} /> : <div className={cn('w-5 h-5 rounded-full border-2 flex items-center justify-center', value <= selectedValue ? 'border-[#C9A84C] bg-[#C9A84C]' : 'border-[#C9A84C]/30 hover:border-[#C9A84C]/30')}>{value <= selectedValue && <Check className="w-3 h-3 text-white" />}</div>}
       </button>
     </TooltipTrigger><TooltipContent side="top" className="max-w-[200px] z-50"><p className="font-semibold text-[#C9A84C]">{type} Level {value}</p><p className="text-xs text-[#ecfdf5]/80">{type === 'priority' ? description.priority : description.feasibility}</p></TooltipContent></Tooltip></TooltipProvider>
   );
@@ -371,7 +371,7 @@ const LeverageBadge: React.FC<{ lp: LeveragePoint }> = ({ lp }) => {
   return (
     <TooltipProvider><Tooltip><TooltipTrigger asChild>
       <div className={cn('flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-bold cursor-help', getMeadowsBadgeColor(lp.leverageLevel))}><Icon className="w-3 h-3" /> L{lp.leverageLevel}</div>
-    </TooltipTrigger><TooltipContent side="bottom" className="max-w-[260px] z-50 space-y-1"><p className="font-semibold text-violet-700">[L{lp.leverageLevel}] {lp.meadowsName}</p><p className="text-xs text-[#ecfdf5]/80">{lp.intervention}</p></TooltipContent></Tooltip></TooltipProvider>
+    </TooltipTrigger><TooltipContent side="bottom" className="max-w-[260px] z-50 space-y-1"><p className="font-semibold text-violet-300">[L{lp.leverageLevel}] {lp.meadowsName}</p><p className="text-xs text-[#ecfdf5]/80">{lp.intervention}</p></TooltipContent></Tooltip></TooltipProvider>
   );
 };
 
@@ -391,18 +391,18 @@ const StrategyCard: React.FC<{ option: StrategicOption; config: typeof quadrantC
           <textarea value={editDesc} rows={3} onChange={e => setEditDesc(e.target.value)} className="w-full px-3 py-2 text-sm border text-foreground bg-background border-[#C9A84C]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A84C] resize-none" />
           <div className="flex justify-end gap-2">
             <button onClick={() => { setEditTitle(option.title); setEditDesc(option.description); setIsEditing(false); }} className="px-3 py-1.5 text-sm text-[#ecfdf5]/80 rounded-lg">Cancel</button>
-            <button onClick={handleSave} className="px-3 py-1.5 text-sm bg-[#C9A84C] text-white rounded-lg">Save</button>
+            <button onClick={handleSave} className="px-3 py-1.5 text-sm bg-[#C9A84C] text-[#022c22] rounded-lg">Save</button>
           </div>
         </div>
       ) : (
         <>
           <div className="flex items-start justify-between gap-2 mb-2">
             <div className="flex items-center gap-2 flex-1 min-w-0">
-              <button onClick={() => onUpdate({ selected: !option.selected })} className={cn('w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0', option.selected ? 'bg-[#C9A84C] border-[#C9A84C] text-white' : 'border-[#C9A84C]/30 hover:border-[#C9A84C]')}>{option.selected && <Check className="w-3 h-3" />}</button>
+              <button onClick={() => onUpdate({ selected: !option.selected })} className={cn('w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0', option.selected ? 'bg-[#C9A84C] border-[#C9A84C] text-[#022c22]' : 'border-[#C9A84C]/30 hover:border-[#C9A84C]')}>{option.selected && <Check className="w-3 h-3" />}</button>
               <h4 className="font-semibold text-[#E8C560] truncate">{option.title}</h4>
             </div>
             <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-              <button onClick={() => setIsEditing(true)} className="p-1.5 text-[#64748b]/80 hover:text-[#ecfdf5]/80 rounded-full hover:bg-[#064e3b]/20"><Edit2 className="w-3.5 h-3.5" /></button>
+              <button onClick={() => setIsEditing(true)} className="p-1.5 text-[#a3bfb3] hover:text-[#ecfdf5]/80 rounded-full hover:bg-[#064e3b]/20"><Edit2 className="w-3.5 h-3.5" /></button>
               <button onClick={onRemove} className="p-1.5 text-red-400 hover:text-red-400 rounded-full hover:bg-red-500/10"><Trash2 className="w-3.5 h-3.5" /></button>
             </div>
           </div>
@@ -412,12 +412,12 @@ const StrategyCard: React.FC<{ option: StrategicOption; config: typeof quadrantC
               <div className="flex items-center gap-1.5">
                 <span className="text-xs font-medium text-[#ecfdf5]/80">Priority:</span>
                 <div className="flex gap-0.5">{[1, 2, 3, 4, 5].map(n => <ScoreButton key={n} value={n} selectedValue={option.priorityScore || 3} onSelect={val => onUpdate({ priorityScore: val })} type="priority" Icon={Star} />)}</div>
-                <span className={cn('text-xs font-semibold w-5 text-center', (option.priorityScore || 3) >= 4 ? 'text-amber-400' : 'text-[#64748b]')}>{option.priorityScore || 3}</span>
+                <span className={cn('text-xs font-semibold w-5 text-center', (option.priorityScore || 3) >= 4 ? 'text-amber-400' : 'text-[#a3bfb3]')}>{option.priorityScore || 3}</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="text-xs font-medium text-[#ecfdf5]/80">Feasibility:</span>
                 <div className="flex gap-0.5">{[1, 2, 3, 4, 5].map(n => <ScoreButton key={n} value={n} selectedValue={option.feasibilityScore || 3} onSelect={val => onUpdate({ feasibilityScore: val })} type="feasibility" />)}</div>
-                <span className={cn('text-xs font-semibold w-5 text-center', (option.feasibilityScore || 3) >= 4 ? 'text-[#C9A84C]' : 'text-[#64748b]')}>{option.feasibilityScore || 3}</span>
+                <span className={cn('text-xs font-semibold w-5 text-center', (option.feasibilityScore || 3) >= 4 ? 'text-[#C9A84C]' : 'text-[#a3bfb3]')}>{option.feasibilityScore || 3}</span>
               </div>
             </div>
             <div className={cn('px-3 py-1.5 rounded-full text-xs font-bold', scoreTier.bg, scoreTier.color)}>Score: {total}/10</div>
@@ -435,39 +435,39 @@ const SystemsContextPanel: React.FC<{ leveragePoints: LeveragePoint[]; archetype
   const lowLPs = leveragePoints.filter(lp => lp.leverageLevel >= 8);
 
   return (
-    <div className="rounded-xl border border-violet-200 bg-gradient-to-r from-violet-50 via-purple-50 to-indigo-50 overflow-hidden">
+    <div className="rounded-xl border border-violet-500/25 bg-gradient-to-r from-[#C9A84C]/10 via-purple-500/10 to-[#7a5c1e]/10 overflow-hidden">
       <button onClick={() => setExpanded(v => !v)} className="w-full flex items-center justify-between px-4 py-3 text-left">
         <div className="flex items-center gap-2.5">
           <div className="w-7 h-7 rounded-lg bg-violet-600 flex items-center justify-center"><GitBranch className="w-4 h-4 text-white" /></div>
           <div>
-            <h3 className="font-semibold text-violet-900 text-sm">Systems Thinking Context</h3>
-            <p className="text-[11px] text-violet-600">{archetypeName ? `Archetype: ${archetypeName}` : 'No archetype active'} · {leveragePoints.length} LPs · {cldNodes.length} CLD variables</p>
+            <h3 className="font-semibold text-violet-300 text-sm">Systems Thinking Context</h3>
+            <p className="text-[11px] text-violet-400">{archetypeName ? `Archetype: ${archetypeName}` : 'No archetype active'} · {leveragePoints.length} LPs · {cldNodes.length} CLD variables</p>
           </div>
         </div>
         {expanded ? <ChevronUp className="w-4 h-4 text-violet-500" /> : <ChevronDown className="w-4 h-4 text-violet-500" />}
       </button>
       {expanded && (
         <div className="px-4 pb-4 space-y-4 border-t border-violet-200/60">
-          {archetypeName && <div className="flex items-start gap-3 pt-3"><div className="w-6 h-6 rounded bg-violet-200 flex items-center justify-center shrink-0 mt-0.5"><Layers className="w-3.5 h-3.5 text-violet-700" /></div><div><p className="text-xs font-semibold text-violet-800">{archetypeName}</p>{archetypeDescription && <p className="text-[11px] text-violet-600 leading-relaxed mt-0.5">{archetypeDescription}</p>}</div></div>}
+          {archetypeName && <div className="flex items-start gap-3 pt-3"><div className="w-6 h-6 rounded bg-violet-500/25 flex items-center justify-center shrink-0 mt-0.5"><Layers className="w-3.5 h-3.5 text-violet-300" /></div><div><p className="text-xs font-semibold text-violet-300">{archetypeName}</p>{archetypeDescription && <p className="text-[11px] text-violet-400 leading-relaxed mt-0.5">{archetypeDescription}</p>}</div></div>}
           {leveragePoints.length > 0 && (
             <div className="space-y-3">
               <p className="text-[10px] font-bold uppercase tracking-wider text-violet-500">Identified Leverage Points</p>
               <div className="flex flex-wrap gap-1.5 text-[9px] font-bold">
-                <span className="px-2 py-0.5 rounded bg-violet-600 text-white">L1–3: Paradigm</span>
+                <span className="px-2 py-0.5 rounded bg-[#C9A84C] text-[#022c22]">L1–3: Paradigm</span>
                 <span className="px-2 py-0.5 rounded bg-red-500 text-white">L4–6: Info/Rules</span>
-                <span className="px-2 py-0.5 rounded bg-amber-500 text-white">L7–9: Feedback</span>
+                <span className="px-2 py-0.5 rounded bg-amber-500 text-[#022c22]">L7–9: Feedback</span>
                 <span className="px-2 py-0.5 rounded bg-slate-400 text-white">L10–12: Params</span>
               </div>
               {[{ label: 'High Leverage', lps: highLPs }, { label: 'Mid Leverage', lps: midLPs }, { label: 'Lower Leverage', lps: lowLPs }].map(({ label, lps }) => lps.length > 0 && (
                 <div key={label}>
-                  <p className="text-[10px] text-[#64748b] font-medium mb-1.5">{label}</p>
+                  <p className="text-[10px] text-[#a3bfb3] font-medium mb-1.5">{label}</p>
                   <div className="space-y-1.5">
                     {lps.map((lp, i) => {
                       const Icon = MEADOWS_ICONS[lp.leverageLevel] ?? Target;
                       return (
-                        <div key={i} className="flex items-start gap-2 p-2 rounded-lg bg-white/70 border border-violet-100">
+                        <div key={i} className="flex items-start gap-2 p-2 rounded-lg bg-white/70 border border-violet-500/25">
                           <span className={cn('shrink-0 text-[10px] font-black px-1.5 py-0.5 rounded mt-0.5', getMeadowsBadgeColor(lp.leverageLevel))}>L{lp.leverageLevel}</span>
-                          <div className="flex-1 min-w-0"><p className="text-[11px] font-semibold text-[#E8C560]/90 truncate">{lp.meadowsName}</p><p className="text-[10px] text-[#64748b] leading-relaxed line-clamp-2">{lp.intervention}</p></div>
+                          <div className="flex-1 min-w-0"><p className="text-[11px] font-semibold text-[#E8C560]/90 truncate">{lp.meadowsName}</p><p className="text-[10px] text-[#a3bfb3] leading-relaxed line-clamp-2">{lp.intervention}</p></div>
                         </div>
                       );
                     })}
@@ -627,7 +627,7 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-[#E8C560]">Strategic Options</h1>
-            <p className="text-[#64748b]">Generate and prioritize SO/ST/WO/WT strategic options{hasSystemsContext ? ' · systems-informed' : ''}</p>
+            <p className="text-[#a3bfb3]">Generate and prioritize SO/ST/WO/WT strategic options{hasSystemsContext ? ' · systems-informed' : ''}</p>
           </div>
           <div className="flex items-center gap-3">
             <div className="text-sm text-[#ecfdf5]/80"><span className="font-medium text-[#C9A84C]">{selectedCount}</span> selected</div>
@@ -639,7 +639,7 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
 
         {hasSystemsContext && <SystemsContextPanel leveragePoints={leveragePoints} archetypeName={selectedArchetypeName} archetypeDescription={activeArchetypeDescription} cldNodes={cldNodes} cldLinks={cldLinks} />}
         {/* ── View switcher: TOWS | Matrix | Impact ─────────────────────── */}
-        <div className="flex items-center gap-1 bg-[#064e3b]/20 dark:bg-[#022c22]/60 rounded-xl p-1 overflow-x-auto">
+        <div className="flex items-center gap-1 bg-[#022c22]/60 rounded-xl p-1 overflow-x-auto">
           {[
             { id: 'tows',   label: 'TOWS Strategies', Icon: Target },
             { id: 'matrix', label: 'SWOT Matrix',     Icon: LayoutDashboard },
@@ -647,7 +647,7 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
           ].map(({ id, label, Icon }) => (
             <button key={id} onClick={() => setSwotView(id as typeof swotView)}
               className={cn('flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors flex-1 justify-center',
-                swotView === id ? 'bg-white dark:bg-[#022c22]/60 shadow-sm text-[#E8C560] dark:text-[#ecfdf5]' : 'text-[#64748b] hover:text-[#E8C560]/90')}>
+                swotView === id ? 'bg-[#022c22]/60 shadow-sm text-[#ecfdf5]' : 'text-[#a3bfb3] hover:text-[#E8C560]/90')}>
               <Icon className="w-3.5 h-3.5" />
               {label}
             </button>
@@ -657,7 +657,7 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
         {/* ── SWOT MATRIX VIEW (transferred from SystemsThinking) ────────── */}
         {swotView === 'matrix' && (
           <div className="space-y-3">
-            <p className="text-xs text-[#64748b] leading-relaxed">
+            <p className="text-xs text-[#a3bfb3] leading-relaxed">
               The scored register the TOWS quadrants are derived from. Editing a score here re-ranks Impact and
               changes which pairings the matrix should generate.
             </p>
@@ -676,22 +676,22 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
             <h3 className="font-semibold text-sm text-[#E8C560]/90 flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-amber-500" /> Ranked by category-appropriate metric
             </h3>
-            <p className="text-xs text-[#64748b] leading-relaxed">
+            <p className="text-xs text-[#a3bfb3] leading-relaxed">
               Strengths and opportunities use the Resilience Index; weaknesses use Risk; threats use the
               Vulnerability Index. A flat Impact x Likelihood ranking would over-weight weaknesses, whose Risk scale
               runs to 25 while the others cap at 5.
             </p>
             {sortedImpact.length === 0 ? (
-              <p className="text-sm text-[#64748b]/80 text-center py-8">
+              <p className="text-sm text-[#a3bfb3] text-center py-8">
                 No SWOT items scored yet — complete the SWOT Analysis to populate this view.
               </p>
             ) : sortedImpact.map((item, idx) => {
               const cfg  = swotCategoryConfig[item.category];
               const Icon = cfg.icon;
               return (
-                <div key={item.id} className="bg-white dark:bg-[#022c22]/60 rounded-xl border border-[#C9A84C]/20 p-4 space-y-3">
+                <div key={item.id} className="bg-[#022c22]/60 rounded-xl border border-[#C9A84C]/20 p-4 space-y-3">
                   <div className="flex items-start gap-3">
-                    <span className="text-xs font-bold text-[#64748b]/80 w-6 shrink-0 mt-0.5">#{idx + 1}</span>
+                    <span className="text-xs font-bold text-[#a3bfb3] w-6 shrink-0 mt-0.5">#{idx + 1}</span>
                     <div className={cn('p-1.5 rounded-lg shrink-0', cfg.bgColor)}><Icon className="w-3.5 h-3.5 text-white" /></div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-2 flex-wrap mb-2">
@@ -713,7 +713,7 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
 
         {swotView === 'tows' && (<>
         {usingBaseline && (
-          <div className="bg-[#064e3b]/10 dark:bg-[#022c22]/60 border border-[#C9A84C]/30 rounded-xl p-5 space-y-5">
+          <div className="bg-[#022c22]/60 border border-[#C9A84C]/30 rounded-xl p-5 space-y-5">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">
@@ -721,7 +721,7 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
                 </span>
                 <h3 className="text-base font-bold text-[#E8C560]">Strategic Pathway Evaluation</h3>
               </div>
-              <span className="text-xs text-[#64748b] dark:text-[#a7f3d0]/70 bg-[#C9A84C]/10 border border-[#C9A84C]/30 rounded-full px-3 py-1">
+              <span className="text-xs text-[#a7f3d0]/70 bg-[#C9A84C]/10 border border-[#C9A84C]/30 rounded-full px-3 py-1">
                 n = {SURVEY_FRAME.n} · {MATRIX_CONTAMINATION.differentiators} differentiating
               </span>
             </div>
@@ -731,20 +731,20 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
                 <div key={o.code} className={cn('rounded-lg border p-3', o.rank === 1 ? 'border-[#059669]/40 bg-[#059669]/[0.07]' : 'border-[#C9A84C]/20 bg-white/[0.02]')}>
                   <div className="flex items-baseline gap-2 mb-1">
                     <span className="font-bold text-[#E8C560]">{o.code}</span>
-                    <span className="text-[0.68rem] text-[#64748b]">{o.name}</span>
+                    <span className="text-[0.68rem] text-[#a3bfb3]">{o.name}</span>
                     <span className={cn('ml-auto text-sm font-bold tabular-nums', o.rank === 1 ? 'text-[#34d399]' : 'text-[#C9A84C]')}>{o.respondentScore.toFixed(2)}</span>
                   </div>
                   <div className="h-1 rounded-full bg-white/10 overflow-hidden mb-2">
                     <div className={cn('h-full rounded-full', o.rank === 1 ? 'bg-[#059669]' : 'bg-[#C9A84C]/60')} style={{ width: `${(o.respondentScore / 10) * 100}%` }} />
                   </div>
-                  <p className="text-[0.68rem] text-[#64748b] leading-relaxed">{o.thesis}</p>
+                  <p className="text-[0.68rem] text-[#a3bfb3] leading-relaxed">{o.thesis}</p>
                 </div>
               ))}
             </div>
 
             <div className="rounded-lg border border-[#C9A84C]/25 bg-white/[0.02] p-3">
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#C9A84C] mb-1.5">Why IEDS, as arithmetic</h4>
-              <p className="text-[0.72rem] text-[#64748b] leading-relaxed">
+              <p className="text-[0.72rem] text-[#a3bfb3] leading-relaxed">
                 BEIE clusters are <strong className="text-[#E8C560]/80">serial, not additive</strong>. Averaging cluster
                 readiness gives {(ECOSYSTEM_MATH.meanReadiness * 100).toFixed(0)}%; multiplying gives{' '}
                 {(ECOSYSTEM_MATH.serialThroughput * 100).toFixed(1)}%, and {(ECOSYSTEM_MATH.withOperatingSystem * 100).toFixed(1)}%
@@ -764,15 +764,15 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
                   <div key={q.type} className="rounded-lg border border-[#C9A84C]/20 bg-white/[0.02] p-2.5">
                     <div className="flex items-baseline justify-between mb-1">
                       <span className="text-xs font-bold text-[#E8C560]">{q.type}</span>
-                      <span className="text-[0.6rem] text-[#64748b]">{q.count} options</span>
+                      <span className="text-[0.6rem] text-[#a3bfb3]">{q.count} options</span>
                     </div>
-                    <div className="text-[0.62rem] text-[#64748b]">priority <span className="text-[#C9A84C] font-semibold">{q.priority.toFixed(2)}</span></div>
-                    <div className="text-[0.62rem] text-[#64748b]">feasibility <span className={cn('font-semibold', q.feasibility < 3.45 ? 'text-red-400' : 'text-[#34d399]')}>{q.feasibility.toFixed(2)}</span></div>
+                    <div className="text-[0.62rem] text-[#a3bfb3]">priority <span className="text-[#C9A84C] font-semibold">{q.priority.toFixed(2)}</span></div>
+                    <div className="text-[0.62rem] text-[#a3bfb3]">feasibility <span className={cn('font-semibold', q.feasibility < 3.45 ? 'text-red-400' : 'text-[#34d399]')}>{q.feasibility.toFixed(2)}</span></div>
                     <div className="text-[0.62rem] text-amber-400 mt-0.5">gap +{q.gap.toFixed(2)}</div>
                   </div>
                 ))}
               </div>
-              <p className="text-[0.68rem] text-[#64748b] mt-2 leading-relaxed">
+              <p className="text-[0.68rem] text-[#a3bfb3] mt-2 leading-relaxed">
                 Every quadrant shows priority above feasibility. Ambition is not the constraint — delivery readiness is.
                 Feasibility here is the owning cluster&rsquo;s respondent readiness, so quadrants weighted toward
                 Enablers score lowest by construction.
@@ -780,7 +780,7 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
             </div>
 
             <div className="rounded-lg border border-amber-500/35 bg-amber-500/[0.08] p-3">
-              <p className="text-[0.72rem] text-amber-700 dark:text-amber-300 leading-relaxed">
+              <p className="text-[0.72rem] text-amber-300 leading-relaxed">
                 <strong>Default contamination.</strong> {MATRIX_CONTAMINATION.allAtDefault} of{' '}
                 {MATRIX_CONTAMINATION.respondents} respondents left all 28 scoring cells at the slider default;{' '}
                 {MATRIX_CONTAMINATION.pctCellsAtDefault}% of cells are midpoint-contaminated. Scores above use the{' '}
@@ -789,15 +789,15 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
               </p>
             </div>
 
-            <p className="text-[0.68rem] text-[#64748b]/80 leading-relaxed">
+            <p className="text-[0.68rem] text-[#a3bfb3] leading-relaxed">
               {SURVEY_FRAME.note} Zero respondents from {SURVEY_FRAME.silentProvinces.join(' and ')}. Post-2024 BARMM
               comprises five provinces plus the SGA and Cotabato City; Sulu is not part of the region.
             </p>
           </div>
         )}
 
-        {!canGenerate && <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 flex items-center gap-3"><AlertCircle className="w-5 h-5 text-amber-400" /><div><p className="text-sm font-medium text-amber-800">Complete SWOT Analysis First</p><p className="text-xs text-amber-400">Current: {swotCounts.strengths}S, {swotCounts.weaknesses}W, {swotCounts.opportunities}O, {swotCounts.threats}T</p></div></div>}
-        {generationError && <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 flex items-center gap-3"><AlertTriangle className="w-5 h-5 text-red-400" /><p className="text-sm font-medium text-red-800">{generationError}</p></div>}
+        {!canGenerate && <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 flex items-center gap-3"><AlertCircle className="w-5 h-5 text-amber-400" /><div><p className="text-sm font-medium text-amber-300">Complete SWOT Analysis First</p><p className="text-xs text-amber-400">Current: {swotCounts.strengths}S, {swotCounts.weaknesses}W, {swotCounts.opportunities}O, {swotCounts.threats}T</p></div></div>}
+        {generationError && <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 flex items-center gap-3"><AlertTriangle className="w-5 h-5 text-red-400" /><p className="text-sm font-medium text-red-300">{generationError}</p></div>}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {QUADRANT_TYPES.map(type => {
@@ -805,7 +805,7 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
             const options = getOptionsByType(type);
             const [Icon1, Icon2] = config.icons;
             return (
-              <div key={type} className="bg-white rounded-xl border border-[#C9A84C]/20 overflow-hidden shadow-sm">
+              <div key={type} className="bg-[#022c22]/60 rounded-xl border border-[#C9A84C]/20 overflow-hidden shadow-sm">
                 <div className={`bg-gradient-to-r ${config.bgGradient} px-4 py-3`}>
                   <div className="flex items-center gap-3">
                     <div className="flex items-center gap-1"><Icon1 className="w-5 h-5 text-white/80" /><ArrowRight className="w-4 h-4 text-white/60" /><Icon2 className="w-5 h-5 text-white/80" /></div>
@@ -821,11 +821,11 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
                       <textarea value={newStrategy.description} rows={2} onChange={e => setNewStrategy(p => ({ ...p, description: e.target.value }))} className="w-full px-3 py-2 text-sm border text-foreground bg-background border-[#C9A84C]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A84C] resize-none" placeholder="Strategy description" />
                       <div className="flex justify-end gap-2">
                         <button onClick={() => setNewStrategy({ quadrant: null, title: '', description: '' })} className="px-3 py-1.5 text-sm text-[#ecfdf5]/80 rounded-lg">Cancel</button>
-                        <button onClick={handleAddStrategy} disabled={!newStrategy.title.trim()} className="px-3 py-1.5 text-sm bg-[#C9A84C] text-white rounded-lg disabled:opacity-50">Add Strategy</button>
+                        <button onClick={handleAddStrategy} disabled={!newStrategy.title.trim()} className="px-3 py-1.5 text-sm bg-[#C9A84C] text-[#022c22] rounded-lg disabled:opacity-50">Add Strategy</button>
                       </div>
                     </div>
                   ) : (
-                    <button onClick={() => setNewStrategy({ quadrant: type, title: '', description: '' })} className={cn('w-full py-3 border-2 border-dashed rounded-xl text-sm font-medium text-[#64748b] hover:text-[#E8C560]/90 hover:border-slate-400 transition-colors flex items-center justify-center gap-2', config.lightBg)}><Plus className="w-4 h-4" /> Add {type} Strategy</button>
+                    <button onClick={() => setNewStrategy({ quadrant: type, title: '', description: '' })} className={cn('w-full py-3 border-2 border-dashed rounded-xl text-sm font-medium text-[#a3bfb3] hover:text-[#E8C560]/90 hover:border-slate-400 transition-colors flex items-center justify-center gap-2', config.lightBg)}><Plus className="w-4 h-4" /> Add {type} Strategy</button>
                   )}
                 </div>
               </div>
@@ -841,8 +841,8 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
                 const total = (opt.priorityScore || 3) + (opt.feasibilityScore || 3);
                 const tier = getTotalScoreTier(total);
                 return (
-                  <div key={opt.id} className="bg-white rounded-lg p-3 border border-[#C9A84C]/20 flex items-start gap-3 hover:shadow-sm transition-shadow">
-                    <span className={cn('px-2 py-1 rounded text-xs font-bold text-white shrink-0', opt.optionType === 'SO' ? 'bg-[#059669]' : opt.optionType === 'ST' ? 'bg-[#C9A84C]' : opt.optionType === 'WO' ? 'bg-purple-500' : 'bg-amber-500')}>{opt.optionType}</span>
+                  <div key={opt.id} className="bg-[#022c22]/60 rounded-lg p-3 border border-[#C9A84C]/20 flex items-start gap-3 hover:shadow-sm transition-shadow">
+                    <span className={cn('px-2 py-1 rounded text-xs font-bold shrink-0', opt.optionType === 'SO' ? 'bg-[#047857] text-white' : opt.optionType === 'ST' ? 'bg-[#C9A84C] text-[#022c22]' : opt.optionType === 'WO' ? 'bg-purple-700 text-white' : 'bg-amber-500 text-[#022c22]')}>{opt.optionType}</span>
                     <div className="flex-1 min-w-0"><p className="font-medium text-[#E8C560] text-sm truncate">{opt.title}</p><p className={cn('text-xs font-semibold', tier.color)}>Score: {total}/10</p></div>
                   </div>
                 );

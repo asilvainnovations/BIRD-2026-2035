@@ -411,7 +411,7 @@ Check it out in our Templates Library!`;
               className={`${size} ${
                 i <= (interactive ? ratingHover || userRating : Math.round(rating))
                   ? 'text-amber-400 fill-amber-400'
-                  : 'text-[#64748b]'
+                  : 'text-[#a3bfb3]'
               }`}
             />
           </button>
@@ -430,8 +430,8 @@ Check it out in our Templates Library!`;
   // Get template complexity level
   const getComplexityLevel = (template: PlanTemplate) => {
     const score = template.plan_data.objectives.length + template.plan_data.swotItems.length;
-    if (score > 20) return { label: 'Advanced', color: 'bg-red-500 text-red-400' };
-    if (score > 12) return { label: 'Intermediate', color: 'bg-amber-500 text-amber-400' };
+    if (score > 20) return { label: 'Advanced', color: 'bg-red-500/15 text-red-300 border border-red-500/30' };
+    if (score > 12) return { label: 'Intermediate', color: 'bg-amber-500/15 text-amber-300 border border-amber-500/30' };
     return { label: 'Beginner', color: 'bg-[#059669]/10 text-[#6ee7b7]' };
   };
 
@@ -451,7 +451,7 @@ Check it out in our Templates Library!`;
 
     return (
       <div className="mb-6 bg-[#064e3b]/10 rounded-xl p-4 border border-[#C9A84C]/20">
-        <h4 className="text-xs font-bold text-[#64748b] uppercase tracking-wider mb-3 flex items-center gap-2">
+        <h4 className="text-xs font-bold text-[#a3bfb3] uppercase tracking-wider mb-3 flex items-center gap-2">
           <Clock className="w-3.5 h-3.5" />
           Implementation Roadmap (2026-2035)
         </h4>
@@ -468,7 +468,7 @@ Check it out in our Templates Library!`;
             </div>
           ))}
         </div>
-        <div className="mt-3 text-xs text-[#64748b] text-center">
+        <div className="mt-3 text-xs text-[#a3bfb3] text-center">
           Three-phase approach: Foundation → Acceleration → Consolidation
         </div>
       </div>
@@ -496,13 +496,13 @@ Check it out in our Templates Library!`;
         title: 'Governance Strengthening', 
         icon: Shield,
         items: ['One-Stop Investment Centers', 'Moral Governance Framework', 'Business Registration Reform', 'Transparency Systems'],
-        color: 'text-violet-600 bg-violet-50 border-violet-200'
+        color: 'text-violet-400 bg-violet-500/10 border-violet-500/25'
       },
     ];
 
     return (
       <div className="mb-6">
-        <h4 className="text-xs font-bold text-[#64748b] uppercase tracking-wider mb-3">Three Strategic Pillars</h4>
+        <h4 className="text-xs font-bold text-[#a3bfb3] uppercase tracking-wider mb-3">Three Strategic Pillars</h4>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {pillars.map((pillar) => (
             <div key={pillar.title} className={`rounded-xl p-3 border ${pillar.color}`}>
@@ -545,7 +545,7 @@ Check it out in our Templates Library!`;
     return (
       <div className="mb-6 bg-[#064e3b]/10 rounded-xl p-4 border border-[#C9A84C]/20">
         <div className="flex items-center justify-between mb-3">
-          <h4 className="text-xs font-bold text-[#64748b] uppercase tracking-wider flex items-center gap-2">
+          <h4 className="text-xs font-bold text-[#a3bfb3] uppercase tracking-wider flex items-center gap-2">
             <Lightbulb className="w-3.5 h-3.5" />
             Best For
           </h4>
@@ -583,7 +583,7 @@ Check it out in our Templates Library!`;
     return (
       <div
         key={template.id}
-        className="group bg-white rounded-2xl border border-[#C9A84C]/20 hover:border-[#C9A84C]/30 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer relative"
+        className="group bg-[#022c22]/60 rounded-2xl border border-[#C9A84C]/20 hover:border-[#C9A84C]/30 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer relative"
         onClick={() => {
           setSelectedTemplate(template);
           setShowPreview(true);
@@ -600,8 +600,8 @@ Check it out in our Templates Library!`;
               onClick={() => toggleCompare(template.id)}
               className={`w-6 h-6 rounded-md border-2 flex items-center justify-center transition-colors ${
                 isInCompare 
-                  ? 'bg-[#C9A84C] border-[#C9A84C] text-white' 
-                  : 'bg-white border-[#C9A84C]/30 hover:border-[#C9A84C]'
+                  ? 'bg-[#C9A84C] border-[#C9A84C] text-[#022c22]' 
+                  : 'bg-[#022c22]/60 border-[#C9A84C]/30 hover:border-[#C9A84C]'
               }`}
             >
               {isInCompare && <Check className="w-3.5 h-3.5" />}
@@ -687,10 +687,10 @@ Check it out in our Templates Library!`;
 
         {/* Card Body */}
         <div className="p-5">
-          <h3 className="font-bold text-[#E8C560] text-base mb-2 line-clamp-1 group-hover:text-slate-900 transition-colors">
+          <h3 className="font-bold text-[#E8C560] text-base mb-2 line-clamp-1 group-hover:text-[#ecfdf5] transition-colors">
             {template.name}
           </h3>
-          <p className="text-[#64748b] text-sm leading-relaxed line-clamp-2 mb-4">
+          <p className="text-[#a3bfb3] text-sm leading-relaxed line-clamp-2 mb-4">
             {template.description}
           </p>
 
@@ -699,7 +699,7 @@ Check it out in our Templates Library!`;
             <div className="flex items-center gap-2 mb-3 text-xs text-[#ecfdf5]/80">
               <Briefcase className="w-3.5 h-3.5 text-[#059669]" />
               <span>PHP 50B Target</span>
-              <span className="text-[#64748b]">•</span>
+              <span className="text-[#a3bfb3]">•</span>
               <Globe className="w-3.5 h-3.5 text-[#C9A84C]" />
               <span>BIMP-EAGA</span>
             </div>
@@ -716,19 +716,19 @@ Check it out in our Templates Library!`;
               </span>
             ))}
             {template.tags.length > 3 && (
-              <span className="px-2 py-0.5 rounded-full bg-[#064e3b]/20 text-[#64748b] text-[10px] font-semibold">
+              <span className="px-2 py-0.5 rounded-full bg-[#064e3b]/20 text-[#a3bfb3] text-[10px] font-semibold">
                 +{template.tags.length - 3}
               </span>
             )}
           </div>
 
           {/* Stats */}
-          <div className="flex items-center justify-between pt-3 border-t border-slate-100">
+          <div className="flex items-center justify-between pt-3 border-t border-[#C9A84C]/15">
             <div className="flex items-center gap-1">
               {renderStars(template.rating, 'w-3.5 h-3.5')}
-              <span className="text-xs text-[#64748b] ml-1">{template.rating.toFixed(1)}</span>
+              <span className="text-xs text-[#a3bfb3] ml-1">{template.rating.toFixed(1)}</span>
             </div>
-            <div className="flex items-center gap-3 text-xs text-[#64748b]/80">
+            <div className="flex items-center gap-3 text-xs text-[#a3bfb3]">
               <span className="flex items-center gap-1">
                 <Download className="w-3.5 h-3.5" />
                 {template.usage_count.toLocaleString()}
@@ -766,7 +766,7 @@ Check it out in our Templates Library!`;
     return (
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowPreview(false)}>
         <div
-          className="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col"
+          className="bg-[#022c22]/60 rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col"
           onClick={e => e.stopPropagation()}
         >
           {/* Modal Header */}
@@ -864,41 +864,41 @@ Check it out in our Templates Library!`;
 
             {/* Vision & Mission */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <div className="bg-[#064e3b]/10 rounded-xl p-4 border border-slate-100">
-                <h4 className="text-xs font-bold text-[#64748b]/80 uppercase tracking-wider mb-2">Vision</h4>
+              <div className="bg-[#064e3b]/10 rounded-xl p-4 border border-[#C9A84C]/15">
+                <h4 className="text-xs font-bold text-[#a3bfb3] uppercase tracking-wider mb-2">Vision</h4>
                 <p className="text-sm text-[#E8C560]/90 leading-relaxed">{pd.vision}</p>
               </div>
-              <div className="bg-[#064e3b]/10 rounded-xl p-4 border border-slate-100">
-                <h4 className="text-xs font-bold text-[#64748b]/80 uppercase tracking-wider mb-2">Mission</h4>
+              <div className="bg-[#064e3b]/10 rounded-xl p-4 border border-[#C9A84C]/15">
+                <h4 className="text-xs font-bold text-[#a3bfb3] uppercase tracking-wider mb-2">Mission</h4>
                 <p className="text-sm text-[#E8C560]/90 leading-relaxed">{pd.mission}</p>
               </div>
             </div>
 
             {/* Strategic Intent */}
-            <div className="bg-gradient-to-r from-slate-50 to-slate-100 rounded-xl p-4 border border-slate-100 mb-6">
-              <h4 className="text-xs font-bold text-[#64748b]/80 uppercase tracking-wider mb-2">Strategic Intent</h4>
+            <div className="bg-gradient-to-r from-[#022c22]/60 to-[#022c22]/60 rounded-xl p-4 border border-[#C9A84C]/15 mb-6">
+              <h4 className="text-xs font-bold text-[#a3bfb3] uppercase tracking-wider mb-2">Strategic Intent</h4>
               <p className="text-sm text-[#E8C560]/90 leading-relaxed font-medium">{pd.strategicIntent}</p>
             </div>
 
             {/* Template Contents Overview */}
             <h3 className="text-sm font-bold text-[#E8C560] uppercase tracking-wider mb-4">Template Contents</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-              <div className="bg-[#059669]/10 rounded-xl p-4 text-center border border-emerald-100">
+              <div className="bg-[#059669]/10 rounded-xl p-4 text-center border border-emerald-500/25">
                 <Target className="w-5 h-5 text-[#34d399] mx-auto mb-2" />
                 <p className="text-2xl font-black text-[#34d399]">{pd.swotItems.length}</p>
                 <p className="text-[10px] font-bold text-[#059669] uppercase">SWOT Items</p>
               </div>
-              <div className="bg-violet-50 rounded-xl p-4 text-center border border-violet-100">
-                <Sparkles className="w-5 h-5 text-violet-600 mx-auto mb-2" />
-                <p className="text-2xl font-black text-violet-700">{pd.strategicOptions.length}</p>
+              <div className="bg-violet-500/10 rounded-xl p-4 text-center border border-violet-500/25">
+                <Sparkles className="w-5 h-5 text-violet-400 mx-auto mb-2" />
+                <p className="text-2xl font-black text-violet-300">{pd.strategicOptions.length}</p>
                 <p className="text-[10px] font-bold text-violet-500 uppercase">Strategies</p>
               </div>
-              <div className="bg-[#C9A84C]/10 rounded-xl p-4 text-center border border-blue-100">
+              <div className="bg-[#C9A84C]/10 rounded-xl p-4 text-center border border-blue-500/25">
                 <BarChart3 className="w-5 h-5 text-[#C9A84C] mx-auto mb-2" />
                 <p className="text-2xl font-black text-[#C9A84C]">{pd.objectives.length}</p>
                 <p className="text-[10px] font-bold text-[#C9A84C] uppercase">Objectives</p>
               </div>
-              <div className="bg-amber-500/10 rounded-xl p-4 text-center border border-amber-100">
+              <div className="bg-amber-500/10 rounded-xl p-4 text-center border border-amber-500/25">
                 <TrendingUp className="w-5 h-5 text-amber-400 mx-auto mb-2" />
                 <p className="text-2xl font-black text-amber-400">{totalKPIs}</p>
                 <p className="text-[10px] font-bold text-amber-500 uppercase">KPIs</p>
@@ -908,21 +908,21 @@ Check it out in our Templates Library!`;
             {/* SWOT Breakdown */}
             <h3 className="text-sm font-bold text-[#E8C560] uppercase tracking-wider mb-3">SWOT Breakdown</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-              <div className="bg-[#059669]/10 rounded-lg p-3 border border-green-100">
+              <div className="bg-[#059669]/10 rounded-lg p-3 border border-green-500/25">
                 <p className="text-xs font-bold text-[#6ee7b7] mb-1">Strengths</p>
-                <p className="text-lg font-black text-green-800">{swotCounts.strengths}</p>
+                <p className="text-lg font-black text-green-300">{swotCounts.strengths}</p>
               </div>
-              <div className="bg-red-500/10 rounded-lg p-3 border border-red-100">
+              <div className="bg-red-500/10 rounded-lg p-3 border border-red-500/25">
                 <p className="text-xs font-bold text-red-400 mb-1">Weaknesses</p>
-                <p className="text-lg font-black text-red-800">{swotCounts.weaknesses}</p>
+                <p className="text-lg font-black text-red-300">{swotCounts.weaknesses}</p>
               </div>
-              <div className="bg-[#C9A84C]/10 rounded-lg p-3 border border-blue-100">
+              <div className="bg-[#C9A84C]/10 rounded-lg p-3 border border-blue-500/25">
                 <p className="text-xs font-bold text-[#C9A84C] mb-1">Opportunities</p>
-                <p className="text-lg font-black text-blue-800">{swotCounts.opportunities}</p>
+                <p className="text-lg font-black text-blue-300">{swotCounts.opportunities}</p>
               </div>
-              <div className="bg-amber-500/10 rounded-lg p-3 border border-amber-100">
+              <div className="bg-amber-500/10 rounded-lg p-3 border border-amber-500/25">
                 <p className="text-xs font-bold text-amber-400 mb-1">Threats</p>
-                <p className="text-lg font-black text-amber-800">{swotCounts.threats}</p>
+                <p className="text-lg font-black text-amber-300">{swotCounts.threats}</p>
               </div>
             </div>
 
@@ -933,8 +933,8 @@ Check it out in our Templates Library!`;
                 const perspectiveColors: Record<string, string> = {
                   financial: 'bg-[#059669]/10 text-[#34d399]',
                   customer: 'bg-[#C9A84C]/10 text-[#C9A84C]',
-                  internal_process: 'bg-violet-100 text-violet-700',
-                  learning_growth: 'bg-amber-500 text-amber-400',
+                  internal_process: 'bg-violet-500/15 text-violet-300',
+                  learning_growth: 'bg-amber-500/15 text-amber-300 border border-amber-500/30',
                 };
                 const perspectiveLabels: Record<string, string> = {
                   financial: 'Financial',
@@ -943,20 +943,20 @@ Check it out in our Templates Library!`;
                   learning_growth: 'Learning & Growth',
                 };
                 return (
-                  <div key={idx} className="flex items-start gap-3 p-3 bg-[#064e3b]/10 rounded-xl border border-slate-100">
+                  <div key={idx} className="flex items-start gap-3 p-3 bg-[#064e3b]/10 rounded-xl border border-[#C9A84C]/15">
                     <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${perspectiveColors[obj.perspective] || 'bg-[#064e3b]/20 text-[#ecfdf5]/80'} flex-shrink-0 mt-0.5`}>
                       {perspectiveLabels[obj.perspective] || obj.perspective}
                     </span>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-[#E8C560]/90">{obj.objective}</p>
-                      <p className="text-xs text-[#64748b] mt-0.5">{obj.description}</p>
-                      <p className="text-[10px] text-[#64748b]/80 mt-1">{obj.kpis?.length || 0} KPIs defined</p>
+                      <p className="text-xs text-[#a3bfb3] mt-0.5">{obj.description}</p>
+                      <p className="text-[10px] text-[#a3bfb3] mt-1">{obj.kpis?.length || 0} KPIs defined</p>
                     </div>
                   </div>
                 );
               })}
               {pd.objectives.length > 4 && (
-                <p className="text-xs text-[#64748b]/80 text-center">+{pd.objectives.length - 4} more objectives</p>
+                <p className="text-xs text-[#a3bfb3] text-center">+{pd.objectives.length - 4} more objectives</p>
               )}
             </div>
 
@@ -988,13 +988,13 @@ Check it out in our Templates Library!`;
                     <button
                       onClick={submitRating}
                       disabled={userRating === 0}
-                      className="px-4 py-2 bg-[#C9A84C] text-white rounded-lg text-sm font-bold hover:bg-[#C9A84C] disabled:opacity-50 transition-colors"
+                      className="px-4 py-2 bg-[#C9A84C] text-[#022c22] rounded-lg text-sm font-bold hover:bg-[#C9A84C] disabled:opacity-50 transition-colors"
                     >
                       Submit Review
                     </button>
                     <button
                       onClick={() => { setShowRatingForm(false); setUserRating(0); setRatingComment(''); }}
-                      className="px-4 py-2 text-[#ecfdf5]/80 hover:bg-slate-200 rounded-lg text-sm transition-colors"
+                      className="px-4 py-2 text-[#ecfdf5]/80 hover:bg-[#064e3b]/60 rounded-lg text-sm transition-colors"
                     >
                       Cancel
                     </button>
@@ -1019,7 +1019,7 @@ Check it out in our Templates Library!`;
             <div className="flex gap-2">
               <button
                 onClick={() => setShowPreview(false)}
-                className="px-5 py-2.5 text-[#ecfdf5]/80 hover:bg-slate-200 rounded-xl text-sm font-bold transition-colors"
+                className="px-5 py-2.5 text-[#ecfdf5]/80 hover:bg-[#064e3b]/60 rounded-xl text-sm font-bold transition-colors"
               >
                 Close
               </button>
@@ -1028,7 +1028,7 @@ Check it out in our Templates Library!`;
                 className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors flex items-center gap-2 ${
                   compareList.includes(template.id)
                     ? 'bg-[#C9A84C]/10 text-[#C9A84C] hover:bg-[#C9A84C]/20'
-                    : 'text-[#ecfdf5]/80 hover:bg-slate-200'
+                    : 'text-[#ecfdf5]/80 hover:bg-[#064e3b]/60'
                 }`}
               >
                 <GitCompare className="w-4 h-4" />
@@ -1057,17 +1057,17 @@ Check it out in our Templates Library!`;
 
     return (
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-3xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+        <div className="bg-[#022c22]/60 rounded-3xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col">
           <div className="p-6 border-b border-[#C9A84C]/20 flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-bold text-slate-900">Compare Templates</h2>
-              <p className="text-sm text-[#64748b]">Side-by-side comparison of selected templates</p>
+              <h2 className="text-xl font-bold text-[#ecfdf5]">Compare Templates</h2>
+              <p className="text-sm text-[#a3bfb3]">Side-by-side comparison of selected templates</p>
             </div>
             <button
               onClick={() => setShowCompare(false)}
               className="p-2 rounded-lg hover:bg-[#064e3b]/20 transition-colors"
             >
-              <X className="w-5 h-5 text-[#64748b]" />
+              <X className="w-5 h-5 text-[#a3bfb3]" />
             </button>
           </div>
 
@@ -1090,30 +1090,30 @@ Check it out in our Templates Library!`;
                     </div>
                     <div className="p-4 space-y-3">
                       <div className="flex justify-between text-sm">
-                        <span className="text-[#64748b]">Rating</span>
+                        <span className="text-[#a3bfb3]">Rating</span>
                         <span className="font-semibold">{template.rating.toFixed(1)}/5</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-[#64748b]">Uses</span>
+                        <span className="text-[#a3bfb3]">Uses</span>
                         <span className="font-semibold">{template.usage_count.toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-[#64748b]">SWOT Items</span>
+                        <span className="text-[#a3bfb3]">SWOT Items</span>
                         <span className="font-semibold">{pd.swotItems.length}</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-[#64748b]">Strategies</span>
+                        <span className="text-[#a3bfb3]">Strategies</span>
                         <span className="font-semibold">{pd.strategicOptions.length}</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-[#64748b]">Objectives</span>
+                        <span className="text-[#a3bfb3]">Objectives</span>
                         <span className="font-semibold">{pd.objectives.length}</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-[#64748b]">Total KPIs</span>
+                        <span className="text-[#a3bfb3]">Total KPIs</span>
                         <span className="font-semibold">{totalKPIs}</span>
                       </div>
-                      <div className="pt-3 border-t border-slate-100">
+                      <div className="pt-3 border-t border-[#C9A84C]/15">
                         <button
                           onClick={() => handleUseTemplate(template)}
                           className={`w-full py-2 bg-gradient-to-r ${colors.gradient} text-white rounded-lg text-sm font-bold hover:opacity-90 transition-opacity`}
@@ -1138,20 +1138,20 @@ Check it out in our Templates Library!`;
       {/* Search & Filter Bar */}
       <div className="flex flex-col md:flex-row gap-4 mb-6">
         <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#64748b]/80" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#a3bfb3]" />
           <input
             type="text"
             placeholder="Search templates by name, industry, or tags..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-white border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:border-transparent transition-all"
+            className="w-full pl-12 pr-4 py-3 bg-[#022c22]/60 border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:border-transparent transition-all"
           />
         </div>
         <div className="flex gap-2">
           <select
             value={sortBy}
             onChange={e => setSortBy(e.target.value as SortOption)}
-            className="px-4 py-3 bg-white border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
+            className="px-4 py-3 bg-[#022c22]/60 border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
           >
             <option value="popular">Most Popular</option>
             <option value="rating">Highest Rated</option>
@@ -1162,8 +1162,8 @@ Check it out in our Templates Library!`;
             onClick={() => setShowCompare(!showCompare)}
             className={`px-4 py-3 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
               showCompare 
-                ? 'bg-[#C9A84C] text-white shadow-lg' 
-                : 'bg-white text-[#ecfdf5]/80 border border-[#C9A84C]/20 hover:bg-[#064e3b]/10'
+                ? 'bg-[#C9A84C] text-[#022c22] shadow-lg' 
+                : 'bg-[#022c22]/60 text-[#ecfdf5]/80 border border-[#C9A84C]/20 hover:bg-[#064e3b]/10'
             }`}
           >
             <GitCompare className="w-4 h-4" />
@@ -1189,14 +1189,14 @@ Check it out in our Templates Library!`;
           <div className="flex gap-2">
             <button
               onClick={() => setCompareList([])}
-              className="px-3 py-1.5 text-sm text-[#ecfdf5]/80 hover:bg-slate-200 rounded-lg transition-colors"
+              className="px-3 py-1.5 text-sm text-[#ecfdf5]/80 hover:bg-[#064e3b]/60 rounded-lg transition-colors"
             >
               Clear
             </button>
             <button
               onClick={() => setShowCompare(true)}
               disabled={compareList.length < 2}
-              className="px-4 py-1.5 bg-[#C9A84C] text-white rounded-lg text-sm font-bold hover:bg-[#C9A84C] disabled:opacity-50 transition-colors"
+              className="px-4 py-1.5 bg-[#C9A84C] text-[#022c22] rounded-lg text-sm font-bold hover:bg-[#C9A84C] disabled:opacity-50 transition-colors"
             >
               View Comparison
             </button>
@@ -1216,7 +1216,7 @@ Check it out in our Templates Library!`;
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
                 isActive
                   ? 'bg-[#022c22] text-white shadow-lg'
-                  : 'bg-white text-[#ecfdf5]/80 border border-[#C9A84C]/20 hover:bg-[#064e3b]/10 hover:border-[#C9A84C]/30'
+                  : 'bg-[#022c22]/60 text-[#ecfdf5]/80 border border-[#C9A84C]/20 hover:bg-[#064e3b]/10 hover:border-[#C9A84C]/30'
               }`}
             >
               <IconComp className="w-4 h-4" />
@@ -1282,9 +1282,9 @@ Check it out in our Templates Library!`;
         </div>
       ) : (
         <div className="text-center py-16">
-          <Search className="w-12 h-12 text-[#64748b] mx-auto mb-4" />
+          <Search className="w-12 h-12 text-[#a3bfb3] mx-auto mb-4" />
           <h3 className="text-lg font-bold text-[#ecfdf5]/80 mb-2">No templates found</h3>
-          <p className="text-sm text-[#64748b]/80">Try adjusting your search or filter criteria</p>
+          <p className="text-sm text-[#a3bfb3]">Try adjusting your search or filter criteria</p>
         </div>
       )}
     </div>
@@ -1295,9 +1295,9 @@ Check it out in our Templates Library!`;
     if (!isAuthenticated) {
       return (
         <div className="text-center py-16">
-          <AlertCircle className="w-12 h-12 text-[#64748b] mx-auto mb-4" />
+          <AlertCircle className="w-12 h-12 text-[#a3bfb3] mx-auto mb-4" />
           <h3 className="text-lg font-bold text-[#ecfdf5]/80 mb-2">Sign in Required</h3>
-          <p className="text-sm text-[#64748b]/80 max-w-md mx-auto">
+          <p className="text-sm text-[#a3bfb3] max-w-md mx-auto">
             Sign in to save and manage your custom templates. Your templates will be securely stored in the cloud.
           </p>
         </div>
@@ -1308,7 +1308,7 @@ Check it out in our Templates Library!`;
       return (
         <div className="text-center py-16">
           <Loader2 className="w-8 h-8 text-[#C9A84C] mx-auto mb-4 animate-spin" />
-          <p className="text-sm text-[#64748b]">Loading your templates...</p>
+          <p className="text-sm text-[#a3bfb3]">Loading your templates...</p>
         </div>
       );
     }
@@ -1316,15 +1316,15 @@ Check it out in our Templates Library!`;
     if (userTemplates.length === 0) {
       return (
         <div className="text-center py-16">
-          <Layers className="w-12 h-12 text-[#64748b] mx-auto mb-4" />
+          <Layers className="w-12 h-12 text-[#a3bfb3] mx-auto mb-4" />
           <h3 className="text-lg font-bold text-[#ecfdf5]/80 mb-2">No saved templates yet</h3>
-          <p className="text-sm text-[#64748b]/80 max-w-md mx-auto mb-6">
+          <p className="text-sm text-[#a3bfb3] max-w-md mx-auto mb-6">
             Save your current strategic plan as a reusable template to quickly start new plans with the same structure.
           </p>
           {currentPlan && (
             <button
               onClick={() => setActiveTab('save')}
-              className="px-5 py-2.5 bg-[#C9A84C] text-white rounded-xl text-sm font-bold hover:bg-[#C9A84C] transition-colors inline-flex items-center gap-2"
+              className="px-5 py-2.5 bg-[#C9A84C] text-[#022c22] rounded-xl text-sm font-bold hover:bg-[#C9A84C] transition-colors inline-flex items-center gap-2"
             >
               <Plus className="w-4 h-4" />
               Save Current Plan as Template
@@ -1337,11 +1337,11 @@ Check it out in our Templates Library!`;
     return (
       <div>
         <div className="flex items-center justify-between mb-6">
-          <p className="text-sm text-[#64748b]">{userTemplates.length} template{userTemplates.length !== 1 ? 's' : ''} saved</p>
+          <p className="text-sm text-[#a3bfb3]">{userTemplates.length} template{userTemplates.length !== 1 ? 's' : ''} saved</p>
           {currentPlan && (
             <button
               onClick={() => setActiveTab('save')}
-              className="px-4 py-2 bg-[#C9A84C] text-white rounded-xl text-sm font-bold hover:bg-[#C9A84C] transition-colors inline-flex items-center gap-2"
+              className="px-4 py-2 bg-[#C9A84C] text-[#022c22] rounded-xl text-sm font-bold hover:bg-[#C9A84C] transition-colors inline-flex items-center gap-2"
             >
               <Plus className="w-4 h-4" />
               Save New Template
@@ -1376,9 +1376,9 @@ Check it out in our Templates Library!`;
     if (!isAuthenticated) {
       return (
         <div className="text-center py-16">
-          <AlertCircle className="w-12 h-12 text-[#64748b] mx-auto mb-4" />
+          <AlertCircle className="w-12 h-12 text-[#a3bfb3] mx-auto mb-4" />
           <h3 className="text-lg font-bold text-[#ecfdf5]/80 mb-2">Sign in Required</h3>
-          <p className="text-sm text-[#64748b]/80 max-w-md mx-auto">
+          <p className="text-sm text-[#a3bfb3] max-w-md mx-auto">
             Sign in to access templates shared by your team members.
           </p>
         </div>
@@ -1388,9 +1388,9 @@ Check it out in our Templates Library!`;
     if (sharedTemplates.length === 0) {
       return (
         <div className="text-center py-16">
-          <Users className="w-12 h-12 text-[#64748b] mx-auto mb-4" />
+          <Users className="w-12 h-12 text-[#a3bfb3] mx-auto mb-4" />
           <h3 className="text-lg font-bold text-[#ecfdf5]/80 mb-2">No shared templates</h3>
-          <p className="text-sm text-[#64748b]/80 max-w-md mx-auto">
+          <p className="text-sm text-[#a3bfb3] max-w-md mx-auto">
             When team members share templates with your organization, they'll appear here. You can also share your templates when saving them.
           </p>
         </div>
@@ -1399,7 +1399,7 @@ Check it out in our Templates Library!`;
 
     return (
       <div>
-        <p className="text-sm text-[#64748b] mb-6">{sharedTemplates.length} shared template{sharedTemplates.length !== 1 ? 's' : ''} available</p>
+        <p className="text-sm text-[#a3bfb3] mb-6">{sharedTemplates.length} shared template{sharedTemplates.length !== 1 ? 's' : ''} available</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sharedTemplates.map(template => renderTemplateCard(template))}
         </div>
@@ -1412,9 +1412,9 @@ Check it out in our Templates Library!`;
     if (!isAuthenticated) {
       return (
         <div className="text-center py-16">
-          <AlertCircle className="w-12 h-12 text-[#64748b] mx-auto mb-4" />
+          <AlertCircle className="w-12 h-12 text-[#a3bfb3] mx-auto mb-4" />
           <h3 className="text-lg font-bold text-[#ecfdf5]/80 mb-2">Sign in Required</h3>
-          <p className="text-sm text-[#64748b]/80 max-w-md mx-auto">
+          <p className="text-sm text-[#a3bfb3] max-w-md mx-auto">
             Sign in to save your plans as reusable templates.
           </p>
         </div>
@@ -1424,9 +1424,9 @@ Check it out in our Templates Library!`;
     if (!currentPlan) {
       return (
         <div className="text-center py-16">
-          <FileText className="w-12 h-12 text-[#64748b] mx-auto mb-4" />
+          <FileText className="w-12 h-12 text-[#a3bfb3] mx-auto mb-4" />
           <h3 className="text-lg font-bold text-[#ecfdf5]/80 mb-2">No Active Plan</h3>
-          <p className="text-sm text-[#64748b]/80 max-w-md mx-auto">
+          <p className="text-sm text-[#a3bfb3] max-w-md mx-auto">
             Create or select a strategic plan first, then you can save it as a reusable template.
           </p>
         </div>
@@ -1435,7 +1435,7 @@ Check it out in our Templates Library!`;
 
     return (
       <div className="max-w-2xl mx-auto">
-        <div className="bg-white rounded-2xl border border-[#C9A84C]/20 overflow-hidden">
+        <div className="bg-[#022c22]/60 rounded-2xl border border-[#C9A84C]/20 overflow-hidden">
           {/* Header */}
           <div className="bg-gradient-to-r from-[#C9A84C] to-[#B8942E] p-6">
             <div className="flex items-center gap-3">
@@ -1481,7 +1481,7 @@ Check it out in our Templates Library!`;
               <select
                 value={templateIndustry}
                 onChange={e => setTemplateIndustry(e.target.value)}
-                className="w-full px-4 py-2.5 border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:border-transparent bg-white"
+                className="w-full px-4 py-2.5 border border-[#C9A84C]/20 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C] focus:border-transparent bg-[#022c22]/60"
               >
                 {INDUSTRY_OPTIONS.filter(o => o.value !== 'all').map(option => (
                   <option key={option.value} value={option.value}>{option.label}</option>
@@ -1502,26 +1502,26 @@ Check it out in our Templates Library!`;
             </div>
 
             {/* Plan Contents Summary */}
-            <div className="bg-[#064e3b]/10 rounded-xl p-4 border border-slate-100">
-              <h4 className="text-xs font-bold text-[#64748b] uppercase tracking-wider mb-3">Plan Contents to Include</h4>
+            <div className="bg-[#064e3b]/10 rounded-xl p-4 border border-[#C9A84C]/15">
+              <h4 className="text-xs font-bold text-[#a3bfb3] uppercase tracking-wider mb-3">Plan Contents to Include</h4>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <div className="text-center">
                   <p className="text-xl font-black text-[#E8C560]/90">{currentPlan.swotItems?.length || 0}</p>
-                  <p className="text-[10px] font-bold text-[#64748b]/80 uppercase">SWOT Items</p>
+                  <p className="text-[10px] font-bold text-[#a3bfb3] uppercase">SWOT Items</p>
                 </div>
                 <div className="text-center">
                   <p className="text-xl font-black text-[#E8C560]/90">{currentPlan.strategicOptions?.length || 0}</p>
-                  <p className="text-[10px] font-bold text-[#64748b]/80 uppercase">Strategies</p>
+                  <p className="text-[10px] font-bold text-[#a3bfb3] uppercase">Strategies</p>
                 </div>
                 <div className="text-center">
                   <p className="text-xl font-black text-[#E8C560]/90">{currentPlan.objectives?.length || 0}</p>
-                  <p className="text-[10px] font-bold text-[#64748b]/80 uppercase">Objectives</p>
+                  <p className="text-[10px] font-bold text-[#a3bfb3] uppercase">Objectives</p>
                 </div>
                 <div className="text-center">
                   <p className="text-xl font-black text-[#E8C560]/90">
                     {currentPlan.objectives?.reduce((sum, obj) => sum + (obj.kpis?.length || 0), 0) || 0}
                   </p>
-                  <p className="text-[10px] font-bold text-[#64748b]/80 uppercase">KPIs</p>
+                  <p className="text-[10px] font-bold text-[#a3bfb3] uppercase">KPIs</p>
                 </div>
               </div>
             </div>
@@ -1529,7 +1529,7 @@ Check it out in our Templates Library!`;
             {/* Sharing Options */}
             <div className="space-y-3">
               <h4 className="text-sm font-bold text-[#E8C560]/90">Sharing Options</h4>
-              <label className="flex items-center gap-3 p-3 bg-[#064e3b]/10 rounded-xl border border-slate-100 cursor-pointer hover:bg-[#064e3b]/20 transition-colors">
+              <label className="flex items-center gap-3 p-3 bg-[#064e3b]/10 rounded-xl border border-[#C9A84C]/15 cursor-pointer hover:bg-[#064e3b]/20 transition-colors">
                 <input
                   type="checkbox"
                   checked={shareWithTeam}
@@ -1538,10 +1538,10 @@ Check it out in our Templates Library!`;
                 />
                 <div>
                   <p className="text-sm font-semibold text-[#E8C560]/90">Share with my organization</p>
-                  <p className="text-xs text-[#64748b]/80">Team members in {userOrganization || 'your organization'} can use this template</p>
+                  <p className="text-xs text-[#a3bfb3]">Team members in {userOrganization || 'your organization'} can use this template</p>
                 </div>
               </label>
-              <label className="flex items-center gap-3 p-3 bg-[#064e3b]/10 rounded-xl border border-slate-100 cursor-pointer hover:bg-[#064e3b]/20 transition-colors">
+              <label className="flex items-center gap-3 p-3 bg-[#064e3b]/10 rounded-xl border border-[#C9A84C]/15 cursor-pointer hover:bg-[#064e3b]/20 transition-colors">
                 <input
                   type="checkbox"
                   checked={makePublic}
@@ -1550,7 +1550,7 @@ Check it out in our Templates Library!`;
                 />
                 <div>
                   <p className="text-sm font-semibold text-[#E8C560]/90">Make publicly available</p>
-                  <p className="text-xs text-[#64748b]/80">Anyone can discover and use this template</p>
+                  <p className="text-xs text-[#a3bfb3]">Anyone can discover and use this template</p>
                 </div>
               </label>
             </div>
@@ -1566,7 +1566,7 @@ Check it out in our Templates Library!`;
               <button
                 onClick={handleSaveAsTemplate}
                 disabled={isSaving || !templateName.trim()}
-                className="w-full py-3 bg-gradient-to-r from-[#C9A84C] to-[#B8942E] text-white rounded-xl text-sm font-bold hover:opacity-90 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full py-3 bg-gradient-to-r from-[#C9A84C] to-[#B8942E] text-[#022c22] rounded-xl text-sm font-bold hover:opacity-90 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSaving ? (
                   <>
@@ -1604,7 +1604,7 @@ Check it out in our Templates Library!`;
           </div>
           <div>
             <h1 className="text-2xl font-black text-[#E8C560]">Templates Library</h1>
-            <p className="text-sm text-[#64748b]">Pre-built strategic plan templates for every industry</p>
+            <p className="text-sm text-[#a3bfb3]">Pre-built strategic plan templates for every industry</p>
           </div>
         </div>
       </div>
@@ -1621,14 +1621,14 @@ Check it out in our Templates Library!`;
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold transition-all ${
                 isActive
                   ? 'bg-[#022c22] text-white shadow-lg'
-                  : 'text-[#64748b] hover:bg-[#064e3b]/20 hover:text-[#E8C560]/90'
+                  : 'text-[#a3bfb3] hover:bg-[#064e3b]/20 hover:text-[#E8C560]/90'
               }`}
             >
               <TabIcon className="w-4 h-4" />
               {tab.label}
               {tab.count !== undefined && (
                 <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-bold ${
-                  isActive ? 'bg-white/20 text-white' : 'bg-slate-200 text-[#64748b]'
+                  isActive ? 'bg-white/20 text-white' : 'bg-[#064e3b]/60 text-[#a3bfb3]'
                 }`}>
                   {tab.count}
                 </span>

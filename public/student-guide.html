@@ -377,6 +377,11 @@ footer .gold{color:var(--gold);}
 ::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:4px;}
 ::-webkit-scrollbar-thumb:hover{background:var(--gold);}
 </style>
+<style id="mtit-seal">
+/* Shared MTIT seal: one circular treatment on every page (matches the SPA's <MTITLogo/>). */
+img.mtit-seal{width:52px;height:52px;max-width:none;border-radius:50%;object-fit:contain;border:2px solid rgba(201,168,76,.32);background:#022c22;display:block;flex-shrink:0}
+img.mtit-seal.mtit-seal--sm{width:44px;height:44px}
+</style>
 </head>
 <body>
 
@@ -388,7 +393,7 @@ footer .gold{color:var(--gold);}
 <nav class="site-nav" id="siteNav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="#" class="nav-logo-wrap" aria-label="BIRD 2026-2035 Home">
-      <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png" alt="MTIT BARMM" width="130" height="40" onerror="this.style.display='none'">
+      <img src="assets/MTIT-logo-circle.webp" class="mtit-seal" alt="MTIT BARMM" width="52" height="52" decoding="async" onerror="this.onerror=null;this.src='assets/MTIT-logo-circle.png'">
       <span class="nav-title">BEIE<br>Framework 101</span>
     </a>
     <div class="nav-right">

@@ -5,7 +5,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { openValidationSurvey } from '@/lib/bird-urls';
 import { generateId, type ActionFrequency, type StrategicPlan } from '@/lib/strategicPlanStore';
 import type { PlanTemplate } from '@/lib/templateData';
-import { StratLogo } from '@/components/branding/Logo';
+import { MTITLogo } from '@/components/branding/Logo';
 import { Loader2 } from 'lucide-react';
 
 // ─── CRITICAL PATH: Load HeroSection immediately (first screen) ─────────────
@@ -33,7 +33,7 @@ const FloatingAIAssistant  = lazy(() => import('./strategic/FloatingAIAssistant'
 const GlobalLoader = React.memo(({ message }: { message: string }) => (
   <div className="min-h-screen bg-[#022c22] flex flex-col items-center justify-center p-6 text-center">
     <div className="relative mb-6">
-      <StratLogo size="xl" withGlow className="animate-pulse" />
+      <MTITLogo size="xl" withGlow className="animate-pulse" />
       <Loader2 className="absolute -bottom-2 -right-2 w-8 h-8 text-[#C9A84C] animate-spin" />
     </div>
     <h2 className="text-[#ecfdf5] font-bold text-xl mb-2">{message}</h2>

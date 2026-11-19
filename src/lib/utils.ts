@@ -164,13 +164,13 @@ export const getStatusColor = (status: string) => {
   switch (status) {
     case 'on-track':
     case 'completed':
-      return 'text-emerald-600 bg-emerald-50 border-emerald-200';
+      return 'text-emerald-400 bg-emerald-500/10 border-emerald-500/25';
     case 'at-risk':
     case 'in-progress':
-      return 'text-amber-600 bg-amber-50 border-amber-200';
+      return 'text-amber-400 bg-amber-500/10 border-amber-500/25';
     case 'delayed':
-      return 'text-rose-600 bg-rose-50 border-rose-200';
+      return 'text-rose-400 bg-rose-500/10 border-rose-500/25';
     default:
-      return 'text-slate-600 bg-slate-50 border-slate-200';
+      return 'text-[#ecfdf5]/70 bg-[#064e3b]/30 border-[#C9A84C]/15';
   }
 };

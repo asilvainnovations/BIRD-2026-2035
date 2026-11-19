@@ -1580,15 +1580,15 @@ export const getTemplateById = (id: string): PlanTemplate | undefined => {
 };
 
 export const COLOR_MAP: Record<string, { bg: string; text: string; border: string; light: string; gradient: string }> = {
-  rose: { bg: 'bg-rose-500', text: 'text-rose-600', border: 'border-rose-200', light: 'bg-rose-50', gradient: 'from-rose-500 to-pink-600' },
-  violet: { bg: 'bg-violet-500', text: 'text-violet-600', border: 'border-violet-200', light: 'bg-violet-50', gradient: 'from-violet-500 to-purple-600' },
-  amber: { bg: 'bg-amber-500', text: 'text-amber-600', border: 'border-amber-200', light: 'bg-amber-50', gradient: 'from-amber-500 to-orange-600' },
-  emerald: { bg: 'bg-emerald-500', text: 'text-emerald-600', border: 'border-emerald-200', light: 'bg-emerald-50', gradient: 'from-emerald-500 to-green-600' },
-  orange: { bg: 'bg-orange-500', text: 'text-orange-600', border: 'border-orange-200', light: 'bg-orange-50', gradient: 'from-orange-500 to-red-600' },
-  pink: { bg: 'bg-pink-500', text: 'text-pink-600', border: 'border-pink-200', light: 'bg-pink-50', gradient: 'from-pink-500 to-rose-600' },
-  sky: { bg: 'bg-sky-500', text: 'text-sky-600', border: 'border-sky-200', light: 'bg-sky-50', gradient: 'from-sky-500 to-blue-600' },
-  blue: { bg: 'bg-blue-500', text: 'text-blue-600', border: 'border-blue-200', light: 'bg-blue-50', gradient: 'from-blue-500 to-indigo-600' },
-  yellow: { bg: 'bg-yellow-500', text: 'text-yellow-600', border: 'border-yellow-200', light: 'bg-yellow-50', gradient: 'from-yellow-500 to-amber-600' },
-  cyan: { bg: 'bg-cyan-500', text: 'text-cyan-600', border: 'border-cyan-200', light: 'bg-cyan-50', gradient: 'from-cyan-500 to-blue-600' },
-  green: { bg: 'bg-green-500', text: 'text-green-600', border: 'border-green-200', light: 'bg-green-50', gradient: 'from-green-500 to-emerald-600' },
+  rose: { bg: 'bg-rose-500', text: 'text-rose-300', border: 'border-rose-500/25', light: 'bg-rose-500/10', gradient: 'from-rose-500 to-pink-600' },
+  violet: { bg: 'bg-violet-500', text: 'text-violet-300', border: 'border-violet-500/25', light: 'bg-violet-500/10', gradient: 'from-violet-500 to-purple-600' },
+  amber: { bg: 'bg-amber-500', text: 'text-amber-300', border: 'border-amber-500/25', light: 'bg-amber-500/10', gradient: 'from-amber-500 to-orange-600' },
+  emerald: { bg: 'bg-emerald-500', text: 'text-emerald-300', border: 'border-emerald-500/25', light: 'bg-emerald-500/10', gradient: 'from-emerald-500 to-green-600' },
+  orange: { bg: 'bg-orange-500', text: 'text-orange-300', border: 'border-orange-500/25', light: 'bg-orange-500/10', gradient: 'from-orange-500 to-red-600' },
+  pink: { bg: 'bg-pink-500', text: 'text-pink-300', border: 'border-pink-500/25', light: 'bg-pink-500/10', gradient: 'from-pink-500 to-rose-600' },
+  sky: { bg: 'bg-sky-500', text: 'text-sky-300', border: 'border-sky-500/25', light: 'bg-sky-500/10', gradient: 'from-sky-500 to-blue-600' },
+  blue: { bg: 'bg-blue-500', text: 'text-blue-300', border: 'border-blue-500/25', light: 'bg-blue-500/10', gradient: 'from-blue-500 to-indigo-600' },
+  yellow: { bg: 'bg-yellow-500', text: 'text-yellow-300', border: 'border-yellow-500/25', light: 'bg-yellow-500/10', gradient: 'from-yellow-500 to-amber-600' },
+  cyan: { bg: 'bg-cyan-500', text: 'text-cyan-300', border: 'border-cyan-500/25', light: 'bg-cyan-500/10', gradient: 'from-cyan-500 to-blue-600' },
+  green: { bg: 'bg-green-500', text: 'text-green-300', border: 'border-green-500/25', light: 'bg-green-500/10', gradient: 'from-green-500 to-emerald-600' },
 };

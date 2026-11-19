@@ -220,17 +220,17 @@ const IMPACT_LIKELIHOOD_GUIDE = {
   low: {
     label: 'Low Priority',
     description: 'Monitor but no immediate action required',
-    color: 'bg-[#064e3b]/20 dark:bg-[#022c22]/60 text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b]',
+    color: 'bg-[#022c22]/60 text-[#a3bfb3]',
   },
   medium: {
     label: 'Medium Priority',
     description: 'Track and prepare contingency plans',
-    color: 'bg-amber-500 text-amber-400',
+    color: 'bg-amber-500/15 text-amber-300 border border-amber-500/30',
   },
   high: {
     label: 'High Priority',
     description: 'Requires active management and resource allocation',
-    color: 'bg-red-500 text-red-400',
+    color: 'bg-red-500/15 text-red-300 border border-red-500/30',
   },
 };
 
@@ -239,7 +239,7 @@ const RatingInstructions: React.FC = () => (
   <motion.div
     initial={{ opacity: 0, y: -10 }}
     animate={{ opacity: 1, y: 0 }}
-    className="mb-4 p-4 bg-gradient-to-br from-cyan-50 to-blue-50 border border-[#C9A84C]/20 rounded-xl"
+    className="mb-4 p-4 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-[#C9A84C]/20 rounded-xl"
   >
     <div className="flex items-center gap-2 mb-3">
       <Info className="w-5 h-5 text-[#C9A84C]" />
@@ -251,16 +251,16 @@ const RatingInstructions: React.FC = () => (
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <Target className="w-4 h-4 text-[#34d399]" />
-          <span className="font-medium text-[#E8C560]/90 dark:text-[#ecfdf5]/90">Impact Score (1-5)</span>
+          <span className="font-medium text-[#ecfdf5]/90">Impact Score (1-5)</span>
         </div>
-        <p className="text-sm text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b] italic">
+        <p className="text-sm text-[#a3bfb3] italic">
           How much will this factor affect your organization's ability to achieve its strategic goals?
         </p>
         <ul className="text-xs space-y-1 pl-6">
           {Object.entries(SCORE_DESCRIPTIONS).map(([num, desc]) => (
             <li key={num} className="flex gap-2">
               <span className="font-bold text-[#34d399] w-4">{num}.</span>
-              <span className="text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b]">{desc.impact}</span>
+              <span className="text-[#a3bfb3]">{desc.impact}</span>
             </li>
           ))}
         </ul>
@@ -270,16 +270,16 @@ const RatingInstructions: React.FC = () => (
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <Target className="w-4 h-4 text-amber-400" />
-          <span className="font-medium text-[#E8C560]/90 dark:text-[#ecfdf5]/90">Likelihood Score (1-5)</span>
+          <span className="font-medium text-[#ecfdf5]/90">Likelihood Score (1-5)</span>
         </div>
-        <p className="text-sm text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b] italic">
+        <p className="text-sm text-[#a3bfb3] italic">
           How probable is it that this factor will occur within your planning timeframe?
         </p>
         <ul className="text-xs space-y-1 pl-6">
           {Object.entries(SCORE_DESCRIPTIONS).map(([num, desc]) => (
             <li key={num} className="flex gap-2">
               <span className="font-bold text-amber-400 w-4">{num}.</span>
-              <span className="text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b]">{desc.likelihood}</span>
+              <span className="text-[#a3bfb3]">{desc.likelihood}</span>
             </li>
           ))}
         </ul>
@@ -370,23 +370,23 @@ const InterdependencyPanel: React.FC<{
       exit={{ opacity: 0, height: 0 }}
       className="overflow-hidden"
     >
-      <div className="bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-500/20 rounded-xl p-5">
+      <div className="bg-gradient-to-br from-[#C9A84C]/10 to-[#7a5c1e]/10 border border-purple-500/20 rounded-xl p-5">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <Network className="w-6 h-6 text-purple-400" />
-            <h3 className="font-semibold text-purple-800">SWOT Interdependency Detection</h3>
+            <h3 className="font-semibold text-purple-300">SWOT Interdependency Detection</h3>
           </div>
           {relationships.length > 0 && (
             <button
               onClick={clearRelationships}
-              className="text-xs text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b] hover:text-[#E8C560]/90 dark:text-[#ecfdf5]/90 underline"
+              className="text-xs hover:text-[#E8C560]/90 text-[#ecfdf5]/90 underline"
             >
               Clear
             </button>
           )}
         </div>
 
-        <p className="text-sm text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b] mb-4">
+        <p className="text-sm text-[#a3bfb3] mb-4">
           This tool analyzes potential causal relationships between your SWOT factors to help you build a <span className="font-medium text-purple-400">Cause-Cause Diagram (CCD)</span> or identify <span className="font-medium text-purple-400">Systems Archetypes</span>.
         </p>
 
@@ -399,7 +399,7 @@ const InterdependencyPanel: React.FC<{
             "w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium transition-all",
             isDetecting
               ? "bg-slate-300 cursor-not-allowed"
-              : "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg hover:shadow-purple-500/30"
+              : "bg-gradient-to-r from-[#C9A84C] to-[#7a5c1e] text-[#022c22] hover:shadow-lg hover:shadow-purple-500/30"
           )}
         >
           {isDetecting ? (
@@ -437,14 +437,14 @@ const InterdependencyPanel: React.FC<{
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.1 }}
-                  className="p-3 bg-white dark:bg-[#022c22]/60 rounded-lg border border-purple-500/20 shadow-sm hover:shadow-md transition-shadow"
+                  className="p-3 bg-[#022c22]/60 rounded-lg border border-purple-500/20 shadow-sm hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-start gap-2">
                     <div className="flex items-center gap-1 flex-1">
                       <span className="text-xs font-medium px-2 py-0.5 rounded bg-[#059669]/10 text-[#34d399]">
                         {rel.item1.category.toUpperCase()}
                       </span>
-                      <ArrowRight className="w-4 h-4 text-[#64748b]/80 dark:text-[#64748b]" />
+                      <ArrowRight className="w-4 h-4 text-[#a3bfb3]" />
                       <span className="text-xs font-medium px-2 py-0.5 rounded bg-[#C9A84C]/10 text-[#C9A84C]">
                         {rel.item2.category.toUpperCase()}
                       </span>
@@ -454,15 +454,15 @@ const InterdependencyPanel: React.FC<{
                       content={
                         <div className="space-y-1">
                           <p className="font-semibold text-purple-400">{rel.relationship}</p>
-                          <p className="text-xs text-[#64748b]/80 dark:text-[#64748b]">Confidence: {rel.confidence}%</p>
+                          <p className="text-xs text-[#a3bfb3]">Confidence: {rel.confidence}%</p>
                         </div>
                       }
                     >
                       <span className={cn(
                         "px-2 py-0.5 rounded-full text-xs font-medium cursor-help",
                         rel.type === 'enables' ? "bg-[#059669]/10 text-[#34d399]" :
-                        rel.type === 'threatens' ? "bg-red-500 text-red-400" :
-                        rel.type === 'mitigates' ? "bg-amber-500 text-amber-400" :
+                        rel.type === 'threatens' ? "bg-red-500/15 text-red-300 border border-red-500/30" :
+                        rel.type === 'mitigates' ? "bg-amber-500/15 text-amber-300 border border-amber-500/30" :
                         "bg-orange-500/10 text-orange-400"
                       )}>
                         {rel.type.charAt(0).toUpperCase() + rel.type.slice(1)}
@@ -470,10 +470,10 @@ const InterdependencyPanel: React.FC<{
                     </Tooltip>
                   </div>
                   
-                  <p className="text-xs text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b] mt-2 line-clamp-2">
+                  <p className="text-xs text-[#a3bfb3] mt-2 line-clamp-2">
                     <span className="font-medium">From:</span> {rel.item1.description}
                   </p>
-                  <p className="text-xs text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b] line-clamp-2">
+                  <p className="text-xs text-[#a3bfb3] line-clamp-2">
                     <span className="font-medium">To:</span> {rel.item2.description}
                   </p>
                 </motion.div>
@@ -484,14 +484,14 @@ const InterdependencyPanel: React.FC<{
             <div className="pt-4 border-t border-purple-500/20 flex gap-2">
               <button
                 onClick={() => onNavigate?.('systems')}
-                className="flex-1 px-3 py-2 bg-gradient-to-r from-[#C9A84C] to-[#B8942E] text-white rounded-lg text-sm font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                className="flex-1 px-3 py-2 bg-gradient-to-r from-[#C9A84C] to-[#B8942E] text-[#022c22] rounded-lg text-sm font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
               >
                 <Network className="w-4 h-4" />
                 Open CCD Builder
               </button>
               <button
                 onClick={() => onNavigate?.('systems')}
-                className="flex-1 px-3 py-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-lg text-sm font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                className="flex-1 px-3 py-2 bg-gradient-to-r from-[#C9A84C] to-[#7a5c1e] text-[#022c22] rounded-lg text-sm font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
               >
                 <BrainCircuit className="w-4 h-4" />
                 View Archetypes
@@ -531,7 +531,7 @@ const ScoreButton: React.FC<{
           <p className="font-semibold text-[#C9A84C]">
             {type === 'impact' ? 'Impact Level' : 'Likelihood Level'} {value}
           </p>
-          <p className="text-xs text-[#64748b]/80 dark:text-[#64748b]">
+          <p className="text-xs text-[#a3bfb3]">
             {type === 'impact' 
               ? SCORE_DESCRIPTIONS[value as keyof typeof SCORE_DESCRIPTIONS].impact
               : SCORE_DESCRIPTIONS[value as keyof typeof SCORE_DESCRIPTIONS].likelihood
@@ -546,7 +546,7 @@ const ScoreButton: React.FC<{
           "w-6 h-6 rounded-full border-2 transition-all duration-200",
           value <= selectedValue
             ? "bg-gradient-to-br from-[#C9A84C] to-[#C9A84C] border-transparent shadow-md scale-110"
-            : "border-[#C9A84C]/30 dark:border-[#C9A84C]/20 hover:border-[#C9A84C]/30 hover:bg-[#064e3b]/20 dark:bg-[#022c22]/60",
+            : "border-[#C9A84C]/20 hover:border-[#C9A84C]/30 hover:bg-[#064e3b]/20 bg-[#022c22]/60",
           type === 'impact' ? "cursor-pointer" : "cursor-pointer"
         )}
         whileHover={{ scale: 1.15 }}
@@ -639,13 +639,13 @@ const SWOTCard: React.FC<{
           className="space-y-3"
         >
           <div className="flex justify-between items-start gap-2">
-            <label className="text-xs font-medium text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b]">Description</label>
+            <label className="text-xs font-medium text-[#a3bfb3]">Description</label>
             <Tooltip content="Cancel editing changes">
               <motion.button
                 onClick={handleCancel}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-1.5 text-[#64748b]/80 dark:text-[#64748b] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                className="p-1.5 text-[#a3bfb3] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
               >
                 <X className="w-4 h-4" />
               </motion.button>
@@ -654,7 +654,7 @@ const SWOTCard: React.FC<{
           <motion.textarea
             value={editText}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setEditText(e.target.value)}
-            className="w-full p-2 text-sm border border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A84C] resize-none bg-white dark:bg-[#022c22]/60"
+            className="w-full p-2 text-sm border border-[#C9A84C]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A84C] resize-none bg-[#022c22]/60"
             rows={3}
             autoFocus
             placeholder="Describe the SWOT factor..."
@@ -666,13 +666,13 @@ const SWOTCard: React.FC<{
           >
             <button
               onClick={handleCancel}
-              className="px-3 py-1.5 text-xs font-medium text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b] bg-white dark:bg-[#022c22]/60 border border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded-lg hover:bg-[#064e3b]/10 dark:bg-[#022c22] transition-colors"
+              className="px-3 py-1.5 text-xs font-medium text-[#a3bfb3] border border-[#C9A84C]/20 rounded-lg hover:bg-[#064e3b]/10 bg-[#022c22] transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={handleSave}
-              className="px-3 py-1.5 text-xs font-medium text-white bg-gradient-to-r from-[#C9A84C] to-[#B8942E] rounded-lg hover:shadow-md transition-all"
+              className="px-3 py-1.5 text-xs font-medium text-[#022c22] bg-gradient-to-r from-[#C9A84C] to-[#B8942E] rounded-lg hover:shadow-md transition-all"
             >
               Save Changes
             </button>
@@ -698,7 +698,7 @@ const SWOTCard: React.FC<{
                   onClick={() => setIsEditing(true)}
                   whileHover={{ scale: 1.15, rotate: 5 }}
                   whileTap={{ scale: 0.9 }}
-                  className="p-1.5 text-[#64748b]/80 dark:text-[#64748b] hover:text-[#C9A84C] hover:bg-[#C9A84C]/10 rounded-lg transition-colors"
+                  className="p-1.5 text-[#a3bfb3] hover:text-[#C9A84C] hover:bg-[#C9A84C]/10 rounded-lg transition-colors"
                 >
                   <Edit2 className="w-4 h-4" />
                 </motion.button>
@@ -724,7 +724,7 @@ const SWOTCard: React.FC<{
             </span>
             {item.aiGenerated && (
               <Tooltip content="This item was generated by AI based on your organization context">
-                <span className="ml-auto text-xs bg-purple-500 text-purple-400 px-2 py-0.5 rounded-full flex items-center gap-1">
+                <span className="ml-auto text-xs bg-purple-500/15 text-purple-300 px-2 py-0.5 rounded-full flex items-center gap-1 border border-purple-500/30">
                   <Sparkles className="w-3 h-3" />
                   AI Generated
                 </span>
@@ -732,17 +732,17 @@ const SWOTCard: React.FC<{
             )}
           </div>
 
-          <div className="flex items-center gap-4 pt-3 border-t border-[#C9A84C]/20 dark:border-[#C9A84C]/20">
+          <div className="flex items-center gap-4 pt-3 border-t border-[#C9A84C]/20">
             {/* Impact Score */}
             <Tooltip
               content={
                 <div className="space-y-1">
                   <p className="font-semibold text-[#34d399]">Impact Score Guide</p>
-                  <p className="text-xs text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b]">Rate how much this factor affects your strategic goals.</p>
+                  <p className="text-xs text-[#a3bfb3]">Rate how much this factor affects your strategic goals.</p>
                   <ul className="text-xs space-y-0.5">
                     {Object.entries(SCORE_DESCRIPTIONS).map(([num, desc]) => (
                       <li key={num} className="flex gap-1">
-                        <span className={cn("font-bold w-3", num <= String(item.impactScore) ? "text-[#059669]" : "text-[#64748b]/80 dark:text-[#64748b]")}>
+                        <span className={cn("font-bold w-3", num <= String(item.impactScore) ? "text-[#059669]" : "text-[#a3bfb3]")}>
                           {num}.
                         </span>
                         <span>{desc.impact}</span>
@@ -754,8 +754,8 @@ const SWOTCard: React.FC<{
             >
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1">
-                  <Info className="w-3 h-3 text-[#64748b]/80 dark:text-[#64748b]" />
-                  <span className="text-xs text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b] font-medium">Impact:</span>
+                  <Info className="w-3 h-3 text-[#a3bfb3]" />
+                  <span className="text-xs text-[#a3bfb3] font-medium">Impact:</span>
                   <div className="flex gap-0.5">
                     {[1, 2, 3, 4, 5].map((n) => (
                       <ScoreButton
@@ -783,11 +783,11 @@ const SWOTCard: React.FC<{
               content={
                 <div className="space-y-1">
                   <p className="font-semibold text-amber-400">Likelihood Score Guide</p>
-                  <p className="text-xs text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b]">Rate the probability of this factor occurring.</p>
+                  <p className="text-xs text-[#a3bfb3]">Rate the probability of this factor occurring.</p>
                   <ul className="text-xs space-y-0.5">
                     {Object.entries(SCORE_DESCRIPTIONS).map(([num, desc]) => (
                       <li key={num} className="flex gap-1">
-                        <span className={cn("font-bold w-3", num <= String(item.likelihoodScore) ? "text-amber-500" : "text-[#64748b]/80 dark:text-[#64748b]")}>
+                        <span className={cn("font-bold w-3", num <= String(item.likelihoodScore) ? "text-amber-500" : "text-[#a3bfb3]")}>
                           {num}.
                         </span>
                         <span>{desc.likelihood}</span>
@@ -799,8 +799,8 @@ const SWOTCard: React.FC<{
             >
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1">
-                  <Info className="w-3 h-3 text-[#64748b]/80 dark:text-[#64748b]" />
-                  <span className="text-xs text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b] font-medium">Likelihood:</span>
+                  <Info className="w-3 h-3 text-[#a3bfb3]" />
+                  <span className="text-xs text-[#a3bfb3] font-medium">Likelihood:</span>
                   <div className="flex gap-0.5">
                     {[1, 2, 3, 4, 5].map((n) => (
                       <ScoreButton
@@ -829,12 +829,12 @@ const SWOTCard: React.FC<{
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             transition={{ delay: 0.4 }}
-            className="mt-3 pt-3 border-t border-slate-100 dark:border-[#C9A84C]/20"
+            className="mt-3 pt-3 border-t border-[#C9A84C]/20"
           >
             <div className="flex items-center justify-between text-xs">
-              <span className="text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b]">{metrics.label}</span>
+              <span className="text-[#a3bfb3]">{metrics.label}</span>
               <div className="flex items-center gap-2">
-                <div className="w-16 h-2 bg-[#064e3b]/20 dark:bg-[#022c22]/60 rounded-full overflow-hidden">
+                <div className="w-16 h-2 bg-[#022c22]/60 rounded-full overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${Math.min((metrics.value / metrics.scale) * 100, 100)}%` }}
@@ -857,7 +857,7 @@ const SWOTCard: React.FC<{
                 </span>
               </div>
             </div>
-            <p className="text-[10px] text-[#64748b]/80 dark:text-[#64748b] mt-1">
+            <p className="text-[10px] text-[#a3bfb3] mt-1">
               Scale: 1-{metrics.scale} • {metrics.type === 'risk' ? 'Higher = More Risk' : 'Higher = More Resilience'}
             </p>
           </motion.div>
@@ -1092,8 +1092,8 @@ const SWOTAnalysis: React.FC<SWOTAnalysisProps> = ({
         className="flex flex-col md:flex-row md:items-center md:justify-between gap-4"
       >
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-[#E8C560] dark:text-[#ecfdf5]">SWOT Analysis</h1>
-          <p className="text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b]">Structured diagnostics for comprehensive environmental analysis</p>
+          <h1 className="text-2xl md:text-3xl font-bold text-[#ecfdf5]">SWOT Analysis</h1>
+          <p className="text-[#a3bfb3]">Structured diagnostics for comprehensive environmental analysis</p>
         </div>
         
         <div className="flex items-center gap-2">
@@ -1104,8 +1104,8 @@ const SWOTAnalysis: React.FC<SWOTAnalysisProps> = ({
             className={cn(
               "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all",
               showInterdependencyPanel
-                ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/25"
-                : "bg-[#064e3b]/20 dark:bg-[#022c22]/60 text-[#E8C560]/90 dark:text-[#ecfdf5]/90 hover:bg-slate-200"
+                ? "bg-gradient-to-r from-[#C9A84C] to-[#7a5c1e] text-[#022c22] shadow-lg shadow-purple-500/25"
+                : "bg-[#022c22]/60 text-[#ecfdf5]/90 hover:bg-[#064e3b]/60"
             )}
           >
             <Link2 className="w-4 h-4" />
@@ -1144,18 +1144,18 @@ const SWOTAnalysis: React.FC<SWOTAnalysisProps> = ({
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="rounded-xl border border-[#C9A84C]/30 bg-[#064e3b]/10 dark:bg-[#022c22]/60 p-5"
+          className="rounded-xl border border-[#C9A84C]/30 bg-[#022c22]/60 p-5"
         >
           <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
             <div>
               <span className="text-[0.68rem] font-bold tracking-widest uppercase text-[#C9A84C] block mb-1">
                 Validation Survey · Chapter 3-A
               </span>
-              <h2 className="text-base font-bold text-[#E8C560] dark:text-[#ecfdf5]">
+              <h2 className="text-base font-bold text-[#ecfdf5]">
                 {swotItems.length} factors scored by {SURVEY_PROVENANCE.n} stakeholders
               </h2>
             </div>
-            <span className="text-xs text-[#64748b] dark:text-[#a7f3d0]/70 bg-[#C9A84C]/10 border border-[#C9A84C]/30 rounded-full px-3 py-1">
+            <span className="text-xs text-[#a7f3d0]/70 bg-[#C9A84C]/10 border border-[#C9A84C]/30 rounded-full px-3 py-1">
               {SURVEY_PROVENANCE.window} · item n = {SURVEY_PROVENANCE.itemRange}
             </span>
           </div>
@@ -1163,7 +1163,7 @@ const SWOTAnalysis: React.FC<SWOTAnalysisProps> = ({
           {/* Coverage warning — the most consequential limitation in this dataset */}
           <div className="flex items-start gap-2 rounded-lg border border-red-500/35 bg-red-500/10 px-3 py-2 mb-4">
             <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-red-500" />
-            <p className="text-[0.72rem] leading-relaxed text-red-600 dark:text-red-300">
+            <p className="text-[0.72rem] leading-relaxed text-red-300">
               <strong>Zero respondents from {SURVEY_PROVENANCE.silentProvinces.join(', ')}.</strong>{' '}
               {SURVEY_PROVENANCE.note}
             </p>
@@ -1180,19 +1180,19 @@ const SWOTAnalysis: React.FC<SWOTAnalysisProps> = ({
               <div key={key}>
                 <div className="flex items-baseline justify-between mb-2">
                   <h3 className="text-xs font-bold uppercase tracking-wider" style={{ color }}>{label}</h3>
-                  <span className="text-[0.6rem] text-[#64748b] dark:text-[#ecfdf5]/30">{formula}</span>
+                  <span className="text-[0.6rem] text-[#ecfdf5]/30">{formula}</span>
                 </div>
                 {topFactors[key].map(({ item, metric }) => (
                   <div key={item.id} className="mb-2.5">
                     <div className="flex justify-between items-baseline gap-2 mb-1">
-                      <span className="text-xs text-[#334155] dark:text-[#d1fae5]/80 truncate">
+                      <span className="text-xs text-[#d1fae5]/80 truncate">
                         {item.description.split(' — ')[0]}
                       </span>
                       <span className="text-xs font-bold tabular-nums flex-shrink-0" style={{ color }}>
                         {metric.toFixed(2)}
                       </span>
                     </div>
-                    <div className="h-1.5 rounded-full bg-[#e2e8f0] dark:bg-white/10 overflow-hidden">
+                    <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
                       <motion.div
                         className="h-full rounded-full"
                         style={{ background: color }}
@@ -1201,7 +1201,7 @@ const SWOTAnalysis: React.FC<SWOTAnalysisProps> = ({
                         transition={{ duration: 1, ease: [0.4, 0, 0.2, 1] }}
                       />
                     </div>
-                    <div className="text-[0.6rem] text-[#94a3b8] dark:text-[#ecfdf5]/28 mt-0.5">
+                    <div className="text-[0.6rem] text-[#ecfdf5]/28 mt-0.5">
                       I {(item.impactScore || 0).toFixed(2)} · L {(item.likelihoodScore || 0).toFixed(2)}
                     </div>
                   </div>
@@ -1210,7 +1210,7 @@ const SWOTAnalysis: React.FC<SWOTAnalysisProps> = ({
             ))}
           </div>
 
-          <p className="mt-3 text-xs text-[#475569] dark:text-[#ecfdf5]/55 leading-relaxed">
+          <p className="mt-3 text-xs text-[#ecfdf5]/55 leading-relaxed">
             <strong>Read this first:</strong> human capital, not infrastructure, tops the risk register.
             Functional literacy (17.76) and child malnutrition (17.25) outrank infrastructure deficits (16.91).
             Editing any card below recalculates these rankings live.
@@ -1226,51 +1226,51 @@ const SWOTAnalysis: React.FC<SWOTAnalysisProps> = ({
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden"
           >
-            <div className="bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-500/20 rounded-xl p-6">
-              <h3 className="font-semibold text-purple-800 mb-4 flex items-center gap-2">
+            <div className="bg-gradient-to-br from-[#C9A84C]/10 to-[#7a5c1e]/10 border border-purple-500/20 rounded-xl p-6">
+              <h3 className="font-semibold text-purple-300 mb-4 flex items-center gap-2">
                 <Sparkles className="w-5 h-5" />
                 AI-Powered SWOT Generation
               </h3>
-              <p className="text-sm text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b] mb-4">
+              <p className="text-sm text-[#a3bfb3] mb-4">
                 Let AI analyze your organizational context and generate relevant SWOT factors automatically.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block text-sm font-medium text-[#E8C560]/90 dark:text-[#ecfdf5]/90 mb-1">Organization Name</label>
+                  <label className="block text-sm font-medium text-[#ecfdf5]/90 mb-1">Organization Name</label>
                   <input
                     type="text"
                     value={aiContext.organization}
                     onChange={(e) => setAiContext((prev) => ({ ...prev, organization: e.target.value }))}
-                    className="w-full px-3 py-2 border border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full px-3 py-2 border border-[#C9A84C]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                     placeholder="e.g., TechForward Inc."
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#E8C560]/90 dark:text-[#ecfdf5]/90 mb-1">Industry/Sector</label>
+                  <label className="block text-sm font-medium text-[#ecfdf5]/90 mb-1">Industry/Sector</label>
                   <input
                     type="text"
                     value={aiContext.industry}
                     onChange={(e) => setAiContext((prev) => ({ ...prev, industry: e.target.value }))}
-                    className="w-full px-3 py-2 border border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full px-3 py-2 border border-[#C9A84C]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                     placeholder="e.g., Technology Consulting"
                   />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-[#E8C560]/90 dark:text-[#ecfdf5]/90 mb-1">Strategic Intent</label>
+                  <label className="block text-sm font-medium text-[#ecfdf5]/90 mb-1">Strategic Intent</label>
                   <input
                     type="text"
                     value={aiContext.strategicIntent}
                     onChange={(e) => setAiContext((prev) => ({ ...prev, strategicIntent: e.target.value }))}
-                    className="w-full px-3 py-2 border border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full px-3 py-2 border border-[#C9A84C]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                     placeholder="e.g., Achieve market leadership in digital transformation"
                   />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-[#E8C560]/90 dark:text-[#ecfdf5]/90 mb-1">Additional Context</label>
+                  <label className="block text-sm font-medium text-[#ecfdf5]/90 mb-1">Additional Context</label>
                   <textarea
                     value={aiContext.context}
                     onChange={(e) => setAiContext((prev) => ({ ...prev, context: e.target.value }))}
-                    className="w-full px-3 py-2 border border-[#C9A84C]/30 dark:border-[#C9A84C]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+                    className="w-full px-3 py-2 border border-[#C9A84C]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
                     rows={3}
                     placeholder="Any additional context about your organization, market position, recent changes, etc."
                   />
@@ -1281,7 +1281,7 @@ const SWOTAnalysis: React.FC<SWOTAnalysisProps> = ({
                 disabled={isGeneratingAI}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full flex items-center justify-center gap-2 px-6 py-2 bg-gradient-to-r from-purple-600 to-violet-600 text-white rounded-lg font-medium hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                className="w-full flex items-center justify-center gap-2 px-6 py-2 bg-gradient-to-r from-[#C9A84C] to-[#7a5c1e] text-[#022c22] rounded-lg font-medium hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               >
                 {isGeneratingAI ? (
                   <>
@@ -1325,7 +1325,7 @@ const SWOTAnalysis: React.FC<SWOTAnalysisProps> = ({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.4 }}
                 className={cn(
-                  "bg-white dark:bg-[#022c22]/60 rounded-xl border overflow-hidden",
+                  "bg-[#022c22]/60 rounded-xl border overflow-hidden",
                   config.borderColor.replace('-200', '-300')
                 )}
               >
@@ -1335,7 +1335,7 @@ const SWOTAnalysis: React.FC<SWOTAnalysisProps> = ({
                   </div>
                   <div>
                     <h3 className={cn("font-semibold", config.textColor)}>{config.label}</h3>
-                    <p className="text-xs text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b]">{config.description}</p>
+                    <p className="text-xs text-[#a3bfb3]">{config.description}</p>
                   </div>
                   <motion.span 
                     className={cn(config.bgColor, config.textColor, "px-2 py-1 rounded-full text-sm font-medium")}
@@ -1371,7 +1371,7 @@ const SWOTAnalysis: React.FC<SWOTAnalysisProps> = ({
                       onChange={(e) => setNewItems((prev) => ({ ...prev, [category]: e.target.value }))}
                       onKeyDown={(e) => e.key === 'Enter' && handleAddItem(category)}
                       placeholder={`Add ${config.label.toLowerCase().slice(0, -1)}...`}
-                      className="flex-1 px-3 py-2 text-sm border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
+                      className="flex-1 px-3 py-2 text-sm border border-[#C9A84C]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A84C]"
                     />
                     <motion.button
                       onClick={() => handleAddItem(category)}
@@ -1399,10 +1399,10 @@ const SWOTAnalysis: React.FC<SWOTAnalysisProps> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7 }}
-        className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-6 border border-[#C9A84C]/20 dark:border-[#C9A84C]/20"
+        className="bg-gradient-to-br from-[#022c22]/60 to-[#022c22]/60 rounded-xl p-6 border border-[#C9A84C]/20"
       >
-        <h3 className="font-semibold text-[#E8C560] dark:text-[#ecfdf5] mb-4 flex items-center gap-2">
-          <Target className="w-5 h-5 text-[#ecfdf5]/80 dark:text-[#64748b]/80 dark:text-[#64748b]" />
+        <h3 className="font-semibold text-[#ecfdf5] mb-4 flex items-center gap-2">
+          <Target className="w-5 h-5 text-[#a3bfb3]" />
           Analysis Summary
         </h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -1420,23 +1420,23 @@ const SWOTAnalysis: React.FC<SWOTAnalysisProps> = ({
                 <motion.div
                   key={category}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className="bg-white dark:bg-[#022c22]/60 rounded-lg p-4 border border-[#C9A84C]/20 dark:border-[#C9A84C]/20 shadow-sm"
+                  className="bg-[#022c22]/60 rounded-lg p-4 border border-[#C9A84C]/20 shadow-sm"
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <div className={cn(config.iconBg, "p-1.5 rounded")}>
                       <config.icon className="w-4 h-4 text-white" />
                     </div>
-                    <span className="text-sm font-medium text-[#E8C560]/90 dark:text-[#ecfdf5]/90">{config.label}</span>
+                    <span className="text-sm font-medium text-[#ecfdf5]/90">{config.label}</span>
                   </div>
                   <motion.p 
-                    className="text-2xl font-bold text-[#E8C560] dark:text-[#ecfdf5]"
+                    className="text-2xl font-bold text-[#ecfdf5]"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.8, type: "spring" }}
                   >
                     {items.length}
                   </motion.p>
-                  <p className="text-xs text-[#64748b] dark:text-[#64748b]/80 dark:text-[#64748b]">
+                  <p className="text-xs text-[#a3bfb3]">
                     Avg. Impact: <span className="font-medium">{avgImpact.toFixed(1)}</span> · 
                     Likelihood: <span className="font-medium">{avgLikelihood.toFixed(1)}</span>
                   </p>

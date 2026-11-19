@@ -199,7 +199,7 @@ const AdminDashboard: React.FC = () => {
                   <div className="text-[9px] text-slate-500">{count || ''}</div>
                   <div className="w-full bg-gradient-to-t from-cyan-600 to-cyan-400 rounded-sm"
                     style={{ height: `${(count / maxSignupCount) * 100}%`, minHeight: '4px' }} />
-                  <div className="text-[8px] text-slate-600">{day.slice(8)}</div>
+                  <div className="text-[8px] text-[#ecfdf5]/70">{day.slice(8)}</div>
                 </div>
               ))}
             </div>
@@ -332,7 +332,7 @@ const AdminDashboard: React.FC = () => {
                     <p className="text-sm text-white font-medium">{a.action}</p>
                     <p className="text-xs text-slate-500 mt-0.5 truncate">{JSON.stringify(a.details)}</p>
                   </div>
-                  <span className="text-[10px] text-slate-600">{new Date(a.created_at).toLocaleString()}</span>
+                  <span className="text-[10px] text-[#ecfdf5]/70">{new Date(a.created_at).toLocaleString()}</span>
                 </div>
               </div>
             ))}

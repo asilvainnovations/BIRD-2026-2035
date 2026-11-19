@@ -988,6 +988,11 @@ h1,h2,h3,h4,h5,h6{font-family:'Cinzel',serif;font-weight:700;}
 </style>
 <base target="_blank">
 <base target="_blank">
+<style id="mtit-seal">
+/* Shared MTIT seal: one circular treatment on every page (matches the SPA's <MTITLogo/>). */
+img.mtit-seal{width:52px;height:52px;max-width:none;border-radius:50%;object-fit:contain;border:2px solid rgba(201,168,76,.32);background:#022c22;display:block;flex-shrink:0}
+img.mtit-seal.mtit-seal--sm{width:44px;height:44px}
+</style>
 </head>
 
 <body>
@@ -1003,7 +1008,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Cinzel',serif;font-weight:700;}
 <nav class="site-nav" id="siteNav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="https://bangsamoro-investment-roadmap.asilvainnovations.com" class="nav-logo" aria-label="BARMM MTIT – Home">
-      <img src="https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png" alt="MTIT-BARMM Logo">
+      <img src="assets/MTIT-logo-circle.webp" class="mtit-seal" alt="MTIT-BARMM Logo" width="52" height="52" decoding="async" onerror="this.onerror=null;this.src='assets/MTIT-logo-circle.png'">
       <span class="nav-logo-text">Bangsamoro<br>Investment Roadmap</span>
     </a>
     <button class="mobile-menu-toggle no-print" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">

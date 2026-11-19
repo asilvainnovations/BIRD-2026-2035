@@ -136,7 +136,7 @@ const SharedPlanView: React.FC = () => {
           </section>
         )}
 
-        <footer className="text-center py-8 text-xs text-slate-600">
+        <footer className="text-center py-8 text-xs text-[#ecfdf5]/70">
           Shared via BIRD 2026–2035 · {new Date(link.created_at).toLocaleDateString()}
         </footer>
       </main>

@@ -7,7 +7,6 @@ import {
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useAuth, UserProfile } from '@/hooks/useAuth';
-import { useTheme, type Theme } from '@/components/theme-provider';
 import { StratLogo } from '@/components/branding/Logo';
 
 type TabId = 'profile' | 'notifications' | 'theme' | 'ai' | 'security' | 'language' | 'integrations';
@@ -57,7 +56,6 @@ const INTEGRATION_DEFS = [
 
 const SettingsPage: React.FC = () => {
   const { user, profile, updateProfile, updatePassword } = useAuth();
-  const { setTheme } = useTheme();
   const [tab, setTab] = useState<TabId>('profile');
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const [profileForm, setProfileForm] = useState({
@@ -168,7 +166,7 @@ const SettingsPage: React.FC = () => {
         <StratLogo size="lg" withGlow />
         <div>
           <h1 className="text-3xl font-black text-white tracking-tight">Settings</h1>
-          <p className="text-[#64748b]/80 text-sm">Configure your BIRD 2026–2035 platform experience</p>
+          <p className="text-[#a3bfb3] text-sm">Configure your BIRD 2026–2035 platform experience</p>
         </div>
         {savedAt && (
           <div className="ml-auto flex items-center gap-2 text-xs text-[#6ee7b7]">
@@ -185,7 +183,7 @@ const SettingsPage: React.FC = () => {
             return (
               <button key={t.id} onClick={() => setTab(t.id)}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-                  active ? 'bg-[#C9A84C] text-white shadow-lg shadow-[#C9A84C]/20' : 'text-[#64748b]/80 hover:bg-[#022c22]/60 hover:text-white'
+                  active ? 'bg-[#C9A84C] text-[#022c22] shadow-lg shadow-[#C9A84C]/20' : 'text-[#a3bfb3] hover:bg-[#022c22]/60 hover:text-white'
                 }`}>
                 <Icon className="w-4 h-4" /> {t.label}
               </button>
@@ -225,23 +223,19 @@ const SettingsPage: React.FC = () => {
 
           {tab === 'theme' && (
             <div className="space-y-4">
-              <h2 className="text-xl font-bold text-white">Theme Settings</h2>
-              <SelectField label="Mode" value={settings.theme_settings.mode}
-                options={['dark', 'light', 'system']}
-                onChange={(v) => { const next = { ...settings, theme_settings: { ...settings.theme_settings, mode: v } }; setSettings(next); persistSettings(next); setTheme(v as Theme); }} />
-              <SelectField label="Accent Color" value={settings.theme_settings.accent}
-                options={['blue', 'cyan', 'emerald', 'purple', 'rose', 'amber']}
-                onChange={(v) => { const next = { ...settings, theme_settings: { ...settings.theme_settings, accent: v } }; setSettings(next); persistSettings(next); }} />
-              <SelectField label="Density" value={settings.theme_settings.density}
-                options={['compact', 'comfortable', 'spacious']}
-                onChange={(v) => { const next = { ...settings, theme_settings: { ...settings.theme_settings, density: v } }; setSettings(next); persistSettings(next); }} />
+              <h2 className="text-xl font-bold text-white">Theme</h2>
+              <div className="rounded-xl border border-[#C9A84C]/20 bg-[#022c22]/60 p-4 text-sm text-[#ecfdf5]/85 leading-relaxed">
+                BIRD uses a single brand theme — Liquid Glass deep green and gold — so the
+                platform matches the public roadmap and dashboard pages and every module stays
+                readable. Light mode will return once each module has a tested light palette.
+              </div>
             </div>
           )}
 
           {tab === 'ai' && (
             <div className="space-y-4">
               <h2 className="text-xl font-bold text-white">AI Configuration</h2>
-              <p className="text-sm text-[#64748b]/80">Customize how BIRD AI behaves across your strategic plans.</p>
+              <p className="text-sm text-[#a3bfb3]">Customize how BIRD AI behaves across your strategic plans.</p>
               <SelectFieldLabeled label="BIRD AI Model" value={settings.ai_config.model}
                 options={[
                   { value: 'moonshot-v1-128k', label: 'Moonshot 128K (Recommended)' },
@@ -253,7 +247,7 @@ const SettingsPage: React.FC = () => {
                 options={['senior_strategist', 'investment_analyst', 'systems_thinker', 'critical_consultant', 'concise_advisor']}
                 onChange={(v) => { const next = { ...settings, ai_config: { ...settings.ai_config, persona: v } }; setSettings(next); persistSettings(next); }} />
               <div>
-                <label className="block text-xs font-bold text-[#64748b]/80 uppercase tracking-wider mb-2">Temperature ({settings.ai_config.temperature})</label>
+                <label className="block text-xs font-bold text-[#a3bfb3] uppercase tracking-wider mb-2">Temperature ({settings.ai_config.temperature})</label>
                 <input type="range" min={0} max={1.5} step={0.1} value={settings.ai_config.temperature}
                   onChange={(e) => { const next = { ...settings, ai_config: { ...settings.ai_config, temperature: parseFloat(e.target.value) } }; setSettings(next); }}
                   onMouseUp={() => persistSettings(settings)}
@@ -295,14 +289,14 @@ const SettingsPage: React.FC = () => {
               <SelectField label="Interface Language" value={settings.language}
                 options={['en', 'es', 'fr', 'de', 'pt', 'ar', 'zh', 'ja', 'ko', 'hi', 'id', 'ms', 'tl']}
                 onChange={(v) => { const next = { ...settings, language: v }; setSettings(next); persistSettings(next); }} />
-              <p className="text-xs text-[#64748b]">English (en), Spanish (es), French (fr), German (de), Portuguese (pt), Arabic (ar), Chinese (zh), Japanese (ja), Korean (ko), Hindi (hi), Indonesian (id), Malay (ms), Filipino (tl)</p>
+              <p className="text-xs text-[#a3bfb3]">English (en), Spanish (es), French (fr), German (de), Portuguese (pt), Arabic (ar), Chinese (zh), Japanese (ja), Korean (ko), Hindi (hi), Indonesian (id), Malay (ms), Filipino (tl)</p>
             </div>
           )}
 
           {tab === 'integrations' && (
             <div className="space-y-3">
               <h2 className="text-xl font-bold text-white">Integrations</h2>
-              <p className="text-sm text-[#64748b]/80 mb-4">Connect external apps to extend your strategic workflow.</p>
+              <p className="text-sm text-[#a3bfb3] mb-4">Connect external apps to extend your strategic workflow.</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {INTEGRATION_DEFS.map(int => {
                   const Icon = int.icon;
@@ -314,7 +308,7 @@ const SettingsPage: React.FC = () => {
                           <Icon className={`w-6 h-6 ${int.color} flex-shrink-0 mt-0.5`} />
                           <div>
                             <h3 className="font-bold text-white text-sm">{int.name}</h3>
-                            <p className="text-xs text-[#64748b]/80 mt-0.5">{int.desc}</p>
+                            <p className="text-xs text-[#a3bfb3] mt-0.5">{int.desc}</p>
                           </div>
                         </div>
                         <button onClick={() => toggleIntegration(int.id, !cfg.enabled)}
@@ -329,13 +323,13 @@ const SettingsPage: React.FC = () => {
                             value={cfg.api_key || ''}
                             onChange={(e) => updateIntegrationField(int.id, 'api_key', e.target.value)}
                             onBlur={() => persistSettings(settings)}
-                            className="w-full px-3 py-2 bg-background border border-[#C9A84C]/20 rounded-lg text-xs text-foreground placeholder:text-[#64748b] focus:outline-none focus:ring-1 focus:ring-[#C9A84C]" />
+                            className="w-full px-3 py-2 bg-background border border-[#C9A84C]/20 rounded-lg text-xs text-foreground placeholder:text-[#a3bfb3] focus:outline-none focus:ring-1 focus:ring-[#C9A84C]" />
                           <input
                             type="text" placeholder="Webhook URL or Account ID (optional)"
                             value={cfg.webhook_url || ''}
                             onChange={(e) => updateIntegrationField(int.id, 'webhook_url', e.target.value)}
                             onBlur={() => persistSettings(settings)}
-                            className="w-full px-3 py-2 bg-background border border-[#C9A84C]/20 rounded-lg text-xs text-foreground placeholder:text-[#64748b] focus:outline-none focus:ring-1 focus:ring-[#C9A84C]" />
+                            className="w-full px-3 py-2 bg-background border border-[#C9A84C]/20 rounded-lg text-xs text-foreground placeholder:text-[#a3bfb3] focus:outline-none focus:ring-1 focus:ring-[#C9A84C]" />
                         </div>
                       )}
                     </div>
@@ -354,16 +348,16 @@ const SettingsPage: React.FC = () => {
 const Field: React.FC<{ label: string; value: string; onChange: (v: string) => void; type?: string; disabled?: boolean }> =
   ({ label, value, onChange, type = 'text', disabled }) => (
   <div>
-    <label className="block text-xs font-bold text-[#64748b]/80 uppercase tracking-wider mb-1.5">{label}</label>
+    <label className="block text-xs font-bold text-[#a3bfb3] uppercase tracking-wider mb-1.5">{label}</label>
     <input type={type} value={value} onChange={(e) => onChange(e.target.value)} disabled={disabled}
-      className="w-full px-3 py-2 bg-background border border-[#C9A84C]/20 rounded-lg text-sm text-foreground placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-[#C9A84C] disabled:opacity-60" />
+      className="w-full px-3 py-2 bg-background border border-[#C9A84C]/20 rounded-lg text-sm text-foreground placeholder:text-[#a3bfb3] focus:outline-none focus:ring-2 focus:ring-[#C9A84C] disabled:opacity-60" />
   </div>
 );
 
 const SelectField: React.FC<{ label: string; value: string; options: string[]; onChange: (v: string) => void }> =
   ({ label, value, options, onChange }) => (
   <div>
-    <label className="block text-xs font-bold text-[#64748b]/80 uppercase tracking-wider mb-1.5">{label}</label>
+    <label className="block text-xs font-bold text-[#a3bfb3] uppercase tracking-wider mb-1.5">{label}</label>
     <select value={value} onChange={(e) => onChange(e.target.value)}
       className="w-full px-3 py-2 bg-background border border-[#C9A84C]/20 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-[#C9A84C]">
       {options.map(o => <option key={o} value={o}>{o}</option>)}
@@ -374,7 +368,7 @@ const SelectField: React.FC<{ label: string; value: string; options: string[]; o
 const SelectFieldLabeled: React.FC<{ label: string; value: string; options: { value: string; label: string }[]; onChange: (v: string) => void }> =
   ({ label, value, options, onChange }) => (
   <div>
-    <label className="block text-xs font-bold text-[#64748b]/80 uppercase tracking-wider mb-1.5">{label}</label>
+    <label className="block text-xs font-bold text-[#a3bfb3] uppercase tracking-wider mb-1.5">{label}</label>
     <select value={value} onChange={(e) => onChange(e.target.value)}
       className="w-full px-3 py-2 bg-background border border-[#C9A84C]/20 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-[#C9A84C]">
       {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -395,7 +389,7 @@ const Toggle: React.FC<{ label: string; value: boolean; onChange: (v: boolean) =
 const PrimaryBtn: React.FC<{ onClick: () => void; loading?: boolean; children: React.ReactNode }> =
   ({ onClick, loading, children }) => (
   <button onClick={onClick} disabled={loading}
-    className="mt-4 px-5 py-2.5 bg-gradient-to-r from-[#C9A84C] to-[#B8942E] text-white rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-[#C9A84C]/20 disabled:opacity-50 transition-all flex items-center gap-2">
+    className="mt-4 px-5 py-2.5 bg-gradient-to-r from-[#C9A84C] to-[#B8942E] text-[#022c22] rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-[#C9A84C]/20 disabled:opacity-50 transition-all flex items-center gap-2">
     {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
     {children}
   </button>

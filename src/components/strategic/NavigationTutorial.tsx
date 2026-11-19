@@ -802,7 +802,7 @@ const ElementTooltip: React.FC<{
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-bold text-[#E8C560] truncate">{el.label}</p>
-            <p className="text-[9px] text-[#64748b] uppercase tracking-wider">{el.shortDesc}</p>
+            <p className="text-[9px] text-[#a3bfb3] uppercase tracking-wider">{el.shortDesc}</p>
           </div>
         </div>
 
@@ -824,7 +824,7 @@ const ElementTooltip: React.FC<{
             {el.location}
           </span>
           {el.location === "hero" && (
-            <span className="text-[9px] text-[#64748b]">Call to Action</span>
+            <span className="text-[9px] text-[#a3bfb3]">Call to Action</span>
           )}
         </div>
       </div>
@@ -856,7 +856,7 @@ const MiniNavPreview: React.FC<{
     <div className="hidden lg:flex flex-col gap-3 w-60 flex-shrink-0">
       {/* Mini Topbar */}
       <div className="rounded-lg border border-[#C9A84C]/10 bg-[#011a12]/90 p-2.5 space-y-1.5">
-        <p className="text-[9px] font-bold uppercase tracking-widest text-[#64748b] mb-1.5">Topbar</p>
+        <p className="text-[9px] font-bold uppercase tracking-widest text-[#a3bfb3] mb-1.5">Topbar</p>
         <div className="flex flex-wrap gap-1">
           {topbarItems.slice(0, 6).map(el => {
             const isActive = el.id === activeElementId;
@@ -873,7 +873,7 @@ const MiniNavPreview: React.FC<{
                 )}
                 title={el.label}
               >
-                <Icon className={cn("w-3.5 h-3.5", isActive ? el.textClass : "text-[#64748b]")} />
+                <Icon className={cn("w-3.5 h-3.5", isActive ? el.textClass : "text-[#a3bfb3]")} />
               </button>
             );
           })}
@@ -882,7 +882,7 @@ const MiniNavPreview: React.FC<{
 
       {/* Mini Sidebar */}
       <div className="rounded-lg border border-[#C9A84C]/10 bg-[#011a12]/90 p-2.5 flex-1 space-y-0.5 overflow-y-auto">
-        <p className="text-[9px] font-bold uppercase tracking-widest text-[#64748b] mb-1.5">Sidebar</p>
+        <p className="text-[9px] font-bold uppercase tracking-widest text-[#a3bfb3] mb-1.5">Sidebar</p>
         {sidebarItems.filter(s => s.id !== "sidebar-header").map(el => {
           const isActive = el.id === activeElementId;
           const Icon = el.icon;
@@ -897,8 +897,8 @@ const MiniNavPreview: React.FC<{
                   : "hover:bg-white/5 border border-transparent"
               )}
             >
-              <Icon className={cn("w-3.5 h-3.5 flex-shrink-0", isActive ? el.textClass : "text-[#64748b]")} />
-              <span className={cn("text-[10px] font-medium truncate", isActive ? "text-[#E8C560]" : "text-[#64748b]")}>
+              <Icon className={cn("w-3.5 h-3.5 flex-shrink-0", isActive ? el.textClass : "text-[#a3bfb3]")} />
+              <span className={cn("text-[10px] font-medium truncate", isActive ? "text-[#E8C560]" : "text-[#a3bfb3]")}>
                 {el.label}
               </span>
               {isActive && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-[#C9A84C] animate-pulse" />}
@@ -909,7 +909,7 @@ const MiniNavPreview: React.FC<{
 
       {/* Mini Hero CTAs */}
       <div className="rounded-lg border border-[#C9A84C]/10 bg-[#011a12]/90 p-2.5 space-y-1.5">
-        <p className="text-[9px] font-bold uppercase tracking-widest text-[#64748b] mb-1.5">Hero CTAs</p>
+        <p className="text-[9px] font-bold uppercase tracking-widest text-[#a3bfb3] mb-1.5">Hero CTAs</p>
         {heroItems.map(el => {
           const isActive = el.id === activeElementId;
           const Icon = el.icon;
@@ -924,8 +924,8 @@ const MiniNavPreview: React.FC<{
                   : "hover:bg-white/5 border border-transparent"
               )}
             >
-              <Icon className={cn("w-3.5 h-3.5 flex-shrink-0", isActive ? el.textClass : "text-[#64748b]")} />
-              <span className={cn("text-[10px] font-medium truncate", isActive ? "text-[#E8C560]" : "text-[#64748b]")}>
+              <Icon className={cn("w-3.5 h-3.5 flex-shrink-0", isActive ? el.textClass : "text-[#a3bfb3]")} />
+              <span className={cn("text-[10px] font-medium truncate", isActive ? "text-[#E8C560]" : "text-[#a3bfb3]")}>
                 {el.label}
               </span>
             </button>
@@ -936,7 +936,7 @@ const MiniNavPreview: React.FC<{
       {/* Location indicator */}
       {activeElementId && NAV_CATALOG[activeElementId] && (
         <div className="text-center">
-          <span className="text-[9px] text-[#64748b] uppercase tracking-wider">
+          <span className="text-[9px] text-[#a3bfb3] uppercase tracking-wider">
             {NAV_CATALOG[activeElementId].location} &bull; {NAV_CATALOG[activeElementId].shortDesc}
           </span>
         </div>
@@ -1143,9 +1143,9 @@ const NavigationTutorial: React.FC<NavigationTutorialProps> = ({
                     </span>
                   )}
                   <h2 className="text-lg font-bold text-[#E8C560] leading-tight font-serif">{current.title}</h2>
-                  <p className="text-xs text-[#64748b] mt-0.5">{current.subtitle}</p>
+                  <p className="text-xs text-[#a3bfb3] mt-0.5">{current.subtitle}</p>
                 </div>
-                <div className="flex-shrink-0 text-right pt-0.5 text-xs font-bold text-[#64748b] tabular-nums">
+                <div className="flex-shrink-0 text-right pt-0.5 text-xs font-bold text-[#a3bfb3] tabular-nums">
                   {step + 1} / {totalSteps}
                 </div>
               </div>
@@ -1173,7 +1173,7 @@ const NavigationTutorial: React.FC<NavigationTutorialProps> = ({
                   <catalogEntry.icon className={cn("w-5 h-5 flex-shrink-0", catalogEntry.textClass)} />
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-[#E8C560]">{catalogEntry.label}</p>
-                    <p className="text-[10px] text-[#64748b] uppercase tracking-wider">
+                    <p className="text-[10px] text-[#a3bfb3] uppercase tracking-wider">
                       {catalogEntry.location} navigation &bull; {catalogEntry.shortDesc}
                     </p>
                   </div>
@@ -1212,7 +1212,7 @@ const NavigationTutorial: React.FC<NavigationTutorialProps> = ({
 
               {/* Tips */}
               <div className="rounded-lg p-4 mb-5 space-y-2.5 bg-[#022c22]/60 border border-[#C9A84C]/10">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#64748b]">Key Features</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#a3bfb3]">Key Features</p>
                 {current.tips.map((tip, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style={{ color: current.accentFrom }} />
@@ -1227,14 +1227,14 @@ const NavigationTutorial: React.FC<NavigationTutorialProps> = ({
                   {isFirst ? (
                     <button
                       onClick={handleSkip}
-                      className="text-xs font-medium text-[#64748b] hover:text-[#ecfdf5]/60 transition-colors"
+                      className="text-xs font-medium text-[#a3bfb3] hover:text-[#ecfdf5]/60 transition-colors"
                     >
                       Skip Tour
                     </button>
                   ) : (
                     <button
                       onClick={goPrev}
-                      className="flex items-center gap-1 px-3 py-2 rounded-md text-xs font-semibold text-[#64748b] hover:text-[#E8C560] bg-white/5 hover:bg-[#C9A84C]/10 transition-colors"
+                      className="flex items-center gap-1 px-3 py-2 rounded-md text-xs font-semibold text-[#a3bfb3] hover:text-[#E8C560] bg-white/5 hover:bg-[#C9A84C]/10 transition-colors"
                     >
                       <ChevronLeft className="w-3.5 h-3.5" /> Back
                     </button>
@@ -1287,7 +1287,7 @@ const NavigationTutorial: React.FC<NavigationTutorialProps> = ({
             </div>
 
             {/* ── Footer ── */}
-            <div className="px-6 py-3 bg-black/20 border-t border-[#C9A84C]/10 flex items-center justify-between text-[11px] text-[#64748b]">
+            <div className="px-6 py-3 bg-black/20 border-t border-[#C9A84C]/10 flex items-center justify-between text-[11px] text-[#a3bfb3]">
               <span className="flex items-center gap-1">
                 <BookOpen className="w-3 h-3" /> BIRD Guide
               </span>
