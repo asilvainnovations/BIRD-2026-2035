@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { X, Send, Loader2, ChevronDown, ChevronUp, Brain, Target, BarChart3, Globe2, Leaf, Landmark } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { generateLocalResponse } from '@/lib/localKnowledgeEngine';
+import { ChatText } from './ChatText';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface Msg {
@@ -73,7 +74,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
   const [messages, setMessages] = useState<Msg[]>([{
     role: 'assistant',
     content:
-      "As-salamu alaykum! I'm the BIRD Local Intelligence Engine — your offline-capable strategy consultant for the Bangsamoro Investment Roadmap 2026–2035.\n\nI can help you analyze SWOT data, explain causal loops, identify leverage points, draft strategic options, and interpret BARMM's economic context — all without external AI services.\n\nWhat would you like to explore?",
+      "As-salamu alaykum. I'm the BIRD Local Intelligence Engine. I answer from the BIRD 2026–2035 report and this platform, offline. What would you like to know?",
     timestamp: Date.now(),
   }]);
   const endRef    = useRef<HTMLDivElement>(null);
@@ -243,13 +244,13 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
                     )}
                     <div
                       className={cn(
-                        'max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm whitespace-pre-wrap leading-relaxed',
+                        'max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed',
                         m.role === 'user'
                           ? 'bg-gradient-to-br from-[#C9A84C] to-blue-600 text-[#022c22] rounded-br-sm'
                           : 'bg-muted text-foreground rounded-bl-sm border border-border/40',
                       )}
                     >
-                      {m.content}
+                      {m.role === 'assistant' ? <ChatText text={m.content} /> : <span className="whitespace-pre-wrap">{m.content}</span>}
                     </div>
                   </div>
                 ))}

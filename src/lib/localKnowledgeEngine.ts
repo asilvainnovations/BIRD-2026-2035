@@ -194,7 +194,7 @@ SWOT Diagnosis → Systems Thinking → TOWS Strategy Matrix → Balanced Scorec
 
 **Provincial Growth Disparity:**
 • **Fastest growing:** Maguindanao del Norte (4.1%), Lanao del Sur (4.0%)
-• **Underinvested islands:** Tawi-Tawi (1.1%), Sulu (1.13%), Basilan (1.6%)
+• **Underinvested islands:** Tawi-Tawi (1.1%), Basilan (1.6%)
 
 **Infrastructure Gaps:**
 • Household electrification: ~39–40% in EC areas (target 90% by 2035, 100% by 2040)
@@ -322,8 +322,8 @@ The SWOT module provides a 4-quadrant environmental diagnostic with **BIRD's off
 
 | Index | Quadrant | Formula | Scale |
 |-------|----------|---------|-------|
-| **Relevance Index (RI)** | Strengths | (Impact × Likelihood) / 5 | 1–5 |
-| **Relevance Index (RI)** | Opportunities | √(Impact × Likelihood) | 1–5 |
+| **Resilience Index (RI)** | Strengths | (Impact × Likelihood) / 5 | 1–5 |
+| **Resilience Index (RI)** | Opportunities | √(Impact × Likelihood) | 1–5 |
 | **Risk Index** | Weaknesses | Impact × Likelihood | 1–25 |
 | **Vulnerability Index (VI)** | Threats | (Impact² × Likelihood) / 25 | 1–5 |
 
@@ -882,21 +882,9 @@ Browse pre-built strategic frameworks by category:
     triggers: ['hello', 'hi', 'hey', 'salam', 'as salamu', 'welcome', 'who are you'],
     triggerPhrases: ['hello', 'hi there', 'who are you', 'what can you do'],
     weight: 5,
-    response: `As-salamu alaykum! I'm the **BIRD Local Intelligence Engine** — your offline-capable strategy consultant for the Bangsamoro Investment Roadmap 2026–2035.
+    response: `As-salamu alaykum. I'm the BIRD Local Intelligence Engine. I answer from the BIRD 2026–2035 report and this platform, offline.
 
-I can help you with:
-• **Strategic Analysis** — SWOT scoring, TOWS formulation, BSC design
-• **Systems Thinking** — Causal loops, archetypes, leverage points
-• **BARMM Context** — Economic data, provincial profiles, halal sector insights
-• **Platform Guidance** — How to use every module, export plans, manage teams
-• **Formula Calculations** — Compute RI, Risk, VI instantly
-• **Troubleshooting** — Sync issues, sign-in problems, export failures
-
-What would you like to explore? Try asking about:
-• "What is the BEIE Framework?"
-• "Calculate RI for impact 4, likelihood 3"
-• "Explain the Fixes that Fail archetype"
-• "How do I export my plan to PDF?"`,
+Ask me about the strategy and its targets, BARMM figures, a framework such as BEIE or the systems archetypes, a score such as RI for impact 4 and likelihood 3, or how to use a module.`,
   },
 ];
 
@@ -904,16 +892,7 @@ What would you like to explore? Try asking about:
 // RESPONSE ENGINE
 // ═══════════════════════════════════════════════════════════════════════════════
 
-const FALLBACK_RESPONSE = `I'm not sure I understood that perfectly. Here are some things I can help with:
-
-• Explain the BEIE Framework, 4 Pillars, or 5 Critical Leverage Points
-• Calculate BIRD scores (Resilience Index, Risk, Vulnerability Index)
-• Guide you through SWOT, TOWS, BSC, or PAPs modules
-• Describe Systems Archetypes and Causal Loop Diagrams
-• Share BARMM economic data and provincial profiles
-• Help with platform navigation, export, or troubleshooting
-
-What would you like to know?`;
+const FALLBACK_RESPONSE = `I couldn't match that to the roadmap or the platform. Try naming a topic, such as "phases and budget", "halal certification", "Resilience Index for impact 4, likelihood 3" or "how to export a plan".`;
 
 export function generateLocalResponse(ctx: ResponseContext): string {
   const { query, activeView } = ctx;
@@ -938,22 +917,12 @@ export function generateLocalResponse(ctx: ResponseContext): string {
   const runnerUp = scored[1];
   let response: string;
 
-  if (runnerUp && runnerUp.score > top.score * 0.85 && runnerUp.entry.category !== top.entry.category) {
-    const r1 = typeof top.entry.response === 'function' ? top.entry.response(ctx) : top.entry.response;
-    const r2 = typeof runnerUp.entry.response === 'function' ? runnerUp.entry.response(ctx) : runnerUp.entry.response;
-    response = `${r1}\n\n**Also relevant:**\n${r2}`;
-  } else {
-    response = typeof top.entry.response === 'function' ? top.entry.response(ctx) : top.entry.response;
-  }
+  // One answer per question: no blended "also relevant" block and no plan-context
+  // footer — the panel already shows which plan is open.
+  void runnerUp;
+  response = typeof top.entry.response === 'function' ? top.entry.response(ctx) : top.entry.response;
 
-  // Append plan context if available
-  if (ctx.plan) {
-    const p = ctx.plan;
-    const planCtx = `\n\n—\n*Context: You're working on **${p.name}** (${p.organization}) — ${p.planningPeriodStart?.slice(0,4) || '2026'}–${p.planningPeriodEnd?.slice(0,4) || '2035'}.*`;
-    response += planCtx;
-  }
-
-  return response;
+  return response.trim();
 }
 
 /** Synchronous check to determine if a query is a calculation request */
