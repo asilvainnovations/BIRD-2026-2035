@@ -29,6 +29,7 @@ import { BSCObjective, KPI, StrategicPlan, StrategicOption } from '@/lib/strateg
 import { supabase } from '@/lib/supabase';
 import { cn } from '@/lib/utils';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
+import { ROADMAP_MATH } from '@/data/bird/roadmapMath';
 
 // Edge Function URLs
 const AI_ASSISTANT_URL = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
@@ -112,8 +113,8 @@ const perspectiveConfig = {
 // ─── BIRD 2035 ROADMAP BSC TEMPLATE DATA ─────────────────────────
 const BIRD_BSC_TEMPLATE_OBJECTS: BSCObjective[] = [
   // FINANCIAL PERSPECTIVE
-  { id: 'bird-f1', perspective: 'financial', weight: 1, objective: 'F1: Increase Investment Approvals', description: 'Investment promotion roadshows; BIMP-EAGA missions; investor aftercare services', kpis: [{ id: 'bird-f1-k1', objectiveId: 'bird-f1', name: 'Annual investment approvals', description: '', baselineValue: 5.1, targetValue: 15, currentValue: 5.1, unit: '₱B', frequency: 'annually', owner: 'BBOI', status: 'on-track' }] },
-  { id: 'bird-f2', perspective: 'financial', weight: 1, objective: 'F2: Grow Regional Economy', description: 'BEIE ecosystem synchronization; PPP frameworks; value chain development', kpis: [{ id: 'bird-f2-k1', objectiveId: 'bird-f2', name: 'BARMM GRDP', description: '', baselineValue: 299.5, targetValue: 550, currentValue: 299.5, unit: '₱B', frequency: 'annually', owner: 'BPDA', status: 'on-track' }] },
+  { id: 'bird-f1', perspective: 'financial', weight: 1, objective: 'F1: Increase Investment Approvals', description: 'Investment promotion roadshows; BIMP-EAGA missions; investor aftercare services', kpis: [{ id: 'bird-f1-k1', objectiveId: 'bird-f1', name: 'Annual investment approvals', description: 'Baseline ₱5.0B (2025); current ₱5.1B is January–April 2026.', baselineValue: 5.0, targetValue: 15, currentValue: 5.1, unit: '₱B', frequency: 'annually', owner: 'BBOI', status: 'on-track' }] },
+  { id: 'bird-f2', perspective: 'financial', weight: 1, objective: 'F2: Grow Regional Economy', description: 'BEIE ecosystem synchronization; PPP frameworks; value chain development', kpis: [{ id: 'bird-f2-k1', objectiveId: 'bird-f2', name: 'BARMM GRDP', description: 'PSA five-province series, constant 2018 prices; ₱266.59B in 2025.', baselineValue: 266.59, targetValue: 550, currentValue: 266.59, unit: '₱B', frequency: 'annually', owner: 'BPDA', status: 'on-track' }] },
   { id: 'bird-f3', perspective: 'financial', weight: 1, objective: 'F3: Expand Export Revenue', description: 'UAE halal corridor; BIMP-EAGA trade facilitation; export readiness programs', kpis: [{ id: 'bird-f3-k1', objectiveId: 'bird-f3', name: 'Annual exports from BARMM', description: '', baselineValue: 10, targetValue: 40, currentValue: 10, unit: '₱B', frequency: 'annually', owner: 'MTIT', status: 'on-track' }] },
   { id: 'bird-f4', perspective: 'financial', weight: 1, objective: 'F4: Activate Green Economy Revenue', description: 'REDD+ program registration; JMC No. 2026-01 implementation; carbon market access', kpis: [{ id: 'bird-f4-k1', objectiveId: 'bird-f4', name: 'Carbon credit + PES revenue', description: '', baselineValue: 0, targetValue: 500, currentValue: 0, unit: '₱M', frequency: 'annually', owner: 'MENRE', status: 'on-track' }] },
   { id: 'bird-f5', perspective: 'financial', weight: 1, objective: 'F5: Mobilize Islamic Finance', description: 'Al-Amanah expansion; Islamic finance literacy; fintech integration', kpis: [{ id: 'bird-f5-k1', objectiveId: 'bird-f5', name: 'Islamic banking assets in BARMM', description: '', baselineValue: 2, targetValue: 20, currentValue: 2, unit: '₱B', frequency: 'annually', owner: 'BSP', status: 'on-track' }] },
@@ -123,7 +124,7 @@ const BIRD_BSC_TEMPLATE_OBJECTS: BSCObjective[] = [
   { id: 'bird-s1', perspective: 'stakeholder', weight: 1, objective: 'S1: Enhance Investor Satisfaction', description: 'Aftercare service improvement; investor ombudsman; regulatory stability', kpis: [{ id: 'bird-s1-k1', objectiveId: 'bird-s1', name: 'Investor satisfaction score', description: '', baselineValue: 0, targetValue: 8, currentValue: 0, unit: '/10', frequency: 'annually', owner: 'BBOI', status: 'on-track' }] },
   { id: 'bird-s2', perspective: 'stakeholder', weight: 1, objective: 'S2: Retain Investment Projects', description: 'Problem resolution mechanisms; one-stop shop; regulatory predictability', kpis: [{ id: 'bird-s2-k1', objectiveId: 'bird-s2', name: 'Investment project retention rate', description: '', baselineValue: 0, targetValue: 85, currentValue: 0, unit: '%', frequency: 'annually', owner: 'BBOI', status: 'on-track' }] },
   { id: 'bird-s3', perspective: 'stakeholder', weight: 1, objective: 'S3: Empower MSMEs through Certification', description: 'BHB MSME certification program; BHIDP implementation; capacity building', kpis: [{ id: 'bird-s3-k1', objectiveId: 'bird-s3', name: 'MSMEs with halal certification', description: '', baselineValue: 500, targetValue: 5000, currentValue: 500, unit: 'count', frequency: 'annually', owner: 'BHB', status: 'on-track' }] },
-  { id: 'bird-s4', perspective: 'stakeholder', weight: 1, objective: 'S4: Reduce Poverty through Investment', description: 'Jobs-focused investment facilitation; MSME development; inclusive value chains', kpis: [{ id: 'bird-s4-k1', objectiveId: 'bird-s4', name: 'Poverty incidence (BARMM)', description: '', baselineValue: 34.8, targetValue: 20, currentValue: 34.8, unit: '%', frequency: 'annually', owner: 'PSA', status: 'on-track' }] },
+  { id: 'bird-s4', perspective: 'stakeholder', weight: 1, objective: 'S4: Reduce Poverty through Investment', description: 'Jobs-focused investment facilitation; MSME development; inclusive value chains', kpis: [{ id: 'bird-s4-k1', objectiveId: 'bird-s4', name: 'Poverty incidence (BARMM)', description: 'Families, full-year 2023 (PSA). 34.8% was the first-semester 2023 figure.', baselineValue: 23.5, targetValue: 20, currentValue: 23.5, unit: '%', frequency: 'annually', owner: 'PSA', status: 'on-track' }] },
   { id: 'bird-s5', perspective: 'stakeholder', weight: 1, objective: 'S5: Improve Community Access to Finance', description: 'Islamic microfinance; fintech deployment; CARD expansion; waqf activation', kpis: [{ id: 'bird-s5-k1', objectiveId: 'bird-s5', name: 'Financial inclusion rate (adults)', description: '', baselineValue: 38, targetValue: 70, currentValue: 38, unit: '%', frequency: 'annually', owner: 'BSP', status: 'on-track' }] },
   { id: 'bird-s6', perspective: 'stakeholder', weight: 1, objective: 'S6: Create Quality Employment', description: 'Labor-intensive sector prioritization; skills matching; TESDA alignment', kpis: [{ id: 'bird-s6-k1', objectiveId: 'bird-s6', name: 'BOI-registered firm jobs created', description: '', baselineValue: 2029, targetValue: 20000, currentValue: 2029, unit: 'count', frequency: 'annually', owner: 'BBOI', status: 'on-track' }] },
   { id: 'bird-s7', perspective: 'stakeholder', weight: 1, objective: 'S7: Ensure Provincial Equity', description: 'Affirmative infrastructure investment; provincial facilitation offices', kpis: [{ id: 'bird-s7-k1', objectiveId: 'bird-s7', name: 'Inter-provincial growth disparity', description: '', baselineValue: 3.9, targetValue: 1.5, currentValue: 3.9, unit: 'pp', frequency: 'annually', owner: 'BPDA', status: 'on-track' }] },
@@ -142,7 +143,7 @@ const BIRD_BSC_TEMPLATE_OBJECTS: BSCObjective[] = [
   { id: 'bird-l2', perspective: 'learning_growth', weight: 1, objective: 'L2: Develop Islamic Finance Professionals', description: 'BSP-aligned scholarship program; professional certification; IsDB training', kpis: [{ id: 'bird-l2-k1', objectiveId: 'bird-l2', name: 'Islamic finance professionals in BARMM', description: '', baselineValue: 20, targetValue: 50, currentValue: 20, unit: 'count', frequency: 'annually', owner: 'BSP', status: 'on-track' }] },
   { id: 'bird-l3', perspective: 'learning_growth', weight: 1, objective: 'L3: Strengthen IPA Capacity', description: 'Capacity building programs; BBOI-MTIT HRD plan; performance incentives', kpis: [{ id: 'bird-l3-k1', objectiveId: 'bird-l3', name: 'IPA staff with certification/training', description: '', baselineValue: 50, targetValue: 80, currentValue: 50, unit: '%', frequency: 'annually', owner: 'BBOI', status: 'on-track' }] },
   { id: 'bird-l4', perspective: 'learning_growth', weight: 1, objective: 'L4: Foster Digital Innovation', description: 'BEGMP implementation; DICT partnership; innovation labs', kpis: [{ id: 'bird-l4-k1', objectiveId: 'bird-l4', name: 'Digital services launched (BEGMP)', description: '', baselineValue: 5, targetValue: 20, currentValue: 5, unit: 'count', frequency: 'quarterly', owner: 'MICT', status: 'on-track' }] },
-  { id: 'bird-l5', perspective: 'learning_growth', weight: 1, objective: 'L5: Improve Functional Literacy', description: 'TESDA programs; DepEd alternative learning; adult literacy campaigns', kpis: [{ id: 'bird-l5-k1', objectiveId: 'bird-l5', name: 'BARMM functional literacy rate', description: '', baselineValue: 59.3, targetValue: 75, currentValue: 59.3, unit: '%', frequency: 'annually', owner: 'DepEd', status: 'on-track' }] },
+  { id: 'bird-l5', perspective: 'learning_growth', weight: 1, objective: 'L5: Improve Functional Literacy', description: 'TESDA programs; DepEd alternative learning; adult literacy campaigns', kpis: [{ id: 'bird-l5-k1', objectiveId: 'bird-l5', name: 'BARMM functional literacy rate', description: 'Ages 10–64, PSA 2024 FLEMMS.', baselineValue: 64.7, targetValue: 75, currentValue: 64.7, unit: '%', frequency: 'annually', owner: 'DepEd', status: 'on-track' }] },
   { id: 'bird-l6', perspective: 'learning_growth', weight: 1, objective: 'L6: Develop Green Economy Expertise', description: 'MENRE-DILG training program; JMC implementation; carbon accounting', kpis: [{ id: 'bird-l6-k1', objectiveId: 'bird-l6', name: 'LGU staff trained on carbon/PES', description: '', baselineValue: 0, targetValue: 200, currentValue: 0, unit: 'count', frequency: 'annually', owner: 'MENRE', status: 'on-track' }] },
   { id: 'bird-l7', perspective: 'learning_growth', weight: 1, objective: 'L7: Align TESDA with Industry', description: 'TESDA-industry councils; skills forecasting; curriculum development', kpis: [{ id: 'bird-l7-k1', objectiveId: 'bird-l7', name: 'Training regulations developed', description: '', baselineValue: 0, targetValue: 15, currentValue: 0, unit: 'TRs', frequency: 'annually', owner: 'TESDA', status: 'on-track' }] },
 ];
@@ -158,14 +159,16 @@ const BIRD_BSC_TEMPLATE_OBJECTS: BSCObjective[] = [
    THE CASCADE IS CAUSAL, NOT DECORATIVE. Learning & Growth → Internal Process
    → Stakeholder → Financial. Financial outcomes are LAGGING indicators of
    capability built two tiers earlier, which is why they land in Phase 3 and
-   why nothing done in 2033–35 can rescue a Phase-1 capability failure.
+   why nothing done in 2032–35 can rescue a Phase-1 capability failure.
 
-   THE FEASIBILITY QUESTION. GRDP must move ₱299.5B (2024) → ₱550B (2035):
-   5.68% CAGR against a 2.70% run-rate, a 2.98pp gap. At trend BARMM lands at
-   ₱401.5B — a ₱148.5B shortfall. ΔGRDP ₱250.5B against a ₱140B public envelope
-   implies an ICOR of 0.56, versus a 3.0–5.0 developing-economy benchmark. Public
-   capital is a CATALYST, not the driver: the scorecard only closes if approvals
-   compound at 10.30% CAGR and crowd in ~5.3x public spend.
+   THE FEASIBILITY QUESTION (data/bird/roadmapMath.ts). On the five-province
+   basis adopted in report Table 7.6, GRDP must move ₱266.59B (2025) → ₱550B
+   (2035): ~7.5% a year against 5.0% growth in 2025. At that rate BARMM lands at
+   ~₱434B — a ~₱116B shortfall. ΔGRDP ~₱283B against a ₱140B public envelope
+   implies a public-capital ICOR of ~0.49, against the 3.5–4.0 the report
+   assumes. Public capital is a CATALYST, not the driver: the scorecard only
+   closes if approvals compound at ~11.6% a year and private capital is crowded
+   in at roughly 6x public spend.
 
    Survey evidence: n=76, 3–20 August 2026. Non-probability convenience sample.
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -201,21 +204,15 @@ const KPI_IMPORTANCE = [
   { label: 'Resilience KPIs',       value: 4.23, n: 66 },
 ] as const;
 
-/** The arithmetic the scorecard has to satisfy. */
-const SCORECARD_MATH = {
-  grdpBase: 299.5, grdpTarget: 550, requiredCAGR: 5.68, runRate: 2.70,
-  trendLanding: 401.5, shortfall: 148.5, publicEnvelope: 140,
-  impliedICOR: 0.56, blendedICOR: 0.98, benchmarkICOR: '3.0–5.0',
-  crowdInMultiple: 5.3, approvalsCAGR: 10.30,
-  executionRate: 80, absorptionLeakage: 28,
-} as const;
+/** The arithmetic the scorecard has to satisfy (shared with the Activity Timeline). */
+const SCORECARD_MATH = ROADMAP_MATH;
 
 /** Phase in which each perspective's outcomes are expected to land. */
 const CASCADE_PHASING: Record<string, string> = {
   learning_growth: 'Phase 1 · 2026–2028',
-  internal_process: 'Phase 1–2 · 2026–2032',
+  internal_process: 'Phase 1–2 · 2026–2031',
   stakeholder: 'Phase 2–3 · 2029–2035',
-  financial: 'Phase 3 · 2033–2035',
+  financial: 'Phase 3 · 2032–2035',
 };
 
 const BSC_SURVEY_FRAME = {
@@ -1034,9 +1031,9 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
             {/* The feasibility arithmetic the scorecard must satisfy */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {[
-                { v: `${SCORECARD_MATH.requiredCAGR}%`, l: 'Required GRDP CAGR', s: `vs ${SCORECARD_MATH.runRate}% run-rate`, c: 'text-red-400' },
-                { v: `₱${SCORECARD_MATH.shortfall}B`, l: 'Shortfall at trend', s: `lands ₱${SCORECARD_MATH.trendLanding}B of ₱${SCORECARD_MATH.grdpTarget}B`, c: 'text-amber-400' },
-                { v: `${SCORECARD_MATH.impliedICOR}`, l: 'Implied ICOR', s: `benchmark ${SCORECARD_MATH.benchmarkICOR}`, c: 'text-red-400' },
+                { v: `${SCORECARD_MATH.requiredCAGR}%`, l: 'Required GRDP CAGR', s: `vs ${SCORECARD_MATH.runRate}% growth in ${SCORECARD_MATH.grdpBaseYear}`, c: 'text-red-400' },
+                { v: `₱${SCORECARD_MATH.shortfallAtTrend}B`, l: 'Shortfall at trend', s: `lands ₱${SCORECARD_MATH.trendLanding}B of ₱${SCORECARD_MATH.grdpTarget}B`, c: 'text-amber-400' },
+                { v: `${SCORECARD_MATH.impliedICOR}`, l: 'Public-capital ICOR', s: `report assumes ${SCORECARD_MATH.reportICOR}`, c: 'text-red-400' },
                 { v: `${SCORECARD_MATH.crowdInMultiple}x`, l: 'Required crowd-in', s: 'private : public capital', c: 'text-[#C9A84C]' },
               ].map(m => (
                 <div key={m.l} className="rounded-lg border border-[#C9A84C]/20 bg-white/[0.02] p-3">
@@ -1110,8 +1107,8 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
               <p className="text-[0.72rem] text-amber-300 leading-relaxed">
                 <strong>The gap worth naming.</strong> Stakeholders endorse the <em>framework</em> (4.16) more readily
                 than the <em>targets</em>: vision achievability scores 3.93, the lowest item in the section. That is
-                consistent with the arithmetic — a 5.68% required CAGR against a 2.70% run-rate, and an implied ICOR of{' '}
-                {SCORECARD_MATH.impliedICOR} against a {SCORECARD_MATH.benchmarkICOR} benchmark. The scepticism is
+                consistent with the arithmetic — a {SCORECARD_MATH.requiredCAGR}% required growth rate against {SCORECARD_MATH.runRate}% in{' '}
+                {SCORECARD_MATH.grdpBaseYear}, and a public-capital ICOR of {SCORECARD_MATH.impliedICOR} against the {SCORECARD_MATH.reportICOR} the report assumes. The scepticism is
                 well-founded, and the honest resolution is either a restated GRDP target or an explicit private-capital
                 mobilisation strategy carrying {SCORECARD_MATH.crowdInMultiple}x public spend.
               </p>

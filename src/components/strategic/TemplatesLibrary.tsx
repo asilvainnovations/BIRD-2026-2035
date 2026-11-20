@@ -66,8 +66,8 @@ const ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
 // Phase configuration for roadmap templates
 const ROADMAP_PHASES = [
   { id: 'foundation', label: 'Foundation Building', years: '2026-2028', color: 'bg-[#059669]' },
-  { id: 'acceleration', label: 'Acceleration', years: '2029-2032', color: 'bg-[#C9A84C]' },
-  { id: 'consolidation', label: 'Consolidation', years: '2033-2035', color: 'bg-violet-500' },
+  { id: 'acceleration', label: 'Acceleration', years: '2029-2031', color: 'bg-[#C9A84C]' },
+  { id: 'consolidation', label: 'Consolidation', years: '2032-2035', color: 'bg-violet-500' },
 ];
 
 interface TemplatesLibraryProps {

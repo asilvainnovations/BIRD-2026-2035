@@ -101,7 +101,7 @@ const BARMM_REGIONAL_CONTEXT: BARMMContext = {
     'Tawi-Tawi',
     'Special Geographic Area (SGA)',
   ],
-  investmentApprovals: '₱5.1B (Q1 2026)',
+  investmentApprovals: '₱5.1B (Jan–Apr 2026)',
   topGrowthProvince: 'Maguindanao del Norte (4.1%, 2024)',
   halalMarketSize: 'USD 2.3 trillion (global halal market)',
   bimpEagaRole: 'Philippines\' gateway to BIMP-EAGA growth corridor',

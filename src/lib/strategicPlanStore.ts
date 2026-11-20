@@ -517,8 +517,8 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
     createItem({ id: generateId(), category: 'strength' as const, description: 'Expanding domestic halal consumer base — 5.69M Muslim population (PSA 2025) with specific Shariah-compliant consumption requirements creates a built-in market foundation.', impactScore: 4, likelihoodScore: 4, aiGenerated: false, leveragePoint: 'LP1' as LeveragePoint, beieCluster: 'transformers' as BEIECluster }),
     // WEAKNESSES
     createItem({ id: generateId(), category: 'weakness' as const, description: 'Weak halal certification system — Bangsamoro Halal Board lacks OIC/SMIIC international accreditation, limiting global market access. Processing time: 45–60 days (target: ≤21 days by 2035).', impactScore: 5, likelihoodScore: 4, aiGenerated: false, leveragePoint: 'LP1' as LeveragePoint, beieCluster: 'transformers' as BEIECluster }),
-    createItem({ id: generateId(), category: 'weakness' as const, description: 'Infrastructure deficit: ~75% electrification (target 100% by 2035); <30% broadband coverage (target 85% by 2035); inadequate farm-to-market roads constraining agri-processing.', impactScore: 5, likelihoodScore: 5, aiGenerated: false, leveragePoint: 'LP2' as LeveragePoint, beieCluster: 'enablers' as BEIECluster }),
-    createItem({ id: generateId(), category: 'weakness' as const, description: 'Low functional literacy: 59.3% (PSA FLEMMS 2024) — significantly below national average — limiting skilled workforce supply for modern agri-industrial investment.', impactScore: 4, likelihoodScore: 5, aiGenerated: false, leveragePoint: 'LP2' as LeveragePoint, beieCluster: 'enablers' as BEIECluster }),
+    createItem({ id: generateId(), category: 'weakness' as const, description: 'Infrastructure deficit: ~39–40% household electrification in EC areas (target 90% by 2035, 100% by 2040); <30% broadband coverage (target 85% by 2035); inadequate farm-to-market roads constraining agri-processing.', impactScore: 5, likelihoodScore: 5, aiGenerated: false, leveragePoint: 'LP2' as LeveragePoint, beieCluster: 'enablers' as BEIECluster }),
+    createItem({ id: generateId(), category: 'weakness' as const, description: 'Low functional literacy: 64.7% (PSA FLEMMS 2024) against 70.8% nationally; basic literacy (81.0%) is the lowest of any region — limiting skilled workforce supply for modern agri-industrial investment.', impactScore: 4, likelihoodScore: 5, aiGenerated: false, leveragePoint: 'LP2' as LeveragePoint, beieCluster: 'enablers' as BEIECluster }),
     createItem({ id: generateId(), category: 'weakness' as const, description: 'Fragmented inter-agency coordination — 15 ministries operating in silos slow investment facilitation; absence of a single investment command center compounds BICC gap.', impactScore: 4, likelihoodScore: 4, aiGenerated: false, leveragePoint: 'LP3' as LeveragePoint, beieCluster: 'cross-cutting' as BEIECluster }),
     createItem({ id: generateId(), category: 'weakness' as const, description: 'Post-harvest losses of 20–40% across AFF sector — cold chain gaps, limited storage, and inadequate processing facilities suppress value creation in the Foundations cluster.', impactScore: 4, likelihoodScore: 5, aiGenerated: false, leveragePoint: 'LP2' as LeveragePoint, beieCluster: 'foundations' as BEIECluster }),
     // OPPORTUNITIES
@@ -563,13 +563,13 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
   plan.objectives = [
     {
       id: obj1Id, perspective: 'financial', weight: 1.5,
-      objective: 'Grow BARMM GRDP to ₱400B by 2030 and ₱550B+ by 2035',
-      description: 'Accelerate GRDP growth from 2.7% (2024) toward PDP 5–6% target through investment-led expansion across all BEIE clusters.',
+      objective: 'Grow BARMM GRDP to ₱440B by 2030 and ₱550B+ by 2035',
+      description: 'Sustain GRDP growth of about 7.5% a year from ₱266.59B (2025, five-province series; 5.0% growth in 2025) through investment-led expansion across all BEIE clusters.',
       bscCode: 'F2', leveragePoint: 'LP1', beieCluster: 'transformers', birdPhase: '1',
       createdBy: userId, createdByName: userName, createdAt: now, champion: userId, championName: userName,
       kpis: [{
         id: generateId(), objectiveId: obj1Id, name: 'BARMM GRDP', description: 'Annual Gross Regional Domestic Product at current prices',
-        unit: '₱B', baselineValue: 299.5, targetValue: 550, target2030: 400, currentValue: 299.5,
+        unit: '₱B', baselineValue: 266.59, targetValue: 550, target2030: 440, currentValue: 266.59,
         frequency: 'annually', owner: userId, ownerName: userName, status: 'on-track', leveragePoint: 'LP1',
         benchmarkSource: 'PSA-RSSO BARMM / NEDA PDP 2023-2028',
       }],
@@ -577,14 +577,14 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
     {
       id: obj2Id, perspective: 'financial', weight: 1.5,
       objective: 'Increase investment approvals to ₱8B p.a. (2030) and ₱15B p.a. (2035)',
-      description: 'Grow both FDI and domestic investment approvals from ₱5.1B (Q1 2026) through BBOI facilitation, halal park development, and BIMP-EAGA corridors.',
+      description: 'Grow both FDI and domestic investment approvals from ₱5.0B (2025; ₱5.1B in January–April 2026) through BBOI facilitation, halal park development, and BIMP-EAGA corridors.',
       bscCode: 'F1', leveragePoint: 'LP1', beieCluster: 'connectors', birdPhase: '1',
       createdBy: userId, createdByName: userName, createdAt: now, champion: userId, championName: userName,
       kpis: [{
         id: generateId(), objectiveId: obj2Id, name: 'Annual Investment Approvals', description: 'Total BBOI-approved investment value',
         unit: '₱B', baselineValue: 5.1, targetValue: 15, target2030: 8, currentValue: 5.1,
         frequency: 'quarterly', owner: userId, ownerName: userName, status: 'on-track', leveragePoint: 'LP1',
-        benchmarkSource: 'BBOI / BEZA Investment Reports (Q1 2026)',
+        benchmarkSource: 'BBOI / BEZA Investment Reports (January–April 2026)',
       }],
     },
     {
@@ -603,12 +603,12 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
     {
       id: obj4Id, perspective: 'stakeholder', weight: 1.5,
       objective: 'Reduce poverty incidence below 25% by 2030 and 20% by 2035',
-      description: 'Continue downward trajectory from 55.9% (2018) → 34.8% (2023) → <25% (2030) through investment-led job creation, MSME support, and inclusive PAPs.',
+      description: 'Continue downward trajectory from 52.9% (2018) → 23.5% (full-year 2023, families) → <20% (2035); the <25% 2030 target is already met and should be recalibrated through investment-led job creation, MSME support, and inclusive PAPs.',
       bscCode: 'S1', leveragePoint: 'LP1', beieCluster: 'cross-cutting', birdPhase: '1',
       createdBy: userId, createdByName: userName, createdAt: now, champion: userId, championName: userName,
       kpis: [{
         id: generateId(), objectiveId: obj4Id, name: 'Poverty Incidence Rate', description: 'BARMM poverty incidence (PSA Family Income and Expenditure Survey)',
-        unit: '%', baselineValue: 34.8, targetValue: 20, target2030: 25, currentValue: 34.8,
+        unit: '%', baselineValue: 23.5, targetValue: 20, target2030: 22, currentValue: 23.5,
         frequency: 'annually', owner: userId, ownerName: userName, status: 'at-risk', leveragePoint: 'LP1',
         benchmarkSource: 'PSA 1H 2023 / BDP 2023-2028',
       }],

@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // BIRD 2026–2035 · Implementation Roadmap Phases
 // Single source of truth for Panel E (Phase Progress Tracker).
-// Source: BIRD 2026–2035 Chapter 7 — Implementation Architecture
+// Source: BIRD 2026–2035 Chapter 3 (Table 3-14) and Chapter 6 (6.3) — phases 2026–2028 / 2029–2031 / 2032–2035
 // Total budget: ₱120–160B across three phased implementation windows.
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -62,14 +62,14 @@ export const PHASES: PhaseTracker[] = [
       { text: 'Bangsamoro Forestry Code enacted & JMC 2026-01 signed — Q2 2026', status: 'active' },
       { text: '1-day digital business registration via BBOI (BEGMP) — Q3 2026',  status: 'pending' },
       { text: 'Bangsamoro Halal Park groundbreaking, Matanog — Q4 2026',         status: 'pending' },
-      { text: 'ZBIP construction commenced; 80% electrification — 2028',          status: 'pending' },
+      { text: 'ZBIP construction commenced; one electrification metric adopted — 2028', status: 'pending' },
       { text: 'Bangsamoro Investment Command Center (BICC) established — Q3 2026', status: 'pending' },
     ],
   },
   {
     num: '02',
     title: 'Acceleration',
-    years: '2029 – 2032',
+    years: '2029 – 2031',
     budget: '₱50–65B',
     budgetMin:  50_000_000_000,
     budgetMax:  65_000_000_000,
@@ -81,15 +81,15 @@ export const PHASES: PhaseTracker[] = [
     milestones: [
       { text: 'Bangsamoro Halal Park Phase 1 operationalised with anchor tenants', status: 'pending' },
       { text: 'REDD+ registered; PES payments activated to LGUs/communities',       status: 'pending' },
-      { text: 'Islamic banking expanded to all 7 provincial capitals',               status: 'pending' },
+      { text: 'Islamic banking expanded to all five provincial capitals',               status: 'pending' },
       { text: 'Cold chain & logistics hubs deployed; OIC full recognition achieved', status: 'pending' },
-      { text: 'TVET-industry alignment scaled; 70% literacy achieved',               status: 'pending' },
+      { text: 'TVET-industry alignment scaled; functional literacy 72% (2030 checkpoint)',               status: 'pending' },
     ],
   },
   {
     num: '03',
     title: 'Consolidation & Global Integration',
-    years: '2033 – 2035',
+    years: '2032 – 2035',
     budget: '₱35–50B',
     budgetMin:  35_000_000_000,
     budgetMax:  50_000_000_000,
@@ -103,7 +103,7 @@ export const PHASES: PhaseTracker[] = [
       { text: '₱500M+ annual green revenue (carbon credits + PES)',                    status: 'pending' },
       { text: 'Full BIMP-EAGA integration; ZBIP fully operational',                    status: 'pending' },
       { text: 'GRDP reaches ₱550B+; poverty incidence <20%',                          status: 'pending' },
-      { text: '100% electrification & 85% broadband across BARMM',                    status: 'pending' },
+      { text: '90% household electrification (100% by 2040) & 85% broadband',      status: 'pending' },
     ],
   },
 ];

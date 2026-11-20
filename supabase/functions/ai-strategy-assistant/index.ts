@@ -102,10 +102,10 @@ Published by: Bureau of Investments – Ministry of Trade, Investments and Touri
 
 ▌REGIONAL PROFILE (Verified Data)
 • Population: 5.69M (PSA, 2025)
-• GRDP: ₱299.5B (2024); Growth: 2.7% (2024) vs 4.0% (2022-2023)
+• GRDP: ₱266.59B (2025, PSA five-province series); growth 5.0% (2025). ₱299.5B (2024) predates Sulu's exclusion
 • Sectoral shares: Services 42.0% | AFF 32.4% | Industry 25.6% (MFBM, 2025)
-• Poverty incidence: 34.8% (1H 2023), down from 55.9% in 2018 — a 21.1pp improvement
-• Investment approvals: ₱5.1B (Q1 2026) — structural improvement, BBOI 2026
+• Poverty incidence (families): 23.5% (full-year 2023), down from 52.9% in 2018; 34.8% was first-semester 2023
+• Investment approvals: ₱5.0B (2025); ₱5.1B in January–April 2026 (BBOI)
 • Provinces: Lanao del Sur, Maguindanao del Norte, Maguindanao del Sur, Basilan,
   Sulu, Tawi-Tawi, Special Geographic Area (SGA)
 
@@ -127,7 +127,7 @@ Organizes BARMM into 5 interconnected investment clusters:
    - Market: Global halal market = USD 2.3 trillion
 3. ENABLERS: Infrastructure, Social Services & Protection, Health
    - Key: BEGMP (1-day digital registration), ZBIP, TESDA alignment
-   - Gap: 25-30% no electricity; <30% broadband; 59.3% functional literacy
+   - Gap: ~39–40% household electrification (EC areas); <30% broadband; 64.7% functional literacy
 4. CONNECTORS: Tourism, Digital Connectivity, Trade, BIMP-EAGA
    - Key: UAE/GCC halal corridor; BIMP-EAGA EGL Sub-Committee Plan 2025-2028
 5. FINANCIERS: Islamic Banking, Waqf, Takaful, Microfinance
@@ -150,12 +150,12 @@ LP5 — Green Economy Activation [High]: JMC 2026-01 (Carbon Credits + PES),
 ▌BALANCED SCORECARD (Chapter 5, BIRD 2026-2035)
 Financial Perspective:
   F1: Investment approvals ₱5.1B → ₱8B (2030) → ₱15B p.a. (2035)
-  F2: GRDP ₱299.5B → ₱400B (2030) → ₱550B+ (2035)
+  F2: GRDP ₱266.59B (2025) → ₱440B (2030) → ₱550B+ (2035), ~7.5% a year
   F3: Export value <₱10B → ₱20B (2030) → ₱40B+ (2035)
   F4: Green revenue ₱0 → ₱100M p.a. (2030) → ₱500M p.a. (2035)
   F5: Islamic banking assets <₱2B → ₱8B (2030) → ₱20B+ (2035)
 Stakeholder Perspective:
-  S1: Poverty incidence 34.8% → <25% (2030) → <20% (2035)
+  S1: Poverty incidence 23.5% (full-year 2023) → <20% (2035); 2030 milestone to be recalibrated
   S2: Investor satisfaction → 7.0/10 (2030) → 8.0+/10 (2035)
   S3: Jobs created → 10,000+ (2030) → 20,000+ cumulative (2035)
 Internal Process Perspective:
@@ -163,10 +163,10 @@ Internal Process Perspective:
   IP2: BHB accreditation status → OIC/SMIIC aligned (2030) → MRA signed (2035)
   IP3: Halal certification time 45-60 days → 30 days → ≤21 days (2035)
   IP4: Business registration → 2 days → 1 day digital (2035)
-  IP5: Electrification ~75% → 90% → 100% (2035)
+  IP5: Household electrification ~39–40% → 90% (2035) → 100% (2040)
   IP6: Broadband <30% → 60% → 85% (2035)
 Learning & Growth Perspective:
-  LG1: Literacy 59.3% → 72% → 75%+ (2035)
+  LG1: Functional literacy 64.7% → 72% (2030) → 75%+ (2035)
   LG2: BHB halal officers minimal → 50 (2026) → 100+ (2035)
   LG3: Renewable energy 75.86% → 82% → 85%+ (2035)
   LG4: MSME share of GRDP ~36% → 38% → 40% (2035)
@@ -178,12 +178,12 @@ Phase 1 — Foundation Building (2026-2028): ₱35-45B
   • 1-day digital business registration (BEGMP)
   • Bangsamoro Halal Park groundbreaking, Matanog
   • ZBIP construction commenced; BICC established
-Phase 2 — Acceleration (2029-2032): ₱50-65B
+Phase 2 — Acceleration (2029-2031): ₱50-65B
   • Halal Park Phase 1 operational; OIC full recognition
   • REDD+ registered; PES payments activated
   • Islamic banking in all 7 provincial capitals
   • Cold chain/logistics hubs deployed; 70% literacy
-Phase 3 — Consolidation & Global Integration (2033-2035): ₱35-50B
+Phase 3 — Consolidation & Global Integration (2032-2035): ₱35-50B
   • SMIIC Mutual Recognition Arrangement (MRA) secured
   • ₱500M+ annual green revenue (carbon + PES)
   • Full BIMP-EAGA integration; ZBIP fully operational

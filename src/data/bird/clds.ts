@@ -198,7 +198,7 @@ export const SYSTEMS_ARCHETYPES: SystemsArchetype[] = [
     id: 'A4',
     name: 'Growth & Underinvestment',
     pattern: 'Growth approaches a limit that could be alleviated if capacity investments keep pace, but delayed capacity investment allows performance to degrade.',
-    birdContext: 'Investment approvals surge to ₱5.1B (Q1 2026) while infrastructure bottlenecks intensify: 25–30% energy gap, <30% broadband, 59.3% literacy, 45–60 day halal certification. Without phased capacity building, growth plateaus as investor ROI erodes.',
+    birdContext: 'Investment approvals surge to ₱5.1B (Jan–Apr 2026) while infrastructure bottlenecks intensify: ~39–40% household electrification, <30% broadband, 64.7% functional literacy, 45–60 day halal certification. Without phased capacity building, growth plateaus as investor ROI erodes.',
     intervention: 'Fast-track ZBIP, BSEMP, and BEGMP deployments. Link 50% of BARMM block grants to infrastructure/human capital KPI achievement. Build 20% reserve capacity in energy and digital systems.',
     leveragePoint: 'LP2',
     impact: 'high',

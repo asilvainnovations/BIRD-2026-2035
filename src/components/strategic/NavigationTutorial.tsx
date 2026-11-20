@@ -332,7 +332,7 @@ const NAV_CATALOG: Record<string, NavElement> = {
     id: "hero-cta-roadmap",
     label: "Implementation Roadmap",
     location: "hero",
-    description: "3-phase \u20b1120-160B investment pathway to 2035. Track Foundation (2026\u20132028), Acceleration (2029\u20132031), and Transformation (2032\u20132035) milestones.",
+    description: "3-phase \u20b1120-160B investment pathway to 2035. Track Foundation (2026\u20132028), Acceleration (2029\u20132031), and Consolidation and Global Integration (2032\u20132035) milestones.",
     shortDesc: "View Phases",
     icon: Compass,
     highlightColor: "amber",

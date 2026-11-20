@@ -417,8 +417,9 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
 
     content += `STRATEGIC OPTION VALIDATION\n`;
     content += `  Stakeholders independently reproduced the consultant rank order:\n`;
-    content += `  IEDS > HEDS > IFES > GEMS. IEDS scored 7.39/10 among the 29\n`;
-    content += `  differentiating respondents, against 8.93/10 in the expert matrix -\n`;
+    content += `  IEDS > HEDS > IFES > GEMS. IEDS scored 6.57/10 among the 50\n`;
+    content += `  respondents who moved a slider (6.05 across all 75), against 8.83/10\n`;
+    content += `  in the analytical matrix (Report Tables 3-9, 3-11) -\n`;
     content += `  same ranking, lower conviction. Endorsement: 44 yes, 20 partial,\n`;
     content += `  1 needs more evidence.\n\n`;
 
