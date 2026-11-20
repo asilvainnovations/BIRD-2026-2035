@@ -88,7 +88,7 @@ export interface BARMMContext {
 }
 
 const BARMM_REGIONAL_CONTEXT: BARMMContext = {
-  population: '5.69M (PSA 2025)',
+  population: '4.54M (five provinces, excl. Sulu; PSA)',
   grdp: '₱299.5B (2024)',
   grdpGrowth: '2.7% (2024)',
   povertyIncidence: '34.8% (1H 2023)',

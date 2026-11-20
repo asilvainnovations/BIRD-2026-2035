@@ -1,4 +1,4 @@
-// ─── BIRD 2026-2035 — AI STRATEGY ASSISTANT EDGE FUNCTION v2.1 ───────────────
+// ─── BIRD 2026-2035 — AI STRATEGY ASSISTANT EDGE FUNCTION v2.2 (2026-11-21: CORS for the BIRD platform; figures aligned with the finalised report) ───────────────
 // Domain-expert AI for the Bangsamoro Investment Roadmap Development (BIRD)
 // 2026-2035 — investment, strategic thinking, systems thinking, BARMM context.
 // Deployed on: rgvteytgkugdqdodedxq.databasepad.com (Supabase Edge Runtime)
@@ -13,14 +13,23 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 // computed per-request inside the handler below so it can check the actual
 // requesting origin.
 const ALLOWED_ORIGINS = [
+  // Local development
   'http://localhost:5173', 'http://localhost:8080',
-  'https://bird-validation-survey.bolt.host', 'https://asilvainnovations.com',
+  // BIRD Strategic Planning Platform (Netlify site "bird2035") and static pages
+  'https://bird-boi.mtit-barmm.com', 'https://bird2035.netlify.app',
+  'https://asilvainnovations.github.io', 'https://asilvainnovations.com',
+  // BIRD Validation Survey
+  'https://bird-validation-survey.bolt.host', 'https://bird-validation-survey.netlify.app',
 ];
+// Netlify deploy previews / branch deploys: https://<id>--<site>.netlify.app
+const PREVIEW_SUFFIXES = ['--bird2035.netlify.app', '--bird-validation-survey.netlify.app'];
 function isAllowedOrigin(origin: string | null): boolean {
   if (!origin) return false;
   if (ALLOWED_ORIGINS.includes(origin)) return true;
   try {
-    return new URL(origin).hostname.endsWith('.webcontainer-api.io');
+    const { protocol, hostname } = new URL(origin);
+    if (protocol !== 'https:') return false;
+    return PREVIEW_SUFFIXES.some((s) => hostname.endsWith(s)) || hostname.endsWith('.webcontainer-api.io');
   } catch {
     return false;
   }
@@ -41,6 +50,20 @@ const SUPABASE_DATA_URL = 'https://lydsisparsmvextskevw.supabase.co';
 const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 const supabase = createClient(SUPABASE_DATA_URL, supabaseServiceKey);
 
+// ─── Rate limiting ────────────────────────────────────────────────────────────
+// Proxies a PAID Anthropic API call on every request and is invoked from
+// browser code with the public anon key. Backed by ai_assistant_rate_limit_log
+// (migration 20260802000000) because Edge Functions are stateless.
+const RATE_LIMIT_MAX_CALLS = 20;
+const RATE_LIMIT_WINDOW_MINUTES = 30;
+const IP_HASH_SALT = Deno.env.get('IP_HASH_SALT') ?? 'bird-2026-2035-fallback-salt';
+
+async function hashIp(ip: string): Promise<string> {
+  const data = new TextEncoder().encode(`${IP_HASH_SALT}:${ip}`);
+  const digest = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
 // ─── Anthropic Configuration ──────────────────────────────────────────────────
 // Migrated from OpenAI 2026-08-01 (OpenAI account hit insufficient_quota).
 // Env var name in Supabase secrets dashboard: ANTHROPIC_API_KEY
@@ -50,7 +73,7 @@ const DEFAULT_MODEL = 'claude-sonnet-5';
 
 // ─── Platform Constants ───────────────────────────────────────────────────────
 const PLATFORM_NAME = 'BIRD 2026-2035';
-const PLATFORM_LOGO = 'https://rgvteytgkugdqdodedxq.databasepad.com/storage/v1/object/public/bird-images/public/MTIT%20Logo.webp';
+const PLATFORM_LOGO = 'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/MTIT%20Logo.png';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 async function fetchPlanFromDB(planId: string) {
@@ -101,20 +124,21 @@ Published by: Bureau of Investments – Ministry of Trade, Investments and Touri
 ══════════════════════════════════════════════════════════════════════════════
 
 ▌REGIONAL PROFILE (Verified Data)
-• Population: 5.69M (PSA, 2025)
-• GRDP: ₱266.59B (2025, PSA five-province series); growth 5.0% (2025). ₱299.5B (2024) predates Sulu's exclusion
+• Population: 4.54M (five provinces, excluding Sulu; PSA)
+• GRDP: ₱266.59B (2025, PSA five-province series, constant 2018 prices); growth 5.0% (2025).
+  ₱299.5B (2024) described the region before Sulu's exclusion — do not use it as the current baseline
 • Sectoral shares: Services 42.0% | AFF 32.4% | Industry 25.6% (MFBM, 2025)
 • Poverty incidence (families): 23.5% (full-year 2023), down from 52.9% in 2018; 34.8% was first-semester 2023
 • Investment approvals: ₱5.0B (2025); ₱5.1B in January–April 2026 (BBOI)
 • Provinces: Lanao del Sur, Maguindanao del Norte, Maguindanao del Sur, Basilan,
-  Sulu, Tawi-Tawi, Special Geographic Area (SGA)
+  Tawi-Tawi, plus Cotabato City and the Special Geographic Area (SGA).
+  Sulu has been outside BARMM since the Supreme Court decision of 9 September 2024
 
 ▌PROVINCIAL ECONOMIC SNAPSHOT
 • Maguindanao del Norte: Fastest growing (4.1%, 2024); GDP ₱81.91B; Services 53%
 • Lanao del Sur: 4.0% (2024); Agus hydro cascade; DoleFil ₱306M pineapple facility
 • Basilan: ASG-free since June 2024 (PIA, 2025) — investment normalization underway
 • Tawi-Tawi: 1.1% growth; seaweed, fisheries, BIMP-EAGA proximity advantages
-• Sulu: 1.13% growth; underinvestment despite strategic location
 • → Island provinces exhibit "Success to the Successful" archetype vs mainland
 
 ▌BEIE FRAMEWORK (Bangsamoro Economic and Investment Ecosystem)
@@ -127,7 +151,8 @@ Organizes BARMM into 5 interconnected investment clusters:
    - Market: Global halal market = USD 2.3 trillion
 3. ENABLERS: Infrastructure, Social Services & Protection, Health
    - Key: BEGMP (1-day digital registration), ZBIP, TESDA alignment
-   - Gap: ~39–40% household electrification (EC areas); <30% broadband; 64.7% functional literacy
+   - Gap: ~39–40% household electrification (EC areas); <30% broadband; functional literacy 64.7%
+     (basic literacy 81.0%, lowest of any region; PSA 2024)
 4. CONNECTORS: Tourism, Digital Connectivity, Trade, BIMP-EAGA
    - Key: UAE/GCC halal corridor; BIMP-EAGA EGL Sub-Committee Plan 2025-2028
 5. FINANCIERS: Islamic Banking, Waqf, Takaful, Microfinance
@@ -147,10 +172,16 @@ LP4 — Islamic Finance Mobilization [High]: Al-Amanah, Takaful, Waqf, Islamic f
 LP5 — Green Economy Activation [High]: JMC 2026-01 (Carbon Credits + PES),
       Bangsamoro Forestry Code, REDD+ program, eco-tourism fees
 
-▌BALANCED SCORECARD (Chapter 5, BIRD 2026-2035)
+▌STRATEGIC OPTIONS (Report Chapter 3, Tables 3-9 and 3-11)
+Analytical composite (weights 20/18/16/15/15/10/6): IEDS 8.83 · HEDS 7.53 · IFES 7.46 · GEMS 7.16.
+Validation survey (n = 75): IEDS 6.05 · HEDS 5.90 · IFES 5.77 · GEMS 5.73 — same rank order.
+Earlier drafts' 8.93 / 8.33 used superseded weights; never quote them as current.
+Validation survey: 76 consented responses, 3–20 August 2026 (non-probability sample).
+
+▌BALANCED SCORECARD (Chapter 6, BIRD 2026-2035)
 Financial Perspective:
-  F1: Investment approvals ₱5.1B → ₱8B (2030) → ₱15B p.a. (2035)
-  F2: GRDP ₱266.59B (2025) → ₱440B (2030) → ₱550B+ (2035), ~7.5% a year
+  F1: Investment approvals ₱5.0B (2025) → ₱10B (2030) → ₱15B p.a. (2035)
+  F2: GRDP ₱266.59B (2025) → ₱383B (2030) → ₱550B+ (2035), about 7.5% a year
   F3: Export value <₱10B → ₱20B (2030) → ₱40B+ (2035)
   F4: Green revenue ₱0 → ₱100M p.a. (2030) → ₱500M p.a. (2035)
   F5: Islamic banking assets <₱2B → ₱8B (2030) → ₱20B+ (2035)
@@ -171,7 +202,7 @@ Learning & Growth Perspective:
   LG3: Renewable energy 75.86% → 82% → 85%+ (2035)
   LG4: MSME share of GRDP ~36% → 38% → 40% (2035)
 
-▌IMPLEMENTATION PHASES (Total: ₱120-160B)
+▌IMPLEMENTATION PHASES (public catalytic envelope ₱120-160B; total investment needed ₱0.99-1.13T at ICOR 3.5-4.0, about 6-9x the public envelope)
 Phase 1 — Foundation Building (2026-2028): ₱35-45B
   • BHB operationalisation (OIC/SMIIC alignment)
   • Bangsamoro Forestry Code enactment + JMC 2026-01 signing
@@ -181,13 +212,13 @@ Phase 1 — Foundation Building (2026-2028): ₱35-45B
 Phase 2 — Acceleration (2029-2031): ₱50-65B
   • Halal Park Phase 1 operational; OIC full recognition
   • REDD+ registered; PES payments activated
-  • Islamic banking in all 7 provincial capitals
-  • Cold chain/logistics hubs deployed; 70% literacy
+  • Islamic banking in all five provincial capitals
+  • Cold chain/logistics hubs deployed; functional literacy 72% (2030)
 Phase 3 — Consolidation & Global Integration (2032-2035): ₱35-50B
   • SMIIC Mutual Recognition Arrangement (MRA) secured
   • ₱500M+ annual green revenue (carbon + PES)
   • Full BIMP-EAGA integration; ZBIP fully operational
-  • GRDP ₱550B+; poverty <20%; 100% electrification
+  • GRDP ₱550B+; poverty <20%; 90% electrification (100% by 2040)
 
 ▌SYSTEMS ARCHETYPES IN BARMM CONTEXT (Chapter 3)
 A1. Fixes that Fail: Subsidies suppress market signals; performance-linked replacements needed
@@ -516,6 +547,31 @@ Deno.serve(async (req: Request) => {
     if (!action) return errorResponse('Missing required field: action', 400);
     if (!VALID_ACTIONS.has(action)) return errorResponse(`Invalid action: "${action}"`, 400);
 
+    // ── Rate limiting ───────────────────────────────────────────────────────
+    const forwardedFor = req.headers.get('x-forwarded-for');
+    const clientIp = forwardedFor ? forwardedFor.split(',')[0].trim() : 'unknown';
+    const ipHash = await hashIp(clientIp);
+
+    const { error: logError } = await supabase
+      .from('ai_assistant_rate_limit_log')
+      .insert({ ip_hash: ipHash, action });
+    if (logError) {
+      console.error('BIRD AI: rate-limit log insert failed (failing open):', logError.message);
+    }
+
+    const windowStart = new Date(Date.now() - RATE_LIMIT_WINDOW_MINUTES * 60 * 1000).toISOString();
+    const { count: recentCount, error: rateLimitError } = await supabase
+      .from('ai_assistant_rate_limit_log')
+      .select('id', { count: 'exact', head: true })
+      .eq('ip_hash', ipHash)
+      .gte('created_at', windowStart);
+
+    if (rateLimitError) {
+      console.error('BIRD AI: rate limit check error (failing open):', rateLimitError.message);
+    } else if ((recentCount ?? 0) > RATE_LIMIT_MAX_CALLS) {
+      return errorResponse('Too many AI requests from this network. Please wait a while and try again.', 429);
+    }
+
     // ── Platform info (no AI call needed) ──────────────────────────────────
     if (action === 'get_platform_info') {
       return jsonResponse({
@@ -531,7 +587,7 @@ Deno.serve(async (req: Request) => {
             systems_thinking: ['Causal Loop Diagram Builder', 'Meadows Leverage Points (LP1-LP5)', 'System Archetypes Library (7 archetypes)', 'TOWS × Systems Integration'],
             ai_assistant: 'BIRD AI — BARMM investment, strategy & systems-thinking consultant (Claude)',
             export_options: ['PDF', 'Word Document', 'Excel Spreadsheet'],
-            implementation: 'Three-phase: Foundation (2026-28), Acceleration (2029-32), Consolidation (2033-35)',
+            implementation: 'Three-phase: Foundation Building (2026-28), Acceleration (2029-31), Consolidation and Global Integration (2032-35)',
           },
           key_metrics: {
             total_budget: '₱120-160B',
@@ -591,15 +647,30 @@ Deno.serve(async (req: Request) => {
       temperature: (config as any).temperature,
     };
 
-    const aiRes = await fetch(ANTHROPIC_API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': anthropicApiKey,
-        'anthropic-version': ANTHROPIC_VERSION,
-      },
-      body: JSON.stringify(payload),
-    });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30000);
+
+    let aiRes: Response;
+    try {
+      aiRes = await fetch(ANTHROPIC_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': anthropicApiKey,
+          'anthropic-version': ANTHROPIC_VERSION,
+        },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      });
+    } catch (fetchErr) {
+      clearTimeout(timeout);
+      const isTimeout = fetchErr instanceof DOMException && fetchErr.name === 'AbortError';
+      return errorResponse(
+        isTimeout ? 'AI service timed out. Please try again.' : 'Could not reach AI service.',
+        504,
+      );
+    }
+    clearTimeout(timeout);
 
     if (!aiRes.ok) {
       const errText = await aiRes.text().catch(() => 'unknown');

@@ -17,6 +17,7 @@ When a value has two legitimate readings (different period or territory), quote 
 | GRDP level | **₱266.59B (2025, five-province BARMM, constant 2018 prices)**; ₱299.5B (2024, region before Sulu's exclusion) | PSA-RSSO BARMM (Apr 2026); MFBM Economic Brief No. 2 (2025) | PSA's 2023–2025 regional accounts move Sulu to Region IX. Use the five-province series for tracking (Table 7.6). |
 | GRDP growth | 6.6% (2022); 4.3% (2023); 2.7% (2024, Apr 2025 release; ~3.4% in the 2026 five-province restatement); **5.0% (2025)** | PSA | Always label 2024 with its release basis. |
 | GRDP 2035 target | **₱550B or more** | Report Ch 3 | ~7.5% a year from the five-province base (Table 7.6). |
+| GRDP milestones | **₱331B (2028 gate), ₱383B (2030 checkpoint)** | Report Ch 4 Table 4-2, Ch 5; Table 7.6 | Constant 7.51% path from ₱266.59B (2025). Supersedes ₱385B / ₱440B (old 2024 base) and ₱400B. |
 | Poverty incidence, families | **23.5% (full-year 2023)**; 34.8% (first semester 2023); 28.0% (2021); 52.9% (2018) | PSA 2023 Full-Year Official Poverty Statistics (15 Aug 2024) | "34.8%" must always say *first semester 2023*. Do **not** pair 34.8% (1H 2023) with a 2018 full-year figure as a trend. |
 | Poverty incidence, population | 32.4% (2023) | PSA | |
 | Poverty target | **below 20% by 2035** | Report Ch 3 | Table 7.6 flags recalibration on the full-year basis. |
@@ -31,7 +32,7 @@ When a value has two legitimate readings (different period or territory), quote 
 |---|---|---|
 | Investment approvals 2025 | **₱5.0B** (against a ₱3B target) | BBOI |
 | Investment approvals 2026 YTD | **₱5.1B, January–April 2026** (not "Q1 2026") | BBOI; MindaNews (3 May 2026) |
-| Investment approvals target | **₱15B or more a year** by 2035 | Report Ch 3 |
+| Investment approvals target | **₱15B or more a year** by 2035; milestones ₱6.5B (2028), ₱10B (2030) | Report Ch 3, Ch 4 Table 4-2 | Baseline ₱5.0B (2025). Supersedes ₱8B (2030). |
 | Jobs target | **At least 20,000** | Report Ch 3 |
 
 ## 3. Strategy and roadmap
@@ -44,6 +45,9 @@ When a value has two legitimate readings (different period or territory), quote 
 | Survey option ratings (n = 75 valid) | IEDS 6.05 · HEDS 5.90 · IFES 5.77 · GEMS 5.73 | Ch 3; Executive Summary |
 | Critical Leverage Points | **Five (LP1–LP5)** | Ch 3 |
 | Indicative public catalytic envelope | **₱120–160B** (planning parameter, not an appropriation) | Ch 3, Ch 6 |
+| Total investment requirement | **₱0.99–1.13 trillion** = ICOR 3.5–4.0 × ₱283.4B gap (₱266.59B → ₱550B, constant 2018 prices) | Ch 3, Ch 7 C.3, Table 7.6 | Supersedes ₱1.55–1.77T, which implied a ₱443B output gain. |
+| Leverage of public capital | **about 6–9×** (₱0.99–1.13T ÷ ₱120–160B) | Ch 7 C.3 | Supersedes 11–14×. |
+| Poverty milestones | <25% by 2030 (already met on the full-year basis; recalibrate), **<20% by 2035** | Ch 4, Ch 5, Table 7.6 | |
 | Phase 1 | **2026–2028** · Foundations and enabling conditions · ₱35–45B | Ch 3, Ch 6 |
 | Phase 2 | **2029–2031** · Value addition and market formation · ₱50–65B | Ch 3, Ch 6 |
 | Phase 3 | **2032–2035** · Consolidation and global integration · ₱35–50B | Ch 3, Ch 6 |
@@ -84,6 +88,9 @@ Generated with `tools/scan` patterns during the November 2026 consistency pass. 
 | Phase 2 2029–2032 · Phase 3 2033–2035 | Phase 2 2029–2031 · Phase 3 2032–2035 |
 | IEDS 8.93 / 8.33 · HEDS 7.61 · IFES 7.48 | IEDS 8.83 · HEDS 7.53 · IFES 7.46 · GEMS 7.16 |
 | "four Critical Leverage Points" | five (LP1–LP5) |
+| "₱1.55–1.77T" total investment; "11–14×" leverage | ₱0.99–1.13T; about 6–9× |
+| GRDP 2030 "₱440B" / "₱400B"; 2028 "₱385B" | ₱383B (2030); ₱331B (2028) |
+| Approvals 2030 "₱8B" | ₱10B |
 | electrification "~75% → 100% (2035)" | ~39–40% of potential EC connections → 90% by 2035 (100% by 2040) |
 | "₱5.1B in Q1 2026" | ₱5.1B, January–April 2026 |
 | "23.5% in 2023" without basis | 23.5% (full-year 2023, families) |
