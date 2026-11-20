@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { ISLAND_COVERAGE } from '@/lib/validationCoverage';
 import { supabase } from '@/lib/supabase';
 import {
   Users,
@@ -191,8 +192,8 @@ const RESOURCES: ResourceItem[] = [
   { id: 11, title: 'Maguindanao del Norte', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/maguindanao-delnorte-outlook.html', type: 'outlook', category: 'Provincial Outlooks', meta: 'GDP growth 2024: 4.1% · GDP share 28% · Pop. 1.2M+ · Key sector: Halal Industry', description: 'BARMM Administrative & Economic Center. Largest provincial economy; hosts Cotabato City and the Bangsamoro Halal Park.' },
   { id: 12, title: 'Maguindanao del Sur', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/maguindanao-delsur-outlook.html', type: 'outlook', category: 'Provincial Outlooks', meta: '24 municipalities · Pop. 800K+ · Poverty incidence 53.0% · Key sector: Agriculture', description: 'Agricultural Heartland & Rice Producer. The clearest agro-processing value-addition gap in the region.' },
   { id: 13, title: 'Special Geographic Area', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/sga-outlook.html', type: 'outlook', category: 'Provincial Outlooks', meta: '63 barangays · 8 new municipalities · BARMM direct governance · Key sector: Agro-Industrial', description: '8 New Municipalities & Cross-Provincial Hub. Land tenure and CADT overlay is the binding constraint on park siting.' },
-  { id: 14, title: 'Tawi-Tawi', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/tawi-tawi-outlook.html', type: 'outlook', category: 'Provincial Outlooks', meta: '40% national seaweed share · Pop. 439K · 390 islands · Key sector: Marine/Aquaculture', description: 'Seaweed Capital & BIMP-EAGA Gateway. Note: returned zero validation-survey respondents.' },
-  { id: 15, title: 'Basilan', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/basilan-outlook.html', type: 'outlook', category: 'Provincial Outlooks', meta: 'Poverty 73.5% (2018) → 33.7% (2023) · ZBIP ₱6.67B · ASG-free 2024 · Key sector: Rubber/Coconut', description: 'Peace Dividend & Rubber Industry. Note: returned zero validation-survey respondents.' },
+  { id: 14, title: 'Tawi-Tawi', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/tawi-tawi-outlook.html', type: 'outlook', category: 'Provincial Outlooks', meta: '40% national seaweed share · Pop. 439K · 390 islands · Key sector: Marine/Aquaculture', description: 'Seaweed Capital & BIMP-EAGA Gateway. Outlook validated at the provincial validation, 28 October 2026, Bongao.' },
+  { id: 15, title: 'Basilan', url: 'https://asilvainnovations.github.io/BIRD-2026-2035/public/basilan-outlook.html', type: 'outlook', category: 'Provincial Outlooks', meta: 'Poverty 73.5% (2018) → 33.7% (2023) · ZBIP ₱6.67B · ASG-free 2024 · Key sector: Rubber/Coconut', description: 'Peace Dividend & Rubber Industry. Outlook validated at the provincial workshop, 20 June 2026, Isabela City.' },
 
   // ── Video Resource Library ────────────────────────────────────────────────
   { id: 20, title: 'Bangsamoro Investment Roadmap 2026–2035', url: 'https://youtu.be/UCi2dVUmSbE', type: 'video', category: 'Video Library', duration: '7 mins', description: "How BIRD positions BARMM as Southeast Asia's hub for resilient, ethical and sustainable investment — growth momentum, risks ahead, and the strategic response." },
@@ -221,8 +222,6 @@ const RESOURCES: ResourceItem[] = [
   { id: 61, title: 'BIRD App User Manual', url: 'https://bird-user-manual.asilvainnovations.com', type: 'document', category: 'Digital Tools', description: 'Step-by-step manual for SWOT, Systems Thinking, Balanced Scorecard, PAPs and the MEL Dashboard. For BOI-MTIT and BARMM strategic planners.' },
 
   // ── Stakeholder Engagement ────────────────────────────────────────────────
-  { id: 70, title: 'Validation Survey Instrument', url: 'https://bird-survey.asilvainnovations.com', type: 'prototype', category: 'Stakeholder Engagement', meta: '76 responses · 3–20 Aug 2026', description: 'The official validation survey collecting stakeholder feedback on strategic assumptions, BEIE cluster dynamics, systems archetypes and investment priorities. The sister platform to this app.' },
-  { id: 71, title: 'Validation Survey Orientation', url: 'https://bird-survey-orientation.asilvainnovations.com', type: 'document', category: 'Stakeholder Engagement', description: 'Orientation briefing for BOI-MTIT staff on survey methodology, technical architecture and deployment protocols.' },
   { id: 72, title: 'Resource Library (Full)', url: 'https://bird-resources.asilvainnovations.com', type: 'document', category: 'Stakeholder Engagement', description: 'The complete published resource library — the canonical source this tab mirrors.' },
 
   // ── Systems Thinking Learning Path ────────────────────────────────────────
@@ -266,7 +265,7 @@ const BIRD_CRITICAL_KPIS: KpiItem[] = [
   { id: 'p4', name: 'Infrastructure Budget Execution', target: 90, current: 80, unit: '%', status: 'at_risk', owner: 'MPW', due_date: '2028-12-31', description: 'Panel B · LP2. Underspending was rated 4.06 impact / 4.03 likelihood by validation-survey respondents — a live weakness, not a theoretical one.' },
   { id: 'l5', name: 'Functional Literacy Rate', target: 75, current: 64.7, unit: '%', status: 'off_track', owner: 'MBHTE / DepEd', due_date: '2035-12-31', description: 'Panel B · LP2. HIGHEST-RISK factor in the entire SWOT register (Risk 17.76 from 74 respondents). Human capital, not infrastructure, is the binding constraint.' },
   { id: 'p5', name: 'Inter-Agency Coordination Score', target: 8, current: 5.5, unit: '/10', status: 'off_track', owner: 'BICC', due_date: '2028-12-31', description: 'Panel B · LP3. Fragmented mandates scored 4.00 impact in the validation survey; transparency was named the critical governance lever by 42 of 73 respondents.' },
-  { id: 's7', name: 'Inter-Provincial Growth Disparity', target: 1.5, current: 3.9, unit: 'pp', status: 'critical', owner: 'BPDA', due_date: '2035-12-31', description: 'Panel B · LP3. Widening. Compounded by an evidence gap: Basilan and Tawi-Tawi returned ZERO validation-survey respondents. Lower is better.' },
+  { id: 's7', name: 'Inter-Provincial Growth Disparity', target: 1.5, current: 3.9, unit: 'pp', status: 'critical', owner: 'BPDA', due_date: '2035-12-31', description: 'Panel B · LP3. Widening. Lower is better.' },
   { id: 'f5', name: 'Islamic Banking Assets in BARMM', target: 20, current: 2, unit: '₱B', status: 'off_track', owner: 'BSP / Al-Amanah', due_date: '2035-12-31', description: 'Panel B · LP4. Stakeholders ranked Macro-Capital (Sukuk, infrastructure banking) first for finance sequencing, 36 of 64.' },
   { id: 'f4', name: 'Carbon Credit + PES Revenue', target: 500, current: 0, unit: '₱M', status: 'critical', owner: 'MENRE', due_date: '2030-12-31', description: 'Panel B · LP5. Unstarted. Gated on the Forestry Code and JMC No. 2026-01 — renewable-energy monetisation scored highest of any opportunity (RI 4.14).' },
 ];
@@ -1628,8 +1627,8 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
 
         <p className="mt-4 text-[0.68rem] text-[#ecfdf5]/40 leading-relaxed">
           Baselines: 2024 PSA / BBOI / MTIT / MENRE actuals. Targets: BIRD 2026–2035. Risk readings referenced in KPI
-          descriptions come from the Validation Survey (n=76, 3–20 Aug 2026) — a non-probability convenience sample with
-          zero respondents from Basilan and Tawi-Tawi.
+          descriptions come from the Validation Survey (n=76, 3–20 Aug 2026) — a non-probability convenience sample.
+          {' '}{ISLAND_COVERAGE}
         </p>
       </div>
 

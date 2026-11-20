@@ -167,28 +167,6 @@ const ROUTE_REGISTRY = Object.freeze([
   /* ── Survey Routes (3 routes) ─────────────────────────────────────────── */
 
   {
-    path:              '/validation-survey',
-    file:              'validation-survey.html',
-    title:             'BIRD Validation Survey',
-    description:       '16-section stakeholder validation survey with offline support. Participate in the BIRD 2026-2035 stakeholder validation survey to help shape BARMM investment priorities.',
-    category:          'survey',
-    navOrder:          7,
-    icon:              '📝',
-    requiresAuth:      false,
-    analyticsPageView: true,
-  },
-  {
-    path:              '/survey-orientation',
-    file:              'survey-orientation.html',
-    title:             'Survey Orientation',
-    description:       'Respondent briefing on C.A.R.E. framework and methodology. Learn about the BIRD survey methodology, the C.A.R.E. framework, and how stakeholder input shapes BARMM strategy.',
-    category:          'survey',
-    navOrder:          8,
-    icon:              '🎓',
-    requiresAuth:      false,
-    analyticsPageView: true,
-  },
-  {
     path:              '/survey-dashboard',
     file:              'survey-dashboard.html',
     title:             'Live Validation Results',

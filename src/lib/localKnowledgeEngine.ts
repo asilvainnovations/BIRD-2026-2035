@@ -673,7 +673,6 @@ The MEL (Monitoring, Evaluation & Learning) Dashboard is the **default landing v
 
 **Hero Banner:**
 • Headline metrics (total budget, current phase, 2035 targets)
-• Gold **"Participate in Validation Survey"** button → opens survey portal
 
 **3 View Modes:**
 1. **Command** — Full detail for plan owners & admins
@@ -707,7 +706,6 @@ The MEL (Monitoring, Evaluation & Learning) Dashboard is the **default landing v
 **Top Bar:**
 • 📁 Plan Selector — Switch plans or create new
 • 🔎 Search — Find SWOT items, strategies, KPIs, PAPs
-• ✅ Survey Button (gold) — Opens Validation Survey
 • ☀️/🌙 Theme Toggle — Dark / Light / System
 • ☁️ Sync Status — Green = synced; Amber = offline (local save active)
 • 👤 Account — Profile, admin dashboard, sign out
@@ -719,31 +717,23 @@ The MEL (Monitoring, Evaluation & Learning) Dashboard is the **default landing v
   },
   {
     id: 'validation-survey',
-    category: 'navigation',
-    triggers: ['validation survey', 'stakeholder survey', 'survey', 'participate', 'feedback', 'have your say'],
-    triggerPhrases: ['validation survey', 'stakeholder survey', 'participate in survey', 'bird survey'],
+    category: 'overview',
+    triggers: ['validation survey', 'stakeholder survey', 'survey', 'validation', 'workshop', 'consultation'],
+    triggerPhrases: ['validation survey', 'stakeholder survey', 'validation workshop', 'provincial workshop', 'survey results'],
     weight: 9,
-    response: `**BIRD Validation Survey — Have Your Say**
+    response: `**How BIRD was validated**
 
-The Validation Survey is a **standalone portal** where stakeholders review and validate the draft roadmap before finalization.
+The validation survey is closed. It ran 3–20 August 2026 and returned 76 consented responses.
 
-**Who should participate:**
-• Government agencies | Private sector | Academe | Civil society | Development partners
+Every province was also consulted in person:
+• Maguindanao del Norte, Maguindanao del Sur and the SGA: mainland workshop, 24 March 2026, Cotabato City
+• Lanao del Sur: provincial workshop, 12 May 2026, Marawi City
+• Basilan: provincial workshop validating the Basilan outlook, 20 June 2026, Isabela City
+• Tawi-Tawi: provincial validation of the Tawi-Tawi outlook, 28 October 2026, Bongao
 
-**How to access:**
-1. Sidebar — Gold **Validation Survey** button (with NEW badge)
-2. Top Bar — Gold **Survey** button (clipboard icon)
-3. MEL Dashboard — **"Participate in Validation Survey"** hero banner
-4. Direct: bird-validation-survey.bolt.host
+The online survey drew no respondents from Basilan or Tawi-Tawi; their voice comes from these workshops.
 
-**What you'll do (15–20 minutes):**
-• Pick your stakeholder group (survey adapts questions)
-• Rate statements on 1–5 scales
-• Rank programs and leverage points
-• Allocate priority points
-• Share open feedback
-
-**Privacy:** Anonymous by default. DPA 2012 compliant. Only the consent checkbox is required.`,
+[Survey results](/survey-dashboard.html) · [Tawi-Tawi validation](/tawi-tawi-validation-workshop.html) · [Report Chapter 1](/report/Chapter1.html)`,
   },
   {
     id: 'export-formats',

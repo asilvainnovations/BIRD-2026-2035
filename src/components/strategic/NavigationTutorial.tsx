@@ -202,18 +202,6 @@ const NAV_CATALOG: Record<string, NavElement> = {
     accentClass: `${BIRD.goldDark.bg} ${BIRD.goldDark.border}`,
   },
 
-  // ── SIDEBAR: Special Items ──
-  "nav-item-validation": {
-    id: "nav-item-validation",
-    label: "Validation Survey",
-    location: "sidebar",
-    description: "BIRD 2026-2035 Feedback. NEW \u2014 Shape the roadmap as a stakeholder. Share your insights as government, private sector, academia, or community leader. Takes 5\u201310 minutes.",
-    shortDesc: "Help shape BARMM 2026\u20132035",
-    icon: ClipboardCheck,
-    highlightColor: "gold",
-    textClass: BIRD.gold.text,
-    accentClass: `${BIRD.gold.bg} ${BIRD.gold.border}`,
-  },
   "sidebar-btn-tutorial": {
     id: "sidebar-btn-tutorial",
     label: "Navigation Tutorial",
@@ -234,17 +222,6 @@ const NAV_CATALOG: Record<string, NavElement> = {
     description: "Switch between your strategic plans or create a new one. All plans auto-save locally and sync to the cloud when online. Current focus displayed here.",
     shortDesc: "BIRD 2026\u20132035 | Current Focus",
     icon: FileDown,
-    highlightColor: "gold",
-    textClass: BIRD.gold.text,
-    accentClass: `${BIRD.gold.bg} ${BIRD.gold.border}`,
-  },
-  "topbar-btn-validation": {
-    id: "topbar-btn-validation",
-    label: "Validation Survey",
-    location: "topbar",
-    description: "Quick-access to the stakeholder validation survey. Share feedback that directly shapes the BIRD roadmap. Available from both sidebar and topbar.",
-    shortDesc: "NEW | Quick Survey Access",
-    icon: ClipboardCheck,
     highlightColor: "gold",
     textClass: BIRD.gold.text,
     accentClass: `${BIRD.gold.bg} ${BIRD.gold.border}`,
@@ -305,17 +282,6 @@ const NAV_CATALOG: Record<string, NavElement> = {
     highlightColor: "green",
     textClass: BIRD.green.text,
     accentClass: `${BIRD.green.bg} ${BIRD.green.border}`,
-  },
-  "hero-cta-validation": {
-    id: "hero-cta-validation",
-    label: "Participate in Validation Survey",
-    location: "hero",
-    description: "Validation Survey. NEW \u2014 Help shape BARMM 2026\u20132035. Your stakeholder feedback directly influences the investment roadmap priorities and resource allocation.",
-    shortDesc: "Share Your Input",
-    icon: ClipboardCheck,
-    highlightColor: "gold",
-    textClass: BIRD.gold.text,
-    accentClass: `${BIRD.gold.bg} ${BIRD.gold.border}`,
   },
   "hero-cta-systems": {
     id: "hero-cta-systems",
@@ -429,27 +395,6 @@ const TUTORIAL_STEPS: TutorialStep[] = [
     gradient: "from-[#C9A84C] via-[#B8942E] to-[#7a5c1e]",
     accentFrom: "#C9A84C",
     accentTo: "#E8C560",
-  },
-
-  // ── 2. Validation Survey (Special ── highlighted) ──
-  {
-    title: "Validation Survey",
-    subtitle: "NEW \u2014 Help Shape BARMM 2026\u20132035",
-    description: NAV_CATALOG["nav-item-validation"].description,
-    icon: ClipboardCheck,
-    viewId: "validation",
-    elementId: "nav-item-validation",
-    tips: [
-      "Takes about 5\u201310 minutes to complete all sections",
-      "Your responses are confidential under the Data Privacy Act of 2012",
-      "Available from both sidebar and topbar for quick access anytime",
-      "Feedback directly influences roadmap priorities and resource allocation",
-    ],
-    gradient: "from-[#C9A84C] via-[#B8943F] to-[#7a5c1e]",
-    accentFrom: "#C9A84C",
-    accentTo: "#E8C560",
-    phase: "Feedback",
-    phaseColor: "bg-[#C9A84C]/20 text-[#E8C560] border-[#C9A84C]/30",
   },
 
   // ── 3. MEL Dashboard ──
@@ -675,7 +620,6 @@ const TUTORIAL_STEPS: TutorialStep[] = [
       "Global search finds KPIs, SWOT items, strategies, and PAPs instantly",
       "Plan selector shows your current focus and lets you switch quickly",
       "Account menu: profile, settings, admin dashboard (if authorized), sign out",
-      "Validation Survey button for quick access to stakeholder feedback",
     ],
     gradient: "from-[#022c22] via-[#064e3b] to-[#011a12]",
     accentFrom: "#6ee7b7",
@@ -687,13 +631,12 @@ const TUTORIAL_STEPS: TutorialStep[] = [
     title: "Hero Quick Access",
     subtitle: "Jump to Key Workflows from the Homepage",
     description:
-      "The hero section offers one-click entry points to the most important workflows: open the MEL Dashboard, participate in the Validation Survey, explore Systems Thinking, or view the Implementation Roadmap.",
+      "The hero section offers one-click entry points to the most important workflows: open the MEL Dashboard, explore Systems Thinking, or view the Implementation Roadmap.",
     icon: Zap,
     viewId: null,
     elementId: "hero-cta-mel",
     tips: [
       "\u201cOpen MEL Dashboard\u2019 \u2014 Jump straight to your KPI command center",
-      "\u201cParticipate in Validation Survey\u2019 \u2014 Share feedback in 5-10 minutes",
       "\u201cSystems Thinking\u2019 \u2014 Explore causal loops and feedback dynamics",
       "\u201cImplementation Roadmap\u2019 \u2014 View the 3-phase \u20b1120-160B pathway",
     ],

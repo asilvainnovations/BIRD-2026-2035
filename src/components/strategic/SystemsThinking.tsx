@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { ISLAND_COVERAGE } from '@/lib/validationCoverage';
 import { similarity } from '@/lib/localStrategist';
 import { supabase } from '@/lib/supabase';
 import {
@@ -67,9 +68,9 @@ import FloatingAIAssistant from './FloatingAIAssistant';
 // fielded 3-20 August 2026.
 //
 // SAMPLING CAVEAT: non-probability convenience sample, no weighting frame.
-// Validation signals, NOT population estimates. Basilan and Tawi-Tawi
-// returned ZERO respondents; ~78% of the sample sits in the Cotabato City /
-// Maguindanao del Norte mainland corridor.
+// Validation signals, NOT population estimates. ~64% of the online sample sits in
+// the Cotabato City / Maguindanao del Norte mainland corridor. The survey drew no
+// respondents from Basilan or Tawi-Tawi; both were validated at provincial workshops.
 // -----------------------------------------------------------------------------
 
 /**
@@ -2019,11 +2020,10 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
           </div>
 
           <div className="flex items-start gap-2 rounded-lg border border-red-500/35 bg-red-500/10 px-3 py-2 mb-4">
-            <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-red-500" />
-            <p className="text-[0.72rem] leading-relaxed text-red-300">
-              <strong>Zero respondents from {SYSTEMS_SIGNALS.silentProvinces.join(', ')}.</strong> Non-probability
-              convenience sample — validation signals, not population estimates. Loops that depend on maritime or
-              island-province dynamics are unvalidated.
+            <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#C9A84C]" />
+            <p className="text-[0.72rem] leading-relaxed text-[#ecfdf5]/70">
+              <strong>{ISLAND_COVERAGE}</strong> Non-probability convenience sample — validation signals, not
+              population estimates. Read maritime and island-province loops against those workshop results.
             </p>
           </div>
 

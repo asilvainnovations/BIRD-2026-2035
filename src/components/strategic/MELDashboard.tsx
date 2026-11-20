@@ -5,7 +5,6 @@ import { StrategicPlan } from '@/lib/strategicPlanStore';
 import { BRAND_ASSETS } from '@/lib/supabase';
 import { generateAnswer } from '@/lib/localKnowledgeEngine';
 import ChatText from './ChatText';
-import { openValidationSurvey } from '@/lib/bird-urls';
 
 // ─── Import HeroSection from external file ────────────────────────────────────
 import HeroSection from './HeroSection';
@@ -33,10 +32,11 @@ import { PHASES, TOTAL_BUDGET }                            from '@/data/bird/pha
 //   has no runtime data dependency.
 //
 // SAMPLING CAVEAT: non-probability convenience sample, no weighting frame.
-// These are stakeholder validation signals, NOT population estimates. Basilan,
-// Basilan and Tawi-Tawi returned ZERO respondents and ~78% of the sample sits in
-// the Cotabato City / Maguindanao del Norte mainland corridor, so any island
-// province or BIMP-EAGA (Sequence C) reading here is unvalidated.
+// These are stakeholder validation signals, NOT population estimates. The online
+// sample is mainland-weighted (Cotabato City / Maguindanao del Norte) and drew no
+// respondents from Basilan or Tawi-Tawi. Both island provinces were validated in
+// person instead: Basilan at its provincial workshop (20 June 2026, Isabela City)
+// and Tawi-Tawi at its provincial validation (28 October 2026, Bongao).
 // ─────────────────────────────────────────────────────────────────────────────
 
 const RESPONDENTS = {
@@ -60,12 +60,20 @@ const RESPONDENTS = {
     { label: 'Tawi-Tawi',                     n:  0 },
   ],
   coverageGap:
-    'Roughly 64% of the sample sits in the Cotabato City / Maguindanao del Norte mainland corridor, ' +
-    'and 2 of the 5 BARMM provinces — Basilan and Tawi-Tawi — returned zero respondents. ' +
-    'Sequence C (BIMP-EAGA maritime integration) and every island-province reading is therefore ' +
-    'unvalidated by the constituencies it most affects. A supplementary island wave is required ' +
-    'before any of this is published as regional consensus.',
+    'Roughly 64% of the online sample sits in the Cotabato City / Maguindanao del Norte mainland corridor, ' +
+    'and the survey drew no respondents from Basilan or Tawi-Tawi. Both provinces were consulted directly: ' +
+    'Basilan at its provincial workshop (20 June 2026, Isabela City), which validated the Basilan outlook, and ' +
+    'Tawi-Tawi at its provincial validation (28 October 2026, Bongao), which validated the Tawi-Tawi outlook.',
 } as const;
+
+/** In-person consultation — every BARMM province and the SGA (Report Ch 1, Stages 2–3; Tawi-Tawi validation). */
+const PROVINCIAL_WORKSHOPS = [
+  { date: '24 Mar 2026', place: 'Cotabato City', covers: ['Maguindanao del Norte', 'Maguindanao del Sur', 'SGA'] },
+  { date: '12 May 2026', place: 'Marawi City',   covers: ['Lanao del Sur'] },
+  { date: '20 Jun 2026', place: 'Isabela City',  covers: ['Basilan'] },
+  { date: '28 Oct 2026', place: 'Bongao',        covers: ['Tawi-Tawi'] },
+] as const;
+const PROVINCES_CONSULTED = PROVINCIAL_WORKSHOPS.flatMap(w => w.covers).filter(p => p !== 'SGA').length;
 
 /** Confidence / readiness / urgency by BEIE cluster — survey Sections 4–9, 1–5 scale. */
 const CLUSTER_SIGNALS = [
@@ -80,16 +88,13 @@ const CLUSTER_SIGNALS = [
 /**
  * SEQUENCING VALIDATION — survey Section 10, items q10_2 / q10_3 / q10_4, 1–5.
  * The three IEDS investment sequences, rated on priority. Verified 2026-08-28.
- *
- * Read this with the coverage gap in mind: Sequence C is the BIMP-EAGA maritime
- * corridor, and the two provinces that corridor actually runs through — Basilan
- * and Tawi-Tawi — contributed zero respondents. Its 4.00 is a mainland opinion
- * about an island programme.
+ * Sequence C (BIMP-EAGA maritime corridor) runs through Basilan and Tawi-Tawi;
+ * their view comes from the provincial workshops, not the online survey.
  */
 const SEQUENCE_SIGNALS = [
   { code: 'A', label: 'Halal & agro-industrial core',    mean: 4.20, sd: 0.79, n: 65, validation: 'partial'     as const },
   { code: 'B', label: 'Green economy & resource base',   mean: 4.09, sd: 0.69, n: 67, validation: 'partial'     as const },
-  { code: 'C', label: 'BIMP-EAGA maritime integration',  mean: 4.00, sd: 0.74, n: 66, validation: 'unvalidated' as const },
+  { code: 'C', label: 'BIMP-EAGA maritime integration',  mean: 4.00, sd: 0.74, n: 66, validation: 'partial'     as const },
 ] as const;
 
 /**
@@ -406,13 +411,6 @@ const DashboardHeroSection: React.FC<{ onNavigate?: (view: string) => void }> = 
               <Target className="w-5 h-5" aria-hidden="true" />
               Open MEL Dashboard
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-            </button>
-            <button
-              onClick={() => openValidationSurvey()}
-              className="px-8 py-4 bg-[rgba(6,78,59,0.6)] backdrop-blur-sm border-2 border-[rgba(201,168,76,0.55)] text-[#C9A84C] rounded-xl font-bold text-base hover:bg-[rgba(201,168,76,0.15)] transition-all flex items-center gap-3 font-display"
-            >
-              <ClipboardCheck className="w-5 h-5" aria-hidden="true" />
-              Participate in Validation Survey
             </button>
           </motion.div>
 
@@ -1489,12 +1487,12 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
             </span>
           </div>
 
-          {/* Coverage warning — the roadmap's most consequential evidence gap */}
-          <div className="flex items-start gap-3 rounded-lg border border-[rgba(239,68,68,0.35)] bg-[rgba(239,68,68,0.08)] px-4 py-3 mb-6">
-            <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#ef4444]" aria-hidden="true" />
+          {/* Coverage — online survey vs in-person provincial validation */}
+          <div className="flex items-start gap-3 rounded-lg border border-[rgba(201,168,76,0.35)] bg-[rgba(201,168,76,0.08)] px-4 py-3 mb-6">
+            <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#C9A84C]" aria-hidden="true" />
             <div>
-              <p className="text-xs font-bold text-[#ef4444] mb-0.5">
-                Coverage gap &mdash; {validation.silentProvinces.map(p => p.label).join(', ')} returned zero respondents
+              <p className="text-xs font-bold text-[#E8C560] mb-0.5">
+                Online survey: no respondents from {validation.silentProvinces.map(p => p.label).join(' or ')} &mdash; both validated at provincial workshops
               </p>
               <p className="text-[0.7rem] text-[#ecfdf5]/55 leading-relaxed">{RESPONDENTS.coverageGap}</p>
             </div>
@@ -1506,7 +1504,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
               { color: '#10b981', val: RESPONDENTS.totalResponses,       lbl: 'Consented Responses' },
               { color: '#C9A84C', val: `${validation.endorsedPct}%`,     lbl: 'Endorse IEDS Outright' },
               { color: '#ef4444', val: validation.meanReadiness.toFixed(2), lbl: 'Mean Readiness (1–5)' },
-              { color: '#3b82f6', val: validation.silentProvinces.length, lbl: 'Provinces With No Voice' },
+              { color: '#3b82f6', val: `${PROVINCES_CONSULTED} / 5`, lbl: 'Provinces Validated in Person' },
             ].map(({ color, val, lbl }) => (
               <div key={lbl} className="bg-[rgba(2,44,34,0.5)] border border-[rgba(201,168,76,0.32)] rounded-lg p-4 text-center relative overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-0.5" style={{ background: color }} aria-hidden="true" />
@@ -1779,8 +1777,8 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
               <p className="text-[0.68rem] text-[#ecfdf5]/45 leading-relaxed mt-3 pt-3 border-t border-[rgba(255,255,255,0.06)]">
                 The three sequences are separated by 0.20 of a scale point against SDs near 0.75 —
                 statistically these are one undifferentiated block, not a ranked order. Sequence C is
-                the BIMP-EAGA maritime corridor, and Basilan and Tawi-Tawi returned zero respondents.
-                Its 4.00 is a mainland opinion about an island programme.
+                the BIMP-EAGA maritime corridor; the survey rating is mainland-weighted, and the island
+                view comes from the Basilan (20 June) and Tawi-Tawi (28 October) provincial workshops.
               </p>
             </div>
 
@@ -1821,7 +1819,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
               <h3 className="text-sm font-bold text-white font-display">
                 Survey Coverage — Who Actually Answered
               </h3>
-              <ValidationBadge level="partial" note={`${validation.silentProvinces.length} provinces silent`} />
+              <ValidationBadge level="partial" note="islands via provincial workshops" />
             </div>
             <p className="text-[0.68rem] text-[#ecfdf5]/40 mb-4">
               All {RESPONDENTS.totalResponses} responses carry final consent; none quarantined.

@@ -18,7 +18,6 @@ interface HeroSectionProps {
   onStartPlanning: () => void;
   onViewDemo: () => void;
   onSignIn?: () => void;
-  onOpenValidationSurvey?: () => void;
   isAuthenticated?: boolean;
   userName?: string;
 }
@@ -110,7 +109,7 @@ const ImageRefCard: React.FC<{ image: typeof BIRD_IMAGES[keyof typeof BIRD_IMAGE
 };
 
 const HeroSection: React.FC<HeroSectionProps> = ({
-  onStartPlanning, onViewDemo, onSignIn, onOpenValidationSurvey, isAuthenticated, userName
+  onStartPlanning, onViewDemo, onSignIn, isAuthenticated, userName
 }) => {
   const allVideos = Object.values(BIRD_VIDEOS);
   const frameworkImages = Object.values(BIRD_IMAGES).filter(img => img.category === 'framework' || img.category === 'cluster');
@@ -182,15 +181,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               className="w-full sm:w-auto px-8 py-4 bg-[#022c22]/60 text-white rounded-xl font-bold text-lg border border-[#C9A84C]/20 hover:bg-[#022c22]/40 transition-all flex items-center justify-center gap-2">
               <Play className="w-5 h-5 text-[#C9A84C]" /> Load BIRD Sample Plan
             </button>
-          </div>
-
-          {/* Golden Validation Survey CTA */}
-          <div className="mb-20">
-            <button onClick={onOpenValidationSurvey || onStartPlanning}
-              className="inline-flex w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-[#C9A84C] to-[#B8943F] hover:from-[#E8C560] hover:to-[#C9A84C] text-[#022c22] rounded-xl font-bold text-lg transition-all hover:-translate-y-1 items-center justify-center gap-3 shadow-lg shadow-[#C9A84C]/20 hover:shadow-[#C9A84C]/40 ring-2 ring-[#C9A84C]/50">
-              <Star className="w-6 h-6 fill-current" /> Take BIRD Validation Survey <ArrowRight className="w-5 h-5" />
-            </button>
-            <p className="text-sm text-[#C9A84C]/80 mt-3 font-medium">Help shape the future of BARMM investment planning</p>
           </div>
 
           {/* BIRD Banner */}

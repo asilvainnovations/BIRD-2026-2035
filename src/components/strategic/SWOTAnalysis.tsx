@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { ISLAND_COVERAGE } from '@/lib/validationCoverage';
 import { motion, AnimatePresence } from '@/lib/motion-shim';
 import {
   Shield,
@@ -117,9 +118,9 @@ const Tooltip: React.FC<{
 //   threat      → Vulnerability Index VI   = (I^2 × L) / 25
 //
 // SAMPLING CAVEAT: non-probability convenience sample, no weighting frame.
-// Validation signals, NOT population estimates. Basilan and Tawi-Tawi
-// returned ZERO respondents; ~78% of the sample sits in the Cotabato City /
-// Maguindanao del Norte corridor. Island-province factors are unvalidated.
+// Validation signals, NOT population estimates. ~64% of the online sample sits in
+// the Cotabato City / Maguindanao del Norte corridor. The survey drew no respondents
+// from Basilan or Tawi-Tawi; both were validated at provincial workshops instead.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const BIRD_SWOT_BASELINE: SWOTItem[] = [
@@ -188,7 +189,7 @@ const SURVEY_PROVENANCE = {
   silentProvinces: ['Basilan', 'Tawi-Tawi'],
   note:
     'Non-probability convenience sample with no weighting frame - stakeholder validation signals, ' +
-    'not population estimates. Around 78% of respondents are based in the Cotabato City / Maguindanao ' +
+    'not population estimates. Around 64% of respondents are based in the Cotabato City / Maguindanao ' +
     'del Norte mainland corridor.',
 } as const;
 
@@ -1111,9 +1112,9 @@ const SWOTAnalysis: React.FC<SWOTAnalysisProps> = ({
 
           {/* Coverage warning — the most consequential limitation in this dataset */}
           <div className="flex items-start gap-2 rounded-lg border border-red-500/35 bg-red-500/10 px-3 py-2 mb-4">
-            <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-red-500" />
-            <p className="text-[0.72rem] leading-relaxed text-red-300">
-              <strong>Zero respondents from {SURVEY_PROVENANCE.silentProvinces.join(', ')}.</strong>{' '}
+            <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#C9A84C]" />
+            <p className="text-[0.72rem] leading-relaxed text-[#ecfdf5]/70">
+              <strong>{ISLAND_COVERAGE}</strong>{' '}
               {SURVEY_PROVENANCE.note}
             </p>
           </div>

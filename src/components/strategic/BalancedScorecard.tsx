@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { ISLAND_COVERAGE } from '@/lib/validationCoverage';
 import { EDGE_FUNCTIONS } from '@/lib/supabase';
 import { motion, AnimatePresence } from '@/lib/motion-shim';
 import {
@@ -1041,8 +1042,7 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
             </div>
 
             <p className="text-[0.68rem] text-[#a3bfb3] leading-relaxed">
-              Non-probability convenience sample — validation signals, not population estimates. Zero respondents from{' '}
-              {BSC_SURVEY_FRAME.silentProvinces.join(' and ')}. Post-2024 BARMM comprises five provinces plus the SGA and
+              Non-probability convenience sample — validation signals, not population estimates. {ISLAND_COVERAGE} Post-2024 BARMM comprises five provinces plus the SGA and
               Cotabato City; Sulu is not part of the region.
             </p>
           </div>

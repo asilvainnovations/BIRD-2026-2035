@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useMemo, useCallback, lazy, Suspens
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useStrategicPlan } from '@/hooks/useStrategicPlan';
 import { useAuth } from '@/hooks/useAuth';
-import { openValidationSurvey } from '@/lib/bird-urls';
 import { generateId, type ActionFrequency, type StrategicPlan } from '@/lib/strategicPlanStore';
 import type { PlanTemplate } from '@/lib/templateData';
 import { MTITLogo } from '@/components/branding/Logo';
@@ -59,7 +58,6 @@ const VIEW_TO_PATH: Record<string, string> = {
   team:       '/team-collaboration',
   settings:   '/settings',
   export:     '/export-plan',
-  validation: '/validation-survey',
 };
 
 const PATH_TO_VIEW: Record<string, string> = Object.fromEntries(
@@ -105,12 +103,6 @@ const AppLayout: React.FC = () => {
 
   // ─── HANDLERS ─────────────────────────────────────────────────────────────
   const goToView = useCallback((view: string) => {
-    // The Validation Survey is a standalone app — open it externally instead
-    // of routing to an in-app view (Sidebar, Topbar, tutorial all funnel here).
-    if (view === 'validation') {
-      openValidationSurvey();
-      return;
-    }
     setActiveView(view);
     navigate(VIEW_TO_PATH[view] || '/mel-dashboard');
   }, [setActiveView, navigate]);
@@ -222,7 +214,6 @@ const AppLayout: React.FC = () => {
         onStartPlanning={handleStartPlanning}
         onViewDemo={() => updateUiState({ showLanding: false })}
         onSignIn={() => updateUiState({ showAuthModal: true })}
-        onOpenValidationSurvey={openValidationSurvey}
         isAuthenticated={isAuthenticated}
         userName={userDisplayInfo.name}
       />

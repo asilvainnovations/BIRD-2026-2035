@@ -36,6 +36,10 @@ RULES = [
     ("population including Sulu", r"5\.69\s?(?:M\b|million)", HISTORICAL + r"|appears to include Sulu"),
     ("four leverage points", r"[Ff]our (?:[Cc]ritical )?[Ll]everage [Pp]oints", HISTORICAL),
     ("100% electrification by 2035", r"100% (?:household )?electrification (?:by|in) 2035|electrification[^\n<]{0,30}100% by 2035", HISTORICAL),
+    ("island provinces framed as having no voice (both validated at provincial workshops)",
+     r"[Nn]o [Vv]oice|[Zz]ero (?:validation-survey )?respondents|ZERO\b[^\n]{0,20}respondents|returned none|island quotas|0 of 76|moved to 26 October|Validation respondents from Basilan",
+     r"(?!)"),
+    ("mainland share of the survey sample is 64% (49 of 76), not 78%", r"78\s?% of (?:the )?(?:sample|respondents)", r"(?!)"),
 ]
 
 def text_of(path: Path) -> str:

@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { ISLAND_COVERAGE } from '@/lib/validationCoverage';
 import { EDGE_FUNCTIONS } from '@/lib/supabase';
 import { Activity, AlertCircle, AlertTriangle, Anchor, ArrowRight, BarChart2, BookOpen, Brain, Check, ChevronDown, ChevronUp, Clock, Crosshair, Edit2, Gauge, GitBranch, Info, Layers, LayoutDashboard, Lightbulb, Link as LinkIcon, Loader2, Plus, Shield, Sparkles, Star, Target, Trash2, TrendingUp, Workflow, X, Zap } from 'lucide-react';
 import { StrategicOption, StrategicPlan, SWOTItem } from '@/lib/strategicPlanStore';
@@ -95,7 +96,7 @@ const MATRIX_CONTAMINATION = { respondents: 75, allAtDefault: 25, pctCellsAtDefa
 const SURVEY_FRAME = {
   n: 76, window: '3–20 August 2026',
   silentProvinces: ['Basilan', 'Tawi-Tawi'],
-  note: 'Non-probability convenience sample, no weighting frame — validation signals, not population estimates. ~78% of respondents sit in the Cotabato City / Maguindanao del Norte mainland corridor, so Sequence C (BIMP-EAGA maritime, Connectors) is unvalidated.',
+  note: 'Non-probability convenience sample, no weighting frame — validation signals, not population estimates. ~64% of respondents sit in the Cotabato City / Maguindanao del Norte mainland corridor; Basilan and Tawi-Tawi, where Sequence C (BIMP-EAGA maritime) runs, were validated at provincial workshops.',
 } as const;
 
 /**
@@ -762,7 +763,7 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
             </div>
 
             <p className="text-[0.68rem] text-[#a3bfb3] leading-relaxed">
-              {SURVEY_FRAME.note} Zero respondents from {SURVEY_FRAME.silentProvinces.join(' and ')}. Post-2024 BARMM
+              {SURVEY_FRAME.note} {ISLAND_COVERAGE} Post-2024 BARMM
               comprises five provinces plus the SGA and Cotabato City; Sulu is not part of the region.
             </p>
           </div>
