@@ -138,9 +138,9 @@ const WORKSHOP_EVIDENCE = {
 } as const;
 
 /**
- * Strategic option evaluation — survey Section 10, same seven weighted criteria as BIRD Chapter 3. `respondentScore` uses only the 29 respondents who
- * genuinely differentiated their sliders; 25 of 75 left all 28 matrix cells at
- * the default value of 5, so `fullSampleScore` is midpoint-contaminated.
+ * Strategic option evaluation — survey Section 10, same seven weighted criteria as BIRD Chapter 3. `differentiatorScore` uses only the 50 respondents who
+ * moved at least one slider; 25 of 75 left all 28 matrix cells at the default
+ * value of 5, so `fullSampleScore` is midpoint-contaminated.
  */
 const STRATEGY_SIGNALS = {
   /** Verified 2026-08-28. Of the 75 respondents who touched the 4×7 matrix, 25
@@ -148,15 +148,15 @@ const STRATEGY_SIGNALS = {
    *  least one slider. `fullSampleScore` is therefore pulled toward 5.00 by a
    *  third of the sample; `differentiatorScore` uses only the 50 who moved. */
   defaultContamination: { respondents: 75, allCellsAtDefault: 25, differentiators: 50 },
-  /** expertScore = BIRD Ch.4 weighted composite (formulas.ts weights).
-   *  Respondent columns are UNWEIGHTED criterion means — the weighted respondent
-   *  aggregate could not be recomputed at build time and is deliberately not
-   *  asserted here. Compare ranks, not levels, across the two columns. */
+  /** expertScore = analytical baseline, report Chapter 3 Table 3-9 (canonical
+   *  weights 20/18/16/15/15/10/6). Respondent columns = report Table 3-11:
+   *  all respondents (n = 75) and slider movers (n = 50). 8.93/7.61/7.48 came
+   *  from superseded draft weights. Compare ranks, not levels, across columns. */
   options: [
-    { code: 'IEDS', name: 'Integrated Ecosystem Development', expertScore: 8.93, differentiatorScore: 6.61, fullSampleScore: 6.07, expertRank: 1, respondentRank: 1 },
-    { code: 'HEDS', name: 'Halal Economy Dominance',          expertScore: 7.61, differentiatorScore: 6.37, fullSampleScore: 5.91, expertRank: 2, respondentRank: 2 },
-    { code: 'IFES', name: 'Infrastructure-First Enabling',    expertScore: 7.48, differentiatorScore: 6.20, fullSampleScore: 5.80, expertRank: 3, respondentRank: 3 },
-    { code: 'GEMS', name: 'Green Economy Monetization',       expertScore: 7.16, differentiatorScore: 6.15, fullSampleScore: 5.77, expertRank: 4, respondentRank: 4 },
+    { code: 'IEDS', name: 'Integrated Ecosystem Development', expertScore: 8.83, differentiatorScore: 6.57, fullSampleScore: 6.05, expertRank: 1, respondentRank: 1 },
+    { code: 'HEDS', name: 'Halal Economy Dominance',          expertScore: 7.53, differentiatorScore: 6.35, fullSampleScore: 5.90, expertRank: 2, respondentRank: 2 },
+    { code: 'IFES', name: 'Infrastructure-First Enabling',    expertScore: 7.46, differentiatorScore: 6.16, fullSampleScore: 5.77, expertRank: 3, respondentRank: 3 },
+    { code: 'GEMS', name: 'Green Economy Monetization',       expertScore: 7.16, differentiatorScore: 6.10, fullSampleScore: 5.73, expertRank: 4, respondentRank: 4 },
   ],
   /** The finding that actually carries weight: the ordinal ranking is identical
    *  across the expert panel, the full sample and the differentiators-only
@@ -228,8 +228,10 @@ const KPI_IMPORTANCE = [
  * LdS ≈ 29.7%). Do not quote the published shares as current.
  */
 const REGIONAL_TOTALS = {
-  gdp2024B: 299.5,          // ₱B — verify whether PSA has restated post-Sulu
-  growth2024: 2.7,          // %
+  gdpB: 266.59,             // ₱B, 2025, PSA five-province series (report Table 7.6)
+  gdpYear: 2025,
+  growthPct: 5.0,           // %, 2025
+  gdpPreExclusion2024B: 299.5, // ₱B, 2024, region before Sulu's exclusion — reference only
   provincesCovered: 5,      // of 5 current provinces
   coveragePct: 100,         // provincial outlook coverage of the CURRENT region
   sharesRestatementNeeded: true,
@@ -1674,8 +1676,8 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
             <span>
               {RESPONDENTS.totalResponses} consented responses, mean {RESPONDENTS.meanFieldsAnswered} of ~245 fields
               answered. Non-probability convenience sample with no weighting frame &mdash; these are stakeholder
-              validation signals, not population estimates. Regional baseline: &#8369;{REGIONAL_TOTALS.gdp2024B}B GRDP
-              (2024), {REGIONAL_TOTALS.growth2024}% growth; provincial outlook files cover {REGIONAL_TOTALS.coveragePct}%
+              validation signals, not population estimates. Regional baseline: &#8369;{REGIONAL_TOTALS.gdpB}B GRDP
+              ({REGIONAL_TOTALS.gdpYear}, five provinces), {REGIONAL_TOTALS.growthPct}% growth; provincial outlook files cover {REGIONAL_TOTALS.coveragePct}%
               of regional GDP.
             </span>
           </p>

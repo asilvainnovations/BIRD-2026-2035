@@ -159,7 +159,7 @@ export function calculatePhaseProgress(
   target2035: number,
   currentYear = new Date().getFullYear(),
 ): { phase1Progress: number; overallProgress: number; phase: 1 | 2 | 3 } {
-  const phase: 1 | 2 | 3 = currentYear <= 2028 ? 1 : currentYear <= 2032 ? 2 : 3;
+  const phase: 1 | 2 | 3 = currentYear <= 2028 ? 1 : currentYear <= 2031 ? 2 : 3; // P1 2026–28 · P2 2029–31 · P3 2032–35 (report Ch. 3)
   const phase1Progress = calculateKPIProgress(current, target2030);
   const overallProgress = calculateKPIProgress(current, target2035);
   return { phase1Progress, overallProgress, phase };

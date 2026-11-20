@@ -7,6 +7,7 @@ import { useStrategicPlan } from '@/hooks/useStrategicPlan';
 // Existing module — verified exports: ACTION_PLAN_2026, ACTION_SUMMARY, ActionPlan,
 // LP_COLOR_MAP. Nothing else is imported from @/data/bird beyond what ships in the repo.
 import { ACTION_PLAN_2026, ACTION_SUMMARY, type ActionPlan } from '@/data/bird/actions';
+import { ROADMAP_MATH } from '@/data/bird/roadmapMath';
 
 /** Row shape returned by the Supabase `activity_logs` table (snake_case). */
 interface ActivityLog {
@@ -58,27 +59,26 @@ const ACTION_ICONS: Record<string, typeof Plus> = {
    ₱120–160B capital programme, and every entry must be readable against the
    trajectory it is supposed to produce.
 
-   Phase boundaries and budgets are read from phases.ts (source of truth):
-     P1 Foundation      2026–2028   ₱35–45B    ₱13.3B/yr
-     P2 Acceleration    2029–2032   ₱50–65B    ₱14.4B/yr
-     P3 Consolidation   2033–2035   ₱35–50B    ₱14.2B/yr
+   Phase boundaries and budgets follow phases.ts and the report (Ch. 3, Ch. 6):
+     P1 Foundation Building   2026–2028   ₱35–45B    ₱13.3B/yr
+     P2 Acceleration          2029–2031   ₱50–65B    ₱19.2B/yr
+     P3 Consolidation and
+        Global Integration    2032–2035   ₱35–50B    ₱10.6B/yr
 
-   THE CENTRAL FINDING — capital efficiency:
-     GRDP must move ₱299.5B (2024 actual) → ₱550B (2035 target) = 5.68% CAGR,
-     against a 2.70% run-rate. That is a 2.98pp gap. At trend, BARMM lands at
-     ₱401.5B — a ₱148.5B shortfall.
+   THE CENTRAL FINDING — capital efficiency (figures from data/bird/roadmapMath.ts):
+     On the PSA five-province basis adopted in Table 7.6, GRDP must move
+     ₱266.59B (2025) → ₱550B (2035) = ~7.5% a year, against 5.0% growth in
+     2025. At that rate BARMM lands at ~₱434B — a ~₱116B shortfall.
 
-     ΔGRDP ₱250.5B against a ₱140B public envelope implies an ICOR of 0.56
-     (₱0.56 of capital per ₱1 of added output). Developing-economy ICOR is
-     typically 3.0–5.0. At ICOR 3.5 the target would need ₱877B — 6.3x the
-     envelope.
+     ΔGRDP ~₱283B against a ₱140B public envelope implies a public-capital
+     ICOR of ~0.49. The report plans on an ICOR of 3.5–4.0; at 3.5 the target
+     needs ~₱992B — about 7x the envelope.
 
-     CONCLUSION: public capital here is a CATALYST, not the driver. The roadmap
-     is only internally consistent if it crowds in private and FDI capital at
-     roughly 5x public spend. Investment approvals rising ₱5.1B → ₱15B (10.30%
-     CAGR) contribute ~₱106B cumulative, taking blended ICOR to 0.98 — still
-     aggressive. This is the assumption the whole roadmap rests on, and it is
-     what the timeline exists to monitor.
+     CONCLUSION: public capital is a CATALYST, not the driver. The roadmap is
+     internally consistent only if it crowds in private and FDI capital at
+     roughly 6x public spend. Approvals rising ₱5.0B (2025) → ₱15B (2035) at
+     ~11.6% a year add ~₱96B cumulative — still far short, which is why the
+     report flags the investment requirement for reconciliation (Table 7.6).
 
    THE BINDING CONSTRAINT — absorption:
      Infra budget execution is 80% (kpis.ts baseline, target 90%). At 80%,
@@ -87,22 +87,6 @@ const ACTION_ICONS: Record<string, typeof Plus> = {
      budget-execution KPIs sit on the critical path, not in a back office.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-const ROADMAP_MATH = {
-  grdpBase: 299.5,          // ₱B, PSA-BARMM 2024 actual
-  grdpTarget: 550,          // ₱B, BIRD 2035
-  requiredCAGR: 5.68,       // %
-  currentRunRate: 2.70,     // %
-  trendLanding: 401.5,      // ₱B at 2.7% to 2035
-  shortfallAtTrend: 148.5,  // ₱B
-  publicEnvelope: 140,      // ₱B midpoint of ₱120–160B
-  impliedICOR: 0.56,
-  blendedICOR: 0.98,
-  benchmarkICOR: '3.0–5.0',
-  crowdInMultiple: 5.3,
-  approvalsCAGR: 10.30,     // %, ₱5.1B → ₱15B
-  executionRate: 80,        // %, 2024 baseline
-  absorptionLeakage: 28,    // ₱B lost at 80% execution
-} as const;
 
 interface PhaseWindow {
   num: string;
@@ -117,7 +101,7 @@ interface PhaseWindow {
   thesis: string;
 }
 
-/** Mirrors phases.ts. Boundaries verified against source: ≤2028 / ≤2032 / after. */
+/** Mirrors phases.ts and the report: ≤2028 / ≤2031 / 2032–2035. */
 const PHASE_WINDOWS: PhaseWindow[] = [
   {
     num: '01', title: 'Foundation Building', years: '2026 – 2028',
@@ -130,19 +114,19 @@ const PHASE_WINDOWS: PhaseWindow[] = [
       'point of execution rate gained here compounds across ₱100B of later spend.',
   },
   {
-    num: '02', title: 'Acceleration', years: '2029 – 2032',
-    startISO: '2029-01-01', endISO: '2032-12-31',
-    budgetMid: 57.5, annualBurn: 14.38, shareOfEnvelope: 41.1,
+    num: '02', title: 'Acceleration', years: '2029 – 2031',
+    startISO: '2029-01-01', endISO: '2031-12-31',
+    budgetMid: 57.5, annualBurn: 19.17, shareOfEnvelope: 41.1,
     bscFocus: 'Internal Process → Stakeholder',
     thesis:
       'The crowding-in window. Public capital peaks here, but the test is whether private ' +
-      'approvals compound at 10.3% CAGR alongside it. If the multiple does not appear by ' +
+      `approvals compound at ${ROADMAP_MATH.approvalsCAGR}% a year alongside it. If the multiple does not appear by ` +
       '2030, the ₱550B target is arithmetically out of reach and should be restated.',
   },
   {
-    num: '03', title: 'Consolidation & Global Integration', years: '2033 – 2035',
-    startISO: '2033-01-01', endISO: '2035-12-31',
-    budgetMid: 42.5, annualBurn: 14.17, shareOfEnvelope: 30.4,
+    num: '03', title: 'Consolidation and Global Integration', years: '2032 – 2035',
+    startISO: '2032-01-01', endISO: '2035-12-31',
+    budgetMid: 42.5, annualBurn: 10.63, shareOfEnvelope: 30.4,
     bscFocus: 'Stakeholder → Financial',
     thesis:
       'Financial-perspective outcomes land last by design. GRDP, exports and Islamic-finance ' +
@@ -349,9 +333,9 @@ export function ActivityTimeline() {
           {/* Trajectory arithmetic */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { v: `${ROADMAP_MATH.requiredCAGR}%`, l: 'Required GRDP CAGR', s: `vs ${ROADMAP_MATH.currentRunRate}% run-rate`, c: 'text-red-400' },
+              { v: `${ROADMAP_MATH.requiredCAGR}%`, l: 'Required GRDP CAGR', s: `vs ${ROADMAP_MATH.runRate}% growth in ${ROADMAP_MATH.grdpBaseYear}`, c: 'text-red-400' },
               { v: `₱${ROADMAP_MATH.shortfallAtTrend}B`, l: 'Shortfall at trend', s: `lands ₱${ROADMAP_MATH.trendLanding}B of ₱${ROADMAP_MATH.grdpTarget}B`, c: 'text-amber-400' },
-              { v: `${ROADMAP_MATH.impliedICOR}`, l: 'Implied ICOR', s: `benchmark ${ROADMAP_MATH.benchmarkICOR}`, c: 'text-red-400' },
+              { v: `${ROADMAP_MATH.impliedICOR}`, l: 'Public-capital ICOR', s: `report assumes ${ROADMAP_MATH.reportICOR}`, c: 'text-red-400' },
               { v: `${ROADMAP_MATH.crowdInMultiple}x`, l: 'Required crowd-in', s: 'private : public capital', c: 'text-gold' },
             ].map((m) => (
               <div key={m.l} className="rounded-lg border border-gold/20 bg-white/[0.02] p-3">
@@ -364,12 +348,13 @@ export function ActivityTimeline() {
 
           <p className="text-xs text-white/45 leading-relaxed">
             <strong className="text-white/75">The investment thesis in one line:</strong> ΔGRDP of ₱
-            {(ROADMAP_MATH.grdpTarget - ROADMAP_MATH.grdpBase).toFixed(1)}B against a ₱{ROADMAP_MATH.publicEnvelope}B
-            public envelope implies an ICOR of {ROADMAP_MATH.impliedICOR} — far below the {ROADMAP_MATH.benchmarkICOR}{' '}
-            typical of developing economies. Public capital is therefore a <em>catalyst</em>, not the driver. The
+            {ROADMAP_MATH.deltaGRDP}B (from {ROADMAP_MATH.basisLabel}) against a ₱{ROADMAP_MATH.publicEnvelope}B
+            public envelope implies an ICOR of {ROADMAP_MATH.impliedICOR} — far below the {ROADMAP_MATH.reportICOR}{' '}
+            the report assumes. Public capital is therefore a <em>catalyst</em>, not the driver. The
             roadmap is internally consistent only if investment approvals compound at{' '}
-            {ROADMAP_MATH.approvalsCAGR}% CAGR and crowd in roughly {ROADMAP_MATH.crowdInMultiple}x public spend,
-            taking blended ICOR to {ROADMAP_MATH.blendedICOR}. Every milestone below is a test of that assumption.
+            {ROADMAP_MATH.approvalsCAGR}% a year and crowd in roughly {ROADMAP_MATH.crowdInMultiple}x public spend.
+            Approvals on that path add only ~₱{ROADMAP_MATH.approvalsCumulative}B, so the investment requirement is
+            still under reconciliation (report Table 7.6). Every milestone below is a test of that assumption.
           </p>
 
           <div className="rounded-lg border border-amber-500/30 bg-amber-500/[0.07] p-3">
@@ -377,7 +362,7 @@ export function ActivityTimeline() {
               <strong>Binding constraint — absorption, not capital.</strong> At {ROADMAP_MATH.executionRate}% infra
               budget execution, ₱{ROADMAP_MATH.absorptionLeakage}B of the ₱{ROADMAP_MATH.publicEnvelope}B envelope
               never converts to output. Lifting execution to 90% recovers ₱
-              {(ROADMAP_MATH.publicEnvelope * 0.1).toFixed(0)}B — cheaper than raising new capital. This is why
+              {ROADMAP_MATH.executionRecovery}B — cheaper than raising new capital. This is why
               budget-execution and certification-integrity actions sit on the critical path rather than in a back
               office.
             </p>

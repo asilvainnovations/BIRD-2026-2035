@@ -187,17 +187,17 @@ SWOT Diagnosis → Systems Thinking → TOWS Strategy Matrix → Balanced Scorec
     response: `**BARMM Key Economic Indicators (2024–2026):**
 
 • **Population:** 5.69M (PSA 2025)
-• **GRDP:** ₱299.5B (2024); growth 2.7%
+• **GRDP:** ₱266.59B (2025, PSA five-province series); growth 5.0%. ₱299.5B (2024) described the region before Sulu's exclusion
 • **Sectoral split:** Services 42% | AFF 32.4% | Industry 25.6%
-• **Poverty incidence:** 34.8% (1H 2023), down from 55.9% in 2018
-• **Investment approvals:** ₱5.1B (Q1 2026)
+• **Poverty incidence (families):** 23.5% (full-year 2023), down from 52.9% in 2018; 34.8% was the first-semester 2023 figure
+• **Investment approvals:** ₱5.0B (2025); ₱5.1B in January–April 2026
 
 **Provincial Growth Disparity:**
 • **Fastest growing:** Maguindanao del Norte (4.1%), Lanao del Sur (4.0%)
 • **Underinvested islands:** Tawi-Tawi (1.1%), Sulu (1.13%), Basilan (1.6%)
 
 **Infrastructure Gaps:**
-• Electrification: ~75% (target 100% by 2035)
+• Household electrification: ~39–40% in EC areas (target 90% by 2035, 100% by 2040)
 • Broadband penetration: <30% (target 85% by 2035)
 • **ZBIP (Zamboanga-Basilan Integrated Power):** ₱6.67B — strategically critical
 
@@ -350,7 +350,7 @@ The SWOT module provides a 4-quadrant environmental diagnostic with **BIRD's off
 • Peace dividend from BOL implementation
 
 **Weaknesses:**
-• Low electrification (~75%) and broadband (<30%)
+• Low electrification (~39–40% in EC areas) and broadband (<30%)
 • Certification bottleneck: only ~500 halal-certified firms
 • Fragmented land titling and property rights
 • Skills mismatch: TVET not aligned with halal industry needs
@@ -538,7 +538,7 @@ The BSC translates vision into measurable objectives. In BIRD, the perspectives 
 • F4: Green economy revenue (REDD+, PES, carbon)
 
 **2. 👥 Stakeholder — "How do communities and investors see us?"**
-• S1: Poverty reduction (34.8% → <20% by 2035)
+• S1: Poverty reduction (23.5% full-year 2023 → <20% by 2035)
 • S2: Investor satisfaction index
 • S3: MSME empowerment (5,000+ halal-certified)
 • S4: Job creation (target: 200,000+ new jobs)
@@ -630,7 +630,7 @@ PAPs = **Programs, Activities, Projects** — the operational engine of BIRD.
 
 • **Budget:** ₱6.67B
 • **Strategic Criticality:** HIGH — addresses LP2 (Infrastructure–Energy–Connectivity Nexus)
-• **Objective:** Close the electrification gap (~75% → 100% by 2035)
+• **Objective:** Close the electrification gap (~39–40% → 90% by 2035, 100% by 2040)
 • **Components:**
   – Baseload power generation for Basilan and adjacent islands
   – Grid interconnection to mainland Mindanao

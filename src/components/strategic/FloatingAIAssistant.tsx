@@ -21,9 +21,9 @@ const AI_LOGO_URL = 'https://appimize.app/assets/apps/user_1097/images/2c7d825bf
 // ─── Contextual Suggestion Sets ───────────────────────────────────────────────
 const VIEW_SUGGESTIONS: Record<string, { icon: React.ElementType; label: string }[]> = {
   dashboard: [
-    { icon: BarChart3, label: "Why is BARMM's GRDP growing slower than the PDP 5% target?" },
+    { icon: BarChart3, label: 'What growth rate does the ₱550B GRDP target need from the 2025 base?' },
     { icon: Target,   label: 'Which Phase 1 milestones are most time-critical in 2026?' },
-    { icon: Globe2,   label: 'How does the ₱5.1B investment approval figure compare to BIMP-EAGA peers?' },
+    { icon: Globe2,   label: 'How do the ₱5.1B approvals for January–April 2026 compare to BIMP-EAGA peers?' },
     { icon: Brain,    label: 'Explain the R1 Investment–Development virtuous cycle for BARMM.' },
   ],
   swot: [

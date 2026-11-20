@@ -403,7 +403,7 @@ export const BIRD_IMAGES = {
     title: "BIRD Implementation Phases",
     url: "https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/validation-survey-images/30-Phases.png",
     category: "roadmap", section: "section8", alt: "Implementation phases diagram",
-    description: "Three-phase implementation roadmap: Foundation (2026-2028), Acceleration (2029-2031), and Transformation (2032-2035).",
+    description: "Three-phase implementation roadmap: Foundation (2026-2028), Acceleration (2029-2031), and Consolidation and Global Integration (2032-2035).",
   },
   timeline: {
     title: "BIRD Implementation Timeline",
