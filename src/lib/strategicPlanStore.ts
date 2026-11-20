@@ -514,7 +514,7 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
     createItem({ id: generateId(), category: 'strength' as const, description: 'Strategic location within BIMP-EAGA, serving as the Philippines\' gateway to a market of 70M+ ASEAN consumers across Brunei, Indonesia, Malaysia, and Philippines.', impactScore: 5, likelihoodScore: 5, aiGenerated: false, leveragePoint: 'LP3' as LeveragePoint, beieCluster: 'connectors' as BEIECluster }),
     createItem({ id: generateId(), category: 'strength' as const, description: 'Strong agriculture, fisheries, and forestry base — AFF contributes 32.4% of GRDP — with vast natural resource endowments including rubber, coconut, seaweed, and fish stocks.', impactScore: 4, likelihoodScore: 5, aiGenerated: false, leveragePoint: 'LP1' as LeveragePoint, beieCluster: 'foundations' as BEIECluster }),
     createItem({ id: generateId(), category: 'strength' as const, description: 'Growing legislative authority and policy momentum from the Bangsamoro Organic Law (RA 11054), BOL, and CREATE MORE Act enabling investment-friendly regulatory environment.', impactScore: 4, likelihoodScore: 4, aiGenerated: false, leveragePoint: 'LP3' as LeveragePoint, beieCluster: 'cross-cutting' as BEIECluster }),
-    createItem({ id: generateId(), category: 'strength' as const, description: 'Expanding domestic halal consumer base — 5.69M Muslim population (PSA 2025) with specific Shariah-compliant consumption requirements creates a built-in market foundation.', impactScore: 4, likelihoodScore: 4, aiGenerated: false, leveragePoint: 'LP1' as LeveragePoint, beieCluster: 'transformers' as BEIECluster }),
+    createItem({ id: generateId(), category: 'strength' as const, description: 'Expanding domestic halal consumer base — 4.54M population in the five provinces, largely Muslim (PSA) with specific Shariah-compliant consumption requirements creates a built-in market foundation.', impactScore: 4, likelihoodScore: 4, aiGenerated: false, leveragePoint: 'LP1' as LeveragePoint, beieCluster: 'transformers' as BEIECluster }),
     // WEAKNESSES
     createItem({ id: generateId(), category: 'weakness' as const, description: 'Weak halal certification system — Bangsamoro Halal Board lacks OIC/SMIIC international accreditation, limiting global market access. Processing time: 45–60 days (target: ≤21 days by 2035).', impactScore: 5, likelihoodScore: 4, aiGenerated: false, leveragePoint: 'LP1' as LeveragePoint, beieCluster: 'transformers' as BEIECluster }),
     createItem({ id: generateId(), category: 'weakness' as const, description: 'Infrastructure deficit: ~39–40% household electrification in EC areas (target 90% by 2035, 100% by 2040); <30% broadband coverage (target 85% by 2035); inadequate farm-to-market roads constraining agri-processing.', impactScore: 5, likelihoodScore: 5, aiGenerated: false, leveragePoint: 'LP2' as LeveragePoint, beieCluster: 'enablers' as BEIECluster }),
@@ -546,7 +546,7 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
     createItem({ id: generateId(), optionType: 'ST' as TOWSQuadrant, title: 'OIC/SMIIC Standards Alignment to Neutralize Competition', description: 'Secure Mutual Recognition Arrangement (MRA) with OIC/SMIIC by 2035 to neutralize Malaysia/Indonesia competitive advantage. Differentiate via Islamic moral governance — authentic halal narrative vs. purely commercial positioning.', priorityScore: 5, feasibilityScore: 3, selected: true, leveragePoint: 'LP1' as LeveragePoint, beieCluster: 'transformers' as BEIECluster, birdPhase: '1' as BIRDPhase, swotPairs: 'S1 × T1+T2', leverageLevel: 5, resourceRequirement: 'medium', approvedBy: userId, approvedAt: now }),
     createItem({ id: generateId(), optionType: 'ST' as TOWSQuadrant, title: 'Climate-Smart Agribusiness & Green Economy Integration', description: 'Deploy climate-resilient agri-practices and REDD+-financed conservation corridors to protect the AFF base from climate threats — while simultaneously generating PES/carbon revenue via JMC 2026-01.', priorityScore: 3, feasibilityScore: 4, selected: false, leveragePoint: 'LP5' as LeveragePoint, beieCluster: 'foundations' as BEIECluster, birdPhase: '2' as BIRDPhase, swotPairs: 'S3 × T4', leverageLevel: 7, resourceRequirement: 'high' }),
     // WO
-    createItem({ id: generateId(), optionType: 'WO' as TOWSQuadrant, title: 'Infrastructure-First Foundation Building (B1 Ceiling Raise)', description: 'Address B1 Growth-Resource Constraints by front-loading ZBIP (₱6.67B), BSEMP, and BEGMP in Phase 1. Achieve 80% electrification by 2028, 100% by 2035; 60% broadband by 2030. Raises investment ceiling to enable Phase 2 acceleration.', priorityScore: 5, feasibilityScore: 3, selected: true, leveragePoint: 'LP2' as LeveragePoint, beieCluster: 'enablers' as BEIECluster, birdPhase: '1' as BIRDPhase, swotPairs: 'W2 × O1+O2', leverageLevel: 10, resourceRequirement: 'high', approvedBy: userId, approvedAt: now }),
+    createItem({ id: generateId(), optionType: 'WO' as TOWSQuadrant, title: 'Infrastructure-First Foundation Building (B1 Ceiling Raise)', description: 'Address B1 Growth-Resource Constraints by front-loading ZBIP (₱6.67B), BSEMP, and BEGMP in Phase 1. Adopt one electrification metric by 2028; reach 90% household electrification by 2035 (100% by 2040); 60% broadband by 2030. Raises investment ceiling to enable Phase 2 acceleration.', priorityScore: 5, feasibilityScore: 3, selected: true, leveragePoint: 'LP2' as LeveragePoint, beieCluster: 'enablers' as BEIECluster, birdPhase: '1' as BIRDPhase, swotPairs: 'W2 × O1+O2', leverageLevel: 10, resourceRequirement: 'high', approvedBy: userId, approvedAt: now }),
     createItem({ id: generateId(), optionType: 'WO' as TOWSQuadrant, title: 'Halal Human Capital Development & TVET-Industry Alignment', description: 'Close halal expertise gap via BHB Training Academy (OIC partnership), TESDA-industry alignment, and community learning centers. Train 50 BHB officers in 2026 (100+ by 2035) — addressing LG2 BSC gap.', priorityScore: 4, feasibilityScore: 4, selected: true, leveragePoint: 'LP2' as LeveragePoint, beieCluster: 'enablers' as BEIECluster, birdPhase: '1' as BIRDPhase, swotPairs: 'W4 × O1', leverageLevel: 4, resourceRequirement: 'medium', approvedBy: userId, approvedAt: now }),
     createItem({ id: generateId(), optionType: 'WO' as TOWSQuadrant, title: 'Islamic Finance MSME Financing Platform', description: 'Bridge the B4 Islamic finance gap by scaling Al-Amanah Islamic Bank to all 7 provincial capitals, launching Islamic fintech for MSME financing, and piloting takaful/waqf products targeting ₱20B+ in Islamic banking assets by 2035.', priorityScore: 4, feasibilityScore: 3, selected: true, leveragePoint: 'LP4' as LeveragePoint, beieCluster: 'financiers' as BEIECluster, birdPhase: '2' as BIRDPhase, swotPairs: 'W5 × O3', leverageLevel: 4, resourceRequirement: 'medium', approvedBy: userId, approvedAt: now }),
     // WT
@@ -563,13 +563,13 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
   plan.objectives = [
     {
       id: obj1Id, perspective: 'financial', weight: 1.5,
-      objective: 'Grow BARMM GRDP to ₱440B by 2030 and ₱550B+ by 2035',
+      objective: 'Grow BARMM GRDP to ₱383B by 2030 and ₱550B+ by 2035',
       description: 'Sustain GRDP growth of about 7.5% a year from ₱266.59B (2025, five-province series; 5.0% growth in 2025) through investment-led expansion across all BEIE clusters.',
       bscCode: 'F2', leveragePoint: 'LP1', beieCluster: 'transformers', birdPhase: '1',
       createdBy: userId, createdByName: userName, createdAt: now, champion: userId, championName: userName,
       kpis: [{
         id: generateId(), objectiveId: obj1Id, name: 'BARMM GRDP', description: 'Annual Gross Regional Domestic Product at current prices',
-        unit: '₱B', baselineValue: 266.59, targetValue: 550, target2030: 440, currentValue: 266.59,
+        unit: '₱B', baselineValue: 266.59, targetValue: 550, target2030: 383, currentValue: 266.59,
         frequency: 'annually', owner: userId, ownerName: userName, status: 'on-track', leveragePoint: 'LP1',
         benchmarkSource: 'PSA-RSSO BARMM / NEDA PDP 2023-2028',
       }],
@@ -582,7 +582,7 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
       createdBy: userId, createdByName: userName, createdAt: now, champion: userId, championName: userName,
       kpis: [{
         id: generateId(), objectiveId: obj2Id, name: 'Annual Investment Approvals', description: 'Total BBOI-approved investment value',
-        unit: '₱B', baselineValue: 5.1, targetValue: 15, target2030: 8, currentValue: 5.1,
+        unit: '₱B', baselineValue: 5.0, targetValue: 15, target2030: 10, currentValue: 5.1,
         frequency: 'quarterly', owner: userId, ownerName: userName, status: 'on-track', leveragePoint: 'LP1',
         benchmarkSource: 'BBOI / BEZA Investment Reports (January–April 2026)',
       }],
@@ -608,7 +608,7 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
       createdBy: userId, createdByName: userName, createdAt: now, champion: userId, championName: userName,
       kpis: [{
         id: generateId(), objectiveId: obj4Id, name: 'Poverty Incidence Rate', description: 'BARMM poverty incidence (PSA Family Income and Expenditure Survey)',
-        unit: '%', baselineValue: 23.5, targetValue: 20, target2030: 22, currentValue: 23.5,
+        unit: '%', baselineValue: 23.5, targetValue: 20, target2030: 25, currentValue: 23.5,
         frequency: 'annually', owner: userId, ownerName: userName, status: 'at-risk', leveragePoint: 'LP1',
         benchmarkSource: 'PSA 1H 2023 / BDP 2023-2028',
       }],

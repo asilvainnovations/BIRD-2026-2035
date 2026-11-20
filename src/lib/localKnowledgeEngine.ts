@@ -186,7 +186,7 @@ SWOT Diagnosis → Systems Thinking → TOWS Strategy Matrix → Balanced Scorec
     weight: 9,
     response: `**BARMM Key Economic Indicators (2024–2026):**
 
-• **Population:** 5.69M (PSA 2025)
+• **Population:** 4.54M (five provinces, Sulu excluded; PSA)
 • **GRDP:** ₱266.59B (2025, PSA five-province series); growth 5.0%. ₱299.5B (2024) described the region before Sulu's exclusion
 • **Sectoral split:** Services 42% | AFF 32.4% | Industry 25.6%
 • **Poverty incidence (families):** 23.5% (full-year 2023), down from 52.9% in 2018; 34.8% was the first-semester 2023 figure
