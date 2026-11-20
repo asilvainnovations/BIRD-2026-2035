@@ -915,12 +915,10 @@ export function generateLocalResponse(ctx: ResponseContext): string {
   // Take top match (or blend top 2 if scores are close)
   const top = scored[0];
   const runnerUp = scored[1];
-  let response: string;
-
   // One answer per question: no blended "also relevant" block and no plan-context
   // footer — the panel already shows which plan is open.
   void runnerUp;
-  response = typeof top.entry.response === 'function' ? top.entry.response(ctx) : top.entry.response;
+  const response = typeof top.entry.response === 'function' ? top.entry.response(ctx) : top.entry.response;
 
   return response.trim();
 }
