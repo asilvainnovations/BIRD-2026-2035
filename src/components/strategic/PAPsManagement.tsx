@@ -21,9 +21,10 @@ import {
 } from 'lucide-react';
 import { PAP, StrategicPlan, BSCObjective } from '@/lib/strategicPlanStore';
 import { supabase } from '@/lib/supabase';
+import { toast } from 'sonner';
+import { missingFrom, bestMatch, NOTHING_NEW } from '@/lib/localStrategist';
 
 // Edge Function URLs
-const AI_URL = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
 const SYNC_URL = EDGE_FUNCTIONS.STRATEGIC_PLANNER_SYNC;
 const EMAIL_URL = EDGE_FUNCTIONS.EMAIL_NOTIFICATIONS;
 
@@ -427,48 +428,24 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
     }
   };
 
-  // 3. AI Generate PAPs
+  // 3. Local Strategist: proposes the Phase 1 priority PAPs from the BIRD report
+  // that the plan does not yet hold, each linked to the plan objective in the
+  // same BSC perspective that it fits best.
   const handleGeneratePAPs = async () => {
     setIsGenerating(true);
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      const response = await fetch(AI_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session?.access_token || ''}`,
-        },
-        body: JSON.stringify({
-          action: 'generate_paps',
-          data: {
-            objectives: plan.objectives.map(o => ({ id: o.id, title: o.objective, perspective: o.perspective })),
-            timeHorizon: `${plan.planningPeriodStart} to ${plan.planningPeriodEnd}`,
-          },
-          plan: plan,
-        }),
+      const PERSPECTIVE: Record<string, string> = {
+        'bird-obj-f': 'financial', 'bird-obj-s': 'stakeholder',
+        'bird-obj-ip': 'internal_process', 'bird-obj-lg': 'learning_growth',
+      };
+      const missing = missingFrom(BIRD_PAP_BASELINE, (plan.paps || []).map((p) => p.name), (p) => p.name);
+      if (!missing.length) { toast.info(NOTHING_NEW); return; }
+      missing.forEach(({ id: _id, objectiveId, ...p }) => {
+        void _id;
+        const pool = (plan.objectives || []).filter((o) => o.perspective === PERSPECTIVE[objectiveId || '']);
+        const linked = bestMatch(`${p.name} ${p.description}`, pool, (o) => `${o.objective} ${o.description}`, 0) ?? pool[0];
+        onAddPAP({ ...p, objectiveId: linked?.id });
       });
-
-      const result = await response.json();
-      if (result.success && result.data && Array.isArray(result.data)) {
-        result.data.forEach((aiPap: any) => {
-          onAddPAP({
-            papType: aiPap.type || 'project',
-            name: aiPap.name,
-            description: aiPap.description || '',
-            owner: session?.user?.id || '',
-            ownerName: 'AI Generated',
-            budget: aiPap.budget_estimate || 0,
-            spent: 0,
-            startDate: new Date().toISOString().split('T')[0],
-            endDate: new Date(Date.now() + (aiPap.duration_months || 6) * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-            progress: 0,
-            status: 'planned',
-            objectiveId: aiPap.linked_objective_id || undefined,
-          });
-        });
-      }
-    } catch (error) {
-      console.error('Failed to generate PAPs:', error);
     } finally {
       setIsGenerating(false);
     }
@@ -552,7 +529,7 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
             className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#065f46] to-[#4c1d95] text-white rounded-xl text-sm font-bold hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-50 transition-all"
           >
             {isGenerating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
-            AI Generate PAPs
+            Add Phase 1 PAPs
           </button>
           <div className="relative group">
             <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#a3bfb3] group-focus-within:text-[#C9A84C]" />

@@ -37,7 +37,6 @@ const EDGE_BASE =
   ((import.meta.env.VITE_SUPABASE_FUNCTIONS_URL as string) || `${supabaseUrl}/functions/v1`).replace(/\/$/, '');
 
 export const EDGE_FUNCTIONS = {
-  AI_STRATEGY_ASSISTANT: `${EDGE_BASE}/ai-strategy-assistant`,
   STRATEGIC_PLANNER_SYNC: `${EDGE_BASE}/strategic-planner-sync`,
   EMAIL_NOTIFICATIONS:    `${EDGE_BASE}/email-notifications`,
   CRM_DISPATCHER:         `${EDGE_BASE}/crm-dispatcher`,

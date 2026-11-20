@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
-import { EDGE_FUNCTIONS } from '@/lib/supabase';
+import { similarity } from '@/lib/localStrategist';
 import { supabase } from '@/lib/supabase';
 import {
   Shield,
@@ -1659,7 +1659,7 @@ const AnalysisSidePanel: React.FC<AnalysisSidePanelProps> = ({
       <div className="p-4 border-b border-[#C9A84C]/20 flex items-center justify-between bg-gradient-to-r from-blue-500/10 to-indigo-500/10">
         <div className="flex items-center gap-2">
           <Bot className="w-5 h-5 text-[#C9A84C]" />
-          <h3 className="font-semibold text-[#ecfdf5]">AI Strategy Assistant</h3>
+          <h3 className="font-semibold text-[#ecfdf5]">Loop &amp; Leverage Analysis</h3>
         </div>
         <button onClick={onClose} className="hover:text-[#ecfdf5]/80"><X className="w-5 h-5" /></button>
       </div>
@@ -1752,7 +1752,7 @@ const AnalysisSidePanel: React.FC<AnalysisSidePanelProps> = ({
           {analysisData.recommendations && analysisData.recommendations.length > 0 && (
             <section>
               <h4 className="font-semibold text-sm text-[#ecfdf5] mb-3 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-amber-500" /> AI Recommendations
+                <Sparkles className="w-4 h-4 text-amber-500" /> Recommendations
               </h4>
               <ul className="space-y-2">
                 {analysisData.recommendations.map((rec, idx) => (
@@ -1892,41 +1892,54 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
   const handleUpdateNodes = useCallback((newNodes: ExtendedCLDNode[]) => setLocalCldNodes(newNodes), []);
   const handleUpdateLinks = useCallback((newLinks: ExtendedCLDLink[]) => setLocalCldLinks(newLinks), []);
 
-  // ── AI Analysis via Kimi Edge Function ─────────────────────────────────────
-  const AI_STRATEGY_URL = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
-
-  const executeAIAnalysis = useCallback(async (
+  // ── Loop & leverage analysis (local) ───────────────────────────────────────
+  // Runs entirely in the browser on the CLD on the canvas: loop detection by
+  // polarity, archetype fit from structure and variable names, and Meadows-ranked
+  // leverage points from the archetype and loop generators above.
+  const executeAIAnalysis = async (
     nodes: ExtendedCLDNode[], links: ExtendedCLDLink[], strategies: string[],
   ): Promise<AIAnalysisResponse> => {
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      const token = session?.access_token;
+    const loops = findLoops(nodes, links);
+    const hasR = loops.some(l => l.type === 'R');
+    const hasB = loops.some(l => l.type === 'B');
+    const labels = nodes.map(n => n.label).join(' ');
 
-      const response = await fetch(AI_STRATEGY_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          action: 'analyze_loops',
-          data: { nodes, links, selectedStrategies: strategies },
-        }),
-      });
+    const dominant = systemArchetypes
+      .map(a => {
+        const wantsR = /reinforc/i.test(a.category);
+        const wantsB = /balanc/i.test(a.category);
+        const loopFit = ((!wantsR || hasR) ? 0.5 : 0) + ((!wantsB || hasB) ? 0.5 : 0);
+        const textFit = similarity(labels, `${a.name} ${a.nodeLabels.join(' ')} ${a.desc}`);
+        const confidence = Math.min(0.95, (a.id === selectedArchId ? 0.4 : 0) + 0.6 * textFit + 0.3 * loopFit);
+        return {
+          archetypeId: a.id,
+          archetypeName: a.name,
+          confidence: Math.round(confidence * 100) / 100,
+          matchedNodes: nodes.filter(n => a.nodeLabels.some(l => similarity(l, n.label) >= 0.5)).map(n => n.id),
+        };
+      })
+      .filter(d => d.confidence >= 0.35)
+      .sort((x, y) => y.confidence - x.confidence)
+      .slice(0, 3);
 
-      if (!response.ok) {
-        const errText = await response.text().catch(() => 'unknown');
-        throw new Error(`Kimi AI error ${response.status}: ${errText.slice(0, 200)}`);
-      }
+    const archId = selectedArchId || dominant[0]?.archetypeId;
+    const points = [
+      ...(archId ? generateArchetypeLeveragePoints(archId, nodes, links) : []),
+      ...generateCLDLeveragePoints(nodes, links),
+    ]
+      .sort((x, y) => x.leverageLevel - y.leverageLevel)
+      .map(({ source: _s, ...p }) => { void _s; return p; });
 
-      const result = await response.json();
-      if (!result.success) throw new Error(result.error || 'AI analysis failed');
-      return (result.data || result) as AIAnalysisResponse;
-    } catch (err) {
-      console.error('AI analysis error:', err);
-      throw new Error(err instanceof Error ? err.message : 'Failed to analyze loops');
-    }
-  }, []);
+    const recommendations: string[] = [];
+    const strongR = loops.filter(l => l.type === 'R').sort((x, y) => y.strength - x.strength)[0];
+    if (strongR) recommendations.push(`Protect and strengthen ${strongR.name.split(':')[0]}; it is the strongest reinforcing loop on the map.`);
+    if (!hasB && loops.length) recommendations.push('No balancing loop was found. Add the constraint (capacity, certification, finance) that will eventually limit growth.');
+    if (!loops.length) recommendations.push('No closed loop yet. Link the variables back to each other so feedback can be analysed.');
+    if (points[0]) recommendations.push(`Highest leverage: ${points[0].intervention} (Meadows level ${points[0].leverageLevel}).`);
+    if (strategies.length) recommendations.push(`Check that the ${strategies.length} selected strateg${strategies.length === 1 ? 'y acts' : 'ies act'} on the variables named in the leverage points.`);
+
+    return { detected_loops: loops, dominant_archetypes: dominant, ranked_leverage_points: points, recommendations };
+  };
 
   // Fall back to the survey-scored baseline when the plan has no SWOT items, so
   // scoring, archetype recommendation and CLD seeding run on real evidence.
@@ -2370,15 +2383,15 @@ const SystemsThinking: React.FC<SystemsThinkingProps> = ({ plan, onUpdateItem, p
       {/* Floating AI Assistant — Systems Thinking Context */}
       <FloatingAIAssistant plan={plan} activeView="systems" />
 
-      {/* Kimi AI Quick Actions — Systems Thinking */}
+      {/* Loop analysis quick action — Systems Thinking */}
       <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-2">
         <button
           onClick={() => setAnalysisPanelOpen(true)}
           className="group flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#C9A84C] via-[#B8942E] to-[#E8C560] text-[#022c22] shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
-          title="AI Loop Analysis"
+          title="Loop &amp; leverage analysis"
         >
           <AIStrategistAvatar size="sm" />
-          <span className="text-xs font-semibold">Kimi AI · Analyze Loops</span>
+          <span className="text-xs font-semibold">Analyze Loops</span>
         </button>
       </div>
 

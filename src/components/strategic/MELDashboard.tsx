@@ -2,7 +2,9 @@ import React, { useMemo, useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from '@/lib/motion-shim';
 import { TrendingUp, TriangleAlert as AlertTriangle, CircleCheck as CheckCircle2, Clock, Target, DollarSign, Users, Cog, GraduationCap, ArrowUpRight, FolderKanban, Info, X, Send, Sparkles, Globe, ChevronDown, Loader as Loader2, ExternalLink, BookOpen, GitBranch, BrainCircuit, Layers, ArrowRight, Play, Zap, Shield, Leaf, ClipboardCheck } from 'lucide-react';
 import { StrategicPlan } from '@/lib/strategicPlanStore';
-import { EDGE_FUNCTIONS, BRAND_ASSETS } from '@/lib/supabase';
+import { BRAND_ASSETS } from '@/lib/supabase';
+import { generateAnswer } from '@/lib/localKnowledgeEngine';
+import ChatText from './ChatText';
 import { openValidationSurvey } from '@/lib/bird-urls';
 
 // ─── Import HeroSection from external file ────────────────────────────────────
@@ -12,7 +14,6 @@ import HeroSection from './HeroSection';
 const BIRD_BANNER_URL =
   'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/public/BIRD%20Banner.png';
 const AI_AVATAR_URL = BRAND_ASSETS.AI_AVATAR_URL;
-const AI_ENDPOINT   = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
 
 // ─── BIRD 2026-2035 Data ──────────────────────────────────────────────────────
 import { PARETO_KPIS }                                     from '@/data/bird/kpis';
@@ -599,22 +600,11 @@ const AIAvatar: React.FC<{ size?: number }> = ({ size = 36 }) => (
   </div>
 );
 
-// ─── Inline markdown renderer ─────────────────────────────────────────────────
-const renderMarkdown = (content: string) =>
-  content.split('\n').map((line, i) => {
-    if (line.startsWith('• ') || line.startsWith('- '))
-      return <li key={i} className="ml-4 list-disc text-sm leading-relaxed">{line.slice(2)}</li>;
-    if (/^\*\*(.+)\*\*$/.test(line))
-      return <p key={i} className="font-bold text-sm mt-2">{line.replace(/\*\*/g, '')}</p>;
-    if (line === '') return <div key={i} className="h-1.5" />;
-    return <p key={i} className="text-sm leading-relaxed">{line.replace(/\*\*/g, '')}</p>;
-  });
-
 // ─── AI Strategist Sidebar Chat ───────────────────────────────────────────────
 const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([{
     id: '0', role: 'assistant', timestamp: new Date(),
-    content: `As-salamu alaykum! I'm BIRD AI — your embedded strategy consultant for the Bangsamoro Investment Roadmap 2026–2035.\n\nI bring expertise in:\n\n**Systems Thinking & Causal Analysis**\n• Feedback loop detection (R1/R2/B1-B4)\n• Meadows Leverage Points (LP1–LP5)\n• 7 BARMM Systems Archetypes\n\n**Investment & Strategy**\n• Panel A: 6 Pareto KPIs · Panel B: BSC Leverage Points\n• Panel C: Priority Action Board 2026\n• Panel E: Phase Progress (₱120–160B Roadmap)\n\n**Current Phase:** Foundation Building (2026–2028)\n**Active Focus:** BHB Operationalisation & Forestry Code\n\nWhat would you like to explore?`,
+    content: "As-salamu alaykum. Ask me about the dashboard's KPIs, the phases and actions, or anything in the BIRD 2026–2035 report.",
   }]);
   const [input, setInput]     = useState('');
   const [loading, setLoading] = useState(false);
@@ -642,30 +632,8 @@ const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     setLoading(true);
 
     try {
-      const res = await fetch(AI_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'chat',
-          data: {
-            message: q,
-            activeView: 'dashboard',
-            messages: history,
-            birdContext: { phase: 'Phase 1: Foundation Building (2026-2028)' },
-          },
-        }),
-      });
-
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      const reply = data?.data?.reply || data?.data?.markdown || 'I received your question but had trouble generating a response. Please try again.';
-
+      const reply = await generateAnswer({ query: q, activeView: 'dashboard', history });
       setMessages(p => [...p, { id: (Date.now()+1).toString(), role: 'assistant', content: reply, timestamp: new Date() }]);
-    } catch {
-      setMessages(p => [...p, {
-        id: (Date.now()+1).toString(), role: 'assistant', timestamp: new Date(),
-        content: 'I encountered a connection issue. Please check your internet connection and try again. The AI service requires the Supabase edge function to be deployed and the OPENAI_API_KEY secret to be configured.',
-      }]);
     } finally {
       setLoading(false);
     }
@@ -680,20 +648,20 @@ const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       initial={{ opacity: 0, x: 80, scale: 0.97 }} animate={{ opacity: 1, x: 0, scale: 1 }}
       exit={{ opacity: 0, x: 80, scale: 0.97 }} transition={{ type: 'spring', damping: 24, stiffness: 260 }}
       className="fixed right-0 top-0 h-full w-full max-w-md z-50 flex flex-col shadow-2xl bg-[#022c22] border-l border-[rgba(201,168,76,0.32)]"
-      role="dialog" aria-modal="true" aria-label="BIRD AI Strategy Assistant"
+      role="dialog" aria-modal="true" aria-label="BIRD Local Intelligence"
     >
       {/* Header */}
       <div className="flex items-center gap-3 px-5 py-4 border-b border-[rgba(201,168,76,0.32)] bg-[rgba(6,78,59,0.5)] flex-shrink-0">
         <AIAvatar size={36} />
         <div className="flex-1 min-w-0">
-          <p className="font-bold text-[#ecfdf5] text-sm font-display">BIRD AI Strategist</p>
+          <p className="font-bold text-[#ecfdf5] text-sm font-display">BIRD Local Intelligence</p>
           <p className="text-xs text-[#C9A84C] flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" aria-hidden="true" />
             BIRD 2026–2035 · MEL Dashboard
           </p>
         </div>
         <button
-          onClick={onClose} aria-label="Close AI assistant"
+          onClick={onClose} aria-label="Close assistant"
           className="p-1.5 rounded-lg hover:bg-white/10 text-[#ecfdf5]/60 hover:text-white transition"
         >
           <X className="w-4 h-4" />
@@ -718,7 +686,7 @@ const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 : 'bg-[rgba(6,78,59,0.6)] text-[#ecfdf5] border border-[rgba(201,168,76,0.32)] rounded-bl-sm ml-2'
             }`}>
               {msg.role === 'assistant'
-                ? <div className="space-y-0.5">{renderMarkdown(msg.content)}</div>
+                ? <ChatText text={msg.content} />
                 : <p>{msg.content}</p>
               }
               <p className={`text-[10px] mt-2 opacity-50`}>
@@ -767,7 +735,7 @@ const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             onKeyDown={onKey}
             placeholder="Ask about systems thinking, BARMM investment…"
             rows={1}
-            aria-label="Message BIRD AI"
+            aria-label="Message BIRD Local Intelligence"
             className="flex-1 bg-transparent text-sm text-[#ecfdf5] placeholder-[#ecfdf5]/40 resize-none focus:outline-none leading-relaxed"
             style={{ maxHeight: 100 }}
           />
@@ -780,7 +748,7 @@ const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             <Send className="w-3.5 h-3.5" />
           </button>
         </div>
-        <p className="text-center text-[10px] text-[#ecfdf5]/20 mt-2">BIRD AI · BOI-MTIT, BARMM · Powered by GPT-4o</p>
+        <p className="text-center text-[10px] text-[#ecfdf5]/20 mt-2">BIRD Local Intelligence · BOI-MTIT, BARMM · Offline capable</p>
       </div>
     </motion.div>
   );
@@ -2004,7 +1972,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
             initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}
             whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}
             onClick={() => setShowAIChat(true)}
-            aria-label="Open BIRD AI Strategy Assistant"
+            aria-label="Open BIRD Local Intelligence"
             className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-[#022c22]/90 backdrop-blur shadow-xl shadow-[#C9A84C]/40 flex items-center justify-center border-2 border-[#C9A84C]/50 hover:border-[#C9A84C] transition"
           >
             <AIAvatar size={48} />

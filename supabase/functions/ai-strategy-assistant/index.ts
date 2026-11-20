@@ -1,3 +1,9 @@
+// STATUS (2026-11-21): the Strat Planner Pro platform no longer calls this function.
+// Its chat and every generate/suggest button run on the BIRD Local Intelligence
+// Engine (src/lib/localKnowledgeEngine.ts, birdCorpus.ts, localStrategist.ts).
+// It stays deployed only because bird-validation-survey's FloatingAIAssistant still
+// calls it on this Supabase project. Retire it once that app uses the local engine.
+
 // ─── BIRD 2026-2035 — AI STRATEGY ASSISTANT EDGE FUNCTION v2.3 (2026-11-21: v57 origin allowlist restored; figures aligned with the finalised report) ───────────────
 // Domain-expert AI for the Bangsamoro Investment Roadmap Development (BIRD)
 // 2026-2035 — investment, strategic thinking, systems thinking, BARMM context.

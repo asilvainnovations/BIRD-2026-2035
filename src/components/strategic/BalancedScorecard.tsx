@@ -27,31 +27,18 @@ import {
 } from 'lucide-react';
 import { BSCObjective, KPI, StrategicPlan, StrategicOption } from '@/lib/strategicPlanStore';
 import { supabase } from '@/lib/supabase';
+import { toast } from 'sonner';
+import { generateAnswer } from '@/lib/localKnowledgeEngine';
+import { missingFrom, similarity, bestMatch, NOTHING_NEW } from '@/lib/localStrategist';
+import ChatText from './ChatText';
 import { cn } from '@/lib/utils';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
 import { ROADMAP_MATH } from '@/data/bird/roadmapMath';
 
 // Edge Function URLs
-const AI_ASSISTANT_URL = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
 const SYNC_URL = EDGE_FUNCTIONS.STRATEGIC_PLANNER_SYNC;
 const EMAIL_URL = EDGE_FUNCTIONS.EMAIL_NOTIFICATIONS;
 
-// ─── NEW: STRATEGIC FRAMEWORK CONTEXT FOR AI EXPERTISE ─────────────────────────────
-const BIRD_STRATEGIC_CONTEXT = `
-=== BIRD 2026-2035 STRATEGIC FRAMEWORK: METRICS & BSC ===
-[KPI BENCHMARKING & CALIBRATION]
-- Calibration Tiers: Baseline (2024-25), Interim 1 (2028), Interim 2 (2030), Terminal (2035), Long-Horizon (2040).
-- External Benchmarks: OIC/SMIIC Halal Standards, ESG criteria, PDP 2023-2028, UN SDGs.
-- BEIE Clusters: Foundations (AFF, Energy), Transformers (Halal, MSMEs), Enablers (Infra, Digital, Human Capital), Connectors (Trade, BIMP-EAGA), Financiers (Islamic Finance).
-- Cross-Cutting OS Metrics: Moral Governance, Resilience, Inclusivity, Peace.
-
-[STRATEGY MAP & BALANCED SCORECARD (IEDS ALIGNMENT)]
-- FINANCIAL PERSPECTIVE: Investment approvals (₱15B p.a.), GRDP (₱550B+), Exports (₱40B+), Green Economy Revenue (₱500M), Islamic Finance Assets (₱20B+).
-- STAKEHOLDER PERSPECTIVE: Investor satisfaction (8.0+/10), MSME halal cert (5,000+), Poverty incidence (<20%), Financial inclusion (70%+), Jobs created (20,000+), Provincial equity (<1.5pp disparity).
-- INTERNAL PROCESS PERSPECTIVE: Business registration (1 day digital), BHB OIC/SMIIC accreditation (Full MRA), Infra budget execution (>90%), Inter-agency coordination (8/10), Climate-risk screening (100%).
-- LEARNING & GROWTH PERSPECTIVE: Halal expertise (100+ officers), Islamic finance pros (50+), IPA capacity (80% certified), Digital platforms (20+ BEGMP), Functional literacy (75%+), Green economy LGU staff (200+), TESDA alignment (15 TRs).
-- CAUSAL PATHWAYS: 1. Halal Economy Value Chain, 2. Infrastructure-Enabled Growth, 3. Green Economy Monetization, 4. Inclusive Development, 5. Islamic Finance Ecosystem.
-`;
 
 interface BalancedScorecardProps {
   plan: StrategicPlan;
@@ -453,46 +440,24 @@ const ObjectiveCard: React.FC<{
     setIsAddingKPI(false);
   };
 
+  // Local Strategist: proposes the KPIs from the BIRD BSC template objective
+  // that best matches this objective, skipping KPIs the objective already has.
   const handleGenerateKPIs = async () => {
     setIsGeneratingKPIs(true);
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      const response = await fetch(AI_ASSISTANT_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session?.access_token || ''}`,
-        },
-        body: JSON.stringify({
-          action: 'generate_kpis',
-          data: {
-            perspective: config.label,
-            objective: objective.objective,
-            context: objective.description,
-          },
-          plan: plan,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (result.success && result.data?.kpis && Array.isArray(result.data.kpis)) {
-        result.data.kpis.forEach((kpi: any) => {
-          onAddKPI({
-            name: kpi.name,
-            description: kpi.description || '',
-            baselineValue: kpi.baseline_value || kpi.baselineValue || 0,
-            targetValue: kpi.target_value || kpi.targetValue || 0,
-            currentValue: kpi.baseline_value || kpi.baselineValue || 0,
-            unit: kpi.unit || '',
-            frequency: kpi.frequency || 'monthly',
-            owner: '',
-            status: 'on-track',
-          });
-        });
+      const pool = BIRD_BSC_TEMPLATE_OBJECTS.filter((t) => t.perspective === objective.perspective);
+      const code = (objective.bscCode || objective.objective.match(/^([A-Z]{1,2}\d+)\s*:/)?.[1] || '').toUpperCase();
+      const match = (code && pool.find((t) => t.objective.toUpperCase().startsWith(`${code}:`)))
+        || bestMatch(`${objective.objective} ${objective.description}`, pool, (t) => `${t.objective} ${t.description}`);
+      const kpis = match ? missingFrom(match.kpis, (objective.kpis || []).map((k) => k.name), (k) => k.name) : [];
+      if (!kpis.length) {
+        toast.info(match ? NOTHING_NEW : 'No BIRD template objective matches this one closely enough to suggest KPIs.');
+        return;
       }
-    } catch (error) {
-      console.error('Failed to generate KPIs:', error);
+      kpis.forEach(({ id: _id, objectiveId: _o, ...k }) => {
+        void _id; void _o;
+        onAddKPI({ ...k, owner: k.owner || '' });
+      });
     } finally {
       setIsGeneratingKPIs(false);
     }
@@ -637,7 +602,7 @@ const ObjectiveCard: React.FC<{
                       className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-purple-400 border border-purple-500/25 rounded-lg hover:bg-purple-500/10 transition-colors disabled:opacity-50"
                     >
                       {isGeneratingKPIs ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
-                      AI Suggest KPIs
+                      Suggest BIRD KPIs
                     </button>
                   </>
                 )}
@@ -750,7 +715,7 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
   const [aiMessages, setAiMessages] = useState<{role: string, content: string}[]>([
     {
       role: 'assistant',
-      content: `Hello! I'm **BIRD AI**, your strategy map and KPI expert for the Bangsamoro Investment Roadmap 2026-2035.\n\nI can help you:\n• Design SMART KPIs aligned with OIC/SMIIC, ESG, and PDP benchmarks.\n• Map causal pathways across the 4 BSC perspectives (Financial, Stakeholder, Internal Process, Learning & Growth).\n• Calibrate targets across the 5 BEIE clusters (Foundations, Transformers, Enablers, Connectors, Financiers).\n\nHow can I assist your BSC strategy today?`
+      content: 'Ask me about BSC objectives, KPIs and targets, or anything in the BIRD 2026–2035 report.'
     }
   ]);
   const [aiInput, setAiInput] = useState('');
@@ -765,33 +730,13 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
     setIsAiLoading(true);
 
     try {
-      // Inject BIRD strategic context into the first user message to guide the AI
-      const historyWithCtx = newMessages.map((m, idx) => {
-        if (idx === 1 && m.role === 'user') { 
-           return { role: 'user', content: `[CONTEXT: BIRD 2026-2035 STRATEGIC FRAMEWORK]\n${BIRD_STRATEGIC_CONTEXT}\n\n[USER QUESTION]: ${m.content}` };
-        }
-        return { role: m.role, content: m.content };
+      const reply = await generateAnswer({
+        query: userMsg.content,
+        activeView: 'scorecard',
+        plan,
+        history: newMessages.slice(0, -1),
       });
-
-      const response = await fetch(AI_ASSISTANT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'chat',
-          data: {
-            messages: historyWithCtx.slice(0, -1),
-            message: historyWithCtx[historyWithCtx.length - 1].content,
-            activeView: 'BalancedScorecard'
-          },
-          plan: plan
-        }),
-      });
-
-      const result = await response.json();
-      const reply = result?.data?.reply || result?.data?.markdown || 'I could not process that request.';
       setAiMessages(prev => [...prev, { role: 'assistant', content: reply }]);
-    } catch (err) {
-      setAiMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, I encountered a connection error. Please try again.' }]);
     } finally {
       setIsAiLoading(false);
     }
@@ -916,41 +861,22 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
     setNewObjective({ perspective: null, objective: '', description: '' });
   };
 
+  // Local Strategist: proposes BIRD BSC template objectives (with their KPIs)
+  // that the plan does not yet have, those closest to the selected strategies first.
   const handleGenerateObjectives = async () => {
     setIsGeneratingObjectives(true);
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      const response = await fetch(AI_ASSISTANT_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session?.access_token || ''}`,
-        },
-        body: JSON.stringify({
-          action: 'generate_objectives',
-          data: {
-            planStrategicIntent: plan.strategicIntent,
-            swotSummary: plan.swotItems || [],
-            selectedStrategies: selectedStrategies.map(s => ({ title: s.title, description: s.description })),
-          },
-          plan: plan,
-        }),
+      const focus = [plan.strategicIntent, ...selectedStrategies.map((s) => `${s.title} ${s.description}`)].filter(Boolean).join(' ');
+      const missing = missingFrom(BIRD_BSC_TEMPLATE_OBJECTS, (plan.objectives || []).map((o) => o.objective), (o) => o.objective)
+        .map((o) => ({ o, fit: focus ? similarity(focus, `${o.objective} ${o.description}`) : 0 }))
+        .sort((x, y) => y.fit - x.fit)
+        .slice(0, 8)
+        .map(({ o }) => o);
+      if (!missing.length) { toast.info(NOTHING_NEW); return; }
+      missing.forEach(({ id: _id, ...o }) => {
+        void _id;
+        onAddObjective({ perspective: o.perspective, objective: o.objective, description: o.description, weight: o.weight || 1 });
       });
-
-      const result = await response.json();
-
-      if (result.success && result.data?.objectives && Array.isArray(result.data.objectives)) {
-        result.data.objectives.forEach((obj: any) => {
-          onAddObjective({
-            perspective: obj.perspective as BSCObjective['perspective'],
-            objective: obj.objective,
-            description: obj.description || '',
-            weight: obj.weight || 1,
-          });
-        });
-      }
-    } catch (error) {
-      console.error('Failed to generate objectives:', error);
     } finally {
       setIsGeneratingObjectives(false);
     }
@@ -1007,7 +933,7 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
                 {isGeneratingObjectives ? (
                   <><Loader2 className="w-4 h-4 animate-spin" /> Generating...</>
                 ) : (
-                  <><Sparkles className="w-4 h-4" /> AI Generate Objectives</>
+                  <><Sparkles className="w-4 h-4" /> Add BIRD Objectives</>
                 )}
               </button>
             )}
@@ -1294,7 +1220,7 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
                     <Sparkles className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-white font-bold text-sm tracking-wide">BIRD AI Strategist</h3>
+                    <h3 className="text-white font-bold text-sm tracking-wide">BIRD Local Intelligence</h3>
                     <p className="text-[#6ee7b7] text-xs font-medium">KPI & BSC Expert (Ch. 5 & 6)</p>
                   </div>
                 </div>
@@ -1317,8 +1243,8 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
                         ? 'bg-gradient-to-br from-emerald-600 to-cyan-700 text-white rounded-br-sm shadow-lg'
                         : 'bg-[#131F38] text-[#ecfdf5]/90 border border-[#059669]/20 rounded-bl-sm'
                     }`}>
-                      <div className="text-sm leading-relaxed whitespace-pre-wrap">
-                        {msg.content.split('**').map((part, i) => i % 2 === 1 ? <strong key={i} className="text-emerald-300">{part}</strong> : part)}
+                      <div className="text-sm leading-relaxed">
+                        {msg.role === 'assistant' ? <ChatText text={msg.content} /> : <span className="whitespace-pre-wrap">{msg.content}</span>}
                       </div>
                     </div>
                   </motion.div>
@@ -1358,7 +1284,7 @@ const BalancedScorecard: React.FC<BalancedScorecardProps> = ({
                     <Send className="w-4 h-4" />
                   </button>
                 </div>
-                <p className="text-[10px] text-[#a3bfb3] mt-2 text-center">Powered by BIRD AI • Aligned with MTIT-BARMM Strategic Plan</p>
+                <p className="text-[10px] text-[#a3bfb3] mt-2 text-center">BIRD Local Intelligence • Aligned with MTIT-BARMM Strategic Plan</p>
               </div>
             </motion.div>
           </>
