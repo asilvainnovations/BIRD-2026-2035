@@ -3,16 +3,27 @@
 // builds React nodes from text, never injects HTML.
 import React from 'react';
 
-/** **bold** and *italic* inside one line. */
+/** **bold**, *italic* and [links](/path) inside one line. */
 function inline(text: string, key: string): React.ReactNode[] {
   const out: React.ReactNode[] = [];
-  const re = /(\*\*[^*]+\*\*|\*[^*\s][^*]*\*)/g;
+  const re = /(\[[^\]]+\]\((?:\/|https:\/\/)[^)\s]+\)|\*\*[^*]+\*\*|\*[^*\s][^*]*\*)/g;
   let last = 0;
   let m: RegExpExecArray | null;
   let i = 0;
   while ((m = re.exec(text))) {
     if (m.index > last) out.push(text.slice(last, m.index));
     const tok = m[0];
+    const link = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(tok);
+    if (link) {
+      out.push(
+        <a key={`${key}-a${i++}`} href={link[2]} target="_blank" rel="noopener noreferrer"
+           className="underline decoration-[#C9A84C]/60 underline-offset-2 hover:decoration-[#C9A84C]">
+          {link[1]}
+        </a>,
+      );
+      last = m.index + tok.length;
+      continue;
+    }
     out.push(
       tok.startsWith('**')
         ? <strong key={`${key}-b${i++}`} className="font-semibold">{tok.slice(2, -2)}</strong>

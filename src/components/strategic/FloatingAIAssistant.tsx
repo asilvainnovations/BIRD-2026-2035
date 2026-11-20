@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { X, Send, Loader2, ChevronDown, ChevronUp, Brain, Target, BarChart3, Globe2, Leaf, Landmark } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { generateLocalResponse } from '@/lib/localKnowledgeEngine';
+import { generateAnswer } from '@/lib/localKnowledgeEngine';
+import { loadCorpus } from '@/lib/birdCorpus';
 import { ChatText } from './ChatText';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -86,6 +87,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
 
   useEffect(() => {
     if (open && !minimized) setTimeout(() => inputRef.current?.focus(), 100);
+    if (open) void loadCorpus(); // warm the report index while the user types
   }, [open, minimized]);
 
   const suggestions = useMemo(
@@ -94,13 +96,11 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
   );
 
   /**
-   * LOCAL INTELLIGENCE — replaces supabase.functions.invoke()
-   * Uses embedded knowledge base from:
-   *   • public/user-manual.html  (17 sections)
-   *   • README.md                (BEIE Framework, Architecture)
-   *   • src/lib/utils.ts         (BIRD mathematical formulas)
-   *
-   * Zero network calls. 100% offline-capable. Deterministic.
+   * LOCAL INTELLIGENCE — no external AI service.
+   * Answers from the BIRD corpus (report Executive Summary to Chapter 7, the data
+   * register, provincial outlooks, Tawi-Tawi workshop; built by scripts/kb/build.py)
+   * and from curated platform guidance (src/lib/localKnowledgeEngine.ts).
+   * Offline-capable and deterministic; every report answer links its section.
    */
   const send = useCallback(async (text: string) => {
     const q = text.trim();
@@ -111,13 +111,11 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
     setInput('');
     setLoading(true);
 
-    // Simulate brief "thinking" delay for UX (local responses are instant)
-    await new Promise((res) => setTimeout(res, 350 + Math.random() * 250));
 
     // Build context for local knowledge engine
     const history = messages.slice(-12).map(({ role, content }) => ({ role, content }));
 
-    const reply = generateLocalResponse({
+    const reply = await generateAnswer({
       query: q,
       activeView: activeView || 'default',
       plan,

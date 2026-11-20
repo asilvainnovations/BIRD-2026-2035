@@ -28,6 +28,7 @@ import {
   calculateWeaknessRisk,
   calculateThreatVI,
 } from '@/lib/utils';
+import { answerFromCorpus } from '@/lib/birdCorpus';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 export interface KnowledgeEntry {
@@ -921,6 +922,67 @@ export function generateLocalResponse(ctx: ResponseContext): string {
   const response = typeof top.entry.response === 'function' ? top.entry.response(ctx) : top.entry.response;
 
   return response.trim();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// FULL-CORPUS ANSWERS — the report, the data register and the provincial outlooks
+// ═══════════════════════════════════════════════════════════════════════════════
+
+/** Curated entries that are about using the platform, not about the roadmap. */
+const PLATFORM_CATEGORIES = new Set<KnowledgeCategory>(['navigation', 'troubleshooting', 'export', 'templates', 'collaboration']);
+const HOW_TO = /\b(how (do|can|to|should) i|where (is|do|can)|click|button|sign ?in|log ?in|sync|export|import|upload|download|template|invite|share|module|tab|sidebar|page|save|delete)\b/i;
+
+function bestCurated(ctx: ResponseContext) {
+  const q = normalize(ctx.query);
+  const scored = KB.map((entry) => ({
+    entry,
+    score: scoreEntry(ctx.query, entry, ctx.activeView),
+    phraseHit: (entry.triggerPhrases ?? []).some((p) => q.includes(p)),
+  })).sort((a, b) => b.score - a.score);
+  // The general navigation guide matches any "how do I…"; prefer a specific entry
+  // (export, sign-in, sync…) when one also matches reasonably well.
+  const best = scored[0];
+  if (best.entry.id === 'navigation-help') {
+    const specific = scored.find((s) => s.entry.id !== 'navigation-help' && s.score >= 16);
+    if (specific) return specific;
+  }
+  return best;
+}
+
+const render = (e: KnowledgeEntry, ctx: ResponseContext) =>
+  (typeof e.response === 'function' ? e.response(ctx) : e.response).trim();
+
+/**
+ * Answer any question about BIRD. Order:
+ *   1. score calculations and greetings → curated engine;
+ *   2. how-to questions about the platform → curated module guidance;
+ *   3. everything about the roadmap → the report, the data register and the
+ *      provincial outlooks, quoted with a link to the exact section;
+ *   4. otherwise the best curated note, else a short fallback.
+ */
+export async function generateAnswer(ctx: ResponseContext): Promise<string> {
+  const q = ctx.query.trim();
+  if (!q) return '';
+  if (isCalculationQuery(q)) return generateLocalResponse(ctx);
+
+  const cur = bestCurated(ctx);
+  const GREETING = /^(hi|hello|hey|salam|as-?salamu?( alaykum| alaikum)?|assalamu alaikum|good (morning|afternoon|evening)|who are you|what can you do)\b[\s!.?]*$/i;
+  if (GREETING.test(q)) return render(KB.find((e) => e.id === 'greeting') ?? cur.entry, ctx);
+  // Substring hits such as "hi" inside "chief" must not trigger the greeting.
+  if (cur.entry.id === 'greeting') cur.score = 0;
+  if (cur.score >= 8 && HOW_TO.test(q) && (PLATFORM_CATEGORIES.has(cur.entry.category) || cur.phraseHit)) {
+    return render(cur.entry, ctx);
+  }
+
+  try {
+    const fromCorpus = await answerFromCorpus(q);
+    if (fromCorpus) return fromCorpus.text;
+  } catch (err) {
+    console.warn('BIRD corpus unavailable; using curated notes', err);
+  }
+
+  if (cur.score >= 8) return render(cur.entry, ctx);
+  return FALLBACK_RESPONSE;
 }
 
 /** Synchronous check to determine if a query is a calculation request */
