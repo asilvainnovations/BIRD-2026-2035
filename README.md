@@ -134,7 +134,7 @@ SWOT ──► Systems Thinking ──► Strategy Matrix ──► Balanced Sco
 
 ```
 BIRD-2026-2035/
-├── index.html                          # SPA entry (SEO/OG/JSON-LD)
+├── index.html                          # SPA entry (SEO/OG/JSON-LD); served as /platform after build
 ├── netlify.toml                        # Netlify build (Node 22, npm) + headers + SPA fallback
 ├── vercel.json                         # Vercel build + headers
 ├── src/
@@ -300,7 +300,7 @@ Migrations live in `supabase/migrations/` (`complete_schema.sql`, `security_fix.
 **Netlify** (production — `netlify.toml`) and **Vercel** (`vercel.json`) are both preconfigured:
 
 - Build: `npm ci` → `npm run build` → output `dist/`
-- SPA rewrites for client-side routes
+- Home page: `public/roadmap.html` is served at `/` and the platform SPA at `/platform` (`scripts/postbuild-home.mjs` renames the built files; unknown paths fall back to `/platform.html`)
 - Security headers (a CSP is pending an audit of inline/CDN assets)
 - Node 22 (`NODE_VERSION` in `netlify.toml`, `.nvmrc`, `engines`)
 

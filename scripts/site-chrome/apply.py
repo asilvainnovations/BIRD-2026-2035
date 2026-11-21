@@ -25,7 +25,8 @@ import html, re, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2] / "public"
-PLATFORM = "https://bird-boi.mtit-barmm.com/"
+HOME = "https://bird-boi.mtit-barmm.com/"            # the roadmap (public/roadmap.html) is the home page
+PLATFORM = "https://bird-boi.mtit-barmm.com/platform"  # the BIRD Strategic Planning Platform (React SPA)
 
 # ── Information architecture (single source of truth) ────────────────────────
 PRIMARY = [  # desktop inline links (≥1100px)
@@ -118,14 +119,14 @@ def cur(href: str, page: str) -> str:
     return ' aria-current="page"' if (not is_ext(href) and href == page) else ""
 
 def link_attrs(href: str) -> str:
-    return ' target="_blank" rel="noopener noreferrer" class="bc-ext"' if is_ext(href) and href != PLATFORM else ""
+    return ' target="_blank" rel="noopener noreferrer" class="bc-ext"' if is_ext(href) and href not in (PLATFORM, HOME) else ""
 
 def seal(pre: str, size: int) -> str:
     return (f'<img class="bc-seal" src="{pre}assets/MTIT-logo-circle.webp" width="{size}" height="{size}" alt="" '
             f'decoding="async" onerror="this.onerror=null;this.src=\'{pre}assets/MTIT-logo-circle.png\'">')
 
 def brand(pre: str, size: int = 38) -> str:
-    return (f'<a class="bc-brand" href="{PLATFORM}" aria-label="BIRD 2026–2035 Strategic Planning Platform — home">'
+    return (f'<a class="bc-brand" href="{HOME}" aria-label="BIRD 2026–2035 Investment Roadmap — home">'
             f'{seal(pre, size)}<span class="bc-word"><strong>BIRD <span>2026–2035</span></strong>'
             f'<small>MTIT · BARMM</small></span></a>')
 
@@ -146,13 +147,13 @@ def bar(pre: str, page: str) -> str:
     return ("<!-- bird-chrome:bar -->"
             f'<header class="bc-scope bc-bar" role="banner"><div class="bc-in">{brand(pre)}'
             f'<nav class="bc-primary" aria-label="Main">{prim}</nav>'
-            f'<a class="bc-cta" href="{PLATFORM}">Open Platform</a>{menu(pre, page)}</div></header>'
+            f'<a class="bc-cta" href="{PLATFORM}">Open the Platform</a>{menu(pre, page)}</div></header>'
             "<!-- /bird-chrome:bar -->")
 
 def embedded(pre: str, page: str) -> str:
     b = brand(pre, 32)
     if page in COMPACT:
-        b = (f'<a class="bc-brand" href="{PLATFORM}" aria-label="BIRD 2026–2035 Strategic Planning Platform — home">'
+        b = (f'<a class="bc-brand" href="{HOME}" aria-label="BIRD 2026–2035 Investment Roadmap — home">'
              f'{seal(pre, 32)}</a>')
     return ("<!-- bird-chrome:embed -->"
             f'<span class="bc-scope bc-embedded">{b}{menu(pre, page, "Site", ICON_GRID)}</span>'

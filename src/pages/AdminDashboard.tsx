@@ -52,7 +52,7 @@ const AdminDashboard: React.FC = () => {
   useEffect(() => {
     if (!isLoading && (!isAuthenticated || !isAdmin)) {
       // not admin -> redirect home
-      navigate('/');
+      navigate('/platform');
     }
   }, [isAuthenticated, isAdmin, isLoading, navigate]);
 
@@ -166,7 +166,7 @@ const AdminDashboard: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
-            <button onClick={() => navigate('/')} className="p-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition">
+            <button onClick={() => navigate('/platform')} className="p-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition">
               <ArrowLeft className="w-5 h-5" />
             </button>
             <StratLogo size="lg" withGlow />

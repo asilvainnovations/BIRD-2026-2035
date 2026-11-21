@@ -1,88 +1,208 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Primary Domains -->
   <url>
-    <loc>https://bangsamoro-investment-roadmap.asilvainnovations.com/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://bird-boi.mtit-barmm.com/</loc>
+    <lastmod>2026-11-21</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://bird-roadmap.asilvainnovations.com/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://bird-boi.mtit-barmm.com/platform</loc>
+    <lastmod>2026-11-21</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://bird-dashboard.asilvainnovations.com/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <!-- Validation survey results (closed) -->
-  <url>
-    <loc>https://bird-survey-dashboard.asilvainnovations.com/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Supporting Platforms -->
-  <url>
-    <loc>https://bird-app.asilvainnovations.com/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://bird-boi.mtit-barmm.com/action-plan.html</loc>
+    <lastmod>2026-11-21</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bird-app.bolt.host/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://bird-boi.mtit-barmm.com/actors-value-network.html</loc>
+    <lastmod>2026-11-21</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bird-action-plan.asilvainnovations.com/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://bird-boi.mtit-barmm.com/bangsamoro-investment-roadmap.html</loc>
+    <lastmod>2026-11-21</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bird-resources.asilvainnovations.com/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://bird-boi.mtit-barmm.com/basilan-outlook.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bird-actors-value-map.asilvainnovations.com/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://bird-boi.mtit-barmm.com/bird-report.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://user-manual.asilvainnovations.com/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://bird-boi.mtit-barmm.com/contact.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/cookie-policy.html</loc>
+    <lastmod>2026-11-21</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://bird-contact.asilvainnovations.com/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <!-- Legal & Compliance -->
-  <url>
-    <loc>https://bird-privacy-policy.asilvainnovations.com/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://bird-boi.mtit-barmm.com/dashboard.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bird-terms-of-service.asilvainnovations.com/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://bird-boi.mtit-barmm.com/ieb.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/kpi.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/lanao-delsur-outlook.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/lds-poa.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/maguindanao-delnorte-outlook.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/maguindanao-delsur-outlook.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/options.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/privacy-policy.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/resources.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/sga-outlook.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/slides.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/strategy-map.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/student-guide.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/survey-dashboard.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/tawi-tawi-outlook.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/tawi-tawi-validation-workshop.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/terms-of-service.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/user-manual.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/report/Chapter1.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/report/Chapter2.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/report/Chapter3.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/report/Chapter4.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/report/Chapter5.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/report/Chapter6.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/report/Chapter7.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/report/Indexes.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/report/executive-summary.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/report/integrated-report-updated.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/report/integrated-report.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/report/integrated.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bird-boi.mtit-barmm.com/report/strategic-dashboard.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <priority>0.8</priority>
   </url>
 </urlset>

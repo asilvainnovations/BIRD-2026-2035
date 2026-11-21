@@ -33,8 +33,12 @@
   ],
   "rewrites": [
     {
+      "source": "/platform",
+      "destination": "/platform.html"
+    },
+    {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/platform.html"
     }
   ]
 }

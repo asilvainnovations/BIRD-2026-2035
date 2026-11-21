@@ -23,7 +23,7 @@ const NotFound = () => {
         <p className="text-[#ecfdf5]/70 mb-2">The page you are looking for does not exist or has been moved.</p>
         <p className="text-[#a3bfb3] text-sm mb-6">BIRD 2026-2035 Strategic Investment Roadmap</p>
         <a 
-          href="/" 
+          href="/platform" 
           className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#C9A84C] to-[#E8C560] text-[#022c22] font-semibold rounded-xl transition-all hover:shadow-lg hover:shadow-[#C9A84C]/20 hover:scale-[1.02]"
         >
           Return to Dashboard

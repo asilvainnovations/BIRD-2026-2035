@@ -15,10 +15,17 @@
   NODE_VERSION = "22"
   NPM_FLAGS = "--no-audit --no-fund"
 
-# React Router / Vite SPA fallback.
+# Home page: dist/index.html is the Investment Roadmap (scripts/postbuild-home.mjs).
+# The BIRD Strategic Planning Platform (React SPA) is dist/platform.html, served at
+# /platform; every other unknown path falls back to it so its routes keep working.
+[[redirects]]
+  from = "/platform"
+  to = "/platform.html"
+  status = 200
+
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/platform.html"
   status = 200
 
 # Long-lived caching is safe for Vite's content-hashed assets.
@@ -31,6 +38,14 @@
 # HTML should revalidate so users receive new deployments promptly.
 [[headers]]
   for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/platform.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
     X-Content-Type-Options = "nosniff"
