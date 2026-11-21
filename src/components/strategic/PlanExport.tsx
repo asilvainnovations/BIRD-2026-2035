@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ISLAND_COVERAGE } from '@/lib/validationCoverage';
 import { EDGE_FUNCTIONS } from '@/lib/supabase';
 import {
   FileText,
@@ -27,7 +28,6 @@ import { StrategicPlan, CLDSnapshot } from '@/lib/strategicPlanStore';
 import { supabase } from '@/lib/supabase';
 
 // Edge Function URLs
-const AI_URL = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
 const SYNC_URL = EDGE_FUNCTIONS.STRATEGIC_PLANNER_SYNC;
 
 interface PlanExportProps {
@@ -400,11 +400,13 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
     content += `  * The survey is a NON-PROBABILITY CONVENIENCE SAMPLE with no\n`;
     content += `    weighting frame. Results are stakeholder validation signals,\n`;
     content += `    NOT population estimates for BARMM.\n`;
-    content += `  * COVERAGE GAP: Basilan and Tawi-Tawi returned ZERO\n`;
-    content += `    respondents. Approximately 78% of the sample is based in the\n`;
-    content += `    Cotabato City / Maguindanao del Norte mainland corridor.\n`;
-    content += `    Sequence C (BIMP-EAGA maritime integration) and all island-\n`;
-    content += `    province findings are UNVALIDATED.\n`;
+    content += `  * COVERAGE: about 64% of the online sample is based in the\n`;
+    content += `    Cotabato City / Maguindanao del Norte mainland corridor. The\n`;
+    content += `    survey drew no respondents from Basilan or Tawi-Tawi; both were\n`;
+    content += `    validated in person: Basilan at a consultative workshop in\n`;
+    content += `    Isabela City (20 June 2026), which accepted all data and\n`;
+    content += `    insights in its outlook; Tawi-Tawi at a provincial validation\n`;
+    content += `    in Bongao (28 October 2026).\n`;
     content += `  * SMALL CELLS: Lanao del Sur (n=3) and Maguindanao del Sur (n=3)\n`;
     content += `    cannot support province-level claims.\n`;
     content += `  * STRATEGIC OPTIONS: 25 of 75 respondents left all 28 scoring cells\n`;
@@ -617,7 +619,7 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
                       Validation Survey (n=76, 3–20 Aug 2026) · Workshops 1, 2, 4 &amp; 5 (MTIT-BARMM 2025) ·
                       Provincial Economic &amp; Investment Outlooks (PSA/MFBM 2023–2025).
                       Non-probability convenience sample — validation signals, not population estimates.
-                      Zero respondents from Basilan and Tawi-Tawi. Full methodology in the exported document.
+                      {ISLAND_COVERAGE} Full methodology in the exported document.
                     </p>
                   </div>
                 </div>

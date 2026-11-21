@@ -28,6 +28,7 @@ import {
   calculateWeaknessRisk,
   calculateThreatVI,
 } from '@/lib/utils';
+import { answerFromCorpus } from '@/lib/birdCorpus';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 export interface KnowledgeEntry {
@@ -194,7 +195,7 @@ SWOT Diagnosis → Systems Thinking → TOWS Strategy Matrix → Balanced Scorec
 
 **Provincial Growth Disparity:**
 • **Fastest growing:** Maguindanao del Norte (4.1%), Lanao del Sur (4.0%)
-• **Underinvested islands:** Tawi-Tawi (1.1%), Sulu (1.13%), Basilan (1.6%)
+• **Underinvested islands:** Tawi-Tawi (1.1%), Basilan (1.6%)
 
 **Infrastructure Gaps:**
 • Household electrification: ~39–40% in EC areas (target 90% by 2035, 100% by 2040)
@@ -322,8 +323,8 @@ The SWOT module provides a 4-quadrant environmental diagnostic with **BIRD's off
 
 | Index | Quadrant | Formula | Scale |
 |-------|----------|---------|-------|
-| **Relevance Index (RI)** | Strengths | (Impact × Likelihood) / 5 | 1–5 |
-| **Relevance Index (RI)** | Opportunities | √(Impact × Likelihood) | 1–5 |
+| **Resilience Index (RI)** | Strengths | (Impact × Likelihood) / 5 | 1–5 |
+| **Resilience Index (RI)** | Opportunities | √(Impact × Likelihood) | 1–5 |
 | **Risk Index** | Weaknesses | Impact × Likelihood | 1–25 |
 | **Vulnerability Index (VI)** | Threats | (Impact² × Likelihood) / 25 | 1–5 |
 
@@ -672,7 +673,6 @@ The MEL (Monitoring, Evaluation & Learning) Dashboard is the **default landing v
 
 **Hero Banner:**
 • Headline metrics (total budget, current phase, 2035 targets)
-• Gold **"Participate in Validation Survey"** button → opens survey portal
 
 **3 View Modes:**
 1. **Command** — Full detail for plan owners & admins
@@ -706,7 +706,6 @@ The MEL (Monitoring, Evaluation & Learning) Dashboard is the **default landing v
 **Top Bar:**
 • 📁 Plan Selector — Switch plans or create new
 • 🔎 Search — Find SWOT items, strategies, KPIs, PAPs
-• ✅ Survey Button (gold) — Opens Validation Survey
 • ☀️/🌙 Theme Toggle — Dark / Light / System
 • ☁️ Sync Status — Green = synced; Amber = offline (local save active)
 • 👤 Account — Profile, admin dashboard, sign out
@@ -718,31 +717,23 @@ The MEL (Monitoring, Evaluation & Learning) Dashboard is the **default landing v
   },
   {
     id: 'validation-survey',
-    category: 'navigation',
-    triggers: ['validation survey', 'stakeholder survey', 'survey', 'participate', 'feedback', 'have your say'],
-    triggerPhrases: ['validation survey', 'stakeholder survey', 'participate in survey', 'bird survey'],
+    category: 'overview',
+    triggers: ['validation survey', 'stakeholder survey', 'survey', 'validation', 'workshop', 'consultation'],
+    triggerPhrases: ['validation survey', 'stakeholder survey', 'validation workshop', 'provincial workshop', 'survey results'],
     weight: 9,
-    response: `**BIRD Validation Survey — Have Your Say**
+    response: `**How BIRD was validated**
 
-The Validation Survey is a **standalone portal** where stakeholders review and validate the draft roadmap before finalization.
+The validation survey is closed. It ran 3–20 August 2026 and returned 76 consented responses.
 
-**Who should participate:**
-• Government agencies | Private sector | Academe | Civil society | Development partners
+Every province was also consulted in person:
+• Maguindanao del Norte, Maguindanao del Sur and the SGA: mainland workshop, 24 March 2026, Cotabato City
+• Lanao del Sur: provincial workshop, 12 May 2026, Marawi City
+• Basilan: consultative workshop organised by the MTIT Basilan Provincial Office, 20 June 2026, Isabela City (outside BARMM); the Basilan outlook was the visual guide and all its data and insights were accepted
+• Tawi-Tawi: provincial validation of the Tawi-Tawi outlook, 28 October 2026, Bongao
 
-**How to access:**
-1. Sidebar — Gold **Validation Survey** button (with NEW badge)
-2. Top Bar — Gold **Survey** button (clipboard icon)
-3. MEL Dashboard — **"Participate in Validation Survey"** hero banner
-4. Direct: bird-validation-survey.bolt.host
+The online survey drew no respondents from Basilan or Tawi-Tawi; their voice comes from these workshops.
 
-**What you'll do (15–20 minutes):**
-• Pick your stakeholder group (survey adapts questions)
-• Rate statements on 1–5 scales
-• Rank programs and leverage points
-• Allocate priority points
-• Share open feedback
-
-**Privacy:** Anonymous by default. DPA 2012 compliant. Only the consent checkbox is required.`,
+[Survey results](/survey-dashboard.html) · [Tawi-Tawi validation](/tawi-tawi-validation-workshop.html) · [Report Chapter 1](/report/Chapter1.html)`,
   },
   {
     id: 'export-formats',
@@ -882,21 +873,9 @@ Browse pre-built strategic frameworks by category:
     triggers: ['hello', 'hi', 'hey', 'salam', 'as salamu', 'welcome', 'who are you'],
     triggerPhrases: ['hello', 'hi there', 'who are you', 'what can you do'],
     weight: 5,
-    response: `As-salamu alaykum! I'm the **BIRD Local Intelligence Engine** — your offline-capable strategy consultant for the Bangsamoro Investment Roadmap 2026–2035.
+    response: `As-salamu alaykum. I'm the BIRD Local Intelligence Engine. I answer from the BIRD 2026–2035 report and this platform, offline.
 
-I can help you with:
-• **Strategic Analysis** — SWOT scoring, TOWS formulation, BSC design
-• **Systems Thinking** — Causal loops, archetypes, leverage points
-• **BARMM Context** — Economic data, provincial profiles, halal sector insights
-• **Platform Guidance** — How to use every module, export plans, manage teams
-• **Formula Calculations** — Compute RI, Risk, VI instantly
-• **Troubleshooting** — Sync issues, sign-in problems, export failures
-
-What would you like to explore? Try asking about:
-• "What is the BEIE Framework?"
-• "Calculate RI for impact 4, likelihood 3"
-• "Explain the Fixes that Fail archetype"
-• "How do I export my plan to PDF?"`,
+Ask me about the strategy and its targets, BARMM figures, a framework such as BEIE or the systems archetypes, a score such as RI for impact 4 and likelihood 3, or how to use a module.`,
   },
 ];
 
@@ -904,16 +883,7 @@ What would you like to explore? Try asking about:
 // RESPONSE ENGINE
 // ═══════════════════════════════════════════════════════════════════════════════
 
-const FALLBACK_RESPONSE = `I'm not sure I understood that perfectly. Here are some things I can help with:
-
-• Explain the BEIE Framework, 4 Pillars, or 5 Critical Leverage Points
-• Calculate BIRD scores (Resilience Index, Risk, Vulnerability Index)
-• Guide you through SWOT, TOWS, BSC, or PAPs modules
-• Describe Systems Archetypes and Causal Loop Diagrams
-• Share BARMM economic data and provincial profiles
-• Help with platform navigation, export, or troubleshooting
-
-What would you like to know?`;
+const FALLBACK_RESPONSE = `I couldn't match that to the roadmap or the platform. Try naming a topic, such as "phases and budget", "halal certification", "Resilience Index for impact 4, likelihood 3" or "how to export a plan".`;
 
 export function generateLocalResponse(ctx: ResponseContext): string {
   const { query, activeView } = ctx;
@@ -936,24 +906,73 @@ export function generateLocalResponse(ctx: ResponseContext): string {
   // Take top match (or blend top 2 if scores are close)
   const top = scored[0];
   const runnerUp = scored[1];
-  let response: string;
+  // One answer per question: no blended "also relevant" block and no plan-context
+  // footer — the panel already shows which plan is open.
+  void runnerUp;
+  const response = typeof top.entry.response === 'function' ? top.entry.response(ctx) : top.entry.response;
 
-  if (runnerUp && runnerUp.score > top.score * 0.85 && runnerUp.entry.category !== top.entry.category) {
-    const r1 = typeof top.entry.response === 'function' ? top.entry.response(ctx) : top.entry.response;
-    const r2 = typeof runnerUp.entry.response === 'function' ? runnerUp.entry.response(ctx) : runnerUp.entry.response;
-    response = `${r1}\n\n**Also relevant:**\n${r2}`;
-  } else {
-    response = typeof top.entry.response === 'function' ? top.entry.response(ctx) : top.entry.response;
+  return response.trim();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// FULL-CORPUS ANSWERS — the report, the data register and the provincial outlooks
+// ═══════════════════════════════════════════════════════════════════════════════
+
+/** Curated entries that are about using the platform, not about the roadmap. */
+const PLATFORM_CATEGORIES = new Set<KnowledgeCategory>(['navigation', 'troubleshooting', 'export', 'templates', 'collaboration']);
+const HOW_TO = /\b(how (do|can|to|should) i|where (is|do|can)|click|button|sign ?in|log ?in|sync|export|import|upload|download|template|invite|share|module|tab|sidebar|page|save|delete)\b/i;
+
+function bestCurated(ctx: ResponseContext) {
+  const q = normalize(ctx.query);
+  const scored = KB.map((entry) => ({
+    entry,
+    score: scoreEntry(ctx.query, entry, ctx.activeView),
+    phraseHit: (entry.triggerPhrases ?? []).some((p) => q.includes(p)),
+  })).sort((a, b) => b.score - a.score);
+  // The general navigation guide matches any "how do I…"; prefer a specific entry
+  // (export, sign-in, sync…) when one also matches reasonably well.
+  const best = scored[0];
+  if (best.entry.id === 'navigation-help') {
+    const specific = scored.find((s) => s.entry.id !== 'navigation-help' && s.score >= 16);
+    if (specific) return specific;
+  }
+  return best;
+}
+
+const render = (e: KnowledgeEntry, ctx: ResponseContext) =>
+  (typeof e.response === 'function' ? e.response(ctx) : e.response).trim();
+
+/**
+ * Answer any question about BIRD. Order:
+ *   1. score calculations and greetings → curated engine;
+ *   2. how-to questions about the platform → curated module guidance;
+ *   3. everything about the roadmap → the report, the data register and the
+ *      provincial outlooks, quoted with a link to the exact section;
+ *   4. otherwise the best curated note, else a short fallback.
+ */
+export async function generateAnswer(ctx: ResponseContext): Promise<string> {
+  const q = ctx.query.trim();
+  if (!q) return '';
+  if (isCalculationQuery(q)) return generateLocalResponse(ctx);
+
+  const cur = bestCurated(ctx);
+  const GREETING = /^(hi|hello|hey|salam|as-?salamu?( alaykum| alaikum)?|assalamu alaikum|good (morning|afternoon|evening)|who are you|what can you do)\b[\s!.?]*$/i;
+  if (GREETING.test(q)) return render(KB.find((e) => e.id === 'greeting') ?? cur.entry, ctx);
+  // Substring hits such as "hi" inside "chief" must not trigger the greeting.
+  if (cur.entry.id === 'greeting') cur.score = 0;
+  if (cur.score >= 8 && HOW_TO.test(q) && (PLATFORM_CATEGORIES.has(cur.entry.category) || cur.phraseHit)) {
+    return render(cur.entry, ctx);
   }
 
-  // Append plan context if available
-  if (ctx.plan) {
-    const p = ctx.plan;
-    const planCtx = `\n\n—\n*Context: You're working on **${p.name}** (${p.organization}) — ${p.planningPeriodStart?.slice(0,4) || '2026'}–${p.planningPeriodEnd?.slice(0,4) || '2035'}.*`;
-    response += planCtx;
+  try {
+    const fromCorpus = await answerFromCorpus(q);
+    if (fromCorpus) return fromCorpus.text;
+  } catch (err) {
+    console.warn('BIRD corpus unavailable; using curated notes', err);
   }
 
-  return response;
+  if (cur.score >= 8) return render(cur.entry, ctx);
+  return FALLBACK_RESPONSE;
 }
 
 /** Synchronous check to determine if a query is a calculation request */

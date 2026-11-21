@@ -34,18 +34,6 @@ const mainMenuItems = [
   { id: 'settings', label: 'Settings', icon: Settings, description: 'Preferences & Account' },
 ];
 
-const specialItems = [
-  {
-    id: 'validation',
-    label: 'Validation Survey',
-    icon: ClipboardCheck,
-    description: 'BIRD 2026-2035 Feedback',
-    badge: 'NEW',
-    highlight: true,
-    external: true, // opens the standalone survey app in a new tab
-  },
-];
-
 const Sidebar: React.FC<SidebarProps> = ({
   activeView,
   onViewChange,
@@ -180,64 +168,11 @@ const Sidebar: React.FC<SidebarProps> = ({
           </div>
         )}
 
-        {/* ═══════════════════════════════════════════════════════════════
-            GOLDEN VALIDATION SURVEY CTA — PROMINENT & ALWAYS VISIBLE
-        ═══════════════════════════════════════════════════════════════ */}
-        {(!isCollapsed || isMobileMenuOpen) && (
-          <div className="px-4 py-3 border-b border-[#C9A84C]/10">
-            <button
-              onClick={() => {
-                onViewChange('validation');
-                if (window.innerWidth < 1024) onCloseMobileMenu();
-              }}
-              className="w-full flex items-center gap-2 px-4 py-3 rounded-xl font-bold text-sm transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 bg-gradient-to-r from-[#C9A84C] to-[#B8943F] hover:from-[#E8C560] hover:to-[#C9A84C] text-[#022c22] shadow-[#C9A84C]/20"
-              title="Opens the standalone Validation Survey in a new tab"
-            >
-              <Star className="w-5 h-5 fill-current" />
-              <span className="flex-1 text-left">Validation Survey</span>
-              <ExternalLink className="w-3.5 h-3.5 opacity-70" />
-              <span className="px-1.5 py-0.5 text-[9px] bg-[#022c22]/20 text-[#022c22] rounded-full uppercase tracking-wider font-black">
-                NEW
-              </span>
-            </button>
-            <p className="text-[10px] text-[#C9A84C] text-center mt-2 leading-tight">
-              Help shape BARMM 2026–2035
-            </p>
-          </div>
-        )}
-
-        {/* Collapsed state: golden icon button */}
-        {isCollapsed && !isMobileMenuOpen && (
-          <div className="px-2 py-3 border-b border-[#C9A84C]/10 flex justify-center">
-            <button
-              onClick={() => onViewChange('validation')}
-              className="relative p-2.5 rounded-xl transition-all bg-[#C9A84C]/10 text-[#C9A84C] hover:bg-[#C9A84C]/20 border border-[#C9A84C]/30"
-              title="Validation Survey (opens in new tab)"
-            >
-              <Star className="w-5 h-5" />
-              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#C9A84C] rounded-full border-2 border-[#011a12]" />
-            </button>
-          </div>
-        )}
-
         {/* Navigation */}
         <nav className="flex-1 py-4 overflow-y-auto custom-scrollbar px-3 space-y-1">
           {mainMenuItems.map((item) => (
             <NavItem key={item.id} item={item} />
           ))}
-
-          {/* Special Items (Validation Survey) */}
-          <div className="my-4 border-t border-[#C9A84C]/10 pt-4">
-            <p className={cn(
-              "text-[10px] uppercase tracking-widest font-bold mb-2 px-3",
-              !isCollapsed || isMobileMenuOpen ? "text-[#C9A84C]" : "sr-only"
-            )}>
-              Special
-            </p>
-            {specialItems.map((item) => (
-              <NavItem key={item.id} item={item} />
-            ))}
-          </div>
 
           {/* Tutorial */}
           <div className="my-4 border-t border-[#C9A84C]/10 pt-4">

@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { ISLAND_COVERAGE } from '@/lib/validationCoverage';
 import { EDGE_FUNCTIONS } from '@/lib/supabase';
 import {
   FolderKanban,
@@ -21,9 +22,10 @@ import {
 } from 'lucide-react';
 import { PAP, StrategicPlan, BSCObjective } from '@/lib/strategicPlanStore';
 import { supabase } from '@/lib/supabase';
+import { toast } from 'sonner';
+import { missingFrom, bestMatch, NOTHING_NEW } from '@/lib/localStrategist';
 
 // Edge Function URLs
-const AI_URL = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
 const SYNC_URL = EDGE_FUNCTIONS.STRATEGIC_PLANNER_SYNC;
 const EMAIL_URL = EDGE_FUNCTIONS.EMAIL_NOTIFICATIONS;
 
@@ -345,7 +347,7 @@ const BIRD_PAP_BASELINE: PAP[] = [
   { id: 'bird-pap-03', objectiveId: 'bird-obj-f',  papType: 'project', name: 'Bangsamoro Halal Park — Matanog Development', description: 'LP1 · BSC F1 · Transformers. Anchor conversion asset. Maguindanao del Sur holds 53% AFF against 11% industry — resource base without conversion capacity is the region-wide pattern this addresses.', owner: 'BBOI', ownerName: 'Bangsamoro Board of Investments', budget: 2_500_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-09-30', progress: 30, status: 'in-progress' },
   { id: 'bird-pap-04', objectiveId: 'bird-obj-ip', papType: 'program', name: 'Digital Business Registration (BNR / BEGMP) Rollout', description: 'LP2 · BSC IP1 · Enablers. Registration time 5 days → 1. Digital backbones drew only 6 of 73 connectivity votes, yet this is the cheapest throughput gain in the portfolio.', owner: 'MTIT', ownerName: 'Ministry of Trade, Investments and Tourism', budget: 450_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-09-30', progress: 30, status: 'in-progress' },
   { id: 'bird-pap-05', objectiveId: 'bird-obj-lg', papType: 'program', name: 'Functional Literacy & TVET-Industry Alignment', description: 'LP2 · BSC LG5 · Enablers. Functional literacy 64.7% (2024) → 75%+. HIGHEST-RISK factor in the entire SWOT register (Risk 17.76, n=74). Human capital, not infrastructure, is the binding constraint.', owner: 'MBHTE', ownerName: 'Ministry of Basic, Higher and Technical Education', budget: 1_200_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-12-31', progress: 10, status: 'planned' },
-  { id: 'bird-pap-06', objectiveId: 'bird-obj-f',  papType: 'project', name: 'Zamboanga-Basilan Interconnection Project (ZBIP)', description: 'LP5 · BSC F2 · Foundations. ₱6.67B multi-year programme; Phase-1 tranche shown. Basilan: poverty 73.5% (2018) → 33.7% (2023) post-ASG. NOTE: zero validation-survey respondents from this province.', owner: 'MPW', ownerName: 'Ministry of Public Works', budget: 1_800_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-12-31', progress: 35, status: 'in-progress' },
+  { id: 'bird-pap-06', objectiveId: 'bird-obj-f',  papType: 'project', name: 'Zamboanga-Basilan Interconnection Project (ZBIP)', description: 'LP5 · BSC F2 · Foundations. ₱6.67B multi-year programme; Phase-1 tranche shown. Basilan: poverty 73.5% (2018) → 33.7% (2023) post-ASG. Outlook accepted at the MTIT Basilan consultative workshop, 20 June 2026, Isabela City.', owner: 'MPW', ownerName: 'Ministry of Public Works', budget: 1_800_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-12-31', progress: 35, status: 'in-progress' },
   { id: 'bird-pap-07', objectiveId: 'bird-obj-ip', papType: 'project', name: 'Cold Chain & Agro-Logistics Build-Out', description: 'LP2 · BSC IP4 · Enablers. 20–40% post-harvest losses (Workshop 1). Market-access assets drew 24 of 73 connectivity votes. Tawi-Tawi supplies 40% of national seaweed and exports it raw.', owner: 'MAFAR', ownerName: 'Ministry of Agriculture, Fisheries and Agrarian Reform', budget: 950_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-09-30', progress: 10, status: 'planned' },
   { id: 'bird-pap-08', objectiveId: 'bird-obj-f',  papType: 'program', name: 'Sukuk & Islamic Finance Framework', description: 'LP4 · BSC F5 · Financiers. Islamic banking assets ₱2B → ₱20B. Stakeholders ranked Macro-Capital first for finance sequencing (36 of 64), but put awareness and literacy ahead of capital in Section 8.', owner: 'BTFO', ownerName: 'Bangsamoro Treasury and Finance Office', budget: 380_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-12-31', progress: 5, status: 'planned' },
   { id: 'bird-pap-09', objectiveId: 'bird-obj-ip', papType: 'program', name: 'JMC No. 2026-01 — Carbon & PES Activation', description: 'LP5 · BSC IP6 · Foundations. MRV systems and LGU capacity. Revenue currently ₱0; 200 LGU staff to be trained on carbon accounting.', owner: 'MENRE', ownerName: 'Ministry of Environment, Natural Resources and Energy', budget: 280_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-09-30', progress: 10, status: 'planned' },
@@ -427,48 +429,24 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
     }
   };
 
-  // 3. AI Generate PAPs
+  // 3. Local Strategist: proposes the Phase 1 priority PAPs from the BIRD report
+  // that the plan does not yet hold, each linked to the plan objective in the
+  // same BSC perspective that it fits best.
   const handleGeneratePAPs = async () => {
     setIsGenerating(true);
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      const response = await fetch(AI_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session?.access_token || ''}`,
-        },
-        body: JSON.stringify({
-          action: 'generate_paps',
-          data: {
-            objectives: plan.objectives.map(o => ({ id: o.id, title: o.objective, perspective: o.perspective })),
-            timeHorizon: `${plan.planningPeriodStart} to ${plan.planningPeriodEnd}`,
-          },
-          plan: plan,
-        }),
+      const PERSPECTIVE: Record<string, string> = {
+        'bird-obj-f': 'financial', 'bird-obj-s': 'stakeholder',
+        'bird-obj-ip': 'internal_process', 'bird-obj-lg': 'learning_growth',
+      };
+      const missing = missingFrom(BIRD_PAP_BASELINE, (plan.paps || []).map((p) => p.name), (p) => p.name);
+      if (!missing.length) { toast.info(NOTHING_NEW); return; }
+      missing.forEach(({ id: _id, objectiveId, ...p }) => {
+        void _id;
+        const pool = (plan.objectives || []).filter((o) => o.perspective === PERSPECTIVE[objectiveId || '']);
+        const linked = bestMatch(`${p.name} ${p.description}`, pool, (o) => `${o.objective} ${o.description}`, 0) ?? pool[0];
+        onAddPAP({ ...p, objectiveId: linked?.id });
       });
-
-      const result = await response.json();
-      if (result.success && result.data && Array.isArray(result.data)) {
-        result.data.forEach((aiPap: any) => {
-          onAddPAP({
-            papType: aiPap.type || 'project',
-            name: aiPap.name,
-            description: aiPap.description || '',
-            owner: session?.user?.id || '',
-            ownerName: 'AI Generated',
-            budget: aiPap.budget_estimate || 0,
-            spent: 0,
-            startDate: new Date().toISOString().split('T')[0],
-            endDate: new Date(Date.now() + (aiPap.duration_months || 6) * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-            progress: 0,
-            status: 'planned',
-            objectiveId: aiPap.linked_objective_id || undefined,
-          });
-        });
-      }
-    } catch (error) {
-      console.error('Failed to generate PAPs:', error);
     } finally {
       setIsGenerating(false);
     }
@@ -552,7 +530,7 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
             className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#065f46] to-[#4c1d95] text-white rounded-xl text-sm font-bold hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-50 transition-all"
           >
             {isGenerating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
-            AI Generate PAPs
+            Add Phase 1 PAPs
           </button>
           <div className="relative group">
             <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#a3bfb3] group-focus-within:text-[#C9A84C]" />
@@ -733,7 +711,7 @@ const PAPsManagement: React.FC<PAPsManagementProps> = ({ plan, onAddPAP, onUpdat
                 distribution and its numbers.
               </p>
               <p>
-                Zero respondents from {PAP_SURVEY_FRAME.silentProvinces.join(' and ')}. Post-2024 BARMM comprises five
+                {ISLAND_COVERAGE} Post-2024 BARMM comprises five
                 provinces plus the SGA and Cotabato City; Sulu is not part of the region.
               </p>
             </div>

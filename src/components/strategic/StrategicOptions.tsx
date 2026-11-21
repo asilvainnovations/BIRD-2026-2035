@@ -1,13 +1,14 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { ISLAND_COVERAGE } from '@/lib/validationCoverage';
 import { EDGE_FUNCTIONS } from '@/lib/supabase';
 import { Activity, AlertCircle, AlertTriangle, Anchor, ArrowRight, BarChart2, BookOpen, Brain, Check, ChevronDown, ChevronUp, Clock, Crosshair, Edit2, Gauge, GitBranch, Info, Layers, LayoutDashboard, Lightbulb, Link as LinkIcon, Loader2, Plus, Shield, Sparkles, Star, Target, Trash2, TrendingUp, Workflow, X, Zap } from 'lucide-react';
 import { StrategicOption, StrategicPlan, SWOTItem } from '@/lib/strategicPlanStore';
 import { supabase } from '@/lib/supabase';
+import { missingFrom, similarity, NOTHING_NEW } from '@/lib/localStrategist';
 import { cn } from '@/lib/utils';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
 
 // Edge Function URLs
-const AI_ASSISTANT_URL = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
 const SYNC_URL = EDGE_FUNCTIONS.STRATEGIC_PLANNER_SYNC;
 
 export interface LeveragePoint { archetypeId?: string; leverageLevel: number; meadowsName: string; intervention: string; targetNodeIds: string[]; expectedImpact: 'high' | 'medium' | 'low'; timeHorizon: 'short' | 'medium' | 'long'; source: 'archetype' | 'cld-analysis'; }
@@ -95,7 +96,7 @@ const MATRIX_CONTAMINATION = { respondents: 75, allAtDefault: 25, pctCellsAtDefa
 const SURVEY_FRAME = {
   n: 76, window: '3–20 August 2026',
   silentProvinces: ['Basilan', 'Tawi-Tawi'],
-  note: 'Non-probability convenience sample, no weighting frame — validation signals, not population estimates. ~78% of respondents sit in the Cotabato City / Maguindanao del Norte mainland corridor, so Sequence C (BIMP-EAGA maritime, Connectors) is unvalidated.',
+  note: 'Non-probability convenience sample, no weighting frame — validation signals, not population estimates. ~64% of respondents sit in the Cotabato City / Maguindanao del Norte mainland corridor; Basilan and Tawi-Tawi, where Sequence C (BIMP-EAGA maritime) runs, were validated at provincial workshops.',
 } as const;
 
 /**
@@ -506,61 +507,33 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
     return () => clearTimeout(timer);
   }, [plan]);
 
+  // Local Strategist: proposes the report's survey-scored TOWS options that the
+  // plan does not yet hold, ranked by fit to the plan's SWOT, intent and systems
+  // context (archetype, leverage points, CLD variables).
   const handleGenerateStrategies = async () => {
     setIsGenerating(true);
     setGenerationError(null);
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session?.access_token) throw new Error('Not authenticated');
-
-      const strengths = (plan.swotItems || []).filter(i => i.category === 'strength').map(i => ({ description: i.description, impactScore: i.impactScore || 3, likelihoodScore: i.likelihoodScore || 3 }));
-      const weaknesses = (plan.swotItems || []).filter(i => i.category === 'weakness').map(i => ({ description: i.description, impactScore: i.impactScore || 3, likelihoodScore: i.likelihoodScore || 3 }));
-      const opportunities = (plan.swotItems || []).filter(i => i.category === 'opportunity').map(i => ({ description: i.description, impactScore: i.impactScore || 3, likelihoodScore: i.likelihoodScore || 3 }));
-      const threats = (plan.swotItems || []).filter(i => i.category === 'threat').map(i => ({ description: i.description, impactScore: i.impactScore || 3, likelihoodScore: i.likelihoodScore || 3 }));
-
-      const systemsContext = hasSystemsContext ? buildSystemsContext(leveragePoints, selectedArchetypeName, activeArchetypeDescription, cldNodes, cldLinks) : null;
-      const quadrantLeverageGuide = QUADRANT_TYPES.reduce<Record<string, any>>((acc, q) => {
-        const qLPs = getLeveragePointsForQuadrant(leveragePoints, q);
-        acc[q] = { leverageRationale: quadrantConfig[q].leverageRationale, relevantLeveragePoints: qLPs.map(lp => ({ level: lp.leverageLevel, meadowsName: lp.meadowsName, intervention: lp.intervention, expectedImpact: lp.expectedImpact, timeHorizon: lp.timeHorizon })) };
-        return acc;
-      }, {} as Record<string, any>);
-
-      const response = await fetch(AI_ASSISTANT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.access_token}` },
-        body: JSON.stringify({
-          action: 'generate_strategies',
-          data: {
-            strengths, weaknesses, opportunities, threats,
-            strategicIntent: plan.strategicIntent,
-            systemsContext,
-            activeArchetype: selectedArchetypeName ? { id: selectedArchetypeId, name: selectedArchetypeName, description: activeArchetypeDescription } : null,
-            leveragePoints: leveragePoints.map(lp => ({ level: lp.leverageLevel, meadowsName: lp.meadowsName, intervention: lp.intervention, impact: lp.expectedImpact, horizon: lp.timeHorizon, source: lp.source })),
-            cldVariables: cldNodes.map(n => ({ label: n.label, category: n.category })),
-            cldRelationships: cldLinks.map(l => ({ from: cldNodes.find(n => n.id === l.from)?.label ?? l.from, to: cldNodes.find(n => n.id === l.to)?.label ?? l.to, polarity: l.polarity, strength: l.strength })),
-            quadrantLeverageGuide,
-            generationInstructions: buildGenerationInstructions(strengths.map(s => s.description), weaknesses.map(w => w.description), opportunities.map(o => o.description), threats.map(t => t.description), plan.strategicIntent, systemsContext, selectedArchetypeName, leveragePoints, quadrantLeverageGuide),
-          },
-          plan: plan,
-        }),
-      });
-
-      const result = await response.json();
-      if (!result.success || !result.data) throw new Error('Invalid response from AI service');
-
+      const systemsContext = hasSystemsContext
+        ? buildSystemsContext(leveragePoints, selectedArchetypeName, activeArchetypeDescription, cldNodes, cldLinks)
+        : '';
+      const focus = [
+        plan.strategicIntent,
+        ...(plan.swotItems || []).map((i) => i.description),
+        systemsContext,
+      ].filter(Boolean).join(' ');
+      const missing = missingFrom(BIRD_TOWS_BASELINE, (plan.strategicOptions || []).map((o) => o.title), (o) => o.title);
       const options: Omit<StrategicOption, 'id'>[] = [];
-      QUADRANT_TYPES.forEach(type => {
-        const strategies = result.data[type] || [];
-        strategies.forEach((s: any) => {
-          options.push({ optionType: type, title: s.title || 'Strategy', description: s.description || '', priorityScore: s.priority_score || 3, feasibilityScore: s.feasibility_score || 3, selected: false });
-        });
+      QUADRANT_TYPES.forEach((type) => {
+        missing
+          .filter((o) => o.optionType === type)
+          .map((o) => ({ o, fit: focus ? similarity(focus, `${o.title} ${o.description}`) : 0 }))
+          .sort((x, y) => y.fit - x.fit || (y.o.priorityScore * y.o.feasibilityScore) - (x.o.priorityScore * x.o.feasibilityScore))
+          .slice(0, 3)
+          .forEach(({ o }) => options.push({ ...o, selected: false }));
       });
-
       if (options.length > 0) onBulkAdd(options);
-      else setGenerationError('No strategies were generated.');
-    } catch (error) {
-      console.error('Failed to generate strategies:', error);
-      setGenerationError(error instanceof Error ? error.message : 'An unexpected error occurred');
+      else setGenerationError(NOTHING_NEW);
     } finally {
       setIsGenerating(false);
     }
@@ -632,7 +605,7 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
           <div className="flex items-center gap-3">
             <div className="text-sm text-[#ecfdf5]/80"><span className="font-medium text-[#C9A84C]">{selectedCount}</span> selected</div>
             <button onClick={handleGenerateStrategies} disabled={isGenerating || !canGenerate} className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#065f46] to-[#4c1d95] text-white rounded-xl text-sm font-medium hover:shadow-lg disabled:opacity-50 transition-all">
-              {isGenerating ? <><Loader2 className="w-4 h-4 animate-spin" /> Generating…</> : <><Sparkles className="w-4 h-4" /> AI Generate{hasSystemsContext ? ' (Systems-Aware)' : ''}</>}
+              {isGenerating ? <><Loader2 className="w-4 h-4 animate-spin" /> Generating…</> : <><Sparkles className="w-4 h-4" /> Add BIRD options{hasSystemsContext ? ' (systems-aware)' : ''}</>}
             </button>
           </div>
         </div>
@@ -790,7 +763,7 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
             </div>
 
             <p className="text-[0.68rem] text-[#a3bfb3] leading-relaxed">
-              {SURVEY_FRAME.note} Zero respondents from {SURVEY_FRAME.silentProvinces.join(' and ')}. Post-2024 BARMM
+              {SURVEY_FRAME.note} {ISLAND_COVERAGE} Post-2024 BARMM
               comprises five provinces plus the SGA and Cotabato City; Sulu is not part of the region.
             </p>
           </div>
@@ -856,25 +829,5 @@ const StrategicOptions: React.FC<StrategicOptionsProps> = ({ plan, onAddOption, 
   );
 };
 
-function buildGenerationInstructions(strengths: string[], weaknesses: string[], opportunities: string[], threats: string[], strategicIntent: string | undefined, systemsContext: string | null, archetypeName: string | null | undefined, leveragePoints: LeveragePoint[], quadrantLeverageGuide: Record<string, any>): string {
-  const lines: string[] = [];
-  lines.push('=== STRATEGY GENERATION TASK ===');
-  lines.push('Generate 2–3 CONCRETE, ACTIONABLE strategic options for each TOWS quadrant.');
-  lines.push('CRITICAL REQUIREMENTS:');
-  lines.push('  1. Each strategy MUST directly reference at least one strength/weakness AND one opportunity/threat.');
-  lines.push('  2. Assign priority_score (1–5) and feasibility_score (1–5).');
-  lines.push('  3. DO NOT produce generic strategies — every option must be traceable to specific SWOT items.');
-  if (strategicIntent) { lines.push(`STRATEGIC INTENT: "${strategicIntent}"`); lines.push(''); }
-  lines.push('─── SWOT INVENTORY ───');
-  if (strengths.length > 0) { lines.push('STRENGTHS:'); strengths.forEach((s, i) => lines.push(`  S${i + 1}: ${s}`)); }
-  if (weaknesses.length > 0) { lines.push('WEAKNESSES:'); weaknesses.forEach((w, i) => lines.push(`  W${i + 1}: ${w}`)); }
-  if (opportunities.length > 0) { lines.push('OPPORTUNITIES:'); opportunities.forEach((o, i) => lines.push(`  O${i + 1}: ${o}`)); }
-  if (threats.length > 0) { lines.push('THREATS:'); threats.forEach((t, i) => lines.push(`  T${i + 1}: ${t}`)); }
-  if (systemsContext) { lines.push('─── SYSTEMS THINKING CONTEXT ───'); lines.push(systemsContext); }
-  lines.push('─── OUTPUT FORMAT ───');
-  lines.push('Return a JSON object with keys "SO", "ST", "WO", "WT". Each key maps to an array of strategy objects:');
-  lines.push('{ "SO": [{ "title": "...", "description": "...", "priority_score": 4, "feasibility_score": 3 }], ... }');
-  return lines.join('\n');
-}
 
 export default StrategicOptions;

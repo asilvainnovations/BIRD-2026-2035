@@ -63,7 +63,8 @@ When a value has two legitimate readings (different period or territory), quote 
 | Regional Validation Survey | **n = 76** responses, **3–20 August 2026** | `survey_responses` (verified 20 Nov 2026: 76 rows, first 2026-08-03 UTC, last 2026-08-20 UTC) |
 | Per-item n | 63–73 (item non-response); option ratings n = 75 | Ch 3, Ch 7 |
 | Tawi-Tawi | 0 survey respondents; 44 of 72 (61.1%) named it the province with most trapped value | Ch 2 |
-| Tawi-Tawi provincial validation | 28 October 2026, Rachel's Place, Bongao; MTIT Tawi-Tawi Provincial Office; facilitated plenary with hand-raise voting | `public/tawi-tawi-outlook.html` |
+| Basilan provincial validation | 20 June 2026, Isabela City (outside BARMM); consultative workshop organised by the MTIT Basilan Provincial Office, using the Basilan Economic and Investment Outlook as the visual guide; all data and insights accepted | `public/basilan-outlook.html`; Report Ch 1, F.4 |
+| Tawi-Tawi provincial validation | 28 October 2026, Rachel's Place, Bongao; MTIT Tawi-Tawi Provincial Office; facilitated plenary with hand-raise voting; validated the Tawi-Tawi Economic and Investment Outlook | `public/tawi-tawi-outlook.html` |
 
 ## 5. Governance context (dated)
 

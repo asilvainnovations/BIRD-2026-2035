@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { X, Send, Loader2, ChevronDown, ChevronUp, Brain, Target, BarChart3, Globe2, Leaf, Landmark } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { generateLocalResponse } from '@/lib/localKnowledgeEngine';
+import { generateAnswer } from '@/lib/localKnowledgeEngine';
+import { loadCorpus } from '@/lib/birdCorpus';
+import { ChatText } from './ChatText';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface Msg {
@@ -73,7 +75,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
   const [messages, setMessages] = useState<Msg[]>([{
     role: 'assistant',
     content:
-      "As-salamu alaykum! I'm the BIRD Local Intelligence Engine — your offline-capable strategy consultant for the Bangsamoro Investment Roadmap 2026–2035.\n\nI can help you analyze SWOT data, explain causal loops, identify leverage points, draft strategic options, and interpret BARMM's economic context — all without external AI services.\n\nWhat would you like to explore?",
+      "As-salamu alaykum. I'm the BIRD Local Intelligence Engine. I answer from the BIRD 2026–2035 report and this platform, offline. What would you like to know?",
     timestamp: Date.now(),
   }]);
   const endRef    = useRef<HTMLDivElement>(null);
@@ -85,6 +87,7 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
 
   useEffect(() => {
     if (open && !minimized) setTimeout(() => inputRef.current?.focus(), 100);
+    if (open) void loadCorpus(); // warm the report index while the user types
   }, [open, minimized]);
 
   const suggestions = useMemo(
@@ -93,13 +96,11 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
   );
 
   /**
-   * LOCAL INTELLIGENCE — replaces supabase.functions.invoke()
-   * Uses embedded knowledge base from:
-   *   • public/user-manual.html  (17 sections)
-   *   • README.md                (BEIE Framework, Architecture)
-   *   • src/lib/utils.ts         (BIRD mathematical formulas)
-   *
-   * Zero network calls. 100% offline-capable. Deterministic.
+   * LOCAL INTELLIGENCE — no external AI service.
+   * Answers from the BIRD corpus (report Executive Summary to Chapter 7, the data
+   * register, provincial outlooks, Tawi-Tawi workshop; built by scripts/kb/build.py)
+   * and from curated platform guidance (src/lib/localKnowledgeEngine.ts).
+   * Offline-capable and deterministic; every report answer links its section.
    */
   const send = useCallback(async (text: string) => {
     const q = text.trim();
@@ -110,13 +111,11 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
     setInput('');
     setLoading(true);
 
-    // Simulate brief "thinking" delay for UX (local responses are instant)
-    await new Promise((res) => setTimeout(res, 350 + Math.random() * 250));
 
     // Build context for local knowledge engine
     const history = messages.slice(-12).map(({ role, content }) => ({ role, content }));
 
-    const reply = generateLocalResponse({
+    const reply = await generateAnswer({
       query: q,
       activeView: activeView || 'default',
       plan,
@@ -243,13 +242,13 @@ const FloatingAIAssistant: React.FC<FloatingAIAssistantProps> = ({ plan, activeV
                     )}
                     <div
                       className={cn(
-                        'max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm whitespace-pre-wrap leading-relaxed',
+                        'max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed',
                         m.role === 'user'
                           ? 'bg-gradient-to-br from-[#C9A84C] to-blue-600 text-[#022c22] rounded-br-sm'
                           : 'bg-muted text-foreground rounded-bl-sm border border-border/40',
                       )}
                     >
-                      {m.content}
+                      {m.role === 'assistant' ? <ChatText text={m.content} /> : <span className="whitespace-pre-wrap">{m.content}</span>}
                     </div>
                   </div>
                 ))}

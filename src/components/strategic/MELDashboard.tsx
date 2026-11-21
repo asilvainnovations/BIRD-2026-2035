@@ -2,8 +2,9 @@ import React, { useMemo, useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from '@/lib/motion-shim';
 import { TrendingUp, TriangleAlert as AlertTriangle, CircleCheck as CheckCircle2, Clock, Target, DollarSign, Users, Cog, GraduationCap, ArrowUpRight, FolderKanban, Info, X, Send, Sparkles, Globe, ChevronDown, Loader as Loader2, ExternalLink, BookOpen, GitBranch, BrainCircuit, Layers, ArrowRight, Play, Zap, Shield, Leaf, ClipboardCheck } from 'lucide-react';
 import { StrategicPlan } from '@/lib/strategicPlanStore';
-import { EDGE_FUNCTIONS, BRAND_ASSETS } from '@/lib/supabase';
-import { openValidationSurvey } from '@/lib/bird-urls';
+import { BRAND_ASSETS } from '@/lib/supabase';
+import { generateAnswer } from '@/lib/localKnowledgeEngine';
+import ChatText from './ChatText';
 
 // ─── Import HeroSection from external file ────────────────────────────────────
 import HeroSection from './HeroSection';
@@ -12,7 +13,6 @@ import HeroSection from './HeroSection';
 const BIRD_BANNER_URL =
   'https://lydsisparsmvextskevw.supabase.co/storage/v1/object/public/bird-images/public/BIRD%20Banner.png';
 const AI_AVATAR_URL = BRAND_ASSETS.AI_AVATAR_URL;
-const AI_ENDPOINT   = EDGE_FUNCTIONS.AI_STRATEGY_ASSISTANT;
 
 // ─── BIRD 2026-2035 Data ──────────────────────────────────────────────────────
 import { PARETO_KPIS }                                     from '@/data/bird/kpis';
@@ -32,10 +32,11 @@ import { PHASES, TOTAL_BUDGET }                            from '@/data/bird/pha
 //   has no runtime data dependency.
 //
 // SAMPLING CAVEAT: non-probability convenience sample, no weighting frame.
-// These are stakeholder validation signals, NOT population estimates. Basilan,
-// Basilan and Tawi-Tawi returned ZERO respondents and ~78% of the sample sits in
-// the Cotabato City / Maguindanao del Norte mainland corridor, so any island
-// province or BIMP-EAGA (Sequence C) reading here is unvalidated.
+// These are stakeholder validation signals, NOT population estimates. The online
+// sample is mainland-weighted (Cotabato City / Maguindanao del Norte) and drew no
+// respondents from Basilan or Tawi-Tawi. Both island provinces were validated in
+// person instead: Basilan at a consultative workshop (20 June 2026, Isabela City)
+// and Tawi-Tawi at its provincial validation (28 October 2026, Bongao).
 // ─────────────────────────────────────────────────────────────────────────────
 
 const RESPONDENTS = {
@@ -59,12 +60,21 @@ const RESPONDENTS = {
     { label: 'Tawi-Tawi',                     n:  0 },
   ],
   coverageGap:
-    'Roughly 64% of the sample sits in the Cotabato City / Maguindanao del Norte mainland corridor, ' +
-    'and 2 of the 5 BARMM provinces — Basilan and Tawi-Tawi — returned zero respondents. ' +
-    'Sequence C (BIMP-EAGA maritime integration) and every island-province reading is therefore ' +
-    'unvalidated by the constituencies it most affects. A supplementary island wave is required ' +
-    'before any of this is published as regional consensus.',
+    'Roughly 64% of the online sample sits in the Cotabato City / Maguindanao del Norte mainland corridor, ' +
+    'and the survey drew no respondents from Basilan or Tawi-Tawi. Both provinces were consulted directly: ' +
+    'Basilan at a consultative workshop organised by the MTIT Basilan Provincial Office (20 June 2026, Isabela City), ' +
+    'where participants accepted all data and insights in the Basilan outlook, and ' +
+    'Tawi-Tawi at its provincial validation (28 October 2026, Bongao), which validated the Tawi-Tawi outlook.',
 } as const;
+
+/** In-person consultation — every BARMM province and the SGA (Report Ch 1, Stages 2–3; Tawi-Tawi validation). */
+const PROVINCIAL_WORKSHOPS = [
+  { date: '24 Mar 2026', place: 'Cotabato City', covers: ['Maguindanao del Norte', 'Maguindanao del Sur', 'SGA'] },
+  { date: '12 May 2026', place: 'Marawi City',   covers: ['Lanao del Sur'] },
+  { date: '20 Jun 2026', place: 'Isabela City',  covers: ['Basilan'] },
+  { date: '28 Oct 2026', place: 'Bongao',        covers: ['Tawi-Tawi'] },
+] as const;
+const PROVINCES_CONSULTED = PROVINCIAL_WORKSHOPS.flatMap(w => w.covers).filter(p => p !== 'SGA').length;
 
 /** Confidence / readiness / urgency by BEIE cluster — survey Sections 4–9, 1–5 scale. */
 const CLUSTER_SIGNALS = [
@@ -79,16 +89,13 @@ const CLUSTER_SIGNALS = [
 /**
  * SEQUENCING VALIDATION — survey Section 10, items q10_2 / q10_3 / q10_4, 1–5.
  * The three IEDS investment sequences, rated on priority. Verified 2026-08-28.
- *
- * Read this with the coverage gap in mind: Sequence C is the BIMP-EAGA maritime
- * corridor, and the two provinces that corridor actually runs through — Basilan
- * and Tawi-Tawi — contributed zero respondents. Its 4.00 is a mainland opinion
- * about an island programme.
+ * Sequence C (BIMP-EAGA maritime corridor) runs through Basilan and Tawi-Tawi;
+ * their view comes from the provincial workshops, not the online survey.
  */
 const SEQUENCE_SIGNALS = [
   { code: 'A', label: 'Halal & agro-industrial core',    mean: 4.20, sd: 0.79, n: 65, validation: 'partial'     as const },
   { code: 'B', label: 'Green economy & resource base',   mean: 4.09, sd: 0.69, n: 67, validation: 'partial'     as const },
-  { code: 'C', label: 'BIMP-EAGA maritime integration',  mean: 4.00, sd: 0.74, n: 66, validation: 'unvalidated' as const },
+  { code: 'C', label: 'BIMP-EAGA maritime integration',  mean: 4.00, sd: 0.74, n: 66, validation: 'partial'     as const },
 ] as const;
 
 /**
@@ -406,13 +413,6 @@ const DashboardHeroSection: React.FC<{ onNavigate?: (view: string) => void }> = 
               Open MEL Dashboard
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
             </button>
-            <button
-              onClick={() => openValidationSurvey()}
-              className="px-8 py-4 bg-[rgba(6,78,59,0.6)] backdrop-blur-sm border-2 border-[rgba(201,168,76,0.55)] text-[#C9A84C] rounded-xl font-bold text-base hover:bg-[rgba(201,168,76,0.15)] transition-all flex items-center gap-3 font-display"
-            >
-              <ClipboardCheck className="w-5 h-5" aria-hidden="true" />
-              Participate in Validation Survey
-            </button>
           </motion.div>
 
           {/* Feature cards grid */}
@@ -599,22 +599,11 @@ const AIAvatar: React.FC<{ size?: number }> = ({ size = 36 }) => (
   </div>
 );
 
-// ─── Inline markdown renderer ─────────────────────────────────────────────────
-const renderMarkdown = (content: string) =>
-  content.split('\n').map((line, i) => {
-    if (line.startsWith('• ') || line.startsWith('- '))
-      return <li key={i} className="ml-4 list-disc text-sm leading-relaxed">{line.slice(2)}</li>;
-    if (/^\*\*(.+)\*\*$/.test(line))
-      return <p key={i} className="font-bold text-sm mt-2">{line.replace(/\*\*/g, '')}</p>;
-    if (line === '') return <div key={i} className="h-1.5" />;
-    return <p key={i} className="text-sm leading-relaxed">{line.replace(/\*\*/g, '')}</p>;
-  });
-
 // ─── AI Strategist Sidebar Chat ───────────────────────────────────────────────
 const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([{
     id: '0', role: 'assistant', timestamp: new Date(),
-    content: `As-salamu alaykum! I'm BIRD AI — your embedded strategy consultant for the Bangsamoro Investment Roadmap 2026–2035.\n\nI bring expertise in:\n\n**Systems Thinking & Causal Analysis**\n• Feedback loop detection (R1/R2/B1-B4)\n• Meadows Leverage Points (LP1–LP5)\n• 7 BARMM Systems Archetypes\n\n**Investment & Strategy**\n• Panel A: 6 Pareto KPIs · Panel B: BSC Leverage Points\n• Panel C: Priority Action Board 2026\n• Panel E: Phase Progress (₱120–160B Roadmap)\n\n**Current Phase:** Foundation Building (2026–2028)\n**Active Focus:** BHB Operationalisation & Forestry Code\n\nWhat would you like to explore?`,
+    content: "As-salamu alaykum. Ask me about the dashboard's KPIs, the phases and actions, or anything in the BIRD 2026–2035 report.",
   }]);
   const [input, setInput]     = useState('');
   const [loading, setLoading] = useState(false);
@@ -642,30 +631,8 @@ const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     setLoading(true);
 
     try {
-      const res = await fetch(AI_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'chat',
-          data: {
-            message: q,
-            activeView: 'dashboard',
-            messages: history,
-            birdContext: { phase: 'Phase 1: Foundation Building (2026-2028)' },
-          },
-        }),
-      });
-
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      const reply = data?.data?.reply || data?.data?.markdown || 'I received your question but had trouble generating a response. Please try again.';
-
+      const reply = await generateAnswer({ query: q, activeView: 'dashboard', history });
       setMessages(p => [...p, { id: (Date.now()+1).toString(), role: 'assistant', content: reply, timestamp: new Date() }]);
-    } catch {
-      setMessages(p => [...p, {
-        id: (Date.now()+1).toString(), role: 'assistant', timestamp: new Date(),
-        content: 'I encountered a connection issue. Please check your internet connection and try again. The AI service requires the Supabase edge function to be deployed and the OPENAI_API_KEY secret to be configured.',
-      }]);
     } finally {
       setLoading(false);
     }
@@ -680,20 +647,20 @@ const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       initial={{ opacity: 0, x: 80, scale: 0.97 }} animate={{ opacity: 1, x: 0, scale: 1 }}
       exit={{ opacity: 0, x: 80, scale: 0.97 }} transition={{ type: 'spring', damping: 24, stiffness: 260 }}
       className="fixed right-0 top-0 h-full w-full max-w-md z-50 flex flex-col shadow-2xl bg-[#022c22] border-l border-[rgba(201,168,76,0.32)]"
-      role="dialog" aria-modal="true" aria-label="BIRD AI Strategy Assistant"
+      role="dialog" aria-modal="true" aria-label="BIRD Local Intelligence"
     >
       {/* Header */}
       <div className="flex items-center gap-3 px-5 py-4 border-b border-[rgba(201,168,76,0.32)] bg-[rgba(6,78,59,0.5)] flex-shrink-0">
         <AIAvatar size={36} />
         <div className="flex-1 min-w-0">
-          <p className="font-bold text-[#ecfdf5] text-sm font-display">BIRD AI Strategist</p>
+          <p className="font-bold text-[#ecfdf5] text-sm font-display">BIRD Local Intelligence</p>
           <p className="text-xs text-[#C9A84C] flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" aria-hidden="true" />
             BIRD 2026–2035 · MEL Dashboard
           </p>
         </div>
         <button
-          onClick={onClose} aria-label="Close AI assistant"
+          onClick={onClose} aria-label="Close assistant"
           className="p-1.5 rounded-lg hover:bg-white/10 text-[#ecfdf5]/60 hover:text-white transition"
         >
           <X className="w-4 h-4" />
@@ -718,7 +685,7 @@ const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 : 'bg-[rgba(6,78,59,0.6)] text-[#ecfdf5] border border-[rgba(201,168,76,0.32)] rounded-bl-sm ml-2'
             }`}>
               {msg.role === 'assistant'
-                ? <div className="space-y-0.5">{renderMarkdown(msg.content)}</div>
+                ? <ChatText text={msg.content} />
                 : <p>{msg.content}</p>
               }
               <p className={`text-[10px] mt-2 opacity-50`}>
@@ -767,7 +734,7 @@ const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             onKeyDown={onKey}
             placeholder="Ask about systems thinking, BARMM investment…"
             rows={1}
-            aria-label="Message BIRD AI"
+            aria-label="Message BIRD Local Intelligence"
             className="flex-1 bg-transparent text-sm text-[#ecfdf5] placeholder-[#ecfdf5]/40 resize-none focus:outline-none leading-relaxed"
             style={{ maxHeight: 100 }}
           />
@@ -780,7 +747,7 @@ const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             <Send className="w-3.5 h-3.5" />
           </button>
         </div>
-        <p className="text-center text-[10px] text-[#ecfdf5]/20 mt-2">BIRD AI · BOI-MTIT, BARMM · Powered by GPT-4o</p>
+        <p className="text-center text-[10px] text-[#ecfdf5]/20 mt-2">BIRD Local Intelligence · BOI-MTIT, BARMM · Offline capable</p>
       </div>
     </motion.div>
   );
@@ -1521,12 +1488,12 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
             </span>
           </div>
 
-          {/* Coverage warning — the roadmap's most consequential evidence gap */}
-          <div className="flex items-start gap-3 rounded-lg border border-[rgba(239,68,68,0.35)] bg-[rgba(239,68,68,0.08)] px-4 py-3 mb-6">
-            <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#ef4444]" aria-hidden="true" />
+          {/* Coverage — online survey vs in-person provincial validation */}
+          <div className="flex items-start gap-3 rounded-lg border border-[rgba(201,168,76,0.35)] bg-[rgba(201,168,76,0.08)] px-4 py-3 mb-6">
+            <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#C9A84C]" aria-hidden="true" />
             <div>
-              <p className="text-xs font-bold text-[#ef4444] mb-0.5">
-                Coverage gap &mdash; {validation.silentProvinces.map(p => p.label).join(', ')} returned zero respondents
+              <p className="text-xs font-bold text-[#E8C560] mb-0.5">
+                Online survey: no respondents from {validation.silentProvinces.map(p => p.label).join(' or ')} &mdash; both validated at provincial workshops
               </p>
               <p className="text-[0.7rem] text-[#ecfdf5]/55 leading-relaxed">{RESPONDENTS.coverageGap}</p>
             </div>
@@ -1538,7 +1505,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
               { color: '#10b981', val: RESPONDENTS.totalResponses,       lbl: 'Consented Responses' },
               { color: '#C9A84C', val: `${validation.endorsedPct}%`,     lbl: 'Endorse IEDS Outright' },
               { color: '#ef4444', val: validation.meanReadiness.toFixed(2), lbl: 'Mean Readiness (1–5)' },
-              { color: '#3b82f6', val: validation.silentProvinces.length, lbl: 'Provinces With No Voice' },
+              { color: '#3b82f6', val: `${PROVINCES_CONSULTED} / 5`, lbl: 'Provinces Validated in Person' },
             ].map(({ color, val, lbl }) => (
               <div key={lbl} className="bg-[rgba(2,44,34,0.5)] border border-[rgba(201,168,76,0.32)] rounded-lg p-4 text-center relative overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-0.5" style={{ background: color }} aria-hidden="true" />
@@ -1811,8 +1778,8 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
               <p className="text-[0.68rem] text-[#ecfdf5]/45 leading-relaxed mt-3 pt-3 border-t border-[rgba(255,255,255,0.06)]">
                 The three sequences are separated by 0.20 of a scale point against SDs near 0.75 —
                 statistically these are one undifferentiated block, not a ranked order. Sequence C is
-                the BIMP-EAGA maritime corridor, and Basilan and Tawi-Tawi returned zero respondents.
-                Its 4.00 is a mainland opinion about an island programme.
+                the BIMP-EAGA maritime corridor; the survey rating is mainland-weighted, and the island
+                view comes from the Basilan (20 June) and Tawi-Tawi (28 October) provincial workshops.
               </p>
             </div>
 
@@ -1853,7 +1820,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
               <h3 className="text-sm font-bold text-white font-display">
                 Survey Coverage — Who Actually Answered
               </h3>
-              <ValidationBadge level="partial" note={`${validation.silentProvinces.length} provinces silent`} />
+              <ValidationBadge level="partial" note="islands via provincial workshops" />
             </div>
             <p className="text-[0.68rem] text-[#ecfdf5]/40 mb-4">
               All {RESPONDENTS.totalResponses} responses carry final consent; none quarantined.
@@ -2004,7 +1971,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
             initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}
             whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}
             onClick={() => setShowAIChat(true)}
-            aria-label="Open BIRD AI Strategy Assistant"
+            aria-label="Open BIRD Local Intelligence"
             className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-[#022c22]/90 backdrop-blur shadow-xl shadow-[#C9A84C]/40 flex items-center justify-center border-2 border-[#C9A84C]/50 hover:border-[#C9A84C] transition"
           >
             <AIAvatar size={48} />

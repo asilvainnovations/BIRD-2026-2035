@@ -21,6 +21,10 @@ jobs:
         run: python3 scripts/check-figures.py
       - name: Single-volume report matches its parts
         run: python3 scripts/report/compile.py --check
+      - name: Assistant knowledge base matches the report
+        run: |
+          pip install --quiet beautifulsoup4 lxml
+          python3 scripts/kb/build.py --check
       - name: Inline scripts in static pages parse
         run: node scripts/check-inline-js.cjs public/*.html public/report/*.html
       - run: npm ci --no-audit --no-fund

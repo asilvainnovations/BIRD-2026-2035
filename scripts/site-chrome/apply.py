@@ -26,7 +26,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2] / "public"
 PLATFORM = "https://bird-boi.mtit-barmm.com/"
-SURVEY = "https://bird-validation-survey.bolt.host/"
 
 # ── Information architecture (single source of truth) ────────────────────────
 PRIMARY = [  # desktop inline links (≥1100px)
@@ -40,8 +39,7 @@ PRIMARY = [  # desktop inline links (≥1100px)
 NAV = [
     ("Platform", [
         ("BIRD Strategic Planning Platform", PLATFORM, "SWOT → Systems → Strategy → BSC → PAPs → MEL"),
-        ("Validation Survey", SURVEY, "Stakeholder survey (opens the survey app)"),
-        ("Survey results", "survey-dashboard.html", None),
+        ("Validation survey results", "survey-dashboard.html", "Closed · n = 76"),
         ("Platform user manual", "user-manual.html", None),
     ]),
     ("The Report", [
@@ -71,12 +69,10 @@ NAV = [
         ("Tawi-Tawi", "tawi-tawi-outlook.html", None),
         ("Tawi-Tawi validation workshop", "tawi-tawi-validation-workshop.html", None),
     ]),
-    ("Learn and engage", [
+    ("Learn more", [
         ("Resource library", "resources.html", None),
         ("Presentation slides", "slides.html", None),
         ("BEIE student's guide", "student-guide.html", None),
-        ("Survey orientation", "survey-orientation.html", None),
-        ("Feedback", "feedback.html", None),
         ("Contact us", "contact.html", None),
     ]),
 ]
@@ -170,7 +166,7 @@ def subnav(links: list[tuple[str, str]]) -> str:
 
 def footer(pre: str, page: str, notes: list[str]) -> str:
     cols = []
-    picks = [("Platform", NAV[0][1] + [NAV[4][1][0], NAV[4][1][5]]), ("The Report", NAV[1][1]),
+    picks = [("Platform", NAV[0][1] + [NAV[4][1][0], NAV[4][1][3]]), ("The Report", NAV[1][1]),
              ("Strategy", NAV[2][1][:6]), ("Provinces", NAV[3][1][:7])]
     for title, items in picks:
         lis = "".join(f'<li><a href="{url(h, pre)}"{cur(h, page)}{link_attrs(h)}>{html.escape(t)}</a></li>'

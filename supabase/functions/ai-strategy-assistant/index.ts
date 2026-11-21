@@ -1,4 +1,10 @@
-// ─── BIRD 2026-2035 — AI STRATEGY ASSISTANT EDGE FUNCTION v2.2 (2026-11-21: CORS for the BIRD platform; figures aligned with the finalised report) ───────────────
+// STATUS (2026-11-21): the Strat Planner Pro platform no longer calls this function.
+// Its chat and every generate/suggest button run on the BIRD Local Intelligence
+// Engine (src/lib/localKnowledgeEngine.ts, birdCorpus.ts, localStrategist.ts).
+// It stays deployed only because bird-validation-survey's FloatingAIAssistant still
+// calls it on this Supabase project. Retire it once that app uses the local engine.
+
+// ─── BIRD 2026-2035 — AI STRATEGY ASSISTANT EDGE FUNCTION v2.3 (2026-11-21: v57 origin allowlist restored; figures aligned with the finalised report) ───────────────
 // Domain-expert AI for the Bangsamoro Investment Roadmap Development (BIRD)
 // 2026-2035 — investment, strategic thinking, systems thinking, BARMM context.
 // Deployed on: rgvteytgkugdqdodedxq.databasepad.com (Supabase Edge Runtime)
@@ -13,23 +19,17 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 // computed per-request inside the handler below so it can check the actual
 // requesting origin.
 const ALLOWED_ORIGINS = [
-  // Local development
+  // The BIRD platform (bird-boi.mtit-barmm.com) does NOT call this function: its
+  // strategy consultant is the offline BIRD Local Intelligence Engine
+  // (src/lib/localKnowledgeEngine.ts). Do not add the platform's origins here.
   'http://localhost:5173', 'http://localhost:8080',
-  // BIRD Strategic Planning Platform (Netlify site "bird2035") and static pages
-  'https://bird-boi.mtit-barmm.com', 'https://bird2035.netlify.app',
-  'https://asilvainnovations.github.io', 'https://asilvainnovations.com',
-  // BIRD Validation Survey
-  'https://bird-validation-survey.bolt.host', 'https://bird-validation-survey.netlify.app',
+  'https://bird-validation-survey.bolt.host', 'https://asilvainnovations.com',
 ];
-// Netlify deploy previews / branch deploys: https://<id>--<site>.netlify.app
-const PREVIEW_SUFFIXES = ['--bird2035.netlify.app', '--bird-validation-survey.netlify.app'];
 function isAllowedOrigin(origin: string | null): boolean {
   if (!origin) return false;
   if (ALLOWED_ORIGINS.includes(origin)) return true;
   try {
-    const { protocol, hostname } = new URL(origin);
-    if (protocol !== 'https:') return false;
-    return PREVIEW_SUFFIXES.some((s) => hostname.endsWith(s)) || hostname.endsWith('.webcontainer-api.io');
+    return new URL(origin).hostname.endsWith('.webcontainer-api.io');
   } catch {
     return false;
   }

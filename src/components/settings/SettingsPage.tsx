@@ -154,7 +154,7 @@ const SettingsPage: React.FC = () => {
     { id: 'profile', label: 'Profile', icon: UserIcon },
     { id: 'notifications', label: 'Notifications', icon: Bell },
     { id: 'theme', label: 'Theme', icon: Palette },
-    { id: 'ai', label: 'AI Configuration', icon: Cpu },
+    { id: 'ai', label: 'Local Intelligence', icon: Cpu },
     { id: 'security', label: 'Security', icon: Shield },
     { id: 'language', label: 'Language', icon: Languages },
     { id: 'integrations', label: 'Integrations', icon: Plug },
@@ -234,31 +234,18 @@ const SettingsPage: React.FC = () => {
 
           {tab === 'ai' && (
             <div className="space-y-4">
-              <h2 className="text-xl font-bold text-white">AI Configuration</h2>
-              <p className="text-sm text-[#a3bfb3]">Customize how BIRD AI behaves across your strategic plans.</p>
-              <SelectFieldLabeled label="BIRD AI Model" value={settings.ai_config.model}
-                options={[
-                  { value: 'moonshot-v1-128k', label: 'Moonshot 128K (Recommended)' },
-                  { value: 'moonshot-v1-32k', label: 'Moonshot 32K' },
-                  { value: 'moonshot-v1-8k', label: 'Moonshot 8K' },
-                ]}
-                onChange={(v) => { const next = { ...settings, ai_config: { ...settings.ai_config, model: v } }; setSettings(next); persistSettings(next); }} />
-              <SelectField label="BIRD AI Persona" value={settings.ai_config.persona}
-                options={['senior_strategist', 'investment_analyst', 'systems_thinker', 'critical_consultant', 'concise_advisor']}
-                onChange={(v) => { const next = { ...settings, ai_config: { ...settings.ai_config, persona: v } }; setSettings(next); persistSettings(next); }} />
-              <div>
-                <label className="block text-xs font-bold text-[#a3bfb3] uppercase tracking-wider mb-2">Temperature ({settings.ai_config.temperature})</label>
-                <input type="range" min={0} max={1.5} step={0.1} value={settings.ai_config.temperature}
-                  onChange={(e) => { const next = { ...settings, ai_config: { ...settings.ai_config, temperature: parseFloat(e.target.value) } }; setSettings(next); }}
-                  onMouseUp={() => persistSettings(settings)}
-                  className="w-full accent-[#C9A84C]" />
+              <h2 className="text-xl font-bold text-white">Local Intelligence</h2>
+              <div className="rounded-xl border border-[#C9A84C]/20 bg-[#022c22]/60 p-4 text-sm text-[#ecfdf5]/85 leading-relaxed space-y-2">
+                <p>
+                  The assistant and every “Add” or “Suggest” button run in your browser on the BIRD 2026–2035 report,
+                  the provincial outlooks and the data register. Nothing is sent to an outside AI service, and it works offline.
+                </p>
+                <p>
+                  Figures come from the report’s canonical data register (Table 7.6). Suggestions are the report’s own
+                  survey-scored SWOT factors, TOWS options, BSC objectives and KPIs, and Phase 1 PAPs, matched to your plan.
+                </p>
+                <p>There is nothing to configure.</p>
               </div>
-              <Toggle label="Auto-suggest improvements while editing"
-                value={settings.ai_config.auto_suggest}
-                onChange={(v) => { const next = { ...settings, ai_config: { ...settings.ai_config, auto_suggest: v } }; setSettings(next); persistSettings(next); }} />
-              <Toggle label="Verbose explanations"
-                value={settings.ai_config.verbose}
-                onChange={(v) => { const next = { ...settings, ai_config: { ...settings.ai_config, verbose: v } }; setSettings(next); persistSettings(next); }} />
             </div>
           )}
 

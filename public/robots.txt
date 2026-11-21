@@ -39,8 +39,6 @@ Allow: /
 # Sitemap Locations (Primary Domains + Bolt.host)
 # ========================================================================
 Sitemap: https://bangsamoro-investment-roadmap.asilvainnovations.com/sitemap.xml
-Sitemap: https://bird-survey.asilvainnovations.com/sitemap.xml
-Sitemap: https://bird-validation-survey.bolt.host/sitemap.xml
 Sitemap: https://bird-roadmap.asilvainnovations.com/sitemap.xml
 Sitemap: https://bird-dashboard.asilvainnovations.com/sitemap.xml
 Sitemap: https://bird-app.asilvainnovations.com/sitemap.xml

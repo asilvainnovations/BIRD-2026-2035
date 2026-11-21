@@ -524,11 +524,6 @@ export const BIRD_SITES = {
     url: "https://bird-roadmap.asilvainnovations.com",
     description: "Interactive roadmap visualization with phase details, milestones, progress tracking, and public dashboards.",
   },
-  surveyOrientation: {
-    title: "Validation Survey Orientation",
-    url: "https://bird-survey-orientation.asilvainnovations.com",
-    description: "Survey orientation and guidance portal with methodology explainer, FAQ, and stakeholder preparation resources.",
-  },
   resources: {
     title: "Resources Library",
     url: "https://bird-resources.asilvainnovations.com",
@@ -548,11 +543,6 @@ export const BIRD_SITES = {
     title: "BIRD Strategic Planning App",
     url: "https://bird-app.asilvainnovations.com",
     description: "Main BIRD strategic planning application with all modules: SWOT, Systems Thinking, BSC, PAPs, MEL, and AI Assistant.",
-  },
-  validationSurvey: {
-    title: "Validation Survey Portal",
-    url: "https://bird-validation-survey.bolt.host/",
-    description: "Standalone validation survey portal for stakeholder feedback collection, analysis, and reporting.",
   },
   boiPortal: {
     title: "BOI-MTIT BARMM Official",
@@ -687,11 +677,6 @@ export function getAvailableSections(): string[] {
 }
 
 // ─── EXTERNAL APP URLS ─────────────────────────────────────────────────────
-/** Canonical URL of the standalone BIRD Validation Survey app.
- *  Every "Validation Survey" button (HeroSection, Topbar, Sidebar,
- *  MELDashboard, tutorial) opens this single destination. */
-export const VALIDATION_SURVEY_URL = BIRD_SITES.validationSurvey.url;
-
 /** Open an external URL in a new, safe browser tab. */
 export function openExternal(url: string) {
   if (typeof window !== 'undefined') {
@@ -699,7 +684,3 @@ export function openExternal(url: string) {
   }
 }
 
-/** Open the standalone Validation Survey in a new tab. */
-export function openValidationSurvey() {
-  openExternal(VALIDATION_SURVEY_URL);
-}

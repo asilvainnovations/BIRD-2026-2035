@@ -197,21 +197,6 @@ const Topbar: React.FC<TopbarProps> = ({
 
         {/* ── Right: Actions ── */}
         <div className="flex items-center gap-2">
-          {/* Validation Survey */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <button
-                id="topbar-btn-validation"
-                onClick={() => onNavigateView('validation')}
-                className="hidden md:flex items-center gap-1.5 px-3 py-2 bg-[#C9A84C]/10 hover:bg-[#C9A84C]/20 text-[#C9A84C] rounded-xl text-xs font-bold border border-[#C9A84C]/30 transition-colors"
-              >
-                <ClipboardCheck className="w-4 h-4" /> Survey
-              </button>
-            </TooltipTrigger>
-            <TooltipContent side="bottom" className="bg-[#022c22] border-[#C9A84C]/30 text-[#E8C560]">
-              <p className="text-xs">Open Validation Survey</p>
-            </TooltipContent>
-          </Tooltip>
 
           {/* Search */}
           <div className="relative" ref={searchRef} id="topbar-search-wrapper">
