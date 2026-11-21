@@ -403,8 +403,10 @@ const PlanExport: React.FC<PlanExportProps> = ({ plan }) => {
     content += `  * COVERAGE: about 64% of the online sample is based in the\n`;
     content += `    Cotabato City / Maguindanao del Norte mainland corridor. The\n`;
     content += `    survey drew no respondents from Basilan or Tawi-Tawi; both were\n`;
-    content += `    validated in person at provincial workshops (Basilan, 20 June\n`;
-    content += `    2026, Isabela City; Tawi-Tawi, 28 October 2026, Bongao).\n`;
+    content += `    validated in person: Basilan at a consultative workshop in\n`;
+    content += `    Isabela City (20 June 2026), which accepted all data and\n`;
+    content += `    insights in its outlook; Tawi-Tawi at a provincial validation\n`;
+    content += `    in Bongao (28 October 2026).\n`;
     content += `  * SMALL CELLS: Lanao del Sur (n=3) and Maguindanao del Sur (n=3)\n`;
     content += `    cannot support province-level claims.\n`;
     content += `  * STRATEGIC OPTIONS: 25 of 75 respondents left all 28 scoring cells\n`;

@@ -728,7 +728,7 @@ The validation survey is closed. It ran 3–20 August 2026 and returned 76 conse
 Every province was also consulted in person:
 • Maguindanao del Norte, Maguindanao del Sur and the SGA: mainland workshop, 24 March 2026, Cotabato City
 • Lanao del Sur: provincial workshop, 12 May 2026, Marawi City
-• Basilan: provincial workshop validating the Basilan outlook, 20 June 2026, Isabela City
+• Basilan: consultative workshop organised by the MTIT Basilan Provincial Office, 20 June 2026, Isabela City (outside BARMM); the Basilan outlook was the visual guide and all its data and insights were accepted
 • Tawi-Tawi: provincial validation of the Tawi-Tawi outlook, 28 October 2026, Bongao
 
 The online survey drew no respondents from Basilan or Tawi-Tawi; their voice comes from these workshops.

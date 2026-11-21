@@ -8,7 +8,7 @@
 export const PROVINCIAL_VALIDATION = [
   { province: 'Maguindanao del Norte, Maguindanao del Sur, SGA', date: '24 March 2026', place: 'Cotabato City' },
   { province: 'Lanao del Sur', date: '12 May 2026', place: 'Marawi City' },
-  { province: 'Basilan', date: '20 June 2026', place: 'Isabela City' },
+  { province: 'Basilan', date: '20 June 2026', place: 'Isabela City (outside BARMM); MTIT Basilan Provincial Office consultative workshop' },
   { province: 'Tawi-Tawi', date: '28 October 2026', place: 'Bongao' },
 ] as const;
 
@@ -17,4 +17,5 @@ export const MAINLAND_SHARE = '64%';
 
 export const ISLAND_COVERAGE =
   'The online survey drew no respondents from Basilan or Tawi-Tawi; both provinces were validated in person ' +
-  'at provincial workshops (Basilan, 20 June 2026, Isabela City; Tawi-Tawi, 28 October 2026, Bongao).';
+  'at provincial workshops: Basilan at a consultative workshop in Isabela City (20 June 2026), which accepted all data and insights in its outlook, ' +
+  'and Tawi-Tawi at a provincial validation in Bongao (28 October 2026).';

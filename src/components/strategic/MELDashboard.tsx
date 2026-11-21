@@ -35,7 +35,7 @@ import { PHASES, TOTAL_BUDGET }                            from '@/data/bird/pha
 // These are stakeholder validation signals, NOT population estimates. The online
 // sample is mainland-weighted (Cotabato City / Maguindanao del Norte) and drew no
 // respondents from Basilan or Tawi-Tawi. Both island provinces were validated in
-// person instead: Basilan at its provincial workshop (20 June 2026, Isabela City)
+// person instead: Basilan at a consultative workshop (20 June 2026, Isabela City)
 // and Tawi-Tawi at its provincial validation (28 October 2026, Bongao).
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -62,7 +62,8 @@ const RESPONDENTS = {
   coverageGap:
     'Roughly 64% of the online sample sits in the Cotabato City / Maguindanao del Norte mainland corridor, ' +
     'and the survey drew no respondents from Basilan or Tawi-Tawi. Both provinces were consulted directly: ' +
-    'Basilan at its provincial workshop (20 June 2026, Isabela City), which validated the Basilan outlook, and ' +
+    'Basilan at a consultative workshop organised by the MTIT Basilan Provincial Office (20 June 2026, Isabela City), ' +
+    'where participants accepted all data and insights in the Basilan outlook, and ' +
     'Tawi-Tawi at its provincial validation (28 October 2026, Bongao), which validated the Tawi-Tawi outlook.',
 } as const;
 
