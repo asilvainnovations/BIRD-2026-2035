@@ -119,7 +119,7 @@ const AppLayout: React.FC = () => {
   const handleSignOut = useCallback(async () => {
     await signOut();
     updateUiState({ showProfileModal: false, showLanding: true });
-    navigate('/');
+    navigate('/platform');
   }, [signOut, navigate, updateUiState]);
 
   const navigateToView = useCallback((viewId: string) => goToView(viewId), [goToView]);

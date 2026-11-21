@@ -89,6 +89,7 @@ const App: React.FC = () => (
             <Suspense fallback={<AppLoadingFallback />}>
               <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/platform" element={<Index />} />
                 <Route path="/mel-dashboard" element={<Index />} />
                 <Route path="/swot-analysis" element={<Index />} />
                 <Route path="/systems-thinking" element={<Index />} />
