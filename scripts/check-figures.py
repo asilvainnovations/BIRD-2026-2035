@@ -39,6 +39,13 @@ RULES = [
     ("island provinces framed as having no voice (both validated at provincial workshops)",
      r"[Nn]o [Vv]oice|[Zz]ero (?:validation-survey )?respondents|ZERO\b[^\n]{0,20}respondents|returned none|island quotas|0 of 76|moved to 26 October|Validation respondents from Basilan",
      r"(?!)"),
+    ("80%-of-impact claim for the headline KPIs (Chapter 5 G.1 disclaims it)",
+     r"(?:drive|drives|driving|explain|explains|collectively explain)[^\n<]{0,40}80\s?% of (?:the )?(?:strategic |IEDS'?s? (?:expected )?)?impact",
+     r"not a claim|does not establish|not establish|should not be interpreted"),
+    ("retired ₱55B roadmap budget (use the ₱120–160B public envelope)", r"(?:₱|PHP\s?)55\s?B\b|₱55 billion", HISTORICAL + r"|single ₱55B|retired"),
+    ("pre-Chapter 5 scorecard codes (use F1–F6, S1–S7, P1–P7, L1–L7)", r"bscCode: '(?:IP|LG)\d|'(?:IP|LG)\d / |\b(?:IP|LG)[1-7]–(?:IP|LG)[1-7]", HISTORICAL),
+    ("BBOI named as data owner (custody: A. Silva / BOI-MTIT)", r"owner: '[^']*BBOI|'BBOI Chair'|Data sources: PSA, BBOI", r"(?!)"),
+    ("old 2030 checkpoints for exports (₱26B) and halal MSMEs (3,000)", r"target2030: '₱20B'|~ 2,000 by 2030|target2030: '2,000\+'", HISTORICAL),
     ("mainland share of the survey sample is 64% (49 of 76), not 78%", r"78\s?% of (?:the )?(?:sample|respondents)", r"(?!)"),
 ]
 

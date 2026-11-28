@@ -337,10 +337,14 @@ The BSC translates your vision and strategies into measurable objectives across 
 
 The platform includes all official BIRD 2026–2035 KPIs pre-loaded in the MEL Dashboard. Reference these when creating your own plan objectives:
 
-- **F1–F5**: Financial perspective KPIs
-- **S1–S4**: Stakeholder perspective KPIs
-- **IP1–IP7**: Internal Process KPIs
-- **LG1–LG4**: Learning & Growth KPIs
+The codes follow Chapter 5 of the BIRD report (27 objectives):
+
+- **F1–F6**: Financial perspective (30%)
+- **S1–S7**: Stakeholder perspective (25%)
+- **P1–P7**: Internal Process perspective (25%)
+- **L1–L7**: Learning & Growth perspective (20%)
+
+The six headline KPIs on Panel A are Chapter 5, Table G.1: investment approvals (F1), GRDP (F2), exports (F3), halal-certified MSMEs (S3), household electrification and broadband connectivity (both linked to S7 and F2). Gender-balanced employment, renewable energy share, MSME share of GDP and halal processing time are Chapter 4 supporting indicators, not scorecard objectives.
 
 ---
 

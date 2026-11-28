@@ -57,7 +57,7 @@ const ARCHETYPE_DATA: Record<string, any> = {
   success_to_the_successful: {
     name: 'Success to the Successful',
     description: 'Mainland provinces outpace archipelagic areas, deepening regional inequality.',
-    leverage_points: ['Affirmative investment policies', 'Provincial equity targets', 'Satellite BBOI offices in Tawi-Tawi, Basilan, SGA'],
+    leverage_points: ['Affirmative investment policies', 'Provincial equity targets', 'Satellite BOI-MTIT facilitation offices in Tawi-Tawi, Basilan, SGA'],
     diagram_note: 'Initial advantages compound, attracting more resources while lagging provinces fall further behind.',
   },
   growth_and_underinvestment: {

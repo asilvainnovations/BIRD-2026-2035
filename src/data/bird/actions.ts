@@ -58,7 +58,7 @@ export interface ActionPlan {
   budgetValue: number;        // numeric PHP for aggregation
   lead: string;
   support: string;
-  bscCode: string;            // Balanced Scorecard perspective code
+  bscCode: string;            // Chapter 5 objective codes served, e.g. 'P3 / L1'
   sdgAlignment?: string;      // SDG alignment
 }
 
@@ -79,7 +79,7 @@ export const ACTION_PLAN_2026: ActionPlan[] = [
     budgetValue: 200_000_000,
     lead: 'BHB / MTIT',
     support: 'OIC/SMIIC (Technical Assistance), TESDA',
-    bscCode: 'IP2 / LG2',
+    bscCode: 'P3 / L1',
     sdgAlignment: 'SDG 8, SDG 17',
   },
   {
@@ -98,7 +98,7 @@ export const ACTION_PLAN_2026: ActionPlan[] = [
     budgetValue: 50_000_000,
     lead: 'MENRE / Parliament',
     support: 'MILG, MENRE-BARMM, LGUs',
-    bscCode: 'F4 / IP7',
+    bscCode: 'F4 / P6',
     sdgAlignment: 'SDG 13, SDG 15, SDG 17',
   },
   {
@@ -109,15 +109,15 @@ export const ACTION_PLAN_2026: ActionPlan[] = [
     cluster: 'Enablers: Infrastructure',
     action: 'BEGMP Digital Rollout & 1-Day Business Registration',
     actionDesc:
-      'Complete deployment of the Bangsamoro e-Governance Master Plan (BEGMP). Achieve 1-day digital business registration via BBOI platform. Deploy BICC (Bangsamoro Investment Command Center) dashboard for real-time investment tracking and investor aftercare.',
+      'Complete deployment of the Bangsamoro e-Governance Master Plan (BEGMP). Achieve 1-day digital business registration via the BOI-MTIT platform. Deploy BICC (Bangsamoro Investment Command Center) dashboard for real-time investment tracking and investor aftercare.',
     priority: 'high',
     due: 'Q3 2026',
     status: 'Development',
     budget: '₱150M',
     budgetValue: 150_000_000,
     lead: 'BDTA / MICT',
-    support: 'BBOI, MTIT, PSA-BARMM',
-    bscCode: 'IP4 / S2',
+    support: 'BOI-MTIT, PSA-BARMM',
+    bscCode: 'P1 / L4 / S1',
     sdgAlignment: 'SDG 8, SDG 9, SDG 17',
   },
   {
@@ -134,9 +134,9 @@ export const ACTION_PLAN_2026: ActionPlan[] = [
     status: 'Development',
     budget: '₱500M',
     budgetValue: 500_000_000,
-    lead: 'MTIT / BBOI',
+    lead: 'BOI-MTIT',
     support: 'BEZA, SPDA, MPW',
-    bscCode: 'F1 / IP1',
+    bscCode: 'F1 / S3',
     sdgAlignment: 'SDG 8, SDG 9',
   },
   {
@@ -155,7 +155,7 @@ export const ACTION_PLAN_2026: ActionPlan[] = [
     budgetValue: 6_670_000_000,
     lead: 'DOE / MPW',
     support: 'MENRE-BARMM, NEA, LGUs',
-    bscCode: 'IP5 / LG3',
+    bscCode: 'P4 / S7',
     sdgAlignment: 'SDG 7, SDG 9',
   },
   {
@@ -174,7 +174,7 @@ export const ACTION_PLAN_2026: ActionPlan[] = [
     budgetValue: 300_000_000,
     lead: 'MFBM / Al-Amanah',
     support: 'BSP, IsDB, MTIT-ETD',
-    bscCode: 'F5 / LG4',
+    bscCode: 'F5 / S5',
     sdgAlignment: 'SDG 8, SDG 10, SDG 17',
   },
   {
@@ -193,7 +193,7 @@ export const ACTION_PLAN_2026: ActionPlan[] = [
     budgetValue: 200_000_000,
     lead: 'MTIT-BTI',
     support: 'BIMP-EAGA Secretariat, DOT, LGUs',
-    bscCode: 'F3 / S3',
+    bscCode: 'F3 / F6',
     sdgAlignment: 'SDG 8, SDG 11, SDG 17',
   },
   {
@@ -212,7 +212,7 @@ export const ACTION_PLAN_2026: ActionPlan[] = [
     budgetValue: 800_000_000,
     lead: 'MAFAR / SPDA',
     support: 'MTIT, MPW, MENRE, DA',
-    bscCode: 'F2 / IP1',
+    bscCode: 'F2 / S3',
     sdgAlignment: 'SDG 2, SDG 8, SDG 12',
   },
   {
@@ -231,7 +231,7 @@ export const ACTION_PLAN_2026: ActionPlan[] = [
     budgetValue: 250_000_000,
     lead: 'TESDA / MOLE',
     support: 'BHB, MTIT, DepEd-BARMM',
-    bscCode: 'LG1 / LG2',
+    bscCode: 'L7 / L1',
     sdgAlignment: 'SDG 4, SDG 8',
   },
   {
@@ -242,15 +242,15 @@ export const ACTION_PLAN_2026: ActionPlan[] = [
     cluster: 'Cross-Cutting: Moral Governance',
     action: 'BICC & MEL Dashboard Deployment',
     actionDesc:
-      'Establish the Bangsamoro Investment Command Center (BICC) as central coordination hub for investment facilitation, monitoring, and adaptive management. Deploy MEL (Monitoring, Evaluation, and Learning) dashboard integrating PSA-BARMM databases, BHB certification logs, and BBOI approval tracking for real-time KPI visualization.',
+      'Establish the Bangsamoro Investment Command Center (BICC) as central coordination hub for investment facilitation, monitoring, and adaptive management. Deploy MEL (Monitoring, Evaluation, and Learning) dashboard integrating PSA-BARMM databases, BHB certification logs, and BOI-MTIT approval tracking for real-time KPI visualization.',
     priority: 'high',
     due: 'Q3 2026',
     status: 'Development',
     budget: '₱80M',
     budgetValue: 80_000_000,
-    lead: 'MTIT / BBOI',
+    lead: 'BOI-MTIT',
     support: 'BDTA, PSA-BARMM, MFBM',
-    bscCode: 'IP4 / S2',
+    bscCode: 'P5 / S1',
     sdgAlignment: 'SDG 16, SDG 17',
   },
 ];

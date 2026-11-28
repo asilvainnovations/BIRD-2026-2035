@@ -23,7 +23,7 @@ export const REGISTER = {
   publicEnvelope: 140,       // ₱B, midpoint of ₱120–160B indicative public catalytic envelope
   reportICOR: '3.5–4.0',     // planning assumption used in the report (Ch. 7, Table 7.6)
   icorForTest: 3.5,          // lower bound, used for the capital-need test
-  approvalsBase: 5.0,        // ₱B, 2025 investment approvals (BBOI)
+  approvalsBase: 5.0,        // ₱B, 2025 investment approvals (Bureau of Investments register, Ch. 5 G.1)
   approvalsYTD2026: 5.1,     // ₱B, January–April 2026
   approvalsTarget: 15,       // ₱B a year by 2035
   executionRate: 80,         // %, infrastructure budget execution baseline (kpis.ts)

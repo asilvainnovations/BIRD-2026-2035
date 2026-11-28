@@ -242,8 +242,9 @@ const RESOURCES: ResourceItem[] = [
 // ═══════════════════════════════════════════════════════════════════════════════
 // These constants mirror the MEL Dashboard (Panels A, B and C) so that
 // accountability and the calendar of activities stay identical across both
-// views. Baselines: 2024 PSA / BBOI / MTIT / MENRE actuals. Targets: BIRD
-// 2026–2035. Due dates are the Phase-1 (2026–2028) milestone dates.
+// views. Baselines: PSA / BOI-MTIT / MTIT / MENRE (Chapter 5 draft figures).
+// Targets: BIRD 2026–2035, Chapter 5. Data custody: Alvin Silva (developer and
+// systems architect), co-owned with BOI-MTIT. Due dates are the Phase-1 (2026–2028) milestone dates.
 //
 // Status mapping follows the MEL convention:
 //   on_track  ≥ 70% of trajectory   at_risk   40–69%
@@ -252,20 +253,22 @@ const RESOURCES: ResourceItem[] = [
 
 const BIRD_CRITICAL_KPIS: KpiItem[] = [
   // ── Pareto Vital Few (Panel A) ────────────────────────────────────────────
-  { id: 'f1', name: 'Annual Investment Approvals', target: 15, current: 5.1, unit: '₱B', status: 'at_risk', owner: 'BBOI', due_date: '2035-12-31', description: 'Panel A · Pareto KPI. Investment promotion roadshows, BIMP-EAGA missions, investor aftercare. ₱5.0B approved in 2025; ₱5.1B in January–April 2026.' },
-  { id: 'f2', name: 'BARMM GRDP', target: 550, current: 266.59, unit: '₱B', status: 'at_risk', owner: 'BPDA', due_date: '2035-12-31', description: 'Panel A · Pareto KPI. Regional output; ₱266.59B in 2025 on the PSA five-province series, growing 5.0%. Requires about 7.5% a year to reach target (Report Table 7.6).' },
-  { id: 's6', name: 'Jobs Created (BOI-registered firms)', target: 20000, current: 2029, unit: 'jobs', status: 'off_track', owner: 'BBOI', due_date: '2035-12-31', description: 'Panel A · Pareto KPI. Labour-intensive sector prioritisation, skills matching, TESDA alignment.' },
-  { id: 's3', name: 'MSMEs with Halal Certification', target: 5000, current: 500, unit: 'MSMEs', status: 'off_track', owner: 'BHB', due_date: '2035-12-31', description: 'Panel A · Pareto KPI. BHB MSME certification programme and BHIDP implementation.' },
-  { id: 's4', name: 'Poverty Incidence (BARMM)', target: 20, current: 23.5, unit: '%', status: 'on_track', owner: 'PSA', due_date: '2035-12-31', description: 'Panel A · Pareto KPI. Families, full-year 2023 (PSA); 34.8% was the first-semester figure. Jobs-focused facilitation, MSME development, inclusive value chains. Lower is better.' },
-  { id: 'f3', name: 'Annual Exports from BARMM', target: 40, current: 10, unit: '₱B', status: 'off_track', owner: 'MTIT', due_date: '2035-12-31', description: 'Panel A · Pareto KPI. UAE halal corridor, BIMP-EAGA trade facilitation, export readiness.' },
+  { id: 'f1', name: 'Annual Investment Approvals', target: 15, current: 5.1, unit: '₱B', status: 'at_risk', owner: 'A. Silva / BOI-MTIT', due_date: '2035-12-31', description: 'Panel A · Headline KPI (Table G.1). Investment promotion roadshows, BIMP-EAGA missions, investor aftercare. ₱5.0B approved in 2025; ₱5.1B in January–April 2026.' },
+  { id: 'f2', name: 'BARMM GRDP', target: 550, current: 266.59, unit: '₱B', status: 'at_risk', owner: 'BPDA', due_date: '2035-12-31', description: 'Panel A · Headline KPI (Table G.1). Regional output; ₱266.59B in 2025 on the PSA five-province series, growing 5.0%. Requires about 7.5% a year to reach target (Report Table 7.6).' },
+  { id: 's6', name: 'Jobs Reported by Investment-Approved Firms', target: 20000, current: 2029, unit: 'jobs', status: 'off_track', owner: 'A. Silva / BOI-MTIT', due_date: '2035-12-31', description: 'Panel B · S6 · LP1+LP3. 2,029 in 2025; 10,000+ by 2030. Labour-intensive sector prioritisation, skills matching, TESDA alignment.' },
+  { id: 's3', name: 'MSMEs with Halal Certification', target: 5000, current: 500, unit: 'MSMEs', status: 'off_track', owner: 'BHB', due_date: '2035-12-31', description: 'Panel A · Headline KPI (Table G.1). ~500 (draft; verify); 3,000 by 2030. BHB MSME certification programme and BHIDP implementation.' },
+  { id: 's4', name: 'Poverty Incidence (BARMM)', target: 20, current: 23.5, unit: '%', status: 'on_track', owner: 'PSA', due_date: '2035-12-31', description: 'Panel B · S4 · LP1+LP2. Families, full-year 2023 (PSA); 34.8% was the first-semester figure. Jobs-focused facilitation, MSME development, inclusive value chains. Lower is better.' },
+  { id: 'f3', name: 'Annual Exports from BARMM', target: 40, current: 10, unit: '₱B', status: 'off_track', owner: 'MTIT', due_date: '2035-12-31', description: 'Panel A · Headline KPI (Table G.1). <₱10B (draft; verify); ₱26B by 2030. UAE halal corridor, BIMP-EAGA trade facilitation, export readiness.' },
+  { id: 'g1-5', name: 'Household Electrification (EC areas)', target: 90, current: 39.5, unit: '%', status: 'at_risk', owner: 'MENRE / DOE / NEA', due_date: '2035-12-31', description: 'Panel A · Headline KPI (Table G.1), links S7 / F2. ~39–40% (NEA); 90% by 2035, 100% by 2040. One electrification metric to be adopted (Table 7.6).' },
+  { id: 'g1-6', name: 'Broadband Connectivity', target: 85, current: 30, unit: '%', status: 'on_track', owner: 'MICT / DICT', due_date: '2035-12-31', description: 'Panel A · Headline KPI (Table G.1), links S7 / F2. <30% (draft; verify); 60% by 2030.' },
 
   // ── Critical / urgent Balanced Scorecard indicators (Panel B) ─────────────
   { id: 'p3', name: 'BHB OIC/SMIIC Accreditation', target: 100, current: 0, unit: '%', status: 'critical', owner: 'BHB', due_date: '2028-12-31', description: 'Panel B · LP1. Unstarted. Blocks the entire halal export pathway — without mutual recognition, certification carries no international weight.' },
-  { id: 'p1', name: 'Business Registration Time', target: 1, current: 5, unit: 'days', status: 'at_risk', owner: 'MTIT', due_date: '2028-06-30', description: 'Panel B · LP2. Digital BNR system and BEGMP e-governance. Lower is better.' },
+  { id: 'p1', name: 'Business Registration Time', target: 1, current: 5, unit: 'days', status: 'at_risk', owner: 'MTIT', due_date: '2028-06-30', description: 'Panel B · P1 · LP3. Digital BNR system and BEGMP e-governance. Lower is better.' },
   { id: 'p4', name: 'Infrastructure Budget Execution', target: 90, current: 80, unit: '%', status: 'at_risk', owner: 'MPW', due_date: '2028-12-31', description: 'Panel B · LP2. Underspending was rated 4.06 impact / 4.03 likelihood by validation-survey respondents — a live weakness, not a theoretical one.' },
-  { id: 'l5', name: 'Functional Literacy Rate', target: 75, current: 64.7, unit: '%', status: 'off_track', owner: 'MBHTE / DepEd', due_date: '2035-12-31', description: 'Panel B · LP2. HIGHEST-RISK factor in the entire SWOT register (Risk 17.76 from 74 respondents). Human capital, not infrastructure, is the binding constraint.' },
+  { id: 'l5', name: 'Functional Literacy Rate', target: 75, current: 64.7, unit: '%', status: 'off_track', owner: 'MBHTE / DepEd', due_date: '2035-12-31', description: 'Panel B · L5 · LP1. HIGHEST-RISK factor in the entire SWOT register (Risk 17.76 from 74 respondents). Human capital, not infrastructure, is the binding constraint.' },
   { id: 'p5', name: 'Inter-Agency Coordination Score', target: 8, current: 5.5, unit: '/10', status: 'off_track', owner: 'BICC', due_date: '2028-12-31', description: 'Panel B · LP3. Fragmented mandates scored 4.00 impact in the validation survey; transparency was named the critical governance lever by 42 of 73 respondents.' },
-  { id: 's7', name: 'Inter-Provincial Growth Disparity', target: 1.5, current: 3.9, unit: 'pp', status: 'critical', owner: 'BPDA', due_date: '2035-12-31', description: 'Panel B · LP3. Widening. Lower is better.' },
+  { id: 's7', name: 'Inter-Provincial Growth Disparity', target: 1.5, current: 3.9, unit: 'pp', status: 'critical', owner: 'BPDA', due_date: '2035-12-31', description: 'Panel B · S7 · LP2. 3.9 pp (2024; verify); <2.5 pp by 2030. Lower is better.' },
   { id: 'f5', name: 'Islamic Banking Assets in BARMM', target: 20, current: 2, unit: '₱B', status: 'off_track', owner: 'BSP / Al-Amanah', due_date: '2035-12-31', description: 'Panel B · LP4. Stakeholders ranked Macro-Capital (Sukuk, infrastructure banking) first for finance sequencing, 36 of 64.' },
   { id: 'f4', name: 'Carbon Credit + PES Revenue', target: 500, current: 0, unit: '₱M', status: 'critical', owner: 'MENRE', due_date: '2030-12-31', description: 'Panel B · LP5. Unstarted. Gated on the Forestry Code and JMC No. 2026-01 — renewable-energy monetisation scored highest of any opportunity (RI 4.14).' },
 ];
@@ -652,7 +655,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
       console.warn('KPIs error:', err.message);
       // MEL Dashboard fallback — the six Pareto "vital few" KPIs and the
       // urgent/critical Balanced Scorecard indicators carried by the BIRD MEL
-      // Dashboard (Panels A and B). Baselines are 2024 PSA / BBOI / MTIT /
+      // Dashboard (Panels A and B). Baselines are PSA / BOI-MTIT / MTIT /
       // MENRE actuals; targets are BIRD 2026–2035. These are the SAME figures
       // the MEL Dashboard renders, so accountability stays consistent across
       // the two views rather than diverging into placeholder numbers.
@@ -1626,7 +1629,7 @@ const TeamCollaboration: React.FC<TeamCollaborationProps> = ({
         </div>
 
         <p className="mt-4 text-[0.68rem] text-[#ecfdf5]/40 leading-relaxed">
-          Baselines: 2024 PSA / BBOI / MTIT / MENRE actuals. Targets: BIRD 2026–2035. Risk readings referenced in KPI
+          Baselines: PSA / BOI-MTIT / MTIT / MENRE (Chapter 5 draft figures). Targets: BIRD 2026–2035. Risk readings referenced in KPI
           descriptions come from the Validation Survey (n=76, 3–20 Aug 2026) — a non-probability convenience sample.
           {' '}{ISLAND_COVERAGE}
         </p>

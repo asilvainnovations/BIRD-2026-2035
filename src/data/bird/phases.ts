@@ -60,7 +60,7 @@ export const PHASES: PhaseTracker[] = [
     milestones: [
       { text: 'BHB operationalisation with OIC/SMIIC alignment — Q2 2026',     status: 'active'  },
       { text: 'Bangsamoro Forestry Code enacted & JMC 2026-01 signed — Q2 2026', status: 'active' },
-      { text: '1-day digital business registration via BBOI (BEGMP) — Q3 2026',  status: 'pending' },
+      { text: '1-day digital business registration via BOI-MTIT (BEGMP) — Q3 2026',  status: 'pending' },
       { text: 'Bangsamoro Halal Park groundbreaking, Matanog — Q4 2026',         status: 'pending' },
       { text: 'ZBIP construction commenced; one electrification metric adopted — 2028', status: 'pending' },
       { text: 'Bangsamoro Investment Command Center (BICC) established — Q3 2026', status: 'pending' },

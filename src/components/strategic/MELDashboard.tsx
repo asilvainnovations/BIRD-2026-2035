@@ -92,10 +92,11 @@ const CLUSTER_SIGNALS = [
  * Sequence C (BIMP-EAGA maritime corridor) runs through Basilan and Tawi-Tawi;
  * their view comes from the provincial workshops, not the online survey.
  */
+type SequenceValidation = 'validated' | 'partial' | 'unvalidated';
 const SEQUENCE_SIGNALS = [
-  { code: 'A', label: 'Halal & agro-industrial core',    mean: 4.20, sd: 0.79, n: 65, validation: 'partial'     as const },
-  { code: 'B', label: 'Green economy & resource base',   mean: 4.09, sd: 0.69, n: 67, validation: 'partial'     as const },
-  { code: 'C', label: 'BIMP-EAGA maritime integration',  mean: 4.00, sd: 0.74, n: 66, validation: 'partial'     as const },
+  { code: 'A', label: 'Halal & agro-industrial core',    mean: 4.20, sd: 0.79, n: 65, validation: 'partial'     as SequenceValidation },
+  { code: 'B', label: 'Green economy & resource base',   mean: 4.09, sd: 0.69, n: 67, validation: 'partial'     as SequenceValidation },
+  { code: 'C', label: 'BIMP-EAGA maritime integration',  mean: 4.00, sd: 0.74, n: 66, validation: 'partial'     as SequenceValidation },
 ] as const;
 
 /**
@@ -267,7 +268,7 @@ const DashboardHeroSection: React.FC<{ onNavigate?: (view: string) => void }> = 
     {
       icon: Target,
       title: 'Strategic MEL Dashboard',
-      desc: 'Monitor 6 Pareto KPIs driving 80% of strategic impact',
+      desc: 'Monitor the 6 headline KPIs of Chapter 5, Table G.1',
       color: '#C9A84C',
       view: 'dashboard',
     },
@@ -761,11 +762,11 @@ const AIStrategistChat: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 // capabilities (Learning & Growth) enable processes (Internal Process), which
 // produce outcomes for people (Stakeholder), which produce economic results
 // (Financial). Panel B previously rendered BSC_LEVERAGE_POINTS.slice(0, 8) as a
-// flat grid — 8 of the 20 objectives in the catalogue, in arbitrary order, with
+// flat grid — 8 objectives from the catalogue, in arbitrary order, with
 // the causal logic invisible. That is a scorecard fragment, not a map.
 //
-// This rebuild renders ALL_BSC_KPIS — the 20-objective canonical catalogue that
-// already existed in kpis.ts but was imported nowhere — as four collapsible
+// This rebuild renders ALL_BSC_KPIS — the 27-objective Chapter 5 catalogue
+// (F1–F6, S1–S7, P1–P7, L1–L7) — as four collapsible
 // layers in causal order, enriched on `bscCode` by BSC_LEVERAGE_POINTS for
 // leverage-point and initiative narrative. Where an objective has no enrichment
 // row it renders a provenance flag rather than silently appearing complete.
@@ -1075,14 +1076,14 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
 
   // ─── Strategy map reconciliation (Panel B) ──────────────────────────────────
   // Joins three independently-maintained structures on `bscCode`:
-  //   ALL_BSC_KPIS        — 20-objective measurement catalogue (spine)
+  //   ALL_BSC_KPIS        — 27-objective Chapter 5 catalogue (spine)
   //   BSC_LEVERAGE_POINTS — 10 rows of initiative / leverage narrative
   //   ACTION_PLAN_2026    — 11 funded Phase-1 actions, bscCode is a "A / B" list
   // The gaps this join exposes are the finding, so they are surfaced, not hidden.
   const strategyMap = useMemo(() => {
     const enrichmentIndex = new Map(BSC_POINTS.map(p => [p.bscCode, p]));
 
-    // An action's bscCode may name several objectives, e.g. 'IP2 / LG2'.
+    // An action's bscCode may name several objectives, e.g. 'P3 / L1'.
     const actionIndex = new Map<string, typeof PRIORITY_ACTIONS>();
     PRIORITY_ACTIONS.forEach(a => {
       String(a.bscCode).split('/').map(c => c.trim()).filter(Boolean).forEach(code => {
@@ -1177,8 +1178,8 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
         </h1>
         <p className="text-[#ecfdf5]/60 max-w-2xl leading-relaxed text-sm md:text-base">
           2026 Priority Actions &amp; 2035 Investment Targets.
-          Applying the <strong className="text-[#C9A84C]">Pareto Principle</strong> to surface the vital few metrics
-          that drive 80% of strategic impact, aligned with the BIRD 2026–2035 Roadmap.
+          A <strong className="text-[#C9A84C]">Pareto-style</strong> shortlist of six headline KPIs (Chapter 5, G.1): a compact
+          management view, not a claim that they account for 80% of impact, aligned with the BIRD 2026–2035 Roadmap.
         </p>
 
         <div className="flex flex-wrap items-center gap-4 mt-6">
@@ -1190,7 +1191,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
           </div>
           <div className="text-xs bg-[rgba(201,168,76,0.08)] border border-[rgba(201,168,76,0.32)] rounded px-3 py-1.5 text-[#C9A84C] flex items-center gap-1.5">
             <Target className="w-3 h-3" aria-hidden="true" />
-            Pareto Focus: 6 Critical KPIs · 10 Priority Actions · {TOTAL_BUDGET.label} Total Roadmap Budget · Validated by {RESPONDENTS.totalResponses} stakeholders
+            6 Headline KPIs · 10 Priority Actions · {TOTAL_BUDGET.label} Public Catalytic Envelope · Validated by {RESPONDENTS.totalResponses} stakeholders
           </div>
         </div>
       </header>
@@ -1216,7 +1217,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
             </div>
           ))}
           <div className="ml-auto text-[0.7rem] text-[#ecfdf5]/35">
-            Baselines: 2024 PSA / BBOI / MTIT. Targets: BIRD 2026-2035. Validation: survey n={RESPONDENTS.totalResponses} (Aug 2026).
+            Baselines: PSA / BOI-MTIT / MTIT (draft; verify). Targets: BIRD 2026–2035, Chapter 5. Validation: survey n={RESPONDENTS.totalResponses} (Aug 2026).
           </div>
         </motion.div>
 
@@ -1945,7 +1946,7 @@ const MELDashboard: React.FC<MELDashboardProps> = ({ onNavigate }) => {
           <span className="text-[#C9A84C]">The Emerging Bangsamoro</span> · Investment Roadmap 2026–2035
         </p>
         <p className="text-[0.68rem] text-[#ecfdf5]/20 mt-1">
-          Data sources: PSA, BBOI, BEZA, MTIT, MENRE (2024 baselines) · Provincial Economic &amp; Investment Outlooks · Workshops 1/2/4/5 (2025) · Validation Survey n={RESPONDENTS.totalResponses} (Aug 2026). Targets per BIRD 2026–2035 &amp; BDP 2023–2028.
+          Data sources: PSA, BOI-MTIT, BEZA, MTIT, MENRE (2024 baselines) · Provincial Economic &amp; Investment Outlooks · Workshops 1/2/4/5 (2025) · Validation Survey n={RESPONDENTS.totalResponses} (Aug 2026). Targets per BIRD 2026–2035 &amp; BDP 2023–2028.
         </p>
       </footer>
 

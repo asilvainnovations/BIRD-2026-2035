@@ -184,14 +184,14 @@ export const SYSTEMS_ARCHETYPES: SystemsArchetype[] = [
     name: 'Success to the Successful',
     pattern: 'Two competing activities; the one that succeeds first receives more resources, increasing its advantage and starving the other of opportunities.',
     birdContext: 'Mainland provinces (Maguindanao del Norte: ₱81.91B GDP, 4.1% growth) attract bulk of investment while island provinces (Tawi-Tawi: 1.1%, Sulu: 1.13%, Basilan: 1.6%) suffer capital starvation despite comparative advantages in seaweed, fisheries, and BIMP-EAGA proximity.',
-    intervention: 'Affirmative investment policies. Provincial equity KPIs tracked by BBOI. Mandatory archipelagic connectivity thresholds in the BARMM Infrastructure Investment Sequencing Plan.',
+    intervention: 'Affirmative investment policies. Provincial equity KPIs tracked by BOI-MTIT. Mandatory archipelagic connectivity thresholds in the BARMM Infrastructure Investment Sequencing Plan.',
     leveragePoint: 'LP3',
     impact: 'high',
     cluster: 'All Clusters: Archipelagic Equity',
     leverageInterventions: [
       { level: 'L10', area: 'Stock-Flow Structure', expectedImpact: 'Build critical infrastructure in underserved areas — Bongao Bridge (96% complete), Basilan-Zamboanga Bridge 2030, Tawi-Tawi port upgrades' },
       { level: 'L5', area: 'Rules', expectedImpact: 'Implement affirmative investment policies with minimum equity thresholds for archipelagic provinces' },
-      { level: 'L3', area: 'Goals', expectedImpact: 'Set provincial equity KPIs alongside aggregate targets; require BBOI to publish provincial investment disparity metrics quarterly' },
+      { level: 'L3', area: 'Goals', expectedImpact: 'Set provincial equity KPIs alongside aggregate targets; require BOI-MTIT to publish provincial investment disparity metrics quarterly' },
     ],
   },
   {
@@ -205,7 +205,7 @@ export const SYSTEMS_ARCHETYPES: SystemsArchetype[] = [
     cluster: 'Enablers: Infrastructure, Social Services',
     leverageInterventions: [
       { level: 'L9', area: 'Delay Lengths', expectedImpact: 'Reduce infrastructure planning-to-completion time from 18 months to 12 months through PPP frameworks' },
-      { level: 'L10', area: 'Stock-Flow Structure', expectedImpact: 'Expand institutional capacity ahead of demand: hire/train BHB certifiers, BBOI investment officers, TESDA instructors' },
+      { level: 'L10', area: 'Stock-Flow Structure', expectedImpact: 'Expand institutional capacity ahead of demand: hire/train BHB certifiers, BOI-MTIT investment officers, TESDA instructors' },
       { level: 'L7', area: 'Positive Feedback Gain', expectedImpact: 'Link 50% of BARMM block grant disbursements to infrastructure/human capital KPI achievement' },
     ],
   },
@@ -334,7 +334,7 @@ export const BEIE_CLUSTERS = [
 export const LEVERAGE_POINTS = [
   { id: 'LP1', meadows: 'L1', name: 'Halal Certification Integrity',    desc: 'OIC/SMIIC accreditation as market-access gateway; BHB as primary LP1 driver', priority: 'Critical' },
   { id: 'LP2', meadows: 'L2', name: 'Infrastructure & Human Capital',   desc: 'Raise B1 growth ceiling: ZBIP, BSEMP, BEGMP, TVET-industry alignment', priority: 'Critical' },
-  { id: 'LP3', meadows: 'L3', name: 'Governance & Investor Confidence', desc: 'Activate R2 feedback loop: BICC, BBOI aftercare, moral governance institutionalization', priority: 'High' },
+  { id: 'LP3', meadows: 'L3', name: 'Governance & Investor Confidence', desc: 'Activate R2 feedback loop: BICC, BOI-MTIT aftercare, moral governance institutionalization', priority: 'High' },
   { id: 'LP4', meadows: 'L4', name: 'Islamic Finance Mobilization',     desc: 'Al-Amanah expansion; Takaful; Waqf; Islamic fintech for MSME financing', priority: 'High' },
   { id: 'LP5', meadows: 'L5', name: 'Green Economy Activation',         desc: 'JMC 2026-01; Forestry Code; REDD+; PES frameworks for LGU revenue', priority: 'High' },
 ] as const;

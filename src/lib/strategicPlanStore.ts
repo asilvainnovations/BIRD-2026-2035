@@ -242,7 +242,7 @@ export interface BSCObjective {
   leveragePoint?: LeveragePoint;
   beieCluster?: BEIECluster;
   birdPhase?: BIRDPhase;
-  /** BSC code from BIRD reference (e.g. "F1", "IP2", "LG3") */
+  /** Chapter 5 objective code from the BIRD reference (e.g. "F1", "P3", "L5") */
   bscCode?: string;
   // User tracking
   createdBy?: string;
@@ -542,7 +542,7 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
     createItem({ id: generateId(), optionType: 'SO' as TOWSQuadrant, title: 'Halal Hub Rapid Development via OIC/SMIIC Accreditation', description: 'Leverage cultural authenticity and Islamic legitimacy to develop the halal ecosystem at pace. Fast-track BHB → OIC/SMIIC accreditation; operationalize Bangsamoro Halal Park (Matanog); integrate AFF-to-halal value chains targeting USD 2.3T global market.', priorityScore: 5, feasibilityScore: 4, selected: true, leveragePoint: 'LP1' as LeveragePoint, beieCluster: 'transformers' as BEIECluster, birdPhase: '1' as BIRDPhase, swotPairs: 'S1+S5 × O1', leverageLevel: 5, resourceRequirement: 'medium', approvedBy: userId, approvedAt: now }),
     createItem({ id: generateId(), optionType: 'SO' as TOWSQuadrant, title: 'BIMP-EAGA Trade Corridor Expansion', description: 'Leverage BARMM\'s BIMP-EAGA gateway position to expand subregional trade — Polloc Freeport, Bongao maritime corridor, and Basilan-Zamboanga Bridge 2030 as concrete connectors to 70M+ consumer market.', priorityScore: 4, feasibilityScore: 4, selected: true, leveragePoint: 'LP3' as LeveragePoint, beieCluster: 'connectors' as BEIECluster, birdPhase: '2' as BIRDPhase, swotPairs: 'S2+S3 × O4', leverageLevel: 10, resourceRequirement: 'high', approvedBy: userId, approvedAt: now }),
     // ST
-    createItem({ id: generateId(), optionType: 'ST' as TOWSQuadrant, title: 'Governance-Centered Investor Confidence Building (R2 Loop Activation)', description: 'Counter negative perception through BICC dashboard, BBOI aftercare protocol, 1-day digital registration (BEGMP), and transparent procurement. Activates R2 Governance–Investor Confidence reinforcing loop.', priorityScore: 4, feasibilityScore: 4, selected: true, leveragePoint: 'LP3' as LeveragePoint, beieCluster: 'cross-cutting' as BEIECluster, birdPhase: '1' as BIRDPhase, swotPairs: 'S4 × T3', leverageLevel: 6, resourceRequirement: 'medium', approvedBy: userId, approvedAt: now }),
+    createItem({ id: generateId(), optionType: 'ST' as TOWSQuadrant, title: 'Governance-Centered Investor Confidence Building (R2 Loop Activation)', description: 'Counter negative perception through BICC dashboard, BOI-MTIT aftercare protocol, 1-day digital registration (BEGMP), and transparent procurement. Activates R2 Governance–Investor Confidence reinforcing loop.', priorityScore: 4, feasibilityScore: 4, selected: true, leveragePoint: 'LP3' as LeveragePoint, beieCluster: 'cross-cutting' as BEIECluster, birdPhase: '1' as BIRDPhase, swotPairs: 'S4 × T3', leverageLevel: 6, resourceRequirement: 'medium', approvedBy: userId, approvedAt: now }),
     createItem({ id: generateId(), optionType: 'ST' as TOWSQuadrant, title: 'OIC/SMIIC Standards Alignment to Neutralize Competition', description: 'Secure Mutual Recognition Arrangement (MRA) with OIC/SMIIC by 2035 to neutralize Malaysia/Indonesia competitive advantage. Differentiate via Islamic moral governance — authentic halal narrative vs. purely commercial positioning.', priorityScore: 5, feasibilityScore: 3, selected: true, leveragePoint: 'LP1' as LeveragePoint, beieCluster: 'transformers' as BEIECluster, birdPhase: '1' as BIRDPhase, swotPairs: 'S1 × T1+T2', leverageLevel: 5, resourceRequirement: 'medium', approvedBy: userId, approvedAt: now }),
     createItem({ id: generateId(), optionType: 'ST' as TOWSQuadrant, title: 'Climate-Smart Agribusiness & Green Economy Integration', description: 'Deploy climate-resilient agri-practices and REDD+-financed conservation corridors to protect the AFF base from climate threats — while simultaneously generating PES/carbon revenue via JMC 2026-01.', priorityScore: 3, feasibilityScore: 4, selected: false, leveragePoint: 'LP5' as LeveragePoint, beieCluster: 'foundations' as BEIECluster, birdPhase: '2' as BIRDPhase, swotPairs: 'S3 × T4', leverageLevel: 7, resourceRequirement: 'high' }),
     // WO
@@ -576,26 +576,26 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
     },
     {
       id: obj2Id, perspective: 'financial', weight: 1.5,
-      objective: 'Increase investment approvals to ₱8B p.a. (2030) and ₱15B p.a. (2035)',
-      description: 'Grow both FDI and domestic investment approvals from ₱5.0B (2025; ₱5.1B in January–April 2026) through BBOI facilitation, halal park development, and BIMP-EAGA corridors.',
+      objective: 'Increase investment approvals to ₱10B p.a. (2030) and ₱15B+ p.a. (2035)',
+      description: 'Grow both FDI and domestic investment approvals from ₱5.0B (2025; ₱5.1B in January–April 2026) through BOI-MTIT facilitation, halal park development, and BIMP-EAGA corridors.',
       bscCode: 'F1', leveragePoint: 'LP1', beieCluster: 'connectors', birdPhase: '1',
       createdBy: userId, createdByName: userName, createdAt: now, champion: userId, championName: userName,
       kpis: [{
-        id: generateId(), objectiveId: obj2Id, name: 'Annual Investment Approvals', description: 'Total BBOI-approved investment value',
+        id: generateId(), objectiveId: obj2Id, name: 'Annual Investment Approvals', description: 'Total approved investment value (BOI-MTIT register)',
         unit: '₱B', baselineValue: 5.0, targetValue: 15, target2030: 10, currentValue: 5.1,
         frequency: 'quarterly', owner: userId, ownerName: userName, status: 'on-track', leveragePoint: 'LP1',
-        benchmarkSource: 'BBOI / BEZA Investment Reports (January–April 2026)',
+        benchmarkSource: 'BOI-MTIT / BEZA investment reports (January–April 2026)',
       }],
     },
     {
-      id: obj3Id, perspective: 'internal_process', weight: 1.5,
-      objective: 'Achieve OIC/SMIIC halal accreditation and certify 5,000+ MSMEs by 2035',
-      description: 'Operationalise BHB with full OIC/SMIIC international recognition by 2030; scale halal-certified MSMEs from ~500 (2024) to 5,000+ by 2035.',
-      bscCode: 'IP1', leveragePoint: 'LP1', beieCluster: 'transformers', birdPhase: '1',
+      id: obj3Id, perspective: 'stakeholder', weight: 1.5,
+      objective: 'Certify 3,000 halal MSMEs by 2030 and 5,000+ by 2035',
+      description: 'Scale halal-certified MSMEs from ~500 (draft baseline; verify) to 3,000 by 2030 and 5,000+ by 2035 (Chapter 5, S3), enabled by BHB OIC/SMIIC accreditation: provisional alignment by 2030, full accreditation and an MRA by 2035 (P3).',
+      bscCode: 'S3', leveragePoint: 'LP1', beieCluster: 'transformers', birdPhase: '1',
       createdBy: userId, createdByName: userName, createdAt: now, champion: userId, championName: userName,
       kpis: [{
         id: generateId(), objectiveId: obj3Id, name: 'Halal-Certified MSMEs', description: 'Cumulative BHB-certified MSMEs with valid certification',
-        unit: 'firms', baselineValue: 500, targetValue: 5000, target2030: 2000, currentValue: 500,
+        unit: 'MSMEs', baselineValue: 500, targetValue: 5000, target2030: 3000, currentValue: 500,
         frequency: 'quarterly', owner: userId, ownerName: userName, status: 'at-risk', leveragePoint: 'LP1',
         benchmarkSource: 'BHB Registry / BHIDP 2025-2030',
       }],
@@ -604,13 +604,13 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
       id: obj4Id, perspective: 'stakeholder', weight: 1.5,
       objective: 'Reduce poverty incidence below 25% by 2030 and 20% by 2035',
       description: 'Continue downward trajectory from 52.9% (2018) → 23.5% (full-year 2023, families) → <20% (2035); the <25% 2030 target is already met and should be recalibrated through investment-led job creation, MSME support, and inclusive PAPs.',
-      bscCode: 'S1', leveragePoint: 'LP1', beieCluster: 'cross-cutting', birdPhase: '1',
+      bscCode: 'S4', leveragePoint: 'LP1', beieCluster: 'cross-cutting', birdPhase: '1',
       createdBy: userId, createdByName: userName, createdAt: now, champion: userId, championName: userName,
       kpis: [{
         id: generateId(), objectiveId: obj4Id, name: 'Poverty Incidence Rate', description: 'BARMM poverty incidence (PSA Family Income and Expenditure Survey)',
         unit: '%', baselineValue: 23.5, targetValue: 20, target2030: 25, currentValue: 23.5,
         frequency: 'annually', owner: userId, ownerName: userName, status: 'at-risk', leveragePoint: 'LP1',
-        benchmarkSource: 'PSA 1H 2023 / BDP 2023-2028',
+        benchmarkSource: 'PSA full-year 2023 / BDP 2023–2028',
       }],
     },
   ];
@@ -618,9 +618,9 @@ export const createSamplePlan = (userInfo?: UserInfo): StrategicPlan => {
   // ── PAPs (Priority Action Plan, 2026 Foundation Phase) ────────────────────
   plan.paps = [
     createItem({ id: generateId(), objectiveId: obj3Id, papType: 'program' as PAPType, name: 'BHB Operationalisation & OIC/SMIIC Alignment Program', description: 'Establish and operationalise Bangsamoro Halal Board with OIC/SMIIC-aligned certification processes. Certify 50 enterprises in 2026. Commence MRA roadmap.', owner: userId, ownerName: userName, ownerEmail: userEmail, budget: 200_000_000, spent: 0, startDate: '2026-01-01', endDate: '2028-12-31', progress: 15, status: 'in-progress' as PAPStatus, beieCluster: 'transformers' as BEIECluster, birdPhase: '1' as BIRDPhase, leveragePoint: 'LP1' as LeveragePoint, leadAgency: 'BHB / MTIT-BARMM', sdgAlignment: 'SDG 8, 17', teamMembers: [userId] }),
-    createItem({ id: generateId(), objectiveId: obj2Id, papType: 'project' as PAPType, name: 'Bangsamoro Halal Park Development — Matanog Site', description: 'Groundbreaking and master-plan construction of Bangsamoro Halal Park at Matanog, Maguindanao del Norte. Anchor tenant pre-qualification; 20+ tenants by 2028.', owner: userId, ownerName: userName, ownerEmail: userEmail, budget: 500_000_000, spent: 0, startDate: '2026-07-01', endDate: '2028-12-31', progress: 5, status: 'planned' as PAPStatus, beieCluster: 'transformers' as BEIECluster, birdPhase: '1' as BIRDPhase, leveragePoint: 'LP2' as LeveragePoint, leadAgency: 'MTIT-BARMM / BBOI', sdgAlignment: 'SDG 8, 9', teamMembers: [userId] }),
+    createItem({ id: generateId(), objectiveId: obj2Id, papType: 'project' as PAPType, name: 'Bangsamoro Halal Park Development — Matanog Site', description: 'Groundbreaking and master-plan construction of Bangsamoro Halal Park at Matanog, Maguindanao del Norte. Anchor tenant pre-qualification; 20+ tenants by 2028.', owner: userId, ownerName: userName, ownerEmail: userEmail, budget: 500_000_000, spent: 0, startDate: '2026-07-01', endDate: '2028-12-31', progress: 5, status: 'planned' as PAPStatus, beieCluster: 'transformers' as BEIECluster, birdPhase: '1' as BIRDPhase, leveragePoint: 'LP2' as LeveragePoint, leadAgency: 'BOI-MTIT', sdgAlignment: 'SDG 8, 9', teamMembers: [userId] }),
     createItem({ id: generateId(), objectiveId: obj2Id, papType: 'project' as PAPType, name: 'Zamboanga-Basilan Interconnection Project (ZBIP)', description: 'Commence ₱6.67B ZBIP to expand Mindanao grid to Basilan. Critical enabler for industrial investment in archipelagic provinces. Target: 80% electrification by 2028.', owner: userId, ownerName: userName, ownerEmail: userEmail, budget: 6_670_000_000, spent: 0, startDate: '2026-04-01', endDate: '2030-12-31', progress: 10, status: 'in-progress' as PAPStatus, beieCluster: 'enablers' as BEIECluster, birdPhase: '1' as BIRDPhase, leveragePoint: 'LP2' as LeveragePoint, leadAgency: 'DOE / MPW', sdgAlignment: 'SDG 7, 9', teamMembers: [userId] }),
-    createItem({ id: generateId(), objectiveId: obj2Id, papType: 'activity' as PAPType, name: 'BEGMP Digital Rollout & 1-Day Business Registration', description: 'Complete BEGMP deployment. Achieve 1-day digital business registration via BBOI. Deploy BICC dashboard for real-time investment tracking.', owner: userId, ownerName: userName, ownerEmail: userEmail, budget: 150_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-12-31', progress: 20, status: 'in-progress' as PAPStatus, beieCluster: 'enablers' as BEIECluster, birdPhase: '1' as BIRDPhase, leveragePoint: 'LP3' as LeveragePoint, leadAgency: 'BDTA / MICT', sdgAlignment: 'SDG 8, 9, 17', teamMembers: [userId] }),
+    createItem({ id: generateId(), objectiveId: obj2Id, papType: 'activity' as PAPType, name: 'BEGMP Digital Rollout & 1-Day Business Registration', description: 'Complete BEGMP deployment. Achieve 1-day digital business registration via BOI-MTIT. Deploy BICC dashboard for real-time investment tracking.', owner: userId, ownerName: userName, ownerEmail: userEmail, budget: 150_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-12-31', progress: 20, status: 'in-progress' as PAPStatus, beieCluster: 'enablers' as BEIECluster, birdPhase: '1' as BIRDPhase, leveragePoint: 'LP3' as LeveragePoint, leadAgency: 'BDTA / MICT', sdgAlignment: 'SDG 8, 9, 17', teamMembers: [userId] }),
     createItem({ id: generateId(), objectiveId: obj4Id, papType: 'activity' as PAPType, name: 'Bangsamoro Forestry Code Enactment & JMC 2026-01 Signing', description: 'Fast-track Forestry Code through Parliament (ENRE Committee) and sign MENRE-MILG JMC No. 2026-01 activating carbon credit and PES revenue streams for LGUs.', owner: userId, ownerName: userName, ownerEmail: userEmail, budget: 50_000_000, spent: 0, startDate: '2026-01-01', endDate: '2026-06-30', progress: 35, status: 'in-progress' as PAPStatus, beieCluster: 'foundations' as BEIECluster, birdPhase: '1' as BIRDPhase, leveragePoint: 'LP5' as LeveragePoint, leadAgency: 'MENRE-BARMM / Parliament', sdgAlignment: 'SDG 13, 15, 17', teamMembers: [userId] }),
   ];
 

@@ -1434,7 +1434,7 @@ export const BUILTIN_TEMPLATES: PlanTemplate[] = [
           description: 'Grow both domestic and foreign direct investment to drive economic expansion and job creation, targeting PHP 50B by 2035',
           weight: 1.5,
           kpis: [
-            { name: 'Total Investment Generated', description: 'Cumulative investment inflows in PHP Billions', baselineValue: 3.5, targetValue: 50.0, currentValue: 3.5, unit: 'PHP B', frequency: 'quarterly', owner: 'BBOI Chair', status: 'on-track' },
+            { name: 'Total Investment Generated', description: 'Cumulative investment inflows in PHP Billions', baselineValue: 3.5, targetValue: 50.0, currentValue: 3.5, unit: 'PHP B', frequency: 'quarterly', owner: 'A. Silva / BOI-MTIT', status: 'on-track' },
             { name: 'FDI Stock Growth Rate', description: 'Year-over-year growth in foreign direct investment stock', baselineValue: 5, targetValue: 15, currentValue: 5, unit: '%', frequency: 'annually', owner: 'BEZA Chief', status: 'on-track' },
             { name: 'Halal Export Value', description: 'Total value of halal-certified product exports', baselineValue: 0.5, targetValue: 25.0, currentValue: 0.5, unit: 'PHP B', frequency: 'quarterly', owner: 'MTIT Minister', status: 'on-track' },
           ],
@@ -1455,7 +1455,7 @@ export const BUILTIN_TEMPLATES: PlanTemplate[] = [
           description: 'Provide world-class investment facilitation services that exceed investor expectations and ensure retention',
           weight: 1.4,
           kpis: [
-            { name: 'Investor Satisfaction Score', description: 'Overall investor satisfaction rating (1-10 scale)', baselineValue: 6.0, targetValue: 8.5, currentValue: 6.0, unit: 'score', frequency: 'annually', owner: 'BBOI Chair', status: 'on-track' },
+            { name: 'Investor Satisfaction Score', description: 'Overall investor satisfaction rating (1-10 scale)', baselineValue: 6.0, targetValue: 8.5, currentValue: 6.0, unit: 'score', frequency: 'annually', owner: 'A. Silva / BOI-MTIT', status: 'on-track' },
             { name: 'Investment Project Retention Rate', description: 'Percentage of investors maintaining or expanding operations', baselineValue: 70, targetValue: 85, currentValue: 70, unit: '%', frequency: 'annually', owner: 'BEZA Chief', status: 'on-track' },
           ],
         },
@@ -1466,7 +1466,7 @@ export const BUILTIN_TEMPLATES: PlanTemplate[] = [
           weight: 1.3,
           kpis: [
             { name: 'MSMEs with Halal Certification', description: 'Total number of certified micro, small, and medium enterprises', baselineValue: 50, targetValue: 2000, currentValue: 50, unit: 'enterprises', frequency: 'quarterly', owner: 'BHB Director', status: 'on-track' },
-            { name: 'MSMEs Accessing Islamic Finance', description: 'Number of small businesses using Shariah-compliant financing', baselineValue: 100, targetValue: 5000, currentValue: 100, unit: 'MSMEs', frequency: 'annually', owner: 'BBOI Chair', status: 'on-track' },
+            { name: 'MSMEs Accessing Islamic Finance', description: 'Number of small businesses using Shariah-compliant financing', baselineValue: 100, targetValue: 5000, currentValue: 100, unit: 'MSMEs', frequency: 'annually', owner: 'A. Silva / BOI-MTIT', status: 'on-track' },
             { name: 'Community Benefit Agreements', description: 'Number of investment projects with signed community benefit agreements', baselineValue: 5, targetValue: 100, currentValue: 5, unit: 'agreements', frequency: 'annually', owner: 'MPFD Minister', status: 'on-track' },
           ],
         },
@@ -1477,7 +1477,7 @@ export const BUILTIN_TEMPLATES: PlanTemplate[] = [
           weight: 1.2,
           kpis: [
             { name: 'Intra-EAGA Trade Value', description: 'Total trade value with BIMP-EAGA partner countries', baselineValue: 2, targetValue: 50, currentValue: 2, unit: 'PHP B', frequency: 'annually', owner: 'MTIT Minister', status: 'on-track' },
-            { name: 'Cross-Border Investment Projects', description: 'Joint ventures and investments from BIMP-EAGA partners', baselineValue: 3, targetValue: 50, currentValue: 3, unit: 'projects', frequency: 'annually', owner: 'BBOI Chair', status: 'on-track' },
+            { name: 'Cross-Border Investment Projects', description: 'Joint ventures and investments from BIMP-EAGA partners', baselineValue: 3, targetValue: 50, currentValue: 3, unit: 'projects', frequency: 'annually', owner: 'A. Silva / BOI-MTIT', status: 'on-track' },
           ],
         },
         {
@@ -1486,9 +1486,9 @@ export const BUILTIN_TEMPLATES: PlanTemplate[] = [
           description: 'Reduce time, cost, and complexity of business registration and permitting to improve ease of doing business',
           weight: 1.4,
           kpis: [
-            { name: 'Business Registration Time', description: 'Days required to complete business name registration', baselineValue: 7, targetValue: 1, currentValue: 7, unit: 'days', frequency: 'monthly', owner: 'BBOI Chair', status: 'on-track' },
+            { name: 'Business Registration Time', description: 'Days required to complete business name registration', baselineValue: 7, targetValue: 1, currentValue: 7, unit: 'days', frequency: 'monthly', owner: 'A. Silva / BOI-MTIT', status: 'on-track' },
             { name: 'Permit Processing Time', description: 'Days required to process investment permits', baselineValue: 30, targetValue: 7, currentValue: 30, unit: 'days', frequency: 'monthly', owner: 'BEZA Chief', status: 'on-track' },
-            { name: 'One-Stop Shop Coverage', description: 'Percentage of services available through one-stop investment centers', baselineValue: 40, targetValue: 95, currentValue: 40, unit: '%', frequency: 'quarterly', owner: 'BBOI Chair', status: 'on-track' },
+            { name: 'One-Stop Shop Coverage', description: 'Percentage of services available through one-stop investment centers', baselineValue: 40, targetValue: 95, currentValue: 40, unit: '%', frequency: 'quarterly', owner: 'A. Silva / BOI-MTIT', status: 'on-track' },
           ],
         },
         {
@@ -1530,13 +1530,13 @@ export const BUILTIN_TEMPLATES: PlanTemplate[] = [
           weight: 1.2,
           kpis: [
             { name: 'Halal Certification Officers Trained', description: 'Number of professionally trained and accredited halal auditors', baselineValue: 10, targetValue: 100, currentValue: 10, unit: 'officers', frequency: 'annually', owner: 'BHB Director', status: 'on-track' },
-            { name: 'Islamic Finance Professionals', description: 'Number of certified Islamic finance practitioners in the region', baselineValue: 5, targetValue: 50, currentValue: 5, unit: 'professionals', frequency: 'annually', owner: 'BBOI Chair', status: 'on-track' },
+            { name: 'Islamic Finance Professionals', description: 'Number of certified Islamic finance practitioners in the region', baselineValue: 5, targetValue: 50, currentValue: 5, unit: 'professionals', frequency: 'annually', owner: 'A. Silva / BOI-MTIT', status: 'on-track' },
           ],
         },
         {
           perspective: 'learning_growth',
           objective: 'Strengthen Institutional Capacity',
-          description: 'Enhance skills and capabilities across investment promotion agencies (BBOI, BEZA, BHB)',
+          description: 'Enhance skills and capabilities across investment promotion agencies (BOI-MTIT, BEZA, BHB)',
           weight: 1.3,
           kpis: [
             { name: 'IPA Staff with Professional Certification', description: 'Percentage of investment promotion staff with relevant certifications', baselineValue: 30, targetValue: 80, currentValue: 30, unit: '%', frequency: 'annually', owner: 'CHRO', status: 'on-track' },

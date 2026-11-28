@@ -146,16 +146,16 @@ const phaseOf = (iso: string): PhaseWindow =>
  * Learning & Growth enablers is a sequencing error, not just a late task.
  */
 const BSC_CASCADE: Record<string, { tier: number; label: string; role: string }> = {
-  LG: { tier: 1, label: 'Learning & Growth', role: 'Enabler — capability that must exist first' },
-  IP: { tier: 2, label: 'Internal Process',  role: 'Conversion — turns capability into throughput' },
+  L:  { tier: 1, label: 'Learning & Growth', role: 'Enabler — capability that must exist first' },
+  P:  { tier: 2, label: 'Internal Process',  role: 'Conversion — turns capability into throughput' },
   S:  { tier: 3, label: 'Stakeholder',       role: 'Outcome — what beneficiaries experience' },
   F:  { tier: 4, label: 'Financial',         role: 'Lagging — realised economic return' },
 };
 
-/** Lowest (earliest) cascade tier referenced by a BSC code like 'IP2 / LG2'. */
+/** Lowest (earliest) cascade tier referenced by a Chapter 5 code like 'P3 / L1'. */
 const cascadeOf = (bscCode?: string) => {
   if (!bscCode) return null;
-  const tiers = (bscCode.match(/\b(LG|IP|S|F)\d/g) ?? [])
+  const tiers = (bscCode.match(/\b(L|P|S|F)\d/g) ?? [])
     .map((c) => BSC_CASCADE[c.replace(/\d/, '')])
     .filter(Boolean);
   return tiers.sort((a, b) => a.tier - b.tier)[0] ?? null;

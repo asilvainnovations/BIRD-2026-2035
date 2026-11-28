@@ -5,10 +5,14 @@
 **Rule.** When a figure appears anywhere in the BIRD ecosystem, it must match this register. Precedence:
 
 1. **The written report**: the Executive Summary and Chapters 1–7, in particular Chapter 2 Table 2-3, the Chapter 3 targets and option scores, the Chapter 4–6 phase schedule, and **Chapter 7 Table 7.6 "Baseline reconciliation required before adoption"**.
-2. **Primary official sources** (PSA, PSA-RSSO BARMM, BBOI, NEA), used to verify (1). Where the report and an official source disagree, the official source wins and the report is corrected.
+2. **Primary official sources** (PSA, PSA-RSSO BARMM, the Bureau of Investments register at BOI-MTIT, NEA), used to verify (1). Where the report and an official source disagree, the official source wins and the report is corrected.
 3. **The live survey database** (`survey_responses` in Supabase project `lydsisparsmvextskevw`) for every Validation Survey count.
 
 When a value has two legitimate readings (different period or territory), quote **both, with their basis**, as Table 2-3 does. Never quote one without its basis.
+
+**Data custody.** BIRD platform data is held by Alvin Silva (developer and systems architect) and co-owned by Alvin Silva and BOI-MTIT. `owner` fields in the platform that name the data holder use "A. Silva / BOI-MTIT"; `source` fields name the statistical source of each figure.
+
+**Scorecard codes.** Objective codes follow Chapter 5 exactly: F1–F6, S1–S7, P1–P7, L1–L7 (27 objectives). The six headline KPIs are Table G.1. Gender-balanced employment, renewable energy share, MSME share of GDP and halal processing time are Chapter 4 supporting indicators (`SUPPORTING_INDICATORS` in `src/data/bird/kpis.ts`), not scorecard objectives.
 
 ## 1. Macro and social baselines
 
@@ -30,8 +34,8 @@ When a value has two legitimate readings (different period or territory), quote 
 
 | Indicator | Canonical value | Source |
 |---|---|---|
-| Investment approvals 2025 | **₱5.0B** (against a ₱3B target) | BBOI |
-| Investment approvals 2026 YTD | **₱5.1B, January–April 2026** (not "Q1 2026") | BBOI; MindaNews (3 May 2026) |
+| Investment approvals 2025 | **₱5.0B** (against a ₱3B target) | BOI-MTIT register |
+| Investment approvals 2026 YTD | **₱5.1B, January–April 2026** (not "Q1 2026") | BOI-MTIT register; MindaNews (3 May 2026) |
 | Investment approvals target | **₱15B or more a year** by 2035; milestones ₱6.5B (2028), ₱10B (2030) | Report Ch 3, Ch 4 Table 4-2 | Baseline ₱5.0B (2025). Supersedes ₱8B (2030). |
 | Jobs target | **At least 20,000** | Report Ch 3 |
 
